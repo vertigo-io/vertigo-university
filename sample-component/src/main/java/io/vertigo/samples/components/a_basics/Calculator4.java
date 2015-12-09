@@ -1,9 +1,9 @@
-package io.vertigo.samples.components;
+package io.vertigo.samples.components.a_basics;
 
 import io.vertigo.lang.Activeable;
 import io.vertigo.lang.Component;
 
-public class Calculator5 implements Component, Activeable {
+public class Calculator4 implements Component, Activeable {
 
 	@Override
 	public void start() {

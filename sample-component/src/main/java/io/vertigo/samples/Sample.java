@@ -1,12 +1,13 @@
 package io.vertigo.samples;
 
 import io.vertigo.app.App;
-import io.vertigo.samples.components.Calculator1;
-import io.vertigo.samples.components.Calculator2;
-import io.vertigo.samples.components.Calculator3;
-import io.vertigo.samples.components.Calculator4;
-import io.vertigo.samples.components.Calculator5;
-import io.vertigo.samples.components.Calculator6;
+import io.vertigo.samples.components.a_basics.Calculator1;
+import io.vertigo.samples.components.a_basics.Calculator2;
+import io.vertigo.samples.components.a_basics.Calculator3;
+import io.vertigo.samples.components.a_basics.Calculator4;
+import io.vertigo.samples.components.b_plugins.Calculator5;
+import io.vertigo.samples.components.b_plugins.Calculator6;
+import io.vertigo.samples.components.c_aop.Calculator7;
 import io.vertigo.samples.config.SampleConfigBuilder;
 
 /***
@@ -43,15 +44,15 @@ public class Sample {
 			System.out.println("|    | offset+1+2+3+4 = " + result3);
 
 			System.out.println("|");
-			System.out.println("|--- a component with plugin");
+			System.out.println("|--- a component with an activeable behavior");
 			final Calculator4 calculator4 = app.getComponentSpace().resolve(Calculator4.class);
 			final int result4 = calculator4.sum(1, 2, 3, 4);
 			System.out.println("|    | 1+2+3+4 = " + result4);
 
 			System.out.println("|");
-			System.out.println("|--- a component with an activeable behavior");
+			System.out.println("|--- a component with plugin");
 			final Calculator5 calculator5 = app.getComponentSpace().resolve(Calculator5.class);
-			final int result5 = calculator5.sum(1, 2, 3, 4);
+			final int result5 = calculator4.sum(1, 2, 3, 4);
 			System.out.println("|    | 1+2+3+4 = " + result5);
 
 			System.out.println("|");
@@ -60,6 +61,12 @@ public class Sample {
 			System.out.println("|    | min(1, 2, 3, 4) = " + calculator6.calc("min", 1, 2, 3, 4));
 			System.out.println("|    | sum(1, 2, 3, 4) = " + calculator6.calc("sum", 1, 2, 3, 4));
 			System.out.println("|    | mult(1, 2, 3, 4) = " + calculator6.calc("mult", 1, 2, 3, 4));
+
+			System.out.println("|");
+			System.out.println("|--- a component with an aspect");
+			final Calculator7 calculator7 = app.getComponentSpace().resolve(Calculator7.class);
+			final int result7 = calculator7.sum(1, 2, 3, 4);
+			System.out.println("|    | 1+2+3+4 = " + result7);
 
 		} catch (final Exception e) {
 			e.printStackTrace();

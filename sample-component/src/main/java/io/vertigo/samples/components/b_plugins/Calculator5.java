@@ -1,10 +1,10 @@
-package io.vertigo.samples.components;
+package io.vertigo.samples.components.b_plugins;
 
 import io.vertigo.lang.Component;
 
 import javax.inject.Inject;
 
-public final class Calculator4 implements Component {
+public final class Calculator5 implements Component {
 	@Inject
 	private OperationPlugin operationPlugin;
 

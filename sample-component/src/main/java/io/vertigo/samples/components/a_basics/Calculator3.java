@@ -1,4 +1,4 @@
-package io.vertigo.samples.components;
+package io.vertigo.samples.components.a_basics;
 
 import io.vertigo.lang.Component;
 

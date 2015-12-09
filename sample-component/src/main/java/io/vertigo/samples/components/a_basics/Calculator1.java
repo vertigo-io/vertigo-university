@@ -1,8 +1,9 @@
-package io.vertigo.samples.components;
+package io.vertigo.samples.components.a_basics;
 
-public final class Calculator2impl implements Calculator2 {
+import io.vertigo.lang.Component;
 
-	@Override
+public class Calculator1 implements Component {
+
 	public int sum(final int... values) {
 		int sum = 0;
 		for (final int value : values) {

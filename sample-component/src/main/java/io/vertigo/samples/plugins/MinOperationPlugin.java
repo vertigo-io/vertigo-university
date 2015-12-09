@@ -1,6 +1,6 @@
 package io.vertigo.samples.plugins;
 
-import io.vertigo.samples.components.OperationPlugin;
+import io.vertigo.samples.components.b_plugins.OperationPlugin;
 
 public final class MinOperationPlugin implements OperationPlugin {
 

@@ -1,9 +1,11 @@
-package io.vertigo.samples.components;
+package io.vertigo.samples.components.c_aop;
 
 import io.vertigo.lang.Component;
+import io.vertigo.samples.aspects.Spy;
 
-public class Calculator1 implements Component {
+public class Calculator7 implements Component {
 
+	@Spy
 	public int sum(final int... values) {
 		int sum = 0;
 		for (final int value : values) {

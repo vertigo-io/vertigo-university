@@ -2,13 +2,16 @@ package io.vertigo.samples.config;
 
 import io.vertigo.app.config.AppConfig;
 import io.vertigo.app.config.AppConfigBuilder;
-import io.vertigo.samples.components.Calculator1;
-import io.vertigo.samples.components.Calculator2;
-import io.vertigo.samples.components.Calculator2impl;
-import io.vertigo.samples.components.Calculator3;
-import io.vertigo.samples.components.Calculator4;
-import io.vertigo.samples.components.Calculator5;
-import io.vertigo.samples.components.Calculator6;
+import io.vertigo.samples.aspects.SpyAspect;
+import io.vertigo.samples.aspects.SpyManager;
+import io.vertigo.samples.components.a_basics.Calculator1;
+import io.vertigo.samples.components.a_basics.Calculator2;
+import io.vertigo.samples.components.a_basics.Calculator2impl;
+import io.vertigo.samples.components.a_basics.Calculator3;
+import io.vertigo.samples.components.a_basics.Calculator4;
+import io.vertigo.samples.components.b_plugins.Calculator5;
+import io.vertigo.samples.components.b_plugins.Calculator6;
+import io.vertigo.samples.components.c_aop.Calculator7;
 import io.vertigo.samples.plugins.MinOperationPlugin;
 import io.vertigo.samples.plugins.MultOperationlugin;
 import io.vertigo.samples.plugins.SumOperationPlugin;
@@ -16,8 +19,15 @@ import io.vertigo.samples.plugins.SumOperationPlugin;
 public class SampleConfigBuilder {
 	public AppConfig build() {
 		return new AppConfigBuilder()
+				.beginModule("aspects")
+				.withNoAPI()
+				.addComponent(SpyManager.class)
+				.addAspect(SpyAspect.class)
+				.endModule()
+
 				.beginModule("sample")
 				.withNoAPI()
+
 				//a simple component must inherit from Component, that's all
 				.addComponent(Calculator1.class)
 
@@ -29,18 +39,20 @@ public class SampleConfigBuilder {
 				.addParam("offset", "1000")
 				.endComponent()
 
-				//Or you can use a plugin to externalize the complexity and be able to change 
-				.addComponent(Calculator4.class)
-				.addPlugin(SumOperationPlugin.class)
-
 				//and you can add behaviors on your component
 				//activeable has two methods : start() and stop()
+				.addComponent(Calculator4.class)
+
+				//Or you can use a plugin to externalize the complexity and be able to change 
 				.addComponent(Calculator5.class)
+				.addPlugin(SumOperationPlugin.class)
 
 				.addComponent(Calculator6.class)
 				.addPlugin(SumOperationPlugin.class)
 				.addPlugin(MinOperationPlugin.class)
 				.addPlugin(MultOperationlugin.class)
+
+				.addComponent(Calculator7.class)
 				.endModule()
 				.build();
 	}
