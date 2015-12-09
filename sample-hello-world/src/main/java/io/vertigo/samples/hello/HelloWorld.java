@@ -14,8 +14,9 @@ import io.vertigo.samples.hello.config.HelloConfigurator;
  * @author pchretien
  */
 public class HelloWorld {
+	private static final int PORT = 8080;
+
 	public static void main(final String[] args) {
-		final int PORT = 8080;
 		try (App app = new App(HelloConfigurator.config(PORT))) {
 			System.in.read();
 		} catch (final Exception e) {

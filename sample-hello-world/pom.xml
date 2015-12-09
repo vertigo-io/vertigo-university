@@ -13,15 +13,13 @@
 	<name>sample-hello-world</name>
 	<packaging>jar</packaging>
 
-
-
-
 	<dependencies>
 		<dependency>
 			<groupId>io.vertigo</groupId>
 			<artifactId>vertigo-core</artifactId>
 			<version>${vertigo.version}</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>io.vertigo</groupId>
 			<artifactId>vertigo-vega-api</artifactId>
@@ -32,6 +30,7 @@
 			<artifactId>vertigo-vega-impl</artifactId>
 			<version>${vertigo.version}</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
