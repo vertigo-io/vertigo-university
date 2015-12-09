@@ -8,7 +8,10 @@ import io.vertigo.samples.components.Calculator2impl;
 import io.vertigo.samples.components.Calculator3;
 import io.vertigo.samples.components.Calculator4;
 import io.vertigo.samples.components.Calculator5;
-import io.vertigo.samples.plugins.SumOperatorPlugin;
+import io.vertigo.samples.components.Calculator6;
+import io.vertigo.samples.plugins.MinOperationPlugin;
+import io.vertigo.samples.plugins.MultOperationlugin;
+import io.vertigo.samples.plugins.SumOperationPlugin;
 
 public class SampleConfigBuilder {
 	public AppConfig build() {
@@ -28,12 +31,16 @@ public class SampleConfigBuilder {
 
 				//Or you can use a plugin to externalize the complexity and be able to change 
 				.addComponent(Calculator4.class)
-				.addPlugin(SumOperatorPlugin.class)
+				.addPlugin(SumOperationPlugin.class)
 
 				//and you can add behaviors on your component
 				//activeable has two methods : start() and stop()
 				.addComponent(Calculator5.class)
 
+				.addComponent(Calculator6.class)
+				.addPlugin(SumOperationPlugin.class)
+				.addPlugin(MinOperationPlugin.class)
+				.addPlugin(MultOperationlugin.class)
 				.endModule()
 				.build();
 	}

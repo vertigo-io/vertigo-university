@@ -2,14 +2,19 @@ package io.vertigo.samples.plugins;
 
 import io.vertigo.samples.components.OperationPlugin;
 
-public final class SumOperatorPlugin implements OperationPlugin {
+public final class MultOperationlugin implements OperationPlugin {
 
 	@Override
 	public int calc(final int[] values) {
-		int sum = 0;
+		int result = 1;
 		for (final int value : values) {
-			sum += value;
+			result *= value;
 		}
-		return sum;
+		return result;
+	}
+
+	@Override
+	public String getOperator() {
+		return "mult";
 	}
 }
