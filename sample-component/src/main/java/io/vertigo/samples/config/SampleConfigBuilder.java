@@ -11,7 +11,8 @@ import io.vertigo.samples.components.a_basics.Calculator3;
 import io.vertigo.samples.components.a_basics.Calculator4;
 import io.vertigo.samples.components.b_plugins.Calculator5;
 import io.vertigo.samples.components.b_plugins.Calculator6;
-import io.vertigo.samples.components.c_aop.Calculator7;
+import io.vertigo.samples.components.c_aop.Calculator8;
+import io.vertigo.samples.plugins.MaxOperationPlugin;
 import io.vertigo.samples.plugins.MinOperationPlugin;
 import io.vertigo.samples.plugins.MultOperationlugin;
 import io.vertigo.samples.plugins.SumOperationPlugin;
@@ -37,6 +38,7 @@ public class SampleConfigBuilder {
 				//You can parameterize a component 
 				.beginComponent(Calculator3.class)
 				.addParam("offset", "1000")
+				.addParam("log", "true")
 				.endComponent()
 
 				//and you can add behaviors on your component
@@ -50,9 +52,12 @@ public class SampleConfigBuilder {
 				.addComponent(Calculator6.class)
 				.addPlugin(SumOperationPlugin.class)
 				.addPlugin(MinOperationPlugin.class)
+				.addPlugin(MaxOperationPlugin.class)
 				.addPlugin(MultOperationlugin.class)
 
-				.addComponent(Calculator7.class)
+				//.addComponent(Calculator7.class)
+
+				.addComponent(Calculator8.class)
 				.endModule()
 				.build();
 	}

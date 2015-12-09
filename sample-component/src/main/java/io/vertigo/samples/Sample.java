@@ -7,7 +7,7 @@ import io.vertigo.samples.components.a_basics.Calculator3;
 import io.vertigo.samples.components.a_basics.Calculator4;
 import io.vertigo.samples.components.b_plugins.Calculator5;
 import io.vertigo.samples.components.b_plugins.Calculator6;
-import io.vertigo.samples.components.c_aop.Calculator7;
+import io.vertigo.samples.components.c_aop.Calculator8;
 import io.vertigo.samples.config.SampleConfigBuilder;
 
 /***
@@ -58,15 +58,22 @@ public class Sample {
 			System.out.println("|");
 			System.out.println("|--- a component with a list of plugins");
 			final Calculator6 calculator6 = app.getComponentSpace().resolve(Calculator6.class);
-			System.out.println("|    | min(1, 2, 3, 4) = " + calculator6.calc("min", 1, 2, 3, 4));
-			System.out.println("|    | sum(1, 2, 3, 4) = " + calculator6.calc("sum", 1, 2, 3, 4));
+			System.out.println("|    | min (1, 2, 3, 4) = " + calculator6.calc("min", 1, 2, 3, 4));
+			System.out.println("|    | sum (1, 2, 3, 4) = " + calculator6.calc("sum", 1, 2, 3, 4));
 			System.out.println("|    | mult(1, 2, 3, 4) = " + calculator6.calc("mult", 1, 2, 3, 4));
+			System.out.println("|    | max (1, 2, 3, 4) = " + calculator6.calc("max", 1, 2, 3, 4));
+
+			//			System.out.println("|");
+			//			System.out.println("|--- a component with an option");
+			//			final Calculator7 calculator7 = app.getComponentSpace().resolve(Calculator7.class);
+			//			final int result7 = calculator7.sum(1, 2, 3, 4);
+			//			System.out.println("|    | 1+2+3+4 = " + result7);
 
 			System.out.println("|");
 			System.out.println("|--- a component with an aspect");
-			final Calculator7 calculator7 = app.getComponentSpace().resolve(Calculator7.class);
-			final int result7 = calculator7.sum(1, 2, 3, 4);
-			System.out.println("|    | 1+2+3+4 = " + result7);
+			final Calculator8 calculator8 = app.getComponentSpace().resolve(Calculator8.class);
+			final int result8 = calculator8.sum(1, 2, 3, 4);
+			System.out.println("|    | 1+2+3+4 = " + result8);
 
 		} catch (final Exception e) {
 			e.printStackTrace();

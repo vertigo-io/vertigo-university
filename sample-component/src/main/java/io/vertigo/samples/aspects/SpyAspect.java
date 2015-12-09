@@ -7,9 +7,7 @@ import io.vertigo.lang.Assertion;
 import javax.inject.Inject;
 
 /**
- * Aspect pour la gestion des transactions au niveau
- * de la couche service.
- * @author prahmoune
+ * @author pchretien
  */
 public final class SpyAspect implements Aspect {
 	private final SpyManager spyManager;
