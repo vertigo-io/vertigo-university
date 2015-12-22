@@ -52,7 +52,7 @@ public class Sample {
 			System.out.println("|");
 			System.out.println("|--- a component with plugin");
 			final Calculator5 calculator5 = app.getComponentSpace().resolve(Calculator5.class);
-			final int result5 = calculator4.sum(1, 2, 3, 4);
+			final int result5 = calculator5.sum(1, 2, 3, 4);
 			System.out.println("|    | 1+2+3+4 = " + result5);
 
 			System.out.println("|");
