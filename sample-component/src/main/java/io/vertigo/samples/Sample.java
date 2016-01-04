@@ -12,12 +12,12 @@ import io.vertigo.samples.config.SampleConfigBuilder;
 
 /***
  * Start the main method.
- * 
+ *
  * Call "http://localhost:8080/hello" with your web browser.
- * You may receive an "hello world" back. 
- * 
- * 
- * 
+ * You may receive an "hello world" back.
+ *
+ *
+ *
  * @author pchretien
  */
 public class Sample {
