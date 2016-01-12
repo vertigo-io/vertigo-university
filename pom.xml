@@ -26,6 +26,7 @@
 	<modules>
 		<module>sample-hello-world</module>
 		<module>sample-component</module>
+		<module>sample-store</module>
 		<module>sample-vega</module>
 	</modules>
 
