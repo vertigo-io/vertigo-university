@@ -1,1 +1,8 @@
-*.prefs
+bin/
+trash/
+target/
+.classpath
+.gitignore
+.project
+.settings/
+mvn-release.txt
