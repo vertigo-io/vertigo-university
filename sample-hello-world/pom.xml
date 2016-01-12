@@ -9,6 +9,7 @@
 		<version>0.9.1-SNAPSHOT</version>
 	</parent>
 
+	<version>0.9.1-SNAPSHOT</version>
 	<artifactId>sample-hello-world</artifactId>
 	<name>sample-hello-world</name>
 	<packaging>jar</packaging>

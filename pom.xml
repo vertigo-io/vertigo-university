@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>io.vertigo</groupId>
 		<artifactId>vertigo-parent</artifactId>
-		<version>0.9.0</version>
+		<version>0.9.1-SNAPSHOT</version>
 	</parent>
 
 	<artifactId>samples-reactor</artifactId>
@@ -20,7 +20,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.test.failure.ignore>true</maven.test.failure.ignore>
 		<maven.test.error.ignore>true</maven.test.error.ignore>
-		<vertigo.version>0.9.0</vertigo.version>
+		<vertigo.version>0.9.1-SNAPSHOT</vertigo.version>
 	</properties>
 
 	<modules>
