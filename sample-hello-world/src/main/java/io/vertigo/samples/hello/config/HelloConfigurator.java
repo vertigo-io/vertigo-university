@@ -2,12 +2,14 @@ package io.vertigo.samples.hello.config;
 
 import io.vertigo.app.config.AppConfig;
 import io.vertigo.app.config.AppConfigBuilder;
+import io.vertigo.commons.impl.CommonsFeatures;
 import io.vertigo.samples.hello.webservices.HelloWebServices;
 import io.vertigo.vega.VegaFeatures;
 
 public final class HelloConfigurator {
 	public static AppConfig config(final int port) {
 		return new AppConfigBuilder()
+				.beginModule(CommonsFeatures.class).endModule()
 				.beginModule(VegaFeatures.class)
 				.withEmbeddedServer(port)
 				.endModule()
