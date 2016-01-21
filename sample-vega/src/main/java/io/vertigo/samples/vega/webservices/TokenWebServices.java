@@ -4,36 +4,27 @@ import io.vertigo.vega.webservice.WebServices;
 import io.vertigo.vega.webservice.stereotype.AccessTokenConsume;
 import io.vertigo.vega.webservice.stereotype.AccessTokenMandatory;
 import io.vertigo.vega.webservice.stereotype.AccessTokenPublish;
-import io.vertigo.vega.webservice.stereotype.AnonymousAccessAllowed;
-import io.vertigo.vega.webservice.stereotype.GET;
 import io.vertigo.vega.webservice.stereotype.POST;
 import io.vertigo.vega.webservice.stereotype.PathPrefix;
 
-@PathPrefix("/vega")
-public class VegaWebServices implements WebServices {
-
-	@AnonymousAccessAllowed
-	@GET("/")
-	public String hello() {
-		return "hello world";
-	}
+@PathPrefix("/tokens")
+public class TokenWebServices implements WebServices {
 
 	@AccessTokenPublish
-	@POST("/getToken")
+	@POST("/")
 	public String getAccessToken() {
 		return "Token generated";
 	}
 
 	@AccessTokenMandatory
-	@POST("/testToken")
+	@POST("/test")
 	public String testAccessToken() {
 		return "Token tested";
 	}
 
 	@AccessTokenConsume
-	@POST("/invalidateToken")
+	@POST("/invalidate")
 	public String consumeAccessToken() {
 		return "Token consumed";
 	}
-
 }
