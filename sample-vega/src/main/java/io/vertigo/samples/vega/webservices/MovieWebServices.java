@@ -2,7 +2,7 @@ package io.vertigo.samples.vega.webservices;
 
 import java.util.Collection;
 
-import io.vertigo.samples.vega.domain.Cinematheque;
+import io.vertigo.samples.vega.domain.MovieDAO;
 import io.vertigo.samples.vega.domain.Movie;
 import io.vertigo.vega.webservice.WebServices;
 import io.vertigo.vega.webservice.stereotype.AnonymousAccessAllowed;
@@ -16,7 +16,7 @@ import io.vertigo.vega.webservice.stereotype.PathPrefix;
 public class MovieWebServices implements WebServices {
 	
 	// Mock-up persistence
-	private final Cinematheque cinematheque = new Cinematheque();
+	private final MovieDAO cinematheque = new MovieDAO();
 
 	@AnonymousAccessAllowed
 	@PUT("/{title}")

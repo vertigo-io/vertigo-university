@@ -4,14 +4,14 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Cinematheque {
+public class MovieDAO {
 
 	// Mock-up persistence
 	private Map<Integer, Movie> cinematheque = null;
 	private int sequence = 0;
 
 	// Initialize
-	public Cinematheque() {
+	public MovieDAO() {
 		cinematheque = new HashMap<Integer, Movie>();
 		for (int id = 0; id < 10; id++) {
 			Movie movie = new Movie().setId(id).setTitle(" sample movie number '" + sequence + "'");
