@@ -16,6 +16,7 @@ public final class SampleVegaConfigurator {
 		.beginModule(CommonsFeatures.class).endModule()
 		.beginModule(VegaFeatures.class)
 			.withEmbeddedServer(port)
+			//.withTokens("security-token")
 		.endModule()
 		//-----Declaration of a module named 'Vega' which contains a webservice component. 
 		.beginModule("Samples")
