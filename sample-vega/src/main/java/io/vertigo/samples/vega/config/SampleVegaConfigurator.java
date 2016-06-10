@@ -2,11 +2,7 @@ package io.vertigo.samples.vega.config;
 
 import io.vertigo.app.config.AppConfig;
 import io.vertigo.app.config.AppConfigBuilder;
-import io.vertigo.commons.daemon.DaemonManager;
 import io.vertigo.commons.impl.CommonsFeatures;
-import io.vertigo.commons.impl.daemon.DaemonManagerImpl;
-import io.vertigo.core.locale.LocaleManager;
-import io.vertigo.core.locale.LocaleManagerImpl;
 import io.vertigo.dynamo.kvstore.KVStoreManager;
 import io.vertigo.persona.impl.security.PersonaFeatures;
 import io.vertigo.samples.vega.domain.SampleSession;
@@ -33,7 +29,7 @@ public final class SampleVegaConfigurator {
 			.withEmbeddedServer(port)
 			.withTokens("security-token")
 		.endModule()
-		//-----Declaration of a module named 'Vega' which contains a webservice component. 
+		//-----Declaration of a module named 'Vega' which contains a webservice component.
 		.beginModule("Samples")
 			.withNoAPI()
 			.addComponent(HelloWebServices.class)
