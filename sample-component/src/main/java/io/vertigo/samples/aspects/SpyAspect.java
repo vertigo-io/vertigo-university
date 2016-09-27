@@ -1,10 +1,10 @@
 package io.vertigo.samples.aspects;
 
+import javax.inject.Inject;
+
 import io.vertigo.core.component.aop.Aspect;
 import io.vertigo.core.component.aop.AspectMethodInvocation;
 import io.vertigo.lang.Assertion;
-
-import javax.inject.Inject;
 
 /**
  * @author pchretien
@@ -20,7 +20,7 @@ public final class SpyAspect implements Aspect {
 	}
 
 	@Override
-	public Object invoke(final Object[] args, final AspectMethodInvocation methodInvocation) throws Exception {
+	public Object invoke(final Object[] args, final AspectMethodInvocation methodInvocation) {
 		spyManager.log("before " + methodInvocation.getMethod().getName());
 		final Object res = methodInvocation.proceed(args);
 		spyManager.log("after " + methodInvocation.getMethod().getName());

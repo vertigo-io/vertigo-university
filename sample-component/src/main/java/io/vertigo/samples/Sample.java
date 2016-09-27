@@ -1,6 +1,6 @@
 package io.vertigo.samples;
 
-import io.vertigo.app.App;
+import io.vertigo.app.AutoCloseableApp;
 import io.vertigo.samples.components.a_basics.Calculator1;
 import io.vertigo.samples.components.a_basics.Calculator2;
 import io.vertigo.samples.components.a_basics.Calculator3;
@@ -22,7 +22,7 @@ import io.vertigo.samples.config.SampleConfigBuilder;
  */
 public class Sample {
 	public static void main(final String[] args) {
-		try (App app = new App(new SampleConfigBuilder().build())) {
+		try (AutoCloseableApp app = new AutoCloseableApp(new SampleConfigBuilder().build())) {
 
 			System.out.println("|--- Samples using components");
 			System.out.println("|");

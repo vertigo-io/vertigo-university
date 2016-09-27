@@ -1,18 +1,15 @@
 package io.vertigo.samples.plugins;
 
+import java.util.stream.IntStream;
+
 import io.vertigo.samples.components.b_plugins.OperationPlugin;
 
 public final class MinOperationPlugin implements OperationPlugin {
 
 	@Override
 	public int calc(final int[] values) {
-		Integer min = null;
-		for (final int value : values) {
-			if (min == null || value < min) {
-				min = value;
-			}
-		}
-		return min;
+		return IntStream.of(values)
+				.min().orElseThrow(() -> new IllegalArgumentException("no min"));
 	}
 
 	@Override

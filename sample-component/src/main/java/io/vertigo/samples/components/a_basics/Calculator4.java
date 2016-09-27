@@ -1,5 +1,7 @@
 package io.vertigo.samples.components.a_basics;
 
+import java.util.stream.IntStream;
+
 import io.vertigo.lang.Activeable;
 import io.vertigo.lang.Component;
 
@@ -16,10 +18,7 @@ public class Calculator4 implements Component, Activeable {
 	}
 
 	public int sum(final int... values) {
-		int sum = 0;
-		for (final int value : values) {
-			sum += value;
-		}
-		return sum;
+		return IntStream.of(values)
+				.sum();
 	}
 }

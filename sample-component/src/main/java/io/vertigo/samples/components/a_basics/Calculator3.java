@@ -1,14 +1,16 @@
 package io.vertigo.samples.components.a_basics;
 
-import io.vertigo.lang.Component;
+import java.util.stream.IntStream;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import io.vertigo.lang.Component;
+
 public final class Calculator3 implements Component {
 	/**
 	 * Params can be injected on fields.
-	 * Params must be named using the annotation. 
+	 * Params must be named using the annotation.
 	 */
 	@Inject
 	@Named("log")
@@ -18,9 +20,9 @@ public final class Calculator3 implements Component {
 
 	/**
 	 * Params can be injected directely on the constructor.
-	 * This way is great because 
+	 * This way is great because
 	 * it encourages immutability
-	 * and 
+	 * and
 	 * it is similar to how to do when the components were created manually
 	 */
 	@Inject
@@ -32,10 +34,7 @@ public final class Calculator3 implements Component {
 		if (log) {
 			System.out.println("log has been activated on " + this.getClass().getSimpleName());
 		}
-		int sum = offset;
-		for (final int value : values) {
-			sum += value;
-		}
-		return sum;
+		return IntStream.of(values)
+				.reduce(offset, Integer::sum);
 	}
 }
