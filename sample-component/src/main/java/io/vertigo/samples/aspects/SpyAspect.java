@@ -28,7 +28,7 @@ public final class SpyAspect implements Aspect {
 	}
 
 	@Override
-	public Class<?> getAnnotationType() {
+	public Class<Spy> getAnnotationType() {
 		return Spy.class;
 	}
 }
