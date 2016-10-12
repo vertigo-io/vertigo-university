@@ -9,8 +9,8 @@
 		<version>0.9.2</version>
 	</parent>
 
-	<artifactId>sample-hello-world</artifactId>
-	<name>sample-hello-world</name>
+  	<artifactId>sample-twitter</artifactId>
+	<name>sample-twitter</name>
 	<packaging>jar</packaging>
 
 	<dependencies>
@@ -18,22 +18,26 @@
 			<groupId>io.vertigo</groupId>
 			<artifactId>vertigo-core</artifactId>
 			<version>${vertigo.version}</version>
-		</dependency>		
-		<dependency>
-			<groupId>io.vertigo</groupId>
-			<artifactId>vertigo-vega-api</artifactId>
-			<version>${vertigo.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.vertigo</groupId>
 			<artifactId>vertigo-vega-impl</artifactId>
 			<version>${vertigo.version}</version>
 		</dependency>
-		
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
+			<groupId>io.vertigo</groupId>
+			<artifactId>vertigo-dynamo-impl</artifactId>
+			<version>${vertigo.version}</version>
 		</dependency>
+		
+		<!-- Externals dependancies -->
+		<!-- Twitter4J -->
+		<dependency>
+		    <groupId>org.twitter4j</groupId>
+		    <artifactId>twitter4j-core</artifactId>
+		    <version>4.0.5</version>
+		</dependency>
+
 	</dependencies>
+  
 </project>

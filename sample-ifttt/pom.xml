@@ -9,19 +9,18 @@
 		<version>0.9.2</version>
 	</parent>
 
-	<artifactId>sample-hello-world</artifactId>
-	<name>sample-hello-world</name>
+  	<artifactId>sample-ifttt</artifactId>
+	<name>sample-ifttt</name>
 	<packaging>jar</packaging>
 
+	<properties>
+		<jersey2.version>2.19</jersey2.version>
+	</properties>
+	
 	<dependencies>
 		<dependency>
 			<groupId>io.vertigo</groupId>
 			<artifactId>vertigo-core</artifactId>
-			<version>${vertigo.version}</version>
-		</dependency>		
-		<dependency>
-			<groupId>io.vertigo</groupId>
-			<artifactId>vertigo-vega-api</artifactId>
 			<version>${vertigo.version}</version>
 		</dependency>
 		<dependency>
@@ -29,11 +28,25 @@
 			<artifactId>vertigo-vega-impl</artifactId>
 			<version>${vertigo.version}</version>
 		</dependency>
-		
 		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
+			<groupId>io.vertigo</groupId>
+			<artifactId>vertigo-dynamo-impl</artifactId>
+			<version>${vertigo.version}</version>
 		</dependency>
+		
+		<!-- Externals dependancies -->
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>${jersey2.version}</version>
+        </dependency>
+        
+        <dependency>
+		    <groupId>org.glassfish.jersey.media</groupId>
+		    <artifactId>jersey-media-json-jackson</artifactId>
+		    <version>${jersey2.version}</version>
+		</dependency>
+        
 	</dependencies>
+  
 </project>
