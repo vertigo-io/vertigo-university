@@ -1,10 +1,10 @@
 package io.vertigo.samples.vega.domain;
 
 import io.vertigo.dynamo.domain.model.KeyConcept;
-import io.vertigo.dynamo.domain.stereotype.DtDefinition;
+import io.vertigo.dynamo.domain.model.URI;
 import io.vertigo.dynamo.domain.stereotype.Field;
+import io.vertigo.dynamo.domain.util.DtObjectUtil;
 
-@DtDefinition
 public final class Movie implements KeyConcept {
 	private static final long serialVersionUID = -5975848806293357234L;
 	@Field(domain = "DO_IDENTITY", type = "ID", required = true, label = "id")
@@ -12,7 +12,6 @@ public final class Movie implements KeyConcept {
 	@Field(domain = "DO_TEXT", label = "name")
 	private String title;
 
-	
 	public Movie setId(final int id) {
 		this.id = id;
 		return this;
@@ -29,5 +28,10 @@ public final class Movie implements KeyConcept {
 
 	public String getTitle() {
 		return title;
+	}
+
+	@Override
+	public URI<Movie> getURI() {
+		return DtObjectUtil.createURI(this);
 	}
 }
