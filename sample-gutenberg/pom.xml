@@ -8,7 +8,7 @@
     <version>0.9.3-SNAPSHOT</version>
   </parent>
 
-  <artifactId>sample-gutemberg</artifactId>
+  <artifactId>sample-gutenberg</artifactId>
   <name>sample-gutemberg</name>
   
   <properties>

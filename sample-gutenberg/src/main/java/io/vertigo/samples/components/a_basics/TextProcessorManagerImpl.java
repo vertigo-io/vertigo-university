@@ -15,9 +15,9 @@ public class TextProcessorManagerImpl implements TextProcessorManager {
 
 	@Override
 	public long process(final Path text) {
-
 		try {
-			return Files.lines(text).count();
+			return Files.lines(text)
+					.count();
 		} catch (final IOException e) {
 			throw new WrappedException(e);
 		}

@@ -13,7 +13,7 @@ import io.vertigo.samples.components.a_basics.TextProcessorManagerImpl;
 public class SampleConfigBuilder {
 	public AppConfig build() {
 		return new AppConfigBuilder()
-				.beginModule("sample")
+				.beginModule("gutenberg")
 				.addComponent(TextProcessorManager.class, TextProcessorManagerImpl.class)
 				.endModule()
 				.build();

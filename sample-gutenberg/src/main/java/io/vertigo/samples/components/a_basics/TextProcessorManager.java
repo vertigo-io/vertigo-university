@@ -14,7 +14,6 @@ public interface TextProcessorManager extends Manager {
 	/**
 	 * Process a text
 	 * @param text
-	 * @return
 	 */
 	public long process(Path text);
 }
