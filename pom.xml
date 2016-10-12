@@ -32,9 +32,9 @@
 		<module>sample-ifttt</module>
 		<module>sample-mail</module>
 		<module>sample-twitter</module>
-		<module>sample-notifications</module>
+<!-- 		<module>sample-notifications</module>
 		
 		<module>sample-gutenberg</module>
-	</modules>
+ -->	</modules>
 
 </project>

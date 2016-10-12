@@ -12,12 +12,11 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 
 /**
- * Send a tweet https://twitter.com/Vertigo_Twit
+ * Sends a tweet https://twitter.com/Vertigo_Twit
  * @author xdurand
  *
  */
 public class TwitterSample {
-
 	private static final Logger LOGGER = Logger.getLogger(TwitterSample.class);
 
 	public static void main(final String[] args) {
