@@ -1,5 +1,6 @@
 package io.vertigo.samples.components.a_basics;
 
+import java.util.Optional;
 import java.util.stream.IntStream;
 
 import javax.inject.Inject;
@@ -26,15 +27,15 @@ public final class Calculator3 implements Component {
 	 * it is similar to how to do when the components were created manually
 	 */
 	@Inject
-	public Calculator3(@Named("offset") final int offset) {
-		this.offset = offset;
+	public Calculator3(@Named("offset") final Optional<Integer> offset) {
+		this.offset = offset.orElse(0);
 	}
 
 	public int sum(final int... values) {
 		if (log) {
-			System.out.println("log has been activated on " + this.getClass().getSimpleName());
+			System.out.println("|    |   >log has been activated on " + this.getClass().getSimpleName());
 		}
-		return IntStream.of(values)
-				.reduce(offset, Integer::sum);
+		return offset + IntStream.of(values)
+				.reduce(0, Integer::sum);
 	}
 }

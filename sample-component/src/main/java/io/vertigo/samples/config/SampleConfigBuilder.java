@@ -11,6 +11,7 @@ import io.vertigo.samples.components.a_basics.Calculator3;
 import io.vertigo.samples.components.a_basics.Calculator4;
 import io.vertigo.samples.components.b_plugins.Calculator5;
 import io.vertigo.samples.components.b_plugins.Calculator6;
+import io.vertigo.samples.components.c_aop.Calculator7;
 import io.vertigo.samples.components.c_aop.Calculator8;
 import io.vertigo.samples.plugins.MaxOperationPlugin;
 import io.vertigo.samples.plugins.MinOperationPlugin;
@@ -35,7 +36,7 @@ public class SampleConfigBuilder {
 				//Or you can add a component with an api and an impl
 				.addComponent(Calculator2.class, Calculator2impl.class)
 
-				//You can parameterize a component 
+				//You can parameterize a component
 				.beginComponent(Calculator3.class)
 				.addParam("offset", "1000")
 				.addParam("log", "true")
@@ -45,7 +46,7 @@ public class SampleConfigBuilder {
 				//activeable has two methods : start() and stop()
 				.addComponent(Calculator4.class)
 
-				//Or you can use a plugin to externalize the complexity and be able to change 
+				//Or you can use a plugin to externalize the complexity and be able to change
 				.addComponent(Calculator5.class)
 				.addPlugin(SumOperationPlugin.class)
 
@@ -55,9 +56,11 @@ public class SampleConfigBuilder {
 				.addPlugin(MaxOperationPlugin.class)
 				.addPlugin(MultOperationlugin.class)
 
-				//.addComponent(Calculator7.class)
-
+				// Aop on one method
+				.addComponent(Calculator7.class)
+				// Aop on class
 				.addComponent(Calculator8.class)
+
 				.endModule()
 				.build();
 	}

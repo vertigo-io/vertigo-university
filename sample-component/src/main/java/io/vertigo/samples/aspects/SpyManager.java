@@ -5,6 +5,6 @@ import io.vertigo.lang.Component;
 public class SpyManager implements Component {
 
 	public void log(final String info) {
-		System.out.println("log :" + info);
+		System.out.println("|    |   >log :" + info);
 	}
 }

@@ -5,6 +5,12 @@ import io.vertigo.app.config.AppConfigBuilder;
 import io.vertigo.commons.impl.CommonsFeatures;
 import io.vertigo.dynamo.impl.DynamoFeatures;
 import io.vertigo.notifications.NotificationManager;
+import io.vertigo.notifications.aspects.supervision.SupervisionAspect;
+import io.vertigo.notifications.aspects.supervision.SupervisionManager;
+import io.vertigo.notifications.aspects.supervision.SupervisionManagerImpl;
+import io.vertigo.notifications.aspects.trace.TraceAspect;
+import io.vertigo.notifications.aspects.trace.TraceManager;
+import io.vertigo.notifications.aspects.trace.TraceManagerImpl;
 import io.vertigo.notifications.impl.NotificationManagerImpl;
 import io.vertigo.notifications.plugins.ifttt.IftttNotificationPlugin;
 import io.vertigo.notifications.plugins.mail.MailNotificationPlugin;
@@ -30,6 +36,12 @@ public class NotificationSampleConfigBuilder {
 				.beginBootModule("fr").endModule()
 				.beginModule(CommonsFeatures.class).endModule()
 				.beginModule(DynamoFeatures.class).endModule()
+				.beginModule("notificationAspects")
+					.addAspect(SupervisionAspect.class)
+					.addAspect(TraceAspect.class)
+					.addComponent(SupervisionManager.class, SupervisionManagerImpl.class)
+					.addComponent(TraceManager.class, TraceManagerImpl.class)
+				.endModule()
 				.beginModule("notifications")
 					.addComponent(NotificationManager.class, NotificationManagerImpl.class)
 						.beginPlugin(IftttNotificationPlugin.class)

@@ -31,7 +31,8 @@ public class NotificationSample {
 			notifManager.sendMessage(message);
 
 			final String messageChannels = "Test NotificationSample selected channels " + format.format(now);
-			notifManager.sendMessage("mail;twitter", messageChannels);
+
+			notifManager.sendMessage(messageChannels, "mail", "twitter");
 
 		} catch (final Exception e) {
 			LOGGER.error("Erreur :", e);

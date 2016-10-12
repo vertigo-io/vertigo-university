@@ -12,13 +12,13 @@ public interface NotificationManager extends Manager {
 	/**
 	 * Send a message to all channels
 	 */
-	public void sendMessage(String message);
+	void sendMessage(String message);
 
 	/**
 	 * Send a message to a specified list of channels
-	 * @param strChannels one or more channels. the channels must be delimited by ';'
+	 * @param channels one or more channels.
 	 * @param message
 	 */
-	public void sendMessage(final String strChannels, final String message);
+	void sendMessage(final String message, final String... channels);
 
 }
