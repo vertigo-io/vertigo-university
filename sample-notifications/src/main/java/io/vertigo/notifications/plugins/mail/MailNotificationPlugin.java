@@ -36,4 +36,9 @@ public class MailNotificationPlugin implements NotificationPlugin {
 		mailManager.sendMail(mail);
 	}
 
+	@Override
+	public String getChannel() {
+		return "mail";
+	}
+
 }

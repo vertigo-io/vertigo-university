@@ -96,4 +96,9 @@ public class IftttNotificationPlugin implements NotificationPlugin, Activeable {
 		}
 	}
 
+	@Override
+	public String getChannel() {
+		return "ifttt";
+	}
+
 }

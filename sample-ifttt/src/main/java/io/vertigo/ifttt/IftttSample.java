@@ -2,6 +2,9 @@ package io.vertigo.ifttt;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Properties;
 
 import javax.ws.rs.client.Client;
@@ -30,12 +33,6 @@ public class IftttSample {
 
 	public static void main(final String[] args) {
 
-		final String message = "message";
-
-		final MakerEvent postMessage = new MakerEvent();
-		postMessage.setValue1("My message");
-		postMessage.setValue2(message);
-
 		System.setProperty("https.proxyHost", "172.20.0.9");
 		System.setProperty("https.proxyPort", "3128");
 
@@ -55,6 +52,14 @@ public class IftttSample {
 
 		final Builder request = resource.request();
 		request.accept(MediaType.APPLICATION_JSON);
+
+		final Date now = new Date();
+		final DateFormat format = new SimpleDateFormat("dd/MM HH:mm:ss");
+		final String message = "Test IftttSample " + format.format(now);
+
+		final MakerEvent postMessage = new MakerEvent();
+		postMessage.setValue1("My message");
+		postMessage.setValue2(message);
 
 		final Response response = request.post(Entity.<MakerEvent> entity(postMessage, MediaType.APPLICATION_JSON));
 

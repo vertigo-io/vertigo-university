@@ -26,9 +26,12 @@ public class NotificationSample {
 
 			final Date now = new Date();
 			final DateFormat format = new SimpleDateFormat("dd/MM HH:mm:ss");
-			final String message = "Test NotificationSample " + format.format(now);
+			final String message = "Test NotificationSample all channels " + format.format(now);
 
 			notifManager.sendMessage(message);
+
+			final String messageChannels = "Test NotificationSample selected channels " + format.format(now);
+			notifManager.sendMessage("mail;twitter", messageChannels);
 
 		} catch (final Exception e) {
 			LOGGER.error("Erreur :", e);

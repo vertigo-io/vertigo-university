@@ -10,7 +10,8 @@ import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
 
 /**
- *
+ * Send a tweet
+ * https://twitter.com/Vertigo_Twit
  * @author dt
  *
  */
@@ -31,7 +32,11 @@ public class TwitterNotificationPlugin implements NotificationPlugin {
 			LOGGER.error("Error while sending new status.", e);
 			throw new WrappedException(e);
 		}
+	}
 
+	@Override
+	public String getChannel() {
+		return "twitter";
 	}
 
 }

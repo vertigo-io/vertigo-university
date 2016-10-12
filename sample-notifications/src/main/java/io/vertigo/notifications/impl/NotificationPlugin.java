@@ -8,11 +8,17 @@ import io.vertigo.lang.Plugin;
  *
  */
 public interface NotificationPlugin extends Plugin {
-	
+
 	/**
 	 * Send a message
 	 * @param message the message to send
 	 */
 	void sendMessage(String message);
-	
+
+	/**
+	 *
+	 * @return
+	 */
+	String getChannel();
+
 }
