@@ -1,7 +1,5 @@
 package io.vertigo.mail;
 
-import org.apache.log4j.Logger;
-
 import io.vertigo.app.AutoCloseableApp;
 import io.vertigo.config.MailSampleConfigBuilder;
 import io.vertigo.tempo.mail.Mail;
@@ -15,8 +13,6 @@ import io.vertigo.tempo.mail.MailManager;
  */
 public class MailSample {
 
-	private static final Logger LOGGER = Logger.getLogger(MailSample.class);
-
 	private static final String DT_MAIL = "Direction Technique<direction.technique@yopmail.com>";
 
 	public static void main(final String[] args) {
@@ -29,7 +25,7 @@ public class MailSample {
 			final Mail mail = new MailBuilder()
 					.from(DT_MAIL)
 					.to(DT_MAIL)
-					.withSubject("Message from MailNotificationPlugin")
+					.withSubject("Message from MailSample")
 					.replyTo(DT_MAIL)
 					.withTextContent(myMail)
 					.build();
