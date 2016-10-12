@@ -15,10 +15,6 @@ import io.vertigo.tempo.plugins.mail.javaxmail.JavaxSendMailPlugin;
  */
 public class MailSampleConfigBuilder {
 
-	/**
-	 *
-	 * @return
-	 */
 	public AppConfig build() {
 		//@formatter:off
 		return new AppConfigBuilder()
