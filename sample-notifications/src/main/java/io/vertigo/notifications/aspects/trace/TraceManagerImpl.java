@@ -26,7 +26,7 @@ public class TraceManagerImpl implements TraceManager {
 
 	@Override
 	public void traceAfter(final String name, final Object ret) {
-		LOG.info("Before calling " + name + " return value : " + String.valueOf(ret));
+		LOG.info("After calling " + name + " return value : " + String.valueOf(ret));
 	}
 
 }

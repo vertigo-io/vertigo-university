@@ -9,5 +9,11 @@ import io.vertigo.lang.Manager;
  */
 public interface SupervisionManager extends Manager {
 
+	/**
+	 *
+	 * @param methodName
+	 * @param start
+	 * @param stop
+	 */
 	void superviseExec(final String methodName, long start, long stop);
 }

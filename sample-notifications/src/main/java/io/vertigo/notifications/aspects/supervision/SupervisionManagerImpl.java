@@ -16,7 +16,7 @@ public class SupervisionManagerImpl implements SupervisionManager {
 
 		final long ellapsedMillis = (stop - start);
 
-		LOG.info("Method: " + methodName + "Exectime:" + ellapsedMillis);
+		LOG.info("Method: " + methodName + "Execuction time (ms) : " + ellapsedMillis);
 
 	}
 
