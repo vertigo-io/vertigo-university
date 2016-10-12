@@ -21,7 +21,7 @@ import io.vertigo.samples.config.SampleConfigBuilder;
  *
  * @author pchretien
  */
-public class Sample {
+public class Samples {
 	public static void main(final String[] args) {
 		try (AutoCloseableApp app = new AutoCloseableApp(new SampleConfigBuilder().build())) {
 

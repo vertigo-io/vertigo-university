@@ -11,7 +11,6 @@ import io.vertigo.core.component.aop.AspectMethodInvocation;
  * @author dt
  */
 public final class TraceAspect implements Aspect {
-
 	private final TraceManager traceManager;
 
 	@Inject
@@ -24,7 +23,6 @@ public final class TraceAspect implements Aspect {
 		traceManager.traceBefore(methodInvocation.getMethod().getName(), args);
 		final Object ret = methodInvocation.proceed(args);
 		traceManager.traceAfter(methodInvocation.getMethod().getName(), ret);
-
 		return ret;
 	}
 

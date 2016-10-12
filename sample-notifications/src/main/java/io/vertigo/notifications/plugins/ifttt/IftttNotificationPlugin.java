@@ -8,6 +8,7 @@ import java.util.Properties;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation.Builder;
 import javax.ws.rs.client.WebTarget;
@@ -16,7 +17,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status.Family;
 
 import org.apache.log4j.Logger;
-import org.glassfish.jersey.client.JerseyClientBuilder;
 
 import io.vertigo.lang.Activeable;
 import io.vertigo.lang.Assertion;
@@ -30,9 +30,7 @@ import io.vertigo.notifications.impl.NotificationPlugin;
  *
  */
 public class IftttNotificationPlugin implements NotificationPlugin, Activeable {
-
 	private static final Logger LOGGER = Logger.getLogger(IftttNotificationPlugin.class);
-
 	private static final String IFTTT = "ifttt.properties";
 
 	private Client client;
@@ -67,7 +65,7 @@ public class IftttNotificationPlugin implements NotificationPlugin, Activeable {
 
 	@Override
 	public void start() {
-		client = JerseyClientBuilder.newClient();
+		client = ClientBuilder.newClient();
 		resource = client.target(url);
 	}
 

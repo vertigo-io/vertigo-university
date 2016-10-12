@@ -26,10 +26,6 @@ import io.vertigo.tempo.plugins.mail.javaxmail.JavaxSendMailPlugin;
  */
 public class NotificationSampleConfigBuilder {
 
-	/**
-	 *
-	 * @return
-	 */
 	public AppConfig build() {
 		//@formatter:off
 		return new AppConfigBuilder()
@@ -37,10 +33,10 @@ public class NotificationSampleConfigBuilder {
 				.beginModule(CommonsFeatures.class).endModule()
 				.beginModule(DynamoFeatures.class).endModule()
 				.beginModule("notificationAspects")
-					.addAspect(SupervisionAspect.class)
-					.addAspect(TraceAspect.class)
 					.addComponent(SupervisionManager.class, SupervisionManagerImpl.class)
 					.addComponent(TraceManager.class, TraceManagerImpl.class)
+					.addAspect(SupervisionAspect.class)
+					.addAspect(TraceAspect.class)
 				.endModule()
 				.beginModule("notifications")
 					.addComponent(NotificationManager.class, NotificationManagerImpl.class)

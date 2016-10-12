@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.Properties;
 
 import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation.Builder;
 import javax.ws.rs.client.WebTarget;
@@ -16,7 +17,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status.Family;
 
 import org.apache.log4j.Logger;
-import org.glassfish.jersey.client.JerseyClientBuilder;
 
 import io.vertigo.lang.WrappedException;
 
@@ -47,7 +47,7 @@ public class IftttSample {
 			throw new WrappedException(e);
 		}
 
-		final Client client = JerseyClientBuilder.newClient();
+		final Client client = ClientBuilder.newClient();
 		final WebTarget resource = client.target(url);
 
 		final Builder request = resource.request();

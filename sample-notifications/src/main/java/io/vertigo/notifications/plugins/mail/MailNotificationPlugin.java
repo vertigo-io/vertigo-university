@@ -13,9 +13,7 @@ import io.vertigo.tempo.mail.MailManager;
  *
  */
 public class MailNotificationPlugin implements NotificationPlugin {
-
 	private static final String DT_MAIL = "Direction Technique<direction.technique@yopmail.com>";
-
 	private final MailManager mailManager;
 
 	@Inject
@@ -25,7 +23,6 @@ public class MailNotificationPlugin implements NotificationPlugin {
 
 	@Override
 	public void sendMessage(final String message) {
-
 		final Mail mail = new MailBuilder()
 				.from(DT_MAIL)
 				.to(DT_MAIL)
@@ -33,6 +30,7 @@ public class MailNotificationPlugin implements NotificationPlugin {
 				.replyTo(DT_MAIL)
 				.withTextContent(message)
 				.build();
+
 		mailManager.sendMail(mail);
 	}
 
@@ -40,5 +38,4 @@ public class MailNotificationPlugin implements NotificationPlugin {
 	public String getChannel() {
 		return "mail";
 	}
-
 }

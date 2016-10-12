@@ -16,17 +16,13 @@ import twitter4j.TwitterFactory;
  *
  */
 public class TwitterNotificationPlugin implements NotificationPlugin {
-
 	private static final Logger LOGGER = Logger.getLogger(TwitterNotificationPlugin.class);
-
 	private static final Twitter TWITTER = TwitterFactory.getSingleton();
 
 	@Override
 	public void sendMessage(final String message) {
-		Status status = null;
-
 		try {
-			status = TWITTER.updateStatus("Message from TwitterNotificationPlugin:" + message);
+			final Status status = TWITTER.updateStatus("Message from TwitterNotificationPlugin:" + message);
 			LOGGER.info("Successfully updated the status to [" + (status != null ? status.getText() : "") + "].");
 		} catch (final TwitterException e) {
 			LOGGER.error("Error while sending new status.", e);

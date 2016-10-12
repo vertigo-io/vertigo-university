@@ -23,21 +23,16 @@ public class NotificationManagerImpl implements NotificationManager {
 
 	@Override
 	public void sendMessage(final String message) {
-
-		for (final NotificationPlugin notificationPlugin : notificationPlugins) {
-			notificationPlugin.sendMessage(message);
-		}
-
+		notificationPlugins.stream()
+				.forEach(p -> p.sendMessage(message));
 	}
 
 	@Override
 	public void sendMessage(final String message, final String... arrChannels) {
-		//@formatter:off
 		final List<String> channels = Arrays.asList(arrChannels);
-
 		notificationPlugins.stream()
-						   .filter(p -> channels.contains(p.getChannel()))
-						   .forEach(p -> p.sendMessage(message));
+				.filter(p -> channels.contains(p.getChannel()))
+				.forEach(p -> p.sendMessage(message));
 	}
 
 }

@@ -16,8 +16,6 @@ public interface NotificationPlugin extends Plugin {
 	void sendMessage(String message);
 
 	/**
-	 *
-	 * @return
 	 */
 	String getChannel();
 

@@ -13,7 +13,6 @@ import io.vertigo.core.component.aop.AspectMethodInvocation;
  *
  */
 public class SupervisionAspect implements Aspect {
-
 	private final SupervisionManager supervisionManager;
 
 	@Inject
