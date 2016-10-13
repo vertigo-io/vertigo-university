@@ -1,6 +1,6 @@
 #Exercice 1 : Découverte 
 
-Projet sample-gutemberg.
+Projet sample-gutenberg.
 
 Importer le projet dans Eclipse (Import Existing Maven Project)
 
@@ -8,13 +8,13 @@ Importer le projet dans Eclipse (Import Existing Maven Project)
 Vérification le fonctionnement de TextProcessorManagerImpl donnant le nombre de lignes.
 
 ## Nombre de mots
-Creer une implémentation donnant le nombre de mots.
+Créer une implémentation donnant le nombre de mots.
 
 ## Nombre de caractères
-Creer une implémentation donnant le nombre de caractères.
+Créer une implémentation donnant le nombre de caractères.
 
 ## Mot le plus long
-Creer une implémentation donnant le mot le plus long.
+Créer une implémentation donnant le mot le plus long.
 
 
 #Exercice 2 : Moteur de notifications
@@ -39,7 +39,7 @@ Le manager devra comporter une méthode envoyant un message avec la signature su
 void sendMessage(String message)
 
 ## Etape 2 : Broadcasting
-Modifier le manager de manière à ce qu'il puisse gérer une liste de plugin.
+Modifier le manager de manière à ce qu'il puisse gérer une liste de plugins.
 
 Créer un second plugin à partir de l'implémentation du projet sample-mail.
 
@@ -48,19 +48,19 @@ La signature de send message doit rester inchangée :
 void sendMessage(String message)
 
 ## Etape 3 : Selecting channels
-Modifier le manager de manière à creer un selecteur de canaux.
+Modifier le manager de manière à créer un sélecteur de canaux.
 
-Une nouvelle méthode dans le manager devra être ajouté pour choisir les channels sur lesquels le message doit être envoyé.
+Une nouvelle méthode dans le manager devra être ajoutée pour choisir les channels sur lesquels le message doit être envoyé.
 
-la signature sera la suivante : 
+La signature sera la suivante : 
 void sendMessage(String message, String... channels);
 
 ## Etape 4 : Performance monitoring
-En utilisanat l'AOP, ajouter un comportement permettant de mesurer les temps de réponse lors des appels aux méthodes sendMessage.
+En utilisant l'AOP, ajouter un comportement permettant de mesurer les temps de réponse lors des appels aux méthodes sendMessage.
 
 ## Etape 5 : NSA logs
-Toujours en utilisant l'AOP, ajouter un comportement permettant de mesurer tracer les paramètres en entrée et les réponse de sendMessage.
+Toujours en utilisant l'AOP, ajouter un comportement permettant de tracer les paramètres en entrée et les réponse de sendMessage.
 
-Ce comportement doit pouvoir être décorrélée de l'imlpémentation de l'étape 4.
+Ce comportement doit pouvoir être décorrélé de l'implémentation de l'étape 4.
 
 
