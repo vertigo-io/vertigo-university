@@ -22,6 +22,7 @@ Créer une implémentation donnant le mot le plus long.
 Groupe 1 : Projet sample-ifttt.
 Groupe 2 : Projet sample-twitter.
 
+
 Importer le projet dans Eclipse (Import Existing Maven Project)
 
 ## Prérequis 
@@ -46,6 +47,8 @@ Créer un second plugin à partir de l'implémentation du projet sample-mail.
 Le manager devra maintenant envoyer le message à tous les canaux de communication.
 La signature de send message doit rester inchangée : 
 void sendMessage(String message)
+
+S'il vous reste du temps, intégrer le plugin de l'autre groupe 1
 
 ## Etape 3 : Selecting channels
 Modifier le manager de manière à créer un sélecteur de canaux.
