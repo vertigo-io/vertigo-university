@@ -1,5 +1,4 @@
-#Exercice 1 :
-
+#Exercice 1 : Découverte 
 
 Projet sample-gutemberg.
 
@@ -16,5 +15,52 @@ Creer une implémentation donnant le nombre de caractères.
 
 ## Mot le plus long
 Creer une implémentation donnant le mot le plus long.
+
+
+#Exercice 2 : Moteur de notifications
+
+Groupe 1 : Projet sample-ifttt.
+Groupe 2 : Projet sample-twitter.
+
+Importer le projet dans Eclipse (Import Existing Maven Project)
+
+## Prérequis 
+Vérification le fonctionnement du projet en envoyant une notification (ifft ou twitter).
+
+## Etape 1 : Back to Basic
+Créer un nouveau projet.
+
+Le but est de refactorer le code avec un manager et un plugin.
+
+Que doit faire le manager ?
+Que doit faire le plugin ?
+
+Le manager devra comporter une méthode envoyant un message avec la signature suivante : 
+void sendMessage(String message)
+
+## Etape 2 : Broadcasting
+Modifier le manager de manière à ce qu'il puisse gérer une liste de plugin.
+
+Créer un second plugin à partir de l'implémentation du projet sample-mail.
+
+Le manager devra maintenant envoyer le message à tous les canaux de communication.
+La signature de send message doit rester inchangée : 
+void sendMessage(String message)
+
+## Etape 3 : Selecting channels
+Modifier le manager de manière à creer un selecteur de canaux.
+
+Une nouvelle méthode dans le manager devra être ajouté pour choisir les channels sur lesquels le message doit être envoyé.
+
+la signature sera la suivante : 
+void sendMessage(String message, String... channels);
+
+## Etape 4 : Performance monitoring
+En utilisanat l'AOP, ajouter un comportement permettant de mesurer les temps de réponse lors des appels aux méthodes sendMessage.
+
+## Etape 5 : NSA logs
+Toujours en utilisant l'AOP, ajouter un comportement permettant de mesurer tracer les paramètres en entrée et les réponse de sendMessage.
+
+Ce comportement doit pouvoir être décorrélée de l'imlpémentation de l'étape 4.
 
 
