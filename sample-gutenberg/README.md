@@ -48,7 +48,7 @@ Le manager devra maintenant envoyer le message à tous les canaux de communicati
 La signature de send message doit rester inchangée : 
 void sendMessage(String message)
 
-S'il vous reste du temps, intégrer le plugin de l'autre groupe 1
+S'il vous reste du temps, intégrer le plugin de l'autre groupe
 
 ## Etape 3 : Selecting channels
 Modifier le manager de manière à créer un sélecteur de canaux.
