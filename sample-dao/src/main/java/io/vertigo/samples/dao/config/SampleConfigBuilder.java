@@ -8,13 +8,13 @@ import io.vertigo.dynamo.database.SqlDataBaseManager;
 import io.vertigo.dynamo.impl.DynamoFeatures;
 import io.vertigo.dynamo.impl.database.SqlDataBaseManagerImpl;
 import io.vertigo.dynamo.impl.database.vendor.h2.H2Database;
-import io.vertigo.dynamo.impl.database.vendor.postgresql.PostgreSqlDataBase;
 import io.vertigo.dynamo.plugins.database.connection.c3p0.C3p0ConnectionProviderPlugin;
 import io.vertigo.dynamo.plugins.environment.loaders.java.AnnotationLoaderPlugin;
 import io.vertigo.dynamo.plugins.environment.loaders.kpr.KprLoaderPlugin;
 import io.vertigo.dynamo.plugins.environment.registries.domain.DomainDynamicRegistryPlugin;
 import io.vertigo.dynamo.plugins.environment.registries.task.TaskDynamicRegistryPlugin;
 import io.vertigo.dynamo.plugins.store.datastore.postgresql.PostgreSqlDataStorePlugin;
+import io.vertigo.samples.dao.aspect.SupervisionAspect;
 import io.vertigo.samples.dao.boot.DataBaseInitializer;
 
 public class SampleConfigBuilder {
@@ -51,6 +51,9 @@ public class SampleConfigBuilder {
 					.beginModule("ressources")
 						.addDefinitionResource("kpr", "application.kpr")
 					.endModule()
+					.beginModule("aspect")
+						.addAspect(SupervisionAspect.class)
+					.endModule()
 					.addInitializer(DataBaseInitializer.class);
 		// @formatter:on
 	}
@@ -76,9 +79,9 @@ public class SampleConfigBuilder {
 						.getModuleConfigBuilder()
 						.addComponent(SqlDataBaseManager.class, SqlDataBaseManagerImpl.class)
 						.beginPlugin(C3p0ConnectionProviderPlugin.class)
-							.addParam("dataBaseClass", PostgreSqlDataBase.class.getName())
-							.addParam("jdbcDriver", org.postgresql.Driver.class.getName())
-							.addParam("jdbcUrl", "jdbc:postgresql://localhost:5432/formation?user=formation&password=formation")
+							.addParam("dataBaseClass", H2Database.class.getName())
+							.addParam("jdbcDriver", org.h2.Driver.class.getName())
+							.addParam("jdbcUrl", "jdbc:h2:mem:database")
 						.endPlugin()
 						.beginPlugin(PostgreSqlDataStorePlugin.class)
 							.addParam("sequencePrefix","SEQ_")

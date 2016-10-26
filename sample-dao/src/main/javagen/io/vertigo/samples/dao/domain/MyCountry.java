@@ -6,10 +6,9 @@ import io.vertigo.dynamo.domain.model.URI;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 /**
  * Attention cette classe est générée automatiquement !
- * Objet de données Country
+ * Objet de données MyCountry
  */
-@io.vertigo.dynamo.domain.stereotype.DataSpace("loaded")
-public final class Country implements Entity {
+public final class MyCountry implements Entity {
 
 	/** SerialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -19,7 +18,7 @@ public final class Country implements Entity {
 
 	/** {@inheritDoc} */
 	@Override
-	public URI<Country> getURI() {
+	public URI<MyCountry> getURI() {
 		return DtObjectUtil.createURI(this);
 	}
 	

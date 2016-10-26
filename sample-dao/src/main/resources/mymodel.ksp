@@ -1,37 +1,33 @@
 package io.vertigo.samples.dao.domain
 
-create DtDefinition DT_COUNTRY {
-  storeName : "loaded"
+create DtDefinition DT_MY_COUNTRY {
   key COU_ID {domain: DO_ID label: "Id" notNull:"false"}
   field NAME {domain: DO_LABEL label: "Code du pays" notNull:"false"}
 }
 
-create DtDefinition DT_MOVIE {
-  storeName : "loaded"
+create DtDefinition DT_MY_MOVIE {
   key MOV_ID {domain: DO_ID label: "Id" notNull:"yes"}
   field NAME {domain: DO_LABEL_LONG label: "Code du pays" notNull:"yes"}
   field YEAR {domain: DO_YEAR label: "Année" notNull:"false"}
   field IMDBID {domain: DO_LABEL label: "Id Imdb" notNull:"false"}
 }
 
-create DtDefinition DT_ACTOR {
-  storeName : "loaded"
+create DtDefinition DT_MY_ACTOR {
   key ACT_ID {domain: DO_ID label: "Id" notNull:"yes"}
   field NAME {domain: DO_LABEL_LONG label: "Nom" notNull:"yes"}
   field SEXE {domain: DO_CODE label: "Sexe" notNull:"false"}
 }
 
-create DtDefinition DT_ROLE {
-  storeName : "loaded"
+create DtDefinition DT_MY_ROLE {
   key ROL_ID {domain: DO_ID label: "Id" notNull:"yes"}
   field AS_CHARACTER {domain: DO_LABEL_VERY_LONG label: "Dans le role de" notNull:"yes"}
 }
 
-create Association A_MOV_COU {
+create Association A_MMOV_MCOU {
   fkFieldName : "COU_ID"
     
- 	dtDefinitionA : DT_MOVIE
-	dtDefinitionB : DT_COUNTRY
+ 	dtDefinitionA : DT_MY_MOVIE
+	dtDefinitionB : DT_MY_COUNTRY
 			
 	navigabilityA : "false"
 	navigabilityB : "true"
@@ -46,11 +42,11 @@ create Association A_MOV_COU {
 			
 }
 
-create Association A_ROL_MOV {
+create Association A_MROL_MMOV {
   fkFieldName : "MOV_ID"
     
- 	dtDefinitionA : DT_ROLE
-	dtDefinitionB : DT_MOVIE
+ 	dtDefinitionA : DT_MY_ROLE
+	dtDefinitionB : DT_MY_MOVIE
 			
 	navigabilityA : "true"
 	navigabilityB : "false"
@@ -66,11 +62,11 @@ create Association A_ROL_MOV {
 }
 
 
-create Association A_ROL_ACT {
+create Association A_MROL_MACT {
   fkFieldName : "ACT_ID"
     
- 	dtDefinitionA : DT_ROLE
-	dtDefinitionB : DT_ACTOR
+ 	dtDefinitionA : DT_MY_ROLE
+	dtDefinitionB : DT_MY_ACTOR
 			
 	navigabilityA : "false"
 	navigabilityB : "true"

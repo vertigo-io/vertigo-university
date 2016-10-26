@@ -6,10 +6,9 @@ import io.vertigo.dynamo.domain.model.URI;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 /**
  * Attention cette classe est générée automatiquement !
- * Objet de données Movie
+ * Objet de données MyMovie
  */
-@io.vertigo.dynamo.domain.stereotype.DataSpace("loaded")
-public final class Movie implements Entity {
+public final class MyMovie implements Entity {
 
 	/** SerialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -19,12 +18,12 @@ public final class Movie implements Entity {
 	private Integer year;
 	private String imdbid;
 	private Long couId;
-	private io.vertigo.samples.dao.domain.Country country;
-	private io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Role> role;
+	private io.vertigo.samples.dao.domain.MyCountry country;
+	private io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.MyRole> role;
 
 	/** {@inheritDoc} */
 	@Override
-	public URI<Movie> getURI() {
+	public URI<MyMovie> getURI() {
 		return DtObjectUtil.createURI(this);
 	}
 	
@@ -125,10 +124,10 @@ public final class Movie implements Entity {
 
 	/**
 	 * Association : Country.
-	 * @return io.vertigo.samples.dao.domain.Country
+	 * @return io.vertigo.samples.dao.domain.MyCountry
 	 */
-	public io.vertigo.samples.dao.domain.Country getCountry() {
-		final io.vertigo.dynamo.domain.model.URI<io.vertigo.samples.dao.domain.Country> fkURI = getCountryURI();
+	public io.vertigo.samples.dao.domain.MyCountry getCountry() {
+		final io.vertigo.dynamo.domain.model.URI<io.vertigo.samples.dao.domain.MyCountry> fkURI = getCountryURI();
 		if (fkURI == null) {
 			return null;
 		}
@@ -150,31 +149,31 @@ public final class Movie implements Entity {
 	 * @return URI de l'association
 	 */
     @io.vertigo.dynamo.domain.stereotype.Association (
-    	name = "A_MOV_COU",
+    	name = "A_MMOV_MCOU",
     	fkFieldName = "COU_ID",
-    	primaryDtDefinitionName = "DT_COUNTRY",
+    	primaryDtDefinitionName = "DT_MY_COUNTRY",
     	primaryIsNavigable = true,
     	primaryRole = "Country",
     	primaryLabel = "Country",
     	primaryMultiplicity = "0..1",
-    	foreignDtDefinitionName = "DT_MOVIE",
+    	foreignDtDefinitionName = "DT_MY_MOVIE",
     	foreignIsNavigable = false,
     	foreignRole = "Movie",
     	foreignLabel = "Movie",
     	foreignMultiplicity = "0..*"
     )
-	public io.vertigo.dynamo.domain.model.URI<io.vertigo.samples.dao.domain.Country> getCountryURI() {
-		return io.vertigo.dynamo.domain.util.DtObjectUtil.createURI(this, "A_MOV_COU", io.vertigo.samples.dao.domain.Country.class);
+	public io.vertigo.dynamo.domain.model.URI<io.vertigo.samples.dao.domain.MyCountry> getCountryURI() {
+		return io.vertigo.dynamo.domain.util.DtObjectUtil.createURI(this, "A_MMOV_MCOU", io.vertigo.samples.dao.domain.MyCountry.class);
 	}
 	/**
 	 * Association : Role.
-	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Role>
+	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.MyRole>
 	 */
-	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Role> getRoleList() {
-//		return this.<io.vertigo.samples.dao.domain.Role> getList(getRoleListURI());
+	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.MyRole> getRoleList() {
+//		return this.<io.vertigo.samples.dao.domain.MyRole> getList(getRoleListURI());
 		// On doit avoir une clé primaire renseignée. Si ce n'est pas le cas, on renvoie une liste vide
 		if (io.vertigo.dynamo.domain.util.DtObjectUtil.getId(this) == null) {
-			return new io.vertigo.dynamo.domain.model.DtList<>(io.vertigo.samples.dao.domain.Role.class);
+			return new io.vertigo.dynamo.domain.model.DtList<>(io.vertigo.samples.dao.domain.MyRole.class);
 		}
 		final io.vertigo.dynamo.domain.model.DtListURI fkDtListURI = getRoleDtListURI();
 		io.vertigo.lang.Assertion.checkNotNull(fkDtListURI);
@@ -191,21 +190,21 @@ public final class Movie implements Entity {
 	 * @return URI de l'association
 	 */
     @io.vertigo.dynamo.domain.stereotype.Association (
-    	name = "A_ROL_MOV",
+    	name = "A_MROL_MMOV",
     	fkFieldName = "MOV_ID",
-    	primaryDtDefinitionName = "DT_MOVIE",
+    	primaryDtDefinitionName = "DT_MY_MOVIE",
     	primaryIsNavigable = false,
     	primaryRole = "Movie",
     	primaryLabel = "Movie",
     	primaryMultiplicity = "0..1",
-    	foreignDtDefinitionName = "DT_ROLE",
+    	foreignDtDefinitionName = "DT_MY_ROLE",
     	foreignIsNavigable = true,
     	foreignRole = "Role",
     	foreignLabel = "Role",
     	foreignMultiplicity = "0..*"
     )
 	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation getRoleDtListURI() {
-		return io.vertigo.dynamo.domain.util.DtObjectUtil.createDtListURIForSimpleAssociation(this, "A_ROL_MOV", "Role");
+		return io.vertigo.dynamo.domain.util.DtObjectUtil.createDtListURIForSimpleAssociation(this, "A_MROL_MMOV", "Role");
 	}
 
 	/** {@inheritDoc} */

@@ -6,10 +6,9 @@ import io.vertigo.dynamo.domain.model.URI;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 /**
  * Attention cette classe est générée automatiquement !
- * Objet de données Role
+ * Objet de données MyRole
  */
-@io.vertigo.dynamo.domain.stereotype.DataSpace("loaded")
-public final class Role implements Entity {
+public final class MyRole implements Entity {
 
 	/** SerialVersionUID. */
 	private static final long serialVersionUID = 1L;
@@ -18,11 +17,11 @@ public final class Role implements Entity {
 	private String asCharacter;
 	private Long movId;
 	private Long actId;
-	private io.vertigo.samples.dao.domain.Actor actor;
+	private io.vertigo.samples.dao.domain.MyActor actor;
 
 	/** {@inheritDoc} */
 	@Override
-	public URI<Role> getURI() {
+	public URI<MyRole> getURI() {
 		return DtObjectUtil.createURI(this);
 	}
 	
@@ -106,10 +105,10 @@ public final class Role implements Entity {
 	// Association : Movie non navigable
 	/**
 	 * Association : Actor.
-	 * @return io.vertigo.samples.dao.domain.Actor
+	 * @return io.vertigo.samples.dao.domain.MyActor
 	 */
-	public io.vertigo.samples.dao.domain.Actor getActor() {
-		final io.vertigo.dynamo.domain.model.URI<io.vertigo.samples.dao.domain.Actor> fkURI = getActorURI();
+	public io.vertigo.samples.dao.domain.MyActor getActor() {
+		final io.vertigo.dynamo.domain.model.URI<io.vertigo.samples.dao.domain.MyActor> fkURI = getActorURI();
 		if (fkURI == null) {
 			return null;
 		}
@@ -131,21 +130,21 @@ public final class Role implements Entity {
 	 * @return URI de l'association
 	 */
     @io.vertigo.dynamo.domain.stereotype.Association (
-    	name = "A_ROL_ACT",
+    	name = "A_MROL_MACT",
     	fkFieldName = "ACT_ID",
-    	primaryDtDefinitionName = "DT_ACTOR",
+    	primaryDtDefinitionName = "DT_MY_ACTOR",
     	primaryIsNavigable = true,
     	primaryRole = "Actor",
     	primaryLabel = "Actor",
     	primaryMultiplicity = "0..1",
-    	foreignDtDefinitionName = "DT_ROLE",
+    	foreignDtDefinitionName = "DT_MY_ROLE",
     	foreignIsNavigable = false,
     	foreignRole = "Role",
     	foreignLabel = "Role",
     	foreignMultiplicity = "0..*"
     )
-	public io.vertigo.dynamo.domain.model.URI<io.vertigo.samples.dao.domain.Actor> getActorURI() {
-		return io.vertigo.dynamo.domain.util.DtObjectUtil.createURI(this, "A_ROL_ACT", io.vertigo.samples.dao.domain.Actor.class);
+	public io.vertigo.dynamo.domain.model.URI<io.vertigo.samples.dao.domain.MyActor> getActorURI() {
+		return io.vertigo.dynamo.domain.util.DtObjectUtil.createURI(this, "A_MROL_MACT", io.vertigo.samples.dao.domain.MyActor.class);
 	}
 
 	/** {@inheritDoc} */

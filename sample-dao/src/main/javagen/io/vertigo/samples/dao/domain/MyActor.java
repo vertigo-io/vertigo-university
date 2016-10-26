@@ -6,63 +6,82 @@ import io.vertigo.dynamo.domain.model.URI;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 /**
  * Attention cette classe est générée automatiquement !
- * Objet de données Country
+ * Objet de données MyActor
  */
-@io.vertigo.dynamo.domain.stereotype.DataSpace("loaded")
-public final class Country implements Entity {
+public final class MyActor implements Entity {
 
 	/** SerialVersionUID. */
 	private static final long serialVersionUID = 1L;
 
-	private Long couId;
+	private Long actId;
 	private String name;
+	private String sexe;
 
 	/** {@inheritDoc} */
 	@Override
-	public URI<Country> getURI() {
+	public URI<MyActor> getURI() {
 		return DtObjectUtil.createURI(this);
 	}
 	
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'. 
-	 * @return Long couId <b>Obligatoire</b>
+	 * @return Long actId <b>Obligatoire</b>
 	 */
 	@Field(domain = "DO_ID", type = "ID", required = true, label = "Id")
-	public Long getCouId() {
-		return couId;
+	public Long getActId() {
+		return actId;
 	}
 
 	/**
 	 * Champ : ID.
 	 * Définit la valeur de la propriété 'Id'.
-	 * @param couId Long <b>Obligatoire</b>
+	 * @param actId Long <b>Obligatoire</b>
 	 */
-	public void setCouId(final Long couId) {
-		this.couId = couId;
+	public void setActId(final Long actId) {
+		this.actId = actId;
 	}
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Code du pays'. 
+	 * Récupère la valeur de la propriété 'Nom'. 
 	 * @return String name 
 	 */
-	@Field(domain = "DO_LABEL", label = "Code du pays")
+	@Field(domain = "DO_LABEL_LONG", label = "Nom")
 	public String getName() {
 		return name;
 	}
 
 	/**
 	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'Code du pays'.
+	 * Définit la valeur de la propriété 'Nom'.
 	 * @param name String 
 	 */
 	public void setName(final String name) {
 		this.name = name;
 	}
 
+	/**
+	 * Champ : DATA.
+	 * Récupère la valeur de la propriété 'Sexe'. 
+	 * @return String sexe 
+	 */
+	@Field(domain = "DO_CODE", label = "Sexe")
+	public String getSexe() {
+		return sexe;
+	}
 
-	// Association : Movie non navigable
+	/**
+	 * Champ : DATA.
+	 * Définit la valeur de la propriété 'Sexe'.
+	 * @param sexe String 
+	 */
+	public void setSexe(final String sexe) {
+		this.sexe = sexe;
+	}
+
+
+	// Association : Role non navigable
 
 	/** {@inheritDoc} */
 	@Override

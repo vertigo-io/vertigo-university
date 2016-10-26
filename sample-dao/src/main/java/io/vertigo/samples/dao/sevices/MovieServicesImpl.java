@@ -4,20 +4,22 @@ import javax.inject.Inject;
 
 import io.vertigo.dynamo.transaction.Transactional;
 import io.vertigo.lang.Assertion;
-import io.vertigo.samples.dao.dao.MovieDAO;
-import io.vertigo.samples.dao.domain.Movie;
+import io.vertigo.samples.dao.aspect.Supervision;
+import io.vertigo.samples.dao.dao.MyMovieDAO;
+import io.vertigo.samples.dao.domain.MyMovie;
 
 @Transactional
 public class MovieServicesImpl implements MovieServices {
 
 	@Inject
-	private MovieDAO movieDAO;
+	private MyMovieDAO myMovieDAO;
 
 	@Override
-	public void saveMovie(final Movie movie) {
-		Assertion.checkNotNull(movie);
+	@Supervision
+	public void saveMyMovie(final MyMovie myMovie) {
+		Assertion.checkNotNull(myMovie);
 		// ---
-		movieDAO.save(movie);
+		myMovieDAO.save(myMovie);
 	}
 
 }
