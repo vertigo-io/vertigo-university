@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>io.vertigo</groupId>
+		<artifactId>samples-reactor</artifactId>
+		<version>0.9.3</version>
+	</parent>
+
+	<artifactId>sample-dao-full</artifactId>
+	<name>sample-dao-full</name>
+	<packaging>jar</packaging>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<version>1.4.191</version>
+		</dependency>
+		<dependency>
+			<groupId>com.mchange</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.5.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.4-1206-jdbc41</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.vertigo</groupId>
+			<artifactId>vertigo-core</artifactId>
+			<version>${vertigo.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.vertigo</groupId>
+			<artifactId>vertigo-commons-impl</artifactId>
+			<version>${vertigo.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.vertigo</groupId>
+			<artifactId>vertigo-dynamo-impl</artifactId>
+			<version>${vertigo.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.vertigo</groupId>
+			<artifactId>vertigo-studio</artifactId>
+			<version>${vertigo.version}</version>
+		</dependency>
+	</dependencies>
+
+</project>
