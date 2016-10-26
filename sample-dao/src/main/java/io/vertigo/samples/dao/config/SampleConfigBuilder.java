@@ -47,6 +47,10 @@ public class SampleConfigBuilder {
 							.addParam("sequencePrefix","SEQ_")
 						.endPlugin()
 					.endModule()
+					//----Definitions
+					.beginModule("ressources")
+						.addDefinitionResource("kpr", "application.kpr")
+					.endModule()
 					.addInitializer(DataBaseInitializer.class);
 		// @formatter:on
 	}
@@ -79,6 +83,10 @@ public class SampleConfigBuilder {
 						.beginPlugin(PostgreSqlDataStorePlugin.class)
 							.addParam("sequencePrefix","SEQ_")
 						.endPlugin()
+					.endModule()
+					//----Definitions
+					.beginModule("ressources")
+						.addDefinitionResource("kpr", "application.kpr")
 					.endModule();
 		// @formatter:on
 	}
