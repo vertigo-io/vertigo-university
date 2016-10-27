@@ -8,6 +8,7 @@ import io.vertigo.dynamo.domain.util.DtObjectUtil;
  * Attention cette classe est générée automatiquement !
  * Objet de données MyCountry
  */
+@io.vertigo.dynamo.domain.stereotype.DataSpace("mine")
 public final class MyCountry implements Entity {
 
 	/** SerialVersionUID. */

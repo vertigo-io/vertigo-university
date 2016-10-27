@@ -1,10 +1,13 @@
-package io.vertigo.samples.dao.config;
+package io.vertigo.samples.dao.run;
+
+import java.util.Optional;
 
 import javax.inject.Inject;
 
 import io.vertigo.app.AutoCloseableApp;
 import io.vertigo.app.config.AppConfigBuilder;
 import io.vertigo.core.component.di.injector.Injector;
+import io.vertigo.samples.dao.config.SampleConfigBuilder;
 import io.vertigo.samples.dao.dao.ActorDAO;
 import io.vertigo.samples.dao.dao.CountryDAO;
 import io.vertigo.samples.dao.dao.MovieDAO;
@@ -13,14 +16,14 @@ import io.vertigo.samples.dao.dao.MyCountryDAO;
 import io.vertigo.samples.dao.dao.MyMovieDAO;
 import io.vertigo.samples.dao.dao.MyRoleDAO;
 import io.vertigo.samples.dao.dao.RoleDAO;
-import io.vertigo.samples.dao.sevices.ActorServices;
-import io.vertigo.samples.dao.sevices.ActorServicesImpl;
-import io.vertigo.samples.dao.sevices.MovieServices;
-import io.vertigo.samples.dao.sevices.MovieServicesImpl;
-import io.vertigo.samples.dao.sevices.RepriseServices;
-import io.vertigo.samples.dao.sevices.RepriseServicesImpl;
-import io.vertigo.samples.dao.sevices.RoleServices;
-import io.vertigo.samples.dao.sevices.RoleServicesImpl;
+import io.vertigo.samples.dao.services.ActorServices;
+import io.vertigo.samples.dao.services.ActorServicesImpl;
+import io.vertigo.samples.dao.services.MovieServices;
+import io.vertigo.samples.dao.services.MovieServicesImpl;
+import io.vertigo.samples.dao.services.RepriseServices;
+import io.vertigo.samples.dao.services.RepriseServicesImpl;
+import io.vertigo.samples.dao.services.RoleServices;
+import io.vertigo.samples.dao.services.RoleServicesImpl;
 import io.vertigo.samples.reprise.ReprisePAO;
 
 public class Reprise {
@@ -65,31 +68,27 @@ public class Reprise {
 
 	void step2() {
 		final long chunksize = 1000L;
-		final long chunkCounts = (long) (Math.floor(repriseServices.countActors() / chunksize) + 1);
-		for (int i = 0; i < chunkCounts; i++) {
-			repriseServices.fillActors(chunksize, i * chunksize);
+		Optional<Long> offset = Optional.of(0L);
+		while (offset.isPresent()) {
+			offset = repriseServices.fillActors(chunksize, offset.get());
 
 		}
 	}
 
 	void step3() {
-		final long minMovie = repriseServices.minMovie();
-		final long maxMovie = repriseServices.maxMovie();
 		final long chunksize = 1000L;
-		final long chunkCounts = (long) (Math.floor(repriseServices.countMovies() / chunksize) + 1);
-		for (int i = 0; i < chunkCounts; i++) {
-			repriseServices.fillMovies(chunksize, i * chunksize, minMovie, maxMovie);
+		Optional<Long> offset = Optional.of(0L);
+		while (offset.isPresent()) {
+			offset = repriseServices.fillMovies(chunksize, offset.get());
 
 		}
 	}
 
 	void step4() {
-		final long minMovie = repriseServices.minMovie();
-		final long maxMovie = repriseServices.maxMovie();
-		final long chunksize = 10000L;
-		final long chunkCounts = (long) (Math.floor(repriseServices.countRoles() / chunksize) + 1);
-		for (int i = 0; i < chunkCounts; i++) {
-			repriseServices.fillRoles(chunksize, i * chunksize, minMovie, maxMovie);
+		final long chunksize = 1000L;
+		Optional<Long> offset = Optional.of(0L);
+		while (offset.isPresent()) {
+			offset = repriseServices.fillRoles(chunksize, offset.get());
 
 		}
 	}

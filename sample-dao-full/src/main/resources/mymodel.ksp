@@ -1,11 +1,13 @@
 package io.vertigo.samples.dao.domain
 
 create DtDefinition DT_MY_COUNTRY {
+  storeName : "mine"
   key COU_ID {domain: DO_ID label: "Id" notNull:"false"}
   field NAME {domain: DO_LABEL label: "Code du pays" notNull:"false"}
 }
 
 create DtDefinition DT_MY_MOVIE {
+  storeName : "mine"
   key MOV_ID {domain: DO_ID label: "Id" notNull:"yes"}
   field NAME {domain: DO_LABEL_LONG label: "Code du pays" notNull:"yes"}
   field YEAR {domain: DO_YEAR label: "Année" notNull:"false"}
@@ -13,12 +15,14 @@ create DtDefinition DT_MY_MOVIE {
 }
 
 create DtDefinition DT_MY_ACTOR {
+  storeName : "mine"
   key ACT_ID {domain: DO_ID label: "Id" notNull:"yes"}
   field NAME {domain: DO_LABEL_LONG label: "Nom" notNull:"yes"}
   field SEXE {domain: DO_CODE label: "Sexe" notNull:"false"}
 }
 
 create DtDefinition DT_MY_ROLE {
+  storeName : "mine"
   key ROL_ID {domain: DO_ID label: "Id" notNull:"yes"}
   field AS_CHARACTER {domain: DO_LABEL_VERY_LONG label: "Dans le role de" notNull:"yes"}
 }

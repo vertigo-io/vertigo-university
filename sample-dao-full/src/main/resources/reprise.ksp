@@ -1,6 +1,7 @@
 package io.vertigo.samples.reprise
 
 create Task TK_INSERT_COUNTRIES_BATCH {
+	storeName : "mine"
     className : "io.vertigo.dynamox.task.TaskEngineProcBatch"
         request : "
         	INSERT INTO MY_COUNTRY (COU_ID, NAME) values (#COUNTRY_LIST.0.COU_ID#, #COUNTRY_LIST.0.NAME#) 
@@ -10,7 +11,6 @@ create Task TK_INSERT_COUNTRIES_BATCH {
 
 
 create Task TK_LOAD_COUNTRIES {
-	storeName : "loaded"
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
         request : "
         	select * from COUNTRY
@@ -19,7 +19,6 @@ create Task TK_LOAD_COUNTRIES {
 }
 
 create Task TK_COUNT_ACTORS {
-	storeName : "loaded"
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
         request : "
         	select count(*) from ACTOR
@@ -28,6 +27,7 @@ create Task TK_COUNT_ACTORS {
 }
 
 create Task TK_INSERT_ACTORS_BATCH {
+	storeName : "mine"
     className : "io.vertigo.dynamox.task.TaskEngineProcBatch"
         request : "
         	INSERT INTO MY_ACTOR (ACT_ID, NAME, SEXE) values (#ACTORS_LIST.0.ACT_ID#, #ACTORS_LIST.0.NAME#, #ACTORS_LIST.0.SEXE#) 
@@ -37,13 +37,12 @@ create Task TK_INSERT_ACTORS_BATCH {
 
 
 create Task TK_LOAD_ACTORS_BY_CHUNK {
-	storeName : "loaded"
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
         request : "
         	select * from ACTOR
+			where ACT_ID > #OFFSET#
         	order by ACT_ID asc
-        	limit #LIMIT#
-        	offset #OFFSET#
+			limit 1000
 			"
 	attribute LIMIT	 	{domain : DO_ID		notNull:"true" 	inOut :"in"}
 	attribute OFFSET	 	{domain : DO_ID		notNull:"true" 	inOut :"in"}
@@ -52,7 +51,6 @@ create Task TK_LOAD_ACTORS_BY_CHUNK {
 
 
 create Task TK_COUNT_MOVIES {
-	storeName : "loaded"
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
         request : "
         	select count(*) from MOVIE
@@ -61,25 +59,8 @@ create Task TK_COUNT_MOVIES {
 	attribute COUNT	 	{domain : DO_ID		notNull:"true" 	inOut :"out"}
 }
 
-create Task TK_MIN_MOVIE {
-	storeName : "loaded"
-    className : "io.vertigo.dynamox.task.TaskEngineSelect"
-        request : "
-        	select min(mov_id) from movie where name like 'S%%'
-			"
-	attribute COUNT	 	{domain : DO_ID		notNull:"true" 	inOut :"out"}
-}
-
-create Task TK_MAX_MOVIE {
-	storeName : "loaded"
-    className : "io.vertigo.dynamox.task.TaskEngineSelect"
-        request : "
-        	select max(mov_id) from movie where name like 'S%%'
-			"
-	attribute COUNT	 	{domain : DO_ID		notNull:"true" 	inOut :"out"}
-}
-
 create Task TK_INSERT_MOVIES_BATCH {
+	storeName : "mine"
     className : "io.vertigo.dynamox.task.TaskEngineProcBatch"
         request : "
         	INSERT INTO MY_MOVIE (MOV_ID, NAME, YEAR, IMDBID, COU_ID) values (#MOVIES_LIST.0.MOV_ID#, #MOVIES_LIST.0.NAME#, #MOVIES_LIST.0.YEAR#, #MOVIES_LIST.0.IMDBID#, #MOVIES_LIST.0.COU_ID#) 
@@ -89,25 +70,20 @@ create Task TK_INSERT_MOVIES_BATCH {
 
 
 create Task TK_LOAD_MOVIES_BY_CHUNK {
-	storeName : "loaded"
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
         request : "
         	select * from movie
-        	where MOV_ID > #MIN# and MOV_ID < #MAX#
+        	where MOV_ID > #OFFSET#
         	order by MOV_ID asc
         	limit #LIMIT#
-        	offset #OFFSET#
 			"
 	attribute LIMIT	 	{domain : DO_ID		notNull:"true" 	inOut :"in"}
 	attribute OFFSET	 	{domain : DO_ID		notNull:"true" 	inOut :"in"}
-	attribute MIN	 	{domain : DO_ID		notNull:"true" 	inOut :"in"}
-	attribute MAX	 	{domain : DO_ID		notNull:"true" 	inOut :"in"}
 	attribute MOVIES_LIST	 	{domain : DO_DT_MOVIE_DTC		notNull:"true" 	inOut :"out"}
 }
 
 
 create Task TK_COUNT_ROLES {
-	storeName : "loaded"
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
         request : "
         	select count(*) from ROLE rol
@@ -118,6 +94,7 @@ create Task TK_COUNT_ROLES {
 }
 
 create Task TK_INSERT_ROLES_BATCH {
+	storeName : "mine"
     className : "io.vertigo.dynamox.task.TaskEngineProcBatch"
         request : "
         	INSERT INTO MY_ROLE (ROL_ID, MOV_ID, ACT_ID, AS_CHARACTER) values (#ROLES_LIST.0.ROL_ID#, #ROLES_LIST.0.MOV_ID#, #ROLES_LIST.0.ACT_ID#, #ROLES_LIST.0.AS_CHARACTER#) 
@@ -127,19 +104,15 @@ create Task TK_INSERT_ROLES_BATCH {
 
 
 create Task TK_LOAD_ROLES_BY_CHUNK {
-	storeName : "loaded"
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
         request : "
         	select rol.* from role rol
-        	where MOV_ID > #MIN# and MOV_ID < #MAX#
+        	where ROL_ID > #OFFSET#
         	order by rol.ROL_ID asc
         	limit #LIMIT#
-        	offset #OFFSET#
 			"
 	attribute LIMIT	 	{domain : DO_ID		notNull:"true" 	inOut :"in"}
 	attribute OFFSET	 	{domain : DO_ID		notNull:"true" 	inOut :"in"}
-	attribute MIN	 	{domain : DO_ID		notNull:"true" 	inOut :"in"}
-	attribute MAX	 	{domain : DO_ID		notNull:"true" 	inOut :"in"}
 	attribute MOVIES_LIST	 	{domain : DO_DT_ROLE_DTC		notNull:"true" 	inOut :"out"}
 }
 

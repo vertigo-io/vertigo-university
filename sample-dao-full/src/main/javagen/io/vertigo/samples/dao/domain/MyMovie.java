@@ -8,6 +8,7 @@ import io.vertigo.dynamo.domain.util.DtObjectUtil;
  * Attention cette classe est générée automatiquement !
  * Objet de données MyMovie
  */
+@io.vertigo.dynamo.domain.stereotype.DataSpace("mine")
 public final class MyMovie implements Entity {
 
 	/** SerialVersionUID. */

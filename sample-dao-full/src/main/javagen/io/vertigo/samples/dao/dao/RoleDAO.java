@@ -42,16 +42,12 @@ public final class RoleDAO extends DAO<Role, java.lang.Long> implements StoreSer
 	 * Execute la tache TK_LOAD_ROLES_BY_CHUNK.
 	 * @param limit Long 
 	 * @param offset Long 
-	 * @param min Long 
-	 * @param max Long 
 	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Role> moviesList
 	*/
-	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Role> loadRolesByChunk(final Long limit, final Long offset, final Long min, final Long max) {
+	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Role> loadRolesByChunk(final Long limit, final Long offset) {
 		final Task task = createTaskBuilder("TK_LOAD_ROLES_BY_CHUNK")
 				.addValue("LIMIT", limit)
 				.addValue("OFFSET", offset)
-				.addValue("MIN", min)
-				.addValue("MAX", max)
 				.build();
 		return getTaskManager()
 				.execute(task)

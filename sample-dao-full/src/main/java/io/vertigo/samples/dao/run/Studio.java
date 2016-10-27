@@ -1,9 +1,10 @@
-package io.vertigo.samples.dao.config;
+package io.vertigo.samples.dao.run;
 
 import javax.inject.Inject;
 
 import io.vertigo.app.AutoCloseableApp;
 import io.vertigo.core.component.di.injector.Injector;
+import io.vertigo.samples.dao.config.SampleStudioConfigBuilder;
 import io.vertigo.studio.mda.MdaManager;
 
 public class Studio {

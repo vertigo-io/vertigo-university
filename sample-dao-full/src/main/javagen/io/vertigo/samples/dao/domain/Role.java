@@ -8,7 +8,6 @@ import io.vertigo.dynamo.domain.util.DtObjectUtil;
  * Attention cette classe est générée automatiquement !
  * Objet de données Role
  */
-@io.vertigo.dynamo.domain.stereotype.DataSpace("loaded")
 public final class Role implements Entity {
 
 	/** SerialVersionUID. */

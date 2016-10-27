@@ -4,7 +4,7 @@ create Task TK_GET_MOVIES_BY_CRITERIA {
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
         request : "
         	select mov.*
-        	from my_movie mov
+        	from movie mov
         	where 
         	1=1
         	<%if(title != null) {%>
@@ -25,9 +25,9 @@ create Task TK_GET_ROLES_IN_MOVIES {
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
         request : "
         	select rol.*
-        	from my_role role
+        	from role rol
         	where 
-        	role.MOV_ID in (#MOVIES.0.MOV_ID#)
+        	rol.MOV_ID in (#MOVIES.0.MOV_ID#)
 			"
 	attribute MOVIES	{domain : DO_DT_MY_MOVIE_DTC 	notNull:"true" 	inOut :"in"}
 	attribute ROLES	{domain : DO_DT_MY_ROLE_DTC 	notNull:"true" 	inOut :"out"}

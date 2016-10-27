@@ -1,4 +1,6 @@
-package io.vertigo.samples.dao.sevices;
+package io.vertigo.samples.dao.services;
+
+import java.util.Optional;
 
 import javax.inject.Inject;
 
@@ -41,9 +43,13 @@ public class RepriseServicesImpl implements RepriseServices {
 	}
 
 	@Override
-	public void fillActors(final long limit, final long offset) {
+	public Optional<Long> fillActors(final long limit, final long offset) {
 		final DtList<Actor> existingActors = actorDAO.loadActorsByChunk(limit, offset);
-		reprisePAO.insertActorsBatch(existingActors);
+		if (!existingActors.isEmpty()) {
+			reprisePAO.insertActorsBatch(existingActors);
+			return Optional.of(existingActors.get(existingActors.size() - 1).getActId());
+		}
+		return Optional.empty();
 
 	}
 
@@ -53,9 +59,13 @@ public class RepriseServicesImpl implements RepriseServices {
 	}
 
 	@Override
-	public void fillMovies(final long limit, final long offset, final long minMovie, final long maxMovie) {
-		final DtList<Movie> existingMovies = movieDAO.loadMoviesByChunk(limit, offset, minMovie, maxMovie);
-		reprisePAO.insertMoviesBatch(existingMovies);
+	public Optional<Long> fillMovies(final long limit, final long offset) {
+		final DtList<Movie> existingMovies = movieDAO.loadMoviesByChunk(limit, offset);
+		if (!existingMovies.isEmpty()) {
+			reprisePAO.insertMoviesBatch(existingMovies);
+			return Optional.of(existingMovies.get(existingMovies.size() - 1).getMovId());
+		}
+		return Optional.empty();
 
 	}
 
@@ -65,20 +75,14 @@ public class RepriseServicesImpl implements RepriseServices {
 	}
 
 	@Override
-	public void fillRoles(final long limit, final long offset, final long minMovie, final long maxMovie) {
-		final DtList<Role> existingMovies = roleDAO.loadRolesByChunk(limit, offset, minMovie, maxMovie);
-		reprisePAO.insertRolesBatch(existingMovies);
+	public Optional<Long> fillRoles(final long limit, final long offset) {
+		final DtList<Role> existingRoles = roleDAO.loadRolesByChunk(limit, offset);
+		if (!existingRoles.isEmpty()) {
+			reprisePAO.insertRolesBatch(existingRoles);
+			return Optional.of(existingRoles.get(existingRoles.size() - 1).getRolId());
+		}
+		return Optional.empty();
 
-	}
-
-	@Override
-	public Long minMovie() {
-		return reprisePAO.minMovie();
-	}
-
-	@Override
-	public Long maxMovie() {
-		return reprisePAO.maxMovie();
 	}
 
 }

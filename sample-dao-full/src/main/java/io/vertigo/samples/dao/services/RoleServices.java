@@ -1,4 +1,4 @@
-package io.vertigo.samples.dao.sevices;
+package io.vertigo.samples.dao.services;
 
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.store.StoreServices;

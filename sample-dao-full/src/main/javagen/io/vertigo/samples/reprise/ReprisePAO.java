@@ -85,30 +85,6 @@ public final class ReprisePAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TK_MIN_MOVIE.
-	 * @return Long count
-	*/
-	public Long minMovie() {
-		final Task task = createTaskBuilder("TK_MIN_MOVIE")
-				.build();
-		return getTaskManager()
-				.execute(task)
-				.getResult();
-	}
-
-	/**
-	 * Execute la tache TK_MAX_MOVIE.
-	 * @return Long count
-	*/
-	public Long maxMovie() {
-		final Task task = createTaskBuilder("TK_MAX_MOVIE")
-				.build();
-		return getTaskManager()
-				.execute(task)
-				.getResult();
-	}
-
-	/**
 	 * Execute la tache TK_INSERT_MOVIES_BATCH.
 	 * @param moviesList io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Movie> 
 	*/
