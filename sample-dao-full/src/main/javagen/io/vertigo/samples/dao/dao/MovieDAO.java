@@ -74,6 +74,18 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	}
 
 	/**
+	 * Execute la tache TK_GET_MOVIES_WITH_100_ACTORS.
+	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Movie> movies
+	*/
+	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Movie> getMoviesWith100Actors() {
+		final Task task = createTaskBuilder("TK_GET_MOVIES_WITH_100_ACTORS")
+				.build();
+		return getTaskManager()
+				.execute(task)
+				.getResult();
+	}
+
+	/**
 	 * Execute la tache TK_LOAD_MOVIES_BY_CHUNK.
 	 * @param limit Long 
 	 * @param offset Long 

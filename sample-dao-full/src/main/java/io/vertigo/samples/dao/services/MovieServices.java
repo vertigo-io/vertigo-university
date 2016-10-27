@@ -5,6 +5,8 @@ import io.vertigo.dynamo.store.StoreServices;
 import io.vertigo.samples.dao.domain.Actor;
 import io.vertigo.samples.dao.domain.Country;
 import io.vertigo.samples.dao.domain.Movie;
+import io.vertigo.samples.dao.domain.MovieByYear;
+import io.vertigo.samples.dao.domain.MovieDisplay;
 
 public interface MovieServices extends StoreServices {
 
@@ -21,5 +23,11 @@ public interface MovieServices extends StoreServices {
 	void addActorToMovie(Long actId, Long movId, String role);
 
 	DtList<Movie> findMoviesByKspWhereIn(String title, Integer year, DtList<Country> countries);
+
+	DtList<Movie> getMoviesWith100Actors();
+
+	DtList<MovieDisplay> getMovieDisplay();
+
+	DtList<MovieByYear> getMoviesByDate();
 
 }

@@ -9,12 +9,15 @@ import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.store.criteria.FilterCriteriaBuilder;
 import io.vertigo.dynamo.transaction.Transactional;
 import io.vertigo.lang.Assertion;
+import io.vertigo.samples.SamplesPAO;
 import io.vertigo.samples.dao.dao.ActorDAO;
 import io.vertigo.samples.dao.dao.MovieDAO;
 import io.vertigo.samples.dao.dao.RoleDAO;
 import io.vertigo.samples.dao.domain.Actor;
 import io.vertigo.samples.dao.domain.Country;
 import io.vertigo.samples.dao.domain.Movie;
+import io.vertigo.samples.dao.domain.MovieByYear;
+import io.vertigo.samples.dao.domain.MovieDisplay;
 import io.vertigo.samples.dao.domain.Role;
 
 @Transactional
@@ -26,6 +29,8 @@ public class MovieServicesImpl implements MovieServices {
 	private ActorDAO actorDAO;
 	@Inject
 	private RoleDAO roleDAO;
+	@Inject
+	private SamplesPAO samplesPAO;
 
 	@Override
 	public Movie getMovieById(final Long movId) {
@@ -83,6 +88,21 @@ public class MovieServicesImpl implements MovieServices {
 		Assertion.checkNotNull(countries);
 		// ---
 		return movieDAO.getMoviesByCriteriaWithCountry(title, Optional.ofNullable(year), countries);
+	}
+
+	@Override
+	public DtList<Movie> getMoviesWith100Actors() {
+		return movieDAO.getMoviesWith100Actors();
+	}
+
+	@Override
+	public DtList<MovieDisplay> getMovieDisplay() {
+		return samplesPAO.getMovieDisplay();
+	}
+
+	@Override
+	public DtList<MovieByYear> getMoviesByDate() {
+		return samplesPAO.getMovieByYear();
 	}
 
 }

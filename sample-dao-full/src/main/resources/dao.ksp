@@ -56,6 +56,39 @@ create Task TK_GET_ACTORS_IN_MOVIE {
 }
 
 
+create Task TK_GET_MOVIES_WITH_100_ACTORS {
+    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+        request : "
+        	select mov.*
+			from movie mov
+			join (select MOV_ID, count(*) cnt from role group by mov_id ) hv on hv.MOV_ID = mov.MOV_ID
+			where hv.cnt> 100
+			"
+	attribute MOVIES	{domain : DO_DT_MOVIE_DTC 	notNull:"true" 	inOut :"out"}
+}
+
+
+create Task TK_GET_MOVIE_DISPLAY {
+    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+        request : "
+		select mov.NAME,mov.YEAR, cou.NAME as COUNTRY, hv.CNT as ACTORS_COUNT
+		from movie mov
+		join country cou on cou.COU_ID = mov.COU_ID
+		join (select MOV_ID, count(*) cnt from role group by mov_id ) hv on hv.MOV_ID = mov.MOV_ID
+		where mov.YEAR > 2010
+		limit 500
+			"
+	attribute MOVIES	{domain : DO_DT_MOVIE_DISPLAY_DTC 	notNull:"true" 	inOut :"out"}
+}
+
+create Task TK_GET_MOVIE_BY_YEAR {
+    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+        request : "
+		select YEAR, count(*) as MOVIES_COUNT from movie where YEAR is not null group by year order by YEAR asc
+			"
+	attribute MOVIES	{domain : DO_DT_MOVIE_BY_YEAR_DTC 	notNull:"true" 	inOut :"out"}
+}
+
 
 
 

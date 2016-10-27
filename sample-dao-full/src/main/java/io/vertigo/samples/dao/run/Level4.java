@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 import io.vertigo.app.AutoCloseableApp;
 import io.vertigo.app.config.AppConfigBuilder;
 import io.vertigo.core.component.di.injector.Injector;
+import io.vertigo.samples.SamplesPAO;
 import io.vertigo.samples.dao.config.SampleConfigBuilder;
 import io.vertigo.samples.dao.dao.ActorDAO;
 import io.vertigo.samples.dao.dao.CountryDAO;
@@ -46,6 +47,7 @@ public class Level4 {
 				.addComponent(RoleDAO.class)
 				.addComponent(CountryDAO.class)
 				.addComponent(ReprisePAO.class)
+				.addComponent(SamplesPAO.class)
 				.endModule()
 				.beginModule("mineServices")
 				.addComponent(MovieServices.class, MovieServicesImpl.class)
@@ -57,11 +59,31 @@ public class Level4 {
 			Injector.injectMembers(level4, app.getComponentSpace());
 			//-----
 			level4.step1();
+			level4.step2();
+			level4.step3();
+			level4.step4();
+			level4.step5();
 		}
 	}
 
 	void step1() {
-		LOGGER.info(movieServices.getActorsByMovie1(STARWARS_ID));
+		LOGGER.info(movieServices.getActorsByMovie2(STARWARS_ID));
+	}
+
+	void step2() {
+		LOGGER.info(movieServices.getMoviesWith100Actors());
+	}
+
+	void step3() {
+		// nothing
+	}
+
+	void step4() {
+		LOGGER.info(movieServices.getMovieDisplay());
+	}
+
+	void step5() {
+		LOGGER.info(movieServices.getMoviesByDate());
 	}
 
 }
