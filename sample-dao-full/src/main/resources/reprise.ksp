@@ -56,6 +56,25 @@ create Task TK_COUNT_MOVIES {
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
         request : "
         	select count(*) from MOVIE
+        	where NAME like 'S%%'
+			"
+	attribute COUNT	 	{domain : DO_ID		notNull:"true" 	inOut :"out"}
+}
+
+create Task TK_MIN_MOVIE {
+	storeName : "loaded"
+    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+        request : "
+        	select min(mov_id) from movie where name like 'S%%'
+			"
+	attribute COUNT	 	{domain : DO_ID		notNull:"true" 	inOut :"out"}
+}
+
+create Task TK_MAX_MOVIE {
+	storeName : "loaded"
+    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+        request : "
+        	select max(mov_id) from movie where name like 'S%%'
 			"
 	attribute COUNT	 	{domain : DO_ID		notNull:"true" 	inOut :"out"}
 }
@@ -74,13 +93,15 @@ create Task TK_LOAD_MOVIES_BY_CHUNK {
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
         request : "
         	select * from movie
-        	where NAME like 'S%'
+        	where MOV_ID > #MIN# and MOV_ID < #MAX#
         	order by MOV_ID asc
         	limit #LIMIT#
         	offset #OFFSET#
 			"
 	attribute LIMIT	 	{domain : DO_ID		notNull:"true" 	inOut :"in"}
 	attribute OFFSET	 	{domain : DO_ID		notNull:"true" 	inOut :"in"}
+	attribute MIN	 	{domain : DO_ID		notNull:"true" 	inOut :"in"}
+	attribute MAX	 	{domain : DO_ID		notNull:"true" 	inOut :"in"}
 	attribute MOVIES_LIST	 	{domain : DO_DT_MOVIE_DTC		notNull:"true" 	inOut :"out"}
 }
 
@@ -91,7 +112,7 @@ create Task TK_COUNT_ROLES {
         request : "
         	select count(*) from ROLE rol
         	join movie mov on mov.MOV_ID = rol.MOV_ID
-        	where mov.name like 'S%'
+        	where mov.name like 'S%%'
 			"
 	attribute COUNT	 	{domain : DO_ID		notNull:"true" 	inOut :"out"}
 }
@@ -110,14 +131,15 @@ create Task TK_LOAD_ROLES_BY_CHUNK {
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
         request : "
         	select rol.* from role rol
-        	join movie mov on mov.MOV_ID = rol.MOV_ID
-        	where mov.NAME like 'S%'
+        	where MOV_ID > #MIN# and MOV_ID < #MAX#
         	order by rol.ROL_ID asc
         	limit #LIMIT#
         	offset #OFFSET#
 			"
 	attribute LIMIT	 	{domain : DO_ID		notNull:"true" 	inOut :"in"}
 	attribute OFFSET	 	{domain : DO_ID		notNull:"true" 	inOut :"in"}
+	attribute MIN	 	{domain : DO_ID		notNull:"true" 	inOut :"in"}
+	attribute MAX	 	{domain : DO_ID		notNull:"true" 	inOut :"in"}
 	attribute MOVIES_LIST	 	{domain : DO_DT_ROLE_DTC		notNull:"true" 	inOut :"out"}
 }
 

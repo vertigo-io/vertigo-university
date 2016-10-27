@@ -12,9 +12,14 @@ public interface RepriseServices extends StoreServices {
 
 	Long countMovies();
 
-	void fillMovies(long limit, long offset);
+	void fillMovies(long limit, long offset, long minMovie, long maxMovie);
 
 	Long countRoles();
 
-	void fillRoles(long limit, long offset);
+	void fillRoles(long limit, long offset, long minMovie, long maxMovie);
+
+	Long minMovie();
+
+	Long maxMovie();
+
 }

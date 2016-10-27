@@ -8,7 +8,7 @@ create Task TK_GET_MOVIES_BY_CRITERIA {
         	where 
         	1=1
         	<%if(title != null) {%>
-        	 and mov.NAME like concat(#TITLE#, '%')
+        	 and mov.NAME like concat(#TITLE#, '%%')
         	<%>}<%>
         	<%if(year != null) {%>
         	 and move.YEAR = #YEAR#

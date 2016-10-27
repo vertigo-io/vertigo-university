@@ -73,19 +73,23 @@ public class Reprise {
 	}
 
 	void step3() {
+		final long minMovie = repriseServices.minMovie();
+		final long maxMovie = repriseServices.maxMovie();
 		final long chunksize = 1000L;
 		final long chunkCounts = (long) (Math.floor(repriseServices.countMovies() / chunksize) + 1);
 		for (int i = 0; i < chunkCounts; i++) {
-			repriseServices.fillMovies(chunksize, i * chunksize);
+			repriseServices.fillMovies(chunksize, i * chunksize, minMovie, maxMovie);
 
 		}
 	}
 
 	void step4() {
-		final long chunksize = 1000L;
+		final long minMovie = repriseServices.minMovie();
+		final long maxMovie = repriseServices.maxMovie();
+		final long chunksize = 10000L;
 		final long chunkCounts = (long) (Math.floor(repriseServices.countRoles() / chunksize) + 1);
 		for (int i = 0; i < chunkCounts; i++) {
-			repriseServices.fillRoles(chunksize, i * chunksize);
+			repriseServices.fillRoles(chunksize, i * chunksize, minMovie, maxMovie);
 
 		}
 	}

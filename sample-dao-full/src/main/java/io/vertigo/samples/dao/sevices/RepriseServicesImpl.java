@@ -53,8 +53,8 @@ public class RepriseServicesImpl implements RepriseServices {
 	}
 
 	@Override
-	public void fillMovies(final long limit, final long offset) {
-		final DtList<Movie> existingMovies = movieDAO.loadMoviesByChunk(limit, offset);
+	public void fillMovies(final long limit, final long offset, final long minMovie, final long maxMovie) {
+		final DtList<Movie> existingMovies = movieDAO.loadMoviesByChunk(limit, offset, minMovie, maxMovie);
 		reprisePAO.insertMoviesBatch(existingMovies);
 
 	}
@@ -65,10 +65,20 @@ public class RepriseServicesImpl implements RepriseServices {
 	}
 
 	@Override
-	public void fillRoles(final long limit, final long offset) {
-		final DtList<Role> existingMovies = roleDAO.loadRolesByChunk(limit, offset);
+	public void fillRoles(final long limit, final long offset, final long minMovie, final long maxMovie) {
+		final DtList<Role> existingMovies = roleDAO.loadRolesByChunk(limit, offset, minMovie, maxMovie);
 		reprisePAO.insertRolesBatch(existingMovies);
 
+	}
+
+	@Override
+	public Long minMovie() {
+		return reprisePAO.minMovie();
+	}
+
+	@Override
+	public Long maxMovie() {
+		return reprisePAO.maxMovie();
 	}
 
 }

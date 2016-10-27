@@ -42,12 +42,16 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	 * Execute la tache TK_LOAD_MOVIES_BY_CHUNK.
 	 * @param limit Long 
 	 * @param offset Long 
+	 * @param min Long 
+	 * @param max Long 
 	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Movie> moviesList
 	*/
-	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Movie> loadMoviesByChunk(final Long limit, final Long offset) {
+	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Movie> loadMoviesByChunk(final Long limit, final Long offset, final Long min, final Long max) {
 		final Task task = createTaskBuilder("TK_LOAD_MOVIES_BY_CHUNK")
 				.addValue("LIMIT", limit)
 				.addValue("OFFSET", offset)
+				.addValue("MIN", min)
+				.addValue("MAX", max)
 				.build();
 		return getTaskManager()
 				.execute(task)
