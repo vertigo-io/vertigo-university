@@ -1,4 +1,4 @@
-package io.vertigo.samples.dao.config;
+package io.vertigo.samples.dao.run;
 
 import javax.inject.Inject;
 
@@ -7,9 +7,10 @@ import org.apache.log4j.Logger;
 import io.vertigo.app.AutoCloseableApp;
 import io.vertigo.app.config.AppConfigBuilder;
 import io.vertigo.core.component.di.injector.Injector;
+import io.vertigo.samples.dao.config.SampleConfigBuilder;
 import io.vertigo.samples.dao.dao.MovieDAO;
-import io.vertigo.samples.dao.sevices.MovieServices;
-import io.vertigo.samples.dao.sevices.MovieServicesImpl;
+import io.vertigo.samples.dao.services.MovieServices;
+import io.vertigo.samples.dao.services.MovieServicesImpl;
 
 public class DaoSample {
 
