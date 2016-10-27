@@ -1,7 +1,5 @@
 package io.vertigo.samples.dao.run;
 
-import java.util.Optional;
-
 import javax.inject.Inject;
 
 import io.vertigo.app.AutoCloseableApp;
@@ -16,6 +14,7 @@ import io.vertigo.samples.dao.dao.MyCountryDAO;
 import io.vertigo.samples.dao.dao.MyMovieDAO;
 import io.vertigo.samples.dao.dao.MyRoleDAO;
 import io.vertigo.samples.dao.dao.RoleDAO;
+import io.vertigo.samples.dao.domain.Actor;
 import io.vertigo.samples.dao.services.ActorServices;
 import io.vertigo.samples.dao.services.ActorServicesImpl;
 import io.vertigo.samples.dao.services.MovieServices;
@@ -24,10 +23,10 @@ import io.vertigo.samples.dao.services.RepriseServices;
 import io.vertigo.samples.dao.services.RepriseServicesImpl;
 import io.vertigo.samples.reprise.ReprisePAO;
 
-public class Reprise {
+public class Level2 {
 
 	@Inject
-	private RepriseServices repriseServices;
+	private ActorServices actorServices;
 
 	public static void main(final String[] args) {
 		final AppConfigBuilder appConfigBuilder = SampleConfigBuilder.createAppConfigBuilderWithoutCrebase();
@@ -49,45 +48,21 @@ public class Reprise {
 				.addComponent(RepriseServices.class, RepriseServicesImpl.class)
 				.endModule();
 		try (final AutoCloseableApp app = new AutoCloseableApp(appConfigBuilder.build())) {
-			final Reprise sample = new Reprise();
-			Injector.injectMembers(sample, app.getComponentSpace());
+			final Level2 level2 = new Level2();
+			Injector.injectMembers(level2, app.getComponentSpace());
 			//-----
-			sample.step1();
-			sample.step2();
-			sample.step3();
-			sample.step4();
+			level2.step1();
 		}
 	}
 
 	void step1() {
-		repriseServices.fillCountries();
-	}
+		final Actor actor = new Actor();
+		actor.setName("Direction Technique");
+		actor.setSexe("M");
 
-	void step2() {
-		final long chunksize = 1000L;
-		Optional<Long> offset = Optional.of(0L);
-		while (offset.isPresent()) {
-			offset = repriseServices.fillActors(chunksize, offset.get());
-
-		}
-	}
-
-	void step3() {
-		final long chunksize = 1000L;
-		Optional<Long> offset = Optional.of(0L);
-		while (offset.isPresent()) {
-			offset = repriseServices.fillMovies(chunksize, offset.get());
-
-		}
-	}
-
-	void step4() {
-		final long chunksize = 1000L;
-		Optional<Long> offset = Optional.of(0L);
-		while (offset.isPresent()) {
-			offset = repriseServices.fillRoles(chunksize, offset.get());
-
-		}
+		actorServices.saveActor(actor);
+		actorServices.getActorById(actor.getActId());
+		actorServices.deleteMyActor(actor.getActId());
 	}
 
 }

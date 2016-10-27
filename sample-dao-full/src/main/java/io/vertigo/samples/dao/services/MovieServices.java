@@ -2,14 +2,24 @@ package io.vertigo.samples.dao.services;
 
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.store.StoreServices;
-import io.vertigo.samples.dao.domain.MyMovie;
+import io.vertigo.samples.dao.domain.Actor;
+import io.vertigo.samples.dao.domain.Country;
+import io.vertigo.samples.dao.domain.Movie;
 
 public interface MovieServices extends StoreServices {
 
-	void saveMyMovie(MyMovie myMovie);
+	Movie getMovieById(Long movId);
 
-	DtList<MyMovie> findMoviesByCriteria1(String title, Integer year);
+	DtList<Movie> findMoviesByCriteria(String title, Integer year);
 
-	DtList<MyMovie> findMoviesByCriteria2(String title, Integer year);
+	DtList<Movie> findMoviesByKsp(String title, Integer year);
+
+	DtList<Actor> getActorsByMovie1(Long movId);
+
+	DtList<Actor> getActorsByMovie2(Long movId);
+
+	void addActorToMovie(Long actId, Long movId, String role);
+
+	DtList<Movie> findMoviesByKspWhereIn(String title, Integer year, DtList<Country> countries);
 
 }

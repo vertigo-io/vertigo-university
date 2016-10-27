@@ -51,7 +51,7 @@ public class SampleStudioConfigBuilder {
 					.beginPlugin(DomainGeneratorPlugin.class)
 						.addParam("targetSubDir", ".")
 						.addParam("generateDtResources", "false")
-						.addParam("generateDtDefinitions", "false")
+						.addParam("generateDtDefinitions", "true")
 						.addParam("generateDtObject", "true")
 						.addParam("generateJpaAnnotations", "false")
 					.endPlugin()

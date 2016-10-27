@@ -1,8 +1,8 @@
 package io.vertigo.samples.dao.run;
 
-import java.util.Optional;
-
 import javax.inject.Inject;
+
+import org.apache.log4j.Logger;
 
 import io.vertigo.app.AutoCloseableApp;
 import io.vertigo.app.config.AppConfigBuilder;
@@ -24,10 +24,14 @@ import io.vertigo.samples.dao.services.RepriseServices;
 import io.vertigo.samples.dao.services.RepriseServicesImpl;
 import io.vertigo.samples.reprise.ReprisePAO;
 
-public class Reprise {
+public class Level4 {
+
+	private final Logger LOGGER = Logger.getLogger(this.getClass());
+
+	private static final Long STARWARS_ID = 3678598L;
 
 	@Inject
-	private RepriseServices repriseServices;
+	private MovieServices movieServices;
 
 	public static void main(final String[] args) {
 		final AppConfigBuilder appConfigBuilder = SampleConfigBuilder.createAppConfigBuilderWithoutCrebase();
@@ -49,45 +53,15 @@ public class Reprise {
 				.addComponent(RepriseServices.class, RepriseServicesImpl.class)
 				.endModule();
 		try (final AutoCloseableApp app = new AutoCloseableApp(appConfigBuilder.build())) {
-			final Reprise sample = new Reprise();
-			Injector.injectMembers(sample, app.getComponentSpace());
+			final Level4 level4 = new Level4();
+			Injector.injectMembers(level4, app.getComponentSpace());
 			//-----
-			sample.step1();
-			sample.step2();
-			sample.step3();
-			sample.step4();
+			level4.step1();
 		}
 	}
 
 	void step1() {
-		repriseServices.fillCountries();
-	}
-
-	void step2() {
-		final long chunksize = 1000L;
-		Optional<Long> offset = Optional.of(0L);
-		while (offset.isPresent()) {
-			offset = repriseServices.fillActors(chunksize, offset.get());
-
-		}
-	}
-
-	void step3() {
-		final long chunksize = 1000L;
-		Optional<Long> offset = Optional.of(0L);
-		while (offset.isPresent()) {
-			offset = repriseServices.fillMovies(chunksize, offset.get());
-
-		}
-	}
-
-	void step4() {
-		final long chunksize = 1000L;
-		Optional<Long> offset = Optional.of(0L);
-		while (offset.isPresent()) {
-			offset = repriseServices.fillRoles(chunksize, offset.get());
-
-		}
+		LOGGER.info(movieServices.getActorsByMovie1(STARWARS_ID));
 	}
 
 }

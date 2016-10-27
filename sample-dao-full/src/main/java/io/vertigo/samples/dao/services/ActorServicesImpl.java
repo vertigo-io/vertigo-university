@@ -4,37 +4,37 @@ import javax.inject.Inject;
 
 import io.vertigo.dynamo.transaction.Transactional;
 import io.vertigo.lang.Assertion;
-import io.vertigo.samples.dao.dao.MyActorDAO;
-import io.vertigo.samples.dao.domain.MyActor;
+import io.vertigo.samples.dao.aspect.Supervision;
+import io.vertigo.samples.dao.dao.ActorDAO;
+import io.vertigo.samples.dao.domain.Actor;
 
 @Transactional
+@Supervision
 public class ActorServicesImpl implements ActorServices {
 
 	@Inject
-	private MyActorDAO myActorDAO;
+	private ActorDAO actorDAO;
 
 	@Override
-	public void saveMyActor(final MyActor myActor) {
-		Assertion.checkNotNull(myActor);
+	public void saveActor(final Actor actor) {
+		Assertion.checkNotNull(actor);
 		// ---
-		myActorDAO.save(myActor);
+		actorDAO.save(actor);
 
 	}
 
 	@Override
-	public MyActor getMyActorById(final Long actId) {
+	public Actor getActorById(final Long actId) {
 		Assertion.checkNotNull(actId);
-		// ---
-		return myActorDAO.get(actId);
+		//---
+		return actorDAO.get(actId);
 	}
 
 	@Override
-	public void deleteMyActor(final MyActor myActor) {
-		Assertion.checkNotNull(myActor);
-		Assertion.checkNotNull(myActor.getActId());
-		// ---
-		myActorDAO.delete(myActor.getActId());
-
+	public void deleteMyActor(final Long actId) {
+		Assertion.checkNotNull(actId);
+		//---
+		actorDAO.delete(actId);
 	}
 
 }

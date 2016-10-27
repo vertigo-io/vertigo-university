@@ -1,14 +1,14 @@
 package io.vertigo.samples.dao.services;
 
 import io.vertigo.dynamo.store.StoreServices;
-import io.vertigo.samples.dao.domain.MyActor;
+import io.vertigo.samples.dao.domain.Actor;
 
 public interface ActorServices extends StoreServices {
 
-	void saveMyActor(MyActor myActor);
+	void saveActor(Actor actor);
 
-	MyActor getMyActorById(Long actId);
+	Actor getActorById(Long actId);
 
-	void deleteMyActor(MyActor myActor);
+	void deleteMyActor(Long actId);
 
 }

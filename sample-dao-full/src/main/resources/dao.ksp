@@ -9,27 +9,53 @@ create Task TK_GET_MOVIES_BY_CRITERIA {
         	1=1
         	<%if(title != null) {%>
         	 and mov.NAME like concat(#TITLE#, '%%')
-        	<%>}<%>
+        	<%}%>
         	<%if(year != null) {%>
-        	 and move.YEAR = #YEAR#
-        	<%>}<%>
+        	 and mov.YEAR = #YEAR#
+        	<%}%>
 			"
 	attribute TITLE	 	{domain : DO_LABEL_LONG 		notNull:"true" 	inOut :"in"}
 	attribute YEAR	 	{domain : DO_YEAR 				notNull:"true" 	inOut :"in"}
-	attribute MOVIES	{domain : DO_DT_MY_MOVIE_DTC 	notNull:"true" 	inOut :"out"}
+	attribute MOVIES	{domain : DO_DT_MOVIE_DTC 	notNull:"true" 	inOut :"out"}
 }
 
-
-
-create Task TK_GET_ROLES_IN_MOVIES {
+create Task TK_GET_MOVIES_BY_CRITERIA_WITH_COUNTRY {
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
         request : "
-        	select rol.*
-        	from role rol
+        	select mov.*
+        	from movie mov
         	where 
-        	rol.MOV_ID in (#MOVIES.0.MOV_ID#)
+        	1=1
+        	<%if(title != null) {%>
+        	 and mov.NAME like concat(#TITLE#, '%%')
+        	<%}%>
+        	<%if(year != null) {%>
+        	 and mov.YEAR = #YEAR#
+        	<%}%>
+        	<%if(!countries.isEmpty()) {%>
+        	 and mov.COU_ID in (#COUNTRIES.ROWNUM.COU_ID#)
+        	<%}%>
 			"
-	attribute MOVIES	{domain : DO_DT_MY_MOVIE_DTC 	notNull:"true" 	inOut :"in"}
-	attribute ROLES	{domain : DO_DT_MY_ROLE_DTC 	notNull:"true" 	inOut :"out"}
+	attribute TITLE	 	{domain : DO_LABEL_LONG 		notNull:"true" 	inOut :"in"}
+	attribute YEAR	 	{domain : DO_YEAR 				notNull:"false"	inOut :"in"}
+	attribute COUNTRIES	{domain : DO_DT_COUNTRY_DTC 	notNull:"true" 	inOut :"in"}
+	attribute MOVIES	{domain : DO_DT_MOVIE_DTC 	notNull:"true" 	inOut :"out"}
 }
+
+
+create Task TK_GET_ACTORS_IN_MOVIE {
+    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+        request : "
+        	select act.*
+        	from role rol
+        	join actor act on act.ACT_ID = rol.ACT_ID
+        	where rol.MOV_ID = #MOV_ID#
+			"
+	attribute MOV_ID	{domain : DO_ID 	notNull:"true" 	inOut :"in"}
+	attribute ACTORS	{domain : DO_DT_ACTOR_DTC 	notNull:"true" 	inOut :"out"}
+}
+
+
+
+
 

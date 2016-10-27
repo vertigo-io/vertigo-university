@@ -39,6 +39,20 @@ public final class ActorDAO extends DAO<Actor, java.lang.Long> implements StoreS
 	}
 
 	/**
+	 * Execute la tache TK_GET_ACTORS_IN_MOVIE.
+	 * @param movId Long 
+	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Actor> actors
+	*/
+	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Actor> getActorsInMovie(final Long movId) {
+		final Task task = createTaskBuilder("TK_GET_ACTORS_IN_MOVIE")
+				.addValue("MOV_ID", movId)
+				.build();
+		return getTaskManager()
+				.execute(task)
+				.getResult();
+	}
+
+	/**
 	 * Execute la tache TK_LOAD_ACTORS_BY_CHUNK.
 	 * @param limit Long 
 	 * @param offset Long 

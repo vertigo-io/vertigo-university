@@ -2,12 +2,13 @@ package io.vertigo.samples.dao.run;
 
 import javax.inject.Inject;
 
+import org.apache.log4j.Logger;
+
 import io.vertigo.app.AutoCloseableApp;
 import io.vertigo.app.config.AppConfigBuilder;
 import io.vertigo.core.component.di.injector.Injector;
 import io.vertigo.samples.dao.config.SampleConfigBuilder;
 import io.vertigo.samples.dao.dao.MyMovieDAO;
-import io.vertigo.samples.dao.domain.MyMovie;
 import io.vertigo.samples.dao.services.MovieServices;
 import io.vertigo.samples.dao.services.MovieServicesImpl;
 
@@ -34,10 +35,7 @@ public class DaoSample {
 	}
 
 	void step1() {
-		final MyMovie newMovie = new MyMovie();
-		newMovie.setName("My Film");
-		newMovie.setYear(2016);
-		movieServices.saveMyMovie(newMovie);
+		Logger.getLogger(this.getClass()).info(movieServices.getMovieById(3678598L));
 	}
 
 }

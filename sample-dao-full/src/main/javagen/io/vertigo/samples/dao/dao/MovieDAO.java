@@ -1,6 +1,7 @@
 package io.vertigo.samples.dao.dao;
 
 import javax.inject.Inject;
+import java.util.Optional;
 import io.vertigo.app.Home;
 import io.vertigo.dynamo.task.metamodel.TaskDefinition;
 import io.vertigo.dynamo.task.model.Task;
@@ -36,6 +37,40 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	private static TaskBuilder createTaskBuilder(final String name) {
 		final TaskDefinition taskDefinition = Home.getApp().getDefinitionSpace().resolve(name, TaskDefinition.class);
 		return new TaskBuilder(taskDefinition);
+	}
+
+	/**
+	 * Execute la tache TK_GET_MOVIES_BY_CRITERIA.
+	 * @param title String 
+	 * @param year Integer 
+	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Movie> movies
+	*/
+	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Movie> getMoviesByCriteria(final String title, final Integer year) {
+		final Task task = createTaskBuilder("TK_GET_MOVIES_BY_CRITERIA")
+				.addValue("TITLE", title)
+				.addValue("YEAR", year)
+				.build();
+		return getTaskManager()
+				.execute(task)
+				.getResult();
+	}
+
+	/**
+	 * Execute la tache TK_GET_MOVIES_BY_CRITERIA_WITH_COUNTRY.
+	 * @param title String 
+	 * @param year Integer (peut être null)
+	 * @param countries io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Country> 
+	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Movie> movies
+	*/
+	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Movie> getMoviesByCriteriaWithCountry(final String title, final Optional<Integer> year, final io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Country> countries) {
+		final Task task = createTaskBuilder("TK_GET_MOVIES_BY_CRITERIA_WITH_COUNTRY")
+				.addValue("TITLE", title)
+				.addValue("YEAR", year.orElse(null))
+				.addValue("COUNTRIES", countries)
+				.build();
+		return getTaskManager()
+				.execute(task)
+				.getResult();
 	}
 
 	/**
