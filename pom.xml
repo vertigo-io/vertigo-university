@@ -35,6 +35,8 @@
 <!-- 		<module>sample-notifications</module>
 		
 		<module>sample-gutenberg</module>
- -->	</modules>
+ -->	
+ 		<module>sample-dao</module>
+ 	</modules>
 
 </project>

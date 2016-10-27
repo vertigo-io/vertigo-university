@@ -5,21 +5,21 @@ import javax.inject.Inject;
 import io.vertigo.dynamo.transaction.Transactional;
 import io.vertigo.lang.Assertion;
 import io.vertigo.samples.dao.aspect.Supervision;
-import io.vertigo.samples.dao.dao.MyMovieDAO;
-import io.vertigo.samples.dao.domain.MyMovie;
+import io.vertigo.samples.dao.dao.MovieDAO;
+import io.vertigo.samples.dao.domain.Movie;
 
 @Transactional
+@Supervision
 public class MovieServicesImpl implements MovieServices {
 
 	@Inject
-	private MyMovieDAO myMovieDAO;
+	private MovieDAO movieDAO;
 
 	@Override
-	@Supervision
-	public void saveMyMovie(final MyMovie myMovie) {
-		Assertion.checkNotNull(myMovie);
+	public Movie getMovieById(final Long movId) {
+		Assertion.checkNotNull(movId);
 		// ---
-		myMovieDAO.save(myMovie);
+		return movieDAO.get(movId);
 	}
 
 }
