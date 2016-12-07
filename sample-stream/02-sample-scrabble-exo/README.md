@@ -37,6 +37,7 @@ public int scoreScrabble(final String word)
 ```
 
 Créer une implémentation dans ScrabbleService calculant le score d'un mot. La valeur de chaque lettre est stockée dans la map SCRABBLE_POINT.
+
 Rem: On ne tiendra pas compte du nombre de lettres disponibles.
 
 ## Etape 5
@@ -46,6 +47,7 @@ public int meilleurScoreScrabble(final Path text) throws IOException {
 ```
 
 Créer une implémentation dans ScrabbleService donnant le meilleur score pour l'ensemble des mots du texte maupassant.txt
+
 Rem: On ne tiendra pas compte du nombre de lettres disponibles.
 
 ## Etape 6
@@ -55,4 +57,5 @@ public Map<Integer, List<String>> mapScoreMot(final Path text) throws IOExceptio
 ```
 
 Créer une implémentation dans ScrabbleService donnant une map de score avec la liste des mots associés
+
 Rem: On ne tiendra pas compte du nombre de lettres disponibles.
