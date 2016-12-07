@@ -26,11 +26,11 @@ public class MainScrabble {
 		final String concat = scrabbleService.concatMot(path, ",");
 		System.out.println("Concat = " + concat);
 
-		/*final Map<String, Long> histo = scrabbleService.histogramFrequenceMotAvecCollectors(path);
+		final Map<String, Long> histo = scrabbleService.histogramFrequenceMotAvecCollectors(path);
 		System.out.println("HistogramAvec = " + histo);
-		
+
 		final Map<String, Long> histo2 = scrabbleService.histogramFrequenceMotSansCollectors(path);
-		System.out.println("HistogramSans = " + histo2);*/
+		System.out.println("HistogramSans = " + histo2);
 
 		final int scoreMot = scrabbleService.scoreScrabble("abcd");
 		System.out.println("Score = " + scoreMot);
@@ -38,7 +38,7 @@ public class MainScrabble {
 		final int meilleurScoreScrabble = scrabbleService.meilleurScoreScrabble(path);
 		System.out.println("Meilleur score scrabble = " + meilleurScoreScrabble);
 
-		final Map<Integer, List<String>> histoScore = scrabbleService.histogramScore(path);
+		final Map<Integer, List<String>> histoScore = scrabbleService.mapScoreMot(path);
 		System.out.println("Histo score scrabble = " + histoScore);
 	}
 
