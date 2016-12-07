@@ -37,7 +37,9 @@ public class MainStarbucks {
 
 		final List<StarbucksDto> starbucks = starbucksService.getStarbucks(path);
 
-		final long nbStarbucks = starbucksService.countCity(starbucks);
+		starbucksService.printStarbucks(starbucks);
+
+		final long nbStarbucks = starbucksService.countStarbucks(starbucks);
 		System.out.println("Nombre de starbucks = " + nbStarbucks);
 
 		final Map<String, Long> villeHisto = starbucksService.villeHistogram(starbucks);
@@ -46,8 +48,15 @@ public class MainStarbucks {
 		final Optional<String> villeMaxStarbucks = starbucksService.villeAvecLePlusDeStarbucks(starbucks);
 		System.out.println("Ville avec le plus de starbucks = " + villeMaxStarbucks.orElse("Aucune"));
 
-		final Optional<String> villeMaxStarbucksFr = starbucksService.villeAvecLePlusDeStarbucksFilter(starbucks, s -> "FR".equals(s.getCountry()));
-		System.out.println("Ville avec le plus de starbucks en France = " + villeMaxStarbucksFr.orElse("Aucune"));
+		final Optional<String> villeMaxStarbucksTx = starbucksService.villeAvecLePlusDeStarbucksFilter(starbucks, s -> "TX".equals(s.getState()));
+		System.out.println("Ville avec le plus de starbucks au Texas = " + villeMaxStarbucksTx.orElse("Aucune"));
+
+		final Optional<String> villeMaxStarbucksCa = starbucksService.villeAvecLePlusDeStarbucksFilter(starbucks, s -> "CA".equals(s.getState()));
+		System.out.println("Ville avec le plus de starbucks en Californie  = " + villeMaxStarbucksCa.orElse("Aucune"));
+
+		final List<Map.Entry<String, Long>> villeNMax = starbucksService.villeNMax(starbucks, 3);
+		System.out.println("Ville avec le plus de Starbucks = " + villeNMax);
+
 	}
 
 }

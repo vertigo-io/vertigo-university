@@ -60,7 +60,12 @@ public class StarbucksService {
 		}
 	}
 
-	public long countCity(final List<StarbucksDto> starbucks) {
+	public void printStarbucks(final List<StarbucksDto> starbucks) {
+		starbucks.stream()
+				.forEach(s -> System.out.println(s.getName()));
+	}
+
+	public long countStarbucks(final List<StarbucksDto> starbucks) {
 		return starbucks.stream()
 				.count();
 	}
@@ -90,6 +95,19 @@ public class StarbucksService {
 				.max(Map.Entry.comparingByValue());
 
 		return opt.map(Map.Entry::getKey);
+	}
+
+	public List<Map.Entry<String, Long>> villeNMax(final List<StarbucksDto> starbucks, final int nFirst) {
+
+		final List<Map.Entry<String, Long>> ret = starbucks.stream()
+				.collect(Collectors.groupingBy(StarbucksDto::getCity, Collectors.counting()))
+				.entrySet()
+				.stream()
+				.sorted((e1, e2) -> e2.getValue().compareTo(e1.getValue()))
+				.limit(nFirst)
+				.collect(Collectors.toList());
+
+		return ret;
 	}
 
 }

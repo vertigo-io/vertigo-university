@@ -1,26 +1,70 @@
-#Exercice 1 : Découverte 
-
-Projet sample-gutenberg.
+#Exercice 1 : Starbucks 
 
 Importer le projet dans Eclipse (Import Existing Maven Project)
 
 ## Prérequis 
-Vérification le fonctionnement de TextProcessorManagerImpl donnant le nombre de lignes.
+Vérification le fonctionnement du projet. La méthode printStarbucks doit lister les nom des Starbucks aux USA. 
 
-## Nombre de mots
-Créer une implémentation donnant le nombre de mots.
+## Etape 1 : 
 
-## Nombre de caractères
-Créer une implémentation donnant le nombre de caractères.
+En utilisant cette signature :
+```
+public long countStarbucks(final List<StarbucksDto> starbucks)
+```
 
-## Mot le plus long
-Créer une implémentation donnant le mot le plus long.
+Créer une implémentation dans StarbucksService retournant le nombre de starbucks.
+
+## Etape 2 : 
+En utilisant cette signature :
+```
+public Map<String, Long> villeHistogram(final List<StarbucksDto> starbucks)
+```
+
+Créer une implémentation dans StarbucksService retournant une map correspondant au nombre de Starbucks par ville.
+ex: 
+{
+  "New York" : 202,
+  "Falcon": 1,
+  "Oklahoma City" : 15,
+  ...
+}
+
+## Etape 3 :
+En utilisant cette signature :
+```
+public Optional<String> villeAvecLePlusDeStarbucks(final List<StarbucksDto> starbucks)
+```
+Créer une implémentation dans StarbucksService retournant la ville comportant le plus de Starbucks.
+
+## Etape 4 :
+En utilisant cette signature :
+```
+public Optional<String> villeAvecLePlusDeStarbucksFilter(final List<StarbucksDto> starbucks, final Predicate<StarbucksDto> filterPredicate)
+```
+Créer une implémentation dans StarbucksService retournant la ville comportant le plus de Starbucks selon un prédicat.
+
+Utiliser cette méthode pour récuperer la ville possédant le plus de Starbucks dans l'état du Texas
+Hint: getState() de StarbucksDto doit être égal à "TX"
+
+Utiliser cette méthode pour récuperer la ville possédant le plus de Starbucks dans l'état de Californie
+Hint: getState() de StarbucksDto doit être égal à "CA"
 
 
-#Exercice 2 : Moteur de notifications
+## Etape 5:
+En utilisant cette signature :
+```
+public List<Map.Entry<String, Long>> villeNMax(final List<StarbucksDto> starbucks, final int nFirst)
+```
 
-Groupe 1 : Projet sample-ifttt.
-Groupe 2 : Projet sample-twitter.
+Créer une implémentation dans StarbucksService retournant la liste des nFirst couple (ville, occurence) comportant le plus de Starbucks de toutes la liste, trié par ordre décroissant.
+
+
+
+#Exercice 2 : Scrabble
+
+Groupe 1 : .
+Groupe 2 : .
+Groupe 3 : .
 
 
 Importer le projet dans Eclipse (Import Existing Maven Project)
