@@ -14,7 +14,17 @@ public long countStarbucks(final List<StarbucksDto> starbucks)
 
 Créer une implémentation dans StarbucksService retournant le nombre de starbucks.
 
-## Etape 2 : 
+## Etape 2 :
+En utilisant cette signature :
+```
+public List<String> filterStarbucksState(final List<StarbucksDto> starbucks, final String stateCode)
+```
+
+Créer une implémentation dans StarbucksService retournant le nom des Starbucks de l'état d'Alabama.
+Hint: getState() de StarbucksDto doit être égal à "AL"
+
+
+## Etape 3 : 
 En utilisant cette signature :
 ```
 public Map<String, Long> villeHistogram(final List<StarbucksDto> starbucks)
@@ -29,14 +39,14 @@ ex:
   ...
 }
 
-## Etape 3 :
+## Etape 4 :
 En utilisant cette signature :
 ```
 public Optional<String> villeAvecLePlusDeStarbucks(final List<StarbucksDto> starbucks)
 ```
 Créer une implémentation dans StarbucksService retournant la ville comportant le plus de Starbucks.
 
-## Etape 4 :
+## Etape 5 :
 En utilisant cette signature :
 ```
 public Optional<String> villeAvecLePlusDeStarbucksFilter(final List<StarbucksDto> starbucks, final Predicate<StarbucksDto> filterPredicate)
@@ -50,7 +60,7 @@ Utiliser cette méthode pour récuperer la ville possédant le plus de Starbucks
 Hint: getState() de StarbucksDto doit être égal à "CA"
 
 
-## Etape 5:
+## Etape 6:
 En utilisant cette signature :
 ```
 public List<Map.Entry<String, Long>> villeNMax(final List<StarbucksDto> starbucks, final int nFirst)

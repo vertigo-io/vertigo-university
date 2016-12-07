@@ -19,7 +19,7 @@ import io.vertigo.samples.dto.StarbucksDto;
  */
 public class StarbucksService {
 
-	private StarbucksDto mapCsvToStarbucksGeoloc(final String line) {
+	private StarbucksDto mapCsvToStarbucks(final String line) {
 		final String[] fields = line.split(";");
 
 		final StarbucksDto ret = new StarbucksDto();
@@ -48,33 +48,64 @@ public class StarbucksService {
 	}
 
 	/**
-	 *
+	 * Construit une liste d'object StarbucksDto à partir d'un csv.
 	 * @return
 	 * @throws IOException
 	 */
 	public List<StarbucksDto> getStarbucks(final Path path) throws IOException {
 		try (Stream<String> lines = Files.lines(path)) {
 
-			return lines.skip(1).map(line -> mapCsvToStarbucksGeoloc(line))
+			return lines.skip(1).map(line -> mapCsvToStarbucks(line))
 					.collect(Collectors.toList());
 		}
 	}
 
+	/**
+	 * Ecrit sur stdout le nom des Starbucks en paramètre.
+	 * @param starbucks
+	 */
 	public void printStarbucks(final List<StarbucksDto> starbucks) {
 		starbucks.stream()
 				.forEach(s -> System.out.println(s.getName()));
 	}
 
+	/**
+	 * Retourne le nombre de Starbuck en paramètre
+	 * @param starbucks
+	 * @return
+	 */
 	public long countStarbucks(final List<StarbucksDto> starbucks) {
 		return starbucks.stream()
 				.count();
 	}
 
+	/**
+	 * Retourne la liste des nom de Starbucks d'un état
+	 * @param starbucks
+	 * @return
+	 */
+	public List<String> filterStarbucksState(final List<StarbucksDto> starbucks, final String stateCode) {
+		return starbucks.stream()
+				.filter(s -> stateCode.equals(s.getState()))
+				.map(StarbucksDto::getName)
+				.collect(Collectors.toList());
+	}
+
+	/**
+	 * Retourne l'histogramme (table de dréquence) des Starbucks par ville
+	 * @param starbucks
+	 * @return
+	 */
 	public Map<String, Long> villeHistogram(final List<StarbucksDto> starbucks) {
 		return starbucks.stream()
 				.collect(Collectors.groupingBy(StarbucksDto::getCity, Collectors.counting()));
 	}
 
+	/**
+	 * Retourne la ville ayant le plus de Starbucks
+	 * @param starbucks
+	 * @return
+	 */
 	public Optional<String> villeAvecLePlusDeStarbucks(final List<StarbucksDto> starbucks) {
 		final Optional<Map.Entry<String, Long>> opt = starbucks.stream()
 				.collect(Collectors.groupingBy(StarbucksDto::getCity, Collectors.counting()))
@@ -85,6 +116,12 @@ public class StarbucksService {
 		return opt.map(Map.Entry::getKey);
 	}
 
+	/**
+	 * Retourne la ville ayant le plus de Starbucks, filtrée selon un critère
+	 * @param starbucks
+	 * @param filterPredicate
+	 * @return
+	 */
 	public Optional<String> villeAvecLePlusDeStarbucksFilter(final List<StarbucksDto> starbucks, final Predicate<StarbucksDto> filterPredicate) {
 
 		final Optional<Map.Entry<String, Long>> opt = starbucks.stream()
@@ -97,6 +134,12 @@ public class StarbucksService {
 		return opt.map(Map.Entry::getKey);
 	}
 
+	/**
+	 * Retourne la liste des n premiers couples (ville, fréquence) ayant le plus de Starbucks, triés par ordre desc.
+	 * @param starbucks
+	 * @param nFirst
+	 * @return
+	 */
 	public List<Map.Entry<String, Long>> villeNMax(final List<StarbucksDto> starbucks, final int nFirst) {
 
 		final List<Map.Entry<String, Long>> ret = starbucks.stream()

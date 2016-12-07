@@ -42,6 +42,9 @@ public class MainStarbucks {
 		final long nbStarbucks = starbucksService.countStarbucks(starbucks);
 		System.out.println("Nombre de starbucks = " + nbStarbucks);
 
+		final List<String> starbucksFiltered = starbucksService.filterStarbucksState(starbucks, "AL");
+		System.out.println("Starbucks d'Alabama = " + starbucksFiltered);
+
 		final Map<String, Long> villeHisto = starbucksService.villeHistogram(starbucks);
 		System.out.println("Ville histo = " + villeHisto);
 
