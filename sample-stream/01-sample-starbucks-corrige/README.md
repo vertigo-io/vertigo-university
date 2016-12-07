@@ -3,7 +3,7 @@
 Importer le projet dans Eclipse (Import Existing Maven Project)
 
 ## Prérequis 
-Vérification le fonctionnement du projet. La méthode printStarbucks doit lister les nom des Starbucks aux USA. 
+Vérifier le fonctionnement du projet. La méthode printStarbucks doit lister les nom des Starbucks aux USA. 
 
 ## Etape 1 : 
 

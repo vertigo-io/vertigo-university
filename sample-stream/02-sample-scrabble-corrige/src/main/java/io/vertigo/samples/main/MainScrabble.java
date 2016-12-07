@@ -20,14 +20,20 @@ public class MainScrabble {
 
 		final ScrabbleService scrabbleService = new ScrabbleService();
 
-		final Map<String, Long> histo = scrabbleService.histogram(path);
-		//System.out.println("Histogram = " + histo);
+		final long count = scrabbleService.countWords(path);
+		System.out.println("Count = " + count);
 
-		final Map<String, Long> histo2 = scrabbleService.histogram2(path);
-		//System.out.println("Histogram2 = " + histo2);
+		final String concat = scrabbleService.concatMot(path, ",");
+		System.out.println("Concat = " + concat);
 
-		//final int scoreMotLePlusLong = scrabbleService.scoreScrabble(motLePlusLong);
-		//System.out.println("Score mot le plus long = " + scoreMotLePlusLong);
+		/*final Map<String, Long> histo = scrabbleService.histogramFrequenceMotAvecCollectors(path);
+		System.out.println("HistogramAvec = " + histo);
+		
+		final Map<String, Long> histo2 = scrabbleService.histogramFrequenceMotSansCollectors(path);
+		System.out.println("HistogramSans = " + histo2);*/
+
+		final int scoreMot = scrabbleService.scoreScrabble("abcd");
+		System.out.println("Score = " + scoreMot);
 
 		final int meilleurScoreScrabble = scrabbleService.meilleurScoreScrabble(path);
 		System.out.println("Meilleur score scrabble = " + meilleurScoreScrabble);

@@ -24,7 +24,7 @@ public class ScrabbleService {
 
 	private static final Map<Character, Integer> SCRABBLE_POINT = buildMapScore();
 
-	private static final Map<Character, Integer> SCRABBLE_OCCURENCE = buildMapOccurence();
+	private static final String PATTERN_MOT = "[\\s|,|\\.|'|«|»|\\?|\\(|\\)|:]|--";
 
 	public static <K, V> Map.Entry<K, V> entry(final K key, final V value) {
 		return new AbstractMap.SimpleEntry<>(key, value);
@@ -65,47 +65,47 @@ public class ScrabbleService {
 				.collect(entriesToMap()));
 	}
 
-	private static Map<Character, Integer> buildMapOccurence() {
-		return Collections.unmodifiableMap(Stream.of(
-				entry('A', 9),
-				entry('B', 2),
-				entry('C', 2),
-				entry('D', 3),
-				entry('E', 15),
-				entry('F', 2),
-				entry('G', 2),
-				entry('H', 2),
-				entry('I', 8),
-				entry('J', 1),
-				entry('K', 1),
-				entry('L', 5),
-				entry('M', 3),
-				entry('N', 6),
-				entry('O', 6),
-				entry('P', 2),
-				entry('Q', 1),
-				entry('R', 6),
-				entry('S', 6),
-				entry('T', 6),
-				entry('U', 6),
-				entry('V', 2),
-				entry('W', 1),
-				entry('X', 1),
-				entry('Y', 1),
-				entry('Z', 1))
-				.collect(entriesToMap()));
+	/**
+	 * @throws IOException
+	 *
+	 */
+	public long countWords(final Path text) throws IOException {
+		try (Stream<String> lines = Files.lines(text)) {
+			return lines.flatMap(line -> Arrays.stream(line.split(PATTERN_MOT)))
+					.filter(w -> !w.isEmpty())
+					.count();
+		}
 	}
 
 	/**
 	 * @throws IOException
 	 *
 	 */
-	public Map<String, Long> histogram(final Path text) throws IOException {
+	public String concatMot(final Path text, final String separator) throws IOException {
+		String concat;
+		try (Stream<String> lines = Files.lines(text)) {
+			concat = lines
+					.flatMap(line -> Arrays.stream(line.split(PATTERN_MOT)))
+					.filter(w -> !w.isEmpty())
+					.limit(10)
+					.collect(Collectors.joining(separator));
+		}
+		return concat;
+	}
+
+	/**
+	 * @throws IOException
+	 *
+	 */
+	public Map<String, Long> histogramFrequenceMotAvecCollectors(final Path text) throws IOException {
 		Map<String, Long> histo;
 		try (Stream<String> lines = Files.lines(text)) {
 			histo = lines
-					.flatMap(line -> Arrays.stream(line.split("[\\s|,|\\.]|--")))
-					.collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+					.flatMap(line -> Arrays.stream(line.split(PATTERN_MOT)))
+					.filter(w -> !w.isEmpty())
+					.collect(
+							Collectors.groupingBy(Function.identity(),
+									Collectors.counting()));
 		}
 		return histo;
 	}
@@ -114,12 +114,16 @@ public class ScrabbleService {
 	 * @throws IOException
 	 *
 	 */
-	public Map<String, Long> histogram2(final Path text) throws IOException {
+	public Map<String, Long> histogramFrequenceMotSansCollectors(final Path text) throws IOException {
 		final Map<String, Long> histo;
 		try (Stream<String> lines = Files.lines(text)) {
 			histo = lines
-					.flatMap(line -> Arrays.stream(line.split("[\\s|,|\\.]|--")))
-					.collect(() -> new HashMap<>(), (map, key) -> map.compute(key, (k, v) -> (v == null) ? 1 : v + 1L), (x, y) -> x.putAll(y));
+					.flatMap(line -> Arrays.stream(line.split(PATTERN_MOT)))
+					.filter(w -> !w.isEmpty())
+					.collect(
+							() -> new HashMap<>(),
+							(map, key) -> map.compute(key, (k, v) -> (v == null) ? 1 : v + 1L),
+							(x, y) -> x.putAll(y));
 		}
 
 		return histo;
@@ -143,10 +147,10 @@ public class ScrabbleService {
 		OptionalInt score;
 		try (Stream<String> lines = Files.lines(text)) {
 			score = lines
-					.flatMap(line -> Arrays.<String> stream(line.split("[\\s|,|\\.]|--")))
+					.flatMap(line -> Arrays.<String> stream(line.split(PATTERN_MOT)))
+					.filter(w -> !w.isEmpty())
 					.mapToInt(word -> scoreScrabble(word))
 					.max();
-
 		}
 
 		return score.orElse(0);
@@ -156,11 +160,12 @@ public class ScrabbleService {
 	 * @throws IOException
 	 *
 	 */
-	public Map<Integer, List<String>> histogramScore(final Path text) throws IOException {
+	public Map<Integer, List<String>> mapScoreMot(final Path text) throws IOException {
 		final Map<Integer, List<String>> score;
 		try (Stream<String> lines = Files.lines(text)) {
 			score = lines
-					.flatMap(line -> Arrays.<String> stream(line.split("[\\s|,|\\.]|--")))
+					.flatMap(line -> Arrays.<String> stream(line.split(PATTERN_MOT)))
+					.filter(w -> !w.isEmpty())
 					.distinct()
 					.collect(Collectors.groupingBy(x -> scoreScrabble(x)));
 		}

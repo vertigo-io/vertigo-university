@@ -1,69 +1,58 @@
-#Exercice 1 : Découverte 
-
-Projet sample-gutenberg.
+#Exercice 2 : Scrabble 
 
 Importer le projet dans Eclipse (Import Existing Maven Project)
 
 ## Prérequis 
-Vérification le fonctionnement de TextProcessorManagerImpl donnant le nombre de lignes.
+Vérifier le fonctionnement du projet. La méthode printStarbucks doit donner le nombre de mots du texte maupassant.txt 
 
-## Nombre de mots
-Créer une implémentation donnant le nombre de mots.
+## Etape 1
 
-## Nombre de caractères
-Créer une implémentation donnant le nombre de caractères.
-
-## Mot le plus long
-Créer une implémentation donnant le mot le plus long.
-
-
-#Exercice 2 : Moteur de notifications
-
-Groupe 1 : Projet sample-ifttt.
-Groupe 2 : Projet sample-twitter.
+En utilisant cette signature :
+```
+public String concatMot(final Path text, final String separator) throws IOException {
+```
+Créer une implémentation dans ScrabbleService retournant la concaténation des 10 premiers mots avec un séparateur.
 
 
-Importer le projet dans Eclipse (Import Existing Maven Project)
+## Etape 2 
+En utilisant cette signature :
+```
+Map<String, Long> histogramFrequenceMotAvecCollectors(final Path text) throws IOException {
+```
 
-## Prérequis 
-Vérification le fonctionnement du projet en envoyant une notification (ifft ou twitter).
+Créer une implémentation dans ScrabbleService retournant l'histogramme du nombre de mots en utilisant les Collectors.
 
-## Etape 1 : Back to Basic
-Créer un nouveau projet.
+## Etape 3
+En utilisant cette signature :
+```
+Map<String, Long> histogramFrequenceMotSansCollectors(final Path text) throws IOException {
+```
 
-Le but est de refactorer le code avec un manager et un plugin.
+Créer une implémentation dans ScrabbleService retournant l'histogramme du nombre de mots sans utiliser les Collectors.
 
-Que doit faire le manager ?
-Que doit faire le plugin ?
+## Etape 4
+En utilisant cette signature :
+```
+public int scoreScrabble(final String word)
+```
 
-Le manager devra comporter une méthode envoyant un message avec la signature suivante : 
-void sendMessage(String message)
+Créer une implémentation dans ScrabbleService calculant le score d'un mot. La valeur de chaque lettre est stockée dans la map SCRABBLE_POINT.
+Rem: On ne tiendra pas compte du nombre de lettres disponibles.
 
-## Etape 2 : Broadcasting
-Modifier le manager de manière à ce qu'il puisse gérer une liste de plugins.
+## Etape 5
+En utilisant cette signature :
+```
+public int meilleurScoreScrabble(final Path text) throws IOException {
+```
 
-Créer un second plugin à partir de l'implémentation du projet sample-mail.
+Créer une implémentation dans ScrabbleService donnant le meilleur score pour l'ensemble des mots du texte maupassant.txt
+Rem: On ne tiendra pas compte du nombre de lettres disponibles.
 
-Le manager devra maintenant envoyer le message à tous les canaux de communication.
-La signature de send message doit rester inchangée : 
-void sendMessage(String message)
+## Etape 6
+En utilisant cette signature :
+```
+public Map<Integer, List<String>> mapScoreMot(final Path text) throws IOException {
+```
 
-S'il vous reste du temps, intégrer le plugin de l'autre groupe
-
-## Etape 3 : Selecting channels
-Modifier le manager de manière à créer un sélecteur de canaux.
-
-Une nouvelle méthode dans le manager devra être ajoutée pour choisir les channels sur lesquels le message doit être envoyé.
-
-La signature sera la suivante : 
-void sendMessage(String message, String... channels);
-
-## Etape 4 : Performance monitoring
-En utilisant l'AOP, ajouter un comportement permettant de mesurer les temps de réponse lors des appels aux méthodes sendMessage.
-
-## Etape 5 : NSA logs
-Toujours en utilisant l'AOP, ajouter un comportement permettant de tracer les paramètres en entrée et les réponse de sendMessage.
-
-Ce comportement doit pouvoir être décorrélé de l'implémentation de l'étape 4.
-
-
+Créer une implémentation dans ScrabbleService donnant une map de score avec la liste des mots associés
+Rem: On ne tiendra pas compte du nombre de lettres disponibles.
