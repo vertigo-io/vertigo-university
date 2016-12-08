@@ -59,3 +59,14 @@ public Map<Integer, List<String>> mapScoreMot(final Path text) throws IOExceptio
 Créer une implémentation dans ScrabbleService donnant une map de score avec la liste des mots associés
 
 Rem: On ne tiendra pas compte du nombre de lettres disponibles.
+
+
+
+## Resultats:
+
+Nombre de starbucks = 10843
+Starbucks d'Alabama = [Target Oxford T-2153, I-20 & Hwy 21, I-85 @ Hwy 280, Target Opelika T-1499 ...]
+Ville avec le plus de starbucks = New York
+Ville avec le plus de starbucks au Texas = Houston
+Ville avec le plus de starbucks en Californie  = San Diego
+Ville avec le plus de Starbucks = [New York=202, Chicago=173, Seattle=141]

@@ -71,3 +71,13 @@ public List<Map.Entry<String, Long>> villeNMax(final List<StarbucksDto> starbuck
 ```
 
 Créer une implémentation dans StarbucksService retournant la liste des nFirst couple (ville, occurence) comportant le plus de Starbucks de toutes la liste, trié par ordre décroissant.
+
+
+
+## Résultats:
+Count = 45147
+Concat = ﻿,Au,lecteur,Cette,version,électronique,reproduit,dans,son,intégralité
+HistogramSans = {au-dessus=3, baissait=1, gardé=3, régler=2, désorienté=1 ...}
+HistogramSans = {au-dessus=3, baissait=1, gardé=3, régler=2, désorienté=1 ...}
+Meilleur score scrabble = 49
+Histo score scrabble = {... 46=[catafalque, Palais-Royal], 47=[auparavant, paralysaient], 48=[apparaissait], 49=[baccalauréat, Haribadada]}
