@@ -10,8 +10,7 @@
 	</parent>
 
 	<artifactId>vertigo-samples</artifactId>
-	<name>samples-reactor</name>
-	<version>0.9.3</version>
+	<name>vertigo-samples</name>
 	<packaging>pom</packaging>
 
 	<properties>

@@ -4,12 +4,12 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>io.vertigo</groupId>
-    <artifactId>samples-reactor</artifactId>
+    <artifactId>vertigo-samples</artifactId>
     <version>0.9.3</version>
   </parent>
 
-  <artifactId>sample-starbucks-corrige</artifactId>
-  <name>sample-starbucks-corrige</name>
+  <artifactId>vertigo-sample-starbucks-corrige</artifactId>
+  <name>vertigo-sample-starbucks-corrige</name>
   
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

@@ -5,12 +5,12 @@
 
 	<parent>
 		<groupId>io.vertigo</groupId>
-		<artifactId>samples-reactor</artifactId>
+		<artifactId>vertigo-samples</artifactId>
 		<version>0.9.3</version>
 	</parent>
 
-  	<artifactId>sample-ifttt</artifactId>
-	<name>sample-ifttt</name>
+  	<artifactId>vertigo-sample-ifttt</artifactId>
+	<name>vertigo-sample-ifttt</name>
 	<packaging>jar</packaging>
 
 	<properties>

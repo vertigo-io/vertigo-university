@@ -5,12 +5,12 @@
 
 	<parent>
 		<groupId>io.vertigo</groupId>
-		<artifactId>samples-reactor</artifactId>
+		<artifactId>vertigo-samples</artifactId>
 		<version>0.9.3</version>
 	</parent>
 
-	<artifactId>sample-hello-world</artifactId>
-	<name>sample-hello-world</name>
+	<artifactId>vertigo-sample-hello-world</artifactId>
+	<name>vertigo-sample-hello-world</name>
 	<packaging>jar</packaging>
 
 	<dependencies>
