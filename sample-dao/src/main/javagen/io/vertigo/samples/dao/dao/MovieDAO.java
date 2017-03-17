@@ -12,7 +12,7 @@ import io.vertigo.samples.dao.domain.Movie;
  * MovieDAO
  */
 public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreServices {
-	 
+
 	/**
 	 * Contructeur.
 	 * @param storeManager Manager de persistance
@@ -22,6 +22,5 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	public MovieDAO(final StoreManager storeManager, final TaskManager taskManager) {
 		super(Movie.class, storeManager, taskManager);
 	}
-	
 
 }

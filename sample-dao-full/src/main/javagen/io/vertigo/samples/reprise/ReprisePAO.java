@@ -39,22 +39,35 @@ public final class ReprisePAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TK_INSERT_COUNTRIES_BATCH.
-	 * @param countryList io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Country> 
-	*/
-	public void insertCountriesBatch(final io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Country> countryList) {
-		final Task task = createTaskBuilder("TK_INSERT_COUNTRIES_BATCH")
-				.addValue("COUNTRY_LIST", countryList)
-				.build();
-		getTaskManager().execute(task);
-	}
-
-	/**
 	 * Execute la tache TK_COUNT_ACTORS.
 	 * @return Long count
 	*/
 	public Long countActors() {
 		final Task task = createTaskBuilder("TK_COUNT_ACTORS")
+				.build();
+		return getTaskManager()
+				.execute(task)
+				.getResult();
+	}
+
+	/**
+	 * Execute la tache TK_COUNT_MOVIES.
+	 * @return Long count
+	*/
+	public Long countMovies() {
+		final Task task = createTaskBuilder("TK_COUNT_MOVIES")
+				.build();
+		return getTaskManager()
+				.execute(task)
+				.getResult();
+	}
+
+	/**
+	 * Execute la tache TK_COUNT_ROLES.
+	 * @return Long count
+	*/
+	public Long countRoles() {
+		final Task task = createTaskBuilder("TK_COUNT_ROLES")
 				.build();
 		return getTaskManager()
 				.execute(task)
@@ -73,15 +86,14 @@ public final class ReprisePAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TK_COUNT_MOVIES.
-	 * @return Long count
+	 * Execute la tache TK_INSERT_COUNTRIES_BATCH.
+	 * @param countryList io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Country> 
 	*/
-	public Long countMovies() {
-		final Task task = createTaskBuilder("TK_COUNT_MOVIES")
+	public void insertCountriesBatch(final io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Country> countryList) {
+		final Task task = createTaskBuilder("TK_INSERT_COUNTRIES_BATCH")
+				.addValue("COUNTRY_LIST", countryList)
 				.build();
-		return getTaskManager()
-				.execute(task)
-				.getResult();
+		getTaskManager().execute(task);
 	}
 
 	/**
@@ -96,18 +108,6 @@ public final class ReprisePAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TK_COUNT_ROLES.
-	 * @return Long count
-	*/
-	public Long countRoles() {
-		final Task task = createTaskBuilder("TK_COUNT_ROLES")
-				.build();
-		return getTaskManager()
-				.execute(task)
-				.getResult();
-	}
-
-	/**
 	 * Execute la tache TK_INSERT_ROLES_BATCH.
 	 * @param rolesList io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Role> 
 	*/
@@ -118,8 +118,7 @@ public final class ReprisePAO implements StoreServices {
 		getTaskManager().execute(task);
 	}
 
-    
-    private TaskManager getTaskManager(){
-    	return taskManager;
-    } 
+	private TaskManager getTaskManager() {
+		return taskManager;
+	}
 }

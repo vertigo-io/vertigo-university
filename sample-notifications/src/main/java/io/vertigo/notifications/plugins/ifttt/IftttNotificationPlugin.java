@@ -2,6 +2,9 @@ package io.vertigo.notifications.plugins.ifttt;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
 
@@ -58,7 +61,7 @@ public class IftttNotificationPlugin implements NotificationPlugin, Activeable {
 			url = prop.getProperty("url");
 		} catch (final IOException e) {
 			LOGGER.error("Error while loading " + IFTTT, e);
-			throw new WrappedException(e);
+			throw WrappedException.wrap(e);
 		}
 
 	}
@@ -92,6 +95,11 @@ public class IftttNotificationPlugin implements NotificationPlugin, Activeable {
 			throw new VSystemException(
 					"Error while sending Ifttt Notification:" + (response != null ? response.getStatus() : ""));
 		}
+
+		final List<String> list = new ArrayList<>();
+		Collections.sort(list, String::compareToIgnoreCase);
+		Collections.sort(list, (s1, s2) -> s1.compareToIgnoreCase(s2));
+
 	}
 
 	@Override

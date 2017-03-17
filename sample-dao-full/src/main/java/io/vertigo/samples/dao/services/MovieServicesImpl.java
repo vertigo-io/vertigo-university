@@ -6,7 +6,8 @@ import java.util.stream.Collectors;
 import javax.inject.Inject;
 
 import io.vertigo.dynamo.domain.model.DtList;
-import io.vertigo.dynamo.store.criteria.FilterCriteriaBuilder;
+import io.vertigo.dynamo.store.criteria.Criteria;
+import io.vertigo.dynamo.store.criteria.Criterions;
 import io.vertigo.dynamo.transaction.Transactional;
 import io.vertigo.lang.Assertion;
 import io.vertigo.samples.SamplesPAO;
@@ -15,6 +16,7 @@ import io.vertigo.samples.dao.dao.MovieDAO;
 import io.vertigo.samples.dao.dao.RoleDAO;
 import io.vertigo.samples.dao.domain.Actor;
 import io.vertigo.samples.dao.domain.Country;
+import io.vertigo.samples.dao.domain.DtDefinitions.MovieFields;
 import io.vertigo.samples.dao.domain.Movie;
 import io.vertigo.samples.dao.domain.MovieByYear;
 import io.vertigo.samples.dao.domain.MovieDisplay;
@@ -41,11 +43,9 @@ public class MovieServicesImpl implements MovieServices {
 
 	@Override
 	public DtList<Movie> findMoviesByCriteria(final String title, final Integer year) {
-		final FilterCriteriaBuilder<Movie> movieFilterCriteriaBuilder = new FilterCriteriaBuilder<>();
-		movieFilterCriteriaBuilder.withPrefix("NAME", title);
-		movieFilterCriteriaBuilder.addFilter("YEAR", year);
-
-		return movieDAO.findAll(movieFilterCriteriaBuilder.build(), 500);
+		final Criteria<Movie> criteria = Criterions.startsWith(MovieFields.NAME, title)
+				.and(Criterions.isEqualTo(MovieFields.YEAR, year));
+		return movieDAO.findAll(criteria, 500);
 	}
 
 	@Override

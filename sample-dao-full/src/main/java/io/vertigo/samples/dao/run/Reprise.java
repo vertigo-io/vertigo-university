@@ -6,7 +6,8 @@ import javax.inject.Inject;
 
 import io.vertigo.app.AutoCloseableApp;
 import io.vertigo.app.config.AppConfigBuilder;
-import io.vertigo.core.component.di.injector.Injector;
+import io.vertigo.app.config.ModuleConfigBuilder;
+import io.vertigo.core.component.di.injector.DIInjector;
 import io.vertigo.samples.dao.config.SampleConfigBuilder;
 import io.vertigo.samples.dao.dao.ActorDAO;
 import io.vertigo.samples.dao.dao.CountryDAO;
@@ -31,7 +32,7 @@ public class Reprise {
 
 	public static void main(final String[] args) {
 		final AppConfigBuilder appConfigBuilder = SampleConfigBuilder.createAppConfigBuilderWithoutCrebase();
-		appConfigBuilder.beginModule("mineDAO")
+		appConfigBuilder.addModule(new ModuleConfigBuilder("mineDAO")
 				.withNoAPI()
 				.addComponent(MyMovieDAO.class)
 				.addComponent(MyActorDAO.class)
@@ -42,15 +43,16 @@ public class Reprise {
 				.addComponent(RoleDAO.class)
 				.addComponent(CountryDAO.class)
 				.addComponent(ReprisePAO.class)
-				.endModule()
-				.beginModule("mineServices")
-				.addComponent(MovieServices.class, MovieServicesImpl.class)
-				.addComponent(ActorServices.class, ActorServicesImpl.class)
-				.addComponent(RepriseServices.class, RepriseServicesImpl.class)
-				.endModule();
+				.build())
+				.addModule(new ModuleConfigBuilder("mineServices")
+						.addComponent(MovieServices.class, MovieServicesImpl.class)
+						.addComponent(ActorServices.class, ActorServicesImpl.class)
+						.addComponent(RepriseServices.class, RepriseServicesImpl.class)
+						.build());
+
 		try (final AutoCloseableApp app = new AutoCloseableApp(appConfigBuilder.build())) {
 			final Reprise sample = new Reprise();
-			Injector.injectMembers(sample, app.getComponentSpace());
+			DIInjector.injectMembers(sample, app.getComponentSpace());
 			//-----
 			sample.step1();
 			sample.step2();

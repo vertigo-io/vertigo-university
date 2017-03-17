@@ -3,11 +3,12 @@ package io.vertigo.samples.dao.services;
 import javax.inject.Inject;
 
 import io.vertigo.dynamo.domain.model.DtList;
-import io.vertigo.dynamo.store.criteria.FilterCriteriaBuilder;
+import io.vertigo.dynamo.store.criteria.Criterions;
 import io.vertigo.dynamo.transaction.Transactional;
 import io.vertigo.lang.Assertion;
 import io.vertigo.samples.dao.dao.CountryDAO;
 import io.vertigo.samples.dao.domain.Country;
+import io.vertigo.samples.dao.domain.DtDefinitions.CountryFields;
 
 @Transactional
 public class CountryServicesImpl implements CountryServices {
@@ -20,7 +21,7 @@ public class CountryServicesImpl implements CountryServices {
 		Assertion.checkArgNotEmpty(prefix);
 		// ---
 
-		return countryDAO.findAll(new FilterCriteriaBuilder<Country>().withPrefix("NAME", prefix).build(), 50);
+		return countryDAO.findAll(Criterions.startsWith(CountryFields.NAME, prefix), 50);
 	}
 
 }

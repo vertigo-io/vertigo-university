@@ -1,9 +1,10 @@
 package io.vertigo.samples.dao.domain;
 
-import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.model.Entity;
 import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
+
 /**
  * Attention cette classe est générée automatiquement !
  * Objet de données Role
@@ -24,10 +25,10 @@ public final class Role implements Entity {
 	public URI<Role> getURI() {
 		return DtObjectUtil.createURI(this);
 	}
-	
+
 	/**
 	 * Champ : ID.
-	 * Récupère la valeur de la propriété 'Id'. 
+	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long rolId <b>Obligatoire</b>
 	 */
 	@Field(domain = "DO_ID", type = "ID", required = true, label = "Id")
@@ -46,8 +47,8 @@ public final class Role implements Entity {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Dans le role de'. 
-	 * @return String asCharacter 
+	 * Récupère la valeur de la propriété 'Dans le role de'.
+	 * @return String asCharacter
 	 */
 	@Field(domain = "DO_LABEL_VERY_LONG", label = "Dans le role de")
 	public String getAsCharacter() {
@@ -57,7 +58,7 @@ public final class Role implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Dans le role de'.
-	 * @param asCharacter String 
+	 * @param asCharacter String
 	 */
 	public void setAsCharacter(final String asCharacter) {
 		this.asCharacter = asCharacter;
@@ -65,8 +66,8 @@ public final class Role implements Entity {
 
 	/**
 	 * Champ : FOREIGN_KEY.
-	 * Récupère la valeur de la propriété 'Movie'. 
-	 * @return Long movId 
+	 * Récupère la valeur de la propriété 'Movie'.
+	 * @return Long movId
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Movie")
 	public Long getMovId() {
@@ -76,7 +77,7 @@ public final class Role implements Entity {
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Définit la valeur de la propriété 'Movie'.
-	 * @param movId Long 
+	 * @param movId Long
 	 */
 	public void setMovId(final Long movId) {
 		this.movId = movId;
@@ -84,8 +85,8 @@ public final class Role implements Entity {
 
 	/**
 	 * Champ : FOREIGN_KEY.
-	 * Récupère la valeur de la propriété 'Actor'. 
-	 * @return Long actId 
+	 * Récupère la valeur de la propriété 'Actor'.
+	 * @return Long actId
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Actor")
 	public Long getActId() {
@@ -95,14 +96,12 @@ public final class Role implements Entity {
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Définit la valeur de la propriété 'Actor'.
-	 * @param actId Long 
+	 * @param actId Long
 	 */
 	public void setActId(final Long actId) {
 		this.actId = actId;
 	}
 
-
-	// Association : Movie non navigable
 	/**
 	 * Association : Actor.
 	 * @return io.vertigo.samples.dao.domain.Actor
@@ -113,14 +112,8 @@ public final class Role implements Entity {
 			return null;
 		}
 		//On est toujours dans un mode lazy. On s'assure cependant que l'objet associé n'a pas changé
-		if (actor != null) {
-			// On s'assure que l'objet correspond à la bonne clé
-			if (!fkURI.equals(actor.getURI())) {
-				actor = null;
-			}
-		}		
-		if (actor == null) {
-			actor = io.vertigo.app.Home.getApp().getComponentSpace().resolve(io.vertigo.dynamo.store.StoreManager.class).getDataStore().read(fkURI);
+		if (actor == null || !fkURI.equals(actor.getURI())) {
+			actor = io.vertigo.app.Home.getApp().getComponentSpace().resolve(io.vertigo.dynamo.store.StoreManager.class).getDataStore().readOne(fkURI);
 		}
 		return actor;
 	}
@@ -129,23 +122,24 @@ public final class Role implements Entity {
 	 * Retourne l'URI: Actor.
 	 * @return URI de l'association
 	 */
-    @io.vertigo.dynamo.domain.stereotype.Association (
-    	name = "A_ROL_ACT",
-    	fkFieldName = "ACT_ID",
-    	primaryDtDefinitionName = "DT_ACTOR",
-    	primaryIsNavigable = true,
-    	primaryRole = "Actor",
-    	primaryLabel = "Actor",
-    	primaryMultiplicity = "0..1",
-    	foreignDtDefinitionName = "DT_ROLE",
-    	foreignIsNavigable = false,
-    	foreignRole = "Role",
-    	foreignLabel = "Role",
-    	foreignMultiplicity = "0..*"
-    )
+	@io.vertigo.dynamo.domain.stereotype.Association(
+			name = "A_ROL_ACT",
+			fkFieldName = "ACT_ID",
+			primaryDtDefinitionName = "DT_ACTOR",
+			primaryIsNavigable = true,
+			primaryRole = "Actor",
+			primaryLabel = "Actor",
+			primaryMultiplicity = "0..1",
+			foreignDtDefinitionName = "DT_ROLE",
+			foreignIsNavigable = false,
+			foreignRole = "Role",
+			foreignLabel = "Role",
+			foreignMultiplicity = "0..*")
 	public io.vertigo.dynamo.domain.model.URI<io.vertigo.samples.dao.domain.Actor> getActorURI() {
 		return io.vertigo.dynamo.domain.util.DtObjectUtil.createURI(this, "A_ROL_ACT", io.vertigo.samples.dao.domain.Actor.class);
 	}
+
+	// Association : Movie non navigable
 
 	/** {@inheritDoc} */
 	@Override

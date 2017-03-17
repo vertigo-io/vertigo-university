@@ -39,18 +39,6 @@ public final class SamplesPAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TK_GET_MOVIE_DISPLAY.
-	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.MovieDisplay> movies
-	*/
-	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.MovieDisplay> getMovieDisplay() {
-		final Task task = createTaskBuilder("TK_GET_MOVIE_DISPLAY")
-				.build();
-		return getTaskManager()
-				.execute(task)
-				.getResult();
-	}
-
-	/**
 	 * Execute la tache TK_GET_MOVIE_BY_YEAR.
 	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.MovieByYear> movies
 	*/
@@ -62,8 +50,19 @@ public final class SamplesPAO implements StoreServices {
 				.getResult();
 	}
 
-    
-    private TaskManager getTaskManager(){
-    	return taskManager;
-    } 
+	/**
+	 * Execute la tache TK_GET_MOVIE_DISPLAY.
+	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.MovieDisplay> movies
+	*/
+	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.MovieDisplay> getMovieDisplay() {
+		final Task task = createTaskBuilder("TK_GET_MOVIE_DISPLAY")
+				.build();
+		return getTaskManager()
+				.execute(task)
+				.getResult();
+	}
+
+	private TaskManager getTaskManager() {
+		return taskManager;
+	}
 }

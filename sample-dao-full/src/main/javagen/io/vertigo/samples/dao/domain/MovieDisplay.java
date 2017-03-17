@@ -1,8 +1,9 @@
 package io.vertigo.samples.dao.domain;
 
-import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.model.DtObject;
+import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
+
 /**
  * Attention cette classe est générée automatiquement !
  * Objet de données MovieDisplay
@@ -17,11 +18,10 @@ public final class MovieDisplay implements DtObject {
 	private String country;
 	private Long actorsCount;
 
-	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Titre'. 
-	 * @return String name 
+	 * Récupère la valeur de la propriété 'Titre'.
+	 * @return String name
 	 */
 	@Field(domain = "DO_LABEL_LONG", label = "Titre")
 	public String getName() {
@@ -31,7 +31,7 @@ public final class MovieDisplay implements DtObject {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Titre'.
-	 * @param name String 
+	 * @param name String
 	 */
 	public void setName(final String name) {
 		this.name = name;
@@ -39,18 +39,18 @@ public final class MovieDisplay implements DtObject {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Année'. 
-	 * @return Integer year 
+	 * Récupère la valeur de la propriété 'AnnÃ©e'.
+	 * @return Integer year
 	 */
-	@Field(domain = "DO_YEAR", label = "Année")
+	@Field(domain = "DO_YEAR", label = "AnnÃ©e")
 	public Integer getYear() {
 		return year;
 	}
 
 	/**
 	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'Année'.
-	 * @param year Integer 
+	 * Définit la valeur de la propriété 'AnnÃ©e'.
+	 * @param year Integer
 	 */
 	public void setYear(final Integer year) {
 		this.year = year;
@@ -58,8 +58,8 @@ public final class MovieDisplay implements DtObject {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Pays'. 
-	 * @return String country 
+	 * Récupère la valeur de la propriété 'Pays'.
+	 * @return String country
 	 */
 	@Field(domain = "DO_LABEL", label = "Pays")
 	public String getCountry() {
@@ -69,7 +69,7 @@ public final class MovieDisplay implements DtObject {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Pays'.
-	 * @param country String 
+	 * @param country String
 	 */
 	public void setCountry(final String country) {
 		this.country = country;
@@ -77,8 +77,8 @@ public final class MovieDisplay implements DtObject {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Nombre d'acteur'. 
-	 * @return Long actorsCount 
+	 * Récupère la valeur de la propriété 'Nombre d'acteur'.
+	 * @return Long actorsCount
 	 */
 	@Field(domain = "DO_ID", label = "Nombre d'acteur")
 	public Long getActorsCount() {
@@ -88,7 +88,7 @@ public final class MovieDisplay implements DtObject {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Nombre d'acteur'.
-	 * @param actorsCount Long 
+	 * @param actorsCount Long
 	 */
 	public void setActorsCount(final Long actorsCount) {
 		this.actorsCount = actorsCount;

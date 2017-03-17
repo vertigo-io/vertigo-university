@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import javax.inject.Inject;
 
 import io.vertigo.core.resource.ResourceManager;
-import io.vertigo.core.spaces.component.ComponentInitializer;
+import io.vertigo.core.component.ComponentInitializer;
 import io.vertigo.dynamo.database.SqlDataBaseManager;
 import io.vertigo.dynamo.database.connection.SqlConnection;
 import io.vertigo.dynamo.database.statement.SqlCallableStatement;
@@ -42,7 +42,7 @@ public class DataBaseInitializer implements ComponentInitializer {
 		try {
 			connection = sqlDataBaseManager.getConnectionProvider(SqlDataBaseManager.MAIN_CONNECTION_PROVIDER_NAME).obtainConnection();
 		} catch (final SQLException e) {
-			throw WrappedException.wrapIfNeeded(e, "Can't open connection");
+			throw WrappedException.wrap(e, "Can't open connection");
 		}
 		execSqlScript(connection, "sqlgen/crebas.sql");
 	}
@@ -64,7 +64,7 @@ public class DataBaseInitializer implements ComponentInitializer {
 			}
 			in.close();
 		} catch (final IOException e) {
-			throw WrappedException.wrapIfNeeded(e, "Can't exec script {0}", scriptPath);
+			throw WrappedException.wrap(e, "Can't exec script {0}", scriptPath);
 		}
 	}
 
@@ -73,7 +73,7 @@ public class DataBaseInitializer implements ComponentInitializer {
 			callableStatement.init();
 			callableStatement.executeUpdate();
 		} catch (final SQLException e) {
-			throw WrappedException.wrapIfNeeded(e, "Can't exec command {0}", sql);
+			throw WrappedException.wrap(e, "Can't exec command {0}", sql);
 		}
 	}
 

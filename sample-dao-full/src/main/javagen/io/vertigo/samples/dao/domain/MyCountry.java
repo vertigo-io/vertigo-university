@@ -1,9 +1,10 @@
 package io.vertigo.samples.dao.domain;
 
-import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.model.Entity;
 import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
+
 /**
  * Attention cette classe est générée automatiquement !
  * Objet de données MyCountry
@@ -22,10 +23,10 @@ public final class MyCountry implements Entity {
 	public URI<MyCountry> getURI() {
 		return DtObjectUtil.createURI(this);
 	}
-	
+
 	/**
 	 * Champ : ID.
-	 * Récupère la valeur de la propriété 'Id'. 
+	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long couId <b>Obligatoire</b>
 	 */
 	@Field(domain = "DO_ID", type = "ID", required = true, label = "Id")
@@ -44,8 +45,8 @@ public final class MyCountry implements Entity {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Code du pays'. 
-	 * @return String name 
+	 * Récupère la valeur de la propriété 'Code du pays'.
+	 * @return String name
 	 */
 	@Field(domain = "DO_LABEL", label = "Code du pays")
 	public String getName() {
@@ -55,12 +56,11 @@ public final class MyCountry implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Code du pays'.
-	 * @param name String 
+	 * @param name String
 	 */
 	public void setName(final String name) {
 		this.name = name;
 	}
-
 
 	// Association : Movie non navigable
 

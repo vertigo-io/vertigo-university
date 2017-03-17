@@ -25,6 +25,7 @@ public class NotificationManagerImpl implements NotificationManager {
 	public void sendMessage(final String message) {
 		notificationPlugins.stream()
 				.forEach(p -> p.sendMessage(message));
+
 	}
 
 	@Override

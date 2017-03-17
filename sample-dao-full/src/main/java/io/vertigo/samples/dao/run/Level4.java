@@ -6,7 +6,8 @@ import org.apache.log4j.Logger;
 
 import io.vertigo.app.AutoCloseableApp;
 import io.vertigo.app.config.AppConfigBuilder;
-import io.vertigo.core.component.di.injector.Injector;
+import io.vertigo.app.config.ModuleConfigBuilder;
+import io.vertigo.core.component.di.injector.DIInjector;
 import io.vertigo.samples.SamplesPAO;
 import io.vertigo.samples.dao.config.SampleConfigBuilder;
 import io.vertigo.samples.dao.dao.ActorDAO;
@@ -36,7 +37,7 @@ public class Level4 {
 
 	public static void main(final String[] args) {
 		final AppConfigBuilder appConfigBuilder = SampleConfigBuilder.createAppConfigBuilderWithoutCrebase();
-		appConfigBuilder.beginModule("mineDAO")
+		appConfigBuilder.addModule(new ModuleConfigBuilder("mineDAO")
 				.withNoAPI()
 				.addComponent(MyMovieDAO.class)
 				.addComponent(MyActorDAO.class)
@@ -48,15 +49,15 @@ public class Level4 {
 				.addComponent(CountryDAO.class)
 				.addComponent(ReprisePAO.class)
 				.addComponent(SamplesPAO.class)
-				.endModule()
-				.beginModule("mineServices")
-				.addComponent(MovieServices.class, MovieServicesImpl.class)
-				.addComponent(ActorServices.class, ActorServicesImpl.class)
-				.addComponent(RepriseServices.class, RepriseServicesImpl.class)
-				.endModule();
+				.build())
+				.addModule(new ModuleConfigBuilder("mineServices")
+						.addComponent(MovieServices.class, MovieServicesImpl.class)
+						.addComponent(ActorServices.class, ActorServicesImpl.class)
+						.addComponent(RepriseServices.class, RepriseServicesImpl.class)
+						.build());
 		try (final AutoCloseableApp app = new AutoCloseableApp(appConfigBuilder.build())) {
 			final Level4 level4 = new Level4();
-			Injector.injectMembers(level4, app.getComponentSpace());
+			DIInjector.injectMembers(level4, app.getComponentSpace());
 			//-----
 			level4.step1();
 			level4.step2();

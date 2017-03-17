@@ -16,7 +16,7 @@ import io.vertigo.samples.dao.domain.Country;
  * CountryDAO
  */
 public final class CountryDAO extends DAO<Country, java.lang.Long> implements StoreServices {
-	 
+
 	/**
 	 * Contructeur.
 	 * @param storeManager Manager de persistance
@@ -26,7 +26,7 @@ public final class CountryDAO extends DAO<Country, java.lang.Long> implements St
 	public CountryDAO(final StoreManager storeManager, final TaskManager taskManager) {
 		super(Country.class, storeManager, taskManager);
 	}
-	
+
 
 	/**
 	 * Creates a taskBuilder.
@@ -49,6 +49,5 @@ public final class CountryDAO extends DAO<Country, java.lang.Long> implements St
 				.execute(task)
 				.getResult();
 	}
-
 
 }

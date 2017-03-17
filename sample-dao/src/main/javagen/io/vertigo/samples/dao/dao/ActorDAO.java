@@ -12,7 +12,7 @@ import io.vertigo.samples.dao.domain.Actor;
  * ActorDAO
  */
 public final class ActorDAO extends DAO<Actor, java.lang.Long> implements StoreServices {
-	 
+
 	/**
 	 * Contructeur.
 	 * @param storeManager Manager de persistance
@@ -22,6 +22,5 @@ public final class ActorDAO extends DAO<Actor, java.lang.Long> implements StoreS
 	public ActorDAO(final StoreManager storeManager, final TaskManager taskManager) {
 		super(Actor.class, storeManager, taskManager);
 	}
-	
 
 }

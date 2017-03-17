@@ -2,7 +2,9 @@ package io.vertigo.notifications.config;
 
 import io.vertigo.app.config.AppConfig;
 import io.vertigo.app.config.AppConfigBuilder;
+import io.vertigo.app.config.ModuleConfigBuilder;
 import io.vertigo.commons.impl.CommonsFeatures;
+import io.vertigo.core.param.Param;
 import io.vertigo.dynamo.impl.DynamoFeatures;
 import io.vertigo.notifications.NotificationManager;
 import io.vertigo.notifications.aspects.supervision.SupervisionAspect;
@@ -29,31 +31,32 @@ public class NotificationSampleConfigBuilder {
 	public AppConfig build() {
 		//@formatter:off
 		return new AppConfigBuilder()
-				.beginBootModule("fr").endModule()
-				.beginModule(CommonsFeatures.class).endModule()
-				.beginModule(DynamoFeatures.class).endModule()
-				.beginModule("notificationAspects")
-					.addComponent(SupervisionManager.class, SupervisionManagerImpl.class)
-					.addComponent(TraceManager.class, TraceManagerImpl.class)
-					.addAspect(SupervisionAspect.class)
-					.addAspect(TraceAspect.class)
-				.endModule()
-				.beginModule("notifications")
-					.addComponent(NotificationManager.class, NotificationManagerImpl.class)
-						.beginPlugin(IftttNotificationPlugin.class)
-							.addParam("proxyHost", "172.20.0.9")
-							.addParam("proxyPort", "3128")
-						.endPlugin()
-						.addPlugin(TwitterNotificationPlugin.class)
-						.addPlugin(MailNotificationPlugin.class)
-					.addComponent(MailManager.class, MailManagerImpl.class)
-						.beginPlugin(JavaxSendMailPlugin.class)
-							.addParam("storeProtocol", "smtp")
-							.addParam("host", "localdelivery.klee.lan.net")
-							.addParam("developmentMode", "true")
-							.addParam("developmentMailTo", "prenom.nom@kleegroup.com")
-						.endPlugin()
-				.endModule()
+				.beginBoot()
+				.withLocales("fr")
+				.endBoot()
+				.addModule(new CommonsFeatures().build())
+				.addModule(new DynamoFeatures().build())
+				.addModule(new ModuleConfigBuilder("notificationAspects")
+						.addComponent(SupervisionManager.class, SupervisionManagerImpl.class)
+						.addComponent(TraceManager.class, TraceManagerImpl.class)
+						.addAspect(SupervisionAspect.class)
+						.addAspect(TraceAspect.class)
+						.build())
+				.addModule(new ModuleConfigBuilder("notifications")
+						.addComponent(NotificationManager.class, NotificationManagerImpl.class)
+							.addPlugin(IftttNotificationPlugin.class,
+									Param.create("proxyHost", "172.20.0.9"),
+									Param.create("proxyPort", "3128"))
+							.addPlugin(TwitterNotificationPlugin.class)
+							.addPlugin(MailNotificationPlugin.class)
+						.addComponent(MailManager.class, MailManagerImpl.class)
+							.addPlugin(JavaxSendMailPlugin.class,
+									Param.create("storeProtocol", "smtp"),
+									Param.create("host", "localdelivery.klee.lan.net"),
+									Param.create("developmentMode", "true"),
+									Param.create("developmentMailTo", "prenom.nom@kleegroup.com"))
+						.build()
+						)
 				.build();
 	}
 

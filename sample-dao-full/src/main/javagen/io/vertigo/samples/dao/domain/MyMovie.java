@@ -1,9 +1,10 @@
 package io.vertigo.samples.dao.domain;
 
-import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.model.Entity;
 import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
+
 /**
  * Attention cette classe est générée automatiquement !
  * Objet de données MyMovie
@@ -27,10 +28,10 @@ public final class MyMovie implements Entity {
 	public URI<MyMovie> getURI() {
 		return DtObjectUtil.createURI(this);
 	}
-	
+
 	/**
 	 * Champ : ID.
-	 * Récupère la valeur de la propriété 'Id'. 
+	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long movId <b>Obligatoire</b>
 	 */
 	@Field(domain = "DO_ID", type = "ID", required = true, label = "Id")
@@ -49,8 +50,8 @@ public final class MyMovie implements Entity {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Code du pays'. 
-	 * @return String name 
+	 * Récupère la valeur de la propriété 'Code du pays'.
+	 * @return String name
 	 */
 	@Field(domain = "DO_LABEL_LONG", label = "Code du pays")
 	public String getName() {
@@ -60,7 +61,7 @@ public final class MyMovie implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Code du pays'.
-	 * @param name String 
+	 * @param name String
 	 */
 	public void setName(final String name) {
 		this.name = name;
@@ -68,18 +69,18 @@ public final class MyMovie implements Entity {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Année'. 
-	 * @return Integer year 
+	 * Récupère la valeur de la propriété 'AnnÃ©e'.
+	 * @return Integer year
 	 */
-	@Field(domain = "DO_YEAR", label = "Année")
+	@Field(domain = "DO_YEAR", label = "AnnÃ©e")
 	public Integer getYear() {
 		return year;
 	}
 
 	/**
 	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'Année'.
-	 * @param year Integer 
+	 * Définit la valeur de la propriété 'AnnÃ©e'.
+	 * @param year Integer
 	 */
 	public void setYear(final Integer year) {
 		this.year = year;
@@ -87,8 +88,8 @@ public final class MyMovie implements Entity {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Id Imdb'. 
-	 * @return String imdbid 
+	 * Récupère la valeur de la propriété 'Id Imdb'.
+	 * @return String imdbid
 	 */
 	@Field(domain = "DO_LABEL", label = "Id Imdb")
 	public String getImdbid() {
@@ -98,7 +99,7 @@ public final class MyMovie implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Id Imdb'.
-	 * @param imdbid String 
+	 * @param imdbid String
 	 */
 	public void setImdbid(final String imdbid) {
 		this.imdbid = imdbid;
@@ -106,8 +107,8 @@ public final class MyMovie implements Entity {
 
 	/**
 	 * Champ : FOREIGN_KEY.
-	 * Récupère la valeur de la propriété 'Country'. 
-	 * @return Long couId 
+	 * Récupère la valeur de la propriété 'Country'.
+	 * @return Long couId
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Country")
 	public Long getCouId() {
@@ -117,7 +118,7 @@ public final class MyMovie implements Entity {
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Définit la valeur de la propriété 'Country'.
-	 * @param couId Long 
+	 * @param couId Long
 	 */
 	public void setCouId(final Long couId) {
 		this.couId = couId;
@@ -133,14 +134,8 @@ public final class MyMovie implements Entity {
 			return null;
 		}
 		//On est toujours dans un mode lazy. On s'assure cependant que l'objet associé n'a pas changé
-		if (country != null) {
-			// On s'assure que l'objet correspond à la bonne clé
-			if (!fkURI.equals(country.getURI())) {
-				country = null;
-			}
-		}		
-		if (country == null) {
-			country = io.vertigo.app.Home.getApp().getComponentSpace().resolve(io.vertigo.dynamo.store.StoreManager.class).getDataStore().read(fkURI);
+		if (country == null || !fkURI.equals(country.getURI())) {
+			country = io.vertigo.app.Home.getApp().getComponentSpace().resolve(io.vertigo.dynamo.store.StoreManager.class).getDataStore().readOne(fkURI);
 		}
 		return country;
 	}
@@ -149,23 +144,23 @@ public final class MyMovie implements Entity {
 	 * Retourne l'URI: Country.
 	 * @return URI de l'association
 	 */
-    @io.vertigo.dynamo.domain.stereotype.Association (
-    	name = "A_MMOV_MCOU",
-    	fkFieldName = "COU_ID",
-    	primaryDtDefinitionName = "DT_MY_COUNTRY",
-    	primaryIsNavigable = true,
-    	primaryRole = "Country",
-    	primaryLabel = "Country",
-    	primaryMultiplicity = "0..1",
-    	foreignDtDefinitionName = "DT_MY_MOVIE",
-    	foreignIsNavigable = false,
-    	foreignRole = "Movie",
-    	foreignLabel = "Movie",
-    	foreignMultiplicity = "0..*"
-    )
+	@io.vertigo.dynamo.domain.stereotype.Association(
+			name = "A_MMOV_MCOU",
+			fkFieldName = "COU_ID",
+			primaryDtDefinitionName = "DT_MY_COUNTRY",
+			primaryIsNavigable = true,
+			primaryRole = "Country",
+			primaryLabel = "Country",
+			primaryMultiplicity = "0..1",
+			foreignDtDefinitionName = "DT_MY_MOVIE",
+			foreignIsNavigable = false,
+			foreignRole = "Movie",
+			foreignLabel = "Movie",
+			foreignMultiplicity = "0..*")
 	public io.vertigo.dynamo.domain.model.URI<io.vertigo.samples.dao.domain.MyCountry> getCountryURI() {
 		return io.vertigo.dynamo.domain.util.DtObjectUtil.createURI(this, "A_MMOV_MCOU", io.vertigo.samples.dao.domain.MyCountry.class);
 	}
+
 	/**
 	 * Association : Role.
 	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.MyRole>
@@ -190,23 +185,23 @@ public final class MyMovie implements Entity {
 	 * Association URI: Role.
 	 * @return URI de l'association
 	 */
-    @io.vertigo.dynamo.domain.stereotype.Association (
-    	name = "A_MROL_MMOV",
-    	fkFieldName = "MOV_ID",
-    	primaryDtDefinitionName = "DT_MY_MOVIE",
-    	primaryIsNavigable = false,
-    	primaryRole = "Movie",
-    	primaryLabel = "Movie",
-    	primaryMultiplicity = "0..1",
-    	foreignDtDefinitionName = "DT_MY_ROLE",
-    	foreignIsNavigable = true,
-    	foreignRole = "Role",
-    	foreignLabel = "Role",
-    	foreignMultiplicity = "0..*"
-    )
+	@io.vertigo.dynamo.domain.stereotype.Association(
+			name = "A_MROL_MMOV",
+			fkFieldName = "MOV_ID",
+			primaryDtDefinitionName = "DT_MY_MOVIE",
+			primaryIsNavigable = false,
+			primaryRole = "Movie",
+			primaryLabel = "Movie",
+			primaryMultiplicity = "0..1",
+			foreignDtDefinitionName = "DT_MY_ROLE",
+			foreignIsNavigable = true,
+			foreignRole = "Role",
+			foreignLabel = "Role",
+			foreignMultiplicity = "0..*")
 	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation getRoleDtListURI() {
 		return io.vertigo.dynamo.domain.util.DtObjectUtil.createDtListURIForSimpleAssociation(this, "A_MROL_MMOV", "Role");
 	}
+
 
 	/** {@inheritDoc} */
 	@Override

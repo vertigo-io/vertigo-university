@@ -2,7 +2,10 @@ package io.vertigo.samples.vega.config;
 
 import io.vertigo.app.config.AppConfig;
 import io.vertigo.app.config.AppConfigBuilder;
+import io.vertigo.app.config.DefinitionProviderConfigBuilder;
+import io.vertigo.app.config.ModuleConfigBuilder;
 import io.vertigo.commons.impl.CommonsFeatures;
+import io.vertigo.dynamo.impl.DynamoFeatures;
 import io.vertigo.dynamo.kvstore.KVStoreManager;
 import io.vertigo.persona.impl.security.PersonaFeatures;
 import io.vertigo.samples.vega.domain.SampleSession;
@@ -17,27 +20,30 @@ public final class SampleVegaConfigurator {
 		final String locales = "fr_FR, en , de_DE";
 		// @formatter:off
 		return new AppConfigBuilder()
-		.beginBootModule(locales).endModule()
-		.beginModule(CommonsFeatures.class).endModule()
-		.beginModule(PersonaFeatures.class)
-			.withUserSession(SampleSession.class)
-		.endModule()
-		.beginModule("dependencies")
-			.addComponent(KVStoreManager.class, io.vertigo.dynamo.impl.kvstore.KVStoreManagerImpl.class)
-		.endModule()
-		.beginModule(VegaFeatures.class)
-			.withEmbeddedServer(port)
-			.withTokens("security-token")
-		.endModule()
-		//-----Declaration of a module named 'Vega' which contains a webservice component.
-		.beginModule("Samples")
-			.withNoAPI()
-			.addComponent(HelloWebServices.class)
-			.addComponent(MovieWebServices.class)
-			.addComponent(TokenWebServices.class)
-			.addDefinitionProvider(VegaDefinitionProvider.class)
-		.endModule()
-		.build();
+				.beginBoot()
+				.withLocales(locales)
+				.endBoot()
+				.addModule(new CommonsFeatures().build())
+				.addModule(new DynamoFeatures().build())
+				.addModule(new PersonaFeatures()
+						.withUserSession(SampleSession.class)
+						.build())
+				.addModule(new ModuleConfigBuilder("dependencies")
+						.addComponent(KVStoreManager.class, io.vertigo.dynamo.impl.kvstore.KVStoreManagerImpl.class)
+						.build())
+				.addModule(new VegaFeatures()
+						.withEmbeddedServer(port)
+						.withTokens("security-token")
+						.build())
+				//-----Declaration of a module named 'Vega' which contains a webservice component.
+				.addModule(new ModuleConfigBuilder("Samples")
+					.withNoAPI()
+					.addComponent(HelloWebServices.class)
+					.addComponent(MovieWebServices.class)
+					.addComponent(TokenWebServices.class)
+					.addDefinitionProvider(new DefinitionProviderConfigBuilder(VegaDefinitionProvider.class).build())
+					.build())
+				.build();
 		// @formatter:on
 	}
 }

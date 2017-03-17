@@ -16,7 +16,7 @@ import io.vertigo.samples.dao.domain.Role;
  * RoleDAO
  */
 public final class RoleDAO extends DAO<Role, java.lang.Long> implements StoreServices {
-	 
+
 	/**
 	 * Contructeur.
 	 * @param storeManager Manager de persistance
@@ -26,7 +26,7 @@ public final class RoleDAO extends DAO<Role, java.lang.Long> implements StoreSer
 	public RoleDAO(final StoreManager storeManager, final TaskManager taskManager) {
 		super(Role.class, storeManager, taskManager);
 	}
-	
+
 
 	/**
 	 * Creates a taskBuilder.
@@ -53,6 +53,5 @@ public final class RoleDAO extends DAO<Role, java.lang.Long> implements StoreSer
 				.execute(task)
 				.getResult();
 	}
-
 
 }

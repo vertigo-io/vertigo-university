@@ -1,8 +1,9 @@
 package io.vertigo.samples.dao.domain;
 
-import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.model.DtObject;
+import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
+
 /**
  * Attention cette classe est générée automatiquement !
  * Objet de données MovieByYear
@@ -15,21 +16,20 @@ public final class MovieByYear implements DtObject {
 	private Integer year;
 	private Long moviesCount;
 
-	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Année'. 
-	 * @return Integer year 
+	 * Récupère la valeur de la propriété 'AnnÃ©e'.
+	 * @return Integer year
 	 */
-	@Field(domain = "DO_YEAR", label = "Année")
+	@Field(domain = "DO_YEAR", label = "AnnÃ©e")
 	public Integer getYear() {
 		return year;
 	}
 
 	/**
 	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'Année'.
-	 * @param year Integer 
+	 * Définit la valeur de la propriété 'AnnÃ©e'.
+	 * @param year Integer
 	 */
 	public void setYear(final Integer year) {
 		this.year = year;
@@ -37,8 +37,8 @@ public final class MovieByYear implements DtObject {
 
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Nombre de film'. 
-	 * @return Long moviesCount 
+	 * Récupère la valeur de la propriété 'Nombre de film'.
+	 * @return Long moviesCount
 	 */
 	@Field(domain = "DO_ID", label = "Nombre de film")
 	public Long getMoviesCount() {
@@ -48,7 +48,7 @@ public final class MovieByYear implements DtObject {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Nombre de film'.
-	 * @param moviesCount Long 
+	 * @param moviesCount Long
 	 */
 	public void setMoviesCount(final Long moviesCount) {
 		this.moviesCount = moviesCount;

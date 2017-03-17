@@ -44,7 +44,7 @@ public class IftttSample {
 			url = prop.getProperty("url");
 		} catch (final IOException e) {
 			LOGGER.error("Error while loading " + IFTTT, e);
-			throw new WrappedException(e);
+			throw WrappedException.wrap(e);
 		}
 
 		final Client client = ClientBuilder.newClient();

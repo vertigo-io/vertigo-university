@@ -1,4 +1,4 @@
-package io.vertigo.samples.components.a_basics;
+package io.vertigo.samples.components.text;
 
 import java.nio.file.Path;
 

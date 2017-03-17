@@ -26,7 +26,7 @@ public class TwitterNotificationPlugin implements NotificationPlugin {
 			LOGGER.info("Successfully updated the status to [" + (status != null ? status.getText() : "") + "].");
 		} catch (final TwitterException e) {
 			LOGGER.error("Error while sending new status.", e);
-			throw new WrappedException(e);
+			throw WrappedException.wrap(e);
 		}
 	}
 
