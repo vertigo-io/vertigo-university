@@ -9,8 +9,8 @@
 		<version>0.9.4</version>
 	</parent>
 
-  	<artifactId>vertigo-sample-mail</artifactId>
-	<name>vertigo-sample-mail</name>
+  	<artifactId>vertigo-sample-twitter-exo</artifactId>
+	<name>vertigo-sample-twitter-exo</name>
 	<packaging>jar</packaging>
 
 	<dependencies>
@@ -30,18 +30,14 @@
 			<version>${vertigo.version}</version>
 		</dependency>
 		
-		
-		<!-- Pour le MailManager -->
+		<!-- Externals dependancies -->
+		<!-- Twitter4J -->
 		<dependency>
-			<groupId>io.vertigo</groupId>
-			<artifactId>vertigo-tempo-api</artifactId>
-			<version>${vertigo.version}</version>
+		    <groupId>org.twitter4j</groupId>
+		    <artifactId>twitter4j-core</artifactId>
+		    <version>4.0.5</version>
 		</dependency>
-		<dependency>
-			<groupId>io.vertigo</groupId>
-			<artifactId>vertigo-tempo-impl</artifactId>
-			<version>${vertigo.version}</version>
-		</dependency>
+
 	</dependencies>
   
 </project>

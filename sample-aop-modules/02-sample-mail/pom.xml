@@ -9,14 +9,10 @@
 		<version>0.9.4</version>
 	</parent>
 
-  	<artifactId>vertigo-sample-ifttt</artifactId>
-	<name>vertigo-sample-ifttt</name>
+  	<artifactId>vertigo-sample-mail-exo</artifactId>
+	<name>vertigo-sample-mail-exo</name>
 	<packaging>jar</packaging>
 
-	<properties>
-		<jersey2.version>2.19</jersey2.version>
-	</properties>
-	
 	<dependencies>
 		<dependency>
 			<groupId>io.vertigo</groupId>
@@ -34,19 +30,18 @@
 			<version>${vertigo.version}</version>
 		</dependency>
 		
-		<!-- Externals dependancies -->
-        <dependency>
-            <groupId>org.glassfish.jersey.core</groupId>
-            <artifactId>jersey-client</artifactId>
-            <version>${jersey2.version}</version>
-        </dependency>
-        
-        <dependency>
-		    <groupId>org.glassfish.jersey.media</groupId>
-		    <artifactId>jersey-media-json-jackson</artifactId>
-		    <version>${jersey2.version}</version>
+		
+		<!-- Pour le MailManager -->
+		<dependency>
+			<groupId>io.vertigo</groupId>
+			<artifactId>vertigo-tempo-api</artifactId>
+			<version>${vertigo.version}</version>
 		</dependency>
-        
+		<dependency>
+			<groupId>io.vertigo</groupId>
+			<artifactId>vertigo-tempo-impl</artifactId>
+			<version>${vertigo.version}</version>
+		</dependency>
 	</dependencies>
   
 </project>

@@ -9,10 +9,14 @@
 		<version>0.9.4</version>
 	</parent>
 
-  	<artifactId>vertigo-sample-twitter</artifactId>
-	<name>vertigo-sample-twitter</name>
+  	<artifactId>vertigo-sample-notifications-corrige</artifactId>
+	<name>vertigo-sample-notifications-corrige</name>
 	<packaging>jar</packaging>
 
+	<properties>
+		<jersey2.version>2.19</jersey2.version>
+	</properties>
+	
 	<dependencies>
 		<dependency>
 			<groupId>io.vertigo</groupId>
@@ -30,14 +34,40 @@
 			<version>${vertigo.version}</version>
 		</dependency>
 		
+		<!-- Vertigo Tempo (pour le MailManager) -->
+		<dependency>
+			<groupId>io.vertigo</groupId>
+			<artifactId>vertigo-tempo-api</artifactId>
+			<version>${vertigo.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.vertigo</groupId>
+			<artifactId>vertigo-tempo-impl</artifactId>
+			<version>${vertigo.version}</version>
+		</dependency>
+		
 		<!-- Externals dependancies -->
+		
 		<!-- Twitter4J -->
 		<dependency>
 		    <groupId>org.twitter4j</groupId>
 		    <artifactId>twitter4j-core</artifactId>
 		    <version>4.0.5</version>
 		</dependency>
-
+		
+		<!-- Jersey 2 -->
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>${jersey2.version}</version>
+        </dependency>
+        <dependency>
+		    <groupId>org.glassfish.jersey.media</groupId>
+		    <artifactId>jersey-media-json-jackson</artifactId>
+		    <version>${jersey2.version}</version>
+		</dependency>
+		
+        
 	</dependencies>
   
 </project>
