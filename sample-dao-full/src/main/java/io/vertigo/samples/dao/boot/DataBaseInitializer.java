@@ -10,12 +10,11 @@ import java.sql.SQLException;
 
 import javax.inject.Inject;
 
-import io.vertigo.core.resource.ResourceManager;
 import io.vertigo.core.component.ComponentInitializer;
+import io.vertigo.core.resource.ResourceManager;
 import io.vertigo.dynamo.database.SqlDataBaseManager;
 import io.vertigo.dynamo.database.connection.SqlConnection;
 import io.vertigo.dynamo.database.statement.SqlCallableStatement;
-import io.vertigo.dynamo.transaction.VTransactionManager;
 import io.vertigo.lang.WrappedException;
 
 /**
@@ -26,8 +25,6 @@ public class DataBaseInitializer implements ComponentInitializer {
 
 	@Inject
 	private ResourceManager resourceManager;
-	@Inject
-	private VTransactionManager transactionManager;
 	@Inject
 	private SqlDataBaseManager sqlDataBaseManager;
 
