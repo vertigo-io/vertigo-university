@@ -195,12 +195,6 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 			public Class<?> next() {
 				return it.next().getDtClass();
 			}
-
-			/** {@inheritDoc} */
-			@Override
-			public void remove() {
-				//unsupported
-			}
 		};
 	}
 }
