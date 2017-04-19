@@ -1,0 +1,93 @@
+package com.kleegroup.lollipop
+
+create Formatter FMT_DEFAULT {
+	className : "io.vertigo.dynamox.domain.formatter.FormatterDefault"
+}
+
+create Domain DO_IDENTITY {
+	dataType : Long
+	formatter : FMT_DEFAULT
+	storeType : "LONG"
+}
+
+create Domain DO_LABEL {
+	dataType : String
+	formatter : FMT_DEFAULT
+	storeType : "VARCHAR(300)"
+	indexType : "text_fr"
+}
+
+create Domain DO_HREF {
+	dataType : String
+	formatter : FMT_DEFAULT
+	storeType : "VARCHAR(250)"
+	indexType : "code"
+}
+
+create Domain DO_MULTI_VALUES {
+	dataType : String
+	formatter : FMT_DEFAULT
+	storeType : "VARCHAR(500)"
+	indexType : "multiple_code"
+}
+
+create Domain DO_CODE {
+	dataType : String
+	formatter : FMT_DEFAULT
+	storeType : "VARCHAR(5)"
+	indexType : "code"
+}
+
+create Domain DO_TEXT_NOT_TOKENIZED {
+	dataType : String
+	formatter : FMT_DEFAULT
+	storeType : "VARCHAR(250)"
+	indexType : "text_fr_not_tokenized"
+}
+
+create Domain DO_TEXT {
+	dataType : String
+	formatter : FMT_DEFAULT
+	storeType : "VARCHAR(10000)"
+	indexType : "text_fr"
+}
+
+create Domain DO_LABEL_SHORT {
+	dataType : String
+	formatter : FMT_DEFAULT
+	storeType : "VARCHAR(100)"
+	indexType : "code"
+}
+
+create Domain DO_YEAR {
+	dataType : Integer
+	formatter : FMT_DEFAULT
+	storeType : "INT"
+}
+
+create Domain DO_RUNTIME{
+	dataType : Integer
+	formatter : FMT_DEFAULT
+	storeType : "INT"
+}
+
+
+create Domain DO_ACTIVE {
+	dataType : Boolean
+	formatter : FMT_DEFAULT
+	storeType : "BOOLEAN"
+}
+
+create Domain DO_RATING {
+	dataType : Integer
+	formatter : FMT_DEFAULT
+	storeType : "INT"
+}
+
+create Domain DO_DATE {
+	dataType : String
+	formatter : FMT_DEFAULT
+	storeType : "VARCHAR(20)"
+	indexType : "code"
+}
+

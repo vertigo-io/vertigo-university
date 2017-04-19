@@ -1,0 +1,37 @@
+package io.vertigo.pandora.domain.persons
+
+
+/************************/
+/***** Index Person *****/
+/************************/
+
+create IndexDefinition IDX_PERSON {  
+  keyConcept : DT_PERSON
+  dtIndex : DT_PERSON_INDEX
+  loaderId : "PersonSearchLoader"
+}
+
+create FacetDefinition FCT_PERSON_ACTIVITY {  
+  dtDefinition:DT_PERSON_INDEX, fieldName:"ACTIVITY", label:"Par activité"
+}
+
+create FacetDefinition FCT_PERSON_NAME {  
+  dtDefinition:DT_PERSON_INDEX, fieldName:"FULL_NAME_SORT_ONLY", label:"Par Nom"
+  range R1 { filter:"FULL_NAME_SORT_ONLY:[* TO a]", label:"#"},
+  range R1 { filter:"FULL_NAME_SORT_ONLY:[a TO g]", label:"a-f"},
+  range R2 { filter:"FULL_NAME_SORT_ONLY:[g TO n]", label:"g-m"},
+  range R3 { filter:"FULL_NAME_SORT_ONLY:[n TO t]", label:"n-s"},
+  range R4 { filter:"FULL_NAME_SORT_ONLY:[t TO *]", label:"t-z"},
+}
+
+create FacetDefinition FCT_PERSON_SEX {  
+  dtDefinition:DT_PERSON_INDEX, fieldName:"SEX", label:"Par sexe"
+}
+
+create FacetedQueryDefinition QRY_PERSON {  
+  keyConcept : DT_PERSON
+  facets : [FCT_PERSON_ACTIVITY, FCT_PERSON_NAME, FCT_PERSON_SEX]
+  domainCriteria : DO_LABEL
+  listFilterBuilderClass : "io.vertigo.dynamox.search.DslListFilterBuilder"  
+  listFilterBuilderQuery : "_all:#+query*#"
+}

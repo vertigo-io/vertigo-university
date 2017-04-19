@@ -1,0 +1,22 @@
+<?xml version =	'1.0' encoding = 'ISO-8859-1'?>
+<!-- Utilisation -->
+<config>
+	<!-- Aspects declaration -->
+	<module name="aspects" >
+		<aspect class="io.vertigo.dynamo.impl.transaction.VTransactionAspect"/>
+	</module>
+	
+	<module name="dao" api="false">
+	    <component class="io.vertigo.demo.dao.administration.utilisateur.LoginDAO" />
+	    <component class="io.vertigo.demo.dao.administration.utilisateur.RoleDAO" />
+	    <component class="io.vertigo.demo.dao.administration.utilisateur.UtilisateurDAO" />
+	    <component class="io.vertigo.demo.dao.produit.ProduitDAO" />
+	</module>
+	
+	<module name="services">
+	    <component api="UtilisateurServices" class="io.vertigo.demo.services.administration.utilisateur.UtilisateurServicesImpl" />
+	    <component api="ProduitServices" class="io.vertigo.demo.services.produit.ProduitServicesImpl" />
+	    <component api="ReferentielServices" class="io.vertigo.demo.services.referentiel.ReferentielServicesImpl" />
+	</module>
+	
+ </config>

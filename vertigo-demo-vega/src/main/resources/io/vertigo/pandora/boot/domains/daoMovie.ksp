@@ -1,0 +1,41 @@
+package io.vertigo.pandora.dao.movies
+
+create Task TK_LOAD_MOVIE_INDEX {
+	className : "io.vertigo.dynamox.task.TaskEngineSelect",
+	request : "	select MOV_ID, TITLE, TITLE as TITLE_SORT_ONLY, PRODUCTION_YEAR, MOVIE_TYPE, POSTER,
+					KEYWORDS, ORIGINAL_TITLE, RUNTIME, SHORT_SYNOPSIS, SYNOPSIS, USER_RATING, PRESS_RATING,
+					(SELECT GROUP_CONCAT(FULL_NAME) FROM PERSON per join ACTOR_ROLE rol on rol.PER_ID = per.PER_ID and rol.mov_id = mov.mov_id) as ACTOR_ROLES,
+					(SELECT GROUP_CONCAT(FULL_NAME) FROM PERSON per join WRITERS rol on rol.PER_ID = per.PER_ID and rol.mov_id = mov.mov_id) as WRITERS,
+					(SELECT GROUP_CONCAT(FULL_NAME) FROM PERSON per join CAMERA rol on rol.PER_ID = per.PER_ID and rol.mov_id = mov.mov_id) as CAMERA,
+					(SELECT GROUP_CONCAT(FULL_NAME) FROM PERSON per join PRODUCERS rol on rol.PER_ID = per.PER_ID and rol.mov_id = mov.mov_id) as PRODUCERS,
+					(SELECT GROUP_CONCAT(FULL_NAME) FROM PERSON per join DIRECTORS rol on rol.PER_ID = per.PER_ID and rol.mov_id = mov.mov_id) as DIRECTORS
+				from MOVIE mov
+				where MOV_ID in (#DTC.ROWNUM.VALUE#);"
+	attribute DTC {domain : DO_DT_DUMMY_DTC, notNull:"true", inOut :"in",} 
+	attribute DTC_INDEX {domain : DO_DT_MOVIE_INDEX_DTC, notNull:"true", inOut :"out",} 
+}
+
+create Task TK_REMOVE_ALL_MOVIES {
+	className : "io.vertigo.dynamox.task.TaskEngineProc",
+	request : "delete from MOVIE"
+}
+
+create Task TK_IMPORT_MOVIES {
+	className : "io.vertigo.dynamox.task.TaskEngineProcBatch",
+	request : "insert into MOVIE (MOV_ID, KEYWORDS, MOVIE_TYPE, ORIGINAL_TITLE, POSTER, PRESS_RATING, PRODUCTION_YEAR, RUNTIME, SHORT_SYNOPSIS, SYNOPSIS, TITLE, TRAILER_HREF, TRAILER_NAME, USER_RATING) 
+						 values (#DTC.0.MOV_ID#,  #DTC.0.KEYWORDS#,  #DTC.0.MOVIE_TYPE#,  #DTC.0.ORIGINAL_TITLE#,  #DTC.0.POSTER#,  #DTC.0.PRESS_RATING#,  #DTC.0.PRODUCTION_YEAR#,  #DTC.0.RUNTIME#,  #DTC.0.SHORT_SYNOPSIS#,  #DTC.0.SYNOPSIS#,  #DTC.0.TITLE#,  #DTC.0.TRAILER_HREF#,  #DTC.0.TRAILER_NAME#,  #DTC.0.USER_RATING#);"
+	attribute DTC {domain : DO_DT_MOVIE_DTC, notNull:"true", inOut :"in",} 
+}
+
+create Task TK_REMOVE_ALL_ACTOR_ROLES {
+	className : "io.vertigo.dynamox.task.TaskEngineProc",
+	request : "delete from ACTOR_ROLE"
+}
+
+create Task TK_IMPORT_ACTOR_ROLES {
+	className : "io.vertigo.dynamox.task.TaskEngineProcBatch",
+	request : "insert into ACTOR_ROLE (ARO_ID, ROLE, PER_ID, MOV_ID) 
+	values ( nextval('SEQ_ACTOR_ROLE'),  #DTC.0.ROLE#,  #DTC.0.PER_ID#,  #DTC.0.MOV_ID#);"
+	attribute DTC {domain : DO_DT_ACTOR_ROLE_DTC, notNull:"true", inOut :"in",} 	
+}
+

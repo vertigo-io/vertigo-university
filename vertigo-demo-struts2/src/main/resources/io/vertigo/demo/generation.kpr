@@ -1,0 +1,9 @@
+execution.kpr
+
+services/administration/utilisateur/model.ksp
+services/produit/model.ksp
+services/client/model.ksp
+services/tutorial/model.ksp
+services/referentiel/model.ksp
+
+services/modelFileInfo.ksp

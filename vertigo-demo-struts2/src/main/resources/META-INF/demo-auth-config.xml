@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<autorisationConfig>
+
+	<!-- Opérations -->
+
+	<!-- Ressources -->
+	<!-- Les ressources sont contruites par un arbre /{type}/{name} -->
+	<!-- {type} possible : PAGE/{url}, DATA/{URI}, SERVICE/{class.method} -->
+	<!-- L'abrorescence tente de respecter /{type}/{name}/{pkId}/{id entité de ratachement niveau N}/{id entité de ratachement niveau N-1} ... -->
+	<!-- Exemple: /DATA/Declaration/profilId/departementId/regionId -->
+	<!-- Exemple: /PAGE/Accueil.do -->
+
+
+	<!-- ************** -->
+	<!-- Accueil -->
+	<!-- ************** -->
+	<!-- Page d'accueil -->
+	<permission description="Accès à la page d'accueil" id="PRM_ACCUEIL" filter="/PAGE/Accueil.do" operation="OP_READ" />
+
+	<!-- ****************** -->
+	<!-- Référentiel -->
+	<!-- ****************** -->
+	<!-- Page d'accueil -->
+	<permission description="Accès à la page du module Référentiel" id="PRM_REFERENTIEL_ACCUEIL" filter="/PAGE/AccueilReferentiel.do" operation="OP_READ" />
+
+
+	<!-- Liste des pays -->
+	<permission description="Accès à la liste des pays" id="PRM_REF_PAYS_LIST" filter="/PAGE/PaysList.do" operation="OP_READ" />
+
+	<!-- Détail d'un pays -->
+	<permission description="Accès à l'écran de détail d'un pays" id="PRM_REF_PAYS_DETAIL" filter="/PAGE/PaysDetail.do" operation="OP_READ" />
+	<permission description="Consultation d'un pays" id="PRM_REF_PAYS_READ" filter="/DATA/Pays.*" operation="OP_READ" />
+	<permission description="Création d'un pays" id="PRM_REF_PAYS_CREATE" filter="/DATA/Pays.*" operation="OP_CREATE" />
+	<permission description="Modification d'un pays" id="PRM_REF_PAYS_UPDATE" filter="/DATA/Pays.*" operation="OP_UPDATE" />
+
+	<!-- Liste des profils -->
+	<permission description="Accès à la liste des profils" id="PRM_REF_PROFIL_LIST" filter="/PAGE/ProfilList.do" operation="OP_READ" />
+
+	<!-- Détail d'un profil -->
+	<permission description="Accès à l'écran de détail d'un profil" id="PRM_REF_PROFIL_DETAIL" filter="/PAGE/ProfilDetail.do" operation="OP_READ" />
+	<permission description="Consultation d'un profil" id="PRM_REF_PROFIL_READ" filter="/DATA/Profil.*" operation="OP_READ" />
+	<permission description="Création d'un profil" id="PRM_REF_PROFIL_CREATE" filter="/DATA/Profil.*" operation="OP_CREATE" />
+	<permission description="Modification d'un profil" id="PRM_REF_PROFIL_UPDATE" filter="/DATA/Profil.*" operation="OP_UPDATE" />
+
+	<!-- Liste des utilisateurs -->
+	<permission description="Accès à l'écran de recherche des utilisateurs" id="PRM_REF_UTILISATEUR_LIST" filter="/PAGE/UtilisateurSearch.do" operation="OP_READ" />
+
+	<!-- Détail d'un utilisateur -->
+	<permission description="Accès à l'écran de détail d'un utilisateur" id="PRM_REF_UTILISATEUR_DETAIL" filter="/PAGE/UtilisateurDetail.do" operation="OP_READ" />
+	<permission description="Lecture d'un utilisateur" id="PRM_REF_UTILISATEUR_READ" filter="/DATA/Utilisateur.*" operation="OP_READ" />
+	<permission description="Création d'utilisateur" id="PRM_REF_UTILISATEUR_CREATE" filter="/DATA/Utilisateur.*" operation="OP_CREATE" />
+	<permission description="Modification d'utilisateur" id="PRM_REF_UTILISATEUR_UPDATE" filter="/DATA/Utilisateur.*" operation="OP_UPDATE" />
+
+	<!-- ****************** -->
+	<!-- Référentiel -->
+	<!-- ****************** -->
+
+	<!-- Pays -->
+	<role name="R_REF_PAY_CONS" description="Consultation de pays">
+		<permission ref="PRM_REF_PAYS_LIST" />
+		<permission ref="PRM_REF_PAYS_DETAIL" />
+		<permission ref="PRM_REF_PAYS_READ" />
+	</role>
+
+	<role name="R_REF_PAY_CREA" description="Création de pays">
+		<permission ref="PRM_REF_PAYS_CREATE" />
+	</role>
+
+	<role name="R_REF_PAY_MODIF" description="Modification de pays">
+		<permission ref="PRM_REF_PAYS_UPDATE" />
+	</role>
+
+	<!-- Profil -->
+	<role name="R_REF_PRF_CONS" description="Consultation de profil">
+		<permission ref="PRM_REF_PROFIL_LIST" />
+		<permission ref="PRM_REF_PROFIL_DETAIL" />
+		<permission ref="PRM_REF_PROFIL_READ" />
+	</role>
+
+	<role name="R_REF_PRF_CREA" description="Création de profil">
+		<permission ref="PRM_REF_PROFIL_CREATE" />
+	</role>
+
+	<role name="R_REF_PRF_MODIF" description="Modification de profil">
+		<permission ref="PRM_REF_PROFIL_UPDATE" />
+	</role>
+
+	<!-- Utilisateur -->
+	<role name="R_REF_UTI_CONS" description="Consultation d'utilisateur">
+		<permission ref="PRM_REF_UTILISATEUR_LIST" />
+		<permission ref="PRM_REF_UTILISATEUR_DETAIL" />
+		<permission ref="PRM_REF_UTILISATEUR_READ" />
+	</role>
+
+	<role name="R_REF_UTI_CREA" description="Création d'utilisateur">
+		<permission ref="PRM_REF_UTILISATEUR_CREATE" />
+	</role>
+
+	<role name="R_REF_UTI_MODIF" description="Modification d'utilisateur">
+		<permission ref="PRM_REF_UTILISATEUR_UPDATE" />
+	</role>
+
+</autorisationConfig>

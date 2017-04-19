@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE project>
+<!-- ====================================================================== -->
+<!-- Ant build file (http://ant.apache.org/) for Ant 1.6.2 or above.        -->
+<!-- ====================================================================== -->
+<project name="vertigo-demo-uistruts" default="generate-sources">
+	<!-- =================================================================== -->
+	<!-- Proprietes                                                          -->
+	<!-- =================================================================== -->
+
+	<property file="build-mda.properties" />
+
+	<property name="build.compiler" value="extJavac" />
+
+	<pathconvert property="class.path">
+		<path>
+			<fileset dir="./src/main/webapp/WEB-INF/lib">
+				<include name="*.jar" />
+			</fileset>
+		</path>
+	</pathconvert>
+	<property name="build.dir" location="./src/main/webapp/WEB-INF/classes" />
+	<property name="src.dir" location="./src/main/java" />
+
+	<!-- ====================================================================== -->
+	<!-- Generation des classes de tests                                        -->
+	<!-- ====================================================================== -->
+	<target name="generate-clean" description="Nettoyage des repertoires avant la generation du code">
+		<echo message="Suppression de .java et .properties du repertoire ${basedir}/${targetGenDir}" />
+		<delete dir="${targetGenDir}" includeemptydirs="true">
+			<include name="**/*.java" />
+			<include name="**/*.properties" />
+		</delete>
+	</target>
+
+	<target name="compile-whatisneeded" description="Compile les classes specifiques pour la generation de code">
+		<mkdir dir="${build.dir}" />
+		<javac srcdir="${src.dir}" destdir="${build.dir}" includes="**/*Formatter*.java,**/*Constraint*.java,**/*TaskEngine*.java" includeantruntime="false" classpath="${build.dir};${class.path}" debug="on" failonerror="false" />
+	</target>
+
+	<target name="generate-sources" depends="compile-whatisneeded" description="Generation des sources">
+		<echo message="build.dir: ${build.dir}" />
+		<echo message="class.path: ${class.path}" />
+
+		<echo message="Generation des classes Java" />
+		<!-- il faut fork="true" si execution avec "same JRE" dans eclipse -->
+		<java dir="." fork="true" maxmemory="128m" classname="io.vertigo.studio.tools.NameSpace2Java" failonerror="true" classpath="${build.dir};${class.path}">
+			<arg value="/build-mda.properties" />
+		</java>
+	</target>
+</project>

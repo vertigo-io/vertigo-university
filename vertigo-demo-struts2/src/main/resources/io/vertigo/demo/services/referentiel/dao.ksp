@@ -1,0 +1,11 @@
+package io.vertigo.demo.dao.referentiel
+
+create Task TK_LOAD_CODE_POSTAL_BY_DEP_ID {
+	className : "io.vertigo.dynamox.task.TaskEngineSelect"
+	request : "Select cpo.*
+               From	CODE_POSTAL cpo, VILLE vil
+               Where cpo.vil_id = vil.vil_id
+                  and vil.DEP_ID = #DEP_ID#"
+    attribute DEP_ID {domain : DO_IDENTIFIANT, 	notNull:"true", inOut :"in"}
+    attribute DTC_CODE_POSTAL {domain : DO_DT_CODE_POSTAL_DTC,	notNull:"true", inOut :"out"}
+}

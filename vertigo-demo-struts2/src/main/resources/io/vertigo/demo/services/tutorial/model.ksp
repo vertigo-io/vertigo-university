@@ -1,0 +1,68 @@
+package io.vertigo.demo.domain.tutorial
+
+create DtDefinition DT_COMMUNE {
+  key ID_INSEE {domain : DO_IDENTIFIANT, 	label:"ID INSEE", 			notNull:"true"} 
+  field CODE_POSTAL {domain :  DO_CODE_POSTAL, 	label:"Code postal", 		notNull:"true"}
+  field COMMUNE { domain : DO_LIBELLE, 		label:"Commune", 			notNull:"true"}
+  field DEPARTEMENT { domain : DO_LIBELLE, 		label:"D�partement", 		notNull:"true"}
+}
+
+create DtDefinition DT_TUTO_OBJECT {
+  key OBJ_ID {domain : DO_IDENTIFIANT, 		label:"ID Objet", 	notNull:"true",}, 
+  field CODE {domain :  DO_CODE, 	label:"Code produit", 		notNull:"true",},
+  field LIBELLE { domain : DO_LIBELLE, 	label:"Libell�", 		notNull:"true",},
+  field DESCRIPTION { domain : DO_TEXTE, 	label:"Description", 		notNull:"false",}, 
+  field PRIX { domain : DO_MONTANT, 	label:"Prix unitaire",  	notNull:"false",}, 
+  field SI_STOCK { domain : DO_OUI_NON, 	label:"En stock", 		notNull:"true",}, 
+  field POIDS { domain : DO_POIDS, 	label:"Poids unitaire", 	notNull:"true",}, 
+  field DATE_CREATION { domain : DO_DATE, 	label:"Date de cr�ation", notNull:"true",}, 
+  field DATE_MODIFICATION { domain : DO_DATE, 	label:"Date de modification", notNull:"false",}, 
+},
+
+create DtDefinition DT_TUTO_OBJECT_TYPE {
+  key TYP_ID {domain : DO_IDENTIFIANT, 		label:"ID Type", 	notNull:"true",}, 
+  field CODE {domain :  DO_CODE, 	label:"Code type", 		notNull:"true",},
+  field LIBELLE { domain : DO_LIBELLE, 	label:"Libell�", 		notNull:"true",},
+},
+
+create DtDefinition DT_TUTO_OBJECT_ETAT {
+  key ETA_ID {domain : DO_IDENTIFIANT, 		label:"ID etat", 	notNull:"true",}, 
+  field ETAT {domain :  DO_CODE, 	label:"Code Etat", 		notNull:"true",},
+  field LIBELLE { domain : DO_LIBELLE, 	label:"Libell�", 		notNull:"true",},
+},
+
+create Association A_OBJ_TYP {
+	dtDefinitionA : DT_TUTO_OBJECT_TYPE,
+	dtDefinitionB : DT_TUTO_OBJECT,
+
+	fkFieldName : "TYP_ID",
+
+	navigabilityA : "true",
+	navigabilityB : "false",
+
+	multiplicityA : "0..1",
+	multiplicityB : "0..*",
+	
+	roleA : "type",
+	labelA : "type",
+	roleB : "objet",
+	labelB : "objet",
+},
+
+create Association A_OBJ_ETA {
+	dtDefinitionA : DT_TUTO_OBJECT_ETAT,
+	dtDefinitionB : DT_TUTO_OBJECT,
+
+	fkFieldName : "ETA_ID",
+
+	navigabilityA : "true",
+	navigabilityB : "false",
+
+	multiplicityA : "0..1",
+	multiplicityB : "0..*",
+	
+	roleA : "etat",
+	labelA : "etat",
+	roleB : "objet",
+	labelB : "objet",
+},

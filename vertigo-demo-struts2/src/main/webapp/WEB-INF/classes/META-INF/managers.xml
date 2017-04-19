@@ -1,0 +1,90 @@
+<?xml version =	'1.0' encoding = 'ISO-8859-1'?>
+<!-- Utilisation -->
+<config>
+	<boot locales="fr_FR">
+		<plugin class="io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin" />
+		<plugin class="io.vertigo.vega.plugins.webservice.servlet.ServletResourceResolverPlugin" />
+		<plugin class="io.vertigo.core.plugins.param.xml.XmlParamPlugin">
+			<param name="url" value="${boot.configXmlInterne}" />
+		</plugin>
+		<plugin class="io.vertigo.vega.plugins.webservice.servlet.WebAppContextParamPlugin" />
+		<plugin class="io.vertigo.dynamo.plugins.environment.loaders.java.AnnotationLoaderPlugin" />
+		<plugin class="io.vertigo.dynamo.plugins.environment.loaders.kpr.KprLoaderPlugin">
+			<param name='encoding' value='utf8' />
+		</plugin>
+		<plugin class="io.vertigo.dynamo.plugins.environment.registries.domain.DomainDynamicRegistryPlugin" />
+		<plugin class="io.vertigo.dynamo.plugins.environment.registries.task.TaskDynamicRegistryPlugin" />
+		<plugin class="io.vertigo.persona.plugins.security.loaders.SecurityResourceLoaderPlugin" />
+		<plugin class="io.vertigo.dynamo.plugins.environment.registries.file.FileDynamicRegistryPlugin" />
+	</boot>
+	<module name="Demo">
+		<definitions>
+			<resource type="classes" path="io.vertigo.demo.domain.DtDefinitions" />
+			<resource type="kpr" path="io/vertigo/demo/execution.kpr" />
+			<resource type="security" path="/META-INF/demo-auth-config.xml" />
+		</definitions>
+	</module>
+	<module name="commons">
+		<component api="TaskManager" class="io.vertigo.dynamo.impl.task.TaskManagerImpl" />
+		<component api="ScriptManager" class="io.vertigo.commons.impl.script.ScriptManagerImpl">
+			<plugin class="io.vertigo.commons.plugins.script.janino.JaninoExpressionEvaluatorPlugin" />
+		</component>
+
+		<component api="AnalyticsManager" class="io.vertigo.commons.impl.analytics.AnalyticsManagerImpl" />
+
+		<component api="VSecurityManager" class="io.vertigo.persona.impl.security.VSecurityManagerImpl">
+			<param name="userSessionClassName" value="io.vertigo.demo.services.DemoUserSession" />
+		</component>
+
+		<component api="CodecManager" class="io.vertigo.commons.impl.codec.CodecManagerImpl" />
+		<component api="CacheManager" class="io.vertigo.commons.impl.cache.CacheManagerImpl">
+			<plugin class="io.vertigo.commons.plugins.cache.memory.MemoryCachePlugin">
+			</plugin>
+		</component>
+		<component api="VTransactionManager" class="io.vertigo.dynamo.impl.transaction.VTransactionManagerImpl" />
+		<component api="SqlDataBaseManager" class="io.vertigo.dynamo.impl.database.SqlDataBaseManagerImpl">
+			<plugin class="io.vertigo.dynamo.plugins.database.connection.datasource.DataSourceConnectionProviderPlugin">
+				<param name="source" value="java:/comp/env/jdbc/DataSource" />
+				<param name="classname" value="io.vertigo.dynamo.impl.database.vendor.h2.H2Database" />
+			</plugin>
+		</component>
+		<component api="KVStoreManager" class="io.vertigo.dynamo.impl.kvstore.KVStoreManagerImpl">
+			<plugin class="io.vertigo.dynamo.plugins.kvstore.berkeley.BerkeleyKVStorePlugin">
+				<param name="collections" value="VActionContext;TTL=43200" /> <!-- 12h -->
+				<param name="dbFilePath" value="${java.io.tmpdir}/ehcache/DemoVActionContext" />
+			</plugin>
+		</component>
+
+		<component api="CollectionsManager" class="io.vertigo.dynamo.impl.collections.CollectionsManagerImpl">
+			<plugin class="io.vertigo.dynamo.plugins.collections.lucene.LuceneIndexPlugin" />
+		</component>
+		<component api="FileManager" class="io.vertigo.dynamo.impl.file.FileManagerImpl" />
+
+		<component api="StoreManager" class="io.vertigo.dynamo.impl.store.StoreManagerImpl">
+			<plugin class="io.vertigo.dynamo.plugins.store.datastore.postgresql.PostgreSqlDataStorePlugin">
+				<param name="sequencePrefix" value="SEQ_" />
+			</plugin>
+			<plugin class="io.vertigo.demo.services.util.TutoMasterDataStoreStatic"/>
+			<plugin class="io.vertigo.demo.services.util.CommuneStorePlugin"/>
+			
+			<plugin class="io.vertigo.dynamo.plugins.store.filestore.db.DbFileStorePlugin">
+				<param name="storeDtName" value="DT_KX_FILE_INFO" />
+			</plugin>
+		</component>
+		<component api="JobManager" class="io.vertigo.tempo.impl.job.JobManagerImpl" />
+		<component api="SchedulerManager" class="io.vertigo.tempo.impl.scheduler.SchedulerManagerImpl" >
+			<plugin class="io.vertigo.tempo.plugins.scheduler.basic.BasicSchedulerPlugin"/>
+		</component>
+		<component api="EventBusManager" class="io.vertigo.commons.impl.eventbus.EventBusManagerImpl" />
+		<component api="DaemonManager" class="io.vertigo.commons.impl.daemon.DaemonManagerImpl" />
+
+	</module>
+
+	<init>
+		<initializer class="io.vertigo.demo.boot.initializer.LocaleManagerInitializer"/>
+		<initializer class="io.vertigo.demo.boot.initializer.PersistenceManagerInitializer"/>
+		<initializer class="io.vertigo.demo.boot.initializer.JobManagerInitializer"/>
+		<initializer class="io.vertigo.demo.boot.initializer.SecurityManagerInitializer"/>
+	</init>
+
+</config>

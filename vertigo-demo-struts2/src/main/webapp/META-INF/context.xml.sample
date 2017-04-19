@@ -1,0 +1,16 @@
+<?xml version='1.0' encoding='utf-8'?>
+<Context debug="9" reloadable="true">
+	<Resource name="jdbc/Datasource" 
+		auth="SERVLET" 
+		type="javax.sql.DataSource"
+		driverClassName="oracle.jdbc.driver.OracleDriver"
+		url="jdbc:oracle:thin:@[server]:1521:[instance]"
+		username="[user]"
+		password="[password]" 
+		maxActive="5" 
+		maxIdle="0" 
+		maxWait="10000"
+		removeAbandoned="true" 
+		logAbandoned="true" />
+</Context>
+

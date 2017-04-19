@@ -1,0 +1,5 @@
+domains/domains.ksp
+domains/searchMovie.ksp
+domains/searchPerson.ksp
+domains/daoMovie.ksp
+domains/daoPerson.ksp
