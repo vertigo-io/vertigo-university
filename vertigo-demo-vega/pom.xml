@@ -81,7 +81,7 @@
         </dependency>
          <dependency>
             <groupId>io.vertigo</groupId>
-            <artifactId>vertigo-x-notification</artifactId>
+            <artifactId>vertigo-notification</artifactId>
             <version>${vertigo.version}</version>
         </dependency> 
         
