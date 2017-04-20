@@ -3,7 +3,7 @@
 	<Resource name="jdbc/DataSource" auth="SERVLET" type="javax.sql.DataSource" 
 			factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
 		 driverClassName="org.h2.Driver" 
-		 url="jdbc:h2:mem:database" 
+		 url="jdbc:h2:d:\temp\database\demo-orchestra" 
 		 maxActive="30" maxIdle="0" maxWait="10000" removeAbandoned="true" logAbandoned="true"/>
 		 
 	<Parameter name="boot.nodeName" value="NODE_TEST_1" override="false" />	 
