@@ -75,17 +75,17 @@ public final class PandoraConfigurator {
 					.addModule(new DynamoFeatures()
 							.withStore()
 							.addDataStorePlugin(SqlDataStorePlugin.class,
-									Param.of("sequencePrefix", "SEQ_"))
+									Param.create("sequencePrefix", "SEQ_"))
 							.withSqlDataBase()
 							.addSqlConnectionProviderPlugin(C3p0ConnectionProviderPlugin.class,
-									Param.of("dataBaseClass", H2DataBase.class.getName()),
-									Param.of("jdbcDriver", Driver.class.getName()),
-									Param.of("jdbcUrl", "jdbc:h2:" + pandoraHome + "/data/demo"))
+									Param.create("dataBaseClass", H2DataBase.class.getName()),
+									Param.create("jdbcDriver", Driver.class.getName()),
+									Param.create("jdbcUrl", "jdbc:h2:" + pandoraHome + "/data/demo"))
 							.withSearch(ESEmbeddedSearchServicesPlugin.class,
-									Param.of("home", pandoraHome + "/search"), //usage d'url impropre
-									Param.of("envIndex", "test"),
-									Param.of("rowsPerQuery", "50"),
-									Param.of("config.file", "io/vertigo/pandora/boot/elasticsearch.yml"))
+									Param.create("home", pandoraHome + "/search"), //usage d'url impropre
+									Param.create("envIndex", "test"),
+									Param.create("rowsPerQuery", "50"),
+									Param.create("config.file", "io/vertigo/pandora/boot/elasticsearch.yml"))
 							/*.addComponent(KVStoreManager.class, KVStoreManagerImpl.class)
 							.beginPlugin(BerkeleyKVStorePlugin.class)
 								.addParam("collections", "allocine-movies,allocine-persons,allocine-queue-persons,allocine-queue-movies")
@@ -141,27 +141,27 @@ public final class PandoraConfigurator {
 			appConfigBuilder
 					.addModule(new ModuleConfigBuilder("studio")
 							.addComponent(MdaManager.class, MdaManagerImpl.class,
-									Param.of("projectPackageName", "io.vertigo.pandora"),
-									Param.of("targetGenDir", "src/main/"),
-									Param.of("encoding", "utf8"))
+									Param.create("projectPackageName", "io.vertigo.pandora"),
+									Param.create("targetGenDir", "src/main/"),
+									Param.create("encoding", "utf8"))
 							.addPlugin(DomainGeneratorPlugin.class,
-									Param.of("targetSubDir", "javagen"),
-									Param.of("generateDtResources", "false"),
-									Param.of("generateJpaAnnotations", "false"),
-									Param.of("generateDtDefinitions", "true"),
-									Param.of("generateDtObject", "true"))
+									Param.create("targetSubDir", "javagen"),
+									Param.create("generateDtResources", "false"),
+									Param.create("generateJpaAnnotations", "false"),
+									Param.create("generateDtDefinitions", "true"),
+									Param.create("generateDtObject", "true"))
 							.addPlugin(TaskGeneratorPlugin.class,
-									Param.of("targetSubDir", "javagen"))
+									Param.create("targetSubDir", "javagen"))
 							.addPlugin(SqlGeneratorPlugin.class,
-									Param.of("targetSubDir", "sqlgen"),
-									Param.of("generateDrop", "false"),
-									Param.of("baseCible", "H2"))
+									Param.create("targetSubDir", "sqlgen"),
+									Param.create("generateDrop", "false"),
+									Param.create("baseCible", "H2"))
 							.addPlugin(JSGeneratorPlugin.class,
-									Param.of("targetSubDir", "jsgen"),
-									Param.of("generateDtResourcesJS", "false"),
-									Param.of("generateJsDtDefinitions", "true"))
+									Param.create("targetSubDir", "jsgen"),
+									Param.create("generateDtResourcesJS", "false"),
+									Param.create("generateJsDtDefinitions", "true"))
 							.addPlugin(WsJsGeneratorPlugin.class,
-									Param.of("targetSubDir", "wsjsgen"))
+									Param.create("targetSubDir", "wsjsgen"))
 							.build())
 					.addModule(new ModuleConfigBuilder("myAppGen")
 							.addDefinitionProvider(new DefinitionProviderConfigBuilder(DynamoDefinitionProvider.class)
