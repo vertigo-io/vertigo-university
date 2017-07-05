@@ -1,7 +1,7 @@
 # vertigo-university
 =================
 
-Vertigo university is a up to date source of kwnoledge about vertigo.
+Vertigo university is an up to date source of kwnoledge about vertigo.
 It's composed of demo apps and code samples
 
 ## vertigo-demo-vega
