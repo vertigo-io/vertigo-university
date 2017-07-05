@@ -14,7 +14,7 @@ A demo application that uses vertigo-struts2 to build the HMI
 A simple application to use the vertigo-orchestra extensions as a standalone app
 
 ## vertigo-samples
-Samples are a bunch of code snippets and more to help you understand and use vertigo to build your app.
+Samples are a bunch of code snippets (and more) to help you understand and use vertigo to build your app.
 Each sample targets a specific topic and is composed of several exercices with solutions.
 
 Use the powerpoint and walkthrough documentation provided in each sample for more details.
