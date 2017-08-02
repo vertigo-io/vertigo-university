@@ -6,7 +6,7 @@ import org.apache.log4j.Logger;
 
 import io.vertigo.app.AutoCloseableApp;
 import io.vertigo.app.config.AppConfigBuilder;
-import io.vertigo.app.config.ModuleConfigBuilder;
+import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.core.component.di.injector.DIInjector;
 import io.vertigo.samples.dao.config.SampleConfigBuilder;
 import io.vertigo.samples.dao.dao.MovieDAO;
@@ -21,11 +21,10 @@ public class DaoSample {
 	public static void main(final String[] args) {
 		final AppConfigBuilder appConfigBuilder = SampleConfigBuilder.createAppConfigBuilder();
 		appConfigBuilder
-				.addModule(new ModuleConfigBuilder("DAO")
-						.withNoAPI()
+				.addModule(ModuleConfig.builder("DAO")
 						.addComponent(MovieDAO.class)
 						.build())
-				.addModule(new ModuleConfigBuilder("Services")
+				.addModule(ModuleConfig.builder("Services")
 						.addComponent(MovieServices.class, MovieServicesImpl.class)
 						.build());
 

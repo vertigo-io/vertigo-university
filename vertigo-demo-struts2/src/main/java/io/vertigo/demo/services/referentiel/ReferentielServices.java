@@ -2,9 +2,9 @@ package io.vertigo.demo.services.referentiel;
 
 import java.util.List;
 
+import io.vertigo.core.component.Component;
 import io.vertigo.demo.domain.referentiel.Famille;
 import io.vertigo.demo.domain.referentiel.OuiNonChoice;
-import io.vertigo.lang.Component;
 
 /**
  * Décrit les services associés à la gestion des utilisateurs.

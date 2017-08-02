@@ -2,9 +2,6 @@ package io.vertigo.mail;
 
 import io.vertigo.app.AutoCloseableApp;
 import io.vertigo.config.MailSampleConfigBuilder;
-import io.vertigo.tempo.mail.Mail;
-import io.vertigo.tempo.mail.MailBuilder;
-import io.vertigo.tempo.mail.MailManager;
 
 /**
  * Send a mail.

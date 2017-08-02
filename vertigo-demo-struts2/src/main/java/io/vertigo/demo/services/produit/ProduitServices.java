@@ -1,9 +1,9 @@
 package io.vertigo.demo.services.produit;
 
+import io.vertigo.core.component.Component;
 import io.vertigo.demo.domain.produit.Produit;
 import io.vertigo.demo.domain.produit.ProduitCritere;
 import io.vertigo.dynamo.domain.model.DtList;
-import io.vertigo.lang.Component;
 
 /**
  * Décrit les services associés à la gestion des produits.

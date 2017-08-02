@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<autorisationConfig>
+<authorisationConfig>
 
 	<!-- Opérations -->
 
@@ -101,4 +101,4 @@
 		<permission ref="PRM_REF_UTILISATEUR_UPDATE" />
 	</role>
 
-</autorisationConfig>
+</authorisationConfig>

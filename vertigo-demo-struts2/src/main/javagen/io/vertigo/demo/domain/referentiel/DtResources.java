@@ -1,6 +1,6 @@
 package io.vertigo.demo.domain.referentiel;
 
-import io.vertigo.lang.MessageKey;
+import io.vertigo.core.locale.MessageKey;
 
 /**
  * Attention cette classe est générée automatiquement !

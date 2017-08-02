@@ -5,10 +5,10 @@ import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
+import io.vertigo.commons.transaction.Transactional;
+import io.vertigo.dynamo.criteria.Criteria;
+import io.vertigo.dynamo.criteria.Criterions;
 import io.vertigo.dynamo.domain.model.DtList;
-import io.vertigo.dynamo.store.criteria.Criteria;
-import io.vertigo.dynamo.store.criteria.Criterions;
-import io.vertigo.dynamo.transaction.Transactional;
 import io.vertigo.lang.Assertion;
 import io.vertigo.samples.SamplesPAO;
 import io.vertigo.samples.dao.dao.ActorDAO;

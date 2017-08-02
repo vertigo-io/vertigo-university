@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import io.vertigo.lang.Component;
+import io.vertigo.core.component.Component;
 
 public final class Calculator3 implements Component {
 	/**

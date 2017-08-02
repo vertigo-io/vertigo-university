@@ -8,6 +8,8 @@ import javax.inject.Inject;
 
 import org.apache.log4j.Logger;
 
+import io.vertigo.commons.transaction.VTransactionManager;
+import io.vertigo.commons.transaction.VTransactionWritable;
 import io.vertigo.demo.domain.DtDefinitions;
 import io.vertigo.dynamo.collections.CollectionsManager;
 import io.vertigo.dynamo.domain.metamodel.DtDefinition;
@@ -18,15 +20,14 @@ import io.vertigo.dynamo.domain.model.DtObject;
 import io.vertigo.dynamo.domain.model.Entity;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.dynamo.store.StoreManager;
-import io.vertigo.dynamo.transaction.VTransactionManager;
-import io.vertigo.dynamo.transaction.VTransactionWritable;
+import io.vertigo.orchestra.services.execution.RunnableActivityEngine;
 
 /**
  * Job de rechargement du cache des MasterDataList.
  * @author npiedeloup
  * @version $Id: ReloadMdCacheJob.java,v 1.3 2014/02/07 16:48:27 npiedeloup Exp $
  */
-public class ReloadMdCacheJob implements Runnable {
+public class ReloadMdCacheJob extends RunnableActivityEngine {
 	private final Logger logger = Logger.getLogger(getClass());
 	@Inject
 	private StoreManager storeManager;

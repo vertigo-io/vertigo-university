@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>io.vertigo</groupId>
 		<artifactId>vertigo-samples</artifactId>
-		<version>0.9.4</version>
+		<version>1.0.0</version>
 	</parent>
 
   	<artifactId>vertigo-sample-mail-exo</artifactId>
@@ -34,12 +34,7 @@
 		<!-- Pour le MailManager -->
 		<dependency>
 			<groupId>io.vertigo</groupId>
-			<artifactId>vertigo-tempo-api</artifactId>
-			<version>${vertigo.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.vertigo</groupId>
-			<artifactId>vertigo-tempo-impl</artifactId>
+			<artifactId>vertigo-mail</artifactId>
 			<version>${vertigo.version}</version>
 		</dependency>
 	</dependencies>

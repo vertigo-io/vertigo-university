@@ -21,7 +21,7 @@ import javax.ws.rs.core.Response.Status.Family;
 
 import org.apache.log4j.Logger;
 
-import io.vertigo.lang.Activeable;
+import io.vertigo.core.component.Activeable;
 import io.vertigo.lang.Assertion;
 import io.vertigo.lang.VSystemException;
 import io.vertigo.lang.WrappedException;

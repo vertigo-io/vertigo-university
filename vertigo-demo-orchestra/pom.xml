@@ -15,14 +15,14 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
     	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<sonar.sources>src/main/java</sonar.sources>
-		<vertigo.version>0.9.4</vertigo.version>
+		<vertigo.version>1.0.0</vertigo.version>
   	</properties>
 
 
 	<dependencies>
 		<dependency>
 			<groupId>io.vertigo</groupId>
-			<artifactId>vertigo-orchestra-impl</artifactId>
+			<artifactId>vertigo-orchestra</artifactId>
 			<version>${vertigo.version}</version>
 		</dependency>
 		<dependency>

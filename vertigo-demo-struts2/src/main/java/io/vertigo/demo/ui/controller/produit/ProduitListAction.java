@@ -1,12 +1,12 @@
 package io.vertigo.demo.ui.controller.produit;
 
+import javax.inject.Inject;
+
 import io.vertigo.demo.domain.produit.Produit;
 import io.vertigo.demo.domain.produit.ProduitCritere;
 import io.vertigo.demo.services.produit.ProduitServices;
 import io.vertigo.demo.ui.controller.AbstractDemoActionSupport;
 import io.vertigo.struts2.core.ContextList;
-
-import javax.inject.Inject;
 
 /**
  * @author prahmoune

@@ -1,6 +1,6 @@
 package io.vertigo.notifications.impl;
 
-import io.vertigo.lang.Plugin;
+import io.vertigo.core.component.Plugin;
 
 /**
  * Plugin permettant de gérer l'envoi de notifications

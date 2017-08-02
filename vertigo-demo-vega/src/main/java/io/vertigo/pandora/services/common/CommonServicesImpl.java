@@ -17,6 +17,7 @@ import java.util.concurrent.ExecutionException;
 
 import javax.inject.Inject;
 
+import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.dynamo.collections.ListFilter;
 import io.vertigo.dynamo.collections.model.FacetedQueryResult;
 import io.vertigo.dynamo.collections.model.FacetedQueryResultMerger;
@@ -27,7 +28,6 @@ import io.vertigo.dynamo.domain.model.URI;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.dynamo.search.SearchManager;
 import io.vertigo.dynamo.search.model.SearchQuery;
-import io.vertigo.dynamo.transaction.Transactional;
 import io.vertigo.lang.WrappedException;
 import io.vertigo.pandora.dao.movies.MovieDAO;
 import io.vertigo.pandora.dao.movies.MoviesPAO;
@@ -65,10 +65,10 @@ public class CommonServicesImpl implements CommonServices {
 		final FacetedQueryResult<MovieIndex, SearchQuery> movies = movieServices.searchMovies(criteria, Collections.<ListFilter> emptyList(), dtListState, Optional.<String> empty());
 		final FacetedQueryResult<PersonIndex, SearchQuery> persons = personServices.searchPersons(criteria, Collections.<ListFilter> emptyList(), dtListState, Optional.<String> empty());
 		return new FacetedQueryResultMerger<DtObject, SearchQuery>()
-				.with(movies, "MOVIE", "SCOPE:MOVIE", "Films", null)
-				.with(persons, "PERSON", "SCOPE:PERSON", "Acteurs", null)
+				.add(movies, "MOVIE", "SCOPE:MOVIE", "Films", null)
+				.add(persons, "PERSON", "SCOPE:PERSON", "Acteurs", null)
 				.withFacet("FCT_SCOPE")
-				.build();
+				.toFacetedQueryResult();
 	}
 
 	@Override

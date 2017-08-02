@@ -6,7 +6,7 @@ import org.apache.log4j.Logger;
 
 import io.vertigo.app.AutoCloseableApp;
 import io.vertigo.app.config.AppConfigBuilder;
-import io.vertigo.app.config.ModuleConfigBuilder;
+import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.core.component.di.injector.DIInjector;
 import io.vertigo.samples.SamplesPAO;
 import io.vertigo.samples.dao.config.SampleConfigBuilder;
@@ -37,8 +37,7 @@ public class Level4 {
 
 	public static void main(final String[] args) {
 		final AppConfigBuilder appConfigBuilder = SampleConfigBuilder.createAppConfigBuilderWithoutCrebase();
-		appConfigBuilder.addModule(new ModuleConfigBuilder("mineDAO")
-				.withNoAPI()
+		appConfigBuilder.addModule(ModuleConfig.builder("mineDAO")
 				.addComponent(MyMovieDAO.class)
 				.addComponent(MyActorDAO.class)
 				.addComponent(MyRoleDAO.class)
@@ -50,7 +49,7 @@ public class Level4 {
 				.addComponent(ReprisePAO.class)
 				.addComponent(SamplesPAO.class)
 				.build())
-				.addModule(new ModuleConfigBuilder("mineServices")
+				.addModule(ModuleConfig.builder("mineServices")
 						.addComponent(MovieServices.class, MovieServicesImpl.class)
 						.addComponent(ActorServices.class, ActorServicesImpl.class)
 						.addComponent(RepriseServices.class, RepriseServicesImpl.class)

@@ -4,20 +4,17 @@
 	<boot locales="fr_FR">
 		<plugin class="io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin" />
 		<plugin class="io.vertigo.core.plugins.resource.url.URLResourceResolverPlugin" />
-		<plugin class="io.vertigo.dynamo.plugins.environment.loaders.poweramc.OOMLoaderPlugin" />
-		<plugin class="io.vertigo.dynamo.plugins.environment.loaders.kpr.KprLoaderPlugin">
-			<param name='encoding' value='utf8' />
-		</plugin>
-		<plugin class="io.vertigo.dynamo.plugins.environment.registries.domain.DomainDynamicRegistryPlugin" />
-		<plugin class="io.vertigo.dynamo.plugins.environment.registries.task.TaskDynamicRegistryPlugin" />
-		<plugin class="io.vertigo.dynamo.plugins.environment.registries.file.FileDynamicRegistryPlugin" />
-		<plugin class="io.vertigo.persona.plugins.security.loaders.SecurityResourceLoaderPlugin" />
 	</boot>
 	<module name="Demo">
 		<definitions>
-			<resource type="oom" path="file:./src/main/bdd/modele/demo.oom" />
-			<resource type="kpr" path="file:./src/main/resources/io/vertigo/demo/generation.kpr" />
-			<resource type="security" path="file:./src/main/resources/META-INF/demo-auth-config.xml" />
+			<provider class="io.vertigo.dynamo.plugins.environment.DynamoDefinitionProvider" >
+				<param name='encoding' value='utf8' />
+				<resource type="oom" path="file:./src/main/bdd/modele/demo.oom" />
+				<resource type="kpr" path="file:./src/main/resources/io/vertigo/demo/generation.kpr" />
+			</provider>
+			<provider class="io.vertigo.persona.plugins.security.loaders.SecurityDefinitionProvider" >
+				<resource type="security" path="file:./src/main/resources/META-INF/demo-auth-config.xml" />
+			</provider>
 		</definitions>
 	</module>
 
@@ -26,14 +23,14 @@
 			<param name="projectPackageName" value="io.vertigo.demo" />
 			<param name="targetGenDir" value="src/main/" />
 			<param name="encoding" value="utf8" />
-			<plugin class="io.vertigo.studio.plugins.mda.domain.DomainGeneratorPlugin">
+			<plugin class="io.vertigo.studio.plugins.mda.domain.java.DomainGeneratorPlugin">
 				<param name="targetSubDir" value="javagen" />
 				<param name="generateDtResources" value="true" />
 				<param name="generateDtDefinitions" value="true" />
 				<param name="generateDtObject" value="true" />
 				<param name="generateJpaAnnotations" value="false" />
 			</plugin>
-			<plugin class="io.vertigo.studio.plugins.mda.domain.SqlGeneratorPlugin">
+			<plugin class="io.vertigo.studio.plugins.mda.domain.sql.SqlGeneratorPlugin">
 				<param name="targetSubDir" value="sqlgen" />
 				<param name="baseCible" value="PostgreSql" />
 				<param name="generateDrop" value="false" />

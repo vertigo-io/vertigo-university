@@ -2,10 +2,9 @@ package io.vertigo.notifications.plugins.mail;
 
 import javax.inject.Inject;
 
+import io.vertigo.mail.Mail;
+import io.vertigo.mail.MailManager;
 import io.vertigo.notifications.impl.NotificationPlugin;
-import io.vertigo.tempo.mail.Mail;
-import io.vertigo.tempo.mail.MailBuilder;
-import io.vertigo.tempo.mail.MailManager;
 
 /**
  *
@@ -23,7 +22,7 @@ public class MailNotificationPlugin implements NotificationPlugin {
 
 	@Override
 	public void sendMessage(final String message) {
-		final Mail mail = new MailBuilder()
+		final Mail mail = Mail.builder()
 				.from(DT_MAIL)
 				.to(DT_MAIL)
 				.withSubject("Message from MailNotificationPlugin")

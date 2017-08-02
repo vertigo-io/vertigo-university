@@ -1,45 +1,72 @@
 package io.vertigo.demo.security;
 
+import io.vertigo.app.Home;
+import io.vertigo.persona.security.metamodel.Role;
+
 
 /**
- * Attention cette classe est g�n�r�e automatiquement !
+ * Warning. This class is generated automatically !
+ *
+ * Enum of the roles known by the vertigo application.
  */
 public enum Roles {
 
 	/**
-	 * R_REF_PAY_CONS.
+	 * Consultation de pays.
 	 */
 	R_REF_PAY_CONS,
 	/**
-	 * R_REF_PAY_CREA.
+	 * Création de pays.
 	 */
 	R_REF_PAY_CREA,
 	/**
-	 * R_REF_PAY_MODIF.
+	 * Modification de pays.
 	 */
 	R_REF_PAY_MODIF,
 	/**
-	 * R_REF_PRF_CONS.
+	 * Consultation de profil.
 	 */
 	R_REF_PRF_CONS,
 	/**
-	 * R_REF_PRF_CREA.
+	 * Création de profil.
 	 */
 	R_REF_PRF_CREA,
 	/**
-	 * R_REF_PRF_MODIF.
+	 * Modification de profil.
 	 */
 	R_REF_PRF_MODIF,
 	/**
-	 * R_REF_UTI_CONS.
+	 * Consultation d'utilisateur.
 	 */
 	R_REF_UTI_CONS,
 	/**
-	 * R_REF_UTI_CREA.
+	 * Création d'utilisateur.
 	 */
 	R_REF_UTI_CREA,
 	/**
-	 * R_REF_UTI_MODIF.
+	 * Modification d'utilisateur.
 	 */
-	R_REF_UTI_MODIF,
+	R_REF_UTI_MODIF;
+
+
+	/**
+	 * Get the associated role for Vertigo.
+	 *
+	 * @param code
+	 *            role code
+	 * @return role
+	 */
+	public static Role getSecurityRole(final String code) {
+		return Home.getApp().getDefinitionSpace().resolve(code, Role.class);
+	}
+
+	/**
+	 * Get the associated role for Vertigo.
+	 *
+	 * @return role
+	 */
+	public Role getSecurityRole() {
+		return getSecurityRole(name());
+	}
+
 }

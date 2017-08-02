@@ -4,6 +4,10 @@ import java.util.Arrays;
 
 import javax.inject.Inject;
 
+import io.vertigo.account.authentication.AuthenticationManager;
+import io.vertigo.account.identity.Account;
+import io.vertigo.account.identity.IdentityManager;
+import io.vertigo.account.impl.authentication.UsernameAuthenticationToken;
 import io.vertigo.dynamo.collections.model.FacetedQueryResult;
 import io.vertigo.dynamo.domain.model.DtObject;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
@@ -19,15 +23,14 @@ import io.vertigo.vega.webservice.stereotype.InnerBodyParam;
 import io.vertigo.vega.webservice.stereotype.POST;
 import io.vertigo.vega.webservice.stereotype.PathPrefix;
 import io.vertigo.vega.webservice.stereotype.QueryParam;
-import io.vertigo.x.account.services.Account;
-import io.vertigo.x.account.services.AccountBuilder;
-import io.vertigo.x.account.services.AccountServices;
 
 @PathPrefix("/common")
 public class CommonWebServices implements WebServices {
 
 	@Inject
-	private AccountServices accountServices;
+	private IdentityManager identityManager;
+	@Inject
+	private AuthenticationManager authenticationManager;
 	@Inject
 	private VSecurityManager securityManager;
 
@@ -63,13 +66,14 @@ public class CommonWebServices implements WebServices {
 	@AnonymousAccessAllowed
 	@GET("/login")
 	public void login() {
-		if (accountServices.getStore().getAccountsCount() == 0) {
-			final Account testAccount0 = new AccountBuilder("0").withDisplayName("John doe").withEmail("john.doe@yopmail.com").build();
-			accountServices.getStore().saveAccounts(Arrays.asList(testAccount0));
-			accountServices.login(testAccount0.getURI());
+		if (identityManager.getStore().getAccountsCount() == 0) {
+			final Account testAccount0 = Account.builder("0").withDisplayName("John doe").withEmail("john.doe@yopmail.com").build();
+			identityManager.getStore().saveAccounts(Arrays.asList(testAccount0));
+
+			authenticationManager.login(new UsernameAuthenticationToken(testAccount0.getURI().toString()));
 			securityManager.getCurrentUserSession().get().authenticate();
 		} else {
-			accountServices.login(DtObjectUtil.createURI(Account.class, "0"));
+			authenticationManager.login(new UsernameAuthenticationToken(DtObjectUtil.createURI(Account.class, "0").toString()));
 			securityManager.getCurrentUserSession().get().authenticate();
 		}
 	}

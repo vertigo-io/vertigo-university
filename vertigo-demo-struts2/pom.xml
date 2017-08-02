@@ -13,7 +13,7 @@
 		<maven.test.failure.ignore>true</maven.test.failure.ignore>
 		<maven.test.error.ignore>true</maven.test.error.ignore>
 		<project.build.sourceEncoding>utf8</project.build.sourceEncoding>
-		<vertigo.version>0.9.4</vertigo.version>
+		<vertigo.version>1.0.0</vertigo.version>
 	</properties>
 
 	<name>Vertigo-Demo-UiStruts</name>
@@ -42,17 +42,17 @@
 		</dependency>
 		<dependency>
 			<groupId>io.vertigo</groupId>
-			<artifactId>vertigo-persona-impl</artifactId>
+			<artifactId>vertigo-account-impl</artifactId>
 			<version>${vertigo.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.vertigo</groupId>
-			<artifactId>vertigo-quarto-impl</artifactId>
+			<artifactId>vertigo-quarto</artifactId>
 			<version>${vertigo.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.vertigo</groupId>
-			<artifactId>vertigo-tempo-impl</artifactId>
+			<artifactId>vertigo-orchestra</artifactId>
 			<version>${vertigo.version}</version>
 		</dependency>
 		<dependency>

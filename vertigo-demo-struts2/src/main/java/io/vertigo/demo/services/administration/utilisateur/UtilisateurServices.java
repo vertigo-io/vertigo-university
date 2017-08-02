@@ -1,11 +1,11 @@
 package io.vertigo.demo.services.administration.utilisateur;
 
+import io.vertigo.core.component.Component;
 import io.vertigo.demo.domain.administration.utilisateur.Role;
 import io.vertigo.demo.domain.administration.utilisateur.Utilisateur;
 import io.vertigo.demo.domain.administration.utilisateur.UtilisateurCritere;
 import io.vertigo.demo.domain.administration.utilisateur.UtilisateurLogin;
 import io.vertigo.dynamo.domain.model.DtList;
-import io.vertigo.lang.Component;
 
 /**
  * Décrit les services associés à la gestion des utilisateurs.

@@ -14,7 +14,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.test.failure.ignore>true</maven.test.failure.ignore>
 		<maven.test.error.ignore>true</maven.test.error.ignore>
-		<vertigo.version>0.9.4</vertigo.version>
+		<vertigo.version>1.0.0</vertigo.version>
 	</properties>
 
     <dependencies>		
@@ -45,7 +45,7 @@
         </dependency>
         <dependency>
             <groupId>io.vertigo</groupId>
-            <artifactId>vertigo-persona-api</artifactId>
+            <artifactId>vertigo-account-api</artifactId>
             <version>${vertigo.version}</version>
         </dependency>
         <dependency>
@@ -71,7 +71,7 @@
         </dependency>
         <dependency>
             <groupId>io.vertigo</groupId>
-            <artifactId>vertigo-persona-impl</artifactId>
+            <artifactId>vertigo-account-impl</artifactId>
             <version>${vertigo.version}</version>
         </dependency>
         <dependency>
@@ -81,7 +81,7 @@
         </dependency>
          <dependency>
             <groupId>io.vertigo</groupId>
-            <artifactId>vertigo-x-notification</artifactId>
+            <artifactId>vertigo-social</artifactId>
             <version>${vertigo.version}</version>
         </dependency> 
         

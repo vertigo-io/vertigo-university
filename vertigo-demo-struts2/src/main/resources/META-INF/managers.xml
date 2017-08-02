@@ -8,20 +8,17 @@
 			<param name="url" value="${boot.configXmlInterne}" />
 		</plugin>
 		<plugin class="io.vertigo.vega.plugins.webservice.servlet.WebAppContextParamPlugin" />
-		<plugin class="io.vertigo.dynamo.plugins.environment.loaders.java.AnnotationLoaderPlugin" />
-		<plugin class="io.vertigo.dynamo.plugins.environment.loaders.kpr.KprLoaderPlugin">
-			<param name='encoding' value='utf8' />
-		</plugin>
-		<plugin class="io.vertigo.dynamo.plugins.environment.registries.domain.DomainDynamicRegistryPlugin" />
-		<plugin class="io.vertigo.dynamo.plugins.environment.registries.task.TaskDynamicRegistryPlugin" />
-		<plugin class="io.vertigo.persona.plugins.security.loaders.SecurityResourceLoaderPlugin" />
-		<plugin class="io.vertigo.dynamo.plugins.environment.registries.file.FileDynamicRegistryPlugin" />
 	</boot>
 	<module name="Demo">
 		<definitions>
-			<resource type="classes" path="io.vertigo.demo.domain.DtDefinitions" />
-			<resource type="kpr" path="io/vertigo/demo/execution.kpr" />
-			<resource type="security" path="/META-INF/demo-auth-config.xml" />
+			<provider class="io.vertigo.dynamo.plugins.environment.DynamoDefinitionProvider" >
+				<param name='encoding' value='utf8' />
+				<resource type="classes" path="io.vertigo.demo.domain.DtDefinitions" />
+				<resource type="kpr" path="io/vertigo/demo/execution.kpr" />
+			</provider>
+			<provider class="io.vertigo.persona.plugins.security.loaders.SecurityDefinitionProvider" >
+				<resource type="security" path="/META-INF/demo-auth-config.xml" />
+			</provider>
 		</definitions>
 	</module>
 	<module name="commons">

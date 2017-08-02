@@ -1,6 +1,6 @@
 package io.vertigo.notifications;
 
-import io.vertigo.lang.Manager;
+import io.vertigo.core.component.Manager;
 
 /**
  *

@@ -1,6 +1,6 @@
 package io.vertigo.samples.aspects;
 
-import io.vertigo.lang.Component;
+import io.vertigo.core.component.Component;
 
 public class SpyManager implements Component {
 

@@ -1,12 +1,12 @@
 package io.vertigo.samples.components.b_plugins;
 
-import io.vertigo.lang.Component;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+
+import io.vertigo.core.component.Component;
 
 public class Calculator6 implements Component {
 	private final Map<String, OperationPlugin> operationDispatcher;

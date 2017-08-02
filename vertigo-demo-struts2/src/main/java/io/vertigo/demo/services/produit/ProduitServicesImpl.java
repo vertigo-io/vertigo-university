@@ -2,13 +2,13 @@ package io.vertigo.demo.services.produit;
 
 import javax.inject.Inject;
 
+import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.demo.dao.produit.ProduitDAO;
 import io.vertigo.demo.domain.produit.Produit;
 import io.vertigo.demo.domain.produit.ProduitCritere;
 import io.vertigo.demo.ui.util.SecurityUtil;
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.domain.model.DtListURIForCriteria;
-import io.vertigo.dynamo.transaction.Transactional;
 
 /**
  * Implémentation des services associés à la gestion des produits.

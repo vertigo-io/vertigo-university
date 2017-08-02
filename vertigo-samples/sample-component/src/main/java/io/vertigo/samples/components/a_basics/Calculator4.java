@@ -2,8 +2,8 @@ package io.vertigo.samples.components.a_basics;
 
 import java.util.stream.IntStream;
 
-import io.vertigo.lang.Activeable;
-import io.vertigo.lang.Component;
+import io.vertigo.core.component.Activeable;
+import io.vertigo.core.component.Component;
 
 public class Calculator4 implements Component, Activeable {
 

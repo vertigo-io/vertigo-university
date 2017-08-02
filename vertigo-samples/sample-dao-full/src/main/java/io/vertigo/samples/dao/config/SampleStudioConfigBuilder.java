@@ -1,9 +1,8 @@
 package io.vertigo.samples.dao.config;
 
 import io.vertigo.app.config.AppConfig;
-import io.vertigo.app.config.AppConfigBuilder;
-import io.vertigo.app.config.DefinitionProviderConfigBuilder;
-import io.vertigo.app.config.ModuleConfigBuilder;
+import io.vertigo.app.config.DefinitionProviderConfig;
+import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.commons.impl.CommonsFeatures;
 import io.vertigo.commons.plugins.cache.memory.MemoryCachePlugin;
 import io.vertigo.core.param.Param;
@@ -12,15 +11,15 @@ import io.vertigo.dynamo.impl.DynamoFeatures;
 import io.vertigo.dynamo.plugins.environment.DynamoDefinitionProvider;
 import io.vertigo.studio.impl.mda.MdaManagerImpl;
 import io.vertigo.studio.mda.MdaManager;
-import io.vertigo.studio.plugins.mda.domain.DomainGeneratorPlugin;
-import io.vertigo.studio.plugins.mda.domain.SqlGeneratorPlugin;
+import io.vertigo.studio.plugins.mda.domain.java.DomainGeneratorPlugin;
+import io.vertigo.studio.plugins.mda.domain.sql.SqlGeneratorPlugin;
 import io.vertigo.studio.plugins.mda.file.FileInfoGeneratorPlugin;
 import io.vertigo.studio.plugins.mda.task.TaskGeneratorPlugin;
 
 public class SampleStudioConfigBuilder {
 	public AppConfig build() {
 		// @formatter:off
-		return new AppConfigBuilder()
+		return  AppConfig.builder()
 				.beginBoot()
 				.withLocales("fr_FR")
 				.addPlugin(ClassPathResourceResolverPlugin.class)
@@ -31,33 +30,33 @@ public class SampleStudioConfigBuilder {
 						.build())
 				.addModule(new DynamoFeatures().build())
 				//----Definitions
-				.addModule(new ModuleConfigBuilder("ressources")
-						.addDefinitionProvider(new DefinitionProviderConfigBuilder(DynamoDefinitionProvider.class)
+				.addModule(ModuleConfig.builder("ressources")
+						.addDefinitionProvider(DefinitionProviderConfig.builder(DynamoDefinitionProvider.class)
 								.addDefinitionResource("kpr", "application.kpr")
 								.build())
 						.build())
 				// ---StudioFeature
-				.addModule(new ModuleConfigBuilder("studio")
+				.addModule( ModuleConfig.builder("studio")
 					.addComponent(MdaManager.class, MdaManagerImpl.class,
-							Param.create("targetGenDir", "src/main/javagen/"),
-							Param.create("encoding", "UTF-8"),
-							Param.create("projectPackageName", "io.vertigo.samples.dao"))
+							Param.of("targetGenDir", "src/main/javagen/"),
+							Param.of("encoding", "UTF-8"),
+							Param.of("projectPackageName", "io.vertigo.samples.dao"))
 
 					.addPlugin(DomainGeneratorPlugin.class,
-							Param.create("targetSubDir", "."),
-							Param.create("generateDtResources", "false"),
-							Param.create("generateDtDefinitions", "true"),
-							Param.create("generateDtObject", "true"),
-							Param.create("generateJpaAnnotations", "false"))
+							Param.of("targetSubDir", "."),
+							Param.of("generateDtResources", "false"),
+							Param.of("generateDtDefinitions", "true"),
+							Param.of("generateDtObject", "true"),
+							Param.of("generateJpaAnnotations", "false"))
 					.addPlugin(TaskGeneratorPlugin.class,
-						Param.create("targetSubDir", "."))
+						Param.of("targetSubDir", "."))
 
 					.addPlugin(FileInfoGeneratorPlugin.class,
-							Param.create("targetSubDir", "."))
+							Param.of("targetSubDir", "."))
 					.addPlugin(SqlGeneratorPlugin.class,
-							Param.create("targetSubDir", "sqlgen"),
-							Param.create("baseCible", "PostgreSql"),
-							Param.create("generateDrop", "false"))
+							Param.of("targetSubDir", "sqlgen"),
+							Param.of("baseCible", "PostgreSql"),
+							Param.of("generateDrop", "false"))
 					.build())
 				.build();
 		// @formatter:on

@@ -2,8 +2,8 @@ package io.vertigo.samples.vega.webservices;
 
 import java.util.Collection;
 
-import io.vertigo.samples.vega.domain.MovieDAO;
 import io.vertigo.samples.vega.domain.Movie;
+import io.vertigo.samples.vega.domain.MovieDAO;
 import io.vertigo.vega.webservice.WebServices;
 import io.vertigo.vega.webservice.stereotype.AnonymousAccessAllowed;
 import io.vertigo.vega.webservice.stereotype.DELETE;

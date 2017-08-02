@@ -1,5 +1,7 @@
 package io.vertigo.demo.ui.controller.administration.utilisateur;
 
+import javax.inject.Inject;
+
 import io.vertigo.demo.domain.administration.utilisateur.Utilisateur;
 import io.vertigo.demo.domain.administration.utilisateur.UtilisateurCritere;
 import io.vertigo.demo.services.administration.utilisateur.UtilisateurServices;
@@ -9,8 +11,6 @@ import io.vertigo.struts2.core.AbstractActionSupport;
 import io.vertigo.struts2.core.ContextForm;
 import io.vertigo.struts2.core.ContextList;
 import io.vertigo.struts2.core.ContextRef;
-
-import javax.inject.Inject;
 
 /**
  * @author npiedeloup

@@ -1,6 +1,6 @@
 package io.vertigo.demo.domain.administration.utilisateur;
 
-import io.vertigo.lang.MessageKey;
+import io.vertigo.core.locale.MessageKey;
 
 /**
  * Attention cette classe est générée automatiquement !
@@ -91,10 +91,6 @@ public enum DtResources implements MessageKey {
 	 * Auteur de dernière modification.
 	 */
 	FLD_UTILISATEUR$AUTEUR_DERNIERE_MODIF,
-	/**
-	 * Prénom Nom.
-	 */
-	FLD_UTILISATEUR$PRENOM_NOM,
 
 	/***********************************************************
 	/** UtilisateurCritere.

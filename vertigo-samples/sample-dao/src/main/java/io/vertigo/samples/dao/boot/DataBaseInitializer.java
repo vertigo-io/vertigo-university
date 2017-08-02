@@ -7,14 +7,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
+import java.util.Collections;
 
 import javax.inject.Inject;
 
 import io.vertigo.core.component.ComponentInitializer;
 import io.vertigo.core.resource.ResourceManager;
-import io.vertigo.dynamo.database.SqlDataBaseManager;
-import io.vertigo.dynamo.database.connection.SqlConnection;
-import io.vertigo.dynamo.database.statement.SqlCallableStatement;
+import io.vertigo.database.sql.SqlDataBaseManager;
+import io.vertigo.database.sql.connection.SqlConnection;
 import io.vertigo.lang.WrappedException;
 
 /**
@@ -36,11 +36,7 @@ public class DataBaseInitializer implements ComponentInitializer {
 
 	private void createDataBase() {
 		SqlConnection connection;
-		try {
-			connection = sqlDataBaseManager.getConnectionProvider(SqlDataBaseManager.MAIN_CONNECTION_PROVIDER_NAME).obtainConnection();
-		} catch (final SQLException e) {
-			throw WrappedException.wrap(e, "Can't open connection");
-		}
+		connection = sqlDataBaseManager.getConnectionProvider(SqlDataBaseManager.MAIN_CONNECTION_PROVIDER_NAME).obtainConnection();
 		execSqlScript(connection, "sqlgen/crebas.sql");
 	}
 
@@ -55,7 +51,7 @@ public class DataBaseInitializer implements ComponentInitializer {
 					crebaseSql.append(adaptedInputLine).append('\n');
 				}
 				if (inputLine.trim().endsWith(";")) {
-					execCallableStatement(connection, sqlDataBaseManager, crebaseSql.toString());
+					execPreparedStatement(connection, sqlDataBaseManager, crebaseSql.toString());
 					crebaseSql.setLength(0);
 				}
 			}
@@ -65,10 +61,10 @@ public class DataBaseInitializer implements ComponentInitializer {
 		}
 	}
 
-	private static void execCallableStatement(final SqlConnection connection, final SqlDataBaseManager sqlDataBaseManager, final String sql) {
-		try (final SqlCallableStatement callableStatement = sqlDataBaseManager.createCallableStatement(connection, sql)) {
-			callableStatement.init();
-			callableStatement.executeUpdate();
+	private static void execPreparedStatement(final SqlConnection connection, final SqlDataBaseManager sqlDataBaseManager, final String sql) {
+		try {
+			sqlDataBaseManager.createPreparedStatement(connection)
+					.executeUpdate(sql, Collections.emptyList());
 		} catch (final SQLException e) {
 			throw WrappedException.wrap(e, "Can't exec command {0}", sql);
 		}

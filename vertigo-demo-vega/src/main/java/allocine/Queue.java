@@ -1,9 +1,9 @@
 package allocine;
 
+import java.util.List;
+
 import io.vertigo.dynamo.kvstore.KVStoreManager;
 import io.vertigo.lang.Assertion;
-
-import java.util.List;
 
 public final class Queue {
 	private final KVStoreManager kvStoreManager;

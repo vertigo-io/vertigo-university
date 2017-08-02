@@ -1,6 +1,6 @@
 package io.vertigo.demo.ui.util;
 
-import io.vertigo.lang.MessageText;
+import io.vertigo.core.locale.MessageText;
 import io.vertigo.persona.security.VSecurityManager;
 import io.vertigo.struts2.core.ComponentRef;
 import io.vertigo.vega.webservice.exception.VSecurityException;

@@ -4,8 +4,9 @@ import javax.inject.Inject;
 
 import io.vertigo.app.AutoCloseableApp;
 import io.vertigo.app.config.AppConfigBuilder;
-import io.vertigo.app.config.ModuleConfigBuilder;
+import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.core.component.di.injector.DIInjector;
+import io.vertigo.samples.SamplesPAO;
 import io.vertigo.samples.dao.config.SampleConfigBuilder;
 import io.vertigo.samples.dao.dao.ActorDAO;
 import io.vertigo.samples.dao.dao.CountryDAO;
@@ -31,8 +32,7 @@ public class Level2 {
 
 	public static void main(final String[] args) {
 		final AppConfigBuilder appConfigBuilder = SampleConfigBuilder.createAppConfigBuilderWithoutCrebase();
-		appConfigBuilder.addModule(new ModuleConfigBuilder("mineDAO")
-				.withNoAPI()
+		appConfigBuilder.addModule(ModuleConfig.builder("mineDAO")
 				.addComponent(MyMovieDAO.class)
 				.addComponent(MyActorDAO.class)
 				.addComponent(MyRoleDAO.class)
@@ -41,9 +41,10 @@ public class Level2 {
 				.addComponent(ActorDAO.class)
 				.addComponent(RoleDAO.class)
 				.addComponent(CountryDAO.class)
+				.addComponent(SamplesPAO.class)
 				.addComponent(ReprisePAO.class)
 				.build())
-				.addModule(new ModuleConfigBuilder("mineServices")
+				.addModule(ModuleConfig.builder("mineServices")
 						.addComponent(MovieServices.class, MovieServicesImpl.class)
 						.addComponent(ActorServices.class, ActorServicesImpl.class)
 						.addComponent(RepriseServices.class, RepriseServicesImpl.class)

@@ -1,10 +1,10 @@
 package io.vertigo.demo.ui.controller;
 
+import org.apache.struts2.ServletActionContext;
+
 import io.vertigo.struts2.core.AbstractActionSupport;
 import io.vertigo.struts2.impl.MethodUtil;
 import io.vertigo.struts2.impl.servlet.RequestContainerWrapper;
-
-import org.apache.struts2.ServletActionContext;
 
 /**
  * Super class des Actions struts Demo.

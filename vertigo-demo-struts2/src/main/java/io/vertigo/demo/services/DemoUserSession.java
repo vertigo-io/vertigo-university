@@ -1,21 +1,21 @@
 package io.vertigo.demo.services;
 
-import io.vertigo.demo.domain.administration.utilisateur.Utilisateur;
-import io.vertigo.persona.security.UserSession;
-
 import java.util.Locale;
+
+import io.vertigo.demo.domain.administration.utilisateur.Utilisateur;
+import io.vertigo.persona.security.PersonaUserSession;
 
 /**
  * Session d'un utilisateur<br>
  * Un utilisateur poss�de une liste de profils correspondant � des r�les au sein d'une ou plusieurs entit�s.<br>
  * On consid�re que toute session utilisateur cr��e implique que l'utilisateur est authentifi�.
- * 
+ *
  * @author cgodard
  * @version $Id: DemoUserSession.java,v 1.2 2014/07/07 16:40:26 pchretien Exp $
  */
-public final class DemoUserSession extends UserSession {
+public final class DemoUserSession extends PersonaUserSession {
 
-	/** 
+	/**
 	 * Serial Version.
 	 */
 	private static final long serialVersionUID = 2497388902473962429L;
@@ -43,7 +43,7 @@ public final class DemoUserSession extends UserSession {
 
 	/**
 	 * R�cup�re la valeur de l'attribut utilisateur.
-	 * 
+	 *
 	 * @return valeur de l'attribut utilisateur
 	 */
 	public Utilisateur getUtilisateur() {
@@ -52,7 +52,7 @@ public final class DemoUserSession extends UserSession {
 
 	/**
 	 * Initialise l'attribut utilisateur.
-	 * 
+	 *
 	 * @param utilisateur valeur d'initialisation de l'attribut utilisateur
 	 */
 	public void setUtilisateur(final Utilisateur utilisateur) {

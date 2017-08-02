@@ -2,6 +2,7 @@ package io.vertigo.demo.services.util;
 
 import java.lang.reflect.Method;
 
+import io.vertigo.dynamo.criteria.Criteria;
 import io.vertigo.dynamo.domain.metamodel.DtDefinition;
 import io.vertigo.dynamo.domain.metamodel.association.DtListURIForNNAssociation;
 import io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation;
@@ -10,7 +11,6 @@ import io.vertigo.dynamo.domain.model.DtListURIForCriteria;
 import io.vertigo.dynamo.domain.model.Entity;
 import io.vertigo.dynamo.domain.model.URI;
 import io.vertigo.dynamo.impl.store.datastore.DataStorePlugin;
-import io.vertigo.dynamo.store.criteria.Criteria;
 import io.vertigo.lang.Assertion;
 import io.vertigo.util.ClassUtil;
 
@@ -101,7 +101,7 @@ public class AbstractStaticMDDataStorePlugin implements DataStorePlugin {
 
 	/** {@inheritDoc} */
 	@Override
-	public void create(final DtDefinition dtDefinition, final Entity dto) {
+	public Entity create(final DtDefinition dtDefinition, final Entity dto) {
 		throw new UnsupportedOperationException();
 	}
 

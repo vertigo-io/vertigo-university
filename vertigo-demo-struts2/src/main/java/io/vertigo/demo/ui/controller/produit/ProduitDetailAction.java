@@ -1,5 +1,7 @@
 package io.vertigo.demo.ui.controller.produit;
 
+import java.util.Optional;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -7,7 +9,6 @@ import io.vertigo.demo.domain.produit.Produit;
 import io.vertigo.demo.domain.referentiel.Famille;
 import io.vertigo.demo.services.produit.ProduitServices;
 import io.vertigo.demo.ui.controller.AbstractDemoActionSupport;
-import java.util.Optional;
 import io.vertigo.struts2.core.ContextForm;
 import io.vertigo.struts2.core.ContextMdl;
 

@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.demo.domain.referentiel.Famille;
 import io.vertigo.demo.domain.referentiel.OuiNonChoice;
 import io.vertigo.dynamo.domain.model.DtList;
@@ -13,7 +14,6 @@ import io.vertigo.dynamo.domain.model.DtListURIForMasterData;
 import io.vertigo.dynamo.domain.model.URI;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.dynamo.store.StoreManager;
-import io.vertigo.dynamo.transaction.Transactional;
 
 /**
  * services associés à la gestion des produits.

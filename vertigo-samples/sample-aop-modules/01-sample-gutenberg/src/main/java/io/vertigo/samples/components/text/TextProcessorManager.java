@@ -2,7 +2,7 @@ package io.vertigo.samples.components.text;
 
 import java.nio.file.Path;
 
-import io.vertigo.lang.Manager;
+import io.vertigo.core.component.Manager;
 
 /**
  *

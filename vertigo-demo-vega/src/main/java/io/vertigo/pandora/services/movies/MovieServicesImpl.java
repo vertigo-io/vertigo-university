@@ -7,6 +7,7 @@ import java.util.Optional;
 import javax.inject.Inject;
 
 import io.vertigo.app.Home;
+import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.dynamo.collections.ListFilter;
 import io.vertigo.dynamo.collections.metamodel.FacetDefinition;
 import io.vertigo.dynamo.collections.model.FacetedQueryResult;
@@ -16,7 +17,6 @@ import io.vertigo.dynamo.domain.model.Fragment;
 import io.vertigo.dynamo.domain.model.URI;
 import io.vertigo.dynamo.search.model.SearchQuery;
 import io.vertigo.dynamo.search.model.SearchQueryBuilder;
-import io.vertigo.dynamo.transaction.Transactional;
 import io.vertigo.pandora.dao.movies.MovieDAO;
 import io.vertigo.pandora.dao.movies.MoviesPAO;
 import io.vertigo.pandora.dao.persons.ActorRoleDAO;
