@@ -14,7 +14,7 @@
 	</context-param>
 	<context-param>
 		<param-name>boot.db.classname</param-name>
-		<param-value>io.vertigo.dynamo.impl.database.vendor.h2.H2DataBase</param-value>
+		<param-value>io.vertigo.database.impl.sql.vendor.h2.H2DataBase</param-value>
 	</context-param>
 
 	<listener>

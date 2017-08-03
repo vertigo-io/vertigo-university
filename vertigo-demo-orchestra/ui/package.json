@@ -42,8 +42,6 @@
                 "LOCAL_FOCUS": false,
                 "API_ROOT": "'./api/orchestra/'",
                 "SOURCE_MAPS": false,
-        				"DEV": false,
-        				"NODE_ENV" : "production",
                 "BABEL_ENV": "production",
                 "BASE_URL": "/",
                 "OUTPUT_PUBLIC_PATH" : "./"
