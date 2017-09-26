@@ -15,6 +15,8 @@ public final class Dummy implements DtObject {
 
 	private Long value;
 
+
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'value'.
@@ -33,8 +35,7 @@ public final class Dummy implements DtObject {
 	public void setValue(final Long value) {
 		this.value = value;
 	}
-
-
+	
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

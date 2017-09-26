@@ -2,11 +2,11 @@ package io.vertigo.demo.dao.commande;
 
 import javax.inject.Inject;
 
-import io.vertigo.demo.domain.commande.LigneCommande;
 import io.vertigo.dynamo.impl.store.util.DAO;
 import io.vertigo.dynamo.store.StoreManager;
 import io.vertigo.dynamo.store.StoreServices;
 import io.vertigo.dynamo.task.TaskManager;
+import io.vertigo.demo.domain.commande.LigneCommande;
 import io.vertigo.lang.Generated;
 
 /**

@@ -4,7 +4,7 @@
 
 	<groupId>io.vertigo</groupId>
 	<artifactId>vertigo-demo-struts2</artifactId>
-	<version>0.1.0-SNAPSHOT</version>
+	<version>0.2.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<properties>
 		<compileSource>1.8</compileSource>
@@ -13,7 +13,7 @@
 		<maven.test.failure.ignore>true</maven.test.failure.ignore>
 		<maven.test.error.ignore>true</maven.test.error.ignore>
 		<project.build.sourceEncoding>utf8</project.build.sourceEncoding>
-		<vertigo.version>1.0.0</vertigo.version>
+		<vertigo.version>1.1.0-SNAPSHOT</vertigo.version>
 	</properties>
 
 	<name>Vertigo-Demo-UiStruts</name>

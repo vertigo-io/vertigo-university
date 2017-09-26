@@ -44,7 +44,7 @@ public class MovieWebServices implements WebServices {
 	public FacetedQueryResult search(@InnerBodyParam("criteria") final String criteria,
 			@InnerBodyParam("facets") final UiSelectedFacets uiSelectedFacets,
 			@InnerBodyParam("group") final Optional<String> clusteringFacetName, final UiListState uiListState) {
-		return movieServices.searchMovies(criteria, uiSelectedFacets.toListFilters(), uiListState.toDtListState(),
+		return movieServices.searchMovies(criteria, uiSelectedFacets.toSelectedFacetValues(), uiListState.toDtListState(),
 				clusteringFacetName);
 	}
 

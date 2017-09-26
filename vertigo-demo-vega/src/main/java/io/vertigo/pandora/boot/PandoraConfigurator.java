@@ -3,8 +3,7 @@ package io.vertigo.pandora.boot;
 import org.h2.Driver;
 
 import io.vertigo.account.AccountFeatures;
-import io.vertigo.account.plugins.authentication.mock.MockAuthenticatingRealmPlugin;
-import io.vertigo.account.plugins.identity.memory.MemoryAccountStorePlugin;
+import io.vertigo.account.plugins.authentication.mock.MockAuthenticatingPlugin;
 import io.vertigo.app.config.AppConfig;
 import io.vertigo.app.config.AppConfigBuilder;
 import io.vertigo.app.config.DefinitionProviderConfig;
@@ -15,6 +14,7 @@ import io.vertigo.commons.plugins.cache.memory.MemoryCachePlugin;
 import io.vertigo.core.param.Param;
 import io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin;
 import io.vertigo.core.plugins.resource.local.LocalResourceResolverPlugin;
+import io.vertigo.database.DatabaseFeatures;
 import io.vertigo.database.impl.sql.vendor.h2.H2DataBase;
 import io.vertigo.database.plugins.sql.connection.c3p0.C3p0ConnectionProviderPlugin;
 import io.vertigo.dynamo.impl.DynamoFeatures;
@@ -76,11 +76,6 @@ public final class PandoraConfigurator {
 							.withStore()
 							.addDataStorePlugin(SqlDataStorePlugin.class,
 									Param.of("sequencePrefix", "SEQ_"))
-							.withSqlDataBase()
-							.addSqlConnectionProviderPlugin(C3p0ConnectionProviderPlugin.class,
-									Param.of("dataBaseClass", H2DataBase.class.getName()),
-									Param.of("jdbcDriver", Driver.class.getName()),
-									Param.of("jdbcUrl", "jdbc:h2:" + pandoraHome + "/data/demo"))
 							.withSearch(ESEmbeddedSearchServicesPlugin.class,
 									Param.of("home", pandoraHome + "/search"), //usage d'url impropre
 									Param.of("envIndex", "test"),
@@ -92,6 +87,12 @@ public final class PandoraConfigurator {
 								.addParam("dbFilePath", pandoraHome+"/data")
 							.endPlugin()*/
 							.build())
+					.addModule(new DatabaseFeatures()
+							.addSqlConnectionProviderPlugin(C3p0ConnectionProviderPlugin.class,
+									Param.of("dataBaseClass", H2DataBase.class.getName()),
+									Param.of("jdbcDriver", Driver.class.getName()),
+									Param.of("jdbcUrl", "jdbc:h2:" + pandoraHome + "/data/demo"))
+							.build())
 					.addModule(new VegaFeatures()
 							.withSecurity()
 							//.withTokens("vega")
@@ -99,8 +100,7 @@ public final class PandoraConfigurator {
 							.withEmbeddedServer(pandoraPort)
 							.build())
 					.addModule(new AccountFeatures()
-							.withAccountStorePlugin(MemoryAccountStorePlugin.class)
-							.withAuthentificationRealm(MockAuthenticatingRealmPlugin.class)
+							.withAuthentication(MockAuthenticatingPlugin.class)
 							.build())
 					.addModule(new SocialFeatures()
 							.withMemoryNotifications()

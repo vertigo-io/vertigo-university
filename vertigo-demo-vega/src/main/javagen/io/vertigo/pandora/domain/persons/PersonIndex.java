@@ -14,16 +14,27 @@ public final class PersonIndex implements DtObject {
 	private static final long serialVersionUID = 1L;
 
 	private Long perId;
+
 	private String fullName;
+
 	private String fullNameSortOnly;
+
 	private String biography;
+
 	private String sex;
+
 	private String photoUrl;
+
 	private String birthDate;
+
 	private String birthPlace;
+
 	private String activity;
+
 	private String movies;
 
+
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'id'.
@@ -42,7 +53,8 @@ public final class PersonIndex implements DtObject {
 	public void setPerId(final Long perId) {
 		this.perId = perId;
 	}
-
+	
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Nom'.
@@ -61,7 +73,8 @@ public final class PersonIndex implements DtObject {
 	public void setFullName(final String fullName) {
 		this.fullName = fullName;
 	}
-
+	
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Nom'.
@@ -80,7 +93,8 @@ public final class PersonIndex implements DtObject {
 	public void setFullNameSortOnly(final String fullNameSortOnly) {
 		this.fullNameSortOnly = fullNameSortOnly;
 	}
-
+	
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Biographie'.
@@ -99,7 +113,8 @@ public final class PersonIndex implements DtObject {
 	public void setBiography(final String biography) {
 		this.biography = biography;
 	}
-
+	
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Sexe'.
@@ -118,7 +133,8 @@ public final class PersonIndex implements DtObject {
 	public void setSex(final String sex) {
 		this.sex = sex;
 	}
-
+	
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'photo'.
@@ -137,7 +153,8 @@ public final class PersonIndex implements DtObject {
 	public void setPhotoUrl(final String photoUrl) {
 		this.photoUrl = photoUrl;
 	}
-
+	
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Date de naissance'.
@@ -156,7 +173,8 @@ public final class PersonIndex implements DtObject {
 	public void setBirthDate(final String birthDate) {
 		this.birthDate = birthDate;
 	}
-
+	
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Lieu de naissance'.
@@ -175,7 +193,8 @@ public final class PersonIndex implements DtObject {
 	public void setBirthPlace(final String birthPlace) {
 		this.birthPlace = birthPlace;
 	}
-
+	
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Activity'.
@@ -194,7 +213,8 @@ public final class PersonIndex implements DtObject {
 	public void setActivity(final String activity) {
 		this.activity = activity;
 	}
-
+	
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Movies'.
@@ -213,8 +233,7 @@ public final class PersonIndex implements DtObject {
 	public void setMovies(final String movies) {
 		this.movies = movies;
 	}
-
-
+	
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

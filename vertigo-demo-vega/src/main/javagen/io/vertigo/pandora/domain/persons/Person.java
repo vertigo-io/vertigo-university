@@ -15,16 +15,27 @@ public final class Person implements KeyConcept {
 	private static final long serialVersionUID = 1L;
 
 	private Long perId;
+
 	private String fullName;
+
 	private String firstName;
+
 	private String lastName;
+
 	private String biography;
+
 	private String shortBiography;
+
 	private String sex;
+
 	private String photoHref;
+
 	private String birthDate;
+
 	private String birthPlace;
+
 	private String activity;
+
 	private io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.ActorRole> roles;
 
 	/** {@inheritDoc} */
@@ -33,6 +44,7 @@ public final class Person implements KeyConcept {
 		return DtObjectUtil.createURI(this);
 	}
 
+	
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'PER ID'.
@@ -51,7 +63,8 @@ public final class Person implements KeyConcept {
 	public void setPerId(final Long perId) {
 		this.perId = perId;
 	}
-
+	
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'FULL NAME'.
@@ -70,7 +83,8 @@ public final class Person implements KeyConcept {
 	public void setFullName(final String fullName) {
 		this.fullName = fullName;
 	}
-
+	
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'FIRST NAME'.
@@ -89,7 +103,8 @@ public final class Person implements KeyConcept {
 	public void setFirstName(final String firstName) {
 		this.firstName = firstName;
 	}
-
+	
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'LAST NAME'.
@@ -108,7 +123,8 @@ public final class Person implements KeyConcept {
 	public void setLastName(final String lastName) {
 		this.lastName = lastName;
 	}
-
+	
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'BIOGRAPHY'.
@@ -127,7 +143,8 @@ public final class Person implements KeyConcept {
 	public void setBiography(final String biography) {
 		this.biography = biography;
 	}
-
+	
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'SHORT BIOGRAPHY'.
@@ -146,7 +163,8 @@ public final class Person implements KeyConcept {
 	public void setShortBiography(final String shortBiography) {
 		this.shortBiography = shortBiography;
 	}
-
+	
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'SEX'.
@@ -165,7 +183,8 @@ public final class Person implements KeyConcept {
 	public void setSex(final String sex) {
 		this.sex = sex;
 	}
-
+	
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'PHOTO HREF'.
@@ -184,7 +203,8 @@ public final class Person implements KeyConcept {
 	public void setPhotoHref(final String photoHref) {
 		this.photoHref = photoHref;
 	}
-
+	
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'BIRTH DATE'.
@@ -203,7 +223,8 @@ public final class Person implements KeyConcept {
 	public void setBirthDate(final String birthDate) {
 		this.birthDate = birthDate;
 	}
-
+	
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'BIRTH PLACE'.
@@ -222,7 +243,8 @@ public final class Person implements KeyConcept {
 	public void setBirthPlace(final String birthPlace) {
 		this.birthPlace = birthPlace;
 	}
-
+	
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'ACTIVITY'.
@@ -241,7 +263,7 @@ public final class Person implements KeyConcept {
 	public void setActivity(final String activity) {
 		this.activity = activity;
 	}
-
+	
 	/**
 	 * Association : Roles.
 	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.ActorRole>
@@ -265,23 +287,10 @@ public final class Person implements KeyConcept {
 	 * Association URI: Roles.
 	 * @return URI de l'association
 	 */
-	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_MRO_PER",
-			fkFieldName = "PER_ID",
-			primaryDtDefinitionName = "DT_PERSON",
-			primaryIsNavigable = true,
-			primaryRole = "Actor",
-			primaryLabel = "Actor",
-			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_ACTOR_ROLE",
-			foreignIsNavigable = true,
-			foreignRole = "Roles",
-			foreignLabel = "Roles",
-			foreignMultiplicity = "0..*")
+					
 	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation getRolesDtListURI() {
 		return io.vertigo.dynamo.domain.util.DtObjectUtil.createDtListURIForSimpleAssociation(this, "A_MRO_PER", "Roles");
 	}
-
 
 	/** {@inheritDoc} */
 	@Override

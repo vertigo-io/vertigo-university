@@ -6,7 +6,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -18,9 +17,9 @@ import java.util.concurrent.ExecutionException;
 import javax.inject.Inject;
 
 import io.vertigo.commons.transaction.Transactional;
-import io.vertigo.dynamo.collections.ListFilter;
 import io.vertigo.dynamo.collections.model.FacetedQueryResult;
 import io.vertigo.dynamo.collections.model.FacetedQueryResultMerger;
+import io.vertigo.dynamo.collections.model.SelectedFacetValues;
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.domain.model.DtListState;
 import io.vertigo.dynamo.domain.model.DtObject;
@@ -62,8 +61,8 @@ public class CommonServicesImpl implements CommonServices {
 	/** {@inheritDoc} */
 	@Override
 	public FacetedQueryResult<DtObject, SearchQuery> searchAll(final String criteria, final DtListState dtListState) {
-		final FacetedQueryResult<MovieIndex, SearchQuery> movies = movieServices.searchMovies(criteria, Collections.<ListFilter> emptyList(), dtListState, Optional.<String> empty());
-		final FacetedQueryResult<PersonIndex, SearchQuery> persons = personServices.searchPersons(criteria, Collections.<ListFilter> emptyList(), dtListState, Optional.<String> empty());
+		final FacetedQueryResult<MovieIndex, SearchQuery> movies = movieServices.searchMovies(criteria, SelectedFacetValues.empty().build(), dtListState, Optional.<String> empty());
+		final FacetedQueryResult<PersonIndex, SearchQuery> persons = personServices.searchPersons(criteria, SelectedFacetValues.empty().build(), dtListState, Optional.<String> empty());
 		return new FacetedQueryResultMerger<DtObject, SearchQuery>()
 				.add(movies, "MOVIE", "SCOPE:MOVIE", "Films", null)
 				.add(persons, "PERSON", "SCOPE:PERSON", "Acteurs", null)

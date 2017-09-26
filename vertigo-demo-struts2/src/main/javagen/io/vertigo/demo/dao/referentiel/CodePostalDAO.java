@@ -3,14 +3,14 @@ package io.vertigo.demo.dao.referentiel;
 import javax.inject.Inject;
 
 import io.vertigo.app.Home;
-import io.vertigo.demo.domain.referentiel.CodePostal;
+import io.vertigo.dynamo.task.metamodel.TaskDefinition;
+import io.vertigo.dynamo.task.model.Task;
+import io.vertigo.dynamo.task.model.TaskBuilder;
 import io.vertigo.dynamo.impl.store.util.DAO;
 import io.vertigo.dynamo.store.StoreManager;
 import io.vertigo.dynamo.store.StoreServices;
 import io.vertigo.dynamo.task.TaskManager;
-import io.vertigo.dynamo.task.metamodel.TaskDefinition;
-import io.vertigo.dynamo.task.model.Task;
-import io.vertigo.dynamo.task.model.TaskBuilder;
+import io.vertigo.demo.domain.referentiel.CodePostal;
 import io.vertigo.lang.Generated;
 
 /**

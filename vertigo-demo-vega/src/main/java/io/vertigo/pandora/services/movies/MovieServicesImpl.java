@@ -8,9 +8,9 @@ import javax.inject.Inject;
 
 import io.vertigo.app.Home;
 import io.vertigo.commons.transaction.Transactional;
-import io.vertigo.dynamo.collections.ListFilter;
 import io.vertigo.dynamo.collections.metamodel.FacetDefinition;
 import io.vertigo.dynamo.collections.model.FacetedQueryResult;
+import io.vertigo.dynamo.collections.model.SelectedFacetValues;
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.domain.model.DtListState;
 import io.vertigo.dynamo.domain.model.Fragment;
@@ -63,9 +63,9 @@ public class MovieServicesImpl implements MovieServices {
 		setPersonExistsInDB(movie.getProducers());
 		//complete writers info
 		setPersonExistsInDB(movie.getWriters());
-
+	
 	}
-
+	
 	public void setPersonExistsInDB(final DtList<PersonLink> persons) {
 		if (null != persons) {
 			for (final PersonLink link : persons) {
@@ -114,7 +114,7 @@ public class MovieServicesImpl implements MovieServices {
 	}
 
 	@Override
-	public FacetedQueryResult<MovieIndex, SearchQuery> searchMovies(final String criteria, final List<ListFilter> listFilters, final DtListState dtListState, final Optional<String> group) {
+	public FacetedQueryResult<MovieIndex, SearchQuery> searchMovies(final String criteria, final SelectedFacetValues listFilters, final DtListState dtListState, final Optional<String> group) {
 		final SearchQueryBuilder searchQueryBuilder = movieDAO.createSearchQueryBuilderMovie(criteria, listFilters);
 		return searchMovieCommon(dtListState, group, searchQueryBuilder);
 	}
@@ -152,7 +152,7 @@ public class MovieServicesImpl implements MovieServices {
 
 	public List<Movie> getRankingByField(final String fieldName) {
 		final DtListState dtListState = new UiListState(6, 0, fieldName, true, "").toDtListState();
-		final List<ListFilter> listFilters = new ArrayList<>();
+		final SelectedFacetValues listFilters = SelectedFacetValues.empty().build();
 		final Optional<String> group = Optional.empty();
 		final SearchQueryBuilder searchQueryBuilder = movieDAO.createSearchQueryBuilderMovieWithPoster("", listFilters);
 		final FacetedQueryResult<MovieIndex, SearchQuery> result = searchMovieCommon(dtListState, group, searchQueryBuilder);

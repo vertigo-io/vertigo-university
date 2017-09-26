@@ -16,8 +16,11 @@ public final class MovieTrailer implements Fragment<Movie> {
 	private static final long serialVersionUID = 1L;
 
 	private String trailerName;
+
 	private String trailerHref;
+
 	private Long movId;
+
 
 	/** {@inheritDoc} */
 	@Override
@@ -25,6 +28,7 @@ public final class MovieTrailer implements Fragment<Movie> {
 		return DtObjectUtil.createEntityURI(this); 
 	}
 
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'TRAILER NAME'.
@@ -43,7 +47,8 @@ public final class MovieTrailer implements Fragment<Movie> {
 	public void setTrailerName(final String trailerName) {
 		this.trailerName = trailerName;
 	}
-
+	
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'TRAILER HREF'.
@@ -62,7 +67,8 @@ public final class MovieTrailer implements Fragment<Movie> {
 	public void setTrailerHref(final String trailerHref) {
 		this.trailerHref = trailerHref;
 	}
-
+	
+	
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'MOV ID'.
@@ -81,8 +87,7 @@ public final class MovieTrailer implements Fragment<Movie> {
 	public void setMovId(final Long movId) {
 		this.movId = movId;
 	}
-
-
+	
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

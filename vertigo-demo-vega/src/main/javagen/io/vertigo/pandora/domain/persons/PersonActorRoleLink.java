@@ -16,9 +16,13 @@ public final class PersonActorRoleLink implements Fragment<Person> {
 	private static final long serialVersionUID = 1L;
 
 	private String fullName;
+
 	private String photoHref;
+
 	private String role;
+
 	private Long perId;
+
 
 	/** {@inheritDoc} */
 	@Override
@@ -26,6 +30,7 @@ public final class PersonActorRoleLink implements Fragment<Person> {
 		return DtObjectUtil.createEntityURI(this); 
 	}
 
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'FULL NAME'.
@@ -44,7 +49,8 @@ public final class PersonActorRoleLink implements Fragment<Person> {
 	public void setFullName(final String fullName) {
 		this.fullName = fullName;
 	}
-
+	
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'PHOTO HREF'.
@@ -63,7 +69,8 @@ public final class PersonActorRoleLink implements Fragment<Person> {
 	public void setPhotoHref(final String photoHref) {
 		this.photoHref = photoHref;
 	}
-
+	
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Role'.
@@ -82,7 +89,8 @@ public final class PersonActorRoleLink implements Fragment<Person> {
 	public void setRole(final String role) {
 		this.role = role;
 	}
-
+	
+	
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'PER ID'.
@@ -101,8 +109,7 @@ public final class PersonActorRoleLink implements Fragment<Person> {
 	public void setPerId(final Long perId) {
 		this.perId = perId;
 	}
-
-
+	
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import io.vertigo.core.component.Component;
-import io.vertigo.dynamo.collections.ListFilter;
 import io.vertigo.dynamo.collections.model.FacetedQueryResult;
+import io.vertigo.dynamo.collections.model.SelectedFacetValues;
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.domain.model.DtListState;
 import io.vertigo.dynamo.domain.model.Fragment;
@@ -23,7 +23,7 @@ public interface MovieServices extends Component {
 
 	<M extends Fragment<Movie>> M getMovie(long id, Class<M> movieFragment);
 
-	FacetedQueryResult<MovieIndex, SearchQuery> searchMovies(final String criteria, final List<ListFilter> listFilters, final DtListState dtListState, final Optional<String> group);
+	FacetedQueryResult<MovieIndex, SearchQuery> searchMovies(final String criteria, final SelectedFacetValues listFilters, final DtListState dtListState, final Optional<String> group);
 
 	List<Movie> getMarkRanking();
 

@@ -3,7 +3,6 @@ package io.vertigo.pandora.dao.persons;
 import javax.inject.Inject;
 
 import java.util.Arrays;
-import java.util.List;
 import io.vertigo.app.Home;
 import io.vertigo.core.component.di.injector.DIInjector;
 import io.vertigo.dynamo.search.SearchManager;
@@ -16,6 +15,7 @@ import io.vertigo.dynamo.collections.ListFilter;
 import io.vertigo.dynamo.collections.metamodel.FacetedQueryDefinition;
 import io.vertigo.dynamo.collections.metamodel.ListFilterBuilder;
 import io.vertigo.dynamo.collections.model.FacetedQueryResult;
+import io.vertigo.dynamo.collections.model.SelectedFacetValues;
 import io.vertigo.commons.transaction.VTransactionManager;
 import io.vertigo.pandora.domain.persons.PersonIndex;
 import io.vertigo.dynamo.domain.model.URI;
@@ -74,14 +74,14 @@ public final class PersonDAO extends DAO<Person, java.lang.Long> implements Stor
 	/**
 	 * Création d'une SearchQuery de type : Person.
 	 * @param criteria Critères de recherche
-	 * @param listFilters Liste des filtres à appliquer (notament les facettes sélectionnées)
+	 * @param selectedFacetValues Liste des facettes sélectionnées à appliquer
 	 * @return SearchQueryBuilder pour ce type de recherche
 	 */
-	public SearchQueryBuilder createSearchQueryBuilderPerson(final String criteria, final List<ListFilter> listFilters) {
+	public SearchQueryBuilder createSearchQueryBuilderPerson(final String criteria, final SelectedFacetValues selectedFacetValues) {
 		final FacetedQueryDefinition facetedQueryDefinition = Home.getApp().getDefinitionSpace().resolve("QRY_PERSON", FacetedQueryDefinition.class);
 		final ListFilterBuilder<String> listFilterBuilder = DIInjector.newInstance(facetedQueryDefinition.getListFilterBuilderClass(), Home.getApp().getComponentSpace());
 		final ListFilter criteriaListFilter = listFilterBuilder.withBuildQuery(facetedQueryDefinition.getListFilterBuilderQuery()).withCriteria(criteria).build();
-		return SearchQuery.builder(criteriaListFilter).withFacetStrategy(facetedQueryDefinition, listFilters);
+		return SearchQuery.builder(criteriaListFilter).withFacetStrategy(facetedQueryDefinition, selectedFacetValues);
 	}
 
 	/**
