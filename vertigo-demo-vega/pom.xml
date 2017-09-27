@@ -91,17 +91,15 @@
             <version>${vertigo.version}</version>
         </dependency>        
 		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-core</artifactId>
-			<version>5.5.0</version>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
 		  <groupId>org.elasticsearch</groupId>
 		  <artifactId>elasticsearch</artifactId>
-		  <version>2.3.5</version>
+		  <version>5.5.1</version>
 		</dependency>
-		
+		<dependency>
+		  <groupId>org.elasticsearch.plugin</groupId>
+		  <artifactId>transport-netty4-client</artifactId>
+		  <version>5.5.1</version>
+		</dependency>
 		<dependency>
 			<groupId>org.reflections</groupId>
 			<artifactId>reflections</artifactId>

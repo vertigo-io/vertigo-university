@@ -3,6 +3,7 @@ package io.vertigo.pandora.boot;
 import org.h2.Driver;
 
 import io.vertigo.account.AccountFeatures;
+import io.vertigo.account.plugins.account.store.loader.LoaderAccountStorePlugin;
 import io.vertigo.account.plugins.authentication.mock.MockAuthenticatingPlugin;
 import io.vertigo.app.config.AppConfig;
 import io.vertigo.app.config.AppConfigBuilder;
@@ -72,6 +73,13 @@ public final class PandoraConfigurator {
 					.addModule(new PersonaFeatures()
 							.withUserSession(LollipopUserSession.class).build())
 					.addModule(new CommonsFeatures().withCache(MemoryCachePlugin.class).withScript().build())
+					.addModule(new DatabaseFeatures()
+							.withSqlDataBase()
+							.addSqlConnectionProviderPlugin(C3p0ConnectionProviderPlugin.class,
+									Param.of("dataBaseClass", H2DataBase.class.getName()),
+									Param.of("jdbcDriver", Driver.class.getName()),
+									Param.of("jdbcUrl", "jdbc:h2:" + pandoraHome + "/data/demo"))
+							.build())
 					.addModule(new DynamoFeatures()
 							.withStore()
 							.addDataStorePlugin(SqlDataStorePlugin.class,
@@ -87,20 +95,21 @@ public final class PandoraConfigurator {
 								.addParam("dbFilePath", pandoraHome+"/data")
 							.endPlugin()*/
 							.build())
-					.addModule(new DatabaseFeatures()
-							.addSqlConnectionProviderPlugin(C3p0ConnectionProviderPlugin.class,
-									Param.of("dataBaseClass", H2DataBase.class.getName()),
-									Param.of("jdbcDriver", Driver.class.getName()),
-									Param.of("jdbcUrl", "jdbc:h2:" + pandoraHome + "/data/demo"))
-							.build())
+
 					.addModule(new VegaFeatures()
 							.withSecurity()
 							//.withTokens("vega")
 							.withMisc()
 							.withEmbeddedServer(pandoraPort)
 							.build())
+					.addModule(ModuleConfig.builder("identities")
+							.addComponent(MockIdentities.class)
+							.build())
 					.addModule(new AccountFeatures()
 							.withAuthentication(MockAuthenticatingPlugin.class)
+							.withAccountStorePlugin(LoaderAccountStorePlugin.class,
+									Param.of("accountLoaderName", "MockIdentities"),
+									Param.of("groupLoaderName", "MockIdentities"))
 							.build())
 					.addModule(new SocialFeatures()
 							.withMemoryNotifications()
