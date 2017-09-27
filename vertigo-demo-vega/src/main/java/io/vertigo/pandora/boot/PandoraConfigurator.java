@@ -10,11 +10,17 @@ import io.vertigo.app.config.AppConfigBuilder;
 import io.vertigo.app.config.DefinitionProviderConfig;
 import io.vertigo.app.config.LogConfig;
 import io.vertigo.app.config.ModuleConfig;
+import io.vertigo.app.config.NodeConfig;
 import io.vertigo.commons.impl.CommonsFeatures;
+import io.vertigo.commons.plugins.analytics.log.SocketLoggerAnalyticsConnectorPlugin;
 import io.vertigo.commons.plugins.cache.memory.MemoryCachePlugin;
 import io.vertigo.core.param.Param;
 import io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin;
 import io.vertigo.core.plugins.resource.local.LocalResourceResolverPlugin;
+import io.vertigo.dashboard.DashboardInitializer;
+import io.vertigo.dashboard.impl.services.data.InfluxDbDataProvider;
+import io.vertigo.dashboard.services.data.DataProvider;
+import io.vertigo.dashboard.webservices.DashboardDataProviderWebServices;
 import io.vertigo.database.DatabaseFeatures;
 import io.vertigo.database.impl.sql.vendor.h2.H2DataBase;
 import io.vertigo.database.plugins.sql.connection.c3p0.C3p0ConnectionProviderPlugin;
@@ -22,6 +28,7 @@ import io.vertigo.dynamo.impl.DynamoFeatures;
 import io.vertigo.dynamo.plugins.environment.DynamoDefinitionProvider;
 import io.vertigo.dynamo.plugins.search.elasticsearch.embedded.ESEmbeddedSearchServicesPlugin;
 import io.vertigo.dynamo.plugins.store.datastore.sql.SqlDataStorePlugin;
+import io.vertigo.dynamox.metric.domain.DomainMetricsProvider;
 import io.vertigo.pandora.dao.movies.MovieDAO;
 import io.vertigo.pandora.dao.movies.MoviesPAO;
 import io.vertigo.pandora.dao.persons.ActorRoleDAO;
@@ -72,7 +79,11 @@ public final class PandoraConfigurator {
 			appConfigBuilder
 					.addModule(new PersonaFeatures()
 							.withUserSession(LollipopUserSession.class).build())
-					.addModule(new CommonsFeatures().withCache(MemoryCachePlugin.class).withScript().build())
+					.addModule(new CommonsFeatures()
+							.withCache(MemoryCachePlugin.class)
+							.withScript()
+							.addAnalyticsConnectorPlugin(SocketLoggerAnalyticsConnectorPlugin.class)
+							.build())
 					.addModule(new DatabaseFeatures()
 							.withSqlDataBase()
 							.addSqlConnectionProviderPlugin(C3p0ConnectionProviderPlugin.class,
@@ -146,6 +157,19 @@ public final class PandoraConfigurator {
 									.addDefinitionResource("classes", DtDefinitions.class.getName())
 									.addDefinitionResource("kpr", "io/vertigo/pandora/boot/application.kpr")
 									.build())
+							.build())
+					.addModule(ModuleConfig.builder("dashboard")
+							.addComponent(DomainMetricsProvider.class)
+							.addComponent(DataProvider.class, InfluxDbDataProvider.class,
+									Param.of("host", "http://analytica.part.klee.lan.net:8086"),
+									Param.of("user", "analytica"),
+									Param.of("password", "kleeklee"))
+							.addComponent(DashboardDataProviderWebServices.class)
+							.build())
+					.addInitializer(DashboardInitializer.class);
+			appConfigBuilder.withNodeConfig(
+					NodeConfig.builder()
+							.withAppName("pandora")
 							.build());
 		} else {
 			appConfigBuilder
