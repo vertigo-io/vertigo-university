@@ -250,7 +250,7 @@ public class CommonServicesImpl implements CommonServices {
 
 	private long indexMovies() {
 		try {
-			return searchManager.reindexAll(searchManager.findFirstIndexDefinitionByKeyConcept(Movie.class)).get();
+			return searchManager.reindexAll(searchManager.findIndexDefinitionByKeyConcept(Movie.class)).get();
 		} catch (InterruptedException | ExecutionException e) {
 			throw WrappedException.wrap(e);
 		}
@@ -258,7 +258,7 @@ public class CommonServicesImpl implements CommonServices {
 
 	private long indexPersons() {
 		try {
-			return searchManager.reindexAll(searchManager.findFirstIndexDefinitionByKeyConcept(Person.class)).get();
+			return searchManager.reindexAll(searchManager.findIndexDefinitionByKeyConcept(Person.class)).get();
 		} catch (InterruptedException | ExecutionException e) {
 			throw WrappedException.wrap(e);
 		}

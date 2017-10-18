@@ -33,7 +33,7 @@ public final class MovieSearchLoader extends AbstractSqlSearchLoader<Long, Movie
 
 	@Override
 	public void start() {
-		indexDefinition = searchManager.findFirstIndexDefinitionByKeyConcept(Movie.class);
+		indexDefinition = searchManager.findIndexDefinitionByKeyConcept(Movie.class);
 
 	}
 

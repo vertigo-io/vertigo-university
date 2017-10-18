@@ -1,31 +1,30 @@
 package io.vertigo.pandora.dao.movies;
 
-import java.util.Arrays;
-
 import javax.inject.Inject;
 
+import java.util.Arrays;
 import io.vertigo.app.Home;
-import io.vertigo.commons.transaction.VTransactionManager;
 import io.vertigo.core.component.di.injector.DIInjector;
+import io.vertigo.dynamo.search.SearchManager;
+import io.vertigo.dynamo.search.metamodel.SearchIndexDefinition;
+import io.vertigo.dynamo.search.model.SearchQuery;
+import io.vertigo.dynamo.search.model.SearchQueryBuilder;
+import io.vertigo.dynamo.domain.model.DtListState;
+import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.dynamo.collections.ListFilter;
 import io.vertigo.dynamo.collections.metamodel.FacetedQueryDefinition;
 import io.vertigo.dynamo.collections.metamodel.ListFilterBuilder;
 import io.vertigo.dynamo.collections.model.FacetedQueryResult;
 import io.vertigo.dynamo.collections.model.SelectedFacetValues;
-import io.vertigo.dynamo.domain.model.DtListState;
+import io.vertigo.commons.transaction.VTransactionManager;
+import io.vertigo.pandora.domain.movies.MovieIndex;
 import io.vertigo.dynamo.domain.model.URI;
-import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.dynamo.impl.store.util.DAO;
-import io.vertigo.dynamo.search.SearchManager;
-import io.vertigo.dynamo.search.metamodel.SearchIndexDefinition;
-import io.vertigo.dynamo.search.model.SearchQuery;
-import io.vertigo.dynamo.search.model.SearchQueryBuilder;
 import io.vertigo.dynamo.store.StoreManager;
 import io.vertigo.dynamo.store.StoreServices;
 import io.vertigo.dynamo.task.TaskManager;
-import io.vertigo.lang.Generated;
 import io.vertigo.pandora.domain.movies.Movie;
-import io.vertigo.pandora.domain.movies.MovieIndex;
+import io.vertigo.lang.Generated;
 
 /**
  * This class is automatically generated.
@@ -104,7 +103,7 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	 * @return Résultat correspondant à la requête (de type MovieIndex) 
 	 */
 	public FacetedQueryResult<MovieIndex, SearchQuery> loadList(final SearchQuery searchQuery, final DtListState listState) {
-		final SearchIndexDefinition indexDefinition = searchManager.findFirstIndexDefinitionByKeyConcept(Movie.class);
+		final SearchIndexDefinition indexDefinition = searchManager.findIndexDefinitionByKeyConcept(Movie.class);
 		return searchManager.loadList(indexDefinition, searchQuery, listState);
 	}
 	
