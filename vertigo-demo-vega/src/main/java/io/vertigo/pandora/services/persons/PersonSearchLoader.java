@@ -34,7 +34,7 @@ public final class PersonSearchLoader extends AbstractSqlSearchLoader<Long, Pers
 
 	@Override
 	public void start() {
-		indexDefinition = searchManager.findIndexDefinitionByKeyConcept(Person.class);
+		indexDefinition = searchManager.findFirstIndexDefinitionByKeyConcept(Person.class);
 
 	}
 

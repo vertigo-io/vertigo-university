@@ -4,7 +4,7 @@ import org.h2.Driver;
 
 import io.vertigo.account.AccountFeatures;
 import io.vertigo.account.plugins.account.store.loader.LoaderAccountStorePlugin;
-import io.vertigo.account.plugins.authentication.mock.MockAuthenticatingPlugin;
+import io.vertigo.account.plugins.authentication.mock.MockAuthenticationPlugin;
 import io.vertigo.app.config.AppConfig;
 import io.vertigo.app.config.AppConfigBuilder;
 import io.vertigo.app.config.DefinitionProviderConfig;
@@ -18,7 +18,7 @@ import io.vertigo.core.param.Param;
 import io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin;
 import io.vertigo.core.plugins.resource.local.LocalResourceResolverPlugin;
 import io.vertigo.dashboard.DashboardInitializer;
-import io.vertigo.dashboard.impl.services.data.InfluxDbDataProvider;
+import io.vertigo.dashboard.plugins.data.influxdb.InfluxDbDataProviderPlugin;
 import io.vertigo.dashboard.services.data.DataProvider;
 import io.vertigo.dashboard.webservices.DashboardDataProviderWebServices;
 import io.vertigo.database.DatabaseFeatures;
@@ -117,7 +117,7 @@ public final class PandoraConfigurator {
 							.addComponent(MockIdentities.class)
 							.build())
 					.addModule(new AccountFeatures()
-							.withAuthentication(MockAuthenticatingPlugin.class)
+							.withAuthentication(MockAuthenticationPlugin.class)
 							.withAccountStorePlugin(LoaderAccountStorePlugin.class,
 									Param.of("accountLoaderName", "MockIdentities"),
 									Param.of("groupLoaderName", "MockIdentities"))
@@ -160,7 +160,7 @@ public final class PandoraConfigurator {
 							.build())
 					.addModule(ModuleConfig.builder("dashboard")
 							.addComponent(DomainMetricsProvider.class)
-							.addComponent(DataProvider.class, InfluxDbDataProvider.class,
+							.addComponent(DataProvider.class, InfluxDbDataProviderPlugin.class,
 									Param.of("host", "http://analytica.part.klee.lan.net:8086"),
 									Param.of("user", "analytica"),
 									Param.of("password", "kleeklee"))
