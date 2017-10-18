@@ -6,7 +6,8 @@ import java.util.function.UnaryOperator;
 
 import javax.inject.Inject;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import io.vertigo.commons.transaction.VTransactionManager;
 import io.vertigo.commons.transaction.VTransactionWritable;
@@ -20,15 +21,15 @@ import io.vertigo.dynamo.domain.model.DtObject;
 import io.vertigo.dynamo.domain.model.Entity;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.dynamo.store.StoreManager;
-import io.vertigo.orchestra.services.execution.RunnableActivityEngine;
+import io.vertigo.orchestra.services.run.RunnableJobEngine;
 
 /**
  * Job de rechargement du cache des MasterDataList.
  * @author npiedeloup
  * @version $Id: ReloadMdCacheJob.java,v 1.3 2014/02/07 16:48:27 npiedeloup Exp $
  */
-public class ReloadMdCacheJob extends RunnableActivityEngine {
-	private final Logger logger = Logger.getLogger(getClass());
+public class ReloadMdCacheJob extends RunnableJobEngine {
+	private final Logger logger = LogManager.getLogger(getClass());
 	@Inject
 	private StoreManager storeManager;
 	@Inject
