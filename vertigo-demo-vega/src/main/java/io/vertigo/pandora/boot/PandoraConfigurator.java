@@ -17,10 +17,8 @@ import io.vertigo.commons.plugins.cache.memory.MemoryCachePlugin;
 import io.vertigo.core.param.Param;
 import io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin;
 import io.vertigo.core.plugins.resource.local.LocalResourceResolverPlugin;
+import io.vertigo.dashboard.DashboardFeatures;
 import io.vertigo.dashboard.DashboardInitializer;
-import io.vertigo.dashboard.plugins.data.influxdb.InfluxDbDataProviderPlugin;
-import io.vertigo.dashboard.services.data.DataProvider;
-import io.vertigo.dashboard.webservices.DashboardDataProviderWebServices;
 import io.vertigo.database.DatabaseFeatures;
 import io.vertigo.database.impl.sql.vendor.h2.H2DataBase;
 import io.vertigo.database.plugins.sql.connection.c3p0.C3p0ConnectionProviderPlugin;
@@ -158,13 +156,11 @@ public final class PandoraConfigurator {
 									.addDefinitionResource("kpr", "io/vertigo/pandora/boot/application.kpr")
 									.build())
 							.build())
-					.addModule(ModuleConfig.builder("dashboard")
+					.addModule(new DashboardFeatures()
+							.withInfluxDb("http://analytica.part.klee.lan.net:8086", "analytica", "kleeklee")
+							.build())
+					.addModule(ModuleConfig.builder("metrics-provider")
 							.addComponent(DomainMetricsProvider.class)
-							.addComponent(DataProvider.class, InfluxDbDataProviderPlugin.class,
-									Param.of("host", "http://analytica.part.klee.lan.net:8086"),
-									Param.of("user", "analytica"),
-									Param.of("password", "kleeklee"))
-							.addComponent(DashboardDataProviderWebServices.class)
 							.build())
 					.addInitializer(DashboardInitializer.class);
 			appConfigBuilder.withNodeConfig(
