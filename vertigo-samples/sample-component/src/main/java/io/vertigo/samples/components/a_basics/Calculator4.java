@@ -1,11 +1,16 @@
 package io.vertigo.samples.components.a_basics;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.stream.IntStream;
 
 import io.vertigo.core.component.Activeable;
 import io.vertigo.core.component.Component;
+import io.vertigo.core.definition.Definition;
+import io.vertigo.core.definition.DefinitionSpace;
+import io.vertigo.core.definition.SimpleDefinitionProvider;
 
-public class Calculator4 implements Component, Activeable {
+public class Calculator4 implements Component, Activeable, SimpleDefinitionProvider {
 
 	@Override
 	public void start() {
@@ -20,5 +25,10 @@ public class Calculator4 implements Component, Activeable {
 	public int sum(final int... values) {
 		return IntStream.of(values)
 				.sum();
+	}
+
+	@Override
+	public List<Definition> provideDefinitions(final DefinitionSpace definitionSpace) {
+		return Collections.emptyList();
 	}
 }
