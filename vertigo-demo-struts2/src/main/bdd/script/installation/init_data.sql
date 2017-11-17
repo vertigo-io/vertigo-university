@@ -30,9 +30,21 @@ INSERT INTO UTILISATEUR (
 	DATE_DERNIERE_MODIF, AUTEUR_DERNIERE_MODIF ) 
 VALUES ( 
 	1, 'Administrateur', '--', 'npiedeloup@kleegroup.com', '0102030405', '0102030405', 1, sysdate, NULL, 'SYSTEM');
+	
+INSERT INTO UTILISATEUR ( 
+	UTI_ID, NOM, PRENOM,
+	MAIL, TELEPHONE, FAX, SI_ACTIF, DATE_CREATION,
+	DATE_DERNIERE_MODIF, AUTEUR_DERNIERE_MODIF ) 
+VALUES ( 
+	2, 'Demo', 'Test', 'demo@yopmail.com', null, null, 1, sysdate, NULL, 'SYSTEM');
 
 INSERT INTO LOGIN (LOG_ID, LOGIN, PASSWORD, UTI_ID) 
-VALUES (1,'admin', 'zfy8fVkqGGCerNUF4pNXkM92Qr0trt4ij-IX290SyiX9TxlKsbQ=', 1);
+VALUES (1,'admin', 'zfy8fVkqX3jlJ1bcUVDb8qKBPHvLJom1zhymv2WAEvf10diXSno=', 1);
+
+INSERT INTO LOGIN (LOG_ID, LOGIN, PASSWORD, UTI_ID) 
+VALUES (2,'demo', 'xGpISBnNcvxztvov8ci9lhkW630SCiHneuniAn5Ub2e4vtqi4FA=', 2);
+
+
 
 /*==============================================================*/
 /* Table: UTI_ROL                                                  */

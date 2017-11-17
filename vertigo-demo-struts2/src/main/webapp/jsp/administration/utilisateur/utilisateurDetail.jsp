@@ -3,6 +3,8 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
+<%@ taglib prefix="v" uri="/vertigo-tags"%>
+
 
 <s:include value="/jsp/include/header.jsp">
 	<s:param name="subtitle">${pageName}</s:param>
@@ -10,7 +12,7 @@
 
 <s:form>
 	<!-- mode création / modification ------------------------------------------------------------------------------------->
-	<s:div layout="table" cols="4">
+	<v:div layout="table" cols="4">
 		<s:if test="%{!modeReadOnly}">
 			<s:textfield name="utilisateurLogin.login" label="default"/>
 			<s:if test="%{modeEdit}">
@@ -26,7 +28,7 @@
 		<s:textfield name="utilisateur.telephone" label="default"/>
 		<s:textfield name="utilisateur.fax" label="default"/>
 		<s:checkbox name="utilisateur.siActif" label="default" labelposition="left"/>
-	</s:div>		
+	</v:div>		
 	<div class="button-bar">
 		<s:if test="%{modeReadOnly}">
 			<s:hidden name="utiId" value="%{utilisateur.utiId}" />

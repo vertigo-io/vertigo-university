@@ -2,17 +2,18 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
 <%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
+<%@ taglib prefix="v" uri="/vertigo-tags"%>
 
 <s:include value="/jsp/include/header.jsp">
 	<s:param name="subtitle">${pageName}</s:param>
 </s:include>
 	<s:form>
-	<s:div layout="table">
+	<v:div layout="table">
 		<s:textfield name="utilisateurCritere.nom" label="default"/>
 		<s:textfield name="utilisateurCritere.login" label="default"/>
 		<s:textfield name="utilisateurCritere.role" label="default"/>
 		<s:checkbox name="utilisateurCritere.isActif" label="default"/>
-	</s:div>
+	</v:div>
 	<div class="button-bar">
 		<div class="right">
 			<s:submit action="rechercherUtilisateurList" value="Rechercher" cssClass="rechercher" />

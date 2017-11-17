@@ -43,26 +43,26 @@ public final class UtilisateurListAction extends AbstractActionSupport {
 		utilisateurs.publish(utilisateurServices.getUtilisateurListByCritere(utilisateurCritere));
 	}
 
-	public String doRechercher() {
+	public String rechercher() {
 		reloadList();
 		return NONE;
 	}
 
-	public String doRechercherActif() {
+	public String rechercherActif() {
 		utilisateurCritereForm.getUiObject().setTypedValue("isActif", true);
 		allUserRef.set(Boolean.FALSE);
 		reloadList();
 		return NONE;
 	}
 
-	public String doRechercherInactif() {
+	public String rechercherInactif() {
 		utilisateurCritereForm.getUiObject().setTypedValue("isActif", false);
 		allUserRef.set(Boolean.FALSE);
 		reloadList();
 		return NONE;
 	}
 
-	public String doRechercherTous() {
+	public String rechercherTous() {
 		utilisateurCritereForm.getUiObject().setTypedValue("isActif", false);
 		allUserRef.set(Boolean.TRUE);
 		reloadList();

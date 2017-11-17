@@ -4,7 +4,7 @@
 <s:include value="/jsp/include/header.jsp">
 	<s:param name="subtitle">${pageName}</s:param>
 </s:include>
-	<h1>Bienvenue sur la DemoKasper 7</h1>	
+	<h1>Bienvenue sur la Vertigo-Struts2</h1>	
  	<ul>
 	<li><a href="./UtilisateurList.do">rechercher un utilisateur</a></li>
 	<li><a href="./ProduitList.do">rechercher un produit</a></li>
