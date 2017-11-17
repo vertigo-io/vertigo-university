@@ -15,7 +15,7 @@
 		<sj:head compressed="false" jquerytheme="redmond" locale="fr"/>
 		<link href="static/css/kasper_demo.css" rel="stylesheet" type="text/css"media="all" />
 		<link rel="shortcut icon" href="static/img/favicon.png">
-		<title>TeleDo - ${param.subtitle}</title>		
+		<title>Demo-Vertigo-Struts2 - ${param.subtitle}</title>		
 	</head>
 	<body>
 		<div class="container">

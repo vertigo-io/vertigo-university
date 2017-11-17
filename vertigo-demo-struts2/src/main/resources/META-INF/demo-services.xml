@@ -3,20 +3,35 @@
 <config>
 	<!-- Aspects declaration -->
 	<module name="aspects" >
-		<aspect class="io.vertigo.dynamo.impl.transaction.VTransactionAspect"/>
+		<aspect class="io.vertigo.commons.impl.transaction.VTransactionAspect"/>
 	</module>
 	
-	<module name="dao" api="false">
-	    <component class="io.vertigo.demo.dao.administration.utilisateur.LoginDAO" />
+	<!-- Demo App-->
+	<module name="Demo">
+		<definitions>
+			<provider class="io.vertigo.dynamo.plugins.environment.DynamoDefinitionProvider" >
+				<param name='encoding' value='utf8' />
+				<resource type="classes" path="io.vertigo.demo.domain.DtDefinitions" />
+				<resource type="kpr" path="io/vertigo/demo/execution.kpr" />
+			</provider>
+			<provider class="io.vertigo.persona.plugins.security.loaders.SecurityDefinitionProvider" >
+				<resource type="security" path="/META-INF/demo-auth-config.xml" />
+			</provider>
+		</definitions>
+		<!-- dao -->
+		<component class="io.vertigo.demo.dao.administration.utilisateur.LoginDAO" />
 	    <component class="io.vertigo.demo.dao.administration.utilisateur.RoleDAO" />
 	    <component class="io.vertigo.demo.dao.administration.utilisateur.UtilisateurDAO" />
 	    <component class="io.vertigo.demo.dao.produit.ProduitDAO" />
-	</module>
-	
-	<module name="services">
+	    <!-- services -->
 	    <component api="UtilisateurServices" class="io.vertigo.demo.services.administration.utilisateur.UtilisateurServicesImpl" />
 	    <component api="ProduitServices" class="io.vertigo.demo.services.produit.ProduitServicesImpl" />
 	    <component api="ReferentielServices" class="io.vertigo.demo.services.referentiel.ReferentielServicesImpl" />
 	</module>
-	
+	<init>
+		<initializer class="io.vertigo.demo.boot.initializer.LocaleManagerInitializer"/>
+		<initializer class="io.vertigo.demo.boot.initializer.PersistenceManagerInitializer"/>
+		<initializer class="io.vertigo.demo.boot.initializer.JobManagerInitializer"/>
+		<initializer class="io.vertigo.demo.boot.initializer.SecurityManagerInitializer"/>
+	</init>
  </config>

@@ -39,17 +39,17 @@ public final class ProduitDetailAction extends AbstractDemoActionSupport {
 		familles.publish(Famille.class, null);
 	}
 
-	public String doEdit() {
+	public String edit() {
 		toModeEdit();
 		return NONE;
 	}
 
-	public String doSave() {
+	public String save() {
 		produitServices.saveProduit(produit.readDto());
 		return SUCCESS;
 	}
 
-	public String doDelete(@Named("prdId") final Long prdId) {
+	public String delete(@Named("prdId") final Long prdId) {
 		produitServices.deleteProduit(prdId);
 		return "success_delete";
 	}

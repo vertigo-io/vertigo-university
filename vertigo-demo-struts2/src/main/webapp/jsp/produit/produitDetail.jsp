@@ -3,6 +3,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
+<%@ taglib prefix="v" uri="/vertigo-tags"%>
 
 <s:include value="/jsp/include/header.jsp">
 	<s:param name="subtitle">${pageName}</s:param>
@@ -10,13 +11,13 @@
 
 <s:form>
 	<!-- mode création / modification ------------------------------------------------------------------------------------->
-	<s:div layout="table">
+	<v:div layout="table">
 		<s:textfield name="produit.code" label="default"/>
 		<s:textfield name="produit.libelle" label="default"/>
 		<s:textfield name="produit.prix" label="default"/>
 		<s:textfield name="produit.description" label="default"/>
 		<s:select name="produit.famId" label="default" list="familles"/>
-	</s:div>		
+	</v:div>		
 	<div class="button-bar">
 		<s:if test="%{modeReadOnly}">
 			<s:hidden name="prdId" value="%{produit.prdId}" />

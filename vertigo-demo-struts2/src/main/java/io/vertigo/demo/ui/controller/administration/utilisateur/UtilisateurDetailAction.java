@@ -48,7 +48,7 @@ public final class UtilisateurDetailAction extends AbstractDemoActionSupport {
 	/**
 	 * @return Outcome d'enregistrement
 	 */
-	public String doSave() {
+	public String save() {
 		utilisateur.checkErrors();
 		if (isModeCreate()) {
 			utilisateurServices.saveUtilisateur(utilisateurLogin.readDto(), utilisateur.readDto(), roles.readDtList());
@@ -62,7 +62,7 @@ public final class UtilisateurDetailAction extends AbstractDemoActionSupport {
 	 * @param utiId Identifiant de l'utilisateur
 	 * @return Outcome de suppression
 	 */
-	public String doDelete(@Named("utiId") final Long utiId) {
+	public String delete(@Named("utiId") final Long utiId) {
 		utilisateurServices.deleteUtilisateur(utiId);
 		return "success_delete";
 	}
@@ -70,7 +70,7 @@ public final class UtilisateurDetailAction extends AbstractDemoActionSupport {
 	/**
 	 * @return Outcome du passage en edition
 	 */
-	public String doEdit() {
+	public String edit() {
 		toModeEdit();
 		return NONE;
 	}
