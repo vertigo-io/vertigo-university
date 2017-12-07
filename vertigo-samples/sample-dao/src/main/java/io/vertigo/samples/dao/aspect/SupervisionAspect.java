@@ -2,7 +2,8 @@ package io.vertigo.samples.dao.aspect;
 
 import java.lang.annotation.Annotation;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import io.vertigo.core.component.aop.Aspect;
 import io.vertigo.core.component.aop.AspectMethodInvocation;
@@ -14,7 +15,7 @@ import io.vertigo.core.component.aop.AspectMethodInvocation;
  */
 public class SupervisionAspect implements Aspect {
 
-	private static final Logger LOG = Logger.getLogger(SupervisionAspect.class);
+	private static final Logger LOG = LogManager.getLogger(SupervisionAspect.class);
 
 	@Override
 	public Object invoke(final Object[] args, final AspectMethodInvocation methodInvocation) {

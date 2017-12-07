@@ -15,6 +15,7 @@ import io.vertigo.commons.plugins.cache.memory.MemoryCachePlugin;
 import io.vertigo.core.param.Param;
 import io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin;
 import io.vertigo.core.plugins.resource.local.LocalResourceResolverPlugin;
+import io.vertigo.database.DatabaseFeatures;
 import io.vertigo.database.impl.sql.vendor.h2.H2DataBase;
 import io.vertigo.database.plugins.sql.connection.c3p0.C3p0ConnectionProviderPlugin;
 import io.vertigo.dynamo.impl.DynamoFeatures;
@@ -72,15 +73,17 @@ public final class PandoraConfigurator {
 					.addModule(new PersonaFeatures()
 							.withUserSession(LollipopUserSession.class).build())
 					.addModule(new CommonsFeatures().withCache(MemoryCachePlugin.class).withScript().build())
-					.addModule(new DynamoFeatures()
-							.withStore()
-							.addDataStorePlugin(SqlDataStorePlugin.class,
-									Param.of("sequencePrefix", "SEQ_"))
+					.addModule(new DatabaseFeatures()
 							.withSqlDataBase()
 							.addSqlConnectionProviderPlugin(C3p0ConnectionProviderPlugin.class,
 									Param.of("dataBaseClass", H2DataBase.class.getName()),
 									Param.of("jdbcDriver", Driver.class.getName()),
 									Param.of("jdbcUrl", "jdbc:h2:" + pandoraHome + "/data/demo"))
+							.build())
+					.addModule(new DynamoFeatures()
+							.withStore()
+							.addDataStorePlugin(SqlDataStorePlugin.class,
+									Param.of("sequencePrefix", "SEQ_"))
 							.withSearch(ESEmbeddedSearchServicesPlugin.class,
 									Param.of("home", pandoraHome + "/search"), //usage d'url impropre
 									Param.of("envIndex", "test"),

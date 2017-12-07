@@ -8,6 +8,7 @@ import io.vertigo.commons.impl.CommonsFeatures;
 import io.vertigo.commons.plugins.cache.memory.MemoryCachePlugin;
 import io.vertigo.core.param.Param;
 import io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin;
+import io.vertigo.database.DatabaseFeatures;
 import io.vertigo.database.impl.sql.vendor.h2.H2DataBase;
 import io.vertigo.database.plugins.sql.connection.c3p0.C3p0ConnectionProviderPlugin;
 import io.vertigo.dynamo.impl.DynamoFeatures;
@@ -33,13 +34,15 @@ public class SampleConfigBuilder {
 					.withCache(MemoryCachePlugin.class)
 					.withScript()
 					.build())
+				.addModule(new DatabaseFeatures()
+						.withSqlDataBase()
+						.addSqlConnectionProviderPlugin(C3p0ConnectionProviderPlugin.class,
+								Param.of("dataBaseClass", H2DataBase.class.getName()),
+								Param.of("jdbcDriver", org.h2.Driver.class.getName()),
+								Param.of("jdbcUrl", "jdbc:h2:D:/atelier/database/formation_loaded"))
+						.build())
 				.addModule(new DynamoFeatures()
 					.withStore()
-					.withSqlDataBase()
-					.addSqlConnectionProviderPlugin(C3p0ConnectionProviderPlugin.class,
-							Param.of("dataBaseClass", H2DataBase.class.getName()),
-							Param.of("jdbcDriver", org.h2.Driver.class.getName()),
-							Param.of("jdbcUrl", "jdbc:h2:D:/atelier/database/formation_loaded"))
 					.addDataStorePlugin(SqlDataStorePlugin.class,
 							Param.of("sequencePrefix", "SEQ_"))
 					.build())

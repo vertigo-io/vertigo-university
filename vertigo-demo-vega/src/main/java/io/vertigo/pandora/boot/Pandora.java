@@ -1,6 +1,6 @@
 package io.vertigo.pandora.boot;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import io.vertigo.app.AutoCloseableApp;
 
@@ -12,7 +12,7 @@ public final class Pandora {
 			Thread.sleep(Long.MAX_VALUE);
 		} catch (final Exception e) {
 			e.printStackTrace();
-			Logger.getLogger(Pandora.class).warn("an error occured when starting", e);
+			LogManager.getLogger(Pandora.class).warn("an error occured when starting", e);
 		}
 	}
 }

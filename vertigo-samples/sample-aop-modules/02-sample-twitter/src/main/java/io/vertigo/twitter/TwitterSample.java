@@ -4,7 +4,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import twitter4j.Status;
 import twitter4j.Twitter;
@@ -17,7 +18,7 @@ import twitter4j.TwitterFactory;
  *
  */
 public class TwitterSample {
-	private static final Logger LOGGER = Logger.getLogger(TwitterSample.class);
+	private static final Logger LOGGER = LogManager.getLogger(TwitterSample.class);
 
 	public static void main(final String[] args) {
 		final String myTweet = "Tweet !";

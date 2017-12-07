@@ -120,7 +120,7 @@ public class UtilisateurServicesImpl implements UtilisateurServices {
 		if (!isCreation) {
 			final Utilisateur loggedUser = loadUtilisateurByLogin(utilisateurLogin);
 			if (!loggedUser.getUtiId().equals(utilisateur.getUtiId())) {
-				throw new VUserException(new MessageText(MSG_LOGIN_INVALID, null));
+				throw new VUserException(MessageText.of(MSG_LOGIN_INVALID));
 			}
 			loginDAO.delete(utilisateur.getLoginList().get(0).getLogId());
 		}
@@ -156,7 +156,7 @@ public class UtilisateurServicesImpl implements UtilisateurServices {
 		final String encodePassword = passwordHelper.encodePassword(salt, utilisateurLogin.getPassword());
 
 		if (!logins.isPresent() || !password.equals(encodePassword)) {
-			throw new VUserException(new MessageText("Login ou mot de passe incorrect", null));
+			throw new VUserException(MessageText.of("Login ou mot de passe incorrect"));
 		}
 
 		final DemoUserSession session = securityManager.<DemoUserSession> getCurrentUserSession().get();

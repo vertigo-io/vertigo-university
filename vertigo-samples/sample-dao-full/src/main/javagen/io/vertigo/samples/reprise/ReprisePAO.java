@@ -76,50 +76,6 @@ public final class ReprisePAO implements StoreServices {
 				.getResult();
 	}
 
-	/**
-	 * Execute la tache TK_INSERT_ACTORS_BATCH.
-	 * @param actorsList io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Actor> 
-	*/
-	public void insertActorsBatch(final io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Actor> actorsList) {
-		final Task task = createTaskBuilder("TK_INSERT_ACTORS_BATCH")
-				.addValue("ACTORS_LIST", actorsList)
-				.build();
-		getTaskManager().execute(task);
-	}
-
-	/**
-	 * Execute la tache TK_INSERT_COUNTRIES_BATCH.
-	 * @param countryList io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Country> 
-	*/
-	public void insertCountriesBatch(final io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Country> countryList) {
-		final Task task = createTaskBuilder("TK_INSERT_COUNTRIES_BATCH")
-				.addValue("COUNTRY_LIST", countryList)
-				.build();
-		getTaskManager().execute(task);
-	}
-
-	/**
-	 * Execute la tache TK_INSERT_MOVIES_BATCH.
-	 * @param moviesList io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Movie> 
-	*/
-	public void insertMoviesBatch(final io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Movie> moviesList) {
-		final Task task = createTaskBuilder("TK_INSERT_MOVIES_BATCH")
-				.addValue("MOVIES_LIST", moviesList)
-				.build();
-		getTaskManager().execute(task);
-	}
-
-	/**
-	 * Execute la tache TK_INSERT_ROLES_BATCH.
-	 * @param rolesList io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Role> 
-	*/
-	public void insertRolesBatch(final io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Role> rolesList) {
-		final Task task = createTaskBuilder("TK_INSERT_ROLES_BATCH")
-				.addValue("ROLES_LIST", rolesList)
-				.build();
-		getTaskManager().execute(task);
-	}
-
 	private TaskManager getTaskManager() {
 		return taskManager;
 	}

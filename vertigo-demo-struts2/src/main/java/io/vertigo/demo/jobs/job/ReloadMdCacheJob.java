@@ -6,7 +6,8 @@ import java.util.function.UnaryOperator;
 
 import javax.inject.Inject;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import io.vertigo.commons.transaction.VTransactionManager;
 import io.vertigo.commons.transaction.VTransactionWritable;
@@ -28,7 +29,7 @@ import io.vertigo.orchestra.services.execution.RunnableActivityEngine;
  * @version $Id: ReloadMdCacheJob.java,v 1.3 2014/02/07 16:48:27 npiedeloup Exp $
  */
 public class ReloadMdCacheJob extends RunnableActivityEngine {
-	private final Logger logger = Logger.getLogger(getClass());
+	private final Logger logger = LogManager.getLogger(getClass());
 	@Inject
 	private StoreManager storeManager;
 	@Inject
