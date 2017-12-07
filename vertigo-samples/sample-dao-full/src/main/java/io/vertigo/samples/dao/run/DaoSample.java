@@ -2,7 +2,7 @@ package io.vertigo.samples.dao.run;
 
 import javax.inject.Inject;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import io.vertigo.app.AutoCloseableApp;
 import io.vertigo.app.config.AppConfigBuilder;
@@ -43,7 +43,7 @@ public class DaoSample {
 	}
 
 	void step1() {
-		Logger.getLogger(this.getClass()).info(movieServices.getMovieById(3678598L));
+		LogManager.getLogger(this.getClass()).info(movieServices.getMovieById(3678598L));
 	}
 
 }

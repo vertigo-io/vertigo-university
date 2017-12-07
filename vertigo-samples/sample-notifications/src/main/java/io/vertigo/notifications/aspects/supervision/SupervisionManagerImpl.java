@@ -1,6 +1,7 @@
 package io.vertigo.notifications.aspects.supervision;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -8,7 +9,7 @@ import org.apache.log4j.Logger;
  *
  */
 public class SupervisionManagerImpl implements SupervisionManager {
-	private static final Logger LOG = Logger.getLogger(SupervisionManagerImpl.class);
+	private static final Logger LOG = LogManager.getLogger(SupervisionManagerImpl.class);
 
 	@Override
 	public void superviseExec(final String methodName, final long start, final long stop) {

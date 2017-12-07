@@ -19,7 +19,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status.Family;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import io.vertigo.core.component.Activeable;
 import io.vertigo.lang.Assertion;
@@ -33,7 +34,7 @@ import io.vertigo.notifications.impl.NotificationPlugin;
  *
  */
 public class IftttNotificationPlugin implements NotificationPlugin, Activeable {
-	private static final Logger LOGGER = Logger.getLogger(IftttNotificationPlugin.class);
+	private static final Logger LOGGER = LogManager.getLogger(IftttNotificationPlugin.class);
 	private static final String IFTTT = "ifttt.properties";
 
 	private Client client;

@@ -4,7 +4,7 @@ create Task TK_INSERT_COUNTRIES_BATCH {
 	storeName : "mine"
     className : "io.vertigo.dynamox.task.TaskEngineProcBatch"
         request : "
-        	INSERT INTO MY_COUNTRY (COU_ID, NAME) values (#COUNTRY_LIST.0.COU_ID#, #COUNTRY_LIST.0.NAME#) 
+        	INSERT INTO MY_COUNTRY (COU_ID, NAME) values (#COUNTRY_LIST.COU_ID#, #COUNTRY_LIST.NAME#) 
 			"
 	attribute COUNTRY_LIST	 	{domain : DO_DT_COUNTRY_DTC		notNull:"true" 	inOut :"in"}
 }
@@ -30,7 +30,7 @@ create Task TK_INSERT_ACTORS_BATCH {
 	storeName : "mine"
     className : "io.vertigo.dynamox.task.TaskEngineProcBatch"
         request : "
-        	INSERT INTO MY_ACTOR (ACT_ID, NAME, SEXE) values (#ACTORS_LIST.0.ACT_ID#, #ACTORS_LIST.0.NAME#, #ACTORS_LIST.0.SEXE#) 
+        	INSERT INTO MY_ACTOR (ACT_ID, NAME, SEXE) values (#ACTORS_LIST.ACT_ID#, #ACTORS_LIST.NAME#, #ACTORS_LIST.SEXE#) 
 			"
 	attribute ACTORS_LIST	 	{domain : DO_DT_ACTOR_DTC		notNull:"true" 	inOut :"in"}
 }
@@ -63,7 +63,7 @@ create Task TK_INSERT_MOVIES_BATCH {
 	storeName : "mine"
     className : "io.vertigo.dynamox.task.TaskEngineProcBatch"
         request : "
-        	INSERT INTO MY_MOVIE (MOV_ID, NAME, YEAR, IMDBID, COU_ID) values (#MOVIES_LIST.0.MOV_ID#, #MOVIES_LIST.0.NAME#, #MOVIES_LIST.0.YEAR#, #MOVIES_LIST.0.IMDBID#, #MOVIES_LIST.0.COU_ID#) 
+        	INSERT INTO MY_MOVIE (MOV_ID, NAME, YEAR, IMDBID, COU_ID) values (#MOVIES_LIST.MOV_ID#, #MOVIES_LIST.NAME#, #MOVIES_LIST.YEAR#, #MOVIES_LIST.IMDBID#, #MOVIES_LIST.COU_ID#) 
 			"
 	attribute MOVIES_LIST	 	{domain : DO_DT_MOVIE_DTC		notNull:"true" 	inOut :"in"}
 }
@@ -97,7 +97,7 @@ create Task TK_INSERT_ROLES_BATCH {
 	storeName : "mine"
     className : "io.vertigo.dynamox.task.TaskEngineProcBatch"
         request : "
-        	INSERT INTO MY_ROLE (ROL_ID, MOV_ID, ACT_ID, AS_CHARACTER) values (#ROLES_LIST.0.ROL_ID#, #ROLES_LIST.0.MOV_ID#, #ROLES_LIST.0.ACT_ID#, #ROLES_LIST.0.AS_CHARACTER#) 
+        	INSERT INTO MY_ROLE (ROL_ID, MOV_ID, ACT_ID, AS_CHARACTER) values (#ROLES_LIST.ROL_ID#, #ROLES_LIST.MOV_ID#, #ROLES_LIST.ACT_ID#, #ROLES_LIST.AS_CHARACTER#) 
 			"
 	attribute ROLES_LIST	 	{domain : DO_DT_ROLE_DTC		notNull:"true" 	inOut :"in"}
 }

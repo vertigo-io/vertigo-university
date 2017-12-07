@@ -2,7 +2,8 @@ package io.vertigo.samples.dao.run;
 
 import javax.inject.Inject;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import io.vertigo.app.AutoCloseableApp;
 import io.vertigo.app.config.AppConfigBuilder;
@@ -32,7 +33,7 @@ import io.vertigo.samples.reprise.ReprisePAO;
 
 public class Level5 {
 
-	private final Logger LOGGER = Logger.getLogger(this.getClass());
+	private final Logger LOGGER = LogManager.getLogger(this.getClass());
 
 	@Inject
 	private MovieServices movieServices;

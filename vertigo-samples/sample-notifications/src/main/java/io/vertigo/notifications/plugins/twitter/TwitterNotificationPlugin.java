@@ -1,6 +1,7 @@
 package io.vertigo.notifications.plugins.twitter;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import io.vertigo.lang.WrappedException;
 import io.vertigo.notifications.impl.NotificationPlugin;
@@ -16,7 +17,7 @@ import twitter4j.TwitterFactory;
  *
  */
 public class TwitterNotificationPlugin implements NotificationPlugin {
-	private static final Logger LOGGER = Logger.getLogger(TwitterNotificationPlugin.class);
+	private static final Logger LOGGER = LogManager.getLogger(TwitterNotificationPlugin.class);
 	private static final Twitter TWITTER = TwitterFactory.getSingleton();
 
 	@Override

@@ -56,10 +56,15 @@ public class MovieServicesImpl implements MovieServices {
 	@Override
 	public DtList<Actor> getActorsByMovie1(final Long movId) {
 		final DtList<Actor> result = new DtList<>(Actor.class);
+		final Movie movie = movieDAO.get(movId);
+		movie.role().load();
 		result.addAll(
-				movieDAO.get(movId).getRoleList()
+				movie.role().get()
 						.stream()
-						.map((role) -> role.getActor())
+						.map((role) -> {
+							role.actor().load();
+							return role.actor().get();
+						})
 						.collect(Collectors.toList()));
 		return result;
 	}

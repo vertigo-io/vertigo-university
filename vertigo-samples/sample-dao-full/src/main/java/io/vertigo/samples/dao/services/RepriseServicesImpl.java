@@ -33,7 +33,7 @@ public class RepriseServicesImpl implements RepriseServices {
 	@Override
 	public void fillCountries() {
 		final DtList<Country> existingCountries = countryDAO.loadCountries();
-		reprisePAO.insertCountriesBatch(existingCountries);
+		countryDAO.insertCountriesBatch(existingCountries);
 
 	}
 
@@ -46,7 +46,7 @@ public class RepriseServicesImpl implements RepriseServices {
 	public Optional<Long> fillActors(final long limit, final long offset) {
 		final DtList<Actor> existingActors = actorDAO.loadActorsByChunk(limit, offset);
 		if (!existingActors.isEmpty()) {
-			reprisePAO.insertActorsBatch(existingActors);
+			actorDAO.insertActorsBatch(existingActors);
 			return Optional.of(existingActors.get(existingActors.size() - 1).getActId());
 		}
 		return Optional.empty();
@@ -62,7 +62,7 @@ public class RepriseServicesImpl implements RepriseServices {
 	public Optional<Long> fillMovies(final long limit, final long offset) {
 		final DtList<Movie> existingMovies = movieDAO.loadMoviesByChunk(limit, offset);
 		if (!existingMovies.isEmpty()) {
-			reprisePAO.insertMoviesBatch(existingMovies);
+			movieDAO.insertMoviesBatch(existingMovies);
 			return Optional.of(existingMovies.get(existingMovies.size() - 1).getMovId());
 		}
 		return Optional.empty();
@@ -78,7 +78,7 @@ public class RepriseServicesImpl implements RepriseServices {
 	public Optional<Long> fillRoles(final long limit, final long offset) {
 		final DtList<Role> existingRoles = roleDAO.loadRolesByChunk(limit, offset);
 		if (!existingRoles.isEmpty()) {
-			reprisePAO.insertRolesBatch(existingRoles);
+			roleDAO.insertRolesBatch(existingRoles);
 			return Optional.of(existingRoles.get(existingRoles.size() - 1).getRolId());
 		}
 		return Optional.empty();

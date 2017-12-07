@@ -1,7 +1,6 @@
 package io.vertigo.samples.vega.config;
 
 import io.vertigo.account.AccountFeatures;
-import io.vertigo.account.plugins.identity.memory.MemoryAccountStorePlugin;
 import io.vertigo.app.config.AppConfig;
 import io.vertigo.app.config.DefinitionProviderConfig;
 import io.vertigo.app.config.ModuleConfig;
@@ -27,7 +26,6 @@ public final class SampleVegaConfigurator {
 				.addModule(new DynamoFeatures().build())
 				.addModule(new AccountFeatures()
 						.withUserSession(SampleSession.class)
-						.withAccountStorePlugin(MemoryAccountStorePlugin.class)
 						.build())
 				.addModule( ModuleConfig.builder("dependencies")
 						.addComponent(KVStoreManager.class, io.vertigo.dynamo.impl.kvstore.KVStoreManagerImpl.class)

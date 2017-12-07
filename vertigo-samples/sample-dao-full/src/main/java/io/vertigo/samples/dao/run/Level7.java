@@ -20,8 +20,6 @@ import io.vertigo.samples.dao.dao.MyRoleDAO;
 import io.vertigo.samples.dao.dao.RoleDAO;
 import io.vertigo.samples.dao.services.ActorServices;
 import io.vertigo.samples.dao.services.ActorServicesImpl;
-import io.vertigo.samples.dao.services.CountryServices;
-import io.vertigo.samples.dao.services.CountryServicesImpl;
 import io.vertigo.samples.dao.services.MovieServices;
 import io.vertigo.samples.dao.services.MovieServicesImpl;
 import io.vertigo.samples.dao.services.RepriseServices;
@@ -48,24 +46,49 @@ public class Level7 {
 				.addComponent(SamplesPAO.class)
 				.build())
 				.addModule(ModuleConfig.builder("mineServices")
-						.addComponent(CountryServices.class, CountryServicesImpl.class)
 						.addComponent(MovieServices.class, MovieServicesImpl.class)
 						.addComponent(ActorServices.class, ActorServicesImpl.class)
 						.addComponent(RepriseServices.class, RepriseServicesImpl.class)
 						.build());
+
 		try (final AutoCloseableApp app = new AutoCloseableApp(appConfigBuilder.build())) {
-			final Level7 level7 = new Level7();
-			DIInjector.injectMembers(level7, app.getComponentSpace());
+			final Level7 sample = new Level7();
+			DIInjector.injectMembers(sample, app.getComponentSpace());
 			//-----
-			level7.step1();
+			sample.step1();
+			sample.step2();
+			sample.step3();
+			sample.step4();
 		}
 	}
 
 	void step1() {
+		repriseServices.fillCountries();
+	}
+
+	void step2() {
+		final long chunksize = 1000L;
+		Optional<Long> offset = Optional.of(0L);
+		while (offset.isPresent()) {
+			offset = repriseServices.fillActors(chunksize, offset.get());
+
+		}
+	}
+
+	void step3() {
 		final long chunksize = 1000L;
 		Optional<Long> offset = Optional.of(0L);
 		while (offset.isPresent()) {
 			offset = repriseServices.fillMovies(chunksize, offset.get());
+
+		}
+	}
+
+	void step4() {
+		final long chunksize = 1000L;
+		Optional<Long> offset = Optional.of(0L);
+		while (offset.isPresent()) {
+			offset = repriseServices.fillRoles(chunksize, offset.get());
 
 		}
 	}

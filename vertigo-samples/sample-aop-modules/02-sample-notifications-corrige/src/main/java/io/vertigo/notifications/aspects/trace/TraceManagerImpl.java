@@ -3,7 +3,8 @@ package io.vertigo.notifications.aspects.trace;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  *
@@ -12,7 +13,7 @@ import org.apache.log4j.Logger;
  */
 public class TraceManagerImpl implements TraceManager {
 
-	private static final Logger LOG = Logger.getLogger(TraceManagerImpl.class);
+	private static final Logger LOG = LogManager.getLogger(TraceManagerImpl.class);
 
 	@Override
 	public void traceBefore(final String name, final Object[] args) {
