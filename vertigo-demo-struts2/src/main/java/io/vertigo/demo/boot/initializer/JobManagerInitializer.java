@@ -1,6 +1,6 @@
 package io.vertigo.demo.boot.initializer;
 
-import java.time.ZonedDateTime;
+import java.time.Instant;
 
 import javax.inject.Inject;
 
@@ -26,17 +26,17 @@ public final class JobManagerInitializer implements ComponentInitializer {
 
 		final OJobModel model = new OJobModel();
 		model.setActive(Boolean.TRUE);
-		model.setClassEngine(SleepJobEngine.class.getCanonicalName());
-		model.setCreationDate(ZonedDateTime.now());
+		model.setJobEngineClassName(SleepJobEngine.class.getCanonicalName());
+		model.setCreationInstant(Instant.now());
 		model.setDesc("Reload masterData cache");
-		model.setJobname("RELOAD_MD_CACHE");
-		model.setMaxDelay(15);
+		model.setJobName("RELOAD_MD_CACHE");
+		model.setRunMaxDelay(15);
 		model.setMaxRetry(0);
-		model.setTimeout(30);
+		model.setExecTimeout(30);
 		orchestraStore.createJobModel(model);
 
 		final OParams params = new OParams();
-		orchestraStore.scheduleAt(model.getJmoId(), params, ZonedDateTime.now().plusSeconds(15));
+		orchestraStore.scheduleAt(model.getJmoId(), params, Instant.now().plusSeconds(15));
 		//orchestraStore.scheduleCron(model.getJmoId(), params, "0 */2 * * * ?");
 	}
 }
