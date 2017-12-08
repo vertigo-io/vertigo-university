@@ -21,15 +21,14 @@ import io.vertigo.dynamo.domain.model.DtObject;
 import io.vertigo.dynamo.domain.model.Entity;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.dynamo.store.StoreManager;
-import io.vertigo.orchestra.plugins.store.OWorkspace;
-import io.vertigo.orchestra.services.run.JobEngine;
+import io.vertigo.orchestra.services.execution.RunnableActivityEngine;
 
 /**
  * Job de rechargement du cache des MasterDataList.
  * @author npiedeloup
  * @version $Id: ReloadMdCacheJob.java,v 1.3 2014/02/07 16:48:27 npiedeloup Exp $
  */
-public class ReloadMdCacheJob implements JobEngine {
+public class ReloadMdCacheJob extends RunnableActivityEngine {
 	private final Logger logger = LogManager.getLogger(getClass());
 	@Inject
 	private StoreManager storeManager;
@@ -40,7 +39,7 @@ public class ReloadMdCacheJob implements JobEngine {
 
 	/** {@inheritDoc} */
 	@Override
-	public void execute(final OWorkspace workspace) {
+	public void run() {
 		for (final Class<?> dtDefinitionClazz : new DtDefinitions()) {
 			final DtDefinition dtDefinition = DtObjectUtil.findDtDefinition((Class<? extends DtObject>) dtDefinitionClazz);
 			if (storeManager.getMasterDataConfig().containsMasterData(dtDefinition)) {

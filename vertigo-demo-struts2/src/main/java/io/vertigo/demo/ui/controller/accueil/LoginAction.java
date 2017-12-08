@@ -2,11 +2,11 @@ package io.vertigo.demo.ui.controller.accueil;
 
 import javax.inject.Inject;
 
+import io.vertigo.demo.domain.administration.utilisateur.UtilisateurLogin;
+import io.vertigo.demo.services.administration.utilisateur.UtilisateurServices;
 import io.vertigo.demo.ui.controller.AbstractDemoActionSupport;
 import io.vertigo.struts2.core.ContextForm;
 import io.vertigo.struts2.core.UiRequestUtil;
-import io.vertigo.struts2.domain.users.UserAuthentification;
-import io.vertigo.struts2.services.users.UserServices;
 
 /**
  * @author npiedeloup
@@ -16,14 +16,14 @@ public final class LoginAction extends AbstractDemoActionSupport {
 	private static final long serialVersionUID = 3517185648660870776L;
 
 	@Inject
-	private UserServices userServices;
+	private UtilisateurServices utilisateurServices;
 
-	private final ContextForm<UserAuthentification> utilisateurLoginRef = new ContextForm<>("utilisateur", this);
+	private final ContextForm<UtilisateurLogin> utilisateurLoginRef = new ContextForm<>("utilisateur", this);
 
 	/** {@inheritDoc} */
 	@Override
 	public void initContext() {
-		final UserAuthentification utilisateurLogin = new UserAuthentification();
+		final UtilisateurLogin utilisateurLogin = new UtilisateurLogin();
 		utilisateurLogin.setLogin("test");
 		utilisateurLoginRef.publish(utilisateurLogin);
 		toModeEdit();
@@ -34,8 +34,8 @@ public final class LoginAction extends AbstractDemoActionSupport {
 	 * @return outcome du login
 	 */
 	public String login() {
-		final UserAuthentification userAuthentification = utilisateurLoginRef.readDto();
-		userServices.loginUser(userAuthentification.getLogin(), userAuthentification.getPassword());
+		final UtilisateurLogin utilisateurLogin = utilisateurLoginRef.readDto();
+		utilisateurServices.connecterUtilisateur(utilisateurLogin);
 		return SUCCESS; //success va sur accueil
 	}
 
