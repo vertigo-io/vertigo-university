@@ -1,7 +1,8 @@
-package io.vertigo.samples.dao.domain;
+package io.vertigo.samples.crystal.domain;
 
 import io.vertigo.dynamo.domain.model.Entity;
 import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.VAccessor;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.lang.Generated;
@@ -16,14 +17,28 @@ public final class Actor implements Entity {
 
 	private Long actId;
 	private String name;
-	private String sexe;
+
+	@io.vertigo.dynamo.domain.stereotype.Association(
+			name = "A_ACT_SEX",
+			fkFieldName = "SEX_CD",
+			primaryDtDefinitionName = "DT_SEXE",
+			primaryIsNavigable = true,
+			primaryRole = "Sexe",
+			primaryLabel = "Sexe",
+			primaryMultiplicity = "0..1",
+			foreignDtDefinitionName = "DT_ACTOR",
+			foreignIsNavigable = false,
+			foreignRole = "Actor",
+			foreignLabel = "Actor",
+			foreignMultiplicity = "0..*")
+	private final VAccessor<io.vertigo.samples.crystal.domain.Sexe> sexCdAccessor = new VAccessor<>(io.vertigo.samples.crystal.domain.Sexe.class, "Sexe");
 
 	/** {@inheritDoc} */
 	@Override
 	public URI<Actor> getURI() {
 		return DtObjectUtil.createURI(this);
 	}
-
+	
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
@@ -42,7 +57,7 @@ public final class Actor implements Entity {
 	public void setActId(final Long actId) {
 		this.actId = actId;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Nom'.
@@ -61,26 +76,52 @@ public final class Actor implements Entity {
 	public void setName(final String name) {
 		this.name = name;
 	}
-
+	
 	/**
-	 * Champ : DATA.
+	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Sexe'.
-	 * @return String sexe
+	 * @return String sexCd
 	 */
-	@Field(domain = "DO_CODE", label = "Sexe")
-	public String getSexe() {
-		return sexe;
+	@Field(domain = "DO_CODE", type = "FOREIGN_KEY", label = "Sexe")
+	public String getSexCd() {
+		return (String)  sexCdAccessor.getId();
 	}
 
 	/**
-	 * Champ : DATA.
+	 * Champ : FOREIGN_KEY.
 	 * Définit la valeur de la propriété 'Sexe'.
-	 * @param sexe String
+	 * @param sexCd String
 	 */
-	public void setSexe(final String sexe) {
-		this.sexe = sexe;
+	public void setSexCd(final String sexCd) {
+		sexCdAccessor.setId(sexCd);
 	}
 
+ 	/**
+	 * Association : Sexe.
+	 * @return l'accesseur vers la propriété 'Sexe'
+	 */
+	public VAccessor<io.vertigo.samples.crystal.domain.Sexe> sexe() {
+		return sexCdAccessor;
+	}
+	
+	@Deprecated
+	public io.vertigo.samples.crystal.domain.Sexe getSexe() {
+		// we keep the lazyness
+		if (!sexCdAccessor.isLoaded()) {
+			sexCdAccessor.load();
+		}
+		return sexCdAccessor.get();
+	}
+
+	/**
+	 * Retourne l'URI: Sexe.
+	 * @return URI de l'association
+	 */
+	@Deprecated
+	public io.vertigo.dynamo.domain.model.URI<io.vertigo.samples.crystal.domain.Sexe> getSexeURI() {
+		return sexCdAccessor.getURI();
+	}
+	
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

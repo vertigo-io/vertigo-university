@@ -1,0 +1,13 @@
+{"io.vertigo.samples.crystal.domain.Sexe" : 
+	{
+		"male" : {
+			"sexCd" : "M",
+			"label" : "Male"
+		},
+		"female" : {
+			"sexCd" : "F",
+			"label" : "Female"
+		}		
+				
+	}
+}

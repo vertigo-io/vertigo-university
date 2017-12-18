@@ -36,6 +36,8 @@
 		<module>sample-gutenberg</module>
  -->	
  		<module>sample-dao</module>
+		<module>sample-crystal</module>
+		<module>sample-crystal-full</module>
  	</modules>
 
 </project>
