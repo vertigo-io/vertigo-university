@@ -13,7 +13,6 @@ import io.vertigo.samples.SamplesPAO;
 import io.vertigo.samples.crystal.dao.ActorDAO;
 import io.vertigo.samples.crystal.dao.MovieDAO;
 import io.vertigo.samples.crystal.dao.MovieProxyDAO;
-import io.vertigo.samples.crystal.dao.RoleDAO;
 import io.vertigo.samples.crystal.domain.Actor;
 import io.vertigo.samples.crystal.domain.Country;
 import io.vertigo.samples.crystal.domain.Movie;
@@ -27,8 +26,6 @@ public class MovieServicesImpl implements MovieServices {
 	private MovieDAO movieDAO;
 	@Inject
 	private ActorDAO actorDAO;
-	@Inject
-	private RoleDAO roleDAO;
 	@Inject
 	private SamplesPAO samplesPAO;
 	@Inject
