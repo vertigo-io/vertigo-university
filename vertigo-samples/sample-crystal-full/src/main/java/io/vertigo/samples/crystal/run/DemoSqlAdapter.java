@@ -225,11 +225,6 @@ public class DemoSqlAdapter {
 			return translations;
 		}
 
-		/**
-		 * Champ : DATA.
-		 * Définit la valeur de la propriété 'Id Imdb'.
-		 * @param imdbid String
-		 */
 		public void setTranslations(final Translations translations) {
 			this.translations = translations;
 		}

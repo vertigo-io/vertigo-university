@@ -58,6 +58,7 @@ public class SampleConfigBuilder {
 								Param.of("config.file", "elasticsearch.yml"))
 						.build())
 				.addModule(new VegaFeatures()
+						.withApiPrefix("/crystal")
 						.withEmbeddedServer(8081)
 						.build())
 				//---- proxies (Level4)

@@ -14,6 +14,7 @@ import io.vertigo.samples.crystal.dao.MovieDAO;
 import io.vertigo.samples.crystal.services.MovieSearchLoader;
 import io.vertigo.samples.crystal.services.MovieServices;
 import io.vertigo.samples.crystal.services.MovieServicesImpl;
+import io.vertigo.samples.crystal.webservices.MovieWebServices;
 
 public class CrystalSample {
 
@@ -23,14 +24,9 @@ public class CrystalSample {
 	public static void main(final String[] args) {
 		final AppConfigBuilder appConfigBuilder = SampleConfigBuilder.createAppConfigBuilder();
 		appConfigBuilder
-				.addModule(ModuleConfig.builder("DAO")
-						.addComponent(MovieDAO.class)
-						.addComponent(CrystalPAO.class)
+				.addModule(ModuleConfig.builder("stepDao")
 						.build())
-				.addModule(ModuleConfig.builder("Services")
-						.addComponent(MovieServices.class, MovieServicesImpl.class)
-						.addComponent(MovieSearchLoader.class)
-						.build());
+				.addModule(defaultSampleModule());
 
 		try (final AutoCloseableApp app = new AutoCloseableApp(appConfigBuilder.build())) {
 			final CrystalSample sample = new CrystalSample();
@@ -38,6 +34,16 @@ public class CrystalSample {
 			//-----
 			sample.step1();
 		}
+	}
+
+	private static ModuleConfig defaultSampleModule() {
+		return ModuleConfig.builder("Sample")
+				.addComponent(MovieDAO.class)
+				.addComponent(CrystalPAO.class)
+				.addComponent(MovieServices.class, MovieServicesImpl.class)
+				.addComponent(MovieSearchLoader.class)
+				.addComponent(MovieWebServices.class)
+				.build();
 	}
 
 	void step1() {

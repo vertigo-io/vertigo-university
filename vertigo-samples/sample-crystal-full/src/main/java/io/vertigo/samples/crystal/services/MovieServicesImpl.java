@@ -8,8 +8,12 @@ import javax.inject.Inject;
 import org.apache.logging.log4j.LogManager;
 
 import io.vertigo.commons.transaction.Transactional;
+import io.vertigo.dynamo.collections.model.FacetedQueryResult;
+import io.vertigo.dynamo.collections.model.SelectedFacetValues;
 import io.vertigo.dynamo.domain.model.DtList;
+import io.vertigo.dynamo.domain.model.DtListState;
 import io.vertigo.dynamo.search.SearchManager;
+import io.vertigo.dynamo.search.model.SearchQueryBuilder;
 import io.vertigo.lang.Assertion;
 import io.vertigo.lang.WrappedException;
 import io.vertigo.samples.SamplesPAO;
@@ -67,6 +71,12 @@ public class MovieServicesImpl implements MovieServices {
 		} catch (InterruptedException | ExecutionException e) {
 			throw WrappedException.wrap(e);
 		}
+	}
+
+	@Override
+	public FacetedQueryResult searchMovies(final String criteria, final SelectedFacetValues selectedFacetValues, final DtListState listState) {
+		final SearchQueryBuilder searchQueryBuilder = movieDAO.createSearchQueryBuilderMovie(criteria, selectedFacetValues);
+		return movieDAO.loadList(searchQueryBuilder.build(), listState);
 	}
 
 	@Override
