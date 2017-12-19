@@ -72,6 +72,11 @@ create Domain DO_ID {
 	storeType : "NUMERIC"
 }
 
+create Domain DO_IDS {
+	dataType : Long
+	formatter : FMT_DEFAULT
+	multiple : "true"
+}
 create Domain DO_DATE {
 	dataType : Date
 	formatter : FMT_DATE
@@ -109,13 +114,23 @@ create Domain DO_LABEL {
 	formatter : FMT_DEFAULT
 	constraint : [CK_MAX_LENGTH_100]
 	storeType : "VARCHAR(100)"
+	indexType : "text_fr"
 }
 
 create Domain DO_LABEL_LONG {
 	dataType : String
 	formatter : FMT_DEFAULT
 	storeType : "VARCHAR(500)"
+	indexType : "text_fr"
 }
+
+create Domain DO_LABEL_LONG_SORT {
+	dataType : String
+	formatter : FMT_DEFAULT
+	storeType : "VARCHAR(500)"
+	indexType:"text_fr_not_tokenized"
+}
+
 
 create Domain DO_LABEL_VERY_LONG {
 	dataType : String

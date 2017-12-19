@@ -18,19 +18,7 @@ public final class Actor implements Entity {
 	private Long actId;
 	private String name;
 
-	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_ACT_SEX",
-			fkFieldName = "SEX_CD",
-			primaryDtDefinitionName = "DT_SEXE",
-			primaryIsNavigable = true,
-			primaryRole = "Sexe",
-			primaryLabel = "Sexe",
-			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_ACTOR",
-			foreignIsNavigable = false,
-			foreignRole = "Actor",
-			foreignLabel = "Actor",
-			foreignMultiplicity = "0..*")
+	@io.vertigo.dynamo.domain.stereotype.Association(name = "A_ACT_SEX", fkFieldName = "SEX_CD", primaryDtDefinitionName = "DT_SEXE", primaryIsNavigable = true, primaryRole = "Sexe", primaryLabel = "Sexe", primaryMultiplicity = "0..1", foreignDtDefinitionName = "DT_ACTOR", foreignIsNavigable = false, foreignRole = "Actor", foreignLabel = "Actor", foreignMultiplicity = "0..*")
 	private final EnumVAccessor<io.vertigo.samples.crystal.domain.Sexe, io.vertigo.samples.crystal.domain.SexeEnum> sexCdAccessor = new EnumVAccessor<>(io.vertigo.samples.crystal.domain.Sexe.class, "Sexe", io.vertigo.samples.crystal.domain.SexeEnum.class);
 
 	/** {@inheritDoc} */

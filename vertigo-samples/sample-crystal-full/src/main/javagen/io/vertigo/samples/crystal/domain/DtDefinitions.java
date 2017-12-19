@@ -27,6 +27,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		MovieByYear(io.vertigo.samples.crystal.domain.MovieByYear.class),
 		/** Objet de données MovieDisplay. */
 		MovieDisplay(io.vertigo.samples.crystal.domain.MovieDisplay.class),
+		/** Objet de données MovieIndex. */
+		MovieIndex(io.vertigo.samples.crystal.domain.MovieIndex.class),
 		/** Objet de données Role. */
 		Role(io.vertigo.samples.crystal.domain.Role.class),
 		/** Objet de données Sexe. */
@@ -64,7 +66,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	public enum CountryFields implements DtFieldName<io.vertigo.samples.crystal.domain.Country> {
 		/** Propriété 'Id'. */
 		COU_ID,
-		/** Propriété 'Code du pays'. */
+		/** Propriété 'Nom du pays'. */
 		NAME	}
 
 	/**
@@ -73,7 +75,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	public enum MovieFields implements DtFieldName<io.vertigo.samples.crystal.domain.Movie> {
 		/** Propriété 'Id'. */
 		MOV_ID,
-		/** Propriété 'Code du pays'. */
+		/** Propriété 'Titre du film'. */
 		NAME,
 		/** Propriété 'AnnÃ©e'. */
 		YEAR,
@@ -103,6 +105,19 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		COUNTRY,
 		/** Propriété 'Nombre d'acteur'. */
 		ACTORS_COUNT	}
+
+	/**
+	 * Enumération des champs de MovieIndex.
+	 */
+	public enum MovieIndexFields implements DtFieldName<io.vertigo.samples.crystal.domain.MovieIndex> {
+		/** Propriété 'id'. */
+		MOV_ID,
+		/** Propriété 'Titre'. */
+		NAME,
+		/** Propriété 'AnnÃ©e'. */
+		YEAR,
+		/** Propriété 'Pays'. */
+		COUNTRY	}
 
 	/**
 	 * Enumération des champs de Role.

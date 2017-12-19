@@ -48,7 +48,7 @@ public class SampleConfigBuilder {
 					.withStore()
 					.addDataStorePlugin(SqlDataStorePlugin.class,
 							Param.of("sequencePrefix", "SEQ_"))
-				.withSearch(ESEmbeddedSearchServicesPlugin.class,
+					.withSearch(ESEmbeddedSearchServicesPlugin.class,
 						Param.of("home", "D:/atelier/search"), //usage d'url impropre
 						Param.of("envIndex", "crystal-test"),
 						Param.of("rowsPerQuery", "50"),
