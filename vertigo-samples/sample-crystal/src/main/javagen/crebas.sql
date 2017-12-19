@@ -58,7 +58,7 @@ comment on column COUNTRY.COU_ID is
 'Id';
 
 comment on column COUNTRY.NAME is
-'Code du pays';
+'Nom du pays';
 
 -- ============================================================
 --   Table : MOVIE                                        
@@ -77,7 +77,7 @@ comment on column MOVIE.MOV_ID is
 'Id';
 
 comment on column MOVIE.NAME is
-'Code du pays';
+'Titre du film';
 
 comment on column MOVIE.YEAR is
 'AnnÃ©e';

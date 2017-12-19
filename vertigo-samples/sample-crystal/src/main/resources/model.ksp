@@ -2,12 +2,13 @@ package io.vertigo.samples.crystal.domain
 
 create DtDefinition DT_COUNTRY {
   key COU_ID {domain: DO_ID label: "Id" notNull:"false"}
-  field NAME {domain: DO_LABEL label: "Code du pays" notNull:"false"}
+  field NAME {domain: DO_LABEL label: "Nom du pays" notNull:"false"}
 }
 
 create DtDefinition DT_MOVIE {
+  stereotype : "KeyConcept"
   key MOV_ID {domain: DO_ID label: "Id" notNull:"true"}
-  field NAME {domain: DO_LABEL_LONG label: "Code du pays" notNull:"true"}
+  field NAME {domain: DO_LABEL_LONG label: "Titre du film" notNull:"true"}
   field YEAR {domain: DO_YEAR label: "Année" notNull:"false"}
   field IMDBID {domain: DO_LABEL label: "Id Imdb" notNull:"false"}
 }

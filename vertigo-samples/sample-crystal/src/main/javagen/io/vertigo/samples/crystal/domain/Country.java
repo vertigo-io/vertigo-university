@@ -44,17 +44,17 @@ public final class Country implements Entity {
 	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Code du pays'.
+	 * Récupère la valeur de la propriété 'Nom du pays'.
 	 * @return String name
 	 */
-	@Field(domain = "DO_LABEL", label = "Code du pays")
+	@Field(domain = "DO_LABEL", label = "Nom du pays")
 	public String getName() {
 		return name;
 	}
 
 	/**
 	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'Code du pays'.
+	 * Définit la valeur de la propriété 'Nom du pays'.
 	 * @param name String
 	 */
 	public void setName(final String name) {
