@@ -41,23 +41,13 @@ public final class SamplesPAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TK_GET_MOVIE_BY_YEAR.
-	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.crystal.domain.MovieByYear> movies
+	 * Execute la tache TK_GET_ACTORS_IDS_BY_MOVIE.
+	 * @param movId Long 
+	 * @return java.util.List<Long> actors
 	*/
-	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.crystal.domain.MovieByYear> getMovieByYear() {
-		final Task task = createTaskBuilder("TK_GET_MOVIE_BY_YEAR")
-				.build();
-		return getTaskManager()
-				.execute(task)
-				.getResult();
-	}
-
-	/**
-	 * Execute la tache TK_GET_MOVIE_DISPLAY.
-	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.crystal.domain.MovieDisplay> movies
-	*/
-	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.crystal.domain.MovieDisplay> getMovieDisplay() {
-		final Task task = createTaskBuilder("TK_GET_MOVIE_DISPLAY")
+	public java.util.List<Long> getActorsIdsByMovie(final Long movId) {
+		final Task task = createTaskBuilder("TK_GET_ACTORS_IDS_BY_MOVIE")
+				.addValue("MOV_ID", movId)
 				.build();
 		return getTaskManager()
 				.execute(task)

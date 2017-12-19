@@ -12,6 +12,7 @@ import io.vertigo.database.DatabaseFeatures;
 import io.vertigo.database.impl.sql.vendor.h2.H2DataBase;
 import io.vertigo.database.plugins.sql.connection.c3p0.C3p0ConnectionProviderPlugin;
 import io.vertigo.dynamo.impl.DynamoFeatures;
+import io.vertigo.dynamo.impl.task.proxy.TaskProxyMethod;
 import io.vertigo.dynamo.plugins.environment.DynamoDefinitionProvider;
 import io.vertigo.dynamo.plugins.store.datastore.sql.SqlDataStorePlugin;
 import io.vertigo.samples.crystal.boot.DataBaseInitializer;
@@ -46,6 +47,10 @@ public class SampleConfigBuilder {
 								.withStore()
 								.addDataStorePlugin(SqlDataStorePlugin.class,
 										Param.of("sequencePrefix","SEQ_"))
+								.build())
+						//---- proxies (Level4)
+						.addModule(ModuleConfig.builder("proxies")
+								.addProxyMethod(TaskProxyMethod.class)
 								.build())
 						//----Definitions
 						.addModule( ModuleConfig.builder("ressources")

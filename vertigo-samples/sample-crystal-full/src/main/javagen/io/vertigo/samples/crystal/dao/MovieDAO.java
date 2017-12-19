@@ -2,7 +2,6 @@ package io.vertigo.samples.crystal.dao;
 
 import javax.inject.Inject;
 
-import java.util.Optional;
 import io.vertigo.app.Home;
 import io.vertigo.dynamo.task.metamodel.TaskDefinition;
 import io.vertigo.dynamo.task.model.Task;
@@ -43,45 +42,13 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	}
 
 	/**
-	 * Execute la tache TK_GET_MOVIES_BY_CRITERIA.
-	 * @param title String 
-	 * @param year Integer 
+	 * Execute la tache TK_GET_MOVIES_IN_COUNTRIES.
+	 * @param countriesIds java.util.List<Long> 
 	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.crystal.domain.Movie> movies
 	*/
-	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.crystal.domain.Movie> getMoviesByCriteria(final String title, final Integer year) {
-		final Task task = createTaskBuilder("TK_GET_MOVIES_BY_CRITERIA")
-				.addValue("TITLE", title)
-				.addValue("YEAR", year)
-				.build();
-		return getTaskManager()
-				.execute(task)
-				.getResult();
-	}
-
-	/**
-	 * Execute la tache TK_GET_MOVIES_BY_CRITERIA_WITH_COUNTRY.
-	 * @param title String 
-	 * @param year Integer (peut être null)
-	 * @param countries io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.crystal.domain.Country> 
-	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.crystal.domain.Movie> movies
-	*/
-	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.crystal.domain.Movie> getMoviesByCriteriaWithCountry(final String title, final Optional<Integer> year, final io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.crystal.domain.Country> countries) {
-		final Task task = createTaskBuilder("TK_GET_MOVIES_BY_CRITERIA_WITH_COUNTRY")
-				.addValue("TITLE", title)
-				.addValue("YEAR", year.orElse(null))
-				.addValue("COUNTRIES", countries)
-				.build();
-		return getTaskManager()
-				.execute(task)
-				.getResult();
-	}
-
-	/**
-	 * Execute la tache TK_GET_MOVIES_WITH_100_ACTORS.
-	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.crystal.domain.Movie> movies
-	*/
-	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.crystal.domain.Movie> getMoviesWith100Actors() {
-		final Task task = createTaskBuilder("TK_GET_MOVIES_WITH_100_ACTORS")
+	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.crystal.domain.Movie> getMoviesInCountries(final java.util.List<Long> countriesIds) {
+		final Task task = createTaskBuilder("TK_GET_MOVIES_IN_COUNTRIES")
+				.addValue("COUNTRIES_IDS", countriesIds)
 				.build();
 		return getTaskManager()
 				.execute(task)

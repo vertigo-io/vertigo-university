@@ -1,33 +1,30 @@
 package io.vertigo.samples.crystal.services;
 
+import java.util.List;
+
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.store.StoreServices;
-import io.vertigo.samples.crystal.domain.Actor;
-import io.vertigo.samples.crystal.domain.Country;
 import io.vertigo.samples.crystal.domain.Movie;
-import io.vertigo.samples.crystal.domain.MovieByYear;
-import io.vertigo.samples.crystal.domain.MovieDisplay;
+import io.vertigo.samples.crystal.domain.Role;
 
 public interface MovieServices extends StoreServices {
 
 	Movie getMovieById(Long movId);
 
-	DtList<Movie> findMoviesByCriteria(String title, Integer year);
+	List<Long> getActorsIdsByMovie(Long movId);
 
-	DtList<Movie> findMoviesByKsp(String title, Integer year);
+	DtList<Movie> getMoviesInCountries(final List<Long> countryIds);
 
-	DtList<Actor> getActorsByMovie1(Long movId);
+	void manipulateAccessors(Long movId);
 
-	DtList<Actor> getActorsByMovie2(Long movId);
+	Movie loadMovieWithRoles(Long movId);
 
-	void addActorToMovie(Long actId, Long movId, String role);
+	Movie loadMovieWithRolesAndReset(Long movId);
 
-	DtList<Movie> findMoviesByKspWhereIn(String title, Integer year, DtList<Country> countries);
+	DtList<Role> getRolesByMovie(Long movId);
 
-	DtList<Movie> getMoviesWith100Actors();
+	long countMaleActorsInMovie(Long movId);
 
-	DtList<MovieDisplay> getMovieDisplay();
-
-	DtList<MovieByYear> getMoviesByDate();
+	long countMoviesInCountry(Long couId);
 
 }

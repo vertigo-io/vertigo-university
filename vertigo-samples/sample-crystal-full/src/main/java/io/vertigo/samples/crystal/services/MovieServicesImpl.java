@@ -1,26 +1,24 @@
 package io.vertigo.samples.crystal.services;
 
-import java.util.Optional;
-import java.util.stream.Collectors;
+import java.util.List;
 
 import javax.inject.Inject;
 
+import org.apache.logging.log4j.LogManager;
+
 import io.vertigo.commons.transaction.Transactional;
-import io.vertigo.dynamo.criteria.Criteria;
-import io.vertigo.dynamo.criteria.Criterions;
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.lang.Assertion;
 import io.vertigo.samples.SamplesPAO;
 import io.vertigo.samples.crystal.dao.ActorDAO;
 import io.vertigo.samples.crystal.dao.MovieDAO;
+import io.vertigo.samples.crystal.dao.MovieProxyDAO;
 import io.vertigo.samples.crystal.dao.RoleDAO;
 import io.vertigo.samples.crystal.domain.Actor;
 import io.vertigo.samples.crystal.domain.Country;
-import io.vertigo.samples.crystal.domain.DtDefinitions.MovieFields;
 import io.vertigo.samples.crystal.domain.Movie;
-import io.vertigo.samples.crystal.domain.MovieByYear;
-import io.vertigo.samples.crystal.domain.MovieDisplay;
 import io.vertigo.samples.crystal.domain.Role;
+import io.vertigo.samples.crystal.domain.SexeEnum;
 
 @Transactional
 public class MovieServicesImpl implements MovieServices {
@@ -33,81 +31,91 @@ public class MovieServicesImpl implements MovieServices {
 	private RoleDAO roleDAO;
 	@Inject
 	private SamplesPAO samplesPAO;
+	@Inject
+	private MovieProxyDAO movieProxyDAO;
 
 	@Override
 	public Movie getMovieById(final Long movId) {
 		Assertion.checkNotNull(movId);
-		// ---
+		//---
 		return movieDAO.get(movId);
 	}
 
 	@Override
-	public DtList<Movie> findMoviesByCriteria(final String title, final Integer year) {
-		final Criteria<Movie> criteria = Criterions.startsWith(MovieFields.NAME, title)
-				.and(Criterions.isEqualTo(MovieFields.YEAR, year));
-		return movieDAO.findAll(criteria, 500);
-	}
-
-	@Override
-	public DtList<Movie> findMoviesByKsp(final String title, final Integer year) {
-		return movieDAO.getMoviesByCriteria(title, year);
-	}
-
-	@Override
-	public DtList<Actor> getActorsByMovie1(final Long movId) {
-		final DtList<Actor> result = new DtList<>(Actor.class);
-		final Movie movie = movieDAO.get(movId);
-		movie.role().load();
-		result.addAll(
-				movie.role().get()
-						.stream()
-						.map((role) -> {
-							role.actor().load();
-							return role.actor().get();
-						})
-						.collect(Collectors.toList()));
-		return result;
-	}
-
-	@Override
-	public DtList<Actor> getActorsByMovie2(final Long movId) {
-		return actorDAO.getActorsInMovie(movId);
-	}
-
-	@Override
-	public void addActorToMovie(final Long actId, final Long movId, final String role) {
-		Assertion.checkNotNull(actId);
+	public List<Long> getActorsIdsByMovie(final Long movId) {
 		Assertion.checkNotNull(movId);
-		Assertion.checkArgNotEmpty(role);
+		//---
+		return samplesPAO.getActorsIdsByMovie(movId);
+	}
+
+	@Override
+	public DtList<Movie> getMoviesInCountries(final List<Long> countryIds) {
+		Assertion.checkNotNull(countryIds);
+		//---
+		return movieDAO.getMoviesInCountries(countryIds);
+	}
+
+	@Override
+	public void manipulateAccessors(final Long movId) {
+		final Movie movie = getMovieById(movId);
+		//--- entity
+		//----- read-------
+		LogManager.getLogger(this.getClass()).info("country accessor isLoaded : " + movie.country().isLoaded());
+		movie.country().load();
+		LogManager.getLogger(this.getClass()).info("country accessor isLoaded : " + movie.country().isLoaded());
+		final Country country = movie.country().get();
+		//----- write-------
+		movie.country().setId(null);
+		LogManager.getLogger(this.getClass()).info("country accessor isLoaded : " + movie.country().isLoaded());
+		movie.country().set(country);
+		LogManager.getLogger(this.getClass()).info("country accessor isLoaded : " + movie.country().isLoaded());
+		//--- list
+		//--- read only
+		movie.role().load();
+		movie.role().get();
+
+	}
+
+	@Override
+	public Movie loadMovieWithRoles(final Long movId) {
+		final Movie movie = getMovieById(movId);
+		movie.role().load();
+		return movie;
+	}
+
+	@Override
+	public Movie loadMovieWithRolesAndReset(final Long movId) {
+		final Movie movie = loadMovieWithRoles(movId);
+		movie.role().reset();
+		return movie;
+	}
+
+	@Override
+	public DtList<Role> getRolesByMovie(final Long movId) {
+		Assertion.checkNotNull(movId);
 		// ---
-		final Role newRole = new Role();
-		newRole.setMovId(movId);
-		newRole.setActId(actId);
-		newRole.setAsCharacter(role);
-		roleDAO.save(newRole);
-
+		final Movie movie = movieDAO.get(movId);
+		// two instructions with accessor , the fluent style is broken to avoid transparent loads within loops
+		movie.role().load();
+		return movie.role().get();
 	}
 
 	@Override
-	public DtList<Movie> findMoviesByKspWhereIn(final String title, final Integer year, final DtList<Country> countries) {
-		Assertion.checkNotNull(countries);
-		// ---
-		return movieDAO.getMoviesByCriteriaWithCountry(title, Optional.ofNullable(year), countries);
+	public long countMaleActorsInMovie(final Long movId) {
+		Assertion.checkNotNull(movId);
+		//---
+		final DtList<Actor> actors = actorDAO.getActorsByMovie(movId);
+
+		return actors.stream()
+				.filter(actor -> actor.sexe().getEnumValue() == SexeEnum.male)
+				.count();
 	}
 
 	@Override
-	public DtList<Movie> getMoviesWith100Actors() {
-		return movieDAO.getMoviesWith100Actors();
-	}
-
-	@Override
-	public DtList<MovieDisplay> getMovieDisplay() {
-		return samplesPAO.getMovieDisplay();
-	}
-
-	@Override
-	public DtList<MovieByYear> getMoviesByDate() {
-		return samplesPAO.getMovieByYear();
+	public long countMoviesInCountry(final Long couId) {
+		Assertion.checkNotNull(couId);
+		//---
+		return movieProxyDAO.count(couId);
 	}
 
 }

@@ -208,3 +208,15 @@ create Domain DO_FILE_PATH {
 	constraint : [CK_MAX_LENGTH_250]
 	storeType : "VARCHAR(250)"
 }
+
+create Domain DO_LONGS {  
+    dataType : Long
+    multiple : "true"
+    formatter : FMT_DEFAULT
+}
+
+create Domain DO_INTEGER {  
+    dataType : Integer
+    formatter : FMT_DEFAULT
+}
+
