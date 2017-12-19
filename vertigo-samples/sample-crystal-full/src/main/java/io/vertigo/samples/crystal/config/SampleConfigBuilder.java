@@ -1,5 +1,8 @@
 package io.vertigo.samples.crystal.config;
 
+import io.vertigo.account.AccountFeatures;
+import io.vertigo.account.plugins.account.store.datastore.StoreAccountStorePlugin;
+import io.vertigo.account.plugins.authentication.ldap.LdapAuthenticationPlugin;
 import io.vertigo.app.config.AppConfig;
 import io.vertigo.app.config.AppConfigBuilder;
 import io.vertigo.app.config.DefinitionProviderConfig;
@@ -18,6 +21,7 @@ import io.vertigo.dynamo.plugins.environment.DynamoDefinitionProvider;
 import io.vertigo.dynamo.plugins.search.elasticsearch.embedded.ESEmbeddedSearchServicesPlugin;
 import io.vertigo.dynamo.plugins.store.datastore.sql.SqlDataStorePlugin;
 import io.vertigo.samples.crystal.boot.DataBaseInitializer;
+import io.vertigo.samples.crystal.webservices.TestUserSession;
 import io.vertigo.vega.VegaFeatures;
 
 public class SampleConfigBuilder {
@@ -61,6 +65,19 @@ public class SampleConfigBuilder {
 						.withApiPrefix("/crystal")
 						.withEmbeddedServer(8081)
 						.build())
+				.addModule(new AccountFeatures()
+					.withUserSession(TestUserSession.class)
+					.withAccountStorePlugin(StoreAccountStorePlugin.class,
+							Param.of("userIdentityEntity", "DT_USER"),
+							Param.of("groupIdentityEntity", "DT_USER_GROUP"),
+							Param.of("userAuthField", "EMAIL"),
+							Param.of("userToAccountMapping", "id:USR_ID, displayName:NAME, email:EMAIL, authToken:EMAIL"),
+							Param.of("groupToGroupAccountMapping", "id:GRP_ID, displayName:NAME"))
+					.withAuthentication(LdapAuthenticationPlugin.class,
+							Param.of("userLoginTemplate", "cn={0},dc=vertigo,dc=io"),
+							Param.of("ldapServerHost", "docker-vertigo.part.klee.lan.net"),
+							Param.of("ldapServerPort", "389"))
+					.build())
 				//---- proxies (Level4)
 				.addModule(ModuleConfig.builder("proxies")
 						.addProxyMethod(TaskProxyMethod.class)

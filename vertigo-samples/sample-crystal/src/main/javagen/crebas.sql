@@ -23,6 +23,12 @@ create sequence SEQ_ROLE
 create sequence SEQ_SEXE
 	start with 1000 cache 20; 
 
+create sequence SEQ_USER
+	start with 1000 cache 20; 
+
+create sequence SEQ_USER_GROUP
+	start with 1000 cache 20; 
+
 
 -- ============================================================
 --   Table : ACTOR                                        
@@ -128,6 +134,54 @@ comment on column SEXE.SEX_CD is
 comment on column SEXE.LABEL is
 'Label';
 
+-- ============================================================
+--   Table : USER                                        
+-- ============================================================
+create table USER
+(
+    USR_ID      	 NUMERIC     	not null,
+    LOGIN       	 VARCHAR(100)	,
+    NAME        	 VARCHAR(100)	,
+    EMAIL       	 VARCHAR(100)	,
+    COU_ID      	 NUMERIC     	,
+    GRP_ID      	 NUMERIC     	,
+    constraint PK_USER primary key (USR_ID)
+);
+
+comment on column USER.USR_ID is
+'Id';
+
+comment on column USER.LOGIN is
+'Login';
+
+comment on column USER.NAME is
+'Nom';
+
+comment on column USER.EMAIL is
+'email';
+
+comment on column USER.COU_ID is
+'Country';
+
+comment on column USER.GRP_ID is
+'Group';
+
+-- ============================================================
+--   Table : USER_GROUP                                        
+-- ============================================================
+create table USER_GROUP
+(
+    GRP_ID      	 NUMERIC     	not null,
+    NAME        	 VARCHAR(100)	,
+    constraint PK_USER_GROUP primary key (GRP_ID)
+);
+
+comment on column USER_GROUP.GRP_ID is
+'Id';
+
+comment on column USER_GROUP.NAME is
+'Nom';
+
 
 
 alter table ACTOR
@@ -153,5 +207,17 @@ alter table ROLE
 	references MOVIE (MOV_ID);
 
 create index ROL_MOV_MOVIE_FK on ROLE (MOV_ID asc);
+
+alter table USER
+	add constraint FK_USR_COU_COUNTRY foreign key (COU_ID)
+	references COUNTRY (COU_ID);
+
+create index USR_COU_COUNTRY_FK on USER (COU_ID asc);
+
+alter table USER
+	add constraint FK_USR_GRP_USER_GROUP foreign key (GRP_ID)
+	references USER_GROUP (GRP_ID);
+
+create index USR_GRP_USER_GROUP_FK on USER (GRP_ID asc);
 
 
