@@ -1,0 +1,54 @@
+package io.vertigo.samples.crystal.authorization;
+
+import io.vertigo.account.authorization.metamodel.Authorization;
+import io.vertigo.account.authorization.metamodel.AuthorizationName;
+import io.vertigo.account.authorization.metamodel.OperationName;
+import io.vertigo.app.Home;
+import io.vertigo.samples.crystal.domain.Movie;
+
+/**
+ * Warning. This class is generated automatically !
+ *
+ * Enum of the security authorizations and operations associated with secured entities known by the application.
+ */
+public final class SecuredEntities {
+
+	private SecuredEntities() {
+		//private constructor
+	}
+
+	/**
+	 * Authorizations of Movie.
+	 */
+	public enum MovieAuthorizations implements AuthorizationName {
+		/** ATZ_MOVIE$READ. */
+		ATZ_MOVIE$READ;
+
+		/**
+		 * Get the associated authorization.
+		 *
+		 * @param code authorization code
+		 * @return authorization
+		 */
+		public static Authorization of(final String code) {
+			return Home.getApp().getDefinitionSpace().resolve(code, Authorization.class);
+		}
+
+		/**
+		 * Get the associated authorization.
+		 *
+		 * @return role
+		 */
+		public Authorization getAuthorization() {
+			return of(name());
+		}
+	}
+
+	/**
+	 * Operations of Movie.
+	 */
+	public enum MovieOperations implements OperationName<Movie> {
+		/** READ. */
+		READ;
+	}
+}

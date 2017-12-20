@@ -1,5 +1,6 @@
 package io.vertigo.samples.crystal.config;
 
+import io.vertigo.account.plugins.authorization.loaders.JsonSecurityDefinitionProvider;
 import io.vertigo.app.config.AppConfig;
 import io.vertigo.app.config.DefinitionProviderConfig;
 import io.vertigo.app.config.ModuleConfig;
@@ -14,6 +15,7 @@ import io.vertigo.studio.impl.mda.MdaManagerImpl;
 import io.vertigo.studio.masterdata.MasterDataManager;
 import io.vertigo.studio.mda.MdaManager;
 import io.vertigo.studio.plugins.masterdata.json.JsonMasterDataValueProvider;
+import io.vertigo.studio.plugins.mda.authorization.AuthorizationGeneratorPlugin;
 import io.vertigo.studio.plugins.mda.domain.java.DomainGeneratorPlugin;
 import io.vertigo.studio.plugins.mda.domain.sql.SqlGeneratorPlugin;
 import io.vertigo.studio.plugins.mda.file.FileInfoGeneratorPlugin;
@@ -53,7 +55,8 @@ public class SampleStudioConfigBuilder {
 								Param.of("generateJpaAnnotations", "false"))
 						.addPlugin(TaskGeneratorPlugin.class,
 								Param.of("targetSubDir", "."))
-
+						.addPlugin(AuthorizationGeneratorPlugin.class,
+								Param.of("targetSubDir", "."))
 						.addPlugin(FileInfoGeneratorPlugin.class,
 								Param.of("targetSubDir", "."))
 						.addPlugin(SqlGeneratorPlugin.class,
@@ -62,12 +65,16 @@ public class SampleStudioConfigBuilder {
 								Param.of("generateDrop", "false"),
 								//------ StaticMasterData-------
 								Param.of("generateMasterData", "true"))
+
 						.addComponent(MasterDataManager.class, MasterDataManagerImpl.class)
 						.addPlugin(JsonMasterDataValueProvider.class,
 								Param.of("fileName", "masterDataValues.json"))
+						//level6
+						.addDefinitionProvider(DefinitionProviderConfig.builder(JsonSecurityDefinitionProvider.class)
+								.addDefinitionResource("security", "auth-config.json")
+								.build())
 						.build())
 				.build();
-
 	}
 
 }

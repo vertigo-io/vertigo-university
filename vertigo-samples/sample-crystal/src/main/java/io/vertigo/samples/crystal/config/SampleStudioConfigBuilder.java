@@ -13,6 +13,7 @@ import io.vertigo.studio.mda.MdaManager;
 import io.vertigo.studio.plugins.mda.domain.java.DomainGeneratorPlugin;
 import io.vertigo.studio.plugins.mda.domain.sql.SqlGeneratorPlugin;
 import io.vertigo.studio.plugins.mda.file.FileInfoGeneratorPlugin;
+import io.vertigo.studio.plugins.mda.security.SecurityGeneratorPlugin;
 import io.vertigo.studio.plugins.mda.task.TaskGeneratorPlugin;
 
 public class SampleStudioConfigBuilder {
@@ -45,6 +46,7 @@ public class SampleStudioConfigBuilder {
 							Param.of("generateDtObject", "true"),
 							Param.of("generateJpaAnnotations", "false"))
 					.addPlugin(TaskGeneratorPlugin.class, Param.of("targetSubDir", "."))
+					.addPlugin(SecurityGeneratorPlugin.class, Param.of("targetSubDir", "."))
 					.addPlugin(FileInfoGeneratorPlugin.class, Param.of("targetSubDir", "."))
 					.addPlugin(SqlGeneratorPlugin.class, Param.of("targetSubDir", "."),
 							Param.of("baseCible", "PostgreSql"),
