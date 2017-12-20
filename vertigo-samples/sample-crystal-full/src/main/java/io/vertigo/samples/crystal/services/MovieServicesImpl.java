@@ -27,6 +27,7 @@ import io.vertigo.lang.WrappedException;
 import io.vertigo.samples.SamplesPAO;
 import io.vertigo.samples.crystal.CrystalPAO;
 import io.vertigo.samples.crystal.authorization.GlobalAuthorizations;
+import io.vertigo.samples.crystal.authorization.SecuredEntities.MovieAuthorizations;
 import io.vertigo.samples.crystal.dao.ActorDAO;
 import io.vertigo.samples.crystal.dao.MovieDAO;
 import io.vertigo.samples.crystal.domain.Actor;
@@ -171,6 +172,7 @@ public class MovieServicesImpl implements MovieServices {
 
 	private void addSecurity() {
 		authorizationManager.obtainUserAuthorizations().addAuthorization(GlobalAuthorizations.ATZ_SPECIAL.getAuthorization());
+		authorizationManager.obtainUserAuthorizations().addAuthorization(MovieAuthorizations.ATZ_MOVIE$READ.getAuthorization());
 		authorizationManager.obtainUserAuthorizations().withSecurityKeys("couId", 1178);
 	}
 
