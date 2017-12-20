@@ -2,6 +2,7 @@ package io.vertigo.samples.crystal.services;
 
 import java.util.List;
 
+import io.vertigo.account.account.Account;
 import io.vertigo.dynamo.collections.model.FacetedQueryResult;
 import io.vertigo.dynamo.collections.model.SelectedFacetValues;
 import io.vertigo.dynamo.domain.model.DtList;
@@ -34,5 +35,7 @@ public interface MovieServices extends StoreServices {
 	DtList<Role> getRolesByMovie(Long movId);
 
 	long countMaleActorsInMovie(Long movId);
+
+	Account login(final String login, final String password);
 
 }

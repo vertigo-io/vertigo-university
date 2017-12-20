@@ -82,8 +82,8 @@ public class SampleConfigBuilder {
 							Param.of("userIdentityEntity", "DT_USER"),
 							Param.of("groupIdentityEntity", "DT_USER_GROUP"),
 							Param.of("userAuthField", "LOGIN"),
-							Param.of("userToAccountMapping", "id:USR_ID, displayName:NAME, email:EMAIL, authToken:LOGIN"),
-							Param.of("groupToGroupAccountMapping", "id:GRP_ID, displayName:NAME"))
+							Param.of("userToAccountMapping", "id:LOGIN, displayName:NAME, email:EMAIL, authToken:LOGIN"),
+							Param.of("groupToGroupAccountMapping", "id:NAME, displayName:NAME"))
 					.withAuthentication(LdapAuthenticationPlugin.class,
 							Param.of("userLoginTemplate", "cn={0},dc=vertigo,dc=io"),
 							Param.of("ldapServerHost", "docker-vertigo.part.klee.lan.net"),

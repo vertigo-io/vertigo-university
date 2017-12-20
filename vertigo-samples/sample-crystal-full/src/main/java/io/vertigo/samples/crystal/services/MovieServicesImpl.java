@@ -1,6 +1,7 @@
 package io.vertigo.samples.crystal.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
 import javax.inject.Inject;
@@ -8,6 +9,10 @@ import javax.inject.Inject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import io.vertigo.account.account.Account;
+import io.vertigo.account.authentication.AuthenticationManager;
+import io.vertigo.account.authentication.AuthenticationToken;
+import io.vertigo.account.impl.authentication.UsernamePasswordAuthenticationToken;
 import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.dynamo.collections.model.FacetedQueryResult;
 import io.vertigo.dynamo.collections.model.SelectedFacetValues;
@@ -32,6 +37,9 @@ import io.vertigo.samples.crystal.domain.SexeEnum;
 @Transactional
 public class MovieServicesImpl implements MovieServices {
 	private static Logger logger = LogManager.getLogger(MovieServices.class);
+
+	@Inject
+	private AuthenticationManager authenticationManager;
 
 	@Inject
 	private MovieDAO movieDAO;
@@ -149,4 +157,11 @@ public class MovieServicesImpl implements MovieServices {
 				.count();
 	}
 
+	@Override
+	public Account login(final String login, final String password) {
+		//A mettre dans un service Tx
+		final AuthenticationToken token = new UsernamePasswordAuthenticationToken(login, password);
+		final Optional<Account> account = authenticationManager.login(token);
+		return account.get();
+	}
 }

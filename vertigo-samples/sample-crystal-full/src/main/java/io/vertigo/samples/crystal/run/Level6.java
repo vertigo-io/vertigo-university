@@ -1,15 +1,10 @@
 package io.vertigo.samples.crystal.run;
 
-import java.util.Optional;
-
 import javax.inject.Inject;
 
-import org.junit.Assert;
+import org.apache.logging.log4j.LogManager;
 
 import io.vertigo.account.account.Account;
-import io.vertigo.account.authentication.AuthenticationManager;
-import io.vertigo.account.authentication.AuthenticationToken;
-import io.vertigo.account.impl.authentication.UsernamePasswordAuthenticationToken;
 import io.vertigo.account.plugins.authorization.loaders.JsonSecurityDefinitionProvider;
 import io.vertigo.app.AutoCloseableApp;
 import io.vertigo.app.config.AppConfigBuilder;
@@ -30,7 +25,7 @@ import io.vertigo.samples.crystal.webservices.MovieWebServices;
 public class Level6 {
 
 	@Inject
-	private AuthenticationManager authenticationManager;
+	private MovieServices movieServices;
 
 	public static void main(final String[] args) {
 		final AppConfigBuilder appConfigBuilder = SampleConfigBuilder.createAppConfigBuilder(true, true, true);
@@ -63,10 +58,8 @@ public class Level6 {
 	}
 
 	void step1() {
-		//A mettre dans un service Tx
-		final AuthenticationToken token = new UsernamePasswordAuthenticationToken("admin", "v3rt1g0");
-		final Optional<Account> account = authenticationManager.login(token);
-		Assert.assertTrue("Authent fail", account.isPresent());
+		final Account account = movieServices.login("admin", "v3rt1g0");
+		LogManager.getLogger(this.getClass()).info("account: " + account.getDisplayName());
 	}
 
 }
