@@ -9,7 +9,11 @@ create DtDefinition DT_MOVIE_INDEX {
   field MOV_ID {domain: DO_ID label: "id" notNull:"true" }
   field NAME {domain: DO_LABEL_LONG label: "Titre" notNull:"false"}
   field YEAR {domain: DO_YEAR label: "Année" notNull:"false"}
-  field COUNTRY {domain: DO_LABEL label: "Pays" notNull:"false"}  
+  field COUNTRY {domain: DO_LABEL label: "Pays" notNull:"false"}
+  
+  computed NAME_SORT_ONLY {domain : DO_LABEL_LONG_SORT, label:"Titre"
+        expression:"return getName();"
+  }  
 }
 
 

@@ -1,5 +1,9 @@
 index :
     analysis :
+        normalizer :
+             sortable :
+                type : custom
+                filter : ["lowercase", "asciifolding"]
         analyzer :
             code :
                 tokenizer : keyword
