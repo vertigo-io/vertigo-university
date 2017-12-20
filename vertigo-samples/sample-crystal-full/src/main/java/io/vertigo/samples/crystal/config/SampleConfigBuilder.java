@@ -1,10 +1,13 @@
 package io.vertigo.samples.crystal.config;
 
 import io.vertigo.account.AccountFeatures;
+import io.vertigo.account.authorization.AuthorizationManager;
+import io.vertigo.account.impl.authorization.AuthorizationManagerImpl;
 import io.vertigo.account.plugins.account.store.datastore.StoreAccountStorePlugin;
 import io.vertigo.account.plugins.authentication.ldap.LdapAuthenticationPlugin;
 import io.vertigo.app.config.AppConfig;
 import io.vertigo.app.config.AppConfigBuilder;
+import io.vertigo.app.config.ComponentConfig;
 import io.vertigo.app.config.DefinitionProviderConfig;
 import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.commons.impl.CommonsFeatures;
@@ -88,6 +91,12 @@ public class SampleConfigBuilder {
 							Param.of("userLoginTemplate", "cn={0},dc=vertigo,dc=io"),
 							Param.of("ldapServerHost", "docker-vertigo.part.klee.lan.net"),
 							Param.of("ldapServerPort", "389"))
+					.build());
+			appConfigBuilder.addModule(ModuleConfig.builder("authorization")
+					.addComponent(ComponentConfig.builder()
+							.withApi(AuthorizationManager.class)
+							.withImpl(AuthorizationManagerImpl.class)
+							.build())
 					.build());
 		}
 

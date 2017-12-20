@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 import io.vertigo.account.account.Account;
 import io.vertigo.account.authentication.AuthenticationManager;
 import io.vertigo.account.authentication.AuthenticationToken;
+import io.vertigo.account.authorization.AuthorizationManager;
 import io.vertigo.account.impl.authentication.UsernamePasswordAuthenticationToken;
 import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.dynamo.collections.model.FacetedQueryResult;
@@ -25,6 +26,7 @@ import io.vertigo.lang.VUserException;
 import io.vertigo.lang.WrappedException;
 import io.vertigo.samples.SamplesPAO;
 import io.vertigo.samples.crystal.CrystalPAO;
+import io.vertigo.samples.crystal.authorization.GlobalAuthorizations;
 import io.vertigo.samples.crystal.dao.ActorDAO;
 import io.vertigo.samples.crystal.dao.MovieDAO;
 import io.vertigo.samples.crystal.domain.Actor;
@@ -40,6 +42,8 @@ public class MovieServicesImpl implements MovieServices {
 
 	@Inject
 	private AuthenticationManager authenticationManager;
+	@Inject
+	private AuthorizationManager authorizationManager;
 
 	@Inject
 	private MovieDAO movieDAO;
@@ -159,9 +163,15 @@ public class MovieServicesImpl implements MovieServices {
 
 	@Override
 	public Account login(final String login, final String password) {
-		//A mettre dans un service Tx
 		final AuthenticationToken token = new UsernamePasswordAuthenticationToken(login, password);
 		final Optional<Account> account = authenticationManager.login(token);
+		addSecurity();
 		return account.get();
 	}
+
+	private void addSecurity() {
+		authorizationManager.obtainUserAuthorizations().addAuthorization(GlobalAuthorizations.ATZ_SPECIAL.getAuthorization());
+		authorizationManager.obtainUserAuthorizations().withSecurityKeys("couId", 1178);
+	}
+
 }
