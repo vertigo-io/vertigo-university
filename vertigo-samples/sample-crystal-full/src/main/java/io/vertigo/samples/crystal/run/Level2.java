@@ -26,7 +26,7 @@ public class Level2 {
 	private MovieServices movieServices;
 
 	public static void main(final String[] args) {
-		final AppConfigBuilder appConfigBuilder = SampleConfigBuilder.createAppConfigBuilder();
+		final AppConfigBuilder appConfigBuilder = SampleConfigBuilder.createAppConfigBuilder(true, false, false);
 		appConfigBuilder
 				.addModule(ModuleConfig.builder("stepDao")
 						.addComponent(ActorDAO.class)

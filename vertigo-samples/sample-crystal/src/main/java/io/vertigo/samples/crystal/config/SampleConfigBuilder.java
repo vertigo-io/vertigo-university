@@ -20,18 +20,29 @@ import io.vertigo.vega.VegaFeatures;
 
 public class SampleConfigBuilder {
 
-	public static AppConfigBuilder createAppConfigBuilder() {
-		// @formatter:off
-		return AppConfig.builder()
+	public static AppConfigBuilder createAppConfigBuilder(final boolean withSearch, final boolean withVega) {
+		final DynamoFeatures dynamoFeatures = new DynamoFeatures()
+				.withStore()
+				.addDataStorePlugin(SqlDataStorePlugin.class,
+						Param.of("sequencePrefix", "SEQ_"));
+		if (withSearch) {
+			dynamoFeatures.withSearch(ESEmbeddedSearchServicesPlugin.class,
+					Param.of("home", "D:/atelier/search"), //usage d'url impropre
+					Param.of("envIndex", "crystal-test"),
+					Param.of("rowsPerQuery", "50"),
+					Param.of("config.file", "elasticsearch.yml"));
+		}
+
+		final AppConfigBuilder appConfigBuilder = AppConfig.builder()
 				.beginBoot()
-					.withLocales("fr_FR")
-					.addPlugin(ClassPathResourceResolverPlugin.class)
-					.addPlugin(LocalResourceResolverPlugin.class)
+				.withLocales("fr_FR")
+				.addPlugin(ClassPathResourceResolverPlugin.class)
+				.addPlugin(LocalResourceResolverPlugin.class)
 				.endBoot()
 				.addModule(new CommonsFeatures()
-					.withCache(MemoryCachePlugin.class)
-					.withScript()
-					.build())
+						.withCache(MemoryCachePlugin.class)
+						.withScript()
+						.build())
 				.addModule(new DatabaseFeatures()
 						.withSqlDataBase()
 						.addSqlConnectionProviderPlugin(C3p0ConnectionProviderPlugin.class,
@@ -39,27 +50,20 @@ public class SampleConfigBuilder {
 								Param.of("jdbcDriver", org.h2.Driver.class.getName()),
 								Param.of("jdbcUrl", "jdbc:h2:D:/atelier/database/formation_loaded"))
 						.build())
-				.addModule(new DynamoFeatures()
-					.withStore()
-					.addDataStorePlugin(SqlDataStorePlugin.class,
-							Param.of("sequencePrefix", "SEQ_"))
-					.withSearch(ESEmbeddedSearchServicesPlugin.class,
-						Param.of("home", "D:/atelier/search"), //usage d'url impropre
-						Param.of("envIndex", "crystal-test"),
-						Param.of("rowsPerQuery", "50"),
-						Param.of("config.file", "elasticsearch.yml"))
-				.build())
-
-				.addModule(new VegaFeatures()
-					.withEmbeddedServer(8081)
-					.build())
-
+				.addModule(dynamoFeatures.build())
 				.addModule(ModuleConfig.builder("ressources")
 						.addDefinitionProvider(DefinitionProviderConfig.builder(DynamoDefinitionProvider.class)
 								.addDefinitionResource("kpr", "application.kpr")
 								.build())
 						.build());
-		// @formatter:on
+
+		if (withVega) {
+			appConfigBuilder.addModule(new VegaFeatures()
+					.withEmbeddedServer(8081)
+					.build());
+		}
+		
+			return appConfigBuilder;
 	}
 
 }

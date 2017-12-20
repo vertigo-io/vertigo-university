@@ -57,6 +57,14 @@ create FacetDefinition FCT_MOVIE_YEAR {
 
 create FacetedQueryDefinition QRY_MOVIE {  
   keyConcept : DT_MOVIE
+  facets : []
+  domainCriteria : DO_LABEL
+  listFilterBuilderClass : "io.vertigo.dynamox.search.DslListFilterBuilder"  
+  listFilterBuilderQuery : "_all:#+query*#"
+}
+
+create FacetedQueryDefinition QRY_MOVIE_WITH_FACETS {  
+  keyConcept : DT_MOVIE
   facets : [FCT_MOVIE_NAME, FCT_MOVIE_YEAR, FCT_MOVIE_COUNTRY]
   domainCriteria : DO_LABEL
   listFilterBuilderClass : "io.vertigo.dynamox.search.DslListFilterBuilder"  

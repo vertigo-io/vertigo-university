@@ -86,6 +86,18 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 		final ListFilter criteriaListFilter = listFilterBuilder.withBuildQuery(facetedQueryDefinition.getListFilterBuilderQuery()).withCriteria(criteria).build();
 		return SearchQuery.builder(criteriaListFilter).withFacetStrategy(facetedQueryDefinition, selectedFacetValues);
 	}
+	/**
+	 * Création d'une SearchQuery de type : MovieWithFacets.
+	 * @param criteria Critères de recherche
+	 * @param selectedFacetValues Liste des facettes sélectionnées à appliquer
+	 * @return SearchQueryBuilder pour ce type de recherche
+	 */
+	public SearchQueryBuilder createSearchQueryBuilderMovieWithFacets(final String criteria, final SelectedFacetValues selectedFacetValues) {
+		final FacetedQueryDefinition facetedQueryDefinition = Home.getApp().getDefinitionSpace().resolve("QRY_MOVIE_WITH_FACETS", FacetedQueryDefinition.class);
+		final ListFilterBuilder<String> listFilterBuilder = DIInjector.newInstance(facetedQueryDefinition.getListFilterBuilderClass(), Home.getApp().getComponentSpace());
+		final ListFilter criteriaListFilter = listFilterBuilder.withBuildQuery(facetedQueryDefinition.getListFilterBuilderQuery()).withCriteria(criteria).build();
+		return SearchQuery.builder(criteriaListFilter).withFacetStrategy(facetedQueryDefinition, selectedFacetValues);
+	}
 
 	/**
 	 * Récupération du résultat issu d'une requête.

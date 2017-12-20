@@ -114,14 +114,14 @@ create Domain DO_LABEL {
 	formatter : FMT_DEFAULT
 	constraint : [CK_MAX_LENGTH_100]
 	storeType : "VARCHAR(100)"
-	indexType : "text_fr"
+	indexType : "text_fr:facetable"
 }
 
 create Domain DO_LABEL_LONG {
 	dataType : String
 	formatter : FMT_DEFAULT
 	storeType : "VARCHAR(500)"
-	indexType : "text_fr"
+	indexType : "text_fr:facetable"
 }
 
 create Domain DO_LABEL_LONG_SORT {

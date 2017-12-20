@@ -18,7 +18,7 @@ import io.vertigo.samples.crystal.webservices.MovieWebServices;
 public class Level5 {
 
 	public static void main(final String[] args) {
-		final AppConfigBuilder appConfigBuilder = SampleConfigBuilder.createAppConfigBuilder();
+		final AppConfigBuilder appConfigBuilder = SampleConfigBuilder.createAppConfigBuilder(true, true, false);
 		appConfigBuilder
 				.addModule(ModuleConfig.builder("stepDao")
 						.addComponent(ActorDAO.class)

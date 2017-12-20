@@ -23,16 +23,16 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		Country(io.vertigo.samples.crystal.domain.Country.class),
 		/** Objet de données Movie. */
 		Movie(io.vertigo.samples.crystal.domain.Movie.class),
-		/** Objet de données MovieByYear. */
-		MovieByYear(io.vertigo.samples.crystal.domain.MovieByYear.class),
-		/** Objet de données MovieDisplay. */
-		MovieDisplay(io.vertigo.samples.crystal.domain.MovieDisplay.class),
 		/** Objet de données MovieIndex. */
 		MovieIndex(io.vertigo.samples.crystal.domain.MovieIndex.class),
 		/** Objet de données Role. */
 		Role(io.vertigo.samples.crystal.domain.Role.class),
 		/** Objet de données Sexe. */
-		Sexe(io.vertigo.samples.crystal.domain.Sexe.class)		;
+		Sexe(io.vertigo.samples.crystal.domain.Sexe.class),
+		/** Objet de données User. */
+		User(io.vertigo.samples.crystal.domain.User.class),
+		/** Objet de données UserGroup. */
+		UserGroup(io.vertigo.samples.crystal.domain.UserGroup.class)		;
 
 		private final Class<?> clazz;
 
@@ -85,28 +85,6 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		COU_ID	}
 
 	/**
-	 * Enumération des champs de MovieByYear.
-	 */
-	public enum MovieByYearFields implements DtFieldName<io.vertigo.samples.crystal.domain.MovieByYear> {
-		/** Propriété 'AnnÃ©e'. */
-		YEAR,
-		/** Propriété 'Nombre de film'. */
-		MOVIES_COUNT	}
-
-	/**
-	 * Enumération des champs de MovieDisplay.
-	 */
-	public enum MovieDisplayFields implements DtFieldName<io.vertigo.samples.crystal.domain.MovieDisplay> {
-		/** Propriété 'Titre'. */
-		NAME,
-		/** Propriété 'AnnÃ©e'. */
-		YEAR,
-		/** Propriété 'Pays'. */
-		COUNTRY,
-		/** Propriété 'Nombre d'acteur'. */
-		ACTORS_COUNT	}
-
-	/**
 	 * Enumération des champs de MovieIndex.
 	 */
 	public enum MovieIndexFields implements DtFieldName<io.vertigo.samples.crystal.domain.MovieIndex> {
@@ -140,6 +118,32 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		SEX_CD,
 		/** Propriété 'Label'. */
 		LABEL	}
+
+	/**
+	 * Enumération des champs de User.
+	 */
+	public enum UserFields implements DtFieldName<io.vertigo.samples.crystal.domain.User> {
+		/** Propriété 'Id'. */
+		USR_ID,
+		/** Propriété 'Login'. */
+		LOGIN,
+		/** Propriété 'Nom'. */
+		NAME,
+		/** Propriété 'email'. */
+		EMAIL,
+		/** Propriété 'Country'. */
+		COU_ID,
+		/** Propriété 'Group'. */
+		GRP_ID	}
+
+	/**
+	 * Enumération des champs de UserGroup.
+	 */
+	public enum UserGroupFields implements DtFieldName<io.vertigo.samples.crystal.domain.UserGroup> {
+		/** Propriété 'Id'. */
+		GRP_ID,
+		/** Propriété 'Nom'. */
+		NAME	}
 
 	/** {@inheritDoc} */
 	@Override

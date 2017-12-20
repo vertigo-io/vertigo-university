@@ -22,4 +22,5 @@ public interface MovieServices extends StoreServices {
 	long indexMovies();
 
 	FacetedQueryResult searchMovies(String criteria, SelectedFacetValues selectedFacetValues, DtListState dtListState);
+
 }

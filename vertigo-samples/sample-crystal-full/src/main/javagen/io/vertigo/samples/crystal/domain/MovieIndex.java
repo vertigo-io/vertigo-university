@@ -94,16 +94,6 @@ public final class MovieIndex implements DtObject {
 		this.country = country;
 	}
 	
-	/**
-	 * Champ : COMPUTED.
-	 * Récupère la valeur de la propriété calculée 'Titre'.
-	 * @return String nameSortOnly
-	 */
-	@Field(domain = "DO_LABEL_LONG_SORT", type = "COMPUTED", persistent = false, label = "Titre")
-	public String getNameSortOnly() {
-		return getName();
-	}
-	
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

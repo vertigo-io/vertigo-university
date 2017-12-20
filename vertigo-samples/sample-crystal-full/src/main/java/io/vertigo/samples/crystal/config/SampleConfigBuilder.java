@@ -25,13 +25,24 @@ import io.vertigo.vega.VegaFeatures;
 
 public class SampleConfigBuilder {
 
-	public static AppConfigBuilder createAppConfigBuilder() {
-		// @formatter:off
-		return AppConfig.builder()
+	public static AppConfigBuilder createAppConfigBuilder(final boolean withSearch, final boolean withVega, final boolean withAccount) {
+		final DynamoFeatures dynamoFeatures = new DynamoFeatures()
+				.withStore()
+				.addDataStorePlugin(SqlDataStorePlugin.class,
+						Param.of("sequencePrefix", "SEQ_"));
+		if (withSearch) {
+			dynamoFeatures.withSearch(ESEmbeddedSearchServicesPlugin.class,
+					Param.of("home", "D:/atelier/search"), //usage d'url impropre
+					Param.of("envIndex", "crystal-test"),
+					Param.of("rowsPerQuery", "50"),
+					Param.of("config.file", "elasticsearch.yml"));
+		}
+
+		final AppConfigBuilder appConfigBuilder = AppConfig.builder()
 				.beginBoot()
-					.withLocales("fr_FR")
-					.addPlugin(ClassPathResourceResolverPlugin.class)
-					.addPlugin(LocalResourceResolverPlugin.class)
+				.withLocales("fr_FR")
+				.addPlugin(ClassPathResourceResolverPlugin.class)
+				.addPlugin(LocalResourceResolverPlugin.class)
 				.endBoot()
 				.addModule(new CommonsFeatures()
 						.withCache(MemoryCachePlugin.class)
@@ -44,21 +55,28 @@ public class SampleConfigBuilder {
 								Param.of("jdbcDriver", org.h2.Driver.class.getName()),
 								Param.of("jdbcUrl", "jdbc:h2:D:/atelier/database/formation_loaded"))
 						.build())
-				.addModule(new DynamoFeatures()
-						.withStore()
-						.addDataStorePlugin(SqlDataStorePlugin.class,
-								Param.of("sequencePrefix","SEQ_"))
-						.withSearch(ESEmbeddedSearchServicesPlugin.class,
-								Param.of("home", "D:/atelier/search"), //usage d'url impropre
-								Param.of("envIndex", "crystal-test"),
-								Param.of("rowsPerQuery", "50"),
-								Param.of("config.file", "elasticsearch.yml"))
-						.build())
-				.addModule(new VegaFeatures()
-						.withApiPrefix("/crystal")
-						.withEmbeddedServer(8081)
-						.build())
-				.addModule(new AccountFeatures()
+				.addModule(dynamoFeatures.build())
+
+				//----Definitions
+				.addModule(ModuleConfig.builder("ressources")
+						.addDefinitionProvider(DefinitionProviderConfig.builder(DynamoDefinitionProvider.class)
+								.addDefinitionResource("kpr", "application.kpr")
+								.build())
+						.build());
+		if (withVega) {
+			appConfigBuilder.addModule(new VegaFeatures()
+					.withEmbeddedServer(8081)
+					.build());
+		}
+
+		//---- proxies (Level4)
+		appConfigBuilder.addModule(ModuleConfig.builder("proxies")
+				.addProxyMethod(TaskProxyMethod.class)
+				.build());
+
+		//---- Account (Level6)
+		if (withAccount) {
+			appConfigBuilder.addModule(new AccountFeatures()
 					.withUserSession(TestUserSession.class)
 					.withAccountStorePlugin(StoreAccountStorePlugin.class,
 							Param.of("userIdentityEntity", "DT_USER"),
@@ -70,18 +88,10 @@ public class SampleConfigBuilder {
 							Param.of("userLoginTemplate", "cn={0},dc=vertigo,dc=io"),
 							Param.of("ldapServerHost", "docker-vertigo.part.klee.lan.net"),
 							Param.of("ldapServerPort", "389"))
-					.build())
-				//---- proxies (Level4)
-				.addModule(ModuleConfig.builder("proxies")
-						.addProxyMethod(TaskProxyMethod.class)
-						.build())
-				//----Definitions
-				.addModule( ModuleConfig.builder("ressources")
-						.addDefinitionProvider( DefinitionProviderConfig.builder(DynamoDefinitionProvider.class)
-								.addDefinitionResource("kpr", "application.kpr")
-								.build())
-						.build());
-		// @formatter:on
+					.build());
+		}
+
+		return appConfigBuilder;
 	}
 
 }
