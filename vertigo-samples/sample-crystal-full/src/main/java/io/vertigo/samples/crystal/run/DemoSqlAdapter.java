@@ -19,6 +19,7 @@ import io.vertigo.commons.plugins.cache.memory.MemoryCachePlugin;
 import io.vertigo.core.component.di.injector.DIInjector;
 import io.vertigo.core.param.Param;
 import io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin;
+import io.vertigo.core.plugins.resource.local.LocalResourceResolverPlugin;
 import io.vertigo.database.impl.sql.SqlAdapterSupplierPlugin;
 import io.vertigo.database.impl.sql.SqlDataBaseManagerImpl;
 import io.vertigo.database.impl.sql.vendor.h2.H2DataBase;
@@ -34,6 +35,7 @@ import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.dynamo.impl.DynamoFeatures;
 import io.vertigo.dynamo.impl.task.proxy.TaskProxyMethod;
 import io.vertigo.dynamo.plugins.environment.DynamoDefinitionProvider;
+import io.vertigo.dynamo.plugins.search.elasticsearch.embedded.ESEmbeddedSearchServicesPlugin;
 import io.vertigo.dynamo.plugins.store.datastore.sql.SqlDataStorePlugin;
 import io.vertigo.lang.WrappedException;
 import io.vertigo.samples.SamplesPAO;
@@ -51,6 +53,7 @@ public class DemoSqlAdapter {
 				.beginBoot()
 				.withLocales("fr_FR")
 				.addPlugin(ClassPathResourceResolverPlugin.class)
+				.addPlugin(LocalResourceResolverPlugin.class)
 				.endBoot()
 				.addModule(new CommonsFeatures()
 						.withCache(MemoryCachePlugin.class)
@@ -68,6 +71,11 @@ public class DemoSqlAdapter {
 						.withStore()
 						.addDataStorePlugin(SqlDataStorePlugin.class,
 								Param.of("sequencePrefix", "SEQ_"))
+						.withSearch(ESEmbeddedSearchServicesPlugin.class,
+								Param.of("home", "D:/atelier/search"), //usage d'url impropre
+								Param.of("envIndex", "crystal-test"),
+								Param.of("rowsPerQuery", "50"),
+								Param.of("config.file", "elasticsearch.yml"))
 						.build())
 				//---- proxies (Level4)
 				.addModule(ModuleConfig.builder("proxies")

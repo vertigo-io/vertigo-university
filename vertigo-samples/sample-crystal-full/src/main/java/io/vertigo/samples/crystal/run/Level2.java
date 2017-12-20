@@ -13,14 +13,12 @@ import io.vertigo.samples.crystal.CrystalPAO;
 import io.vertigo.samples.crystal.config.SampleConfigBuilder;
 import io.vertigo.samples.crystal.dao.ActorDAO;
 import io.vertigo.samples.crystal.dao.MovieDAO;
-import io.vertigo.samples.crystal.dao.MovieProxyDAO;
 import io.vertigo.samples.crystal.dao.RoleDAO;
 import io.vertigo.samples.crystal.domain.Movie;
 import io.vertigo.samples.crystal.services.MovieSearchLoader;
 import io.vertigo.samples.crystal.services.MovieServices;
 import io.vertigo.samples.crystal.services.MovieServicesImpl;
 import io.vertigo.samples.crystal.webservices.MovieWebServices;
-import io.vertigo.vega.impl.webservice.catalog.SwaggerWebServices;
 
 public class Level2 {
 
@@ -28,13 +26,12 @@ public class Level2 {
 	private MovieServices movieServices;
 
 	public static void main(final String[] args) {
-		final AppConfigBuilder appConfigBuilder = SampleConfigBuilder.createAppConfigBuilderWithoutCrebase();
+		final AppConfigBuilder appConfigBuilder = SampleConfigBuilder.createAppConfigBuilder();
 		appConfigBuilder
 				.addModule(ModuleConfig.builder("stepDao")
 						.addComponent(ActorDAO.class)
 						.addComponent(RoleDAO.class)
 						.addComponent(SamplesPAO.class)
-						.addProxy(MovieProxyDAO.class)
 						.build())
 				.addModule(defaultSampleModule());
 		try (final AutoCloseableApp app = new AutoCloseableApp(appConfigBuilder.build())) {
@@ -54,7 +51,6 @@ public class Level2 {
 				.addComponent(MovieServices.class, MovieServicesImpl.class)
 				.addComponent(MovieSearchLoader.class)
 				.addComponent(MovieWebServices.class)
-				.addComponent(SwaggerWebServices.class)
 				.build();
 	}
 

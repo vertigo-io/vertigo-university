@@ -35,6 +35,4 @@ public interface MovieServices extends StoreServices {
 
 	long countMaleActorsInMovie(Long movId);
 
-	long countMoviesInCountry(Long couId);
-
 }

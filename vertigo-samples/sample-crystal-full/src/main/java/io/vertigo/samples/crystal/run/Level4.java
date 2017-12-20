@@ -19,15 +19,14 @@ import io.vertigo.samples.crystal.services.MovieSearchLoader;
 import io.vertigo.samples.crystal.services.MovieServices;
 import io.vertigo.samples.crystal.services.MovieServicesImpl;
 import io.vertigo.samples.crystal.webservices.MovieWebServices;
-import io.vertigo.vega.impl.webservice.catalog.SwaggerWebServices;
 
 public class Level4 {
 
 	@Inject
-	private MovieServices movieServices;
+	private MovieProxyDAO movieProxyDAO;
 
 	public static void main(final String[] args) {
-		final AppConfigBuilder appConfigBuilder = SampleConfigBuilder.createAppConfigBuilderWithoutCrebase();
+		final AppConfigBuilder appConfigBuilder = SampleConfigBuilder.createAppConfigBuilder();
 		appConfigBuilder
 				.addModule(ModuleConfig.builder("stepDao")
 						.addComponent(ActorDAO.class)
@@ -51,12 +50,11 @@ public class Level4 {
 				.addComponent(MovieServices.class, MovieServicesImpl.class)
 				.addComponent(MovieSearchLoader.class)
 				.addComponent(MovieWebServices.class)
-				.addComponent(SwaggerWebServices.class)
 				.build();
 	}
 
 	void step1() {
-		LogManager.getLogger(this.getClass()).info("film in france : " + movieServices.countMoviesInCountry(1128L));
+		LogManager.getLogger(this.getClass()).info("film in france : " + movieProxyDAO.count(1128L));
 	}
 
 }

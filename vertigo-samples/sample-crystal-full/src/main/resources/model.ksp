@@ -106,16 +106,3 @@ create Association A_ACT_SEX {
 			
 }
 
-
-/*************Level4*****************************/
-create DtDefinition DT_MOVIE_DISPLAY {
-  field NAME {domain: DO_LABEL_LONG label: "Titre" notNull:"true"}
-  field YEAR {domain: DO_YEAR label: "Année" notNull:"false"}
-  field COUNTRY {domain: DO_LABEL label: "Pays" notNull:"false"}
-  field ACTORS_COUNT {domain: DO_ID label: "Nombre d'acteur" notNull:"false"}
-}
-
-create DtDefinition DT_MOVIE_BY_YEAR {
-  field YEAR {domain: DO_YEAR label: "Année" notNull:"false"}
-  field MOVIES_COUNT {domain: DO_ID label: "Nombre de film" notNull:"false"}
-}

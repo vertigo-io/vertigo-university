@@ -1,7 +1,10 @@
 domains.ksp
-model.ksp
-alter.ksp
-searchMovie.ksp
 
+model.ksp
+modelUser.ksp
+
+alter.ksp
+
+searchMovie.ksp
 dao.ksp
 daoSearch.ksp

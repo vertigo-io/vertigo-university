@@ -20,19 +20,12 @@ import io.vertigo.dynamo.impl.task.proxy.TaskProxyMethod;
 import io.vertigo.dynamo.plugins.environment.DynamoDefinitionProvider;
 import io.vertigo.dynamo.plugins.search.elasticsearch.embedded.ESEmbeddedSearchServicesPlugin;
 import io.vertigo.dynamo.plugins.store.datastore.sql.SqlDataStorePlugin;
-import io.vertigo.samples.crystal.boot.DataBaseInitializer;
 import io.vertigo.samples.crystal.webservices.TestUserSession;
 import io.vertigo.vega.VegaFeatures;
 
 public class SampleConfigBuilder {
-	public static AppConfigBuilder createAppConfigBuilder() {
-		// @formatter:off
-				return createAppConfigBuilderWithoutCrebase()
-					.addInitializer(DataBaseInitializer.class);
-		// @formatter:on
-	}
 
-	public static AppConfigBuilder createAppConfigBuilderWithoutCrebase() {
+	public static AppConfigBuilder createAppConfigBuilder() {
 		// @formatter:off
 		return AppConfig.builder()
 				.beginBoot()

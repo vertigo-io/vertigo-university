@@ -19,13 +19,8 @@ import io.vertigo.dynamo.plugins.store.datastore.sql.SqlDataStorePlugin;
 import io.vertigo.vega.VegaFeatures;
 
 public class SampleConfigBuilder {
-	public static AppConfigBuilder createAppConfigBuilder() {
-		// @formatter:off
-				return createAppConfigBuilderCore();
-		// @formatter:on
-	}
 
-	public static AppConfigBuilder createAppConfigBuilderCore() {
+	public static AppConfigBuilder createAppConfigBuilder() {
 		// @formatter:off
 		return AppConfig.builder()
 				.beginBoot()

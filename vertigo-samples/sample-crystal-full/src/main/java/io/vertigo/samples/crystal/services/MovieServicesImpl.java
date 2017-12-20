@@ -20,7 +20,6 @@ import io.vertigo.samples.SamplesPAO;
 import io.vertigo.samples.crystal.CrystalPAO;
 import io.vertigo.samples.crystal.dao.ActorDAO;
 import io.vertigo.samples.crystal.dao.MovieDAO;
-import io.vertigo.samples.crystal.dao.MovieProxyDAO;
 import io.vertigo.samples.crystal.domain.Actor;
 import io.vertigo.samples.crystal.domain.Country;
 import io.vertigo.samples.crystal.domain.Movie;
@@ -37,8 +36,6 @@ public class MovieServicesImpl implements MovieServices {
 	private ActorDAO actorDAO;
 	@Inject
 	private SamplesPAO samplesPAO;
-	@Inject
-	private MovieProxyDAO movieProxyDAO;
 	@Inject
 	private CrystalPAO crystalPAO;
 
@@ -140,13 +137,6 @@ public class MovieServicesImpl implements MovieServices {
 		return actors.stream()
 				.filter(actor -> actor.sexe().getEnumValue() == SexeEnum.male)
 				.count();
-	}
-
-	@Override
-	public long countMoviesInCountry(final Long couId) {
-		Assertion.checkNotNull(couId);
-		//---
-		return movieProxyDAO.count(couId);
 	}
 
 }
