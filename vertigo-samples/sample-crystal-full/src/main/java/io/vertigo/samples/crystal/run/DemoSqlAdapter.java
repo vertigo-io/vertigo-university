@@ -113,7 +113,6 @@ public class DemoSqlAdapter {
 			final List<MovieDemo> result = sqlDataBaseManager.executeQuery(sqlStatement, MovieDemo.class, (Integer) 1, connection);
 
 			final MovieDemo starWars = result.get(0);
-			starWars.setTranslations(new Translations("Un nouvel espoir", "Una nueva esperanza", "A new hope"));
 			final SqlStatement sqlUpdateStatement = SqlStatement
 					.builder("update movie_demo set translations = #translations# where mov_id = #mov_id# ")
 					.bind("mov_id", Long.class, 3678598L)
@@ -147,87 +146,42 @@ public class DemoSqlAdapter {
 			return DtObjectUtil.createURI(this);
 		}
 
-		/**
-		 * Champ : ID.
-		 * Récupère la valeur de la propriété 'Id'.
-		 * @return Long movId <b>Obligatoire</b>
-		 */
 		@Field(domain = "DO_ID", type = "ID", required = true, label = "Id")
 		public Long getMovId() {
 			return movId;
 		}
 
-		/**
-		 * Champ : ID.
-		 * Définit la valeur de la propriété 'Id'.
-		 * @param movId Long <b>Obligatoire</b>
-		 */
 		public void setMovId(final Long movId) {
 			this.movId = movId;
 		}
 
-		/**
-		 * Champ : DATA.
-		 * Récupère la valeur de la propriété 'Code du pays'.
-		 * @return String name <b>Obligatoire</b>
-		 */
 		@Field(domain = "DO_LABEL_LONG", required = true, label = "Code du pays")
 		public String getName() {
 			return name;
 		}
 
-		/**
-		 * Champ : DATA.
-		 * Définit la valeur de la propriété 'Code du pays'.
-		 * @param name String <b>Obligatoire</b>
-		 */
 		public void setName(final String name) {
 			this.name = name;
 		}
 
-		/**
-		 * Champ : DATA.
-		 * Récupère la valeur de la propriété 'AnnÃ©e'.
-		 * @return Integer year
-		 */
 		@Field(domain = "DO_YEAR", label = "AnnÃ©e")
 		public Integer getYear() {
 			return year;
 		}
 
-		/**
-		 * Champ : DATA.
-		 * Définit la valeur de la propriété 'AnnÃ©e'.
-		 * @param year Integer
-		 */
 		public void setYear(final Integer year) {
 			this.year = year;
 		}
 
-		/**
-		 * Champ : DATA.
-		 * Récupère la valeur de la propriété 'Id Imdb'.
-		 * @return String imdbid
-		 */
 		@Field(domain = "DO_LABEL", label = "Id Imdb")
 		public String getImdbid() {
 			return imdbid;
 		}
 
-		/**
-		 * Champ : DATA.
-		 * Définit la valeur de la propriété 'Id Imdb'.
-		 * @param imdbid String
-		 */
 		public void setImdbid(final String imdbid) {
 			this.imdbid = imdbid;
 		}
 
-		/**
-		 * Champ : DATA.
-		 * Récupère la valeur de la propriété 'Id Imdb'.
-		 * @return String imdbid
-		 */
 		@Field(domain = "DO_TRANSLATIONS", label = "Id Imdb")
 		public Translations getTranslations() {
 			return translations;

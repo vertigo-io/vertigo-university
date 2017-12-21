@@ -16,7 +16,7 @@ import io.vertigo.persona.security.UserSession;
 import io.vertigo.persona.security.VSecurityManager;
 import io.vertigo.samples.SamplesPAO;
 import io.vertigo.samples.crystal.CrystalPAO;
-import io.vertigo.samples.crystal.authorization.SecuredEntities;
+import io.vertigo.samples.crystal.authorization.SecuredEntities.MovieOperations;
 import io.vertigo.samples.crystal.config.SampleConfigBuilder;
 import io.vertigo.samples.crystal.dao.ActorDAO;
 import io.vertigo.samples.crystal.dao.MovieDAO;
@@ -75,7 +75,7 @@ public class Level7 {
 			final Account account = movieServices.login("admin", "v3rt1g0");
 			LogManager.getLogger(this.getClass()).info("account: " + account.getDisplayName());
 
-			final String query = authorizationManager.getSearchSecurity(Movie.class, SecuredEntities.MovieOperations.READ);
+			final String query = authorizationManager.getSearchSecurity(Movie.class, MovieOperations.READ);
 			LogManager.getLogger(this.getClass()).info("query: " + query);
 		} finally {
 			securityManager.stopCurrentUserSession();
