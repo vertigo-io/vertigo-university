@@ -1,0 +1,75 @@
+package io.vertigo.samples.crystal.domain
+
+
+/************************/
+/***** Index Movie  *****/
+/************************/
+
+create DtDefinition DT_MOVIE_INDEX {
+  field MOV_ID {domain: DO_ID label: "id" notNull:"true" }
+  field NAME {domain: DO_LABEL_LONG label: "Titre" notNull:"false"}
+  field YEAR {domain: DO_YEAR label: "Année" notNull:"false"}
+  field COUNTRY {domain: DO_LABEL label: "Pays" notNull:"false"}
+  
+  computed NAME_SORT_ONLY {domain : DO_LABEL_LONG_SORT, label:"Titre"
+        expression:"return getName();"
+  }  
+}
+
+
+/************************/
+/***** Index Movie  *****/
+/************************/
+
+create IndexDefinition IDX_MOVIE {  
+  keyConcept : DT_MOVIE
+  dtIndex : DT_MOVIE_INDEX
+  loaderId : "MovieSearchLoader"
+}
+
+
+create FacetDefinition FCT_MOVIE_COUNTRY {  
+  dtDefinition:DT_MOVIE_INDEX, fieldName:"COUNTRY", label:"Par pays"
+  multiselectable : "true"
+}
+
+create FacetDefinition FCT_MOVIE_NAME {  
+  dtDefinition:DT_MOVIE_INDEX, fieldName:"NAME", label:"Par titre"
+  range R1 { filter:"NAME.keyword:[* TO a]", label:"#"},
+  range R2 { filter:"NAME.keyword:[a TO g]", label:"a-f"},
+  range R3 { filter:"NAME.keyword:[g TO n]", label:"g-m"},
+  range R4 { filter:"NAME.keyword:[n TO t]", label:"n-s"},
+  range R4 { filter:"NAME.keyword:[t TO *]", label:"t-z"},
+}
+
+create FacetDefinition FCT_MOVIE_YEAR {  
+  dtDefinition:DT_MOVIE_INDEX, fieldName:"YEAR", label:"Par année"
+  range R1 { filter:"YEAR:[* TO 1930]", label:"< années 30"},
+  range R2 { filter:"YEAR:[1930 TO 1940]", label:"années 30"},
+  range R3 { filter:"YEAR:[1940 TO 1950]", label:"années 40"},
+  range R4 { filter:"YEAR:[1950 TO 1960]", label:"années 50"},
+  range R5 { filter:"YEAR:[1960 TO 1970]", label:"années 60"},
+  range R6 { filter:"YEAR:[1970 TO 1980]", label:"années 70"},
+  range R7 { filter:"YEAR:[1980 TO 1990]", label:"années 80"},
+  range R8 { filter:"YEAR:[1990 TO 2000]", label:"années 90"},
+  range R9 { filter:"YEAR:[2000 TO 2010]", label:"années 2000"},
+  range R10 { filter:"YEAR:[2010 TO *]", label:"> années 2010"},  
+}
+
+create FacetedQueryDefinition QRY_MOVIE {  
+  keyConcept : DT_MOVIE
+  facets : []
+  domainCriteria : DO_LABEL
+  listFilterBuilderClass : "io.vertigo.dynamox.search.DslListFilterBuilder"  
+  listFilterBuilderQuery : "_all:#+query*#"
+}
+
+create FacetedQueryDefinition QRY_MOVIE_WITH_FACETS {  
+  keyConcept : DT_MOVIE
+  facets : [FCT_MOVIE_NAME, FCT_MOVIE_YEAR, FCT_MOVIE_COUNTRY]
+  domainCriteria : DO_LABEL
+  listFilterBuilderClass : "io.vertigo.dynamox.search.DslListFilterBuilder"  
+  listFilterBuilderQuery : "_all:#+query*#"
+}
+
+

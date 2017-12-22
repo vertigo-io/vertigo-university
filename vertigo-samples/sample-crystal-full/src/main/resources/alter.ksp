@@ -1,0 +1,8 @@
+package io.vertigo.samples.crystal.domain
+
+
+alter DtDefinition DT_SEXE {
+  stereotype : "StaticMasterData"
+}
+
+

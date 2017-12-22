@@ -1,0 +1,43 @@
+package io.vertigo.samples
+
+create Task TK_GET_ACTORS_IDS_BY_MOVIE {
+    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+        request : "
+        	select act.act_id 
+			from role rol
+			join actor act on rol.act_id= act.act_id 
+			join movie mov on rol.mov_id = mov.mov_id 
+			where mov.mov_id = #MOV_ID#
+			"
+	attribute MOV_ID	{domain : DO_ID 				notNull:"true" 	inOut :"in"}
+	attribute ACTORS	{domain : DO_LONGS			 	notNull:"true" 	inOut :"out"}
+}
+
+create Task TK_GET_ACTORS_BY_MOVIE {
+    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+        request : "
+        	select act.*
+			from role rol
+			join actor act on rol.act_id= act.act_id 
+			join movie mov on rol.mov_id = mov.mov_id 
+			where mov.mov_id = #MOV_ID#
+			"
+	attribute MOV_ID	{domain : DO_ID 				notNull:"true" 	inOut :"in"}
+	attribute ACTORS	{domain : DO_DT_ACTOR_DTC	 	notNull:"true" 	inOut :"out"}
+}
+
+
+create Task TK_GET_MOVIES_IN_COUNTRIES {
+    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+        request : "
+        	select * 
+        	from movie 
+        	where cou_id in ( #COUNTRIES_IDS.ROWNUM#)
+			"
+	attribute COUNTRIES_IDS	{domain : DO_LONGS 				notNull:"true" 	inOut :"in"}
+	attribute MOVIES		{domain : DO_DT_MOVIE_DTC		notNull:"true" 	inOut :"out"}
+}
+
+
+
+

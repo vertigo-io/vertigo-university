@@ -1,0 +1,29 @@
+index :
+    analysis :
+        normalizer :
+             sortable :
+                type : custom
+                filter : ["lowercase", "asciifolding"]  
+        analyzer :
+            multiple_code :
+                tokenizer : piped_keywords
+                filter : [standard]
+            text_fr_not_tokenized :
+                tokenizer : keyword
+                filter : [standard, lowercase, snowball]
+            text_fr :
+                tokenizer : standard
+                filter : [standard, lowercase, snowball, elision]
+        tokenizer :
+            keyword :
+                type : keyword
+            piped_keywords :
+                type : pattern
+                pattern : '([|,] *)'
+        filter :
+            snowball:
+                type : snowball
+                language: French
+            elision:
+                type : elision
+                articles: [l, m, t, qu, n, s, j, d]
