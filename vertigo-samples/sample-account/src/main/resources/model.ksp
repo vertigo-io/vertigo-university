@@ -1,0 +1,108 @@
+package io.vertigo.samples.account.domain
+
+create DtDefinition DT_COUNTRY {
+  key COU_ID {domain: DO_ID label: "Id" notNull:"false"}
+  field NAME {domain: DO_LABEL label: "Nom du pays" notNull:"false"}
+}
+
+create DtDefinition DT_MOVIE {
+  stereotype : "KeyConcept"
+  key MOV_ID {domain: DO_ID label: "Id" notNull:"true"}
+  field NAME {domain: DO_LABEL_LONG label: "Titre du film" notNull:"true"}
+  field YEAR {domain: DO_YEAR label: "Année" notNull:"false"}
+  field IMDBID {domain: DO_LABEL label: "Id Imdb" notNull:"false"}
+}
+
+create DtDefinition DT_ACTOR {
+  key ACT_ID {domain: DO_ID label: "Id" notNull:"true"}
+  field NAME {domain: DO_LABEL_LONG label: "Nom" notNull:"true"}
+}
+
+create DtDefinition DT_SEXE {
+  key SEX_CD {domain: DO_CODE label: "Id" notNull:"true"}
+  field LABEL {domain: DO_LABEL_LONG label: "Label" notNull:"true"}
+}
+
+
+create DtDefinition DT_ROLE {
+  key ROL_ID {domain: DO_ID label: "Id" notNull:"true"}
+  field AS_CHARACTER {domain: DO_LABEL_VERY_LONG label: "Dans le role de" notNull:"true"}
+}
+
+create Association A_MOV_COU {
+  fkFieldName : "COU_ID"
+    
+ 	dtDefinitionA : DT_MOVIE
+	dtDefinitionB : DT_COUNTRY
+			
+	navigabilityA : "false"
+	navigabilityB : "true"
+	
+	multiplicityA:"0..*"
+	multiplicityB:"0..1"
+	
+	labelA : "Movie"
+	labelB : "Country"
+	roleA : "Movie"
+	roleB : "Country"
+			
+}
+
+create Association A_ROL_MOV {
+  fkFieldName : "MOV_ID"
+    
+ 	dtDefinitionA : DT_ROLE
+	dtDefinitionB : DT_MOVIE
+			
+	navigabilityA : "true"
+	navigabilityB : "false"
+	
+	multiplicityA:"0..*"
+	multiplicityB:"0..1"
+	
+	labelA : "Role"
+	labelB : "Movie"
+	roleA : "Role"
+	roleB : "Movie"
+			
+}
+
+
+create Association A_ROL_ACT {
+  fkFieldName : "ACT_ID"
+    
+ 	dtDefinitionA : DT_ROLE
+	dtDefinitionB : DT_ACTOR
+			
+	navigabilityA : "false"
+	navigabilityB : "true"
+	
+	multiplicityA:"0..*"
+	multiplicityB:"0..1"
+	
+	labelA : "Role"
+	labelB : "Actor"
+	roleA : "Role"
+	roleB : "Actor"
+			
+}
+
+create Association A_ACT_SEX {
+  fkFieldName : "SEX_CD"
+    
+ 	dtDefinitionA : DT_ACTOR
+	dtDefinitionB : DT_SEXE
+			
+	navigabilityA : "false"
+	navigabilityB : "true"
+	
+	multiplicityA:"0..*"
+	multiplicityB:"0..1"
+	
+	labelA : "Actor"
+	labelB : "Sexe"
+	roleA : "Actor"
+	roleB : "Sexe"
+			
+}
+
