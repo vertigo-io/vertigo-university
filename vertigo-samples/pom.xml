@@ -38,6 +38,7 @@
  		<module>sample-dao</module>
 		<module>sample-crystal</module>
 		<module>sample-crystal-full</module>
+		<module>sample-account</module>
  	</modules>
 
 </project>

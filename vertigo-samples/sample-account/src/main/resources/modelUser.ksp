@@ -1,0 +1,51 @@
+package io.vertigo.samples.account.domain
+
+create DtDefinition DT_USER {
+  key USR_ID {domain: DO_ID label: "Id" notNull:"false"}
+  field LOGIN {domain: DO_LABEL label: "Login" notNull:"false"}
+  field NAME {domain: DO_LABEL label: "Nom" notNull:"false"}
+  field EMAIL {domain: DO_LABEL label: "email" notNull:"false"}
+}
+
+create DtDefinition DT_USER_GROUP {
+  key GRP_ID {domain: DO_ID label: "Id" notNull:"false"}
+  field NAME {domain: DO_LABEL label: "Nom" notNull:"false"}
+}
+
+create Association A_USR_COU {
+  fkFieldName : "COU_ID"
+    
+ 	dtDefinitionA : DT_USER
+	dtDefinitionB : DT_COUNTRY
+			
+	navigabilityA : "false"
+	navigabilityB : "true"
+	
+	multiplicityA:"0..*"
+	multiplicityB:"0..1"
+	
+	labelA : "User"
+	labelB : "Country"
+	roleA : "User"
+	roleB : "Country"
+			
+}
+
+create Association A_USR_GRP {
+  fkFieldName : "GRP_ID"
+    
+ 	dtDefinitionA : DT_USER
+	dtDefinitionB : DT_USER_GROUP
+			
+	navigabilityA : "false"
+	navigabilityB : "true"
+	
+	multiplicityA:"0..*"
+	multiplicityB:"0..1"
+	
+	labelA : "User"
+	labelB : "Group"
+	roleA : "User"
+	roleB : "Group"
+			
+}
