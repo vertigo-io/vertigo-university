@@ -22,6 +22,8 @@ import io.vertigo.samples.crystal.dao.ActorDAO;
 import io.vertigo.samples.crystal.dao.MovieDAO;
 import io.vertigo.samples.crystal.dao.RoleDAO;
 import io.vertigo.samples.crystal.domain.Movie;
+import io.vertigo.samples.crystal.services.LoginServices;
+import io.vertigo.samples.crystal.services.LoginServicesImpl;
 import io.vertigo.samples.crystal.services.MovieSearchLoader;
 import io.vertigo.samples.crystal.services.MovieServices;
 import io.vertigo.samples.crystal.services.MovieServicesImpl;
@@ -31,7 +33,7 @@ import io.vertigo.samples.crystal.webservices.TestUserSession;
 public class Level7 {
 
 	@Inject
-	private MovieServices movieServices;
+	private LoginServices loginServices;
 	@Inject
 	private AuthorizationManager authorizationManager;
 	@Inject
@@ -62,6 +64,7 @@ public class Level7 {
 				.addComponent(MovieDAO.class)
 				.addComponent(CrystalPAO.class)
 				.addComponent(MovieServices.class, MovieServicesImpl.class)
+				.addComponent(LoginServices.class, LoginServicesImpl.class)
 				.addComponent(MovieSearchLoader.class)
 				.addComponent(MovieWebServices.class)
 				.build();
@@ -72,7 +75,7 @@ public class Level7 {
 		try {
 			securityManager.startCurrentUserSession(userSession);
 
-			final Account account = movieServices.login("admin", "v3rt1g0");
+			final Account account = loginServices.login("admin", "v3rt1g0");
 			LogManager.getLogger(this.getClass()).info("account: " + account.getDisplayName());
 
 			final String query = authorizationManager.getSearchSecurity(Movie.class, MovieOperations.READ);
