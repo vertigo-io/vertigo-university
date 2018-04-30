@@ -15,7 +15,7 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
     	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<sonar.sources>src/main/java</sonar.sources>
-		<vertigo.version>1.1.0</vertigo.version>
+		<vertigo.version>1.1.1</vertigo.version>
   	</properties>
 
 
