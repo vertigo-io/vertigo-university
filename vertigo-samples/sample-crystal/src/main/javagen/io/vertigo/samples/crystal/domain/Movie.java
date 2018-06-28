@@ -188,7 +188,7 @@ public final class Movie implements KeyConcept {
 	
 	/**
 	 * Association : Role.
-	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.crystal.domain.Role>
+	 * @return DtList de io.vertigo.samples.crystal.domain.Role
 	 */
 	@Deprecated
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.crystal.domain.Role> getRoleList() {
