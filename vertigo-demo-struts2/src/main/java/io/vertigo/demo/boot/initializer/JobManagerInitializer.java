@@ -38,5 +38,6 @@ public final class JobManagerInitializer implements ComponentInitializer {
 		final OParams params = new OParams();
 		orchestraStore.scheduleAt(model.getJmoId(), params, Instant.now().plusSeconds(15));
 		//orchestraStore.scheduleCron(model.getJmoId(), params, "0 */2 * * * ?");
+
 	}
 }
