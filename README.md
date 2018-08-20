@@ -2,7 +2,9 @@
 =================
 
 Vertigo university is an up to date source of knowledge about vertigo.
-It's composed of demo apps and code samples
+It's composed of demo apps and code samples.
+
+For [Eclipse](https://www.eclipse.org/) users, it is advised to use the [KSP Plugin](https://github.com/sebez/vertigo-chroma-kspplugin) to enhance Developer Experience.
 
 ## vertigo-demo-vega
 A demo application that uses vertigo-vega and an SPA as UI
