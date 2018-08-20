@@ -4,8 +4,6 @@
 Vertigo university is an up to date source of knowledge about vertigo.
 It's composed of demo apps and code samples.
 
-For [Eclipse](https://www.eclipse.org/) users, it is advised to use the [KSP Plugin](https://github.com/sebez/vertigo-chroma-kspplugin) to enhance Developer Experience.
-
 ## vertigo-demo-vega
 A demo application that uses vertigo-vega and an SPA as UI
 
@@ -27,6 +25,9 @@ Use the PowerPoint and walkthrough documentation provided in each sample for mor
 * __sample-stream__ : learn how to efficiently use java 8 streams in your source code
 * __sameple-vega__ : learn how to create and publish REST webservices in your app
 * __sample-notifications__ : learn how to send notifications to users
+
+## Additional note for [Eclipse](https://www.eclipse.org/) users
+A plugin named [KSP Plugin](https://github.com/sebez/vertigo-chroma-kspplugin) developped by [sebez](https://github.com/sebez/) enhances Developer Experience.
 
 -----
 #License
