@@ -31,7 +31,7 @@
 	<init>
 		<initializer class="io.vertigo.demo.boot.initializer.LocaleManagerInitializer"/>
 		<initializer class="io.vertigo.demo.boot.initializer.PersistenceManagerInitializer"/>
-		<initializer class="io.vertigo.demo.boot.initializer.JobManagerInitializer"/>
+		<!-- <initializer class="io.vertigo.demo.boot.initializer.JobManagerInitializer"/>  -->
 		<initializer class="io.vertigo.demo.boot.initializer.SecurityManagerInitializer"/>
 	</init>
  </config>
