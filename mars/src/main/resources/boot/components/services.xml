@@ -1,0 +1,22 @@
+<?xml version =	'1.0' encoding = 'ISO-8859-1'?>
+<config>
+
+	<module name="aop">
+		<aspect class="io.vertigo.commons.impl.transaction.VTransactionAspect"/>
+	</module>
+
+	<module name="dao">
+		<component class="io.vertigo.mars.dao.movies.MovieDAO" />
+	</module>
+
+	<module name="services">
+		<component api="MovieServices" class="io.vertigo.mars.services.movies.MovieServicesImpl"/>
+		<component api="UserServices" class="io.vertigo.mars.services.users.UserServicesImpl"/>
+	</module>
+
+	<init>
+		<initializer class="io.vertigo.mars.boot.MasterDataInitializer"/>
+		<initializer class="io.vertigo.mars.boot.I18nResourcesInitializer"/>
+	</init>
+
+</config>

@@ -1,0 +1,37 @@
+.modal {
+	border-radius:0; width:800px; padding:0; color:#0d384d; overflow: auto; position: absolute;
+}
+.modalWrapper .modal-header {background:#edf0f2; padding: 24px 30px;}
+.modalWrapper.modalConfirm {z-index: 1060;}
+.modal-backdrop.fade.in.modalConfirmOverrlay {display: none;z-index: 1059;}
+.modal .close {position:absolute; right:30px; background:none; border:none; color:#00ab8f; margin:5px 0 0; opacity:1; font-size:1em; font-weight:normal; text-shadow:none;}
+.modal .closetop {top:30px;}
+.modal .closebottom {bottom:57px;}
+.modal iframe {width:100%; border:none; overflow:visible;}
+.modalWrapper .modal-header h1 {margin:0; font-size:1.25em; color:#0d384d; font-weight:500; line-height:normal;}
+.modalWrapper .modal-body {padding:30px 32px 40px;}
+.modalWrapper .modal-body th, .modal .modal-body td {padding-top:11px; padding-bottom:11px;}
+.modalWrapper .modal-body .tdLabel {text-align:right; padding-right: 25px; width:180px;}
+.modalWrapper .modal-body .tdLabel label {font-size:1em;}
+.modalWrapper .modal-body input[type='text'] {
+	color: #0d384d;
+	font-size: 1em;
+	box-shadow: none;
+	border-radius: 0;
+	border: none;
+	border-bottom: 1px solid #7d8e96;
+	background: #fff;
+	padding: 0;
+	min-height: 30px;
+}
+.modalWrapper .modal-body input[type='file'], .modal .modal-body select {border:1px solid #7d8e96; padding:0 18px; min-height: 48px;}
+.modalWrapper .modal-body input[type='file'] {padding-top:8px;}
+.modalWrapper .modal-body .btnGroup {padding-top:30px;}
+
+
+.topOfPage {
+	position: fixed;
+	right: 35px;
+	bottom: 25px;
+	z-index:150;
+}

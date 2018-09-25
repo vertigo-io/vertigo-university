@@ -1,0 +1,55 @@
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.ui.theme" value="xhtml" />
+	<constant name="struts.ui.templateDir" value="template" />
+
+	<!-- overwrite struts2-core.jar/org.apache.struts2/struts-messages.properties -->
+	<constant name="struts.custom.i18n.resources" value="global" />
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true" />
+	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.action.extension" value="do" />
+	<constant name="struts.action.excludePattern" value="/static/.*" />
+	<constant name="struts.mapper.action.prefix.enabled" value="true" /> <!-- when set to false support for "action:" prefix is disabled, set to false by default -->
+	<constant name="struts.mapper.alwaysSelectFullNamespace" value="true"></constant>
+	<constant name="struts.mapper.action.prefix.crossNamespaces" value="false" />
+	<!-- when set to false, actions defined with "action:" prefix must be in the same namespace as current action -->
+
+	<constant name="struts.multipart.maxSize" value="5242880" /><!-- 5Mio -->
+
+	<constant name="struts.freemarker.manager.classname" value="io.vertigo.struts2.impl.views.freemarker.VFreemarkerManager" />
+
+
+	<package name="default" namespace="/" extends="struts-default">
+		<interceptors>
+			<interceptor name="userException" class="io.vertigo.struts2.impl.interceptor.VUserExceptionInterceptor" />
+			<interceptor name="contextStore" class="io.vertigo.struts2.impl.interceptor.KActionContextStoreInterceptor" />
+			<interceptor name="restrictActionAccess" class="io.vertigo.struts2.impl.interceptor.KActionRestrictAccessInterceptor" />
+
+			<interceptor-stack name="vertigoDefaultStack">
+				<interceptor-ref name="defaultStack" />
+
+				<interceptor-ref name="restrictActionAccess" /> <!-- Assure que les executes sont appellés en POST sauf s'ils ont l'annotation @GET -->
+				<interceptor-ref name="userException" /> <!-- Converti les UserExceptions en ActionError ou FieldsError -->
+				<interceptor-ref name="contextStore" /> <!-- Persist le context -->
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="vertigoDefaultStack" />
+
+		<action name="ListAutocomplete" class="io.vertigo.struts2.controller.ListAutocompleteAction" method="searchFullText" />
+
+		<action name="*Accueil"
+			class="io.vertigo.mars.ui.AccueilAction" method="{1}">
+			<result name="none">/WEB-INF/jsp/accueil.jsp</result>
+			<result name="success">/WEB-INF/jsp/accueil.jsp</result>
+		</action>
+
+	</package>
+
+
+</struts>
