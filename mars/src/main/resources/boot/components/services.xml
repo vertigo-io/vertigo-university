@@ -17,6 +17,7 @@
 	<init>
 		<initializer class="io.vertigo.mars.boot.MasterDataInitializer"/>
 		<initializer class="io.vertigo.mars.boot.I18nResourcesInitializer"/>
+		<initializer class="io.vertigo.mars.boot.DataBaseInitializer"/>
 	</init>
 
 </config>

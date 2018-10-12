@@ -23,7 +23,7 @@
 	<module name="vertigo-database">
 		<component api="SqlDataBaseManager" class="io.vertigo.database.impl.sql.SqlDataBaseManagerImpl">
 			<plugin class="io.vertigo.database.plugins.sql.connection.datasource.DataSourceConnectionProviderPlugin">
-				<param name="classname" value="io.vertigo.database.impl.sql.vendor.postgresql.PostgreSqlDataBase" />
+				<param name="classname" value="io.vertigo.database.impl.sql.vendor.h2.H2DataBase" />
 				<param name="source" value="java:/comp/env/jdbc/DataSource" />
 			</plugin>
 		</component>
@@ -40,20 +40,25 @@
 				<param name="sequencePrefix" value="SEQ_" />
 			</plugin>
 		</component>
-			<component api="KVStoreManager" class="io.vertigo.dynamo.impl.kvstore.KVStoreManagerImpl">
+		<component api="KVStoreManager" class="io.vertigo.dynamo.impl.kvstore.KVStoreManagerImpl">
 			<plugin class="io.vertigo.dynamo.plugins.kvstore.delayedmemory.DelayedMemoryKVStorePlugin">
 				<param name="collections" value="lollipop-tokens" />
 				<param name="timeToLiveSeconds" value="120" />
 			</plugin>
 			<plugin class="io.vertigo.dynamo.plugins.kvstore.berkeley.BerkeleyKVStorePlugin">
-				<param name="collections" value="VActionContext;TTL=86400"/>
-				<param name="dbFilePath" value="${java.io.tmpdir}/ehcache/MarsVActionContext"/>
+				<param name="collections" value="VViewContext;TTL=43200" /> <!-- 12h -->
+				<param name="dbFilePath" value="${java.io.tmpdir}/vertigo/TestVViewContext" />
 			</plugin>
 		</component>
 	</module>
 	<module name="vertigo-persona">
 		<component api="VSecurityManager" class="io.vertigo.persona.impl.security.VSecurityManagerImpl">
 			<param name="userSessionClassName" value="io.vertigo.mars.user.MarsUserSession" />
+		</component>
+	</module>
+	<module name="vertigo-ui">
+		<component api="UiManager" class="io.vertigo.ui.impl.UiManagerImpl">
+			<param name="controllerRootPackage" value="io.vertigo.mars.controller" />
 		</component>
 	</module>
 

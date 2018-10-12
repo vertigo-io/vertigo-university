@@ -3,61 +3,7 @@
 	<Resource name="jdbc/DataSource"
 		auth="SERVLET"
 		type="javax.sql.DataSource"
-		driverClassName="org.postgresql.Driver"
-		url="jdbc:postgresql://miura.part.klee.lan.net:5432/marsdev"
-		username="marsdev"
-		password="marsdev"
-		maxActive="5"
-		maxIdle="0"
-		maxWait="10000"
-		removeAbandoned="true"
-		logAbandoned="true" />
-
-
-
-<!--  postgres
-	<Resource name="jdbc/DataSource"
-		auth="SERVLET"
-		type="javax.sql.DataSource"
-		driverClassName="org.postgresql.Driver"
-		url="jdbc:postgresql://miura.part.klee.lan.net:5432/marsdev"
-		username="marsdev"
-		password="marsdev"
-		maxActive="5"
-		maxIdle="0"
-		maxWait="10000"
-		removeAbandoned="true"
-		logAbandoned="true" />
- -->
-
-<!--  H2 embedded
-	<Resource name="jdbc/DataSource"
-		auth="SERVLET"
-		type="javax.sql.DataSource"
 		driverClassName="org.h2.Driver"
-		url="jdbc:h2:~/test;MODE=PostgreSQL"
-		username="sa"
-		maxActive="5"
-		maxIdle="0"
-		maxWait="10000"
-		removeAbandoned="true"
-		logAbandoned="true" />
- -->
-<!--  H2 server
-	<Resource name="jdbc/DataSource"
-		auth="SERVLET"
-		type="javax.sql.DataSource"
-		driverClassName="org.h2.Driver"
-		url="jdbc:h2:tcp://localhost/~/test;MODE=PostgreSQL"
-		username="sa"
-		maxActive="5"
-		maxIdle="0"
-		maxWait="10000"
-		removeAbandoned="true"
-		logAbandoned="true" />
- -->
-
-
-
+		url="jdbc:h2:mem:test" />
 
 </Context>
