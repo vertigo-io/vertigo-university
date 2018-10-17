@@ -56,12 +56,6 @@
 			<param name="userSessionClassName" value="io.vertigo.mars.user.MarsUserSession" />
 		</component>
 	</module>
-	<module name="vertigo-ui">
-		<component api="UiManager" class="io.vertigo.ui.impl.UiManagerImpl">
-			<param name="controllerRootPackage" value="io.vertigo.mars.controller" />
-		</component>
-	</module>
-
 	<module name="mars-boot-resources">
 		<definitions>
 			<provider class="io.vertigo.dynamo.plugins.environment.DynamoDefinitionProvider" >

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="http://www.morphbit.com/thymeleaf/component"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <vu:head-meta/>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Demo Application of Vertigo UI powered by SpringMvc, Thymeleaf and Quasar Framework"/>
+    <meta name="author" content="Klee Group"/>
+    
+  	<link rel="stylesheet" th:href="@{/static/css/mars.css}"/>
+	<link rel="icon" th:href="@{/static/img/favicon.ico}"/>
+    
+   	<script th:src="@{/static/js/mars.js}"></script>
+</head>
+
+<body class="mat desktop no-touch platform-mat">
+	<vu:page>
+      <q-layout view="hHr LpR lFf" id="page" v-cloak>
+			<!-- BEGIN HEADER-->
+			<q-layout-header class="items-center">
+				<q-toolbar class="justify-between">
+					<div class="row">
+						<q-btn flat round dense @click="componentStates.showLeft = !componentStates.showLeft" icon="menu" aria-label="Toggle menu on left side"></q-btn>
+						<div><img th:src="@{/static/img/logo MMC v0.1.png}" height="30px"/></div>
+						<q-toolbar-title>
+								MMC Managment 
+								<span slot="subtitle">Mars Mining Company</span>
+						</q-toolbar-title>
+					</div>
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div>
+						<input type="text"/>
+						<i aria-hidden="true" class="q-icon material-icons">search</i>
+					</div>
+					<div>
+						<q-btn round dense color="primary" icon="mail" class="on-left" >
+							<q-chip floating color="red">22</q-chip>
+						</q-btn>
+						<q-btn icon-right="arrow_drop_down"  class="on-left">
+							<img th:src="@{/static/img/woman.png}" class="avatar"/>
+							<div>Daniel Johnson<br/><small>Administrator</small></div>
+						</q-btn>
+						<q-btn flat round dense icon="apps" aria-label="Toggle apps"></q-btn>
+					</div>
+				</q-toolbar>
+			</q-layout-header>
+        	<!-- END HEADER-->
+        	
+			<q-page-container>
+				<div class="row justify-center">
+					<div class="col-md-6 col-xs-12" >
+						<section layout:fragment="content"></section>
+					</div>
+				</div>
+			</q-page-container>
+			
+			<q-layout-footer>
+    			<!-- content; any -->
+  			</q-layout-footer>
+		</q-layout>
+	</vu:page>
+</body>
+
+</html>

@@ -1,8 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:vu="http://www.morphbit.com/thymeleaf/component">
-<vu:page title="Movie Detail" >
-	<div class="row justify-center">
-		<div class="col-6" >
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="http://www.morphbit.com/thymeleaf/component"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{templates/mmcLayout}"
+>
+
+<head>
+	<title>Movie Detail</title>
+</head>
+
+<body>
+	<section layout:fragment="content">
 			<vu:form>		
 				<vu:grid cols="3">
 					<vu:text-field object="movie" field="movId"/>
@@ -14,7 +22,6 @@
 					</vu:grid-cell>
 				</vu:grid>
 			</vu:form>
-		</div>	
-	</div>
-</vu:page>
+	</section>
+</body>
 </html>
