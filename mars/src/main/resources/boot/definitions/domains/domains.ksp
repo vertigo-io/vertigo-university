@@ -17,6 +17,17 @@ create Formatter FMT_DATE_HEURE {
      args : "dd/MM/yyyy '�' HH'h'mm"
 }
 
+create Formatter FMT_TAGS {
+	className : "io.vertigo.dynamox.domain.formatter.FormatterDefault"
+	/* TODO implement tags formatter */
+}
+
+create Formatter FMT_CURRENCY {
+	className : "io.vertigo.dynamox.domain.formatter.FormatterDefault"
+	/* TODO implement currency formatter */
+}
+
+
 /**************************************************************************************************/
 /********************************* Constraints ****************************************************/
 /**************************************************************************************************/
@@ -57,10 +68,26 @@ create Constraint CK_MAX_LENGTH_250 {
 	args :"250"
 }
 
+create Constraint CK_MAX_LENGTH_350 {
+	className: "io.vertigo.dynamox.domain.constraint.ConstraintStringLength"
+	args :"350"
+}
+
 create Constraint CK_MAX_LENGTH_3000 {
 	className: "io.vertigo.dynamox.domain.constraint.ConstraintStringLength"
 	args :"3000"
 }
+
+create Constraint CK_MIN_HEALTH_VALUE_0 {
+	className: "io.vertigo.dynamox.domain.constraint.ConstraintNumberMinimum"
+	args :"0"
+}
+
+create Constraint CK_MAX_HEALTH_VALUE_100 {
+	className: "io.vertigo.dynamox.domain.constraint.ConstraintNumberMaximum"
+	args :"100"
+}
+
 
 /**************************************************************************************************/
 /********************************* Domains ********************************************************/
@@ -78,30 +105,20 @@ create Domain DO_DATE {
 	storeType : "DATE"
 }
 
-create Domain DO_YEAR {
-	dataType : Integer
+
+create Domain DO_CURRENCY {
+	dataType : BigDecimal
+	formatter : FMT_CURRENCY
+	unit : "$"
+	storeType: "NUMERIC(12,2)"
+}
+
+
+create Domain DO_HEALTH {
+	dataType: Integer
 	formatter : FMT_DEFAULT
+	constraint : [CK_MIN_HEALTH_VALUE_0, CK_MAX_HEALTH_VALUE_100]
 	storeType : "NUMERIC"
-}
-
-create Domain DO_DURATION {
-	dataType : Integer
-	formatter : FMT_DEFAULT
-	storeType : "NUMERIC"
-}
-
-create Domain DO_COMMENT {
-	dataType : String
-	formatter : FMT_DEFAULT
-	constraint : [CK_MAX_LENGTH_3000]
-	storeType : "VARCHAR(3000)"
-}
-
-create Domain DO_LABEL_SHORT {
-	dataType : String
-	formatter : FMT_DEFAULT
-	constraint : [CK_MAX_LENGTH_50]
-	storeType : "VARCHAR(50)"
 }
 
 create Domain DO_LABEL {
@@ -111,11 +128,11 @@ create Domain DO_LABEL {
 	storeType : "VARCHAR(100)"
 }
 
-create Domain DO_LABEL_LONG {
+create Domain DO_DESCRIPTION {
 	dataType : String
 	formatter : FMT_DEFAULT
-	constraint : [CK_MAX_LENGTH_250]
-	storeType : "VARCHAR(250)"
+	constraint : [CK_MAX_LENGTH_350]
+	storeType : "VARCHAR(350)"
 }
 
 create Domain DO_EMAIL {
@@ -132,26 +149,6 @@ create Domain DO_CODE {
 	storeType : "VARCHAR(100)"
 }
 
-create Domain DO_MULTI_VALUES_FIELD {
-	dataType : String
-	formatter : FMT_DEFAULT
-	constraint : [CK_MAX_LENGTH_3000]
-	storeType : "VARCHAR(3000)"
-}
-
-create Domain DO_NAME {
-	dataType : String
-	formatter : FMT_DEFAULT
-	constraint : [CK_MAX_LENGTH_50]
-	storeType : "VARCHAR(50)"
-}
-
-create Domain DO_FIRSTNAME {
-	dataType : String
-	formatter : FMT_DEFAULT
-	constraint : [CK_MAX_LENGTH_50]
-	storeType : "VARCHAR(50)"
-}
 
 create Domain DO_PASSWORD {
 	dataType : String
@@ -166,9 +163,11 @@ create Domain DO_TEXT {
 	storeType : "TEXT"
 }
 
-create Domain DO_TEXT_NOT_ANALYZED {
+create Domain DO_TAGS {
 	dataType : String
-	formatter : FMT_DEFAULT
+	formatter : FMT_TAGS
+	storeType : "TEXT"
+	/* TODO : add constraints and formatter */
 }
 
 create Domain DO_YES_NO {
@@ -178,28 +177,3 @@ create Domain DO_YES_NO {
 }
 
 
-create Domain DO_FILE_NAME {
-	dataType : String
-	formatter : FMT_DEFAULT
-	constraint : [CK_MAX_LENGTH_100]
-	storeType : "VARCHAR(100)"
-}
-
-create Domain DO_TIMESTAMP {
-	dataType : Date
-	formatter : FMT_DATE_HEURE
-	storeType : "TIMESTAMP"
-}
-
-create Domain DO_FILE_LENGTH {
-	dataType : Long
-	formatter : FMT_DEFAULT
-	storeType : "NUMERIC"
-}
-
-create Domain DO_FILE_PATH {
-	dataType : String
-	formatter : FMT_DEFAULT
-	constraint : [CK_MAX_LENGTH_250]
-	storeType : "VARCHAR(250)"
-}

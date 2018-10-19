@@ -1,0 +1,39 @@
+package io.mars.humanresources.domain
+
+
+
+create DtDefinition DT_PERSON {
+	id PERSON_ID {domain: DO_ID label:"Id"}
+	field FIRST_NAME {domain: DO_LABEL label: "Name" required:"false"}
+	field LAST_NAME {domain: DO_LABEL label: "Name" required:"false"}
+	field E_MAIL {domain: DO_EMAIL label:"E-mail" required: "false"}
+	
+}
+
+
+create DtDefinition DT_MISSION {
+	id MISSION_ID {domain: DO_ID label:"Id"}
+	field ROLE {domain: DO_CODE label:"Role" required:"false"}
+}
+
+
+
+/* Associations */
+
+create Association A_PERSON_MISSION {
+	fkFieldName : "MISSION_ID"
+    
+ 	dtDefinitionA : DT_PERSON
+	dtDefinitionB : DT_MISSION
+			
+	navigabilityA : "false"
+	navigabilityB : "true"
+	
+	multiplicityA:"0..*"	
+	multiplicityB:"0..1"
+	
+	labelA : "Person"
+	labelB : "Mission"
+	roleA : "Person"
+	roleB : "Mission"
+}

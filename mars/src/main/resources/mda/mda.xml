@@ -14,7 +14,7 @@
 	 	<definitions>
 	 		<provider class="io.vertigo.dynamo.plugins.environment.DynamoDefinitionProvider" >
 		 		<param name="encoding" value="UTF-8" />
-				<resource type ="oom" path="file:./src/main/database/model/mars.oom"/>
+				<!--   <resource type ="oom" path="file:./src/main/database/model/mars.oom"/> -->
 				<resource type ="kpr" path="file:./src/main/resources/mda/generation.kpr"/>
 			</provider>
 		</definitions>
@@ -25,7 +25,7 @@
 	    <component api="MdaManager" class="io.vertigo.studio.impl.mda.MdaManagerImpl">
 	        <param name ="targetGenDir" value="src/main/javagen/"/>
             <param name ="encoding" value="UTF-8"/>
-            <param name ="projectPackageName" value="io.vertigo.mars"/>
+            <param name ="projectPackageName" value="io.mars"/>
 
 	        <plugin class="io.vertigo.studio.plugins.mda.domain.java.DomainGeneratorPlugin">
 		        <param name ="targetSubDir" value="."/>

@@ -1,2 +1,4 @@
-search.ksp
 ../boot/definitions/application.kpr
+../base.ksp
+../catalog.ksp
+../humanresources.ksp

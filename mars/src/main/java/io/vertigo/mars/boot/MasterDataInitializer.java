@@ -13,8 +13,8 @@ import io.vertigo.dynamo.domain.model.DtListURIForMasterData;
 import io.vertigo.dynamo.domain.model.DtObject;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.dynamo.store.StoreManager;
-import io.vertigo.mars.domain.users.Profil;
-import io.vertigo.mars.domain.users.SecurityRole;
+//import io.vertigo.mars.domain.users.Profil;
+//import io.vertigo.mars.domain.users.SecurityRole;
 
 /**
  * Init masterdata list.
@@ -38,8 +38,8 @@ public class MasterDataInitializer implements ComponentInitializer {
 	}
 
 	private static void registerAllMasterData(final StoreManager storeManager) {
-		registerMasterData(storeManager, Profil.class);
-		registerMasterData(storeManager, SecurityRole.class);
+	//	registerMasterData(storeManager, Profil.class);
+	//	registerMasterData(storeManager, SecurityRole.class);
 	}
 
 	private static <O extends DtObject> void registerMasterData(final StoreManager storeManager, final Class<O> dtObjectClass) {

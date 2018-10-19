@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import io.vertigo.mars.domain.movies.Movie;
+//import io.vertigo.mars.domain.movies.Movie;
 import io.vertigo.mars.services.movies.MovieServices;
 import io.vertigo.ui.core.ViewContext;
 import io.vertigo.ui.core.ViewContextKey;
@@ -18,7 +18,7 @@ import io.vertigo.ui.impl.springmvc.controller.AbstractVSpringMvcController;
 @Controller
 @RequestMapping("/movie")
 public class MovieController extends AbstractVSpringMvcController {
-
+/*
 	private final ViewContextKey<Movie> movieKey = ViewContextKey.of("movie");
 
 	@Autowired
@@ -42,5 +42,5 @@ public class MovieController extends AbstractVSpringMvcController {
 		redirectAttributes.addAttribute("movId", movie.getMovId());
 		return "redirect:/movie/";
 	}
-
+*/
 }

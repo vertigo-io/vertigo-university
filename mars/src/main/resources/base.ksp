@@ -1,0 +1,216 @@
+package io.mars.base.domain
+
+create DtDefinition DT_BASE {
+	id BAS_ID {domain: DO_ID label: "Id"}
+	field CODE {domain: DO_CODE label: "Base Code" required:"false"}
+	field NAME {domain: DO_LABEL label: "Name" required:"false"}
+	field HEALTH_LEVEL {domain: DO_HEALTH label: "Health Level" required: "false"}	
+	field CREATION_DATE {domain: DO_DATE label: "Base Creation Date" required:"false"}
+	field DESCRIPTION {domain: DO_DESCRIPTION label: "Description" required:"false"}
+	field GEO_LOCATION {domain: DO_LABEL label:"Geographic Location" required:"false"}
+	field ASSETS_VALUE {domain: DO_CURRENCY label:"Current base assets value" required:"false"}
+	field RENTING_FEE {domain: DO_CURRENCY label: "Renting Fee" required:"false"}
+}
+
+
+create DtDefinition DT_BASE_TYPE {
+	id BASE_TYPE_ID {domain: DO_CODE label:"Id"}
+	field LABEL {domain: DO_LABEL label:"Base Type Label" required:"false"}	
+}
+
+create DtDefinition DT_PICTURE {
+	id PICTURE_ID {domain: DO_ID label:"Id"}
+	field PICTUREFILE_ID {domain: DO_ID label:"Id" required:"false"}
+}
+
+
+create DtDefinition DT_GEOSECTOR {
+	id GEOSECTOR_ID {domain: DO_ID label:"Id"}
+	field SECTOR_LABEL {domain: DO_LABEL label:"Sector Label" required:"false"}
+}
+
+
+create DtDefinition DT_JOB {
+	id JOB_ID {domain: DO_ID label:"Id"}
+	field CODE {domain: DO_LABEL label: "CODE" required:"false"}
+	field NAME {domain: DO_LABEL label: "Job Name" required:"false"}
+	field DESCRIPTION {domain: DO_DESCRIPTION label: "Job Description" required:"false"}
+	field DUE_DATE {domain: DO_DATE label: "Due Date" required:"false"}	
+}
+
+create DtDefinition DT_JOB_STATUS {
+	id JOB_STATUS_ID {domain: DO_CODE label:"Id"}
+	field LABEL {domain: DO_LABEL label:"Status Label" required:"false"}
+}
+
+create DtDefinition DT_EQUIPMENT {
+	id EQUIPMENT_ID {domain: DO_ID label:"Id"}
+	field NAME {domain: DO_LABEL label: "Name" required:"false"}
+	field CODE {domain: DO_CODE label: "Base Code" required:"false"}
+	field HEALTH_LEVEL {domain: DO_HEALTH label: "Health Level" required: "false"}	
+	field PURCHASE_DATE {domain: DO_DATE label: "Date of purchase" required:"false"}
+	field DESCRIPTION {domain: DO_DESCRIPTION label: "Description" required:"false"}
+	field TAGS {domain: DO_TAGS label: "Tags" required:"false"}
+	field GEO_LOCATION {domain: DO_LABEL label:"Geographic Location" required:"false"}
+	field RENTING_FEE {domain: DO_CURRENCY label: "Renting Fee" required:"false"}
+	field EQUIPMENT_VALUE {domain: DO_CURRENCY label:"Current equipment value" required:"false"}
+}
+
+
+
+/* Exemple : "Long Range Antenna","High Res Camera", "All Terrain Tires" */
+create DtDefinition DT_EQUIPMENT_FEATURE {
+	id EQUIPMENT_FEATURE_ID {domain: DO_ID label:"Id"}
+}
+
+
+create DtDefinition DT_MAINTENANCE_OP {
+	id MO_ID {domain: DO_ID label:"Id"}
+	field TICKET_CODE {domain: DO_LABEL label: "Ticket Number" required:"false"}
+	field NAME {domain: DO_LABEL label: "Mainenance Operation" required:"false"}
+	field DESCRIPTION {domain: DO_DESCRIPTION label: "Maintenance Operation Descrption" required:"false"}
+	field DUE_DATE {domain: DO_DATE label: "Due Date" required:"false"}	
+}
+
+create DtDefinition DT_MAINTENANCE_OP_STATUS {
+	id MO_STATUS_ID {domain: DO_CODE label:"Id"}
+	field LABEL {domain: DO_LABEL label:"Status Label" required:"false"}
+}
+
+
+
+
+
+
+/* Associations */
+
+create Association A_MISSION_BASE {
+	fkFieldName : "BASE_ID"
+    
+ 	dtDefinitionA : DT_MISSION
+	dtDefinitionB : DT_BASE
+			
+	navigabilityA : "false"
+	navigabilityB : "true"
+	
+	multiplicityA:"0..*"	
+	multiplicityB:"0..1"
+	
+	labelA : "Mission"
+	labelB : "Base"
+	roleA : "Mission"
+	roleB : "Base"
+}
+
+
+create Association A_BASE_BASETYPE {
+	fkFieldName : "BASE_TYPE_ID"
+    
+ 	dtDefinitionA : DT_BASE
+	dtDefinitionB : DT_BASE_TYPE
+			
+	navigabilityA : "false"
+	navigabilityB : "true"
+	
+	multiplicityA:"0..*"	
+	multiplicityB:"0..1"
+	
+	labelA : "Base"
+	labelB : "Base Type"
+	roleA : "Base"
+	roleB : "BaseType"
+	
+}
+
+create Association A_BASE_GEOSECTOR {
+	fkFieldName : "GEOSECTOR_ID"
+    
+ 	dtDefinitionA : DT_BASE
+	dtDefinitionB : DT_GEOSECTOR
+			
+	navigabilityA : "false"
+	navigabilityB : "true"
+	
+	multiplicityA:"0..*"
+	multiplicityB:"0..1"
+	
+	labelA : "Base"
+	labelB : "Base Geosector"
+	roleA : "Base"
+	roleB : "Geosector"
+}
+
+create Association A_BASE_PICTURE {
+	fkFieldName : "BASE_ID"
+    
+ 	dtDefinitionA : DT_BASE
+	dtDefinitionB : DT_PICTURE
+			
+	navigabilityA : "false"
+	navigabilityB : "true"
+	
+	multiplicityA:"1..1"
+	multiplicityB:"0..*"
+	
+	labelA : "Base"
+	labelB : "Base Pictures"
+	roleA : "Base"
+	roleB : "Pictures"
+}
+
+create Association A_BASE_EQUIPMENT {
+	fkFieldName : "BASE_ID"
+    
+ 	dtDefinitionA : DT_BASE
+	dtDefinitionB : DT_EQUIPMENT
+			
+	navigabilityA : "true"
+	navigabilityB : "true"
+	
+	multiplicityA:"0..1"
+	multiplicityB:"0..*"
+	
+	labelA : "Base"
+	labelB : "Base Equipments"
+	roleA : "Base"
+	roleB : "BaseEquipments"
+}
+
+create Association A_EQUIPMENT_EQUIPMENT_TYPE {
+	fkFieldName : "EQUIPMENT_TYPE_ID"
+    
+ 	dtDefinitionA : DT_EQUIPMENT
+	dtDefinitionB : DT_EQUIPMENT_TYPE
+			
+	navigabilityA : "false"
+	navigabilityB : "true"
+	
+	multiplicityA:"0..*"	
+	multiplicityB:"0..1"
+	
+	labelA : "Equipment"
+	labelB : "Equipment Type"
+	roleA : "Equipment"
+	roleB : "EquipmentType"
+}
+
+
+create Association A_EQUIPMENT_GEOSECTOR {
+	fkFieldName : "GEOSECTOR_ID"
+    
+ 	dtDefinitionA : DT_EQUIPMENT
+	dtDefinitionB : DT_GEOSECTOR
+			
+	navigabilityA : "false"
+	navigabilityB : "true"
+	
+	multiplicityA:"0..*"
+	multiplicityB:"0..1"
+	
+	labelA : "Equipment"
+	labelB : "Equipment Geosector"
+	roleA : "Equipment"
+	roleB : "Geosector"
+	
+}
+

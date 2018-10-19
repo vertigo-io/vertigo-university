@@ -37,8 +37,8 @@ import io.vertigo.database.sql.SqlDataBaseManager;
 import io.vertigo.database.sql.connection.SqlConnection;
 import io.vertigo.database.sql.statement.SqlStatement;
 import io.vertigo.lang.WrappedException;
-import io.vertigo.mars.dao.movies.MovieDAO;
-import io.vertigo.mars.domain.movies.Movie;
+/*import io.vertigo.mars.dao.movies.MovieDAO;
+import io.vertigo.mars.domain.movies.Movie;*/
 
 /**
  * Init masterdata list.
@@ -52,14 +52,17 @@ public class DataBaseInitializer implements ComponentInitializer {
 	private VTransactionManager transactionManager;
 	@Inject
 	private SqlDataBaseManager sqlDataBaseManager;
+	
+	/*
 	@Inject
 	private MovieDAO movieDao;
+	*/
 
 	/** {@inheritDoc} */
 	@Override
 	public void init() {
 		createDataBase();
-		createInitialMovies(movieDao, transactionManager);
+		//createInitialMovies(movieDao, transactionManager);
 
 	}
 
@@ -95,6 +98,7 @@ public class DataBaseInitializer implements ComponentInitializer {
 		}
 	}
 
+	/*
 	private static void createInitialMovies(final MovieDAO movieDao, final VTransactionManager transactionManager) {
 		try (VTransactionWritable tx = transactionManager.createCurrentTransaction()) {
 			movieDao.create(createMovie("Pulp Fiction", 1994, 154, "http://ia.media-imdb.com/images/M/MV5BMTkxMTA5OTAzMl5BMl5BanBnXkFtZTgwNjA5MDc3NjE@._V1_SX214_AL_.jpg",
@@ -127,4 +131,5 @@ public class DataBaseInitializer implements ComponentInitializer {
 		movie.setDescription(description);
 		return movie;
 	}
+	*/
 }

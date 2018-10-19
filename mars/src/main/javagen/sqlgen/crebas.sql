@@ -8,245 +8,459 @@
 -- ============================================================
 --   Sequences                                      
 -- ============================================================
-create sequence SEQ_APPLICATION_USER
+create sequence SEQ_BASE
 	start with 1000 cache 20; 
 
-create sequence SEQ_CASTING
+create sequence SEQ_BASE_TYPE
 	start with 1000 cache 20; 
 
-create sequence SEQ_MOVIE
+create sequence SEQ_EQUIPMENT
 	start with 1000 cache 20; 
 
-create sequence SEQ_PEOPLE
+create sequence SEQ_EQUIPMENT_CATEGORY
 	start with 1000 cache 20; 
 
-create sequence SEQ_PROFIL
+create sequence SEQ_EQUIPMENT_FEATURE
 	start with 1000 cache 20; 
 
-create sequence SEQ_SECURITY_ROLE
+create sequence SEQ_EQUIPMENT_TYPE
 	start with 1000 cache 20; 
 
-create sequence SEQ_USER_AUTHENTIFICATION
+create sequence SEQ_GEOSECTOR
+	start with 1000 cache 20; 
+
+create sequence SEQ_JOB
+	start with 1000 cache 20; 
+
+create sequence SEQ_JOB_STATUS
+	start with 1000 cache 20; 
+
+create sequence SEQ_MAINTENANCE_OP
+	start with 1000 cache 20; 
+
+create sequence SEQ_MAINTENANCE_OP_STATUS
+	start with 1000 cache 20; 
+
+create sequence SEQ_MISSION
+	start with 1000 cache 20; 
+
+create sequence SEQ_PERSON
+	start with 1000 cache 20; 
+
+create sequence SEQ_PICTURE
 	start with 1000 cache 20; 
 
 
 -- ============================================================
---   Table : APPLICATION_USER                                        
+--   Table : BASE                                        
 -- ============================================================
-create table APPLICATION_USER
+create table BASE
 (
-    USR_ID      	 NUMERIC     	not null,
-    LAST_NAME   	 VARCHAR(50) 	,
-    FIRST_NAME  	 VARCHAR(50) 	,
-    EMAIL       	 VARCHAR(150)	,
-    PRO_ID      	 NUMERIC     	,
-    constraint PK_APPLICATION_USER primary key (USR_ID)
+    BAS_ID      	 NUMERIC     	not null,
+    CODE        	 VARCHAR(100)	,
+    NAME        	 VARCHAR(100)	,
+    HEALTH_LEVEL	 NUMERIC     	,
+    CREATION_DATE	 DATE        	,
+    DESCRIPTION 	 VARCHAR(350)	,
+    GEO_LOCATION	 VARCHAR(100)	,
+    ASSETS_VALUE	 NUMERIC(12,2)	,
+    RENTING_FEE 	 NUMERIC(12,2)	,
+    BASE_TYPE_ID	 VARCHAR(100)	,
+    GEOSECTOR_ID	 NUMERIC     	,
+    constraint PK_BASE primary key (BAS_ID)
 );
 
-comment on column APPLICATION_USER.USR_ID is
-'USR_ID';
+comment on column BASE.BAS_ID is
+'Id';
 
-comment on column APPLICATION_USER.LAST_NAME is
-'Last Name';
+comment on column BASE.CODE is
+'Base Code';
 
-comment on column APPLICATION_USER.FIRST_NAME is
-'First Name';
+comment on column BASE.NAME is
+'Name';
 
-comment on column APPLICATION_USER.EMAIL is
-'email';
+comment on column BASE.HEALTH_LEVEL is
+'Health Level';
 
-comment on column APPLICATION_USER.PRO_ID is
-'Profil';
+comment on column BASE.CREATION_DATE is
+'Base Creation Date';
 
--- ============================================================
---   Table : CASTING                                        
--- ============================================================
-create table CASTING
-(
-    CAST_ID     	 NUMERIC     	not null,
-    CHARACTER_NAME	 VARCHAR(250)	,
-    PEO_ID      	 NUMERIC     	not null,
-    MOV_ID      	 NUMERIC     	not null,
-    constraint PK_CASTING primary key (CAST_ID)
-);
-
-comment on column CASTING.CAST_ID is
-'Cast_id';
-
-comment on column CASTING.CHARACTER_NAME is
-'Character name';
-
-comment on column CASTING.PEO_ID is
-'People';
-
-comment on column CASTING.MOV_ID is
-'Movie';
-
--- ============================================================
---   Table : MOVIE                                        
--- ============================================================
-create table MOVIE
-(
-    MOV_ID      	 NUMERIC     	not null,
-    TITLE       	 VARCHAR(250)	,
-    RELEASED    	 DATE        	,
-    YEAR        	 NUMERIC     	,
-    RUNTIME     	 NUMERIC     	,
-    DESCRIPTION 	 VARCHAR(3000)	,
-    POSTER      	 VARCHAR(250)	,
-    RATED       	 VARCHAR(250)	,
-    constraint PK_MOVIE primary key (MOV_ID)
-);
-
-comment on column MOVIE.MOV_ID is
-'MOV_ID';
-
-comment on column MOVIE.TITLE is
-'TITLE';
-
-comment on column MOVIE.RELEASED is
-'Released';
-
-comment on column MOVIE.YEAR is
-'Year';
-
-comment on column MOVIE.RUNTIME is
-'Runtime';
-
-comment on column MOVIE.DESCRIPTION is
+comment on column BASE.DESCRIPTION is
 'Description';
 
-comment on column MOVIE.POSTER is
-'Poster';
+comment on column BASE.GEO_LOCATION is
+'Geographic Location';
 
-comment on column MOVIE.RATED is
-'rated';
+comment on column BASE.ASSETS_VALUE is
+'Current base assets value';
+
+comment on column BASE.RENTING_FEE is
+'Renting Fee';
+
+comment on column BASE.BASE_TYPE_ID is
+'Base Type';
+
+comment on column BASE.GEOSECTOR_ID is
+'Base Geosector';
 
 -- ============================================================
---   Table : PEOPLE                                        
+--   Table : BASE_TYPE                                        
 -- ============================================================
-create table PEOPLE
+create table BASE_TYPE
 (
-    PEO_ID      	 NUMERIC     	not null,
-    LAST_NAME   	 VARCHAR(50) 	,
-    FIRST_NAME  	 VARCHAR(50) 	,
-    PEO_NAME    	 VARCHAR(250)	,
-    IMDBID      	 VARCHAR(100)	,
-    constraint PK_PEOPLE primary key (PEO_ID)
-);
-
-comment on column PEOPLE.PEO_ID is
-'PEO_ID';
-
-comment on column PEOPLE.LAST_NAME is
-'Last Name';
-
-comment on column PEOPLE.FIRST_NAME is
-'First Name';
-
-comment on column PEOPLE.PEO_NAME is
-'Peo Name';
-
-comment on column PEOPLE.IMDBID is
-'imdbID';
-
--- ============================================================
---   Table : PROFIL                                        
--- ============================================================
-create table PROFIL
-(
-    PRO_ID      	 NUMERIC     	not null,
+    BASE_TYPE_ID	 VARCHAR(100)	not null,
     LABEL       	 VARCHAR(100)	,
-    constraint PK_PROFIL primary key (PRO_ID)
+    constraint PK_BASE_TYPE primary key (BASE_TYPE_ID)
 );
 
-comment on column PROFIL.PRO_ID is
-'PRO_ID';
+comment on column BASE_TYPE.BASE_TYPE_ID is
+'Id';
 
-comment on column PROFIL.LABEL is
-'Label';
+comment on column BASE_TYPE.LABEL is
+'Base Type Label';
 
 -- ============================================================
---   Table : SECURITY_ROLE                                        
+--   Table : EQUIPMENT                                        
 -- ============================================================
-create table SECURITY_ROLE
+create table EQUIPMENT
 (
-    SRO_CD      	 VARCHAR(100)	not null,
+    EQUIPMENT_ID	 NUMERIC     	not null,
+    NAME        	 VARCHAR(100)	,
+    CODE        	 VARCHAR(100)	,
+    HEALTH_LEVEL	 NUMERIC     	,
+    PURCHASE_DATE	 DATE        	,
+    DESCRIPTION 	 VARCHAR(350)	,
+    TAGS        	 TEXT        	,
+    GEO_LOCATION	 VARCHAR(100)	,
+    RENTING_FEE 	 NUMERIC(12,2)	,
+    EQUIPMENT_VALUE	 NUMERIC(12,2)	,
+    BASE_ID     	 NUMERIC     	,
+    GEOSECTOR_ID	 NUMERIC     	,
+    EQUIPMENT_CATEGORY_ID	 NUMERIC     	,
+    EQUIPMENT_TYPE_ID	 NUMERIC     	,
+    constraint PK_EQUIPMENT primary key (EQUIPMENT_ID)
+);
+
+comment on column EQUIPMENT.EQUIPMENT_ID is
+'Id';
+
+comment on column EQUIPMENT.NAME is
+'Name';
+
+comment on column EQUIPMENT.CODE is
+'Base Code';
+
+comment on column EQUIPMENT.HEALTH_LEVEL is
+'Health Level';
+
+comment on column EQUIPMENT.PURCHASE_DATE is
+'Date of purchase';
+
+comment on column EQUIPMENT.DESCRIPTION is
+'Description';
+
+comment on column EQUIPMENT.TAGS is
+'Tags';
+
+comment on column EQUIPMENT.GEO_LOCATION is
+'Geographic Location';
+
+comment on column EQUIPMENT.RENTING_FEE is
+'Renting Fee';
+
+comment on column EQUIPMENT.EQUIPMENT_VALUE is
+'Current equipment value';
+
+comment on column EQUIPMENT.BASE_ID is
+'Base';
+
+comment on column EQUIPMENT.GEOSECTOR_ID is
+'Equipment Geosector';
+
+comment on column EQUIPMENT.EQUIPMENT_CATEGORY_ID is
+'Equipment Category';
+
+comment on column EQUIPMENT.EQUIPMENT_TYPE_ID is
+'Equipment Type';
+
+-- ============================================================
+--   Table : EQUIPMENT_CATEGORY                                        
+-- ============================================================
+create table EQUIPMENT_CATEGORY
+(
+    EQUIPMENT_CATEGORY_ID	 NUMERIC     	not null,
     LABEL       	 VARCHAR(100)	,
-    constraint PK_SECURITY_ROLE primary key (SRO_CD)
+    ACTIVE      	 bool        	,
+    constraint PK_EQUIPMENT_CATEGORY primary key (EQUIPMENT_CATEGORY_ID)
 );
 
-comment on column SECURITY_ROLE.SRO_CD is
-'SRO_CD';
+comment on column EQUIPMENT_CATEGORY.EQUIPMENT_CATEGORY_ID is
+'Id';
 
-comment on column SECURITY_ROLE.LABEL is
-'Label';
+comment on column EQUIPMENT_CATEGORY.LABEL is
+'Equipment Category Label';
+
+comment on column EQUIPMENT_CATEGORY.ACTIVE is
+'Equipment category is active';
 
 -- ============================================================
---   Table : USER_AUTHENTIFICATION                                        
+--   Table : EQUIPMENT_FEATURE                                        
 -- ============================================================
-create table USER_AUTHENTIFICATION
+create table EQUIPMENT_FEATURE
 (
-    AUTH_ID     	 NUMERIC     	not null,
-    LOGIN       	 VARCHAR(50) 	,
-    PASSWORD    	 VARCHAR(32) 	,
-    USR_ID      	 NUMERIC     	not null,
-    constraint PK_USER_AUTHENTIFICATION primary key (AUTH_ID)
+    EQUIPMENT_FEATURE_ID	 NUMERIC     	not null,
+    constraint PK_EQUIPMENT_FEATURE primary key (EQUIPMENT_FEATURE_ID)
 );
 
-comment on column USER_AUTHENTIFICATION.AUTH_ID is
-'AUTH_ID';
+comment on column EQUIPMENT_FEATURE.EQUIPMENT_FEATURE_ID is
+'Id';
 
-comment on column USER_AUTHENTIFICATION.LOGIN is
-'Login';
-
-comment on column USER_AUTHENTIFICATION.PASSWORD is
-'Password';
-
-comment on column USER_AUTHENTIFICATION.USR_ID is
-'Application user';
-
-
-
-alter table USER_AUTHENTIFICATION
-	add constraint FK_AUTH_USR_APPLICATION_USER foreign key (USR_ID)
-	references APPLICATION_USER (USR_ID);
-
-create index AUTH_USR_APPLICATION_USER_FK on USER_AUTHENTIFICATION (USR_ID asc);
-
-alter table CASTING
-	add constraint FK_CAST_MOV_MOVIE foreign key (MOV_ID)
-	references MOVIE (MOV_ID);
-
-create index CAST_MOV_MOVIE_FK on CASTING (MOV_ID asc);
-
-alter table CASTING
-	add constraint FK_CAST_PEO_PEOPLE foreign key (PEO_ID)
-	references PEOPLE (PEO_ID);
-
-create index CAST_PEO_PEOPLE_FK on CASTING (PEO_ID asc);
-
-alter table APPLICATION_USER
-	add constraint FK_USR_PRO_PROFIL foreign key (PRO_ID)
-	references PROFIL (PRO_ID);
-
-create index USR_PRO_PROFIL_FK on APPLICATION_USER (PRO_ID asc);
-
-
-create table PRO_SRO
+-- ============================================================
+--   Table : EQUIPMENT_TYPE                                        
+-- ============================================================
+create table EQUIPMENT_TYPE
 (
-	PRO_ID      	 NUMERIC     	 not null,
-	SRO_CD      	 VARCHAR(100)	 not null,
-	constraint PK_PRO_SRO primary key (PRO_ID, SRO_CD),
-	constraint FK_PRO_SRO_PROFIL 
-		foreign key(PRO_ID)
-		references PROFIL (PRO_ID),
-	constraint FK_PRO_SRO_SECURITY_ROLE 
-		foreign key(SRO_CD)
-		references SECURITY_ROLE (SRO_CD)
+    EQUIPMENT_TYPE_ID	 NUMERIC     	not null,
+    LABEL       	 VARCHAR(100)	,
+    ACTIVE      	 bool        	,
+    constraint PK_EQUIPMENT_TYPE primary key (EQUIPMENT_TYPE_ID)
 );
 
-create index PRO_SRO_PROFIL_FK on PRO_SRO (PRO_ID asc);
+comment on column EQUIPMENT_TYPE.EQUIPMENT_TYPE_ID is
+'Id';
 
-create index PRO_SRO_SECURITY_ROLE_FK on PRO_SRO (SRO_CD asc);
+comment on column EQUIPMENT_TYPE.LABEL is
+'Equipment Type Label';
+
+comment on column EQUIPMENT_TYPE.ACTIVE is
+'Equipment type is active';
+
+-- ============================================================
+--   Table : GEOSECTOR                                        
+-- ============================================================
+create table GEOSECTOR
+(
+    GEOSECTOR_ID	 NUMERIC     	not null,
+    SECTOR_LABEL	 VARCHAR(100)	,
+    constraint PK_GEOSECTOR primary key (GEOSECTOR_ID)
+);
+
+comment on column GEOSECTOR.GEOSECTOR_ID is
+'Id';
+
+comment on column GEOSECTOR.SECTOR_LABEL is
+'Sector Label';
+
+-- ============================================================
+--   Table : JOB                                        
+-- ============================================================
+create table JOB
+(
+    JOB_ID      	 NUMERIC     	not null,
+    CODE        	 VARCHAR(100)	,
+    NAME        	 VARCHAR(100)	,
+    DESCRIPTION 	 VARCHAR(350)	,
+    DUE_DATE    	 DATE        	,
+    constraint PK_JOB primary key (JOB_ID)
+);
+
+comment on column JOB.JOB_ID is
+'Id';
+
+comment on column JOB.CODE is
+'CODE';
+
+comment on column JOB.NAME is
+'Job Name';
+
+comment on column JOB.DESCRIPTION is
+'Job Description';
+
+comment on column JOB.DUE_DATE is
+'Due Date';
+
+-- ============================================================
+--   Table : JOB_STATUS                                        
+-- ============================================================
+create table JOB_STATUS
+(
+    JOB_STATUS_ID	 VARCHAR(100)	not null,
+    LABEL       	 VARCHAR(100)	,
+    constraint PK_JOB_STATUS primary key (JOB_STATUS_ID)
+);
+
+comment on column JOB_STATUS.JOB_STATUS_ID is
+'Id';
+
+comment on column JOB_STATUS.LABEL is
+'Status Label';
+
+-- ============================================================
+--   Table : MAINTENANCE_OP                                        
+-- ============================================================
+create table MAINTENANCE_OP
+(
+    MO_ID       	 NUMERIC     	not null,
+    TICKET_CODE 	 VARCHAR(100)	,
+    NAME        	 VARCHAR(100)	,
+    DESCRIPTION 	 VARCHAR(350)	,
+    DUE_DATE    	 DATE        	,
+    constraint PK_MAINTENANCE_OP primary key (MO_ID)
+);
+
+comment on column MAINTENANCE_OP.MO_ID is
+'Id';
+
+comment on column MAINTENANCE_OP.TICKET_CODE is
+'Ticket Number';
+
+comment on column MAINTENANCE_OP.NAME is
+'Mainenance Operation';
+
+comment on column MAINTENANCE_OP.DESCRIPTION is
+'Maintenance Operation Descrption';
+
+comment on column MAINTENANCE_OP.DUE_DATE is
+'Due Date';
+
+-- ============================================================
+--   Table : MAINTENANCE_OP_STATUS                                        
+-- ============================================================
+create table MAINTENANCE_OP_STATUS
+(
+    MO_STATUS_ID	 VARCHAR(100)	not null,
+    LABEL       	 VARCHAR(100)	,
+    constraint PK_MAINTENANCE_OP_STATUS primary key (MO_STATUS_ID)
+);
+
+comment on column MAINTENANCE_OP_STATUS.MO_STATUS_ID is
+'Id';
+
+comment on column MAINTENANCE_OP_STATUS.LABEL is
+'Status Label';
+
+-- ============================================================
+--   Table : MISSION                                        
+-- ============================================================
+create table MISSION
+(
+    MISSION_ID  	 NUMERIC     	not null,
+    ROLE        	 VARCHAR(100)	,
+    BASE_ID     	 NUMERIC     	,
+    constraint PK_MISSION primary key (MISSION_ID)
+);
+
+comment on column MISSION.MISSION_ID is
+'Id';
+
+comment on column MISSION.ROLE is
+'Role';
+
+comment on column MISSION.BASE_ID is
+'Base';
+
+-- ============================================================
+--   Table : PERSON                                        
+-- ============================================================
+create table PERSON
+(
+    PERSON_ID   	 NUMERIC     	not null,
+    FIRST_NAME  	 VARCHAR(100)	,
+    LAST_NAME   	 VARCHAR(100)	,
+    E_MAIL      	 VARCHAR(150)	,
+    MISSION_ID  	 NUMERIC     	,
+    constraint PK_PERSON primary key (PERSON_ID)
+);
+
+comment on column PERSON.PERSON_ID is
+'Id';
+
+comment on column PERSON.FIRST_NAME is
+'Name';
+
+comment on column PERSON.LAST_NAME is
+'Name';
+
+comment on column PERSON.E_MAIL is
+'E-mail';
+
+comment on column PERSON.MISSION_ID is
+'Mission';
+
+-- ============================================================
+--   Table : PICTURE                                        
+-- ============================================================
+create table PICTURE
+(
+    PICTURE_ID  	 NUMERIC     	not null,
+    PICTUREFILE_ID	 NUMERIC     	,
+    BASE_ID     	 NUMERIC     	not null,
+    constraint PK_PICTURE primary key (PICTURE_ID)
+);
+
+comment on column PICTURE.PICTURE_ID is
+'Id';
+
+comment on column PICTURE.PICTUREFILE_ID is
+'Id';
+
+comment on column PICTURE.BASE_ID is
+'Base';
+
+
+
+alter table BASE
+	add constraint FK_BASE_BASETYPE_BASE_TYPE foreign key (BASE_TYPE_ID)
+	references BASE_TYPE (BASE_TYPE_ID);
+
+create index BASE_BASETYPE_BASE_TYPE_FK on BASE (BASE_TYPE_ID asc);
+
+alter table EQUIPMENT
+	add constraint FK_BASE_EQUIPMENT_BASE foreign key (BASE_ID)
+	references BASE (BAS_ID);
+
+create index BASE_EQUIPMENT_BASE_FK on EQUIPMENT (BASE_ID asc);
+
+alter table BASE
+	add constraint FK_BASE_GEOSECTOR_GEOSECTOR foreign key (GEOSECTOR_ID)
+	references GEOSECTOR (GEOSECTOR_ID);
+
+create index BASE_GEOSECTOR_GEOSECTOR_FK on BASE (GEOSECTOR_ID asc);
+
+alter table PICTURE
+	add constraint FK_BASE_PICTURE_BASE foreign key (BASE_ID)
+	references BASE (BAS_ID);
+
+create index BASE_PICTURE_BASE_FK on PICTURE (BASE_ID asc);
+
+alter table EQUIPMENT
+	add constraint FK_EQUIPMENT_EQUIPMENT_TYPE_EQUIPMENT_TYPE foreign key (EQUIPMENT_TYPE_ID)
+	references EQUIPMENT_TYPE (EQUIPMENT_TYPE_ID);
+
+create index EQUIPMENT_EQUIPMENT_TYPE_EQUIPMENT_TYPE_FK on EQUIPMENT (EQUIPMENT_TYPE_ID asc);
+
+alter table EQUIPMENT
+	add constraint FK_EQUIPMENT_GEOSECTOR_GEOSECTOR foreign key (GEOSECTOR_ID)
+	references GEOSECTOR (GEOSECTOR_ID);
+
+create index EQUIPMENT_GEOSECTOR_GEOSECTOR_FK on EQUIPMENT (GEOSECTOR_ID asc);
+
+alter table EQUIPMENT
+	add constraint FK_EQUIPMENT_TYPE_EQUIPMENT_CATEGORY_EQUIPMENT_CATEGORY foreign key (EQUIPMENT_CATEGORY_ID)
+	references EQUIPMENT_CATEGORY (EQUIPMENT_CATEGORY_ID);
+
+create index EQUIPMENT_TYPE_EQUIPMENT_CATEGORY_EQUIPMENT_CATEGORY_FK on EQUIPMENT (EQUIPMENT_CATEGORY_ID asc);
+
+alter table MISSION
+	add constraint FK_MISSION_BASE_BASE foreign key (BASE_ID)
+	references BASE (BAS_ID);
+
+create index MISSION_BASE_BASE_FK on MISSION (BASE_ID asc);
+
+alter table PERSON
+	add constraint FK_PERSON_MISSION_MISSION foreign key (MISSION_ID)
+	references MISSION (MISSION_ID);
+
+create index PERSON_MISSION_MISSION_FK on PERSON (MISSION_ID asc);
+
 
