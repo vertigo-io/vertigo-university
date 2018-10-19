@@ -22,7 +22,7 @@ public final class Country implements Entity {
 	public URI<Country> getURI() {
 		return DtObjectUtil.createURI(this);
 	}
-	
+
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
@@ -41,7 +41,7 @@ public final class Country implements Entity {
 	public void setCouId(final Long couId) {
 		this.couId = couId;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Nom du pays'.
@@ -60,7 +60,7 @@ public final class Country implements Entity {
 	public void setName(final String name) {
 		this.name = name;
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

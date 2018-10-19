@@ -49,14 +49,12 @@ public final class ActorRole implements Entity {
 			foreignMultiplicity = "0..*")
 	private final VAccessor<io.vertigo.pandora.domain.movies.Movie> movIdAccessor = new VAccessor<>(io.vertigo.pandora.domain.movies.Movie.class, "movie");
 
-
 	/** {@inheritDoc} */
 	@Override
 	public URI<ActorRole> getURI() {
 		return DtObjectUtil.createURI(this);
 	}
 
-	
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'ARO ID'.
@@ -75,8 +73,7 @@ public final class ActorRole implements Entity {
 	public void setAroId(final Long aroId) {
 		this.aroId = aroId;
 	}
-	
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'ROLE'.
@@ -95,8 +92,7 @@ public final class ActorRole implements Entity {
 	public void setRole(final String role) {
 		this.role = role;
 	}
-	
-	
+
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Actor'.
@@ -104,7 +100,7 @@ public final class ActorRole implements Entity {
 	 */
 	@Field(domain = "DO_IDENTITY", type = "FOREIGN_KEY", label = "Actor")
 	public Long getPerId() {
-		return (Long)  perIdAccessor.getId();
+		return (Long) perIdAccessor.getId();
 	}
 
 	/**
@@ -115,8 +111,7 @@ public final class ActorRole implements Entity {
 	public void setPerId(final Long perId) {
 		perIdAccessor.setId(perId);
 	}
-	
-	
+
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Movie'.
@@ -124,7 +119,7 @@ public final class ActorRole implements Entity {
 	 */
 	@Field(domain = "DO_IDENTITY", type = "FOREIGN_KEY", label = "Movie")
 	public Long getMovId() {
-		return (Long)  movIdAccessor.getId();
+		return (Long) movIdAccessor.getId();
 	}
 
 	/**
@@ -135,12 +130,12 @@ public final class ActorRole implements Entity {
 	public void setMovId(final Long movId) {
 		movIdAccessor.setId(movId);
 	}
-	
+
 	/**
 	 * Association : Actor.
 	 * @return io.vertigo.pandora.domain.persons.Person
 	 */
-				
+
 	public io.vertigo.pandora.domain.persons.Person getActor() {
 		return perIdAccessor.get();
 	}

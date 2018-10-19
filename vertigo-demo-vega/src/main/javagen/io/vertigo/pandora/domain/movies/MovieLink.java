@@ -25,14 +25,12 @@ public final class MovieLink implements Fragment<Movie> {
 
 	private Long movId;
 
-
 	/** {@inheritDoc} */
 	@Override
 	public URI<Movie> getEntityURI() {
-		return DtObjectUtil.createEntityURI(this); 
+		return DtObjectUtil.createEntityURI(this);
 	}
 
-	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'TITLE'.
@@ -51,8 +49,7 @@ public final class MovieLink implements Fragment<Movie> {
 	public void setTitle(final String title) {
 		this.title = title;
 	}
-	
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'POSTER'.
@@ -71,8 +68,7 @@ public final class MovieLink implements Fragment<Movie> {
 	public void setPoster(final String poster) {
 		this.poster = poster;
 	}
-	
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'MOVIE TYPE'.
@@ -91,8 +87,7 @@ public final class MovieLink implements Fragment<Movie> {
 	public void setMovieType(final String movieType) {
 		this.movieType = movieType;
 	}
-	
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'PRODUCTION YEAR'.
@@ -111,8 +106,7 @@ public final class MovieLink implements Fragment<Movie> {
 	public void setProductionYear(final Integer productionYear) {
 		this.productionYear = productionYear;
 	}
-	
-	
+
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'MOV ID'.
@@ -131,7 +125,7 @@ public final class MovieLink implements Fragment<Movie> {
 	public void setMovId(final Long movId) {
 		this.movId = movId;
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

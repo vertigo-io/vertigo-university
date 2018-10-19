@@ -17,7 +17,7 @@ public final class MovieIndex implements DtObject {
 	private String name;
 	private Integer year;
 	private String country;
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'id'.
@@ -36,7 +36,7 @@ public final class MovieIndex implements DtObject {
 	public void setMovId(final Long movId) {
 		this.movId = movId;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Titre'.
@@ -55,7 +55,7 @@ public final class MovieIndex implements DtObject {
 	public void setName(final String name) {
 		this.name = name;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'AnnÃ©e'.
@@ -74,7 +74,7 @@ public final class MovieIndex implements DtObject {
 	public void setYear(final Integer year) {
 		this.year = year;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Pays'.
@@ -93,7 +93,7 @@ public final class MovieIndex implements DtObject {
 	public void setCountry(final String country) {
 		this.country = country;
 	}
-	
+
 	/**
 	 * Champ : COMPUTED.
 	 * Récupère la valeur de la propriété calculée 'Titre'.
@@ -103,7 +103,7 @@ public final class MovieIndex implements DtObject {
 	public String getNameSortOnly() {
 		return getName();
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

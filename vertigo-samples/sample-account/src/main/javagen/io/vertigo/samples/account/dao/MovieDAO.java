@@ -34,7 +34,7 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	 * @param uri URI du keyConcept modifié
 	 * @return KeyConcept à modifier
 	 */
-	 public Movie readOneForUpdate(final URI<Movie> uri) {
+	public Movie readOneForUpdate(final URI<Movie> uri) {
 		return dataStore.readOneForUpdate(uri);
 	}
 
@@ -45,7 +45,7 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	 * @param id Clé du keyConcept modifié
 	 * @return KeyConcept à modifier
 	 */
-	 public Movie readOneForUpdate(final java.lang.Long id) {
+	public Movie readOneForUpdate(final java.lang.Long id) {
 		return readOneForUpdate(createDtObjectURI(id));
 	}
 }

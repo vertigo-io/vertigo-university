@@ -53,7 +53,7 @@ public final class Role implements Entity {
 	public URI<Role> getURI() {
 		return DtObjectUtil.createURI(this);
 	}
-	
+
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
@@ -72,7 +72,7 @@ public final class Role implements Entity {
 	public void setRolId(final Long rolId) {
 		this.rolId = rolId;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Dans le role de'.
@@ -91,7 +91,7 @@ public final class Role implements Entity {
 	public void setAsCharacter(final String asCharacter) {
 		this.asCharacter = asCharacter;
 	}
-	
+
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Movie'.
@@ -99,7 +99,7 @@ public final class Role implements Entity {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Movie")
 	public Long getMovId() {
-		return (Long)  movIdAccessor.getId();
+		return (Long) movIdAccessor.getId();
 	}
 
 	/**
@@ -110,7 +110,7 @@ public final class Role implements Entity {
 	public void setMovId(final Long movId) {
 		movIdAccessor.setId(movId);
 	}
-	
+
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Actor'.
@@ -118,7 +118,7 @@ public final class Role implements Entity {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Actor")
 	public Long getActId() {
-		return (Long)  actIdAccessor.getId();
+		return (Long) actIdAccessor.getId();
 	}
 
 	/**
@@ -130,14 +130,14 @@ public final class Role implements Entity {
 		actIdAccessor.setId(actId);
 	}
 
- 	/**
+	/**
 	 * Association : Actor.
 	 * @return l'accesseur vers la propriété 'Actor'
 	 */
 	public VAccessor<io.vertigo.samples.crystal.domain.Actor> actor() {
 		return actIdAccessor;
 	}
-	
+
 	@Deprecated
 	public io.vertigo.samples.crystal.domain.Actor getActor() {
 		// we keep the lazyness
@@ -156,14 +156,14 @@ public final class Role implements Entity {
 		return actIdAccessor.getURI();
 	}
 
- 	/**
+	/**
 	 * Association : Movie.
 	 * @return l'accesseur vers la propriété 'Movie'
 	 */
 	public VAccessor<io.vertigo.samples.crystal.domain.Movie> movie() {
 		return movIdAccessor;
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

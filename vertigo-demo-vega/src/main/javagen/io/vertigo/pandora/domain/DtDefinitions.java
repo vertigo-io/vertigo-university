@@ -40,7 +40,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		/** Objet de données PersonIndex. */
 		PersonIndex(io.vertigo.pandora.domain.persons.PersonIndex.class),
 		/** Objet de données PersonLink. */
-		PersonLink(io.vertigo.pandora.domain.persons.PersonLink.class)		;
+		PersonLink(io.vertigo.pandora.domain.persons.PersonLink.class);
 
 		private final Class<?> clazz;
 
@@ -68,14 +68,16 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		/** Propriété 'Actor'. */
 		PER_ID,
 		/** Propriété 'Movie'. */
-		MOV_ID	}
+		MOV_ID
+	}
 
 	/**
 	 * Enumération des champs de Dummy.
 	 */
 	public enum DummyFields implements DtFieldName<io.vertigo.pandora.domain.movies.Dummy> {
 		/** Propriété 'value'. */
-		VALUE	}
+		VALUE
+	}
 
 	/**
 	 * Enumération des champs de Movie.
@@ -108,7 +110,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		/** Propriété 'USER RATING'. */
 		USER_RATING,
 		/** Propriété 'PRESS RATING'. */
-		PRESS_RATING	}
+		PRESS_RATING
+	}
 
 	/**
 	 * Enumération des champs de MovieCaract.
@@ -127,7 +130,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		/** Propriété 'PRODUCTION YEAR'. */
 		PRODUCTION_YEAR,
 		/** Propriété 'MOV ID'. */
-		MOV_ID	}
+		MOV_ID
+	}
 
 	/**
 	 * Enumération des champs de MovieIndex.
@@ -168,7 +172,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		/** Propriété 'Producers'. */
 		PRODUCERS,
 		/** Propriété 'Directors'. */
-		DIRECTORS	}
+		DIRECTORS
+	}
 
 	/**
 	 * Enumération des champs de MovieLink.
@@ -183,7 +188,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		/** Propriété 'PRODUCTION YEAR'. */
 		PRODUCTION_YEAR,
 		/** Propriété 'MOV ID'. */
-		MOV_ID	}
+		MOV_ID
+	}
 
 	/**
 	 * Enumération des champs de MovieSynopsis.
@@ -194,7 +200,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		/** Propriété 'SHORT SYNOPSIS'. */
 		SHORT_SYNOPSIS,
 		/** Propriété 'MOV ID'. */
-		MOV_ID	}
+		MOV_ID
+	}
 
 	/**
 	 * Enumération des champs de MovieTrailer.
@@ -205,7 +212,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		/** Propriété 'TRAILER HREF'. */
 		TRAILER_HREF,
 		/** Propriété 'MOV ID'. */
-		MOV_ID	}
+		MOV_ID
+	}
 
 	/**
 	 * Enumération des champs de Person.
@@ -232,7 +240,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		/** Propriété 'BIRTH PLACE'. */
 		BIRTH_PLACE,
 		/** Propriété 'ACTIVITY'. */
-		ACTIVITY	}
+		ACTIVITY
+	}
 
 	/**
 	 * Enumération des champs de PersonActorRoleLink.
@@ -245,7 +254,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		/** Propriété 'Role'. */
 		ROLE,
 		/** Propriété 'PER ID'. */
-		PER_ID	}
+		PER_ID
+	}
 
 	/**
 	 * Enumération des champs de PersonIndex.
@@ -270,7 +280,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		/** Propriété 'Activity'. */
 		ACTIVITY,
 		/** Propriété 'Movies'. */
-		MOVIES	}
+		MOVIES
+	}
 
 	/**
 	 * Enumération des champs de PersonLink.
@@ -283,7 +294,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		/** Propriété 'Movie type'. */
 		EXISTS_IN_BDD,
 		/** Propriété 'PER ID'. */
-		PER_ID	}
+		PER_ID
+	}
 
 	/** {@inheritDoc} */
 	@Override

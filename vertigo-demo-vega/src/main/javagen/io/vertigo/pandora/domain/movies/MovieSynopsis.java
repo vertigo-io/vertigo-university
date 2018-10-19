@@ -21,14 +21,12 @@ public final class MovieSynopsis implements Fragment<Movie> {
 
 	private Long movId;
 
-
 	/** {@inheritDoc} */
 	@Override
 	public URI<Movie> getEntityURI() {
-		return DtObjectUtil.createEntityURI(this); 
+		return DtObjectUtil.createEntityURI(this);
 	}
 
-	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'SYNOPSIS'.
@@ -47,8 +45,7 @@ public final class MovieSynopsis implements Fragment<Movie> {
 	public void setSynopsis(final String synopsis) {
 		this.synopsis = synopsis;
 	}
-	
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'SHORT SYNOPSIS'.
@@ -67,8 +64,7 @@ public final class MovieSynopsis implements Fragment<Movie> {
 	public void setShortSynopsis(final String shortSynopsis) {
 		this.shortSynopsis = shortSynopsis;
 	}
-	
-	
+
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'MOV ID'.
@@ -87,7 +83,7 @@ public final class MovieSynopsis implements Fragment<Movie> {
 	public void setMovId(final Long movId) {
 		this.movId = movId;
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

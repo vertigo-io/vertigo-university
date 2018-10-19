@@ -59,7 +59,7 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	 * @param uri URI du keyConcept modifié
 	 * @return KeyConcept à modifier
 	 */
-	 public Movie readOneForUpdate(final URI<Movie> uri) {
+	public Movie readOneForUpdate(final URI<Movie> uri) {
 		return dataStore.readOneForUpdate(uri);
 	}
 
@@ -70,7 +70,7 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	 * @param id Clé du keyConcept modifié
 	 * @return KeyConcept à modifier
 	 */
-	 public Movie readOneForUpdate(final java.lang.Long id) {
+	public Movie readOneForUpdate(final java.lang.Long id) {
 		return readOneForUpdate(createDtObjectURI(id));
 	}
 
@@ -86,6 +86,7 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 		final ListFilter criteriaListFilter = listFilterBuilder.withBuildQuery(facetedQueryDefinition.getListFilterBuilderQuery()).withCriteria(criteria).build();
 		return SearchQuery.builder(criteriaListFilter).withFacetStrategy(facetedQueryDefinition, selectedFacetValues);
 	}
+
 	/**
 	 * Création d'une SearchQuery de type : MovieWithFacets.
 	 * @param criteria Critères de recherche
@@ -109,13 +110,13 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 		final SearchIndexDefinition indexDefinition = searchManager.findFirstIndexDefinitionByKeyConcept(Movie.class);
 		return searchManager.loadList(indexDefinition, searchQuery, listState);
 	}
-	
-/**
-	 * Mark an entity as dirty. Index of these elements will be reindexed if Tx commited.
-	 * Reindexation isn't synchrone, strategy is dependant of plugin's parameters.
-	 *
-	 * @param entityUri Key concept's uri
-	 */
+
+	/**
+		 * Mark an entity as dirty. Index of these elements will be reindexed if Tx commited.
+		 * Reindexation isn't synchrone, strategy is dependant of plugin's parameters.
+		 *
+		 * @param entityUri Key concept's uri
+		 */
 	public void markAsDirty(final URI<Movie> entityUri) {
 		transactionManager.getCurrentTransaction().addAfterCompletion((final boolean txCommitted) -> {
 			if (txCommitted) {// reindex only is tx successful
@@ -123,7 +124,7 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 			}
 		});
 	}
-	
+
 	/**
 	 * Mark an entity as dirty. Index of these elements will be reindexed if Tx commited.
 	 * Reindexation isn't synchrone, strategy is dependant of plugin's parameters.

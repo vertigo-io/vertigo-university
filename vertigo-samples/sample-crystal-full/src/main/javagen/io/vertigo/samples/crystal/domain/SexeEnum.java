@@ -9,8 +9,7 @@ import io.vertigo.dynamo.domain.util.DtObjectUtil;
 public enum SexeEnum implements MasterDataEnum<io.vertigo.samples.crystal.domain.Sexe> {
 
 	male("M"), //
-	female("F")
-	;
+	female("F");
 
 	private final URI<io.vertigo.samples.crystal.domain.Sexe> entityUri;
 

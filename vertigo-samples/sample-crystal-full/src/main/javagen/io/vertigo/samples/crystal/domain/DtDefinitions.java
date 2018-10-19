@@ -32,7 +32,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		/** Objet de données User. */
 		User(io.vertigo.samples.crystal.domain.User.class),
 		/** Objet de données UserGroup. */
-		UserGroup(io.vertigo.samples.crystal.domain.UserGroup.class)		;
+		UserGroup(io.vertigo.samples.crystal.domain.UserGroup.class);
 
 		private final Class<?> clazz;
 
@@ -58,7 +58,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		/** Propriété 'Nom'. */
 		NAME,
 		/** Propriété 'Sexe'. */
-		SEX_CD	}
+		SEX_CD
+	}
 
 	/**
 	 * Enumération des champs de Country.
@@ -67,7 +68,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		/** Propriété 'Id'. */
 		COU_ID,
 		/** Propriété 'Nom du pays'. */
-		NAME	}
+		NAME
+	}
 
 	/**
 	 * Enumération des champs de Movie.
@@ -82,7 +84,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		/** Propriété 'Id Imdb'. */
 		IMDBID,
 		/** Propriété 'Country'. */
-		COU_ID	}
+		COU_ID
+	}
 
 	/**
 	 * Enumération des champs de MovieIndex.
@@ -95,7 +98,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		/** Propriété 'AnnÃ©e'. */
 		YEAR,
 		/** Propriété 'Pays'. */
-		COUNTRY	}
+		COUNTRY
+	}
 
 	/**
 	 * Enumération des champs de Role.
@@ -108,7 +112,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		/** Propriété 'Movie'. */
 		MOV_ID,
 		/** Propriété 'Actor'. */
-		ACT_ID	}
+		ACT_ID
+	}
 
 	/**
 	 * Enumération des champs de Sexe.
@@ -117,7 +122,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		/** Propriété 'Id'. */
 		SEX_CD,
 		/** Propriété 'Label'. */
-		LABEL	}
+		LABEL
+	}
 
 	/**
 	 * Enumération des champs de User.
@@ -134,7 +140,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		/** Propriété 'Country'. */
 		COU_ID,
 		/** Propriété 'Group'. */
-		GRP_ID	}
+		GRP_ID
+	}
 
 	/**
 	 * Enumération des champs de UserGroup.
@@ -143,7 +150,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		/** Propriété 'Id'. */
 		GRP_ID,
 		/** Propriété 'Nom'. */
-		NAME	}
+		NAME
+	}
 
 	/** {@inheritDoc} */
 	@Override

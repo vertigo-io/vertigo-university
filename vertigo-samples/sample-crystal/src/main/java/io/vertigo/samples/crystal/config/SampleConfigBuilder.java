@@ -62,8 +62,8 @@ public class SampleConfigBuilder {
 					.withEmbeddedServer(8081)
 					.build());
 		}
-		
-			return appConfigBuilder;
+
+		return appConfigBuilder;
 	}
 
 }

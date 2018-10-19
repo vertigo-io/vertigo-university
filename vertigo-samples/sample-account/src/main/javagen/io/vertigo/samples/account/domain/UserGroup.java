@@ -22,7 +22,7 @@ public final class UserGroup implements Entity {
 	public URI<UserGroup> getURI() {
 		return DtObjectUtil.createURI(this);
 	}
-	
+
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
@@ -41,7 +41,7 @@ public final class UserGroup implements Entity {
 	public void setGrpId(final Long grpId) {
 		this.grpId = grpId;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Nom'.
@@ -60,7 +60,7 @@ public final class UserGroup implements Entity {
 	public void setName(final String name) {
 		this.name = name;
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

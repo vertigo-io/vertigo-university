@@ -55,7 +55,7 @@ public final class User implements Entity {
 	public URI<User> getURI() {
 		return DtObjectUtil.createURI(this);
 	}
-	
+
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
@@ -74,7 +74,7 @@ public final class User implements Entity {
 	public void setUsrId(final Long usrId) {
 		this.usrId = usrId;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Login'.
@@ -93,7 +93,7 @@ public final class User implements Entity {
 	public void setLogin(final String login) {
 		this.login = login;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Nom'.
@@ -112,7 +112,7 @@ public final class User implements Entity {
 	public void setName(final String name) {
 		this.name = name;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'email'.
@@ -131,7 +131,7 @@ public final class User implements Entity {
 	public void setEmail(final String email) {
 		this.email = email;
 	}
-	
+
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Country'.
@@ -139,7 +139,7 @@ public final class User implements Entity {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Country")
 	public Long getCouId() {
-		return (Long)  couIdAccessor.getId();
+		return (Long) couIdAccessor.getId();
 	}
 
 	/**
@@ -150,7 +150,7 @@ public final class User implements Entity {
 	public void setCouId(final Long couId) {
 		couIdAccessor.setId(couId);
 	}
-	
+
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Group'.
@@ -158,7 +158,7 @@ public final class User implements Entity {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Group")
 	public Long getGrpId() {
-		return (Long)  grpIdAccessor.getId();
+		return (Long) grpIdAccessor.getId();
 	}
 
 	/**
@@ -170,14 +170,14 @@ public final class User implements Entity {
 		grpIdAccessor.setId(grpId);
 	}
 
- 	/**
+	/**
 	 * Association : Country.
 	 * @return l'accesseur vers la propriété 'Country'
 	 */
 	public VAccessor<io.vertigo.samples.account.domain.Country> country() {
 		return couIdAccessor;
 	}
-	
+
 	@Deprecated
 	public io.vertigo.samples.account.domain.Country getCountry() {
 		// we keep the lazyness
@@ -196,14 +196,14 @@ public final class User implements Entity {
 		return couIdAccessor.getURI();
 	}
 
- 	/**
+	/**
 	 * Association : Group.
 	 * @return l'accesseur vers la propriété 'Group'
 	 */
 	public VAccessor<io.vertigo.samples.account.domain.UserGroup> group() {
 		return grpIdAccessor;
 	}
-	
+
 	@Deprecated
 	public io.vertigo.samples.account.domain.UserGroup getGroup() {
 		// we keep the lazyness
@@ -221,7 +221,7 @@ public final class User implements Entity {
 	public io.vertigo.dynamo.domain.model.URI<io.vertigo.samples.account.domain.UserGroup> getGroupURI() {
 		return grpIdAccessor.getURI();
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

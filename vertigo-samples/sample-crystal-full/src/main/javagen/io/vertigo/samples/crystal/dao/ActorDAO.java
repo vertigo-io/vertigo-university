@@ -30,7 +30,6 @@ public final class ActorDAO extends DAO<Actor, java.lang.Long> implements StoreS
 		super(Actor.class, storeManager, taskManager);
 	}
 
-
 	/**
 	 * Creates a taskBuilder.
 	 * @param name  the name of the task

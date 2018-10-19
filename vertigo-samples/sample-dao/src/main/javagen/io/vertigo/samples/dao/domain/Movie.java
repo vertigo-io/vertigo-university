@@ -56,7 +56,7 @@ public final class Movie implements Entity {
 	public URI<Movie> getURI() {
 		return DtObjectUtil.createURI(this);
 	}
-	
+
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
@@ -75,7 +75,7 @@ public final class Movie implements Entity {
 	public void setMovId(final Long movId) {
 		this.movId = movId;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Code du pays'.
@@ -94,7 +94,7 @@ public final class Movie implements Entity {
 	public void setName(final String name) {
 		this.name = name;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'AnnÃ©e'.
@@ -113,7 +113,7 @@ public final class Movie implements Entity {
 	public void setYear(final Integer year) {
 		this.year = year;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Id Imdb'.
@@ -132,7 +132,7 @@ public final class Movie implements Entity {
 	public void setImdbid(final String imdbid) {
 		this.imdbid = imdbid;
 	}
-	
+
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Country'.
@@ -140,7 +140,7 @@ public final class Movie implements Entity {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Country")
 	public Long getCouId() {
-		return (Long)  couIdAccessor.getId();
+		return (Long) couIdAccessor.getId();
 	}
 
 	/**
@@ -152,14 +152,14 @@ public final class Movie implements Entity {
 		couIdAccessor.setId(couId);
 	}
 
- 	/**
+	/**
 	 * Association : Country.
 	 * @return l'accesseur vers la propriété 'Country'
 	 */
 	public VAccessor<io.vertigo.samples.dao.domain.Country> country() {
 		return couIdAccessor;
 	}
-	
+
 	@Deprecated
 	public io.vertigo.samples.dao.domain.Country getCountry() {
 		// we keep the lazyness
@@ -185,7 +185,7 @@ public final class Movie implements Entity {
 	public ListVAccessor<io.vertigo.samples.dao.domain.Role> role() {
 		return roleAccessor;
 	}
-	
+
 	/**
 	 * Association : Role.
 	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Role>
@@ -203,11 +203,11 @@ public final class Movie implements Entity {
 	 * Association URI: Role.
 	 * @return URI de l'association
 	 */
-	@Deprecated	
+	@Deprecated
 	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation getRoleDtListURI() {
 		return (io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation) roleAccessor.getDtListURI();
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

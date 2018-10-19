@@ -14,7 +14,7 @@ import io.vertigo.vega.webservice.stereotype.PathPrefix;
 
 @PathPrefix("/movies")
 public class MovieWebServices implements WebServices {
-	
+
 	// Mock-up persistence
 	private final MovieDAO cinematheque = new MovieDAO();
 
@@ -23,7 +23,7 @@ public class MovieWebServices implements WebServices {
 	public int putMovie(@PathParam("title") String title) {
 		return cinematheque.putMovie(title);
 	}
-	
+
 	@AnonymousAccessAllowed
 	@DELETE("/{id}")
 	public void deleteMovie(@PathParam("id") int id) {
