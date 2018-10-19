@@ -23,7 +23,7 @@ public final class Login implements Entity {
 	/** {@inheritDoc} */
 	@Override
 	public URI<Login> getURI() {
-		return DtObjectUtil.createURI(this);
+		return URI.of(this);
 	}
 
 	/**

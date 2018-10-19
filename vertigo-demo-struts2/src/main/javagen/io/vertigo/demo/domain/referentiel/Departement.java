@@ -23,7 +23,7 @@ public final class Departement implements Entity {
 	/** {@inheritDoc} */
 	@Override
 	public URI<Departement> getURI() {
-		return DtObjectUtil.createURI(this);
+		return URI.of(this);
 	}
 
 	/**

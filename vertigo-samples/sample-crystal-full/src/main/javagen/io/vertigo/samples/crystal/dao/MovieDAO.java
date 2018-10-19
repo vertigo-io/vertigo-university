@@ -132,7 +132,7 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	 * @param entity Key concept
 	 */
 	public void markAsDirty(final Movie entity) {
-		markAsDirty(DtObjectUtil.createURI(entity));
+		markAsDirty(URI.of(entity));
 	}
 
 	/**

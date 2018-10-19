@@ -24,7 +24,7 @@ public final class KxFileInfo implements Entity {
 	/** {@inheritDoc} */
 	@Override
 	public URI<KxFileInfo> getURI() {
-		return DtObjectUtil.createURI(this);
+		return URI.of(this);
 	}
 
 	/**

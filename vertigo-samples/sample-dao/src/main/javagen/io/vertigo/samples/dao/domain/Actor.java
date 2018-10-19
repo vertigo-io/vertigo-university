@@ -21,7 +21,7 @@ public final class Actor implements Entity {
 	/** {@inheritDoc} */
 	@Override
 	public URI<Actor> getURI() {
-		return DtObjectUtil.createURI(this);
+		return URI.of(this);
 	}
 
 	/**

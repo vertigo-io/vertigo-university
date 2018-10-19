@@ -51,7 +51,7 @@ public final class Movie implements KeyConcept {
 	/** {@inheritDoc} */
 	@Override
 	public URI<Movie> getURI() {
-		return DtObjectUtil.createURI(this);
+		return URI.of(this);
 	}
 
 	/**

@@ -30,7 +30,7 @@ public final class TutoObject implements Entity {
 	/** {@inheritDoc} */
 	@Override
 	public URI<TutoObject> getURI() {
-		return DtObjectUtil.createURI(this);
+		return URI.of(this);
 	}
 
 	/**

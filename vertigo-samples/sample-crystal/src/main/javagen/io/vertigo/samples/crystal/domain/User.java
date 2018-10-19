@@ -53,7 +53,7 @@ public final class User implements Entity {
 	/** {@inheritDoc} */
 	@Override
 	public URI<User> getURI() {
-		return DtObjectUtil.createURI(this);
+		return URI.of(this);
 	}
 
 	/**

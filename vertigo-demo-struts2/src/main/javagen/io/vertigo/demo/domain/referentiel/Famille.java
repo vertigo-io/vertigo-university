@@ -20,7 +20,7 @@ public final class Famille implements Entity {
 	/** {@inheritDoc} */
 	@Override
 	public URI<Famille> getURI() {
-		return DtObjectUtil.createURI(this);
+		return URI.of(this);
 	}
 
 	/**

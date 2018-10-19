@@ -55,7 +55,7 @@ public final class MyMovie implements Entity {
 	/** {@inheritDoc} */
 	@Override
 	public URI<MyMovie> getURI() {
-		return DtObjectUtil.createURI(this);
+		return URI.of(this);
 	}
 	
 	/**

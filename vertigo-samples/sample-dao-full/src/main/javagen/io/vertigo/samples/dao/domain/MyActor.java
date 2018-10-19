@@ -22,7 +22,7 @@ public final class MyActor implements Entity {
 	/** {@inheritDoc} */
 	@Override
 	public URI<MyActor> getURI() {
-		return DtObjectUtil.createURI(this);
+		return URI.of(this);
 	}
 	
 	/**

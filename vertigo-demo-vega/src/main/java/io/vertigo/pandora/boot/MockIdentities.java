@@ -28,7 +28,7 @@ public final class MockIdentities implements Component, AccountLoader, GroupLoad
 	private final Map<URI<AccountGroup>, Set<URI<Account>>> accountsPerGroup = new HashMap<>();
 
 	private static URI<Account> createAccountURI(final String id) {
-		return DtObjectUtil.createURI(Account.class, id);
+		return URI.of(Account.class, id);
 	}
 
 	/**
@@ -46,14 +46,14 @@ public final class MockIdentities implements Component, AccountLoader, GroupLoad
 		final URI<Account> accountURI2 = createAccountURI(testAccount2.getId());
 
 		final AccountGroup testAccountGroup1 = new AccountGroup("100", "TIME's cover");
-		final URI<AccountGroup> group1Uri = DtObjectUtil.createURI(AccountGroup.class, testAccountGroup1.getId());
+		final URI<AccountGroup> group1Uri = URI.of(AccountGroup.class, testAccountGroup1.getId());
 		saveGroup(testAccountGroup1);
 
 		attach(accountURI1, group1Uri);
 		attach(accountURI2, group1Uri);
 
 		final AccountGroup groupAll = new AccountGroup("ALL", "Everyone");
-		final URI<AccountGroup> groupAllUri = DtObjectUtil.createURI(AccountGroup.class, groupAll.getId());
+		final URI<AccountGroup> groupAllUri = URI.of(AccountGroup.class, groupAll.getId());
 		saveGroup(groupAll);
 		attach(accountURI0, groupAllUri);
 		attach(accountURI1, groupAllUri);

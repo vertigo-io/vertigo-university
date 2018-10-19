@@ -52,7 +52,7 @@ public final class ActorRole implements Entity {
 	/** {@inheritDoc} */
 	@Override
 	public URI<ActorRole> getURI() {
-		return DtObjectUtil.createURI(this);
+		return URI.of(this);
 	}
 
 	/**

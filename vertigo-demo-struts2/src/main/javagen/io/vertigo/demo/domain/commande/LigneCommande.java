@@ -23,7 +23,7 @@ public final class LigneCommande implements Entity {
 	/** {@inheritDoc} */
 	@Override
 	public URI<LigneCommande> getURI() {
-		return DtObjectUtil.createURI(this);
+		return URI.of(this);
 	}
 
 	/**

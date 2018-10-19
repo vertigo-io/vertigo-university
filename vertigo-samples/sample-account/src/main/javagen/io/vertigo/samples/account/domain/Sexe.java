@@ -20,7 +20,7 @@ public final class Sexe implements Entity {
 	/** {@inheritDoc} */
 	@Override
 	public URI<Sexe> getURI() {
-		return DtObjectUtil.createURI(this);
+		return URI.of(this);
 	}
 
 	/**

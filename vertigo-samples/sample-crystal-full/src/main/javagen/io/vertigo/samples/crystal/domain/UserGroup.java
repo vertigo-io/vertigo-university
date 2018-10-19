@@ -20,7 +20,7 @@ public final class UserGroup implements Entity {
 	/** {@inheritDoc} */
 	@Override
 	public URI<UserGroup> getURI() {
-		return DtObjectUtil.createURI(this);
+		return URI.of(this);
 	}
 
 	/**

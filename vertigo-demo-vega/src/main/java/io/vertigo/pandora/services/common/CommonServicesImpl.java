@@ -223,7 +223,7 @@ public class CommonServicesImpl implements CommonServices {
 	/*private List<URI> idsToURIs(final List<Long> personIds, final List<URI> personURIs) {
 	final List<URI> personURIs = new ArrayList<>();
 	for (final Long personId : personIds) {
-		personURIs.add(DtObjectUtil.createURI(Person.class, personId));
+		personURIs.add(URI.of(Person.class, personId));
 	}
 	return personURIs;
 	}*/
@@ -242,7 +242,7 @@ public class CommonServicesImpl implements CommonServices {
 		final Set<URI> personURIs = new HashSet<>();
 		if (jsonPersonLinks != null) {
 			for (final JsonPersonLink jsonPersonLink : jsonPersonLinks) {
-				personURIs.add(DtObjectUtil.createURI(Person.class, jsonPersonLink.getCode()));
+				personURIs.add(URI.of(Person.class, jsonPersonLink.getCode()));
 			}
 		}
 		return new ArrayList<>(personURIs);

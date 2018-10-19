@@ -21,7 +21,7 @@ public final class Region implements Entity {
 	/** {@inheritDoc} */
 	@Override
 	public URI<Region> getURI() {
-		return DtObjectUtil.createURI(this);
+		return URI.of(this);
 	}
 
 	/**

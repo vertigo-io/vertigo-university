@@ -22,7 +22,7 @@ public final class Ville implements Entity {
 	/** {@inheritDoc} */
 	@Override
 	public URI<Ville> getURI() {
-		return DtObjectUtil.createURI(this);
+		return URI.of(this);
 	}
 
 	/**

@@ -14,7 +14,7 @@ public enum SexeEnum implements MasterDataEnum<io.vertigo.samples.crystal.domain
 	private final URI<io.vertigo.samples.crystal.domain.Sexe> entityUri;
 
 	private SexeEnum(final Serializable id) {
-		entityUri = DtObjectUtil.createURI(io.vertigo.samples.crystal.domain.Sexe.class, id);
+		entityUri = URI.of(io.vertigo.samples.crystal.domain.Sexe.class, id);
 	}
 
 	@Override

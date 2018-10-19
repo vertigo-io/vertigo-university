@@ -21,7 +21,7 @@ public final class MyCountry implements Entity {
 	/** {@inheritDoc} */
 	@Override
 	public URI<MyCountry> getURI() {
-		return DtObjectUtil.createURI(this);
+		return URI.of(this);
 	}
 	
 	/**

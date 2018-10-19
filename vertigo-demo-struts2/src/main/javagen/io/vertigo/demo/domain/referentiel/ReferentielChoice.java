@@ -20,7 +20,7 @@ public final class ReferentielChoice implements Entity {
 	/** {@inheritDoc} */
 	@Override
 	public URI<ReferentielChoice> getURI() {
-		return DtObjectUtil.createURI(this);
+		return URI.of(this);
 	}
 
 	/**

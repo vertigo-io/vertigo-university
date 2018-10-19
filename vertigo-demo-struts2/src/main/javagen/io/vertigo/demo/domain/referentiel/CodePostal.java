@@ -22,7 +22,7 @@ public final class CodePostal implements Entity {
 	/** {@inheritDoc} */
 	@Override
 	public URI<CodePostal> getURI() {
-		return DtObjectUtil.createURI(this);
+		return URI.of(this);
 	}
 
 	/**

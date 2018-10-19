@@ -26,7 +26,7 @@ public final class Commande implements Entity {
 	/** {@inheritDoc} */
 	@Override
 	public URI<Commande> getURI() {
-		return DtObjectUtil.createURI(this);
+		return URI.of(this);
 	}
 
 	/**

@@ -116,6 +116,6 @@ public final class PersonDAO extends DAO<Person, java.lang.Long> implements Stor
 	 * @param entity Key concept
 	 */
 	public void markAsDirty(final Person entity) {
-		markAsDirty(DtObjectUtil.createURI(entity));
+		markAsDirty(URI.of(entity));
 	}
 }

@@ -30,7 +30,7 @@ public final class Utilisateur implements Entity {
 	/** {@inheritDoc} */
 	@Override
 	public URI<Utilisateur> getURI() {
-		return DtObjectUtil.createURI(this);
+		return URI.of(this);
 	}
 
 	/**

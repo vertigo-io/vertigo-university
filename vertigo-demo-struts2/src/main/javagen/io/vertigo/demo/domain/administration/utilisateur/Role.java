@@ -20,7 +20,7 @@ public final class Role implements Entity {
 	/** {@inheritDoc} */
 	@Override
 	public URI<Role> getURI() {
-		return DtObjectUtil.createURI(this);
+		return URI.of(this);
 	}
 
 	/**

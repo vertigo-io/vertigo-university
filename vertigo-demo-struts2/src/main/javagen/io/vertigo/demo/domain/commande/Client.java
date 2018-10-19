@@ -25,7 +25,7 @@ public final class Client implements Entity {
 	/** {@inheritDoc} */
 	@Override
 	public URI<Client> getURI() {
-		return DtObjectUtil.createURI(this);
+		return URI.of(this);
 	}
 
 	/**

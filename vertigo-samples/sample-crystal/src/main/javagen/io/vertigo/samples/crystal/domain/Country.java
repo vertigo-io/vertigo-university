@@ -20,7 +20,7 @@ public final class Country implements Entity {
 	/** {@inheritDoc} */
 	@Override
 	public URI<Country> getURI() {
-		return DtObjectUtil.createURI(this);
+		return URI.of(this);
 	}
 
 	/**

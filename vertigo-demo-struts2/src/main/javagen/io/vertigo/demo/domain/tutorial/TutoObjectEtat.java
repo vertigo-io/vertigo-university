@@ -22,7 +22,7 @@ public final class TutoObjectEtat implements Entity {
 	/** {@inheritDoc} */
 	@Override
 	public URI<TutoObjectEtat> getURI() {
-		return DtObjectUtil.createURI(this);
+		return URI.of(this);
 	}
 
 	/**

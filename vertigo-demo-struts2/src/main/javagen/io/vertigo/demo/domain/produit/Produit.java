@@ -28,7 +28,7 @@ public final class Produit implements Entity {
 	/** {@inheritDoc} */
 	@Override
 	public URI<Produit> getURI() {
-		return DtObjectUtil.createURI(this);
+		return URI.of(this);
 	}
 
 	/**

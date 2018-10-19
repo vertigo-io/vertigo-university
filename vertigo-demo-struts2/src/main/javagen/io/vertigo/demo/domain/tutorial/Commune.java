@@ -23,7 +23,7 @@ public final class Commune implements Entity {
 	/** {@inheritDoc} */
 	@Override
 	public URI<Commune> getURI() {
-		return DtObjectUtil.createURI(this);
+		return URI.of(this);
 	}
 
 	/**
