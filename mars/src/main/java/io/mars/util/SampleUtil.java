@@ -1,4 +1,4 @@
-package io.vertigo.mars.util;
+package io.mars.util;
 
 /**
  * Util classes publish easier method or are stateLess.

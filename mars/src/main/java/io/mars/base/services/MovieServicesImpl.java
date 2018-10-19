@@ -1,13 +1,13 @@
-package io.vertigo.mars.services.movies;
+package io.mars.base.services;
 
 import javax.inject.Inject;
 
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.domain.model.DtListState;
 import io.vertigo.dynamo.criteria.Criterions;
+import io.mars.dao.movies.MovieDAO;
+import io.mars.domain.movies.Movie;
 import io.vertigo.commons.transaction.Transactional;
-import io.vertigo.mars.dao.movies.MovieDAO;
-import io.vertigo.mars.domain.movies.Movie;
 
 @Transactional
 public class MovieServicesImpl implements MovieServices {

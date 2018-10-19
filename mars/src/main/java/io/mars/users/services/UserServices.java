@@ -1,7 +1,7 @@
-package io.vertigo.mars.services.users;
+package io.mars.users.services;
 
+import io.mars.domain.users.ApplicationUser;
 import io.vertigo.core.component.Component;
-import io.vertigo.mars.domain.users.ApplicationUser;
 
 public interface UserServices extends Component {
 

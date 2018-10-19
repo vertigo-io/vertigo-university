@@ -1,9 +1,9 @@
-package io.vertigo.mars.services.movies;
+package io.mars.base.services;
 
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.domain.model.DtListState;
+import io.mars.domain.movies.Movie;
 import io.vertigo.core.component.Component;
-import io.vertigo.mars.domain.movies.Movie;
 
 public interface MovieServices extends Component {
 

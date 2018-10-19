@@ -1,7 +1,7 @@
 /**
  *
  */
-package io.vertigo.mars.boot;
+package io.mars.boot;
 
 import java.util.HashSet;
 import java.util.Set;

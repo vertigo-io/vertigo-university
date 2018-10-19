@@ -1,4 +1,4 @@
-package io.vertigo.mars.boot;
+package io.mars.boot;
 
 import org.springframework.context.annotation.ComponentScan;
 

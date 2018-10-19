@@ -1,7 +1,7 @@
 /**
  *
  */
-package io.vertigo.mars.boot;
+package io.mars.boot;
 
 import javax.inject.Inject;
 

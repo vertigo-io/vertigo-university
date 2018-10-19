@@ -19,7 +19,7 @@
 /**
  *
  */
-package io.vertigo.mars.boot;
+package io.mars.boot;
 
 import java.io.BufferedReader;
 import java.io.IOException;

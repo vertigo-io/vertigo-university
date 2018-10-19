@@ -1,14 +1,13 @@
-package io.vertigo.mars.services.users;
+package io.mars.users.services;
 
+import io.mars.domain.users.ApplicationUser;
+import io.mars.users.MarsUserSession;
 import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.core.locale.MessageText;
 import io.vertigo.lang.VUserException;
 import io.vertigo.persona.security.VSecurityManager;
 
 import javax.inject.Inject;
-
-import io.vertigo.mars.domain.users.ApplicationUser;
-import io.vertigo.mars.user.MarsUserSession;
 
 @Transactional
 public class UserServicesImpl implements UserServices {

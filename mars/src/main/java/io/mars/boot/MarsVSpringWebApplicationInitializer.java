@@ -1,4 +1,4 @@
-package io.vertigo.mars.boot;
+package io.mars.boot;
 
 import io.vertigo.ui.impl.springmvc.config.AbstractVSpringMvcWebApplicationInitializer;
 
