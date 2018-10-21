@@ -6,19 +6,19 @@
 >
 
 <head>
-	<title>Movie Detail</title>
+	<title>Base Detail</title>
 </head>
 
 <body>
 	<section layout:fragment="content">
 			<vu:form>		
 				<vu:grid cols="3">
-					<vu:text-field object="movie" field="movId"/>
-					<vu:text-field object="movie" field="title" />
-					<vu:text-field object="movie" field="year" />
+					<vu:text-field object="base" field="baseId"/>
+					<vu:text-field object="base" field="name" />
+					<vu:text-field object="base" field="healthLevel" />
 					<vu:grid-cell>
-						<vu:button-submit th:if="${!model.modeEdit}" label="Edit" action="@{/movie/_edit}" color="primary"/>
-						<vu:button-submit th:if="${model.modeEdit}"  label="Save" action="@{/movie/_save}" color="primary" />
+						<vu:button-submit th:if="${!model.modeEdit}" label="Edit" action="@{/base/_edit}" color="primary"/>
+						<vu:button-submit th:if="${model.modeEdit}"  label="Save" action="@{/base/_save}" color="primary" />
 					</vu:grid-cell>
 				</vu:grid>
 			</vu:form>
