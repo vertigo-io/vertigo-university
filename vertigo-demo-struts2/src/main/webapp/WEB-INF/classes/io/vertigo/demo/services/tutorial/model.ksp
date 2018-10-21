@@ -1,34 +1,34 @@
 package io.vertigo.demo.domain.tutorial
 
 create DtDefinition DT_COMMUNE {
-  key ID_INSEE {domain : DO_IDENTIFIANT, 	label:"ID INSEE", 			notNull:"true"} 
-  field CODE_POSTAL {domain :  DO_CODE_POSTAL, 	label:"Code postal", 		notNull:"true"}
-  field COMMUNE { domain : DO_LIBELLE, 		label:"Commune", 			notNull:"true"}
-  field DEPARTEMENT { domain : DO_LIBELLE, 		label:"D�partement", 		notNull:"true"}
+  id ID_INSEE {domain : DO_IDENTIFIANT, 	label:"ID INSEE", 			} 
+  field CODE_POSTAL {domain :  DO_CODE_POSTAL, 	label:"Code postal", 		required:"true"}
+  field COMMUNE { domain : DO_LIBELLE, 		label:"Commune", 			required:"true"}
+  field DEPARTEMENT { domain : DO_LIBELLE, 		label:"D�partement", 		required:"true"}
 }
 
 create DtDefinition DT_TUTO_OBJECT {
-  key OBJ_ID {domain : DO_IDENTIFIANT, 		label:"ID Objet", 	notNull:"true",}, 
-  field CODE {domain :  DO_CODE, 	label:"Code produit", 		notNull:"true",},
-  field LIBELLE { domain : DO_LIBELLE, 	label:"Libell�", 		notNull:"true",},
-  field DESCRIPTION { domain : DO_TEXTE, 	label:"Description", 		notNull:"false",}, 
-  field PRIX { domain : DO_MONTANT, 	label:"Prix unitaire",  	notNull:"false",}, 
-  field SI_STOCK { domain : DO_OUI_NON, 	label:"En stock", 		notNull:"true",}, 
-  field POIDS { domain : DO_POIDS, 	label:"Poids unitaire", 	notNull:"true",}, 
-  field DATE_CREATION { domain : DO_DATE, 	label:"Date de cr�ation", notNull:"true",}, 
-  field DATE_MODIFICATION { domain : DO_DATE, 	label:"Date de modification", notNull:"false",}, 
+  id OBJ_ID {domain : DO_IDENTIFIANT, 		label:"ID Objet", 	}, 
+  field CODE {domain :  DO_CODE, 	label:"Code produit", 		required:"true",},
+  field LIBELLE { domain : DO_LIBELLE, 	label:"Libell�", 		required:"true",},
+  field DESCRIPTION { domain : DO_TEXTE, 	label:"Description", 		required:"false",}, 
+  field PRIX { domain : DO_MONTANT, 	label:"Prix unitaire",  	required:"false",}, 
+  field SI_STOCK { domain : DO_OUI_NON, 	label:"En stock", 		required:"true",}, 
+  field POIDS { domain : DO_POIDS, 	label:"Poids unitaire", 	required:"true",}, 
+  field DATE_CREATION { domain : DO_DATE, 	label:"Date de cr�ation", required:"true",}, 
+  field DATE_MODIFICATION { domain : DO_DATE, 	label:"Date de modification", required:"false",}, 
 },
 
 create DtDefinition DT_TUTO_OBJECT_TYPE {
-  key TYP_ID {domain : DO_IDENTIFIANT, 		label:"ID Type", 	notNull:"true",}, 
-  field CODE {domain :  DO_CODE, 	label:"Code type", 		notNull:"true",},
-  field LIBELLE { domain : DO_LIBELLE, 	label:"Libell�", 		notNull:"true",},
+  id TYP_ID {domain : DO_IDENTIFIANT, 		label:"ID Type", 	}, 
+  field CODE {domain :  DO_CODE, 	label:"Code type", 		required:"true",},
+  field LIBELLE { domain : DO_LIBELLE, 	label:"Libell�", 		required:"true",},
 },
 
 create DtDefinition DT_TUTO_OBJECT_ETAT {
-  key ETA_ID {domain : DO_IDENTIFIANT, 		label:"ID etat", 	notNull:"true",}, 
-  field ETAT {domain :  DO_CODE, 	label:"Code Etat", 		notNull:"true",},
-  field LIBELLE { domain : DO_LIBELLE, 	label:"Libell�", 		notNull:"true",},
+  id ETA_ID {domain : DO_IDENTIFIANT, 		label:"ID etat", 	}, 
+  field ETAT {domain :  DO_CODE, 	label:"Code Etat", 		required:"true",},
+  field LIBELLE { domain : DO_LIBELLE, 	label:"Libell�", 		required:"true",},
 },
 
 create Association A_OBJ_TYP {

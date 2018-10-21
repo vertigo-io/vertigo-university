@@ -23,7 +23,7 @@ public final class EquipmentType implements Entity {
 	public URI<EquipmentType> getURI() {
 		return URI.of(this);
 	}
-	
+
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
@@ -42,7 +42,7 @@ public final class EquipmentType implements Entity {
 	public void setEquipmentTypeId(final Long equipmentTypeId) {
 		this.equipmentTypeId = equipmentTypeId;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Equipment Type Label'.
@@ -61,7 +61,7 @@ public final class EquipmentType implements Entity {
 	public void setLabel(final String label) {
 		this.label = label;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Equipment type is active'.
@@ -80,7 +80,7 @@ public final class EquipmentType implements Entity {
 	public void setActive(final Boolean active) {
 		this.active = active;
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

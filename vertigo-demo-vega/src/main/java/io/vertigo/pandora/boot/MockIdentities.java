@@ -15,7 +15,6 @@ import io.vertigo.account.plugins.account.store.loader.AccountLoader;
 import io.vertigo.account.plugins.account.store.loader.GroupLoader;
 import io.vertigo.core.component.Component;
 import io.vertigo.dynamo.domain.model.URI;
-import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.dynamo.file.model.VFile;
 import io.vertigo.util.ListBuilder;
 

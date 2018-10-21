@@ -25,12 +25,10 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
-import java.util.Calendar;
 
 import javax.inject.Inject;
 
 import io.vertigo.commons.transaction.VTransactionManager;
-import io.vertigo.commons.transaction.VTransactionWritable;
 import io.vertigo.core.component.ComponentInitializer;
 import io.vertigo.core.resource.ResourceManager;
 import io.vertigo.database.sql.SqlDataBaseManager;
@@ -52,7 +50,7 @@ public class DataBaseInitializer implements ComponentInitializer {
 	private VTransactionManager transactionManager;
 	@Inject
 	private SqlDataBaseManager sqlDataBaseManager;
-	
+
 	/*
 	@Inject
 	private MovieDAO movieDao;
@@ -118,7 +116,7 @@ public class DataBaseInitializer implements ComponentInitializer {
 			tx.commit();
 		}
 	}
-
+	
 	private static Movie createMovie(final String title, final int year, final int runtime, final String poster, final String description) {
 		final Movie movie = new Movie();
 		movie.setTitle(title);

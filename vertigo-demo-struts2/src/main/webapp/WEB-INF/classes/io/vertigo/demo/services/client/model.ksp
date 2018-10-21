@@ -1,7 +1,7 @@
 package io.vertigo.demo.domain.client
 
 create DtDefinition DT_CLIENT_CRITERE {
-    field NOM {domain : DO_LIBELLE, label : "Nom", notNull : "false",},
+    field NOM {domain : DO_LIBELLE, label : "Nom", required : "false",},
 },
 
 create DtDefinition DT_ADRESSE_SELECTION {

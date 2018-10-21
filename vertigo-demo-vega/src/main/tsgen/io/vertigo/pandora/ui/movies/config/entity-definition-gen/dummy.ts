@@ -5,14 +5,14 @@
 
 /* tslint:disable */
 import { EntityField, StoreNode } from "focus4/entity";
-import * as domains from "../../../common/domain"
+import * as domains from "../../../../00-core/domain"
 
 export interface Dummy {
 	value: number;
 }
 
 export interface DummyNode extends StoreNode<Dummy> {
-	value: EntityField<number>;
+	value: EntityField<number, typeof domains.DO_IDENTITY>;
 }
 
 export const DummyEntity = {

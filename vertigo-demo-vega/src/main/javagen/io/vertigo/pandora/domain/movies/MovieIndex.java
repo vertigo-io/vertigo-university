@@ -14,41 +14,24 @@ public final class MovieIndex implements DtObject {
 	private static final long serialVersionUID = 1L;
 
 	private Long movId;
-
 	private String title;
-
 	private String titleSortOnly;
-
 	private String originalTitle;
-
 	private String synopsis;
-
 	private String shortSynopsis;
-
 	private String keywords;
-
 	private String poster;
-
 	private Integer runtime;
-
 	private String movieType;
-
 	private Integer productionYear;
-
 	private Integer userRating;
-
 	private Integer pressRating;
-
 	private String actorRoles;
-
 	private String writers;
-
 	private String camera;
-
 	private String producers;
-
 	private String directors;
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'id'.
@@ -67,7 +50,7 @@ public final class MovieIndex implements DtObject {
 	public void setMovId(final Long movId) {
 		this.movId = movId;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Title'.
@@ -86,7 +69,7 @@ public final class MovieIndex implements DtObject {
 	public void setTitle(final String title) {
 		this.title = title;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Title'.
@@ -105,7 +88,7 @@ public final class MovieIndex implements DtObject {
 	public void setTitleSortOnly(final String titleSortOnly) {
 		this.titleSortOnly = titleSortOnly;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Original Title'.
@@ -124,7 +107,7 @@ public final class MovieIndex implements DtObject {
 	public void setOriginalTitle(final String originalTitle) {
 		this.originalTitle = originalTitle;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Synopsis'.
@@ -143,7 +126,7 @@ public final class MovieIndex implements DtObject {
 	public void setSynopsis(final String synopsis) {
 		this.synopsis = synopsis;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'shortSynopsis'.
@@ -162,7 +145,7 @@ public final class MovieIndex implements DtObject {
 	public void setShortSynopsis(final String shortSynopsis) {
 		this.shortSynopsis = shortSynopsis;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'keywords'.
@@ -181,7 +164,7 @@ public final class MovieIndex implements DtObject {
 	public void setKeywords(final String keywords) {
 		this.keywords = keywords;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'poster'.
@@ -200,7 +183,7 @@ public final class MovieIndex implements DtObject {
 	public void setPoster(final String poster) {
 		this.poster = poster;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'runtime'.
@@ -219,7 +202,7 @@ public final class MovieIndex implements DtObject {
 	public void setRuntime(final Integer runtime) {
 		this.runtime = runtime;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Movie type'.
@@ -238,7 +221,7 @@ public final class MovieIndex implements DtObject {
 	public void setMovieType(final String movieType) {
 		this.movieType = movieType;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'productionYear'.
@@ -257,7 +240,7 @@ public final class MovieIndex implements DtObject {
 	public void setProductionYear(final Integer productionYear) {
 		this.productionYear = productionYear;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'userRating'.
@@ -276,7 +259,7 @@ public final class MovieIndex implements DtObject {
 	public void setUserRating(final Integer userRating) {
 		this.userRating = userRating;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'presRating'.
@@ -295,7 +278,7 @@ public final class MovieIndex implements DtObject {
 	public void setPressRating(final Integer pressRating) {
 		this.pressRating = pressRating;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Roles'.
@@ -314,7 +297,7 @@ public final class MovieIndex implements DtObject {
 	public void setActorRoles(final String actorRoles) {
 		this.actorRoles = actorRoles;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Writers'.
@@ -333,7 +316,7 @@ public final class MovieIndex implements DtObject {
 	public void setWriters(final String writers) {
 		this.writers = writers;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Camera'.
@@ -352,7 +335,7 @@ public final class MovieIndex implements DtObject {
 	public void setCamera(final String camera) {
 		this.camera = camera;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Producers'.
@@ -371,7 +354,7 @@ public final class MovieIndex implements DtObject {
 	public void setProducers(final String producers) {
 		this.producers = producers;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Directors'.
@@ -390,7 +373,7 @@ public final class MovieIndex implements DtObject {
 	public void setDirectors(final String directors) {
 		this.directors = directors;
 	}
-
+	
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

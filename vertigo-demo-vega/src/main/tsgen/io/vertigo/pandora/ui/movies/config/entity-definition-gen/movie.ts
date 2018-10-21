@@ -5,7 +5,7 @@
 
 /* tslint:disable */
 import { EntityField, StoreNode } from "focus4/entity";
-import * as domains from "../../../common/domain"
+import * as domains from "../../../../00-core/domain"
 
 export interface Movie {
 	movId: number;
@@ -25,20 +25,20 @@ export interface Movie {
 }
 
 export interface MovieNode extends StoreNode<Movie> {
-	movId: EntityField<number>;
-	title: EntityField<string>;
-	originalTitle: EntityField<string>;
-	synopsis: EntityField<string>;
-	shortSynopsis: EntityField<string>;
-	keywords: EntityField<string>;
-	poster: EntityField<string>;
-	trailerName: EntityField<string>;
-	trailerHref: EntityField<string>;
-	runtime: EntityField<number>;
-	movieType: EntityField<string>;
-	productionYear: EntityField<number>;
-	userRating: EntityField<number>;
-	pressRating: EntityField<number>;
+	movId: EntityField<number, typeof domains.DO_IDENTITY>;
+	title: EntityField<string, typeof domains.DO_LABEL>;
+	originalTitle: EntityField<string, typeof domains.DO_LABEL>;
+	synopsis: EntityField<string, typeof domains.DO_TEXT>;
+	shortSynopsis: EntityField<string, typeof domains.DO_TEXT>;
+	keywords: EntityField<string, typeof domains.DO_LABEL>;
+	poster: EntityField<string, typeof domains.DO_HREF>;
+	trailerName: EntityField<string, typeof domains.DO_LABEL>;
+	trailerHref: EntityField<string, typeof domains.DO_HREF>;
+	runtime: EntityField<number, typeof domains.DO_RUNTIME>;
+	movieType: EntityField<string, typeof domains.DO_LABEL_SHORT>;
+	productionYear: EntityField<number, typeof domains.DO_YEAR>;
+	userRating: EntityField<number, typeof domains.DO_RATING>;
+	pressRating: EntityField<number, typeof domains.DO_RATING>;
 }
 
 export const MovieEntity = {

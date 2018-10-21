@@ -21,7 +21,7 @@ public final class EquipmentFeature implements Entity {
 	public URI<EquipmentFeature> getURI() {
 		return URI.of(this);
 	}
-	
+
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
@@ -40,7 +40,7 @@ public final class EquipmentFeature implements Entity {
 	public void setEquipmentFeatureId(final Long equipmentFeatureId) {
 		this.equipmentFeatureId = equipmentFeatureId;
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

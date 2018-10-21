@@ -31,7 +31,7 @@ public final class DynaObjectServiceImpl implements DynaObjectService {
 	/** {@inheritDoc} */
 	@Override
 	public Entity load(final DtDefinition dtDefinition, final Serializable id) {
-		final URI<Entity> uri = new URI<>(dtDefinition, id);
+		final URI<Entity> uri = URI.of(dtDefinition, id);
 		return storeManager.getDataStore().readOne(uri);
 	}
 
@@ -51,7 +51,7 @@ public final class DynaObjectServiceImpl implements DynaObjectService {
 	/** {@inheritDoc} */
 	@Override
 	public void delete(final DtDefinition dtDefinition, final Serializable id) {
-		final URI<Entity> uri = new URI<>(dtDefinition, id);
+		final URI<Entity> uri = URI.of(dtDefinition, id);
 		storeManager.getDataStore().delete(uri);
 	}
 

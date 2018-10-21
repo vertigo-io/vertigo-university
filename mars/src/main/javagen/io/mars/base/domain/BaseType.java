@@ -22,7 +22,7 @@ public final class BaseType implements Entity {
 	public URI<BaseType> getURI() {
 		return URI.of(this);
 	}
-	
+
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
@@ -41,7 +41,7 @@ public final class BaseType implements Entity {
 	public void setBaseTypeId(final String baseTypeId) {
 		this.baseTypeId = baseTypeId;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Base Type Label'.
@@ -60,7 +60,7 @@ public final class BaseType implements Entity {
 	public void setLabel(final String label) {
 		this.label = label;
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {
