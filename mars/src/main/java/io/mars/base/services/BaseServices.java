@@ -1,6 +1,6 @@
 package io.mars.base.services;
 
-import io.mars.domain.base.Base;
+import io.mars.base.domain.Base;
 import io.vertigo.core.component.Component;
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.domain.model.DtListState;

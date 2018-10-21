@@ -18,33 +18,33 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	 */
 	public enum Definitions {
 		/** Objet de données Base. */
-		Base(io.mars.domain.base.Base.class),
+		Base(io.mars.base.domain.Base.class),
 		/** Objet de données BaseType. */
-		BaseType(io.mars.domain.base.BaseType.class),
+		BaseType(io.mars.base.domain.BaseType.class),
 		/** Objet de données Equipment. */
-		Equipment(io.mars.domain.base.Equipment.class),
+		Equipment(io.mars.base.domain.Equipment.class),
 		/** Objet de données EquipmentCategory. */
-		EquipmentCategory(io.mars.domain.catalog.EquipmentCategory.class),
+		EquipmentCategory(io.mars.catalog.domain.EquipmentCategory.class),
 		/** Objet de données EquipmentFeature. */
-		EquipmentFeature(io.mars.domain.base.EquipmentFeature.class),
+		EquipmentFeature(io.mars.base.domain.EquipmentFeature.class),
 		/** Objet de données EquipmentType. */
-		EquipmentType(io.mars.domain.catalog.EquipmentType.class),
+		EquipmentType(io.mars.catalog.domain.EquipmentType.class),
 		/** Objet de données Geosector. */
-		Geosector(io.mars.domain.base.Geosector.class),
+		Geosector(io.mars.base.domain.Geosector.class),
 		/** Objet de données Job. */
-		Job(io.mars.domain.base.Job.class),
+		Job(io.mars.base.domain.Job.class),
 		/** Objet de données JobStatus. */
-		JobStatus(io.mars.domain.base.JobStatus.class),
+		JobStatus(io.mars.base.domain.JobStatus.class),
 		/** Objet de données MaintenanceOp. */
-		MaintenanceOp(io.mars.domain.base.MaintenanceOp.class),
+		MaintenanceOp(io.mars.base.domain.MaintenanceOp.class),
 		/** Objet de données MaintenanceOpStatus. */
-		MaintenanceOpStatus(io.mars.domain.base.MaintenanceOpStatus.class),
+		MaintenanceOpStatus(io.mars.base.domain.MaintenanceOpStatus.class),
 		/** Objet de données Mission. */
-		Mission(io.mars.domain.humanresources.Mission.class),
+		Mission(io.mars.humanresources.domain.Mission.class),
 		/** Objet de données Person. */
-		Person(io.mars.domain.humanresources.Person.class),
+		Person(io.mars.humanresources.domain.Person.class),
 		/** Objet de données Picture. */
-		Picture(io.mars.domain.base.Picture.class)		;
+		Picture(io.mars.base.domain.Picture.class)		;
 
 		private final Class<?> clazz;
 
@@ -64,7 +64,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de Base.
 	 */
-	public enum BaseFields implements DtFieldName<io.mars.domain.base.Base> {
+	public enum BaseFields implements DtFieldName<io.mars.base.domain.Base> {
 		/** Propriété 'Id'. */
 		BAS_ID,
 		/** Propriété 'Base Code'. */
@@ -91,7 +91,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de BaseType.
 	 */
-	public enum BaseTypeFields implements DtFieldName<io.mars.domain.base.BaseType> {
+	public enum BaseTypeFields implements DtFieldName<io.mars.base.domain.BaseType> {
 		/** Propriété 'Id'. */
 		BASE_TYPE_ID,
 		/** Propriété 'Base Type Label'. */
@@ -100,7 +100,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de Equipment.
 	 */
-	public enum EquipmentFields implements DtFieldName<io.mars.domain.base.Equipment> {
+	public enum EquipmentFields implements DtFieldName<io.mars.base.domain.Equipment> {
 		/** Propriété 'Id'. */
 		EQUIPMENT_ID,
 		/** Propriété 'Name'. */
@@ -133,7 +133,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de EquipmentCategory.
 	 */
-	public enum EquipmentCategoryFields implements DtFieldName<io.mars.domain.catalog.EquipmentCategory> {
+	public enum EquipmentCategoryFields implements DtFieldName<io.mars.catalog.domain.EquipmentCategory> {
 		/** Propriété 'Id'. */
 		EQUIPMENT_CATEGORY_ID,
 		/** Propriété 'Equipment Category Label'. */
@@ -144,14 +144,14 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de EquipmentFeature.
 	 */
-	public enum EquipmentFeatureFields implements DtFieldName<io.mars.domain.base.EquipmentFeature> {
+	public enum EquipmentFeatureFields implements DtFieldName<io.mars.base.domain.EquipmentFeature> {
 		/** Propriété 'Id'. */
 		EQUIPMENT_FEATURE_ID	}
 
 	/**
 	 * Enumération des champs de EquipmentType.
 	 */
-	public enum EquipmentTypeFields implements DtFieldName<io.mars.domain.catalog.EquipmentType> {
+	public enum EquipmentTypeFields implements DtFieldName<io.mars.catalog.domain.EquipmentType> {
 		/** Propriété 'Id'. */
 		EQUIPMENT_TYPE_ID,
 		/** Propriété 'Equipment Type Label'. */
@@ -162,7 +162,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de Geosector.
 	 */
-	public enum GeosectorFields implements DtFieldName<io.mars.domain.base.Geosector> {
+	public enum GeosectorFields implements DtFieldName<io.mars.base.domain.Geosector> {
 		/** Propriété 'Id'. */
 		GEOSECTOR_ID,
 		/** Propriété 'Sector Label'. */
@@ -171,7 +171,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de Job.
 	 */
-	public enum JobFields implements DtFieldName<io.mars.domain.base.Job> {
+	public enum JobFields implements DtFieldName<io.mars.base.domain.Job> {
 		/** Propriété 'Id'. */
 		JOB_ID,
 		/** Propriété 'CODE'. */
@@ -186,7 +186,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de JobStatus.
 	 */
-	public enum JobStatusFields implements DtFieldName<io.mars.domain.base.JobStatus> {
+	public enum JobStatusFields implements DtFieldName<io.mars.base.domain.JobStatus> {
 		/** Propriété 'Id'. */
 		JOB_STATUS_ID,
 		/** Propriété 'Status Label'. */
@@ -195,7 +195,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de MaintenanceOp.
 	 */
-	public enum MaintenanceOpFields implements DtFieldName<io.mars.domain.base.MaintenanceOp> {
+	public enum MaintenanceOpFields implements DtFieldName<io.mars.base.domain.MaintenanceOp> {
 		/** Propriété 'Id'. */
 		MO_ID,
 		/** Propriété 'Ticket Number'. */
@@ -210,7 +210,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de MaintenanceOpStatus.
 	 */
-	public enum MaintenanceOpStatusFields implements DtFieldName<io.mars.domain.base.MaintenanceOpStatus> {
+	public enum MaintenanceOpStatusFields implements DtFieldName<io.mars.base.domain.MaintenanceOpStatus> {
 		/** Propriété 'Id'. */
 		MO_STATUS_ID,
 		/** Propriété 'Status Label'. */
@@ -219,7 +219,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de Mission.
 	 */
-	public enum MissionFields implements DtFieldName<io.mars.domain.humanresources.Mission> {
+	public enum MissionFields implements DtFieldName<io.mars.humanresources.domain.Mission> {
 		/** Propriété 'Id'. */
 		MISSION_ID,
 		/** Propriété 'Role'. */
@@ -230,7 +230,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de Person.
 	 */
-	public enum PersonFields implements DtFieldName<io.mars.domain.humanresources.Person> {
+	public enum PersonFields implements DtFieldName<io.mars.humanresources.domain.Person> {
 		/** Propriété 'Id'. */
 		PERSON_ID,
 		/** Propriété 'Name'. */
@@ -245,7 +245,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de Picture.
 	 */
-	public enum PictureFields implements DtFieldName<io.mars.domain.base.Picture> {
+	public enum PictureFields implements DtFieldName<io.mars.base.domain.Picture> {
 		/** Propriété 'Id'. */
 		PICTURE_ID,
 		/** Propriété 'Id'. */
