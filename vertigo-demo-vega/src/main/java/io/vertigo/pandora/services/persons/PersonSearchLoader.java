@@ -55,7 +55,7 @@ public final class PersonSearchLoader extends AbstractSqlSearchLoader<Long, Pers
 		final List<SearchIndex<Person, PersonIndex>> personSearchIndexes = new ArrayList<>(personIds.size());
 		for (final PersonIndex personIndex : personIndexes) {
 			personSearchIndexes.add(SearchIndex.createIndex(indexDefinition,
-					new URI(indexDefinition.getKeyConceptDtDefinition(), personIndex.getPerId()), personIndex));
+					URI.of(indexDefinition.getKeyConceptDtDefinition(), personIndex.getPerId()), personIndex));
 		}
 		return personSearchIndexes;
 	}

@@ -53,7 +53,7 @@ public final class MovieSearchLoader extends AbstractSqlSearchLoader<Long, Movie
 		final List<SearchIndex<Movie, MovieIndex>> movieSearchIndexes = new ArrayList<>(searchChunk.getAllURIs().size());
 		for (final MovieIndex movieIndex : movieIndexes) {
 			movieSearchIndexes.add(SearchIndex.createIndex(indexDefinition,
-					new URI(indexDefinition.getKeyConceptDtDefinition(), movieIndex.getMovId()), movieIndex));
+					URI.of(indexDefinition.getKeyConceptDtDefinition(), movieIndex.getMovId()), movieIndex));
 		}
 		return movieSearchIndexes;
 	}
