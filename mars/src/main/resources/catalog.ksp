@@ -1,4 +1,4 @@
-package io.mars.catalog.domain
+package io.mars.domain.catalog
 
 /* Exemple : "Drone", "Rover" */
 create DtDefinition DT_EQUIPMENT_TYPE {

@@ -1,4 +1,4 @@
-package io.mars.base.domain
+package io.mars.domain.base
 
 create DtDefinition DT_BASE {
 	id BAS_ID {domain: DO_ID label: "Id"}
