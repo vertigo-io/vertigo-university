@@ -1,5 +1,5 @@
 package io.vertigo.mars.domain.search
 
 create DtDefinition DT_DUMMY {
-  field DUMMY_LONG {domain: DO_ID label: "Id" notNull:"false"}
+  field DUMMY_LONG {domain: DO_ID label: "Id" required:"false"}
 }

@@ -5,7 +5,7 @@
 
 /* tslint:disable */
 import { EntityField, StoreNode } from "focus4/entity";
-import * as domains from "../../../common/domain"
+import * as domains from "../../../../00-core/domain"
 
 export interface Person {
 	perId: number;
@@ -22,17 +22,17 @@ export interface Person {
 }
 
 export interface PersonNode extends StoreNode<Person> {
-	perId: EntityField<number>;
-	fullName: EntityField<string>;
-	firstName: EntityField<string>;
-	lastName: EntityField<string>;
-	biography: EntityField<string>;
-	shortBiography: EntityField<string>;
-	sex: EntityField<string>;
-	photoHref: EntityField<string>;
-	birthDate: EntityField<string>;
-	birthPlace: EntityField<string>;
-	activity: EntityField<string>;
+	perId: EntityField<number, typeof domains.DO_IDENTITY>;
+	fullName: EntityField<string, typeof domains.DO_LABEL>;
+	firstName: EntityField<string, typeof domains.DO_LABEL>;
+	lastName: EntityField<string, typeof domains.DO_LABEL>;
+	biography: EntityField<string, typeof domains.DO_TEXT>;
+	shortBiography: EntityField<string, typeof domains.DO_TEXT>;
+	sex: EntityField<string, typeof domains.DO_CODE>;
+	photoHref: EntityField<string, typeof domains.DO_HREF>;
+	birthDate: EntityField<string, typeof domains.DO_DATE>;
+	birthPlace: EntityField<string, typeof domains.DO_LABEL>;
+	activity: EntityField<string, typeof domains.DO_MULTI_VALUES>;
 }
 
 export const PersonEntity = {

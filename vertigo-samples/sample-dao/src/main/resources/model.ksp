@@ -1,26 +1,26 @@
 package io.vertigo.samples.dao.domain
 
 create DtDefinition DT_COUNTRY {
-  key COU_ID {domain: DO_ID label: "Id" notNull:"false"}
-  field NAME {domain: DO_LABEL label: "Code du pays" notNull:"false"}
+  id COU_ID {domain: DO_ID label: "Id" }
+  field NAME {domain: DO_LABEL label: "Code du pays" required:"false"}
 }
 
 create DtDefinition DT_MOVIE {
-  key MOV_ID {domain: DO_ID label: "Id" notNull:"true"}
-  field NAME {domain: DO_LABEL_LONG label: "Code du pays" notNull:"true"}
-  field YEAR {domain: DO_YEAR label: "Année" notNull:"false"}
-  field IMDBID {domain: DO_LABEL label: "Id Imdb" notNull:"false"}
+  id MOV_ID {domain: DO_ID label: "Id" }
+  field NAME {domain: DO_LABEL_LONG label: "Code du pays" required:"true"}
+  field YEAR {domain: DO_YEAR label: "Année" required:"false"}
+  field IMDBID {domain: DO_LABEL label: "Id Imdb" required:"false"}
 }
 
 create DtDefinition DT_ACTOR {
-  key ACT_ID {domain: DO_ID label: "Id" notNull:"true"}
-  field NAME {domain: DO_LABEL_LONG label: "Nom" notNull:"true"}
-  field SEXE {domain: DO_CODE label: "Sexe" notNull:"false"}
+  id ACT_ID {domain: DO_ID label: "Id" }
+  field NAME {domain: DO_LABEL_LONG label: "Nom" required:"true"}
+  field SEXE {domain: DO_CODE label: "Sexe" required:"false"}
 }
 
 create DtDefinition DT_ROLE {
-  key ROL_ID {domain: DO_ID label: "Id" notNull:"true"}
-  field AS_CHARACTER {domain: DO_LABEL_VERY_LONG label: "Dans le role de" notNull:"true"}
+  id ROL_ID {domain: DO_ID label: "Id" }
+  field AS_CHARACTER {domain: DO_LABEL_VERY_LONG label: "Dans le role de" required:"true"}
 }
 
 create Association A_MOV_COU {

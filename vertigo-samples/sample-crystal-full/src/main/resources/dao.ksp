@@ -9,8 +9,8 @@ create Task TK_GET_ACTORS_IDS_BY_MOVIE {
 			join movie mov on rol.mov_id = mov.mov_id 
 			where mov.mov_id = #MOV_ID#
 			"
-	attribute MOV_ID	{domain : DO_ID 				notNull:"true" 	inOut :"in"}
-	attribute ACTORS	{domain : DO_LONGS			 	notNull:"true" 	inOut :"out"}
+	attribute MOV_ID	{domain : DO_ID 				required:"true" 	inOut :"in"}
+	attribute ACTORS	{domain : DO_LONGS			 	required:"true" 	inOut :"out"}
 }
 
 create Task TK_GET_ACTORS_BY_MOVIE {
@@ -22,8 +22,8 @@ create Task TK_GET_ACTORS_BY_MOVIE {
 			join movie mov on rol.mov_id = mov.mov_id 
 			where mov.mov_id = #MOV_ID#
 			"
-	attribute MOV_ID	{domain : DO_ID 				notNull:"true" 	inOut :"in"}
-	attribute ACTORS	{domain : DO_DT_ACTOR_DTC	 	notNull:"true" 	inOut :"out"}
+	attribute MOV_ID	{domain : DO_ID 				required:"true" 	inOut :"in"}
+	attribute ACTORS	{domain : DO_DT_ACTOR_DTC	 	required:"true" 	inOut :"out"}
 }
 
 
@@ -34,8 +34,8 @@ create Task TK_GET_MOVIES_IN_COUNTRIES {
         	from movie 
         	where cou_id in ( #COUNTRIES_IDS.ROWNUM#)
 			"
-	attribute COUNTRIES_IDS	{domain : DO_LONGS 				notNull:"true" 	inOut :"in"}
-	attribute MOVIES		{domain : DO_DT_MOVIE_DTC		notNull:"true" 	inOut :"out"}
+	attribute COUNTRIES_IDS	{domain : DO_LONGS 				required:"true" 	inOut :"in"}
+	attribute MOVIES		{domain : DO_DT_MOVIE_DTC		required:"true" 	inOut :"out"}
 }
 
 

@@ -5,7 +5,7 @@ package io.vertigo.demo.dao.administration.utilisateur
  */
 create Task TK_LOAD_UTILISATEUR_ACTIF_BY_LOGIN {
     className : "io.vertigo.dynamox.task.TaskEngineSelect",
-    attribute LOGIN {domain : DO_LOGIN, notNull:"true", inOut :"in",}
+    attribute LOGIN {domain : DO_LOGIN, required:"true", inOut :"in",}
 }
 /** Exemple d'utilisation de templating */ 
 alter Task TK_LOAD_UTILISATEUR_ACTIF_BY_LOGIN {
@@ -18,10 +18,10 @@ alter Task TK_LOAD_UTILISATEUR_ACTIF_BY_LOGIN {
 }
 
 alter Task TK_LOAD_UTILISATEUR_ACTIF_BY_LOGIN {
-    attribute DTO_UTILISATEUR {domain : DO_DT_UTILISATEUR_DTO, notNull:"false", inOut :"out",}
+    attribute DTO_UTILISATEUR {domain : DO_DT_UTILISATEUR_DTO, required:"false", inOut :"out",}
 }
 alter Task TK_LOAD_UTILISATEUR_ACTIF_BY_LOGIN {
-    attribute CRYPTED_PASSWORD {domain : DO_PASSWORD, notNull:"true", inOut :"in",}
+    attribute CRYPTED_PASSWORD {domain : DO_PASSWORD, required:"true", inOut :"in",}
 }
 
 
@@ -52,8 +52,8 @@ create Task TK_LIST_UTILISATEUR_BY_CRITERE {
                			And uti.SI_ACTIF = #DTO_UTILISATEUR_CRITERE.IS_ACTIF#
                		<%}%>
               		order by uti.NOM, uti.PRENOM",
-   	attribute DTO_UTILISATEUR_CRITERE {domain : DO_DT_UTILISATEUR_CRITERE_DTO, notNull:"true", inOut :"in",}
- 	attribute DTC_UTILISATEUR {domain : DO_DT_UTILISATEUR_DTC, notNull:"true", inOut :"out",}
+   	attribute DTO_UTILISATEUR_CRITERE {domain : DO_DT_UTILISATEUR_CRITERE_DTO, required:"true", inOut :"in",}
+ 	attribute DTC_UTILISATEUR {domain : DO_DT_UTILISATEUR_DTC, required:"true", inOut :"out",}
 }
 
 create Task TK_LIST_UTILISATEUR_BY_ROLE {
@@ -62,6 +62,6 @@ create Task TK_LIST_UTILISATEUR_BY_ROLE {
                From	UTILISATEUR uti
                Join UTI_ROL pro on pro.UTI_ID = usr.UTI_ID
                Where pro.ROL_CODE = #ROL_CODE#",               
-    attribute ROL_CODE {domain : DO_CODE, 						notNull:"true", inOut :"in",}
-    attribute DTC_UTILISATEUR {domain : DO_DT_UTILISATEUR_DTC, 		notNull:"true", inOut :"out",}
+    attribute ROL_CODE {domain : DO_CODE, 						required:"true", inOut :"in",}
+    attribute DTC_UTILISATEUR {domain : DO_DT_UTILISATEUR_DTC, 		required:"true", inOut :"out",}
 }

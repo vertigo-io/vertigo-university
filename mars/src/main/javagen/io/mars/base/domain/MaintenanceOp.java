@@ -25,7 +25,7 @@ public final class MaintenanceOp implements Entity {
 	public URI<MaintenanceOp> getURI() {
 		return URI.of(this);
 	}
-	
+
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
@@ -44,7 +44,7 @@ public final class MaintenanceOp implements Entity {
 	public void setMoId(final Long moId) {
 		this.moId = moId;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Ticket Number'.
@@ -63,7 +63,7 @@ public final class MaintenanceOp implements Entity {
 	public void setTicketCode(final String ticketCode) {
 		this.ticketCode = ticketCode;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Mainenance Operation'.
@@ -82,7 +82,7 @@ public final class MaintenanceOp implements Entity {
 	public void setName(final String name) {
 		this.name = name;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Maintenance Operation Descrption'.
@@ -101,7 +101,7 @@ public final class MaintenanceOp implements Entity {
 	public void setDescription(final String description) {
 		this.description = description;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Due Date'.
@@ -120,7 +120,7 @@ public final class MaintenanceOp implements Entity {
 	public void setDueDate(final java.util.Date dueDate) {
 		this.dueDate = dueDate;
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

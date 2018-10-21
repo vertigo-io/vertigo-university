@@ -5,7 +5,7 @@
 
 /* tslint:disable */
 import { EntityField, StoreNode } from "focus4/entity";
-import * as domains from "../../../common/domain"
+import * as domains from "../../../../00-core/domain"
 
 export interface ActorRole {
 	aroId: number;
@@ -15,10 +15,10 @@ export interface ActorRole {
 }
 
 export interface ActorRoleNode extends StoreNode<ActorRole> {
-	aroId: EntityField<number>;
-	role: EntityField<string>;
-	perId: EntityField<number>;
-	movId: EntityField<number>;
+	aroId: EntityField<number, typeof domains.DO_IDENTITY>;
+	role: EntityField<string, typeof domains.DO_LABEL>;
+	perId: EntityField<number, typeof domains.DO_IDENTITY>;
+	movId: EntityField<number, typeof domains.DO_IDENTITY>;
 }
 
 export const ActorRoleEntity = {

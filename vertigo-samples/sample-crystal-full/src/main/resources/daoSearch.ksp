@@ -7,6 +7,6 @@ create Task TK_LOAD_MOVIE_INDEX {
 				from MOVIE mov
 				join COUNTRY cou on cou.cou_id = mov.cou_id
 				where MOV_ID in (#MOVIE_IDS.ROWNUM#);"
-	attribute MOVIE_IDS {domain : DO_IDS, notNull:"true", inOut :"in",} 
-	attribute DTC_INDEX {domain : DO_DT_MOVIE_INDEX_DTC, notNull:"true", inOut :"out",} 
+	attribute MOVIE_IDS {domain : DO_IDS, required:"true", inOut :"in",} 
+	attribute DTC_INDEX {domain : DO_DT_MOVIE_INDEX_DTC, required:"true", inOut :"out",} 
 }

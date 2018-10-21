@@ -48,7 +48,7 @@ public class ReferentielServicesImpl implements ReferentielServices {
 	/** {@inheritDoc} */
 	@Override
 	public Famille getFamille(final Long famId) {
-		final URI<Famille> uri = new URI<>(DtObjectUtil.findDtDefinition(Famille.class), famId);
+		final URI<Famille> uri = URI.of(Famille.class, famId);
 		return storeManager.getDataStore().<Famille> readOne(uri);
 	}
 

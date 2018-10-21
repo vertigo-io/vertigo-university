@@ -22,7 +22,7 @@ public final class Geosector implements Entity {
 	public URI<Geosector> getURI() {
 		return URI.of(this);
 	}
-	
+
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
@@ -41,7 +41,7 @@ public final class Geosector implements Entity {
 	public void setGeosectorId(final Long geosectorId) {
 		this.geosectorId = geosectorId;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Sector Label'.
@@ -60,7 +60,7 @@ public final class Geosector implements Entity {
 	public void setSectorLabel(final String sectorLabel) {
 		this.sectorLabel = sectorLabel;
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

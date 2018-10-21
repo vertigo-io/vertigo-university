@@ -22,7 +22,7 @@ public final class MaintenanceOpStatus implements Entity {
 	public URI<MaintenanceOpStatus> getURI() {
 		return URI.of(this);
 	}
-	
+
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
@@ -41,7 +41,7 @@ public final class MaintenanceOpStatus implements Entity {
 	public void setMoStatusId(final String moStatusId) {
 		this.moStatusId = moStatusId;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Status Label'.
@@ -60,7 +60,7 @@ public final class MaintenanceOpStatus implements Entity {
 	public void setLabel(final String label) {
 		this.label = label;
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

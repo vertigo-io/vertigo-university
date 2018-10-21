@@ -16,25 +16,19 @@ public final class MovieCaract implements Fragment<Movie> {
 	private static final long serialVersionUID = 1L;
 
 	private String title;
-
 	private String originalTitle;
-
 	private String keywords;
-
 	private Integer runtime;
-
 	private String movieType;
-
 	private Integer productionYear;
-
 	private Long movId;
 
 	/** {@inheritDoc} */
 	@Override
 	public URI<Movie> getEntityURI() {
-		return DtObjectUtil.createEntityURI(this);
+		return DtObjectUtil.createEntityURI(this); 
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'TITLE'.
@@ -53,7 +47,7 @@ public final class MovieCaract implements Fragment<Movie> {
 	public void setTitle(final String title) {
 		this.title = title;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'ORIGINAL TITLE'.
@@ -72,7 +66,7 @@ public final class MovieCaract implements Fragment<Movie> {
 	public void setOriginalTitle(final String originalTitle) {
 		this.originalTitle = originalTitle;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'KEYWORDS'.
@@ -91,7 +85,7 @@ public final class MovieCaract implements Fragment<Movie> {
 	public void setKeywords(final String keywords) {
 		this.keywords = keywords;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'RUNTIME'.
@@ -110,7 +104,7 @@ public final class MovieCaract implements Fragment<Movie> {
 	public void setRuntime(final Integer runtime) {
 		this.runtime = runtime;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'MOVIE TYPE'.
@@ -129,7 +123,7 @@ public final class MovieCaract implements Fragment<Movie> {
 	public void setMovieType(final String movieType) {
 		this.movieType = movieType;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'PRODUCTION YEAR'.
@@ -148,7 +142,7 @@ public final class MovieCaract implements Fragment<Movie> {
 	public void setProductionYear(final Integer productionYear) {
 		this.productionYear = productionYear;
 	}
-
+	
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'MOV ID'.
@@ -167,7 +161,7 @@ public final class MovieCaract implements Fragment<Movie> {
 	public void setMovId(final Long movId) {
 		this.movId = movId;
 	}
-
+	
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

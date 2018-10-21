@@ -15,21 +15,21 @@ alter DtDefinition DT_UTILISATEUR {
 }
 
 create DtDefinition DT_UTILISATEUR_LOGIN {
-  field LOGIN {domain : DO_LOGIN, label :"Identifiant utilisateur", notNull:"true",},
-	field PASSWORD {domain : DO_PASSWORD, label :"Mot de passe", notNull:"true",},
-	field NEW_PASSWORD {domain : DO_PASSWORD, label :"Nouveau mot de passe", notNull:"true",},
-	field NEW_PASSWORD_CHECK {domain : DO_PASSWORD, label :"Resaisir le mot de passe", notNull:"true",},
+  field LOGIN {domain : DO_LOGIN, label :"Identifiant utilisateur", required:"true",},
+	field PASSWORD {domain : DO_PASSWORD, label :"Mot de passe", required:"true",},
+	field NEW_PASSWORD {domain : DO_PASSWORD, label :"Nouveau mot de passe", required:"true",},
+	field NEW_PASSWORD_CHECK {domain : DO_PASSWORD, label :"Resaisir le mot de passe", required:"true",},
 },
 
 create DtDefinition DT_UTILISATEUR_CRITERE {
-    field NOM {domain : DO_LIBELLE, label : "Nom", notNull : "false",},
-	field LOGIN {domain : DO_LOGIN, label : "Indentifiant", notNull : "false",},
-	field ROLE {domain : DO_LIBELLE, label : "Rôle", notNull : "false",},
-	/*field IS_ALL {domain : DO_ACTIF, label : "Tous les utilisateurs", notNull : "true",},*/
-	field IS_ACTIF {domain : DO_ACTIF, label : "Seulement les utilisateurs actifs", notNull : "false",},
+    field NOM {domain : DO_LIBELLE, label : "Nom", required : "false",},
+	field LOGIN {domain : DO_LOGIN, label : "Indentifiant", required : "false",},
+	field ROLE {domain : DO_LIBELLE, label : "Rôle", required : "false",},
+	/*field IS_ALL {domain : DO_ACTIF, label : "Tous les utilisateurs", required : "true",},*/
+	field IS_ACTIF {domain : DO_ACTIF, label : "Seulement les utilisateurs actifs", required : "false",},
 },
 
 create DtDefinition DT_ROLE_INPUT {
-    field ROL_CODE {domain : DO_CODE, label : "Role", notNull : "true",},
+    field ROL_CODE {domain : DO_CODE, label : "Role", required : "true",},
 },
 

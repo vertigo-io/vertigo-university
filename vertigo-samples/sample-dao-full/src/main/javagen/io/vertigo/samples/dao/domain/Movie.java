@@ -188,7 +188,7 @@ public final class Movie implements Entity {
 	
 	/**
 	 * Association : Role.
-	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Role>
+	 * @return DtList de io.vertigo.samples.dao.domain.Role
 	 */
 	@Deprecated
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Role> getRoleList() {

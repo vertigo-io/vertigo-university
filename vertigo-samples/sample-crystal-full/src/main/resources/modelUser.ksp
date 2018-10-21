@@ -1,15 +1,15 @@
 package io.vertigo.samples.crystal.domain
 
 create DtDefinition DT_USER {
-  key USR_ID {domain: DO_ID label: "Id" notNull:"false"}
-  field LOGIN {domain: DO_LABEL label: "Login" notNull:"false"}
-  field NAME {domain: DO_LABEL label: "Nom" notNull:"false"}
-  field EMAIL {domain: DO_LABEL label: "email" notNull:"false"}
+  id USR_ID {domain: DO_ID label: "Id" }
+  field LOGIN {domain: DO_LABEL label: "Login" required:"false"}
+  field NAME {domain: DO_LABEL label: "Nom" required:"false"}
+  field EMAIL {domain: DO_LABEL label: "email" required:"false"}
 }
 
 create DtDefinition DT_USER_GROUP {
-  key GRP_ID {domain: DO_ID label: "Id" notNull:"false"}
-  field NAME {domain: DO_LABEL label: "Nom" notNull:"false"}
+  id GRP_ID {domain: DO_ID label: "Id" }
+  field NAME {domain: DO_LABEL label: "Nom" required:"false"}
 }
 
 create Association A_USR_COU {

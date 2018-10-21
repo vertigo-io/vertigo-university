@@ -4,22 +4,22 @@ import java.io.Serializable;
 
 import io.vertigo.dynamo.domain.model.MasterDataEnum;
 import io.vertigo.dynamo.domain.model.URI;
-import io.vertigo.dynamo.domain.util.DtObjectUtil;
 
 public enum SexeEnum implements MasterDataEnum<io.vertigo.samples.crystal.domain.Sexe> {
 
 	male("M"), //
-	female("F");
+	female("F")
+	;
 
-	private final URI<io.vertigo.samples.crystal.domain.Sexe> entityUri;
+	private final Serializable entityId;
 
 	private SexeEnum(final Serializable id) {
-		entityUri = URI.of(io.vertigo.samples.crystal.domain.Sexe.class, id);
+		entityId = id;
 	}
 
 	@Override
 	public URI<io.vertigo.samples.crystal.domain.Sexe> getEntityUri() {
-		return entityUri;
+		return URI.of(io.vertigo.samples.crystal.domain.Sexe.class, entityId);
 	}
 
 }
