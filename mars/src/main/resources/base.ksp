@@ -5,7 +5,7 @@ create DtDefinition DT_BASE {
 	field CODE {domain: DO_CODE label: "Base Code" required:"false"}
 	field NAME {domain: DO_LABEL label: "Name" required:"false"}
 	field HEALTH_LEVEL {domain: DO_HEALTH label: "Health Level" required: "false"}	
-	field CREATION_DATE {domain: DO_DATE label: "Base Creation Date" required:"false"}
+	field CREATION_DATE {domain: DO_LOCALDATE label: "Base Creation Date" required:"false"}
 	field DESCRIPTION {domain: DO_DESCRIPTION label: "Description" required:"false"}
 	field GEO_LOCATION {domain: DO_LABEL label:"Geographic Location" required:"false"}
 	field ASSETS_VALUE {domain: DO_CURRENCY label:"Current base assets value" required:"false"}
@@ -14,6 +14,7 @@ create DtDefinition DT_BASE {
 
 
 create DtDefinition DT_BASE_TYPE {
+	stereotype : "StaticMasterData"
 	id BASE_TYPE_ID {domain: DO_CODE label:"Id"}
 	field LABEL {domain: DO_LABEL label:"Base Type Label" required:"false"}	
 }
@@ -35,10 +36,11 @@ create DtDefinition DT_JOB {
 	field CODE {domain: DO_LABEL label: "CODE" required:"false"}
 	field NAME {domain: DO_LABEL label: "Job Name" required:"false"}
 	field DESCRIPTION {domain: DO_DESCRIPTION label: "Job Description" required:"false"}
-	field DUE_DATE {domain: DO_DATE label: "Due Date" required:"false"}	
+	field DUE_DATE {domain: DO_LOCALDATE label: "Due Date" required:"false"}	
 }
 
 create DtDefinition DT_JOB_STATUS {
+	stereotype: "StaticMasterData"
 	id JOB_STATUS_ID {domain: DO_CODE label:"Id"}
 	field LABEL {domain: DO_LABEL label:"Status Label" required:"false"}
 }
@@ -48,7 +50,7 @@ create DtDefinition DT_EQUIPMENT {
 	field NAME {domain: DO_LABEL label: "Name" required:"false"}
 	field CODE {domain: DO_CODE label: "Base Code" required:"false"}
 	field HEALTH_LEVEL {domain: DO_HEALTH label: "Health Level" required: "false"}	
-	field PURCHASE_DATE {domain: DO_DATE label: "Date of purchase" required:"false"}
+	field PURCHASE_DATE {domain: DO_LOCALDATE label: "Date of purchase" required:"false"}
 	field DESCRIPTION {domain: DO_DESCRIPTION label: "Description" required:"false"}
 	field TAGS {domain: DO_TAGS label: "Tags" required:"false"}
 	field GEO_LOCATION {domain: DO_LABEL label:"Geographic Location" required:"false"}
@@ -69,7 +71,7 @@ create DtDefinition DT_MAINTENANCE_OP {
 	field TICKET_CODE {domain: DO_LABEL label: "Ticket Number" required:"false"}
 	field NAME {domain: DO_LABEL label: "Mainenance Operation" required:"false"}
 	field DESCRIPTION {domain: DO_DESCRIPTION label: "Maintenance Operation Descrption" required:"false"}
-	field DUE_DATE {domain: DO_DATE label: "Due Date" required:"false"}	
+	field DUE_DATE {domain: DO_LOCALDATE label: "Due Date" required:"false"}	
 }
 
 create DtDefinition DT_MAINTENANCE_OP_STATUS {

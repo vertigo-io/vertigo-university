@@ -13,8 +13,11 @@ import io.vertigo.core.param.Param;
 import io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin;
 import io.vertigo.dynamo.impl.DynamoFeatures;
 import io.vertigo.dynamo.plugins.environment.DynamoDefinitionProvider;
+import io.vertigo.studio.impl.masterdata.MasterDataManagerImpl;
 import io.vertigo.studio.impl.mda.MdaManagerImpl;
+import io.vertigo.studio.masterdata.MasterDataManager;
 import io.vertigo.studio.mda.MdaManager;
+import io.vertigo.studio.plugins.masterdata.json.JsonMasterDataValueProvider;
 import io.vertigo.studio.plugins.mda.domain.java.DomainGeneratorPlugin;
 import io.vertigo.studio.plugins.mda.domain.sql.SqlGeneratorPlugin;
 import io.vertigo.studio.plugins.mda.file.FileInfoGeneratorPlugin;
@@ -42,6 +45,8 @@ public class Studio {
 						.build())
 				// ---StudioFeature
 				.addModule( ModuleConfig.builder("studio")
+					.addComponent(MasterDataManager.class, MasterDataManagerImpl.class)
+						.addPlugin(JsonMasterDataValueProvider.class, Param.of("fileName", "masterDataValues.json"))
 					.addComponent(MdaManager.class, MdaManagerImpl.class,
 							Param.of("targetGenDir", "src/main/javagen/"),
 							Param.of("encoding", "UTF-8"),
@@ -61,7 +66,11 @@ public class Studio {
 					.addPlugin(SqlGeneratorPlugin.class,
 							Param.of("targetSubDir", "sqlgen"),
 							Param.of("baseCible", "H2"),
-							Param.of("generateDrop", "false"))
+							Param.of("generateDrop", "false"),
+							Param.of("generateMasterData", "true"))
+					
+					
+					
 					.build())
 				.build();
 		// @formatter:on

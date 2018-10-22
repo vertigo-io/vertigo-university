@@ -1,0 +1,32 @@
+{"io.mars.base.domain.BaseType" : 
+    {
+        "hydro" : {
+            "baseTypeId" : "HYDRO",
+            "label" : "Hydroponic"
+        },
+        "mine" : {
+            "baseTypeId" : "MINE",
+            "label" : "Mining Complex"
+        }       
+
+    },
+	"io.mars.base.domain.JobStatus" : 
+    {
+        "done" : {
+            "jobStatusId" : "DONE",
+            "label" : "Done"
+        },
+        "inProgress" : {
+            "jobStatusId" : "INPROGRESS",
+            "label" : "In Progress"
+        },
+        "failed" : {
+            "jobStatusId" : "FAILED",
+            "label" : "Failed"
+        },
+        "pending" : {
+            "jobStatusId" : "PENDING",
+            "label" : "Pending"
+        }
+    }    
+}

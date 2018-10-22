@@ -18,7 +18,7 @@ public final class Job implements Entity {
 	private String code;
 	private String name;
 	private String description;
-	private java.util.Date dueDate;
+	private java.time.LocalDate dueDate;
 
 	/** {@inheritDoc} */
 	@Override
@@ -105,19 +105,19 @@ public final class Job implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Due Date'.
-	 * @return Date dueDate
+	 * @return LocalDate dueDate
 	 */
-	@Field(domain = "DO_DATE", label = "Due Date")
-	public java.util.Date getDueDate() {
+	@Field(domain = "DO_LOCALDATE", label = "Due Date")
+	public java.time.LocalDate getDueDate() {
 		return dueDate;
 	}
 
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Due Date'.
-	 * @param dueDate Date
+	 * @param dueDate LocalDate
 	 */
-	public void setDueDate(final java.util.Date dueDate) {
+	public void setDueDate(final java.time.LocalDate dueDate) {
 		this.dueDate = dueDate;
 	}
 	

@@ -19,7 +19,7 @@ public final class Equipment implements Entity {
 	private String name;
 	private String code;
 	private Integer healthLevel;
-	private java.util.Date purchaseDate;
+	private java.time.LocalDate purchaseDate;
 	private String description;
 	private String tags;
 	private String geoLocation;
@@ -171,19 +171,19 @@ public final class Equipment implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Date of purchase'.
-	 * @return Date purchaseDate
+	 * @return LocalDate purchaseDate
 	 */
-	@Field(domain = "DO_DATE", label = "Date of purchase")
-	public java.util.Date getPurchaseDate() {
+	@Field(domain = "DO_LOCALDATE", label = "Date of purchase")
+	public java.time.LocalDate getPurchaseDate() {
 		return purchaseDate;
 	}
 
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Date of purchase'.
-	 * @param purchaseDate Date
+	 * @param purchaseDate LocalDate
 	 */
-	public void setPurchaseDate(final java.util.Date purchaseDate) {
+	public void setPurchaseDate(final java.time.LocalDate purchaseDate) {
 		this.purchaseDate = purchaseDate;
 	}
 	

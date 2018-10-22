@@ -25,8 +25,8 @@ public class BaseController extends AbstractVSpringMvcController {
 	private BaseServices baseServices;
 
 	@GetMapping("/")
-	public void initContext(final ViewContext viewContext, @RequestParam("baseId") final Long baseId) {
-		final Base base = baseServices.get(baseId);
+	public void initContext(final ViewContext viewContext, @RequestParam("basId") final Long basId) {
+		final Base base = baseServices.get(basId);
 		viewContext.publishDto(baseKey, base);
 	}
 
@@ -39,7 +39,7 @@ public class BaseController extends AbstractVSpringMvcController {
 	public String doSave(
 			@ViewAttribute("base") final Base base, final RedirectAttributes redirectAttributes) {
 		baseServices.save(base);
-		redirectAttributes.addAttribute("baseId", base.getBasId());
+		redirectAttributes.addAttribute("basId", base.getBasId());
 		return "redirect:/base/";
 	}
 
