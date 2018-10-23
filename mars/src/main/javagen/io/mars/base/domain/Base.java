@@ -58,21 +58,6 @@ public final class Base implements Entity {
 	private final VAccessor<io.mars.base.domain.Geosector> geosectorIdAccessor = new VAccessor<>(io.mars.base.domain.Geosector.class, "Geosector");
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_BASE_EQUIPMENT",
-			fkFieldName = "BASE_ID",
-			primaryDtDefinitionName = "DT_BASE",
-			primaryIsNavigable = true,
-			primaryRole = "Base",
-			primaryLabel = "Base",
-			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_EQUIPMENT",
-			foreignIsNavigable = true,
-			foreignRole = "BaseEquipments",
-			foreignLabel = "Base Equipments",
-			foreignMultiplicity = "0..*")
-	private final ListVAccessor<io.mars.base.domain.Equipment> baseEquipmentsAccessor = new ListVAccessor<>(this, "A_BASE_EQUIPMENT", "BaseEquipments");
-
-	@io.vertigo.dynamo.domain.stereotype.Association(
 			name = "A_BASE_PICTURE",
 			fkFieldName = "BASE_ID",
 			primaryDtDefinitionName = "DT_BASE",
@@ -326,36 +311,6 @@ public final class Base implements Entity {
 	@Deprecated
 	public io.vertigo.dynamo.domain.model.URI<io.mars.base.domain.BaseType> getBaseTypeURI() {
 		return baseTypeIdAccessor.getURI();
-	}
-
-	/**
-	 * Association : Base Equipments.
-	 * @return l'accesseur vers la propriété 'Base Equipments'
-	 */
-	public ListVAccessor<io.mars.base.domain.Equipment> baseEquipments() {
-		return baseEquipmentsAccessor;
-	}
-	
-	/**
-	 * Association : Base Equipments.
-	 * @return DtList de io.mars.base.domain.Equipment
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.DtList<io.mars.base.domain.Equipment> getBaseEquipmentsList() {
-		// we keep the lazyness
-		if (!baseEquipmentsAccessor.isLoaded()) {
-			baseEquipmentsAccessor.load();
-		}
-		return baseEquipmentsAccessor.get();
-	}
-
-	/**
-	 * Association URI: Base Equipments.
-	 * @return URI de l'association
-	 */
-	@Deprecated	
-	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation getBaseEquipmentsDtListURI() {
-		return (io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation) baseEquipmentsAccessor.getDtListURI();
 	}
 
  	/**

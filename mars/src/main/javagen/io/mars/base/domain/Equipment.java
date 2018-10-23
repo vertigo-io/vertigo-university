@@ -35,7 +35,7 @@ public final class Equipment implements Entity {
 			primaryLabel = "Base",
 			primaryMultiplicity = "0..1",
 			foreignDtDefinitionName = "DT_EQUIPMENT",
-			foreignIsNavigable = true,
+			foreignIsNavigable = false,
 			foreignRole = "BaseEquipments",
 			foreignLabel = "Base Equipments",
 			foreignMultiplicity = "0..*")

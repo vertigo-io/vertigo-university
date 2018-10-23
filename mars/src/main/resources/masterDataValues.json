@@ -28,5 +28,39 @@
             "jobStatusId" : "PENDING",
             "label" : "Pending"
         }
+    },
+    "io.mars.base.domain.WorkOrderStatus" : 
+    {
+        "done" : {
+            "workOrderStatusId" : "DONE",
+            "label" : "Done"
+        },
+        "inProgress" : {
+            "workOrderStatusId" : "INPROGRESS",
+            "label" : "In Progress"
+        },
+        "failed" : {
+            "workOrderStatusId" : "FAILED",
+            "label" : "Failed"
+        },
+        "pending" : {
+            "workOrderStatusId" : "PENDING",
+            "label" : "Pending"
+        }
+    },
+    "io.mars.base.domain.TicketStatus" : 
+    {
+        "open" : {
+            "ticketStatusId" : "OPEN",
+            "label" : "Open"
+        },
+        "assigned" : {
+            "ticketStatusId" : "ASSIGNED",
+            "label" : "Assigned"
+        },
+        "closed" : {
+            "ticketStatusId" : "CLOSED",
+            "label" : "Closed"
+        }
     }    
 }

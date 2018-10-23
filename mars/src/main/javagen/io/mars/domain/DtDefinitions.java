@@ -35,16 +35,20 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		Job(io.mars.base.domain.Job.class),
 		/** Objet de données JobStatus. */
 		JobStatus(io.mars.base.domain.JobStatus.class),
-		/** Objet de données MaintenanceOp. */
-		MaintenanceOp(io.mars.base.domain.MaintenanceOp.class),
-		/** Objet de données MaintenanceOpStatus. */
-		MaintenanceOpStatus(io.mars.base.domain.MaintenanceOpStatus.class),
 		/** Objet de données Mission. */
 		Mission(io.mars.humanresources.domain.Mission.class),
 		/** Objet de données Person. */
 		Person(io.mars.humanresources.domain.Person.class),
 		/** Objet de données Picture. */
-		Picture(io.mars.base.domain.Picture.class)		;
+		Picture(io.mars.base.domain.Picture.class),
+		/** Objet de données Ticket. */
+		Ticket(io.mars.maintenance.domain.Ticket.class),
+		/** Objet de données TicketStatus. */
+		TicketStatus(io.mars.maintenance.domain.TicketStatus.class),
+		/** Objet de données WorkOrder. */
+		WorkOrder(io.mars.maintenance.domain.WorkOrder.class),
+		/** Objet de données WorkOrderStatus. */
+		WorkOrderStatus(io.mars.maintenance.domain.WorkOrderStatus.class)		;
 
 		private final Class<?> clazz;
 
@@ -146,7 +150,9 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	 */
 	public enum EquipmentFeatureFields implements DtFieldName<io.mars.base.domain.EquipmentFeature> {
 		/** Propriété 'Id'. */
-		EQUIPMENT_FEATURE_ID	}
+		EQUIPMENT_FEATURE_ID,
+		/** Propriété 'Name'. */
+		NAME	}
 
 	/**
 	 * Enumération des champs de EquipmentType.
@@ -193,30 +199,6 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		LABEL	}
 
 	/**
-	 * Enumération des champs de MaintenanceOp.
-	 */
-	public enum MaintenanceOpFields implements DtFieldName<io.mars.base.domain.MaintenanceOp> {
-		/** Propriété 'Id'. */
-		MO_ID,
-		/** Propriété 'Ticket Number'. */
-		TICKET_CODE,
-		/** Propriété 'Mainenance Operation'. */
-		NAME,
-		/** Propriété 'Maintenance Operation Descrption'. */
-		DESCRIPTION,
-		/** Propriété 'Due Date'. */
-		DUE_DATE	}
-
-	/**
-	 * Enumération des champs de MaintenanceOpStatus.
-	 */
-	public enum MaintenanceOpStatusFields implements DtFieldName<io.mars.base.domain.MaintenanceOpStatus> {
-		/** Propriété 'Id'. */
-		MO_STATUS_ID,
-		/** Propriété 'Status Label'. */
-		LABEL	}
-
-	/**
 	 * Enumération des champs de Mission.
 	 */
 	public enum MissionFields implements DtFieldName<io.mars.humanresources.domain.Mission> {
@@ -252,6 +234,62 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		PICTUREFILE_ID,
 		/** Propriété 'Base'. */
 		BASE_ID	}
+
+	/**
+	 * Enumération des champs de Ticket.
+	 */
+	public enum TicketFields implements DtFieldName<io.mars.maintenance.domain.Ticket> {
+		/** Propriété 'Id'. */
+		TICKET_ID,
+		/** Propriété 'Ticket Number'. */
+		CODE,
+		/** Propriété 'Ticket title'. */
+		TITLE,
+		/** Propriété 'Ticket Descrption'. */
+		DESCRIPTION,
+		/** Propriété 'Ticket Creation Date'. */
+		DATE_CREATED,
+		/** Propriété 'Ticket Status'. */
+		WORK_ORDER_STATUS_ID,
+		/** Propriété 'Equipment'. */
+		EQUIPMENT_ID	}
+
+	/**
+	 * Enumération des champs de TicketStatus.
+	 */
+	public enum TicketStatusFields implements DtFieldName<io.mars.maintenance.domain.TicketStatus> {
+		/** Propriété 'Id'. */
+		TICKET_STATUS_ID,
+		/** Propriété 'Status Label'. */
+		LABEL	}
+
+	/**
+	 * Enumération des champs de WorkOrder.
+	 */
+	public enum WorkOrderFields implements DtFieldName<io.mars.maintenance.domain.WorkOrder> {
+		/** Propriété 'Id'. */
+		MO_ID,
+		/** Propriété 'Ticket Number'. */
+		TICKET_CODE,
+		/** Propriété 'Mainenance Operation'. */
+		NAME,
+		/** Propriété 'Maintenance Operation Descrption'. */
+		DESCRIPTION,
+		/** Propriété 'Due Date'. */
+		DUE_DATE,
+		/** Propriété 'Ticket'. */
+		TICKET_ID,
+		/** Propriété 'Work Order Status'. */
+		WORK_ORDER_STATUS_ID	}
+
+	/**
+	 * Enumération des champs de WorkOrderStatus.
+	 */
+	public enum WorkOrderStatusFields implements DtFieldName<io.mars.maintenance.domain.WorkOrderStatus> {
+		/** Propriété 'Id'. */
+		WORK_ORDER_STATUS_ID,
+		/** Propriété 'Status Label'. */
+		LABEL	}
 
 	/** {@inheritDoc} */
 	@Override

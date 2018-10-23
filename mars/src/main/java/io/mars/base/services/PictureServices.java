@@ -12,4 +12,6 @@ public interface PictureServices extends Component {
 	void save(Picture picture);
 
 	Picture get(Long pictureId);
+	
+	//DtList<Picture> getPicturesFromBase(Long baseId);
 }
