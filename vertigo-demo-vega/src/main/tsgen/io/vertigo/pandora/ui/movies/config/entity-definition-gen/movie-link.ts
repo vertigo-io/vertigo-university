@@ -5,7 +5,7 @@
 
 /* tslint:disable */
 import { EntityField, StoreNode } from "focus4/entity";
-import * as domains from "../../../common/domain"
+import * as domains from "../../../../00-core/domain"
 
 export interface MovieLink {
 	title?: string;
@@ -16,11 +16,11 @@ export interface MovieLink {
 }
 
 export interface MovieLinkNode extends StoreNode<MovieLink> {
-	title: EntityField<string>;
-	poster: EntityField<string>;
-	movieType: EntityField<string>;
-	productionYear: EntityField<number>;
-	movId: EntityField<number>;
+	title: EntityField<string, typeof domains.DO_LABEL>;
+	poster: EntityField<string, typeof domains.DO_HREF>;
+	movieType: EntityField<string, typeof domains.DO_LABEL_SHORT>;
+	productionYear: EntityField<number, typeof domains.DO_YEAR>;
+	movId: EntityField<number, typeof domains.DO_IDENTITY>;
 }
 
 export const MovieLinkEntity = {

@@ -3,7 +3,6 @@ package io.vertigo.samples.vega.domain;
 import io.vertigo.dynamo.domain.model.KeyConcept;
 import io.vertigo.dynamo.domain.model.URI;
 import io.vertigo.dynamo.domain.stereotype.Field;
-import io.vertigo.dynamo.domain.util.DtObjectUtil;
 
 public final class Movie implements KeyConcept {
 	private static final long serialVersionUID = -5975848806293357234L;

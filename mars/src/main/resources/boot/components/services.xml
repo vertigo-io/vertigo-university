@@ -6,18 +6,18 @@
 	</module>
 
 	<module name="dao">
-		<component class="io.vertigo.mars.dao.movies.MovieDAO" />
+		<component class="io.mars.base.dao.BaseDAO" />
+		<component class="io.mars.base.dao.BaseTypeDAO" />
 	</module>
 
 	<module name="services">
-		<component api="MovieServices" class="io.vertigo.mars.services.movies.MovieServicesImpl"/>
-		<component api="UserServices" class="io.vertigo.mars.services.users.UserServicesImpl"/>
+		<component api="BaseServices" class="io.mars.base.services.BaseServicesImpl"/>
 	</module>
 
 	<init>
-		<initializer class="io.vertigo.mars.boot.MasterDataInitializer"/>
-		<initializer class="io.vertigo.mars.boot.I18nResourcesInitializer"/>
-		<initializer class="io.vertigo.mars.boot.DataBaseInitializer"/>
+		<initializer class="io.mars.boot.MasterDataInitializer"/>
+		<initializer class="io.mars.boot.I18nResourcesInitializer"/>
+		<initializer class="io.mars.boot.DataBaseInitializer"/>
 	</init>
 
 </config>

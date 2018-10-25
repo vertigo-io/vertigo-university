@@ -35,12 +35,6 @@ create sequence SEQ_JOB
 create sequence SEQ_JOB_STATUS
 	start with 1000 cache 20; 
 
-create sequence SEQ_MAINTENANCE_OP
-	start with 1000 cache 20; 
-
-create sequence SEQ_MAINTENANCE_OP_STATUS
-	start with 1000 cache 20; 
-
 create sequence SEQ_MISSION
 	start with 1000 cache 20; 
 
@@ -48,6 +42,18 @@ create sequence SEQ_PERSON
 	start with 1000 cache 20; 
 
 create sequence SEQ_PICTURE
+	start with 1000 cache 20; 
+
+create sequence SEQ_TICKET
+	start with 1000 cache 20; 
+
+create sequence SEQ_TICKET_STATUS
+	start with 1000 cache 20; 
+
+create sequence SEQ_WORK_ORDER
+	start with 1000 cache 20; 
+
+create sequence SEQ_WORK_ORDER_STATUS
 	start with 1000 cache 20; 
 
 
@@ -209,11 +215,15 @@ comment on column EQUIPMENT_CATEGORY.ACTIVE is
 create table EQUIPMENT_FEATURE
 (
     EQUIPMENT_FEATURE_ID	 NUMERIC     	not null,
+    NAME        	 VARCHAR(100)	,
     constraint PK_EQUIPMENT_FEATURE primary key (EQUIPMENT_FEATURE_ID)
 );
 
 comment on column EQUIPMENT_FEATURE.EQUIPMENT_FEATURE_ID is
 'Id';
+
+comment on column EQUIPMENT_FEATURE.NAME is
+'Name';
 
 -- ============================================================
 --   Table : EQUIPMENT_TYPE                                        
@@ -296,50 +306,6 @@ comment on column JOB_STATUS.LABEL is
 'Status Label';
 
 -- ============================================================
---   Table : MAINTENANCE_OP                                        
--- ============================================================
-create table MAINTENANCE_OP
-(
-    MO_ID       	 NUMERIC     	not null,
-    TICKET_CODE 	 VARCHAR(100)	,
-    NAME        	 VARCHAR(100)	,
-    DESCRIPTION 	 VARCHAR(350)	,
-    DUE_DATE    	 DATE        	,
-    constraint PK_MAINTENANCE_OP primary key (MO_ID)
-);
-
-comment on column MAINTENANCE_OP.MO_ID is
-'Id';
-
-comment on column MAINTENANCE_OP.TICKET_CODE is
-'Ticket Number';
-
-comment on column MAINTENANCE_OP.NAME is
-'Mainenance Operation';
-
-comment on column MAINTENANCE_OP.DESCRIPTION is
-'Maintenance Operation Descrption';
-
-comment on column MAINTENANCE_OP.DUE_DATE is
-'Due Date';
-
--- ============================================================
---   Table : MAINTENANCE_OP_STATUS                                        
--- ============================================================
-create table MAINTENANCE_OP_STATUS
-(
-    MO_STATUS_ID	 VARCHAR(100)	not null,
-    LABEL       	 VARCHAR(100)	,
-    constraint PK_MAINTENANCE_OP_STATUS primary key (MO_STATUS_ID)
-);
-
-comment on column MAINTENANCE_OP_STATUS.MO_STATUS_ID is
-'Id';
-
-comment on column MAINTENANCE_OP_STATUS.LABEL is
-'Status Label';
-
--- ============================================================
 --   Table : MISSION                                        
 -- ============================================================
 create table MISSION
@@ -407,6 +373,110 @@ comment on column PICTURE.PICTUREFILE_ID is
 comment on column PICTURE.BASE_ID is
 'Base';
 
+-- ============================================================
+--   Table : TICKET                                        
+-- ============================================================
+create table TICKET
+(
+    TICKET_ID   	 NUMERIC     	not null,
+    CODE        	 VARCHAR(100)	,
+    TITLE       	 VARCHAR(100)	,
+    DESCRIPTION 	 VARCHAR(350)	,
+    DATE_CREATED	 DATE        	,
+    WORK_ORDER_STATUS_ID	 VARCHAR(100)	,
+    EQUIPMENT_ID	 NUMERIC     	,
+    constraint PK_TICKET primary key (TICKET_ID)
+);
+
+comment on column TICKET.TICKET_ID is
+'Id';
+
+comment on column TICKET.CODE is
+'Ticket Number';
+
+comment on column TICKET.TITLE is
+'Ticket title';
+
+comment on column TICKET.DESCRIPTION is
+'Ticket Descrption';
+
+comment on column TICKET.DATE_CREATED is
+'Ticket Creation Date';
+
+comment on column TICKET.WORK_ORDER_STATUS_ID is
+'Ticket Status';
+
+comment on column TICKET.EQUIPMENT_ID is
+'Equipment';
+
+-- ============================================================
+--   Table : TICKET_STATUS                                        
+-- ============================================================
+create table TICKET_STATUS
+(
+    TICKET_STATUS_ID	 VARCHAR(100)	not null,
+    LABEL       	 VARCHAR(100)	,
+    constraint PK_TICKET_STATUS primary key (TICKET_STATUS_ID)
+);
+
+comment on column TICKET_STATUS.TICKET_STATUS_ID is
+'Id';
+
+comment on column TICKET_STATUS.LABEL is
+'Status Label';
+
+-- ============================================================
+--   Table : WORK_ORDER                                        
+-- ============================================================
+create table WORK_ORDER
+(
+    MO_ID       	 NUMERIC     	not null,
+    TICKET_CODE 	 VARCHAR(100)	,
+    NAME        	 VARCHAR(100)	,
+    DESCRIPTION 	 VARCHAR(350)	,
+    DUE_DATE    	 DATE        	,
+    TICKET_ID   	 NUMERIC     	,
+    WORK_ORDER_STATUS_ID	 VARCHAR(100)	,
+    constraint PK_WORK_ORDER primary key (MO_ID)
+);
+
+comment on column WORK_ORDER.MO_ID is
+'Id';
+
+comment on column WORK_ORDER.TICKET_CODE is
+'Ticket Number';
+
+comment on column WORK_ORDER.NAME is
+'Mainenance Operation';
+
+comment on column WORK_ORDER.DESCRIPTION is
+'Maintenance Operation Descrption';
+
+comment on column WORK_ORDER.DUE_DATE is
+'Due Date';
+
+comment on column WORK_ORDER.TICKET_ID is
+'Ticket';
+
+comment on column WORK_ORDER.WORK_ORDER_STATUS_ID is
+'Work Order Status';
+
+-- ============================================================
+--   Table : WORK_ORDER_STATUS                                        
+-- ============================================================
+create table WORK_ORDER_STATUS
+(
+    WORK_ORDER_STATUS_ID	 VARCHAR(100)	not null,
+    LABEL       	 VARCHAR(100)	,
+    constraint PK_WORK_ORDER_STATUS primary key (WORK_ORDER_STATUS_ID)
+);
+
+comment on column WORK_ORDER_STATUS.WORK_ORDER_STATUS_ID is
+'Id';
+
+comment on column WORK_ORDER_STATUS.LABEL is
+'Status Label';
+
 
 
 alter table BASE
@@ -445,6 +515,12 @@ alter table EQUIPMENT
 
 create index EQUIPMENT_GEOSECTOR_GEOSECTOR_FK on EQUIPMENT (GEOSECTOR_ID asc);
 
+alter table TICKET
+	add constraint FK_EQUIPMENT_TICKET_EQUIPMENT foreign key (EQUIPMENT_ID)
+	references EQUIPMENT (EQUIPMENT_ID);
+
+create index EQUIPMENT_TICKET_EQUIPMENT_FK on TICKET (EQUIPMENT_ID asc);
+
 alter table EQUIPMENT
 	add constraint FK_EQUIPMENT_TYPE_EQUIPMENT_CATEGORY_EQUIPMENT_CATEGORY foreign key (EQUIPMENT_CATEGORY_ID)
 	references EQUIPMENT_CATEGORY (EQUIPMENT_CATEGORY_ID);
@@ -462,5 +538,23 @@ alter table PERSON
 	references MISSION (MISSION_ID);
 
 create index PERSON_MISSION_MISSION_FK on PERSON (MISSION_ID asc);
+
+alter table TICKET
+	add constraint FK_TICKET_TICKET_STATUS_TICKET_STATUS foreign key (WORK_ORDER_STATUS_ID)
+	references TICKET_STATUS (TICKET_STATUS_ID);
+
+create index TICKET_TICKET_STATUS_TICKET_STATUS_FK on TICKET (WORK_ORDER_STATUS_ID asc);
+
+alter table WORK_ORDER
+	add constraint FK_TICKET_WORK_ORDER_TICKET foreign key (TICKET_ID)
+	references TICKET (TICKET_ID);
+
+create index TICKET_WORK_ORDER_TICKET_FK on WORK_ORDER (TICKET_ID asc);
+
+alter table WORK_ORDER
+	add constraint FK_WORK_ORDER_WORK_ORDER_STATUS_WORK_ORDER_STATUS foreign key (WORK_ORDER_STATUS_ID)
+	references WORK_ORDER_STATUS (WORK_ORDER_STATUS_ID);
+
+create index WORK_ORDER_WORK_ORDER_STATUS_WORK_ORDER_STATUS_FK on WORK_ORDER (WORK_ORDER_STATUS_ID asc);
 
 

@@ -15,6 +15,7 @@ public final class EquipmentFeature implements Entity {
 	private static final long serialVersionUID = 1L;
 
 	private Long equipmentFeatureId;
+	private String name;
 
 	/** {@inheritDoc} */
 	@Override
@@ -39,6 +40,25 @@ public final class EquipmentFeature implements Entity {
 	 */
 	public void setEquipmentFeatureId(final Long equipmentFeatureId) {
 		this.equipmentFeatureId = equipmentFeatureId;
+	}
+	
+	/**
+	 * Champ : DATA.
+	 * Récupère la valeur de la propriété 'Name'.
+	 * @return String name
+	 */
+	@Field(domain = "DO_LABEL", label = "Name")
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * Champ : DATA.
+	 * Définit la valeur de la propriété 'Name'.
+	 * @param name String
+	 */
+	public void setName(final String name) {
+		this.name = name;
 	}
 	
 	/** {@inheritDoc} */

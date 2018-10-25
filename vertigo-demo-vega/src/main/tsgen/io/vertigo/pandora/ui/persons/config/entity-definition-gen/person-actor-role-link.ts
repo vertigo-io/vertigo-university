@@ -5,7 +5,7 @@
 
 /* tslint:disable */
 import { EntityField, StoreNode } from "focus4/entity";
-import * as domains from "../../../common/domain"
+import * as domains from "../../../../00-core/domain"
 
 export interface PersonActorRoleLink {
 	fullName?: string;
@@ -15,10 +15,10 @@ export interface PersonActorRoleLink {
 }
 
 export interface PersonActorRoleLinkNode extends StoreNode<PersonActorRoleLink> {
-	fullName: EntityField<string>;
-	photoHref: EntityField<string>;
-	role: EntityField<string>;
-	perId: EntityField<number>;
+	fullName: EntityField<string, typeof domains.DO_LABEL>;
+	photoHref: EntityField<string, typeof domains.DO_HREF>;
+	role: EntityField<string, typeof domains.DO_LABEL>;
+	perId: EntityField<number, typeof domains.DO_IDENTITY>;
 }
 
 export const PersonActorRoleLinkEntity = {

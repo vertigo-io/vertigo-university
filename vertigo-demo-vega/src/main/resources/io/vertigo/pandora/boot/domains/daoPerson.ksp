@@ -14,8 +14,8 @@ create Task TK_LOAD_FULL_PERSON_INDEX {
 					) as MOVIES
 				from PERSON per
 				where PER_ID in (#DTC.ROWNUM.VALUE#);"
-	attribute DTC {domain : DO_DT_DUMMY_DTC, notNull:"true", inOut :"in",} 
-	attribute DTC_INDEX {domain : DO_DT_PERSON_INDEX_DTC, notNull:"true", inOut :"out",} 
+	attribute DTC {domain : DO_DT_DUMMY_DTC, required:"true", inOut :"in",} 
+	attribute DTC_INDEX {domain : DO_DT_PERSON_INDEX_DTC, required:"true", inOut :"out",} 
 }
 
 create Task TK_LOAD_PERSON_INDEX {
@@ -24,8 +24,8 @@ create Task TK_LOAD_PERSON_INDEX {
 					BIRTH_DATE, BIRTH_PLACE, PHOTO_HREF as PHOTO_URL
 				from PERSON per
 				where PER_ID in (#DTC.ROWNUM.VALUE#);"
-	attribute DTC {domain : DO_DT_DUMMY_DTC, notNull:"true", inOut :"in",} 
-	attribute DTC_INDEX {domain : DO_DT_PERSON_INDEX_DTC, notNull:"true", inOut :"out",} 
+	attribute DTC {domain : DO_DT_DUMMY_DTC, required:"true", inOut :"in",} 
+	attribute DTC_INDEX {domain : DO_DT_PERSON_INDEX_DTC, required:"true", inOut :"out",} 
 }
 
 create Task TK_LOAD_ACTOR_ROLE_LINK {
@@ -34,8 +34,8 @@ create Task TK_LOAD_ACTOR_ROLE_LINK {
 				from ACTOR_ROLE aro
 				join PERSON per on per.per_id = aro.per_id
 				where aro.MOV_ID = #MOV_ID#;"
-	attribute MOV_ID {domain : DO_IDENTITY, notNull:"true", inOut :"in",} 
-	attribute DTC {domain : DO_DT_PERSON_ACTOR_ROLE_LINK_DTC, notNull:"true", inOut :"out",} 
+	attribute MOV_ID {domain : DO_IDENTITY, required:"true", inOut :"in",} 
+	attribute DTC {domain : DO_DT_PERSON_ACTOR_ROLE_LINK_DTC, required:"true", inOut :"out",} 
 }
 
 
@@ -48,5 +48,5 @@ create Task TK_IMPORT_PERSONS {
 	className : "io.vertigo.dynamox.task.TaskEngineProcBatch",
 	request : "insert into PERSON (PER_ID, ACTIVITY, BIOGRAPHY, BIRTH_DATE, BIRTH_PLACE, FIRST_NAME, FULL_NAME, LAST_NAME, PHOTO_HREF, SEX, SHORT_BIOGRAPHY) 
 	values (#DTC.0.PER_ID#,  #DTC.0.ACTIVITY#,  #DTC.0.BIOGRAPHY#,  #DTC.0.BIRTH_DATE#,  #DTC.0.BIRTH_PLACE#,  #DTC.0.FIRST_NAME#,  #DTC.0.FULL_NAME#,  #DTC.0.LAST_NAME#,  #DTC.0.PHOTO_HREF#,  #DTC.0.SEX#,  #DTC.0.SHORT_BIOGRAPHY#);"
-	attribute DTC {domain : DO_DT_PERSON_DTC, notNull:"true", inOut :"in",} 	
+	attribute DTC {domain : DO_DT_PERSON_DTC, required:"true", inOut :"in",} 	
 }

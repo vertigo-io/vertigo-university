@@ -32,7 +32,7 @@ public class SampleStudioConfigBuilder {
 				//----Definitions
 				.addModule(ModuleConfig.builder("ressources")
 						.addDefinitionProvider(DefinitionProviderConfig.builder(DynamoDefinitionProvider.class)
-								.addDefinitionResource("kpr", "application.kpr")
+								.addDefinitionResource("kpr", "/mda/generation.kpr")
 								.build())
 						.build())
 				// ---StudioFeature

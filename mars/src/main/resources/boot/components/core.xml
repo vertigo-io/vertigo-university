@@ -51,19 +51,24 @@
 			</plugin>
 		</component>
 	</module>
+	
+	<!-- 
 	<module name="vertigo-persona">
 		<component api="VSecurityManager" class="io.vertigo.persona.impl.security.VSecurityManagerImpl">
 			<param name="userSessionClassName" value="io.vertigo.mars.user.MarsUserSession" />
 		</component>
 	</module>
+	 -->
+	 
 	<module name="mars-boot-resources">
 		<definitions>
 			<provider class="io.vertigo.dynamo.plugins.environment.DynamoDefinitionProvider" >
 				<resource type="kpr" path="boot/definitions/application.kpr" />
-				<resource type="classes" path="io.vertigo.mars.domain.DtDefinitions" />
+				<resource type="classes" path="io.mars.domain.DtDefinitions" />
 			</provider>
 		</definitions>
 	</module>
 
+	
 
 </config>

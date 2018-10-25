@@ -23,7 +23,7 @@ public final class Actor implements Entity {
 	public URI<Actor> getURI() {
 		return URI.of(this);
 	}
-
+	
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
@@ -42,7 +42,7 @@ public final class Actor implements Entity {
 	public void setActId(final Long actId) {
 		this.actId = actId;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Nom'.
@@ -61,7 +61,7 @@ public final class Actor implements Entity {
 	public void setName(final String name) {
 		this.name = name;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Sexe'.
@@ -80,7 +80,7 @@ public final class Actor implements Entity {
 	public void setSexe(final String sexe) {
 		this.sexe = sexe;
 	}
-
+	
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

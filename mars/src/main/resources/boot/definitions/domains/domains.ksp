@@ -99,8 +99,15 @@ create Domain DO_ID {
 	storeType : "NUMERIC"
 }
 
-create Domain DO_DATE {
-	dataType : Date
+
+create Domain DO_INSTANT {
+	dataType : Instant
+	formatter : FMT_DATE_HEURE
+	storeType : "TIMESTAMP"
+}
+
+create Domain DO_LOCALDATE {
+	dataType : LocalDate
 	formatter : FMT_DATE
 	storeType : "DATE"
 }

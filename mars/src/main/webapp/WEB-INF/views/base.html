@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="http://www.morphbit.com/thymeleaf/component"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{templates/mmcLayout}"
+>
+
+<head>
+	<title>Base Detail</title>
+</head>
+
+<body>
+	<section layout:fragment="content">
+			<vu:form>		
+				<vu:grid cols="3">
+					<vu:text-field object="base" field="basId"/>
+					<vu:text-field object="base" field="name" />
+					<vu:text-field object="base" field="healthLevel" />
+					<vu:grid-cell>
+						<vu:button-submit th:if="${!model.modeEdit}" label="Edit" action="@{/base/_edit}" color="primary"/>
+						<vu:button-submit th:if="${model.modeEdit}"  label="Save" action="@{/base/_save}" color="primary" />
+					</vu:grid-cell>
+				</vu:grid>
+			</vu:form>
+	</section>
+</body>
+</html>

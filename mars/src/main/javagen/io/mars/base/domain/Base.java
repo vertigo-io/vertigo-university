@@ -3,6 +3,7 @@ package io.mars.base.domain;
 import io.vertigo.dynamo.domain.model.Entity;
 import io.vertigo.dynamo.domain.model.URI;
 import io.vertigo.dynamo.domain.model.VAccessor;
+import io.vertigo.dynamo.domain.model.EnumVAccessor;
 import io.vertigo.dynamo.domain.model.ListVAccessor;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
@@ -20,7 +21,7 @@ public final class Base implements Entity {
 	private String code;
 	private String name;
 	private Integer healthLevel;
-	private java.util.Date creationDate;
+	private java.time.LocalDate creationDate;
 	private String description;
 	private String geoLocation;
 	private java.math.BigDecimal assetsValue;
@@ -39,7 +40,7 @@ public final class Base implements Entity {
 			foreignRole = "Base",
 			foreignLabel = "Base",
 			foreignMultiplicity = "0..*")
-	private final VAccessor<io.mars.base.domain.BaseType> baseTypeIdAccessor = new VAccessor<>(io.mars.base.domain.BaseType.class, "BaseType");
+	private final EnumVAccessor<io.mars.base.domain.BaseType, io.mars.base.domain.BaseTypeEnum> baseTypeIdAccessor = new EnumVAccessor<>(io.mars.base.domain.BaseType.class, "BaseType", io.mars.base.domain.BaseTypeEnum.class);
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
 			name = "A_BASE_GEOSECTOR",
@@ -55,21 +56,6 @@ public final class Base implements Entity {
 			foreignLabel = "Base",
 			foreignMultiplicity = "0..*")
 	private final VAccessor<io.mars.base.domain.Geosector> geosectorIdAccessor = new VAccessor<>(io.mars.base.domain.Geosector.class, "Geosector");
-
-	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_BASE_EQUIPMENT",
-			fkFieldName = "BASE_ID",
-			primaryDtDefinitionName = "DT_BASE",
-			primaryIsNavigable = true,
-			primaryRole = "Base",
-			primaryLabel = "Base",
-			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_EQUIPMENT",
-			foreignIsNavigable = true,
-			foreignRole = "BaseEquipments",
-			foreignLabel = "Base Equipments",
-			foreignMultiplicity = "0..*")
-	private final ListVAccessor<io.mars.base.domain.Equipment> baseEquipmentsAccessor = new ListVAccessor<>(this, "A_BASE_EQUIPMENT", "BaseEquipments");
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
 			name = "A_BASE_PICTURE",
@@ -171,19 +157,19 @@ public final class Base implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Base Creation Date'.
-	 * @return Date creationDate
+	 * @return LocalDate creationDate
 	 */
-	@Field(domain = "DO_DATE", label = "Base Creation Date")
-	public java.util.Date getCreationDate() {
+	@Field(domain = "DO_LOCALDATE", label = "Base Creation Date")
+	public java.time.LocalDate getCreationDate() {
 		return creationDate;
 	}
 
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Base Creation Date'.
-	 * @param creationDate Date
+	 * @param creationDate LocalDate
 	 */
-	public void setCreationDate(final java.util.Date creationDate) {
+	public void setCreationDate(final java.time.LocalDate creationDate) {
 		this.creationDate = creationDate;
 	}
 	
@@ -305,7 +291,7 @@ public final class Base implements Entity {
 	 * Association : Base Type.
 	 * @return l'accesseur vers la propriété 'Base Type'
 	 */
-	public VAccessor<io.mars.base.domain.BaseType> baseType() {
+	public EnumVAccessor<io.mars.base.domain.BaseType, io.mars.base.domain.BaseTypeEnum> baseType() {
 		return baseTypeIdAccessor;
 	}
 	
@@ -325,36 +311,6 @@ public final class Base implements Entity {
 	@Deprecated
 	public io.vertigo.dynamo.domain.model.URI<io.mars.base.domain.BaseType> getBaseTypeURI() {
 		return baseTypeIdAccessor.getURI();
-	}
-
-	/**
-	 * Association : Base Equipments.
-	 * @return l'accesseur vers la propriété 'Base Equipments'
-	 */
-	public ListVAccessor<io.mars.base.domain.Equipment> baseEquipments() {
-		return baseEquipmentsAccessor;
-	}
-	
-	/**
-	 * Association : Base Equipments.
-	 * @return DtList de io.mars.base.domain.Equipment
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.DtList<io.mars.base.domain.Equipment> getBaseEquipmentsList() {
-		// we keep the lazyness
-		if (!baseEquipmentsAccessor.isLoaded()) {
-			baseEquipmentsAccessor.load();
-		}
-		return baseEquipmentsAccessor.get();
-	}
-
-	/**
-	 * Association URI: Base Equipments.
-	 * @return URI de l'association
-	 */
-	@Deprecated	
-	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation getBaseEquipmentsDtListURI() {
-		return (io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation) baseEquipmentsAccessor.getDtListURI();
 	}
 
  	/**

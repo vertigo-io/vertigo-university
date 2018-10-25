@@ -6,7 +6,7 @@ create Task TK_INSERT_COUNTRIES_BATCH {
         request : "
         	INSERT INTO MY_COUNTRY (COU_ID, NAME) values (#COUNTRY_LIST.COU_ID#, #COUNTRY_LIST.NAME#) 
 			"
-	attribute COUNTRY_LIST	 	{domain : DO_DT_COUNTRY_DTC		notNull:"true" 	inOut :"in"}
+	attribute COUNTRY_LIST	 	{domain : DO_DT_COUNTRY_DTC		required:"true" 	inOut :"in"}
 }
 
 
@@ -15,7 +15,7 @@ create Task TK_LOAD_COUNTRIES {
         request : "
         	select * from COUNTRY
 			"
-	attribute COUNTRY_LIST	 	{domain : DO_DT_COUNTRY_DTC		notNull:"true" 	inOut :"out"}
+	attribute COUNTRY_LIST	 	{domain : DO_DT_COUNTRY_DTC		required:"true" 	inOut :"out"}
 }
 
 create Task TK_COUNT_ACTORS {
@@ -23,7 +23,7 @@ create Task TK_COUNT_ACTORS {
         request : "
         	select count(*) from ACTOR
 			"
-	attribute COUNT	 	{domain : DO_ID		notNull:"true" 	inOut :"out"}
+	attribute COUNT	 	{domain : DO_ID		required:"true" 	inOut :"out"}
 }
 
 create Task TK_INSERT_ACTORS_BATCH {
@@ -32,7 +32,7 @@ create Task TK_INSERT_ACTORS_BATCH {
         request : "
         	INSERT INTO MY_ACTOR (ACT_ID, NAME, SEXE) values (#ACTORS_LIST.ACT_ID#, #ACTORS_LIST.NAME#, #ACTORS_LIST.SEXE#) 
 			"
-	attribute ACTORS_LIST	 	{domain : DO_DT_ACTOR_DTC		notNull:"true" 	inOut :"in"}
+	attribute ACTORS_LIST	 	{domain : DO_DT_ACTOR_DTC		required:"true" 	inOut :"in"}
 }
 
 
@@ -44,9 +44,9 @@ create Task TK_LOAD_ACTORS_BY_CHUNK {
         	order by ACT_ID asc
 			limit 1000
 			"
-	attribute LIMIT	 	{domain : DO_ID		notNull:"true" 	inOut :"in"}
-	attribute OFFSET	 	{domain : DO_ID		notNull:"true" 	inOut :"in"}
-	attribute ACTORS_LIST	 	{domain : DO_DT_ACTOR_DTC		notNull:"true" 	inOut :"out"}
+	attribute LIMIT	 	{domain : DO_ID		required:"true" 	inOut :"in"}
+	attribute OFFSET	 	{domain : DO_ID		required:"true" 	inOut :"in"}
+	attribute ACTORS_LIST	 	{domain : DO_DT_ACTOR_DTC		required:"true" 	inOut :"out"}
 }
 
 
@@ -56,7 +56,7 @@ create Task TK_COUNT_MOVIES {
         	select count(*) from MOVIE
         	where NAME like 'S%%'
 			"
-	attribute COUNT	 	{domain : DO_ID		notNull:"true" 	inOut :"out"}
+	attribute COUNT	 	{domain : DO_ID		required:"true" 	inOut :"out"}
 }
 
 create Task TK_INSERT_MOVIES_BATCH {
@@ -65,7 +65,7 @@ create Task TK_INSERT_MOVIES_BATCH {
         request : "
         	INSERT INTO MY_MOVIE (MOV_ID, NAME, YEAR, IMDBID, COU_ID) values (#MOVIES_LIST.MOV_ID#, #MOVIES_LIST.NAME#, #MOVIES_LIST.YEAR#, #MOVIES_LIST.IMDBID#, #MOVIES_LIST.COU_ID#) 
 			"
-	attribute MOVIES_LIST	 	{domain : DO_DT_MOVIE_DTC		notNull:"true" 	inOut :"in"}
+	attribute MOVIES_LIST	 	{domain : DO_DT_MOVIE_DTC		required:"true" 	inOut :"in"}
 }
 
 
@@ -77,9 +77,9 @@ create Task TK_LOAD_MOVIES_BY_CHUNK {
         	order by MOV_ID asc
         	limit #LIMIT#
 			"
-	attribute LIMIT	 	{domain : DO_ID		notNull:"true" 	inOut :"in"}
-	attribute OFFSET	 	{domain : DO_ID		notNull:"true" 	inOut :"in"}
-	attribute MOVIES_LIST	 	{domain : DO_DT_MOVIE_DTC		notNull:"true" 	inOut :"out"}
+	attribute LIMIT	 	{domain : DO_ID		required:"true" 	inOut :"in"}
+	attribute OFFSET	 	{domain : DO_ID		required:"true" 	inOut :"in"}
+	attribute MOVIES_LIST	 	{domain : DO_DT_MOVIE_DTC		required:"true" 	inOut :"out"}
 }
 
 
@@ -90,7 +90,7 @@ create Task TK_COUNT_ROLES {
         	join movie mov on mov.MOV_ID = rol.MOV_ID
         	where mov.name like 'S%%'
 			"
-	attribute COUNT	 	{domain : DO_ID		notNull:"true" 	inOut :"out"}
+	attribute COUNT	 	{domain : DO_ID		required:"true" 	inOut :"out"}
 }
 
 create Task TK_INSERT_ROLES_BATCH {
@@ -99,7 +99,7 @@ create Task TK_INSERT_ROLES_BATCH {
         request : "
         	INSERT INTO MY_ROLE (ROL_ID, MOV_ID, ACT_ID, AS_CHARACTER) values (#ROLES_LIST.ROL_ID#, #ROLES_LIST.MOV_ID#, #ROLES_LIST.ACT_ID#, #ROLES_LIST.AS_CHARACTER#) 
 			"
-	attribute ROLES_LIST	 	{domain : DO_DT_ROLE_DTC		notNull:"true" 	inOut :"in"}
+	attribute ROLES_LIST	 	{domain : DO_DT_ROLE_DTC		required:"true" 	inOut :"in"}
 }
 
 
@@ -111,8 +111,8 @@ create Task TK_LOAD_ROLES_BY_CHUNK {
         	order by rol.ROL_ID asc
         	limit #LIMIT#
 			"
-	attribute LIMIT	 	{domain : DO_ID		notNull:"true" 	inOut :"in"}
-	attribute OFFSET	 	{domain : DO_ID		notNull:"true" 	inOut :"in"}
-	attribute MOVIES_LIST	 	{domain : DO_DT_ROLE_DTC		notNull:"true" 	inOut :"out"}
+	attribute LIMIT	 	{domain : DO_ID		required:"true" 	inOut :"in"}
+	attribute OFFSET	 	{domain : DO_ID		required:"true" 	inOut :"in"}
+	attribute MOVIES_LIST	 	{domain : DO_DT_ROLE_DTC		required:"true" 	inOut :"out"}
 }
 

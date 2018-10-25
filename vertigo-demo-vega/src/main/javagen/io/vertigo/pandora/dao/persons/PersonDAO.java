@@ -10,7 +10,6 @@ import io.vertigo.dynamo.search.metamodel.SearchIndexDefinition;
 import io.vertigo.dynamo.search.model.SearchQuery;
 import io.vertigo.dynamo.search.model.SearchQueryBuilder;
 import io.vertigo.dynamo.domain.model.DtListState;
-import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.dynamo.collections.ListFilter;
 import io.vertigo.dynamo.collections.metamodel.FacetedQueryDefinition;
 import io.vertigo.dynamo.collections.metamodel.ListFilterBuilder;
@@ -18,6 +17,9 @@ import io.vertigo.dynamo.collections.model.FacetedQueryResult;
 import io.vertigo.dynamo.collections.model.SelectedFacetValues;
 import io.vertigo.commons.transaction.VTransactionManager;
 import io.vertigo.pandora.domain.persons.PersonIndex;
+import io.vertigo.dynamo.task.metamodel.TaskDefinition;
+import io.vertigo.dynamo.task.model.Task;
+import io.vertigo.dynamo.task.model.TaskBuilder;
 import io.vertigo.dynamo.domain.model.URI;
 import io.vertigo.dynamo.impl.store.util.DAO;
 import io.vertigo.dynamo.store.StoreManager;
@@ -56,7 +58,7 @@ public final class PersonDAO extends DAO<Person, java.lang.Long> implements Stor
 	 * @param uri URI du keyConcept modifié
 	 * @return KeyConcept à modifier
 	 */
-	public Person readOneForUpdate(final URI<Person> uri) {
+	 public Person readOneForUpdate(final URI<Person> uri) {
 		return dataStore.readOneForUpdate(uri);
 	}
 
@@ -67,7 +69,7 @@ public final class PersonDAO extends DAO<Person, java.lang.Long> implements Stor
 	 * @param id Clé du keyConcept modifié
 	 * @return KeyConcept à modifier
 	 */
-	public Person readOneForUpdate(final java.lang.Long id) {
+	 public Person readOneForUpdate(final java.lang.Long id) {
 		return readOneForUpdate(createDtObjectURI(id));
 	}
 
@@ -91,16 +93,16 @@ public final class PersonDAO extends DAO<Person, java.lang.Long> implements Stor
 	 * @return Résultat correspondant à la requête (de type PersonIndex) 
 	 */
 	public FacetedQueryResult<PersonIndex, SearchQuery> loadList(final SearchQuery searchQuery, final DtListState listState) {
-		final SearchIndexDefinition indexDefinition = searchManager.findIndexDefinitionByKeyConcept(Person.class);
+		final SearchIndexDefinition indexDefinition = searchManager.findFirstIndexDefinitionByKeyConcept(Person.class);
 		return searchManager.loadList(indexDefinition, searchQuery, listState);
 	}
-
-	/**
-		 * Mark an entity as dirty. Index of these elements will be reindexed if Tx commited.
-		 * Reindexation isn't synchrone, strategy is dependant of plugin's parameters.
-		 *
-		 * @param entityUri Key concept's uri
-		 */
+	
+/**
+	 * Mark an entity as dirty. Index of these elements will be reindexed if Tx commited.
+	 * Reindexation isn't synchrone, strategy is dependant of plugin's parameters.
+	 *
+	 * @param entityUri Key concept's uri
+	 */
 	public void markAsDirty(final URI<Person> entityUri) {
 		transactionManager.getCurrentTransaction().addAfterCompletion((final boolean txCommitted) -> {
 			if (txCommitted) {// reindex only is tx successful
@@ -108,7 +110,7 @@ public final class PersonDAO extends DAO<Person, java.lang.Long> implements Stor
 			}
 		});
 	}
-
+	
 	/**
 	 * Mark an entity as dirty. Index of these elements will be reindexed if Tx commited.
 	 * Reindexation isn't synchrone, strategy is dependant of plugin's parameters.
@@ -118,4 +120,26 @@ public final class PersonDAO extends DAO<Person, java.lang.Long> implements Stor
 	public void markAsDirty(final Person entity) {
 		markAsDirty(URI.of(entity));
 	}
+
+	/**
+	 * Creates a taskBuilder.
+	 * @param name  the name of the task
+	 * @return the builder 
+	 */
+	private static TaskBuilder createTaskBuilder(final String name) {
+		final TaskDefinition taskDefinition = Home.getApp().getDefinitionSpace().resolve(name, TaskDefinition.class);
+		return Task.builder(taskDefinition);
+	}
+
+	/**
+	 * Execute la tache TK_IMPORT_PERSONS.
+	 * @param dtc io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.Person> 
+	*/
+	public void importPersons(final io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.Person> dtc) {
+		final Task task = createTaskBuilder("TK_IMPORT_PERSONS")
+				.addValue("DTC", dtc)
+				.build();
+		getTaskManager().execute(task);
+	}
+
 }
