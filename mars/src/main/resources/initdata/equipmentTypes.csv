@@ -1,0 +1,33 @@
+Enabled;Category;Name
+true;Building;Wind Power Plant
+true;Building;Nuclear Power Plant
+true;Building;Solar Power Plant
+true;Building;Mobile Power Generator
+true;Building;Power Suply Depot
+true;Building;Hydroponic Farm
+true;Building;Martian Soil Farm
+true;Building;Ranch
+true;Building;Food Factory
+true;Building;Farming Area
+true;Building;Hospital
+true;Building;Radio Station
+true;Building;Water Station
+true;Building;Terraformation Plant
+true;Building;Air Recycling Station
+true;Building;Mining Area
+true;Building;Mine
+true;Building;Police Station
+true;Building;Fire Station
+true;Building;Robotics Facility
+true;Vehicle;Mobile Power Generator
+true;Vehicle;Tractor
+true;Vehicle;Field Hospital
+true;Vehicle;Medic Vehicle
+true;Vehicle;Bacta Tank
+true;Vehicle;Satellite
+true;Vehicle;Space Construction Vehicle
+true;Vehicle;Martian Mining Vehicle
+true;Vehicle;Emergency Vehicle
+true;Bot;Satellite
+true;Bot;Droid
+true;Bot;Drone

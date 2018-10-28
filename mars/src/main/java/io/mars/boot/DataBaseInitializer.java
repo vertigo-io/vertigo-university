@@ -30,10 +30,14 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
+import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
+import com.opencsv.CSVReaderBuilder;
 
 import io.mars.basemanagement.dao.BaseDAO;
 import io.mars.basemanagement.domain.Base;
@@ -62,7 +66,7 @@ import io.vertigo.lang.WrappedException;
  */
 public class DataBaseInitializer implements ComponentInitializer {
 
-	private static final int EQUIPMENT_TYPE_CSV_FILE_COLUMN_NUMBER = 2;
+	private static final int EQUIPMENT_TYPE_CSV_FILE_COLUMN_NUMBER = 3;
 
 	@Inject
 	private ResourceManager resourceManager;
@@ -91,7 +95,7 @@ public class DataBaseInitializer implements ComponentInitializer {
 		createInitialPersons(personDao, transactionManager);
 		createInitialEquipmentCategories(equipmentCategoryDAO, transactionManager);
 		// createInitialEquipmentTypes(equipmentTypeDAO,equipmentCategoryDAO, transactionManager);
-		createInitialEquipmentTypesFromCSV(equipmentTypeDAO, equipmentCategoryDAO, transactionManager, "equipmentTypes.csv");
+		createInitialEquipmentTypesFromCSV(equipmentTypeDAO, equipmentCategoryDAO, transactionManager, "initdata/equipmentTypes.csv");
 
 	}
 
@@ -189,21 +193,33 @@ public class DataBaseInitializer implements ComponentInitializer {
 		}
 	}
 
-	private static void createInitialEquipmentTypesFromCSV(final EquipmentTypeDAO equipmentTypeDAO,
+	private void createInitialEquipmentTypesFromCSV(final EquipmentTypeDAO equipmentTypeDAO,
 			final EquipmentCategoryDAO equipmentCategoryDAO,
 			final VTransactionManager transactionManager,
 			final String csvFilePath) {
-		try (Reader reader = Files.newBufferedReader(Paths.get(csvFilePath));
-				CSVReader csvReader = new CSVReader(reader);) {
+		
+		try (
+				VTransactionWritable tx = transactionManager.createCurrentTransaction();
+				Reader reader = new BufferedReader(new InputStreamReader(resourceManager.resolve(csvFilePath).openStream()));
+				CSVReader csvReader = new CSVReaderBuilder(reader)
+						.withCSVParser(new CSVParserBuilder()
+								.withSeparator(';')
+								.build())
+						.withSkipLines(1)
+						.build();
+			) {
 			String[] nextRecord;
 			String currentCategoryLabel = "";
 			EquipmentCategory equipmentCategory = null;
 
+						
 			while ((nextRecord = csvReader.readNext()) != null) {
 				Assertion.checkArgument(nextRecord.length == EQUIPMENT_TYPE_CSV_FILE_COLUMN_NUMBER, "CSV File {0} Format not suitable for Equipment Types", csvFilePath);
 
-				String nextCategoryLabel = nextRecord[0];
-				String equipmentTypeName = nextRecord[1];
+				Boolean enabled = Boolean.valueOf(nextRecord[0]);
+				String nextCategoryLabel = nextRecord[1];
+				String equipmentTypeName = nextRecord[2];
+				
 
 				if (nextCategoryLabel != currentCategoryLabel) {
 					currentCategoryLabel = nextCategoryLabel;
@@ -211,8 +227,10 @@ public class DataBaseInitializer implements ComponentInitializer {
 					Assertion.checkArgument(categoryList.size() == 1, "Could not fully determine Equipment Category Entity for category : {0} ", nextCategoryLabel);
 					equipmentCategory = categoryList.get(0);
 				}
-				equipmentTypeDAO.create(createEquipmentType(true, equipmentTypeName, equipmentCategory));
+				equipmentTypeDAO.create(createEquipmentType(enabled, equipmentTypeName, equipmentCategory));
 			}
+			
+			tx.commit();
 
 		} catch (final IOException e) {
 			throw WrappedException.wrap(e, "Can't load csv file {0}", csvFilePath);

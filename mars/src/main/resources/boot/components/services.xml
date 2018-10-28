@@ -6,15 +6,15 @@
 	</module>
 
 	<module name="dao">
-		<component class="io.mars.base.dao.BaseDAO" />
+		<component class="io.mars.basemanagement.dao.BaseDAO" />
 		<component class="io.mars.humanresources.dao.PersonDAO" />
 		<component class="io.mars.catalog.dao.EquipmentCategoryDAO" />
 		<component class="io.mars.catalog.dao.EquipmentTypeDAO" />
-		<component class="io.mars.base.dao.EquipmentDAO" />
+		<component class="io.mars.basemanagement.dao.EquipmentDAO" />
 	</module>
 
 	<module name="services">
-		<component api="BaseServices" class="io.mars.base.services.BaseServicesImpl"/>
+		<!-- <component api="BaseServices" class="io.mars.basemanagement.services.base.BaseServices"/> -->
 	</module>
 
 	<init>
