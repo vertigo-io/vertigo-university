@@ -20,7 +20,7 @@ create DtDefinition DT_EQUIPMENT_CATEGORY {
 create Association A_EQUIPMENT_TYPE_EQUIPMENT_CATEGORY {
 	fkFieldName : "EQUIPMENT_CATEGORY_ID"
     
- 	dtDefinitionA : DT_EQUIPMENT
+ 	dtDefinitionA : DT_EQUIPMENT_TYPE
 	dtDefinitionB : DT_EQUIPMENT_CATEGORY
 			
 	navigabilityA : "false"

@@ -31,7 +31,22 @@ public final class Mission implements Entity {
 			foreignRole = "Mission",
 			foreignLabel = "Mission",
 			foreignMultiplicity = "0..*")
-	private final VAccessor<io.mars.base.domain.Base> baseIdAccessor = new VAccessor<>(io.mars.base.domain.Base.class, "Base");
+	private final VAccessor<io.mars.basemanagement.domain.Base> baseIdAccessor = new VAccessor<>(io.mars.basemanagement.domain.Base.class, "Base");
+
+	@io.vertigo.dynamo.domain.stereotype.Association(
+			name = "A_BUSINESS_MISSION",
+			fkFieldName = "BUSINESS_ID",
+			primaryDtDefinitionName = "DT_BUSINESS",
+			primaryIsNavigable = true,
+			primaryRole = "Business",
+			primaryLabel = "Business",
+			primaryMultiplicity = "0..1",
+			foreignDtDefinitionName = "DT_MISSION",
+			foreignIsNavigable = false,
+			foreignRole = "BusinessMissions",
+			foreignLabel = "Business Missions",
+			foreignMultiplicity = "0..*")
+	private final VAccessor<io.mars.basemanagement.domain.Business> businessIdAccessor = new VAccessor<>(io.mars.basemanagement.domain.Business.class, "Business");
 
 	/** {@inheritDoc} */
 	@Override
@@ -95,17 +110,62 @@ public final class Mission implements Entity {
 	public void setBaseId(final Long baseId) {
 		baseIdAccessor.setId(baseId);
 	}
+	
+	/**
+	 * Champ : FOREIGN_KEY.
+	 * Récupère la valeur de la propriété 'Business'.
+	 * @return Long businessId
+	 */
+	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Business")
+	public Long getBusinessId() {
+		return (Long)  businessIdAccessor.getId();
+	}
+
+	/**
+	 * Champ : FOREIGN_KEY.
+	 * Définit la valeur de la propriété 'Business'.
+	 * @param businessId Long
+	 */
+	public void setBusinessId(final Long businessId) {
+		businessIdAccessor.setId(businessId);
+	}
+
+ 	/**
+	 * Association : Business.
+	 * @return l'accesseur vers la propriété 'Business'
+	 */
+	public VAccessor<io.mars.basemanagement.domain.Business> business() {
+		return businessIdAccessor;
+	}
+	
+	@Deprecated
+	public io.mars.basemanagement.domain.Business getBusiness() {
+		// we keep the lazyness
+		if (!businessIdAccessor.isLoaded()) {
+			businessIdAccessor.load();
+		}
+		return businessIdAccessor.get();
+	}
+
+	/**
+	 * Retourne l'URI: Business.
+	 * @return URI de l'association
+	 */
+	@Deprecated
+	public io.vertigo.dynamo.domain.model.URI<io.mars.basemanagement.domain.Business> getBusinessURI() {
+		return businessIdAccessor.getURI();
+	}
 
  	/**
 	 * Association : Base.
 	 * @return l'accesseur vers la propriété 'Base'
 	 */
-	public VAccessor<io.mars.base.domain.Base> base() {
+	public VAccessor<io.mars.basemanagement.domain.Base> base() {
 		return baseIdAccessor;
 	}
 	
 	@Deprecated
-	public io.mars.base.domain.Base getBase() {
+	public io.mars.basemanagement.domain.Base getBase() {
 		// we keep the lazyness
 		if (!baseIdAccessor.isLoaded()) {
 			baseIdAccessor.load();
@@ -118,7 +178,7 @@ public final class Mission implements Entity {
 	 * @return URI de l'association
 	 */
 	@Deprecated
-	public io.vertigo.dynamo.domain.model.URI<io.mars.base.domain.Base> getBaseURI() {
+	public io.vertigo.dynamo.domain.model.URI<io.mars.basemanagement.domain.Base> getBaseURI() {
 		return baseIdAccessor.getURI();
 	}
 	

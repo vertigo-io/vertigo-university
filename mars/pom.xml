@@ -36,6 +36,13 @@
             <version>${vertigo.version}</version>
         </dependency>
         
+        <dependency>
+    		<groupId>com.opencsv</groupId>
+    		<artifactId>opencsv</artifactId>
+    		<version>4.0</version>
+		</dependency>
+        
+        
 		<!-- test-->
 		<dependency>
 			<groupId>junit</groupId>

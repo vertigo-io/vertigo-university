@@ -18,7 +18,7 @@ public final class Person implements Entity {
 	private Long personId;
 	private String firstName;
 	private String lastName;
-	private String eMail;
+	private String email;
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
 			name = "A_PERSON_MISSION",
@@ -101,20 +101,20 @@ public final class Person implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'E-mail'.
-	 * @return String eMail
+	 * @return String email
 	 */
 	@Field(domain = "DO_EMAIL", label = "E-mail")
-	public String getEMail() {
-		return eMail;
+	public String getEmail() {
+		return email;
 	}
 
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'E-mail'.
-	 * @param eMail String
+	 * @param email String
 	 */
-	public void setEMail(final String eMail) {
-		this.eMail = eMail;
+	public void setEmail(final String email) {
+		this.email = email;
 	}
 	
 	/**

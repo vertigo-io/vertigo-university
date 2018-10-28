@@ -50,7 +50,7 @@ public final class Ticket implements Entity {
 			foreignRole = "EquipmentTickets",
 			foreignLabel = "Equipment tickets",
 			foreignMultiplicity = "0..*")
-	private final VAccessor<io.mars.base.domain.Equipment> equipmentIdAccessor = new VAccessor<>(io.mars.base.domain.Equipment.class, "Equipment");
+	private final VAccessor<io.mars.basemanagement.domain.Equipment> equipmentIdAccessor = new VAccessor<>(io.mars.basemanagement.domain.Equipment.class, "Equipment");
 
 	/** {@inheritDoc} */
 	@Override
@@ -195,12 +195,12 @@ public final class Ticket implements Entity {
 	 * Association : Equipment.
 	 * @return l'accesseur vers la propriété 'Equipment'
 	 */
-	public VAccessor<io.mars.base.domain.Equipment> equipment() {
+	public VAccessor<io.mars.basemanagement.domain.Equipment> equipment() {
 		return equipmentIdAccessor;
 	}
 	
 	@Deprecated
-	public io.mars.base.domain.Equipment getEquipment() {
+	public io.mars.basemanagement.domain.Equipment getEquipment() {
 		// we keep the lazyness
 		if (!equipmentIdAccessor.isLoaded()) {
 			equipmentIdAccessor.load();
@@ -213,7 +213,7 @@ public final class Ticket implements Entity {
 	 * @return URI de l'association
 	 */
 	@Deprecated
-	public io.vertigo.dynamo.domain.model.URI<io.mars.base.domain.Equipment> getEquipmentURI() {
+	public io.vertigo.dynamo.domain.model.URI<io.mars.basemanagement.domain.Equipment> getEquipmentURI() {
 		return equipmentIdAccessor.getURI();
 	}
 

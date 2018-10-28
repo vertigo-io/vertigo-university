@@ -2,6 +2,7 @@ package io.mars.catalog.domain;
 
 import io.vertigo.dynamo.domain.model.Entity;
 import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.VAccessor;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.lang.Generated;
@@ -17,6 +18,21 @@ public final class EquipmentType implements Entity {
 	private Long equipmentTypeId;
 	private String label;
 	private Boolean active;
+
+	@io.vertigo.dynamo.domain.stereotype.Association(
+			name = "A_EQUIPMENT_TYPE_EQUIPMENT_CATEGORY",
+			fkFieldName = "EQUIPMENT_CATEGORY_ID",
+			primaryDtDefinitionName = "DT_EQUIPMENT_CATEGORY",
+			primaryIsNavigable = true,
+			primaryRole = "EquipmentCategory",
+			primaryLabel = "Equipment Category",
+			primaryMultiplicity = "0..1",
+			foreignDtDefinitionName = "DT_EQUIPMENT_TYPE",
+			foreignIsNavigable = false,
+			foreignRole = "EquipmentType",
+			foreignLabel = "Equipment Type",
+			foreignMultiplicity = "0..*")
+	private final VAccessor<io.mars.catalog.domain.EquipmentCategory> equipmentCategoryIdAccessor = new VAccessor<>(io.mars.catalog.domain.EquipmentCategory.class, "EquipmentCategory");
 
 	/** {@inheritDoc} */
 	@Override
@@ -79,6 +95,51 @@ public final class EquipmentType implements Entity {
 	 */
 	public void setActive(final Boolean active) {
 		this.active = active;
+	}
+	
+	/**
+	 * Champ : FOREIGN_KEY.
+	 * Récupère la valeur de la propriété 'Equipment Category'.
+	 * @return Long equipmentCategoryId
+	 */
+	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Equipment Category")
+	public Long getEquipmentCategoryId() {
+		return (Long)  equipmentCategoryIdAccessor.getId();
+	}
+
+	/**
+	 * Champ : FOREIGN_KEY.
+	 * Définit la valeur de la propriété 'Equipment Category'.
+	 * @param equipmentCategoryId Long
+	 */
+	public void setEquipmentCategoryId(final Long equipmentCategoryId) {
+		equipmentCategoryIdAccessor.setId(equipmentCategoryId);
+	}
+
+ 	/**
+	 * Association : Equipment Category.
+	 * @return l'accesseur vers la propriété 'Equipment Category'
+	 */
+	public VAccessor<io.mars.catalog.domain.EquipmentCategory> equipmentCategory() {
+		return equipmentCategoryIdAccessor;
+	}
+	
+	@Deprecated
+	public io.mars.catalog.domain.EquipmentCategory getEquipmentCategory() {
+		// we keep the lazyness
+		if (!equipmentCategoryIdAccessor.isLoaded()) {
+			equipmentCategoryIdAccessor.load();
+		}
+		return equipmentCategoryIdAccessor.get();
+	}
+
+	/**
+	 * Retourne l'URI: Equipment Category.
+	 * @return URI de l'association
+	 */
+	@Deprecated
+	public io.vertigo.dynamo.domain.model.URI<io.mars.catalog.domain.EquipmentCategory> getEquipmentCategoryURI() {
+		return equipmentCategoryIdAccessor.getURI();
 	}
 	
 	/** {@inheritDoc} */

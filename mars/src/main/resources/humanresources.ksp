@@ -6,7 +6,7 @@ create DtDefinition DT_PERSON {
 	id PERSON_ID {domain: DO_ID label:"Id"}
 	field FIRST_NAME {domain: DO_LABEL label: "Name" required:"false"}
 	field LAST_NAME {domain: DO_LABEL label: "Name" required:"false"}
-	field E_MAIL {domain: DO_EMAIL label:"E-mail" required: "false"}
+	field EMAIL {domain: DO_EMAIL label:"E-mail" required: "false"}
 	
 }
 

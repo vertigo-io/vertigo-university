@@ -1,5 +1,5 @@
 ../boot/definitions/application.kpr
-../base.ksp
+../basemanagement.ksp
 ../catalog.ksp
 ../humanresources.ksp
 ../maintenance.ksp

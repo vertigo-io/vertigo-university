@@ -18,29 +18,31 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	 */
 	public enum Definitions {
 		/** Objet de données Base. */
-		Base(io.mars.base.domain.Base.class),
+		Base(io.mars.basemanagement.domain.Base.class),
 		/** Objet de données BaseType. */
-		BaseType(io.mars.base.domain.BaseType.class),
+		BaseType(io.mars.basemanagement.domain.BaseType.class),
+		/** Objet de données Business. */
+		Business(io.mars.basemanagement.domain.Business.class),
 		/** Objet de données Equipment. */
-		Equipment(io.mars.base.domain.Equipment.class),
+		Equipment(io.mars.basemanagement.domain.Equipment.class),
 		/** Objet de données EquipmentCategory. */
 		EquipmentCategory(io.mars.catalog.domain.EquipmentCategory.class),
 		/** Objet de données EquipmentFeature. */
-		EquipmentFeature(io.mars.base.domain.EquipmentFeature.class),
+		EquipmentFeature(io.mars.basemanagement.domain.EquipmentFeature.class),
 		/** Objet de données EquipmentType. */
 		EquipmentType(io.mars.catalog.domain.EquipmentType.class),
 		/** Objet de données Geosector. */
-		Geosector(io.mars.base.domain.Geosector.class),
+		Geosector(io.mars.basemanagement.domain.Geosector.class),
 		/** Objet de données Job. */
-		Job(io.mars.base.domain.Job.class),
+		Job(io.mars.basemanagement.domain.Job.class),
 		/** Objet de données JobStatus. */
-		JobStatus(io.mars.base.domain.JobStatus.class),
+		JobStatus(io.mars.basemanagement.domain.JobStatus.class),
 		/** Objet de données Mission. */
 		Mission(io.mars.humanresources.domain.Mission.class),
 		/** Objet de données Person. */
 		Person(io.mars.humanresources.domain.Person.class),
 		/** Objet de données Picture. */
-		Picture(io.mars.base.domain.Picture.class),
+		Picture(io.mars.basemanagement.domain.Picture.class),
 		/** Objet de données Ticket. */
 		Ticket(io.mars.maintenance.domain.Ticket.class),
 		/** Objet de données TicketStatus. */
@@ -68,7 +70,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de Base.
 	 */
-	public enum BaseFields implements DtFieldName<io.mars.base.domain.Base> {
+	public enum BaseFields implements DtFieldName<io.mars.basemanagement.domain.Base> {
 		/** Propriété 'Id'. */
 		BAS_ID,
 		/** Propriété 'Base Code'. */
@@ -95,16 +97,25 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de BaseType.
 	 */
-	public enum BaseTypeFields implements DtFieldName<io.mars.base.domain.BaseType> {
+	public enum BaseTypeFields implements DtFieldName<io.mars.basemanagement.domain.BaseType> {
 		/** Propriété 'Id'. */
 		BASE_TYPE_ID,
 		/** Propriété 'Base Type Label'. */
 		LABEL	}
 
 	/**
+	 * Enumération des champs de Business.
+	 */
+	public enum BusinessFields implements DtFieldName<io.mars.basemanagement.domain.Business> {
+		/** Propriété 'Id'. */
+		BUSINESS_ID,
+		/** Propriété 'Name'. */
+		NAME	}
+
+	/**
 	 * Enumération des champs de Equipment.
 	 */
-	public enum EquipmentFields implements DtFieldName<io.mars.base.domain.Equipment> {
+	public enum EquipmentFields implements DtFieldName<io.mars.basemanagement.domain.Equipment> {
 		/** Propriété 'Id'. */
 		EQUIPMENT_ID,
 		/** Propriété 'Name'. */
@@ -129,8 +140,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		BASE_ID,
 		/** Propriété 'Equipment Geosector'. */
 		GEOSECTOR_ID,
-		/** Propriété 'Equipment Category'. */
-		EQUIPMENT_CATEGORY_ID,
+		/** Propriété 'Business'. */
+		BUSINESS_ID,
 		/** Propriété 'Equipment Type'. */
 		EQUIPMENT_TYPE_ID	}
 
@@ -148,11 +159,13 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de EquipmentFeature.
 	 */
-	public enum EquipmentFeatureFields implements DtFieldName<io.mars.base.domain.EquipmentFeature> {
+	public enum EquipmentFeatureFields implements DtFieldName<io.mars.basemanagement.domain.EquipmentFeature> {
 		/** Propriété 'Id'. */
 		EQUIPMENT_FEATURE_ID,
 		/** Propriété 'Name'. */
-		NAME	}
+		NAME,
+		/** Propriété 'Equipment'. */
+		EQUIPMENT_ID	}
 
 	/**
 	 * Enumération des champs de EquipmentType.
@@ -163,12 +176,14 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		/** Propriété 'Equipment Type Label'. */
 		LABEL,
 		/** Propriété 'Equipment type is active'. */
-		ACTIVE	}
+		ACTIVE,
+		/** Propriété 'Equipment Category'. */
+		EQUIPMENT_CATEGORY_ID	}
 
 	/**
 	 * Enumération des champs de Geosector.
 	 */
-	public enum GeosectorFields implements DtFieldName<io.mars.base.domain.Geosector> {
+	public enum GeosectorFields implements DtFieldName<io.mars.basemanagement.domain.Geosector> {
 		/** Propriété 'Id'. */
 		GEOSECTOR_ID,
 		/** Propriété 'Sector Label'. */
@@ -177,7 +192,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de Job.
 	 */
-	public enum JobFields implements DtFieldName<io.mars.base.domain.Job> {
+	public enum JobFields implements DtFieldName<io.mars.basemanagement.domain.Job> {
 		/** Propriété 'Id'. */
 		JOB_ID,
 		/** Propriété 'CODE'. */
@@ -192,7 +207,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de JobStatus.
 	 */
-	public enum JobStatusFields implements DtFieldName<io.mars.base.domain.JobStatus> {
+	public enum JobStatusFields implements DtFieldName<io.mars.basemanagement.domain.JobStatus> {
 		/** Propriété 'Id'. */
 		JOB_STATUS_ID,
 		/** Propriété 'Status Label'. */
@@ -207,7 +222,9 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		/** Propriété 'Role'. */
 		ROLE,
 		/** Propriété 'Base'. */
-		BASE_ID	}
+		BASE_ID,
+		/** Propriété 'Business'. */
+		BUSINESS_ID	}
 
 	/**
 	 * Enumération des champs de Person.
@@ -220,14 +237,14 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		/** Propriété 'Name'. */
 		LAST_NAME,
 		/** Propriété 'E-mail'. */
-		E_MAIL,
+		EMAIL,
 		/** Propriété 'Mission'. */
 		MISSION_ID	}
 
 	/**
 	 * Enumération des champs de Picture.
 	 */
-	public enum PictureFields implements DtFieldName<io.mars.base.domain.Picture> {
+	public enum PictureFields implements DtFieldName<io.mars.basemanagement.domain.Picture> {
 		/** Propriété 'Id'. */
 		PICTURE_ID,
 		/** Propriété 'Id'. */

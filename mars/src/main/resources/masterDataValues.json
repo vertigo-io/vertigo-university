@@ -1,4 +1,4 @@
-{"io.mars.base.domain.BaseType" : 
+{"io.mars.basemanagement.domain.BaseType" : 
     {
         "hydro" : {
             "baseTypeId" : "HYDRO",
@@ -10,7 +10,7 @@
         }       
 
     },
-	"io.mars.base.domain.JobStatus" : 
+	"io.mars.basemanagement.domain.JobStatus" : 
     {
         "done" : {
             "jobStatusId" : "DONE",
@@ -29,7 +29,7 @@
             "label" : "Pending"
         }
     },
-    "io.mars.base.domain.WorkOrderStatus" : 
+    "io.mars.basemanagement.domain.WorkOrderStatus" : 
     {
         "done" : {
             "workOrderStatusId" : "DONE",

@@ -2,6 +2,27 @@
 --   SGBD      		  :  H2                     
 -- ============================================================
 
+-- ============================================================
+--   Drop                                       
+-- ============================================================
+drop table BASE cascade;
+drop table BASE_TYPE cascade;
+drop table BUSINESS cascade;
+drop table EQUIPMENT cascade;
+drop table EQUIPMENT_CATEGORY cascade;
+drop table EQUIPMENT_FEATURE cascade;
+drop table EQUIPMENT_TYPE cascade;
+drop table GEOSECTOR cascade;
+drop table JOB cascade;
+drop table JOB_STATUS cascade;
+drop table MISSION cascade;
+drop table PERSON cascade;
+drop table PICTURE cascade;
+drop table TICKET cascade;
+drop table TICKET_STATUS cascade;
+drop table WORK_ORDER cascade;
+drop table WORK_ORDER_STATUS cascade;
+
 
 
 
@@ -12,6 +33,9 @@ create sequence SEQ_BASE
 	start with 1000 cache 20; 
 
 create sequence SEQ_BASE_TYPE
+	start with 1000 cache 20; 
+
+create sequence SEQ_BUSINESS
 	start with 1000 cache 20; 
 
 create sequence SEQ_EQUIPMENT
@@ -126,6 +150,22 @@ comment on column BASE_TYPE.LABEL is
 'Base Type Label';
 
 -- ============================================================
+--   Table : BUSINESS                                        
+-- ============================================================
+create table BUSINESS
+(
+    BUSINESS_ID 	 NUMERIC     	not null,
+    NAME        	 VARCHAR(100)	,
+    constraint PK_BUSINESS primary key (BUSINESS_ID)
+);
+
+comment on column BUSINESS.BUSINESS_ID is
+'Id';
+
+comment on column BUSINESS.NAME is
+'Name';
+
+-- ============================================================
 --   Table : EQUIPMENT                                        
 -- ============================================================
 create table EQUIPMENT
@@ -142,7 +182,7 @@ create table EQUIPMENT
     EQUIPMENT_VALUE	 NUMERIC(12,2)	,
     BASE_ID     	 NUMERIC     	,
     GEOSECTOR_ID	 NUMERIC     	,
-    EQUIPMENT_CATEGORY_ID	 NUMERIC     	,
+    BUSINESS_ID 	 NUMERIC     	,
     EQUIPMENT_TYPE_ID	 NUMERIC     	,
     constraint PK_EQUIPMENT primary key (EQUIPMENT_ID)
 );
@@ -183,8 +223,8 @@ comment on column EQUIPMENT.BASE_ID is
 comment on column EQUIPMENT.GEOSECTOR_ID is
 'Equipment Geosector';
 
-comment on column EQUIPMENT.EQUIPMENT_CATEGORY_ID is
-'Equipment Category';
+comment on column EQUIPMENT.BUSINESS_ID is
+'Business';
 
 comment on column EQUIPMENT.EQUIPMENT_TYPE_ID is
 'Equipment Type';
@@ -216,6 +256,7 @@ create table EQUIPMENT_FEATURE
 (
     EQUIPMENT_FEATURE_ID	 NUMERIC     	not null,
     NAME        	 VARCHAR(100)	,
+    EQUIPMENT_ID	 NUMERIC     	,
     constraint PK_EQUIPMENT_FEATURE primary key (EQUIPMENT_FEATURE_ID)
 );
 
@@ -225,6 +266,9 @@ comment on column EQUIPMENT_FEATURE.EQUIPMENT_FEATURE_ID is
 comment on column EQUIPMENT_FEATURE.NAME is
 'Name';
 
+comment on column EQUIPMENT_FEATURE.EQUIPMENT_ID is
+'Equipment';
+
 -- ============================================================
 --   Table : EQUIPMENT_TYPE                                        
 -- ============================================================
@@ -233,6 +277,7 @@ create table EQUIPMENT_TYPE
     EQUIPMENT_TYPE_ID	 NUMERIC     	not null,
     LABEL       	 VARCHAR(100)	,
     ACTIVE      	 bool        	,
+    EQUIPMENT_CATEGORY_ID	 NUMERIC     	,
     constraint PK_EQUIPMENT_TYPE primary key (EQUIPMENT_TYPE_ID)
 );
 
@@ -244,6 +289,9 @@ comment on column EQUIPMENT_TYPE.LABEL is
 
 comment on column EQUIPMENT_TYPE.ACTIVE is
 'Equipment type is active';
+
+comment on column EQUIPMENT_TYPE.EQUIPMENT_CATEGORY_ID is
+'Equipment Category';
 
 -- ============================================================
 --   Table : GEOSECTOR                                        
@@ -313,6 +361,7 @@ create table MISSION
     MISSION_ID  	 NUMERIC     	not null,
     ROLE        	 VARCHAR(100)	,
     BASE_ID     	 NUMERIC     	,
+    BUSINESS_ID 	 NUMERIC     	,
     constraint PK_MISSION primary key (MISSION_ID)
 );
 
@@ -325,6 +374,9 @@ comment on column MISSION.ROLE is
 comment on column MISSION.BASE_ID is
 'Base';
 
+comment on column MISSION.BUSINESS_ID is
+'Business';
+
 -- ============================================================
 --   Table : PERSON                                        
 -- ============================================================
@@ -333,7 +385,7 @@ create table PERSON
     PERSON_ID   	 NUMERIC     	not null,
     FIRST_NAME  	 VARCHAR(100)	,
     LAST_NAME   	 VARCHAR(100)	,
-    E_MAIL      	 VARCHAR(150)	,
+    EMAIL       	 VARCHAR(150)	,
     MISSION_ID  	 NUMERIC     	,
     constraint PK_PERSON primary key (PERSON_ID)
 );
@@ -347,7 +399,7 @@ comment on column PERSON.FIRST_NAME is
 comment on column PERSON.LAST_NAME is
 'Name';
 
-comment on column PERSON.E_MAIL is
+comment on column PERSON.EMAIL is
 'E-mail';
 
 comment on column PERSON.MISSION_ID is
@@ -504,6 +556,24 @@ alter table PICTURE
 create index BASE_PICTURE_BASE_FK on PICTURE (BASE_ID asc);
 
 alter table EQUIPMENT
+	add constraint FK_BUSINESS_EQUIPMENT_BUSINESS foreign key (BUSINESS_ID)
+	references BUSINESS (BUSINESS_ID);
+
+create index BUSINESS_EQUIPMENT_BUSINESS_FK on EQUIPMENT (BUSINESS_ID asc);
+
+alter table MISSION
+	add constraint FK_BUSINESS_MISSION_BUSINESS foreign key (BUSINESS_ID)
+	references BUSINESS (BUSINESS_ID);
+
+create index BUSINESS_MISSION_BUSINESS_FK on MISSION (BUSINESS_ID asc);
+
+alter table EQUIPMENT_FEATURE
+	add constraint FK_EQUIPMENT_EQUIPMENT_FEATURE_EQUIPMENT foreign key (EQUIPMENT_ID)
+	references EQUIPMENT (EQUIPMENT_ID);
+
+create index EQUIPMENT_EQUIPMENT_FEATURE_EQUIPMENT_FK on EQUIPMENT_FEATURE (EQUIPMENT_ID asc);
+
+alter table EQUIPMENT
 	add constraint FK_EQUIPMENT_EQUIPMENT_TYPE_EQUIPMENT_TYPE foreign key (EQUIPMENT_TYPE_ID)
 	references EQUIPMENT_TYPE (EQUIPMENT_TYPE_ID);
 
@@ -521,11 +591,11 @@ alter table TICKET
 
 create index EQUIPMENT_TICKET_EQUIPMENT_FK on TICKET (EQUIPMENT_ID asc);
 
-alter table EQUIPMENT
+alter table EQUIPMENT_TYPE
 	add constraint FK_EQUIPMENT_TYPE_EQUIPMENT_CATEGORY_EQUIPMENT_CATEGORY foreign key (EQUIPMENT_CATEGORY_ID)
 	references EQUIPMENT_CATEGORY (EQUIPMENT_CATEGORY_ID);
 
-create index EQUIPMENT_TYPE_EQUIPMENT_CATEGORY_EQUIPMENT_CATEGORY_FK on EQUIPMENT (EQUIPMENT_CATEGORY_ID asc);
+create index EQUIPMENT_TYPE_EQUIPMENT_CATEGORY_EQUIPMENT_CATEGORY_FK on EQUIPMENT_TYPE (EQUIPMENT_CATEGORY_ID asc);
 
 alter table MISSION
 	add constraint FK_MISSION_BASE_BASE foreign key (BASE_ID)
