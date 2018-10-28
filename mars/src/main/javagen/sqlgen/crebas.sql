@@ -2,27 +2,6 @@
 --   SGBD      		  :  H2                     
 -- ============================================================
 
--- ============================================================
---   Drop                                       
--- ============================================================
-drop table BASE cascade;
-drop table BASE_TYPE cascade;
-drop table BUSINESS cascade;
-drop table EQUIPMENT cascade;
-drop table EQUIPMENT_CATEGORY cascade;
-drop table EQUIPMENT_FEATURE cascade;
-drop table EQUIPMENT_TYPE cascade;
-drop table GEOSECTOR cascade;
-drop table JOB cascade;
-drop table JOB_STATUS cascade;
-drop table MISSION cascade;
-drop table PERSON cascade;
-drop table PICTURE cascade;
-drop table TICKET cascade;
-drop table TICKET_STATUS cascade;
-drop table WORK_ORDER cascade;
-drop table WORK_ORDER_STATUS cascade;
-
 
 
 

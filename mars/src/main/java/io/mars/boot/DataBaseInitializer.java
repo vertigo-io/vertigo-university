@@ -67,7 +67,8 @@ import io.vertigo.lang.WrappedException;
 public class DataBaseInitializer implements ComponentInitializer {
 
 	private static final int EQUIPMENT_TYPE_CSV_FILE_COLUMN_NUMBER = 3;
-
+	private static final int PERSON_CSV_FILE_COLUMN_NUMBER = 3;
+	
 	@Inject
 	private ResourceManager resourceManager;
 	@Inject
@@ -76,10 +77,10 @@ public class DataBaseInitializer implements ComponentInitializer {
 	private SqlDataBaseManager sqlDataBaseManager;
 
 	@Inject
-	private BaseDAO baseDao;
+	private BaseDAO baseDAO;
 
 	@Inject
-	private PersonDAO personDao;
+	private PersonDAO personDAO;
 
 	@Inject
 	private EquipmentCategoryDAO equipmentCategoryDAO;
@@ -91,8 +92,9 @@ public class DataBaseInitializer implements ComponentInitializer {
 	@Override
 	public void init() {
 		createDataBase();
-		createInitialBases(baseDao, transactionManager);
-		createInitialPersons(personDao, transactionManager);
+		createInitialBases(baseDAO, transactionManager);
+		// createInitialPersons(personDao, transactionManager);
+		createInitialPersonsFromCSV(personDAO, transactionManager, "initdata/persons.csv");
 		createInitialEquipmentCategories(equipmentCategoryDAO, transactionManager);
 		// createInitialEquipmentTypes(equipmentTypeDAO,equipmentCategoryDAO, transactionManager);
 		createInitialEquipmentTypesFromCSV(equipmentTypeDAO, equipmentCategoryDAO, transactionManager, "initdata/equipmentTypes.csv");
@@ -155,6 +157,7 @@ public class DataBaseInitializer implements ComponentInitializer {
 		}
 	}
 
+	/*
 	private static void createInitialPersons(final PersonDAO personDao, final VTransactionManager transactionManager) {
 		try (VTransactionWritable tx = transactionManager.createCurrentTransaction()) {
 			personDao.create(createPerson(
@@ -182,7 +185,8 @@ public class DataBaseInitializer implements ComponentInitializer {
 			tx.commit();
 		}
 	}
-
+	 */
+	
 	private static void createInitialEquipmentCategories(final EquipmentCategoryDAO equipmentCategoryDAO, final VTransactionManager transactionManager) {
 		try (VTransactionWritable tx = transactionManager.createCurrentTransaction()) {
 
@@ -238,6 +242,44 @@ public class DataBaseInitializer implements ComponentInitializer {
 
 	}
 
+	private void createInitialPersonsFromCSV(final PersonDAO personDAO,
+			final VTransactionManager transactionManager,
+			final String csvFilePath) {
+		
+		try (
+				VTransactionWritable tx = transactionManager.createCurrentTransaction();
+				Reader reader = new BufferedReader(new InputStreamReader(resourceManager.resolve(csvFilePath).openStream()));
+				CSVReader csvReader = new CSVReaderBuilder(reader)
+						.withCSVParser(new CSVParserBuilder()
+								.withSeparator(';')
+								.build())
+						.withSkipLines(1)
+						.build();
+			) {
+			String[] nextRecord;
+						
+			while ((nextRecord = csvReader.readNext()) != null) {
+				Assertion.checkArgument(nextRecord.length == PERSON_CSV_FILE_COLUMN_NUMBER, "CSV File {0} Format not suitable for Persons", csvFilePath);
+
+				String firstName = nextRecord[0];
+				String lastName = nextRecord[1];
+				String email = nextRecord[2];
+
+				personDAO.create(createPerson(firstName,lastName,email));
+			}
+			
+			tx.commit();
+
+		} catch (final IOException e) {
+			throw WrappedException.wrap(e, "Can't load csv file {0}", csvFilePath);
+		}
+
+	}
+
+	
+	
+	
+	/*
 	private static void createInitialEquipmentTypes(final EquipmentTypeDAO equipmentTypeDAO, final EquipmentCategoryDAO equipmentCategoryDAO, final VTransactionManager transactionManager) {
 		try (VTransactionWritable tx = transactionManager.createCurrentTransaction()) {
 
@@ -303,7 +345,8 @@ public class DataBaseInitializer implements ComponentInitializer {
 			tx.commit();
 		}
 	}
-
+	*/
+	
 	private static Base createBase(final BaseTypeEnum baseTypeEnumValue,
 			final String baseName,
 			final String baseCode,

@@ -66,7 +66,7 @@ public class Studio {
 					.addPlugin(SqlGeneratorPlugin.class,
 							Param.of("targetSubDir", "sqlgen"),
 							Param.of("baseCible", "H2"),
-							Param.of("generateDrop", "true"),
+							Param.of("generateDrop", "false"),
 							Param.of("generateMasterData", "true"))
 					
 					
