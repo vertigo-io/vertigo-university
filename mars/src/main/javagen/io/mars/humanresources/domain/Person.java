@@ -2,7 +2,6 @@ package io.mars.humanresources.domain;
 
 import io.vertigo.dynamo.domain.model.Entity;
 import io.vertigo.dynamo.domain.model.URI;
-import io.vertigo.dynamo.domain.model.VAccessor;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.lang.Generated;
@@ -19,21 +18,6 @@ public final class Person implements Entity {
 	private String firstName;
 	private String lastName;
 	private String email;
-
-	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_PERSON_MISSION",
-			fkFieldName = "MISSION_ID",
-			primaryDtDefinitionName = "DT_MISSION",
-			primaryIsNavigable = true,
-			primaryRole = "Mission",
-			primaryLabel = "Mission",
-			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_PERSON",
-			foreignIsNavigable = false,
-			foreignRole = "Person",
-			foreignLabel = "Person",
-			foreignMultiplicity = "0..*")
-	private final VAccessor<io.mars.humanresources.domain.Mission> missionIdAccessor = new VAccessor<>(io.mars.humanresources.domain.Mission.class, "Mission");
 
 	/** {@inheritDoc} */
 	@Override
@@ -115,51 +99,6 @@ public final class Person implements Entity {
 	 */
 	public void setEmail(final String email) {
 		this.email = email;
-	}
-	
-	/**
-	 * Champ : FOREIGN_KEY.
-	 * Récupère la valeur de la propriété 'Mission'.
-	 * @return Long missionId
-	 */
-	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Mission")
-	public Long getMissionId() {
-		return (Long)  missionIdAccessor.getId();
-	}
-
-	/**
-	 * Champ : FOREIGN_KEY.
-	 * Définit la valeur de la propriété 'Mission'.
-	 * @param missionId Long
-	 */
-	public void setMissionId(final Long missionId) {
-		missionIdAccessor.setId(missionId);
-	}
-
- 	/**
-	 * Association : Mission.
-	 * @return l'accesseur vers la propriété 'Mission'
-	 */
-	public VAccessor<io.mars.humanresources.domain.Mission> mission() {
-		return missionIdAccessor;
-	}
-	
-	@Deprecated
-	public io.mars.humanresources.domain.Mission getMission() {
-		// we keep the lazyness
-		if (!missionIdAccessor.isLoaded()) {
-			missionIdAccessor.load();
-		}
-		return missionIdAccessor.get();
-	}
-
-	/**
-	 * Retourne l'URI: Mission.
-	 * @return URI de l'association
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.URI<io.mars.humanresources.domain.Mission> getMissionURI() {
-		return missionIdAccessor.getURI();
 	}
 	
 	/** {@inheritDoc} */

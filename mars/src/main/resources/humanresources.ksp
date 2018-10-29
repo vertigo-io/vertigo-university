@@ -21,7 +21,7 @@ create DtDefinition DT_MISSION {
 /* Associations */
 
 create Association A_PERSON_MISSION {
-	fkFieldName : "MISSION_ID"
+	fkFieldName : "PERSON_ID"
     
  	dtDefinitionA : DT_PERSON
 	dtDefinitionB : DT_MISSION

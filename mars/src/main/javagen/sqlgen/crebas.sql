@@ -339,6 +339,7 @@ create table MISSION
 (
     MISSION_ID  	 NUMERIC     	not null,
     ROLE        	 VARCHAR(100)	,
+    PERSON_ID   	 NUMERIC     	,
     BASE_ID     	 NUMERIC     	,
     BUSINESS_ID 	 NUMERIC     	,
     constraint PK_MISSION primary key (MISSION_ID)
@@ -349,6 +350,9 @@ comment on column MISSION.MISSION_ID is
 
 comment on column MISSION.ROLE is
 'Role';
+
+comment on column MISSION.PERSON_ID is
+'Person';
 
 comment on column MISSION.BASE_ID is
 'Base';
@@ -365,7 +369,6 @@ create table PERSON
     FIRST_NAME  	 VARCHAR(100)	,
     LAST_NAME   	 VARCHAR(100)	,
     EMAIL       	 VARCHAR(150)	,
-    MISSION_ID  	 NUMERIC     	,
     constraint PK_PERSON primary key (PERSON_ID)
 );
 
@@ -380,9 +383,6 @@ comment on column PERSON.LAST_NAME is
 
 comment on column PERSON.EMAIL is
 'E-mail';
-
-comment on column PERSON.MISSION_ID is
-'Mission';
 
 -- ============================================================
 --   Table : PICTURE                                        
@@ -582,11 +582,11 @@ alter table MISSION
 
 create index MISSION_BASE_BASE_FK on MISSION (BASE_ID asc);
 
-alter table PERSON
-	add constraint FK_PERSON_MISSION_MISSION foreign key (MISSION_ID)
-	references MISSION (MISSION_ID);
+alter table MISSION
+	add constraint FK_PERSON_MISSION_PERSON foreign key (PERSON_ID)
+	references PERSON (PERSON_ID);
 
-create index PERSON_MISSION_MISSION_FK on PERSON (MISSION_ID asc);
+create index PERSON_MISSION_PERSON_FK on MISSION (PERSON_ID asc);
 
 alter table TICKET
 	add constraint FK_TICKET_TICKET_STATUS_TICKET_STATUS foreign key (WORK_ORDER_STATUS_ID)

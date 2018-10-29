@@ -19,6 +19,21 @@ public final class Mission implements Entity {
 	private String role;
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
+			name = "A_PERSON_MISSION",
+			fkFieldName = "PERSON_ID",
+			primaryDtDefinitionName = "DT_PERSON",
+			primaryIsNavigable = true,
+			primaryRole = "Person",
+			primaryLabel = "Person",
+			primaryMultiplicity = "0..1",
+			foreignDtDefinitionName = "DT_MISSION",
+			foreignIsNavigable = false,
+			foreignRole = "Mission",
+			foreignLabel = "Mission",
+			foreignMultiplicity = "0..*")
+	private final VAccessor<io.mars.humanresources.domain.Person> personIdAccessor = new VAccessor<>(io.mars.humanresources.domain.Person.class, "Person");
+
+	@io.vertigo.dynamo.domain.stereotype.Association(
 			name = "A_MISSION_BASE",
 			fkFieldName = "BASE_ID",
 			primaryDtDefinitionName = "DT_BASE",
@@ -90,6 +105,25 @@ public final class Mission implements Entity {
 	 */
 	public void setRole(final String role) {
 		this.role = role;
+	}
+	
+	/**
+	 * Champ : FOREIGN_KEY.
+	 * Récupère la valeur de la propriété 'Person'.
+	 * @return Long personId
+	 */
+	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Person")
+	public Long getPersonId() {
+		return (Long)  personIdAccessor.getId();
+	}
+
+	/**
+	 * Champ : FOREIGN_KEY.
+	 * Définit la valeur de la propriété 'Person'.
+	 * @param personId Long
+	 */
+	public void setPersonId(final Long personId) {
+		personIdAccessor.setId(personId);
 	}
 	
 	/**
@@ -180,6 +214,32 @@ public final class Mission implements Entity {
 	@Deprecated
 	public io.vertigo.dynamo.domain.model.URI<io.mars.basemanagement.domain.Base> getBaseURI() {
 		return baseIdAccessor.getURI();
+	}
+
+ 	/**
+	 * Association : Person.
+	 * @return l'accesseur vers la propriété 'Person'
+	 */
+	public VAccessor<io.mars.humanresources.domain.Person> person() {
+		return personIdAccessor;
+	}
+	
+	@Deprecated
+	public io.mars.humanresources.domain.Person getPerson() {
+		// we keep the lazyness
+		if (!personIdAccessor.isLoaded()) {
+			personIdAccessor.load();
+		}
+		return personIdAccessor.get();
+	}
+
+	/**
+	 * Retourne l'URI: Person.
+	 * @return URI de l'association
+	 */
+	@Deprecated
+	public io.vertigo.dynamo.domain.model.URI<io.mars.humanresources.domain.Person> getPersonURI() {
+		return personIdAccessor.getURI();
 	}
 	
 	/** {@inheritDoc} */

@@ -221,6 +221,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		MISSION_ID,
 		/** Propriété 'Role'. */
 		ROLE,
+		/** Propriété 'Person'. */
+		PERSON_ID,
 		/** Propriété 'Base'. */
 		BASE_ID,
 		/** Propriété 'Business'. */
@@ -237,9 +239,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		/** Propriété 'Name'. */
 		LAST_NAME,
 		/** Propriété 'E-mail'. */
-		EMAIL,
-		/** Propriété 'Mission'. */
-		MISSION_ID	}
+		EMAIL	}
 
 	/**
 	 * Enumération des champs de Picture.
