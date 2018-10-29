@@ -26,11 +26,11 @@ create Association A_PERSON_MISSION {
  	dtDefinitionA : DT_PERSON
 	dtDefinitionB : DT_MISSION
 			
-	navigabilityA : "false"
-	navigabilityB : "true"
+	navigabilityA : "true"
+	navigabilityB : "false"
 	
-	multiplicityA:"0..*"	
-	multiplicityB:"0..1"
+	multiplicityA:"0..1"	
+	multiplicityB:"0..*"
 	
 	labelA : "Person"
 	labelB : "Mission"
