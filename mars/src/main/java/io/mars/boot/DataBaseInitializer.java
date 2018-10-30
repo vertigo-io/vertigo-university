@@ -26,12 +26,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.math.BigDecimal;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.inject.Inject;
 
@@ -68,7 +64,7 @@ public class DataBaseInitializer implements ComponentInitializer {
 
 	private static final int EQUIPMENT_TYPE_CSV_FILE_COLUMN_NUMBER = 3;
 	private static final int PERSON_CSV_FILE_COLUMN_NUMBER = 3;
-	
+
 	@Inject
 	private ResourceManager resourceManager;
 	@Inject
@@ -94,10 +90,10 @@ public class DataBaseInitializer implements ComponentInitializer {
 		createDataBase();
 		createInitialBases(baseDAO, transactionManager);
 		// createInitialPersons(personDao, transactionManager);
-		createInitialPersonsFromCSV(personDAO, transactionManager, "initdata/persons.csv");
-		createInitialEquipmentCategories(equipmentCategoryDAO, transactionManager);
+		createInitialPersonsFromCSV("initdata/persons.csv");
+		createInitialEquipmentCategories();
 		// createInitialEquipmentTypes(equipmentTypeDAO,equipmentCategoryDAO, transactionManager);
-		createInitialEquipmentTypesFromCSV(equipmentTypeDAO, equipmentCategoryDAO, transactionManager, "initdata/equipmentTypes.csv");
+		createInitialEquipmentTypesFromCSV("initdata/equipmentTypes.csv");
 
 	}
 
@@ -137,7 +133,7 @@ public class DataBaseInitializer implements ComponentInitializer {
 		}
 		try {
 			connection.commit();
-		} catch (SQLException e) {
+		} catch (final SQLException e) {
 			throw WrappedException.wrap(e);
 		}
 	}
@@ -186,8 +182,8 @@ public class DataBaseInitializer implements ComponentInitializer {
 		}
 	}
 	 */
-	
-	private static void createInitialEquipmentCategories(final EquipmentCategoryDAO equipmentCategoryDAO, final VTransactionManager transactionManager) {
+
+	private void createInitialEquipmentCategories() {
 		try (VTransactionWritable tx = transactionManager.createCurrentTransaction()) {
 
 			equipmentCategoryDAO.create(createEquipmentCategory(true, "Bot"));
@@ -197,11 +193,9 @@ public class DataBaseInitializer implements ComponentInitializer {
 		}
 	}
 
-	private void createInitialEquipmentTypesFromCSV(final EquipmentTypeDAO equipmentTypeDAO,
-			final EquipmentCategoryDAO equipmentCategoryDAO,
-			final VTransactionManager transactionManager,
+	private void createInitialEquipmentTypesFromCSV(
 			final String csvFilePath) {
-		
+
 		try (
 				VTransactionWritable tx = transactionManager.createCurrentTransaction();
 				Reader reader = new BufferedReader(new InputStreamReader(resourceManager.resolve(csvFilePath).openStream()));
@@ -210,30 +204,27 @@ public class DataBaseInitializer implements ComponentInitializer {
 								.withSeparator(';')
 								.build())
 						.withSkipLines(1)
-						.build();
-			) {
+						.build();) {
 			String[] nextRecord;
 			String currentCategoryLabel = "";
 			EquipmentCategory equipmentCategory = null;
 
-						
 			while ((nextRecord = csvReader.readNext()) != null) {
 				Assertion.checkArgument(nextRecord.length == EQUIPMENT_TYPE_CSV_FILE_COLUMN_NUMBER, "CSV File {0} Format not suitable for Equipment Types", csvFilePath);
 
-				Boolean enabled = Boolean.valueOf(nextRecord[0]);
-				String nextCategoryLabel = nextRecord[1];
-				String equipmentTypeName = nextRecord[2];
-				
+				final Boolean enabled = Boolean.valueOf(nextRecord[0]);
+				final String nextCategoryLabel = nextRecord[1];
+				final String equipmentTypeName = nextRecord[2];
 
 				if (nextCategoryLabel != currentCategoryLabel) {
 					currentCategoryLabel = nextCategoryLabel;
-					DtList<EquipmentCategory> categoryList = equipmentCategoryDAO.getListByDtFieldName(EquipmentCategoryFields.LABEL, nextCategoryLabel, 1);
+					final DtList<EquipmentCategory> categoryList = equipmentCategoryDAO.getListByDtFieldName(EquipmentCategoryFields.LABEL, nextCategoryLabel, 1);
 					Assertion.checkArgument(categoryList.size() == 1, "Could not fully determine Equipment Category Entity for category : {0} ", nextCategoryLabel);
 					equipmentCategory = categoryList.get(0);
 				}
 				equipmentTypeDAO.create(createEquipmentType(enabled, equipmentTypeName, equipmentCategory));
 			}
-			
+
 			tx.commit();
 
 		} catch (final IOException e) {
@@ -242,10 +233,9 @@ public class DataBaseInitializer implements ComponentInitializer {
 
 	}
 
-	private void createInitialPersonsFromCSV(final PersonDAO personDAO,
-			final VTransactionManager transactionManager,
+	private void createInitialPersonsFromCSV(
 			final String csvFilePath) {
-		
+
 		try (
 				VTransactionWritable tx = transactionManager.createCurrentTransaction();
 				Reader reader = new BufferedReader(new InputStreamReader(resourceManager.resolve(csvFilePath).openStream()));
@@ -254,20 +244,19 @@ public class DataBaseInitializer implements ComponentInitializer {
 								.withSeparator(';')
 								.build())
 						.withSkipLines(1)
-						.build();
-			) {
+						.build();) {
 			String[] nextRecord;
-						
+
 			while ((nextRecord = csvReader.readNext()) != null) {
 				Assertion.checkArgument(nextRecord.length == PERSON_CSV_FILE_COLUMN_NUMBER, "CSV File {0} Format not suitable for Persons", csvFilePath);
 
-				String firstName = nextRecord[0];
-				String lastName = nextRecord[1];
-				String email = nextRecord[2];
+				final String firstName = nextRecord[0];
+				final String lastName = nextRecord[1];
+				final String email = nextRecord[2];
 
-				personDAO.create(createPerson(firstName,lastName,email));
+				personDAO.create(createPerson(firstName, lastName, email));
 			}
-			
+
 			tx.commit();
 
 		} catch (final IOException e) {
@@ -276,77 +265,74 @@ public class DataBaseInitializer implements ComponentInitializer {
 
 	}
 
-	
-	
-	
 	/*
 	private static void createInitialEquipmentTypes(final EquipmentTypeDAO equipmentTypeDAO, final EquipmentCategoryDAO equipmentCategoryDAO, final VTransactionManager transactionManager) {
 		try (VTransactionWritable tx = transactionManager.createCurrentTransaction()) {
-
+	
 			// Buildings
 			DtList<EquipmentCategory> categoryList = equipmentCategoryDAO.getListByDtFieldName(EquipmentCategoryFields.LABEL, "Building", 1);
 			EquipmentCategory equipmentCategory = categoryList.get(0);
-
+	
 			equipmentTypeDAO.create(createEquipmentType(true, "Wind Power Plant", equipmentCategory));
 			equipmentTypeDAO.create(createEquipmentType(true, "Nuclear Power Plant", equipmentCategory));
 			equipmentTypeDAO.create(createEquipmentType(true, "Solar Power Plant", equipmentCategory));
 			equipmentTypeDAO.create(createEquipmentType(true, "Mobile Power Generator", equipmentCategory));
 			equipmentTypeDAO.create(createEquipmentType(true, "Power Suply Depot", equipmentCategory));
-
+	
 			equipmentTypeDAO.create(createEquipmentType(true, "Hydroponic Farm", equipmentCategory));
 			equipmentTypeDAO.create(createEquipmentType(true, "Martian Soil Farm", equipmentCategory));
 			equipmentTypeDAO.create(createEquipmentType(true, "Ranch", equipmentCategory));
 			equipmentTypeDAO.create(createEquipmentType(true, "Food Factory", equipmentCategory));
 			equipmentTypeDAO.create(createEquipmentType(true, "Farming Area", equipmentCategory));
-
+	
 			equipmentTypeDAO.create(createEquipmentType(true, "Hospital", equipmentCategory));
-
+	
 			equipmentTypeDAO.create(createEquipmentType(true, "Radio Station", equipmentCategory));
-
+	
 			equipmentTypeDAO.create(createEquipmentType(true, "Water Station", equipmentCategory));
 			equipmentTypeDAO.create(createEquipmentType(true, "Terraformation Plant", equipmentCategory));
 			equipmentTypeDAO.create(createEquipmentType(true, "Air Recycling Station", equipmentCategory));
-
+	
 			equipmentTypeDAO.create(createEquipmentType(true, "Mining Area", equipmentCategory));
 			equipmentTypeDAO.create(createEquipmentType(true, "Mine", equipmentCategory));
-
+	
 			equipmentTypeDAO.create(createEquipmentType(true, "Police Station", equipmentCategory));
 			equipmentTypeDAO.create(createEquipmentType(true, "Fire Station", equipmentCategory));
-
+	
 			equipmentTypeDAO.create(createEquipmentType(true, "Robotics Facility", equipmentCategory));
-
+	
 			// Vehicles
 			categoryList = equipmentCategoryDAO.getListByDtFieldName(EquipmentCategoryFields.LABEL, "Vehicle", 1);
 			equipmentCategory = categoryList.get(0);
-
+	
 			equipmentTypeDAO.create(createEquipmentType(true, "Mobile Power Generator", equipmentCategory));
-
+	
 			equipmentTypeDAO.create(createEquipmentType(true, "Tractor", equipmentCategory));
-
+	
 			equipmentTypeDAO.create(createEquipmentType(true, "Field Hospital", equipmentCategory));
 			equipmentTypeDAO.create(createEquipmentType(true, "Medic Vehicle", equipmentCategory));
 			equipmentTypeDAO.create(createEquipmentType(true, "Bacta Tank", equipmentCategory));
-
+	
 			equipmentTypeDAO.create(createEquipmentType(true, "Satellite", equipmentCategory));
-
+	
 			equipmentTypeDAO.create(createEquipmentType(true, "Space Construction Vehicle", equipmentCategory));
 			equipmentTypeDAO.create(createEquipmentType(true, "Martian Mining Vehicle", equipmentCategory));
-
+	
 			equipmentTypeDAO.create(createEquipmentType(true, "Emergency Vehicle", equipmentCategory));
-
+	
 			// Bots
 			categoryList = equipmentCategoryDAO.getListByDtFieldName(EquipmentCategoryFields.LABEL, "Bot", 1);
 			equipmentCategory = categoryList.get(0);
-
+	
 			equipmentTypeDAO.create(createEquipmentType(true, "Satellite", equipmentCategory));
 			equipmentTypeDAO.create(createEquipmentType(true, "Droid", equipmentCategory));
 			equipmentTypeDAO.create(createEquipmentType(true, "Drone", equipmentCategory));
-
+	
 			tx.commit();
 		}
 	}
 	*/
-	
+
 	private static Base createBase(final BaseTypeEnum baseTypeEnumValue,
 			final String baseName,
 			final String baseCode,
