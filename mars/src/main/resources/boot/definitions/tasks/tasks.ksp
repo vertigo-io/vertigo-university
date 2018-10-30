@@ -1,0 +1,9 @@
+package io.mars.basemanagement
+
+create Task TK_SELECT_PRIMITIVE {  
+    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+    request : "
+            select ID from EQUIPMENT_TYPE
+             "
+    attribute EQUIPMENT_TYPE_ID_LIST     {domain : DO_LONGS         required:"true"  inOut :"out"}
+}

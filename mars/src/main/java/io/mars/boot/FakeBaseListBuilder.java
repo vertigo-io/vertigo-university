@@ -12,12 +12,12 @@ import io.mars.basemanagement.domain.BaseTypeEnum;
 
 public class FakeBaseListBuilder {
 
-	private List<String> dictionnary1;
-	private List<String> dictionnary2;
+	private List<String> nameFirstPartdictionnary;
+	private List<String> nameSecondPartdictionnary;
 	private int maxValues;
 
-	private static final int MIN_ASSTEST_VALUE = 10000;
-	private static final int MAX_ASSTEST_VALUE = 100000;
+	private static final int MIN_ASSETS_VALUE = 10000;
+	private static final int MAX_ASSETS_VALUE = 100000;
 
 	private static final int MIN_RENTING_FEE = 1000;
 	private static final int MAX_RENTING_FEE = 4000;
@@ -25,9 +25,9 @@ public class FakeBaseListBuilder {
 	public FakeBaseListBuilder() {
 	}
 
-	public FakeBaseListBuilder withNameDictionnaries(List<String> dictionnary1, List<String> dictionnary2) {
-		this.dictionnary1 = dictionnary1;
-		this.dictionnary2 = dictionnary2;
+	public FakeBaseListBuilder withNameDictionnaries(List<String> nameFirstPartDictionnary, List<String> nameSecondPartDictionnary) {
+		this.nameFirstPartdictionnary = nameFirstPartDictionnary;
+		this.nameSecondPartdictionnary = nameSecondPartDictionnary;
 		return this;
 	}
 
@@ -44,8 +44,8 @@ public class FakeBaseListBuilder {
 		List<Base> baseList = new ArrayList<Base>();
 
 		int currentCounter = 0;
-		for (String firstPart : dictionnary1) {
-			for (String secondPart : dictionnary2) {
+		for (String firstPart : nameFirstPartdictionnary) {
+			for (String secondPart : nameSecondPartdictionnary) {
 
 				baseList.add(createBase(FakeDataUtils.randomEnum(BaseTypeEnum.class),
 						firstPart + " " + secondPart,
@@ -58,11 +58,11 @@ public class FakeBaseListBuilder {
 						getRentingFee()));
 				currentCounter++;
 
-				if (currentCounter > maxValues) {
+				if (currentCounter >= maxValues) {
 					break;
 				}
 			}
-			if (currentCounter > maxValues) {
+			if (currentCounter >= maxValues) {
 				break;
 			}
 		}
@@ -93,7 +93,7 @@ public class FakeBaseListBuilder {
 	}
 
 	private static BigDecimal getAssetsValue() {
-		Double randomDouble = ThreadLocalRandom.current().nextDouble(MIN_ASSTEST_VALUE, MAX_ASSTEST_VALUE);
+		Double randomDouble = ThreadLocalRandom.current().nextDouble(MIN_ASSETS_VALUE, MAX_ASSETS_VALUE);
 		return BigDecimal.valueOf(randomDouble);
 	}
 

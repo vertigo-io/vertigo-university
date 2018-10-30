@@ -25,9 +25,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
-import java.math.BigDecimal;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
@@ -39,7 +37,6 @@ import com.opencsv.CSVReaderBuilder;
 
 import io.mars.basemanagement.dao.BaseDAO;
 import io.mars.basemanagement.domain.Base;
-import io.mars.basemanagement.domain.BaseTypeEnum;
 import io.mars.catalog.dao.EquipmentCategoryDAO;
 import io.mars.catalog.dao.EquipmentTypeDAO;
 import io.mars.catalog.domain.EquipmentCategory;
@@ -90,7 +87,7 @@ public class DataBaseInitializer implements ComponentInitializer {
 	@Override
 	public void init() {
 		createDataBase();
-		createInitialBases(baseDAO, transactionManager);
+		createInitialBases();
 		createInitialPersonsFromCSV("initdata/persons.csv");
 		createInitialEquipmentCategories();
 		createInitialEquipmentTypesFromCSV("initdata/equipmentTypes.csv");
@@ -99,6 +96,7 @@ public class DataBaseInitializer implements ComponentInitializer {
 
 	private void createDataBase() {
 		final SqlConnection connection = sqlDataBaseManager.getConnectionProvider(SqlDataBaseManager.MAIN_CONNECTION_PROVIDER_NAME).obtainConnection();
+		execCallableStatement(connection, sqlDataBaseManager, "drop all objects;");
 		execSqlScript(connection, "sqlgen/crebas.sql");
 		execSqlScript(connection, "sqlgen/init_masterdata_base_type.sql");
 		execSqlScript(connection, "sqlgen/init_masterdata_job_status.sql");
@@ -138,7 +136,7 @@ public class DataBaseInitializer implements ComponentInitializer {
 		}
 	}
 
-	private static void createInitialBases(final BaseDAO baseDao, final VTransactionManager transactionManager) {
+	private void createInitialBases() {
 		try (VTransactionWritable tx = transactionManager.createCurrentTransaction()) {
 
 			List<String> nameFirstPartDictionnary1 = Arrays.asList("Alpha", "Beta", "Gamma", "Delta", "Epsilon", "Zeta", "Eta", "Theta");
@@ -150,11 +148,15 @@ public class DataBaseInitializer implements ComponentInitializer {
 					.build();
 
 			for (Base base : baseList) {
-				baseDao.create(base);
+				baseDAO.create(base);
 			}
 
 			tx.commit();
 		}
+	}
+
+	private static void createInitialEquipment() {
+
 	}
 
 	private void createInitialEquipmentCategories() {
@@ -237,28 +239,6 @@ public class DataBaseInitializer implements ComponentInitializer {
 			throw WrappedException.wrap(e, "Can't load csv file {0}", csvFilePath);
 		}
 
-	}
-
-	private static Base createBase(final BaseTypeEnum baseTypeEnumValue,
-			final String baseName,
-			final String baseCode,
-			final int healthLevel,
-			final LocalDate creationDate,
-			final String description,
-			final String geoLocation,
-			final BigDecimal assetsValue,
-			final BigDecimal rentingFee) {
-		final Base base = new Base();
-		base.setCode(baseCode);
-		base.setName(baseName);
-		base.baseType().setEnumValue(baseTypeEnumValue);
-		base.setHealthLevel(healthLevel);
-		base.setCreationDate(creationDate);
-		base.setDescription(description);
-		base.setGeoLocation(geoLocation);
-		base.setAssetsValue(assetsValue);
-		base.setRentingFee(rentingFee);
-		return base;
 	}
 
 	private static Person createPerson(final String firstName,
