@@ -14,7 +14,7 @@
 	</module>
 
 	<module name="services">
-		<!-- <component api="BaseServices" class="io.mars.basemanagement.services.base.BaseServices"/> -->
+		<component class="io.mars.basemanagement.services.base.BaseServices"/>
 	</module>
 
 	<init>

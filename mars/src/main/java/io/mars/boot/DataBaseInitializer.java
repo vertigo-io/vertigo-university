@@ -28,6 +28,8 @@ import java.io.Reader;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -89,10 +91,8 @@ public class DataBaseInitializer implements ComponentInitializer {
 	public void init() {
 		createDataBase();
 		createInitialBases(baseDAO, transactionManager);
-		// createInitialPersons(personDao, transactionManager);
 		createInitialPersonsFromCSV("initdata/persons.csv");
 		createInitialEquipmentCategories();
-		// createInitialEquipmentTypes(equipmentTypeDAO,equipmentCategoryDAO, transactionManager);
 		createInitialEquipmentTypesFromCSV("initdata/equipmentTypes.csv");
 
 	}
@@ -140,48 +140,22 @@ public class DataBaseInitializer implements ComponentInitializer {
 
 	private static void createInitialBases(final BaseDAO baseDao, final VTransactionManager transactionManager) {
 		try (VTransactionWritable tx = transactionManager.createCurrentTransaction()) {
-			baseDao.create(createBase(BaseTypeEnum.hydro,
-					"Alpha Base",
-					"ALPHA1",
-					85,
-					LocalDate.of(2023, 12, 5),
-					"This facility is the first to have been established in Valles Marineris and one of the first martian base ever established. It was named after the first lunar base Alpha, before the Moon disappeared from the solar system in 1999.",
-					"43,566666N 51,47795W",
-					BigDecimal.valueOf(12500.33),
-					BigDecimal.valueOf(255.40)));
-			tx.commit();
-		}
-	}
 
-	/*
-	private static void createInitialPersons(final PersonDAO personDao, final VTransactionManager transactionManager) {
-		try (VTransactionWritable tx = transactionManager.createCurrentTransaction()) {
-			personDao.create(createPerson(
-					"James T.", "Kirk", "jtkirk@mmc.co.mars"));
-			personDao.create(createPerson(
-					"John", "König", "jkonig@mmc.co.mars"));
-			personDao.create(createPerson(
-					"Neil", "Armstrong", "narmstrong@mmc.co.mars"));
-			personDao.create(createPerson(
-					"Jean-Luc", "Picard", "jlpicard@mmc.co.mars"));
-			personDao.create(createPerson(
-					"Darth", "Vader", "dvader@mmc.co.mars"));
-			personDao.create(createPerson(
-					"Han", "Solo", "hsolo@mmc.co.mars"));
-			personDao.create(createPerson(
-					"Jim", "Lovell", "jlovell@mmc.co.mars"));
-			personDao.create(createPerson(
-					"William", "Adama", "wadama@mmc.co.mars"));
-			personDao.create(createPerson(
-					"Worker", "One", "wone@mmc.co.mars"));
-			personDao.create(createPerson(
-					"Worker", "Two", "wtwo@mmc.co.mars"));
-			personDao.create(createPerson(
-					"Worker", "Three", "wthree@mmc.co.mars"));
+			List<String> nameFirstPartDictionnary1 = Arrays.asList("Alpha", "Beta", "Gamma", "Delta", "Epsilon", "Zeta", "Eta", "Theta");
+			List<String> nameSecondPartDictionnary2 = Arrays.asList("Centauri", "Aldebaran", "Pisces", "Cygnus", "Pegasus", "Dragon", "Andromeda");
+
+			List<Base> baseList = new FakeBaseListBuilder()
+					.withMaxValues(50)
+					.withNameDictionnaries(nameFirstPartDictionnary1, nameSecondPartDictionnary2)
+					.build();
+
+			for (Base base : baseList) {
+				baseDao.create(base);
+			}
+
 			tx.commit();
 		}
 	}
-	 */
 
 	private void createInitialEquipmentCategories() {
 		try (VTransactionWritable tx = transactionManager.createCurrentTransaction()) {
@@ -264,74 +238,6 @@ public class DataBaseInitializer implements ComponentInitializer {
 		}
 
 	}
-
-	/*
-	private static void createInitialEquipmentTypes(final EquipmentTypeDAO equipmentTypeDAO, final EquipmentCategoryDAO equipmentCategoryDAO, final VTransactionManager transactionManager) {
-		try (VTransactionWritable tx = transactionManager.createCurrentTransaction()) {
-	
-			// Buildings
-			DtList<EquipmentCategory> categoryList = equipmentCategoryDAO.getListByDtFieldName(EquipmentCategoryFields.LABEL, "Building", 1);
-			EquipmentCategory equipmentCategory = categoryList.get(0);
-	
-			equipmentTypeDAO.create(createEquipmentType(true, "Wind Power Plant", equipmentCategory));
-			equipmentTypeDAO.create(createEquipmentType(true, "Nuclear Power Plant", equipmentCategory));
-			equipmentTypeDAO.create(createEquipmentType(true, "Solar Power Plant", equipmentCategory));
-			equipmentTypeDAO.create(createEquipmentType(true, "Mobile Power Generator", equipmentCategory));
-			equipmentTypeDAO.create(createEquipmentType(true, "Power Suply Depot", equipmentCategory));
-	
-			equipmentTypeDAO.create(createEquipmentType(true, "Hydroponic Farm", equipmentCategory));
-			equipmentTypeDAO.create(createEquipmentType(true, "Martian Soil Farm", equipmentCategory));
-			equipmentTypeDAO.create(createEquipmentType(true, "Ranch", equipmentCategory));
-			equipmentTypeDAO.create(createEquipmentType(true, "Food Factory", equipmentCategory));
-			equipmentTypeDAO.create(createEquipmentType(true, "Farming Area", equipmentCategory));
-	
-			equipmentTypeDAO.create(createEquipmentType(true, "Hospital", equipmentCategory));
-	
-			equipmentTypeDAO.create(createEquipmentType(true, "Radio Station", equipmentCategory));
-	
-			equipmentTypeDAO.create(createEquipmentType(true, "Water Station", equipmentCategory));
-			equipmentTypeDAO.create(createEquipmentType(true, "Terraformation Plant", equipmentCategory));
-			equipmentTypeDAO.create(createEquipmentType(true, "Air Recycling Station", equipmentCategory));
-	
-			equipmentTypeDAO.create(createEquipmentType(true, "Mining Area", equipmentCategory));
-			equipmentTypeDAO.create(createEquipmentType(true, "Mine", equipmentCategory));
-	
-			equipmentTypeDAO.create(createEquipmentType(true, "Police Station", equipmentCategory));
-			equipmentTypeDAO.create(createEquipmentType(true, "Fire Station", equipmentCategory));
-	
-			equipmentTypeDAO.create(createEquipmentType(true, "Robotics Facility", equipmentCategory));
-	
-			// Vehicles
-			categoryList = equipmentCategoryDAO.getListByDtFieldName(EquipmentCategoryFields.LABEL, "Vehicle", 1);
-			equipmentCategory = categoryList.get(0);
-	
-			equipmentTypeDAO.create(createEquipmentType(true, "Mobile Power Generator", equipmentCategory));
-	
-			equipmentTypeDAO.create(createEquipmentType(true, "Tractor", equipmentCategory));
-	
-			equipmentTypeDAO.create(createEquipmentType(true, "Field Hospital", equipmentCategory));
-			equipmentTypeDAO.create(createEquipmentType(true, "Medic Vehicle", equipmentCategory));
-			equipmentTypeDAO.create(createEquipmentType(true, "Bacta Tank", equipmentCategory));
-	
-			equipmentTypeDAO.create(createEquipmentType(true, "Satellite", equipmentCategory));
-	
-			equipmentTypeDAO.create(createEquipmentType(true, "Space Construction Vehicle", equipmentCategory));
-			equipmentTypeDAO.create(createEquipmentType(true, "Martian Mining Vehicle", equipmentCategory));
-	
-			equipmentTypeDAO.create(createEquipmentType(true, "Emergency Vehicle", equipmentCategory));
-	
-			// Bots
-			categoryList = equipmentCategoryDAO.getListByDtFieldName(EquipmentCategoryFields.LABEL, "Bot", 1);
-			equipmentCategory = categoryList.get(0);
-	
-			equipmentTypeDAO.create(createEquipmentType(true, "Satellite", equipmentCategory));
-			equipmentTypeDAO.create(createEquipmentType(true, "Droid", equipmentCategory));
-			equipmentTypeDAO.create(createEquipmentType(true, "Drone", equipmentCategory));
-	
-			tx.commit();
-		}
-	}
-	*/
 
 	private static Base createBase(final BaseTypeEnum baseTypeEnumValue,
 			final String baseName,
