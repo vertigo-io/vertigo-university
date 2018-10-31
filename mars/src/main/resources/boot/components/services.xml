@@ -14,10 +14,13 @@
 		<component class="io.mars.basemanagement.dao.BusinessDAO" />
 		<component class="io.mars.basemanagement.BasemanagementPAO" />
 		<component class="io.mars.basemanagement.dao.GeosectorDAO" />
+		<component class="io.mars.maintenance.dao.TicketDAO" />
+		<component class="io.mars.maintenance.dao.WorkOrderDAO" />
 	</module>
 
 	<module name="services">
 		<component class="io.mars.basemanagement.services.base.BaseServices"/>
+		<component class="io.mars.datageneration.DataGenerator" />
 	</module>
 
 	<init>
