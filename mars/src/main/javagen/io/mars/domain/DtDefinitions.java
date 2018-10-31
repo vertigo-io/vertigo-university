@@ -72,7 +72,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	 */
 	public enum BaseFields implements DtFieldName<io.mars.basemanagement.domain.Base> {
 		/** Propriété 'Id'. */
-		BAS_ID,
+		BASE_ID,
 		/** Propriété 'Base Code'. */
 		CODE,
 		/** Propriété 'Name'. */

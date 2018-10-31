@@ -1,4 +1,4 @@
-package io.mars.basemanagement.pao;
+package io.mars.basemanagement;
 
 import javax.inject.Inject;
 
@@ -41,11 +41,47 @@ public final class BasemanagementPAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TK_SELECT_PRIMITIVE.
+	 * Execute la tache TK_SELECT_BASE_ID.
+	 * @return java.util.List<Long> baseIdList
+	*/
+	public java.util.List<Long> selectBaseId() {
+		final Task task = createTaskBuilder("TK_SELECT_BASE_ID")
+				.build();
+		return getTaskManager()
+				.execute(task)
+				.getResult();
+	}
+
+	/**
+	 * Execute la tache TK_SELECT_BUSINESS_ID.
+	 * @return java.util.List<Long> businessIdList
+	*/
+	public java.util.List<Long> selectBusinessId() {
+		final Task task = createTaskBuilder("TK_SELECT_BUSINESS_ID")
+				.build();
+		return getTaskManager()
+				.execute(task)
+				.getResult();
+	}
+
+	/**
+	 * Execute la tache TK_SELECT_EQUIPMENT_TYPE_ID.
 	 * @return java.util.List<Long> equipmentTypeIdList
 	*/
-	public java.util.List<Long> selectPrimitive() {
-		final Task task = createTaskBuilder("TK_SELECT_PRIMITIVE")
+	public java.util.List<Long> selectEquipmentTypeId() {
+		final Task task = createTaskBuilder("TK_SELECT_EQUIPMENT_TYPE_ID")
+				.build();
+		return getTaskManager()
+				.execute(task)
+				.getResult();
+	}
+
+	/**
+	 * Execute la tache TK_SELECT_GEOSECTOR_ID.
+	 * @return java.util.List<Long> geosectorIdList
+	*/
+	public java.util.List<Long> selectGeosectorId() {
+		final Task task = createTaskBuilder("TK_SELECT_GEOSECTOR_ID")
 				.build();
 		return getTaskManager()
 				.execute(task)

@@ -65,7 +65,7 @@ create sequence SEQ_WORK_ORDER_STATUS
 -- ============================================================
 create table BASE
 (
-    BAS_ID      	 NUMERIC     	not null,
+    BASE_ID     	 NUMERIC     	not null,
     CODE        	 VARCHAR(100)	,
     NAME        	 VARCHAR(100)	,
     HEALTH_LEVEL	 NUMERIC     	,
@@ -76,10 +76,10 @@ create table BASE
     RENTING_FEE 	 NUMERIC(12,2)	,
     BASE_TYPE_ID	 VARCHAR(100)	,
     GEOSECTOR_ID	 NUMERIC     	,
-    constraint PK_BASE primary key (BAS_ID)
+    constraint PK_BASE primary key (BASE_ID)
 );
 
-comment on column BASE.BAS_ID is
+comment on column BASE.BASE_ID is
 'Id';
 
 comment on column BASE.CODE is
@@ -518,7 +518,7 @@ create index BASE_BASETYPE_BASE_TYPE_FK on BASE (BASE_TYPE_ID asc);
 
 alter table EQUIPMENT
 	add constraint FK_BASE_EQUIPMENT_BASE foreign key (BASE_ID)
-	references BASE (BAS_ID);
+	references BASE (BASE_ID);
 
 create index BASE_EQUIPMENT_BASE_FK on EQUIPMENT (BASE_ID asc);
 
@@ -530,7 +530,7 @@ create index BASE_GEOSECTOR_GEOSECTOR_FK on BASE (GEOSECTOR_ID asc);
 
 alter table PICTURE
 	add constraint FK_BASE_PICTURE_BASE foreign key (BASE_ID)
-	references BASE (BAS_ID);
+	references BASE (BASE_ID);
 
 create index BASE_PICTURE_BASE_FK on PICTURE (BASE_ID asc);
 
@@ -578,7 +578,7 @@ create index EQUIPMENT_TYPE_EQUIPMENT_CATEGORY_EQUIPMENT_CATEGORY_FK on EQUIPMEN
 
 alter table MISSION
 	add constraint FK_MISSION_BASE_BASE foreign key (BASE_ID)
-	references BASE (BAS_ID);
+	references BASE (BASE_ID);
 
 create index MISSION_BASE_BASE_FK on MISSION (BASE_ID asc);
 

@@ -1,7 +1,7 @@
 package io.mars.basemanagement.domain
 
 create DtDefinition DT_BASE {
-	id BAS_ID {domain: DO_ID label: "Id"}
+	id BASE_ID {domain: DO_ID label: "Id"}
 	field CODE {domain: DO_CODE label: "Base Code" required:"false"}
 	field NAME {domain: DO_LABEL label: "Name" required:"false"}
 	field HEALTH_LEVEL {domain: DO_HEALTH label: "Health Level" required: "false"}	

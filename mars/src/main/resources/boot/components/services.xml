@@ -11,6 +11,9 @@
 		<component class="io.mars.catalog.dao.EquipmentCategoryDAO" />
 		<component class="io.mars.catalog.dao.EquipmentTypeDAO" />
 		<component class="io.mars.basemanagement.dao.EquipmentDAO" />
+		<component class="io.mars.basemanagement.dao.BusinessDAO" />
+		<component class="io.mars.basemanagement.BasemanagementPAO" />
+		<component class="io.mars.basemanagement.dao.GeosectorDAO" />
 	</module>
 
 	<module name="services">

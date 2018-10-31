@@ -17,7 +17,7 @@ import io.vertigo.lang.Generated;
 public final class Base implements Entity {
 	private static final long serialVersionUID = 1L;
 
-	private Long basId;
+	private Long baseId;
 	private String code;
 	private String name;
 	private Integer healthLevel;
@@ -81,20 +81,20 @@ public final class Base implements Entity {
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
-	 * @return Long basId <b>Obligatoire</b>
+	 * @return Long baseId <b>Obligatoire</b>
 	 */
 	@Field(domain = "DO_ID", type = "ID", required = true, label = "Id")
-	public Long getBasId() {
-		return basId;
+	public Long getBaseId() {
+		return baseId;
 	}
 
 	/**
 	 * Champ : ID.
 	 * Définit la valeur de la propriété 'Id'.
-	 * @param basId Long <b>Obligatoire</b>
+	 * @param baseId Long <b>Obligatoire</b>
 	 */
-	public void setBasId(final Long basId) {
-		this.basId = basId;
+	public void setBaseId(final Long baseId) {
+		this.baseId = baseId;
 	}
 	
 	/**

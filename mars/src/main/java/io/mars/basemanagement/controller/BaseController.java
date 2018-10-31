@@ -39,7 +39,7 @@ public class BaseController extends AbstractVSpringMvcController {
 	public String doSave(
 			@ViewAttribute("base") final Base base, final RedirectAttributes redirectAttributes) {
 		baseServices.save(base);
-		redirectAttributes.addAttribute("basId", base.getBasId());
+		redirectAttributes.addAttribute("basId", base.getBaseId());
 		return "redirect:/base/";
 	}
 

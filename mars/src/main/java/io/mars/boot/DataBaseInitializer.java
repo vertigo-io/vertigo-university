@@ -35,8 +35,15 @@ import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 
+import io.mars.basemanagement.BasemanagementPAO;
 import io.mars.basemanagement.dao.BaseDAO;
+import io.mars.basemanagement.dao.BusinessDAO;
+import io.mars.basemanagement.dao.EquipmentDAO;
+import io.mars.basemanagement.dao.GeosectorDAO;
 import io.mars.basemanagement.domain.Base;
+import io.mars.basemanagement.domain.Business;
+import io.mars.basemanagement.domain.Equipment;
+import io.mars.basemanagement.domain.Geosector;
 import io.mars.catalog.dao.EquipmentCategoryDAO;
 import io.mars.catalog.dao.EquipmentTypeDAO;
 import io.mars.catalog.domain.EquipmentCategory;
@@ -56,13 +63,21 @@ import io.vertigo.lang.Assertion;
 import io.vertigo.lang.WrappedException;
 
 /**
- * Init masterdata list.
- * @author jmforhan
+ * Init sample data for the app.
+ * @author dszniten
  */
 public class DataBaseInitializer implements ComponentInitializer {
 
 	private static final int EQUIPMENT_TYPE_CSV_FILE_COLUMN_NUMBER = 3;
 	private static final int PERSON_CSV_FILE_COLUMN_NUMBER = 3;
+	private static final int BUSINESS_CSV_FILE_COLUMN_NUMBER = 1;
+	private static final int GEOSECTOR_CSV_FILE_COLUMN_NUMBER = 1;
+
+	@Inject
+	private BusinessDAO businessDAO;
+
+	@Inject
+	private GeosectorDAO geosectorDAO;
 
 	@Inject
 	private ResourceManager resourceManager;
@@ -75,6 +90,9 @@ public class DataBaseInitializer implements ComponentInitializer {
 	private BaseDAO baseDAO;
 
 	@Inject
+	private EquipmentDAO equipmentDAO;
+
+	@Inject
 	private PersonDAO personDAO;
 
 	@Inject
@@ -83,14 +101,21 @@ public class DataBaseInitializer implements ComponentInitializer {
 	@Inject
 	private EquipmentTypeDAO equipmentTypeDAO;
 
+	@Inject
+	private BasemanagementPAO basemanagementPAO;
+
 	/** {@inheritDoc} */
 	@Override
 	public void init() {
 		createDataBase();
+		createInitialGeosectorsFromCSV("initdata/geosectors.csv");
 		createInitialBases();
 		createInitialPersonsFromCSV("initdata/persons.csv");
 		createInitialEquipmentCategories();
 		createInitialEquipmentTypesFromCSV("initdata/equipmentTypes.csv");
+		createInitialBusinessesFromCSV("initdata/businesses.csv");
+
+		createInitialEquipments();
 
 	}
 
@@ -144,6 +169,7 @@ public class DataBaseInitializer implements ComponentInitializer {
 
 			List<Base> baseList = new FakeBaseListBuilder()
 					.withMaxValues(50)
+					.withBasemanagementPAO(basemanagementPAO)
 					.withNameDictionnaries(nameFirstPartDictionnary1, nameSecondPartDictionnary2)
 					.build();
 
@@ -155,8 +181,22 @@ public class DataBaseInitializer implements ComponentInitializer {
 		}
 	}
 
-	private static void createInitialEquipment() {
+	private void createInitialEquipments() {
+		try (VTransactionWritable tx = transactionManager.createCurrentTransaction()) {
+			List<Equipment> equipmentList = new FakeEquipmentListBuilder()
+					.withBasemanagementPAO(basemanagementPAO)
+					.withBusinessDAO(businessDAO)
+					.withEquipmentTypeDAO(equipmentTypeDAO)
+					.withMaxValues(100)
+					.build();
 
+			for (Equipment equipment : equipmentList) {
+				equipmentDAO.create(equipment);
+			}
+
+			tx.commit();
+
+		}
 	}
 
 	private void createInitialEquipmentCategories() {
@@ -169,8 +209,59 @@ public class DataBaseInitializer implements ComponentInitializer {
 		}
 	}
 
-	private void createInitialEquipmentTypesFromCSV(
-			final String csvFilePath) {
+	private void createInitialBusinessesFromCSV(final String csvFilePath) {
+		try (
+				VTransactionWritable tx = transactionManager.createCurrentTransaction();
+				Reader reader = new BufferedReader(new InputStreamReader(resourceManager.resolve(csvFilePath).openStream()));
+				CSVReader csvReader = new CSVReaderBuilder(reader)
+						.withCSVParser(new CSVParserBuilder()
+								.withSeparator(';')
+								.build())
+						.withSkipLines(1)
+						.build();) {
+			String[] nextRecord;
+
+			while ((nextRecord = csvReader.readNext()) != null) {
+				Assertion.checkArgument(nextRecord.length == BUSINESS_CSV_FILE_COLUMN_NUMBER, "CSV File {0} Format not suitable for Equipment Types", csvFilePath);
+
+				final String businessName = nextRecord[0];
+				businessDAO.create(createBusiness(businessName));
+			}
+			tx.commit();
+
+		} catch (final IOException e) {
+			throw WrappedException.wrap(e, "Can't load csv file {0}", csvFilePath);
+		}
+
+	}
+
+	private void createInitialGeosectorsFromCSV(final String csvFilePath) {
+		try (
+				VTransactionWritable tx = transactionManager.createCurrentTransaction();
+				Reader reader = new BufferedReader(new InputStreamReader(resourceManager.resolve(csvFilePath).openStream()));
+				CSVReader csvReader = new CSVReaderBuilder(reader)
+						.withCSVParser(new CSVParserBuilder()
+								.withSeparator(';')
+								.build())
+						.withSkipLines(1)
+						.build();) {
+			String[] nextRecord;
+
+			while ((nextRecord = csvReader.readNext()) != null) {
+				Assertion.checkArgument(nextRecord.length == GEOSECTOR_CSV_FILE_COLUMN_NUMBER, "CSV File {0} Format not suitable for Equipment Types", csvFilePath);
+
+				final String geosectorName = nextRecord[0];
+				geosectorDAO.create(createGeosector(geosectorName));
+			}
+			tx.commit();
+
+		} catch (final IOException e) {
+			throw WrappedException.wrap(e, "Can't load csv file {0}", csvFilePath);
+		}
+
+	}
+
+	private void createInitialEquipmentTypesFromCSV(final String csvFilePath) {
 
 		try (
 				VTransactionWritable tx = transactionManager.createCurrentTransaction();
@@ -239,6 +330,18 @@ public class DataBaseInitializer implements ComponentInitializer {
 			throw WrappedException.wrap(e, "Can't load csv file {0}", csvFilePath);
 		}
 
+	}
+
+	private Business createBusiness(String businessName) {
+		Business business = new Business();
+		business.setName(businessName);
+		return business;
+	}
+
+	private Geosector createGeosector(String geosectorName) {
+		Geosector geosector = new Geosector();
+		geosector.setSectorLabel(geosectorName);
+		return geosector;
 	}
 
 	private static Person createPerson(final String firstName,

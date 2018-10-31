@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
+import io.mars.basemanagement.BasemanagementPAO;
 import io.mars.basemanagement.domain.Base;
 import io.mars.basemanagement.domain.BaseTypeEnum;
 
@@ -14,16 +15,14 @@ public class FakeBaseListBuilder {
 
 	private List<String> nameFirstPartdictionnary;
 	private List<String> nameSecondPartdictionnary;
-	private int maxValues;
+	private int maxValues = 0;
+	private BasemanagementPAO basemanagementPAO = null;
 
 	private static final int MIN_ASSETS_VALUE = 10000;
 	private static final int MAX_ASSETS_VALUE = 100000;
 
 	private static final int MIN_RENTING_FEE = 1000;
 	private static final int MAX_RENTING_FEE = 4000;
-
-	public FakeBaseListBuilder() {
-	}
 
 	public FakeBaseListBuilder withNameDictionnaries(List<String> nameFirstPartDictionnary, List<String> nameSecondPartDictionnary) {
 		this.nameFirstPartdictionnary = nameFirstPartDictionnary;
@@ -40,13 +39,20 @@ public class FakeBaseListBuilder {
 		return this;
 	}
 
+	public FakeBaseListBuilder withBasemanagementPAO(BasemanagementPAO basemanagementPAO) {
+		this.basemanagementPAO = basemanagementPAO;
+		return this;
+	}
+
 	public List<Base> build() {
 		List<Base> baseList = new ArrayList<Base>();
+		List<Long> geosectorIdList = basemanagementPAO.selectGeosectorId();
 
 		int currentCounter = 0;
 		for (String firstPart : nameFirstPartdictionnary) {
 			for (String secondPart : nameSecondPartdictionnary) {
 
+				Long currentGeosectorId = geosectorIdList.get(ThreadLocalRandom.current().nextInt(geosectorIdList.size()));
 				baseList.add(createBase(FakeDataUtils.randomEnum(BaseTypeEnum.class),
 						firstPart + " " + secondPart,
 						getCodeFromBaseName(firstPart, secondPart, currentCounter),
@@ -55,7 +61,8 @@ public class FakeBaseListBuilder {
 						getDescription(),
 						getGeoLocation(),
 						getAssetsValue(),
-						getRentingFee()));
+						getRentingFee(),
+						currentGeosectorId));
 				currentCounter++;
 
 				if (currentCounter >= maxValues) {
@@ -110,7 +117,8 @@ public class FakeBaseListBuilder {
 			final String description,
 			final String geoLocation,
 			final BigDecimal assetsValue,
-			final BigDecimal rentingFee) {
+			final BigDecimal rentingFee,
+			final Long geosectorId) {
 		final Base base = new Base();
 		base.setCode(baseCode);
 		base.setName(baseName);
@@ -121,6 +129,7 @@ public class FakeBaseListBuilder {
 		base.setGeoLocation(geoLocation);
 		base.setAssetsValue(assetsValue);
 		base.setRentingFee(rentingFee);
+		base.geosector().setId(geosectorId);
 		return base;
 	}
 }
