@@ -164,16 +164,16 @@ public class DataBaseInitializer implements ComponentInitializer {
 	private void createInitialBases() {
 		try (VTransactionWritable tx = transactionManager.createCurrentTransaction()) {
 
-			List<String> nameFirstPartDictionnary1 = Arrays.asList("Alpha", "Beta", "Gamma", "Delta", "Epsilon", "Zeta", "Eta", "Theta");
-			List<String> nameSecondPartDictionnary2 = Arrays.asList("Centauri", "Aldebaran", "Pisces", "Cygnus", "Pegasus", "Dragon", "Andromeda");
+			final List<String> nameFirstPartDictionnary1 = Arrays.asList("Alpha", "Beta", "Gamma", "Delta", "Epsilon", "Zeta", "Eta", "Theta");
+			final List<String> nameSecondPartDictionnary2 = Arrays.asList("Centauri", "Aldebaran", "Pisces", "Cygnus", "Pegasus", "Dragon", "Andromeda");
 
-			List<Base> baseList = new FakeBaseListBuilder()
+			final List<Base> baseList = new FakeBaseListBuilder()
 					.withMaxValues(50)
-					.withBasemanagementPAO(basemanagementPAO)
+					.withGeosectorIdList(basemanagementPAO.selectGeosectorId())
 					.withNameDictionnaries(nameFirstPartDictionnary1, nameSecondPartDictionnary2)
 					.build();
 
-			for (Base base : baseList) {
+			for (final Base base : baseList) {
 				baseDAO.create(base);
 			}
 
@@ -183,14 +183,15 @@ public class DataBaseInitializer implements ComponentInitializer {
 
 	private void createInitialEquipments() {
 		try (VTransactionWritable tx = transactionManager.createCurrentTransaction()) {
-			List<Equipment> equipmentList = new FakeEquipmentListBuilder()
-					.withBasemanagementPAO(basemanagementPAO)
-					.withBusinessDAO(businessDAO)
-					.withEquipmentTypeDAO(equipmentTypeDAO)
+			final List<Equipment> equipmentList = new FakeEquipmentListBuilder()
+					.withBaseIdList(basemanagementPAO.selectBaseId())
+					.withGeosectorIdList(basemanagementPAO.selectGeosectorId())
+					.withBusinessList(businessDAO.selectBusiness())
+					.withEquipmentTypeList(equipmentTypeDAO.selectEquipmentType())
 					.withMaxValues(100)
 					.build();
 
-			for (Equipment equipment : equipmentList) {
+			for (final Equipment equipment : equipmentList) {
 				equipmentDAO.create(equipment);
 			}
 
@@ -332,14 +333,14 @@ public class DataBaseInitializer implements ComponentInitializer {
 
 	}
 
-	private Business createBusiness(String businessName) {
-		Business business = new Business();
+	private Business createBusiness(final String businessName) {
+		final Business business = new Business();
 		business.setName(businessName);
 		return business;
 	}
 
-	private Geosector createGeosector(String geosectorName) {
-		Geosector geosector = new Geosector();
+	private Geosector createGeosector(final String geosectorName) {
+		final Geosector geosector = new Geosector();
 		geosector.setSectorLabel(geosectorName);
 		return geosector;
 	}

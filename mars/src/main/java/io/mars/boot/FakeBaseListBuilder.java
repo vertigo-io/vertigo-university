@@ -7,16 +7,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
-import io.mars.basemanagement.BasemanagementPAO;
 import io.mars.basemanagement.domain.Base;
 import io.mars.basemanagement.domain.BaseTypeEnum;
+import io.vertigo.lang.Assertion;
 
 public class FakeBaseListBuilder {
 
 	private List<String> nameFirstPartdictionnary;
 	private List<String> nameSecondPartdictionnary;
-	private int maxValues = 0;
-	private BasemanagementPAO basemanagementPAO = null;
+	private List<Long> myGeosectorIdList;
+	private int myMaxValues = 0;
 
 	private static final int MIN_ASSETS_VALUE = 10000;
 	private static final int MAX_ASSETS_VALUE = 100000;
@@ -24,35 +24,38 @@ public class FakeBaseListBuilder {
 	private static final int MIN_RENTING_FEE = 1000;
 	private static final int MAX_RENTING_FEE = 4000;
 
-	public FakeBaseListBuilder withNameDictionnaries(List<String> nameFirstPartDictionnary, List<String> nameSecondPartDictionnary) {
-		this.nameFirstPartdictionnary = nameFirstPartDictionnary;
-		this.nameSecondPartdictionnary = nameSecondPartDictionnary;
+	public FakeBaseListBuilder withNameDictionnaries(final List<String> nameFirstPartDictionnary, final List<String> nameSecondPartDictionnary) {
+		nameFirstPartdictionnary = nameFirstPartDictionnary;
+		nameSecondPartdictionnary = nameSecondPartDictionnary;
 		return this;
 	}
 
-	public FakeBaseListBuilder withSaveCSVPath(String path) {
+	public FakeBaseListBuilder withSaveCSVPath(final String path) {
 		return this;
 	}
 
-	public FakeBaseListBuilder withMaxValues(int maxValues) {
-		this.maxValues = maxValues;
+	public FakeBaseListBuilder withMaxValues(final int maxValues) {
+		myMaxValues = maxValues;
 		return this;
 	}
 
-	public FakeBaseListBuilder withBasemanagementPAO(BasemanagementPAO basemanagementPAO) {
-		this.basemanagementPAO = basemanagementPAO;
+	public FakeBaseListBuilder withGeosectorIdList(final List<Long> geosectorIdList) {
+		Assertion.checkNotNull(geosectorIdList);
+		//---
+		myGeosectorIdList = geosectorIdList;
 		return this;
 	}
 
 	public List<Base> build() {
-		List<Base> baseList = new ArrayList<Base>();
-		List<Long> geosectorIdList = basemanagementPAO.selectGeosectorId();
+		Assertion.checkNotNull(myGeosectorIdList);
+		//---
+		final List<Base> baseList = new ArrayList<>();
 
 		int currentCounter = 0;
-		for (String firstPart : nameFirstPartdictionnary) {
-			for (String secondPart : nameSecondPartdictionnary) {
+		for (final String firstPart : nameFirstPartdictionnary) {
+			for (final String secondPart : nameSecondPartdictionnary) {
 
-				Long currentGeosectorId = geosectorIdList.get(ThreadLocalRandom.current().nextInt(geosectorIdList.size()));
+				final Long currentGeosectorId = myGeosectorIdList.get(ThreadLocalRandom.current().nextInt(myGeosectorIdList.size()));
 				baseList.add(createBase(FakeDataUtils.randomEnum(BaseTypeEnum.class),
 						firstPart + " " + secondPart,
 						getCodeFromBaseName(firstPart, secondPart, currentCounter),
@@ -65,25 +68,25 @@ public class FakeBaseListBuilder {
 						currentGeosectorId));
 				currentCounter++;
 
-				if (currentCounter >= maxValues) {
+				if (currentCounter >= myMaxValues) {
 					break;
 				}
 			}
-			if (currentCounter >= maxValues) {
+			if (currentCounter >= myMaxValues) {
 				break;
 			}
 		}
 		return baseList;
 	}
 
-	private static String getCodeFromBaseName(String firstPart, String secondPart, int baseIndex) {
-		String code = firstPart + "-" + baseIndex;
+	private static String getCodeFromBaseName(final String firstPart, final String secondPart, final int baseIndex) {
+		final String code = firstPart + "-" + baseIndex;
 		return code;
 	}
 
 	private static LocalDate getCreationDate() {
 
-		LocalDate today = LocalDate.now();
+		final LocalDate today = LocalDate.now();
 		return today.minus(31 + FakeDataUtils.random.nextInt(3650), ChronoUnit.DAYS);
 	}
 
@@ -100,12 +103,12 @@ public class FakeBaseListBuilder {
 	}
 
 	private static BigDecimal getAssetsValue() {
-		Double randomDouble = ThreadLocalRandom.current().nextDouble(MIN_ASSETS_VALUE, MAX_ASSETS_VALUE);
+		final Double randomDouble = ThreadLocalRandom.current().nextDouble(MIN_ASSETS_VALUE, MAX_ASSETS_VALUE);
 		return BigDecimal.valueOf(randomDouble);
 	}
 
 	private static BigDecimal getRentingFee() {
-		Double randomDouble = ThreadLocalRandom.current().nextDouble(MIN_RENTING_FEE, MAX_RENTING_FEE);
+		final Double randomDouble = ThreadLocalRandom.current().nextDouble(MIN_RENTING_FEE, MAX_RENTING_FEE);
 		return BigDecimal.valueOf(randomDouble);
 	}
 
