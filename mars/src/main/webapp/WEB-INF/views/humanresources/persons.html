@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="http://www.morphbit.com/thymeleaf/component"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{templates/mmcLayout}"
+>
+	<head>
+		<title>Persons</title>
+	</head>
+	
+	<body>
+		<section layout:fragment="content" >
+			<vu:table list="persons" componentId="personsTable" selectable="false" sortUrl="@{/humanresources/persons/_sort}">
+				<vu:column field="personId" />
+				<vu:column field="firstName" sortable="true" />
+				<vu:column field="lastName" sortable="true" />
+				<vu:column field="email" sortable="true" />
+			</vu:table>
+		</section>
+	</body>
+</html>

@@ -20,13 +20,13 @@
 
 	<module name="services">
 		<component class="io.mars.basemanagement.services.base.BaseServices"/>
+		<component class="io.mars.humanresources.services.person.PersonServices"/>
 		<component class="io.mars.datageneration.DataGenerator" />
 	</module>
 
 	<init>
 		<initializer class="io.mars.boot.MasterDataInitializer"/>
 		<initializer class="io.mars.boot.I18nResourcesInitializer"/>
-		<initializer class="io.mars.boot.DataBaseInitializer"/>
 	</init>
 
 </config>

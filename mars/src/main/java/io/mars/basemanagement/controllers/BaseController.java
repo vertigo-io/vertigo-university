@@ -1,4 +1,4 @@
-package io.mars.basemanagement.controller;
+package io.mars.basemanagement.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
