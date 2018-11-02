@@ -27,6 +27,7 @@
 	<init>
 		<initializer class="io.mars.boot.MasterDataInitializer"/>
 		<initializer class="io.mars.boot.I18nResourcesInitializer"/>
+		<initializer class="io.mars.boot.DataBaseInitializer"/>
 	</init>
 
 </config>
