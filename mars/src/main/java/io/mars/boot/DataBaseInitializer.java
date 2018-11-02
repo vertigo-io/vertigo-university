@@ -28,6 +28,7 @@ import java.io.Reader;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 
 import javax.inject.Inject;
 
@@ -58,7 +59,7 @@ import io.vertigo.core.resource.ResourceManager;
 import io.vertigo.database.sql.SqlDataBaseManager;
 import io.vertigo.database.sql.connection.SqlConnection;
 import io.vertigo.database.sql.statement.SqlStatement;
-import io.vertigo.dynamo.domain.model.DtList;
+import io.vertigo.dynamo.criteria.Criterions;
 import io.vertigo.lang.Assertion;
 import io.vertigo.lang.WrappedException;
 
@@ -74,12 +75,6 @@ public class DataBaseInitializer implements ComponentInitializer {
 	private static final int GEOSECTOR_CSV_FILE_COLUMN_NUMBER = 1;
 
 	@Inject
-	private BusinessDAO businessDAO;
-
-	@Inject
-	private GeosectorDAO geosectorDAO;
-
-	@Inject
 	private ResourceManager resourceManager;
 	@Inject
 	private VTransactionManager transactionManager;
@@ -87,20 +82,19 @@ public class DataBaseInitializer implements ComponentInitializer {
 	private SqlDataBaseManager sqlDataBaseManager;
 
 	@Inject
+	private BusinessDAO businessDAO;
+	@Inject
+	private GeosectorDAO geosectorDAO;
+	@Inject
 	private BaseDAO baseDAO;
-
 	@Inject
 	private EquipmentDAO equipmentDAO;
-
 	@Inject
 	private PersonDAO personDAO;
-
 	@Inject
 	private EquipmentCategoryDAO equipmentCategoryDAO;
-
 	@Inject
 	private EquipmentTypeDAO equipmentTypeDAO;
-
 	@Inject
 	private BasemanagementPAO basemanagementPAO;
 
@@ -108,12 +102,12 @@ public class DataBaseInitializer implements ComponentInitializer {
 	@Override
 	public void init() {
 		createDataBase();
-		createInitialGeosectorsFromCSV("initdata/geosectors.csv");
+		createInitialDataFromCSV("initdata/geosectors.csv", this::createInitialGeosectorFromCSV);
 		createInitialBases();
-		createInitialPersonsFromCSV("initdata/persons.csv");
+		createInitialDataFromCSV("initdata/persons.csv", this::createInitialPersonFromCSV);
 		createInitialEquipmentCategories();
 		createInitialEquipmentTypesFromCSV("initdata/equipmentTypes.csv");
-		createInitialBusinessesFromCSV("initdata/businesses.csv");
+		createInitialDataFromCSV("initdata/businesses.csv", this::createInitialBusinessFromCSV);
 
 		createInitialEquipments();
 
@@ -210,56 +204,18 @@ public class DataBaseInitializer implements ComponentInitializer {
 		}
 	}
 
-	private void createInitialBusinessesFromCSV(final String csvFilePath) {
-		try (
-				VTransactionWritable tx = transactionManager.createCurrentTransaction();
-				Reader reader = new BufferedReader(new InputStreamReader(resourceManager.resolve(csvFilePath).openStream()));
-				CSVReader csvReader = new CSVReaderBuilder(reader)
-						.withCSVParser(new CSVParserBuilder()
-								.withSeparator(';')
-								.build())
-						.withSkipLines(1)
-						.build();) {
-			String[] nextRecord;
-
-			while ((nextRecord = csvReader.readNext()) != null) {
-				Assertion.checkArgument(nextRecord.length == BUSINESS_CSV_FILE_COLUMN_NUMBER, "CSV File {0} Format not suitable for Equipment Types", csvFilePath);
-
-				final String businessName = nextRecord[0];
-				businessDAO.create(createBusiness(businessName));
-			}
-			tx.commit();
-
-		} catch (final IOException e) {
-			throw WrappedException.wrap(e, "Can't load csv file {0}", csvFilePath);
-		}
-
+	private void createInitialBusinessFromCSV(final String[] businessRecord) {
+		Assertion.checkArgument(businessRecord.length == BUSINESS_CSV_FILE_COLUMN_NUMBER, "CSV File Format not suitable for Equipment Types");
+		// ---
+		final String businessName = businessRecord[0];
+		businessDAO.create(createBusiness(businessName));
 	}
 
-	private void createInitialGeosectorsFromCSV(final String csvFilePath) {
-		try (
-				VTransactionWritable tx = transactionManager.createCurrentTransaction();
-				Reader reader = new BufferedReader(new InputStreamReader(resourceManager.resolve(csvFilePath).openStream()));
-				CSVReader csvReader = new CSVReaderBuilder(reader)
-						.withCSVParser(new CSVParserBuilder()
-								.withSeparator(';')
-								.build())
-						.withSkipLines(1)
-						.build();) {
-			String[] nextRecord;
-
-			while ((nextRecord = csvReader.readNext()) != null) {
-				Assertion.checkArgument(nextRecord.length == GEOSECTOR_CSV_FILE_COLUMN_NUMBER, "CSV File {0} Format not suitable for Equipment Types", csvFilePath);
-
-				final String geosectorName = nextRecord[0];
-				geosectorDAO.create(createGeosector(geosectorName));
-			}
-			tx.commit();
-
-		} catch (final IOException e) {
-			throw WrappedException.wrap(e, "Can't load csv file {0}", csvFilePath);
-		}
-
+	private void createInitialGeosectorFromCSV(final String[] geoSectorRecord) {
+		Assertion.checkArgument(geoSectorRecord.length == GEOSECTOR_CSV_FILE_COLUMN_NUMBER, "CSV File Format not suitable for Equipment Types");
+		// ---
+		final String geosectorName = geoSectorRecord[0];
+		geosectorDAO.create(createGeosector(geosectorName));
 	}
 
 	private void createInitialEquipmentTypesFromCSV(final String csvFilePath) {
@@ -286,9 +242,7 @@ public class DataBaseInitializer implements ComponentInitializer {
 
 				if (nextCategoryLabel != currentCategoryLabel) {
 					currentCategoryLabel = nextCategoryLabel;
-					final DtList<EquipmentCategory> categoryList = equipmentCategoryDAO.getListByDtFieldName(EquipmentCategoryFields.LABEL, nextCategoryLabel, 1);
-					Assertion.checkArgument(categoryList.size() == 1, "Could not fully determine Equipment Category Entity for category : {0} ", nextCategoryLabel);
-					equipmentCategory = categoryList.get(0);
+					equipmentCategory = equipmentCategoryDAO.find(Criterions.isEqualTo(EquipmentCategoryFields.LABEL, nextCategoryLabel));
 				}
 				equipmentTypeDAO.create(createEquipmentType(enabled, equipmentTypeName, equipmentCategory));
 			}
@@ -301,8 +255,19 @@ public class DataBaseInitializer implements ComponentInitializer {
 
 	}
 
-	private void createInitialPersonsFromCSV(
-			final String csvFilePath) {
+	private void createInitialPersonFromCSV(final String[] personRecord) {
+		Assertion.checkArgument(personRecord.length == PERSON_CSV_FILE_COLUMN_NUMBER, "CSV File Format not suitable for Persons");
+		// ---
+		final String firstName = personRecord[0];
+		final String lastName = personRecord[1];
+		final String email = personRecord[2];
+
+		personDAO.create(createPerson(firstName, lastName, email));
+
+	}
+
+	private void createInitialDataFromCSV(
+			final String csvFilePath, final Consumer<String[]> lineHandler) {
 
 		try (
 				VTransactionWritable tx = transactionManager.createCurrentTransaction();
@@ -316,13 +281,7 @@ public class DataBaseInitializer implements ComponentInitializer {
 			String[] nextRecord;
 
 			while ((nextRecord = csvReader.readNext()) != null) {
-				Assertion.checkArgument(nextRecord.length == PERSON_CSV_FILE_COLUMN_NUMBER, "CSV File {0} Format not suitable for Persons", csvFilePath);
-
-				final String firstName = nextRecord[0];
-				final String lastName = nextRecord[1];
-				final String email = nextRecord[2];
-
-				personDAO.create(createPerson(firstName, lastName, email));
+				lineHandler.accept(nextRecord);
 			}
 
 			tx.commit();
@@ -333,13 +292,13 @@ public class DataBaseInitializer implements ComponentInitializer {
 
 	}
 
-	private Business createBusiness(final String businessName) {
+	private static Business createBusiness(final String businessName) {
 		final Business business = new Business();
 		business.setName(businessName);
 		return business;
 	}
 
-	private Geosector createGeosector(final String geosectorName) {
+	private static Geosector createGeosector(final String geosectorName) {
 		final Geosector geosector = new Geosector();
 		geosector.setSectorLabel(geosectorName);
 		return geosector;
