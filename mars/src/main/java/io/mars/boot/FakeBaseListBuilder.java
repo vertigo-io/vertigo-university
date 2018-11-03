@@ -13,8 +13,8 @@ import io.vertigo.lang.Assertion;
 
 public class FakeBaseListBuilder {
 
-	private List<String> nameFirstPartdictionnary;
-	private List<String> nameSecondPartdictionnary;
+	private List<String> myNameFirstPartDictionnary;
+	private List<String> myNameSecondPartDictionnary;
 	private List<Long> myGeosectorIdList;
 	private int myMaxValues = 0;
 
@@ -25,8 +25,8 @@ public class FakeBaseListBuilder {
 	private static final int MAX_RENTING_FEE = 4000;
 
 	public FakeBaseListBuilder withNameDictionnaries(final List<String> nameFirstPartDictionnary, final List<String> nameSecondPartDictionnary) {
-		nameFirstPartdictionnary = nameFirstPartDictionnary;
-		nameSecondPartdictionnary = nameSecondPartDictionnary;
+		myNameFirstPartDictionnary = nameFirstPartDictionnary;
+		myNameSecondPartDictionnary = nameSecondPartDictionnary;
 		return this;
 	}
 
@@ -52,16 +52,20 @@ public class FakeBaseListBuilder {
 		final List<Base> baseList = new ArrayList<>();
 
 		int currentCounter = 0;
-		for (final String firstPart : nameFirstPartdictionnary) {
-			for (final String secondPart : nameSecondPartdictionnary) {
+		for (final String firstPart : myNameFirstPartDictionnary) {
+			for (final String secondPart : myNameSecondPartDictionnary) {
 
 				final Long currentGeosectorId = myGeosectorIdList.get(ThreadLocalRandom.current().nextInt(myGeosectorIdList.size()));
+				final LocalDate creationDate = getCreationDate();
+				final int healthLevel = getHealthLevel();
+				final String description = getDescription(firstPart, secondPart, healthLevel, creationDate);
+				
 				baseList.add(createBase(FakeDataUtils.randomEnum(BaseTypeEnum.class),
 						firstPart + " " + secondPart,
 						getCodeFromBaseName(firstPart, secondPart, currentCounter),
-						getHealthLevel(),
-						getCreationDate(),
-						getDescription(),
+						healthLevel,
+						creationDate,
+						description,
 						getGeoLocation(),
 						getAssetsValue(),
 						getRentingFee(),
@@ -94,8 +98,8 @@ public class FakeBaseListBuilder {
 		return FakeDataUtils.random.nextInt(101);
 	}
 
-	private static String getDescription() {
-		return "";
+	private static String getDescription(String firstPart, String secondPart, int healthLevel, LocalDate creationDate) {
+		return "The " + firstPart + " " + secondPart + " base was created on " + creationDate +". Its current HealthLevel is :" + healthLevel +".";
 	}
 
 	private static String getGeoLocation() {
