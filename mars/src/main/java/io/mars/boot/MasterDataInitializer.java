@@ -6,12 +6,6 @@ package io.mars.boot;
 import javax.inject.Inject;
 
 import io.vertigo.core.component.ComponentInitializer;
-import io.vertigo.dynamo.domain.metamodel.DataType;
-import io.vertigo.dynamo.domain.metamodel.DtDefinition;
-import io.vertigo.dynamo.domain.metamodel.DtField;
-import io.vertigo.dynamo.domain.model.DtListURIForMasterData;
-import io.vertigo.dynamo.domain.model.DtObject;
-import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.dynamo.store.StoreManager;
 //import io.vertigo.mars.domain.users.Profil;
 //import io.vertigo.mars.domain.users.SecurityRole;
@@ -22,11 +16,11 @@ import io.vertigo.dynamo.store.StoreManager;
  */
 public class MasterDataInitializer implements ComponentInitializer {
 
-	private static final int CACHE_DURATION_LONG = 3600;
+	/*private static final int CACHE_DURATION_LONG = 3600;
 	private static final int CACHE_DURATION_SHORT = 600;
 	private static final String ACTIF_CODE = "ACTIF";
 	private static final String IS_ACTIVE = "IS_ACTIVE";
-	private static final String ALL_CODE = null;
+	private static final String ALL_CODE = null;*/
 
 	@Inject
 	private StoreManager storeManager;
@@ -38,11 +32,11 @@ public class MasterDataInitializer implements ComponentInitializer {
 	}
 
 	private static void registerAllMasterData(final StoreManager storeManager) {
-	//	registerMasterData(storeManager, Profil.class);
-	//	registerMasterData(storeManager, SecurityRole.class);
+		//	registerMasterData(storeManager, Profil.class);
+		//	registerMasterData(storeManager, SecurityRole.class);
 	}
 
-	private static <O extends DtObject> void registerMasterData(final StoreManager storeManager, final Class<O> dtObjectClass) {
+	/*private static <O extends DtObject> void registerMasterData(final StoreManager storeManager, final Class<O> dtObjectClass) {
 		registerMasterData(storeManager, dtObjectClass, null, true, true);
 	}
 
@@ -72,6 +66,6 @@ public class MasterDataInitializer implements ComponentInitializer {
 		// On enregistre la liste globale
 		final DtListURIForMasterData uri = new DtListURIForMasterData(dtDefinition, ALL_CODE);
 		storeManager.getMasterDataConfig().register(uri);
-	}
+	}*/
 
 }
