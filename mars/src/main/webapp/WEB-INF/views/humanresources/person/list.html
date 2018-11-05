@@ -16,10 +16,10 @@
 				<vu:column field="lastName" sortable="true" />
 				<vu:column field="email" sortable="true" />
 				<vu:column name="actions" label="Actions" sortable="true" >
-					<q-btn round color="secondary" icon="card_giftcard" type="a" th::href="|'@{/humanresources/person/detail/}?personId='+props.row.personId|"></q-btn>
-					<q-btn round color="secondary" icon="card_giftcard" type="a" th::href="|'@{/humanresources/person/detail/}?personId='+props.row.personId|"></q-btn>
+					<q-btn round color="primary" icon="arrow_forward" type="a" th::href="|'@{/humanresources/person/detail/}?personId='+props.row.personId|"></q-btn>
 				</vu:column>
 			</vu:table>
+			<q-btn label="Add" type="a" color="primary" th:href="@{/humanresources/person/detail/}"></q-btn>
 		</section>
 	</body>
 </html>
