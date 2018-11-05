@@ -18,7 +18,7 @@
 
 <body class="mat desktop no-touch platform-mat">
 	<vu:page>
-      <q-layout view="hHh LpR lff" id="page" v-cloak>
+      <q-layout view="hHh LpR fff" id="page" v-cloak>
 			<!-- BEGIN HEADER-->
 			<q-layout-header class="items-center">
 				<q-toolbar class="justify-between">
@@ -75,41 +75,9 @@
   			
   			<q-layout-drawer
 		      side="left"
-		      :overlay="!componentStates.navDrawer.miniState"
 		      v-model="componentStates.navDrawer.showLeft"
-		      th:with="miniState=${model.vContext['componentStates']['navDrawer'].addPrimitive('miniState', true)}"
-		      :mini="componentStates.navDrawer.miniState"
-			    @mouseover="componentStates.navDrawer.miniState = false"
-			    @mouseout="componentStates.navDrawer.miniState = true"
 			  >
 		      
-		      <div slot="mini" style="height:100%">
-		      	 <q-list link style="height:100%">
-			      <nav>
-			        <q-item tag="a" th:href="@{#}">
-			          <q-item-side icon="fas fa-globe-asia"></q-item-side>
-			        </q-item>
-			        <q-item tag="a" th:href="@{#}">
-			          <q-item-side icon="fas fa-store-alt"></q-item-side>
-			        </q-item>
-			        <q-item tag="a" th:href="@{/humanresources/persons/}">
-			          <q-item-side icon="fas fa-user-friends"></q-item-side>
-			        </q-item>
-			        <q-item tag="a" th:href="@{#}">
-			          <q-item-side icon="fas fa-box-open"></q-item-side>
-			        </q-item>
-			        <q-item tag="a" th:href="@{#}">
-			          <q-item-side icon="fas fa-cubes"></q-item-side>
-			        </q-item>
-			        <q-item tag="a" th:href="@{#}">
-			          <q-item-side icon="fas fa-thermometer-empty"></q-item-side>
-			        </q-item>
-			        <q-item tag="a" th:href="@{#}">
-			          <q-item-side icon="fas fa-chart-pie" ></q-item-side>
-			        </q-item>
-			        </nav>
-			        </q-list>
-		      </div>
 		      
 		      <q-list link style="height:100%">
 		      <nav class="text-no-wrap">
@@ -121,7 +89,7 @@
 		          <q-item-side icon="fas fa-store-alt"></q-item-side>
 		          <q-item-main label="Managed Bases"></q-item-main>
 		        </q-item>
-		        <q-item tag="a" th:href="@{/humanresources/persons/}">
+		        <q-item tag="a" th:href="@{/humanresources/person/list/}">
 		          <q-item-side icon="fas fa-user-friends"></q-item-side>
 		          <q-item-main label="Personnel" sublabel="Base managers, Workers,..."></q-item-main>
 		        </q-item>

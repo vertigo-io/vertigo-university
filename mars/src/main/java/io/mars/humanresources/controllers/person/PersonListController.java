@@ -4,6 +4,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import io.mars.humanresources.domain.Person;
@@ -14,8 +15,8 @@ import io.vertigo.ui.core.ViewContextKey;
 import io.vertigo.ui.impl.springmvc.controller.AbstractVSpringMvcController;
 
 @Controller
-@RequestMapping("/humanresources/persons")
-public class PersonsController extends AbstractVSpringMvcController {
+@RequestMapping("/humanresources/person/list")
+public class PersonListController extends AbstractVSpringMvcController {
 
 	private static final ViewContextKey<Person> persons = ViewContextKey.of("persons");
 
@@ -26,6 +27,12 @@ public class PersonsController extends AbstractVSpringMvcController {
 	public void initContext(final ViewContext viewContext) {
 		final DtListState dtListState = new DtListState(200, 0, null, null);
 		viewContext.publishDtList(persons, personServices.getPersons(dtListState));
+	}
+
+	@PostMapping("/_sort")
+	public ViewContext sort(final ViewContext viewContext, final DtListState dtListState) {
+		viewContext.publishDtList(persons, personServices.getPersons(dtListState));
+		return viewContext;
 	}
 
 }

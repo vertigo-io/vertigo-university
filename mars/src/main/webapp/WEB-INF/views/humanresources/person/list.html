@@ -10,11 +10,15 @@
 	
 	<body>
 		<section layout:fragment="content" >
-			<vu:table list="persons" componentId="personsTable" selectable="false" sortUrl="@{/humanresources/persons/_sort}">
+			<vu:table list="persons" componentId="personsTable" sortUrl="@{/humanresources/persons/_sort}">
 				<vu:column field="personId" />
 				<vu:column field="firstName" sortable="true" />
 				<vu:column field="lastName" sortable="true" />
 				<vu:column field="email" sortable="true" />
+				<vu:column name="actions" label="Actions" sortable="true" >
+					<q-btn round color="secondary" icon="card_giftcard" type="a" th::href="|'@{/humanresources/person/detail/}?personId='+props.row.personId|"></q-btn>
+					<q-btn round color="secondary" icon="card_giftcard" type="a" th::href="|'@{/humanresources/person/detail/}?personId='+props.row.personId|"></q-btn>
+				</vu:column>
 			</vu:table>
 		</section>
 	</body>
