@@ -25,6 +25,7 @@
 	</module>
 
 	<init>
+		<!-- initializer class="io.mars.boot.DataBaseInitializer"/  -->
 		<initializer class="io.mars.boot.MasterDataInitializer"/>
 		<initializer class="io.mars.boot.I18nResourcesInitializer"/>
 	</init>

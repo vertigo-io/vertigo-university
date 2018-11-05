@@ -1,4 +1,34 @@
 /******** CSS SPECIFIQUE A CERTAINES PAGES *******/
+:root {
+  	--q-color-body-background: #fdf1e9;
+	--q-color-body-color: #f3a875;
+	--q-color-primary:	#ed7d31;
+	--q-color-secondary:#f3a875;
+	--q-color-tertiary:	#ffe8cb;
+	--q-color-positive:	#21BA45;
+	--q-color-negative:	#DB2828;
+	--q-color-info:		#31CCEC;	
+	--q-color-warning:	#F2C037;  
+}
+
+body {
+  background: white !important;
+  background: var(--q-color-body-background) !important;
+  color: var(--q-color-body-color) !important;
+}
+
+.q-item-side {
+  color: currentColor !important;
+}
+
+.q-item {
+  color: currentColor !important;
+}
+
+.q-item-sublabel {
+  color: currentColor !important;
+}
+
 
 nav a {
 	text-decoration: none;

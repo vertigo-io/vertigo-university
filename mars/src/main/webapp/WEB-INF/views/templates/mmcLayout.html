@@ -21,7 +21,7 @@
       <q-layout view="hHh LpR fff" id="page" v-cloak>
 			<!-- BEGIN HEADER-->
 			<q-layout-header class="items-center">
-				<q-toolbar class="justify-between">
+				<q-toolbar  color="white" text-color="primary"  class="justify-between">
 					<div class="row">
 						<q-btn flat round dense 
 						th:with="showLeft=${model.vContext['componentStates'].addComponentState('navDrawer').addPrimitive('showLeft', true)}"
@@ -74,10 +74,9 @@
   			</q-layout-footer>
   			
   			<q-layout-drawer
+  			  content-class="bg-primary text-white"
 		      side="left"
-		      v-model="componentStates.navDrawer.showLeft"
-			  >
-		      
+		      v-model="componentStates.navDrawer.showLeft">
 		      
 		      <q-list link style="height:100%">
 		      <nav class="text-no-wrap">

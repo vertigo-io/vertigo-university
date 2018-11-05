@@ -15,7 +15,7 @@ import io.vertigo.ui.core.ViewContextKey;
 import io.vertigo.ui.impl.springmvc.controller.AbstractVSpringMvcController;
 
 @Controller
-@RequestMapping("/humanresources/person/list")
+@RequestMapping("/humanresources/persons")
 public class PersonListController extends AbstractVSpringMvcController {
 
 	private static final ViewContextKey<Person> persons = ViewContextKey.of("persons");
