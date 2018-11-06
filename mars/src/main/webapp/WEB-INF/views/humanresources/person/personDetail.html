@@ -11,16 +11,18 @@
 	<body>
 		<section layout:fragment="content" >
 			<vu:form>
-				<vu:grid cols="2">
-					<vu:text-field object="person" field="firstName"/>
-					<vu:text-field object="person" field="lastName" />
-					<vu:text-field object="person" field="email" />
-					<vu:grid-cell>
-						<vu:button-submit th:if="${model.modeReadOnly}" label="Edit" action="@{_edit}" color="primary"/>
-						<vu:button-submit th:if="${model.modeEdit}"  label="Save" action="@{_save}" color="primary" />
-						<vu:button-submit th:if="${model.modeCreate}" label="Create" action="@{_create}" color="primary"/>
-					</vu:grid-cell>
-				</vu:grid>
+				<vu:block title="Information">
+						<vu:grid cols="2">
+							<vu:text-field object="person" field="firstName"/>
+							<vu:text-field object="person" field="lastName" />
+							<vu:text-field object="person" field="email" />
+							<vu:grid-cell>
+								<vu:button-submit th:if="${model.modeReadOnly}" label="Edit" action="@{_edit}" color="primary"/>
+								<vu:button-submit th:if="${model.modeEdit}"  label="Save" action="@{_save}" color="primary" />
+								<vu:button-submit th:if="${model.modeCreate}" label="Create" action="@{_create}" color="primary"/>
+							</vu:grid-cell>
+						</vu:grid>
+					</vu:block>
 			</vu:form>
 		</section>
 	</body>

@@ -10,6 +10,7 @@
 	
 	<body>
 		<section layout:fragment="content" >
+			<q-btn label="Add" type="a" color="primary" th:href="@{/humanresources/person/}"></q-btn>
 			<vu:table list="persons" componentId="personsTable" sortUrl="@{/humanresources/persons/_sort}">
 				<vu:column field="personId" />
 				<vu:column field="firstName" sortable="true" />
@@ -19,7 +20,6 @@
 					<q-btn round color="primary" icon="arrow_forward" type="a" th::href="|'@{/humanresources/person/}'+props.row.personId|"></q-btn>
 				</vu:column>
 			</vu:table>
-			<q-btn label="Add" type="a" color="primary" th:href="@{/humanresources/person/}"></q-btn>
 		</section>
 	</body>
 </html>
