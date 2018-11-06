@@ -2,27 +2,63 @@
 <html xmlns:th="http://www.thymeleaf.org" 
   xmlns:vu="http://www.morphbit.com/thymeleaf/component"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{templates/mmcLayout}"
+  layout:decorate="~{templates/mmcDetailLayout}"
 >
 	<head>
 		<title>Person detail</title>
 	</head>
 	
 	<body>
+	
+		<section layout:fragment="content-nav">
+			<q-list link style="height:100%">
+			      <nav v-scroll-spy="{offset:150}">
+			        <q-item tag="a" href="#information">Information</q-item>
+			      </nav>
+	        </q-list>		    
+		</section>
+		
+		<section class="col-12" layout:fragment="content-header" >			
+			<vu:form>
+				<div class="row justify-between items-center bg-secondary text-white">
+					<div class="row justify-between">
+						<img th:src="@{/static/img/persons/Person10.jpg}" class="detailImg  gt-md"/>
+						<div class="detailTitle q-pa-md">
+								<big>James T. Kirk</big> 
+								<br/><small>Base Manager</small></div>
+					</div>
+						<!-- Brand and toggle get grouped for better mobile display -->				
+					<div class="row items-center">
+						<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>
+						
+						<q-btn round size="lg" color="primary"  icon="more_horiz"  direction="down" aria-label="More actions" title="More actions" class="on-left"> 
+						  <q-popover><q-list link>
+						    <q-item><q-btn flat>Delete</q-btn></q-item>
+						    <q-item><q-btn flat>Archive</q-btn></q-item>
+						    <q-item><q-btn flat>Bind to base</q-btn></q-item>
+						  </q-list>
+						  </q-popover>
+						</q-btn>
+						<img th:src="@{/static/img/TypesLogo/PersonType.png }" class="detailType"/>
+					</div>
+				</div>
+			</vu:form>
+		</section>
+		
 		<section layout:fragment="content" >
 			<vu:form>
-				<vu:block title="Information">
-						<vu:grid cols="2">
-							<vu:text-field object="person" field="firstName"/>
-							<vu:text-field object="person" field="lastName" />
-							<vu:text-field object="person" field="email" />
-							<vu:grid-cell>
-								<vu:button-submit th:if="${model.modeReadOnly}" label="Edit" action="@{_edit}" color="primary"/>
-								<vu:button-submit th:if="${model.modeEdit}"  label="Save" action="@{_save}" color="primary" />
-								<vu:button-submit th:if="${model.modeCreate}" label="Create" action="@{_create}" color="primary"/>
-							</vu:grid-cell>
-						</vu:grid>
-					</vu:block>
+				<vu:block id="information" title="Information" class="bg-white">
+				<vu:grid cols="2">
+					<vu:text-field object="person" field="firstName"/>
+					<vu:text-field object="person" field="lastName" />
+					<vu:text-field object="person" field="email" />					
+				</vu:grid>
+				<div class="row justify-end">
+				<vu:button-submit th:if="${model.modeEdit}"  label="Cancel" action="@{_edit}" flat />
+				<vu:button-submit th:if="${model.modeEdit}"  label="Save" action="@{_save}" color="primary" />
+				<vu:button-submit th:if="${model.modeCreate}" label="Create" action="@{_create}" color="primary"/>
+				</div>				
+				</vu:block>
 			</vu:form>
 		</section>
 	</body>

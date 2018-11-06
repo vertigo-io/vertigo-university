@@ -78,7 +78,7 @@
 		      side="left"
 		      v-model="componentStates.navDrawer.showLeft">
 		      
-		      <q-list link style="height:100%">
+		      <q-list link style="height:100%; border:0px;">
 		      <nav class="text-no-wrap">
 		        <q-item tag="a" th:href="@{#}">
 		          <q-item-side icon="fas fa-globe-asia "></q-item-side>
@@ -112,9 +112,14 @@
 		        </q-list>
 		    </q-layout-drawer>
 		    
+		    <q-layout-drawer side="right" show-if-above>		    
+		     	<section layout:fragment="content-nav"></section>		     	
+		    </q-layout-drawer>
+  			
 			<q-page-container class="row justify-center">
-			 	<q-page class="layout-padding col-12">
-					<section layout:fragment="content"></section>
+			 	<section layout:fragment="content-header"></section>
+				<q-page class="layout-padding col-12">
+			 		<section layout:fragment="content"></section>
 				</q-page>
 			</q-page-container>
   			
