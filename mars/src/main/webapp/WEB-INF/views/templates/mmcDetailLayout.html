@@ -13,6 +13,7 @@
   	<link rel="stylesheet" th:href="@{/static/css/mars.css}"/>
 	<link rel="icon" th:href="@{/static/img/favicon.ico}"/>
     
+	<script th:src="@{/vertigo-ui/static/js/v-components/v-scroll-spy.js}"></script>
    	<script th:src="@{/static/js/mars.js}"></script>
 </head>
 
@@ -112,14 +113,13 @@
 		        </q-list>
 		    </q-layout-drawer>
 		    
-		    <q-layout-drawer side="right" show-if-above>		    
-		     	<section layout:fragment="content-nav"></section>		     	
-		    </q-layout-drawer>
-  			
-			<q-page-container class="row justify-center">
+		 	<q-page-container class="row justify-center">
 			 	<section layout:fragment="content-header"></section>
-				<q-page class="layout-padding col-12">
-			 		<section layout:fragment="content"></section>
+				<q-page class="row col-12 layout-padding">
+					<div class="col-2"><section layout:fragment="content-nav"></section></div>
+					<div class="col-10">
+			 			<section layout:fragment="content"></section>
+			 		</div>
 				</q-page>
 			</q-page-container>
   			

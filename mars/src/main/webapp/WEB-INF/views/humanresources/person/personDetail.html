@@ -11,11 +11,12 @@
 	<body>
 	
 		<section layout:fragment="content-nav">
-			<q-list link style="height:100%">
-			      <nav v-scroll-spy="{offset:150}">
+			<nav v-scroll-spy="{offset:150}">
+			    <q-list link style="height:100%">
 			        <q-item tag="a" href="#information">Information</q-item>
-			      </nav>
-	        </q-list>		    
+			        <q-item tag="a" href="#contact">Contact actions</q-item>				      
+	        	</q-list>
+	        </nav>
 		</section>
 		
 		<section class="col-12" layout:fragment="content-header" >			
@@ -57,6 +58,16 @@
 				<vu:button-submit th:if="${model.modeEdit}"  label="Cancel" action="@{_edit}" flat />
 				<vu:button-submit th:if="${model.modeEdit}"  label="Save" action="@{_save}" color="primary" />
 				<vu:button-submit th:if="${model.modeCreate}" label="Create" action="@{_create}" color="primary"/>
+				</div>				
+				</vu:block>
+				
+				<vu:block id="contact" title="Contact actions" class="bg-white">
+				<div class="row justify-between">
+					<q-btn color="primary" icon="email" label="Mail"></q-btn>
+					<q-btn color="primary" icon="chat" label="Chat"></q-btn>
+					<q-btn color="primary" icon="voicemail" label="Voice mail"></q-btn>
+					<q-btn color="primary" icon="duo" label="High Res. Camera"></q-btn>
+					<q-btn color="primary" icon="swap_calls" label="All Terrain Tires"></q-btn>
 				</div>				
 				</vu:block>
 			</vu:form>

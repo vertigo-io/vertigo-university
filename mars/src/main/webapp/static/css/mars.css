@@ -17,10 +17,9 @@ body {
   color: var(--q-color-body-color) !important;
 }
 
-
-
 .q-item-side {
   color: currentColor !important;
+  text-align: center;	
 }
 
 .q-item {
@@ -30,38 +29,33 @@ body {
 .q-item-sublabel {
   color: currentColor !important;
 }
-
-.detailHeader {
-	margin: -2.5rem -3.5rem 0px;
-}
-.detailHeader > div {
-	//height: 140px;
-}
-
-.moreAction .q-btn-dropdown-arrow {
-	//display:none;
-}
-
 .detailType, .detailType img {
 	height: 140px;
 	border-radius: 50%;
 }
-
 .detailImg, .detailImg img {
 	height: 150px;
 }
 
-
-
-nav a {
-	text-decoration: none;	
+nav .q-list {
+	border: none;
 }
 
-.q-item-side {
-	text-align: center;	
+nav a {
+	text-decoration: none;
+	border-left-width:1px;
+	border-left-style:solid;
+	border-left-color:light-grey;		
+}
+
+nav a.q-item.active {
+	background: none;
+	border-left-width:5px;
+	border-left-style:solid;
+	border-left-color:var(--q-color-primary);	
 }
 
 a.q-item {
-	color: #737373;	
+	color: grey;	
 }
 
