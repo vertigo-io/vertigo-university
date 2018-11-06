@@ -10,7 +10,14 @@
 	
 	<body>
 		<section layout:fragment="content" >
-			<q-btn label="Add" type="a" color="primary" th:href="@{/humanresources/person/}"></q-btn>
+		<div class="row justify-end">
+			<vu:form>
+				<vu:button-submit icon="fas fa-grip-horizontal" action="@{_changeRenderer?renderer=cards}" th::flat="${model.listRenderer != 'cards'}"/>
+				<vu:button-submit icon="fas fa-table" action="@{_changeRenderer?renderer=table}" th::flat="${model.listRenderer != 'table'}" />
+			</vu:form>
+		</div>
+		<q-btn label="Add" type="a" color="primary" th:href="@{/humanresources/person/}"></q-btn>
+		<th:block th:if="${model.listRenderer == 'table'}">
 			<vu:table list="persons" componentId="personsTable" sortUrl="@{/humanresources/persons/_sort}">
 				<vu:column field="personId" />
 				<vu:column field="firstName" sortable="true" />
@@ -20,6 +27,29 @@
 					<q-btn round color="primary" icon="arrow_forward" type="a" th::href="|'@{/humanresources/person/}'+props.row.personId|"></q-btn>
 				</vu:column>
 			</vu:table>
+		</th:block>
+		<th:block th:if="${model.listRenderer == 'cards'}">
+			<vu:include-data object="persons" field="personId" />
+			<vu:include-data object="persons" field="firstName" />
+			<vu:include-data object="persons" field="lastName" />
+			<vu:include-data object="persons" field="email" />
+			<div class="row ">
+				<q-card v-for="person in vueData.persons" :key="person.personId" style="width: 300px; max-width: 90vw" class="q-ma-sm" >
+					<q-card-media style="max-height: 200px;">
+						<img th:src="@{/static/img/persons/Person10.jpg}"  />
+					</q-card-media>
+					<q-card-title>
+						<a class="text-primary" th::href="|'@{/humanresources/person/}'+person.personId|">{{person.firstName}} {{person.lastName}}</a>
+						<span slot="subtitle">{{person.email}}</span>
+					</q-card-title>
+					<q-card-main>
+					a
+					</q-card-main>
+					<q-card-separator></q-card-separator>
+					b
+				</q-card>
+			</div>
+		</th:block>
 		</section>
 	</body>
 </html>
