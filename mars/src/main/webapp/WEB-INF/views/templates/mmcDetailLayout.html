@@ -53,22 +53,22 @@
         	<!-- END HEADER-->
         				
 			<q-layout-footer>
-    			<q-toolbar  color="secondary" text-color="primary" class="justify-between">
-					<div class="row col-4 justify-between">
-					<div >
+    			<q-toolbar  color="secondary" text-color="primary" class="justify-between gt-sm">
+					<div class="row col">
+					<div class="on-right gt-lg">
 						Connected since 
 						<div class="q-chip row no-wrap inline items-center q-chip-square bg-primary text-white">
 						<div class="q-chip-main ellipsis">2</div></div> hours
 					</div>
 					<!-- Brand and toggle get grouped for better mobile display -->
-					<div>
+					<div class="on-right">
 						Base managers connected to system : 
 						<div class="q-chip row no-wrap inline items-center q-chip-square bg-primary text-white">
 						<div class="q-chip-main ellipsis">5</div></div>
 					</div>
 					</div>
-					<div class="row col-2 justify-between items-center">
-						<img th:src="@{/static/img/logo MMC grey v0.1.png}" height="30px"/>
+					<div class="row col justify-end items-center">
+						<img th:src="@{/static/img/logo MMC grey v0.1.png}" height="30px" class="on-left"/>
 						&copy; 2153 Mars Mining Corp.
 					</div>
 				</q-toolbar>
@@ -79,7 +79,7 @@
 		      side="left"
 		      v-model="componentStates.navDrawer.showLeft">
 		      
-		      <q-list link style="height:100%; border:0px;">
+		      <q-list link style="height:100%">
 		      <nav class="text-no-wrap">
 		        <q-item tag="a" th:href="@{#}">
 		          <q-item-side icon="fas fa-globe-asia "></q-item-side>
