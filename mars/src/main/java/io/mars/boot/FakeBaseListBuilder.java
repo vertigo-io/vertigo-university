@@ -15,7 +15,9 @@ public class FakeBaseListBuilder {
 
 	private List<String> myNameFirstPartDictionnary;
 	private List<String> myNameSecondPartDictionnary;
+	private List<String> myTagsDictionnary;
 	private List<Long> myGeosectorIdList;
+
 	private int myMaxValues = 0;
 
 	private static final int MIN_ASSETS_VALUE = 10000;
@@ -23,6 +25,8 @@ public class FakeBaseListBuilder {
 
 	private static final int MIN_RENTING_FEE = 1000;
 	private static final int MAX_RENTING_FEE = 4000;
+	private static final int MIN_TAG_NUMBER = 1;
+	private static final int MAX_TAG_NUMBER = 3;
 
 	public FakeBaseListBuilder withNameDictionnaries(final List<String> nameFirstPartDictionnary, final List<String> nameSecondPartDictionnary) {
 		myNameFirstPartDictionnary = nameFirstPartDictionnary;
@@ -59,7 +63,7 @@ public class FakeBaseListBuilder {
 				final LocalDate creationDate = getCreationDate();
 				final int healthLevel = getHealthLevel();
 				final String description = getDescription(firstPart, secondPart, healthLevel, creationDate);
-				
+
 				baseList.add(createBase(FakeDataUtils.randomEnum(BaseTypeEnum.class),
 						firstPart + " " + secondPart,
 						getCodeFromBaseName(firstPart, secondPart, currentCounter),
@@ -69,7 +73,8 @@ public class FakeBaseListBuilder {
 						getGeoLocation(),
 						getAssetsValue(),
 						getRentingFee(),
-						currentGeosectorId));
+						currentGeosectorId,
+						getTagsFromDictionnary(myTagsDictionnary)));
 				currentCounter++;
 
 				if (currentCounter >= myMaxValues) {
@@ -81,6 +86,16 @@ public class FakeBaseListBuilder {
 			}
 		}
 		return baseList;
+	}
+
+	private static String getTagsFromDictionnary(final List<String> tagDictionnary) {
+		String tagString = "";
+		final int tagNumber = ThreadLocalRandom.current().nextInt(MIN_TAG_NUMBER, MAX_TAG_NUMBER);
+		for (int i = 0; i < tagNumber; i++) {
+			tagString += tagDictionnary.get(ThreadLocalRandom.current().nextInt(tagDictionnary.size() - 1)) + " ";
+		}
+		return tagString.substring(0, tagString.length() - 1);
+
 	}
 
 	private static String getCodeFromBaseName(final String firstPart, final String secondPart, final int baseIndex) {
@@ -98,8 +113,8 @@ public class FakeBaseListBuilder {
 		return FakeDataUtils.random.nextInt(101);
 	}
 
-	private static String getDescription(String firstPart, String secondPart, int healthLevel, LocalDate creationDate) {
-		return "The " + firstPart + " " + secondPart + " base was created on " + creationDate +". Its current HealthLevel is :" + healthLevel +".";
+	private static String getDescription(final String firstPart, final String secondPart, final int healthLevel, final LocalDate creationDate) {
+		return "The " + firstPart + " " + secondPart + " base was created on " + creationDate + ". Its current HealthLevel is :" + healthLevel + ".";
 	}
 
 	private static String getGeoLocation() {
@@ -125,7 +140,8 @@ public class FakeBaseListBuilder {
 			final String geoLocation,
 			final BigDecimal assetsValue,
 			final BigDecimal rentingFee,
-			final Long geosectorId) {
+			final Long geosectorId,
+			final String tagString) {
 		final Base base = new Base();
 		base.setCode(baseCode);
 		base.setName(baseName);
@@ -137,6 +153,12 @@ public class FakeBaseListBuilder {
 		base.setAssetsValue(assetsValue);
 		base.setRentingFee(rentingFee);
 		base.geosector().setId(geosectorId);
+		base.setTags(tagString);
 		return base;
+	}
+
+	public FakeBaseListBuilder withTagsDictionnary(final List<String> sampleTags) {
+		myTagsDictionnary = sampleTags;
+		return this;
 	}
 }

@@ -89,6 +89,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		ASSETS_VALUE,
 		/** Propriété 'Renting Fee'. */
 		RENTING_FEE,
+		/** Propriété 'Tags'. */
+		TAGS,
 		/** Propriété 'Base Type'. */
 		BASE_TYPE_ID,
 		/** Propriété 'Base Geosector'. */
@@ -239,7 +241,13 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		/** Propriété 'Name'. */
 		LAST_NAME,
 		/** Propriété 'E-mail'. */
-		EMAIL	}
+		EMAIL,
+		/** Propriété 'PictureFileId'. */
+		PICTUREFILE_ID,
+		/** Propriété 'Tags'. */
+		TAGS,
+		/** Propriété 'Date hired'. */
+		DATE_HIRED	}
 
 	/**
 	 * Enumération des champs de Picture.

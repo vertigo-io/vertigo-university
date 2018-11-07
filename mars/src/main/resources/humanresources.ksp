@@ -7,7 +7,9 @@ create DtDefinition DT_PERSON {
 	field FIRST_NAME {domain: DO_LABEL label: "Name" required:"false"}
 	field LAST_NAME {domain: DO_LABEL label: "Name" required:"false"}
 	field EMAIL {domain: DO_EMAIL label:"E-mail" required: "false"}
-	
+	field PICTUREFILE_ID {domain: DO_ID label:"PictureFileId" required:"false"}
+	field TAGS {domain: DO_TAGS label: "Tags" required:"false"}
+	field DATE_HIRED {domain: DO_LOCALDATE label: "Date hired" required:"false"}
 }
 
 
@@ -15,6 +17,7 @@ create DtDefinition DT_MISSION {
 	id MISSION_ID {domain: DO_ID label:"Id"}
 	field ROLE {domain: DO_CODE label:"Role" required:"false"}
 }
+
 
 
 

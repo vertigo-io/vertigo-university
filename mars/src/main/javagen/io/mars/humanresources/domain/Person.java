@@ -18,6 +18,9 @@ public final class Person implements Entity {
 	private String firstName;
 	private String lastName;
 	private String email;
+	private Long picturefileId;
+	private String tags;
+	private java.time.LocalDate dateHired;
 
 	/** {@inheritDoc} */
 	@Override
@@ -99,6 +102,63 @@ public final class Person implements Entity {
 	 */
 	public void setEmail(final String email) {
 		this.email = email;
+	}
+	
+	/**
+	 * Champ : DATA.
+	 * Récupère la valeur de la propriété 'PictureFileId'.
+	 * @return Long picturefileId
+	 */
+	@Field(domain = "DO_ID", label = "PictureFileId")
+	public Long getPicturefileId() {
+		return picturefileId;
+	}
+
+	/**
+	 * Champ : DATA.
+	 * Définit la valeur de la propriété 'PictureFileId'.
+	 * @param picturefileId Long
+	 */
+	public void setPicturefileId(final Long picturefileId) {
+		this.picturefileId = picturefileId;
+	}
+	
+	/**
+	 * Champ : DATA.
+	 * Récupère la valeur de la propriété 'Tags'.
+	 * @return String tags
+	 */
+	@Field(domain = "DO_TAGS", label = "Tags")
+	public String getTags() {
+		return tags;
+	}
+
+	/**
+	 * Champ : DATA.
+	 * Définit la valeur de la propriété 'Tags'.
+	 * @param tags String
+	 */
+	public void setTags(final String tags) {
+		this.tags = tags;
+	}
+	
+	/**
+	 * Champ : DATA.
+	 * Récupère la valeur de la propriété 'Date hired'.
+	 * @return LocalDate dateHired
+	 */
+	@Field(domain = "DO_LOCALDATE", label = "Date hired")
+	public java.time.LocalDate getDateHired() {
+		return dateHired;
+	}
+
+	/**
+	 * Champ : DATA.
+	 * Définit la valeur de la propriété 'Date hired'.
+	 * @param dateHired LocalDate
+	 */
+	public void setDateHired(final java.time.LocalDate dateHired) {
+		this.dateHired = dateHired;
 	}
 	
 	/** {@inheritDoc} */

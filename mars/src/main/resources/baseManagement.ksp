@@ -10,6 +10,7 @@ create DtDefinition DT_BASE {
 	field GEO_LOCATION {domain: DO_LABEL label:"Geographic Location" required:"false"}
 	field ASSETS_VALUE {domain: DO_CURRENCY label:"Current base assets value" required:"false"}
 	field RENTING_FEE {domain: DO_CURRENCY label: "Renting Fee" required:"false"}
+	field TAGS {domain: DO_TAGS label: "Tags" required:"false"}
 }
 
 

@@ -26,6 +26,7 @@ public final class Base implements Entity {
 	private String geoLocation;
 	private java.math.BigDecimal assetsValue;
 	private java.math.BigDecimal rentingFee;
+	private String tags;
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
 			name = "A_BASE_BASETYPE",
@@ -247,6 +248,25 @@ public final class Base implements Entity {
 	 */
 	public void setRentingFee(final java.math.BigDecimal rentingFee) {
 		this.rentingFee = rentingFee;
+	}
+	
+	/**
+	 * Champ : DATA.
+	 * Récupère la valeur de la propriété 'Tags'.
+	 * @return String tags
+	 */
+	@Field(domain = "DO_TAGS", label = "Tags")
+	public String getTags() {
+		return tags;
+	}
+
+	/**
+	 * Champ : DATA.
+	 * Définit la valeur de la propriété 'Tags'.
+	 * @param tags String
+	 */
+	public void setTags(final String tags) {
+		this.tags = tags;
 	}
 	
 	/**

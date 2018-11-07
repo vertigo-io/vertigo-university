@@ -26,6 +26,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
@@ -70,7 +72,7 @@ import io.vertigo.lang.WrappedException;
 public class DataBaseInitializer implements ComponentInitializer {
 
 	private static final int EQUIPMENT_TYPE_CSV_FILE_COLUMN_NUMBER = 3;
-	private static final int PERSON_CSV_FILE_COLUMN_NUMBER = 3;
+	private static final int PERSON_CSV_FILE_COLUMN_NUMBER = 5;
 	private static final int BUSINESS_CSV_FILE_COLUMN_NUMBER = 1;
 	private static final int GEOSECTOR_CSV_FILE_COLUMN_NUMBER = 1;
 
@@ -160,11 +162,13 @@ public class DataBaseInitializer implements ComponentInitializer {
 
 			final List<String> nameFirstPartDictionnary1 = Arrays.asList("Alpha", "Beta", "Gamma", "Delta", "Epsilon", "Zeta", "Eta", "Theta");
 			final List<String> nameSecondPartDictionnary2 = Arrays.asList("Centauri", "Aldebaran", "Pisces", "Cygnus", "Pegasus", "Dragon", "Andromeda");
+			final List<String> sampleTags = Arrays.asList("#mountain", "#sea", "#historic", "#cold", "#first", "#nasa", "#experimental");
 
 			final List<Base> baseList = new FakeBaseListBuilder()
 					.withMaxValues(50)
 					.withGeosectorIdList(basemanagementPAO.selectGeosectorId())
 					.withNameDictionnaries(nameFirstPartDictionnary1, nameSecondPartDictionnary2)
+					.withTagsDictionnary(sampleTags)
 					.build();
 
 			for (final Base base : baseList) {
@@ -261,8 +265,11 @@ public class DataBaseInitializer implements ComponentInitializer {
 		final String firstName = personRecord[0];
 		final String lastName = personRecord[1];
 		final String email = personRecord[2];
+		final String tags = personRecord[3];
+		final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		final LocalDate dateHired = LocalDate.parse(personRecord[4], dateFormatter);
 
-		personDAO.create(createPerson(firstName, lastName, email));
+		personDAO.create(createPerson(firstName, lastName, email, tags, dateHired));
 
 	}
 
@@ -306,11 +313,15 @@ public class DataBaseInitializer implements ComponentInitializer {
 
 	private static Person createPerson(final String firstName,
 			final String lastName,
-			final String eMail) {
+			final String eMail,
+			final String tags,
+			final LocalDate dateHired) {
 		final Person person = new Person();
 		person.setFirstName(firstName);
 		person.setLastName(lastName);
 		person.setEmail(eMail);
+		person.setTags(tags);
+		person.setDateHired(dateHired);
 		return person;
 	}
 

@@ -74,6 +74,7 @@ create table BASE
     GEO_LOCATION	 VARCHAR(100)	,
     ASSETS_VALUE	 NUMERIC(12,2)	,
     RENTING_FEE 	 NUMERIC(12,2)	,
+    TAGS        	 TEXT        	,
     BASE_TYPE_ID	 VARCHAR(100)	,
     GEOSECTOR_ID	 NUMERIC     	,
     constraint PK_BASE primary key (BASE_ID)
@@ -105,6 +106,9 @@ comment on column BASE.ASSETS_VALUE is
 
 comment on column BASE.RENTING_FEE is
 'Renting Fee';
+
+comment on column BASE.TAGS is
+'Tags';
 
 comment on column BASE.BASE_TYPE_ID is
 'Base Type';
@@ -369,6 +373,9 @@ create table PERSON
     FIRST_NAME  	 VARCHAR(100)	,
     LAST_NAME   	 VARCHAR(100)	,
     EMAIL       	 VARCHAR(150)	,
+    PICTUREFILE_ID	 NUMERIC     	,
+    TAGS        	 TEXT        	,
+    DATE_HIRED  	 DATE        	,
     constraint PK_PERSON primary key (PERSON_ID)
 );
 
@@ -383,6 +390,15 @@ comment on column PERSON.LAST_NAME is
 
 comment on column PERSON.EMAIL is
 'E-mail';
+
+comment on column PERSON.PICTUREFILE_ID is
+'PictureFileId';
+
+comment on column PERSON.TAGS is
+'Tags';
+
+comment on column PERSON.DATE_HIRED is
+'Date hired';
 
 -- ============================================================
 --   Table : PICTURE                                        
