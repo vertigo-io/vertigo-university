@@ -41,6 +41,11 @@ public class PersonDetailController extends AbstractVSpringMvcController {
 		toModeEdit();
 	}
 
+	@PostMapping("/_cancel")
+	public void doCancel() {
+		toModeReadOnly();
+	}
+
 	@PostMapping("/_create")
 	public String doCreate(
 			@ViewAttribute("person") final Person person) {

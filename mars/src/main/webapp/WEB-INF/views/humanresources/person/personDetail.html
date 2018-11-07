@@ -55,7 +55,7 @@
 					<vu:text-field object="person" field="email" />					
 				</vu:grid>
 				<div class="row justify-end">
-				<vu:button-submit th:if="${model.modeEdit}"  label="Cancel" action="@{_edit}" flat />
+				<vu:button-submit th:if="${model.modeEdit}"  label="Cancel" action="@{_cancel}" flat />
 				<vu:button-submit th:if="${model.modeEdit}"  label="Save" action="@{_save}" color="primary" />
 				<vu:button-submit th:if="${model.modeCreate}" label="Create" action="@{_create}" color="primary"/>
 				</div>				

@@ -14,6 +14,7 @@
 			<vu:form>
 				<vu:button-submit icon="fas fa-grip-horizontal" action="@{_changeRenderer?renderer=cards}" th::flat="${model.listRenderer != 'cards'}"/>
 				<vu:button-submit icon="fas fa-table" action="@{_changeRenderer?renderer=table}" th::flat="${model.listRenderer != 'table'}" />
+				<vu:button-submit icon="fas fa-table" action="@{_changeRenderer?renderer=list}" th::flat="${model.listRenderer != 'list'}" />
 			</vu:form>
 		</div>
 		<q-btn label="Add" type="a" color="primary" th:href="@{/humanresources/person/}"></q-btn>
@@ -49,6 +50,31 @@
 					b
 				</q-card>
 			</div>
+		</th:block>
+		<th:block th:if="${model.listRenderer == 'list'}">
+			<vu:include-data object="persons" field="personId" />
+			<vu:include-data object="persons" field="firstName" />
+			<vu:include-data object="persons" field="lastName" />
+			<vu:include-data object="persons" field="email_fmt" />
+			<vu:list list="persons">
+				<q-item-side>
+					<img th:src="@{/static/img/persons/Person10.jpg}" class="avatar"  />
+				</q-item-side>
+				<q-item-main>
+					<div class="row">
+						<div class="col-6">
+							<vu:field-read field="personId" list="persons" listKey="personId" listDisplay="firstName" />
+						</div>
+						<div class="col-6">
+							{{item.lastName}}
+							{{item.email_fmt}}
+						</div>
+					</div>
+				</q-item-main>
+				<q-item-side>
+					<q-btn round color="primary" icon="arrow_forward" type="a" th::href="|'@{/humanresources/person/}'+item.personId|"></q-btn>
+				</q-item-side>
+			</vu:list>
 		</th:block>
 		</section>
 	</body>
