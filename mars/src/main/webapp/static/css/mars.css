@@ -17,13 +17,17 @@ body {
   color: var(--q-color-body-color) !important;
 }
 
-.q-item-side {
-  color: currentColor !important;
-  text-align: center;	
+.q-list {
+	border: none;
 }
 
 .q-item {
   color: currentColor !important;
+}
+
+.q-item-side {
+  color: currentColor !important;
+  text-align: center;	
 }
 
 .q-item-sublabel {
@@ -37,18 +41,21 @@ body {
 	height: 150px;
 }
 
-nav .q-list {
+.q-list {
 	border: none;
 }
 
 nav a {
-	text-decoration: none;
+	text-decoration: none;	
+}
+
+nav.scroll-spy-nav a {
 	border-left-width:1px;
 	border-left-style:solid;
 	border-left-color:light-grey;		
 }
 
-nav a.q-item.active {
+nav.scroll-spy-nav a.q-item.active {
 	background: none;
 	border-left-width:5px;
 	border-left-style:solid;
