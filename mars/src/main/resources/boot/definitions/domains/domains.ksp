@@ -190,3 +190,12 @@ create Domain DO_YES_NO {
 }
 
 
+create Domain DO_SIZE {
+	dataType : Long
+	formatter : FMT_DEFAULT
+}
+
+create Domain DO_URI {
+	dataType : Long
+	formatter : FMT_DEFAULT
+}

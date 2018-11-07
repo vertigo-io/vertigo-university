@@ -30,6 +30,7 @@
 	</module>
 
 	<module name="vertigo-dynamo">
+		<component api="FileManager" class="io.vertigo.dynamo.impl.file.FileManagerImpl" />
 		<component api="VTransactionManager" class="io.vertigo.commons.impl.transaction.VTransactionManagerImpl" />
 		<component api="CollectionsManager" class="io.vertigo.dynamo.impl.collections.CollectionsManagerImpl" />
 		<component api="TaskManager" class="io.vertigo.dynamo.impl.task.TaskManagerImpl"/>
