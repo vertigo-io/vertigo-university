@@ -1,7 +1,7 @@
 /******** CSS SPECIFIQUE A CERTAINES PAGES *******/
 :root {
   	--q-color-body-background: #fdf1e9;
-	--q-color-body-color: #f3a875;
+	--q-color-body-color: #101010;
 	--q-color-primary:	#ed7d31;
 	--q-color-secondary:#fad9c2;
 	--q-color-tertiary:	#ffe8cb;
@@ -65,4 +65,24 @@ nav.scroll-spy-nav a.q-item.active {
 a.q-item {
 	color: grey;	
 }
+.persons .q-card {
+	width:100%;
+	min-width: 200px;	
+}
+
+@media (min-width: 1500px) {
+.persons .personCard {
+	width: 25%;
+}}
+
+.q-table-container {
+	background:#fff!important;
+}
+
+.q-table-container thead {
+	background:var(--q-color-secondary)!important;
+}
+
+
+
 

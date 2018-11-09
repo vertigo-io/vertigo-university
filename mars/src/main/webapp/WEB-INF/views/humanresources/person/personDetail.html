@@ -19,31 +19,26 @@
 	        </nav>
 		</section>
 		
-		<section class="col-12" layout:fragment="content-header" >			
-			<vu:form>
-				<div class="row justify-between items-center bg-secondary text-white">
-					<div class="row justify-between">
-						<img th:src="@{/static/img/persons/Person10.jpg}" class="detailImg  gt-md"/>
-						<div class="detailTitle q-pa-md">
-								<big>James T. Kirk</big> 
-								<br/><small>Base Manager</small></div>
-					</div>
-						<!-- Brand and toggle get grouped for better mobile display -->				
-					<div class="row items-center">
-						<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>
-						
-						<q-btn round size="lg" color="primary"  icon="more_horiz"  direction="down" aria-label="More actions" title="More actions" class="on-left"> 
-						  <q-popover><q-list link>
-						    <q-item><q-btn flat>Delete</q-btn></q-item>
-						    <q-item><q-btn flat>Archive</q-btn></q-item>
-						    <q-item><q-btn flat>Bind to base</q-btn></q-item>
-						  </q-list>
-						  </q-popover>
-						</q-btn>
-						<img th:src="@{/static/img/TypesLogo/PersonType.png }" class="detailType"/>
+		<section>
+				<div layout:fragment="content-header-info">
+					<img th:src="@{/static/img/persons/Person10.jpg}" class="detailImg gt-md"/>
+					<div class="detailTitle q-pa-md">
+							<big>James T. Kirk</big> 
+							<br/><small>Base Manager</small>
 					</div>
 				</div>
-			</vu:form>
+				<div layout:fragment="content-header-actions">
+					<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>
+					
+					<q-btn round size="lg" color="primary" icon="more_horiz"  direction="down" aria-label="More actions" title="More actions" class="on-left"> 
+					  <q-popover><q-list link>
+					    <q-item><q-btn flat>Delete</q-btn></q-item>
+					    <q-item><q-btn flat>Archive</q-btn></q-item>
+					    <q-item><q-btn flat>Bind to base</q-btn></q-item>
+					  </q-list>
+					  </q-popover>
+					</q-btn>
+				</div>
 		</section>
 		
 		<section layout:fragment="content" >
