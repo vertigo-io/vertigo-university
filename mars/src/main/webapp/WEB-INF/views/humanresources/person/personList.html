@@ -10,14 +10,19 @@
 	
 	<body>
 		<section layout:fragment="content" >
-		<div class="row justify-end">
-			<vu:form>
-				<vu:button-submit icon="fas fa-grip-horizontal" action="@{_changeRenderer?renderer=cards}" th::flat="${model.listRenderer != 'cards'}"/>
-				<vu:button-submit icon="fas fa-table" action="@{_changeRenderer?renderer=table}" th::flat="${model.listRenderer != 'table'}" />
-				<vu:button-submit icon="fas fa-list" action="@{_changeRenderer?renderer=list}" th::flat="${model.listRenderer != 'list'}" />
-			</vu:form>
+		<div class="row justify-between q-mb-md">
+			<div>
+				<q-btn label="Add" type="a" color="primary" th:href="@{/humanresources/person/}"></q-btn>
+			</div>
+			<div class="row justify-end">
+				<vu:form>
+					<vu:button-submit icon="fas fa-grip-horizontal" action="@{_changeRenderer?renderer=cards}" th::flat="${model.listRenderer != 'cards'}"/>
+					<vu:button-submit icon="fas fa-table" action="@{_changeRenderer?renderer=table}" th::flat="${model.listRenderer != 'table'}" />
+					<vu:button-submit icon="fas fa-list" action="@{_changeRenderer?renderer=list}" th::flat="${model.listRenderer != 'list'}" />
+				</vu:form>
+			</div>
 		</div>
-		<q-btn label="Add" type="a" color="primary" th:href="@{/humanresources/person/}"></q-btn>
+		
 		<th:block th:if="${model.listRenderer == 'table'}">
 			<vu:table list="persons" componentId="personsTable" sortUrl="@{/humanresources/persons/_sort}">
 				<vu:column field="personId" />
@@ -34,23 +39,20 @@
 			<vu:include-data object="persons" field="firstName" />
 			<vu:include-data object="persons" field="lastName" />
 			<vu:include-data object="persons" field="email" />
-			
-			<div class="row wrap persons justify-between gutter-md">
-				<vu:cards list="persons" componentId="personsCards" sortUrl="@{/humanresources/persons/_sort}" rowsPerPage="5" showMore="true" showMoreLabel="Show more" >
-					<q-card-media >
-						<img th:src="@{/static/img/persons/Person10.jpg}"  />
-					</q-card-media>
-					<q-card-title>
-						<a class="text-primary" th::href="|'@{/humanresources/person/}'+item.personId|">{{item.firstName}} {{item.lastName}}</a>
-						<span slot="subtitle">{{item.email}}</span>
-					</q-card-title>
-					<q-card-main>
-					a
-					</q-card-main>
-					<q-card-separator></q-card-separator>
-					b
-				</vu:cards>
-			</div>
+			<vu:cards list="persons" cardClass="personCard col-xl-4 col-md-6 col-xs-12" componentId="personsCards" sortUrl="@{/humanresources/persons/_sort}" rowsPerPage="8" showMore="true" showMoreLabel="Show more" >
+				<q-card-media >
+					<img th:src="@{/static/img/persons/Person10.jpg}"  />
+				</q-card-media>
+				<q-card-title>
+					<a class="text-primary" th::href="|'@{/humanresources/person/}'+item.personId|">{{item.firstName}} {{item.lastName}}</a>
+					<span slot="subtitle">{{item.email}}</span>
+				</q-card-title>
+				<q-card-main>
+				a
+				</q-card-main>
+				<q-card-separator></q-card-separator>
+				b
+			</vu:cards>
 		</th:block>
 		<th:block th:if="${model.listRenderer == 'list'}">
 			<vu:list list="persons" componentId="personsList" sortUrl="@{/humanresources/persons/_sort}" rowsPerPage="5" pagination_:direction-links="true" pagination_:boundary-links="true" >

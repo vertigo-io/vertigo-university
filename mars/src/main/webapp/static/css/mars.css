@@ -65,13 +65,12 @@ nav.scroll-spy-nav a.q-item.active {
 a.q-item {
 	color: grey;	
 }
-.persons .q-card {
-	width:100%;
-	min-width: 200px;	
+.personCard .q-card {
+	width:100%;	
 }
 
 @media (min-width: 1500px) {
-.persons .personCard {
+.row  .personCard {
 	width: 25%;
 }}
 
