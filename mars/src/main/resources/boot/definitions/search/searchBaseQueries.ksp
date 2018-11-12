@@ -1,0 +1,15 @@
+package io.mars.basemanagement.search
+
+create IndexDefinition IDX_BASE {  
+  keyConcept : DT_BASE
+  dtIndex : DT_BASE_INDEX
+  loaderId : "BaseSearchLoader"
+}
+
+create FacetedQueryDefinition QRY_BASE {
+	keyConcept : DT_BASE
+	facets : [ ]
+	domainCriteria : DO_LABEL
+	listFilterBuilderClass : "io.vertigo.dynamox.search.DslListFilterBuilder"  
+	listFilterBuilderQuery : "BASE_ID:#query# NAME:#query# CODE:#+query*#"
+}

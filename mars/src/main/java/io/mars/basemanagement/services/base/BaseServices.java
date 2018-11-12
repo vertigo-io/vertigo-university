@@ -1,9 +1,13 @@
 package io.mars.basemanagement.services.base;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
+import io.mars.basemanagement.BasemanagementPAO;
 import io.mars.basemanagement.dao.BaseDAO;
 import io.mars.basemanagement.domain.Base;
+import io.mars.basemanagement.search.BaseIndex;
 import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.core.component.Component;
 import io.vertigo.dynamo.criteria.Criterions;
@@ -16,6 +20,9 @@ public class BaseServices implements Component {
 	@Inject
 	private BaseDAO baseDAO;
 
+	@Inject
+	private BasemanagementPAO basemanagementPAO;
+
 	public Base get(final Long baseId) {
 		return baseDAO.get(baseId);
 	}
@@ -26,5 +33,9 @@ public class BaseServices implements Component {
 
 	public DtList<Base> getBases(final DtListState dtListState) {
 		return baseDAO.findAll(Criterions.alwaysTrue(), dtListState.getMaxRows().orElse(50));
+	}
+
+	public DtList<BaseIndex> getBaseIndex(final List<Long> baseIds) {
+		return basemanagementPAO.loadBaseIndex(baseIds);
 	}
 }

@@ -1,3 +1,5 @@
 domains/domains.ksp
 tasks/tasks.ksp
-common/file.ksp
+tasks/searchTasks.ksp
+search/searchBaseQueries.ksp
+search/searchEquipmentQueries.ksp

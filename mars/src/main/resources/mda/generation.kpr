@@ -3,3 +3,6 @@
 ../catalog.ksp
 ../humanresources.ksp
 ../maintenance.ksp
+../searchBase.ksp
+../searchEquipment.ksp
+../file.ksp

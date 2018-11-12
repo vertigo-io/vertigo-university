@@ -139,6 +139,7 @@ create Domain DO_LABEL {
 	formatter : FMT_DEFAULT
 	constraint : [CK_MAX_LENGTH_100]
 	storeType : "VARCHAR(100)"
+	indexType : "text_fr"
 }
 
 create Domain DO_DESCRIPTION {
@@ -146,6 +147,7 @@ create Domain DO_DESCRIPTION {
 	formatter : FMT_DEFAULT
 	constraint : [CK_MAX_LENGTH_350]
 	storeType : "VARCHAR(350)"
+	indexType : "text_fr"
 }
 
 create Domain DO_EMAIL {
@@ -160,6 +162,7 @@ create Domain DO_CODE {
 	formatter : FMT_DEFAULT
 	constraint : [CK_MAX_LENGTH_100]
 	storeType : "VARCHAR(100)"
+	indexType : "code:keyword"
 }
 
 
@@ -180,7 +183,7 @@ create Domain DO_TAGS {
 	dataType : String
 	formatter : FMT_TAGS
 	storeType : "TEXT"
-	/* TODO : add constraints and formatter */
+	indexType : "multiple_code:facetable"
 }
 
 create Domain DO_YES_NO {
@@ -193,9 +196,5 @@ create Domain DO_YES_NO {
 create Domain DO_SIZE {
 	dataType : Long
 	formatter : FMT_DEFAULT
-}
-
-create Domain DO_URI {
-	dataType : Long
-	formatter : FMT_DEFAULT
+	storeType : "NUMERIC"
 }

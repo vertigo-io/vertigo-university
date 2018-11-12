@@ -56,6 +56,72 @@
 			<version>0.9.5.2</version>
 			<scope>test</scope>
 		</dependency>
+    	
+    	<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-core</artifactId>
+			<version>6.6.1</version> <!-- 6.6.1 compatible with ElasticSearch 5.6.8 -->
+		</dependency>
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-analyzers-common</artifactId>
+			<version>6.6.1</version> <!-- 6.6.1 compatible with ElasticSearch 5.6.8 -->
+		</dependency>
+		<dependency>
+			<groupId>org.apache.lucene</groupId>
+			<artifactId>lucene-queryparser</artifactId>
+			<version>6.6.1</version> <!-- 6.6.1 compatible with ElasticSearch 5.6.8 -->
+		</dependency>
+		
+		<dependency>
+			<groupId>org.elasticsearch</groupId>
+			<artifactId>elasticsearch</artifactId>
+			<version>5.6.8</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.elasticsearch.client</groupId>
+		    <artifactId>transport</artifactId>
+		    <version>5.6.8</version><!-- EsTransportSearchServicesPlugin -->
+		</dependency>
+		<dependency>
+			<groupId>org.elasticsearch.plugin</groupId>
+			<artifactId>transport-netty4-client</artifactId>
+			<version>5.6.8</version>
+		</dependency>
+    	
+    	
+    	
+    	
+		
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.9.7</version> <!-- version for spring -->
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+    		<artifactId>jackson-dataformat-smile</artifactId>
+    		<version>2.9.7</version> <!-- version for spring -->
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+    		<artifactId>jackson-dataformat-yaml</artifactId>
+    		<version>2.9.7</version> <!-- version for spring -->
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+    		<artifactId>jackson-dataformat-cbor</artifactId>
+    		<version>2.9.7</version> <!-- version for spring -->
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.9.7</version> <!-- version for spring -->
+		</dependency>
+		
+		
+		
+		
     </dependencies>
 
 	<build>

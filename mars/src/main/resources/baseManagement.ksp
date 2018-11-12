@@ -1,6 +1,7 @@
 package io.mars.basemanagement.domain
 
 create DtDefinition DT_BASE {
+	stereotype: "KeyConcept"
 	id BASE_ID {domain: DO_ID label: "Id"}
 	field CODE {domain: DO_CODE label: "Base Code" required:"false"}
 	field NAME {domain: DO_LABEL label: "Name" required:"false"}
@@ -47,6 +48,7 @@ create DtDefinition DT_JOB_STATUS {
 }
 
 create DtDefinition DT_EQUIPMENT {
+	stereotype: "KeyConcept"
 	id EQUIPMENT_ID {domain: DO_ID label:"Id"}
 	field NAME {domain: DO_LABEL label: "Name" required:"false"}
 	field CODE {domain: DO_CODE label: "Base Code" required:"false"}

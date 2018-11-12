@@ -1,9 +1,13 @@
 package io.mars.basemanagement.services.equipment;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
+import io.mars.basemanagement.BasemanagementPAO;
 import io.mars.basemanagement.dao.EquipmentDAO;
 import io.mars.basemanagement.domain.Equipment;
+import io.mars.basemanagement.search.EquipmentIndex;
 import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.core.component.Component;
 import io.vertigo.dynamo.criteria.Criterions;
@@ -11,7 +15,10 @@ import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.domain.model.DtListState;
 
 @Transactional
-public class EquipmentServicesImpl implements Component {
+public class EquipmentServices implements Component {
+
+	@Inject
+	private BasemanagementPAO basemanagementPAO;
 
 	@Inject
 	private EquipmentDAO equipmentDAO;
@@ -26,5 +33,9 @@ public class EquipmentServicesImpl implements Component {
 
 	public DtList<Equipment> getEquipments(final DtListState dtListState) {
 		return equipmentDAO.findAll(Criterions.alwaysTrue(), dtListState.getMaxRows().orElse(50));
+	}
+
+	public DtList<EquipmentIndex> getEquipmentIndex(final List<Long> equipmentIds) {
+		return basemanagementPAO.loadEquipmentIndex(equipmentIds);
 	}
 }

@@ -38,6 +38,9 @@ create sequence SEQ_JOB
 create sequence SEQ_JOB_STATUS
 	start with 1000 cache 20; 
 
+create sequence SEQ_MEDIA_FILE_INFO
+	start with 1000 cache 20; 
+
 create sequence SEQ_MISSION
 	start with 1000 cache 20; 
 
@@ -335,6 +338,30 @@ comment on column JOB_STATUS.JOB_STATUS_ID is
 
 comment on column JOB_STATUS.LABEL is
 'Status Label';
+
+-- ============================================================
+--   Table : MEDIA_FILE_INFO                                        
+-- ============================================================
+create table MEDIA_FILE_INFO
+(
+    FIL_ID      	 NUMERIC     	not null,
+    FILE_NAME   	 VARCHAR(100)	not null,
+    LENGTH      	 NUMERIC     	not null,
+    LAST_MODIFIED	 TIMESTAMP   	not null,
+    constraint PK_MEDIA_FILE_INFO primary key (FIL_ID)
+);
+
+comment on column MEDIA_FILE_INFO.FIL_ID is
+'Id';
+
+comment on column MEDIA_FILE_INFO.FILE_NAME is
+'Name';
+
+comment on column MEDIA_FILE_INFO.LENGTH is
+'Size';
+
+comment on column MEDIA_FILE_INFO.LAST_MODIFIED is
+'Modification Date';
 
 -- ============================================================
 --   Table : MISSION                                        

@@ -1,11 +1,11 @@
-package io.mars.common.tools.file
+package io.mars.common.domain.tools.file
 
 create FileInfo FI_FILE_INFO_STD {
 	storeName : "main"
 }
 
 create DtDefinition DT_MEDIA_FILE_INFO {
-	 id  FIL_ID 			{domain : DO_URI 	label : "Id" }
+	 id  FIL_ID 			{domain : DO_ID 	label : "Id" }
 	 field FILE_NAME 		{domain : DO_LABEL 	label : "Name" 					required : "true" }
  	 field LENGTH 			{domain : DO_SIZE 	label : "Size" 				required : "true" }
 	 field LAST_MODIFIED 	{domain : DO_INSTANT	label : "Modification Date" 	required : "true" }

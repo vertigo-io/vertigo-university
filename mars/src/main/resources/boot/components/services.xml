@@ -20,12 +20,19 @@
 
 	<module name="services">
 		<component class="io.mars.basemanagement.services.base.BaseServices"/>
+		<component class="io.mars.basemanagement.services.equipment.EquipmentServices"/>
 		<component class="io.mars.humanresources.services.person.PersonServices"/>
 		<component class="io.mars.datageneration.DataGenerator" />
 	</module>
 
+	<module name="search">
+		<component class="io.mars.basemanagement.search.BaseSearchLoader" />
+		<component class="io.mars.basemanagement.search.EquipmentSearchLoader" />
+	</module>
+
+
 	<init>
-		<!-- initializer class="io.mars.boot.DataBaseInitializer"/  -->
+		<initializer class="io.mars.boot.DataBaseInitializer"/> 
 		<initializer class="io.mars.boot.MasterDataInitializer"/>
 		<initializer class="io.mars.boot.I18nResourcesInitializer"/>
 	</init>

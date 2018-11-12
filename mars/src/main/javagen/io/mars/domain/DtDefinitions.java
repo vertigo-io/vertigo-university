@@ -19,6 +19,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	public enum Definitions {
 		/** Objet de données Base. */
 		Base(io.mars.basemanagement.domain.Base.class),
+		/** Objet de données BaseIndex. */
+		BaseIndex(io.mars.basemanagement.search.BaseIndex.class),
 		/** Objet de données BaseType. */
 		BaseType(io.mars.basemanagement.domain.BaseType.class),
 		/** Objet de données Business. */
@@ -29,6 +31,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		EquipmentCategory(io.mars.catalog.domain.EquipmentCategory.class),
 		/** Objet de données EquipmentFeature. */
 		EquipmentFeature(io.mars.basemanagement.domain.EquipmentFeature.class),
+		/** Objet de données EquipmentIndex. */
+		EquipmentIndex(io.mars.basemanagement.search.EquipmentIndex.class),
 		/** Objet de données EquipmentType. */
 		EquipmentType(io.mars.catalog.domain.EquipmentType.class),
 		/** Objet de données Geosector. */
@@ -37,6 +41,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		Job(io.mars.basemanagement.domain.Job.class),
 		/** Objet de données JobStatus. */
 		JobStatus(io.mars.basemanagement.domain.JobStatus.class),
+		/** Objet de données MediaFileInfo. */
+		MediaFileInfo(io.mars.common.domain.tools.file.MediaFileInfo.class),
 		/** Objet de données Mission. */
 		Mission(io.mars.humanresources.domain.Mission.class),
 		/** Objet de données Person. */
@@ -95,6 +101,23 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		BASE_TYPE_ID,
 		/** Propriété 'Base Geosector'. */
 		GEOSECTOR_ID	}
+
+	/**
+	 * Enumération des champs de BaseIndex.
+	 */
+	public enum BaseIndexFields implements DtFieldName<io.mars.basemanagement.search.BaseIndex> {
+		/** Propriété 'id'. */
+		BASE_ID,
+		/** Propriété 'Name'. */
+		NAME,
+		/** Propriété 'Base Code'. */
+		CODE,
+		/** Propriété 'Base Creation Date'. */
+		CREATION_DATE,
+		/** Propriété 'Tags'. */
+		TAGS,
+		/** Propriété 'Base Type'. */
+		BASE_TYPE_LABEL	}
 
 	/**
 	 * Enumération des champs de BaseType.
@@ -170,6 +193,27 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		EQUIPMENT_ID	}
 
 	/**
+	 * Enumération des champs de EquipmentIndex.
+	 */
+	public enum EquipmentIndexFields implements DtFieldName<io.mars.basemanagement.search.EquipmentIndex> {
+		/** Propriété 'Id'. */
+		EQUIPMENT_ID,
+		/** Propriété 'Name'. */
+		NAME,
+		/** Propriété 'Base Code'. */
+		CODE,
+		/** Propriété 'Date of purchase'. */
+		PURCHASE_DATE,
+		/** Propriété 'Description'. */
+		DESCRIPTION,
+		/** Propriété 'Tags'. */
+		TAGS,
+		/** Propriété 'Equipment Type'. */
+		EQUIPMENT_TYPE_NAME,
+		/** Propriété 'Equipment Type'. */
+		EQUIPMENT_CATEGORY_NAME	}
+
+	/**
 	 * Enumération des champs de EquipmentType.
 	 */
 	public enum EquipmentTypeFields implements DtFieldName<io.mars.catalog.domain.EquipmentType> {
@@ -214,6 +258,21 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		JOB_STATUS_ID,
 		/** Propriété 'Status Label'. */
 		LABEL	}
+
+	/**
+	 * Enumération des champs de MediaFileInfo.
+	 */
+	public enum MediaFileInfoFields implements DtFieldName<io.mars.common.domain.tools.file.MediaFileInfo> {
+		/** Propriété 'Id'. */
+		FIL_ID,
+		/** Propriété 'Name'. */
+		FILE_NAME,
+		/** Propriété 'Size'. */
+		LENGTH,
+		/** Propriété 'Modification Date'. */
+		LAST_MODIFIED,
+		/** Propriété 'data'. */
+		FILE_DATA	}
 
 	/**
 	 * Enumération des champs de Mission.

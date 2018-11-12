@@ -53,6 +53,19 @@
 		</component>
 	</module>
 	
+	<module name="vertigo-search">
+		<component api="SearchManager" class="io.vertigo.dynamo.impl.search.SearchManagerImpl">
+		    <plugin class="io.vertigo.dynamo.plugins.search.elasticsearch.embedded.ESEmbeddedSearchServicesPlugin">
+		        <param name="home" value="search/" />
+		        <param name="envIndex" value="TU_TEST" />
+		        <param name="rowsPerQuery" value="50" />
+		        <param name="config.file" value="search/elasticsearch.yml" />
+		    </plugin>
+		</component>
+	</module>
+	
+	
+	
 	<!-- 
 	<module name="vertigo-persona">
 		<component api="VSecurityManager" class="io.vertigo.persona.impl.security.VSecurityManagerImpl">

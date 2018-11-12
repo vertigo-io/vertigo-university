@@ -41,6 +41,34 @@ public final class BasemanagementPAO implements StoreServices {
 	}
 
 	/**
+	 * Execute la tache TK_LOAD_BASE_INDEX.
+	 * @param baseIds java.util.List<Long> 
+	 * @return io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.search.BaseIndex> dtcIndex
+	*/
+	public io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.search.BaseIndex> loadBaseIndex(final java.util.List<Long> baseIds) {
+		final Task task = createTaskBuilder("TK_LOAD_BASE_INDEX")
+				.addValue("BASE_IDS", baseIds)
+				.build();
+		return getTaskManager()
+				.execute(task)
+				.getResult();
+	}
+
+	/**
+	 * Execute la tache TK_LOAD_EQUIPMENT_INDEX.
+	 * @param equipmentIds java.util.List<Long> 
+	 * @return io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.search.EquipmentIndex> dtcIndex
+	*/
+	public io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.search.EquipmentIndex> loadEquipmentIndex(final java.util.List<Long> equipmentIds) {
+		final Task task = createTaskBuilder("TK_LOAD_EQUIPMENT_INDEX")
+				.addValue("EQUIPMENT_IDS", equipmentIds)
+				.build();
+		return getTaskManager()
+				.execute(task)
+				.getResult();
+	}
+
+	/**
 	 * Execute la tache TK_SELECT_BASE_ID.
 	 * @return java.util.List<Long> baseIdList
 	*/
