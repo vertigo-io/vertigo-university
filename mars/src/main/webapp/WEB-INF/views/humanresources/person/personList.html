@@ -36,7 +36,7 @@
 			<vu:include-data object="persons" field="email" />
 			
 			<div class="row wrap persons justify-between gutter-md">
-				<vu:cards list="persons" componentId="personsCards" sortUrl="@{/humanresources/persons/_sort}" rowsPerPage="5" showMoreLabel="Show more" >
+				<vu:cards list="persons" componentId="personsCards" sortUrl="@{/humanresources/persons/_sort}" rowsPerPage="5" showMore="true" showMoreLabel="Show more" >
 					<q-card-media >
 						<img th:src="@{/static/img/persons/Person10.jpg}"  />
 					</q-card-media>
@@ -53,7 +53,7 @@
 			</div>
 		</th:block>
 		<th:block th:if="${model.listRenderer == 'list'}">
-			<vu:list list="persons" componentId="personsList" sortUrl="@{/humanresources/persons/_sort}" rowsPerPage="5" showMoreLabel="Show more">
+			<vu:list list="persons" componentId="personsList" sortUrl="@{/humanresources/persons/_sort}" rowsPerPage="5" pagination_:direction-links="true" pagination_:boundary-links="true" >
 				<q-item-side>
 					<img th:src="@{/static/img/persons/Person10.jpg}" class="avatar"  />
 				</q-item-side>
