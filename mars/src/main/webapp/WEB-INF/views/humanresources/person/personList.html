@@ -24,7 +24,7 @@
 				<vu:column field="firstName" sortable="true" />
 				<vu:column field="lastName" sortable="true" />
 				<vu:column field="email" sortable="true" />
-				<vu:column name="actions" label="Actions" sortable="true" >
+				<vu:column name="actions" label="Actions" >
 					<q-btn round color="primary" icon="arrow_forward" type="a" th::href="|'@{/humanresources/person/}'+props.row.personId|"></q-btn>
 				</vu:column>
 			</vu:table>

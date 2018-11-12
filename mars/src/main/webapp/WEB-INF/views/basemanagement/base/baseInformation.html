@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="http://www.morphbit.com/thymeleaf/component"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{templates/mmcDetailLayout}"
+>
+	<head>
+		<title>Base Informations</title>
+	</head>
+	
+	<body>
+	
+		<section layout:fragment="content-nav">
+			<nav v-scroll-spy="{offset:150}">
+			    <q-list link style="height:100%">
+			        <q-item tag="a" href="#health">Health Condition</q-item>
+			        <q-item tag="a" href="#views">Views</q-item>
+			        <q-item tag="a" href="#general">General Information</q-item>
+			        <q-item tag="a" href="#financial">Financial value</q-item>				      
+	        	</q-list>
+	        </nav>
+		</section>
+		
+		<section>
+				<div layout:fragment="content-header-info">
+					<img th:src="@{/static/img/bases/Mars base 1.jpg}" class="detailImg gt-md"/>
+					<div class="detailTitle q-pa-md">
+							<big>Alpha Base</big> 
+					</div>
+				</div>
+				<div layout:fragment="content-header-actions">
+					<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>
+					
+					<q-btn round size="lg" color="primary" icon="more_horiz"  direction="down" aria-label="More actions" title="More actions" class="on-left"> 
+					  <q-popover><q-list link>
+					  	<q-item><q-btn flat>Add view</q-btn></q-item>
+					    <q-item><q-btn flat>Delete</q-btn></q-item>
+					    <q-item><q-btn flat>Archive</q-btn></q-item>
+					  </q-list>
+					  </q-popover>
+					</q-btn>
+				</div>
+		</section>
+		
+		<section layout:fragment="content" >
+			<vu:form>
+				<vu:button-submit th:if="${model.modeEdit}"  label="Save" action="@{_save}" color="primary" />
+				<vu:block id="health" title="Health Condition">
+				<vu:grid cols="2">
+					<vu:text-field object="base" field="healthLevel"/>
+				</vu:grid>
+				<div class="row justify-end">
+				</div>				
+				</vu:block>
+				
+				<vu:block id="views" title="Views">
+					add views
+				</vu:block>
+				
+				<vu:block id="general" title="General Information">
+					<vu:grid cols="2">
+						<vu:text-field object="base" field="name"/>
+						<vu:text-field object="base" field="code"/>
+						<vu:text-field object="base" field="geoLocation" />
+						<vu:date object="base" field="creationDate" />
+						<vu:grid-cell>
+							<vu:text-area object="base" field="description"/>
+						</vu:grid-cell>
+					</vu:grid>
+				</vu:block>
+				
+				<vu:block id="financial" title="Financial value">
+					<vu:grid cols="2">
+						<vu:text-field object="base" field="assetsValue"/>
+						<vu:text-field object="base" field="rentingFee"/>
+					</vu:grid>
+				</vu:block>
+			</vu:form>
+		</section>
+	</body>
+</html>

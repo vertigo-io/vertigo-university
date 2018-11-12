@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="http://www.morphbit.com/thymeleaf/component"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{templates/mmcListLayout}"
+>
+	<head>
+		<title>Bases</title>
+	</head>
+	
+	<body>
+		<section layout:fragment="content" >
+			<vu:include-data object="bases" field="baseId" />
+			<vu:include-data object="bases" field="name" />
+			<vu:include-data object="bases" field="code" />
+			<div class="row wrap justify-between gutter-md">
+				<vu:cards list="bases" componentId="baseCards" sortUrl="@{/basemanagement/bases/_sort}" rowsPerPage="10" showMore="true" showMoreLabel="Show more" >
+					<q-card-media >
+						<img th:src="@{/static/img/bases/Mars base 1.jpg}"  />
+					</q-card-media>
+					<q-card-title>
+						<a class="text-primary" th::href="|'@{/basemanagement/base/information/}'+item.baseId|">{{item.name}}</a>
+						<span slot="subtitle">{{item.code}}</span>
+					</q-card-title>
+					<q-card-main>
+					a
+					</q-card-main>
+					<q-card-separator></q-card-separator>
+					b
+				</vu:cards>
+			</div>
+		</section>
+	</body>
+</html>
