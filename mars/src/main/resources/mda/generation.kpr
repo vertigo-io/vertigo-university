@@ -1,8 +1,8 @@
 ../boot/definitions/application.kpr
-../basemanagement.ksp
-../catalog.ksp
-../humanresources.ksp
-../maintenance.ksp
-../searchBase.ksp
-../searchEquipment.ksp
-../file.ksp
+basemanagement.ksp
+catalog.ksp
+humanresources.ksp
+maintenance.ksp
+searchBase.ksp
+searchEquipment.ksp
+file.ksp
