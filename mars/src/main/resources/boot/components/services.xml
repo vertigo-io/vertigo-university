@@ -35,6 +35,7 @@
 		<!-- initializer class="io.mars.boot.DataBaseInitializer"/ --> 
 		<initializer class="io.mars.boot.MasterDataInitializer"/>
 		<initializer class="io.mars.boot.I18nResourcesInitializer"/>
+		<initializer class="io.mars.boot.SearchInitializer"/>
 	</init>
 
 </config>

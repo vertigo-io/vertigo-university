@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="http://www.morphbit.com/thymeleaf/component"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{templates/mmcDetailLayout}"
+>
+	<head>
+		<title>Base Jobs</title>
+	</head>
+	
+	<body>
+	
+		<section layout:fragment="content-nav">
+			<nav v-scroll-spy="{offset:150}">
+			    <q-list link style="height:100%">
+			        <q-item tag="a" href="#overview">Equipment Overview</q-item>
+			        <q-item tag="a" href="#equipments">Equipments</q-item>
+			        <q-item tag="a" href="#maintenance">Last Maintenance Operations</q-item>
+	        	</q-list>
+	        </nav>
+		</section>
+		
+		<section>
+				<div layout:fragment="content-header-info">
+					<img th:src="@{/static/img/bases/Mars base 1.jpg}" class="detailImg gt-md"/>
+					<div class="detailTitle q-pa-md">
+							<big>Alpha Base</big> 
+					</div>
+				</div>
+				<div layout:fragment="content-header-actions">
+					<q-btn round size="lg" color="primary" icon="more_horiz"  direction="down" aria-label="More actions" title="More actions" class="on-left"> 
+					  <q-popover><q-list link>
+					  	<q-item><q-btn flat>Add view</q-btn></q-item>
+					    <q-item><q-btn flat>Delete</q-btn></q-item>
+					    <q-item><q-btn flat>Archive</q-btn></q-item>
+					  </q-list>
+					  </q-popover>
+					</q-btn>
+				</div>
+		</section>
+		
+		<section layout:fragment="content" >
+			<vu:form>
+				<vu:block id="overview" title="Equipment Overview"/>
+				
+				<vu:block id="equipments" title="Equipments"/>
+				
+				<vu:block id="maintenance" title="Last Maintenance Operations"/>
+			</vu:form>
+		</section>
+	</body>
+</html>

@@ -10,9 +10,12 @@ import io.mars.basemanagement.domain.Equipment;
 import io.mars.basemanagement.search.EquipmentIndex;
 import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.core.component.Component;
+import io.vertigo.dynamo.collections.model.FacetedQueryResult;
+import io.vertigo.dynamo.collections.model.SelectedFacetValues;
 import io.vertigo.dynamo.criteria.Criterions;
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.domain.model.DtListState;
+import io.vertigo.dynamo.search.model.SearchQuery;
 
 @Transactional
 public class EquipmentServices implements Component {
@@ -37,5 +40,10 @@ public class EquipmentServices implements Component {
 
 	public DtList<EquipmentIndex> getEquipmentIndex(final List<Long> equipmentIds) {
 		return basemanagementPAO.loadEquipmentIndex(equipmentIds);
+	}
+
+	public FacetedQueryResult<EquipmentIndex, SearchQuery> searchEquipments(final String criteria, final SelectedFacetValues selectedFacetValues, final DtListState dtListState) {
+		final SearchQuery searchQuery = equipmentDAO.createSearchQueryBuilderEquipment(criteria, selectedFacetValues).build();
+		return equipmentDAO.loadList(searchQuery, dtListState);
 	}
 }

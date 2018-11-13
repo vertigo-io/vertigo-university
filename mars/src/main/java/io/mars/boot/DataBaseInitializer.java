@@ -54,7 +54,6 @@ import io.mars.catalog.domain.EquipmentType;
 import io.mars.domain.DtDefinitions.EquipmentCategoryFields;
 import io.mars.humanresources.dao.PersonDAO;
 import io.mars.humanresources.domain.Person;
-import io.vertigo.app.Home;
 import io.vertigo.commons.transaction.VTransactionManager;
 import io.vertigo.commons.transaction.VTransactionWritable;
 import io.vertigo.core.component.ComponentInitializer;
@@ -63,8 +62,6 @@ import io.vertigo.database.sql.SqlDataBaseManager;
 import io.vertigo.database.sql.connection.SqlConnection;
 import io.vertigo.database.sql.statement.SqlStatement;
 import io.vertigo.dynamo.criteria.Criterions;
-import io.vertigo.dynamo.search.SearchManager;
-import io.vertigo.dynamo.search.metamodel.SearchIndexDefinition;
 import io.vertigo.lang.Assertion;
 import io.vertigo.lang.WrappedException;
 
@@ -102,8 +99,6 @@ public class DataBaseInitializer implements ComponentInitializer {
 	private EquipmentTypeDAO equipmentTypeDAO;
 	@Inject
 	private BasemanagementPAO basemanagementPAO;
-	@Inject
-	private SearchManager searchManager;
 
 	/** {@inheritDoc} */
 	@Override
@@ -116,12 +111,6 @@ public class DataBaseInitializer implements ComponentInitializer {
 		createInitialEquipmentTypesFromCSV("initdata/equipmentTypes.csv");
 		createInitialDataFromCSV("initdata/businesses.csv", this::createInitialBusinessFromCSV);
 		createInitialEquipments();
-
-		Home.getApp().registerPreActivateFunction(() -> {
-			Home.getApp().getDefinitionSpace()
-					.getAll(SearchIndexDefinition.class)
-					.forEach((indexDefinition) -> searchManager.reindexAll(indexDefinition));
-		});
 	}
 
 	private void createDataBase() {

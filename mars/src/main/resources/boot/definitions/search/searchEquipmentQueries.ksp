@@ -11,5 +11,5 @@ create FacetedQueryDefinition QRY_EQUIPMENT {
 	facets : [ ]
 	domainCriteria : DO_LABEL
 	listFilterBuilderClass : "io.vertigo.dynamox.search.DslListFilterBuilder"  
-	listFilterBuilderQuery : "EQUIPMENT_ID:#query# NAME:#query# CODE:#+query*#"
+	listFilterBuilderQuery : "_all:#+query*#"
 }
