@@ -23,7 +23,7 @@ import io.vertigo.app.config.discovery.ModuleDiscoveryFeatures;
 public class HrFeatures extends ModuleDiscoveryFeatures {
 
 	public HrFeatures() {
-		super("catalog");
+		super("hr");
 	}
 
 	@Override

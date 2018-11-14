@@ -23,7 +23,7 @@ import io.vertigo.app.config.discovery.ModuleDiscoveryFeatures;
 public class MaintenanceFeatures extends ModuleDiscoveryFeatures {
 
 	public MaintenanceFeatures() {
-		super("catalog");
+		super("maintenance");
 	}
 
 	@Override
