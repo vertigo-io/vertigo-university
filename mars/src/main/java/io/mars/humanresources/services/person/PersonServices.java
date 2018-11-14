@@ -2,19 +2,48 @@ package io.mars.humanresources.services.person;
 
 import javax.inject.Inject;
 
+import io.mars.fileinfo.FileInfoStd;
 import io.mars.humanresources.dao.PersonDAO;
 import io.mars.humanresources.domain.Person;
 import io.vertigo.commons.transaction.Transactional;
+import io.vertigo.core.component.Activeable;
 import io.vertigo.core.component.Component;
 import io.vertigo.dynamo.criteria.Criterions;
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.domain.model.DtListState;
+import io.vertigo.dynamo.domain.model.FileInfoURI;
+import io.vertigo.dynamo.file.FileManager;
+import io.vertigo.dynamo.file.metamodel.FileInfoDefinition;
+import io.vertigo.dynamo.file.model.FileInfo;
+import io.vertigo.dynamo.file.model.VFile;
+import io.vertigo.dynamo.store.StoreManager;
 
 @Transactional
-public class PersonServices implements Component {
+public class PersonServices implements Component, Activeable {
 
 	@Inject
 	private PersonDAO personDAO;
+
+	@Inject
+	private StoreManager storeManager;
+
+	@Inject
+	private FileManager fileManager;
+
+	private VFile defaultPhoto;
+
+	@Override
+	public void start() {
+		defaultPhoto = fileManager.createFile(
+				"defaultPhoto.png",
+				"image/png",
+				PersonServices.class.getResource("/defaultPhoto.png"));
+	}
+
+	@Override
+	public void stop() {
+		//rien
+	}
 
 	public Person getPerson(final Long personId) {
 		return personDAO.get(personId);
@@ -34,5 +63,29 @@ public class PersonServices implements Component {
 
 	public DtList<Person> getPersons(final DtListState dtListState) {
 		return personDAO.findAll(Criterions.alwaysTrue(), dtListState.getMaxRows().orElse(50));
+	}
+
+	public VFile getPersonPicture(final Long fileId) {
+		//apply security check
+		if (fileId == null) {
+			return defaultPhoto;
+		}
+		return storeManager.getFileStore().read(toFileInfoStdURI(fileId)).getVFile();
+	}
+
+	public void savePersonPicture(final Long personId, final VFile personPicture) {
+		final Person person = getPerson(personId);
+		//apply security check
+		final Long oldPicture = person.getPicturefileId();
+		final FileInfo fileInfo = storeManager.getFileStore().create(new FileInfoStd(personPicture));
+		person.setPicturefileId((Long) fileInfo.getURI().getKey());
+		updatePerson(person);
+		if (oldPicture != null) {
+			storeManager.getFileStore().delete(toFileInfoStdURI(personId));
+		}
+	}
+
+	private FileInfoURI toFileInfoStdURI(final Long fileId) {
+		return new FileInfoURI(FileInfoDefinition.findFileInfoDefinition(FileInfoStd.class), fileId);
 	}
 }

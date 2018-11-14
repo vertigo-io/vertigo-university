@@ -4,6 +4,10 @@ create FileInfo FI_FILE_INFO_STD {
 	storeName : "main"
 }
 
+create FileInfo FI_FILE_INFO_TMP {
+	storeName : "temp"
+}
+
 create DtDefinition DT_MEDIA_FILE_INFO {
 	 id  FIL_ID 			{domain : DO_ID 	label : "Id" }
 	 field FILE_NAME 		{domain : DO_LABEL 	label : "Name" 					required : "true" }
