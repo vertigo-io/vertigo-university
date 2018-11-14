@@ -29,15 +29,13 @@ import io.mars.hr.services.person.PersonServices;
 import io.vertigo.dynamo.file.model.VFile;
 import io.vertigo.ui.core.ProtectedValueUtil;
 import io.vertigo.ui.impl.springmvc.controller.AbstractVSpringMvcController;
-import io.vertigo.ui.impl.springmvc.controller.AbstractVSpringMvcController.AcceptCtxQueryParam;
 
 /**
  * Service web de chargement des fichiers.
  * @author npiedeloup
  */
 @Controller
-@AcceptCtxQueryParam
-@RequestMapping("/hr/person/file")
+@RequestMapping("/hr/person/picture")
 public final class PersonFileController extends AbstractVSpringMvcController {
 
 	@Inject

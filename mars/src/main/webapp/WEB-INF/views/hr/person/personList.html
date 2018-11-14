@@ -43,7 +43,7 @@
 			
 			<vu:cards list="persons" cardClass="personCard col-xl-4 col-md-6 col-xs-12" componentId="personsCards" sortUrl="@{/hr/persons/_sort}" rowsPerPage="8" showMore="true" showMoreLabel="Show more" >
 				<q-card-media >
-					<img th::src="|'@{/humanresources/person/file/}'+item.picturefileId|"/>
+					<img th::src="|'@{/humanresources/person/picture/}'+item.picturefileId|"/>
 				</q-card-media>
 				<q-card-title>
 					<a class="text-primary" th::href="|'@{/hr/person/}'+item.personId|">{{item.firstName}} {{item.lastName}}</a>

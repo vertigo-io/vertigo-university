@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import io.mars.hr.domain.Person;
 import io.mars.hr.services.person.PersonServices;
+import io.vertigo.dynamo.file.model.VFile;
+import io.vertigo.ui.core.ProtectedValueUtil;
 import io.vertigo.ui.core.ViewContext;
 import io.vertigo.ui.core.ViewContextKey;
 import io.vertigo.ui.impl.springmvc.argumentresolvers.ViewAttribute;
@@ -34,6 +36,13 @@ public class PersonDetailController extends AbstractVSpringMvcController {
 	public void initContext(final ViewContext viewContext) {
 		viewContext.publishDto(personKey, personServices.initPerson());
 		toModeCreate();
+	}
+
+	@GetMapping("/picture/{protectedUrl}")
+	public VFile loadFile(@PathVariable("protectedUrl") final String protectedUrl) {
+		final Long fileKey = ProtectedValueUtil.readProtectedValue(protectedUrl);
+		//project specific part
+		return personServices.getPersonPicture(fileKey);
 	}
 
 	@PostMapping("/_edit")
