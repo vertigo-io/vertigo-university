@@ -46,7 +46,7 @@ public class Studio {
 				// ---StudioFeature
 				.addModule( ModuleConfig.builder("studio")
 					.addComponent(MasterDataManager.class, MasterDataManagerImpl.class)
-						.addPlugin(JsonMasterDataValueProvider.class, Param.of("fileName", "masterDataValues.json"))
+						.addPlugin(JsonMasterDataValueProvider.class, Param.of("fileName", "mda/masterDataValues.json"))
 					.addComponent(MdaManager.class, MdaManagerImpl.class,
 							Param.of("targetGenDir", "src/main/javagen/"),
 							Param.of("encoding", "UTF-8"),
@@ -68,9 +68,9 @@ public class Studio {
 							Param.of("baseCible", "H2"),
 							Param.of("generateDrop", "false"),
 							Param.of("generateMasterData", "true"))
-					
-					
-					
+
+
+
 					.build())
 				.build();
 		// @formatter:on

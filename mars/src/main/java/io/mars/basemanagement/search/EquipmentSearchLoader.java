@@ -51,7 +51,7 @@ public final class EquipmentSearchLoader extends AbstractSqlSearchLoader<Long, E
 		final List<SearchIndex<Equipment, EquipmentIndex>> equipmentSearchIndexes = new ArrayList<>(searchChunk.getAllURIs().size());
 		for (final EquipmentIndex equipmentIndex : equipmentIndexes) {
 			equipmentSearchIndexes.add(SearchIndex.<Equipment, EquipmentIndex> createIndex(indexDefinition,
-					URI.<Equipment> of(indexDefinition.getKeyConceptDtDefinition(), equipmentIndex.getEquipmentId()), equipmentIndex));
+					URI.of(indexDefinition.getKeyConceptDtDefinition(), equipmentIndex.getEquipmentId()), equipmentIndex));
 		}
 		return equipmentSearchIndexes;
 	}

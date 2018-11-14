@@ -51,7 +51,7 @@ public final class BaseSearchLoader extends AbstractSqlSearchLoader<Long, Base, 
 		final List<SearchIndex<Base, BaseIndex>> baseSearchIndexes = new ArrayList<>(searchChunk.getAllURIs().size());
 		for (final BaseIndex baseIndex : baseIndexes) {
 			baseSearchIndexes.add(SearchIndex.<Base, BaseIndex> createIndex(indexDefinition,
-					URI.<Base> of(indexDefinition.getKeyConceptDtDefinition(), baseIndex.getBaseId()), baseIndex));
+					URI.of(indexDefinition.getKeyConceptDtDefinition(), baseIndex.getBaseId()), baseIndex));
 		}
 		return baseSearchIndexes;
 	}
