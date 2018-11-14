@@ -1,41 +1,11 @@
 <?xml version =	'1.0' encoding = 'ISO-8859-1'?>
 <config>
-
-	<module name="aop">
-		<aspect class="io.vertigo.commons.impl.transaction.VTransactionAspect"/>
-	</module>
-
-	<module name="dao">
-		<component class="io.mars.basemanagement.dao.BaseDAO" />
-		<component class="io.mars.hr.dao.PersonDAO" />
-		<component class="io.mars.catalog.dao.EquipmentCategoryDAO" />
-		<component class="io.mars.catalog.dao.EquipmentTypeDAO" />
-		<component class="io.mars.basemanagement.dao.EquipmentDAO" />
-		<component class="io.mars.basemanagement.dao.BusinessDAO" />
-		<component class="io.mars.basemanagement.BasemanagementPAO" />
-		<component class="io.mars.basemanagement.dao.GeosectorDAO" />
-		<component class="io.mars.maintenance.dao.TicketDAO" />
-		<component class="io.mars.maintenance.dao.WorkOrderDAO" />
-	</module>
-
-	<module name="services">
-		<component class="io.mars.basemanagement.services.base.BaseServices"/>
-		<component class="io.mars.basemanagement.services.equipment.EquipmentServices"/>
-		<component class="io.mars.hr.services.person.PersonServices"/>
+	<feature class="io.mars.catalog.CatalogFeatures" />
+	<feature class="io.mars.hr.HrFeatures" />
+	<feature class="io.mars.basemanagement.BasemanagementFeatures" />
+	<feature class="io.mars.maintenance.MaintenanceFeatures" />
+	
+	<module name="datageneration">
 		<component class="io.mars.datageneration.DataGenerator" />
 	</module>
-
-	<module name="search">
-		<component class="io.mars.basemanagement.search.BaseSearchLoader" />
-		<component class="io.mars.basemanagement.search.EquipmentSearchLoader" />
-	</module>
-
-
-	<init>
-		<!-- initializer class="io.mars.boot.DataBaseInitializer"/ --> 
-		<initializer class="io.mars.boot.MasterDataInitializer"/>
-		<initializer class="io.mars.boot.I18nResourcesInitializer"/>
-		<initializer class="io.mars.boot.SearchInitializer"/>
-	</init>
-
 </config>
