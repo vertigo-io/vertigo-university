@@ -6,9 +6,29 @@ create IndexDefinition IDX_EQUIPMENT {
   loaderId : "EquipmentSearchLoader"
 }
 
+
+create FacetDefinition FCT_EQUIPMENT_EQUIPMENT_TYPE_NAME {
+	dtDefinition:DT_EQUIPMENT_INDEX, fieldName:"EQUIPMENT_TYPE_NAME", label:"Equipment Type"
+} 
+
+
+create FacetDefinition FCT_EQUIPMENT_EQUIPMENT_CATEGORY_NAME {
+	dtDefinition:DT_EQUIPMENT_INDEX, fieldName:"EQUIPMENT_CATEGORY_NAME", label:"Equipment Category"
+} 
+
+
+create FacetDefinition FCT_EQUIPMENT_PURCHASE_DATE {
+	dtDefinition:DT_EQUIPMENT_INDEX, fieldName:"PURCHASE_DATE", label:"Purchase Date"
+	range R1 { filter:"PURCHASE_DATE:[01/01/2008 TO 01/01/2012]", label:"2008-2012"},
+	range R2 { filter:"PURCHASE_DATE:[01/01/2012 TO 01/01/2016]", label:"2012-2016"},
+	range R3 { filter:"PURCHASE_DATE:[01/01/2016 TO *]", label:"after 2016"}
+}
+
+
+
 create FacetedQueryDefinition QRY_EQUIPMENT {
 	keyConcept : DT_EQUIPMENT
-	facets : [ ]
+	facets : [FCT_EQUIPMENT_EQUIPMENT_TYPE_NAME, FCT_EQUIPMENT_PURCHASE_DATE, FCT_EQUIPMENT_EQUIPMENT_CATEGORY_NAME ]
 	domainCriteria : DO_LABEL
 	listFilterBuilderClass : "io.vertigo.dynamox.search.DslListFilterBuilder"  
 	listFilterBuilderQuery : "_all:#+query*#"

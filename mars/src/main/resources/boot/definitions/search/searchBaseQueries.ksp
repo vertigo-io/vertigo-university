@@ -6,9 +6,21 @@ create IndexDefinition IDX_BASE {
   loaderId : "BaseSearchLoader"
 }
 
+
+create FacetDefinition FCT_BASE_BASE_TYPE_LABEL {
+	dtDefinition:DT_BASE_INDEX, fieldName:"BASE_TYPE_LABEL", label:"Base Type"
+} 
+
+create FacetDefinition FCT_BASE_CREATION_DATE {
+	dtDefinition:DT_BASE_INDEX, fieldName:"CREATION_DATE", label:"Creation Date"
+	range R1 { filter:"CREATION_DATE:[01/01/2008 TO 01/01/2012]", label:"2008-2012"},
+	range R2 { filter:"CREATION_DATE:[01/01/2012 TO 01/01/2016]", label:"2012-2016"},
+	range R3 { filter:"CREATION_DATE:[01/01/2016 TO *]", label:"after 2016"}
+}
+
 create FacetedQueryDefinition QRY_BASE {
 	keyConcept : DT_BASE
-	facets : [ ]
+	facets : [FCT_BASE_BASE_TYPE_LABEL,  FCT_BASE_CREATION_DATE ]
 	domainCriteria : DO_LABEL
 	listFilterBuilderClass : "io.vertigo.dynamox.search.DslListFilterBuilder"  
 	listFilterBuilderQuery : "BASE_ID:#query# NAME:#query# CODE:#+query*#"

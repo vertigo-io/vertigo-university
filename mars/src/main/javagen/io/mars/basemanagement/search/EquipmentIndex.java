@@ -157,17 +157,17 @@ public final class EquipmentIndex implements DtObject {
 	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Equipment Type'.
+	 * Récupère la valeur de la propriété 'Equipment Category'.
 	 * @return String equipmentCategoryName
 	 */
-	@Field(domain = "DO_LABEL", label = "Equipment Type")
+	@Field(domain = "DO_LABEL", label = "Equipment Category")
 	public String getEquipmentCategoryName() {
 		return equipmentCategoryName;
 	}
 
 	/**
 	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'Equipment Type'.
+	 * Définit la valeur de la propriété 'Equipment Category'.
 	 * @param equipmentCategoryName String
 	 */
 	public void setEquipmentCategoryName(final String equipmentCategoryName) {

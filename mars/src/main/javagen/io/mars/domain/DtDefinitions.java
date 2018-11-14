@@ -210,7 +210,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		TAGS,
 		/** Propriété 'Equipment Type'. */
 		EQUIPMENT_TYPE_NAME,
-		/** Propriété 'Equipment Type'. */
+		/** Propriété 'Equipment Category'. */
 		EQUIPMENT_CATEGORY_NAME	}
 
 	/**

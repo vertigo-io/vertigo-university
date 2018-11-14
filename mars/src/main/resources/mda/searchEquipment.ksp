@@ -13,6 +13,6 @@ create DtDefinition DT_EQUIPMENT_INDEX {
 	field DESCRIPTION {domain: DO_DESCRIPTION label: "Description" required:"false"}
 	field TAGS {domain: DO_TAGS label: "Tags" required:"false"}
 	field EQUIPMENT_TYPE_NAME {domain: DO_LABEL label:"Equipment Type" required:"false"}
-	field EQUIPMENT_CATEGORY_NAME {domain: DO_LABEL label:"Equipment Type" required:"false"}
+	field EQUIPMENT_CATEGORY_NAME {domain: DO_LABEL label:"Equipment Category" required:"false"}
 }
 
