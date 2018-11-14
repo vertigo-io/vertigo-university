@@ -1,10 +1,10 @@
-package io.mars.humanresources.services.person;
+package io.mars.hr.services.person;
 
 import javax.inject.Inject;
 
 import io.mars.fileinfo.FileInfoStd;
-import io.mars.humanresources.dao.PersonDAO;
-import io.mars.humanresources.domain.Person;
+import io.mars.hr.dao.PersonDAO;
+import io.mars.hr.domain.Person;
 import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.core.component.Activeable;
 import io.vertigo.core.component.Component;

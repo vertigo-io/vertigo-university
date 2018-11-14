@@ -7,7 +7,7 @@ import io.vertigo.ui.impl.springmvc.config.VSpringWebConfig;
 @ComponentScan({
 		"io.mars.basemanagement.controllers.base",
 		"io.mars.basemanagement.controllers.equipment",
-		"io.mars.humanresources.controllers.person" })
+		"io.mars.hr.controllers.person" })
 public class MarsVSpringWebConfig extends VSpringWebConfig {
 	// nothing basic config is enough
 }

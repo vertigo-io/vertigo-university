@@ -1,9 +1,9 @@
-package io.mars.humanresources.services.mission;
+package io.mars.hr.services.mission;
 
 import javax.inject.Inject;
 
-import io.mars.humanresources.dao.MissionDAO;
-import io.mars.humanresources.domain.Mission;
+import io.mars.hr.dao.MissionDAO;
+import io.mars.hr.domain.Mission;
 import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.core.component.Component;
 import io.vertigo.dynamo.criteria.Criterions;

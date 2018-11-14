@@ -1,4 +1,4 @@
-package io.mars.humanresources.controllers.person;
+package io.mars.hr.controllers.person;
 
 import javax.inject.Inject;
 
@@ -8,15 +8,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import io.mars.humanresources.domain.Person;
-import io.mars.humanresources.services.person.PersonServices;
+import io.mars.hr.domain.Person;
+import io.mars.hr.services.person.PersonServices;
 import io.vertigo.dynamo.domain.model.DtListState;
 import io.vertigo.ui.core.ViewContext;
 import io.vertigo.ui.core.ViewContextKey;
 import io.vertigo.ui.impl.springmvc.controller.AbstractVSpringMvcController;
 
 @Controller
-@RequestMapping("/humanresources/persons")
+@RequestMapping("/hr/persons")
 public class PersonListController extends AbstractVSpringMvcController {
 
 	private static final ViewContextKey<Person> persons = ViewContextKey.of("persons");

@@ -1,4 +1,4 @@
-package io.mars.humanresources.domain;
+package io.mars.hr.domain;
 
 import io.vertigo.dynamo.domain.model.Entity;
 import io.vertigo.dynamo.domain.model.URI;

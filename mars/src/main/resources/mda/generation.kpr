@@ -1,7 +1,7 @@
 ../boot/definitions/application.kpr
 basemanagement.ksp
 catalog.ksp
-humanresources.ksp
+hr.ksp
 maintenance.ksp
 searchBase.ksp
 searchEquipment.ksp

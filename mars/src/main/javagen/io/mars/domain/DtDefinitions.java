@@ -44,9 +44,9 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		/** Objet de données MediaFileInfo. */
 		MediaFileInfo(io.mars.common.domain.tools.file.MediaFileInfo.class),
 		/** Objet de données Mission. */
-		Mission(io.mars.humanresources.domain.Mission.class),
+		Mission(io.mars.hr.domain.Mission.class),
 		/** Objet de données Person. */
-		Person(io.mars.humanresources.domain.Person.class),
+		Person(io.mars.hr.domain.Person.class),
 		/** Objet de données Picture. */
 		Picture(io.mars.basemanagement.domain.Picture.class),
 		/** Objet de données Ticket. */
@@ -277,7 +277,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de Mission.
 	 */
-	public enum MissionFields implements DtFieldName<io.mars.humanresources.domain.Mission> {
+	public enum MissionFields implements DtFieldName<io.mars.hr.domain.Mission> {
 		/** Propriété 'Id'. */
 		MISSION_ID,
 		/** Propriété 'Role'. */
@@ -292,7 +292,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de Person.
 	 */
-	public enum PersonFields implements DtFieldName<io.mars.humanresources.domain.Person> {
+	public enum PersonFields implements DtFieldName<io.mars.hr.domain.Person> {
 		/** Propriété 'Id'. */
 		PERSON_ID,
 		/** Propriété 'Name'. */

@@ -1,4 +1,4 @@
-package io.mars.humanresources.dao;
+package io.mars.hr.dao;
 
 import javax.inject.Inject;
 
@@ -6,7 +6,7 @@ import io.vertigo.dynamo.impl.store.util.DAO;
 import io.vertigo.dynamo.store.StoreManager;
 import io.vertigo.dynamo.store.StoreServices;
 import io.vertigo.dynamo.task.TaskManager;
-import io.mars.humanresources.domain.Person;
+import io.mars.hr.domain.Person;
 import io.vertigo.lang.Generated;
 
 /**

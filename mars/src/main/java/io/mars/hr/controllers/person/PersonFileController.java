@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.mars.humanresources.controllers.person;
+package io.mars.hr.controllers.person;
 
 import java.io.Serializable;
 
@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import io.mars.domain.DtDefinitions;
-import io.mars.humanresources.services.person.PersonServices;
+import io.mars.hr.services.person.PersonServices;
 import io.vertigo.dynamo.file.model.VFile;
 import io.vertigo.lang.Assertion;
 import io.vertigo.ui.core.AbstractUiListUnmodifiable;
@@ -45,7 +45,7 @@ import io.vertigo.vega.webservice.model.UiList;
  */
 @Controller
 @AcceptCtxQueryParam
-@RequestMapping("/humanresources/person/file")
+@RequestMapping("/hr/person/file")
 public final class PersonFileController extends AbstractVSpringMvcController {
 
 	@Inject

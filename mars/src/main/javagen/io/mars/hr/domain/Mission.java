@@ -1,4 +1,4 @@
-package io.mars.humanresources.domain;
+package io.mars.hr.domain;
 
 import io.vertigo.dynamo.domain.model.Entity;
 import io.vertigo.dynamo.domain.model.URI;
@@ -31,7 +31,7 @@ public final class Mission implements Entity {
 			foreignRole = "Mission",
 			foreignLabel = "Mission",
 			foreignMultiplicity = "0..*")
-	private final VAccessor<io.mars.humanresources.domain.Person> personIdAccessor = new VAccessor<>(io.mars.humanresources.domain.Person.class, "Person");
+	private final VAccessor<io.mars.hr.domain.Person> personIdAccessor = new VAccessor<>(io.mars.hr.domain.Person.class, "Person");
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
 			name = "A_MISSION_BASE",
@@ -220,12 +220,12 @@ public final class Mission implements Entity {
 	 * Association : Person.
 	 * @return l'accesseur vers la propriété 'Person'
 	 */
-	public VAccessor<io.mars.humanresources.domain.Person> person() {
+	public VAccessor<io.mars.hr.domain.Person> person() {
 		return personIdAccessor;
 	}
 	
 	@Deprecated
-	public io.mars.humanresources.domain.Person getPerson() {
+	public io.mars.hr.domain.Person getPerson() {
 		// we keep the lazyness
 		if (!personIdAccessor.isLoaded()) {
 			personIdAccessor.load();
@@ -238,7 +238,7 @@ public final class Mission implements Entity {
 	 * @return URI de l'association
 	 */
 	@Deprecated
-	public io.vertigo.dynamo.domain.model.URI<io.mars.humanresources.domain.Person> getPersonURI() {
+	public io.vertigo.dynamo.domain.model.URI<io.mars.hr.domain.Person> getPersonURI() {
 		return personIdAccessor.getURI();
 	}
 	
