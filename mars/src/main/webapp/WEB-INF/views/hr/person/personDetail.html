@@ -21,7 +21,9 @@
 		
 		<section>
 				<div layout:fragment="content-header-info">
-					<img th:src="@{/static/img/persons/Person10.jpg}" class="detailImg gt-md"/>
+					<vu:include-data-protected object="person" field="picturefileId"/>
+									
+					<img th::src="|'@{/humanresources/person/file/}'+vueData.person.picturefileId|" class="detailImg gt-md"/>
 					<div class="detailTitle q-pa-md">
 							<big>James T. Kirk</big> 
 							<br/><small>Base Manager</small>

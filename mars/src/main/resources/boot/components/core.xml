@@ -52,8 +52,8 @@
 		</component>
 		<component api="KVStoreManager" class="io.vertigo.dynamo.impl.kvstore.KVStoreManagerImpl">
 			<plugin class="io.vertigo.dynamo.plugins.kvstore.delayedmemory.DelayedMemoryKVStorePlugin">
-				<param name="collections" value="lollipop-tokens" />
-				<param name="timeToLiveSeconds" value="120" />
+				<param name="collections" value="protected-value" />
+				<param name="timeToLiveSeconds" value="3600" /><!-- 1h -->
 			</plugin>
 			<plugin class="io.vertigo.dynamo.plugins.kvstore.berkeley.BerkeleyKVStorePlugin">
 				<param name="collections" value="VViewContext;TTL=43200" /> <!-- 12h -->
