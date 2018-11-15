@@ -12,19 +12,21 @@
 	<body>
 		<section layout:fragment="content" >	
 			<vu:search resultKey="equipments" searchUrl="@{/basemanagement/equipments/_search}" collectionComponentId="equipmentsTable">
-				<div class="col-3">
-					<vu:facets resultKey="equipments" />
-				</div>
-				<div class="col-9">
-					<vu:include-data-primitive key="criteria"/>
-					<q-input placeholder="Type, Name..." v-model="vueData.criteria" @input="search('equipments')"></q-input>
-					<vu:table list="equipments_list" componentId="equipmentsTable" sortUrl="${searchUrl}">
-						<vu:column field="equipmentId" />
-						<vu:column field="name" />
-						<vu:column field="code" sortable="true"/>
-						<vu:column field="equipmentTypeName" />
-						<vu:column field="equipmentCategoryName" />
-					</vu:table>
+				<div class="row">
+					<div class="col-3 q-pr-xl">
+						<vu:facets resultKey="equipments" />
+					</div>
+					<div class="col-9">
+						<vu:include-data-primitive key="criteria"/>
+						<q-input placeholder="Type, Name..." v-model="vueData.criteria" @input="search('equipments')"></q-input>
+						<vu:table list="equipments_list" componentId="equipmentsTable" sortUrl="${searchUrl}">
+							<vu:column field="equipmentId" />
+							<vu:column field="name" />
+							<vu:column field="code" sortable="true"/>
+							<vu:column field="equipmentTypeName" />
+							<vu:column field="equipmentCategoryName" />
+						</vu:table>
+					</div>
 				</div>
 			</vu:search>
 		</section>
