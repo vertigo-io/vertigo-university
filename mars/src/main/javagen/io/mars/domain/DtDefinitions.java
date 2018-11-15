@@ -267,12 +267,14 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		FIL_ID,
 		/** Propriété 'Name'. */
 		FILE_NAME,
+		/** Propriété 'MimeType'. */
+		MIME_TYPE,
 		/** Propriété 'Size'. */
 		LENGTH,
 		/** Propriété 'Modification Date'. */
 		LAST_MODIFIED,
-		/** Propriété 'data'. */
-		FILE_DATA	}
+		/** Propriété 'path'. */
+		FILE_PATH	}
 
 	/**
 	 * Enumération des champs de Mission.

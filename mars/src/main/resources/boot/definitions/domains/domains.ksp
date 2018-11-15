@@ -1,5 +1,14 @@
 package io.mars
 
+create FileInfo FI_FILE_INFO_STD {
+	storeName : "main"
+}
+
+create FileInfo FI_FILE_INFO_TMP {
+	storeName : "temp"
+}
+
+
 /**************************************************************************************************/
 /********************************* Formatters *****************************************************/
 /**************************************************************************************************/
@@ -177,6 +186,12 @@ create Domain DO_TEXT {
 	dataType : String
 	formatter : FMT_DEFAULT
 	storeType : "TEXT"
+}
+
+create Domain DO_FILE_PATH {
+	dataType : String
+	formatter : FMT_DEFAULT
+	storeType : "VARCHAR(500)"
 }
 
 create Domain DO_TAGS {

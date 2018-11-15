@@ -346,8 +346,10 @@ create table MEDIA_FILE_INFO
 (
     FIL_ID      	 NUMERIC     	not null,
     FILE_NAME   	 VARCHAR(100)	not null,
+    MIME_TYPE   	 VARCHAR(100)	not null,
     LENGTH      	 NUMERIC     	not null,
     LAST_MODIFIED	 TIMESTAMP   	not null,
+    FILE_PATH   	 VARCHAR(500)	not null,
     constraint PK_MEDIA_FILE_INFO primary key (FIL_ID)
 );
 
@@ -357,11 +359,17 @@ comment on column MEDIA_FILE_INFO.FIL_ID is
 comment on column MEDIA_FILE_INFO.FILE_NAME is
 'Name';
 
+comment on column MEDIA_FILE_INFO.MIME_TYPE is
+'MimeType';
+
 comment on column MEDIA_FILE_INFO.LENGTH is
 'Size';
 
 comment on column MEDIA_FILE_INFO.LAST_MODIFIED is
 'Modification Date';
+
+comment on column MEDIA_FILE_INFO.FILE_PATH is
+'path';
 
 -- ============================================================
 --   Table : MISSION                                        

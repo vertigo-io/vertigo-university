@@ -16,9 +16,10 @@ public final class MediaFileInfo implements Entity {
 
 	private Long filId;
 	private String fileName;
+	private String mimeType;
 	private Long length;
 	private java.time.Instant lastModified;
-	private String fileData;
+	private String filePath;
 
 	/** {@inheritDoc} */
 	@Override
@@ -66,6 +67,25 @@ public final class MediaFileInfo implements Entity {
 	
 	/**
 	 * Champ : DATA.
+	 * Récupère la valeur de la propriété 'MimeType'.
+	 * @return String mimeType <b>Obligatoire</b>
+	 */
+	@Field(domain = "DO_LABEL", required = true, label = "MimeType")
+	public String getMimeType() {
+		return mimeType;
+	}
+
+	/**
+	 * Champ : DATA.
+	 * Définit la valeur de la propriété 'MimeType'.
+	 * @param mimeType String <b>Obligatoire</b>
+	 */
+	public void setMimeType(final String mimeType) {
+		this.mimeType = mimeType;
+	}
+	
+	/**
+	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Size'.
 	 * @return Long length <b>Obligatoire</b>
 	 */
@@ -104,21 +124,21 @@ public final class MediaFileInfo implements Entity {
 	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'data'.
-	 * @return String fileData
+	 * Récupère la valeur de la propriété 'path'.
+	 * @return String filePath <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_LABEL", persistent = false, label = "data")
-	public String getFileData() {
-		return fileData;
+	@Field(domain = "DO_FILE_PATH", required = true, label = "path")
+	public String getFilePath() {
+		return filePath;
 	}
 
 	/**
 	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'data'.
-	 * @param fileData String
+	 * Définit la valeur de la propriété 'path'.
+	 * @param filePath String <b>Obligatoire</b>
 	 */
-	public void setFileData(final String fileData) {
-		this.fileData = fileData;
+	public void setFilePath(final String filePath) {
+		this.filePath = filePath;
 	}
 	
 	/** {@inheritDoc} */

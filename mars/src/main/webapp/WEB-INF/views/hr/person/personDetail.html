@@ -22,15 +22,18 @@
 		<section>
 				<div layout:fragment="content-header-info">
 					<vu:include-data-protected object="person" field="picturefileId"/>
-									
-					<img th::src="|'@{/humanresources/person/picture/}'+vueData.person.picturefileId|" class="detailImg gt-md"/>
+					
+					<div>				
+						<img th::src="|'@{/hr/person/picture/}'+vueData.person.picturefileId|" class="detailImg gt-md"/>
+						
+					</div>
 					<div class="detailTitle q-pa-md">
-							<big>James T. Kirk</big> 
+							<big>[[${model.vContext['person']['firstName']}]] [[${model.vContext['person']['lastName']}]]</big> 
 							<br/><small>Base Manager</small>
 					</div>
 				</div>
 				<div layout:fragment="content-header-actions">
-					<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>
+					<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>
 					
 					<q-btn round size="lg" color="primary" icon="more_horiz"  direction="down" aria-label="More actions" title="More actions" class="on-left"> 
 					  <q-popover><q-list link>
@@ -49,10 +52,14 @@
 				<vu:grid cols="2">
 					<vu:text-field object="person" field="firstName"/>
 					<vu:text-field object="person" field="lastName" />
-					<vu:text-field object="person" field="email" />					
+					<vu:text-field object="person" field="email" />		
+					<vu:label-edit object="person" field="picturefileId">
+						<q-uploader th:url="@{/hr/person/picture/}" :additional-fields="[{'name':'CTX', 'value':vueData.CTX}]" auto-expand></q-uploader>
+					</vu:label-edit>
+								
 				</vu:grid>
 				<div class="row justify-end">
-				<vu:button-submit th:if="${model.modeEdit}"  label="Cancel" action="@{_cancel}" flat />
+				<vu:button-submit th:if="${model.modeEdit}"  label="Cancel" action="@{_cancel}" :flat />
 				<vu:button-submit th:if="${model.modeEdit}"  label="Save" action="@{_save}" color="primary" />
 				<vu:button-submit th:if="${model.modeCreate}" label="Create" action="@{_create}" color="primary"/>
 				</div>				
