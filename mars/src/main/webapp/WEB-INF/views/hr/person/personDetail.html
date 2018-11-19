@@ -5,19 +5,7 @@
   layout:decorate="~{templates/mmcDetailLayout}"
 >
 	<head>
-		<title>Person detail</title>
-		<script>
-			VUiExtensions.methods.uploadFile = function(uploaderRef) {
-				this.$refs[uploaderRef].upload()
-			}
-			VUiExtensions.methods.uploaded = function(event, object, field) {
-				console.log('uploaded')
-				console.log(event)
-				console.log(event.xhr)
-				vueData[object][field] = event.xhr.response
-			}
-			
-		</script>
+		<title>Person detail</title>		
 	</head>
 	
 	<body>
@@ -64,13 +52,9 @@
 				<vu:grid cols="2">
 					<vu:text-field object="person" field="firstName"/>
 					<vu:text-field object="person" field="lastName" />
-					<vu:text-field object="person" field="email" />		
-					<vu:label-edit object="person" field="picturefileIdTmp" th:if="${viewMode=='edit'}">
-						<vu:include-data-protected object="person" field="picturefileIdTmp"/>
-						<input type="hidden" th:name="|vContext['person']['picturefileIdTmp']|" th:v-bind:value="|vueData.person.picturefileIdTmp|" />
-						<q-uploader th:url="@{/hr/person/picture/}" :additional-fields="[{'name':'CTX', 'value':vueData.CTX}]" auto-expand ref="upld2" @add="uploadFile('upld2')"
-						@uploaded="uploaded($event, 'person', 'picturefileIdTmp')"></q-uploader>						
-					</vu:label-edit>
+					<vu:text-field object="person" field="email" />
+					<vu:fileupload-field th:url="'@{/hr/person/pictureInField/}'" object="person" field="picturefileIdTmp" th:if="${viewMode=='edit'}" />
+					<vu:fileupload-ctx th:url="'@{/hr/person/pictureInCtx/}'" object="person" field="picturefileId" th:if="${viewMode=='edit'}" />
 								
 				</vu:grid>
 				<div class="row justify-end">
