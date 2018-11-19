@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import io.mars.hr.domain.Person;
 import io.mars.hr.services.person.PersonServices;
@@ -24,7 +25,6 @@ import io.vertigo.ui.impl.springmvc.controller.AbstractVSpringMvcController;
 public class PersonDetailController extends AbstractVSpringMvcController {
 
 	private static final ViewContextKey<Person> personKey = ViewContextKey.of("person");
-	private static final ViewContextKey<FileInfoURI> personPictureTmp = ViewContextKey.of("personPictureTmp");
 
 	@Inject
 	private PersonServices personServices;
@@ -49,10 +49,11 @@ public class PersonDetailController extends AbstractVSpringMvcController {
 	}
 
 	@PostMapping("/picture")
-	public ViewContext uploadFile(final ViewContext viewContext, @Named("file") final VFile personPictureFile) {
+	@ResponseBody
+	public String uploadFile(@Named("file") final VFile personPictureFile) {
 		final FileInfoURI personPictureUri = personServices.savePictureTmp(personPictureFile);
-		viewContext.publishRef(personPictureTmp, personPictureUri);
-		return viewContext;
+		final String protectedFileInfoUri = ProtectedValueUtil.generateProtectedValue(personPictureUri);
+		return protectedFileInfoUri;
 	}
 
 	@PostMapping("/_edit")
@@ -67,20 +68,20 @@ public class PersonDetailController extends AbstractVSpringMvcController {
 
 	@PostMapping("/_create")
 	public String doCreate(
-			@ViewAttribute("person") final Person person, final ViewContext viewContext) {
+			@ViewAttribute("person") final Person person) {
 		personServices.createPerson(person);
-		if (viewContext.containsKey(personPictureTmp)) {
-			final FileInfoURI personPictureUri = (FileInfoURI) viewContext.get(personPictureTmp);
+		if (person.getPicturefileIdTmp() != null) {
+			final FileInfoURI personPictureUri = ProtectedValueUtil.readProtectedValue(person.getPicturefileIdTmp(), FileInfoURI.class);
 			personServices.savePersonPicture(person.getPersonId(), personPictureUri);
 		}
 		return "redirect:/hr/person/" + person.getPersonId();
 	}
 
 	@PostMapping("/_save")
-	public String doSave(@ViewAttribute("person") final Person person, final ViewContext viewContext) {
+	public String doSave(@ViewAttribute("person") final Person person) {
 		personServices.updatePerson(person);
-		if (viewContext.containsKey(personPictureTmp)) {
-			final FileInfoURI personPictureUri = (FileInfoURI) viewContext.get(personPictureTmp);
+		if (person.getPicturefileIdTmp() != null) {
+			final FileInfoURI personPictureUri = ProtectedValueUtil.readProtectedValue(person.getPicturefileIdTmp(), FileInfoURI.class);
 			personServices.savePersonPicture(person.getPersonId(), personPictureUri);
 		}
 		return "redirect:/hr/person/" + person.getPersonId();

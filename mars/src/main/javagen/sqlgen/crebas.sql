@@ -427,7 +427,7 @@ comment on column PERSON.EMAIL is
 'E-mail';
 
 comment on column PERSON.PICTUREFILE_ID is
-'PictureFileId';
+'Picture';
 
 comment on column PERSON.TAGS is
 'Tags';

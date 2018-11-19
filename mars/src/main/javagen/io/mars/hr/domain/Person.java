@@ -19,6 +19,7 @@ public final class Person implements Entity {
 	private String lastName;
 	private String email;
 	private Long picturefileId;
+	private String picturefileIdTmp;
 	private String tags;
 	private java.time.LocalDate dateHired;
 
@@ -106,21 +107,40 @@ public final class Person implements Entity {
 	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'PictureFileId'.
+	 * Récupère la valeur de la propriété 'Picture'.
 	 * @return Long picturefileId
 	 */
-	@Field(domain = "DO_ID", label = "PictureFileId")
+	@Field(domain = "DO_ID", label = "Picture")
 	public Long getPicturefileId() {
 		return picturefileId;
 	}
 
 	/**
 	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'PictureFileId'.
+	 * Définit la valeur de la propriété 'Picture'.
 	 * @param picturefileId Long
 	 */
 	public void setPicturefileId(final Long picturefileId) {
 		this.picturefileId = picturefileId;
+	}
+	
+	/**
+	 * Champ : DATA.
+	 * Récupère la valeur de la propriété 'Picture'.
+	 * @return String picturefileIdTmp
+	 */
+	@Field(domain = "DO_LABEL", persistent = false, label = "Picture")
+	public String getPicturefileIdTmp() {
+		return picturefileIdTmp;
+	}
+
+	/**
+	 * Champ : DATA.
+	 * Définit la valeur de la propriété 'Picture'.
+	 * @param picturefileIdTmp String
+	 */
+	public void setPicturefileIdTmp(final String picturefileIdTmp) {
+		this.picturefileIdTmp = picturefileIdTmp;
 	}
 	
 	/**
