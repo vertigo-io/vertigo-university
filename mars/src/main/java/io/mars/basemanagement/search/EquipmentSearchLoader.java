@@ -44,8 +44,8 @@ public final class EquipmentSearchLoader extends AbstractSqlSearchLoader<Long, E
 	@Override
 	public List<SearchIndex<Equipment, EquipmentIndex>> loadData(final SearchChunk<Equipment> searchChunk) {
 		final List<Long> equipmentIds = new ArrayList<>();
-		for (final UID<Equipment> uri : searchChunk.getAllUIDs()) {
-			equipmentIds.add((Long) uri.getId());
+		for (final UID<Equipment> uid : searchChunk.getAllUIDs()) {
+			equipmentIds.add((Long) uid.getId());
 		}
 		final DtList<EquipmentIndex> equipmentIndexes = myEquipmentServices.getEquipmentIndex(equipmentIds);
 		final List<SearchIndex<Equipment, EquipmentIndex>> equipmentSearchIndexes = new ArrayList<>(searchChunk.getAllUIDs().size());

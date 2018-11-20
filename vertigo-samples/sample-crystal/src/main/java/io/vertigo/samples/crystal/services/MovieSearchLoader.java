@@ -44,8 +44,8 @@ public final class MovieSearchLoader extends AbstractSqlSearchLoader<Long, Movie
 	@Override
 	public List<SearchIndex<Movie, MovieIndex>> loadData(final SearchChunk<Movie> searchChunk) {
 		final List<Long> movieIds = new ArrayList<>();
-		for (final UID<Movie> uri : searchChunk.getAllUIDs()) {
-			movieIds.add((Long) uri.getId());
+		for (final UID<Movie> uid : searchChunk.getAllUIDs()) {
+			movieIds.add((Long) uid.getId());
 		}
 		final DtList<MovieIndex> movieIndexes = movieServices.getMovieIndex(movieIds);
 		final List<SearchIndex<Movie, MovieIndex>> movieSearchIndexes = new ArrayList<>(searchChunk.getAllUIDs().size());
