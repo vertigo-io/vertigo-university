@@ -1,7 +1,7 @@
 package io.vertigo.samples.crystal.domain;
 
 import io.vertigo.dynamo.domain.model.Entity;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.model.VAccessor;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
@@ -52,10 +52,10 @@ public final class User implements Entity {
 
 	/** {@inheritDoc} */
 	@Override
-	public URI<User> getURI() {
-		return URI.of(this);
+	public UID<User> getUID() {
+		return UID.of(this);
 	}
-	
+
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
@@ -74,7 +74,7 @@ public final class User implements Entity {
 	public void setUsrId(final Long usrId) {
 		this.usrId = usrId;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Login'.
@@ -93,7 +93,7 @@ public final class User implements Entity {
 	public void setLogin(final String login) {
 		this.login = login;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Nom'.
@@ -112,7 +112,7 @@ public final class User implements Entity {
 	public void setName(final String name) {
 		this.name = name;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'email'.
@@ -131,7 +131,7 @@ public final class User implements Entity {
 	public void setEmail(final String email) {
 		this.email = email;
 	}
-	
+
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Country'.
@@ -139,7 +139,7 @@ public final class User implements Entity {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Country")
 	public Long getCouId() {
-		return (Long)  couIdAccessor.getId();
+		return (Long) couIdAccessor.getId();
 	}
 
 	/**
@@ -150,7 +150,7 @@ public final class User implements Entity {
 	public void setCouId(final Long couId) {
 		couIdAccessor.setId(couId);
 	}
-	
+
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Group'.
@@ -158,7 +158,7 @@ public final class User implements Entity {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Group")
 	public Long getGrpId() {
-		return (Long)  grpIdAccessor.getId();
+		return (Long) grpIdAccessor.getId();
 	}
 
 	/**
@@ -170,14 +170,14 @@ public final class User implements Entity {
 		grpIdAccessor.setId(grpId);
 	}
 
- 	/**
+	/**
 	 * Association : Country.
 	 * @return l'accesseur vers la propriété 'Country'
 	 */
 	public VAccessor<io.vertigo.samples.crystal.domain.Country> country() {
 		return couIdAccessor;
 	}
-	
+
 	@Deprecated
 	public io.vertigo.samples.crystal.domain.Country getCountry() {
 		// we keep the lazyness
@@ -192,18 +192,18 @@ public final class User implements Entity {
 	 * @return URI de l'association
 	 */
 	@Deprecated
-	public io.vertigo.dynamo.domain.model.URI<io.vertigo.samples.crystal.domain.Country> getCountryURI() {
+	public io.vertigo.dynamo.domain.model.UID<io.vertigo.samples.crystal.domain.Country> getCountryURI() {
 		return couIdAccessor.getURI();
 	}
 
- 	/**
+	/**
 	 * Association : Group.
 	 * @return l'accesseur vers la propriété 'Group'
 	 */
 	public VAccessor<io.vertigo.samples.crystal.domain.UserGroup> group() {
 		return grpIdAccessor;
 	}
-	
+
 	@Deprecated
 	public io.vertigo.samples.crystal.domain.UserGroup getGroup() {
 		// we keep the lazyness
@@ -218,10 +218,10 @@ public final class User implements Entity {
 	 * @return URI de l'association
 	 */
 	@Deprecated
-	public io.vertigo.dynamo.domain.model.URI<io.vertigo.samples.crystal.domain.UserGroup> getGroupURI() {
+	public io.vertigo.dynamo.domain.model.UID<io.vertigo.samples.crystal.domain.UserGroup> getGroupURI() {
 		return grpIdAccessor.getURI();
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

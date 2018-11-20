@@ -17,7 +17,7 @@ import io.vertigo.dynamo.collections.model.FacetedQueryResult;
 import io.vertigo.dynamo.collections.model.SelectedFacetValues;
 import io.vertigo.commons.transaction.VTransactionManager;
 import io.vertigo.samples.crystal.domain.MovieIndex;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.impl.store.util.DAO;
 import io.vertigo.dynamo.store.StoreManager;
 import io.vertigo.dynamo.store.StoreServices;
@@ -55,7 +55,7 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	 * @param uri URI du keyConcept modifié
 	 * @return KeyConcept à modifier
 	 */
-	 public Movie readOneForUpdate(final URI<Movie> uri) {
+	 public Movie readOneForUpdate(final UID<Movie> uri) {
 		return dataStore.readOneForUpdate(uri);
 	}
 
@@ -112,7 +112,7 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	 *
 	 * @param entityUri Key concept's uri
 	 */
-	public void markAsDirty(final URI<Movie> entityUri) {
+	public void markAsDirty(final UID<Movie> entityUri) {
 		transactionManager.getCurrentTransaction().addAfterCompletion((final boolean txCommitted) -> {
 			if (txCommitted) {// reindex only is tx successful
 				searchManager.markAsDirty(Arrays.asList(entityUri));
@@ -127,6 +127,6 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	 * @param entity Key concept
 	 */
 	public void markAsDirty(final Movie entity) {
-		markAsDirty(URI.of(entity));
+		markAsDirty(UID.of(entity));
 	}
 }

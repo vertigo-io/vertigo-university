@@ -1,9 +1,9 @@
 package io.vertigo.samples.account.domain;
 
 import io.vertigo.dynamo.domain.model.KeyConcept;
-import io.vertigo.dynamo.domain.model.URI;
-import io.vertigo.dynamo.domain.model.VAccessor;
 import io.vertigo.dynamo.domain.model.ListVAccessor;
+import io.vertigo.dynamo.domain.model.UID;
+import io.vertigo.dynamo.domain.model.VAccessor;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.lang.Generated;
@@ -53,10 +53,10 @@ public final class Movie implements KeyConcept {
 
 	/** {@inheritDoc} */
 	@Override
-	public URI<Movie> getURI() {
-		return URI.of(this);
+	public UID<Movie> getUID() {
+		return UID.of(this);
 	}
-	
+
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
@@ -75,7 +75,7 @@ public final class Movie implements KeyConcept {
 	public void setMovId(final Long movId) {
 		this.movId = movId;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Titre du film'.
@@ -94,7 +94,7 @@ public final class Movie implements KeyConcept {
 	public void setName(final String name) {
 		this.name = name;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'AnnÃ©e'.
@@ -113,7 +113,7 @@ public final class Movie implements KeyConcept {
 	public void setYear(final Integer year) {
 		this.year = year;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Id Imdb'.
@@ -132,7 +132,7 @@ public final class Movie implements KeyConcept {
 	public void setImdbid(final String imdbid) {
 		this.imdbid = imdbid;
 	}
-	
+
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Country'.
@@ -140,7 +140,7 @@ public final class Movie implements KeyConcept {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Country")
 	public Long getCouId() {
-		return (Long)  couIdAccessor.getId();
+		return (Long) couIdAccessor.getId();
 	}
 
 	/**
@@ -152,14 +152,14 @@ public final class Movie implements KeyConcept {
 		couIdAccessor.setId(couId);
 	}
 
- 	/**
+	/**
 	 * Association : Country.
 	 * @return l'accesseur vers la propriété 'Country'
 	 */
 	public VAccessor<io.vertigo.samples.account.domain.Country> country() {
 		return couIdAccessor;
 	}
-	
+
 	@Deprecated
 	public io.vertigo.samples.account.domain.Country getCountry() {
 		// we keep the lazyness
@@ -174,7 +174,7 @@ public final class Movie implements KeyConcept {
 	 * @return URI de l'association
 	 */
 	@Deprecated
-	public io.vertigo.dynamo.domain.model.URI<io.vertigo.samples.account.domain.Country> getCountryURI() {
+	public io.vertigo.dynamo.domain.model.UID<io.vertigo.samples.account.domain.Country> getCountryURI() {
 		return couIdAccessor.getURI();
 	}
 
@@ -185,7 +185,7 @@ public final class Movie implements KeyConcept {
 	public ListVAccessor<io.vertigo.samples.account.domain.Role> role() {
 		return roleAccessor;
 	}
-	
+
 	/**
 	 * Association : Role.
 	 * @return DtList de io.vertigo.samples.account.domain.Role
@@ -203,11 +203,11 @@ public final class Movie implements KeyConcept {
 	 * Association URI: Role.
 	 * @return URI de l'association
 	 */
-	@Deprecated	
+	@Deprecated
 	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation getRoleDtListURI() {
 		return (io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation) roleAccessor.getDtListURI();
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

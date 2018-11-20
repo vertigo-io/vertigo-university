@@ -1,7 +1,7 @@
 package io.vertigo.samples.crystal.domain;
 
 import io.vertigo.dynamo.domain.model.Entity;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.lang.Generated;
@@ -19,10 +19,10 @@ public final class UserGroup implements Entity {
 
 	/** {@inheritDoc} */
 	@Override
-	public URI<UserGroup> getURI() {
-		return URI.of(this);
+	public UID<UserGroup> getUID() {
+		return UID.of(this);
 	}
-	
+
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
@@ -41,7 +41,7 @@ public final class UserGroup implements Entity {
 	public void setGrpId(final Long grpId) {
 		this.grpId = grpId;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Nom'.
@@ -60,7 +60,7 @@ public final class UserGroup implements Entity {
 	public void setName(final String name) {
 		this.name = name;
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

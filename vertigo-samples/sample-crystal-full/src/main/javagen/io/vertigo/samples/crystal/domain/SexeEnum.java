@@ -3,7 +3,7 @@ package io.vertigo.samples.crystal.domain;
 import java.io.Serializable;
 
 import io.vertigo.dynamo.domain.model.MasterDataEnum;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 
 public enum SexeEnum implements MasterDataEnum<io.vertigo.samples.crystal.domain.Sexe> {
 
@@ -18,8 +18,8 @@ public enum SexeEnum implements MasterDataEnum<io.vertigo.samples.crystal.domain
 	}
 
 	@Override
-	public URI<io.vertigo.samples.crystal.domain.Sexe> getEntityUri() {
-		return URI.of(io.vertigo.samples.crystal.domain.Sexe.class, entityId);
+	public UID<io.vertigo.samples.crystal.domain.Sexe> getEntityUri() {
+		return UID.of(io.vertigo.samples.crystal.domain.Sexe.class, entityId);
 	}
 
 }

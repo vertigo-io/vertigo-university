@@ -1,7 +1,7 @@
 package io.vertigo.samples.crystal.domain;
 
 import io.vertigo.dynamo.domain.model.Entity;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.model.VAccessor;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
@@ -35,10 +35,10 @@ public final class Actor implements Entity {
 
 	/** {@inheritDoc} */
 	@Override
-	public URI<Actor> getURI() {
-		return URI.of(this);
+	public UID<Actor> getUID() {
+		return UID.of(this);
 	}
-	
+
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
@@ -57,7 +57,7 @@ public final class Actor implements Entity {
 	public void setActId(final Long actId) {
 		this.actId = actId;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Nom'.
@@ -76,7 +76,7 @@ public final class Actor implements Entity {
 	public void setName(final String name) {
 		this.name = name;
 	}
-	
+
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Sexe'.
@@ -84,7 +84,7 @@ public final class Actor implements Entity {
 	 */
 	@Field(domain = "DO_CODE", type = "FOREIGN_KEY", label = "Sexe")
 	public String getSexCd() {
-		return (String)  sexCdAccessor.getId();
+		return (String) sexCdAccessor.getId();
 	}
 
 	/**
@@ -96,14 +96,14 @@ public final class Actor implements Entity {
 		sexCdAccessor.setId(sexCd);
 	}
 
- 	/**
+	/**
 	 * Association : Sexe.
 	 * @return l'accesseur vers la propriété 'Sexe'
 	 */
 	public VAccessor<io.vertigo.samples.crystal.domain.Sexe> sexe() {
 		return sexCdAccessor;
 	}
-	
+
 	@Deprecated
 	public io.vertigo.samples.crystal.domain.Sexe getSexe() {
 		// we keep the lazyness
@@ -118,10 +118,10 @@ public final class Actor implements Entity {
 	 * @return URI de l'association
 	 */
 	@Deprecated
-	public io.vertigo.dynamo.domain.model.URI<io.vertigo.samples.crystal.domain.Sexe> getSexeURI() {
+	public io.vertigo.dynamo.domain.model.UID<io.vertigo.samples.crystal.domain.Sexe> getSexeURI() {
 		return sexCdAccessor.getURI();
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

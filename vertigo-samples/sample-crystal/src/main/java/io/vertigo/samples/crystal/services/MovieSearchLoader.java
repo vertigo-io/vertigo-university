@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import io.vertigo.commons.transaction.VTransactionManager;
 import io.vertigo.core.component.Activeable;
 import io.vertigo.dynamo.domain.model.DtList;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.search.SearchManager;
 import io.vertigo.dynamo.search.metamodel.SearchChunk;
 import io.vertigo.dynamo.search.metamodel.SearchIndexDefinition;
@@ -44,14 +44,14 @@ public final class MovieSearchLoader extends AbstractSqlSearchLoader<Long, Movie
 	@Override
 	public List<SearchIndex<Movie, MovieIndex>> loadData(final SearchChunk<Movie> searchChunk) {
 		final List<Long> movieIds = new ArrayList<>();
-		for (final URI<Movie> uri : searchChunk.getAllURIs()) {
+		for (final UID<Movie> uri : searchChunk.getAllURIs()) {
 			movieIds.add((Long) uri.getId());
 		}
 		final DtList<MovieIndex> movieIndexes = movieServices.getMovieIndex(movieIds);
 		final List<SearchIndex<Movie, MovieIndex>> movieSearchIndexes = new ArrayList<>(searchChunk.getAllURIs().size());
 		for (final MovieIndex movieIndex : movieIndexes) {
 			movieSearchIndexes.add(SearchIndex.createIndex(indexDefinition,
-					URI.of(indexDefinition.getKeyConceptDtDefinition(), movieIndex.getMovId()), movieIndex));
+					UID.of(indexDefinition.getKeyConceptDtDefinition(), movieIndex.getMovId()), movieIndex));
 		}
 		return movieSearchIndexes;
 	}
