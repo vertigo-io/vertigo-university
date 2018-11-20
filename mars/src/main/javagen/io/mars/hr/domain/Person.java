@@ -1,7 +1,7 @@
 package io.mars.hr.domain;
 
 import io.vertigo.dynamo.domain.model.Entity;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.lang.Generated;
@@ -25,10 +25,10 @@ public final class Person implements Entity {
 
 	/** {@inheritDoc} */
 	@Override
-	public URI<Person> getURI() {
-		return URI.of(this);
+	public UID<Person> getUID() {
+		return UID.of(this);
 	}
-	
+
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
@@ -47,7 +47,7 @@ public final class Person implements Entity {
 	public void setPersonId(final Long personId) {
 		this.personId = personId;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Name'.
@@ -66,7 +66,7 @@ public final class Person implements Entity {
 	public void setFirstName(final String firstName) {
 		this.firstName = firstName;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Name'.
@@ -85,7 +85,7 @@ public final class Person implements Entity {
 	public void setLastName(final String lastName) {
 		this.lastName = lastName;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'E-mail'.
@@ -104,7 +104,7 @@ public final class Person implements Entity {
 	public void setEmail(final String email) {
 		this.email = email;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Picture'.
@@ -123,7 +123,7 @@ public final class Person implements Entity {
 	public void setPicturefileId(final Long picturefileId) {
 		this.picturefileId = picturefileId;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Picture'.
@@ -142,7 +142,7 @@ public final class Person implements Entity {
 	public void setPicturefileIdTmp(final String picturefileIdTmp) {
 		this.picturefileIdTmp = picturefileIdTmp;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Tags'.
@@ -161,7 +161,7 @@ public final class Person implements Entity {
 	public void setTags(final String tags) {
 		this.tags = tags;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Date hired'.
@@ -180,7 +180,7 @@ public final class Person implements Entity {
 	public void setDateHired(final java.time.LocalDate dateHired) {
 		this.dateHired = dateHired;
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

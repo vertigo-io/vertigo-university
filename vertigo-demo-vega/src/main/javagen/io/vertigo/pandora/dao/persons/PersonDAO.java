@@ -20,7 +20,7 @@ import io.vertigo.pandora.domain.persons.PersonIndex;
 import io.vertigo.dynamo.task.metamodel.TaskDefinition;
 import io.vertigo.dynamo.task.model.Task;
 import io.vertigo.dynamo.task.model.TaskBuilder;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.impl.store.util.DAO;
 import io.vertigo.dynamo.store.StoreManager;
 import io.vertigo.dynamo.store.StoreServices;
@@ -58,7 +58,7 @@ public final class PersonDAO extends DAO<Person, java.lang.Long> implements Stor
 	 * @param uri URI du keyConcept modifié
 	 * @return KeyConcept à modifier
 	 */
-	 public Person readOneForUpdate(final URI<Person> uri) {
+	 public Person readOneForUpdate(final UID<Person> uri) {
 		return dataStore.readOneForUpdate(uri);
 	}
 
@@ -103,7 +103,7 @@ public final class PersonDAO extends DAO<Person, java.lang.Long> implements Stor
 	 *
 	 * @param entityUri Key concept's uri
 	 */
-	public void markAsDirty(final URI<Person> entityUri) {
+	public void markAsDirty(final UID<Person> entityUri) {
 		transactionManager.getCurrentTransaction().addAfterCompletion((final boolean txCommitted) -> {
 			if (txCommitted) {// reindex only is tx successful
 				searchManager.markAsDirty(Arrays.asList(entityUri));
@@ -118,7 +118,7 @@ public final class PersonDAO extends DAO<Person, java.lang.Long> implements Stor
 	 * @param entity Key concept
 	 */
 	public void markAsDirty(final Person entity) {
-		markAsDirty(URI.of(entity));
+		markAsDirty(UID.of(entity));
 	}
 
 	/**

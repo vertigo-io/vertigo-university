@@ -1,7 +1,7 @@
 package io.mars.catalog.domain;
 
 import io.vertigo.dynamo.domain.model.Entity;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.model.VAccessor;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
@@ -36,10 +36,10 @@ public final class EquipmentType implements Entity {
 
 	/** {@inheritDoc} */
 	@Override
-	public URI<EquipmentType> getURI() {
-		return URI.of(this);
+	public UID<EquipmentType> getUID() {
+		return UID.of(this);
 	}
-	
+
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
@@ -58,7 +58,7 @@ public final class EquipmentType implements Entity {
 	public void setEquipmentTypeId(final Long equipmentTypeId) {
 		this.equipmentTypeId = equipmentTypeId;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Equipment Type Label'.
@@ -77,7 +77,7 @@ public final class EquipmentType implements Entity {
 	public void setLabel(final String label) {
 		this.label = label;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Equipment type is active'.
@@ -96,7 +96,7 @@ public final class EquipmentType implements Entity {
 	public void setActive(final Boolean active) {
 		this.active = active;
 	}
-	
+
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Equipment Category'.
@@ -104,7 +104,7 @@ public final class EquipmentType implements Entity {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Equipment Category")
 	public Long getEquipmentCategoryId() {
-		return (Long)  equipmentCategoryIdAccessor.getId();
+		return (Long) equipmentCategoryIdAccessor.getId();
 	}
 
 	/**
@@ -116,14 +116,14 @@ public final class EquipmentType implements Entity {
 		equipmentCategoryIdAccessor.setId(equipmentCategoryId);
 	}
 
- 	/**
+	/**
 	 * Association : Equipment Category.
 	 * @return l'accesseur vers la propriété 'Equipment Category'
 	 */
 	public VAccessor<io.mars.catalog.domain.EquipmentCategory> equipmentCategory() {
 		return equipmentCategoryIdAccessor;
 	}
-	
+
 	@Deprecated
 	public io.mars.catalog.domain.EquipmentCategory getEquipmentCategory() {
 		// we keep the lazyness
@@ -138,10 +138,10 @@ public final class EquipmentType implements Entity {
 	 * @return URI de l'association
 	 */
 	@Deprecated
-	public io.vertigo.dynamo.domain.model.URI<io.mars.catalog.domain.EquipmentCategory> getEquipmentCategoryURI() {
+	public io.vertigo.dynamo.domain.model.UID<io.mars.catalog.domain.EquipmentCategory> getEquipmentCategoryURI() {
 		return equipmentCategoryIdAccessor.getURI();
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

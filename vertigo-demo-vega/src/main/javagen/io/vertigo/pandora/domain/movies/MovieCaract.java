@@ -1,7 +1,7 @@
 package io.vertigo.pandora.domain.movies;
 
 import io.vertigo.dynamo.domain.model.Fragment;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.lang.Generated;
@@ -25,7 +25,7 @@ public final class MovieCaract implements Fragment<Movie> {
 
 	/** {@inheritDoc} */
 	@Override
-	public URI<Movie> getEntityURI() {
+	public UID<Movie> getEntityURI() {
 		return DtObjectUtil.createEntityURI(this); 
 	}
 	

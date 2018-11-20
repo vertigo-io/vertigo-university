@@ -1,7 +1,7 @@
 package io.mars.basemanagement.domain;
 
 import io.vertigo.dynamo.domain.model.Entity;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.lang.Generated;
@@ -19,10 +19,10 @@ public final class Geosector implements Entity {
 
 	/** {@inheritDoc} */
 	@Override
-	public URI<Geosector> getURI() {
-		return URI.of(this);
+	public UID<Geosector> getUID() {
+		return UID.of(this);
 	}
-	
+
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
@@ -41,7 +41,7 @@ public final class Geosector implements Entity {
 	public void setGeosectorId(final Long geosectorId) {
 		this.geosectorId = geosectorId;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Sector Label'.
@@ -60,7 +60,7 @@ public final class Geosector implements Entity {
 	public void setSectorLabel(final String sectorLabel) {
 		this.sectorLabel = sectorLabel;
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

@@ -10,7 +10,7 @@ import io.mars.basemanagement.services.equipment.EquipmentServices;
 import io.vertigo.commons.transaction.VTransactionManager;
 import io.vertigo.core.component.Activeable;
 import io.vertigo.dynamo.domain.model.DtList;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.search.SearchManager;
 import io.vertigo.dynamo.search.metamodel.SearchChunk;
 import io.vertigo.dynamo.search.metamodel.SearchIndexDefinition;
@@ -44,14 +44,14 @@ public final class EquipmentSearchLoader extends AbstractSqlSearchLoader<Long, E
 	@Override
 	public List<SearchIndex<Equipment, EquipmentIndex>> loadData(final SearchChunk<Equipment> searchChunk) {
 		final List<Long> equipmentIds = new ArrayList<>();
-		for (final URI<Equipment> uri : searchChunk.getAllURIs()) {
+		for (final UID<Equipment> uri : searchChunk.getAllURIs()) {
 			equipmentIds.add((Long) uri.getId());
 		}
 		final DtList<EquipmentIndex> equipmentIndexes = myEquipmentServices.getEquipmentIndex(equipmentIds);
 		final List<SearchIndex<Equipment, EquipmentIndex>> equipmentSearchIndexes = new ArrayList<>(searchChunk.getAllURIs().size());
 		for (final EquipmentIndex equipmentIndex : equipmentIndexes) {
 			equipmentSearchIndexes.add(SearchIndex.<Equipment, EquipmentIndex> createIndex(indexDefinition,
-					URI.of(indexDefinition.getKeyConceptDtDefinition(), equipmentIndex.getEquipmentId()), equipmentIndex));
+					UID.of(indexDefinition.getKeyConceptDtDefinition(), equipmentIndex.getEquipmentId()), equipmentIndex));
 		}
 		return equipmentSearchIndexes;
 	}

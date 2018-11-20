@@ -9,7 +9,7 @@ import io.vertigo.dynamo.collections.model.SelectedFacetValues;
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.domain.model.DtListState;
 import io.vertigo.dynamo.domain.model.Fragment;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.search.model.SearchQuery;
 import io.vertigo.pandora.domain.movies.Movie;
 import io.vertigo.pandora.domain.movies.MovieIndex;
@@ -39,19 +39,19 @@ public interface MovieServices extends Component {
 
 	DtList<Person> getWriters(final long id);
 
-	void saveWriters(final Movie movie, final List<URI> personURIs);
+	void saveWriters(final Movie movie, final List<UID> personURIs);
 
 	DtList<Person> getCamera(final long id);
 
-	void saveCamera(final Movie movie, final List<URI> personURIs);
+	void saveCamera(final Movie movie, final List<UID> personURIs);
 
 	DtList<Person> getProducers(final long id);
 
-	void saveProducers(final Movie movie, final List<URI> personURIs);
+	void saveProducers(final Movie movie, final List<UID> personURIs);
 
 	DtList<Person> getDirectors(final long id);
 
-	void saveDirectors(final Movie movie, final List<URI> personURIs);
+	void saveDirectors(final Movie movie, final List<UID> personURIs);
 
 	//-------------
 	//  Private

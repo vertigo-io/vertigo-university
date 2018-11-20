@@ -2,7 +2,7 @@ package io.vertigo.pandora.domain.persons;
 
 import io.vertigo.dynamo.domain.model.KeyConcept;
 import io.vertigo.dynamo.domain.model.ListVAccessor;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.lang.Generated;
@@ -96,8 +96,8 @@ public final class Person implements KeyConcept {
 
 	/** {@inheritDoc} */
 	@Override
-	public URI<Person> getURI() {
-		return URI.of(this);
+	public UID<Person> getUID() {
+		return UID.of(this);
 	}
 
 	/**

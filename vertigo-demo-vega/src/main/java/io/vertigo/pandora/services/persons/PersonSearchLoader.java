@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import io.vertigo.commons.transaction.VTransactionManager;
 import io.vertigo.core.component.Activeable;
 import io.vertigo.dynamo.domain.model.DtList;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.search.SearchManager;
 import io.vertigo.dynamo.search.metamodel.SearchChunk;
 import io.vertigo.dynamo.search.metamodel.SearchIndexDefinition;
@@ -48,14 +48,14 @@ public final class PersonSearchLoader extends AbstractSqlSearchLoader<Long, Pers
 	public List<SearchIndex<Person, PersonIndex>> loadData(final SearchChunk<Person> searchChunk) {
 		final List<Long> personIds = new ArrayList<>();
 
-		for (final URI<Person> uri : searchChunk.getAllURIs()) {
+		for (final UID<Person> uri : searchChunk.getAllURIs()) {
 			personIds.add((Long) uri.getId());
 		}
 		final DtList<PersonIndex> personIndexes = personServices.getPersonIndex(personIds);
 		final List<SearchIndex<Person, PersonIndex>> personSearchIndexes = new ArrayList<>(personIds.size());
 		for (final PersonIndex personIndex : personIndexes) {
 			personSearchIndexes.add(SearchIndex.createIndex(indexDefinition,
-					URI.of(indexDefinition.getKeyConceptDtDefinition(), personIndex.getPerId()), personIndex));
+					UID.of(indexDefinition.getKeyConceptDtDefinition(), personIndex.getPerId()), personIndex));
 		}
 		return personSearchIndexes;
 	}

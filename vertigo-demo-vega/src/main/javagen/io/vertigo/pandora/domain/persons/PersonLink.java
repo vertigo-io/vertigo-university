@@ -1,7 +1,7 @@
 package io.vertigo.pandora.domain.persons;
 
 import io.vertigo.dynamo.domain.model.Fragment;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.lang.Generated;
@@ -22,7 +22,7 @@ public final class PersonLink implements Fragment<Person> {
 
 	/** {@inheritDoc} */
 	@Override
-	public URI<Person> getEntityURI() {
+	public UID<Person> getEntityURI() {
 		return DtObjectUtil.createEntityURI(this); 
 	}
 	

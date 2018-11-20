@@ -1,7 +1,7 @@
 package io.mars.basemanagement.domain;
 
 import io.vertigo.dynamo.domain.model.KeyConcept;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.model.VAccessor;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
@@ -88,10 +88,10 @@ public final class Equipment implements KeyConcept {
 
 	/** {@inheritDoc} */
 	@Override
-	public URI<Equipment> getURI() {
-		return URI.of(this);
+	public UID<Equipment> getUID() {
+		return UID.of(this);
 	}
-	
+
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
@@ -110,7 +110,7 @@ public final class Equipment implements KeyConcept {
 	public void setEquipmentId(final Long equipmentId) {
 		this.equipmentId = equipmentId;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Name'.
@@ -129,7 +129,7 @@ public final class Equipment implements KeyConcept {
 	public void setName(final String name) {
 		this.name = name;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Base Code'.
@@ -148,7 +148,7 @@ public final class Equipment implements KeyConcept {
 	public void setCode(final String code) {
 		this.code = code;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Health Level'.
@@ -167,7 +167,7 @@ public final class Equipment implements KeyConcept {
 	public void setHealthLevel(final Integer healthLevel) {
 		this.healthLevel = healthLevel;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Date of purchase'.
@@ -186,7 +186,7 @@ public final class Equipment implements KeyConcept {
 	public void setPurchaseDate(final java.time.LocalDate purchaseDate) {
 		this.purchaseDate = purchaseDate;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Description'.
@@ -205,7 +205,7 @@ public final class Equipment implements KeyConcept {
 	public void setDescription(final String description) {
 		this.description = description;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Tags'.
@@ -224,7 +224,7 @@ public final class Equipment implements KeyConcept {
 	public void setTags(final String tags) {
 		this.tags = tags;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Geographic Location'.
@@ -243,7 +243,7 @@ public final class Equipment implements KeyConcept {
 	public void setGeoLocation(final String geoLocation) {
 		this.geoLocation = geoLocation;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Renting Fee'.
@@ -262,7 +262,7 @@ public final class Equipment implements KeyConcept {
 	public void setRentingFee(final java.math.BigDecimal rentingFee) {
 		this.rentingFee = rentingFee;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Current equipment value'.
@@ -281,7 +281,7 @@ public final class Equipment implements KeyConcept {
 	public void setEquipmentValue(final java.math.BigDecimal equipmentValue) {
 		this.equipmentValue = equipmentValue;
 	}
-	
+
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Base'.
@@ -289,7 +289,7 @@ public final class Equipment implements KeyConcept {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Base")
 	public Long getBaseId() {
-		return (Long)  baseIdAccessor.getId();
+		return (Long) baseIdAccessor.getId();
 	}
 
 	/**
@@ -300,7 +300,7 @@ public final class Equipment implements KeyConcept {
 	public void setBaseId(final Long baseId) {
 		baseIdAccessor.setId(baseId);
 	}
-	
+
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Equipment Geosector'.
@@ -308,7 +308,7 @@ public final class Equipment implements KeyConcept {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Equipment Geosector")
 	public Long getGeosectorId() {
-		return (Long)  geosectorIdAccessor.getId();
+		return (Long) geosectorIdAccessor.getId();
 	}
 
 	/**
@@ -319,7 +319,7 @@ public final class Equipment implements KeyConcept {
 	public void setGeosectorId(final Long geosectorId) {
 		geosectorIdAccessor.setId(geosectorId);
 	}
-	
+
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Business'.
@@ -327,7 +327,7 @@ public final class Equipment implements KeyConcept {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Business")
 	public Long getBusinessId() {
-		return (Long)  businessIdAccessor.getId();
+		return (Long) businessIdAccessor.getId();
 	}
 
 	/**
@@ -338,7 +338,7 @@ public final class Equipment implements KeyConcept {
 	public void setBusinessId(final Long businessId) {
 		businessIdAccessor.setId(businessId);
 	}
-	
+
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Equipment Type'.
@@ -346,7 +346,7 @@ public final class Equipment implements KeyConcept {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Equipment Type")
 	public Long getEquipmentTypeId() {
-		return (Long)  equipmentTypeIdAccessor.getId();
+		return (Long) equipmentTypeIdAccessor.getId();
 	}
 
 	/**
@@ -358,14 +358,14 @@ public final class Equipment implements KeyConcept {
 		equipmentTypeIdAccessor.setId(equipmentTypeId);
 	}
 
- 	/**
+	/**
 	 * Association : Base.
 	 * @return l'accesseur vers la propriété 'Base'
 	 */
 	public VAccessor<io.mars.basemanagement.domain.Base> base() {
 		return baseIdAccessor;
 	}
-	
+
 	@Deprecated
 	public io.mars.basemanagement.domain.Base getBase() {
 		// we keep the lazyness
@@ -380,18 +380,18 @@ public final class Equipment implements KeyConcept {
 	 * @return URI de l'association
 	 */
 	@Deprecated
-	public io.vertigo.dynamo.domain.model.URI<io.mars.basemanagement.domain.Base> getBaseURI() {
+	public io.vertigo.dynamo.domain.model.UID<io.mars.basemanagement.domain.Base> getBaseURI() {
 		return baseIdAccessor.getURI();
 	}
 
- 	/**
+	/**
 	 * Association : Business.
 	 * @return l'accesseur vers la propriété 'Business'
 	 */
 	public VAccessor<io.mars.basemanagement.domain.Business> business() {
 		return businessIdAccessor;
 	}
-	
+
 	@Deprecated
 	public io.mars.basemanagement.domain.Business getBusiness() {
 		// we keep the lazyness
@@ -406,18 +406,18 @@ public final class Equipment implements KeyConcept {
 	 * @return URI de l'association
 	 */
 	@Deprecated
-	public io.vertigo.dynamo.domain.model.URI<io.mars.basemanagement.domain.Business> getBusinessURI() {
+	public io.vertigo.dynamo.domain.model.UID<io.mars.basemanagement.domain.Business> getBusinessURI() {
 		return businessIdAccessor.getURI();
 	}
 
- 	/**
+	/**
 	 * Association : Equipment Type.
 	 * @return l'accesseur vers la propriété 'Equipment Type'
 	 */
 	public VAccessor<io.mars.catalog.domain.EquipmentType> equipmentType() {
 		return equipmentTypeIdAccessor;
 	}
-	
+
 	@Deprecated
 	public io.mars.catalog.domain.EquipmentType getEquipmentType() {
 		// we keep the lazyness
@@ -432,18 +432,18 @@ public final class Equipment implements KeyConcept {
 	 * @return URI de l'association
 	 */
 	@Deprecated
-	public io.vertigo.dynamo.domain.model.URI<io.mars.catalog.domain.EquipmentType> getEquipmentTypeURI() {
+	public io.vertigo.dynamo.domain.model.UID<io.mars.catalog.domain.EquipmentType> getEquipmentTypeURI() {
 		return equipmentTypeIdAccessor.getURI();
 	}
 
- 	/**
+	/**
 	 * Association : Equipment Geosector.
 	 * @return l'accesseur vers la propriété 'Equipment Geosector'
 	 */
 	public VAccessor<io.mars.basemanagement.domain.Geosector> geosector() {
 		return geosectorIdAccessor;
 	}
-	
+
 	@Deprecated
 	public io.mars.basemanagement.domain.Geosector getGeosector() {
 		// we keep the lazyness
@@ -458,10 +458,10 @@ public final class Equipment implements KeyConcept {
 	 * @return URI de l'association
 	 */
 	@Deprecated
-	public io.vertigo.dynamo.domain.model.URI<io.mars.basemanagement.domain.Geosector> getGeosectorURI() {
+	public io.vertigo.dynamo.domain.model.UID<io.mars.basemanagement.domain.Geosector> getGeosectorURI() {
 		return geosectorIdAccessor.getURI();
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

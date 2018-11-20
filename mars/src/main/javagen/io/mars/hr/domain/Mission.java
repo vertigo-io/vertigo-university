@@ -1,7 +1,7 @@
 package io.mars.hr.domain;
 
 import io.vertigo.dynamo.domain.model.Entity;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.model.VAccessor;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
@@ -65,10 +65,10 @@ public final class Mission implements Entity {
 
 	/** {@inheritDoc} */
 	@Override
-	public URI<Mission> getURI() {
-		return URI.of(this);
+	public UID<Mission> getUID() {
+		return UID.of(this);
 	}
-	
+
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
@@ -87,7 +87,7 @@ public final class Mission implements Entity {
 	public void setMissionId(final Long missionId) {
 		this.missionId = missionId;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Role'.
@@ -106,7 +106,7 @@ public final class Mission implements Entity {
 	public void setRole(final String role) {
 		this.role = role;
 	}
-	
+
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Person'.
@@ -114,7 +114,7 @@ public final class Mission implements Entity {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Person")
 	public Long getPersonId() {
-		return (Long)  personIdAccessor.getId();
+		return (Long) personIdAccessor.getId();
 	}
 
 	/**
@@ -125,7 +125,7 @@ public final class Mission implements Entity {
 	public void setPersonId(final Long personId) {
 		personIdAccessor.setId(personId);
 	}
-	
+
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Base'.
@@ -133,7 +133,7 @@ public final class Mission implements Entity {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Base")
 	public Long getBaseId() {
-		return (Long)  baseIdAccessor.getId();
+		return (Long) baseIdAccessor.getId();
 	}
 
 	/**
@@ -144,7 +144,7 @@ public final class Mission implements Entity {
 	public void setBaseId(final Long baseId) {
 		baseIdAccessor.setId(baseId);
 	}
-	
+
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Business'.
@@ -152,7 +152,7 @@ public final class Mission implements Entity {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Business")
 	public Long getBusinessId() {
-		return (Long)  businessIdAccessor.getId();
+		return (Long) businessIdAccessor.getId();
 	}
 
 	/**
@@ -164,14 +164,14 @@ public final class Mission implements Entity {
 		businessIdAccessor.setId(businessId);
 	}
 
- 	/**
+	/**
 	 * Association : Business.
 	 * @return l'accesseur vers la propriété 'Business'
 	 */
 	public VAccessor<io.mars.basemanagement.domain.Business> business() {
 		return businessIdAccessor;
 	}
-	
+
 	@Deprecated
 	public io.mars.basemanagement.domain.Business getBusiness() {
 		// we keep the lazyness
@@ -186,18 +186,18 @@ public final class Mission implements Entity {
 	 * @return URI de l'association
 	 */
 	@Deprecated
-	public io.vertigo.dynamo.domain.model.URI<io.mars.basemanagement.domain.Business> getBusinessURI() {
+	public io.vertigo.dynamo.domain.model.UID<io.mars.basemanagement.domain.Business> getBusinessURI() {
 		return businessIdAccessor.getURI();
 	}
 
- 	/**
+	/**
 	 * Association : Base.
 	 * @return l'accesseur vers la propriété 'Base'
 	 */
 	public VAccessor<io.mars.basemanagement.domain.Base> base() {
 		return baseIdAccessor;
 	}
-	
+
 	@Deprecated
 	public io.mars.basemanagement.domain.Base getBase() {
 		// we keep the lazyness
@@ -212,18 +212,18 @@ public final class Mission implements Entity {
 	 * @return URI de l'association
 	 */
 	@Deprecated
-	public io.vertigo.dynamo.domain.model.URI<io.mars.basemanagement.domain.Base> getBaseURI() {
+	public io.vertigo.dynamo.domain.model.UID<io.mars.basemanagement.domain.Base> getBaseURI() {
 		return baseIdAccessor.getURI();
 	}
 
- 	/**
+	/**
 	 * Association : Person.
 	 * @return l'accesseur vers la propriété 'Person'
 	 */
 	public VAccessor<io.mars.hr.domain.Person> person() {
 		return personIdAccessor;
 	}
-	
+
 	@Deprecated
 	public io.mars.hr.domain.Person getPerson() {
 		// we keep the lazyness
@@ -238,10 +238,10 @@ public final class Mission implements Entity {
 	 * @return URI de l'association
 	 */
 	@Deprecated
-	public io.vertigo.dynamo.domain.model.URI<io.mars.hr.domain.Person> getPersonURI() {
+	public io.vertigo.dynamo.domain.model.UID<io.mars.hr.domain.Person> getPersonURI() {
 		return personIdAccessor.getURI();
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

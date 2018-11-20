@@ -11,7 +11,7 @@ import io.vertigo.demo.domain.referentiel.Famille;
 import io.vertigo.demo.domain.referentiel.OuiNonChoice;
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.domain.model.DtListURIForMasterData;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.dynamo.store.StoreManager;
 
@@ -48,7 +48,7 @@ public class ReferentielServicesImpl implements ReferentielServices {
 	/** {@inheritDoc} */
 	@Override
 	public Famille getFamille(final Long famId) {
-		final URI<Famille> uri = URI.of(Famille.class, famId);
+		final UID<Famille> uri = UID.of(Famille.class, famId);
 		return storeManager.getDataStore().<Famille> readOne(uri);
 	}
 

@@ -11,7 +11,7 @@ import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.domain.model.DtListURI;
 import io.vertigo.dynamo.domain.model.DtListURIForCriteria;
 import io.vertigo.dynamo.domain.model.Entity;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.store.StoreManager;
 
 /**
@@ -31,7 +31,7 @@ public final class DynaObjectServiceImpl implements DynaObjectService {
 	/** {@inheritDoc} */
 	@Override
 	public Entity load(final DtDefinition dtDefinition, final Serializable id) {
-		final URI<Entity> uri = URI.of(dtDefinition, id);
+		final UID<Entity> uri = UID.of(dtDefinition, id);
 		return storeManager.getDataStore().readOne(uri);
 	}
 
@@ -51,7 +51,7 @@ public final class DynaObjectServiceImpl implements DynaObjectService {
 	/** {@inheritDoc} */
 	@Override
 	public void delete(final DtDefinition dtDefinition, final Serializable id) {
-		final URI<Entity> uri = URI.of(dtDefinition, id);
+		final UID<Entity> uri = UID.of(dtDefinition, id);
 		storeManager.getDataStore().delete(uri);
 	}
 

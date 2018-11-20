@@ -23,7 +23,7 @@ import io.vertigo.dynamo.collections.model.SelectedFacetValues;
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.domain.model.DtListState;
 import io.vertigo.dynamo.domain.model.DtObject;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.search.SearchManager;
 import io.vertigo.dynamo.search.model.SearchQuery;
 import io.vertigo.lang.WrappedException;
@@ -180,10 +180,10 @@ public class CommonServicesImpl implements CommonServices {
 
 		for (final JsonMovie jsonMovie : jsonMovies) {
 			final Movie movie = movieMaps.get(jsonMovie.getCode());
-			final List<URI> writersUris = extractURIs(jsonMovie, "writers");
-			final List<URI> cameraUris = extractURIs(jsonMovie, "camera");
-			final List<URI> producersUris = extractURIs(jsonMovie, "producers");
-			final List<URI> directorsUris = extractURIs(jsonMovie, "directors");
+			final List<UID> writersUris = extractURIs(jsonMovie, "writers");
+			final List<UID> cameraUris = extractURIs(jsonMovie, "camera");
+			final List<UID> producersUris = extractURIs(jsonMovie, "producers");
+			final List<UID> directorsUris = extractURIs(jsonMovie, "directors");
 			movieDAO.updateNN(movie.getWritersDtListURI(), writersUris);
 			movieDAO.updateNN(movie.getCameraDtListURI(), cameraUris);
 			movieDAO.updateNN(movie.getProducersDtListURI(), producersUris);
@@ -242,12 +242,12 @@ public class CommonServicesImpl implements CommonServices {
 		}
 	}
 
-	private List<URI> extractURIs(final JsonMovie jsonMovie, final String propertyName) {
+	private List<UID> extractURIs(final JsonMovie jsonMovie, final String propertyName) {
 		final JsonPersonLink[] jsonPersonLinks = (JsonPersonLink[]) BeanUtil.getValue(jsonMovie, propertyName);
-		final Set<URI> personURIs = new HashSet<>();
+		final Set<UID> personURIs = new HashSet<>();
 		if (jsonPersonLinks != null) {
 			for (final JsonPersonLink jsonPersonLink : jsonPersonLinks) {
-				personURIs.add(URI.of(Person.class, jsonPersonLink.getCode()));
+				personURIs.add(UID.of(Person.class, jsonPersonLink.getCode()));
 			}
 		}
 		return new ArrayList<>(personURIs);

@@ -1,7 +1,7 @@
 package io.mars.basemanagement.domain;
 
 import io.vertigo.dynamo.domain.model.DtStaticMasterData;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.lang.Generated;
@@ -19,10 +19,10 @@ public final class JobStatus implements DtStaticMasterData {
 
 	/** {@inheritDoc} */
 	@Override
-	public URI<JobStatus> getURI() {
-		return URI.of(this);
+	public UID<JobStatus> getUID() {
+		return UID.of(this);
 	}
-	
+
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
@@ -41,7 +41,7 @@ public final class JobStatus implements DtStaticMasterData {
 	public void setJobStatusId(final String jobStatusId) {
 		this.jobStatusId = jobStatusId;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Status Label'.
@@ -60,7 +60,7 @@ public final class JobStatus implements DtStaticMasterData {
 	public void setLabel(final String label) {
 		this.label = label;
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

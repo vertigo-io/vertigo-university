@@ -1,7 +1,7 @@
 package io.mars.catalog.domain;
 
 import io.vertigo.dynamo.domain.model.Entity;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.lang.Generated;
@@ -20,10 +20,10 @@ public final class EquipmentCategory implements Entity {
 
 	/** {@inheritDoc} */
 	@Override
-	public URI<EquipmentCategory> getURI() {
-		return URI.of(this);
+	public UID<EquipmentCategory> getUID() {
+		return UID.of(this);
 	}
-	
+
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
@@ -42,7 +42,7 @@ public final class EquipmentCategory implements Entity {
 	public void setEquipmentCategoryId(final Long equipmentCategoryId) {
 		this.equipmentCategoryId = equipmentCategoryId;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Equipment Category Label'.
@@ -61,7 +61,7 @@ public final class EquipmentCategory implements Entity {
 	public void setLabel(final String label) {
 		this.label = label;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Equipment category is active'.
@@ -80,7 +80,7 @@ public final class EquipmentCategory implements Entity {
 	public void setActive(final Boolean active) {
 		this.active = active;
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

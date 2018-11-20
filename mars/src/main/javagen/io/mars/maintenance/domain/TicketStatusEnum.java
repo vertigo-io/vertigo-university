@@ -3,7 +3,7 @@ package io.mars.maintenance.domain;
 import java.io.Serializable;
 
 import io.vertigo.dynamo.domain.model.MasterDataEnum;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 
 public enum TicketStatusEnum implements MasterDataEnum<io.mars.maintenance.domain.TicketStatus> {
 
@@ -16,8 +16,8 @@ public enum TicketStatusEnum implements MasterDataEnum<io.mars.maintenance.domai
 	}
 
 	@Override
-	public URI<io.mars.maintenance.domain.TicketStatus> getEntityUri() {
-		return URI.of(io.mars.maintenance.domain.TicketStatus.class, entityId);
+	public UID<io.mars.maintenance.domain.TicketStatus> getEntityUri() {
+		return UID.of(io.mars.maintenance.domain.TicketStatus.class, entityId);
 	}
 
 }

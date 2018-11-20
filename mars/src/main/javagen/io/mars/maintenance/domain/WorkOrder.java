@@ -1,9 +1,9 @@
 package io.mars.maintenance.domain;
 
 import io.vertigo.dynamo.domain.model.Entity;
-import io.vertigo.dynamo.domain.model.URI;
-import io.vertigo.dynamo.domain.model.VAccessor;
 import io.vertigo.dynamo.domain.model.EnumVAccessor;
+import io.vertigo.dynamo.domain.model.UID;
+import io.vertigo.dynamo.domain.model.VAccessor;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.lang.Generated;
@@ -54,10 +54,10 @@ public final class WorkOrder implements Entity {
 
 	/** {@inheritDoc} */
 	@Override
-	public URI<WorkOrder> getURI() {
-		return URI.of(this);
+	public UID<WorkOrder> getUID() {
+		return UID.of(this);
 	}
-	
+
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
@@ -76,7 +76,7 @@ public final class WorkOrder implements Entity {
 	public void setMoId(final Long moId) {
 		this.moId = moId;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Ticket Number'.
@@ -95,7 +95,7 @@ public final class WorkOrder implements Entity {
 	public void setTicketCode(final String ticketCode) {
 		this.ticketCode = ticketCode;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Mainenance Operation'.
@@ -114,7 +114,7 @@ public final class WorkOrder implements Entity {
 	public void setName(final String name) {
 		this.name = name;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Maintenance Operation Descrption'.
@@ -133,7 +133,7 @@ public final class WorkOrder implements Entity {
 	public void setDescription(final String description) {
 		this.description = description;
 	}
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Due Date'.
@@ -152,7 +152,7 @@ public final class WorkOrder implements Entity {
 	public void setDueDate(final java.time.LocalDate dueDate) {
 		this.dueDate = dueDate;
 	}
-	
+
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Ticket'.
@@ -160,7 +160,7 @@ public final class WorkOrder implements Entity {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Ticket")
 	public Long getTicketId() {
-		return (Long)  ticketIdAccessor.getId();
+		return (Long) ticketIdAccessor.getId();
 	}
 
 	/**
@@ -171,7 +171,7 @@ public final class WorkOrder implements Entity {
 	public void setTicketId(final Long ticketId) {
 		ticketIdAccessor.setId(ticketId);
 	}
-	
+
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Work Order Status'.
@@ -179,7 +179,7 @@ public final class WorkOrder implements Entity {
 	 */
 	@Field(domain = "DO_CODE", type = "FOREIGN_KEY", label = "Work Order Status")
 	public String getWorkOrderStatusId() {
-		return (String)  workOrderStatusIdAccessor.getId();
+		return (String) workOrderStatusIdAccessor.getId();
 	}
 
 	/**
@@ -191,14 +191,14 @@ public final class WorkOrder implements Entity {
 		workOrderStatusIdAccessor.setId(workOrderStatusId);
 	}
 
- 	/**
+	/**
 	 * Association : Ticket.
 	 * @return l'accesseur vers la propriété 'Ticket'
 	 */
 	public VAccessor<io.mars.maintenance.domain.Ticket> ticket() {
 		return ticketIdAccessor;
 	}
-	
+
 	@Deprecated
 	public io.mars.maintenance.domain.Ticket getTicket() {
 		// we keep the lazyness
@@ -213,18 +213,18 @@ public final class WorkOrder implements Entity {
 	 * @return URI de l'association
 	 */
 	@Deprecated
-	public io.vertigo.dynamo.domain.model.URI<io.mars.maintenance.domain.Ticket> getTicketURI() {
+	public io.vertigo.dynamo.domain.model.UID<io.mars.maintenance.domain.Ticket> getTicketURI() {
 		return ticketIdAccessor.getURI();
 	}
 
- 	/**
+	/**
 	 * Association : Work Order Status.
 	 * @return l'accesseur vers la propriété 'Work Order Status'
 	 */
 	public EnumVAccessor<io.mars.maintenance.domain.WorkOrderStatus, io.mars.maintenance.domain.WorkOrderStatusEnum> workOrderStatus() {
 		return workOrderStatusIdAccessor;
 	}
-	
+
 	@Deprecated
 	public io.mars.maintenance.domain.WorkOrderStatus getWorkOrderStatus() {
 		// we keep the lazyness
@@ -239,10 +239,10 @@ public final class WorkOrder implements Entity {
 	 * @return URI de l'association
 	 */
 	@Deprecated
-	public io.vertigo.dynamo.domain.model.URI<io.mars.maintenance.domain.WorkOrderStatus> getWorkOrderStatusURI() {
+	public io.vertigo.dynamo.domain.model.UID<io.mars.maintenance.domain.WorkOrderStatus> getWorkOrderStatusURI() {
 		return workOrderStatusIdAccessor.getURI();
 	}
-	
+
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

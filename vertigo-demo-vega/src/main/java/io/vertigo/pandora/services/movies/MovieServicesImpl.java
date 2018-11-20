@@ -14,7 +14,7 @@ import io.vertigo.dynamo.collections.model.SelectedFacetValues;
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.domain.model.DtListState;
 import io.vertigo.dynamo.domain.model.Fragment;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.search.model.SearchQuery;
 import io.vertigo.dynamo.search.model.SearchQueryBuilder;
 import io.vertigo.pandora.dao.movies.MovieDAO;
@@ -94,22 +94,22 @@ public class MovieServicesImpl implements MovieServices {
 	}
 
 	@Override
-	public void saveWriters(final Movie movie, final List<URI> personURIs) {
+	public void saveWriters(final Movie movie, final List<UID> personURIs) {
 		movieDAO.updateNN(movie.getWritersDtListURI(), personURIs);
 	}
 
 	@Override
-	public void saveCamera(final Movie movie, final List<URI> personURIs) {
+	public void saveCamera(final Movie movie, final List<UID> personURIs) {
 		movieDAO.updateNN(movie.getCameraDtListURI(), personURIs);
 	}
 
 	@Override
-	public void saveProducers(final Movie movie, final List<URI> personURIs) {
+	public void saveProducers(final Movie movie, final List<UID> personURIs) {
 		movieDAO.updateNN(movie.getProducersDtListURI(), personURIs);
 	}
 
 	@Override
-	public void saveDirectors(final Movie movie, final List<URI> personURIs) {
+	public void saveDirectors(final Movie movie, final List<UID> personURIs) {
 		movieDAO.updateNN(movie.getDirectorsDtListURI(), personURIs);
 	}
 
