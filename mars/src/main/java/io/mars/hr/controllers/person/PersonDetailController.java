@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import io.mars.hr.domain.Person;
 import io.mars.hr.services.person.PersonServices;
@@ -24,7 +25,8 @@ import io.vertigo.ui.impl.springmvc.controller.AbstractVSpringMvcController;
 public class PersonDetailController extends AbstractVSpringMvcController {
 
 	private static final ViewContextKey<Person> personKey = ViewContextKey.of("person");
-	private static final ViewContextKey<FileInfoURI> personPictureTmp = ViewContextKey.of("personPictureTmp");
+	//when using /pictureInCtx
+	private static final ViewContextKey<FileInfoURI> personPictureUri = ViewContextKey.of("personPictureUri");
 
 	@Inject
 	private PersonServices personServices;
@@ -48,10 +50,18 @@ public class PersonDetailController extends AbstractVSpringMvcController {
 		return personServices.getPersonPicture(fileKey);
 	}
 
-	@PostMapping("/picture")
-	public ViewContext uploadFile(final ViewContext viewContext, @Named("file") final VFile personPictureFile) {
+	@PostMapping("/pictureInField")
+	@ResponseBody
+	public String uploadFile(@Named("file") final VFile personPictureFile) {
 		final FileInfoURI personPictureUri = personServices.savePictureTmp(personPictureFile);
-		viewContext.publishRef(personPictureTmp, personPictureUri);
+		final String protectedFileInfoUri = ProtectedValueUtil.generateProtectedValue(personPictureUri);
+		return protectedFileInfoUri;
+	}
+
+	@PostMapping("/pictureInCtx")
+	public ViewContext uploadFileCtx(final ViewContext viewContext, @Named("file") final VFile personPictureFile) {
+		final FileInfoURI fileInfoUri = personServices.savePictureTmp(personPictureFile);
+		viewContext.publishRef(personPictureUri, fileInfoUri);
 		return viewContext;
 	}
 
@@ -66,12 +76,18 @@ public class PersonDetailController extends AbstractVSpringMvcController {
 	}
 
 	@PostMapping("/_create")
-	public String doCreate(
-			@ViewAttribute("person") final Person person, final ViewContext viewContext) {
+	public String doCreate(@ViewAttribute("person") final Person person, final ViewContext viewContext) {
 		personServices.createPerson(person);
-		if (viewContext.containsKey(personPictureTmp)) {
-			final FileInfoURI personPictureUri = (FileInfoURI) viewContext.get(personPictureTmp);
+		//when using pictureInField
+		if (person.getPicturefileIdTmp() != null) {
+			final FileInfoURI personPictureUri = ProtectedValueUtil.readProtectedValue(person.getPicturefileIdTmp(), FileInfoURI.class);
 			personServices.savePersonPicture(person.getPersonId(), personPictureUri);
+		}
+
+		//when using pictureInCtx
+		else if (viewContext.containsKey(personPictureUri)) {
+			final FileInfoURI fileInfoURI = (FileInfoURI) viewContext.get(personPictureUri);
+			personServices.savePersonPicture(person.getPersonId(), fileInfoURI);
 		}
 		return "redirect:/hr/person/" + person.getPersonId();
 	}
@@ -79,9 +95,16 @@ public class PersonDetailController extends AbstractVSpringMvcController {
 	@PostMapping("/_save")
 	public String doSave(@ViewAttribute("person") final Person person, final ViewContext viewContext) {
 		personServices.updatePerson(person);
-		if (viewContext.containsKey(personPictureTmp)) {
-			final FileInfoURI personPictureUri = (FileInfoURI) viewContext.get(personPictureTmp);
+
+		//when using pictureInField
+		if (person.getPicturefileIdTmp() != null) {
+			final FileInfoURI personPictureUri = ProtectedValueUtil.readProtectedValue(person.getPicturefileIdTmp(), FileInfoURI.class);
 			personServices.savePersonPicture(person.getPersonId(), personPictureUri);
+		}
+		//when using pictureInCtx
+		else if (viewContext.containsKey(personPictureUri)) {
+			final FileInfoURI fileInfoURI = (FileInfoURI) viewContext.get(personPictureUri);
+			personServices.savePersonPicture(person.getPersonId(), fileInfoURI);
 		}
 		return "redirect:/hr/person/" + person.getPersonId();
 	}

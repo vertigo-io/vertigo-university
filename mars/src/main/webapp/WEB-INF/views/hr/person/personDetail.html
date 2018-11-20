@@ -5,7 +5,7 @@
   layout:decorate="~{templates/mmcDetailLayout}"
 >
 	<head>
-		<title>Person detail</title>
+		<title>Person detail</title>		
 	</head>
 	
 	<body>
@@ -52,10 +52,9 @@
 				<vu:grid cols="2">
 					<vu:text-field object="person" field="firstName"/>
 					<vu:text-field object="person" field="lastName" />
-					<vu:text-field object="person" field="email" />		
-					<vu:label-edit object="person" field="picturefileId">
-						<q-uploader th:url="@{/hr/person/picture/}" :additional-fields="[{'name':'CTX', 'value':vueData.CTX}]" auto-expand></q-uploader>
-					</vu:label-edit>
+					<vu:text-field object="person" field="email" />
+					<vu:fileupload-field th:url="'@{/hr/person/pictureInField/}'" object="person" field="picturefileIdTmp" th:if="${viewMode=='edit'}" />
+					<vu:fileupload-ctx th:url="'@{/hr/person/pictureInCtx/}'" object="person" field="picturefileId" th:if="${viewMode=='edit'}" />
 								
 				</vu:grid>
 				<div class="row justify-end">

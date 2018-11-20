@@ -303,8 +303,10 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		LAST_NAME,
 		/** Propriété 'E-mail'. */
 		EMAIL,
-		/** Propriété 'PictureFileId'. */
+		/** Propriété 'Picture'. */
 		PICTUREFILE_ID,
+		/** Propriété 'Picture'. */
+		PICTUREFILE_ID_TMP,
 		/** Propriété 'Tags'. */
 		TAGS,
 		/** Propriété 'Date hired'. */
