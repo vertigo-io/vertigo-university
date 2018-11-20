@@ -38,7 +38,7 @@ public final class Picture implements Entity {
 	public UID<Picture> getUID() {
 		return UID.of(this);
 	}
-
+	
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
@@ -57,7 +57,7 @@ public final class Picture implements Entity {
 	public void setPictureId(final Long pictureId) {
 		this.pictureId = pictureId;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Id'.
@@ -76,7 +76,7 @@ public final class Picture implements Entity {
 	public void setPicturefileId(final Long picturefileId) {
 		this.picturefileId = picturefileId;
 	}
-
+	
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Base'.
@@ -84,7 +84,7 @@ public final class Picture implements Entity {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", required = true, label = "Base")
 	public Long getBaseId() {
-		return (Long) baseIdAccessor.getId();
+		return (Long)  baseIdAccessor.getId();
 	}
 
 	/**
@@ -96,14 +96,14 @@ public final class Picture implements Entity {
 		baseIdAccessor.setId(baseId);
 	}
 
-	/**
+ 	/**
 	 * Association : Base.
 	 * @return l'accesseur vers la propriété 'Base'
 	 */
 	public VAccessor<io.mars.basemanagement.domain.Base> base() {
 		return baseIdAccessor;
 	}
-
+	
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

@@ -16,7 +16,7 @@ public enum WorkOrderStatusEnum implements MasterDataEnum<io.mars.maintenance.do
 	}
 
 	@Override
-	public UID<io.mars.maintenance.domain.WorkOrderStatus> getEntityUri() {
+	public UID<io.mars.maintenance.domain.WorkOrderStatus> getEntityUID() {
 		return UID.of(io.mars.maintenance.domain.WorkOrderStatus.class, entityId);
 	}
 

@@ -18,7 +18,7 @@ public enum SexeEnum implements MasterDataEnum<io.vertigo.samples.crystal.domain
 	}
 
 	@Override
-	public UID<io.vertigo.samples.crystal.domain.Sexe> getEntityUri() {
+	public UID<io.vertigo.samples.crystal.domain.Sexe> getEntityUID() {
 		return UID.of(io.vertigo.samples.crystal.domain.Sexe.class, entityId);
 	}
 

@@ -1,7 +1,7 @@
 package io.vertigo.samples.dao.domain;
 
 import io.vertigo.dynamo.domain.model.Entity;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.lang.Generated;
@@ -19,8 +19,8 @@ public final class Country implements Entity {
 
 	/** {@inheritDoc} */
 	@Override
-	public URI<Country> getURI() {
-		return URI.of(this);
+	public UID<Country> getUID() {
+		return UID.of(this);
 	}
 	
 	/**

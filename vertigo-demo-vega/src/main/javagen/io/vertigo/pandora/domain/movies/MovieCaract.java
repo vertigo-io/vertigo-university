@@ -25,8 +25,8 @@ public final class MovieCaract implements Fragment<Movie> {
 
 	/** {@inheritDoc} */
 	@Override
-	public UID<Movie> getEntityURI() {
-		return DtObjectUtil.createEntityURI(this); 
+	public UID<Movie> getEntityUID() {
+		return DtObjectUtil.createEntityUID(this); 
 	}
 	
 	/**

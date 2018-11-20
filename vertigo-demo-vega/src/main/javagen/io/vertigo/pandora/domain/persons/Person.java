@@ -53,7 +53,7 @@ public final class Person implements KeyConcept {
 			roleB = "Camera",
 			labelA = "Movie",
 			labelB = "Camera")
-	private final ListVAccessor<io.vertigo.pandora.domain.movies.Movie> movieAccessor = new ListVAccessor<>(this, "ANN_CAMERA", "Movie");
+	private final ListVAccessor<io.vertigo.pandora.domain.movies.Movie> camerasAccessor = new ListVAccessor<>(this, "ANN_CAMERA", "Movie");
 
 	@io.vertigo.dynamo.domain.stereotype.AssociationNN(
 			name = "ANN_DIRECTORS",
@@ -66,7 +66,7 @@ public final class Person implements KeyConcept {
 			roleB = "Directors",
 			labelA = "Movie",
 			labelB = "Directors")
-	private final ListVAccessor<io.vertigo.pandora.domain.movies.Movie> movieDirectorAccessor = new ListVAccessor<>(this, "ANN_DIRECTORS", "Movie");
+	private final ListVAccessor<io.vertigo.pandora.domain.movies.Movie> directorsAccessor = new ListVAccessor<>(this, "ANN_DIRECTORS", "Movie");
 
 	@io.vertigo.dynamo.domain.stereotype.AssociationNN(
 			name = "ANN_PRODUCERS",
@@ -79,7 +79,7 @@ public final class Person implements KeyConcept {
 			roleB = "Producers",
 			labelA = "Movie",
 			labelB = "Producers")
-	private final ListVAccessor<io.vertigo.pandora.domain.movies.Movie> movieProducersAccessor = new ListVAccessor<>(this, "ANN_PRODUCERS", "Movie");
+	private final ListVAccessor<io.vertigo.pandora.domain.movies.Movie> producersAccessor = new ListVAccessor<>(this, "ANN_PRODUCERS", "Movie");
 
 	@io.vertigo.dynamo.domain.stereotype.AssociationNN(
 			name = "ANN_WRITERS",
@@ -92,7 +92,7 @@ public final class Person implements KeyConcept {
 			roleB = "Writers",
 			labelA = "Movie",
 			labelB = "Writers")
-	private final ListVAccessor<io.vertigo.pandora.domain.movies.Movie> movieWritersAccessor = new ListVAccessor<>(this, "ANN_WRITERS", "Movie");
+	private final ListVAccessor<io.vertigo.pandora.domain.movies.Movie> movieAccessor = new ListVAccessor<>(this, "ANN_WRITERS", "Movie");
 
 	/** {@inheritDoc} */
 	@Override
@@ -331,8 +331,8 @@ public final class Person implements KeyConcept {
 	}
 
 	/**
-	 * Association URI: Roles.
-	 * @return URI de l'association
+	 * Association UID: Roles.
+	 * @return UID de l'association
 	 */
 	@Deprecated
 	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation getRolesDtListURI() {

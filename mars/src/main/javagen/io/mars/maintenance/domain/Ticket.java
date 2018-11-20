@@ -1,9 +1,9 @@
 package io.mars.maintenance.domain;
 
 import io.vertigo.dynamo.domain.model.Entity;
-import io.vertigo.dynamo.domain.model.EnumVAccessor;
 import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.model.VAccessor;
+import io.vertigo.dynamo.domain.model.EnumVAccessor;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.lang.Generated;
@@ -57,7 +57,7 @@ public final class Ticket implements Entity {
 	public UID<Ticket> getUID() {
 		return UID.of(this);
 	}
-
+	
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
@@ -76,7 +76,7 @@ public final class Ticket implements Entity {
 	public void setTicketId(final Long ticketId) {
 		this.ticketId = ticketId;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Ticket Number'.
@@ -95,7 +95,7 @@ public final class Ticket implements Entity {
 	public void setCode(final String code) {
 		this.code = code;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Ticket title'.
@@ -114,7 +114,7 @@ public final class Ticket implements Entity {
 	public void setTitle(final String title) {
 		this.title = title;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Ticket Descrption'.
@@ -133,7 +133,7 @@ public final class Ticket implements Entity {
 	public void setDescription(final String description) {
 		this.description = description;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Ticket Creation Date'.
@@ -152,7 +152,7 @@ public final class Ticket implements Entity {
 	public void setDateCreated(final java.time.LocalDate dateCreated) {
 		this.dateCreated = dateCreated;
 	}
-
+	
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Ticket Status'.
@@ -160,7 +160,7 @@ public final class Ticket implements Entity {
 	 */
 	@Field(domain = "DO_CODE", type = "FOREIGN_KEY", label = "Ticket Status")
 	public String getWorkOrderStatusId() {
-		return (String) workOrderStatusIdAccessor.getId();
+		return (String)  workOrderStatusIdAccessor.getId();
 	}
 
 	/**
@@ -171,7 +171,7 @@ public final class Ticket implements Entity {
 	public void setWorkOrderStatusId(final String workOrderStatusId) {
 		workOrderStatusIdAccessor.setId(workOrderStatusId);
 	}
-
+	
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Equipment'.
@@ -179,7 +179,7 @@ public final class Ticket implements Entity {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Equipment")
 	public Long getEquipmentId() {
-		return (Long) equipmentIdAccessor.getId();
+		return (Long)  equipmentIdAccessor.getId();
 	}
 
 	/**
@@ -191,14 +191,14 @@ public final class Ticket implements Entity {
 		equipmentIdAccessor.setId(equipmentId);
 	}
 
-	/**
+ 	/**
 	 * Association : Equipment.
 	 * @return l'accesseur vers la propriété 'Equipment'
 	 */
 	public VAccessor<io.mars.basemanagement.domain.Equipment> equipment() {
 		return equipmentIdAccessor;
 	}
-
+	
 	@Deprecated
 	public io.mars.basemanagement.domain.Equipment getEquipment() {
 		// we keep the lazyness
@@ -209,22 +209,22 @@ public final class Ticket implements Entity {
 	}
 
 	/**
-	 * Retourne l'URI: Equipment.
-	 * @return URI de l'association
+	 * Retourne l'UID: Equipment.
+	 * @return UID de l'association
 	 */
 	@Deprecated
-	public io.vertigo.dynamo.domain.model.UID<io.mars.basemanagement.domain.Equipment> getEquipmentURI() {
-		return equipmentIdAccessor.getURI();
+	public io.vertigo.dynamo.domain.model.UID<io.mars.basemanagement.domain.Equipment> getEquipmentUID() {
+		return equipmentIdAccessor.getUID();
 	}
 
-	/**
+ 	/**
 	 * Association : Ticket Status.
 	 * @return l'accesseur vers la propriété 'Ticket Status'
 	 */
 	public EnumVAccessor<io.mars.maintenance.domain.TicketStatus, io.mars.maintenance.domain.TicketStatusEnum> ticketStatus() {
 		return workOrderStatusIdAccessor;
 	}
-
+	
 	@Deprecated
 	public io.mars.maintenance.domain.TicketStatus getTicketStatus() {
 		// we keep the lazyness
@@ -235,14 +235,14 @@ public final class Ticket implements Entity {
 	}
 
 	/**
-	 * Retourne l'URI: Ticket Status.
-	 * @return URI de l'association
+	 * Retourne l'UID: Ticket Status.
+	 * @return UID de l'association
 	 */
 	@Deprecated
-	public io.vertigo.dynamo.domain.model.UID<io.mars.maintenance.domain.TicketStatus> getTicketStatusURI() {
-		return workOrderStatusIdAccessor.getURI();
+	public io.vertigo.dynamo.domain.model.UID<io.mars.maintenance.domain.TicketStatus> getTicketStatusUID() {
+		return workOrderStatusIdAccessor.getUID();
 	}
-
+	
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

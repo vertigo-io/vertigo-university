@@ -25,7 +25,7 @@ public final class Job implements Entity {
 	public UID<Job> getUID() {
 		return UID.of(this);
 	}
-
+	
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
@@ -44,7 +44,7 @@ public final class Job implements Entity {
 	public void setJobId(final Long jobId) {
 		this.jobId = jobId;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'CODE'.
@@ -63,7 +63,7 @@ public final class Job implements Entity {
 	public void setCode(final String code) {
 		this.code = code;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Job Name'.
@@ -82,7 +82,7 @@ public final class Job implements Entity {
 	public void setName(final String name) {
 		this.name = name;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Job Description'.
@@ -101,7 +101,7 @@ public final class Job implements Entity {
 	public void setDescription(final String description) {
 		this.description = description;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Due Date'.
@@ -120,7 +120,7 @@ public final class Job implements Entity {
 	public void setDueDate(final java.time.LocalDate dueDate) {
 		this.dueDate = dueDate;
 	}
-
+	
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

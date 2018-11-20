@@ -1,7 +1,7 @@
 package io.vertigo.samples.dao.domain;
 
 import io.vertigo.dynamo.domain.model.Entity;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.lang.Generated;
@@ -21,8 +21,8 @@ public final class MyActor implements Entity {
 
 	/** {@inheritDoc} */
 	@Override
-	public URI<MyActor> getURI() {
-		return URI.of(this);
+	public UID<MyActor> getUID() {
+		return UID.of(this);
 	}
 	
 	/**

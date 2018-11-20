@@ -16,7 +16,7 @@ public enum TicketStatusEnum implements MasterDataEnum<io.mars.maintenance.domai
 	}
 
 	@Override
-	public UID<io.mars.maintenance.domain.TicketStatus> getEntityUri() {
+	public UID<io.mars.maintenance.domain.TicketStatus> getEntityUID() {
 		return UID.of(io.mars.maintenance.domain.TicketStatus.class, entityId);
 	}
 

@@ -1,8 +1,8 @@
 package io.vertigo.pandora.domain.movies;
 
 import io.vertigo.dynamo.domain.model.KeyConcept;
-import io.vertigo.dynamo.domain.model.ListVAccessor;
 import io.vertigo.dynamo.domain.model.UID;
+import io.vertigo.dynamo.domain.model.ListVAccessor;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.lang.Generated;
@@ -102,7 +102,7 @@ public final class Movie implements KeyConcept {
 	public UID<Movie> getUID() {
 		return UID.of(this);
 	}
-
+	
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'MOV ID'.
@@ -121,7 +121,7 @@ public final class Movie implements KeyConcept {
 	public void setMovId(final Long movId) {
 		this.movId = movId;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'TITLE'.
@@ -140,7 +140,7 @@ public final class Movie implements KeyConcept {
 	public void setTitle(final String title) {
 		this.title = title;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'ORIGINAL TITLE'.
@@ -159,7 +159,7 @@ public final class Movie implements KeyConcept {
 	public void setOriginalTitle(final String originalTitle) {
 		this.originalTitle = originalTitle;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'SYNOPSIS'.
@@ -178,7 +178,7 @@ public final class Movie implements KeyConcept {
 	public void setSynopsis(final String synopsis) {
 		this.synopsis = synopsis;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'SHORT SYNOPSIS'.
@@ -197,7 +197,7 @@ public final class Movie implements KeyConcept {
 	public void setShortSynopsis(final String shortSynopsis) {
 		this.shortSynopsis = shortSynopsis;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'KEYWORDS'.
@@ -216,7 +216,7 @@ public final class Movie implements KeyConcept {
 	public void setKeywords(final String keywords) {
 		this.keywords = keywords;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'POSTER'.
@@ -235,7 +235,7 @@ public final class Movie implements KeyConcept {
 	public void setPoster(final String poster) {
 		this.poster = poster;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'TRAILER NAME'.
@@ -254,7 +254,7 @@ public final class Movie implements KeyConcept {
 	public void setTrailerName(final String trailerName) {
 		this.trailerName = trailerName;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'TRAILER HREF'.
@@ -273,7 +273,7 @@ public final class Movie implements KeyConcept {
 	public void setTrailerHref(final String trailerHref) {
 		this.trailerHref = trailerHref;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'RUNTIME'.
@@ -292,7 +292,7 @@ public final class Movie implements KeyConcept {
 	public void setRuntime(final Integer runtime) {
 		this.runtime = runtime;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'MOVIE TYPE'.
@@ -311,7 +311,7 @@ public final class Movie implements KeyConcept {
 	public void setMovieType(final String movieType) {
 		this.movieType = movieType;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'PRODUCTION YEAR'.
@@ -330,7 +330,7 @@ public final class Movie implements KeyConcept {
 	public void setProductionYear(final Integer productionYear) {
 		this.productionYear = productionYear;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'USER RATING'.
@@ -349,7 +349,7 @@ public final class Movie implements KeyConcept {
 	public void setUserRating(final Integer userRating) {
 		this.userRating = userRating;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'PRESS RATING'.
@@ -376,7 +376,7 @@ public final class Movie implements KeyConcept {
 	public ListVAccessor<io.vertigo.pandora.domain.persons.ActorRole> roles() {
 		return rolesAccessor;
 	}
-
+	
 	/**
 	 * Association : Roles.
 	 * @return DtList de io.vertigo.pandora.domain.persons.ActorRole
@@ -391,10 +391,10 @@ public final class Movie implements KeyConcept {
 	}
 
 	/**
-	 * Association URI: Roles.
-	 * @return URI de l'association
+	 * Association UID: Roles.
+	 * @return UID de l'association
 	 */
-	@Deprecated
+	@Deprecated	
 	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation getRolesDtListURI() {
 		return (io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation) rolesAccessor.getDtListURI();
 	}
@@ -406,7 +406,7 @@ public final class Movie implements KeyConcept {
 	public ListVAccessor<io.vertigo.pandora.domain.persons.Person> camera() {
 		return cameraAccessor;
 	}
-
+	
 	/**
 	 * Association : Camera.
 	 * @return DtList de io.vertigo.pandora.domain.persons.Person
@@ -421,10 +421,10 @@ public final class Movie implements KeyConcept {
 	}
 
 	/**
-	 * Association URI: Camera.
-	 * @return URI de l'association
+	 * Association UID: Camera.
+	 * @return UID de l'association
 	 */
-	@Deprecated
+	@Deprecated	
 	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForNNAssociation getCameraDtListURI() {
 		return (io.vertigo.dynamo.domain.metamodel.association.DtListURIForNNAssociation) cameraAccessor.getDtListURI();
 	}
@@ -436,7 +436,7 @@ public final class Movie implements KeyConcept {
 	public ListVAccessor<io.vertigo.pandora.domain.persons.Person> directors() {
 		return directorsAccessor;
 	}
-
+	
 	/**
 	 * Association : Directors.
 	 * @return DtList de io.vertigo.pandora.domain.persons.Person
@@ -451,10 +451,10 @@ public final class Movie implements KeyConcept {
 	}
 
 	/**
-	 * Association URI: Directors.
-	 * @return URI de l'association
+	 * Association UID: Directors.
+	 * @return UID de l'association
 	 */
-	@Deprecated
+	@Deprecated	
 	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForNNAssociation getDirectorsDtListURI() {
 		return (io.vertigo.dynamo.domain.metamodel.association.DtListURIForNNAssociation) directorsAccessor.getDtListURI();
 	}
@@ -466,7 +466,7 @@ public final class Movie implements KeyConcept {
 	public ListVAccessor<io.vertigo.pandora.domain.persons.Person> producers() {
 		return producersAccessor;
 	}
-
+	
 	/**
 	 * Association : Producers.
 	 * @return DtList de io.vertigo.pandora.domain.persons.Person
@@ -481,10 +481,10 @@ public final class Movie implements KeyConcept {
 	}
 
 	/**
-	 * Association URI: Producers.
-	 * @return URI de l'association
+	 * Association UID: Producers.
+	 * @return UID de l'association
 	 */
-	@Deprecated
+	@Deprecated	
 	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForNNAssociation getProducersDtListURI() {
 		return (io.vertigo.dynamo.domain.metamodel.association.DtListURIForNNAssociation) producersAccessor.getDtListURI();
 	}
@@ -496,7 +496,7 @@ public final class Movie implements KeyConcept {
 	public ListVAccessor<io.vertigo.pandora.domain.persons.Person> writers() {
 		return writersAccessor;
 	}
-
+	
 	/**
 	 * Association : Writers.
 	 * @return DtList de io.vertigo.pandora.domain.persons.Person
@@ -511,14 +511,14 @@ public final class Movie implements KeyConcept {
 	}
 
 	/**
-	 * Association URI: Writers.
-	 * @return URI de l'association
+	 * Association UID: Writers.
+	 * @return UID de l'association
 	 */
-	@Deprecated
+	@Deprecated	
 	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForNNAssociation getWritersDtListURI() {
 		return (io.vertigo.dynamo.domain.metamodel.association.DtListURIForNNAssociation) writersAccessor.getDtListURI();
 	}
-
+	
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

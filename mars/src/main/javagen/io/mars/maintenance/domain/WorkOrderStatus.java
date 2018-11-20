@@ -22,7 +22,7 @@ public final class WorkOrderStatus implements DtStaticMasterData {
 	public UID<WorkOrderStatus> getUID() {
 		return UID.of(this);
 	}
-
+	
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
@@ -41,7 +41,7 @@ public final class WorkOrderStatus implements DtStaticMasterData {
 	public void setWorkOrderStatusId(final String workOrderStatusId) {
 		this.workOrderStatusId = workOrderStatusId;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Status Label'.
@@ -60,7 +60,7 @@ public final class WorkOrderStatus implements DtStaticMasterData {
 	public void setLabel(final String label) {
 		this.label = label;
 	}
-
+	
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

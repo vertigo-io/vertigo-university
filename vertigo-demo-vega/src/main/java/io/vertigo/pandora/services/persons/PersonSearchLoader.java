@@ -48,7 +48,7 @@ public final class PersonSearchLoader extends AbstractSqlSearchLoader<Long, Pers
 	public List<SearchIndex<Person, PersonIndex>> loadData(final SearchChunk<Person> searchChunk) {
 		final List<Long> personIds = new ArrayList<>();
 
-		for (final UID<Person> uri : searchChunk.getAllURIs()) {
+		for (final UID<Person> uri : searchChunk.getAllUIDs()) {
 			personIds.add((Long) uri.getId());
 		}
 		final DtList<PersonIndex> personIndexes = personServices.getPersonIndex(personIds);

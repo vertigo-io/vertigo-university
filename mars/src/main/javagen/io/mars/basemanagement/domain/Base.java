@@ -1,10 +1,10 @@
 package io.mars.basemanagement.domain;
 
-import io.vertigo.dynamo.domain.model.EnumVAccessor;
 import io.vertigo.dynamo.domain.model.KeyConcept;
-import io.vertigo.dynamo.domain.model.ListVAccessor;
 import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.model.VAccessor;
+import io.vertigo.dynamo.domain.model.EnumVAccessor;
+import io.vertigo.dynamo.domain.model.ListVAccessor;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.lang.Generated;
@@ -78,7 +78,7 @@ public final class Base implements KeyConcept {
 	public UID<Base> getUID() {
 		return UID.of(this);
 	}
-
+	
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
@@ -97,7 +97,7 @@ public final class Base implements KeyConcept {
 	public void setBaseId(final Long baseId) {
 		this.baseId = baseId;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Base Code'.
@@ -116,7 +116,7 @@ public final class Base implements KeyConcept {
 	public void setCode(final String code) {
 		this.code = code;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Name'.
@@ -135,7 +135,7 @@ public final class Base implements KeyConcept {
 	public void setName(final String name) {
 		this.name = name;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Health Level'.
@@ -154,7 +154,7 @@ public final class Base implements KeyConcept {
 	public void setHealthLevel(final Integer healthLevel) {
 		this.healthLevel = healthLevel;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Base Creation Date'.
@@ -173,7 +173,7 @@ public final class Base implements KeyConcept {
 	public void setCreationDate(final java.time.LocalDate creationDate) {
 		this.creationDate = creationDate;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Description'.
@@ -192,7 +192,7 @@ public final class Base implements KeyConcept {
 	public void setDescription(final String description) {
 		this.description = description;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Geographic Location'.
@@ -211,7 +211,7 @@ public final class Base implements KeyConcept {
 	public void setGeoLocation(final String geoLocation) {
 		this.geoLocation = geoLocation;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Current base assets value'.
@@ -230,7 +230,7 @@ public final class Base implements KeyConcept {
 	public void setAssetsValue(final java.math.BigDecimal assetsValue) {
 		this.assetsValue = assetsValue;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Renting Fee'.
@@ -249,7 +249,7 @@ public final class Base implements KeyConcept {
 	public void setRentingFee(final java.math.BigDecimal rentingFee) {
 		this.rentingFee = rentingFee;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Tags'.
@@ -268,7 +268,7 @@ public final class Base implements KeyConcept {
 	public void setTags(final String tags) {
 		this.tags = tags;
 	}
-
+	
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Base Type'.
@@ -276,7 +276,7 @@ public final class Base implements KeyConcept {
 	 */
 	@Field(domain = "DO_CODE", type = "FOREIGN_KEY", label = "Base Type")
 	public String getBaseTypeId() {
-		return (String) baseTypeIdAccessor.getId();
+		return (String)  baseTypeIdAccessor.getId();
 	}
 
 	/**
@@ -287,7 +287,7 @@ public final class Base implements KeyConcept {
 	public void setBaseTypeId(final String baseTypeId) {
 		baseTypeIdAccessor.setId(baseTypeId);
 	}
-
+	
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Base Geosector'.
@@ -295,7 +295,7 @@ public final class Base implements KeyConcept {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Base Geosector")
 	public Long getGeosectorId() {
-		return (Long) geosectorIdAccessor.getId();
+		return (Long)  geosectorIdAccessor.getId();
 	}
 
 	/**
@@ -307,14 +307,14 @@ public final class Base implements KeyConcept {
 		geosectorIdAccessor.setId(geosectorId);
 	}
 
-	/**
+ 	/**
 	 * Association : Base Type.
 	 * @return l'accesseur vers la propriété 'Base Type'
 	 */
 	public EnumVAccessor<io.mars.basemanagement.domain.BaseType, io.mars.basemanagement.domain.BaseTypeEnum> baseType() {
 		return baseTypeIdAccessor;
 	}
-
+	
 	@Deprecated
 	public io.mars.basemanagement.domain.BaseType getBaseType() {
 		// we keep the lazyness
@@ -325,22 +325,22 @@ public final class Base implements KeyConcept {
 	}
 
 	/**
-	 * Retourne l'URI: Base Type.
-	 * @return URI de l'association
+	 * Retourne l'UID: Base Type.
+	 * @return UID de l'association
 	 */
 	@Deprecated
-	public io.vertigo.dynamo.domain.model.UID<io.mars.basemanagement.domain.BaseType> getBaseTypeURI() {
-		return baseTypeIdAccessor.getURI();
+	public io.vertigo.dynamo.domain.model.UID<io.mars.basemanagement.domain.BaseType> getBaseTypeUID() {
+		return baseTypeIdAccessor.getUID();
 	}
 
-	/**
+ 	/**
 	 * Association : Base Geosector.
 	 * @return l'accesseur vers la propriété 'Base Geosector'
 	 */
 	public VAccessor<io.mars.basemanagement.domain.Geosector> geosector() {
 		return geosectorIdAccessor;
 	}
-
+	
 	@Deprecated
 	public io.mars.basemanagement.domain.Geosector getGeosector() {
 		// we keep the lazyness
@@ -351,12 +351,12 @@ public final class Base implements KeyConcept {
 	}
 
 	/**
-	 * Retourne l'URI: Base Geosector.
-	 * @return URI de l'association
+	 * Retourne l'UID: Base Geosector.
+	 * @return UID de l'association
 	 */
 	@Deprecated
-	public io.vertigo.dynamo.domain.model.UID<io.mars.basemanagement.domain.Geosector> getGeosectorURI() {
-		return geosectorIdAccessor.getURI();
+	public io.vertigo.dynamo.domain.model.UID<io.mars.basemanagement.domain.Geosector> getGeosectorUID() {
+		return geosectorIdAccessor.getUID();
 	}
 
 	/**
@@ -366,7 +366,7 @@ public final class Base implements KeyConcept {
 	public ListVAccessor<io.mars.basemanagement.domain.Picture> pictures() {
 		return picturesAccessor;
 	}
-
+	
 	/**
 	 * Association : Base Pictures.
 	 * @return DtList de io.mars.basemanagement.domain.Picture
@@ -381,14 +381,14 @@ public final class Base implements KeyConcept {
 	}
 
 	/**
-	 * Association URI: Base Pictures.
-	 * @return URI de l'association
+	 * Association UID: Base Pictures.
+	 * @return UID de l'association
 	 */
-	@Deprecated
+	@Deprecated	
 	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation getPicturesDtListURI() {
 		return (io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation) picturesAccessor.getDtListURI();
 	}
-
+	
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

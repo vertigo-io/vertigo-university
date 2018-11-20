@@ -38,7 +38,7 @@ public final class EquipmentFeature implements Entity {
 	public UID<EquipmentFeature> getUID() {
 		return UID.of(this);
 	}
-
+	
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
@@ -57,7 +57,7 @@ public final class EquipmentFeature implements Entity {
 	public void setEquipmentFeatureId(final Long equipmentFeatureId) {
 		this.equipmentFeatureId = equipmentFeatureId;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Name'.
@@ -76,7 +76,7 @@ public final class EquipmentFeature implements Entity {
 	public void setName(final String name) {
 		this.name = name;
 	}
-
+	
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Equipment'.
@@ -84,7 +84,7 @@ public final class EquipmentFeature implements Entity {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Equipment")
 	public Long getEquipmentId() {
-		return (Long) equipmentIdAccessor.getId();
+		return (Long)  equipmentIdAccessor.getId();
 	}
 
 	/**
@@ -96,14 +96,14 @@ public final class EquipmentFeature implements Entity {
 		equipmentIdAccessor.setId(equipmentId);
 	}
 
-	/**
+ 	/**
 	 * Association : Equipment.
 	 * @return l'accesseur vers la propriété 'Equipment'
 	 */
 	public VAccessor<io.mars.basemanagement.domain.Equipment> equipment() {
 		return equipmentIdAccessor;
 	}
-
+	
 	@Deprecated
 	public io.mars.basemanagement.domain.Equipment getEquipment() {
 		// we keep the lazyness
@@ -114,14 +114,14 @@ public final class EquipmentFeature implements Entity {
 	}
 
 	/**
-	 * Retourne l'URI: Equipment.
-	 * @return URI de l'association
+	 * Retourne l'UID: Equipment.
+	 * @return UID de l'association
 	 */
 	@Deprecated
-	public io.vertigo.dynamo.domain.model.UID<io.mars.basemanagement.domain.Equipment> getEquipmentURI() {
-		return equipmentIdAccessor.getURI();
+	public io.vertigo.dynamo.domain.model.UID<io.mars.basemanagement.domain.Equipment> getEquipmentUID() {
+		return equipmentIdAccessor.getUID();
 	}
-
+	
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

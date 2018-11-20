@@ -22,8 +22,8 @@ public final class PersonActorRoleLink implements Fragment<Person> {
 
 	/** {@inheritDoc} */
 	@Override
-	public UID<Person> getEntityURI() {
-		return DtObjectUtil.createEntityURI(this); 
+	public UID<Person> getEntityUID() {
+		return DtObjectUtil.createEntityUID(this); 
 	}
 	
 	/**

@@ -53,7 +53,7 @@ public final class Role implements Entity {
 	public UID<Role> getUID() {
 		return UID.of(this);
 	}
-
+	
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
@@ -72,7 +72,7 @@ public final class Role implements Entity {
 	public void setRolId(final Long rolId) {
 		this.rolId = rolId;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Dans le role de'.
@@ -91,7 +91,7 @@ public final class Role implements Entity {
 	public void setAsCharacter(final String asCharacter) {
 		this.asCharacter = asCharacter;
 	}
-
+	
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Movie'.
@@ -99,7 +99,7 @@ public final class Role implements Entity {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Movie")
 	public Long getMovId() {
-		return (Long) movIdAccessor.getId();
+		return (Long)  movIdAccessor.getId();
 	}
 
 	/**
@@ -110,7 +110,7 @@ public final class Role implements Entity {
 	public void setMovId(final Long movId) {
 		movIdAccessor.setId(movId);
 	}
-
+	
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Actor'.
@@ -118,7 +118,7 @@ public final class Role implements Entity {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Actor")
 	public Long getActId() {
-		return (Long) actIdAccessor.getId();
+		return (Long)  actIdAccessor.getId();
 	}
 
 	/**
@@ -130,14 +130,14 @@ public final class Role implements Entity {
 		actIdAccessor.setId(actId);
 	}
 
-	/**
+ 	/**
 	 * Association : Actor.
 	 * @return l'accesseur vers la propriété 'Actor'
 	 */
 	public VAccessor<io.vertigo.samples.account.domain.Actor> actor() {
 		return actIdAccessor;
 	}
-
+	
 	@Deprecated
 	public io.vertigo.samples.account.domain.Actor getActor() {
 		// we keep the lazyness
@@ -148,22 +148,22 @@ public final class Role implements Entity {
 	}
 
 	/**
-	 * Retourne l'URI: Actor.
-	 * @return URI de l'association
+	 * Retourne l'UID: Actor.
+	 * @return UID de l'association
 	 */
 	@Deprecated
-	public io.vertigo.dynamo.domain.model.UID<io.vertigo.samples.account.domain.Actor> getActorURI() {
-		return actIdAccessor.getURI();
+	public io.vertigo.dynamo.domain.model.UID<io.vertigo.samples.account.domain.Actor> getActorUID() {
+		return actIdAccessor.getUID();
 	}
 
-	/**
+ 	/**
 	 * Association : Movie.
 	 * @return l'accesseur vers la propriété 'Movie'
 	 */
 	public VAccessor<io.vertigo.samples.account.domain.Movie> movie() {
 		return movIdAccessor;
 	}
-
+	
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

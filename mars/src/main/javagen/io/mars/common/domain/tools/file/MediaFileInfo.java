@@ -26,7 +26,7 @@ public final class MediaFileInfo implements Entity {
 	public UID<MediaFileInfo> getUID() {
 		return UID.of(this);
 	}
-
+	
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
@@ -45,7 +45,7 @@ public final class MediaFileInfo implements Entity {
 	public void setFilId(final Long filId) {
 		this.filId = filId;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Name'.
@@ -64,7 +64,7 @@ public final class MediaFileInfo implements Entity {
 	public void setFileName(final String fileName) {
 		this.fileName = fileName;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'MimeType'.
@@ -83,7 +83,7 @@ public final class MediaFileInfo implements Entity {
 	public void setMimeType(final String mimeType) {
 		this.mimeType = mimeType;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Size'.
@@ -102,7 +102,7 @@ public final class MediaFileInfo implements Entity {
 	public void setLength(final Long length) {
 		this.length = length;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Modification Date'.
@@ -121,7 +121,7 @@ public final class MediaFileInfo implements Entity {
 	public void setLastModified(final java.time.Instant lastModified) {
 		this.lastModified = lastModified;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'path'.
@@ -140,7 +140,7 @@ public final class MediaFileInfo implements Entity {
 	public void setFilePath(final String filePath) {
 		this.filePath = filePath;
 	}
-
+	
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

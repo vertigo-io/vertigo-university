@@ -1,7 +1,7 @@
 package io.vertigo.samples.dao.domain;
 
 import io.vertigo.dynamo.domain.model.Entity;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.model.VAccessor;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
@@ -51,8 +51,8 @@ public final class MyRole implements Entity {
 
 	/** {@inheritDoc} */
 	@Override
-	public URI<MyRole> getURI() {
-		return URI.of(this);
+	public UID<MyRole> getUID() {
+		return UID.of(this);
 	}
 	
 	/**
@@ -149,12 +149,12 @@ public final class MyRole implements Entity {
 	}
 
 	/**
-	 * Retourne l'URI: Actor.
-	 * @return URI de l'association
+	 * Retourne l'UID: Actor.
+	 * @return UID de l'association
 	 */
 	@Deprecated
-	public io.vertigo.dynamo.domain.model.URI<io.vertigo.samples.dao.domain.MyActor> getActorURI() {
-		return actIdAccessor.getURI();
+	public io.vertigo.dynamo.domain.model.UID<io.vertigo.samples.dao.domain.MyActor> getActorUID() {
+		return actIdAccessor.getUID();
 	}
 
  	/**

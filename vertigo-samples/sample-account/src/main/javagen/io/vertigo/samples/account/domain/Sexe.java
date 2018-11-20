@@ -22,7 +22,7 @@ public final class Sexe implements Entity {
 	public UID<Sexe> getUID() {
 		return UID.of(this);
 	}
-
+	
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
@@ -41,7 +41,7 @@ public final class Sexe implements Entity {
 	public void setSexCd(final String sexCd) {
 		this.sexCd = sexCd;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Label'.
@@ -60,7 +60,7 @@ public final class Sexe implements Entity {
 	public void setLabel(final String label) {
 		this.label = label;
 	}
-
+	
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

@@ -49,14 +49,14 @@ public final class BaseDAO extends DAO<Base, java.lang.Long> implements StoreSer
 	}
 
 	/**
-	 * Indique que le keyConcept associé à cette uri va être modifié.
+	 * Indique que le keyConcept associé à cette UID va être modifié.
 	 * Techniquement cela interdit les opérations d'ecriture en concurrence 
 	 * et envoie un évenement de modification du keyConcept (à la fin de transaction eventuellement) 
-	 * @param uri URI du keyConcept modifié
+	 * @param UID UID du keyConcept modifié
 	 * @return KeyConcept à modifier
 	 */
-	 public Base readOneForUpdate(final UID<Base> uri) {
-		return dataStore.readOneForUpdate(uri);
+	 public Base readOneForUpdate(final UID<Base> uid) {
+		return dataStore.readOneForUpdate(uid);
 	}
 
 	/**
@@ -67,7 +67,7 @@ public final class BaseDAO extends DAO<Base, java.lang.Long> implements StoreSer
 	 * @return KeyConcept à modifier
 	 */
 	 public Base readOneForUpdate(final java.lang.Long id) {
-		return readOneForUpdate(createDtObjectURI(id));
+		return readOneForUpdate(createDtObjectUID(id));
 	}
 
 	/**
@@ -98,12 +98,12 @@ public final class BaseDAO extends DAO<Base, java.lang.Long> implements StoreSer
 	 * Mark an entity as dirty. Index of these elements will be reindexed if Tx commited.
 	 * Reindexation isn't synchrone, strategy is dependant of plugin's parameters.
 	 *
-	 * @param entityUri Key concept's uri
+	 * @param entityUID Key concept's UID
 	 */
-	public void markAsDirty(final UID<Base> entityUri) {
+	public void markAsDirty(final UID<Base> entityUID) {
 		transactionManager.getCurrentTransaction().addAfterCompletion((final boolean txCommitted) -> {
 			if (txCommitted) {// reindex only is tx successful
-				searchManager.markAsDirty(Arrays.asList(entityUri));
+				searchManager.markAsDirty(Arrays.asList(entityUID));
 			}
 		});
 	}

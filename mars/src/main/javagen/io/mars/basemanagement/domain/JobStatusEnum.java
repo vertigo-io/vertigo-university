@@ -20,7 +20,7 @@ public enum JobStatusEnum implements MasterDataEnum<io.mars.basemanagement.domai
 	}
 
 	@Override
-	public UID<io.mars.basemanagement.domain.JobStatus> getEntityUri() {
+	public UID<io.mars.basemanagement.domain.JobStatus> getEntityUID() {
 		return UID.of(io.mars.basemanagement.domain.JobStatus.class, entityId);
 	}
 

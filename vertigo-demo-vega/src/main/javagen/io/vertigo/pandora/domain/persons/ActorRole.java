@@ -53,7 +53,7 @@ public final class ActorRole implements Entity {
 	public UID<ActorRole> getUID() {
 		return UID.of(this);
 	}
-
+	
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'ARO ID'.
@@ -72,7 +72,7 @@ public final class ActorRole implements Entity {
 	public void setAroId(final Long aroId) {
 		this.aroId = aroId;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'ROLE'.
@@ -91,7 +91,7 @@ public final class ActorRole implements Entity {
 	public void setRole(final String role) {
 		this.role = role;
 	}
-
+	
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Actor'.
@@ -99,7 +99,7 @@ public final class ActorRole implements Entity {
 	 */
 	@Field(domain = "DO_IDENTITY", type = "FOREIGN_KEY", label = "Actor")
 	public Long getPerId() {
-		return (Long) perIdAccessor.getId();
+		return (Long)  perIdAccessor.getId();
 	}
 
 	/**
@@ -110,7 +110,7 @@ public final class ActorRole implements Entity {
 	public void setPerId(final Long perId) {
 		perIdAccessor.setId(perId);
 	}
-
+	
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Movie'.
@@ -118,7 +118,7 @@ public final class ActorRole implements Entity {
 	 */
 	@Field(domain = "DO_IDENTITY", type = "FOREIGN_KEY", label = "Movie")
 	public Long getMovId() {
-		return (Long) movIdAccessor.getId();
+		return (Long)  movIdAccessor.getId();
 	}
 
 	/**
@@ -130,7 +130,7 @@ public final class ActorRole implements Entity {
 		movIdAccessor.setId(movId);
 	}
 
-	/**
+ 	/**
 	 * Association : Movie.
 	 * @return l'accesseur vers la propriété 'Movie'
 	 */
@@ -138,14 +138,14 @@ public final class ActorRole implements Entity {
 		return movIdAccessor;
 	}
 
-	/**
+ 	/**
 	 * Association : Actor.
 	 * @return l'accesseur vers la propriété 'Actor'
 	 */
 	public VAccessor<io.vertigo.pandora.domain.persons.Person> actor() {
 		return perIdAccessor;
 	}
-
+	
 	@Deprecated
 	public io.vertigo.pandora.domain.persons.Person getActor() {
 		// we keep the lazyness
@@ -156,14 +156,14 @@ public final class ActorRole implements Entity {
 	}
 
 	/**
-	 * Retourne l'URI: Actor.
-	 * @return URI de l'association
+	 * Retourne l'UID: Actor.
+	 * @return UID de l'association
 	 */
 	@Deprecated
-	public io.vertigo.dynamo.domain.model.UID<io.vertigo.pandora.domain.persons.Person> getActorURI() {
-		return perIdAccessor.getURI();
+	public io.vertigo.dynamo.domain.model.UID<io.vertigo.pandora.domain.persons.Person> getActorUID() {
+		return perIdAccessor.getUID();
 	}
-
+	
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

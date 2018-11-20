@@ -1,7 +1,7 @@
 package io.vertigo.samples.dao.domain;
 
 import io.vertigo.dynamo.domain.model.Entity;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.model.VAccessor;
 import io.vertigo.dynamo.domain.model.ListVAccessor;
 import io.vertigo.dynamo.domain.stereotype.Field;
@@ -54,8 +54,8 @@ public final class MyMovie implements Entity {
 
 	/** {@inheritDoc} */
 	@Override
-	public URI<MyMovie> getURI() {
-		return URI.of(this);
+	public UID<MyMovie> getUID() {
+		return UID.of(this);
 	}
 	
 	/**
@@ -171,12 +171,12 @@ public final class MyMovie implements Entity {
 	}
 
 	/**
-	 * Retourne l'URI: Country.
-	 * @return URI de l'association
+	 * Retourne l'UID: Country.
+	 * @return UID de l'association
 	 */
 	@Deprecated
-	public io.vertigo.dynamo.domain.model.URI<io.vertigo.samples.dao.domain.MyCountry> getCountryURI() {
-		return couIdAccessor.getURI();
+	public io.vertigo.dynamo.domain.model.UID<io.vertigo.samples.dao.domain.MyCountry> getCountryUID() {
+		return couIdAccessor.getUID();
 	}
 
 	/**
@@ -201,8 +201,8 @@ public final class MyMovie implements Entity {
 	}
 
 	/**
-	 * Association URI: Role.
-	 * @return URI de l'association
+	 * Association UID: Role.
+	 * @return UID de l'association
 	 */
 	@Deprecated	
 	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation getRoleDtListURI() {

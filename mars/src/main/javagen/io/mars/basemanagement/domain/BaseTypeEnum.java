@@ -18,7 +18,7 @@ public enum BaseTypeEnum implements MasterDataEnum<io.mars.basemanagement.domain
 	}
 
 	@Override
-	public UID<io.mars.basemanagement.domain.BaseType> getEntityUri() {
+	public UID<io.mars.basemanagement.domain.BaseType> getEntityUID() {
 		return UID.of(io.mars.basemanagement.domain.BaseType.class, entityId);
 	}
 
