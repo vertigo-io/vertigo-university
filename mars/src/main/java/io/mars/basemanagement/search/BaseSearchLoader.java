@@ -44,14 +44,15 @@ public final class BaseSearchLoader extends AbstractSqlSearchLoader<Long, Base, 
 	@Override
 	public List<SearchIndex<Base, BaseIndex>> loadData(final SearchChunk<Base> searchChunk) {
 		final List<Long> baseIds = new ArrayList<>();
-		for (final UID<Base> uri : searchChunk.getAllUIDs()) {
-			baseIds.add((Long) uri.getId());
+		for (final UID<Base> uid : searchChunk.getAllUIDs()) {
+			baseIds.add((Long) uid.getId());
 		}
 		final DtList<BaseIndex> baseIndexes = myBaseServices.getBaseIndex(baseIds);
 		final List<SearchIndex<Base, BaseIndex>> baseSearchIndexes = new ArrayList<>(searchChunk.getAllUIDs().size());
 		for (final BaseIndex baseIndex : baseIndexes) {
-			baseSearchIndexes.add(SearchIndex.<Base, BaseIndex> createIndex(indexDefinition,
-					UID.of(indexDefinition.getKeyConceptDtDefinition(), baseIndex.getBaseId()), baseIndex));
+			baseSearchIndexes.add(
+					SearchIndex.<Base, BaseIndex> createIndex(indexDefinition,
+							UID.of(indexDefinition.getKeyConceptDtDefinition(), baseIndex.getBaseId()), baseIndex));
 		}
 		return baseSearchIndexes;
 	}
