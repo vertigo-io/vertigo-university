@@ -418,10 +418,10 @@ comment on column PERSON.PERSON_ID is
 'Id';
 
 comment on column PERSON.FIRST_NAME is
-'Name';
+'First Name';
 
 comment on column PERSON.LAST_NAME is
-'Name';
+'Last Name';
 
 comment on column PERSON.EMAIL is
 'E-mail';

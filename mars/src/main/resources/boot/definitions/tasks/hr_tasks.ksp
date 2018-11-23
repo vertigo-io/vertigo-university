@@ -1,0 +1,14 @@
+package io.mars.hr
+
+create Task TK_GET_BASE_MANAGER {  
+    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+    request : "
+            select per.*
+            	from mission mis
+            	join person per on mis.person_id = per.person_id
+            	where mis.base_id = #BASE_ID# and mis.role= 'MANAGER';
+             "
+    attribute BASE_ID     {domain : DO_ID         		required:"true"  inOut :"in"}
+    attribute MANAGER     {domain : DO_DT_PERSON_DTO    required:"false"  inOut :"out"}
+}
+

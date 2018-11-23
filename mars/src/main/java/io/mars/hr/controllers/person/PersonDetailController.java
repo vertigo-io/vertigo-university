@@ -26,7 +26,7 @@ public class PersonDetailController extends AbstractVSpringMvcController {
 
 	private static final ViewContextKey<Person> personKey = ViewContextKey.of("person");
 	//when using /pictureInCtx
-	private static final ViewContextKey<FileInfoURI> personPictureUri = ViewContextKey.of("personPictureUri");
+	private static final ViewContextKey<FileInfoURI> personPictureUriKey = ViewContextKey.of("personPictureUri");
 
 	@Inject
 	private PersonServices personServices;
@@ -61,7 +61,7 @@ public class PersonDetailController extends AbstractVSpringMvcController {
 	@PostMapping("/pictureInCtx")
 	public ViewContext uploadFileCtx(final ViewContext viewContext, @Named("file") final VFile personPictureFile) {
 		final FileInfoURI fileInfoUri = personServices.savePictureTmp(personPictureFile);
-		viewContext.publishRef(personPictureUri, fileInfoUri);
+		viewContext.publishRef(personPictureUriKey, fileInfoUri);
 		return viewContext;
 	}
 
@@ -85,8 +85,8 @@ public class PersonDetailController extends AbstractVSpringMvcController {
 		}
 
 		//when using pictureInCtx
-		else if (viewContext.containsKey(personPictureUri)) {
-			final FileInfoURI fileInfoURI = (FileInfoURI) viewContext.get(personPictureUri);
+		else if (viewContext.containsKey(personPictureUriKey)) {
+			final FileInfoURI fileInfoURI = (FileInfoURI) viewContext.get(personPictureUriKey);
 			personServices.savePersonPicture(person.getPersonId(), fileInfoURI);
 		}
 		return "redirect:/hr/person/" + person.getPersonId();
@@ -102,8 +102,8 @@ public class PersonDetailController extends AbstractVSpringMvcController {
 			personServices.savePersonPicture(person.getPersonId(), personPictureUri);
 		}
 		//when using pictureInCtx
-		else if (viewContext.containsKey(personPictureUri)) {
-			final FileInfoURI fileInfoURI = (FileInfoURI) viewContext.get(personPictureUri);
+		else if (viewContext.containsKey(personPictureUriKey)) {
+			final FileInfoURI fileInfoURI = (FileInfoURI) viewContext.get(personPictureUriKey);
 			personServices.savePersonPicture(person.getPersonId(), fileInfoURI);
 		}
 		return "redirect:/hr/person/" + person.getPersonId();

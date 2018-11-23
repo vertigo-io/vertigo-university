@@ -297,9 +297,9 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	public enum PersonFields implements DtFieldName<io.mars.hr.domain.Person> {
 		/** Propriété 'Id'. */
 		PERSON_ID,
-		/** Propriété 'Name'. */
+		/** Propriété 'First Name'. */
 		FIRST_NAME,
-		/** Propriété 'Name'. */
+		/** Propriété 'Last Name'. */
 		LAST_NAME,
 		/** Propriété 'E-mail'. */
 		EMAIL,

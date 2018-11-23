@@ -6,7 +6,9 @@ import javax.inject.Inject;
 
 import io.mars.basemanagement.BasemanagementPAO;
 import io.mars.basemanagement.dao.BaseDAO;
+import io.mars.basemanagement.dao.GeosectorDAO;
 import io.mars.basemanagement.domain.Base;
+import io.mars.basemanagement.domain.Geosector;
 import io.mars.basemanagement.search.BaseIndex;
 import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.core.component.Component;
@@ -19,6 +21,8 @@ public class BaseServices implements Component {
 
 	@Inject
 	private BaseDAO baseDAO;
+	@Inject
+	private GeosectorDAO geosectorDAO;
 
 	@Inject
 	private BasemanagementPAO basemanagementPAO;
@@ -33,6 +37,10 @@ public class BaseServices implements Component {
 
 	public DtList<Base> getBases(final DtListState dtListState) {
 		return baseDAO.findAll(Criterions.alwaysTrue(), dtListState.getMaxRows().orElse(50));
+	}
+
+	public DtList<Geosector> getAllGeosectors() {
+		return geosectorDAO.findAll(Criterions.alwaysTrue(), Integer.MAX_VALUE);
 	}
 
 	public DtList<BaseIndex> getBaseIndex(final List<Long> baseIds) {

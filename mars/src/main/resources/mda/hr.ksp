@@ -1,18 +1,16 @@
 package io.mars.hr.domain
 
 
-
 create DtDefinition DT_PERSON {
 	id PERSON_ID {domain: DO_ID label:"Id"}
-	field FIRST_NAME {domain: DO_LABEL label: "Name" required:"false"}
-	field LAST_NAME {domain: DO_LABEL label: "Name" required:"false"}
+	field FIRST_NAME {domain: DO_LABEL label: "First Name" required:"false"}
+	field LAST_NAME {domain: DO_LABEL label: "Last Name" required:"false"}
 	field EMAIL {domain: DO_EMAIL label:"E-mail" required: "false"}
 	field PICTUREFILE_ID {domain: DO_ID label:"Picture" required:"false"}
 	field PICTUREFILE_ID_TMP {domain: DO_LABEL label:"Picture" required:"false" persistent:"false"}
 	field TAGS {domain: DO_TAGS label: "Tags" required:"false"}
 	field DATE_HIRED {domain: DO_LOCALDATE label: "Date hired" required:"false"}
 }
-
 
 create DtDefinition DT_MISSION {
 	id MISSION_ID {domain: DO_ID label:"Id"}

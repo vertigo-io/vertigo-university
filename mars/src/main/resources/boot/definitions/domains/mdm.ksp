@@ -1,0 +1,13 @@
+package io.mars
+
+alter DtDefinition DT_BASE_TYPE {
+	sortField : "LABEL"
+ 	displayField : "LABEL"
+
+}
+
+alter DtDefinition DT_GEOSECTOR {
+	sortField : "SECTOR_LABEL"
+ 	displayField : "SECTOR_LABEL"
+
+}

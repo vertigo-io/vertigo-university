@@ -50,17 +50,17 @@ public final class Person implements Entity {
 	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Name'.
+	 * Récupère la valeur de la propriété 'First Name'.
 	 * @return String firstName
 	 */
-	@Field(domain = "DO_LABEL", label = "Name")
+	@Field(domain = "DO_LABEL", label = "First Name")
 	public String getFirstName() {
 		return firstName;
 	}
 
 	/**
 	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'Name'.
+	 * Définit la valeur de la propriété 'First Name'.
 	 * @param firstName String
 	 */
 	public void setFirstName(final String firstName) {
@@ -69,17 +69,17 @@ public final class Person implements Entity {
 	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Name'.
+	 * Récupère la valeur de la propriété 'Last Name'.
 	 * @return String lastName
 	 */
-	@Field(domain = "DO_LABEL", label = "Name")
+	@Field(domain = "DO_LABEL", label = "Last Name")
 	public String getLastName() {
 		return lastName;
 	}
 
 	/**
 	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'Name'.
+	 * Définit la valeur de la propriété 'Last Name'.
 	 * @param lastName String
 	 */
 	public void setLastName(final String lastName) {
