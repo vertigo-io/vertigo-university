@@ -1,4 +1,4 @@
-package io.mars.boot;
+package io.mars.datageneration;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

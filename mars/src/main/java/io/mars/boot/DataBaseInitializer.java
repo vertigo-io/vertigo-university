@@ -51,6 +51,8 @@ import io.mars.catalog.dao.EquipmentCategoryDAO;
 import io.mars.catalog.dao.EquipmentTypeDAO;
 import io.mars.catalog.domain.EquipmentCategory;
 import io.mars.catalog.domain.EquipmentType;
+import io.mars.datageneration.FakeBaseListBuilder;
+import io.mars.datageneration.FakeEquipmentListBuilder;
 import io.mars.domain.DtDefinitions.EquipmentCategoryFields;
 import io.mars.hr.dao.PersonDAO;
 import io.mars.hr.domain.Person;
@@ -75,6 +77,7 @@ public class DataBaseInitializer implements ComponentInitializer {
 	private static final int PERSON_CSV_FILE_COLUMN_NUMBER = 5;
 	private static final int BUSINESS_CSV_FILE_COLUMN_NUMBER = 1;
 	private static final int GEOSECTOR_CSV_FILE_COLUMN_NUMBER = 1;
+	private static final Long RANDOM_SEED = 1337L;
 
 	@Inject
 	private ResourceManager resourceManager;
@@ -180,6 +183,7 @@ public class DataBaseInitializer implements ComponentInitializer {
 	private void createInitialEquipments() {
 		try (VTransactionWritable tx = transactionManager.createCurrentTransaction()) {
 			final List<Equipment> equipmentList = new FakeEquipmentListBuilder()
+					.withRandomSeed(RANDOM_SEED)
 					.withBaseIdList(basemanagementPAO.selectBaseId())
 					.withGeosectorIdList(basemanagementPAO.selectGeosectorId())
 					.withBusinessList(businessDAO.selectBusiness())
