@@ -53,8 +53,7 @@
 					<vu:text-field object="person" field="firstName"/>
 					<vu:text-field object="person" field="lastName" />
 					<vu:text-field object="person" field="email" />
-					<vu:fileupload-field th:url="'@{/hr/person/pictureInField/}'" object="person" field="picturefileIdTmp" th:if="${viewMode=='edit'}" />
-					<vu:fileupload-ctx th:url="'@{/hr/person/pictureInCtx/}'" object="person" field="picturefileId" th:if="${viewMode=='edit'}" />
+					<vu:fileupload th:url="'@{/hr/person/picture/}'" object="person" field="picturefileId" th:if="${viewMode=='edit'}" />
 								
 				</vu:grid>
 				<div class="row justify-end">
