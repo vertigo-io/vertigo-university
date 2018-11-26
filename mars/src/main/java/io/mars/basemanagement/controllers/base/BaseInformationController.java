@@ -38,8 +38,11 @@ public class BaseInformationController extends AbstractVSpringMvcController {
 		viewContext.publishMdl(baseTypesKey, BaseType.class, null); //all
 		viewContext.publishDtList(geosectorsKey, baseServices.getAllGeosectors());
 		viewContext.publishDto(baseKey, baseServices.get(baseId));
-		viewContext.publishDto(baseManagerKey, missionServices.getBaseManager(baseId).orElse(new Person()));
-		// TODO: c'est quoi la bonne option
+		//---
+		final Person noManagerPerson = new Person();
+		noManagerPerson.setLastName("No manager");
+		//---
+		viewContext.publishDto(baseManagerKey, missionServices.getBaseManager(baseId).orElse(noManagerPerson));
 		toModeReadOnly();
 	}
 
