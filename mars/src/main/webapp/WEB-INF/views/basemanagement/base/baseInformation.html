@@ -61,10 +61,10 @@
 					<vu:grid cols="2">
 						<vu:text-field object="base" field="name"/>
 						<vu:text-field object="base" field="code"/>
-						<vu:text-field-read object="baseManager" field="lastName" label_overidedLabel="Base Manager" />
+						<vu:text-field-read object="baseManager" field="lastName" label="Base Manager" />
 						<vu:autocomplete object="base" field="geosectorId" list="geosectors" />
 						<vu:text-field object="base" field="geoLocation" />
-						<vu:select object="base" field="baseTypeId" list="baseTypes" />
+						<vu:radio object="base" field="baseTypeId" list="baseTypes" />
 						<vu:date object="base" field="creationDate" />
 						<vu:grid-cell>
 							<vu:text-area object="base" field="description"/>
