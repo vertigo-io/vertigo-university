@@ -1,11 +1,11 @@
-package io.mars.boot;
+package io.mars.datageneration;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
+import java.util.Random;
 
 import io.mars.basemanagement.domain.Business;
 import io.mars.basemanagement.domain.Equipment;
@@ -20,6 +20,7 @@ public class FakeEquipmentListBuilder {
 	private static final int MAX_EQUIPMENT_VALUE = 3000;
 	private static final int MIN_RENTING_FEE = 50;
 	private static final int MAX_RENTING_FEE = 300;
+	private static Random rnd = null;
 
 	private DtList<Business> myBusinessList;
 	private DtList<EquipmentType> myEquipmentTypeList;
@@ -27,6 +28,11 @@ public class FakeEquipmentListBuilder {
 	private List<Long> myGeosectorIdList;
 
 	public FakeEquipmentListBuilder() {
+	}
+
+	public FakeEquipmentListBuilder withRandomSeed(final Long randomSeed) {
+		rnd = new Random(randomSeed);
+		return this;
 	}
 
 	public FakeEquipmentListBuilder withMaxValues(final int maxValues) {
@@ -72,13 +78,15 @@ public class FakeEquipmentListBuilder {
 		Assertion.checkNotNull(myBusinessList);
 		Assertion.checkNotNull(myBaseIdList);
 		Assertion.checkNotNull(myGeosectorIdList);
+		Assertion.checkNotNull(rnd);
 		final List<Equipment> equipmentList = new ArrayList<>();
 
 		for (int currentCounter = 0; currentCounter < myMaxValues; currentCounter++) {
-			final EquipmentType currentEquipmentType = myEquipmentTypeList.get(ThreadLocalRandom.current().nextInt(myEquipmentTypeList.size()));
-			final Business currentBusiness = myBusinessList.get(ThreadLocalRandom.current().nextInt(myBusinessList.size()));
-			final Long currentBaseId = myBaseIdList.get(ThreadLocalRandom.current().nextInt(myBaseIdList.size()));
-			final Long currentGeosectorId = myGeosectorIdList.get(ThreadLocalRandom.current().nextInt(myGeosectorIdList.size()));
+
+			final EquipmentType currentEquipmentType = myEquipmentTypeList.get(rnd.nextInt(myEquipmentTypeList.size()));
+			final Business currentBusiness = myBusinessList.get(rnd.nextInt(myBusinessList.size()));
+			final Long currentBaseId = myBaseIdList.get(rnd.nextInt(myBaseIdList.size()));
+			final Long currentGeosectorId = myGeosectorIdList.get(rnd.nextInt(myGeosectorIdList.size()));
 
 			final Equipment equipment = createEquipment(currentBaseId,
 					currentBusiness,
@@ -115,7 +123,7 @@ public class FakeEquipmentListBuilder {
 	}
 
 	private static int getHealthLevel() {
-		return FakeDataUtils.random.nextInt(101);
+		return rnd.nextInt(101);
 	}
 
 	private static String getGeoLocation() {
@@ -123,18 +131,18 @@ public class FakeEquipmentListBuilder {
 	}
 
 	private static BigDecimal getEquipmentValue() {
-		final Double randomDouble = ThreadLocalRandom.current().nextDouble(MIN_EQUIPMENT_VALUE, MAX_EQUIPMENT_VALUE);
+		final Double randomDouble = myNextDouble(MIN_EQUIPMENT_VALUE, MAX_EQUIPMENT_VALUE, rnd);
 		return BigDecimal.valueOf(randomDouble);
 	}
 
 	private static LocalDate getPurchaseDate() {
 
 		final LocalDate today = LocalDate.now();
-		return today.minus(31 + FakeDataUtils.random.nextInt(3650), ChronoUnit.DAYS);
+		return today.minus(31 + rnd.nextInt(3650), ChronoUnit.DAYS);
 	}
 
 	private static BigDecimal getRentingFee() {
-		final Double randomDouble = ThreadLocalRandom.current().nextDouble(MIN_RENTING_FEE, MAX_RENTING_FEE);
+		final Double randomDouble = myNextDouble(MIN_RENTING_FEE, MAX_RENTING_FEE, rnd);
 		return BigDecimal.valueOf(randomDouble);
 	}
 
@@ -166,6 +174,12 @@ public class FakeEquipmentListBuilder {
 		equipment.setRentingFee(rentingFee);
 		equipment.setTags(tags);
 		return equipment;
+	}
+
+	private static Double myNextDouble(final int min, final int max, final Random random) {
+		Assertion.checkNotNull(random, "Random Generator must be initialised before use");
+		//
+		return min + random.nextDouble() * (max - min);
 	}
 
 }

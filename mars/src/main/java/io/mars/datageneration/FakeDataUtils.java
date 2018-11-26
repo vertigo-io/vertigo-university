@@ -1,4 +1,4 @@
-package io.mars.boot;
+package io.mars.datageneration;
 
 import java.security.SecureRandom;
 
