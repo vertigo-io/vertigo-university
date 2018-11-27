@@ -1,12 +1,14 @@
 package io.mars.datageneration;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import io.vertigo.lang.Assertion;
+import io.vertigo.lang.VSystemException;
 
 public class RangeMap<T extends Comparable<T>, V> {
 
-	private final Map<MyRange<T>, V> myMap = null;
+	private final Map<MyRange<T>, V> myMap = new HashMap<>();
 
 	public void addSegment(final T minValue, final T maxValue, final V value) {
 		Assertion.checkNotNull(minValue);
@@ -23,12 +25,14 @@ public class RangeMap<T extends Comparable<T>, V> {
 	}
 
 	public V getValue(final T pointInKey) {
-		for (final MyRange<T> range : myMap.keySet()) {
-			if (pointInKey.compareTo(range.getMinValue()) >= 0 && pointInKey.compareTo(range.getMaxValue()) < 0) {
-				return myMap.get(range);
-			}
-		}
-		return null;
+		Assertion.checkNotNull(pointInKey);
+		//
+		final MyRange<T> goodRange = myMap.keySet().stream()
+				.filter(range -> pointInKey.compareTo(range.getMinValue()) >= 0 && pointInKey.compareTo(range.getMaxValue()) < 0)
+				.findFirst()
+				.orElseThrow(() -> new VSystemException("Unable to find enclosing range for value {0}", pointInKey));
+
+		return myMap.get(goodRange);
 
 	}
 
@@ -49,7 +53,7 @@ public class RangeMap<T extends Comparable<T>, V> {
 			Assertion.checkNotNull(minValue);
 			Assertion.checkNotNull(maxValue);
 			Assertion.checkArgument(minValue.compareTo(maxValue) < 0, "The range minValue must be strictly inferior to maxValue");
-
+			//
 			myMinValue = minValue;
 			myMaxValue = maxValue;
 		}

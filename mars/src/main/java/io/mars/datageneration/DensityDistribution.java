@@ -2,10 +2,10 @@ package io.mars.datageneration;
 
 import io.vertigo.lang.Assertion;
 
-public class DensityDistribution<T extends Comparable<T>> {
-	private RangeMap<T, Double> myRangeMap;
+public class DensityDistribution {
+	private final RangeMap<Double, Double> myRangeMap = new RangeMap<>();
 
-	public void addSegment(final T minValue, final T maxValue, final double density) {
+	public void addSegment(final Double minValue, final Double maxValue, final double density) {
 		Assertion.checkNotNull(myRangeMap);
 		Assertion.checkNotNull(minValue);
 		Assertion.checkNotNull(maxValue);
@@ -13,7 +13,7 @@ public class DensityDistribution<T extends Comparable<T>> {
 		myRangeMap.addSegment(minValue, maxValue, density);
 	}
 
-	public Double getDensity(final T event) {
+	public Double getDensity(final Double event) {
 		Assertion.checkNotNull(event);
 		//
 		return myRangeMap.getValue(event);
