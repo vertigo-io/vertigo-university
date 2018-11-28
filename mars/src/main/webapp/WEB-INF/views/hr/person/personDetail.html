@@ -49,7 +49,10 @@
 					<vu:text-field object="person" field="firstName"/>
 					<vu:text-field object="person" field="lastName" />
 					<vu:text-field object="person" field="email" />
-					<vu:fileupload th:url="'@{/hr/person/picture/}'" object="person" field="picturefileId" th:if="${viewMode=='edit'}" />
+					<vu:label-edit object="person" field="picturefileId" th:if="${viewMode=='edit'}"  >
+						<vu:fileupload-key th:url="'@{/commons/upload}'" key="personTmpPictureUri" />
+					</vu:label-edit>
+					
 								
 				</vu:grid>
 				<div class="row justify-end">

@@ -1,5 +1,7 @@
 package io.mars.hr.controllers.person;
 
+import java.util.Optional;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -24,8 +26,6 @@ import io.vertigo.ui.impl.springmvc.controller.AbstractVSpringMvcController;
 public class PersonDetailController extends AbstractVSpringMvcController {
 
 	private static final ViewContextKey<Person> personKey = ViewContextKey.of("person");
-	//to store tmp file
-	private static final ViewContextKey<FileInfoURI> personTmpPictureUriKey = ViewContextKey.of("personTmpPictureUri");
 
 	@Inject
 	private PersonServices personServices;
@@ -49,13 +49,6 @@ public class PersonDetailController extends AbstractVSpringMvcController {
 		return personServices.getPersonPicture(fileKey);
 	}
 
-	@PostMapping("/picture")
-	public ViewContext uploadFileCtx(@Named("file") final VFile personPictureFile, final ViewContext viewContext) {
-		final FileInfoURI fileInfoUri = personServices.savePictureTmp(personPictureFile);
-		viewContext.publishRef(personTmpPictureUriKey, fileInfoUri);
-		return viewContext; //update CTX_ID in view
-	}
-
 	@PostMapping("/_edit")
 	public void doEdit() {
 		toModeEdit();
@@ -67,21 +60,19 @@ public class PersonDetailController extends AbstractVSpringMvcController {
 	}
 
 	@PostMapping("/_create")
-	public String doCreate(@ViewAttribute("person") final Person person, final ViewContext viewContext) {
+	public String doCreate(@ViewAttribute("person") final Person person, @Named("personTmpPictureUri") final Optional<FileInfoURI> personPictureFile) {
 		personServices.createPerson(person);
-		if (viewContext.containsKey(personTmpPictureUriKey)) {
-			final FileInfoURI fileInfoURI = (FileInfoURI) viewContext.get(personTmpPictureUriKey);
-			personServices.savePersonPicture(person.getPersonId(), fileInfoURI);
+		if (personPictureFile.isPresent()) {
+			personServices.savePersonPicture(person.getPersonId(), personPictureFile.get());
 		}
 		return "redirect:/hr/person/" + person.getPersonId();
 	}
 
 	@PostMapping("/_save")
-	public String doSave(@ViewAttribute("person") final Person person, final ViewContext viewContext) {
+	public String doSave(@ViewAttribute("person") final Person person, @Named("personTmpPictureUri") final Optional<FileInfoURI> personPictureFile) {
 		personServices.updatePerson(person);
-		if (viewContext.containsKey(personTmpPictureUriKey)) {
-			final FileInfoURI fileInfoURI = (FileInfoURI) viewContext.get(personTmpPictureUriKey);
-			personServices.savePersonPicture(person.getPersonId(), fileInfoURI);
+		if (personPictureFile.isPresent()) {
+			personServices.savePersonPicture(person.getPersonId(), personPictureFile.get());
 		}
 		return "redirect:/hr/person/" + person.getPersonId();
 	}
