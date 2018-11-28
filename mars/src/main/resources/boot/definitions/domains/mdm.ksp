@@ -11,3 +11,10 @@ alter DtDefinition DT_GEOSECTOR {
  	displayField : "SECTOR_LABEL"
 
 }
+
+
+alter DtDefinition DT_EQUIPMENT_TYPE {
+	sortField : "LABEL"
+ 	displayField : "LABEL"
+
+}

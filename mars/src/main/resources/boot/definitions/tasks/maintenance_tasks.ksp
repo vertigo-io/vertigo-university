@@ -1,0 +1,17 @@
+package io.mars.maintenance
+
+
+create Task TK_GET_LAST_TICKETS_BY_BASE_ID {  
+    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+    request : "
+            select 
+            	tic.*
+			from ticket tic
+			join equipment equ on equ.equipment_id = tic.equipment_id
+			where equ.base_id = #BASE_ID#
+			order by tic.date_created desc
+			limit 50
+             "
+    attribute BASE_ID     {domain : DO_ID         		required:"true"  inOut :"in"}
+    attribute TICKETS     {domain : DO_DT_TICKET_DTC    required:"true"  inOut :"out"}
+}

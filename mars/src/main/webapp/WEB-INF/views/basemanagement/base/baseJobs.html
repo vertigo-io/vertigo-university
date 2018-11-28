@@ -20,11 +20,11 @@
 		</section>
 		
 		<section>
-				<div layout:fragment="content-header-info">
+				<div layout:fragment="content-header-left">
 					<img th:src="@{/static/img/bases/Mars base 1.jpg}" class="detailImg gt-md"/>
-					<div class="detailTitle q-pa-md">
-							<big>Alpha Base</big> 
-					</div>
+				</div>
+				<div layout:fragment="content-header-title">
+					<big>Alpha Base</big> 
 				</div>
 				<div layout:fragment="content-header-actions">
 					<q-btn round size="lg" color="primary" icon="more_horiz"  direction="down" aria-label="More actions" title="More actions" class="on-left"> 
@@ -35,6 +35,11 @@
 					  </q-list>
 					  </q-popover>
 					</q-btn>
+				</div>
+				<div layout:fragment="content-header-tabs">
+					<q-btn flat type="a" th:href="@{/basemanagement/base/information/} + ${model.base.baseId}">Base Informations</q-btn>
+					<q-btn flat type="a" class="active" th:href="@{/basemanagement/base/jobs/} + ${model.base.baseId}">Jobs</q-btn>
+					<q-btn flat type="a" th:href="@{/basemanagement/base/equipment/} + ${model.base.baseId}">Equipment</q-btn>
 				</div>
 		</section>
 		

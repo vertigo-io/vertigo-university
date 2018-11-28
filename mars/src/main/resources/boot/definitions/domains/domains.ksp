@@ -16,6 +16,11 @@ create Formatter FMT_DEFAULT{
 	className : "io.vertigo.dynamox.domain.formatter.FormatterDefault"
 }
 
+create Formatter FMT_ID{
+	className : "io.vertigo.ui.formatter.FormatterId"
+}
+
+
 create Formatter FMT_DATE {
      className :"io.vertigo.dynamox.domain.formatter.FormatterDate"
      args : "dd/MM/yy;dd/MM/yyyy"
@@ -110,7 +115,7 @@ create Domain DO_LONGS {
 
 create Domain DO_ID {
 	dataType : Long
-	formatter : FMT_DEFAULT
+	formatter : FMT_ID
 	storeType : "NUMERIC"
 }
 
@@ -209,6 +214,12 @@ create Domain DO_YES_NO {
 
 
 create Domain DO_SIZE {
+	dataType : Long
+	formatter : FMT_DEFAULT
+	storeType : "NUMERIC"
+}
+
+create Domain DO_COUNT {
 	dataType : Long
 	formatter : FMT_DEFAULT
 	storeType : "NUMERIC"

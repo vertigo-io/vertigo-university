@@ -76,6 +76,15 @@ create DtDefinition DT_BUSINESS {
 }
 
 
+create DtDefinition DT_EQUIPMENT_OVERVIEW {
+	field BUSINESS_ID  {domain: DO_ID label: "Business Id" required:"false"}
+	field COUNT  {domain: DO_COUNT label: "Count by business" required:"false"}
+	field BUSINESS_NAME  {domain: DO_LABEL label: "Business" required:"false"}
+	field OK_COUNT  {domain: DO_COUNT label: "Ok count" required:"false"}
+	field DOWN_COUNT  {domain: DO_COUNT label: "Down count" required:"false"}
+}
+
+
 /* Associations */
 
 create Association A_MISSION_BASE {

@@ -2,6 +2,8 @@ domains/domains.ksp
 domains/mdm.ksp
 tasks/tasks.ksp
 tasks/hr_tasks.ksp
+tasks/basemanagement_tasks.ksp
+tasks/maintenance_tasks.ksp
 tasks/searchTasks.ksp
 search/searchBaseQueries.ksp
 search/searchEquipmentQueries.ksp
