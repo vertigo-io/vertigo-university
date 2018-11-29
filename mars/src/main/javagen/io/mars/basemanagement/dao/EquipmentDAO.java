@@ -17,6 +17,9 @@ import io.vertigo.dynamo.collections.model.FacetedQueryResult;
 import io.vertigo.dynamo.collections.model.SelectedFacetValues;
 import io.vertigo.commons.transaction.VTransactionManager;
 import io.mars.basemanagement.search.EquipmentIndex;
+import io.vertigo.dynamo.task.metamodel.TaskDefinition;
+import io.vertigo.dynamo.task.model.Task;
+import io.vertigo.dynamo.task.model.TaskBuilder;
 import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.impl.store.util.DAO;
 import io.vertigo.dynamo.store.StoreManager;
@@ -117,4 +120,29 @@ public final class EquipmentDAO extends DAO<Equipment, java.lang.Long> implement
 	public void markAsDirty(final Equipment entity) {
 		markAsDirty(UID.of(entity));
 	}
+
+	/**
+	 * Creates a taskBuilder.
+	 * @param name  the name of the task
+	 * @return the builder 
+	 */
+	private static TaskBuilder createTaskBuilder(final String name) {
+		final TaskDefinition taskDefinition = Home.getApp().getDefinitionSpace().resolve(name, TaskDefinition.class);
+		return Task.builder(taskDefinition);
+	}
+
+	/**
+	 * Execute la tache TK_GET_LAST_PURCHASED_EQUIPMENTS_BY_BASE_ID.
+	 * @param baseId Long 
+	 * @return io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.domain.Equipment> equipments
+	*/
+	public io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.domain.Equipment> getLastPurchasedEquipmentsByBaseId(final Long baseId) {
+		final Task task = createTaskBuilder("TK_GET_LAST_PURCHASED_EQUIPMENTS_BY_BASE_ID")
+				.addValue("BASE_ID", baseId)
+				.build();
+		return getTaskManager()
+				.execute(task)
+				.getResult();
+	}
+
 }

@@ -14,18 +14,18 @@
 			<nav v-scroll-spy="{offset:150}">
 			    <q-list link style="height:100%">
 			        <q-item tag="a" href="#overview">Equipment Overview</q-item>
-			        <q-item tag="a" href="#equipments">Equipments</q-item>
-			        <q-item tag="a" href="#maintenance">Last Maintenance Operations</q-item>
+			        <q-item tag="a" href="#equipments">Recently purchased equipment units</q-item>
+			        <q-item tag="a" href="#maintenance">Lastest maintenance tickets</q-item>
 	        	</q-list>
 	        </nav>
 		</section>
 		
 		<section>
-				<div layout:fragment="content-header-info">
+				<div layout:fragment="content-header-left">
 					<img th:src="@{/static/img/bases/Mars base 1.jpg}" class="detailImg gt-md"/>
-					<div class="detailTitle q-pa-md">
-							<big>Alpha Base</big> 
-					</div>
+				</div>
+				<div layout:fragment="content-header-title">
+					<big>Alpha Base</big> 
 				</div>
 				<div layout:fragment="content-header-actions">
 					<q-btn round size="lg" color="primary" icon="more_horiz"  direction="down" aria-label="More actions" title="More actions" class="on-left"> 
@@ -37,15 +37,49 @@
 					  </q-popover>
 					</q-btn>
 				</div>
+				<div layout:fragment="content-header-tabs">
+					<q-btn flat type="a" th:href="@{/basemanagement/base/information/} + ${model.base.baseId}">Base Informations</q-btn>
+					<q-btn flat type="a" th:href="@{/basemanagement/base/jobs/} + ${model.base.baseId}">Jobs</q-btn>
+					<q-btn flat type="a" class="active" th:href="@{/basemanagement/base/equipment/} + ${model.base.baseId}">Equipment</q-btn>
+				</div>
 		</section>
 		
 		<section layout:fragment="content" >
 			<vu:form>
-				<vu:block id="overview" title="Equipment Overview"/>
+				<vu:block id="overview" title="Equipment Overview">
+					<vu:include-data object="equipmentOverviews" field="'*'" />
+					<div class="row">
+						<div v-for="equipmentOverview in vueData.equipmentOverviews" :key="equipmentOverview.businessId" class="col-2 text-center" >
+							<q-knob
+								  :value="equipmentOverview.okCount"
+								  :min="0"
+								  :max="equipmentOverview.count"
+								  color="positive"
+								  :readonly="true" ><q-icon name="mdi-radio-tower" size="80px" color="primary"></q-icon></q-knob>
+							<div class="text-primary small-caps">{{equipmentOverview.businessName}}</div>
+							<div class="text-italic">{{equipmentOverview.count}} Unit(s)</div>
+						</div>
+					</div>
+					
+				</vu:block>				
+				<vu:block id="equipments" title="Recently purchased equipment units">
+					<vu:table list="lastEquipments" componentId="lastEquipments" rowsPerPage="5">
+						<vu:column field="code" />
+						<vu:column field="name" />
+						<vu:column field="purchaseDate" />
+						<vu:column name="equipmentType" label="Equipment Type" >
+							<vu:field-read field="equipmentTypeId" list="equipmentTypes" listKey="equipmentTypeId" listDisplay="label" />
+						</vu:column>
+					</vu:table>
+				</vu:block>
 				
-				<vu:block id="equipments" title="Equipments"/>
-				
-				<vu:block id="maintenance" title="Last Maintenance Operations"/>
+				<vu:block id="maintenance" title="Lastest maintenance tickets">
+					<vu:table list="lastTickets" componentId="lastTickets" rowsPerPage="5">
+						<vu:column field="code" />
+						<vu:column field="title" />
+						<vu:column field="dateCreated" />
+					</vu:table>
+				</vu:block>
 			</vu:form>
 		</section>
 	</body>

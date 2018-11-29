@@ -2,6 +2,10 @@ package io.mars.maintenance.dao;
 
 import javax.inject.Inject;
 
+import io.vertigo.app.Home;
+import io.vertigo.dynamo.task.metamodel.TaskDefinition;
+import io.vertigo.dynamo.task.model.Task;
+import io.vertigo.dynamo.task.model.TaskBuilder;
 import io.vertigo.dynamo.impl.store.util.DAO;
 import io.vertigo.dynamo.store.StoreManager;
 import io.vertigo.dynamo.store.StoreServices;
@@ -24,6 +28,31 @@ public final class TicketDAO extends DAO<Ticket, java.lang.Long> implements Stor
 	@Inject
 	public TicketDAO(final StoreManager storeManager, final TaskManager taskManager) {
 		super(Ticket.class, storeManager, taskManager);
+	}
+
+
+	/**
+	 * Creates a taskBuilder.
+	 * @param name  the name of the task
+	 * @return the builder 
+	 */
+	private static TaskBuilder createTaskBuilder(final String name) {
+		final TaskDefinition taskDefinition = Home.getApp().getDefinitionSpace().resolve(name, TaskDefinition.class);
+		return Task.builder(taskDefinition);
+	}
+
+	/**
+	 * Execute la tache TK_GET_LAST_TICKETS_BY_BASE_ID.
+	 * @param baseId Long 
+	 * @return io.vertigo.dynamo.domain.model.DtList<io.mars.maintenance.domain.Ticket> tickets
+	*/
+	public io.vertigo.dynamo.domain.model.DtList<io.mars.maintenance.domain.Ticket> getLastTicketsByBaseId(final Long baseId) {
+		final Task task = createTaskBuilder("TK_GET_LAST_TICKETS_BY_BASE_ID")
+				.addValue("BASE_ID", baseId)
+				.build();
+		return getTaskManager()
+				.execute(task)
+				.getResult();
 	}
 
 }

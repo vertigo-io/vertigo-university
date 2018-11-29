@@ -9,10 +9,10 @@ import io.vertigo.core.component.Component;
 import io.vertigo.dynamo.criteria.Criterions;
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.domain.model.DtListState;
+import io.vertigo.lang.Assertion;
 
 @Transactional
-public class TicketServices implements Component{
-
+public class TicketServices implements Component {
 
 	@Inject
 	private TicketDAO ticketDAO;
@@ -29,6 +29,10 @@ public class TicketServices implements Component{
 		return ticketDAO.findAll(Criterions.alwaysTrue(), dtListState.getMaxRows().orElse(50));
 	}
 
+	public DtList<Ticket> getLastestTicketsByBase(final Long baseId) {
+		Assertion.checkNotNull(baseId);
+		//---
+		return ticketDAO.getLastTicketsByBaseId(baseId);
+	}
+
 }
-
-

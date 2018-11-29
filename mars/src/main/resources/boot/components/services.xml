@@ -1,5 +1,6 @@
 <?xml version =	'1.0' encoding = 'ISO-8859-1'?>
 <config>
+	<feature class="io.mars.commons.CommonsFeatures" />
 	<feature class="io.mars.catalog.CatalogFeatures" />
 	<feature class="io.mars.hr.HrFeatures" />
 	<feature class="io.mars.basemanagement.BasemanagementFeatures" />

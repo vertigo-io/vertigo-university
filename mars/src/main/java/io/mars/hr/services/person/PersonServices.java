@@ -2,8 +2,8 @@ package io.mars.hr.services.person;
 
 import javax.inject.Inject;
 
+import io.mars.commons.services.CommonsServices;
 import io.mars.fileinfo.FileInfoStd;
-import io.mars.fileinfo.FileInfoTmp;
 import io.mars.hr.dao.PersonDAO;
 import io.mars.hr.domain.Person;
 import io.vertigo.commons.transaction.Transactional;
@@ -30,6 +30,9 @@ public class PersonServices implements Component, Activeable {
 
 	@Inject
 	private FileManager fileManager;
+
+	@Inject
+	private CommonsServices commonsServices;
 
 	private VFile defaultPhoto;
 
@@ -78,24 +81,13 @@ public class PersonServices implements Component, Activeable {
 		final Person person = getPerson(personId);
 		//apply security check
 		final Long oldPicture = person.getPicturefileId();
-		final VFile fileTmp = getPictureTmp(personPictureTmp);
+		final VFile fileTmp = commonsServices.getFileTmp(personPictureTmp);
 		final FileInfo fileInfo = storeManager.getFileStore().create(new FileInfoStd(fileTmp));
 		person.setPicturefileId((Long) fileInfo.getURI().getKey());
 		updatePerson(person);
 		if (oldPicture != null) {
 			storeManager.getFileStore().delete(toFileInfoStdURI(oldPicture));
 		}
-	}
-
-	public FileInfoURI savePictureTmp(final VFile personPicture) {
-		//apply security check
-		final FileInfo fileInfo = storeManager.getFileStore().create(new FileInfoTmp(personPicture));
-		return fileInfo.getURI();
-	}
-
-	private VFile getPictureTmp(final FileInfoURI personPictureTmp) {
-		//apply security check
-		return storeManager.getFileStore().read(personPictureTmp).getVFile();
 	}
 
 	private FileInfoURI toFileInfoStdURI(final Long fileId) {

@@ -5,6 +5,7 @@ import org.springframework.context.annotation.ComponentScan;
 import io.vertigo.ui.impl.springmvc.config.VSpringWebConfig;
 
 @ComponentScan({
+		"io.mars.commons.controllers",
 		"io.mars.basemanagement.controllers.base",
 		"io.mars.basemanagement.controllers.equipment",
 		"io.mars.hr.controllers.person" })

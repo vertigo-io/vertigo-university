@@ -11,13 +11,18 @@
   	<q-page-container class="row justify-center" layout:fragment="page-container">
 	 	<section class="col-12">
 		 	<div class="row justify-between items-center bg-secondary text-white">
-				<div class="row justify-between" layout:fragment="content-header-info"></div>
-					<!-- Brand and toggle get grouped for better mobile display -->				
-					<div class="row items-center">
-					<vu:form>
-						<div class="primary" layout:fragment="content-header-actions"></div>
-					</vu:form>
-					<img th:src="@{/static/img/TypesLogo/PersonType.png }" class="detailType"/>
+				<div layout:fragment="content-header-left"></div>
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="col column header-content">				
+					<div class="row col justify-between">
+						<div class="detailTitle q-pa-md self-start" layout:fragment="content-header-title"></div>
+						<div class="row self-center">
+							<vu:form>
+								<div class="primary" layout:fragment="content-header-actions"></div>
+							</vu:form>
+						</div>
+					</div>
+					<div class="row bg-tertiary items-center header-tabs" layout:fragment="content-header-tabs"></div>
 				</div>
 			</div>		
 		</section>

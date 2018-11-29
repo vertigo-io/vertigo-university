@@ -82,6 +82,23 @@ a.q-item {
 	background:var(--q-color-secondary)!important;
 }
 
+.small-caps {
+	font-variant: small-caps;
+}
 
+.header-content {
+	height: 150px;
+}
 
+.header-tabs a {
+	color: grey;
+}
+
+.header-tabs a.active {
+	color: black;
+}
+
+.header-tabs a.active .q-btn-inner {
+	border-bottom: 3px solid black;
+}
 

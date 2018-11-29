@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import io.mars.basemanagement.BasemanagementPAO;
 import io.mars.basemanagement.dao.EquipmentDAO;
 import io.mars.basemanagement.domain.Equipment;
+import io.mars.basemanagement.domain.EquipmentOverview;
 import io.mars.basemanagement.search.EquipmentIndex;
 import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.core.component.Component;
@@ -16,6 +17,7 @@ import io.vertigo.dynamo.criteria.Criterions;
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.domain.model.DtListState;
 import io.vertigo.dynamo.search.model.SearchQuery;
+import io.vertigo.lang.Assertion;
 
 @Transactional
 public class EquipmentServices implements Component {
@@ -45,5 +47,17 @@ public class EquipmentServices implements Component {
 	public FacetedQueryResult<EquipmentIndex, SearchQuery> searchEquipments(final String criteria, final SelectedFacetValues selectedFacetValues, final DtListState dtListState) {
 		final SearchQuery searchQuery = equipmentDAO.createSearchQueryBuilderEquipment(criteria, selectedFacetValues).build();
 		return equipmentDAO.loadList(searchQuery, dtListState);
+	}
+
+	public DtList<EquipmentOverview> getEquipmentOverviewByBaseId(final Long baseId) {
+		Assertion.checkNotNull(baseId);
+		//---
+		return basemanagementPAO.getEquipmentsOverview(baseId);
+	}
+
+	public DtList<Equipment> getLastPurchasedEquipmentsByBase(final Long baseId) {
+		Assertion.checkNotNull(baseId);
+		//---
+		return equipmentDAO.getLastPurchasedEquipmentsByBaseId(baseId);
 	}
 }

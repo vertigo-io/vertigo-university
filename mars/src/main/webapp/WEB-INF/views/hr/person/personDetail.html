@@ -20,17 +20,13 @@
 		</section>
 		
 		<section>
-				<div layout:fragment="content-header-info">
+				<div layout:fragment="content-header-left">
 					<vu:include-data-protected object="person" field="picturefileId"/>
-					
-					<div>				
-						<img th::src="|'@{/hr/person/picture/}'+vueData.person.picturefileId|" class="detailImg gt-md"/>
-						
-					</div>
-					<div class="detailTitle q-pa-md">
-							<big>[[${model.vContext['person']['firstName']}]] [[${model.vContext['person']['lastName']}]]</big> 
-							<br/><small>Base Manager</small>
-					</div>
+					<img th::src="|'@{/hr/person/picture/}'+vueData.person.picturefileId|" class="detailImg gt-md"/>
+				</div>
+				<div layout:fragment="content-header-title">
+					<big>[[${model.vContext['person']['firstName']}]] [[${model.vContext['person']['lastName']}]]</big> 
+					<br/><small>Base Manager</small>
 				</div>
 				<div layout:fragment="content-header-actions">
 					<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>
@@ -53,7 +49,10 @@
 					<vu:text-field object="person" field="firstName"/>
 					<vu:text-field object="person" field="lastName" />
 					<vu:text-field object="person" field="email" />
-					<vu:fileupload th:url="'@{/hr/person/picture/}'" object="person" field="picturefileId" th:if="${viewMode=='edit'}" />
+					<vu:label-edit object="person" field="picturefileId" th:if="${viewMode=='edit'}"  >
+						<vu:fileupload th:url="'@{/commons/upload}'" key="personTmpPictureUri" />
+					</vu:label-edit>
+					
 								
 				</vu:grid>
 				<div class="row justify-end">
