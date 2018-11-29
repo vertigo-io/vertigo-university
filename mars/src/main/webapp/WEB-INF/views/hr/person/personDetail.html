@@ -50,7 +50,7 @@
 					<vu:text-field object="person" field="lastName" />
 					<vu:text-field object="person" field="email" />
 					<vu:label-edit object="person" field="picturefileId" th:if="${viewMode=='edit'}"  >
-						<vu:fileupload-key th:url="'@{/commons/upload}'" key="personTmpPictureUri" />
+						<vu:fileupload th:url="'@{/commons/upload}'" key="personTmpPictureUri" />
 					</vu:label-edit>
 					
 								
