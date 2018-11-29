@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import io.mars.basemanagement.domain.BaseType;
 import io.mars.catalog.domain.EquipmentType;
+import io.mars.maintenance.domain.WorkOrderStatus;
 import io.vertigo.core.component.ComponentInitializer;
 import io.vertigo.dynamo.domain.metamodel.DtDefinition;
 import io.vertigo.dynamo.domain.metamodel.DtStereotype;
@@ -39,6 +40,7 @@ public class MasterDataInitializer implements ComponentInitializer {
 	private static void registerAllMasterData(final StoreManager storeManager) {
 		registerMasterData(storeManager, BaseType.class);
 		registerMasterData(storeManager, EquipmentType.class);
+		registerMasterData(storeManager, WorkOrderStatus.class);
 	}
 
 	private static <O extends DtObject> void registerMasterData(final StoreManager storeManager, final Class<O> dtObjectClass) {

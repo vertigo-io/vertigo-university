@@ -25,7 +25,7 @@
 					<img th::src="|'@{/hr/person/picture/}'+vueData.person.picturefileId|" class="detailImg gt-md"/>
 				</div>
 				<div layout:fragment="content-header-title">
-					<big>[[${model.vContext['person']['firstName']}]] [[${model.vContext['person']['lastName']}]]</big> 
+					<big th:text="|${model.person.firstName} ${model.person.lastName}|"></big> 
 					<br/><small>Base Manager</small>
 				</div>
 				<div layout:fragment="content-header-actions">

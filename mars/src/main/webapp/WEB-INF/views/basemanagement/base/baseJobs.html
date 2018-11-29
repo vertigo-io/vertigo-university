@@ -24,7 +24,7 @@
 					<img th:src="@{/static/img/bases/Mars base 1.jpg}" class="detailImg gt-md"/>
 				</div>
 				<div layout:fragment="content-header-title">
-					<big>Alpha Base</big> 
+					<big th:text="${model.base.name}"></big> 
 				</div>
 				<div layout:fragment="content-header-actions">
 					<q-btn round size="lg" color="primary" icon="more_horiz"  direction="down" aria-label="More actions" title="More actions" class="on-left"> 

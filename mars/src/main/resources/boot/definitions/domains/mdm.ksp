@@ -3,18 +3,19 @@ package io.mars
 alter DtDefinition DT_BASE_TYPE {
 	sortField : "LABEL"
  	displayField : "LABEL"
-
 }
 
 alter DtDefinition DT_GEOSECTOR {
 	sortField : "SECTOR_LABEL"
  	displayField : "SECTOR_LABEL"
-
 }
-
 
 alter DtDefinition DT_EQUIPMENT_TYPE {
 	sortField : "LABEL"
  	displayField : "LABEL"
+}
 
+alter DtDefinition DT_WORK_ORDER_STATUS {
+	sortField : "LABEL"
+ 	displayField : "LABEL"
 }

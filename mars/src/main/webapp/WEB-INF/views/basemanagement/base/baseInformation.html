@@ -26,7 +26,7 @@
 					<img th:src="@{/static/img/bases/Mars base 1.jpg}" class="detailImg gt-md"/>
 				</div>
 				<div layout:fragment="content-header-title">
-					<big>Alpha Base</big> 
+					<big th:text="${model.base.name}"></big> 
 				</div>
 				<div layout:fragment="content-header-actions">
 					<q-btn round size="lg" color="primary" icon="more_horiz"  direction="down" aria-label="More actions" title="More actions" class="on-left"> 
@@ -49,11 +49,11 @@
 			<vu:form>
 				<vu:button-submit th:if="${model.modeEdit}"  label="Save" action="@{_save}" color="primary" />
 				<vu:block id="health" title="Health Condition">
-				<vu:grid cols="2">
-					<vu:text-field object="base" field="healthLevel"/>
-				</vu:grid>
-				<div class="row justify-end">
-				</div>				
+					<vu:grid cols="2">
+						<vu:text-field object="base" field="healthLevel"/>
+					</vu:grid>
+					<div class="row justify-end">
+					</div>				
 				</vu:block>
 				
 				<vu:block id="views" title="Views">

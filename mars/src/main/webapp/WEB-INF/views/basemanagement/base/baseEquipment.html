@@ -25,7 +25,7 @@
 					<img th:src="@{/static/img/bases/Mars base 1.jpg}" class="detailImg gt-md"/>
 				</div>
 				<div layout:fragment="content-header-title">
-					<big>Alpha Base</big> 
+					<big th:text="${model.base.name}"></big> 
 				</div>
 				<div layout:fragment="content-header-actions">
 					<q-btn round size="lg" color="primary" icon="more_horiz"  direction="down" aria-label="More actions" title="More actions" class="on-left"> 
@@ -69,6 +69,10 @@
 						<vu:column field="purchaseDate" />
 						<vu:column name="equipmentType" label="Equipment Type" >
 							<vu:field-read field="equipmentTypeId" list="equipmentTypes" listKey="equipmentTypeId" listDisplay="label" />
+						</vu:column>
+						<vu:column name="actions" label="Actions" >
+							<vu:include-data object="lastEquipments" field="equipmentId" />
+							<q-btn round color="primary" icon="arrow_forward" type="a" th::href="|'@{/basemanagement/equipment/information/}'+props.row.equipmentId|"></q-btn>
 						</vu:column>
 					</vu:table>
 				</vu:block>

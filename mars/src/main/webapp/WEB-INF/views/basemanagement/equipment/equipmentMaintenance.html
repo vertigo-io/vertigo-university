@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="http://www.morphbit.com/thymeleaf/component"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{templates/mmcDetailLayout}"
+>
+	<head>
+		<title>Base Jobs</title>
+	</head>
+	
+	<body>
+	
+		<section layout:fragment="content-nav">
+			<nav v-scroll-spy="{offset:150}">
+			    <q-list link style="height:100%">
+			        <q-item tag="a" href="#tickets">Tickets</q-item>
+	        	</q-list>
+	        </nav>
+		</section>
+		
+		<section>
+				<div layout:fragment="content-header-left">
+					<img th:src="@{/static/img/bases/Mars base 1.jpg}" class="detailImg gt-md"/>
+				</div>
+				<div layout:fragment="content-header-title">
+					<big th:text="${model.equipment.code}"></big>
+					<br/><small th:text="${model.equipment.name}"></small>
+				</div>
+				<div layout:fragment="content-header-actions">
+				</div>
+				<div layout:fragment="content-header-tabs">
+					<q-btn flat type="a" th:href="@{/basemanagement/equipment/information/} + ${model.equipment.equipmentId}">Informations</q-btn>
+					<q-btn flat type="a" class="active" th:href="@{/basemanagement/equipment/maintenance/} + ${model.equipment.equipmentId}">Maintenance</q-btn>
+				</div>
+		</section>
+		
+		<section layout:fragment="content" >
+			<vu:block id="tickets" title="Tickets">
+				<vu:table list="tickets" componentId="tickets" rowsPerPage="10">
+					<vu:column field="code" />
+					<vu:column field="title" />
+					<vu:column field="dateCreated" />
+					<vu:column name="workOrderStatusId" label="Status" >
+						<vu:field-read field="workOrderStatusId" list="workOrderStatus" listKey="workOrderStatusId" listDisplay="label" />
+					</vu:column>
+				</vu:table>
+			</vu:block>
+		</section>
+	</body>
+</html>

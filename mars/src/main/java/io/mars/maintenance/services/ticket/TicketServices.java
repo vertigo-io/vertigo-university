@@ -2,6 +2,7 @@ package io.mars.maintenance.services.ticket;
 
 import javax.inject.Inject;
 
+import io.mars.domain.DtDefinitions.TicketFields;
 import io.mars.maintenance.dao.TicketDAO;
 import io.mars.maintenance.domain.Ticket;
 import io.vertigo.commons.transaction.Transactional;
@@ -33,6 +34,12 @@ public class TicketServices implements Component {
 		Assertion.checkNotNull(baseId);
 		//---
 		return ticketDAO.getLastTicketsByBaseId(baseId);
+	}
+
+	public DtList<Ticket> getTicketsByEquipment(final Long equipmentId) {
+		Assertion.checkNotNull(equipmentId);
+		//---
+		return ticketDAO.findAll(Criterions.isEqualTo(TicketFields.EQUIPMENT_ID, equipmentId), Integer.MAX_VALUE);
 	}
 
 }

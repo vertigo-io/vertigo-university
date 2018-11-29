@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="http://www.morphbit.com/thymeleaf/component"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{templates/mmcDetailLayout}"
+>
+	<head>
+		<title>Equipment Informations</title>
+	</head>
+	
+	<body>
+	
+		<section layout:fragment="content-nav">
+			<nav v-scroll-spy="{offset:150}">
+			    <q-list link style="height:100%">
+			        <q-item tag="a" href="#health">Health Condition</q-item>
+			        <q-item tag="a" href="#general">General Information</q-item>
+			        <q-item tag="a" href="#financial">Financial value</q-item>				      
+	        	</q-list>
+	        </nav>
+		</section>
+		
+		<section>
+				<div layout:fragment="content-header-left">
+					<img th:src="@{/static/img/bases/Mars base 1.jpg}" class="detailImg gt-md"/>
+				</div>
+				<div layout:fragment="content-header-title">
+					<big th:text="${model.equipment.code}"></big>
+					<br/><small th:text="${model.equipment.name}"></small>
+				</div>
+				<div layout:fragment="content-header-actions">
+					<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>
+				</div>
+				<div layout:fragment="content-header-tabs">
+					<q-btn flat type="a" class="active" th:href="@{/basemanagement/equipment/information/} + ${model.equipment.equipmentId}">Informations</q-btn>
+					<q-btn flat type="a" th:href="@{/basemanagement/equipment/maintenance/} + ${model.equipment.equipmentId}">Maintenance</q-btn>
+				</div>
+		</section>
+		
+		<section layout:fragment="content" >
+			<vu:form>
+				<vu:button-submit th:if="${model.modeEdit}"  label="Save" action="@{_save}" color="primary" />
+				<vu:block id="health" title="Health Condition">
+					<vu:grid cols="2">
+						<vu:text-field object="equipment" field="healthLevel"/>
+					</vu:grid>
+				</vu:block>
+				
+				<vu:block id="general" title="General Information">
+					<vu:grid cols="2">
+						<vu:text-field object="equipment" field="name"/>
+						<vu:text-field object="equipment" field="code"/>
+						<vu:grid-cell>
+							<vu:text-area object="equipment" field="description"/>
+						</vu:grid-cell>
+					</vu:grid>
+				</vu:block>
+				
+				<vu:block id="financial" title="Financial value">
+					<vu:grid cols="2">
+						<vu:text-field object="equipment" field="equipmentValue" input_suffix="'&#8364;'"/>
+						<vu:text-field object="equipment" field="rentingFee" input_suffix="'&#8364;'"/>
+					</vu:grid>
+				</vu:block>
+			</vu:form>
+		</section>
+	</body>
+</html>
