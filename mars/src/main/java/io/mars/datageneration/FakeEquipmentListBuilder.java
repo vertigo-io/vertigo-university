@@ -3,7 +3,6 @@ package io.mars.datageneration;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -73,13 +72,13 @@ public class FakeEquipmentListBuilder {
 		return this;
 	}
 
-	public List<Equipment> build() {
+	public DtList<Equipment> build() {
 		Assertion.checkNotNull(myEquipmentTypeList);
 		Assertion.checkNotNull(myBusinessList);
 		Assertion.checkNotNull(myBaseIdList);
 		Assertion.checkNotNull(myGeosectorIdList);
 		Assertion.checkNotNull(rnd);
-		final List<Equipment> equipmentList = new ArrayList<>();
+		final DtList<Equipment> equipmentList = new DtList<>(Equipment.class);
 
 		for (int currentCounter = 0; currentCounter < myMaxValues; currentCounter++) {
 

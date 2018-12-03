@@ -64,6 +64,7 @@ import io.vertigo.database.sql.SqlDataBaseManager;
 import io.vertigo.database.sql.connection.SqlConnection;
 import io.vertigo.database.sql.statement.SqlStatement;
 import io.vertigo.dynamo.criteria.Criterions;
+import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.lang.Assertion;
 import io.vertigo.lang.WrappedException;
 
@@ -182,7 +183,7 @@ public class DataBaseInitializer implements ComponentInitializer {
 
 	private void createInitialEquipments() {
 		try (VTransactionWritable tx = transactionManager.createCurrentTransaction()) {
-			final List<Equipment> equipmentList = new FakeEquipmentListBuilder()
+			final DtList<Equipment> equipmentList = new FakeEquipmentListBuilder()
 					.withRandomSeed(RANDOM_SEED)
 					.withBaseIdList(basemanagementPAO.selectBaseId())
 					.withGeosectorIdList(basemanagementPAO.selectGeosectorId())
@@ -191,9 +192,13 @@ public class DataBaseInitializer implements ComponentInitializer {
 					.withMaxValues(100)
 					.build();
 
+			// TODO à supprimer
+			/*
 			for (final Equipment equipment : equipmentList) {
 				equipmentDAO.create(equipment);
 			}
+			*/
+			equipmentDAO.insertEquipmentsBatch(equipmentList);
 
 			tx.commit();
 

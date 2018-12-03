@@ -32,3 +32,37 @@ create Task TK_GET_LAST_PURCHASED_EQUIPMENTS_BY_BASE_ID {
     attribute BASE_ID     	 {domain : DO_ID         		required:"true"  inOut :"in"}
     attribute EQUIPMENTS     {domain : DO_DT_EQUIPMENT_DTC    required:"true"  inOut :"out"}
 }
+
+create Task TK_INSERT_EQUIPMENTS_BATCH {
+    className : "io.vertigo.dynamox.task.TaskEngineProcBatch"
+        request : "
+        	INSERT INTO EQUIPMENT (EQUIPMENT_ID, 
+        							NAME, 
+        							CODE, 
+        							HEALTH_LEVEL, 
+        							PURCHASE_DATE, 
+        							DESCRIPTION, 
+        							TAGS, 
+        							GEO_LOCATION, 
+        							RENTING_FEE, 
+        							EQUIPMENT_VALUE, 
+        							BASE_ID, 
+        							GEOSECTOR_ID, 
+        							BUSINESS_ID, 
+        							EQUIPMENT_TYPE_ID) values (nextval('SEQ_EQUIPMENT'),
+        														#EQUIPMENTS_LIST.NAME#,
+        														#EQUIPMENTS_LIST.CODE#,
+        														#EQUIPMENTS_LIST.HEALTH_LEVEL#,
+        														#EQUIPMENTS_LIST.PURCHASE_DATE#,
+        														#EQUIPMENTS_LIST.DESCRIPTION#,
+        														#EQUIPMENTS_LIST.TAGS#,
+        														#EQUIPMENTS_LIST.GEO_LOCATION#,
+        														#EQUIPMENTS_LIST.RENTING_FEE#,
+        														#EQUIPMENTS_LIST.EQUIPMENT_VALUE#,
+        														#EQUIPMENTS_LIST.BASE_ID#,
+        														#EQUIPMENTS_LIST.GEOSECTOR_ID#,
+        														#EQUIPMENTS_LIST.BUSINESS_ID#,
+        														#EQUIPMENTS_LIST.EQUIPMENT_TYPE_ID#)
+			"
+	attribute EQUIPMENTS_LIST	 	{domain : DO_DT_EQUIPMENT_DTC		required:"true" 	inOut :"in"}
+}

@@ -145,4 +145,15 @@ public final class EquipmentDAO extends DAO<Equipment, java.lang.Long> implement
 				.getResult();
 	}
 
+	/**
+	 * Execute la tache TK_INSERT_EQUIPMENTS_BATCH.
+	 * @param equipmentsList io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.domain.Equipment> 
+	*/
+	public void insertEquipmentsBatch(final io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.domain.Equipment> equipmentsList) {
+		final Task task = createTaskBuilder("TK_INSERT_EQUIPMENTS_BATCH")
+				.addValue("EQUIPMENTS_LIST", equipmentsList)
+				.build();
+		getTaskManager().execute(task);
+	}
+
 }
