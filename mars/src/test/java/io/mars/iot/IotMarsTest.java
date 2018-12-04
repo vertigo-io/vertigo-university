@@ -36,6 +36,14 @@ import io.vertigo.database.timeseries.Measure;
 import io.vertigo.database.timeseries.TimeFilter;
 import io.vertigo.database.timeseries.TimeSeriesDataBaseManager;
 
+//import lib to use mqtt paho
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.eclipse.paho.client.mqttv3.MqttCallback;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 /**
  * Test of the IoT services for mars.
  *
@@ -72,8 +80,73 @@ public final class IotMarsTest {
 	private TimeSeriesDataBaseManager timeSeriesDataBaseManager;
 
 	@Test
+	public void testMqttClient() {
+        String topic        = "MQTT";
+        String content      = "Message from MqttPublishSample";
+        int qos             = 0;
+        String broker       = "tcp://mars.dev.klee.lan.net:1883";
+        String clientId     = "JavaSample";
+        MemoryPersistence persistence = new MemoryPersistence();
+		while (!Thread.interrupted()) {
+			try {
+                MqttClient sampleClient = new MqttClient(broker, clientId, persistence);
+                MqttConnectOptions connOpts = new MqttConnectOptions();
+                connOpts.setCleanSession(true);
+                System.out.println("Connecting to broker: "+broker);
+                sampleClient.connect(connOpts);
+                System.out.println("Connected");
+                System.out.println("Publishing message: "+content);
+                MqttMessage message = new MqttMessage(content.getBytes());
+                message.setQos(qos);
+                sampleClient.publish(topic, message);
+                System.out.println("Message published");
+                sampleClient.disconnect();
+                System.out.println("Disconnected");
+                } catch (MqttException me) {
+                    System.out.println("reason "+me.getReasonCode());
+                    System.out.println("msg "+me.getMessage());
+                    System.out.println("loc "+me.getLocalizedMessage());
+                    System.out.println("cause "+me.getCause());
+                    System.out.println("excep "+me);
+                    me.printStackTrace();
+                }
+			}
+	}
+	
+	@Test
 	public void testInsertMeasure() {
 		// subscribe to mqtt and store infos
+        String topic        = "e/farm43/temperature";
+        String broker       = "tcp://mars.dev.klee.lan.net:1883";
+        String clientId     = "Test";
+        MemoryPersistence persistence = new MemoryPersistence();
+		while (!Thread.interrupted()) {
+			try {				
+				  MqttClient sampleClient = new MqttClient(broker, clientId, persistence);
+				    MqttConnectOptions connOpts = new MqttConnectOptions();
+				    connOpts.setCleanSession(true);
+	                System.out.println("Connecting to broker: "+broker);
+				    sampleClient.setCallback(new MqttCallback() {
+				      public void connectionLost(Throwable cause) {}
+
+				      public void messageArrived(String topic, MqttMessage message) throws Exception {
+				        System.out.println("Message: " + message.toString());
+				      }
+
+				      public void deliveryComplete(IMqttDeliveryToken token) {}
+				    });
+
+				    sampleClient.connect(connOpts);
+	                System.out.println("Connected");
+				    sampleClient.subscribe(topic);
+				    
+				    Thread.sleep(10*1000);
+	                sampleClient.disconnect();
+	                System.out.println("Disconnected");
+				  } catch(Exception e) {
+				    e.printStackTrace();
+				  }
+		}
 		final Measure measure = Measure.builder("test")
 				.time(Instant.now())
 				.addField("temp", 12)
