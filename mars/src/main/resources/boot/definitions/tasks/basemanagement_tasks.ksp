@@ -66,3 +66,18 @@ create Task TK_INSERT_EQUIPMENTS_BATCH {
 			"
 	attribute EQUIPMENTS_LIST	 	{domain : DO_DT_EQUIPMENT_DTC		required:"true" 	inOut :"in"}
 }
+
+create Task TK_LOAD_EQUIPMENTS_BY_CHUNK {
+    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+        request : "
+        	select * from EQUIPMENT
+			where EQUIPMENT_ID > #OFFSET#
+			and PURCHASE_DATE <= #DATE_EXIST#
+        	order by EQUIPMENT_ID asc
+			limit #LIMIT#
+			"
+	attribute LIMIT	 	{domain : DO_ID		required:"true" 	inOut :"in"}
+	attribute OFFSET	 	{domain : DO_ID		required:"true" 	inOut :"in"}
+	attribute DATE_EXIST {domain : DO_INSTANT required:"true" inOut:"in"}
+	attribute EQUIPMENT_LIST	 	{domain : DO_DT_EQUIPMENT_DTC		required:"true" 	inOut :"out"}
+}

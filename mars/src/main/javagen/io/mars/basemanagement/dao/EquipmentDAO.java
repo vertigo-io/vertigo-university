@@ -156,4 +156,22 @@ public final class EquipmentDAO extends DAO<Equipment, java.lang.Long> implement
 		getTaskManager().execute(task);
 	}
 
+	/**
+	 * Execute la tache TK_LOAD_EQUIPMENTS_BY_CHUNK.
+	 * @param limit Long 
+	 * @param offset Long 
+	 * @param dateExist java.time.Instant 
+	 * @return io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.domain.Equipment> equipmentList
+	*/
+	public io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.domain.Equipment> loadEquipmentsByChunk(final Long limit, final Long offset, final java.time.Instant dateExist) {
+		final Task task = createTaskBuilder("TK_LOAD_EQUIPMENTS_BY_CHUNK")
+				.addValue("LIMIT", limit)
+				.addValue("OFFSET", offset)
+				.addValue("DATE_EXIST", dateExist)
+				.build();
+		return getTaskManager()
+				.execute(task)
+				.getResult();
+	}
+
 }
