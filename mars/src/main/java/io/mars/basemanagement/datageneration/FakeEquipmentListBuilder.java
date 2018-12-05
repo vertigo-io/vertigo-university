@@ -8,7 +8,7 @@ import java.util.List;
 import io.mars.basemanagement.domain.Business;
 import io.mars.basemanagement.domain.Equipment;
 import io.mars.catalog.domain.EquipmentType;
-import io.mars.datageneration.GenerationConfig;
+import io.mars.datageneration.DataGenerator;
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.lang.Assertion;
 import io.vertigo.lang.Builder;
@@ -91,7 +91,7 @@ public class FakeEquipmentListBuilder implements Builder {
 	}
 
 	private static int getHealthLevel() {
-		return GenerationConfig.rnd.nextInt(101);
+		return DataGenerator.rnd.nextInt(101);
 	}
 
 	private static String getGeoLocation() {
@@ -105,7 +105,7 @@ public class FakeEquipmentListBuilder implements Builder {
 
 	private static LocalDate getPurchaseDate() {
 		final LocalDate today = LocalDate.now();
-		return today.minus(31 + GenerationConfig.rnd.nextInt(3650), ChronoUnit.DAYS);
+		return today.minus(31 + DataGenerator.rnd.nextInt(3650), ChronoUnit.DAYS);
 	}
 
 	private static BigDecimal getRentingFee() {
@@ -144,7 +144,7 @@ public class FakeEquipmentListBuilder implements Builder {
 	}
 
 	private static Double myNextDouble(final int min, final int max) {
-		return min + GenerationConfig.rnd.nextDouble() * (max - min);
+		return min + DataGenerator.rnd.nextDouble() * (max - min);
 	}
 
 	@Override
@@ -157,10 +157,10 @@ public class FakeEquipmentListBuilder implements Builder {
 
 		for (int currentCounter = 0; currentCounter < myMaxValues; currentCounter++) {
 
-			final EquipmentType currentEquipmentType = myEquipmentTypes.get(GenerationConfig.rnd.nextInt(myEquipmentTypes.size()));
-			final Business currentBusiness = myBusinessList.get(GenerationConfig.rnd.nextInt(myBusinessList.size()));
-			final Long currentBaseId = myBaseIds.get(GenerationConfig.rnd.nextInt(myBaseIds.size()));
-			final Long currentGeosectorId = myGeosectorIds.get(GenerationConfig.rnd.nextInt(myGeosectorIds.size()));
+			final EquipmentType currentEquipmentType = myEquipmentTypes.get(DataGenerator.rnd.nextInt(myEquipmentTypes.size()));
+			final Business currentBusiness = myBusinessList.get(DataGenerator.rnd.nextInt(myBusinessList.size()));
+			final Long currentBaseId = myBaseIds.get(DataGenerator.rnd.nextInt(myBaseIds.size()));
+			final Long currentGeosectorId = myGeosectorIds.get(DataGenerator.rnd.nextInt(myGeosectorIds.size()));
 
 			final Equipment equipment = createEquipment(currentBaseId,
 					currentBusiness,

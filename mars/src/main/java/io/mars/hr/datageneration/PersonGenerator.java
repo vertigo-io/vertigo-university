@@ -13,7 +13,6 @@ import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 
-import io.mars.datageneration.GenerationConfig;
 import io.mars.hr.dao.PersonDAO;
 import io.mars.hr.domain.Person;
 import io.vertigo.commons.transaction.VTransactionManager;
@@ -24,6 +23,8 @@ import io.vertigo.lang.Assertion;
 import io.vertigo.lang.WrappedException;
 
 public final class PersonGenerator implements Component {
+
+	private static final int PERSON_CSV_FILE_COLUMN_NUMBER = 5;
 
 	@Inject
 	private VTransactionManager transactionManager;
@@ -46,7 +47,7 @@ public final class PersonGenerator implements Component {
 			String[] nextRecord;
 
 			while ((nextRecord = csvReader.readNext()) != null) {
-				Assertion.checkArgument(nextRecord.length == GenerationConfig.PERSON_CSV_FILE_COLUMN_NUMBER, "CSV File Format not suitable for Persons");
+				Assertion.checkArgument(nextRecord.length == PERSON_CSV_FILE_COLUMN_NUMBER, "CSV File Format not suitable for Persons");
 				// ---
 				final String firstName = nextRecord[0];
 				final String lastName = nextRecord[1];

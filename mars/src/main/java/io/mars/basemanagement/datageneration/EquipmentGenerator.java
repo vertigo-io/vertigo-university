@@ -19,7 +19,6 @@ import io.mars.catalog.dao.EquipmentCategoryDAO;
 import io.mars.catalog.dao.EquipmentTypeDAO;
 import io.mars.catalog.domain.EquipmentCategory;
 import io.mars.catalog.domain.EquipmentType;
-import io.mars.datageneration.GenerationConfig;
 import io.mars.domain.DtDefinitions.EquipmentCategoryFields;
 import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.core.component.Component;
@@ -31,6 +30,8 @@ import io.vertigo.lang.WrappedException;
 
 @Transactional
 public class EquipmentGenerator implements Component {
+
+	private static final int EQUIPMENT_TYPE_CSV_FILE_COLUMN_NUMBER = 3;
 
 	@Inject
 	private EquipmentDAO equipmentDAO;
@@ -45,13 +46,13 @@ public class EquipmentGenerator implements Component {
 	@Inject
 	private ResourceManager resourceManager;
 
-	public void createInitialEquipments() {
+	public void createInitialEquipments(final int equipmentUnitsToGenerate) {
 		final DtList<Equipment> equipmentList = new FakeEquipmentListBuilder()
 				.withBaseIdList(basemanagementPAO.selectBaseId())
 				.withGeosectorIdList(basemanagementPAO.selectGeosectorId())
 				.withBusinessList(businessDAO.selectBusiness())
 				.withEquipmentTypeList(equipmentTypeDAO.selectEquipmentType())
-				.withMaxValues(GenerationConfig.EQUIPMENT_UNITS_TO_GENERATE)
+				.withMaxValues(equipmentUnitsToGenerate)
 				.build();
 
 		equipmentDAO.insertEquipmentsBatch(equipmentList);
@@ -76,7 +77,7 @@ public class EquipmentGenerator implements Component {
 			EquipmentCategory equipmentCategory = null;
 
 			while ((nextRecord = csvReader.readNext()) != null) {
-				Assertion.checkArgument(nextRecord.length == GenerationConfig.EQUIPMENT_TYPE_CSV_FILE_COLUMN_NUMBER, "CSV File {0} Format not suitable for Equipment Types", csvFilePath);
+				Assertion.checkArgument(nextRecord.length == EQUIPMENT_TYPE_CSV_FILE_COLUMN_NUMBER, "CSV File {0} Format not suitable for Equipment Types", csvFilePath);
 
 				final Boolean enabled = Boolean.valueOf(nextRecord[0]);
 				final String nextCategoryLabel = nextRecord[1];

@@ -2,8 +2,10 @@ package io.mars.datageneration;
 
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+import java.util.Random;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import io.mars.basemanagement.datageneration.BaseGenerator;
 import io.mars.basemanagement.datageneration.EquipmentGenerator;
@@ -15,6 +17,9 @@ import io.vertigo.lang.Assertion;
 
 public class DataGenerator implements Component {
 
+	private static final Long RANDOM_SEED = 1337L;
+	public static final Random rnd = new Random(RANDOM_SEED);
+
 	// a placer sur la bonne méthode
 	//	@DaemonScheduled(name = "DMN_TICKET_AND_WO_GENERATOR", periodInSeconds = 10)
 
@@ -24,16 +29,25 @@ public class DataGenerator implements Component {
 	private EquipmentGenerator equipmentGenerator;
 	@Inject
 	private PersonGenerator personGenerator;
-
 	@Inject
 	private BaseGenerator baseGenerator;
 	@Inject
 	private ReferenceDataGenerator referenceDataGenerator;
 
+	private final int initialEquipmentUnits;
+
+	@Inject
+	public DataGenerator(
+			@Named("initialEquipmentUnits") final Integer initialEquipmentUnits) {
+		Assertion.checkNotNull(initialEquipmentUnits);
+		//---
+		this.initialEquipmentUnits = initialEquipmentUnits;
+	}
+
 	public void generateInitialEquipments() {
 		equipmentGenerator.createInitialEquipmentCategories();
 		equipmentGenerator.createInitialEquipmentTypesFromCSV("initdata/equipmentTypes.csv");
-		equipmentGenerator.createInitialEquipments();
+		equipmentGenerator.createInitialEquipments(initialEquipmentUnits);
 
 	}
 
@@ -57,7 +71,7 @@ public class DataGenerator implements Component {
 		while (timeCursor.isBefore(to)) {
 			ticketGenerator.generatePastTickets(timeCursor, ChronoUnit.DAYS, 1);
 			// tous les 10 à 20 jours
-			timeCursor = timeCursor.plus(GenerationConfig.rnd.nextInt(10) + 10, ChronoUnit.DAYS);
+			timeCursor = timeCursor.plus(rnd.nextInt(10) + 10, ChronoUnit.DAYS);
 		}
 	}
 

@@ -16,7 +16,6 @@ import io.mars.basemanagement.dao.BusinessDAO;
 import io.mars.basemanagement.dao.GeosectorDAO;
 import io.mars.basemanagement.domain.Business;
 import io.mars.basemanagement.domain.Geosector;
-import io.mars.datageneration.GenerationConfig;
 import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.core.component.Component;
 import io.vertigo.core.resource.ResourceManager;
@@ -25,6 +24,9 @@ import io.vertigo.lang.WrappedException;
 
 @Transactional
 public class ReferenceDataGenerator implements Component {
+
+	private static final int BUSINESS_CSV_FILE_COLUMN_NUMBER = 1;
+	private static final int GEOSECTOR_CSV_FILE_COLUMN_NUMBER = 1;
 
 	@Inject
 	private GeosectorDAO geosectorDAO;
@@ -40,14 +42,14 @@ public class ReferenceDataGenerator implements Component {
 	}
 
 	private void createInitialBusinessFromCSV(final String[] businessRecord) {
-		Assertion.checkArgument(businessRecord.length == GenerationConfig.BUSINESS_CSV_FILE_COLUMN_NUMBER, "CSV File Format not suitable for Equipment Types");
+		Assertion.checkArgument(businessRecord.length == BUSINESS_CSV_FILE_COLUMN_NUMBER, "CSV File Format not suitable for Equipment Types");
 		// ---
 		final String businessName = businessRecord[0];
 		businessDAO.create(createBusiness(businessName));
 	}
 
 	private void createInitialGeosectorFromCSV(final String[] geoSectorRecord) {
-		Assertion.checkArgument(geoSectorRecord.length == GenerationConfig.GEOSECTOR_CSV_FILE_COLUMN_NUMBER, "CSV File Format not suitable for Equipment Types");
+		Assertion.checkArgument(geoSectorRecord.length == GEOSECTOR_CSV_FILE_COLUMN_NUMBER, "CSV File Format not suitable for Equipment Types");
 		// ---
 		final String geosectorName = geoSectorRecord[0];
 		geosectorDAO.create(createGeosector(geosectorName));

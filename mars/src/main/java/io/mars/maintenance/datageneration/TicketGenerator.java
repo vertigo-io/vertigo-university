@@ -11,8 +11,8 @@ import javax.inject.Inject;
 
 import io.mars.basemanagement.dao.EquipmentDAO;
 import io.mars.basemanagement.domain.Equipment;
+import io.mars.datageneration.DataGenerator;
 import io.mars.datageneration.DensityDistribution;
-import io.mars.datageneration.GenerationConfig;
 import io.mars.maintenance.dao.TicketDAO;
 import io.mars.maintenance.domain.Ticket;
 import io.vertigo.commons.transaction.VTransactionManager;
@@ -79,7 +79,7 @@ public class TicketGenerator implements Component {
 			final Double density = qualityEquipmentDensityDistribution.getDensity(Double.valueOf(yearOfEvent));
 
 			final Double realDensity = density / (chronoUnit.getDuration().getSeconds() / ChronoUnit.YEARS.getDuration().getSeconds()) * step;
-			final Double tirage = GenerationConfig.rnd.nextDouble();
+			final Double tirage = DataGenerator.rnd.nextDouble();
 
 			if (realDensity >= tirage) {
 				final Ticket ticket = new Ticket();
