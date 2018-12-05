@@ -7,6 +7,8 @@
 	<feature class="io.mars.maintenance.MaintenanceFeatures" />
 	
 	<module name="datageneration">
-		<component class="io.mars.datageneration.DataGenerator" />
+		<component class="io.mars.datageneration.DataGenerator" >
+			<param name="initialEquipmentUnits" value="1500" />
+		</component>
 	</module>
 </config>

@@ -2,20 +2,17 @@ package io.mars.datageneration;
 
 import io.vertigo.lang.Assertion;
 
-public class DensityDistribution {
+public final class DensityDistribution {
+
 	private final RangeMap<Double, Double> myRangeMap = new RangeMap<>();
 
-	public void addSegment(final Double minValue, final Double maxValue, final double density) {
+	public void addSegment(final double minValue, final double maxValue, final double density) {
 		Assertion.checkNotNull(myRangeMap);
-		Assertion.checkNotNull(minValue);
-		Assertion.checkNotNull(maxValue);
 		//
 		myRangeMap.addSegment(minValue, maxValue, density);
 	}
 
-	public Double getDensity(final Double event) {
-		Assertion.checkNotNull(event);
-		//
+	public double getDensity(final double event) {
 		return myRangeMap.getValue(event);
 	}
 

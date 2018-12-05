@@ -23,86 +23,60 @@ import java.util.Collections;
 
 import javax.inject.Inject;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.MqttCallback;
+//import lib to use mqtt paho
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.eclipse.paho.client.mqttv3.MqttException;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.junit.jupiter.api.Test;
 
-import io.vertigo.app.AutoCloseableApp;
-import io.vertigo.app.Home;
-import io.vertigo.core.component.di.injector.DIInjector;
+import io.vertigo.AbstractTestCaseJU5;
 import io.vertigo.database.timeseries.DataFilter;
 import io.vertigo.database.timeseries.Measure;
 import io.vertigo.database.timeseries.TimeFilter;
 import io.vertigo.database.timeseries.TimeSeriesDataBaseManager;
-
-//import lib to use mqtt paho
-import org.eclipse.paho.client.mqttv3.MqttClient;
-import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
-import org.eclipse.paho.client.mqttv3.MqttCallback;
-import org.eclipse.paho.client.mqttv3.MqttException;
-import org.eclipse.paho.client.mqttv3.MqttMessage;
-import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
-import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 
 /**
  * Test of the IoT services for mars.
  *
  * @author mlaroche
  */
-public final class IotMarsTest {
-
-	private static AutoCloseableApp app;
-
-	@BeforeAll
-	public static final void setUp() throws Exception {
-		app = new AutoCloseableApp(IotMarsTestConfig.config());
-	}
-
-	@AfterAll
-	public static final void tearDown() throws Exception {
-		if (app != null) {
-			app.close();
-		}
-	}
-
-	public final void setUpInjection() throws Exception {
-		if (app != null) {
-			DIInjector.injectMembers(this, Home.getApp().getComponentSpace());
-		}
-	}
-
-	@BeforeEach
-	public void doSetUp() throws Exception {
-		setUpInjection();
-	}
+public final class IotMarsTest extends AbstractTestCaseJU5 {
 
 	@Inject
 	private TimeSeriesDataBaseManager timeSeriesDataBaseManager;
 
 	@Test
 	public void testMqttClient() {
-		String mytopic = "MQTT";
-		String content = "Message from MqttPublishSample";
-		int qos = 0;
-		String broker = "tcp://mars.dev.klee.lan.net:1883";
-		String clientId = "JavaSample";
-		MemoryPersistence persistence = new MemoryPersistence();
-		MqttCallback callback = new MqttCallback() {
-			public void connectionLost(Throwable cause) {
+		final String mytopic = "MQTT";
+		final String content = "Message from MqttPublishSample";
+		final int qos = 0;
+		final String broker = "tcp://mars.dev.klee.lan.net:1883";
+		final String clientId = "JavaSample";
+		final MemoryPersistence persistence = new MemoryPersistence();
+		final MqttCallback callback = new MqttCallback() {
+			@Override
+			public void connectionLost(final Throwable cause) {
+				// TODO
 			}
 
-			public void messageArrived(String topic, MqttMessage message) throws Exception {
+			@Override
+			public void messageArrived(final String topic, final MqttMessage message) throws Exception {
 				System.out.println("Message: " + message.toString());
-				
+
 			}
 
-			public void deliveryComplete(IMqttDeliveryToken token) {
+			@Override
+			public void deliveryComplete(final IMqttDeliveryToken token) {
+				// TODO
 			}
 		};
 		try {
-			MqttClient sampleClient = new MqttClient(broker, clientId, persistence);
-			MqttConnectOptions connOpts = new MqttConnectOptions();
+			final MqttClient sampleClient = new MqttClient(broker, clientId, persistence);
+			final MqttConnectOptions connOpts = new MqttConnectOptions();
 			connOpts.setCleanSession(true);
 			System.out.println("Connecting to broker: " + broker);
 			sampleClient.connect(connOpts);
@@ -110,14 +84,14 @@ public final class IotMarsTest {
 			System.out.println("Connected");
 			sampleClient.subscribe(mytopic);
 			System.out.println("Publishing message: " + content);
-			MqttMessage message = new MqttMessage(content.getBytes());
+			final MqttMessage message = new MqttMessage(content.getBytes());
 			message.setQos(qos);
 			sampleClient.publish(mytopic, message);
 			System.out.println("Message published");
 			sampleClient.subscribe(mytopic);
 			sampleClient.disconnect();
 			System.out.println("Disconnected");
-		} catch (MqttException me) {
+		} catch (final MqttException me) {
 			System.out.println("reason " + me.getReasonCode());
 			System.out.println("msg " + me.getMessage());
 			System.out.println("loc " + me.getLocalizedMessage());

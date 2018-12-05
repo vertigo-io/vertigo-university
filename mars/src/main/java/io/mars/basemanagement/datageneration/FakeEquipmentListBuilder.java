@@ -1,39 +1,41 @@
-package io.mars.datageneration;
+package io.mars.basemanagement.datageneration;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-import java.util.Random;
 
 import io.mars.basemanagement.domain.Business;
 import io.mars.basemanagement.domain.Equipment;
 import io.mars.catalog.domain.EquipmentType;
+import io.mars.datageneration.DataGenerator;
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.lang.Assertion;
+import io.vertigo.lang.Builder;
 
-public class FakeEquipmentListBuilder {
+@SuppressWarnings("rawtypes")
+public class FakeEquipmentListBuilder implements Builder {
 
 	private int myMaxValues;
 	private static final int MIN_EQUIPMENT_VALUE = 100;
 	private static final int MAX_EQUIPMENT_VALUE = 3000;
 	private static final int MIN_RENTING_FEE = 50;
 	private static final int MAX_RENTING_FEE = 300;
-	private static Random rnd = null;
 
 	private DtList<Business> myBusinessList;
-	private DtList<EquipmentType> myEquipmentTypeList;
-	private List<Long> myBaseIdList;
-	private List<Long> myGeosectorIdList;
+	private DtList<EquipmentType> myEquipmentTypes;
+	private List<Long> myBaseIds;
+	private List<Long> myGeosectorIds;
 
 	public FakeEquipmentListBuilder() {
 	}
 
-	public FakeEquipmentListBuilder withRandomSeed(final Long randomSeed) {
-		rnd = new Random(randomSeed);
-		return this;
-	}
-
+	/*
+		public FakeEquipmentListBuilder withRandomSeed(final Long randomSeed) {
+			rnd = new Random(randomSeed);
+			return this;
+		}
+	*/
 	public FakeEquipmentListBuilder withMaxValues(final int maxValues) {
 		myMaxValues = maxValues;
 		return this;
@@ -44,65 +46,32 @@ public class FakeEquipmentListBuilder {
 		return this;
 	}
 
-	public FakeEquipmentListBuilder withEquipmentTypeList(final DtList<EquipmentType> equipmentTypeList) {
-		Assertion.checkNotNull(equipmentTypeList);
+	public FakeEquipmentListBuilder withEquipmentTypeList(final DtList<EquipmentType> equipmentTypes) {
+		Assertion.checkNotNull(equipmentTypes);
 		//---
-		myEquipmentTypeList = equipmentTypeList;
+		myEquipmentTypes = equipmentTypes;
 		return this;
 	}
 
-	public FakeEquipmentListBuilder withBusinessList(final DtList<Business> businessList) {
-		Assertion.checkNotNull(businessList);
+	public FakeEquipmentListBuilder withBusinessList(final DtList<Business> businesses) {
+		Assertion.checkNotNull(businesses);
 		//---
-		myBusinessList = businessList;
+		myBusinessList = businesses;
 		return this;
 	}
 
-	public FakeEquipmentListBuilder withBaseIdList(final List<Long> baseIdList) {
-		Assertion.checkNotNull(baseIdList);
+	public FakeEquipmentListBuilder withBaseIdList(final List<Long> baseIds) {
+		Assertion.checkNotNull(baseIds);
 		//---
-		myBaseIdList = baseIdList;
+		myBaseIds = baseIds;
 		return this;
 	}
 
-	public FakeEquipmentListBuilder withGeosectorIdList(final List<Long> geosectorIdList) {
-		Assertion.checkNotNull(geosectorIdList);
+	public FakeEquipmentListBuilder withGeosectorIdList(final List<Long> geosectorIds) {
+		Assertion.checkNotNull(geosectorIds);
 		//---
-		myGeosectorIdList = geosectorIdList;
+		myGeosectorIds = geosectorIds;
 		return this;
-	}
-
-	public DtList<Equipment> build() {
-		Assertion.checkNotNull(myEquipmentTypeList);
-		Assertion.checkNotNull(myBusinessList);
-		Assertion.checkNotNull(myBaseIdList);
-		Assertion.checkNotNull(myGeosectorIdList);
-		Assertion.checkNotNull(rnd);
-		final DtList<Equipment> equipmentList = new DtList<>(Equipment.class);
-
-		for (int currentCounter = 0; currentCounter < myMaxValues; currentCounter++) {
-
-			final EquipmentType currentEquipmentType = myEquipmentTypeList.get(rnd.nextInt(myEquipmentTypeList.size()));
-			final Business currentBusiness = myBusinessList.get(rnd.nextInt(myBusinessList.size()));
-			final Long currentBaseId = myBaseIdList.get(rnd.nextInt(myBaseIdList.size()));
-			final Long currentGeosectorId = myGeosectorIdList.get(rnd.nextInt(myGeosectorIdList.size()));
-
-			final Equipment equipment = createEquipment(currentBaseId,
-					currentBusiness,
-					currentEquipmentType,
-					currentGeosectorId,
-					getCode(currentEquipmentType.getLabel(), currentBusiness.getName(), currentCounter),
-					getEquipmentValue(),
-					getGeoLocation(),
-					getHealthLevel(),
-					getEquipmentName(currentEquipmentType.getLabel(), currentBusiness.getName(), currentCounter),
-					getDescription(),
-					getPurchaseDate(),
-					getRentingFee(),
-					getTags());
-			equipmentList.add(equipment);
-		}
-		return equipmentList;
 	}
 
 	private static String getTags() {
@@ -122,7 +91,7 @@ public class FakeEquipmentListBuilder {
 	}
 
 	private static int getHealthLevel() {
-		return rnd.nextInt(101);
+		return DataGenerator.rnd.nextInt(101);
 	}
 
 	private static String getGeoLocation() {
@@ -130,18 +99,17 @@ public class FakeEquipmentListBuilder {
 	}
 
 	private static BigDecimal getEquipmentValue() {
-		final Double randomDouble = myNextDouble(MIN_EQUIPMENT_VALUE, MAX_EQUIPMENT_VALUE, rnd);
+		final Double randomDouble = myNextDouble(MIN_EQUIPMENT_VALUE, MAX_EQUIPMENT_VALUE);
 		return BigDecimal.valueOf(randomDouble);
 	}
 
 	private static LocalDate getPurchaseDate() {
-
 		final LocalDate today = LocalDate.now();
-		return today.minus(31 + rnd.nextInt(3650), ChronoUnit.DAYS);
+		return today.minus(31 + DataGenerator.rnd.nextInt(3650), ChronoUnit.DAYS);
 	}
 
 	private static BigDecimal getRentingFee() {
-		final Double randomDouble = myNextDouble(MIN_RENTING_FEE, MAX_RENTING_FEE, rnd);
+		final Double randomDouble = myNextDouble(MIN_RENTING_FEE, MAX_RENTING_FEE);
 		return BigDecimal.valueOf(randomDouble);
 	}
 
@@ -175,10 +143,41 @@ public class FakeEquipmentListBuilder {
 		return equipment;
 	}
 
-	private static Double myNextDouble(final int min, final int max, final Random random) {
-		Assertion.checkNotNull(random, "Random Generator must be initialised before use");
-		//
-		return min + random.nextDouble() * (max - min);
+	private static Double myNextDouble(final int min, final int max) {
+		return min + DataGenerator.rnd.nextDouble() * (max - min);
+	}
+
+	@Override
+	public DtList<Equipment> build() {
+		Assertion.checkNotNull(myEquipmentTypes);
+		Assertion.checkNotNull(myBusinessList);
+		Assertion.checkNotNull(myBaseIds);
+		Assertion.checkNotNull(myGeosectorIds);
+		final DtList<Equipment> equipments = new DtList<>(Equipment.class);
+
+		for (int currentCounter = 0; currentCounter < myMaxValues; currentCounter++) {
+
+			final EquipmentType currentEquipmentType = myEquipmentTypes.get(DataGenerator.rnd.nextInt(myEquipmentTypes.size()));
+			final Business currentBusiness = myBusinessList.get(DataGenerator.rnd.nextInt(myBusinessList.size()));
+			final Long currentBaseId = myBaseIds.get(DataGenerator.rnd.nextInt(myBaseIds.size()));
+			final Long currentGeosectorId = myGeosectorIds.get(DataGenerator.rnd.nextInt(myGeosectorIds.size()));
+
+			final Equipment equipment = createEquipment(currentBaseId,
+					currentBusiness,
+					currentEquipmentType,
+					currentGeosectorId,
+					getCode(currentEquipmentType.getLabel(), currentBusiness.getName(), currentCounter),
+					getEquipmentValue(),
+					getGeoLocation(),
+					getHealthLevel(),
+					getEquipmentName(currentEquipmentType.getLabel(), currentBusiness.getName(), currentCounter),
+					getDescription(),
+					getPurchaseDate(),
+					getRentingFee(),
+					getTags());
+			equipments.add(equipment);
+		}
+		return equipments;
 	}
 
 }

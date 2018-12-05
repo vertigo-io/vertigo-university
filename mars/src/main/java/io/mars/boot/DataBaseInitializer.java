@@ -24,48 +24,21 @@ package io.mars.boot;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.sql.SQLException;
+import java.time.Instant;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.Arrays;
-import java.util.List;
-import java.util.function.Consumer;
+import java.time.LocalTime;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 
 import javax.inject.Inject;
 
-import com.opencsv.CSVParserBuilder;
-import com.opencsv.CSVReader;
-import com.opencsv.CSVReaderBuilder;
-
-import io.mars.basemanagement.BasemanagementPAO;
-import io.mars.basemanagement.dao.BaseDAO;
-import io.mars.basemanagement.dao.BusinessDAO;
-import io.mars.basemanagement.dao.EquipmentDAO;
-import io.mars.basemanagement.dao.GeosectorDAO;
-import io.mars.basemanagement.domain.Base;
-import io.mars.basemanagement.domain.Business;
-import io.mars.basemanagement.domain.Equipment;
-import io.mars.basemanagement.domain.Geosector;
-import io.mars.catalog.dao.EquipmentCategoryDAO;
-import io.mars.catalog.dao.EquipmentTypeDAO;
-import io.mars.catalog.domain.EquipmentCategory;
-import io.mars.catalog.domain.EquipmentType;
-import io.mars.datageneration.FakeBaseListBuilder;
-import io.mars.datageneration.FakeEquipmentListBuilder;
-import io.mars.domain.DtDefinitions.EquipmentCategoryFields;
-import io.mars.hr.dao.PersonDAO;
-import io.mars.hr.domain.Person;
-import io.vertigo.commons.transaction.VTransactionManager;
-import io.vertigo.commons.transaction.VTransactionWritable;
+import io.mars.datageneration.DataGenerator;
 import io.vertigo.core.component.ComponentInitializer;
 import io.vertigo.core.resource.ResourceManager;
 import io.vertigo.database.sql.SqlDataBaseManager;
 import io.vertigo.database.sql.connection.SqlConnection;
 import io.vertigo.database.sql.statement.SqlStatement;
-import io.vertigo.dynamo.criteria.Criterions;
-import io.vertigo.dynamo.domain.model.DtList;
-import io.vertigo.lang.Assertion;
 import io.vertigo.lang.WrappedException;
 
 /**
@@ -74,47 +47,23 @@ import io.vertigo.lang.WrappedException;
  */
 public class DataBaseInitializer implements ComponentInitializer {
 
-	private static final int EQUIPMENT_TYPE_CSV_FILE_COLUMN_NUMBER = 3;
-	private static final int PERSON_CSV_FILE_COLUMN_NUMBER = 5;
-	private static final int BUSINESS_CSV_FILE_COLUMN_NUMBER = 1;
-	private static final int GEOSECTOR_CSV_FILE_COLUMN_NUMBER = 1;
-	private static final Long RANDOM_SEED = 1337L;
-
 	@Inject
 	private ResourceManager resourceManager;
 	@Inject
-	private VTransactionManager transactionManager;
-	@Inject
 	private SqlDataBaseManager sqlDataBaseManager;
-
 	@Inject
-	private BusinessDAO businessDAO;
-	@Inject
-	private GeosectorDAO geosectorDAO;
-	@Inject
-	private BaseDAO baseDAO;
-	@Inject
-	private EquipmentDAO equipmentDAO;
-	@Inject
-	private PersonDAO personDAO;
-	@Inject
-	private EquipmentCategoryDAO equipmentCategoryDAO;
-	@Inject
-	private EquipmentTypeDAO equipmentTypeDAO;
-	@Inject
-	private BasemanagementPAO basemanagementPAO;
+	private DataGenerator dataGenerator;
 
 	/** {@inheritDoc} */
 	@Override
 	public void init() {
 		createDataBase();
-		createInitialDataFromCSV("initdata/geosectors.csv", this::createInitialGeosectorFromCSV);
-		createInitialBases();
-		createInitialDataFromCSV("initdata/persons.csv", this::createInitialPersonFromCSV);
-		createInitialEquipmentCategories();
-		createInitialEquipmentTypesFromCSV("initdata/equipmentTypes.csv");
-		createInitialDataFromCSV("initdata/businesses.csv", this::createInitialBusinessFromCSV);
-		createInitialEquipments();
+
+		dataGenerator.generateReferenceData();
+		dataGenerator.generateInitialPersons();
+		dataGenerator.generateInitialBases();
+		dataGenerator.generateInitialEquipments();
+		dataGenerator.generatePastData(ZonedDateTime.of(LocalDate.of(2017, 1, 1), LocalTime.of(0, 0), ZoneOffset.UTC).toInstant(), Instant.now());
 	}
 
 	private void createDataBase() {
@@ -157,194 +106,6 @@ public class DataBaseInitializer implements ComponentInitializer {
 		} catch (final SQLException e) {
 			throw WrappedException.wrap(e);
 		}
-	}
-
-	private void createInitialBases() {
-		try (VTransactionWritable tx = transactionManager.createCurrentTransaction()) {
-
-			final List<String> nameFirstPartDictionnary1 = Arrays.asList("Alpha", "Beta", "Gamma", "Delta", "Epsilon", "Zeta", "Eta", "Theta");
-			final List<String> nameSecondPartDictionnary2 = Arrays.asList("Centauri", "Aldebaran", "Pisces", "Cygnus", "Pegasus", "Dragon", "Andromeda");
-			final List<String> sampleTags = Arrays.asList("#mountain", "#sea", "#historic", "#cold", "#first", "#nasa", "#experimental");
-
-			final List<Base> baseList = new FakeBaseListBuilder()
-					.withMaxValues(50)
-					.withGeosectorIdList(basemanagementPAO.selectGeosectorId())
-					.withNameDictionnaries(nameFirstPartDictionnary1, nameSecondPartDictionnary2)
-					.withTagsDictionnary(sampleTags)
-					.build();
-
-			for (final Base base : baseList) {
-				baseDAO.create(base);
-			}
-
-			tx.commit();
-		}
-	}
-
-	private void createInitialEquipments() {
-		try (VTransactionWritable tx = transactionManager.createCurrentTransaction()) {
-			final DtList<Equipment> equipmentList = new FakeEquipmentListBuilder()
-					.withRandomSeed(RANDOM_SEED)
-					.withBaseIdList(basemanagementPAO.selectBaseId())
-					.withGeosectorIdList(basemanagementPAO.selectGeosectorId())
-					.withBusinessList(businessDAO.selectBusiness())
-					.withEquipmentTypeList(equipmentTypeDAO.selectEquipmentType())
-					.withMaxValues(100)
-					.build();
-
-			// TODO à supprimer
-			/*
-			for (final Equipment equipment : equipmentList) {
-				equipmentDAO.create(equipment);
-			}
-			*/
-			equipmentDAO.insertEquipmentsBatch(equipmentList);
-
-			tx.commit();
-
-		}
-	}
-
-	private void createInitialEquipmentCategories() {
-		try (VTransactionWritable tx = transactionManager.createCurrentTransaction()) {
-
-			equipmentCategoryDAO.create(createEquipmentCategory(true, "Bot"));
-			equipmentCategoryDAO.create(createEquipmentCategory(true, "Building"));
-			equipmentCategoryDAO.create(createEquipmentCategory(true, "Vehicle"));
-			tx.commit();
-		}
-	}
-
-	private void createInitialBusinessFromCSV(final String[] businessRecord) {
-		Assertion.checkArgument(businessRecord.length == BUSINESS_CSV_FILE_COLUMN_NUMBER, "CSV File Format not suitable for Equipment Types");
-		// ---
-		final String businessName = businessRecord[0];
-		businessDAO.create(createBusiness(businessName));
-	}
-
-	private void createInitialGeosectorFromCSV(final String[] geoSectorRecord) {
-		Assertion.checkArgument(geoSectorRecord.length == GEOSECTOR_CSV_FILE_COLUMN_NUMBER, "CSV File Format not suitable for Equipment Types");
-		// ---
-		final String geosectorName = geoSectorRecord[0];
-		geosectorDAO.create(createGeosector(geosectorName));
-	}
-
-	private void createInitialEquipmentTypesFromCSV(final String csvFilePath) {
-
-		try (
-				VTransactionWritable tx = transactionManager.createCurrentTransaction();
-				Reader reader = new BufferedReader(new InputStreamReader(resourceManager.resolve(csvFilePath).openStream()));
-				CSVReader csvReader = new CSVReaderBuilder(reader)
-						.withCSVParser(new CSVParserBuilder()
-								.withSeparator(';')
-								.build())
-						.withSkipLines(1)
-						.build();) {
-			String[] nextRecord;
-			String currentCategoryLabel = "";
-			EquipmentCategory equipmentCategory = null;
-
-			while ((nextRecord = csvReader.readNext()) != null) {
-				Assertion.checkArgument(nextRecord.length == EQUIPMENT_TYPE_CSV_FILE_COLUMN_NUMBER, "CSV File {0} Format not suitable for Equipment Types", csvFilePath);
-
-				final Boolean enabled = Boolean.valueOf(nextRecord[0]);
-				final String nextCategoryLabel = nextRecord[1];
-				final String equipmentTypeName = nextRecord[2];
-
-				if (nextCategoryLabel != currentCategoryLabel) {
-					currentCategoryLabel = nextCategoryLabel;
-					equipmentCategory = equipmentCategoryDAO.find(Criterions.isEqualTo(EquipmentCategoryFields.LABEL, nextCategoryLabel));
-				}
-				equipmentTypeDAO.create(createEquipmentType(enabled, equipmentTypeName, equipmentCategory));
-			}
-
-			tx.commit();
-
-		} catch (final IOException e) {
-			throw WrappedException.wrap(e, "Can't load csv file {0}", csvFilePath);
-		}
-
-	}
-
-	private void createInitialPersonFromCSV(final String[] personRecord) {
-		Assertion.checkArgument(personRecord.length == PERSON_CSV_FILE_COLUMN_NUMBER, "CSV File Format not suitable for Persons");
-		// ---
-		final String firstName = personRecord[0];
-		final String lastName = personRecord[1];
-		final String email = personRecord[2];
-		final String tags = personRecord[3];
-		final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		final LocalDate dateHired = LocalDate.parse(personRecord[4], dateFormatter);
-
-		personDAO.create(createPerson(firstName, lastName, email, tags, dateHired));
-
-	}
-
-	private void createInitialDataFromCSV(
-			final String csvFilePath, final Consumer<String[]> lineHandler) {
-
-		try (
-				VTransactionWritable tx = transactionManager.createCurrentTransaction();
-				Reader reader = new BufferedReader(new InputStreamReader(resourceManager.resolve(csvFilePath).openStream()));
-				CSVReader csvReader = new CSVReaderBuilder(reader)
-						.withCSVParser(new CSVParserBuilder()
-								.withSeparator(';')
-								.build())
-						.withSkipLines(1)
-						.build();) {
-			String[] nextRecord;
-
-			while ((nextRecord = csvReader.readNext()) != null) {
-				lineHandler.accept(nextRecord);
-			}
-
-			tx.commit();
-
-		} catch (final IOException e) {
-			throw WrappedException.wrap(e, "Can't load csv file {0}", csvFilePath);
-		}
-
-	}
-
-	private static Business createBusiness(final String businessName) {
-		final Business business = new Business();
-		business.setName(businessName);
-		return business;
-	}
-
-	private static Geosector createGeosector(final String geosectorName) {
-		final Geosector geosector = new Geosector();
-		geosector.setSectorLabel(geosectorName);
-		return geosector;
-	}
-
-	private static Person createPerson(final String firstName,
-			final String lastName,
-			final String eMail,
-			final String tags,
-			final LocalDate dateHired) {
-		final Person person = new Person();
-		person.setFirstName(firstName);
-		person.setLastName(lastName);
-		person.setEmail(eMail);
-		person.setTags(tags);
-		person.setDateHired(dateHired);
-		return person;
-	}
-
-	private static EquipmentCategory createEquipmentCategory(final boolean active, final String label) {
-		final EquipmentCategory equipmentCategory = new EquipmentCategory();
-		equipmentCategory.setActive(active);
-		equipmentCategory.setLabel(label);
-		return equipmentCategory;
-	}
-
-	private static EquipmentType createEquipmentType(final boolean active, final String label, final EquipmentCategory equipmentCategory) {
-		final EquipmentType equipmentType = new EquipmentType();
-		equipmentType.setActive(active);
-		equipmentType.setLabel(label);
-		equipmentType.equipmentCategory().set(equipmentCategory);
-		return equipmentType;
 	}
 
 }
