@@ -1,4 +1,4 @@
-package io.mars.datageneration;
+package io.mars.basemanagement.datageneration;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -9,14 +9,18 @@ import java.util.concurrent.ThreadLocalRandom;
 
 import io.mars.basemanagement.domain.Base;
 import io.mars.basemanagement.domain.BaseTypeEnum;
+import io.mars.datageneration.FakeDataUtils;
+import io.mars.datageneration.GenerationConfig;
 import io.vertigo.lang.Assertion;
+import io.vertigo.lang.Builder;
 
-public class FakeBaseListBuilder {
+@SuppressWarnings("rawtypes")
+public final class FakeBaseListBuilder implements Builder {
 
 	private List<String> myNameFirstPartDictionnary;
 	private List<String> myNameSecondPartDictionnary;
 	private List<String> myTagsDictionnary;
-	private List<Long> myGeosectorIdList;
+	private List<Long> myGeosectorIds;
 
 	private int myMaxValues = 0;
 
@@ -43,49 +47,16 @@ public class FakeBaseListBuilder {
 		return this;
 	}
 
-	public FakeBaseListBuilder withGeosectorIdList(final List<Long> geosectorIdList) {
-		Assertion.checkNotNull(geosectorIdList);
+	public FakeBaseListBuilder withGeosectorIds(final List<Long> geosectorIds) {
+		Assertion.checkNotNull(geosectorIds);
 		//---
-		myGeosectorIdList = geosectorIdList;
+		myGeosectorIds = geosectorIds;
 		return this;
 	}
 
-	public List<Base> build() {
-		Assertion.checkNotNull(myGeosectorIdList);
-		//---
-		final List<Base> baseList = new ArrayList<>();
-
-		int currentCounter = 0;
-		for (final String firstPart : myNameFirstPartDictionnary) {
-			for (final String secondPart : myNameSecondPartDictionnary) {
-
-				final Long currentGeosectorId = myGeosectorIdList.get(ThreadLocalRandom.current().nextInt(myGeosectorIdList.size()));
-				final LocalDate creationDate = getCreationDate();
-				final int healthLevel = getHealthLevel();
-				final String description = getDescription(firstPart, secondPart, healthLevel, creationDate);
-
-				baseList.add(createBase(FakeDataUtils.randomEnum(BaseTypeEnum.class),
-						firstPart + " " + secondPart,
-						getCodeFromBaseName(firstPart, secondPart, currentCounter),
-						healthLevel,
-						creationDate,
-						description,
-						getGeoLocation(),
-						getAssetsValue(),
-						getRentingFee(),
-						currentGeosectorId,
-						getTagsFromDictionnary(myTagsDictionnary)));
-				currentCounter++;
-
-				if (currentCounter >= myMaxValues) {
-					break;
-				}
-			}
-			if (currentCounter >= myMaxValues) {
-				break;
-			}
-		}
-		return baseList;
+	public FakeBaseListBuilder withTagsDictionnary(final List<String> sampleTags) {
+		myTagsDictionnary = sampleTags;
+		return this;
 	}
 
 	private static String getTagsFromDictionnary(final List<String> tagDictionnary) {
@@ -106,11 +77,11 @@ public class FakeBaseListBuilder {
 	private static LocalDate getCreationDate() {
 
 		final LocalDate today = LocalDate.now();
-		return today.minus(31 + FakeDataUtils.random.nextInt(3650), ChronoUnit.DAYS);
+		return today.minus(31 + GenerationConfig.rnd.nextInt(3650), ChronoUnit.DAYS);
 	}
 
 	private static int getHealthLevel() {
-		return FakeDataUtils.random.nextInt(101);
+		return GenerationConfig.rnd.nextInt(101);
 	}
 
 	private static String getDescription(final String firstPart, final String secondPart, final int healthLevel, final LocalDate creationDate) {
@@ -157,8 +128,43 @@ public class FakeBaseListBuilder {
 		return base;
 	}
 
-	public FakeBaseListBuilder withTagsDictionnary(final List<String> sampleTags) {
-		myTagsDictionnary = sampleTags;
-		return this;
+	@Override
+	public List<Base> build() {
+		Assertion.checkNotNull(myGeosectorIds);
+		//---
+		final List<Base> bases = new ArrayList<>();
+
+		int currentCounter = 0;
+		for (final String firstPart : myNameFirstPartDictionnary) {
+			for (final String secondPart : myNameSecondPartDictionnary) {
+
+				final Long currentGeosectorId = myGeosectorIds.get(ThreadLocalRandom.current().nextInt(myGeosectorIds.size()));
+				final LocalDate creationDate = getCreationDate();
+				final int healthLevel = getHealthLevel();
+				final String description = getDescription(firstPart, secondPart, healthLevel, creationDate);
+
+				bases.add(createBase(FakeDataUtils.randomEnum(BaseTypeEnum.class),
+						firstPart + " " + secondPart,
+						getCodeFromBaseName(firstPart, secondPart, currentCounter),
+						healthLevel,
+						creationDate,
+						description,
+						getGeoLocation(),
+						getAssetsValue(),
+						getRentingFee(),
+						currentGeosectorId,
+						getTagsFromDictionnary(myTagsDictionnary)));
+				currentCounter++;
+
+				if (currentCounter >= myMaxValues) {
+					break;
+				}
+			}
+			if (currentCounter >= myMaxValues) {
+				break;
+			}
+		}
+		return bases;
 	}
+
 }
