@@ -40,13 +40,13 @@ public class Studio {
 				//----Definitions
 				.addModule(ModuleConfig.builder("ressources")
 						.addDefinitionProvider(DefinitionProviderConfig.builder(DynamoDefinitionProvider.class)
-								.addDefinitionResource("kpr", "mda/generation.kpr")
+								.addDefinitionResource("kpr", "io/mars/gen.kpr")
 								.build())
 						.build())
 				// ---StudioFeature
 				.addModule( ModuleConfig.builder("studio")
 					.addComponent(MasterDataManager.class, MasterDataManagerImpl.class)
-						.addPlugin(JsonMasterDataValueProvider.class, Param.of("fileName", "mda/masterDataValues.json"))
+						.addPlugin(JsonMasterDataValueProvider.class, Param.of("fileName", "io/mars/masterDataValues.json"))
 					.addComponent(MdaManager.class, MdaManagerImpl.class,
 							Param.of("targetGenDir", "src/main/javagen/"),
 							Param.of("encoding", "UTF-8"),

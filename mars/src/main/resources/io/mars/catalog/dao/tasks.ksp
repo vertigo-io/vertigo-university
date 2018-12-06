@@ -1,0 +1,12 @@
+package io.mars.catalog
+
+create Task TK_SELECT_EQUIPMENT_TYPE {  
+    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+    request : "
+            select EQUIPMENT_TYPE_ID, LABEL from EQUIPMENT_TYPE
+             "
+    attribute DTC_EQUIPMENT_TYPE     {domain : DO_DT_EQUIPMENT_TYPE_DTC required:"true"  inOut :"out"}
+}
+
+
+

@@ -111,7 +111,7 @@
 	<module name="mars-boot-resources">
 		<definitions>
 			<provider class="io.vertigo.dynamo.plugins.environment.DynamoDefinitionProvider" >
-				<resource type="kpr" path="boot/definitions/application.kpr" />
+				<resource type="kpr" path="io/mars/run.kpr" />
 				<resource type="classes" path="io.mars.domain.DtDefinitions" />
 			</provider>
 		</definitions>

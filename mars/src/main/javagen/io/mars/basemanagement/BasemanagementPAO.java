@@ -107,18 +107,6 @@ public final class BasemanagementPAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TK_SELECT_EQUIPMENT_TYPE_ID.
-	 * @return java.util.List<Long> equipmentTypeIdList
-	*/
-	public java.util.List<Long> selectEquipmentTypeId() {
-		final Task task = createTaskBuilder("TK_SELECT_EQUIPMENT_TYPE_ID")
-				.build();
-		return getTaskManager()
-				.execute(task)
-				.getResult();
-	}
-
-	/**
 	 * Execute la tache TK_SELECT_GEOSECTOR_ID.
 	 * @return java.util.List<Long> geosectorIdList
 	*/
