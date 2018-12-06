@@ -80,7 +80,7 @@
 	</module>
 	
 	<module name="vertigo-persona">
-		<component api="VSecurityManager" class="io.vertigo.persona.impl.security.VSecurityManagerImpl">
+		<component api="VSecurityManager" class="io.vertigo.account.impl.security.VSecurityManagerImpl">
 			<param name="userSessionClassName" value="io.mars.commons.MarsUserSession" />
 		</component>
 	</module>
@@ -176,9 +176,10 @@
 	</module>
 
 	<init>
-		<!-- initializer class="io.mars.boot.DataBaseInitializer"/ --> 
+		<initializer class="io.mars.boot.DataBaseInitializer" /> 
 		<initializer class="io.mars.boot.MasterDataInitializer"/>
 		<initializer class="io.mars.boot.I18nResourcesInitializer"/>
 		<initializer class="io.mars.boot.SearchInitializer"/>
+		<initializer class="io.mars.boot.OrchestraInitializer"/>
 	</init>
 </config>

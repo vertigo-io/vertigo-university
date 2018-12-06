@@ -10,7 +10,7 @@ import java.util.concurrent.ThreadLocalRandom;
 import io.mars.basemanagement.domain.Base;
 import io.mars.basemanagement.domain.BaseTypeEnum;
 import io.mars.datageneration.DataGenerator;
-import io.mars.datageneration.FakeDataUtils;
+import io.mars.datageneration.FakeDataUtil;
 import io.vertigo.lang.Assertion;
 import io.vertigo.lang.Builder;
 
@@ -77,11 +77,11 @@ public final class FakeBaseListBuilder implements Builder {
 	private static LocalDate getCreationDate() {
 
 		final LocalDate today = LocalDate.now();
-		return today.minus(31 + DataGenerator.rnd.nextInt(3650), ChronoUnit.DAYS);
+		return today.minus(31 + DataGenerator.RND.nextInt(3650), ChronoUnit.DAYS);
 	}
 
 	private static int getHealthLevel() {
-		return DataGenerator.rnd.nextInt(101);
+		return DataGenerator.RND.nextInt(101);
 	}
 
 	private static String getDescription(final String firstPart, final String secondPart, final int healthLevel, final LocalDate creationDate) {
@@ -143,7 +143,7 @@ public final class FakeBaseListBuilder implements Builder {
 				final int healthLevel = getHealthLevel();
 				final String description = getDescription(firstPart, secondPart, healthLevel, creationDate);
 
-				bases.add(createBase(FakeDataUtils.randomEnum(BaseTypeEnum.class),
+				bases.add(createBase(FakeDataUtil.randomEnum(BaseTypeEnum.class),
 						firstPart + " " + secondPart,
 						getCodeFromBaseName(firstPart, secondPart, currentCounter),
 						healthLevel,

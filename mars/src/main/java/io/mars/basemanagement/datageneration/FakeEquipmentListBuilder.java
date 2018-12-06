@@ -91,7 +91,7 @@ public class FakeEquipmentListBuilder implements Builder {
 	}
 
 	private static int getHealthLevel() {
-		return DataGenerator.rnd.nextInt(101);
+		return DataGenerator.RND.nextInt(101);
 	}
 
 	private static String getGeoLocation() {
@@ -105,7 +105,7 @@ public class FakeEquipmentListBuilder implements Builder {
 
 	private static LocalDate getPurchaseDate() {
 		final LocalDate today = LocalDate.now();
-		return today.minus(31 + DataGenerator.rnd.nextInt(3650), ChronoUnit.DAYS);
+		return today.minus(31 + DataGenerator.RND.nextInt(3650), ChronoUnit.DAYS);
 	}
 
 	private static BigDecimal getRentingFee() {
@@ -144,7 +144,7 @@ public class FakeEquipmentListBuilder implements Builder {
 	}
 
 	private static Double myNextDouble(final int min, final int max) {
-		return min + DataGenerator.rnd.nextDouble() * (max - min);
+		return min + DataGenerator.RND.nextDouble() * (max - min);
 	}
 
 	@Override
@@ -157,10 +157,10 @@ public class FakeEquipmentListBuilder implements Builder {
 
 		for (int currentCounter = 0; currentCounter < myMaxValues; currentCounter++) {
 
-			final EquipmentType currentEquipmentType = myEquipmentTypes.get(DataGenerator.rnd.nextInt(myEquipmentTypes.size()));
-			final Business currentBusiness = myBusinessList.get(DataGenerator.rnd.nextInt(myBusinessList.size()));
-			final Long currentBaseId = myBaseIds.get(DataGenerator.rnd.nextInt(myBaseIds.size()));
-			final Long currentGeosectorId = myGeosectorIds.get(DataGenerator.rnd.nextInt(myGeosectorIds.size()));
+			final EquipmentType currentEquipmentType = myEquipmentTypes.get(DataGenerator.RND.nextInt(myEquipmentTypes.size()));
+			final Business currentBusiness = myBusinessList.get(DataGenerator.RND.nextInt(myBusinessList.size()));
+			final Long currentBaseId = myBaseIds.get(DataGenerator.RND.nextInt(myBaseIds.size()));
+			final Long currentGeosectorId = myGeosectorIds.get(DataGenerator.RND.nextInt(myGeosectorIds.size()));
 
 			final Equipment equipment = createEquipment(currentBaseId,
 					currentBusiness,

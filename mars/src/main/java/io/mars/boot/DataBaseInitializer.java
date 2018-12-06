@@ -25,11 +25,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
 
 import javax.inject.Inject;
 
@@ -58,12 +53,7 @@ public class DataBaseInitializer implements ComponentInitializer {
 	@Override
 	public void init() {
 		createDataBase();
-
-		dataGenerator.generateReferenceData();
-		dataGenerator.generateInitialPersons();
-		dataGenerator.generateInitialBases();
-		dataGenerator.generateInitialEquipments();
-		dataGenerator.generatePastData(ZonedDateTime.of(LocalDate.of(2017, 1, 1), LocalTime.of(0, 0), ZoneOffset.UTC).toInstant(), Instant.now());
+		dataGenerator.generateInitialData();
 	}
 
 	private void createDataBase() {
@@ -74,7 +64,7 @@ public class DataBaseInitializer implements ComponentInitializer {
 		execSqlScript(connection, "sqlgen/init_masterdata_job_status.sql");
 		execSqlScript(connection, "sqlgen/init_masterdata_work_order_status.sql");
 
-		execSqlScript(connection, "io/vertigo/orchestra/sql/crebas_orchestra.sql");
+		execSqlScript(connection, "io/vertigo/orchestra/sql/orchestra_create_init.sql");
 
 	}
 

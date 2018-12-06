@@ -6,7 +6,7 @@ import java.util.Map;
 import io.vertigo.lang.Assertion;
 import io.vertigo.lang.VSystemException;
 
-public final class RangeMap<T extends Comparable<T>, V> {
+final class RangeMap<T extends Comparable<T>, V> {
 
 	private final Map<MyRange<T>, V> myMap = new HashMap<>();
 

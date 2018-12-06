@@ -79,7 +79,7 @@ public class TicketGenerator implements Component {
 			final Double density = qualityEquipmentDensityDistribution.getDensity(Double.valueOf(yearOfEvent));
 
 			final Double realDensity = density / (chronoUnit.getDuration().getSeconds() / ChronoUnit.YEARS.getDuration().getSeconds()) * step;
-			final Double tirage = DataGenerator.rnd.nextDouble();
+			final Double tirage = DataGenerator.RND.nextDouble();
 
 			if (realDensity >= tirage) {
 				final Ticket ticket = new Ticket();

@@ -1,6 +1,10 @@
 package io.mars.datageneration;
 
 import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.Random;
 
@@ -18,7 +22,7 @@ import io.vertigo.lang.Assertion;
 public class DataGenerator implements Component {
 
 	private static final Long RANDOM_SEED = 1337L;
-	public static final Random rnd = new Random(RANDOM_SEED);
+	public static final Random RND = new Random(RANDOM_SEED);
 
 	// a placer sur la bonne méthode
 	//	@DaemonScheduled(name = "DMN_TICKET_AND_WO_GENERATOR", periodInSeconds = 10)
@@ -44,26 +48,33 @@ public class DataGenerator implements Component {
 		this.initialEquipmentUnits = initialEquipmentUnits;
 	}
 
-	public void generateInitialEquipments() {
+	public void generateInitialData() {
+		generateReferenceData();
+		generateInitialPersons();
+		generateInitialBases();
+		generateInitialEquipments();
+		generatePastData(ZonedDateTime.of(LocalDate.of(2017, 1, 1), LocalTime.of(0, 0), ZoneOffset.UTC).toInstant(), Instant.now());
+	}
+
+	private void generateInitialEquipments() {
 		equipmentGenerator.createInitialEquipmentCategories();
 		equipmentGenerator.createInitialEquipmentTypesFromCSV("initdata/equipmentTypes.csv");
 		equipmentGenerator.createInitialEquipments(initialEquipmentUnits);
-
 	}
 
-	public void generateInitialPersons() {
+	private void generateInitialPersons() {
 		personGenerator.createInitialPersonsFromCSV("initdata/persons.csv");
 	}
 
-	public void generateInitialBases() {
+	private void generateInitialBases() {
 		baseGenerator.generateInitialBases();
 	}
 
-	public void generateReferenceData() {
+	private void generateReferenceData() {
 		referenceDataGenerator.generateReferenceData();
 	}
 
-	public void generatePastData(final Instant from, final Instant to) {
+	private void generatePastData(final Instant from, final Instant to) {
 		Assertion.checkNotNull(from);
 		Assertion.checkNotNull(to);
 		//
@@ -71,7 +82,7 @@ public class DataGenerator implements Component {
 		while (timeCursor.isBefore(to)) {
 			ticketGenerator.generatePastTickets(timeCursor, ChronoUnit.DAYS, 1);
 			// tous les 10 à 20 jours
-			timeCursor = timeCursor.plus(rnd.nextInt(10) + 10, ChronoUnit.DAYS);
+			timeCursor = timeCursor.plus(RND.nextInt(10) + 10, ChronoUnit.DAYS);
 		}
 	}
 

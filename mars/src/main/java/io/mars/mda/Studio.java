@@ -1,4 +1,4 @@
-package io.mars.run;
+package io.mars.mda;
 
 import javax.inject.Inject;
 
