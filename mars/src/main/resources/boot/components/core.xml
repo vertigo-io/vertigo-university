@@ -77,13 +77,36 @@
 	
 	
 	
-	<!-- 
+	
 	<module name="vertigo-persona">
 		<component api="VSecurityManager" class="io.vertigo.persona.impl.security.VSecurityManagerImpl">
-			<param name="userSessionClassName" value="io.vertigo.mars.user.MarsUserSession" />
+			<param name="userSessionClassName" value="io.mars.commons.MarsUserSession" />
 		</component>
 	</module>
-	 -->
+	 
+	<module name="vertigo-vega" >
+		<component api="WebServiceManager" class="io.vertigo.vega.impl.webservice.WebServiceManagerImpl">
+			<plugin class="io.vertigo.vega.plugins.webservice.scanner.annotations.AnnotationsWebServiceScannerPlugin" />
+			<plugin class="io.vertigo.vega.plugins.webservice.webserver.sparkjava.SparkJavaServletFilterWebServerPlugin" >
+				<param name="apiPrefix" value="/api"/>
+			</plugin>
+			<!-- Handlers -->
+			<plugin class="io.vertigo.vega.plugins.webservice.handler.ExceptionWebServiceHandlerPlugin" />
+			<plugin class="io.vertigo.vega.plugins.webservice.handler.SessionInvalidateWebServiceHandlerPlugin" />
+			<plugin class="io.vertigo.vega.plugins.webservice.handler.SessionWebServiceHandlerPlugin" />
+			<plugin class="io.vertigo.vega.plugins.webservice.handler.RateLimitingWebServiceHandlerPlugin" />
+			<plugin class="io.vertigo.vega.plugins.webservice.handler.SecurityWebServiceHandlerPlugin" />
+			<plugin class="io.vertigo.vega.plugins.webservice.handler.AccessTokenWebServiceHandlerPlugin" />
+			<plugin class="io.vertigo.vega.plugins.webservice.handler.JsonConverterWebServiceHandlerPlugin"/>
+			<plugin class="io.vertigo.vega.plugins.webservice.handler.PaginatorAndSortWebServiceHandlerPlugin" />
+			<plugin class="io.vertigo.vega.plugins.webservice.handler.ValidatorWebServiceHandlerPlugin" />
+			<plugin class="io.vertigo.vega.plugins.webservice.handler.RestfulServiceWebServiceHandlerPlugin" />
+		</component>
+		<component api="JsonEngine" class="io.vertigo.vega.engines.webservice.json.GoogleJsonEngine"/>
+		<component api="TokenManager" class="io.vertigo.vega.impl.token.TokenManagerImpl">
+			<param name="collection" value="mars-api" />
+		</component>
+	</module>
 	 
 	<module name="mars-boot-resources">
 		<definitions>
