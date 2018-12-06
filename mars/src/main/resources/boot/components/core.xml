@@ -42,6 +42,10 @@
 			<plugin class="io.vertigo.dynamo.plugins.store.datastore.sql.SqlDataStorePlugin">
 				<param name="sequencePrefix" value="SEQ_" />
 			</plugin>
+			<plugin class="io.vertigo.dynamo.plugins.store.datastore.sql.SqlDataStorePlugin">
+				<param name="dataSpace" value="orchestra"/>
+				<param name="sequencePrefix" value="SEQ_" />
+			</plugin>
 			<plugin class="io.vertigo.dynamo.plugins.store.filestore.fs.FsFileStorePlugin">
 				<param name="storeDtName" value="DT_MEDIA_FILE_INFO" />
 				<param name="path" value="${user.home}/marsFiles/" />
@@ -75,9 +79,6 @@
 		</component>
 	</module>
 	
-	
-	
-	
 	<module name="vertigo-persona">
 		<component api="VSecurityManager" class="io.vertigo.persona.impl.security.VSecurityManagerImpl">
 			<param name="userSessionClassName" value="io.mars.commons.MarsUserSession" />
@@ -107,6 +108,63 @@
 			<param name="collection" value="mars-api" />
 		</component>
 	</module>
+	<module name="vega-webservices"  >
+		<component class="io.vertigo.vega.impl.webservice.catalog.CatalogWebServices" />
+		<component class="io.vertigo.vega.impl.webservice.catalog.SwaggerWebServices" />
+	</module>
+	
+	<module name="aop">
+		<aspect class="io.vertigo.commons.impl.transaction.VTransactionAspect"/>
+	</module>
+	
+	<module name="orchestra-dao" >
+		<component class="io.vertigo.orchestra.dao.definition.OProcessDAO"/>
+		<component class="io.vertigo.orchestra.dao.definition.OActivityDAO"/>
+		<component class="io.vertigo.orchestra.dao.planification.OProcessPlanificationDAO"/>
+		<component class="io.vertigo.orchestra.dao.execution.OActivityExecutionDAO"/>
+		<component class="io.vertigo.orchestra.dao.execution.OProcessExecutionDAO"/>
+		<component class="io.vertigo.orchestra.dao.execution.OActivityWorkspaceDAO"/>
+		<component class="io.vertigo.orchestra.dao.execution.OActivityLogDAO"/>
+		<component class="io.vertigo.orchestra.dao.execution.ExecutionPAO"/>
+		<component class="io.vertigo.orchestra.dao.planification.PlanificationPAO"/>
+		<component class="io.vertigo.orchestra.dao.execution.ONodeDAO"/>
+		<component class="io.vertigo.orchestra.dao.definition.DefinitionPAO"/>
+		<component class="io.vertigo.orchestra.monitoring.dao.summary.SummaryPAO"/>
+		<component class="io.vertigo.orchestra.monitoring.dao.uiexecutions.UiexecutionsPAO"/>
+		<component class="io.vertigo.orchestra.monitoring.dao.uidefinitions.UidefinitionsPAO"/>
+	</module>
+	<module name="orchestra">
+		<definitions>
+			<provider class="io.vertigo.dynamo.plugins.environment.DynamoDefinitionProvider" >
+				<resource type ="kpr" path="io/vertigo/orchestra/execution.kpr"/>
+			    <resource type="classes" path="io.vertigo.orchestra.domain.DtDefinitions" />  
+		    </provider>
+		</definitions>   
+		<component api="ONodeManager" class="io.vertigo.orchestra.impl.node.ONodeManagerImpl"/>
+		<component api="OrchestraDefinitionManager" class="io.vertigo.orchestra.impl.definitions.OrchestraDefinitionManagerImpl">
+			<plugin class="io.vertigo.orchestra.plugins.definitions.db.DbProcessDefinitionStorePlugin"/>
+		</component>
+		<component api="OrchestraServices" class="io.vertigo.orchestra.impl.services.OrchestraServicesImpl">
+			<plugin class="io.vertigo.orchestra.plugins.services.schedule.db.DbProcessSchedulerPlugin">
+				<param name="nodeName" value="MARS1" />
+				<param name="planningPeriodSeconds" value="30" />
+				<param name="forecastDurationSeconds" value="60" />
+			</plugin>
+			<plugin class="io.vertigo.orchestra.plugins.services.execution.db.DbProcessExecutorPlugin">
+				<param name="nodeName" value="MARS1" />
+				<param name="executionPeriodSeconds" value="30" />
+				<param name="workersCount" value="10" />
+			</plugin>
+			<plugin class="io.vertigo.orchestra.plugins.services.log.db.DbProcessLoggerPlugin"/>
+			<plugin class="io.vertigo.orchestra.plugins.services.report.db.DbProcessReportPlugin"/>
+		</component>
+	</module>
+	<module name="orchestra-webservices"  >
+		<component class="io.vertigo.orchestra.webservices.WsInfos" />
+		<component class="io.vertigo.orchestra.webservices.WsDefinition" />
+		<component class="io.vertigo.orchestra.webservices.WsExecution" />
+		<component class="io.vertigo.orchestra.webservices.WsExecutionControl" />
+	</module>
 	 
 	<module name="mars-boot-resources">
 		<definitions>
@@ -117,12 +175,8 @@
 		</definitions>
 	</module>
 
-	<module name="aop">
-		<aspect class="io.vertigo.commons.impl.transaction.VTransactionAspect"/>
-	</module>
-
 	<init>
-		<!-- initializer class="io.mars.boot.DataBaseInitializer"/  --> 
+		<!-- initializer class="io.mars.boot.DataBaseInitializer"/ --> 
 		<initializer class="io.mars.boot.MasterDataInitializer"/>
 		<initializer class="io.mars.boot.I18nResourcesInitializer"/>
 		<initializer class="io.mars.boot.SearchInitializer"/>

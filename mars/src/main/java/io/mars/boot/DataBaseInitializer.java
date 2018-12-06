@@ -74,6 +74,8 @@ public class DataBaseInitializer implements ComponentInitializer {
 		execSqlScript(connection, "sqlgen/init_masterdata_job_status.sql");
 		execSqlScript(connection, "sqlgen/init_masterdata_work_order_status.sql");
 
+		execSqlScript(connection, "io/vertigo/orchestra/sql/crebas_orchestra.sql");
+
 	}
 
 	private void execSqlScript(final SqlConnection connection, final String scriptPath) {
