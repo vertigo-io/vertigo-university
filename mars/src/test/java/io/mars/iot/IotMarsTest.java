@@ -51,7 +51,10 @@ public final class IotMarsTest extends AbstractTestCaseJU5 {
 
 	@Test
 	public void testMqttClient() {
-		final String mytopic = "MQTT";
+
+		final String mytopicsub = "alpha/#";
+		final String mytopicpub = "alpha/MQTT";
+		final String mytopicpub2 = "alpha/Toto";
 		final String content = "Message from MqttPublishSample";
 		final int qos = 0;
 		final String broker = "tcp://mars.dev.klee.lan.net:1883";
@@ -60,11 +63,13 @@ public final class IotMarsTest extends AbstractTestCaseJU5 {
 		final MqttCallback callback = new MqttCallback() {
 			@Override
 			public void connectionLost(final Throwable cause) {
-				// TODO
+				//
 			}
 
 			@Override
 			public void messageArrived(final String topic, final MqttMessage message) throws Exception {
+				handleMessage(message, topic);
+				System.out.println("message from: " + topic);
 				System.out.println("Message: " + message.toString());
 
 			}
@@ -82,13 +87,14 @@ public final class IotMarsTest extends AbstractTestCaseJU5 {
 			sampleClient.connect(connOpts);
 			sampleClient.setCallback(callback);
 			System.out.println("Connected");
-			sampleClient.subscribe(mytopic);
+			sampleClient.subscribe(mytopicsub);
 			System.out.println("Publishing message: " + content);
 			final MqttMessage message = new MqttMessage(content.getBytes());
 			message.setQos(qos);
-			sampleClient.publish(mytopic, message);
+			sampleClient.publish(mytopicpub, message);
+			sampleClient.publish(mytopicpub2, message);
 			System.out.println("Message published");
-			sampleClient.subscribe(mytopic);
+			sampleClient.subscribe(mytopicsub);
 			sampleClient.disconnect();
 			System.out.println("Disconnected");
 		} catch (final MqttException me) {
@@ -101,6 +107,16 @@ public final class IotMarsTest extends AbstractTestCaseJU5 {
 		}
 	}
 
+	private static String[] parseMqttMessage(final MqttMessage message) {
+		final String[] dataParsed = message.toString().split(" ");
+		return dataParsed;
+	}
+
+	private static String[] parseTopic(final String topic) {
+		final String[] dataParsed = topic.split("/");
+		return dataParsed;
+	}
+
 	@Test
 	public void testInsertMeasure() {
 		final Measure measure = Measure.builder("test")
@@ -110,9 +126,31 @@ public final class IotMarsTest extends AbstractTestCaseJU5 {
 		timeSeriesDataBaseManager.insertMeasure("mars-test", measure);
 	}
 
-	private void handleMessage(final MqttMessage message) {
+	private static String getTypeOfDataMeasured(final String[] topicParsed) {
+		if (topicParsed[1] == "temperature") {
+			return "temperature";
+		} else if (topicParsed[1] == "moisture") {
+			return "moisture";
+		} else if (topicParsed[1] == "temperature") {
+			return "temperature";
+		} else if (topicParsed[1] == "soil_moisture") {
+			return "soil_moisture";
+		} else if (topicParsed[-1] == "temperature") {
+			return "temperature";
+		} else {
+			return null;
+		}
+	}
+
+	private void handleMessage(final MqttMessage message, final String topic) {
 		///
-		//timeSeriesDataBaseManager.insertMeasure("mars-test", measure);
+		final String[] data = parseMqttMessage(message);
+		final String[] location = parseTopic(topic);
+		final Measure mes = Measure.builder(location[1])
+				.time(Instant.now())
+				.addField(getTypeOfDataMeasured(location), data[1])
+				.build();
+		timeSeriesDataBaseManager.insertMeasure("mars-test", mes);
 	}
 
 	@Test
