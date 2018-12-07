@@ -18,8 +18,10 @@
  */
 package io.mars.iot;
 
+import io.mars.basemanagement.services.equipment.IotEquipmentServices;
 import io.vertigo.app.config.AppConfig;
 import io.vertigo.app.config.AppConfigBuilder;
+import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.commons.impl.CommonsFeatures;
 import io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin;
 import io.vertigo.core.plugins.resource.url.URLResourceResolverPlugin;
@@ -38,6 +40,9 @@ public final class IotMarsTestConfig {
 				.addModule(new DatabaseFeatures()
 						.withTimeSeriesDataBase("mars-test")
 						.withInfluxDb("http://mars.dev.klee.lan.net:8086", "user", "password")
+						.build())
+				.addModule(ModuleConfig.builder("mars-iot")
+						.addComponent(IotEquipmentServices.class)
 						.build());
 	}
 

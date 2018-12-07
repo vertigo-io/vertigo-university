@@ -90,7 +90,7 @@ public class PersonServices implements Component, Activeable {
 		}
 	}
 
-	private FileInfoURI toFileInfoStdURI(final Long fileId) {
+	private static FileInfoURI toFileInfoStdURI(final Long fileId) {
 		return new FileInfoURI(FileInfoDefinition.findFileInfoDefinition(FileInfoStd.class), fileId);
 	}
 }
