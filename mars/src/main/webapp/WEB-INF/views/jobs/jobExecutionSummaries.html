@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="http://www.morphbit.com/thymeleaf/component"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{templates/mmcListLayout}"
+>
+	<head>
+		<title>Jobs Weekly Summary</title>
+	</head>
+	
+	<body>
+		<section layout:fragment="content" >
+			<vu:list list="summaries" componentId="baseCards" rowsPerPage="20"  >
+				<div class="row">
+					<div class="col-3">
+						<vu:include-data object="summaries" field="processLabel" />
+						{{item.processLabel}}
+					</div>
+					<div class="col-3">
+						<vu:include-data object="summaries" field="health" />
+						<vu:include-data object="summaries" field="errorsCount" />
+						<vu:include-data object="summaries" field="successfulCount" />
+						<vu:include-data object="summaries" field="misfiredCount" />
+						<vu:include-data object="summaries" field="averageExecutionTime" />
+						{{item.health}}
+						{{item.errorsCount}}
+						{{item.successfulCount}}
+						{{item.misfiredCount}}
+						{{item.averageExecutionTime}}
+					</div>
+					<div class="col-3">
+						<vu:include-data object="summaries" field="lastExecutionTime" />
+						{{item.lastExecutionTime}}
+					</div>
+					<div class="col-3">
+						<vu:include-data object="summaries" field="nextExecutionTime" />
+						{{item.nextExecutionTime}}
+					</div>
+				</div>
+			</vu:list>
+		</section>
+	</body>
+</html>

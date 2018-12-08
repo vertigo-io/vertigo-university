@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="http://www.morphbit.com/thymeleaf/component"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{templates/mmcDetailLayout}"
+>
+	<head>
+		<title>Job detail</title>		
+	</head>
+	
+	<body>
+	
+		<section layout:fragment="content-nav">
+			<nav v-scroll-spy="{offset:150}">
+			    <q-list link style="height:100%">
+			        <q-item tag="a" href="#information">Information</q-item>
+	        	</q-list>
+	        </nav>
+		</section>
+		
+		<section>
+				<div layout:fragment="content-header-title">
+					<big th:text="${model.job.label}"></big> 
+				</div>
+		</section>
+		
+		<section layout:fragment="content" >
+			<vu:form>
+				<vu:block id="information" title="Information">
+					<vu:grid cols="2">
+						<vu:text-field object="job" field="name"/>
+						<vu:text-field object="job" field="label" />
+					</vu:grid>
+				</vu:block>
+			</vu:form>
+		</section>
+	</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="http://www.morphbit.com/thymeleaf/component"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{templates/mmcListLayout}"
+>
+	<head>
+		<title>Jobs</title>
+		<script type="text/javascript">
+		VUiExtensions.methods.navigate =  function navigate(url) { window.location.href = url; }
+	</script>
+	</head>
+	
+	<body>
+		<section layout:fragment="content" >
+			<vu:include-data object="jobs" field="name"/>
+			<vu:include-data object="jobs" field="label"/>
+			<vu:list list="jobs" componentId="jobsList" rowsPerPage="20" >
+				<q-item-main>
+					<div class="row" >
+						<div class="col-6">
+							{{item.name}}
+						</div>
+						<div class="col-6">
+							{{item.label}}
+						</div>
+					</div>
+				</q-item-main>
+				<q-item-side>
+					<q-btn round color="primary" icon="arrow_forward" type="a" th::href="|'@{/job/}'+item.name|"></q-btn>
+				</q-item-side>
+			</vu:list>
+		</section>
+	</body>
+	
+</html>

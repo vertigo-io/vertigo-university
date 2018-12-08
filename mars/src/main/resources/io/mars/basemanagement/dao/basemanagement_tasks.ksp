@@ -12,7 +12,7 @@ create Task TK_GET_EQUIPMENTS_OVERVIEW {
 			from equipment equ
 				join business bus on bus.business_id = equ.business_id 
 			where equ.base_id = #BASE_ID#
-			group by business_name, business_id
+			group by business_name, bus.business_id
              "
     attribute BASE_ID     {domain : DO_ID         		required:"true"  inOut :"in"}
     attribute OVERVIEW     {domain : DO_DT_EQUIPMENT_OVERVIEW_DTC    required:"true"  inOut :"out"}

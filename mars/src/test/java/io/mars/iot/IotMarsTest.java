@@ -31,6 +31,7 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import io.vertigo.AbstractTestCaseJU5;
@@ -63,6 +64,18 @@ public final class IotMarsTest extends AbstractTestCaseJU5 {
 
 	@Inject
 	private TimeSeriesDataBaseManager timeSeriesDataBaseManager;
+
+	@Test
+	@Disabled
+	public void server() {
+		while (!Thread.interrupted()) {
+			try {
+				Thread.sleep(10 * 1000);
+			} catch (final InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 
 	@Test
 	public void testMqttClient() throws InterruptedException {

@@ -14,6 +14,7 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
+import io.vertigo.app.config.discovery.NotDiscoverable;
 import io.vertigo.core.component.Activeable;
 import io.vertigo.core.component.Component;
 import io.vertigo.database.timeseries.Measure;
@@ -21,6 +22,7 @@ import io.vertigo.database.timeseries.TimeSeriesDataBaseManager;
 import io.vertigo.lang.Assertion;
 import io.vertigo.lang.WrappedException;
 
+@NotDiscoverable
 public class IotEquipmentServices implements Component, Activeable {
 
 	private final Logger logger = LogManager.getLogger(this.getClass());

@@ -11,4 +11,7 @@
 			<param name="initialEquipmentUnits" value="1500" />
 		</component>
 	</module>
+	<module name="jobs">
+		<component class="io.mars.jobs.services.JobServices" />
+	</module>
 </config>

@@ -8,7 +8,8 @@ import io.vertigo.ui.impl.springmvc.config.VSpringWebConfig;
 		"io.mars.commons.controllers",
 		"io.mars.basemanagement.controllers.base",
 		"io.mars.basemanagement.controllers.equipment",
-		"io.mars.hr.controllers.person" })
+		"io.mars.hr.controllers.person",
+		"io.mars.jobs.controllers" })
 public class MarsVSpringWebConfig extends VSpringWebConfig {
 	// nothing basic config is enough
 }
