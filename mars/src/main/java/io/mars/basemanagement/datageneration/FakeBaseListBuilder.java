@@ -63,7 +63,7 @@ public final class FakeBaseListBuilder implements Builder {
 		String tagString = "";
 		final int tagNumber = ThreadLocalRandom.current().nextInt(MIN_TAG_NUMBER, MAX_TAG_NUMBER);
 		for (int i = 0; i < tagNumber; i++) {
-			tagString += tagDictionnary.get(ThreadLocalRandom.current().nextInt(tagDictionnary.size() - 1)) + " ";
+			tagString += tagDictionnary.get(ThreadLocalRandom.current().nextInt(tagDictionnary.size() - 1)) + ";";
 		}
 		return tagString.substring(0, tagString.length() - 1);
 

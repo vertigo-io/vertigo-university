@@ -50,6 +50,9 @@ create sequence SEQ_PERSON
 create sequence SEQ_PICTURE
 	start with 1000 cache 20; 
 
+create sequence SEQ_TAG
+	start with 1000 cache 20; 
+
 create sequence SEQ_TICKET
 	start with 1000 cache 20; 
 
@@ -454,6 +457,22 @@ comment on column PICTURE.PICTUREFILE_ID is
 
 comment on column PICTURE.BASE_ID is
 'Base';
+
+-- ============================================================
+--   Table : TAG                                        
+-- ============================================================
+create table TAG
+(
+    TAG_ID      	 NUMERIC     	not null,
+    LABEL       	 VARCHAR(100)	,
+    constraint PK_TAG primary key (TAG_ID)
+);
+
+comment on column TAG.TAG_ID is
+'Id';
+
+comment on column TAG.LABEL is
+'Label';
 
 -- ============================================================
 --   Table : TICKET                                        

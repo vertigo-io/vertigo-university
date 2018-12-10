@@ -19,3 +19,8 @@ alter DtDefinition DT_WORK_ORDER_STATUS {
 	sortField : "LABEL"
  	displayField : "LABEL"
 }
+
+alter DtDefinition DT_TAG {
+	sortField : "LABEL"
+ 	displayField : "LABEL"
+}

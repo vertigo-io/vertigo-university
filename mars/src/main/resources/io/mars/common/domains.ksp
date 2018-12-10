@@ -119,6 +119,13 @@ create Domain DO_ID {
 	storeType : "NUMERIC"
 }
 
+create Domain DO_MULTIPLE_IDS {
+	dataType : String
+	formatter : FMT_DEFAULT
+    storeType : "TEXT"
+}
+
+
 
 create Domain DO_INSTANT {
 	dataType : Instant

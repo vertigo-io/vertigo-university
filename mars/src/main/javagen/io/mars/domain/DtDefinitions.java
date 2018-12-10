@@ -51,6 +51,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		Person(io.mars.hr.domain.Person.class),
 		/** Objet de données Picture. */
 		Picture(io.mars.basemanagement.domain.Picture.class),
+		/** Objet de données Tag. */
+		Tag(io.mars.basemanagement.domain.Tag.class),
 		/** Objet de données Ticket. */
 		Ticket(io.mars.maintenance.domain.Ticket.class),
 		/** Objet de données TicketStatus. */
@@ -339,6 +341,15 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		PICTUREFILE_ID,
 		/** Propriété 'Base'. */
 		BASE_ID	}
+
+	/**
+	 * Enumération des champs de Tag.
+	 */
+	public enum TagFields implements DtFieldName<io.mars.basemanagement.domain.Tag> {
+		/** Propriété 'Id'. */
+		TAG_ID,
+		/** Propriété 'Label'. */
+		LABEL	}
 
 	/**
 	 * Enumération des champs de Ticket.

@@ -1,12 +1,12 @@
 FirstName;LastName;Email;Tags;DateHired
-James T.;Kirk;jtkirk@mmc.co.mars;#historic #captain;12/07/2023
-John;König;jkonig@mmc.co.mars;#moon #1999;04/12/2033
-Neil;Armstrong;narmstrong@mmc.co.mars;#nasa #first #giant;05/12/2033
-Jean-Luc;Picard;jlpicard@mmc.co.mars;#enterprise #french;06/12/2005
+James T.;Kirk;jtkirk@mmc.co.mars;"#historic;#captain";12/07/2023
+John;König;jkonig@mmc.co.mars;"#moon;#1999";04/12/2033
+Neil;Armstrong;narmstrong@mmc.co.mars;"#nasa;#first;#giant";05/12/2033
+Jean-Luc;Picard;jlpicard@mmc.co.mars;"#enterprise;#french";06/12/2005
 Darth;Vader;dvader@mmc.co.mars;#evil;07/01/2008
-Han;Solo;hsolo@mmc.co.mars;#hero #general;04/12/2033
-Jim;Lovell;jlovell@mmc.co.mars;#houston #problem;05/12/2033
+Han;Solo;hsolo@mmc.co.mars;"#hero;#general";04/12/2033
+Jim;Lovell;jlovell@mmc.co.mars;"#houston;#problem";05/12/2033
 William;Adama;wadama@mmc.co.mars;#lost;06/12/2005
 Worker;One;wone@mmc.co.mars;#plumber;07/01/2008
 Worker;Two;wtwo@mmc.co.mars;#worker;12/12/2033
-Worker;Three;wthree@mmc.co.mars;#worker #efficient;13/12/2033
+Worker;Three;wthree@mmc.co.mars;"#worker;#efficient";13/12/2033

@@ -148,7 +148,7 @@ public final class Person implements Entity {
 	 * Récupère la valeur de la propriété 'Tags'.
 	 * @return String tags
 	 */
-	@Field(domain = "DO_TAGS", label = "Tags")
+	@Field(domain = "DO_MULTIPLE_IDS", label = "Tags")
 	public String getTags() {
 		return tags;
 	}

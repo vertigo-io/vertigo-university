@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import io.mars.basemanagement.domain.Tag;
 import io.mars.hr.domain.Person;
 import io.mars.hr.services.person.PersonServices;
 import io.vertigo.dynamo.domain.model.FileInfoURI;
@@ -26,12 +27,14 @@ import io.vertigo.ui.impl.springmvc.controller.AbstractVSpringMvcController;
 public class PersonDetailController extends AbstractVSpringMvcController {
 
 	private static final ViewContextKey<Person> personKey = ViewContextKey.of("person");
+	private final ViewContextKey<Tag> tagsKey = ViewContextKey.of("tags");
 
 	@Inject
 	private PersonServices personServices;
 
 	@GetMapping("/{personId}")
 	public void initContext(final ViewContext viewContext, @PathVariable("personId") final Long personId) {
+		viewContext.publishMdl(tagsKey, Tag.class, null); //all
 		viewContext.publishDto(personKey, personServices.getPerson(personId));
 		toModeReadOnly();
 	}

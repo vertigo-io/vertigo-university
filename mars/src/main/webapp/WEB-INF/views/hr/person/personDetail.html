@@ -45,23 +45,21 @@
 		<section layout:fragment="content" >
 			<vu:form>
 				<vu:block id="information" title="Information">
-				<vu:grid cols="2">
-					<vu:text-field object="person" field="firstName"/>
-					<vu:text-field object="person" field="lastName" />
-					<vu:text-field object="person" field="email" />
-					<vu:label-edit object="person" field="picturefileId" th:if="${viewMode=='edit'}"  >
-						<vu:fileupload th:url="'@{/commons/upload}'" key="personTmpPictureUri" />
-					</vu:label-edit>
-					
-								
-				</vu:grid>
-				<div class="row justify-end">
-				<vu:button-submit th:if="${model.modeEdit}"  label="Cancel" action="@{_cancel}" :flat />
-				<vu:button-submit th:if="${model.modeEdit}"  label="Save" action="@{_save}" color="primary" />
-				<vu:button-submit th:if="${model.modeCreate}" label="Create" action="@{_create}" color="primary"/>
-				</div>				
+					<vu:grid cols="2">
+						<vu:text-field object="person" field="firstName"/>
+						<vu:text-field object="person" field="lastName" />
+						<vu:text-field object="person" field="email" />
+						<vu:chips-autocomplete object="person" field="tags" list="tags" staticData="true"/>
+						<vu:label-edit object="person" field="picturefileId" th:if="${viewMode=='edit'}"  >
+							<vu:fileupload th:url="'@{/commons/upload}'" key="personTmpPictureUri" />
+						</vu:label-edit>
+					</vu:grid>
+					<div class="row justify-end">
+					<vu:button-submit th:if="${model.modeEdit}"  label="Cancel" action="@{_cancel}" :flat />
+					<vu:button-submit th:if="${model.modeEdit}"  label="Save" action="@{_save}" color="primary" />
+					<vu:button-submit th:if="${model.modeCreate}" label="Create" action="@{_create}" color="primary"/>
+					</div>				
 				</vu:block>
-				
 				<vu:block id="contact" title="Contact actions">
 				<div class="row justify-between">
 					<q-btn color="primary" icon="email" label="Mail"></q-btn>

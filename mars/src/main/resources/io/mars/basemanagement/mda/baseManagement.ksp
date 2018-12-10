@@ -11,7 +11,14 @@ create DtDefinition DT_BASE {
 	field GEO_LOCATION {domain: DO_LABEL label:"Geographic Location" required:"false"}
 	field ASSETS_VALUE {domain: DO_CURRENCY label:"Current base assets value" required:"false"}
 	field RENTING_FEE {domain: DO_CURRENCY label: "Renting Fee" required:"false"}
-	field TAGS {domain: DO_TAGS label: "Tags" required:"false"}
+	field TAGS {domain: DO_MULTIPLE_IDS label: "Tags" required:"false"}
+}
+
+
+create DtDefinition DT_TAG {
+	stereotype: "KeyConcept"
+	id TAG_ID {domain: DO_ID label: "Id"}
+	field LABEL {domain: DO_LABEL label: "Label" required:"false"}
 }
 
 

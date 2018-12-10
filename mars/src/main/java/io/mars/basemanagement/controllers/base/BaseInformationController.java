@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import io.mars.basemanagement.domain.Base;
 import io.mars.basemanagement.domain.BaseType;
 import io.mars.basemanagement.domain.Geosector;
+import io.mars.basemanagement.domain.Tag;
 import io.mars.basemanagement.services.base.BaseServices;
 import io.mars.hr.domain.Person;
 import io.mars.hr.services.mission.MissionServices;
@@ -32,10 +33,12 @@ public class BaseInformationController extends AbstractVSpringMvcController {
 	private final ViewContextKey<Person> baseManagerKey = ViewContextKey.of("baseManager");
 	private final ViewContextKey<BaseType> baseTypesKey = ViewContextKey.of("baseTypes");
 	private final ViewContextKey<Geosector> geosectorsKey = ViewContextKey.of("geosectors");
+	private final ViewContextKey<Tag> tagsKey = ViewContextKey.of("tags");
 
 	@GetMapping("/{baseId}")
 	public void initContext(final ViewContext viewContext, @PathVariable("baseId") final Long baseId) {
 		viewContext.publishMdl(baseTypesKey, BaseType.class, null); //all
+		viewContext.publishMdl(tagsKey, Tag.class, null); //all
 		viewContext.publishDtList(geosectorsKey, baseServices.getAllGeosectors());
 		viewContext.publishDto(baseKey, baseServices.get(baseId));
 		//---
