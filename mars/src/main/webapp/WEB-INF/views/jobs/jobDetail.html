@@ -24,13 +24,17 @@
 		</section>
 		
 		<section>
-				<div layout:fragment="content-header-title">
-					<big th:text="${model.job.label}"></big> 
-				</div>
-				<div layout:fragment="content-header-actions">
-					<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>
-					<vu:button-submit action="@{_executeNow}" :round size="lg" color="primary" icon="play_circle_outline" aria-label="Execute now" title="Execute" class="on-left"/>
-				</div>
+			<div layout:fragment="content-header-title">
+				<big th:text="${model.job.label}"></big> 
+			</div>
+			<div layout:fragment="content-header-actions">
+				<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>
+				<vu:button-submit action="@{_executeNow}" :round size="lg" color="primary" icon="play_circle_outline" aria-label="Execute now" title="Execute" class="on-left"/>
+			</div>
+			<div layout:fragment="content-header-tabs">
+				<q-btn flat type="a" class="active" th:href="@{/jobDetail/} + ${model.job.name}">Detail</q-btn>
+				<q-btn flat type="a" th:href="@{/jobExecutions/} + ${model.job.name}">Executions</q-btn>
+			</div>
 		</section>
 		
 		<section layout:fragment="content" >
@@ -38,8 +42,7 @@
 				<vu:button-submit th:if="${model.modeEdit}"  label="Cancel" action="@{_cancel}" :flat />
 				<vu:button-submit th:if="${model.modeEdit}"  label="Save" action="@{_save}" color="primary" />
 				<vu:block id="week" title="'Week\'s executions'">
-					<div class="row items-center">
-						<div class="col-4 execution-summary row justify-start items-center">
+						<div class="execution-summary row justify-start items-center">
 							<vu:include-data object="executionSummary" field="health" />
 							<vu:include-data object="executionSummary" field="errorsCount" />
 							<vu:include-data object="executionSummary" field="successfulCount" />
@@ -68,10 +71,6 @@
 								<span>{{vueData.executionSummary.averageExecutionTime}}</span>
 							</div>
 						</div>
-						<div class="col">
-							<q-btn  color="primary" type="a" th:href="@{'/job/'+${model.job.name}}">See all executions</q-btn>
-						</div>
-					</div>
 				</vu:block>
 				<vu:block id="information" title="Information">
 					<vu:grid cols="2">

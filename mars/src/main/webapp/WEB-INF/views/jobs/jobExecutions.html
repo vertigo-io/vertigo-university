@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="http://www.morphbit.com/thymeleaf/component"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{templates/mmcDetailLayout}"
+>
+	<head>
+		<title>Jobs Executions</title>
+	</head>
+	
+	<section>
+		<div layout:fragment="content-header-title">
+			<big th:text="${model.job.label}"></big> 
+		</div>
+		<div layout:fragment="content-header-tabs">
+			<q-btn flat type="a"  th:href="@{/jobDetail/} + ${model.job.name}">Detail</q-btn>
+			<q-btn flat type="a" class="active" th:href="@{/jobExecutions/} + ${model.job.name}">Executions</q-btn>
+		</div>
+	</section>
+	
+	<body>
+		<section layout:fragment="content" >
+			<vu:table list="jobExecutions" componentId="jobExecutions" sortUrl="@{/hr/persons/_sort}">
+				<vu:column field="beginTime" />
+				<vu:column field="endTime"  />
+				<vu:column field="executionTime" />
+				<vu:column field="status" sortable="true" />
+			</vu:table>
+		</section>
+	</body>
+</html>

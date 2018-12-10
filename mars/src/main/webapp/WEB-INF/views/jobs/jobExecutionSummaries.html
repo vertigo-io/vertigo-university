@@ -63,7 +63,7 @@
 				</q-item-main>
 				<q-item-side>
 					<vu:include-data object="summaries" field="processName" />
-					<q-btn round color="primary" icon="arrow_forward" type="a" th::href="|'@{/job/}'+item.processName|"></q-btn>
+					<q-btn round color="primary" icon="arrow_forward" type="a" th::href="|'@{/jobDetail/}'+item.processName|"></q-btn>
 				</q-item-side>
 			</vu:list>
 		</section>

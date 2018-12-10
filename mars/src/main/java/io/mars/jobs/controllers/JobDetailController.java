@@ -29,7 +29,7 @@ import io.vertigo.ui.impl.springmvc.argumentresolvers.ViewAttribute;
 import io.vertigo.ui.impl.springmvc.controller.AbstractVSpringMvcController;
 
 @Controller
-@RequestMapping("/job")
+@RequestMapping("/jobDetail")
 public class JobDetailController extends AbstractVSpringMvcController {
 
 	private static final ViewContextKey<OProcessUi> jobKey = ViewContextKey.of("job");
