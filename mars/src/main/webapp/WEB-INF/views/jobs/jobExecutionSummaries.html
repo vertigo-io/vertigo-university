@@ -11,32 +11,60 @@
 	<body>
 		<section layout:fragment="content" >
 			<vu:list list="summaries" componentId="baseCards" rowsPerPage="20"  >
-				<div class="row">
-					<div class="col-3">
-						<vu:include-data object="summaries" field="processLabel" />
-						{{item.processLabel}}
+				<q-item-main>
+					<div class="row col items-center">
+						<div class="col-4 text-bold uppercase">
+							<vu:include-data object="summaries" field="processLabel" />
+							{{item.processLabel}}
+						</div>
+						<div class="col-4 execution-summary row justify-start items-center">
+							<vu:include-data object="summaries" field="health" />
+							<vu:include-data object="summaries" field="errorsCount" />
+							<vu:include-data object="summaries" field="successfulCount" />
+							<vu:include-data object="summaries" field="misfiredCount" />
+							<vu:include-data object="summaries" field="averageExecutionTime" />
+							<div class="health" >
+								<q-icon v-if="item.health == 'ERROR'" name="favorite" color="negative" size="24px"></q-icon>
+								<q-icon v-if="item.health == 'WARNING'" name="favorite" color="warning" size="24px"></q-icon>
+								<q-icon v-else name="favorite" color="positive" size="24px"></q-icon>
+							</div>
+							<div class="error" >
+								<q-icon name="report_problem" color="negative" size="24px"></q-icon>
+								<span>{{item.errorsCount}}</span>
+							</div>
+							<div class="success" >
+								<q-icon name="verified_user" color="positive" size="24px" ></q-icon>
+								<span>{{item.successfulCount}}</span>
+							</div>
+							<div class="misfired" >
+								<q-icon name="alarm_off" color="faded" size="24px"></q-icon>
+								<span>{{item.misfiredCount}}</span>
+							</div>
+							<div class="time" >
+								<q-icon name="timer" size="24px"></q-icon>
+								<span>{{item.averageExecutionTime}}</span>
+							</div>
+						</div>
+						<div class="col-2">
+							<vu:include-data object="summaries" field="lastExecutionTime" />
+							<div class="column items-center">
+								<div>Last execution</div>
+								<div class="text-bold">{{item.lastExecutionTime}}</div>
+							</div>
+						</div>
+						<div class="col-2">
+							<vu:include-data object="summaries" field="nextExecutionTime" />
+							<div class="column items-center">
+								<div>Next execution</div>
+								<div class="text-bold">{{item.nextExecutionTime}}</div>
+							</div>
+						</div>
 					</div>
-					<div class="col-3">
-						<vu:include-data object="summaries" field="health" />
-						<vu:include-data object="summaries" field="errorsCount" />
-						<vu:include-data object="summaries" field="successfulCount" />
-						<vu:include-data object="summaries" field="misfiredCount" />
-						<vu:include-data object="summaries" field="averageExecutionTime" />
-						{{item.health}}
-						{{item.errorsCount}}
-						{{item.successfulCount}}
-						{{item.misfiredCount}}
-						{{item.averageExecutionTime}}
-					</div>
-					<div class="col-3">
-						<vu:include-data object="summaries" field="lastExecutionTime" />
-						{{item.lastExecutionTime}}
-					</div>
-					<div class="col-3">
-						<vu:include-data object="summaries" field="nextExecutionTime" />
-						{{item.nextExecutionTime}}
-					</div>
-				</div>
+				</q-item-main>
+				<q-item-side>
+					<vu:include-data object="summaries" field="processName" />
+					<q-btn round color="primary" icon="arrow_forward" type="a" th::href="|'@{/job/}'+item.processName|"></q-btn>
+				</q-item-side>
 			</vu:list>
 		</section>
 	</body>

@@ -6,6 +6,7 @@
 >
 	<head>
 		<title>Job detail</title>		
+		<script th:src="@{/vertigo-ui/static/js/v-components/v-json-editor.js}"></script>
 	</head>
 	
 	<body>
@@ -13,7 +14,11 @@
 		<section layout:fragment="content-nav">
 			<nav v-scroll-spy="{offset:150}">
 			    <q-list link style="height:100%">
+			    	<q-item tag="a" href="#week">Week's executions</q-item>
 			        <q-item tag="a" href="#information">Information</q-item>
+			        <q-item tag="a" href="#metadatas">Metadatas</q-item>
+			        <q-item tag="a" href="#technical_information">Technical informations</q-item>
+			        <q-item tag="a" href="#params">Params</q-item>
 	        	</q-list>
 	        </nav>
 		</section>
@@ -22,15 +27,74 @@
 				<div layout:fragment="content-header-title">
 					<big th:text="${model.job.label}"></big> 
 				</div>
+				<div layout:fragment="content-header-actions">
+					<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>
+					<vu:button-submit action="@{_executeNow}" :round size="lg" color="primary" icon="play_circle_outline" aria-label="Execute now" title="Execute" class="on-left"/>
+				</div>
 		</section>
 		
 		<section layout:fragment="content" >
 			<vu:form>
+				<vu:button-submit th:if="${model.modeEdit}"  label="Cancel" action="@{_cancel}" :flat />
+				<vu:button-submit th:if="${model.modeEdit}"  label="Save" action="@{_save}" color="primary" />
+				<vu:block id="week" title="'Week\'s executions'">
+					<div class="row items-center">
+						<div class="col-4 execution-summary row justify-start items-center">
+							<vu:include-data object="executionSummary" field="health" />
+							<vu:include-data object="executionSummary" field="errorsCount" />
+							<vu:include-data object="executionSummary" field="successfulCount" />
+							<vu:include-data object="executionSummary" field="misfiredCount" />
+							<vu:include-data object="executionSummary" field="averageExecutionTime" />
+							<div class="health" >
+								<q-icon v-if="vueData.executionSummary.health == 'ERROR'" name="favorite" color="negative" size="32px"></q-icon>
+								<q-icon v-if="vueData.executionSummary.health == 'WARNING'" name="favorite" color="warning" size="32px"></q-icon>
+								<q-icon v-else name="favorite" color="positive" size="32px"></q-icon>
+								<span>&nbsp;</span>
+							</div>
+							<div class="error" >
+								<q-icon name="report_problem" color="negative" size="32px"></q-icon>
+								<span>{{vueData.executionSummary.errorsCount}}</span>
+							</div>
+							<div class="success" >
+								<q-icon name="verified_user" color="positive" size="32px" ></q-icon>
+								<span>{{vueData.executionSummary.successfulCount}}</span>
+							</div>
+							<div class="misfired" >
+								<q-icon name="alarm_off" color="faded" size="32px"></q-icon>
+								<span>{{vueData.executionSummary.misfiredCount}}</span>
+							</div>
+							<div class="time" >
+								<q-icon name="timer" size="32px"></q-icon>
+								<span>{{vueData.executionSummary.averageExecutionTime}}</span>
+							</div>
+						</div>
+						<div class="col">
+							<q-btn  color="primary" type="a" th:href="@{'/job/'+${model.job.name}}">See all executions</q-btn>
+						</div>
+					</div>
+				</vu:block>
 				<vu:block id="information" title="Information">
 					<vu:grid cols="2">
-						<vu:text-field object="job" field="name"/>
-						<vu:text-field object="job" field="label" />
+						<vu:text-field-read object="job" field="name"/>
+						<vu:text-field-read object="job" field="label" />
 					</vu:grid>
+				</vu:block>
+				<vu:block id="metadatas" title="Metadatas">
+					<vu:include-data object="job" field="metadatas" />
+					<v-json-editor v-model="vueData.job.metadatas" :readonly="true" :cols="2" ></v-json-editor>
+				</vu:block>
+				<vu:block id="technical_information" title="Technical informations">
+					<vu:grid cols="2">
+						<vu:text-field object="job" field="cronExpression"/>
+						<vu:checkbox object="job" field="active" />
+						<vu:checkbox object="job" field="multiexecution" />
+						<vu:text-field object="job" field="rescuePeriod" />
+					</vu:grid>
+				</vu:block>
+				<vu:block id="params" title="Params">
+					<vu:include-data object="job" field="initialParams" />
+					<input type="hidden" name="vContext[job][initialParams]" v-bind:value="vueData.job.initialParams" ></input>
+					<v-json-editor v-model="vueData.job.initialParams" th::readonly="${model.modeReadOnly}" :cols="2"></v-json-editor>
 				</vu:block>
 			</vu:form>
 		</section>

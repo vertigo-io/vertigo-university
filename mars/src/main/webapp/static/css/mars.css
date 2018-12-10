@@ -102,3 +102,15 @@ a.q-item {
 	border-bottom: 3px solid black;
 }
 
+/**Orchestra***/
+
+.execution-summary > div {
+	    width: 32px;
+	    margin: 5px 10px;
+	    text-align: center;
+}
+
+.execution-summary span {
+	vertical-align: middle;
+    line-height: 32px;
+}
