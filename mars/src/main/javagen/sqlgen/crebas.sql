@@ -32,12 +32,6 @@ create sequence SEQ_EQUIPMENT_TYPE
 create sequence SEQ_GEOSECTOR
 	start with 1000 cache 20; 
 
-create sequence SEQ_JOB
-	start with 1000 cache 20; 
-
-create sequence SEQ_JOB_STATUS
-	start with 1000 cache 20; 
-
 create sequence SEQ_MEDIA_FILE_INFO
 	start with 1000 cache 20; 
 
@@ -297,50 +291,6 @@ comment on column GEOSECTOR.GEOSECTOR_ID is
 
 comment on column GEOSECTOR.SECTOR_LABEL is
 'Sector Label';
-
--- ============================================================
---   Table : JOB                                        
--- ============================================================
-create table JOB
-(
-    JOB_ID      	 NUMERIC     	not null,
-    CODE        	 VARCHAR(100)	,
-    NAME        	 VARCHAR(100)	,
-    DESCRIPTION 	 VARCHAR(350)	,
-    DUE_DATE    	 DATE        	,
-    constraint PK_JOB primary key (JOB_ID)
-);
-
-comment on column JOB.JOB_ID is
-'Id';
-
-comment on column JOB.CODE is
-'CODE';
-
-comment on column JOB.NAME is
-'Job Name';
-
-comment on column JOB.DESCRIPTION is
-'Job Description';
-
-comment on column JOB.DUE_DATE is
-'Due Date';
-
--- ============================================================
---   Table : JOB_STATUS                                        
--- ============================================================
-create table JOB_STATUS
-(
-    JOB_STATUS_ID	 VARCHAR(100)	not null,
-    LABEL       	 VARCHAR(100)	,
-    constraint PK_JOB_STATUS primary key (JOB_STATUS_ID)
-);
-
-comment on column JOB_STATUS.JOB_STATUS_ID is
-'Id';
-
-comment on column JOB_STATUS.LABEL is
-'Status Label';
 
 -- ============================================================
 --   Table : MEDIA_FILE_INFO                                        

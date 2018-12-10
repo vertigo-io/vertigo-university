@@ -39,10 +39,6 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		EquipmentType(io.mars.catalog.domain.EquipmentType.class),
 		/** Objet de données Geosector. */
 		Geosector(io.mars.basemanagement.domain.Geosector.class),
-		/** Objet de données Job. */
-		Job(io.mars.basemanagement.domain.Job.class),
-		/** Objet de données JobStatus. */
-		JobStatus(io.mars.basemanagement.domain.JobStatus.class),
 		/** Objet de données MediaFileInfo. */
 		MediaFileInfo(io.mars.common.domain.tools.file.MediaFileInfo.class),
 		/** Objet de données Mission. */
@@ -253,30 +249,6 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		GEOSECTOR_ID,
 		/** Propriété 'Sector Label'. */
 		SECTOR_LABEL	}
-
-	/**
-	 * Enumération des champs de Job.
-	 */
-	public enum JobFields implements DtFieldName<io.mars.basemanagement.domain.Job> {
-		/** Propriété 'Id'. */
-		JOB_ID,
-		/** Propriété 'CODE'. */
-		CODE,
-		/** Propriété 'Job Name'. */
-		NAME,
-		/** Propriété 'Job Description'. */
-		DESCRIPTION,
-		/** Propriété 'Due Date'. */
-		DUE_DATE	}
-
-	/**
-	 * Enumération des champs de JobStatus.
-	 */
-	public enum JobStatusFields implements DtFieldName<io.mars.basemanagement.domain.JobStatus> {
-		/** Propriété 'Id'. */
-		JOB_STATUS_ID,
-		/** Propriété 'Status Label'. */
-		LABEL	}
 
 	/**
 	 * Enumération des champs de MediaFileInfo.

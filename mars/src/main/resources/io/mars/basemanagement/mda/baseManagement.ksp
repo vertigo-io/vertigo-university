@@ -39,21 +39,6 @@ create DtDefinition DT_GEOSECTOR {
 	field SECTOR_LABEL {domain: DO_LABEL label:"Sector Label" required:"false"}
 }
 
-
-create DtDefinition DT_JOB {
-	id JOB_ID {domain: DO_ID label:"Id"}
-	field CODE {domain: DO_LABEL label: "CODE" required:"false"}
-	field NAME {domain: DO_LABEL label: "Job Name" required:"false"}
-	field DESCRIPTION {domain: DO_DESCRIPTION label: "Job Description" required:"false"}
-	field DUE_DATE {domain: DO_LOCALDATE label: "Due Date" required:"false"}	
-}
-
-create DtDefinition DT_JOB_STATUS {
-	stereotype: "StaticMasterData"
-	id JOB_STATUS_ID {domain: DO_CODE label:"Id"}
-	field LABEL {domain: DO_LABEL label:"Status Label" required:"false"}
-}
-
 create DtDefinition DT_EQUIPMENT {
 	stereotype: "KeyConcept"
 	id EQUIPMENT_ID {domain: DO_ID label:"Id"}
