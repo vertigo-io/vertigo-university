@@ -82,12 +82,14 @@ public class IotEquipmentServices implements Component, Activeable {
 	public void start() {
 		//final String topicPub = "alpha/MQTT";
 		final String topicSub = "#";
-		//		try {
-		//			// Subscribing to topics
-		//			mqttClient.subscribe(topicSub);
-		//		} catch (final MqttException me) {
-		//			throw WrappedException.wrap(me);
-		//		}
+		try {
+			// Subscribing to topics
+			mqttClient.subscribe(topicSub, 0);
+			logger.info("Subscribed to channel: " + topicSub);
+
+		} catch (final MqttException me) {
+			throw WrappedException.wrap(me);
+		}
 	}
 
 	@Override
@@ -104,13 +106,19 @@ public class IotEquipmentServices implements Component, Activeable {
 		Assertion.checkNotNull(message);
 		Assertion.checkNotNull(topic);
 		///
+		logger.info("Receive message " + message + " from " + topic);
 		final String[] data = parseMqttMessage(message);
+		logger.info("data parsed");
 		final String[] location = parseTopic(topic);
+		logger.info("topic parsed");
+		logger.info("data that will be stored " + data[1] + " from " + location[1]);
+		logger.info("value of data: " + Double.parseDouble(data[1]));
 		final Measure mes = Measure.builder(location[1])
 				.time(Instant.now())
-				.addField("value", Integer.parseInt(data[1]))
+				.addField("value", Double.parseDouble(data[1]))
 				.build();
 		timeSeriesDataBaseManager.insertMeasure("mars-test", mes);
+		logger.info("Added measure to mars-test");
 	}
 
 	private static String[] parseMqttMessage(final MqttMessage message) {
