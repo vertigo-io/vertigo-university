@@ -64,8 +64,8 @@
 				<vu:block id="equipments" title="Recently purchased equipment units">
 					<vu:table list="lastEquipments" componentId="lastEquipments" rowsPerPage="5">
 						<vu:column field="code" />
-						<vu:column field="name" />
-						<vu:column field="purchaseDate" />
+						<vu:column field="name" sortable="true" />
+						<vu:column field="purchaseDate" sortable="true" />
 						<vu:column name="equipmentType" label="Equipment Type" >
 							<vu:field-read field="equipmentTypeId" list="equipmentTypes" listKey="equipmentTypeId" listDisplay="label" />
 						</vu:column>
@@ -84,6 +84,12 @@
 					</vu:table>
 				</vu:block>
 			</vu:form>
+		</section>
+		
+		<section layout:fragment="footer" >
+			<script type="text/javascript">
+				componentStates.lastEquipments.columns[2].sort = VUi.methods.sortDatesAsString("DD/MM/YYYY");
+			</script>
 		</section>
 	</body>
 </html>
