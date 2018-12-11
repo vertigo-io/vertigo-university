@@ -10,6 +10,9 @@ create DtDefinition DT_PERSON {
 	field PICTUREFILE_ID_TMP {domain: DO_LABEL label:"Picture" required:"false" persistent:"false"}
 	field TAGS {domain: DO_MULTIPLE_IDS label: "Tags" required:"false"}
 	field DATE_HIRED {domain: DO_LOCALDATE label: "Date hired" required:"false"}
+	computed FULL_NAME {domain : DO_LABEL, label:"Full name"
+        expression:"return getFirstName() + \" \" + getLastName();"
+    }
 }
 
 create DtDefinition DT_MISSION {

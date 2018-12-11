@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" 
   xmlns:vu="http://www.morphbit.com/thymeleaf/component"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{templates/mmcDetailLayout}"
+  layout:decorate="~{templates/mmcDetailNavLayout}"
 >
 	<head>
 		<title>Job detail</title>		
@@ -25,7 +25,7 @@
 		
 		<section>
 			<div layout:fragment="content-header-title">
-				<big th:text="${model.job.label}"></big> 
+				<span class="text-bigger" th:text="${model.job.label}"></span> 
 			</div>
 			<div layout:fragment="content-header-actions">
 				<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>

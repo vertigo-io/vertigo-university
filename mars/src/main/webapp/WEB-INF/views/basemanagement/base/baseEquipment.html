@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" 
   xmlns:vu="http://www.morphbit.com/thymeleaf/component"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{templates/mmcDetailLayout}"
+  layout:decorate="~{templates/mmcDetailNavLayout}"
 >
 	<head>
 		<title>Base Jobs</title>
@@ -25,7 +25,7 @@
 					<img th:src="@{/static/img/bases/Mars base 1.jpg}" class="detailImg gt-md"/>
 				</div>
 				<div layout:fragment="content-header-title">
-					<big th:text="${model.base.name}"></big> 
+					<span class="text-bigger" th:text="${model.base.name}"></span> 
 				</div>
 				<div layout:fragment="content-header-actions">
 					<q-btn round size="lg" color="primary" icon="more_horiz"  direction="down" aria-label="More actions" title="More actions" class="on-left"> 

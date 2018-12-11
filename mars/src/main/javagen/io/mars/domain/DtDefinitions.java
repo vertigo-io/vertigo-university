@@ -301,7 +301,9 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		/** Propriété 'Tags'. */
 		TAGS,
 		/** Propriété 'Date hired'. */
-		DATE_HIRED	}
+		DATE_HIRED,
+		/** Propriété 'Full name'. */
+		FULL_NAME	}
 
 	/**
 	 * Enumération des champs de Picture.

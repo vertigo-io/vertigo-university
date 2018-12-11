@@ -20,6 +20,21 @@
 	
 	<body>
 		<section layout:fragment="content" >
+			<vu:include-data object="jobExecutions" field="'*'" />
+			<q-timeline responsive color="secondary">
+			  <q-timeline-entry v-for="execution in vueData.jobExecutions" :key="execution.preId"
+			    :title="execution.beginTime"
+			    color="green"
+			    
+			  >
+			    <div>
+			      {{execution.status}}
+			      executionTime : {{execution.executionTime}}
+			    </div>
+			  </q-timeline-entry>
+			</q-timeline>
+				
+		
 			<vu:table list="jobExecutions" componentId="jobExecutions" sortUrl="@{/hr/persons/_sort}">
 				<vu:column field="beginTime" />
 				<vu:column field="endTime"  />

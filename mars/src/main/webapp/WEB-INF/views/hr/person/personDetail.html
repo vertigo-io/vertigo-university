@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" 
   xmlns:vu="http://www.morphbit.com/thymeleaf/component"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{templates/mmcDetailLayout}"
+  layout:decorate="~{templates/mmcDetailNavLayout}"
 >
 	<head>
 		<title>Person detail</title>		
@@ -25,8 +25,8 @@
 					<img th::src="|'@{/hr/person/picture/}'+vueData.person.picturefileId|" class="detailImg gt-md"/>
 				</div>
 				<div layout:fragment="content-header-title">
-					<big th:text="|${model.person.firstName} ${model.person.lastName}|"></big> 
-					<br/><small>Base Manager</small>
+					<span class="text-bigger" th:text="${model.person.fullName}"></span> 
+					<br/><span class="text-smaller">Base Manager</span>
 				</div>
 				<div layout:fragment="content-header-actions">
 					<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>

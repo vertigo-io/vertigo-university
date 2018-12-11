@@ -181,6 +181,16 @@ public final class Person implements Entity {
 		this.dateHired = dateHired;
 	}
 	
+	/**
+	 * Champ : COMPUTED.
+	 * Récupère la valeur de la propriété calculée 'Full name'.
+	 * @return String fullName
+	 */
+	@Field(domain = "DO_LABEL", type = "COMPUTED", persistent = false, label = "Full name")
+	public String getFullName() {
+		return getFirstName() + " " + getLastName();
+	}
+	
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {
