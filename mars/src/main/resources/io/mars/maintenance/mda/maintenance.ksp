@@ -50,7 +50,7 @@ create Association A_TICKET_WORK_ORDER {
 }
 
 create Association A_TICKET_TICKET_STATUS {
-	fkFieldName : "WORK_ORDER_STATUS_ID"
+	fkFieldName : "TICKET_STATUS_ID"
     
  	dtDefinitionA : DT_TICKET
 	dtDefinitionB : DT_TICKET_STATUS
