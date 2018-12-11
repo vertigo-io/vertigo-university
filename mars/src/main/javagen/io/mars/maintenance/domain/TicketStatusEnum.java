@@ -7,6 +7,9 @@ import io.vertigo.dynamo.domain.model.UID;
 
 public enum TicketStatusEnum implements MasterDataEnum<io.mars.maintenance.domain.TicketStatus> {
 
+	open("OPEN"), //
+	assigned("ASSIGNED"), //
+	closed("CLOSED")
 	;
 
 	private final Serializable entityId;

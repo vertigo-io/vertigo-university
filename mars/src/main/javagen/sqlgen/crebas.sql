@@ -38,6 +38,12 @@ create sequence SEQ_MEDIA_FILE_INFO
 create sequence SEQ_MISSION
 	start with 1000 cache 20; 
 
+create sequence SEQ_OPENDATA_SERVICE
+	start with 1000 cache 20; 
+
+create sequence SEQ_OPENDATA_SERVICE_STATUS
+	start with 1000 cache 20; 
+
 create sequence SEQ_PERSON
 	start with 1000 cache 20; 
 
@@ -353,6 +359,54 @@ comment on column MISSION.BUSINESS_ID is
 'Business';
 
 -- ============================================================
+--   Table : OPENDATA_SERVICE                                        
+-- ============================================================
+create table OPENDATA_SERVICE
+(
+    ODS_ID      	 NUMERIC     	not null,
+    NAME        	 VARCHAR(100)	,
+    CODE        	 VARCHAR(100)	,
+    END_POINT_URL	 TEXT        	,
+    TAGS        	 TEXT        	,
+    OPENDATA_SERVICE_STATUS_ID	 VARCHAR(100)	,
+    constraint PK_OPENDATA_SERVICE primary key (ODS_ID)
+);
+
+comment on column OPENDATA_SERVICE.ODS_ID is
+'Id';
+
+comment on column OPENDATA_SERVICE.NAME is
+'Name';
+
+comment on column OPENDATA_SERVICE.CODE is
+'Code';
+
+comment on column OPENDATA_SERVICE.END_POINT_URL is
+'Service Endpoint URL';
+
+comment on column OPENDATA_SERVICE.TAGS is
+'Tags';
+
+comment on column OPENDATA_SERVICE.OPENDATA_SERVICE_STATUS_ID is
+'Opendata Service Status';
+
+-- ============================================================
+--   Table : OPENDATA_SERVICE_STATUS                                        
+-- ============================================================
+create table OPENDATA_SERVICE_STATUS
+(
+    OPENDATA_SERVICE_STATUS_ID	 VARCHAR(100)	not null,
+    LABEL       	 VARCHAR(100)	,
+    constraint PK_OPENDATA_SERVICE_STATUS primary key (OPENDATA_SERVICE_STATUS_ID)
+);
+
+comment on column OPENDATA_SERVICE_STATUS.OPENDATA_SERVICE_STATUS_ID is
+'Id';
+
+comment on column OPENDATA_SERVICE_STATUS.LABEL is
+'Status Label';
+
+-- ============================================================
 --   Table : PERSON                                        
 -- ============================================================
 create table PERSON
@@ -434,7 +488,7 @@ create table TICKET
     TITLE       	 VARCHAR(100)	,
     DESCRIPTION 	 VARCHAR(350)	,
     DATE_CREATED	 DATE        	,
-    WORK_ORDER_STATUS_ID	 VARCHAR(100)	,
+    TICKET_STATUS_ID	 VARCHAR(100)	,
     EQUIPMENT_ID	 NUMERIC     	,
     constraint PK_TICKET primary key (TICKET_ID)
 );
@@ -454,7 +508,7 @@ comment on column TICKET.DESCRIPTION is
 comment on column TICKET.DATE_CREATED is
 'Ticket Creation Date';
 
-comment on column TICKET.WORK_ORDER_STATUS_ID is
+comment on column TICKET.TICKET_STATUS_ID is
 'Ticket Status';
 
 comment on column TICKET.EQUIPMENT_ID is
@@ -602,6 +656,12 @@ alter table MISSION
 
 create index MISSION_BASE_BASE_FK on MISSION (BASE_ID asc);
 
+alter table OPENDATA_SERVICE
+	add constraint FK_OPENDATA_SERVICE_OPENDATA_SERVICE_STATUS_OPENDATA_SERVICE_STATUS foreign key (OPENDATA_SERVICE_STATUS_ID)
+	references OPENDATA_SERVICE_STATUS (OPENDATA_SERVICE_STATUS_ID);
+
+create index OPENDATA_SERVICE_OPENDATA_SERVICE_STATUS_OPENDATA_SERVICE_STATUS_FK on OPENDATA_SERVICE (OPENDATA_SERVICE_STATUS_ID asc);
+
 alter table MISSION
 	add constraint FK_PERSON_MISSION_PERSON foreign key (PERSON_ID)
 	references PERSON (PERSON_ID);
@@ -609,10 +669,10 @@ alter table MISSION
 create index PERSON_MISSION_PERSON_FK on MISSION (PERSON_ID asc);
 
 alter table TICKET
-	add constraint FK_TICKET_TICKET_STATUS_TICKET_STATUS foreign key (WORK_ORDER_STATUS_ID)
+	add constraint FK_TICKET_TICKET_STATUS_TICKET_STATUS foreign key (TICKET_STATUS_ID)
 	references TICKET_STATUS (TICKET_STATUS_ID);
 
-create index TICKET_TICKET_STATUS_TICKET_STATUS_FK on TICKET (WORK_ORDER_STATUS_ID asc);
+create index TICKET_TICKET_STATUS_TICKET_STATUS_FK on TICKET (TICKET_STATUS_ID asc);
 
 alter table WORK_ORDER
 	add constraint FK_TICKET_WORK_ORDER_TICKET foreign key (TICKET_ID)

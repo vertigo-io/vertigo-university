@@ -24,7 +24,7 @@ public final class Ticket implements Entity {
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
 			name = "A_TICKET_TICKET_STATUS",
-			fkFieldName = "WORK_ORDER_STATUS_ID",
+			fkFieldName = "TICKET_STATUS_ID",
 			primaryDtDefinitionName = "DT_TICKET_STATUS",
 			primaryIsNavigable = true,
 			primaryRole = "TicketStatus",
@@ -35,7 +35,7 @@ public final class Ticket implements Entity {
 			foreignRole = "Ticketr",
 			foreignLabel = "Ticket",
 			foreignMultiplicity = "0..*")
-	private final EnumVAccessor<io.mars.maintenance.domain.TicketStatus, io.mars.maintenance.domain.TicketStatusEnum> workOrderStatusIdAccessor = new EnumVAccessor<>(io.mars.maintenance.domain.TicketStatus.class, "TicketStatus", io.mars.maintenance.domain.TicketStatusEnum.class);
+	private final EnumVAccessor<io.mars.maintenance.domain.TicketStatus, io.mars.maintenance.domain.TicketStatusEnum> ticketStatusIdAccessor = new EnumVAccessor<>(io.mars.maintenance.domain.TicketStatus.class, "TicketStatus", io.mars.maintenance.domain.TicketStatusEnum.class);
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
 			name = "A_EQUIPMENT_TICKET",
@@ -156,20 +156,20 @@ public final class Ticket implements Entity {
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Ticket Status'.
-	 * @return String workOrderStatusId
+	 * @return String ticketStatusId
 	 */
 	@Field(domain = "DO_CODE", type = "FOREIGN_KEY", label = "Ticket Status")
-	public String getWorkOrderStatusId() {
-		return (String)  workOrderStatusIdAccessor.getId();
+	public String getTicketStatusId() {
+		return (String)  ticketStatusIdAccessor.getId();
 	}
 
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Définit la valeur de la propriété 'Ticket Status'.
-	 * @param workOrderStatusId String
+	 * @param ticketStatusId String
 	 */
-	public void setWorkOrderStatusId(final String workOrderStatusId) {
-		workOrderStatusIdAccessor.setId(workOrderStatusId);
+	public void setTicketStatusId(final String ticketStatusId) {
+		ticketStatusIdAccessor.setId(ticketStatusId);
 	}
 	
 	/**
@@ -222,16 +222,16 @@ public final class Ticket implements Entity {
 	 * @return l'accesseur vers la propriété 'Ticket Status'
 	 */
 	public EnumVAccessor<io.mars.maintenance.domain.TicketStatus, io.mars.maintenance.domain.TicketStatusEnum> ticketStatus() {
-		return workOrderStatusIdAccessor;
+		return ticketStatusIdAccessor;
 	}
 	
 	@Deprecated
 	public io.mars.maintenance.domain.TicketStatus getTicketStatus() {
 		// we keep the lazyness
-		if (!workOrderStatusIdAccessor.isLoaded()) {
-			workOrderStatusIdAccessor.load();
+		if (!ticketStatusIdAccessor.isLoaded()) {
+			ticketStatusIdAccessor.load();
 		}
-		return workOrderStatusIdAccessor.get();
+		return ticketStatusIdAccessor.get();
 	}
 
 	/**
@@ -240,7 +240,7 @@ public final class Ticket implements Entity {
 	 */
 	@Deprecated
 	public io.vertigo.dynamo.domain.model.UID<io.mars.maintenance.domain.TicketStatus> getTicketStatusUID() {
-		return workOrderStatusIdAccessor.getUID();
+		return ticketStatusIdAccessor.getUID();
 	}
 	
 	/** {@inheritDoc} */

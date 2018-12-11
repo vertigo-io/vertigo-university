@@ -7,6 +7,10 @@ import io.vertigo.dynamo.domain.model.UID;
 
 public enum WorkOrderStatusEnum implements MasterDataEnum<io.mars.maintenance.domain.WorkOrderStatus> {
 
+	done("DONE"), //
+	inProgress("INPROGRESS"), //
+	failed("FAILED"), //
+	pending("PENDING")
 	;
 
 	private final Serializable entityId;

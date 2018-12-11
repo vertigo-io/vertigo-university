@@ -10,26 +10,7 @@
         }       
 
     },
-	"io.mars.basemanagement.domain.JobStatus" : 
-    {
-        "done" : {
-            "jobStatusId" : "DONE",
-            "label" : "Done"
-        },
-        "inProgress" : {
-            "jobStatusId" : "INPROGRESS",
-            "label" : "In Progress"
-        },
-        "failed" : {
-            "jobStatusId" : "FAILED",
-            "label" : "Failed"
-        },
-        "pending" : {
-            "jobStatusId" : "PENDING",
-            "label" : "Pending"
-        }
-    },
-    "io.mars.basemanagement.domain.WorkOrderStatus" : 
+	"io.mars.maintenance.domain.WorkOrderStatus" : 
     {
         "done" : {
             "workOrderStatusId" : "DONE",
@@ -48,7 +29,7 @@
             "label" : "Pending"
         }
     },
-    "io.mars.base.domain.TicketStatus" : 
+    "io.mars.maintenance.domain.TicketStatus" : 
     {
         "open" : {
             "ticketStatusId" : "OPEN",
@@ -62,5 +43,16 @@
             "ticketStatusId" : "CLOSED",
             "label" : "Closed"
         }
-    }    
+    },
+    "io.mars.opendata.domain.OpendataServiceStatus" : 
+    {
+        "enabled" : {
+            "opendataServiceStatusId" : "ENABLED",
+            "label" : "Enabled"
+        },
+        "disabled" : {
+            "opendataServiceStatusId" : "DISABLED",
+            "label" : "Disabled"
+        }
+   	}    
 }

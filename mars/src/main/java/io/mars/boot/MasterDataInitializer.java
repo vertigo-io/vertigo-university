@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import io.mars.basemanagement.domain.BaseType;
 import io.mars.basemanagement.domain.Tag;
 import io.mars.catalog.domain.EquipmentType;
+import io.mars.maintenance.domain.TicketStatus;
 import io.mars.maintenance.domain.WorkOrderStatus;
 import io.vertigo.core.component.ComponentInitializer;
 import io.vertigo.dynamo.domain.metamodel.DtDefinition;
@@ -42,6 +43,7 @@ public class MasterDataInitializer implements ComponentInitializer {
 		registerMasterData(storeManager, BaseType.class);
 		registerMasterData(storeManager, EquipmentType.class);
 		registerMasterData(storeManager, WorkOrderStatus.class);
+		registerMasterData(storeManager, TicketStatus.class);
 		registerMasterData(storeManager, Tag.class);
 	}
 
