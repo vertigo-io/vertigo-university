@@ -8,8 +8,6 @@ import io.mars.basemanagement.services.base.BaseServices;
 import io.mars.basemanagement.services.equipment.EquipmentServices;
 import io.mars.catalog.domain.EquipmentType;
 import io.mars.catalog.services.equipment.EquipmentTypeServices;
-import io.mars.hr.domain.Person;
-import io.mars.hr.services.person.PersonServices;
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.domain.model.DtListState;
 import io.vertigo.vega.webservice.WebServices;
