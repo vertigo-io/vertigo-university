@@ -132,6 +132,20 @@ public final class EquipmentDAO extends DAO<Equipment, java.lang.Long> implement
 	}
 
 	/**
+	 * Execute la tache TK_GET_EQUIPMENTS_BY_BASE_CODE.
+	 * @param code String 
+	 * @return io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.domain.Equipment> equipments
+	*/
+	public io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.domain.Equipment> getEquipmentsByBaseCode(final String code) {
+		final Task task = createTaskBuilder("TK_GET_EQUIPMENTS_BY_BASE_CODE")
+				.addValue("CODE", code)
+				.build();
+		return getTaskManager()
+				.execute(task)
+				.getResult();
+	}
+
+	/**
 	 * Execute la tache TK_GET_LAST_PURCHASED_EQUIPMENTS_BY_BASE_ID.
 	 * @param baseId Long 
 	 * @return io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.domain.Equipment> equipments

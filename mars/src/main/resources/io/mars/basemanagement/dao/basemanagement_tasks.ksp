@@ -33,6 +33,21 @@ create Task TK_GET_LAST_PURCHASED_EQUIPMENTS_BY_BASE_ID {
     attribute EQUIPMENTS     {domain : DO_DT_EQUIPMENT_DTC    required:"true"  inOut :"out"}
 }
 
+create Task TK_GET_EQUIPMENTS_BY_BASE_CODE {  
+    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+    request : "
+            select 
+            	equ.*,
+			from equipment equ
+				join base bas on bas.base_id = equ.base_id
+			where bas.code = #CODE#
+             "
+    attribute CODE     	 {domain : DO_CODE         		required:"true"  inOut :"in"}
+    attribute EQUIPMENTS     {domain : DO_DT_EQUIPMENT_DTC    required:"true"  inOut :"out"}
+}
+
+
+
 create Task TK_INSERT_EQUIPMENTS_BATCH {
     className : "io.vertigo.dynamox.task.TaskEngineProcBatch"
         request : "

@@ -60,4 +60,10 @@ public class EquipmentServices implements Component {
 		//---
 		return equipmentDAO.getLastPurchasedEquipmentsByBaseId(baseId);
 	}
+
+	public DtList<Equipment> getEquipmentByBase(final String baseCode) {
+		Assertion.checkNotNull(baseCode);
+		//---
+		return equipmentDAO.getEquipmentsByBaseCode(baseCode);
+	}
 }
