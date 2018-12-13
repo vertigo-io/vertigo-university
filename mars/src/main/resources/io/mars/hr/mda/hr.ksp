@@ -15,6 +15,11 @@ create DtDefinition DT_PERSON {
     }
 }
 
+create DtDefinition DT_GROUPS {
+	id GROUP_ID {domain: DO_ID label:"Id"}
+	field NAME {domain: DO_LABEL label: "Name" required:"false"}
+}
+
 create DtDefinition DT_MISSION {
 	id MISSION_ID {domain: DO_ID label:"Id"}
 	field ROLE {domain: DO_CODE label:"Role" required:"false"}
@@ -39,4 +44,22 @@ create Association A_PERSON_MISSION {
 	labelB : "Mission"
 	roleA : "Person"
 	roleB : "Mission"
+}
+
+create Association A_PERSON_GROUPS {
+	fkFieldName : "GROUP_ID"
+    
+ 	dtDefinitionA : DT_PERSON
+	dtDefinitionB : DT_GROUPS
+			
+	navigabilityA : "false"
+	navigabilityB : "true"
+	
+	multiplicityA:"0..*"	
+	multiplicityB:"0..1"
+	
+	labelA : "Person"
+	labelB : "Group"
+	roleA : "Person"
+	roleB : "Group"
 }

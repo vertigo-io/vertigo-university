@@ -1,0 +1,4 @@
+admin@mmc.co.mars	admin		XpJeYvyj0c0zS1kI1eFyHw1KgHEPGgyrVmue-yB5Dm6hopCitUogs= 	// :admin
+jtkirk@mmc.co.mars	JTKirk		5NfIFw480cJ1RfnztJS_eSBboXqMapec91x04reDNTybgEr9QV_Kg= 	// Enterprise
+jlpicard@mmc.co.mars	JPicard	_lElv_D20c_FqefCF7qq55RBWq23_bViVpRIxm4d9Q1JTvnJstaiA= 	// Picard
+wone@mmc.co.mars	wone		Rs6JYWAx0cF_tE_76SRvCcEskeeZ6NYqBE-JYvuEbR5ZQgsW0C-Q4=	// wone	

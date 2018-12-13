@@ -2,6 +2,7 @@ package io.mars.hr.domain;
 
 import io.vertigo.dynamo.domain.model.Entity;
 import io.vertigo.dynamo.domain.model.UID;
+import io.vertigo.dynamo.domain.model.VAccessor;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.lang.Generated;
@@ -22,6 +23,21 @@ public final class Person implements Entity {
 	private String picturefileIdTmp;
 	private String tags;
 	private java.time.LocalDate dateHired;
+
+	@io.vertigo.dynamo.domain.stereotype.Association(
+			name = "A_PERSON_GROUPS",
+			fkFieldName = "GROUP_ID",
+			primaryDtDefinitionName = "DT_GROUPS",
+			primaryIsNavigable = true,
+			primaryRole = "Group",
+			primaryLabel = "Group",
+			primaryMultiplicity = "0..1",
+			foreignDtDefinitionName = "DT_PERSON",
+			foreignIsNavigable = false,
+			foreignRole = "Person",
+			foreignLabel = "Person",
+			foreignMultiplicity = "0..*")
+	private final VAccessor<io.mars.hr.domain.Groups> groupIdAccessor = new VAccessor<>(io.mars.hr.domain.Groups.class, "Group");
 
 	/** {@inheritDoc} */
 	@Override
@@ -182,6 +198,25 @@ public final class Person implements Entity {
 	}
 	
 	/**
+	 * Champ : FOREIGN_KEY.
+	 * Récupère la valeur de la propriété 'Group'.
+	 * @return Long groupId
+	 */
+	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Group")
+	public Long getGroupId() {
+		return (Long)  groupIdAccessor.getId();
+	}
+
+	/**
+	 * Champ : FOREIGN_KEY.
+	 * Définit la valeur de la propriété 'Group'.
+	 * @param groupId Long
+	 */
+	public void setGroupId(final Long groupId) {
+		groupIdAccessor.setId(groupId);
+	}
+	
+	/**
 	 * Champ : COMPUTED.
 	 * Récupère la valeur de la propriété calculée 'Full name'.
 	 * @return String fullName
@@ -189,6 +224,32 @@ public final class Person implements Entity {
 	@Field(domain = "DO_LABEL", type = "COMPUTED", persistent = false, label = "Full name")
 	public String getFullName() {
 		return getFirstName() + " " + getLastName();
+	}
+
+ 	/**
+	 * Association : Group.
+	 * @return l'accesseur vers la propriété 'Group'
+	 */
+	public VAccessor<io.mars.hr.domain.Groups> group() {
+		return groupIdAccessor;
+	}
+	
+	@Deprecated
+	public io.mars.hr.domain.Groups getGroup() {
+		// we keep the lazyness
+		if (!groupIdAccessor.isLoaded()) {
+			groupIdAccessor.load();
+		}
+		return groupIdAccessor.get();
+	}
+
+	/**
+	 * Retourne l'UID: Group.
+	 * @return UID de l'association
+	 */
+	@Deprecated
+	public io.vertigo.dynamo.domain.model.UID<io.mars.hr.domain.Groups> getGroupUID() {
+		return groupIdAccessor.getUID();
 	}
 	
 	/** {@inheritDoc} */

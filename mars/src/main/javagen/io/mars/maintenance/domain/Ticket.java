@@ -21,6 +21,7 @@ public final class Ticket implements Entity {
 	private String title;
 	private String description;
 	private java.time.LocalDate dateCreated;
+	private java.time.LocalDate dateClosed;
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
 			name = "A_TICKET_TICKET_STATUS",
@@ -151,6 +152,25 @@ public final class Ticket implements Entity {
 	 */
 	public void setDateCreated(final java.time.LocalDate dateCreated) {
 		this.dateCreated = dateCreated;
+	}
+	
+	/**
+	 * Champ : DATA.
+	 * Récupère la valeur de la propriété 'Ticket Closing Date'.
+	 * @return LocalDate dateClosed
+	 */
+	@Field(domain = "DO_LOCALDATE", label = "Ticket Closing Date")
+	public java.time.LocalDate getDateClosed() {
+		return dateClosed;
+	}
+
+	/**
+	 * Champ : DATA.
+	 * Définit la valeur de la propriété 'Ticket Closing Date'.
+	 * @param dateClosed LocalDate
+	 */
+	public void setDateClosed(final java.time.LocalDate dateClosed) {
+		this.dateClosed = dateClosed;
 	}
 	
 	/**

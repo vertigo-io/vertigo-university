@@ -32,6 +32,9 @@ create sequence SEQ_EQUIPMENT_TYPE
 create sequence SEQ_GEOSECTOR
 	start with 1000 cache 20; 
 
+create sequence SEQ_GROUPS
+	start with 1000 cache 20; 
+
 create sequence SEQ_MEDIA_FILE_INFO
 	start with 1000 cache 20; 
 
@@ -299,6 +302,22 @@ comment on column GEOSECTOR.SECTOR_LABEL is
 'Sector Label';
 
 -- ============================================================
+--   Table : GROUPS                                        
+-- ============================================================
+create table GROUPS
+(
+    GROUP_ID    	 NUMERIC     	not null,
+    NAME        	 VARCHAR(100)	,
+    constraint PK_GROUPS primary key (GROUP_ID)
+);
+
+comment on column GROUPS.GROUP_ID is
+'Id';
+
+comment on column GROUPS.NAME is
+'Name';
+
+-- ============================================================
 --   Table : MEDIA_FILE_INFO                                        
 -- ============================================================
 create table MEDIA_FILE_INFO
@@ -426,6 +445,7 @@ create table PERSON
     PICTUREFILE_ID	 NUMERIC     	,
     TAGS        	 TEXT        	,
     DATE_HIRED  	 DATE        	,
+    GROUP_ID    	 NUMERIC     	,
     constraint PK_PERSON primary key (PERSON_ID)
 );
 
@@ -449,6 +469,9 @@ comment on column PERSON.TAGS is
 
 comment on column PERSON.DATE_HIRED is
 'Date hired';
+
+comment on column PERSON.GROUP_ID is
+'Group';
 
 -- ============================================================
 --   Table : PICTURE                                        
@@ -496,6 +519,7 @@ create table TICKET
     TITLE       	 VARCHAR(100)	,
     DESCRIPTION 	 VARCHAR(350)	,
     DATE_CREATED	 DATE        	,
+    DATE_CLOSED 	 DATE        	,
     TICKET_STATUS_ID	 VARCHAR(100)	,
     EQUIPMENT_ID	 NUMERIC     	,
     constraint PK_TICKET primary key (TICKET_ID)
@@ -515,6 +539,9 @@ comment on column TICKET.DESCRIPTION is
 
 comment on column TICKET.DATE_CREATED is
 'Ticket Creation Date';
+
+comment on column TICKET.DATE_CLOSED is
+'Ticket Closing Date';
 
 comment on column TICKET.TICKET_STATUS_ID is
 'Ticket Status';
@@ -547,6 +574,8 @@ create table WORK_ORDER
     TICKET_CODE 	 VARCHAR(100)	,
     NAME        	 VARCHAR(100)	,
     DESCRIPTION 	 VARCHAR(350)	,
+    DATE_CREATED	 DATE        	,
+    DATE_CLOSED 	 DATE        	,
     DUE_DATE    	 DATE        	,
     TICKET_ID   	 NUMERIC     	,
     WORK_ORDER_STATUS_ID	 VARCHAR(100)	,
@@ -564,6 +593,12 @@ comment on column WORK_ORDER.NAME is
 
 comment on column WORK_ORDER.DESCRIPTION is
 'Maintenance Operation Descrption';
+
+comment on column WORK_ORDER.DATE_CREATED is
+'Work Order Creation Date';
+
+comment on column WORK_ORDER.DATE_CLOSED is
+'Work Order Closing Date';
 
 comment on column WORK_ORDER.DUE_DATE is
 'Due Date';
@@ -669,6 +704,12 @@ alter table OPENDATA_SET
 	references OPENDATA_SET_STATUS (OPENDATA_SET_STATUS_ID);
 
 create index OPENDATA_SET_OPENDATA_SET_STATUS_OPENDATA_SET_STATUS_FK on OPENDATA_SET (OPENDATA_SET_STATUS_ID asc);
+
+alter table PERSON
+	add constraint FK_PERSON_GROUPS_GROUPS foreign key (GROUP_ID)
+	references GROUPS (GROUP_ID);
+
+create index PERSON_GROUPS_GROUPS_FK on PERSON (GROUP_ID asc);
 
 alter table MISSION
 	add constraint FK_PERSON_MISSION_PERSON foreign key (PERSON_ID)

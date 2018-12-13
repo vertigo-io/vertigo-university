@@ -75,7 +75,7 @@
 				<param name="collections" value="VViewContext;TTL=43200" /> <!-- 12h -->
 				<param name="dbFilePath" value="${java.io.tmpdir}/vertigo/TestVViewContext" />
 			</plugin>
-		</component>
+		</component>	
 	</module>
 	
 	<module name="vertigo-search">
@@ -89,9 +89,23 @@
 		</component>
 	</module>
 	
-	<module name="vertigo-persona">
+	<module name="vertigo-account">
 		<component api="VSecurityManager" class="io.vertigo.account.impl.security.VSecurityManagerImpl">
 			<param name="userSessionClassName" value="io.mars.commons.MarsUserSession" />
+		</component>
+		<component api="AccountManager" class="io.vertigo.account.impl.account.AccountManagerImpl">
+			<plugin class="io.vertigo.account.plugins.account.store.datastore.StoreAccountStorePlugin">
+				<param name="userIdentityEntity" value="DT_PERSON" />
+				<param name="groupIdentityEntity" value="DT_GROUPS" />
+				<param name="userAuthField" value="EMAIL" />
+				<param name="userToAccountMapping" value="id:PERSON_ID, displayName:LAST_NAME, email:EMAIL, authToken:EMAIL" />
+				<param name="groupToGroupAccountMapping" value="id:GROUP_ID, displayName:NAME" />
+			</plugin>
+		</component>
+		<component api="AuthenticationManager" class="io.vertigo.account.impl.authentication.AuthenticationManagerImpl">
+			<plugin class="io.vertigo.account.plugins.authentication.text.TextAuthenticationPlugin">
+				<param name="filePath" value="/initdata/userAccounts.txt" />
+			</plugin>
 		</component>
 	</module>
 	 

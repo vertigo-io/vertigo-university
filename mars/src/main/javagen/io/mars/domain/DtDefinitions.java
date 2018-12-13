@@ -39,6 +39,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		EquipmentType(io.mars.catalog.domain.EquipmentType.class),
 		/** Objet de données Geosector. */
 		Geosector(io.mars.basemanagement.domain.Geosector.class),
+		/** Objet de données Groups. */
+		Groups(io.mars.hr.domain.Groups.class),
 		/** Objet de données MediaFileInfo. */
 		MediaFileInfo(io.mars.common.domain.tools.file.MediaFileInfo.class),
 		/** Objet de données Mission. */
@@ -255,6 +257,15 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		SECTOR_LABEL	}
 
 	/**
+	 * Enumération des champs de Groups.
+	 */
+	public enum GroupsFields implements DtFieldName<io.mars.hr.domain.Groups> {
+		/** Propriété 'Id'. */
+		GROUP_ID,
+		/** Propriété 'Name'. */
+		NAME	}
+
+	/**
 	 * Enumération des champs de MediaFileInfo.
 	 */
 	public enum MediaFileInfoFields implements DtFieldName<io.mars.common.domain.tools.file.MediaFileInfo> {
@@ -337,7 +348,9 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		/** Propriété 'Date hired'. */
 		DATE_HIRED,
 		/** Propriété 'Full name'. */
-		FULL_NAME	}
+		FULL_NAME,
+		/** Propriété 'Group'. */
+		GROUP_ID	}
 
 	/**
 	 * Enumération des champs de Picture.
@@ -373,6 +386,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		DESCRIPTION,
 		/** Propriété 'Ticket Creation Date'. */
 		DATE_CREATED,
+		/** Propriété 'Ticket Closing Date'. */
+		DATE_CLOSED,
 		/** Propriété 'Ticket Status'. */
 		TICKET_STATUS_ID,
 		/** Propriété 'Equipment'. */
@@ -399,6 +414,10 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		NAME,
 		/** Propriété 'Maintenance Operation Descrption'. */
 		DESCRIPTION,
+		/** Propriété 'Work Order Creation Date'. */
+		DATE_CREATED,
+		/** Propriété 'Work Order Closing Date'. */
+		DATE_CLOSED,
 		/** Propriété 'Due Date'. */
 		DUE_DATE,
 		/** Propriété 'Ticket'. */

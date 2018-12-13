@@ -20,6 +20,8 @@ public final class WorkOrder implements Entity {
 	private String ticketCode;
 	private String name;
 	private String description;
+	private java.time.LocalDate dateCreated;
+	private java.time.LocalDate dateClosed;
 	private java.time.LocalDate dueDate;
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
@@ -132,6 +134,44 @@ public final class WorkOrder implements Entity {
 	 */
 	public void setDescription(final String description) {
 		this.description = description;
+	}
+	
+	/**
+	 * Champ : DATA.
+	 * Récupère la valeur de la propriété 'Work Order Creation Date'.
+	 * @return LocalDate dateCreated
+	 */
+	@Field(domain = "DO_LOCALDATE", label = "Work Order Creation Date")
+	public java.time.LocalDate getDateCreated() {
+		return dateCreated;
+	}
+
+	/**
+	 * Champ : DATA.
+	 * Définit la valeur de la propriété 'Work Order Creation Date'.
+	 * @param dateCreated LocalDate
+	 */
+	public void setDateCreated(final java.time.LocalDate dateCreated) {
+		this.dateCreated = dateCreated;
+	}
+	
+	/**
+	 * Champ : DATA.
+	 * Récupère la valeur de la propriété 'Work Order Closing Date'.
+	 * @return LocalDate dateClosed
+	 */
+	@Field(domain = "DO_LOCALDATE", label = "Work Order Closing Date")
+	public java.time.LocalDate getDateClosed() {
+		return dateClosed;
+	}
+
+	/**
+	 * Champ : DATA.
+	 * Définit la valeur de la propriété 'Work Order Closing Date'.
+	 * @param dateClosed LocalDate
+	 */
+	public void setDateClosed(final java.time.LocalDate dateClosed) {
+		this.dateClosed = dateClosed;
 	}
 	
 	/**
