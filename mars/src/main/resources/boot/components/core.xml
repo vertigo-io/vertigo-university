@@ -10,7 +10,12 @@
 
 	<module name="vertigo-commons">
 		<component api="DaemonManager" class="io.vertigo.commons.impl.daemon.DaemonManagerImpl"/>
-		<component api="AnalyticsManager" class="io.vertigo.commons.impl.analytics.AnalyticsManagerImpl" />
+		<component api="AnalyticsManager" class="io.vertigo.commons.impl.analytics.AnalyticsManagerImpl" >
+			<plugin class="io.vertigo.commons.plugins.analytics.log.SocketLoggerAnalyticsConnectorPlugin">
+				<param name="appName" value="mars-analytics" />
+				<param name="hostName" value="mars.dev.klee.lan.net" />
+			</plugin>
+		</component>
 		<component api="ScriptManager" class="io.vertigo.commons.impl.script.ScriptManagerImpl">
 			<plugin class="io.vertigo.commons.plugins.script.janino.JaninoExpressionEvaluatorPlugin" />
 		</component>
@@ -47,12 +52,9 @@
 		<component api="EventBusManager" class="io.vertigo.commons.impl.eventbus.EventBusManagerImpl" />
 
 		<component api="StoreManager" class="io.vertigo.dynamo.impl.store.StoreManagerImpl">
-			<plugin class="io.vertigo.dynamo.plugins.store.datastore.sql.SqlDataStorePlugin">
-				<param name="sequencePrefix" value="SEQ_" />
-			</plugin>
+			<plugin class="io.vertigo.dynamo.plugins.store.datastore.sql.SqlDataStorePlugin" />
 			<plugin class="io.vertigo.dynamo.plugins.store.datastore.sql.SqlDataStorePlugin">
 				<param name="dataSpace" value="orchestra"/>
-				<param name="sequencePrefix" value="SEQ_" />
 			</plugin>
 			<plugin class="io.vertigo.dynamo.plugins.store.filestore.fs.FsFileStorePlugin">
 				<param name="storeDtName" value="DT_MEDIA_FILE_INFO" />
@@ -101,6 +103,7 @@
 			</plugin>
 			<!-- Handlers -->
 			<plugin class="io.vertigo.vega.plugins.webservice.handler.ExceptionWebServiceHandlerPlugin" />
+			<plugin class="io.vertigo.vega.plugins.webservice.handler.AnalyticsWebServiceHandlerPlugin" />
 			<plugin class="io.vertigo.vega.plugins.webservice.handler.SessionInvalidateWebServiceHandlerPlugin" />
 			<plugin class="io.vertigo.vega.plugins.webservice.handler.SessionWebServiceHandlerPlugin" />
 			<plugin class="io.vertigo.vega.plugins.webservice.handler.RateLimitingWebServiceHandlerPlugin" />
@@ -172,6 +175,14 @@
 		<component class="io.vertigo.orchestra.webservices.WsDefinition" />
 		<component class="io.vertigo.orchestra.webservices.WsExecution" />
 		<component class="io.vertigo.orchestra.webservices.WsExecutionControl" />
+	</module>
+	
+	
+	<module name="dashboard" >
+		<component api="DataProvider" class="io.vertigo.dashboard.impl.services.data.DataProviderImpl" >
+			<param name="appName" value="mars-analytics"/>
+		</component>
+		<component class="io.vertigo.dashboard.webservices.DashboardDataProviderWebServices" />
 	</module>
 	 
 	<module name="mars-boot-resources">
