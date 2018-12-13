@@ -193,6 +193,9 @@
 	
 	
 	<module name="dashboard" >
+		<component class="io.vertigo.dashboard.ui.DashboardUiManager" >
+			<param name="contextName" value="mars" />
+		</component>
 		<component api="DataProvider" class="io.vertigo.dashboard.impl.services.data.DataProviderImpl" >
 			<param name="appName" value="mars-analytics"/>
 		</component>
