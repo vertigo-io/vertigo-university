@@ -38,10 +38,10 @@ create sequence SEQ_MEDIA_FILE_INFO
 create sequence SEQ_MISSION
 	start with 1000 cache 20; 
 
-create sequence SEQ_OPENDATA_SERVICE
+create sequence SEQ_OPENDATA_SET
 	start with 1000 cache 20; 
 
-create sequence SEQ_OPENDATA_SERVICE_STATUS
+create sequence SEQ_OPENDATA_SET_STATUS
 	start with 1000 cache 20; 
 
 create sequence SEQ_PERSON
@@ -359,51 +359,59 @@ comment on column MISSION.BUSINESS_ID is
 'Business';
 
 -- ============================================================
---   Table : OPENDATA_SERVICE                                        
+--   Table : OPENDATA_SET                                        
 -- ============================================================
-create table OPENDATA_SERVICE
+create table OPENDATA_SET
 (
     ODS_ID      	 NUMERIC     	not null,
-    NAME        	 VARCHAR(100)	,
     CODE        	 VARCHAR(100)	,
+    TITLE       	 VARCHAR(100)	,
+    DESCRIPTION 	 VARCHAR(350)	,
     END_POINT_URL	 TEXT        	,
+    PICTUREFILE_ID	 NUMERIC     	,
     TAGS        	 TEXT        	,
-    OPENDATA_SERVICE_STATUS_ID	 VARCHAR(100)	,
-    constraint PK_OPENDATA_SERVICE primary key (ODS_ID)
+    OPENDATA_SET_STATUS_ID	 VARCHAR(100)	,
+    constraint PK_OPENDATA_SET primary key (ODS_ID)
 );
 
-comment on column OPENDATA_SERVICE.ODS_ID is
+comment on column OPENDATA_SET.ODS_ID is
 'Id';
 
-comment on column OPENDATA_SERVICE.NAME is
-'Name';
-
-comment on column OPENDATA_SERVICE.CODE is
+comment on column OPENDATA_SET.CODE is
 'Code';
 
-comment on column OPENDATA_SERVICE.END_POINT_URL is
+comment on column OPENDATA_SET.TITLE is
+'Title';
+
+comment on column OPENDATA_SET.DESCRIPTION is
+'Description';
+
+comment on column OPENDATA_SET.END_POINT_URL is
 'Service Endpoint URL';
 
-comment on column OPENDATA_SERVICE.TAGS is
+comment on column OPENDATA_SET.PICTUREFILE_ID is
+'Picture';
+
+comment on column OPENDATA_SET.TAGS is
 'Tags';
 
-comment on column OPENDATA_SERVICE.OPENDATA_SERVICE_STATUS_ID is
-'Opendata Service Status';
+comment on column OPENDATA_SET.OPENDATA_SET_STATUS_ID is
+'Opendata Set Status';
 
 -- ============================================================
---   Table : OPENDATA_SERVICE_STATUS                                        
+--   Table : OPENDATA_SET_STATUS                                        
 -- ============================================================
-create table OPENDATA_SERVICE_STATUS
+create table OPENDATA_SET_STATUS
 (
-    OPENDATA_SERVICE_STATUS_ID	 VARCHAR(100)	not null,
+    OPENDATA_SET_STATUS_ID	 VARCHAR(100)	not null,
     LABEL       	 VARCHAR(100)	,
-    constraint PK_OPENDATA_SERVICE_STATUS primary key (OPENDATA_SERVICE_STATUS_ID)
+    constraint PK_OPENDATA_SET_STATUS primary key (OPENDATA_SET_STATUS_ID)
 );
 
-comment on column OPENDATA_SERVICE_STATUS.OPENDATA_SERVICE_STATUS_ID is
+comment on column OPENDATA_SET_STATUS.OPENDATA_SET_STATUS_ID is
 'Id';
 
-comment on column OPENDATA_SERVICE_STATUS.LABEL is
+comment on column OPENDATA_SET_STATUS.LABEL is
 'Status Label';
 
 -- ============================================================
@@ -656,11 +664,11 @@ alter table MISSION
 
 create index MISSION_BASE_BASE_FK on MISSION (BASE_ID asc);
 
-alter table OPENDATA_SERVICE
-	add constraint FK_OPENDATA_SERVICE_OPENDATA_SERVICE_STATUS_OPENDATA_SERVICE_STATUS foreign key (OPENDATA_SERVICE_STATUS_ID)
-	references OPENDATA_SERVICE_STATUS (OPENDATA_SERVICE_STATUS_ID);
+alter table OPENDATA_SET
+	add constraint FK_OPENDATA_SET_OPENDATA_SET_STATUS_OPENDATA_SET_STATUS foreign key (OPENDATA_SET_STATUS_ID)
+	references OPENDATA_SET_STATUS (OPENDATA_SET_STATUS_ID);
 
-create index OPENDATA_SERVICE_OPENDATA_SERVICE_STATUS_OPENDATA_SERVICE_STATUS_FK on OPENDATA_SERVICE (OPENDATA_SERVICE_STATUS_ID asc);
+create index OPENDATA_SET_OPENDATA_SET_STATUS_OPENDATA_SET_STATUS_FK on OPENDATA_SET (OPENDATA_SET_STATUS_ID asc);
 
 alter table MISSION
 	add constraint FK_PERSON_MISSION_PERSON foreign key (PERSON_ID)

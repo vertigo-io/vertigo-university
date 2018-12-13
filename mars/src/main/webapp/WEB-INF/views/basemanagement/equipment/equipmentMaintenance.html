@@ -5,7 +5,7 @@
   layout:decorate="~{templates/mmcDetailNavLayout}"
 >
 	<head>
-		<title>Base Jobs</title>
+		<title>Equipment Maintenance</title>
 	</head>
 	
 	<body>
@@ -40,8 +40,8 @@
 					<vu:column field="code" />
 					<vu:column field="title" />
 					<vu:column field="dateCreated" />
-					<vu:column name="workOrderStatusId" label="Status" >
-						<vu:field-read field="workOrderStatusId" list="workOrderStatus" listKey="workOrderStatusId" listDisplay="label" />
+					<vu:column name="ticketStatusId" label="Status" >
+						<vu:field-read field="ticketStatusId" list="ticketStatus" listKey="ticketStatusId" listDisplay="label" />
 					</vu:column>
 				</vu:table>
 			</vu:block>

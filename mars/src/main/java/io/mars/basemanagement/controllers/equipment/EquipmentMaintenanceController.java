@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import io.mars.basemanagement.domain.Equipment;
 import io.mars.basemanagement.services.equipment.EquipmentServices;
 import io.mars.maintenance.domain.Ticket;
-import io.mars.maintenance.domain.WorkOrderStatus;
+import io.mars.maintenance.domain.TicketStatus;
 import io.mars.maintenance.services.ticket.TicketServices;
 import io.vertigo.ui.core.ViewContext;
 import io.vertigo.ui.core.ViewContextKey;
@@ -27,11 +27,11 @@ public class EquipmentMaintenanceController extends AbstractVSpringMvcController
 
 	private final ViewContextKey<Equipment> equipmentKey = ViewContextKey.of("equipment");
 	private final ViewContextKey<Ticket> ticketsKey = ViewContextKey.of("tickets");
-	private final ViewContextKey<WorkOrderStatus> workOrderStatusKey = ViewContextKey.of("workOrderStatus");
+	private final ViewContextKey<TicketStatus> ticketStatusKey = ViewContextKey.of("ticketStatus");
 
 	@GetMapping("/{equipmentId}")
 	public void initContext(final ViewContext viewContext, @PathVariable("equipmentId") final Long equipmentId) {
-		viewContext.publishMdl(workOrderStatusKey, WorkOrderStatus.class, null); //all
+		viewContext.publishMdl(ticketStatusKey, TicketStatus.class, null); //all
 		viewContext.publishDtList(ticketsKey, ticketServices.getTicketsByEquipment(equipmentId));
 		viewContext.publishDto(equipmentKey, equipmentServices.get(equipmentId));
 		//---
