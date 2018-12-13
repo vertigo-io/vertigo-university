@@ -5,6 +5,7 @@
 	<feature class="io.mars.hr.HrFeatures" />
 	<feature class="io.mars.basemanagement.BasemanagementFeatures" />
 	<feature class="io.mars.maintenance.MaintenanceFeatures" />
+	<feature class="io.mars.opendata.OpendataFeatures" />
 	
 	<module name="datageneration">
 		<component class="io.mars.datageneration.DataGenerator" >

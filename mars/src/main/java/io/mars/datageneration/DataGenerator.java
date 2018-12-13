@@ -16,6 +16,7 @@ import io.mars.basemanagement.datageneration.EquipmentGenerator;
 import io.mars.basemanagement.datageneration.ReferenceDataGenerator;
 import io.mars.hr.datageneration.PersonGenerator;
 import io.mars.maintenance.datageneration.TicketGenerator;
+import io.mars.opendata.datageneration.OpendataSetGenerator;
 import io.vertigo.core.component.Component;
 import io.vertigo.lang.Assertion;
 
@@ -37,6 +38,8 @@ public class DataGenerator implements Component {
 	private BaseGenerator baseGenerator;
 	@Inject
 	private ReferenceDataGenerator referenceDataGenerator;
+	@Inject
+	private OpendataSetGenerator opendataSetGenerator;
 
 	private final int initialEquipmentUnits;
 
@@ -53,7 +56,12 @@ public class DataGenerator implements Component {
 		generateInitialPersons();
 		generateInitialBases();
 		generateInitialEquipments();
+		generateInitialOpendataSets();
 		generatePastData(ZonedDateTime.of(LocalDate.of(2017, 1, 1), LocalTime.of(0, 0), ZoneOffset.UTC).toInstant(), Instant.now());
+	}
+
+	private void generateInitialOpendataSets() {
+		opendataSetGenerator.createInitialOpendataSetsFromCSV("initdata/opendataSets.csv");
 	}
 
 	private void generateInitialEquipments() {

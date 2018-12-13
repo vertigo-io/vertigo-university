@@ -178,6 +178,12 @@ create Domain DO_EMAIL {
 	storeType : "VARCHAR(150)"
 }
 
+create Domain DO_URL {
+	dataType : String
+	formatter : FMT_DEFAULT
+	storeType : "TEXT"
+}
+
 create Domain DO_CODE {
 	dataType : String
 	formatter : FMT_DEFAULT

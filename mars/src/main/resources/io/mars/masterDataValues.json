@@ -44,14 +44,14 @@
             "label" : "Closed"
         }
     },
-    "io.mars.opendata.domain.OpendataServiceStatus" : 
+    "io.mars.opendata.domain.OpendataSetStatus" : 
     {
         "enabled" : {
-            "opendataServiceStatusId" : "ENABLED",
+            "opendataSetStatusId" : "ENABLED",
             "label" : "Enabled"
         },
         "disabled" : {
-            "opendataServiceStatusId" : "DISABLED",
+            "opendataSetStatusId" : "DISABLED",
             "label" : "Disabled"
         }
    	}    

@@ -1,0 +1,5 @@
+Status;Code;Title;Description;Endpoint URL;Tags
+enabled;WS-BASES;Open Bases Directory;"<p>Ce <strong>service""</strong> permet de lister l'ensemble des bases gérées par la Mars Mining Company</p>";/api/bases;"#base;#captain"
+enabled;WS-EQUIPMENTS;Open Equipment Directory;"<p>Ce <strong>service""</strong> permet de lister l'ensemble des équipements d'une base de la Mars Mining Company</p>";/api/base/Alpha-1/equipments;#equipment
+enabled;WS-PERSONS;Open Persons Directory;"<p>Ce <strong>service""</strong> permet de lister l'ensemble du personnel de la Mars Mining Company</p>";/api/persons;"#directory;#human;#hr"
+enabled;WS-EQUIPMENT-TYPES;Open Equipment Types Directory;"<p>Ce <strong>service""</strong> permet de lister l'ensemble types d'équipements mis à la disposition des bases de la Mars Mining Company</p>";/api/equipmentTypes;"#catalog;#categories"

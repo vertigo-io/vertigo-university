@@ -43,6 +43,10 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		MediaFileInfo(io.mars.common.domain.tools.file.MediaFileInfo.class),
 		/** Objet de données Mission. */
 		Mission(io.mars.hr.domain.Mission.class),
+		/** Objet de données OpendataSet. */
+		OpendataSet(io.mars.opendata.domain.OpendataSet.class),
+		/** Objet de données OpendataSetStatus. */
+		OpendataSetStatus(io.mars.opendata.domain.OpendataSetStatus.class),
 		/** Objet de données Person. */
 		Person(io.mars.hr.domain.Person.class),
 		/** Objet de données Picture. */
@@ -283,6 +287,36 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		BUSINESS_ID	}
 
 	/**
+	 * Enumération des champs de OpendataSet.
+	 */
+	public enum OpendataSetFields implements DtFieldName<io.mars.opendata.domain.OpendataSet> {
+		/** Propriété 'Id'. */
+		ODS_ID,
+		/** Propriété 'Code'. */
+		CODE,
+		/** Propriété 'Title'. */
+		TITLE,
+		/** Propriété 'Description'. */
+		DESCRIPTION,
+		/** Propriété 'Service Endpoint URL'. */
+		END_POINT_URL,
+		/** Propriété 'Picture'. */
+		PICTUREFILE_ID,
+		/** Propriété 'Tags'. */
+		TAGS,
+		/** Propriété 'Opendata Set Status'. */
+		OPENDATA_SET_STATUS_ID	}
+
+	/**
+	 * Enumération des champs de OpendataSetStatus.
+	 */
+	public enum OpendataSetStatusFields implements DtFieldName<io.mars.opendata.domain.OpendataSetStatus> {
+		/** Propriété 'Id'. */
+		OPENDATA_SET_STATUS_ID,
+		/** Propriété 'Status Label'. */
+		LABEL	}
+
+	/**
 	 * Enumération des champs de Person.
 	 */
 	public enum PersonFields implements DtFieldName<io.mars.hr.domain.Person> {
@@ -340,7 +374,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		/** Propriété 'Ticket Creation Date'. */
 		DATE_CREATED,
 		/** Propriété 'Ticket Status'. */
-		WORK_ORDER_STATUS_ID,
+		TICKET_STATUS_ID,
 		/** Propriété 'Equipment'. */
 		EQUIPMENT_ID	}
 

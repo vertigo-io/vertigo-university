@@ -1,0 +1,35 @@
+package io.mars.opendata.domain
+
+create DtDefinition DT_OPENDATA_SET {
+	id ODS_ID {domain: DO_ID label:"Id"}
+	field CODE {domain: DO_CODE label: "Code" required:"false"}
+	field TITLE {domain: DO_LABEL label: "Title" required:"false"}
+	field DESCRIPTION {domain: DO_DESCRIPTION label: "Description" required:"false"}
+	field END_POINT_URL {domain: DO_URL label:"Service Endpoint URL" required: "false"}
+	field PICTUREFILE_ID {domain: DO_ID label:"Picture" required:"false"}
+	field TAGS {domain: DO_MULTIPLE_IDS label: "Tags" required:"false"}
+}
+
+create DtDefinition DT_OPENDATA_SET_STATUS {
+	stereotype: "StaticMasterData"
+	id OPENDATA_SET_STATUS_ID {domain: DO_CODE label:"Id"}
+	field LABEL {domain: DO_LABEL label:"Status Label" required:"false"}
+}
+
+create Association A_OPENDATA_SET_OPENDATA_SET_STATUS {
+	fkFieldName : "OPENDATA_SET_STATUS_ID"
+    
+ 	dtDefinitionA : DT_OPENDATA_SET
+	dtDefinitionB : DT_OPENDATA_SET_STATUS
+			
+	navigabilityA : "false"
+	navigabilityB : "true"
+	
+	multiplicityA:"0..*"	
+	multiplicityB:"0..1"
+	
+	labelA : "Opendata Set"
+	labelB : "Opendata Set Status"
+	roleA : "OpendataSet"
+	roleB : "OpendataSetStatus"
+}
