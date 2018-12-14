@@ -35,7 +35,7 @@ public class LoginController extends AbstractVSpringMvcController {
 		//final String pass = new PasswordHelper().createPassword(password);
 		final Account loggedAccount = loginServices.login(login, password);
 		System.out.println("login : " + loggedAccount);
-		return "redirect:/home";
+		return "redirect:/home/";
 	}
 
 }
