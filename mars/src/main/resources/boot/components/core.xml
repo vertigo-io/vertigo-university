@@ -8,7 +8,7 @@
 		</plugin>
 	</boot>
 
-	<module name="vertigo-commons">
+	<module name="commons">
 		<component api="DaemonManager" class="io.vertigo.commons.impl.daemon.DaemonManagerImpl"/>
 		<component api="AnalyticsManager" class="io.vertigo.commons.impl.analytics.AnalyticsManagerImpl" >
 			<plugin class="io.vertigo.commons.plugins.analytics.log.SocketLoggerAnalyticsConnectorPlugin">
@@ -25,7 +25,7 @@
 		</component>
 	</module>
 	
-	<module name="vertigo-database">
+	<module name="database">
 		<component api="SqlDataBaseManager" class="io.vertigo.database.impl.sql.SqlDataBaseManagerImpl">
 			<plugin class="io.vertigo.database.plugins.sql.connection.datasource.DataSourceConnectionProviderPlugin">
 				<param name="classname" value="io.vertigo.database.impl.sql.vendor.h2.H2DataBase" />
@@ -42,7 +42,7 @@
 		</component>
 	</module>
 
-	<module name="vertigo-dynamo">
+	<module name="dynamo">
 		<component api="FileManager" class="io.vertigo.dynamo.impl.file.FileManagerImpl" />
 		<component api="VTransactionManager" class="io.vertigo.commons.impl.transaction.VTransactionManagerImpl" />
 		<component api="CollectionsManager" class="io.vertigo.dynamo.impl.collections.CollectionsManagerImpl" >
@@ -76,9 +76,6 @@
 				<param name="dbFilePath" value="${java.io.tmpdir}/vertigo/TestVViewContext" />
 			</plugin>
 		</component>	
-	</module>
-	
-	<module name="vertigo-search">
 		<component api="SearchManager" class="io.vertigo.dynamo.impl.search.SearchManagerImpl">
 		    <plugin class="io.vertigo.dynamo.plugins.search.elasticsearch.embedded.ESEmbeddedSearchServicesPlugin">
 		        <param name="home" value="search/" />
@@ -89,7 +86,7 @@
 		</component>
 	</module>
 	
-	<module name="vertigo-account">
+	<module name="account">
 		<component api="VSecurityManager" class="io.vertigo.account.impl.security.VSecurityManagerImpl">
 			<param name="userSessionClassName" value="io.mars.commons.MarsUserSession" />
 		</component>
@@ -109,7 +106,7 @@
 		</component>
 	</module>
 	 
-	<module name="vertigo-vega" >
+	<module name="vega" >
 		<component api="WebServiceManager" class="io.vertigo.vega.impl.webservice.WebServiceManagerImpl">
 			<plugin class="io.vertigo.vega.plugins.webservice.scanner.annotations.AnnotationsWebServiceScannerPlugin" />
 			<plugin class="io.vertigo.vega.plugins.webservice.webserver.sparkjava.SparkJavaServletFilterWebServerPlugin" >
@@ -132,8 +129,6 @@
 		<component api="TokenManager" class="io.vertigo.vega.impl.token.TokenManagerImpl">
 			<param name="collection" value="mars-api" />
 		</component>
-	</module>
-	<module name="vega-webservices"  >
 		<component class="io.vertigo.vega.impl.webservice.catalog.CatalogWebServices" />
 		<component class="io.vertigo.vega.impl.webservice.catalog.SwaggerWebServices" />
 	</module>
@@ -143,6 +138,16 @@
 	</module>
 	
 	<module name="orchestra-dao" >
+		
+	</module>
+	<module name="orchestra">
+		<definitions>
+			<provider class="io.vertigo.dynamo.plugins.environment.DynamoDefinitionProvider" >
+				<resource type ="kpr" path="io/vertigo/orchestra/execution.kpr"/>
+			    <resource type="classes" path="io.vertigo.orchestra.domain.DtDefinitions" />  
+		    </provider>
+		</definitions>  
+		<!-- dao --> 
 		<component class="io.vertigo.orchestra.dao.definition.OProcessDAO"/>
 		<component class="io.vertigo.orchestra.dao.definition.OActivityDAO"/>
 		<component class="io.vertigo.orchestra.dao.planification.OProcessPlanificationDAO"/>
@@ -157,14 +162,7 @@
 		<component class="io.vertigo.orchestra.monitoring.dao.summary.SummaryPAO"/>
 		<component class="io.vertigo.orchestra.monitoring.dao.uiexecutions.UiexecutionsPAO"/>
 		<component class="io.vertigo.orchestra.monitoring.dao.uidefinitions.UidefinitionsPAO"/>
-	</module>
-	<module name="orchestra">
-		<definitions>
-			<provider class="io.vertigo.dynamo.plugins.environment.DynamoDefinitionProvider" >
-				<resource type ="kpr" path="io/vertigo/orchestra/execution.kpr"/>
-			    <resource type="classes" path="io.vertigo.orchestra.domain.DtDefinitions" />  
-		    </provider>
-		</definitions>   
+		<!-- managers and plugins -->
 		<component api="ONodeManager" class="io.vertigo.orchestra.impl.node.ONodeManagerImpl"/>
 		<component api="OrchestraDefinitionManager" class="io.vertigo.orchestra.impl.definitions.OrchestraDefinitionManagerImpl">
 			<plugin class="io.vertigo.orchestra.plugins.definitions.db.DbProcessDefinitionStorePlugin"/>
@@ -183,14 +181,12 @@
 			<plugin class="io.vertigo.orchestra.plugins.services.log.db.DbProcessLoggerPlugin"/>
 			<plugin class="io.vertigo.orchestra.plugins.services.report.db.DbProcessReportPlugin"/>
 		</component>
-	</module>
-	<module name="orchestra-webservices"  >
+		<!-- webservices -->
 		<component class="io.vertigo.orchestra.webservices.WsInfos" />
 		<component class="io.vertigo.orchestra.webservices.WsDefinition" />
 		<component class="io.vertigo.orchestra.webservices.WsExecution" />
 		<component class="io.vertigo.orchestra.webservices.WsExecutionControl" />
 	</module>
-	
 	
 	<module name="dashboard" >
 		<component class="io.vertigo.dashboard.ui.DashboardUiManager" >
