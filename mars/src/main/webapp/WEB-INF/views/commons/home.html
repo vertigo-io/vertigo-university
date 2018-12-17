@@ -5,13 +5,119 @@
   layout:decorate="~{templates/mmcListLayout}"
 >
 	<head>
-		<title>Jobs</title>
+		<title>Home</title>
+		<!-- graphs -->
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-color/1.0.3/d3-color.min.js" ></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-interpolate/1.1.5/d3-interpolate.min.js" ></script>
+		<script th:src="@{/dashboard/static/dashboard.js}"></script>
+		<script th:src="@{/dashboard/static/dashboard.chartjs.js}"></script>
+		
+		<!-- maps -->
+		<link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.2.0/css/ol.css" type="text/css"/>
+		<script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.2.0/build/ol.js"></script>
+		<script th:src="@{/vertigo-ui/static/js/v-components/v-map.js}"></script>
 	</head>
 	
 	<body>
 		<section layout:fragment="content" >
-			Home Page
+			<div class="gutter-lg">
+				<div class="row gutter-lg" >
+					<div class="col-3 row justify-center items-center">
+						<span class="text-primary" style="font-size:6em;" th:text="${model.basesSummary.baseCount}"></span> 
+						<q-icon name="fas fa-store-alt" color="faded" size="3em"></q-icon>
+					</div>
+					<div class="col-3">
+						<q-card color="white">
+							<q-card-title class="bg-secondary">Global Health Level</q-card-title>
+							<q-card-main class="row justify-center">
+								<q-rating readonly th::value="${model.basesSummary.baseMeanHealth} / 100 * 3 + 1" :max="3" size="3em;" icon="favorite"></q-rating>
+							</q-card-main>
+						</q-card>
+					</div>
+					<div class="col-3">
+						<q-card color="white">
+							<q-card-title class="bg-secondary">Equipment</q-card-title>
+							<q-card-main>
+								<div class="column items-center">
+									<div class="row text-positive indicator" th:text="|${model.basesSummary.onlineEquipmentPercent} %|" ></div>
+									<div class="row text-faded indicator-title">Equipments online</div>
+								</div>
+							</q-card-main>
+						</q-card>
+					</div>
+					<div class="col-3">
+						<q-card color="white">
+							<q-card-title class="bg-secondary">Maintenance</q-card-title>
+							<q-card-main>
+								<div class="column items-center">
+									<div class="row text-positive indicator" th:text="${model.basesSummary.openedTickets}" ></div>
+									<div class="row text-faded indicator-title">Opened Tickets</div>
+								</div>
+							</q-card-main>
+						</q-card>
+					</div>
+				</div>
+				<div class="row gutter-lg" >
+					<div class="col-6 column">
+						<div>
+							<q-card color="white">
+								<q-card-title class="bg-secondary">Supplies</q-card-title>
+								<q-card-main class="gutter-sm">
+									<div class="row q-mt-md">
+										<span class="col-1 text-blue justify-between"><q-icon name="fas fa-tint" color="blue"></q-icon> 75%</span>
+										<q-progress class="col" :percentage="75" stripe color="blue" style="height: 20px">sdd</q-progress> 
+									</div>
+									<div class="row">
+										<span class="col-1 text-yellow"><q-icon name="fas fa-bolt" color="yellow"></q-icon> 98%</span>
+										<q-progress class="col" :percentage="98" stripe  color="yellow" style="height: 20px"></q-progress>
+									</div>
+									<div class="row">
+										<span class="col-1 text-grey"><q-icon name="fas fa-cloud" color="grey"></q-icon> 20%</span>
+										<q-progress class="col" :percentage="20" stripe  color="grey" style="height: 20px"></q-progress>
+									</div>
+								</q-card-main>
+							</q-card>
+						</div>
+						<div>
+							<vu:table list="lastWorkOrders" componentId="lastWorkOrders" >
+								<vu:column field="name" />
+								<vu:column field="dateCreated" />
+								<vu:column field="dateClosed" />
+								<vu:column name="status" label="Status" >
+									<vu:field-read field="workOrderStatusId" list="workOrderStatus" listKey="workOrderStatusId" listDisplay="label" />
+								</vu:column>
+							</vu:table>
+						</div>
+					</div>
+					<div class="col-6">
+						<q-card color="white">
+							<q-card-title class="bg-secondary">Equipments</q-card-title>
+							<q-card-main>
+								<div class="chart chartjs stakedbarchart"
+								    th:data-url="@{/api/dashboard/data/series/clustered}" 
+								    data-query-clustered-measure='{ "measure": "duration:count", "thresholds": ["10","20","50","100","200","500","1000","2000"] }'
+								    data-query-data-filter='{ "measurement": "webservices", "filters": {"location": "*", "name": "*", "module": "*", "feature": "*" }}'
+								    data-query-time-filter='{ "from": "now() - 3d", "to": "now()", "dim": "1h" }'
+								    data-labels='{"duration:count<10":"<10ms","duration:count_20":"<20ms","duration:count_50":"<50ms","duration:count_100":"<100ms", "duration:count_200":"<200ms", "duration:count_500":"<500ms", "duration:count_1000":"<1s", "duration:count_2000":"<2s", "duration:count>2000":">2s"}'
+								    data-colors='iRED2GREEN'></div>
+								repartition des équipements par catégories
+							</q-card-main>
+						</q-card>
+					</div>
+				</div>
+				<div class="row col-12" >
+					<div style="width:100%">
+						<v-map id="map" marker-color="#027BE3" :list="[{lat : 2.239230, lon: 48.773744 },{lat : 2.280263, lon: 48.827317 },{lat : -4.570026, lon: 48.357621 }]"></v-map>
+					</div>
+				</div>
+			</div>
 		</section>
 	</body>
-	
+	<section layout:fragment="footer" >
+		<script type="text/javascript">
+			showCharts();
+		</script>
+	</section>
 </html>

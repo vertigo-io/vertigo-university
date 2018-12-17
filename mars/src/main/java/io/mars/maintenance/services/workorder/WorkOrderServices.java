@@ -11,8 +11,7 @@ import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.domain.model.DtListState;
 
 @Transactional
-public class WorkOrderServices implements Component{
-
+public class WorkOrderServices implements Component {
 
 	@Inject
 	private WorkOrderDAO workOrderDAO;
@@ -29,6 +28,8 @@ public class WorkOrderServices implements Component{
 		return workOrderDAO.findAll(Criterions.alwaysTrue(), dtListState.getMaxRows().orElse(50));
 	}
 
+	public DtList<WorkOrder> getLastWorkOrders() {
+		return workOrderDAO.getLastWorkOrders();
+	}
+
 }
-
-

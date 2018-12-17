@@ -128,6 +128,18 @@ a.q-item {
 	font-size: 80%;
 }
 
+
+/** Home **/
+.indicator {
+	font-size: 3em;
+}
+
+.indicator-title {
+	font-size: 1.5em;
+	font-variant: small-caps;
+}
+
+
 /**Orchestra***/
 
 .execution-summary > div {

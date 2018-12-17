@@ -19,6 +19,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	public enum Definitions {
 		/** Objet de données Base. */
 		Base(io.mars.basemanagement.domain.Base.class),
+		/** Objet de données BasesSummary. */
+		BasesSummary(io.mars.basemanagement.domain.BasesSummary.class),
 		/** Objet de données BaseIndex. */
 		BaseIndex(io.mars.basemanagement.search.BaseIndex.class),
 		/** Objet de données BaseType. */
@@ -107,6 +109,19 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		BASE_TYPE_ID,
 		/** Propriété 'Base Geosector'. */
 		GEOSECTOR_ID	}
+
+	/**
+	 * Enumération des champs de BasesSummary.
+	 */
+	public enum BasesSummaryFields implements DtFieldName<io.mars.basemanagement.domain.BasesSummary> {
+		/** Propriété 'Base Code'. */
+		BASE_COUNT,
+		/** Propriété 'Name'. */
+		BASE_MEAN_HEALTH,
+		/** Propriété 'Health Level'. */
+		OPENED_TICKETS,
+		/** Propriété 'Base Creation Date'. */
+		ONLINE_EQUIPMENT_PERCENT	}
 
 	/**
 	 * Enumération des champs de BaseIndex.

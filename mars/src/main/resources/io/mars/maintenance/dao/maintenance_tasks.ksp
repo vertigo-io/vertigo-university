@@ -15,3 +15,15 @@ create Task TK_GET_LAST_TICKETS_BY_BASE_ID {
     attribute BASE_ID     {domain : DO_ID         		required:"true"  inOut :"in"}
     attribute TICKETS     {domain : DO_DT_TICKET_DTC    required:"true"  inOut :"out"}
 }
+
+create Task TK_GET_LAST_WORK_ORDERS {  
+    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+    request : "
+            select 
+            	wor.*
+			from work_order wor
+			order by wor.date_created desc
+			limit 20
+             "
+    attribute WORK_ORDERS     {domain : DO_DT_WORK_ORDER_DTC    required:"true"  inOut :"out"}
+}

@@ -1,0 +1,14 @@
+package io.mars.basemanagement
+
+
+create Task TK_GET_BASES_SUMMARY {  
+    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+    request : "
+            select 
+				(select count(*) from base) as base_count,
+				(select avg(health_level) from base) as base_mean_health,
+				(select count(*) from ticket tic where tic.ticket_status_id = 'OPEN' or tic.ticket_status_id = 'ASSIGNED') as opened_tickets,
+				(select sum(case when health_level > 30 then 1.0 else 0.0 end) / count(*) * 100 from equipment) as online_equipment_percent;
+             "
+    attribute BASES_SUMMARY     {domain : DO_DT_BASES_SUMMARY_DTO    required:"true"  inOut :"out"}
+}

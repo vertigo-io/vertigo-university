@@ -8,6 +8,7 @@ import io.mars.basemanagement.BasemanagementPAO;
 import io.mars.basemanagement.dao.BaseDAO;
 import io.mars.basemanagement.dao.GeosectorDAO;
 import io.mars.basemanagement.domain.Base;
+import io.mars.basemanagement.domain.BasesSummary;
 import io.mars.basemanagement.domain.Geosector;
 import io.mars.basemanagement.search.BaseIndex;
 import io.vertigo.commons.transaction.Transactional;
@@ -45,5 +46,9 @@ public class BaseServices implements Component {
 
 	public DtList<BaseIndex> getBaseIndex(final List<Long> baseIds) {
 		return basemanagementPAO.loadBaseIndex(baseIds);
+	}
+
+	public BasesSummary getBaseSummary() {
+		return basemanagementPAO.getBasesSummary();
 	}
 }

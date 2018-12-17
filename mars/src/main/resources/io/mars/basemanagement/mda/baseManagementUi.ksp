@@ -1,0 +1,8 @@
+package io.mars.basemanagement.domain
+
+create DtDefinition DT_BASES_SUMMARY {
+	field BASE_COUNT 				{domain: DO_COUNT label: "Base Code" required:"true"}
+	field BASE_MEAN_HEALTH 			{domain: DO_HEALTH label: "Name" required:"true"}
+	field OPENED_TICKETS		 	{domain: DO_COUNT label: "Health Level" required: "true"}	
+	field ONLINE_EQUIPMENT_PERCENT	{domain: DO_HEALTH label: "Base Creation Date" required:"true"}
+}

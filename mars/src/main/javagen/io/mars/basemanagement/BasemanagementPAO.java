@@ -41,6 +41,18 @@ public final class BasemanagementPAO implements StoreServices {
 	}
 
 	/**
+	 * Execute la tache TK_GET_BASES_SUMMARY.
+	 * @return io.mars.basemanagement.domain.BasesSummary basesSummary
+	*/
+	public io.mars.basemanagement.domain.BasesSummary getBasesSummary() {
+		final Task task = createTaskBuilder("TK_GET_BASES_SUMMARY")
+				.build();
+		return getTaskManager()
+				.execute(task)
+				.getResult();
+	}
+
+	/**
 	 * Execute la tache TK_GET_EQUIPMENTS_OVERVIEW.
 	 * @param baseId Long 
 	 * @return io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.domain.EquipmentOverview> overview
