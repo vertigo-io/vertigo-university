@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import io.mars.basemanagement.domain.Base;
+import io.mars.basemanagement.domain.BaseType;
+import io.mars.basemanagement.domain.Geosector;
 import io.mars.basemanagement.services.base.BaseServices;
 import io.vertigo.dynamo.domain.model.DtListState;
 import io.vertigo.ui.core.ViewContext;
@@ -19,12 +21,16 @@ import io.vertigo.ui.impl.springmvc.controller.AbstractVSpringMvcController;
 public class BaseListController extends AbstractVSpringMvcController {
 
 	private static final ViewContextKey<Base> bases = ViewContextKey.of("bases");
+	private static final ViewContextKey<Geosector> geosectors = ViewContextKey.of("geosectors");
+	private static final ViewContextKey<BaseType> baseTypes = ViewContextKey.of("baseTypes");
 
 	@Inject
 	private BaseServices baseServices;
 
 	@GetMapping("/")
 	public void initContext(final ViewContext viewContext) {
+		viewContext.publishMdl(geosectors, Geosector.class, null); //all
+		viewContext.publishMdl(baseTypes, BaseType.class, null); //all
 		final DtListState dtListState = new DtListState(200, 0, null, null);
 		viewContext.publishDtList(bases, baseServices.getBases(dtListState));
 	}

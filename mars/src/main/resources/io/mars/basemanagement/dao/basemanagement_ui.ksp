@@ -12,3 +12,15 @@ create Task TK_GET_BASES_SUMMARY {
              "
     attribute BASES_SUMMARY     {domain : DO_DT_BASES_SUMMARY_DTO    required:"true"  inOut :"out"}
 }
+
+create Task TK_GET_BASE_OVERVIEW {  
+    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+    request : "
+           select 
+				(select count(*) from equipment equ where equ.base_id = #BASE_ID#) as equipment_count,
+				(select count(*) from ticket tic join equipment equ on equ.equipment_id = tic.equipment_id where equ.base_id = #BASE_ID# and ( tic.ticket_status_id = 'OPEN' or tic.ticket_status_id = 'ASSIGNED')) as opened_tickets,
+				(select count(*) from work_order wor join ticket tic on tic.ticket_id = wor.ticket_id join equipment equ on equ.equipment_id = tic.equipment_id where equ.base_id = #BASE_ID#  and wor.work_order_status_id = 'INPROGRESS') as work_orders_inprogress
+             "
+    attribute BASE_ID     		{domain : DO_ID    						required:"true"  inOut :"in"}
+    attribute BASE_OVERVIEW     {domain : DO_DT_BASE_OVERVIEW_DTO    	required:"true"  inOut :"out"}
+}

@@ -83,12 +83,12 @@ nav.scroll-spy-nav a.q-item.active {
 a.q-item {
 	color: grey;	
 }
-.personCard .q-card {
+.marsCard .q-card {
 	width:100%;	
 }
 
 @media (min-width: 1500px) {
-.row  .personCard {
+.row  .marsCard {
 	width: 25%;
 }}
 

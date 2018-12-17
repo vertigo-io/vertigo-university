@@ -8,6 +8,7 @@ import io.mars.basemanagement.BasemanagementPAO;
 import io.mars.basemanagement.dao.BaseDAO;
 import io.mars.basemanagement.dao.GeosectorDAO;
 import io.mars.basemanagement.domain.Base;
+import io.mars.basemanagement.domain.BaseOverview;
 import io.mars.basemanagement.domain.BasesSummary;
 import io.mars.basemanagement.domain.Geosector;
 import io.mars.basemanagement.search.BaseIndex;
@@ -50,5 +51,9 @@ public class BaseServices implements Component {
 
 	public BasesSummary getBaseSummary() {
 		return basemanagementPAO.getBasesSummary();
+	}
+
+	public BaseOverview getBaseOverview(final Long baseId) {
+		return basemanagementPAO.getBaseOverview(baseId);
 	}
 }

@@ -27,6 +27,7 @@
 					<br/><span class="text-smaller" th:text="${model.equipment.name}"></span>
 				</div>
 				<div layout:fragment="content-header-actions">
+					<vu:button-submit action="@{_addTicket}" :round size="lg" color="primary" icon="add" aria-label="Create ticket" title="Create ticket" class="on-left"/>
 				</div>
 				<div layout:fragment="content-header-tabs">
 					<q-btn flat type="a" th:href="@{/basemanagement/equipment/information/} + ${model.equipment.equipmentId}">Informations</q-btn>
@@ -40,9 +41,6 @@
 					<vu:column field="code" />
 					<vu:column field="title" />
 					<vu:column field="dateCreated" />
-					<vu:column name="ticketStatusId" label="Status" >
-						<vu:field-read field="ticketStatusId" list="ticketStatus" listKey="ticketStatusId" listDisplay="label" />
-					</vu:column>
 				</vu:table>
 			</vu:block>
 		</section>

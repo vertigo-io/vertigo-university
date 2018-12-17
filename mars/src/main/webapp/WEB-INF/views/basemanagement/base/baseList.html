@@ -13,22 +13,38 @@
 			<vu:include-data object="bases" field="baseId" />
 			<vu:include-data object="bases" field="name" />
 			<vu:include-data object="bases" field="code" />
-			<div class="row wrap justify-between gutter-md">
-				<vu:cards list="bases" componentId="baseCards" sortUrl="@{/basemanagement/bases/_sort}" rowsPerPage="10" showMore="true" showMoreLabel="Show more" >
+			<vu:include-data object="bases" field="tags" />
+			<vu:include-data object="bases" field="geosectorId" />
+			<vu:include-data object="bases" field="healthLevel" />
+			<vu:include-data object="bases" field="creationDate" />
+
+			<vu:cards list="bases" componentId="baseCards" cardClass="marsCard col-xl-4 col-md-6 col-xs-12"  sortUrl="@{/basemanagement/bases/_sort}" rowsPerPage="8" showMore="true" showMoreLabel="Show more" >
 					<q-card-media >
 						<img th:src="@{/static/img/bases/Mars base 1.jpg}"  />
 					</q-card-media>
-					<q-card-title>
-						<a class="text-primary" th::href="|'@{/basemanagement/base/information/}'+item.baseId|">{{item.name}}</a>
-						<span slot="subtitle">{{item.code}}</span>
-					</q-card-title>
-					<q-card-main>
-					a
+					<q-card-main class="row">
+						<div class="col-3" >
+							<q-knob
+								  :value="item.healthLevel"
+								  :min="0"
+								  :max="100"
+								  color="positive"
+								  size="70px"
+								  :readonly="true" ><q-icon name="fas fa-store-alt" size="35px" color="primary"></q-icon></q-knob>
+						</div>
+						<div class="col" >
+							<a class="text-primary" th::href="|'@{/basemanagement/base/information/}'+item.baseId|">{{item.name}}</a><br/>
+							<span >{{item.code}}</span><br/>
+							<vu:field-read field="baseTypeId" list="baseTypes" listKey="baseTypeId" /><br/>
+							Created : {{item.creationDate}}<br/>
+							<q-icon name="location_on" size="25px"></q-icon><vu:field-read field="geosectorId" list="geosectors" listKey="geosectorId" listDisplay="sectorLabel" /><br/>		
+						</div>		
 					</q-card-main>
 					<q-card-separator></q-card-separator>
-					b
+					<q-card-actions>
+						<q-chips-input :value="item.tags"  :readonly="true"  :hide-underline="true" > </q-chips-input>
+					</q-card-actions>
 				</vu:cards>
-			</div>
 		</section>
 	</body>
 </html>

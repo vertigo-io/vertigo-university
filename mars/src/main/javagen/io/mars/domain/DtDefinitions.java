@@ -23,6 +23,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		BasesSummary(io.mars.basemanagement.domain.BasesSummary.class),
 		/** Objet de données BaseIndex. */
 		BaseIndex(io.mars.basemanagement.search.BaseIndex.class),
+		/** Objet de données BaseOverview. */
+		BaseOverview(io.mars.basemanagement.domain.BaseOverview.class),
 		/** Objet de données BaseType. */
 		BaseType(io.mars.basemanagement.domain.BaseType.class),
 		/** Objet de données Business. */
@@ -139,6 +141,17 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		TAGS,
 		/** Propriété 'Base Type'. */
 		BASE_TYPE_LABEL	}
+
+	/**
+	 * Enumération des champs de BaseOverview.
+	 */
+	public enum BaseOverviewFields implements DtFieldName<io.mars.basemanagement.domain.BaseOverview> {
+		/** Propriété 'Equipements count'. */
+		EQUIPMENT_COUNT,
+		/** Propriété 'Opened tickets'. */
+		OPENED_TICKETS,
+		/** Propriété 'Work orders in progress'. */
+		WORK_ORDERS_INPROGRESS	}
 
 	/**
 	 * Enumération des champs de BaseType.

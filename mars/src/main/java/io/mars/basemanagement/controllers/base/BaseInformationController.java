@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import io.mars.basemanagement.domain.Base;
+import io.mars.basemanagement.domain.BaseOverview;
 import io.mars.basemanagement.domain.BaseType;
 import io.mars.basemanagement.domain.Geosector;
 import io.mars.basemanagement.domain.Tag;
@@ -34,12 +35,16 @@ public class BaseInformationController extends AbstractVSpringMvcController {
 	private final ViewContextKey<BaseType> baseTypesKey = ViewContextKey.of("baseTypes");
 	private final ViewContextKey<Geosector> geosectorsKey = ViewContextKey.of("geosectors");
 	private final ViewContextKey<Tag> tagsKey = ViewContextKey.of("tags");
+	private final ViewContextKey<BaseOverview> baseOverview = ViewContextKey.of("baseOverview");
 
 	@GetMapping("/{baseId}")
 	public void initContext(final ViewContext viewContext, @PathVariable("baseId") final Long baseId) {
 		viewContext.publishMdl(baseTypesKey, BaseType.class, null); //all
 		viewContext.publishMdl(tagsKey, Tag.class, null); //all
 		viewContext.publishDtList(geosectorsKey, baseServices.getAllGeosectors());
+		//---
+		viewContext.publishDto(baseOverview, baseServices.getBaseOverview(baseId));
+		//---
 		viewContext.publishDto(baseKey, baseServices.get(baseId));
 		//---
 		final Person noManagerPerson = new Person();

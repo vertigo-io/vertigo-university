@@ -1,11 +1,16 @@
 package io.mars.maintenance.services.ticket;
 
+import java.time.LocalDate;
+
 import javax.inject.Inject;
 
 import io.mars.domain.DtDefinitions.TicketFields;
 import io.mars.maintenance.dao.TicketDAO;
 import io.mars.maintenance.domain.Ticket;
+import io.mars.maintenance.domain.TicketStatusEnum;
+import io.vertigo.commons.eventbus.EventBusManager;
 import io.vertigo.commons.transaction.Transactional;
+import io.vertigo.commons.transaction.VTransactionManager;
 import io.vertigo.core.component.Component;
 import io.vertigo.dynamo.criteria.Criterions;
 import io.vertigo.dynamo.domain.model.DtList;
@@ -17,6 +22,10 @@ public class TicketServices implements Component {
 
 	@Inject
 	private TicketDAO ticketDAO;
+	@Inject
+	private VTransactionManager transactionManager;
+	@Inject
+	private EventBusManager eventBusManager;
 
 	public Ticket getTicketFromId(final Long baseId) {
 		return ticketDAO.get(baseId);
@@ -24,6 +33,19 @@ public class TicketServices implements Component {
 
 	public void save(final Ticket ticket) {
 		ticketDAO.save(ticket);
+	}
+
+	public void createTicket(final Ticket ticket) {
+		ticket.setDateCreated(LocalDate.now());
+		ticket.ticketStatus().setEnumValue(TicketStatusEnum.open);
+		//---
+		ticketDAO.save(ticket);
+		transactionManager.getCurrentTransaction()
+				.addAfterCompletion(txCommited -> {
+					if (txCommited) {
+						eventBusManager.post(new TicketEvent(TicketEvent.Type.CREATE, ticket));
+					}
+				});
 	}
 
 	public DtList<Ticket> getTickets(final DtListState dtListState) {

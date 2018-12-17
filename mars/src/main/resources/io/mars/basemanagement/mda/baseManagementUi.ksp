@@ -6,3 +6,9 @@ create DtDefinition DT_BASES_SUMMARY {
 	field OPENED_TICKETS		 	{domain: DO_COUNT label: "Health Level" required: "true"}	
 	field ONLINE_EQUIPMENT_PERCENT	{domain: DO_HEALTH label: "Base Creation Date" required:"true"}
 }
+
+create DtDefinition DT_BASE_OVERVIEW {
+	field EQUIPMENT_COUNT 			{domain: DO_COUNT label: "Equipements count" required:"true"}
+	field OPENED_TICKETS		 	{domain: DO_COUNT label: "Opened tickets" required: "true"}	
+	field WORK_ORDERS_INPROGRESS	{domain: DO_COUNT label: "Work orders in progress" required:"true"}
+}
