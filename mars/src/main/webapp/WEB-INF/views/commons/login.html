@@ -20,18 +20,20 @@
 	<vu:page >
 	<div id="page" class="row justify-center items-center">
       	<div><h2>Welcome to  the Mars<br/>Base Network.</h2></div>
-      	<vu:form>
-      		<vu:include-data-primitive key="login" />
-      		<vu:include-data-primitive key="password" />
-      		<div>
-	      		<q-field label="Login"	orientation="vertical">
-					<q-input v-model="vueData.login" name="login"></q-input>			
-				</q-field>
-				<q-field label="Password"	orientation="vertical">
-					<q-input type="password" v-model="vueData.password" name="password"></q-input>			
-				</q-field>
-				<vu:button-submit label="Login" action="@{_login}" :flat />
-			</div>
+      	<vu:form >
+      			<vu:include-data-primitive key="login" />
+	      		<vu:include-data-primitive key="password" />
+	      		<div class="gutter-y-md">
+		      		<q-field label="Login"	orientation="vertical">
+						<q-input v-model="vueData.login" name="login"></q-input>			
+					</q-field>
+					<q-field label="Password"	orientation="vertical">
+						<q-input type="password" v-model="vueData.password" name="password"></q-input>			
+					</q-field>
+					<div class="float-right">
+						<vu:button-submit label="Login" action="@{_login}" class="bg-primary text-white" :flat />
+					</div>
+				</div>
 		</vu:form>
 	</div>
 	</vu:page>
