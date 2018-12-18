@@ -179,7 +179,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		EQUIPMENT_ID,
 		/** Propriété 'Name'. */
 		NAME,
-		/** Propriété 'Base Code'. */
+		/** Propriété 'Equipment Code'. */
 		CODE,
 		/** Propriété 'Health Level'. */
 		HEALTH_LEVEL,

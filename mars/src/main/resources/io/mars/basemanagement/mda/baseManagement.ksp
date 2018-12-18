@@ -43,11 +43,11 @@ create DtDefinition DT_EQUIPMENT {
 	stereotype: "KeyConcept"
 	id EQUIPMENT_ID {domain: DO_ID label:"Id"}
 	field NAME {domain: DO_LABEL label: "Name" required:"false"}
-	field CODE {domain: DO_CODE label: "Base Code" required:"false"}
+	field CODE {domain: DO_CODE label: "Equipment Code" required:"false"}
 	field HEALTH_LEVEL {domain: DO_HEALTH label: "Health Level" required: "false"}	
 	field PURCHASE_DATE {domain: DO_LOCALDATE label: "Date of purchase" required:"false"}
 	field DESCRIPTION {domain: DO_DESCRIPTION label: "Description" required:"false"}
-	field TAGS {domain: DO_TAGS label: "Tags" required:"false"}
+	field TAGS {domain: DO_MULTIPLE_IDS label: "Tags" required:"false"}
 	field GEO_LOCATION {domain: DO_LABEL label:"Geographic Location" required:"false"}
 	field RENTING_FEE {domain: DO_CURRENCY label: "Renting Fee" required:"false"}
 	field EQUIPMENT_VALUE {domain: DO_CURRENCY label:"Current equipment value" required:"false"}

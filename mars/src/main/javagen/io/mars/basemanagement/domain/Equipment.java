@@ -132,17 +132,17 @@ public final class Equipment implements KeyConcept {
 	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Base Code'.
+	 * Récupère la valeur de la propriété 'Equipment Code'.
 	 * @return String code
 	 */
-	@Field(domain = "DO_CODE", label = "Base Code")
+	@Field(domain = "DO_CODE", label = "Equipment Code")
 	public String getCode() {
 		return code;
 	}
 
 	/**
 	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'Base Code'.
+	 * Définit la valeur de la propriété 'Equipment Code'.
 	 * @param code String
 	 */
 	public void setCode(final String code) {
@@ -211,7 +211,7 @@ public final class Equipment implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Tags'.
 	 * @return String tags
 	 */
-	@Field(domain = "DO_TAGS", label = "Tags")
+	@Field(domain = "DO_MULTIPLE_IDS", label = "Tags")
 	public String getTags() {
 		return tags;
 	}

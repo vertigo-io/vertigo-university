@@ -30,6 +30,8 @@
 				</div>
 				<div layout:fragment="content-header-actions">
 					<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>
+					<q-btn round size="lg" color="primary" icon="fas fa-cubes" type="a" th:href="@{/basemanagement/equipments/}"  aria-label="Add equipment" title="See all equipments" class="on-left" ></q-btn>
+					<q-btn round size="lg" color="primary" icon="fas fa-cubes" type="a" th:href="@{/basemanagement/equipment/new}"  aria-label="Add equipment" title="Add equipment" class="on-left" >+</q-btn>
 					<q-btn round size="lg" color="primary" icon="more_horiz"  direction="down" aria-label="More actions" title="More actions" class="on-left"> 
 					  <q-popover><q-list link>
 					  	<q-item><q-btn flat>Add view</q-btn></q-item>

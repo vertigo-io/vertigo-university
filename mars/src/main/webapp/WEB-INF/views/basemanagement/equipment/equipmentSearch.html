@@ -26,7 +26,7 @@
 							<vu:column field="equipmentTypeName" />
 							<vu:column field="equipmentCategoryName" />
 							<vu:column name="actions" label="Actions" >
-								<q-btn round color="primary" icon="arrow_forward" type="a" th::href="|'@{/basemanagement/equipment/information/}'+props.row.equipmentId|"></q-btn>
+								<q-btn round color="primary" icon="arrow_forward" type="a" th::href="|'@{/basemanagement/equipment/}'+props.row.equipmentId|"></q-btn>
 							</vu:column>
 						</vu:table>
 					</div>

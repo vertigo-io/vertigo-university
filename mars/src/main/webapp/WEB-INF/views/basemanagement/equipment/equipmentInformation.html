@@ -25,43 +25,48 @@
 					<img th:src="@{/static/img/bases/Mars base 1.jpg}" class="detailImg gt-md"/>
 				</div>
 				<div layout:fragment="content-header-title">
-					<span class="text-bigger" th:text="${model.equipment.code}"></span>
+					<span class="text-bigger" th:text="${model.equipment.code?:'New Equipment'}"></span>
 					<br/><span class="text-smaller" th:text="${model.equipment.name}"></span>
 				</div>
-				<div layout:fragment="content-header-actions">
+				<div th:if="${!model.modeCreate}" layout:fragment="content-header-actions">
 					<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>
 				</div>
-				<div layout:fragment="content-header-tabs">
-					<q-btn flat type="a" class="active" th:href="@{/basemanagement/equipment/information/} + ${model.equipment.equipmentId}">Informations</q-btn>
+				<div th:if="${!model.modeCreate}" layout:fragment="content-header-tabs">
+					<q-btn flat type="a" class="active" th:href="@{/basemanagement/equipment/} + ${model.equipment.equipmentId}">Informations</q-btn>
 					<q-btn flat type="a" th:href="@{/basemanagement/equipment/maintenance/} + ${model.equipment.equipmentId}">Maintenance</q-btn>
 				</div>
 		</section>
 		
 		<section layout:fragment="content" >
 			<vu:form>
-				<vu:button-submit th:if="${model.modeEdit}"  label="Save" action="@{_save}" color="primary" />
 				<vu:block id="health" title="Health Condition">
 					<vu:grid cols="2">
 						<vu:text-field object="equipment" field="healthLevel"/>
 					</vu:grid>
 				</vu:block>
-				
 				<vu:block id="general" title="General Information">
 					<vu:grid cols="2">
 						<vu:text-field object="equipment" field="name"/>
 						<vu:text-field object="equipment" field="code"/>
+						<vu:autocomplete object="equipment" field="baseId" list="bases" labelField="name"/>
+						<vu:select object="equipment" field="equipmentTypeId" list="equipmentTypes" />
+						<vu:select object="equipment" field="businessId" list="businesses" labelField="name" />
+						<vu:date object="equipment" field="purchaseDate" />
+						<vu:chips-autocomplete object="equipment" field="tags" list="tags" staticData="true" />
+						<vu:text-field object="equipment" field="geoLocation" />
 						<vu:grid-cell>
 							<vu:text-area object="equipment" field="description"/>
 						</vu:grid-cell>
 					</vu:grid>
 				</vu:block>
-				
 				<vu:block id="financial" title="Financial value">
 					<vu:grid cols="2">
 						<vu:text-field object="equipment" field="equipmentValue" input_suffix="'&#8364;'"/>
 						<vu:text-field object="equipment" field="rentingFee" input_suffix="'&#8364;'"/>
 					</vu:grid>
 				</vu:block>
+				<vu:button-submit th:if="${model.modeEdit}"  label="Save" action="@{_save}" color="primary" />
+				<vu:button-submit th:if="${model.modeCreate}"  label="Create" action="@{_create}" color="primary" />
 			</vu:form>
 		</section>
 	</body>

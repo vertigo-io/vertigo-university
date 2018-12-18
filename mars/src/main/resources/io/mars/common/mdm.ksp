@@ -29,3 +29,8 @@ alter DtDefinition DT_GEOSECTOR {
 	sortField : "SECTOR_LABEL"
  	displayField : "SECTOR_LABEL"
 }
+
+alter DtDefinition DT_BUSINESS {
+	sortField : "NAME"
+ 	displayField : "NAME"
+}

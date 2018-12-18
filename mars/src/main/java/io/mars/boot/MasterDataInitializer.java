@@ -6,6 +6,7 @@ package io.mars.boot;
 import javax.inject.Inject;
 
 import io.mars.basemanagement.domain.BaseType;
+import io.mars.basemanagement.domain.Business;
 import io.mars.basemanagement.domain.Geosector;
 import io.mars.basemanagement.domain.Tag;
 import io.mars.catalog.domain.EquipmentType;
@@ -47,6 +48,7 @@ public class MasterDataInitializer implements ComponentInitializer {
 		registerMasterData(storeManager, TicketStatus.class);
 		registerMasterData(storeManager, Tag.class);
 		registerMasterData(storeManager, Geosector.class);
+		registerMasterData(storeManager, Business.class);
 	}
 
 	private static <O extends DtObject> void registerMasterData(final StoreManager storeManager, final Class<O> dtObjectClass) {

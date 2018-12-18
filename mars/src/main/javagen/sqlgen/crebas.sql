@@ -186,7 +186,7 @@ comment on column EQUIPMENT.NAME is
 'Name';
 
 comment on column EQUIPMENT.CODE is
-'Base Code';
+'Equipment Code';
 
 comment on column EQUIPMENT.HEALTH_LEVEL is
 'Health Level';
