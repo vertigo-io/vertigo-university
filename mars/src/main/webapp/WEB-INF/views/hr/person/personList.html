@@ -36,42 +36,52 @@
 		</th:block>
 		<th:block th:if="${model.listRenderer == 'cards'}">
 			<vu:include-data object="persons" field="personId" />
-			<vu:include-data object="persons" field="firstName" />
-			<vu:include-data object="persons" field="lastName" />
+			<vu:include-data object="persons" field="fullName" />
 			<vu:include-data object="persons" field="email" />
+			<vu:include-data object="persons" field="dateHired" />
+			<vu:include-data object="persons" field="tags" />
 			<vu:include-data-protected object="persons" field="picturefileId"/>					
 			
 			<vu:cards list="persons" cardClass="marsCard col-xl-4 col-md-6 col-xs-12" componentId="personsCards" sortUrl="@{/hr/persons/_sort}" rowsPerPage="8" showMore="true" showMoreLabel="Show more" >
 				<q-card-media >
 					<img th::src="|'@{/humanresources/person/picture/}'+item.picturefileId|"/>
 				</q-card-media>
-				<q-card-title>
-					<a class="text-primary" th::href="|'@{/hr/person/}'+item.personId|">{{item.firstName}} {{item.lastName}}</a>
-					<span slot="subtitle">{{item.email}}</span>
-				</q-card-title>
-				<q-card-main>
-				a
+				<q-card-main class="row">
+					<div class="col-3" >
+						<q-icon name="fas fa-user" size="35px" color="primary"></q-icon>
+					</div>
+					<div class="col" >
+						<a class="text-primary small-caps text-bigger" th::href="|'@{/hr/person/}'+item.personId|">{{item.fullName}}</a><br/>
+						Email : {{item.email}}<br/>
+						Hired : {{item.dateHired}}<br/>
+						<q-icon name="location_on" size="25px"></q-icon><br/>		
+					</div>		
 				</q-card-main>
 				<q-card-separator></q-card-separator>
-				b
+				<q-card-actions>
+					<q-chips-input :value="item.tags"  :readonly="true"  :hide-underline="true" ></q-chips-input>
+				</q-card-actions>
 			</vu:cards>
 		</th:block>
 		<th:block th:if="${model.listRenderer == 'list'}">
 			<vu:include-data-protected object="persons" field="picturefileId"/>	
-			<vu:list list="persons" componentId="personsList" sortUrl="@{/hr/persons/_sort}" rowsPerPage="5" pagination_:direction-links="true" pagination_:boundary-links="true" >
+			<vu:list list="persons" componentId="personsList" sortUrl="@{/hr/persons/_sort}" rowsPerPage="8" pagination_:direction-links="true" pagination_:boundary-links="true" >
 				<q-item-side>
 					<img th::src="|'@{/humanresources/person/picture/}'+item.picturefileId|" class="avatar"  />
 				</q-item-side>
 				<q-item-main>
 					<div class="row">
 						<div class="col-6">
-							<vu:field-read field="personId" list="persons" listKey="personId" listDisplay="firstName" />
+							<vu:include-data object="persons" field="fullName" />
+							<vu:include-data object="persons" field="dateHired" />
+							<a class="text-primary small-caps text-bigger" th::href="|'@{/hr/person/}'+item.personId|">{{item.fullName}}</a><br/>
+							Hired : {{item.dateHired}}<br/>
 						</div>
 						<div class="col-6">
-							<vu:include-data object="persons" field="lastName" />
 							<vu:include-data object="persons" field="email_fmt" />
-							{{item.lastName}}
-							{{item.email_fmt}}
+							<vu:include-data object="persons" field="tags" />
+							<q-icon name="mail" ></q-icon>{{item.email}}<br/>
+							<q-chips-input :value="item.tags"  :readonly="true"  :hide-underline="true" ></q-chips-input>
 						</div>
 					</div>
 				</q-item-main>
