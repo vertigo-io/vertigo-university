@@ -12,3 +12,8 @@ create DtDefinition DT_BASE_OVERVIEW {
 	field OPENED_TICKETS		 	{domain: DO_COUNT label: "Opened tickets" required: "true"}	
 	field WORK_ORDERS_INPROGRESS	{domain: DO_COUNT label: "Work orders in progress" required:"true"}
 }
+
+create DtDefinition DT_EQUIPMENT_MAINTENANCE_OVERVIEW {
+	field OPENED_TICKETS		 	{domain: DO_COUNT label: "Opened tickets" required: "true"}	
+	field WORK_ORDERS_INPROGRESS	{domain: DO_COUNT label: "Work orders in progress" required:"true"}
+}

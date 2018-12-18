@@ -37,6 +37,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		EquipmentFeature(io.mars.basemanagement.domain.EquipmentFeature.class),
 		/** Objet de données EquipmentIndex. */
 		EquipmentIndex(io.mars.basemanagement.search.EquipmentIndex.class),
+		/** Objet de données EquipmentMaintenanceOverview. */
+		EquipmentMaintenanceOverview(io.mars.basemanagement.domain.EquipmentMaintenanceOverview.class),
 		/** Objet de données EquipmentOverview. */
 		EquipmentOverview(io.mars.basemanagement.domain.EquipmentOverview.class),
 		/** Objet de données EquipmentType. */
@@ -246,6 +248,15 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		EQUIPMENT_TYPE_NAME,
 		/** Propriété 'Equipment Category'. */
 		EQUIPMENT_CATEGORY_NAME	}
+
+	/**
+	 * Enumération des champs de EquipmentMaintenanceOverview.
+	 */
+	public enum EquipmentMaintenanceOverviewFields implements DtFieldName<io.mars.basemanagement.domain.EquipmentMaintenanceOverview> {
+		/** Propriété 'Opened tickets'. */
+		OPENED_TICKETS,
+		/** Propriété 'Work orders in progress'. */
+		WORK_ORDERS_INPROGRESS	}
 
 	/**
 	 * Enumération des champs de EquipmentOverview.

@@ -24,3 +24,15 @@ create Task TK_GET_BASE_OVERVIEW {
     attribute BASE_ID     		{domain : DO_ID    						required:"true"  inOut :"in"}
     attribute BASE_OVERVIEW     {domain : DO_DT_BASE_OVERVIEW_DTO    	required:"true"  inOut :"out"}
 }
+
+
+create Task TK_GET_EQUIPMENT_MAINTENANCE_OVERVIEW {  
+    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+    request : "
+           select 
+				(select count(*) from ticket tic where tic.equipment_id = #EQUIPMENT_ID# and ( tic.ticket_status_id = 'OPEN' or tic.ticket_status_id = 'ASSIGNED')) as opened_tickets,
+				(select count(*) from work_order wor join ticket tic on tic.ticket_id = wor.ticket_id join equipment equ on equ.equipment_id = #EQUIPMENT_ID#  and wor.work_order_status_id = 'INPROGRESS') as work_orders_inprogress
+             "
+    attribute EQUIPMENT_ID     		{domain : DO_ID    						required:"true"  inOut :"in"}
+    attribute EQUIPMENT_MAINTENANCE_OVERVIEW     {domain : DO_DT_EQUIPMENT_MAINTENANCE_OVERVIEW_DTO    	required:"true"  inOut :"out"}
+}

@@ -39,11 +39,27 @@
 		
 		<section layout:fragment="content" >
 			<vu:form>
-				<vu:block id="health" title="Health Condition">
-					<vu:grid cols="2">
-						<vu:text-field object="equipment" field="healthLevel"/>
-					</vu:grid>
-				</vu:block>
+				<div id="health" class="row q-ma-md" th:if="${!model.modeCreate}" >
+					<div class="col-3">
+						<q-card class="bg-white text-center" >
+							<q-card-title class="indicator-title text-faded">Health</q-card-title>
+							<q-card-main>
+								<q-knob
+								  th::value="${model.equipment.healthLevel}"
+								  :min="0"
+								  :max="100"
+								  color="positive"
+								  :readonly="true" style="font-size: 2rem"></q-knob>
+							</q-card-main>
+						</q-card>
+					</div>
+					<div class="col-9 q-pl-md ">
+						<q-card class="bg-white row justify-around items-center" style="height:100%;">
+							<div class="text-center"> <span class="indicator text-positive" th:text="${model.equipmentMaintenanceOverview.openedTickets}"/><br/><span class="indicator-title text-faded">Opened Tickets(s)</span></div>
+							<div class="text-center"> <span class="indicator text-positive" th:text="${model.equipmentMaintenanceOverview.workOrdersInprogress}"/><br/><span class="indicator-title text-faded">WorkOrder(s) in progress</span></div>
+						</q-card>
+					</div>
+				</div>
 				<vu:block id="general" title="General Information">
 					<vu:grid cols="2">
 						<vu:text-field object="equipment" field="name"/>

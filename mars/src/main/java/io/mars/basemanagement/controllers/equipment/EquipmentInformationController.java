@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import io.mars.basemanagement.domain.Business;
 import io.mars.basemanagement.domain.Equipment;
+import io.mars.basemanagement.domain.EquipmentMaintenanceOverview;
 import io.mars.basemanagement.domain.Tag;
 import io.mars.basemanagement.services.base.BaseServices;
 import io.mars.basemanagement.services.equipment.EquipmentServices;
@@ -30,6 +31,7 @@ public class EquipmentInformationController extends AbstractVSpringMvcController
 	private BaseServices baseServices;
 
 	private final ViewContextKey<Equipment> equipmentKey = ViewContextKey.of("equipment");
+	private final ViewContextKey<EquipmentMaintenanceOverview> equipmentMaintenanceOverview = ViewContextKey.of("equipmentMaintenanceOverview");
 
 	@GetMapping("/new")
 	public void initContext(final ViewContext viewContext) {
@@ -45,6 +47,7 @@ public class EquipmentInformationController extends AbstractVSpringMvcController
 		loadLists(viewContext);
 		//---
 		viewContext.publishDto(equipmentKey, equipmentServices.get(equipmentId));
+		viewContext.publishDto(equipmentMaintenanceOverview, equipmentServices.getMaintenanceOverviewByEquipment(equipmentId));
 		//---
 		toModeReadOnly();
 	}

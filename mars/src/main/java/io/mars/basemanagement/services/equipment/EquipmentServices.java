@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import io.mars.basemanagement.BasemanagementPAO;
 import io.mars.basemanagement.dao.EquipmentDAO;
 import io.mars.basemanagement.domain.Equipment;
+import io.mars.basemanagement.domain.EquipmentMaintenanceOverview;
 import io.mars.basemanagement.domain.EquipmentOverview;
 import io.mars.basemanagement.search.EquipmentIndex;
 import io.vertigo.commons.transaction.Transactional;
@@ -65,5 +66,11 @@ public class EquipmentServices implements Component {
 		Assertion.checkNotNull(baseCode);
 		//---
 		return equipmentDAO.getEquipmentsByBaseCode(baseCode);
+	}
+
+	public EquipmentMaintenanceOverview getMaintenanceOverviewByEquipment(final Long equipmentId) {
+		Assertion.checkNotNull(equipmentId);
+		//---
+		return basemanagementPAO.getEquipmentMaintenanceOverview(equipmentId);
 	}
 }

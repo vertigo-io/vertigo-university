@@ -13,7 +13,8 @@
 		<section layout:fragment="content-nav">
 			<nav v-scroll-spy="{offset:150}">
 			    <q-list link style="height:100%">
-			        <q-item tag="a" href="#tickets">Tickets</q-item>
+			        <q-item tag="a" href="#openedTickets">Opened tickets</q-item>
+			        <q-item tag="a" href="#closedTickets">Closed tickets</q-item>
 	        	</q-list>
 	        </nav>
 		</section>
@@ -36,11 +37,19 @@
 		</section>
 		
 		<section layout:fragment="content" >
-			<vu:block id="tickets" title="Tickets">
-				<vu:table list="tickets" componentId="tickets" rowsPerPage="10">
+			<vu:block id="openedTickets" title="Opened tickets">
+				<vu:table list="openedTickets" componentId="openedTickets" rowsPerPage="10">
 					<vu:column field="code" />
 					<vu:column field="title" />
 					<vu:column field="dateCreated" />
+				</vu:table>
+			</vu:block>
+			<vu:block id="closedTickets" title="Closed tickets">
+				<vu:table list="closedTickets" componentId="closedTickets" rowsPerPage="10">
+					<vu:column field="code" />
+					<vu:column field="title" />
+					<vu:column field="dateCreated" />
+					<vu:column field="dateClosed" />
 				</vu:table>
 			</vu:block>
 		</section>

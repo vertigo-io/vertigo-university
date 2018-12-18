@@ -58,10 +58,22 @@ public class TicketServices implements Component {
 		return ticketDAO.getLastTicketsByBaseId(baseId);
 	}
 
-	public DtList<Ticket> getTicketsByEquipment(final Long equipmentId) {
+	public DtList<Ticket> getOpenedTicketsByEquipment(final Long equipmentId) {
 		Assertion.checkNotNull(equipmentId);
 		//---
-		return ticketDAO.findAll(Criterions.isEqualTo(TicketFields.EQUIPMENT_ID, equipmentId), Integer.MAX_VALUE);
+		return ticketDAO.findAll(
+				Criterions.isEqualTo(TicketFields.EQUIPMENT_ID, equipmentId)
+						.and(Criterions.isNotEqualTo(TicketFields.TICKET_STATUS_ID, (String) TicketStatusEnum.closed.getEntityUID().getId())),
+				Integer.MAX_VALUE);
+	}
+
+	public DtList<Ticket> getClosedTicketsByEquipment(final Long equipmentId) {
+		Assertion.checkNotNull(equipmentId);
+		//---
+		return ticketDAO.findAll(
+				Criterions.isEqualTo(TicketFields.EQUIPMENT_ID, equipmentId)
+						.and(Criterions.isEqualTo(TicketFields.TICKET_STATUS_ID, (String) TicketStatusEnum.closed.getEntityUID().getId())),
+				Integer.MAX_VALUE);
 	}
 
 }
