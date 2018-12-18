@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="http://www.morphbit.com/thymeleaf/component"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{templates/mmcDetailNavLayout}"
+>
+	<head>
+		<title>Ticket detail</title>		
+	</head>
+	
+	<body>
+	
+		<section layout:fragment="content-nav">
+			lifecycle
+		</section>
+		
+		<section>
+			<div layout:fragment="content-header-title">
+				<span class="text-bigger" th:text="${model.ticket.title}"></span> 
+				<br/><span class="text-smaller" th:text="${model.ticket.code}"></span>
+			</div>
+			<div layout:fragment="content-header-actions">
+				<q-btn round size="lg" color="primary" icon="fas fa-cubes" type="a" th:href="@{/basemanagement/equipment/} + ${model.ticket.equipmentId}"  aria-label="Go to equipment" title="Go to equipment" class="on-left" ></q-btn>
+				<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>
+			</div>
+		</section>
+		
+		<section layout:fragment="content" >
+			<vu:form>
+				<vu:button-submit th:if="${model.modeEdit}"  label="Save" action="@{_save}" color="primary" />
+				<vu:block title="Information">
+					<vu:grid cols="2">
+						<vu:text-field object="ticket" field="code" />
+						<vu:text-field object="ticket" field="title" />
+					</vu:grid>
+				</vu:block>
+				<vu:block title="Description">
+					<vu:include-data object="ticket" field="description" />
+					<q-editor th:v-if="${!model.modeReadOnly}" v-model="vueData.ticket.description" ></q-editor>
+					<pre th:if="${model.modeReadOnly}" th:utext="${model.ticket.description}"></pre>
+					<input type="hidden" name="vContext[ticket][description]" v-bind:value="vueData.ticket.description" />
+				</vu:block>
+				<vu:block id="workOrders" title="WorkOrders">
+					<vu:table list="workOrders" componentId="workOrders" rowsPerPage="10">
+						<vu:column field="name" />
+						<vu:column field="dateCreated" />
+						<vu:column field="dueDate" />
+						<vu:column field="dateClosed" />
+					</vu:table>
+				</vu:block>
+			</vu:form>
+		</section>
+	</body>
+</html>

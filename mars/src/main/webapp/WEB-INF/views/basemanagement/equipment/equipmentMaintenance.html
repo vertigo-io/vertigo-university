@@ -42,6 +42,10 @@
 					<vu:column field="code" />
 					<vu:column field="title" />
 					<vu:column field="dateCreated" />
+					<vu:column name="actions" label="Actions" >
+						<vu:include-data object="openedTickets" field="ticketId" />
+						<q-btn round color="primary" icon="arrow_forward" type="a" th::href="|'@{/maintenance/ticket/}'+props.row.ticketId|"></q-btn>
+					</vu:column>
 				</vu:table>
 			</vu:block>
 			<vu:block id="closedTickets" title="Closed tickets">
@@ -50,6 +54,10 @@
 					<vu:column field="title" />
 					<vu:column field="dateCreated" />
 					<vu:column field="dateClosed" />
+					<vu:column name="actions" label="Actions" >
+						<vu:include-data object="closedTickets" field="ticketId" />
+						<q-btn round color="primary" icon="arrow_forward" type="a" th::href="|'@{/maintenance/ticket/}'+props.row.ticketId|"></q-btn>
+					</vu:column>
 				</vu:table>
 			</vu:block>
 		</section>

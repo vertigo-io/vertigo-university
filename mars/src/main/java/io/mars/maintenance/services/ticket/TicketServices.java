@@ -27,8 +27,8 @@ public class TicketServices implements Component {
 	@Inject
 	private EventBusManager eventBusManager;
 
-	public Ticket getTicketFromId(final Long baseId) {
-		return ticketDAO.get(baseId);
+	public Ticket getTicketFromId(final Long ticketId) {
+		return ticketDAO.get(ticketId);
 	}
 
 	public void save(final Ticket ticket) {
