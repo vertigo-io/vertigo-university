@@ -58,9 +58,10 @@ public class DataBaseInitializer implements ComponentInitializer {
 
 	private void createDataBase() {
 		final SqlConnection connection = sqlDataBaseManager.getConnectionProvider(SqlDataBaseManager.MAIN_CONNECTION_PROVIDER_NAME).obtainConnection();
-		//execCallableStatement(connection, sqlDataBaseManager, "drop all objects;");
+		execCallableStatement(connection, sqlDataBaseManager, "drop all objects;");
 		execSqlScript(connection, "sqlgen/crebas.sql");
 		execSqlScript(connection, "sqlgen/init_masterdata_base_type.sql");
+		execSqlScript(connection, "sqlgen/init_masterdata_ticket_status.sql");
 		execSqlScript(connection, "sqlgen/init_masterdata_work_order_status.sql");
 		execSqlScript(connection, "sqlgen/init_masterdata_opendata_set_status.sql");
 
