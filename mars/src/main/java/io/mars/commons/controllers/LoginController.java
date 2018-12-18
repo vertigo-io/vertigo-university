@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import io.mars.commons.services.LoginServices;
 import io.vertigo.account.account.Account;
+import io.vertigo.account.impl.authentication.PasswordHelper;
 import io.vertigo.ui.core.ViewContext;
 import io.vertigo.ui.core.ViewContextKey;
 import io.vertigo.ui.impl.springmvc.controller.AbstractVSpringMvcController;
@@ -32,9 +33,10 @@ public class LoginController extends AbstractVSpringMvcController {
 
 	@PostMapping("/_login")
 	public String doLogin(@RequestParam("login") final String login, @RequestParam("password") final String password) {
-		//final String pass = new PasswordHelper().createPassword(password);
+		final String pass = new PasswordHelper().createPassword(password);
+		System.out.println("createInputPass:" + pass);
 		final Account loggedAccount = loginServices.login(login, password);
-		System.out.println("login : " + loggedAccount);
+		System.out.println("login:" + loggedAccount);
 		return "redirect:/home/";
 	}
 
