@@ -42,7 +42,7 @@ public class MovieWebServices implements WebServices {
 	@AnonymousAccessAllowed
 	@GET("/_search")
 	public FacetedQueryResult<MovieIndex, SearchQuery> searchMovies(@QueryParam("q") final String criteria) {
-		return movieServices.searchMovies(criteria, SelectedFacetValues.empty().build(), new DtListState(5, 0, null, true));
+		return movieServices.searchMovies(criteria, SelectedFacetValues.empty().build(), DtListState.of(5, 0));
 	}
 
 	@AnonymousAccessAllowed

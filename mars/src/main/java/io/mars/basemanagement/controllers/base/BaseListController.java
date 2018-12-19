@@ -31,7 +31,7 @@ public class BaseListController extends AbstractVSpringMvcController {
 	public void initContext(final ViewContext viewContext) {
 		viewContext.publishMdl(geosectors, Geosector.class, null); //all
 		viewContext.publishMdl(baseTypes, BaseType.class, null); //all
-		final DtListState dtListState = new DtListState(200, 0, null, null);
+		final DtListState dtListState = DtListState.of(200, 0);
 		viewContext.publishDtList(bases, baseServices.getBases(dtListState));
 	}
 

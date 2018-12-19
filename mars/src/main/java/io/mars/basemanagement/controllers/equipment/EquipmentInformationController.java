@@ -53,7 +53,8 @@ public class EquipmentInformationController extends AbstractVSpringMvcController
 	}
 
 	private void loadLists(final ViewContext viewContext) {
-		viewContext.publishDtList(ViewContextKey.of("bases"), baseServices.getBases(new DtListState(Integer.MAX_VALUE, 0, null, null)));
+		final DtListState dtListState = DtListState.of(null, 0);
+		viewContext.publishDtList(ViewContextKey.of("bases"), baseServices.getBases(dtListState));
 		//---
 		viewContext.publishMdl(ViewContextKey.of("businesses"), Business.class, null);
 		viewContext.publishMdl(ViewContextKey.of("equipmentTypes"), EquipmentType.class, null);

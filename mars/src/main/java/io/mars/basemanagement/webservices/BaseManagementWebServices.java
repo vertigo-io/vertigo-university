@@ -29,7 +29,7 @@ public class BaseManagementWebServices implements WebServices {
 	@AnonymousAccessAllowed
 	@GET("/bases")
 	public DtList<Base> bases() {
-		DtListState dtListState = new DtListState(Integer.MAX_VALUE, 0, null, null);
+		final DtListState dtListState = DtListState.of(null, 0);
 		return baseServices.getBases(dtListState);
 	}
 
@@ -42,7 +42,7 @@ public class BaseManagementWebServices implements WebServices {
 	@AnonymousAccessAllowed
 	@GET("/equipmentTypes")
 	public DtList<EquipmentType> equimentTypes() {
-		DtListState dtListState = new DtListState(Integer.MAX_VALUE, 0, null, null);
+		final DtListState dtListState = DtListState.of(null, 0);
 		return equipmentTypeServices.getEquipmentTypes(dtListState);
 	}
 

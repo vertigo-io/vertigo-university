@@ -18,7 +18,7 @@ public class HrWebServices implements WebServices {
 	@AnonymousAccessAllowed
 	@GET("/persons")
 	public DtList<Person> persons() {
-		DtListState dtListState = new DtListState(Integer.MAX_VALUE, 0, null, null);
+		final DtListState dtListState = DtListState.of(null, 0);
 		return personServices.getPersons(dtListState);
 	}
 

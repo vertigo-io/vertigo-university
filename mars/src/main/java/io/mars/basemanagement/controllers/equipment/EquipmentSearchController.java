@@ -31,7 +31,7 @@ public class EquipmentSearchController extends AbstractVSpringMvcController {
 
 	@GetMapping("/")
 	public void initContext(final ViewContext viewContext) {
-		final DtListState dtListState = new DtListState(100, 0, null, null);
+		final DtListState dtListState = DtListState.of(100, 0);
 		viewContext.publishRef(criteriaKey, "");
 		final FacetedQueryResult<EquipmentIndex, SearchQuery> facetedQueryResult = equipmentServices.searchEquipments("", SelectedFacetValues.empty().build(), dtListState);
 		viewContext.publishFacetedQueryResult(equipments, EquipmentIndexFields.EQUIPMENT_ID, facetedQueryResult, criteriaKey);
