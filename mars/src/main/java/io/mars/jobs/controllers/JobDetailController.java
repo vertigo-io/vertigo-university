@@ -60,7 +60,7 @@ public class JobDetailController extends AbstractVSpringMvcController {
 
 	@PostMapping("/_cancel")
 	public String doCancel(@ViewAttribute("job") final OProcessUi oProcessUi) {
-		return "redirect:/job/" + oProcessUi.getName();
+		return "redirect:/jobDetail/" + oProcessUi.getName();
 	}
 
 	@PostMapping("/_save")
@@ -72,7 +72,7 @@ public class JobDetailController extends AbstractVSpringMvcController {
 				job.getRescuePeriod(),
 				job.getActive());
 		orchestraDefinitionManager.updateProcessDefinitionInitialParams(job.getName(), mapCodec.decode(job.getInitialParams()));
-		return "redirect:/job/" + job.getName();
+		return "redirect:/jobDetail/" + job.getName();
 	}
 
 	@PostMapping("/_executeNow")

@@ -33,8 +33,8 @@
 				<vu:button-submit action="@{_executeNow}" :round size="lg" color="primary" icon="play_circle_outline" aria-label="Execute now" title="Execute" class="on-left"/>
 			</div>
 			<div layout:fragment="content-header-tabs">
-				<q-btn flat type="a" class="active" th:href="@{/jobDetail/} + ${model.job.name}">Detail</q-btn>
-				<q-btn flat type="a" th:href="@{/jobExecutions/} + ${model.job.name}">Executions</q-btn>
+				<q-btn flat type="a" class="active" th:href="@{/jobDetail/} + ${model.job.name} ">Detail</q-btn>
+				<q-btn flat type="a" th:href="@{/jobExecutions/} + ${model.job.name} ">Executions</q-btn>
 			</div>
 		</section>
 		

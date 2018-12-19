@@ -51,7 +51,7 @@
 		<section layout:fragment="content" >
 			<vu:form>
 				<div id="health" class="row q-ma-md" th:if="${!model.modeCreate}" >
-					<div class="col-3">
+					<div class="col-md-3 col-xs-12">
 						<q-card class="bg-white text-center" >
 							<q-card-title class="indicator-title text-faded">Health</q-card-title>
 							<q-card-main>
@@ -64,7 +64,7 @@
 							</q-card-main>
 						</q-card>
 					</div>
-					<div class="col-9 q-pl-md ">
+					<div class="col-md-9 col-xs-12 q-pl-md ">
 						<q-card class="bg-white row justify-around items-center" style="height:100%;">
 							<div class="text-center"> <span class="indicator text-positive" th:text="${model.baseOverview.equipmentCount}"/><br/><span class="indicator-title text-faded">Equipement(s)</span></div>
 							<div class="text-center"> <span class="indicator text-positive" th:text="${model.baseOverview.openedTickets}"/><br/><span class="indicator-title text-faded">Opened Tickets(s)</span></div>

@@ -22,14 +22,14 @@
 	
 	<body>
 		<section layout:fragment="page-container">
-		<q-page class="row col-12 layout-padding col">			
+		<q-page class="row col-12 layout-padding col justify-center">			
 			<div class="gutter-lg col">
 				<div class="row gutter-lg" >
-					<div class="col-3 row justify-center items-center">
+					<div class="col-md-3 col-xs-12 row justify-center items-center">
 						<span class="text-primary" style="font-size:6em;" th:text="${model.basesSummary.baseCount}"></span> 
 						<q-icon name="fas fa-store-alt" color="faded" size="3em"></q-icon>
 					</div>
-					<div class="col-3">
+					<div class="col-md-3 col-xs-12">
 						<q-card color="white">
 							<q-card-title class="bg-secondary">Global Health Level</q-card-title>
 							<q-card-main class="row justify-center">
@@ -37,7 +37,7 @@
 							</q-card-main>
 						</q-card>
 					</div>
-					<div class="col-3">
+					<div class="col-md-3 col-xs-12">
 						<q-card color="white">
 							<q-card-title class="bg-secondary">Equipment</q-card-title>
 							<q-card-main>
@@ -48,7 +48,7 @@
 							</q-card-main>
 						</q-card>
 					</div>
-					<div class="col-3">
+					<div class="col-md-3 col-xs-12">
 						<q-card color="white">
 							<q-card-title class="bg-secondary">Maintenance</q-card-title>
 							<q-card-main>
@@ -61,7 +61,7 @@
 					</div>
 				</div>
 				<div class="row gutter-lg" >
-					<div class="col-6 column">
+					<div class="col-md-6 col-xs-12 column">
 						<div>
 							<q-card color="white">
 								<q-card-title class="bg-secondary">Supplies</q-card-title>
@@ -92,7 +92,7 @@
 							</vu:table>
 						</div>
 					</div>
-					<div class="col-6">
+					<div class="col-md-6 col-xs-12">
 						<q-card color="white">
 							<q-card-title class="bg-secondary">Equipments</q-card-title>
 							<q-card-main>
