@@ -21,7 +21,9 @@
 	</head>
 	
 	<body>
-		<section layout:fragment="content" >
+		<section layout:fragment="page-container" >
+		<q-page class="row col-12 layout-padding">			
+	 		<section class="col-12"  layout:fragment="content">
 			<div class="gutter-lg">
 				<div class="row gutter-lg" >
 					<div class="col-3 row justify-center items-center">
@@ -113,6 +115,7 @@
 					</div>
 				</div>
 			</div>
+		</q-page>
 		</section>
 	</body>
 	<section layout:fragment="footer" >
