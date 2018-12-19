@@ -137,9 +137,6 @@
 		<aspect class="io.vertigo.commons.impl.transaction.VTransactionAspect"/>
 	</module>
 	
-	<module name="orchestra-dao" >
-		
-	</module>
 	<module name="orchestra">
 		<definitions>
 			<provider class="io.vertigo.dynamo.plugins.environment.DynamoDefinitionProvider" >
@@ -186,6 +183,15 @@
 		<component class="io.vertigo.orchestra.webservices.WsDefinition" />
 		<component class="io.vertigo.orchestra.webservices.WsExecution" />
 		<component class="io.vertigo.orchestra.webservices.WsExecutionControl" />
+	</module>
+	
+	<module name="social">
+		<component api="NotificationServices" class="io.vertigo.social.impl.notification.NotificationServicesImpl">
+			<plugin class="io.vertigo.social.plugins.notification.memory.MemoryNotificationPlugin"/>
+		</component>
+		
+		<component class="io.vertigo.social.webservices.account.AccountWebServices" />
+		<component class="io.vertigo.social.webservices.notification.NotificationWebServices" />
 	</module>
 	
 	<module name="dashboard" >
