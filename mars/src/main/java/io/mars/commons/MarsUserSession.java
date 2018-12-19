@@ -20,6 +20,12 @@ package io.mars.commons;
 
 import java.util.Locale;
 
+import io.mars.hr.domain.Person;
+import io.vertigo.account.account.Account;
+import io.vertigo.account.authentication.AuthenticationManager;
+import io.vertigo.account.authorization.VSecurityException;
+import io.vertigo.app.Home;
+import io.vertigo.core.locale.MessageText;
 import io.vertigo.persona.security.UserSession;
 
 /**
@@ -31,11 +37,25 @@ import io.vertigo.persona.security.UserSession;
 public class MarsUserSession extends UserSession {
 
 	private static final long serialVersionUID = 1782541593145943505L;
+	private Person loggedPerson;
 
 	/** {@inheritDoc} */
 	@Override
 	public Locale getLocale() {
 		return Locale.FRANCE;
+	}
+
+	public final Person getLoggedPerson() {
+		return loggedPerson;
+	}
+
+	public final void setLoggedPerson(final Person loggedPerson) {
+		this.loggedPerson = loggedPerson;
+	}
+
+	public final Account getLoggedAccount() {
+		return Home.getApp().getComponentSpace().resolve(AuthenticationManager.class).getLoggedAccount()
+				.orElseThrow(() -> new VSecurityException(MessageText.of("No account logged in")));
 	}
 
 }

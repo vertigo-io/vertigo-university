@@ -1,4 +1,4 @@
-package io.mars.commons.controllers;
+package io.mars.hr.controllers.login;
 
 import javax.inject.Inject;
 
@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import io.mars.commons.services.LoginServices;
-import io.vertigo.account.account.Account;
+import io.mars.hr.services.login.LoginServices;
 import io.vertigo.account.impl.authentication.PasswordHelper;
 import io.vertigo.ui.core.ViewContext;
 import io.vertigo.ui.core.ViewContextKey;
@@ -26,17 +25,21 @@ public class LoginController extends AbstractVSpringMvcController {
 	private LoginServices loginServices;
 
 	@GetMapping("/")
-	public void initContext(final ViewContext viewContext) {
-		viewContext.publishRef(loginKey, "");
-		viewContext.publishRef(passwordKey, "");
+	public String initContext(final ViewContext viewContext) {
+		if (!loginServices.isAuthenticated()) {
+			viewContext.publishRef(loginKey, "");
+			viewContext.publishRef(passwordKey, "");
+			return null;
+		} else {
+			return "redirect:/home/";
+		}
 	}
 
 	@PostMapping("/_login")
 	public String doLogin(@RequestParam("login") final String login, @RequestParam("password") final String password) {
 		final String pass = new PasswordHelper().createPassword(password);
 		System.out.println("createInputPass:" + pass);
-		final Account loggedAccount = loginServices.login(login, password);
-		System.out.println("login:" + loggedAccount);
+		loginServices.login(login, password);
 		return "redirect:/home/";
 	}
 

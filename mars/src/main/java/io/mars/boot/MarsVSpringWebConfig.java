@@ -8,6 +8,7 @@ import io.vertigo.ui.impl.springmvc.config.VSpringWebConfig;
 		"io.mars.commons.controllers",
 		"io.mars.basemanagement.controllers.base",
 		"io.mars.basemanagement.controllers.equipment",
+		"io.mars.hr.controllers.login",
 		"io.mars.hr.controllers.person",
 		"io.mars.maintenance.controllers.ticket",
 		"io.mars.jobs.controllers" })
