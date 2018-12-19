@@ -38,6 +38,7 @@ public class MarsUserSession extends UserSession {
 
 	private static final long serialVersionUID = 1782541593145943505L;
 	private Person loggedPerson;
+	private String currentProfile;
 
 	/** {@inheritDoc} */
 	@Override
@@ -51,6 +52,14 @@ public class MarsUserSession extends UserSession {
 
 	public final void setLoggedPerson(final Person loggedPerson) {
 		this.loggedPerson = loggedPerson;
+	}
+
+	public final String getCurrentProfile() {
+		return currentProfile;
+	}
+
+	public final void setCurrentProfile(final String currentProfile) {
+		this.currentProfile = currentProfile;
 	}
 
 	public final Account getLoggedAccount() {

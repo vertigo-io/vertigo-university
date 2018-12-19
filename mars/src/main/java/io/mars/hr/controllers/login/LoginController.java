@@ -1,6 +1,7 @@
 package io.mars.hr.controllers.login;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,6 +42,12 @@ public class LoginController extends AbstractVSpringMvcController {
 		System.out.println("createInputPass:" + pass);
 		loginServices.login(login, password);
 		return "redirect:/home/";
+	}
+
+	@GetMapping("/_logout")
+	public String logout(final HttpSession httpSession) {
+		loginServices.logout(httpSession);
+		return "redirect:/login/";
 	}
 
 }

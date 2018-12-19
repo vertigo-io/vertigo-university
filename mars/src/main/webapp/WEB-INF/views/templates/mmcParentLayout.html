@@ -43,7 +43,23 @@
 						</q-btn>
 						<q-btn icon-right="arrow_drop_down"  class="on-left gt-md">
 							<img th:src="@{/static/img/woman.png}" class="avatar"/>
-							<div  class="on-right">Daniel Johnson<br/><small>Administrator</small></div>
+							<div class="on-right"><span th:text="${model.vContext['connectedUser']['firstName']+' '+model.vContext['connectedUser']['lastName']}"></span><br/><small><span th:text="${model.vContext['activeProfile']}"></span></small></div>
+							<q-popover>
+							  <q-list link>
+							  	<q-item>
+							    	<q-item-main><q-btn type="a" flat label="Viewer" th:href="@{/userProfil/_changeProfile?profile=Viewer}" /></q-item-main>
+							    </q-item>
+							    <q-item>
+							    	<q-item-main><q-btn type="a" flat label="Editor" th:href="@{/userProfil/_changeProfile?profile=Editor}" /></q-item-main>
+							    </q-item>
+							    <q-item>
+							    	<q-item-main><q-btn type="a" flat label="Administrator" th:href="@{/userProfil/_changeProfile?profile=Administrator}" /></q-item-main>
+							    </q-item>
+							    <q-item>
+							    	<q-item-main><q-btn type="a" outline label="Disconnect" th:href="@{/login/_logout}" /></q-item-main>
+							    </q-item>
+							  </q-list>
+							 </q-popover>
 						</q-btn>
 						<q-btn flat round dense icon="apps" aria-label="Toggle apps">
 							<q-popover>

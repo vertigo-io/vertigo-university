@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import io.mars.basemanagement.domain.Base;
 import io.mars.basemanagement.domain.BasesSummary;
 import io.mars.basemanagement.services.base.BaseServices;
+import io.mars.hr.controllers.login.UserProfilController;
 import io.mars.maintenance.domain.WorkOrder;
 import io.mars.maintenance.domain.WorkOrderStatus;
 import io.mars.maintenance.services.workorder.WorkOrderServices;
@@ -30,6 +31,8 @@ public class HomeController extends AbstractVSpringMvcController {
 	private BaseServices baseServices;
 	@Inject
 	private WorkOrderServices workOrderServices;
+	@Inject
+	private UserProfilController userProfilController;
 
 	@GetMapping("/")
 	public void initContext(final ViewContext viewContext) {
@@ -39,6 +42,7 @@ public class HomeController extends AbstractVSpringMvcController {
 		viewContext.publishDto(summaryKey, baseServices.getBaseSummary());
 		viewContext.publishDtList(lastWorkOrdersKey, workOrderServices.getLastWorkOrders());
 
+		userProfilController.initContext(viewContext);
 	}
 
 }
