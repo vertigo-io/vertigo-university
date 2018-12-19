@@ -20,15 +20,15 @@
 				<br/><span class="text-smaller" th:text="${model.ticket.code}"></span>
 			</div>
 			<div layout:fragment="content-header-actions">
+				<vu:button-submit th:if="${model.modeEdit}"   action="@{_cancel}" :round size="lg" color="primary" icon="fas fa-ban" :flat aria-label="Cancel" title="Cancel" class="on-left"  />
+				<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>
 				<q-btn th:if="${!model.modeCreate}" round size="lg" color="primary" icon="add" aria-label="Add work order" title="Add work order" th:@click="|openModal('workOrderEditModal', '@{/maintenance/workorder/new}', { 'ticketId' : vueData.ticket.ticketId })|"></q-btn>
 				<q-btn th:if="${!model.modeCreate}" round size="lg" color="primary" icon="fas fa-cubes" type="a" th:href="@{/basemanagement/equipment/} + ${model.ticket.equipmentId}"  aria-label="Go to equipment" title="Go to equipment" class="on-left" ></q-btn>
-				<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>
 			</div>
 		</section>
 		
 		<section layout:fragment="content" >
 			<vu:form>
-				<vu:button-submit th:if="${model.modeEdit}"  label="Save" action="@{_save}" color="primary" />
 				<vu:block title="Information">
 					<vu:grid cols="2">
 						<vu:text-field object="ticket" field="code" />
@@ -55,6 +55,10 @@
 						</vu:column>
 					</vu:table>
 				</vu:block>
+				<q-page-sticky position="bottom-right" :offset="[48, 48]">
+					<vu:button-submit th:if="${model.modeEdit}"   icon="save" label="Save" action="@{_save}" size="lg" color="primary" />
+					<vu:button-submit th:if="${model.modeCreate}" icon="save" label="Create" action="@{_create}" size="lg" color="primary"/>
+				</q-page-sticky>
 			</vu:form>
 			<vu:modal componentId="workOrderEditModal" closeLabel="Close" iframe_width="1000" iframe_height="800" />
 		</section>

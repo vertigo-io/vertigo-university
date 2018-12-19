@@ -17,6 +17,9 @@ body {
   color: var(--q-color-body-color) !important;
 }
 
+.container-bottom-padding {
+	padding-bottom: 64px;
+}
 
 body.login {
 	background: url(../img/loginBackground.png) !important;	

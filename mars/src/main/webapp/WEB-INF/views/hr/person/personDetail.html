@@ -30,7 +30,7 @@
 				</div>
 				<div layout:fragment="content-header-actions">
 					<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>
-					
+					<vu:button-submit th:if="${model.modeEdit}"   action="@{_cancel}" :round size="lg" color="primary" icon="fas fa-ban" :flat aria-label="Cancel" title="Cancel" class="on-left"  />					
 					<q-btn round size="lg" color="primary" icon="more_horiz"  direction="down" aria-label="More actions" title="More actions" class="on-left"> 
 					  <q-popover><q-list link>
 					    <q-item><q-btn flat>Delete</q-btn></q-item>
@@ -54,21 +54,20 @@
 							<vu:fileupload th:url="'@{/commons/upload}'" key="personTmpPictureUri" />
 						</vu:label-edit>
 					</vu:grid>
-					<div class="row justify-end">
-					<vu:button-submit th:if="${model.modeEdit}"  label="Cancel" action="@{_cancel}" :flat />
-					<vu:button-submit th:if="${model.modeEdit}"  label="Save" action="@{_save}" color="primary" />
-					<vu:button-submit th:if="${model.modeCreate}" label="Create" action="@{_create}" color="primary"/>
-					</div>				
 				</vu:block>
 				<vu:block id="contact" title="Contact actions">
-				<div class="row justify-between">
-					<q-btn color="primary" icon="email" label="Mail"></q-btn>
-					<q-btn color="primary" icon="chat" label="Chat"></q-btn>
-					<q-btn color="primary" icon="voicemail" label="Voice mail"></q-btn>
-					<q-btn color="primary" icon="duo" label="High Res. Camera"></q-btn>
-					<q-btn color="primary" icon="swap_calls" label="All Terrain Tires"></q-btn>
-				</div>				
+					<div class="row justify-between">
+						<q-btn color="primary" icon="email" label="Mail"></q-btn>
+						<q-btn color="primary" icon="chat" label="Chat"></q-btn>
+						<q-btn color="primary" icon="voicemail" label="Voice mail"></q-btn>
+						<q-btn color="primary" icon="duo" label="High Res. Camera"></q-btn>
+						<q-btn color="primary" icon="swap_calls" label="All Terrain Tires"></q-btn>
+					</div>				
 				</vu:block>
+				<q-page-sticky position="bottom-right" :offset="[48, 48]">
+					<vu:button-submit th:if="${model.modeEdit}"   icon="save" label="Save" action="@{_save}" size="lg" color="primary" />
+					<vu:button-submit th:if="${model.modeCreate}" icon="save" label="Create" action="@{_create}" size="lg" color="primary"/>
+				</q-page-sticky>				
 			</vu:form>
 		</section>
 	</body>

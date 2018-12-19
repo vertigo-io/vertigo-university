@@ -11,10 +11,6 @@
 	<module name="commons">
 		<component api="DaemonManager" class="io.vertigo.commons.impl.daemon.DaemonManagerImpl"/>
 		<component api="AnalyticsManager" class="io.vertigo.commons.impl.analytics.AnalyticsManagerImpl" >
-			<plugin class="io.vertigo.commons.plugins.analytics.log.SocketLoggerAnalyticsConnectorPlugin">
-				<param name="appName" value="mars-analytics" />
-				<param name="hostName" value="mars.dev.klee.lan.net" />
-			</plugin>
 		</component>
 		<component api="ScriptManager" class="io.vertigo.commons.impl.script.ScriptManagerImpl">
 			<plugin class="io.vertigo.commons.plugins.script.janino.JaninoExpressionEvaluatorPlugin" />
@@ -35,7 +31,7 @@
 		<component api="TimeSeriesDataBaseManager" class="io.vertigo.database.impl.timeseries.TimeSeriesDataBaseManagerImpl">
 			<param name="dbNames" value="mars-test" />
 			<plugin class="io.vertigo.database.plugins.timeseries.InfluxDbTimeSeriesPlugin">
-				<param name="host" value="http://mars.dev.klee.lan.net:8086" />
+				<param name="host" value="http://smartheater.home:8086" />
 				<param name="user" value="user" />
 				<param name="password" value="password" />
 			</plugin>

@@ -31,6 +31,7 @@
 					<br/><div>{{vueData.opendataSet.code}}</div>
 				</div>
 				<div layout:fragment="content-header-actions">
+					<vu:button-submit th:if="${model.modeEdit}"   action="@{_cancel}" :round size="lg" color="primary" icon="fas fa-ban" :flat aria-label="Cancel" title="Cancel" class="on-left"  />
 					<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>
 					
 					<q-btn round size="lg" color="primary" icon="more_horiz"  direction="down" aria-label="More actions" title="More actions" class="on-left"> 
@@ -70,12 +71,15 @@
 				</vu:block>
 				
 				<vu:block id="links" title="Opendata Set actions">
-				<div class="row justify-between">
-					<q-btn color="primary" type="a" th:href="@{/api/swaggerUi/}" target="new" icon="email" label="Interface swagger"></q-btn>
-					<q-btn color="primary" type="a" th:href="@{__${model.opendataSet.endPointUrl}__}" target="new" icon="chat" label="Fichier JSON"></q-btn>
-					<q-btn color="primary" icon="voicemail" label="Fichier CSV"></q-btn>
-				</div>				
+					<div class="row justify-between">
+						<q-btn color="primary" type="a" th:href="@{/api/swaggerUi/}" target="new" icon="email" label="Interface swagger"></q-btn>
+						<q-btn color="primary" type="a" th:href="@{__${model.opendataSet.endPointUrl}__}" target="new" icon="chat" label="Fichier JSON"></q-btn>
+						<q-btn color="primary" icon="voicemail" label="Fichier CSV"></q-btn>
+					</div>				
 				</vu:block>
+				<q-page-sticky position="bottom-right" :offset="[48, 48]">
+					<vu:button-submit th:if="${model.modeEdit}"   icon="save" label="Save" action="@{_save}" size="lg" color="primary" />
+				</q-page-sticky>
 			</vu:form>
 		</section>
 	</body>

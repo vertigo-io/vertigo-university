@@ -29,6 +29,7 @@
 					<br/><span class="text-smaller" th:text="${model.equipment.name}"></span>
 				</div>
 				<div th:if="${!model.modeCreate}" layout:fragment="content-header-actions">
+					<vu:button-submit th:if="${model.modeEdit}"   action="@{_cancel}" :round size="lg" color="primary" icon="fas fa-ban" :flat aria-label="Cancel" title="Cancel" class="on-left"  />
 					<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>
 				</div>
 				<div th:if="${!model.modeCreate}" layout:fragment="content-header-tabs">

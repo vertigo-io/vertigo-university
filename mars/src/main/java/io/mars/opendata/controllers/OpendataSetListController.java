@@ -25,7 +25,7 @@ public class OpendataSetListController extends AbstractVSpringMvcController {
 
 	@GetMapping("/")
 	public void initContext(final ViewContext viewContext) {
-		final DtListState dtListState = new DtListState(200, 0, null, null);
+		final DtListState dtListState = DtListState.of(200, 0, null, null);
 		viewContext.publishDtList(opendataSets, opendataSetServices.getOpendataSets(dtListState));
 	}
 

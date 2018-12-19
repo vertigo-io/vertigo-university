@@ -29,6 +29,7 @@
 			</div>
 			<div layout:fragment="content-header-actions">
 				<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>
+				<vu:button-submit th:if="${model.modeEdit}"   action="@{_cancel}" :round size="lg" color="primary" icon="fas fa-ban" :flat aria-label="Cancel" title="Cancel" class="on-left"  />
 				<vu:button-submit action="@{_executeNow}" :round size="lg" color="primary" icon="play_circle_outline" aria-label="Execute now" title="Execute" class="on-left"/>
 			</div>
 			<div layout:fragment="content-header-tabs">
@@ -39,8 +40,6 @@
 		
 		<section layout:fragment="content" >
 			<vu:form>
-				<vu:button-submit th:if="${model.modeEdit}"  label="Cancel" action="@{_cancel}" :flat />
-				<vu:button-submit th:if="${model.modeEdit}"  label="Save" action="@{_save}" color="primary" />
 				<vu:block id="week" title="'Week\'s executions'">
 						<div class="execution-summary row justify-start items-center">
 							<vu:include-data object="executionSummary" field="health" />
@@ -95,6 +94,9 @@
 					<input type="hidden" name="vContext[job][initialParams]" v-bind:value="vueData.job.initialParams" ></input>
 					<v-json-editor v-model="vueData.job.initialParams" th::readonly="${model.modeReadOnly}" :cols="2"></v-json-editor>
 				</vu:block>
+				<q-page-sticky position="bottom-right" :offset="[48, 48]">
+					<vu:button-submit th:if="${model.modeEdit}"   icon="save" label="Save" action="@{_save}" size="lg" color="primary" />
+				</q-page-sticky>
 			</vu:form>
 		</section>
 	</body>
