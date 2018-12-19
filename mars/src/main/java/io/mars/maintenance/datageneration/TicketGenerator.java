@@ -1,6 +1,7 @@
 package io.mars.maintenance.datageneration;
 
 import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.ZoneOffset;
@@ -15,6 +16,7 @@ import io.mars.datageneration.DataGenerator;
 import io.mars.datageneration.DensityDistribution;
 import io.mars.maintenance.dao.TicketDAO;
 import io.mars.maintenance.domain.Ticket;
+import io.mars.maintenance.domain.TicketStatusEnum;
 import io.vertigo.commons.transaction.VTransactionManager;
 import io.vertigo.commons.transaction.VTransactionWritable;
 import io.vertigo.core.component.Component;
@@ -27,11 +29,21 @@ public class TicketGenerator implements Component {
 
 	//private static final Instant GenesisDate = ZonedDateTime.of(2000, 1, 1, 0, 0, 0, 0, ZoneOffset.UTC).toInstant();
 	private static final int CHUNK_SIZE = 1000;
-
+	private final static LocalDate nowLocalDate = LocalDateTime.ofInstant(Instant.now(), ZoneOffset.UTC).toLocalDate();
+	private static final int MAX_TICKET_CLOSE_DATE_OFFSET = 10;
 	private final DensityDistribution qualityEquipmentDensityDistribution;
 
 	@Inject
 	private VTransactionManager transactionManager;
+
+	@Inject
+	private EquipmentDAO equipmentDAO;
+
+	@Inject
+	private TicketDAO ticketDAO;
+
+	@Inject
+	private WorkOrderGenerator workOrderGenerator;
 
 	@Inject
 	public TicketGenerator() {
@@ -40,12 +52,6 @@ public class TicketGenerator implements Component {
 		qualityEquipmentDensityDistribution.addSegment(1.0, 7.0, 12.0);
 		qualityEquipmentDensityDistribution.addSegment(7.0, 9999.0, 96.0);
 	}
-
-	@Inject
-	private EquipmentDAO equipmentDAO;
-
-	@Inject
-	private TicketDAO ticketDAO;
 
 	public void generatePastTickets(final Instant instant, final ChronoUnit chronoUnit, final int step) {
 
@@ -83,11 +89,20 @@ public class TicketGenerator implements Component {
 
 			if (realDensity >= tirage) {
 				final Ticket ticket = new Ticket();
+				final int closeDateOffset = DataGenerator.RND.nextInt(MAX_TICKET_CLOSE_DATE_OFFSET);
+
 				ticket.setDateCreated(LocalDateTime.ofInstant(instant, ZoneOffset.UTC).toLocalDate());
-				ticket.setCode("T-" + tirage.toString().substring(4));
+				ticket.setDateClosed(ticket.getDateCreated().plus(closeDateOffset, ChronoUnit.DAYS));
+				ticket.setCode("T-" + tirage.toString().substring(0, 6));
 				ticket.setTitle("Ticket n°" + ticket.getCode());
 				ticket.setEquipmentId(equipmentItem.getEquipmentId());
+				ticket.setDescription("<p><strong>Ce ticket a été créé le " + ticket.getDateCreated() + "</strong></p><p>Il a été créé pour l'équipement " + equipmentItem.getName() + "</p><p>En cas de non résolution, merci de contacter :</p><ul><li>Votre centre de maintenance MarsAssistance</li><li>Votre supérieur hiérarchique</li></ul>");
+				if (ticket.getDateClosed().isBefore(nowLocalDate)) {
+					ticket.ticketStatus().setEnumValue(TicketStatusEnum.closed);
+				}
 				ticketDAO.create(ticket);
+				workOrderGenerator.createWorkOrdersForTicket(ticket, nowLocalDate);
+
 			}
 		}
 	}

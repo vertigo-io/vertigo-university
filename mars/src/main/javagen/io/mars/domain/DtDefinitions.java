@@ -446,7 +446,9 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	 */
 	public enum WorkOrderFields implements DtFieldName<io.mars.maintenance.domain.WorkOrder> {
 		/** Propriété 'Id'. */
-		MO_ID,
+		WO_ID,
+		/** Propriété 'Ticket Number'. */
+		CODE,
 		/** Propriété 'Ticket Number'. */
 		TICKET_CODE,
 		/** Propriété 'Mainenance Operation'. */

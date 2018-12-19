@@ -570,7 +570,8 @@ comment on column TICKET_STATUS.LABEL is
 -- ============================================================
 create table WORK_ORDER
 (
-    MO_ID       	 NUMERIC     	not null,
+    WO_ID       	 NUMERIC     	not null,
+    CODE        	 VARCHAR(100)	,
     TICKET_CODE 	 VARCHAR(100)	,
     NAME        	 VARCHAR(100)	,
     DESCRIPTION 	 VARCHAR(350)	,
@@ -579,11 +580,14 @@ create table WORK_ORDER
     DUE_DATE    	 DATE        	,
     TICKET_ID   	 NUMERIC     	,
     WORK_ORDER_STATUS_ID	 VARCHAR(100)	,
-    constraint PK_WORK_ORDER primary key (MO_ID)
+    constraint PK_WORK_ORDER primary key (WO_ID)
 );
 
-comment on column WORK_ORDER.MO_ID is
+comment on column WORK_ORDER.WO_ID is
 'Id';
+
+comment on column WORK_ORDER.CODE is
+'Ticket Number';
 
 comment on column WORK_ORDER.TICKET_CODE is
 'Ticket Number';

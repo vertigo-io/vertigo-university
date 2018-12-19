@@ -16,7 +16,8 @@ import io.vertigo.lang.Generated;
 public final class WorkOrder implements Entity {
 	private static final long serialVersionUID = 1L;
 
-	private Long moId;
+	private Long woId;
+	private String code;
 	private String ticketCode;
 	private String name;
 	private String description;
@@ -63,20 +64,39 @@ public final class WorkOrder implements Entity {
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
-	 * @return Long moId <b>Obligatoire</b>
+	 * @return Long woId <b>Obligatoire</b>
 	 */
 	@Field(domain = "DO_ID", type = "ID", required = true, label = "Id")
-	public Long getMoId() {
-		return moId;
+	public Long getWoId() {
+		return woId;
 	}
 
 	/**
 	 * Champ : ID.
 	 * Définit la valeur de la propriété 'Id'.
-	 * @param moId Long <b>Obligatoire</b>
+	 * @param woId Long <b>Obligatoire</b>
 	 */
-	public void setMoId(final Long moId) {
-		this.moId = moId;
+	public void setWoId(final Long woId) {
+		this.woId = woId;
+	}
+	
+	/**
+	 * Champ : DATA.
+	 * Récupère la valeur de la propriété 'Ticket Number'.
+	 * @return String code
+	 */
+	@Field(domain = "DO_LABEL", label = "Ticket Number")
+	public String getCode() {
+		return code;
+	}
+
+	/**
+	 * Champ : DATA.
+	 * Définit la valeur de la propriété 'Ticket Number'.
+	 * @param code String
+	 */
+	public void setCode(final String code) {
+		this.code = code;
 	}
 	
 	/**

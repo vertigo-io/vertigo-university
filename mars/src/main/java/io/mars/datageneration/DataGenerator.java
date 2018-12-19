@@ -57,7 +57,7 @@ public class DataGenerator implements Component {
 		generateInitialBases();
 		generateInitialEquipments();
 		generateInitialOpendataSets();
-		generatePastData(ZonedDateTime.of(LocalDate.of(2017, 1, 1), LocalTime.of(0, 0), ZoneOffset.UTC).toInstant(), Instant.now());
+		generatePastData(ZonedDateTime.of(LocalDate.of(2018, 11, 19), LocalTime.of(0, 0), ZoneOffset.UTC).toInstant(), Instant.now());
 	}
 
 	private void generateInitialOpendataSets() {
