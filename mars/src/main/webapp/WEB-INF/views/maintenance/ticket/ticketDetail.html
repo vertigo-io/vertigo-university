@@ -16,11 +16,12 @@
 		
 		<section>
 			<div layout:fragment="content-header-title">
-				<span class="text-bigger" th:text="${model.ticket.title}"></span> 
+				<span class="text-bigger" th:text="${model.modeCreate ? 'New Ticket' : model.ticket.title}"></span> 
 				<br/><span class="text-smaller" th:text="${model.ticket.code}"></span>
 			</div>
 			<div layout:fragment="content-header-actions">
-				<q-btn round size="lg" color="primary" icon="fas fa-cubes" type="a" th:href="@{/basemanagement/equipment/} + ${model.ticket.equipmentId}"  aria-label="Go to equipment" title="Go to equipment" class="on-left" ></q-btn>
+				<q-btn th:if="${!model.modeCreate}" round size="lg" color="primary" icon="add" aria-label="Add work order" title="Add work order" th:@click="|openModal('workOrderEditModal', '@{/maintenance/workorder/new}', { 'ticketId' : vueData.ticket.ticketId })|"></q-btn>
+				<q-btn th:if="${!model.modeCreate}" round size="lg" color="primary" icon="fas fa-cubes" type="a" th:href="@{/basemanagement/equipment/} + ${model.ticket.equipmentId}"  aria-label="Go to equipment" title="Go to equipment" class="on-left" ></q-btn>
 				<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>
 			</div>
 		</section>
@@ -40,15 +41,22 @@
 					<pre th:if="${model.modeReadOnly}" th:utext="${model.ticket.description}"></pre>
 					<input type="hidden" name="vContext[ticket][description]" v-bind:value="vueData.ticket.description" />
 				</vu:block>
-				<vu:block id="workOrders" title="WorkOrders">
+				<vu:block th:if="${model.modeReadOnly}" id="workOrders" title="WorkOrders">
+					<vu:include-data object="ticket" field="ticketId" />
+					<vu:include-data object="workOrders" field="woId" />
+					<q-btn label="Add" th:@click="|openModal('workOrderEditModal', '@{/maintenance/workorder/new}', { 'ticketId' : vueData.ticket.ticketId })|"></q-btn>
 					<vu:table list="workOrders" componentId="workOrders" rowsPerPage="10">
 						<vu:column field="name" />
 						<vu:column field="dateCreated" />
 						<vu:column field="dueDate" />
 						<vu:column field="dateClosed" />
+						<vu:column name="action" label="Actions">
+							<q-btn round color="primary" icon="edit" label="View detail" th:@click="|openModal('workOrderEditModal', '@{/maintenance/workorder/}' + props.row.woId )|"></q-btn>
+						</vu:column>
 					</vu:table>
 				</vu:block>
 			</vu:form>
+			<vu:modal componentId="workOrderEditModal" closeLabel="Close" iframe_width="1000" iframe_height="800" />
 		</section>
 	</body>
 </html>

@@ -58,6 +58,10 @@ public class TicketServices implements Component {
 		return ticketDAO.getLastTicketsByBaseId(baseId);
 	}
 
+	public DtList<Ticket> getLastestTickets() {
+		return ticketDAO.getLastTickets();
+	}
+
 	public DtList<Ticket> getOpenedTicketsByEquipment(final Long equipmentId) {
 		Assertion.checkNotNull(equipmentId);
 		//---

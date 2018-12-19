@@ -34,6 +34,7 @@
 				<div th:if="${!model.modeCreate}" layout:fragment="content-header-tabs">
 					<q-btn flat type="a" class="active" th:href="@{/basemanagement/equipment/} + ${model.equipment.equipmentId}">Informations</q-btn>
 					<q-btn flat type="a" th:href="@{/basemanagement/equipment/maintenance/} + ${model.equipment.equipmentId}">Maintenance</q-btn>
+					<q-btn flat type="a" th:href="@{/basemanagement/equipment/environment/} + ${model.equipment.equipmentId}">Environment</q-btn>
 				</div>
 		</section>
 		

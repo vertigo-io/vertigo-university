@@ -45,7 +45,44 @@
 							<img th:src="@{/static/img/woman.png}" class="avatar"/>
 							<div  class="on-right">Daniel Johnson<br/><small>Administrator</small></div>
 						</q-btn>
-						<q-btn flat round dense icon="apps" aria-label="Toggle apps"></q-btn>
+						<q-btn flat round dense icon="apps" aria-label="Toggle apps">
+							<q-popover>
+								<div class="row gutter-sm q-pa-md" style="width: 300px;">
+									<div class="col-6" >
+										<q-btn type="a" href="https://klee-digital-factory.slack.com"  target="new" class="full-width" style="height:68px">
+											<div class="column items-center col-12">
+												<div class="col-12"><q-icon size="36px"name="fab fa-slack" ></q-icon></div>
+												<div class="col-12">Slack</div>
+											</div>
+										</q-btn>
+									</div>
+									<div class="col-6" >
+										<q-btn type="a" href="https://mars.dev.klee.lan.net:9443/store/" target="new" class="full-width" style="height:68px">
+											<div class="column items-center">
+												<div class="col-12"><img th:src="@{/static/img/logo_WSO2.png}" width="100%"></img></div>
+												<div class="col-12">API</div>
+											</div>
+										</q-btn>
+									</div>
+									<div class="col-6" >
+										<q-btn type="a" href="https://klee.opendatasoft.com/explore/dataset/dt-tests/information/" target="new" class="full-width" style="height:68px">
+											<div class="column items-center">
+												<div class="col-12"><img th:src="@{/static/img/logo_ods.png}" width="100%"></img></div>
+												<div class="col-12">OpenData</div>
+											</div>
+										</q-btn>
+									</div>
+									<div class="col-6" >
+										<q-btn type="a" href="https://klee-digital-factory.slack.com" target="new" class="full-width" style="height:68px">
+											<div class="column items-center">
+												<div class="col-12"><img th:src="@{/static/img/logo_360Learning.png}" width="100%"></img></div>
+												<div class="col-12">Academy</div>
+											</div>
+										</q-btn>
+									</div>
+								</div>
+							</q-popover>
+						</q-btn>
 					</div>
 				</q-toolbar>
 			</q-layout-header>
@@ -91,6 +128,10 @@
 		        <q-item tag="a" th:href="@{/hr/persons/}">
 		          <q-item-side icon="fas fa-user-friends"></q-item-side>
 		          <q-item-main label="Personnel" sublabel="Base managers, Workers,..."></q-item-main>
+		        </q-item>
+		        <q-item tag="a" th:href="@{/maintenance/dashboard/}">
+		          <q-item-side icon="fas fa-exclamation"></q-item-side>
+		          <q-item-main label="Maintenance" sublabel="Tickets, Work Orders"></q-item-main>
 		        </q-item>
 		        <q-item tag="a" th:href="@{#}">
 		          <q-item-side icon="fas fa-box-open"></q-item-side>

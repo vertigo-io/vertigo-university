@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="http://www.morphbit.com/thymeleaf/component"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{templates/mmcDetailLayout}"
+>
+	<head>
+		<title>Maintenance Dashboard</title>		
+	</head>
+	
+	<body>
+	
+		<section>
+			<div layout:fragment="content-header-title">
+				<span class="text-bigger text-center">Maintenance Dashboard</span> 
+			</div>
+			<div layout:fragment="content-header-actions">
+				<q-btn round size="lg" color="primary" icon="fas fa-exclamation" type="a" th:href="@{/maintenance/ticket/new}"  aria-label="Create ticket" title="Create ticket" class="on-left" >+</q-btn>
+			</div>
+		</section>
+		
+		<section layout:fragment="content" >
+				<div  class="row q-ma-md">
+					<div class="col-12">
+						<q-card class="bg-white row justify-around items-center" style="height:100%;">
+							<div class="text-center"> <span class="indicator text-positive" th:text="12" /><br/><span class="indicator-title text-faded">Closed ticket(s) this week</span></div>
+							<div class="text-center"> <span class="indicator text-positive" th:text="15" /><br/><span class="indicator-title text-faded">Work order(s) in progress</span></div>
+							<div class="text-center"> <span class="indicator text-positive" th:text="3" /> day(s)<br/><span class="indicator-title text-faded">Monthly work orders' delay</span></div>
+							<div class="text-center"> <span class="indicator text-positive" th:text="2" /> day(s) <q-icon size="20px" color="positive" name="fas fa-arrow-up" ></q-icon><br/><span class="indicator-title text-faded">Weekly work orders' delay</span></div>
+						</q-card>
+					</div>
+				</div>
+				<vu:block title="Lastest created tickets">
+					<vu:table list="lastTickets" componentId="lastTickets" rowsPerPage="5">
+						<vu:column field="code" />
+						<vu:column field="title" />
+						<vu:column field="dateCreated" />
+						<vu:column name="actions" label="Actions" >
+							<vu:include-data object="lastTickets" field="ticketId" />
+							<q-btn round color="primary" icon="arrow_forward" type="a" th::href="|'@{/maintenance/ticket/}'+props.row.ticketId|"></q-btn>
+						</vu:column>
+					</vu:table>
+				</vu:block>
+				
+		</section>
+	</body>
+</html>

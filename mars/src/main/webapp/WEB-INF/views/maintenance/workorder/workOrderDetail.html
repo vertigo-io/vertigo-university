@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="http://www.morphbit.com/thymeleaf/component"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{templates/mmcModalLayout}"
+>
+	<head>
+		<title>Work Order Detail</title>		
+	</head>
+	
+	<body class="bg-white">
+	
+		<section layout:fragment="page-container" >
+			<vu:form>
+				<vu:text-field object="workOrder" field="name" />
+				<vu:date object="workOrder" field="dueDate" />
+				<vu:text-area object="workOrder" field="description" />
+				<vu:button-submit th:if="${model.modeEdit}"  label="Save" action="@{_save}" color="primary" />
+				<vu:button-submit th:if="${model.modeCreate}"  label="Create" action="@{_create}" color="primary" />
+			</vu:form>
+		</section>
+	</body>
+</html>
