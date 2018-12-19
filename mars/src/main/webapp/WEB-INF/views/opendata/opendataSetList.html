@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="http://www.morphbit.com/thymeleaf/component"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{templates/mmcListLayout}"
+>
+	<head>
+		<title>Opendata Sets</title>
+	</head>
+	
+	<body>
+		<section layout:fragment="content" >
+			<div class="row justify-between q-mb-md">
+				<div>
+					<q-btn label="Add" type="a" color="primary" th:href="@{/opendata/opendataset/}"></q-btn>
+				</div>
+			</div>
+			
+			
+			<vu:table list="opendataSets" componentId="opendataSetsTable" sortUrl="@{/opendata/opendatasets/_sort}">
+				<vu:column field="code" />
+				<vu:column field="title" sortable="true" />
+				<vu:column field="description" sortable="true" />
+				<vu:column name="actions" label="Actions" >
+					<vu:include-data object="opendataSets" field="odsId" />
+					<q-btn round color="primary" icon="arrow_forward" type="a" th::href="|'@{/opendata/opendataset/}'+props.row.odsId|"></q-btn>
+				</vu:column>
+			</vu:table>
+			
+			<!--  
+			<br><br>
+			<vu:include-data object="opendataSets" field="odsId" />
+			<vu:include-data object="opendataSets" field="code" />
+			<vu:include-data object="opendataSets" field="title" />
+			<vu:include-data object="opendataSets" field="description" />
+			<vu:include-data object="opendataSets" field="endPointUrl" />
+			<vu:include-data object="opendataSets" field="tags" />
+			<vu:include-data-protected object="opendataSets" field="picturefileId"/>					
+			
+			<vu:cards list="opendataSets" cardClass="marsCard col-xl-4 col-md-6 col-xs-12" componentId="opendataSetsCards" sortUrl="@{/opendata/opendataSets/_sort}" rowsPerPage="8" showMore="true" showMoreLabel="Show more" >
+				<q-card-media >
+					<img th::src="|'@{/opendata/opendataset/picture/}'+item.picturefileId|"/>
+				</q-card-media>
+				<q-card-main class="row">
+					<div class="col-3" >
+						<q-icon name="fas fa-user" size="35px" color="primary"></q-icon>
+					</div>
+					<div class="col" >
+						<a class="text-primary small-caps text-bigger" th::href="|'@{/opendata/opendataSet/}'+item.odsId|">{{item.title}}</a><br/>
+						<q-icon name="location_on" size="25px"></q-icon>Code : {{item.code}}<br/>		
+					</div>		
+				</q-card-main>
+				<q-card-separator></q-card-separator>
+				<q-card-actions>
+					<q-chips-input :value="item.tags"  :readonly="true"  :hide-underline="true" ></q-chips-input>
+				</q-card-actions>
+			</vu:cards>
+			
+			 -->
+			<br/><br/>
+			
+			<vu:include-data-protected object="opendataSets" field="picturefileId"/>	
+			<vu:list list="opendataSets" componentId="opendataSetsList" sortUrl="@{/opendata/opendatasets/_sort}" rowsPerPage="8" pagination_:direction-links="true" pagination_:boundary-links="true" >
+				<q-item-side>
+					<img th::src="|'@{/opendata/opendataset/picture/}'+item.picturefileId|" class="avatar"  />
+				</q-item-side>
+				<q-item-main>
+					<div class="row">
+						<div class="col-3">
+							<vu:include-data object="opendataSets" field="title" />
+							<vu:include-data object="opendataSets" field="code" />
+							<a class="text-primary small-caps text-bigger" th::href="|'@{/opendata/opendataset/}'+item.odsId|">{{item.title}}</a><br/>
+							Web service reference : {{item.code}}<br/>
+						</div>
+						<div class="col-9">
+							<vu:include-data object="opendataSets" field="description" />
+							<vu:include-data object="opendataSets" field="tags" />
+							<span v-html="item.description"></span>
+							<q-chips-input :value="item.tags"  :readonly="true"  :hide-underline="true" ></q-chips-input>
+						</div>
+					</div>
+				</q-item-main>
+			</vu:list>
+			
+			
+		</section>
+	</body>
+</html>

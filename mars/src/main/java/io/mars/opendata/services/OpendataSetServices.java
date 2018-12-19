@@ -71,7 +71,7 @@ public class OpendataSetServices implements Component, Activeable {
 		return storeManager.getFileStore().read(toFileInfoStdURI(fileId)).getVFile();
 	}
 
-	public void savePersonPicture(final Long odsId, final FileInfoURI odsPictureTmp) {
+	public void saveOpendataSetPicture(final Long odsId, final FileInfoURI odsPictureTmp) {
 		final OpendataSet opendataSet = getOpendataSet(odsId);
 		//apply security check
 		final Long oldPicture = opendataSet.getPicturefileId();
@@ -86,6 +86,10 @@ public class OpendataSetServices implements Component, Activeable {
 
 	private static FileInfoURI toFileInfoStdURI(final Long fileId) {
 		return new FileInfoURI(FileInfoDefinition.findFileInfoDefinition(FileInfoStd.class), fileId);
+	}
+
+	public OpendataSet createOpendataSet(final OpendataSet opendataSet) {
+		return opendataSetDAO.create(opendataSet);
 	}
 
 }
