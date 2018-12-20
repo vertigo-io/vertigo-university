@@ -10,7 +10,6 @@ import io.mars.maintenance.domain.Ticket;
 import io.mars.maintenance.domain.TicketStatus;
 import io.mars.maintenance.domain.WorkOrderStatus;
 import io.mars.maintenance.services.ticket.TicketServices;
-import io.mars.maintenance.services.workorder.WorkOrderServices;
 import io.vertigo.ui.core.ViewContext;
 import io.vertigo.ui.core.ViewContextKey;
 import io.vertigo.ui.impl.springmvc.controller.AbstractVSpringMvcController;
@@ -21,8 +20,6 @@ public class MaintenanceDashboardController extends AbstractVSpringMvcController
 
 	@Inject
 	private TicketServices ticketServices;
-	@Inject
-	private WorkOrderServices workOrderServices;
 
 	private final ViewContextKey<Ticket> lastTickets = ViewContextKey.of("lastTickets");
 
