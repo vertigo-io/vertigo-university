@@ -87,6 +87,9 @@
 	</module>
 	
 	<module name="account">
+		<definitions>
+			<provider class="io.vertigo.account.impl.account.AccountDefinitionProvider" />
+		</definitions>
 		<component api="VSecurityManager" class="io.vertigo.account.impl.security.VSecurityManagerImpl">
 			<param name="userSessionClassName" value="io.mars.commons.MarsUserSession" />
 		</component>

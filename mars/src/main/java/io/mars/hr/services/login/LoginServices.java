@@ -1,6 +1,8 @@
 package io.mars.hr.services.login;
 
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
@@ -15,8 +17,12 @@ import io.vertigo.account.impl.authentication.UsernamePasswordAuthenticationToke
 import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.core.component.Component;
 import io.vertigo.core.locale.MessageText;
+import io.vertigo.dynamo.domain.model.DtListState;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.lang.VUserException;
 import io.vertigo.persona.security.VSecurityManager;
+import io.vertigo.social.services.notification.Notification;
+import io.vertigo.social.services.notification.NotificationServices;
 
 @Transactional
 public class LoginServices implements Component {
@@ -27,17 +33,46 @@ public class LoginServices implements Component {
 	private VSecurityManager securityManager;
 
 	@Inject
+	private NotificationServices notificationServices;
+
+	@Inject
 	private PersonServices personServices;
 
 	public void login(final String login, final String password) {
 		final Optional<Account> loggedAccount = authenticationManager.login(new UsernamePasswordAuthenticationToken(login, password));
 		if (!loggedAccount.isPresent()) {
+			sendNotificationToAll(Notification.builder()
+					.withSender("System")
+					.withTitle("Fail login attempt")
+					.withContent("Try to login:'" + login + "' with password:'123456'")
+					.withTTLInSeconds(600)
+					.withType("MARS-LOGIN") //should prefix by app, in case of multi-apps notifications
+					.withTargetUrl("#")
+					.build());
 			throw new VUserException("Login or Password invalid");
 		}
 		final Account account = loggedAccount.get();
 		final Person person = personServices.getPerson(Long.valueOf(account.getId()));
 		getUserSession().setLoggedPerson(person);
 		getUserSession().setCurrentProfile("Administrator");
+
+		sendNotificationToAll(Notification.builder()
+				.withSender(account.getDisplayName())
+				.withTitle("New login")
+				.withContent("User " + account.getDisplayName() + " just login")
+				.withTTLInSeconds(600)
+				.withType("MARS-LOGIN") //should prefix by app, in case of multi-apps notifications
+				.withTargetUrl("/mars/hr/person/" + account.getId())
+				.build());
+
+	}
+
+	private void sendNotificationToAll(final Notification notification) {
+		final Set<UID<Account>> accountUIDs = personServices.getPersons(DtListState.of(null, 0))
+				.stream()
+				.map((person) -> UID.of(Account.class, String.valueOf(person.getPersonId())))
+				.collect(Collectors.toSet());
+		notificationServices.send(notification, accountUIDs);
 	}
 
 	public boolean isAuthenticated() {

@@ -12,6 +12,8 @@
     
   	<link rel="stylesheet" th:href="@{/static/css/mars.css}"/>
 	<link rel="icon" th:href="@{/static/img/favicon.ico}"/>
+	
+	<script th:src="@{/vertigo-ui/static/js/v-components/v-notifications.js}"></script>
     
    	<script th:src="@{/static/js/mars.js}"></script>
 </head>
@@ -38,9 +40,7 @@
 						<i aria-hidden="true" class="q-icon material-icons">search</i>
 					</div>
 					<div>
-						<q-btn round dense color="primary" icon="mail" class="on-left" >
-							<q-chip floating color="red">22</q-chip>
-						</q-btn>
+						<v-notifications th:base-url="@{/api/}"></v-notifications>
 						<q-btn icon-right="arrow_drop_down"  class="on-left gt-md">
 							<vu:include-data-protected object="connectedUser" field="picturefileId"/>
 							<img th::src="|'@{/hr/person/picture/}'+vueData.connectedUser.picturefileId|" class="avatar"/>
