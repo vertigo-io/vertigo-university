@@ -10,13 +10,8 @@
 	
 	<body>
 		<section layout:fragment="content" >
-			<div class="row justify-between q-mb-md">
-				<div>
-					<q-btn label="Add" type="a" color="primary" th:href="@{/opendata/opendataset/}"></q-btn>
-				</div>
-			</div>
-			
-			
+
+			<!-- 			
 			<vu:table list="opendataSets" componentId="opendataSetsTable" sortUrl="@{/opendata/opendatasets/_sort}">
 				<vu:column field="code" />
 				<vu:column field="title" sortable="true" />
@@ -26,7 +21,7 @@
 					<q-btn round color="primary" icon="arrow_forward" type="a" th::href="|'@{/opendata/opendataset/}'+props.row.odsId|"></q-btn>
 				</vu:column>
 			</vu:table>
-			
+			 -->
 			<!--  
 			<br><br>
 			<vu:include-data object="opendataSets" field="odsId" />
@@ -67,8 +62,10 @@
 				<q-item-main>
 					<div class="row">
 						<div class="col-3">
+							<vu:include-data object="opendataSets" field="odsId" />
 							<vu:include-data object="opendataSets" field="title" />
 							<vu:include-data object="opendataSets" field="code" />
+							<vu:include-data object="opendataSets" field="endPointUrl" />
 							<a class="text-primary small-caps text-bigger" th::href="|'@{/opendata/opendataset/}'+item.odsId|">{{item.title}}</a><br/>
 							Web service reference : {{item.code}}<br/>
 						</div>
@@ -80,6 +77,11 @@
 						</div>
 					</div>
 				</q-item-main>
+				<q-item-side>
+					<q-btn round color="primary" icon="arrow_forward" type="a" th::href="|'@{/opendata/opendataset/}'+item.personId|"></q-btn>
+					<q-btn round color="primary" icon="email" type="a" th:href="@{/api/swaggerUi/}"></q-btn>
+					<q-btn color="primary" type="a" th::href="|'@{/.}'+ item.endPointUrl|" target="new" icon="chat" label="Fichier JSON"></q-btn>
+				</q-item-side>
 			</vu:list>
 			
 			
