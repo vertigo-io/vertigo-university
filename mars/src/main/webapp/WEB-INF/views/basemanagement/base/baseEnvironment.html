@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="http://www.morphbit.com/thymeleaf/component"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{templates/mmcDetailNavLayout}"
+>
+	<head>
+		<title>Environment</title>
+		
+				<!-- graphs -->
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-color/1.0.3/d3-color.min.js" ></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-interpolate/1.1.5/d3-interpolate.min.js" ></script>
+		<script th:src="@{/dashboard/static/dashboard.js}"></script>
+		<script th:src="@{/dashboard/static/dashboard.chartjs.js}"></script>
+	</head>
+	
+	<body>
+	
+		<section layout:fragment="content-nav">
+			<nav v-scroll-spy="{offset:150}">
+			    <q-list link style="height:100%">
+			        <q-item tag="a" href="#weatheroverview">Weather Overview</q-item>
+			        <q-item tag="a" href="#farmoverview">Farm Overview</q-item>
+			        <q-item tag="a" href="#securityoverview">Security overview</q-item>
+			        <q-item tag="a" href="#personneloverview">Personnel overview</q-item>
+	        	</q-list>
+	        </nav>
+		</section>
+		
+		<section>
+				<div layout:fragment="content-header-left">
+					<img th:src="@{/static/img/bases/Mars base 1.jpg}" class="detailImg gt-md"/>
+				</div>
+				<div layout:fragment="content-header-title">
+					<span class="text-bigger" th:text="${model.base.name}"></span> 
+				</div>
+				<div layout:fragment="content-header-actions">
+					<q-btn round size="lg" color="primary" icon="fas fa-cubes" type="a" th:href="@{/basemanagement/equipments/}"  aria-label="Add equipment" title="See all equipments" class="on-left" ></q-btn>
+					<q-btn round size="lg" color="primary" icon="fas fa-cubes" type="a" th:href="@{/basemanagement/equipment/new}"  aria-label="Add equipment" title="Add equipment" class="on-left" >+</q-btn>
+					<q-btn round size="lg" color="primary" icon="more_horiz"  direction="down" aria-label="More actions" title="More actions" class="on-left"> 
+					  <q-popover><q-list link>
+					  	<q-item><q-btn flat>Add view</q-btn></q-item>
+					    <q-item><q-btn flat>Delete</q-btn></q-item>
+					    <q-item><q-btn flat>Archive</q-btn></q-item>
+					  </q-list>
+					  </q-popover>
+					</q-btn>
+				</div>
+				<div layout:fragment="content-header-tabs">
+					<q-btn flat type="a" th:href="@{/basemanagement/base/information/} + ${model.base.baseId}">Base Informations</q-btn>
+					<q-btn flat type="a" th:href="@{/basemanagement/base/equipment/} + ${model.base.baseId}">Equipment</q-btn>
+					<q-btn flat type="a" class="active" th:href="@{/basemanagement/base/environment/} + ${model.base.baseId}">Environment</q-btn>
+				</div>
+		</section>
+		
+		<section layout:fragment="content" >
+			<vu:form>
+				<vu:block id="weatherooverview" title="Weather Overview">
+
+					<div class="col-md-6">
+						<div>
+					Current Temperature: TODO
+					Current Humidity: TODO
+						</div>
+						<div class="chart chartjs linechart bg-white" 
+							    th:data-url="@{/api/basemanagment/equipment/environment/data/series}" 
+							    data-query-measures='["value:mean"]'
+							    data-query-data-filter='{ "measurement": "temperature", "filters": {"equipment": "*"}}'
+							    data-query-time-filter='{ "from": "now() - 3d", "to": "now()", "dim": "1h"}'
+								data-labels='{"value:mean":"Mean Value from temperature"}' 
+							    data-colors='iGREEN2BLUE'></div> 
+					<div class="chart chartjs linechart bg-white" 
+							    th:data-url="@{/api/basemanagment/equipment/environment/data/series}" 
+							    data-query-measures='["value:mean"]'
+							    data-query-data-filter='{ "measurement": "humidite", "filters": {"equipment": "*"}}'
+							    data-query-time-filter='{ "from": "now() - 3d", "to": "now()", "dim": "1h"}'
+								data-labels='{"value:mean":"Mean Value Humitidy"}' 
+							    data-colors='iRED2GREEN'></div> 
+					</div>
+				</vu:block>		
+				
+				<vu:block id="farmoverview" title="Farm Overview">
+					<div class="col-md-6">
+						<div>
+					Farms to water : TODO
+						</div>
+						<div class="chart chartjs linechart bg-white" 
+							    th:data-url="@{/api/basemanagment/equipment/environment/data/series}" 
+							    data-query-measures='["value:mean"]'
+							    data-query-data-filter='{ "measurement": "moisture", "filters": {"equipment": "*"}}'
+							    data-query-time-filter='{ "from": "now() - 3d", "to": "now()", "dim": "4h"}'
+								data-labels='{"value:mean":"Mean Value from humidity"}' 
+							    data-colors='iGREEN:INTENSITY'></div> 
+					</div>
+				</vu:block>		
+				<vu:block id="securityoverview" title="Farm Overview">
+					<div class="col-md-6">
+						<div>
+					 Triggered alarm this month: TODO
+						</div>
+						<div class="chart chartjs linechart bg-white" 
+							    th:data-url="@{/api/basemanagment/equipment/environment/data/series}" 
+							    data-query-measures='["value:mean"]'
+							    data-query-data-filter='{ "measurement": "geiger", "filters": {"equipment": "ms01"}}'
+							    data-query-time-filter='{ "from": "now() - 30d", "to": "now()", "dim": "2h"}'
+								data-labels='{"value:mean":"Mean Value from humidity"}' 
+							    data-colors='iGREEN:INTENSITY'></div> 
+					</div>
+				</vu:block>						
+		</vu:form>
+		</section>
+		
+		<section layout:fragment="footer" >
+			<script type="text/javascript">
+				componentStates.lastEquipments.columns[2].sort = VUi.methods.sortDatesAsString("DD/MM/YYYY");
+			</script>
+		<script type="text/javascript">
+			showCharts();
+		</script>
+		</section>
+	</body>
+</html>

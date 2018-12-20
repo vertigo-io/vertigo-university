@@ -115,6 +115,7 @@ public class IotEquipmentServices implements Component, Activeable {
 		logger.info("value of data: " + Double.parseDouble(data[1]));
 		final Measure mes = Measure.builder(location[1])
 				.time(Instant.now())
+				.addField("equipment", location[0])
 				.addField("value", Double.parseDouble(data[1]))
 				.build();
 		timeSeriesDataBaseManager.insertMeasure("mars-test", mes);

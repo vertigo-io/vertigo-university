@@ -41,19 +41,40 @@
 							    data-query-measures='["value:mean"]'
 							    data-query-data-filter='{ "measurement": "temperature", "filters": {"equipment": "fs01"}}'
 							    data-query-time-filter='{ "from": "now() - 3d", "to": "now()", "dim": "1h"}'
-								data-labels='{"value:mean":"Mean Value"}' 
-							    data-colors='iRED2GREEN'></div> 
+								data-labels='{"value:mean":"Mean Value from temperature"}' 
+							    data-colors='iGREEN2BLUE'></div> 
+				</div>
+				<div class="col-md-6 col-xs-12" >
+					<div class="chart chartjs linechart bg-white" 
+							    th:data-url="@{/api/basemanagment/equipment/environment/data/series}" 
+							    data-query-measures='["value:MAX"]'
+							    data-query-data-filter='{ "measurement": "temperature", "filters": {"equipment": "fs01"}}'
+							    data-query-time-filter='{ "from": "now() - 3d", "to": "now()", "dim": "1h"}'
+								data-labels='{"value:MAX":"max Value temperature"}' 
+							    data-colors='iANDROID:LIGHT'></div> 
+				</div>
+				<div class="col-md-6 col-xs-12" >
+					<div class="chart chartjs linechart bg-white" 
+							    th:data-url="@{/api/basemanagment/equipment/environment/data/series}" 
+							    data-query-measures='["value:min"]'
+							    data-query-data-filter='{ "measurement": "temperature", "filters": {"equipment": "fs01"}}'
+							    data-query-time-filter='{ "from": "now() - 3d", "to": "now()", "dim": "1h"}'
+								data-labels='{"value:min":"min Value temperature"}' 
+							    data-colors='iANDROID'></div> 
 				</div>
 				<div class="col-md-6 col-xs-12" >
 					<div class="chart chartjs linechart bg-white" 
 							    th:data-url="@{/api/basemanagment/equipment/environment/data/series}" 
 							    data-query-measures='["value:mean"]'
-							    data-query-data-filter='{ "measurement": "temperature", "filters": {"equipment": "fs01"}}'
+							    data-query-data-filter='{ "measurement": "humidite", "filters": {"equipment": "fs01"}}'
 							    data-query-time-filter='{ "from": "now() - 3d", "to": "now()", "dim": "1h"}'
-								data-labels='{"value:mean":"Mean Value"}' 
+								data-labels='{"value:mean":"Mean Value humidite"}' 
+								title='humidite'
 							    data-colors='iRED2GREEN'></div> 
 				</div>
+				
 			 </div>
+			 
 		</section>
 	</body>
 	
