@@ -67,7 +67,7 @@
 			<vu:include-data-protected object="persons" field="picturefileId"/>	
 			<vu:list list="persons" componentId="personsList" sortUrl="@{/hr/persons/_sort}" rowsPerPage="8" pagination_:direction-links="true" pagination_:boundary-links="true" >
 				<q-item-side>
-					<img th::src="|'@{/humanresources/person/picture/}'+item.picturefileId|" class="avatar"  />
+					<img th::src="|'@{/hr/person/picture/}'+item.picturefileId|" class="avatar"  />
 				</q-item-side>
 				<q-item-main>
 					<div class="row">

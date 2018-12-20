@@ -42,7 +42,8 @@
 							<q-chip floating color="red">22</q-chip>
 						</q-btn>
 						<q-btn icon-right="arrow_drop_down"  class="on-left gt-md">
-							<img th:src="@{/static/img/woman.png}" class="avatar"/>
+							<vu:include-data-protected object="connectedUser" field="picturefileId"/>
+							<img th::src="|'@{/hr/person/picture/}'+vueData.connectedUser.picturefileId|" class="avatar"/>
 							<div class="on-right"><span th:text="${model.vContext['connectedUser']['firstName']+' '+model.vContext['connectedUser']['lastName']}"></span><br/><small><span th:text="${model.vContext['activeProfile']}"></span></small></div>
 							<q-popover>
 							  <q-list link>

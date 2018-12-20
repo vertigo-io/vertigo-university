@@ -42,7 +42,7 @@ public class LoginServices implements Component {
 
 	public boolean isAuthenticated() {
 		final Optional<MarsUserSession> userSession = securityManager.<MarsUserSession> getCurrentUserSession();
-		return userSession.isPresent() ? false : userSession.get().isAuthenticated();
+		return !userSession.isPresent() ? false : userSession.get().isAuthenticated();
 	}
 
 	public Person getLoggedPerson() {

@@ -21,7 +21,9 @@ package io.mars.hr.controllers.login;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -33,6 +35,7 @@ import io.vertigo.ui.impl.springmvc.controller.AbstractVSpringMvcController;
 
 @Controller
 @RequestMapping("/userProfil")
+@ControllerAdvice(assignableTypes = { AbstractVSpringMvcController.class })
 public final class UserProfilController extends AbstractVSpringMvcController {
 	private static final ViewContextKey<Person> connectedUserKey = ViewContextKey.of("connectedUser");
 	private static final ViewContextKey<String> activeProfileKey = ViewContextKey.of("activeProfile");
@@ -40,10 +43,12 @@ public final class UserProfilController extends AbstractVSpringMvcController {
 	@Inject
 	private LoginServices loginServices;
 
-	@GetMapping("/")
+	@ModelAttribute
 	public void initContext(final ViewContext viewContext) {
-		viewContext.publishDto(connectedUserKey, loginServices.getLoggedPerson());
-		viewContext.publishRef(activeProfileKey, loginServices.getActiveProfile());
+		if (loginServices.isAuthenticated()) { //must support all cases
+			viewContext.publishDto(connectedUserKey, loginServices.getLoggedPerson());
+			viewContext.publishRef(activeProfileKey, loginServices.getActiveProfile());
+		}
 	}
 
 	@GetMapping("/_changeProfile")
@@ -56,7 +61,7 @@ public final class UserProfilController extends AbstractVSpringMvcController {
 		private VSecurityManager securityManager;
 		@Inject
 		private AccountManager identityManager;
-	
+
 		@GetMapping("/userInfo")
 		public Person getUserInfo() {
 			final Optional<MarsUserSession> userSession = securityManager.getCurrentUserSession();
@@ -65,7 +70,7 @@ public final class UserProfilController extends AbstractVSpringMvcController {
 			}
 			return null;
 		}
-	
+
 		@GetMapping("/userPhoto")
 		public VFile getUserPhoto() {
 			final Optional<MarsUserSession> userSession = securityManager.getCurrentUserSession();
