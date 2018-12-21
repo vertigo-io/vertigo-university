@@ -41,7 +41,7 @@
 					</div>
 					<div>
 						<v-notifications th:base-url="@{/api/}"></v-notifications>
-						<q-btn icon-right="arrow_drop_down"  class="on-left gt-md">
+						<q-btn icon-right="arrow_drop_down" flat class="on-left gt-md">
 							<vu:include-data-protected object="connectedUser" field="picturefileId"/>
 							<img th::src="|'@{/hr/person/picture/}'+vueData.connectedUser.picturefileId|" class="avatar"/>
 							<div class="on-right"><span th:text="${model.vContext['connectedUser']['firstName']+' '+model.vContext['connectedUser']['lastName']}"></span><br/><small><span th:text="${model.vContext['activeProfile']}"></span></small></div>
