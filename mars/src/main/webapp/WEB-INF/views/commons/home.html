@@ -110,7 +110,8 @@
 				</div>
 				<div class="row col-12" >
 					<div style="width:100%">
-						<v-map id="map" marker-color="#027BE3" :list="[{lat : 2.239230, lon: 48.773744 },{lat : 2.280263, lon: 48.827317 },{lat : -4.570026, lon: 48.357621 }]"></v-map>
+						<vu:include-data object="bases" field="geoLocation" />
+						<v-map id="map" marker-color="#027BE3" :list="vueData.bases" field="geoLocation"></v-map>
 					</div>
 				</div>
 			</div>

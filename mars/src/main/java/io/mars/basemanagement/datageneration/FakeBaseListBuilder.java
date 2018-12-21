@@ -21,6 +21,7 @@ public final class FakeBaseListBuilder implements Builder {
 	private List<String> myNameSecondPartDictionnary;
 	private List<String> myTagsDictionnary;
 	private List<Long> myGeosectorIds;
+	private List<String> myGeoLocations;
 
 	private int myMaxValues = 0;
 
@@ -51,6 +52,11 @@ public final class FakeBaseListBuilder implements Builder {
 		Assertion.checkNotNull(geosectorIds);
 		//---
 		myGeosectorIds = geosectorIds;
+		return this;
+	}
+
+	public FakeBaseListBuilder withGeoLocations(final List<String> geoLocations) {
+		myGeoLocations = geoLocations;
 		return this;
 	}
 
@@ -88,8 +94,9 @@ public final class FakeBaseListBuilder implements Builder {
 		return "The " + firstPart + " " + secondPart + " base was created on " + creationDate + ". Its current HealthLevel is :" + healthLevel + ".";
 	}
 
-	private static String getGeoLocation() {
-		return "";
+	private String getGeoLocation() {
+		Assertion.checkNotNull(myGeoLocations);
+		return myGeoLocations.get(DataGenerator.RND.nextInt(myGeoLocations.size()));
 	}
 
 	private static BigDecimal getAssetsValue() {
