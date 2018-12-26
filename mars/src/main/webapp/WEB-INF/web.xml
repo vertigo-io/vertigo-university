@@ -145,7 +145,7 @@
 		<location>/jsp/application-error.jsp</location>
 	</error-page>
 	<error-page>
-		<error-code>403</error-code>
+		<error-code>401</error-code>
 		<location>/index.html</location>
 	</error-page>
 	<error-page>
