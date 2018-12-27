@@ -30,7 +30,9 @@ public class EquipmentServices implements Component {
 	private EquipmentDAO equipmentDAO;
 
 	public Equipment get(final Long equipmentId) {
-		return equipmentDAO.get(equipmentId);
+		final Equipment equipment = equipmentDAO.get(equipmentId);
+		equipment.equipmentType().load();
+		return equipment;
 	}
 
 	public void save(final Equipment equipment) {

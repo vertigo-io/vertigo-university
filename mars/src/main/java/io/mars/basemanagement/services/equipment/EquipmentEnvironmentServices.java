@@ -1,5 +1,6 @@
 package io.mars.basemanagement.services.equipment;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -58,5 +59,33 @@ public class EquipmentEnvironmentServices implements Component {
 
 	public List<String> getTagValues(final String measurement, final String tag) {
 		return timeSeriesDataBaseManager.getTagValues(appName, measurement, tag);
+	}
+
+	public Double getLastTemperature() {
+		final TabularDatas lastTemperatures = timeSeriesDataBaseManager.getTabularData(
+				"mars-test",
+				Collections.singletonList("value:last"),
+				DataFilter.builder("temperature").build(),
+				TimeFilter.builder("now() - 1h", "now() + 1h").build());
+		return (Double) lastTemperatures.getTabularDataSeries().get(0).getValues().get("value:last");
+	}
+
+	public Double getLastHumidity() {
+		final TabularDatas lastHumidite = timeSeriesDataBaseManager.getTabularData(
+				"mars-test",
+				Collections.singletonList("value:last"),
+				DataFilter.builder("humidite").build(),
+				TimeFilter.builder("now() - 1h", "now() + 1h").build());
+		return (Double) lastHumidite.getTabularDataSeries().get(0).getValues().get("value:last");
+	}
+
+	public Double getTotalTemperatureMeasured() {
+		//a changer pour V2
+		final TabularDatas totalMeasure = timeSeriesDataBaseManager.getTabularData(
+				"mars-test",
+				Collections.singletonList("value:count"),
+				DataFilter.builder("temperature").build(),
+				TimeFilter.builder("now() - 365d", "now() + 1h").build());
+		return (Double) totalMeasure.getTabularDataSeries().get(0).getValues().get("value:count");
 	}
 }
