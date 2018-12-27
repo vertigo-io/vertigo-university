@@ -44,11 +44,11 @@ body.login {
 	border: none;
 }
 
-.q-item {
+.bg-primary .q-item {
   color: currentColor !important;
 }
 
-.q-item-side {
+.bg-primary .q-item-side {
   color: currentColor !important;
   text-align: center;	
 }
@@ -72,6 +72,7 @@ nav a {
 	text-decoration: none;	
 }
 
+
 nav.scroll-spy-nav a {
 	border-left-width:1px;
 	border-left-style:solid;
@@ -83,9 +84,10 @@ nav.scroll-spy-nav a.q-item.active {
 	border-left-width:5px;
 	border-left-style:solid;
 	border-left-color:var(--q-color-primary);	
+	color: var(--q-color-primary) !important;
 }
 
-a.q-item {
+nav a.q-item {
 	color: grey;	
 }
 .marsCard .q-card {
