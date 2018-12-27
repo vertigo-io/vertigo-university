@@ -216,7 +216,7 @@
 		</definitions>
 	</module>
 	
-	<!-- <module name="ledger">
+	<module name="ledger">
 		<component api="LedgerManager" class="io.vertigo.ledger.impl.services.LedgerManagerImpl" >
 			<plugin class="io.vertigo.ledger.plugins.ethereum.EthereumLedgerPlugin">
 				<param name="urlRpcEthNode" value="http://docker-vertigo:8545" />
@@ -225,12 +225,10 @@
 				<param name="defaultDestAccountName" value="Mars Mining Corporation" />
 				<param name="defaultDestPublicAddr" value="0x9a48b59e301794298fdc0f945da3fbd58cff5beb" />
 				<param name="walletPassword" value="fakepassword" />
-				<param name="walletPath" value="W:\\Digital Factory\\02 - Solutions\\Vertigo\\Blockchain\\accounts\\keystore_blockchain_privée\\UTC-
-				-2018-08-31T12-38-40.161637877Z-
-				-9a48b59e301794298fdc0f945da3fbd58cff5beb" />
+				<param name="walletPath" value="W:\\Digital Factory\\02 - Solutions\\Vertigo\\Blockchain\\accounts\\keystore_blockchain_privée\\UTC--2018-08-31T12-38-40.161637877Z--9a48b59e301794298fdc0f945da3fbd58cff5beb" />
 			</plugin>
 		</component>		
-	</module> -->
+	</module>
 
 	<init>
 <!-- 		<initializer class="io.mars.boot.DataBaseInitializer" />  -->

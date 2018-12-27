@@ -5,7 +5,7 @@ create DtDefinition DT_TICKET {
 	id TICKET_ID {domain: DO_ID label:"Id"}
 	field CODE {domain: DO_LABEL label: "Ticket Number" required:"false"}
 	field TITLE {domain: DO_LABEL label: "Ticket title" required:"false"}
-	field DESCRIPTION {domain: DO_DESCRIPTION label: "Ticket Descrption" required:"false"}
+	field DESCRIPTION {domain: DO_DESCRIPTION label: "Ticket Description" required:"false"}
 	field DATE_CREATED {domain: DO_LOCALDATE label: "Ticket Creation Date" required:"false"}
 	field DATE_CLOSED {domain: DO_LOCALDATE label: "Ticket Closing Date" required:"false"}
 }

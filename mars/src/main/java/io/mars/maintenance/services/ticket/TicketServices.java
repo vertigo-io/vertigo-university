@@ -36,9 +36,10 @@ public class TicketServices implements Component {
 	}
 
 	public void createTicket(final Ticket ticket) {
+		Assertion.checkArgument(ticket.getTicketId() == null, "No id should be provided for a new ticket");
+		//---
 		ticket.setDateCreated(LocalDate.now());
 		ticket.ticketStatus().setEnumValue(TicketStatusEnum.open);
-		//---
 		ticketDAO.save(ticket);
 		transactionManager.getCurrentTransaction()
 				.addAfterCompletion(txCommited -> {
