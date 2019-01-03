@@ -2,7 +2,12 @@
 <config>
 	<boot locales="fr_FR">
 		<plugin class="io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin" />
+		<plugin class="io.vertigo.core.plugins.resource.local.LocalResourceResolverPlugin" />
+		
 		<plugin class="io.vertigo.vega.plugins.webservice.servlet.WebAppContextParamPlugin"/>
+		<plugin class="io.vertigo.core.plugins.param.properties.PropertiesParamPlugin">
+			<param name="url" value="W:\\Digital Factory\\02 - Solutions\\Vertigo\\Blockchain\\accounts\\marsWalletAccount.properties"/>
+		</plugin>
 		<plugin class="io.vertigo.core.plugins.param.xml.XmlParamPlugin">
 			<param name="url" value="/boot/config/application-config.xml"/>
 		</plugin>
@@ -220,12 +225,12 @@
 		<component api="LedgerManager" class="io.vertigo.ledger.impl.services.LedgerManagerImpl" >
 			<plugin class="io.vertigo.ledger.plugins.ethereum.EthereumLedgerPlugin">
 				<param name="urlRpcEthNode" value="http://docker-vertigo:8545" />
-				<param name="myAccountName" value="Mars Mining Corporation" />
-				<param name="myPublicAddr" value="0x9a48b59e301794298fdc0f945da3fbd58cff5beb" />
-				<param name="defaultDestAccountName" value="Mars Mining Corporation" />
-				<param name="defaultDestPublicAddr" value="0x9a48b59e301794298fdc0f945da3fbd58cff5beb" />
+				<param name="myAccountName" value="${myAccountName}" />
+				<param name="myPublicAddr" value="${myPublicAddr}" />
+				<param name="defaultDestAccountName" value="${myAccountName}" />
+				<param name="defaultDestPublicAddr" value="${myPublicAddr}" />
 				<param name="walletPassword" value="${walletPassword}" />
-				<param name="walletPath" value="W:\\Digital Factory\\02 - Solutions\\Vertigo\\Blockchain\\accounts\\keystore_blockchain_privée\\UTC--2018-08-31T12-38-40.161637877Z--9a48b59e301794298fdc0f945da3fbd58cff5beb" />
+				<param name="walletPath" value="${walletPath}" />
 			</plugin>
 		</component>		
 	</module>

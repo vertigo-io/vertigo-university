@@ -5,4 +5,7 @@
 		type="javax.sql.DataSource"
 		driverClassName="org.h2.Driver"
 		url="jdbc:h2:~/marsdb/mars;AUTO_SERVER=TRUE" />
+		
+	<!-- Parameter name="boot.walletParams" value="W:\\Digital Factory\\02 - Solutions\\Vertigo\\Blockchain\\accounts\\marsWalletAccount.properties" override="false"/ -->
+		
 </Context>
