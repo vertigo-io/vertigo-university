@@ -102,9 +102,7 @@ public class EquipmentServices implements Component {
 				.withMsg(commentString)
 				.build();
 
-		final Equipment equipment = get(equipmentId);
-
-		commentServices.publish(currentAccountUID, comment, equipment.getUID());
+		commentServices.publish(currentAccountUID, comment, UID.of(Equipment.class, equipmentId));
 
 	}
 
