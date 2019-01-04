@@ -8,7 +8,9 @@ import io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugi
 import io.vertigo.dynamo.collections.CollectionsManager;
 import io.vertigo.dynamo.impl.collections.CollectionsManagerImpl;
 import io.vertigo.dynamo.plugins.environment.DynamoDefinitionProvider;
+import io.vertigo.studio.impl.masterdata.MasterDataManagerImpl;
 import io.vertigo.studio.impl.mda.MdaManagerImpl;
+import io.vertigo.studio.masterdata.MasterDataManager;
 import io.vertigo.studio.mda.MdaManager;
 import io.vertigo.studio.plugins.mda.domain.java.DomainGeneratorPlugin;
 import io.vertigo.studio.plugins.mda.domain.sql.SqlGeneratorPlugin;
@@ -49,6 +51,7 @@ public class SampleStudioConfigBuilder {
 					.addPlugin(SqlGeneratorPlugin.class, Param.of("targetSubDir", "."),
 							Param.of("baseCible", "PostgreSql"),
 							Param.of("generateDrop", "false"))
+					.addComponent(MasterDataManager.class, MasterDataManagerImpl.class)
 					.build())
 				.build();
 		// @formatter:on

@@ -69,7 +69,7 @@ public class Studio {
 							Param.of("generateDrop", "false"),
 							Param.of("generateMasterData", "true"))
 
-
+					.addComponent(MasterDataManager.class, MasterDataManagerImpl.class)
 
 					.build())
 				.build();
