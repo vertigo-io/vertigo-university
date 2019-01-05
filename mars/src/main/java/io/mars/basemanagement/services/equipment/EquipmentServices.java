@@ -14,7 +14,6 @@ import io.mars.basemanagement.search.EquipmentIndex;
 import io.vertigo.account.account.Account;
 import io.vertigo.account.authentication.AuthenticationManager;
 import io.vertigo.account.authorization.VSecurityException;
-import io.vertigo.commons.impl.connectors.redis.RedisConnector;
 import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.core.component.Component;
 import io.vertigo.core.locale.MessageText;
@@ -38,8 +37,6 @@ public class EquipmentServices implements Component {
 	private EquipmentDAO equipmentDAO;
 	@Inject
 	private CommentServices commentServices;
-	@Inject
-	private RedisConnector redisConnector;
 	@Inject
 	private AuthenticationManager authenticationManager;
 

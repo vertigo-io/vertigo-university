@@ -11,7 +11,6 @@ import io.mars.basemanagement.domain.Equipment;
 import io.mars.basemanagement.services.equipment.EquipmentEnvironmentServices;
 import io.mars.basemanagement.services.equipment.EquipmentServices;
 import io.mars.catalog.domain.EquipmentType;
-import io.vertigo.database.timeseries.TimeSeriesDataBaseManager;
 import io.vertigo.ui.core.ViewContext;
 import io.vertigo.ui.core.ViewContextKey;
 import io.vertigo.ui.impl.springmvc.controller.AbstractVSpringMvcController;
@@ -20,8 +19,6 @@ import io.vertigo.ui.impl.springmvc.controller.AbstractVSpringMvcController;
 @RequestMapping("/basemanagement/equipment/environment")
 public class EquipmentEnvironmentController extends AbstractVSpringMvcController {
 
-	@Inject
-	private TimeSeriesDataBaseManager timeSeriesDataBaseManager;
 	@Inject
 	private EquipmentServices equipmentServices;
 	@Inject
