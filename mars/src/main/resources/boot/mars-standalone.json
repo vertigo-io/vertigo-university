@@ -19,11 +19,7 @@
 				"cache": {}
 			},
 			"plugins": [
-				{"io.vertigo.commons.plugins.cache.memory.MemoryCachePlugin" :{}},
-				{"io.vertigo.commons.plugins.analytics.log.SocketLoggerAnalyticsConnectorPlugin" : {
-					"appName": "mars-analytics", 
-					"hostName": "mars.dev.klee.lan.net"
-				}}
+				{"io.vertigo.commons.plugins.cache.memory.MemoryCachePlugin" :{}}
 			]
 		},
 		"io.vertigo.database.DatabaseFeatures": {
@@ -38,11 +34,7 @@
 						"classname": "io.vertigo.database.impl.sql.vendor.h2.H2DataBase", 
 						"source": "java:/comp/env/jdbc/DataSource"
 				}},
-				{"io.vertigo.database.plugins.timeseries.influxdb.InfluxDbTimeSeriesPlugin" : {
-					"host": "http://smartheater.home:8086", 
-					"user": "user",
-					"password" :"password"
-				}}
+				{"io.vertigo.database.plugins.timeseries.fake.FakeTimeSeriesPlugin" : {}}
 			]
 		},
 		"io.vertigo.dynamo.DynamoFeatures": {

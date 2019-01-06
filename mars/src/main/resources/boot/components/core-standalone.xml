@@ -5,9 +5,6 @@
 		<plugin class="io.vertigo.core.plugins.resource.local.LocalResourceResolverPlugin" />
 		
 		<plugin class="io.vertigo.vega.plugins.webservice.servlet.WebAppContextParamPlugin"/>
-		<!-- plugin class="io.vertigo.core.plugins.param.properties.PropertiesParamPlugin">
-			<param name="url" value="W:\\Digital Factory\\02 - Solutions\\Vertigo\\Blockchain\\accounts\\marsWalletAccount.properties"/>
-		</plugin-->
 		<plugin class="io.vertigo.core.plugins.param.xml.XmlParamPlugin">
 			<param name="url" value="/boot/config/application-config.xml"/>
 		</plugin>
@@ -15,12 +12,7 @@
 
 	<module name="commons">
 		<component api="DaemonManager" class="io.vertigo.commons.impl.daemon.DaemonManagerImpl"/>
-		<component api="AnalyticsManager" class="io.vertigo.commons.impl.analytics.AnalyticsManagerImpl" >
-			<plugin class="io.vertigo.commons.plugins.analytics.log.SocketLoggerAnalyticsConnectorPlugin">
-				<param name="appName" value="mars-analytics" />
-				<param name="hostName" value="mars.dev.klee.lan.net" />
-			</plugin>
-		</component>
+		<component api="AnalyticsManager" class="io.vertigo.commons.impl.analytics.AnalyticsManagerImpl" />
 		<component api="ScriptManager" class="io.vertigo.commons.impl.script.ScriptManagerImpl">
 			<plugin class="io.vertigo.commons.plugins.script.janino.JaninoExpressionEvaluatorPlugin" />
 		</component>
@@ -39,11 +31,6 @@
 		</component>
 		<component api="TimeSeriesDataBaseManager" class="io.vertigo.database.impl.timeseries.TimeSeriesDataBaseManagerImpl">
 			<param name="dbNames" value="mars-test" />
-			<!-- plugin class="io.vertigo.database.plugins.timeseries.influxdb.InfluxDbTimeSeriesPlugin">
-				<param name="host" value="http://mars.dev.klee.lan.net:8086" />
-				<param name="user" value="user" />
-				<param name="password" value="password" />
-			</plugin-->
 			<plugin class="io.vertigo.database.plugins.timeseries.fake.FakeTimeSeriesPlugin" />
 		</component>
 	</module>
@@ -201,13 +188,6 @@
 		<component api="CommentServices" class="io.vertigo.social.impl.comment.CommentServicesImpl">
 			<plugin class="io.vertigo.social.plugins.comment.memory.MemoryCommentPlugin"/>
 		</component>
-		
-		<!-- component class="io.vertigo.commons.impl.connectors.redis.RedisConnector">
-			<param name="host" value="mars.dev.klee.lan.net" />
-			<param name="port" value="6379" />
-			<param name="database" value="0" />
-		</component-->
-		
 		<component class="io.vertigo.social.webservices.account.AccountWebServices" />
 		<component class="io.vertigo.social.webservices.notification.NotificationWebServices" />
 	</module>
@@ -222,15 +202,6 @@
 	 
 	<module name="ledger">
 		<component api="LedgerManager" class="io.vertigo.ledger.impl.services.LedgerManagerImpl" >
-			<!-- plugin class="io.vertigo.ledger.plugins.ethereum.EthereumLedgerPlugin">
-				<param name="urlRpcEthNode" value="http://docker-vertigo:8545" />
-				<param name="myAccountName" value="${myAccountName}" />
-				<param name="myPublicAddr" value="${myPublicAddr}" />
-				<param name="defaultDestAccountName" value="${myAccountName}" />
-				<param name="defaultDestPublicAddr" value="${myPublicAddr}" />
-				<param name="walletPassword" value="${walletPassword}" />
-				<param name="walletPath" value="${walletPath}" />
-			</plugin -->
 			<plugin class="io.vertigo.ledger.plugins.fake.FakeLedgerPlugin"/>
 		</component>		
 	</module>
