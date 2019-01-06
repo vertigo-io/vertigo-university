@@ -25,9 +25,7 @@
 		"io.vertigo.database.DatabaseFeatures": {
 			"features": {
 				"sql": {},
-				"timeseries": {
-					"dbNames" :"mars-test"
-				}
+				"timeseries": {}
 			},
 			"plugins": [ 
 				{"io.vertigo.database.plugins.sql.connection.datasource.DataSourceConnectionProviderPlugin" : {

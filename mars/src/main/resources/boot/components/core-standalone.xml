@@ -30,7 +30,6 @@
 			</plugin>
 		</component>
 		<component api="TimeSeriesDataBaseManager" class="io.vertigo.database.impl.timeseries.TimeSeriesDataBaseManagerImpl">
-			<param name="dbNames" value="mars-test" />
 			<plugin class="io.vertigo.database.plugins.timeseries.fake.FakeTimeSeriesPlugin" />
 		</component>
 	</module>

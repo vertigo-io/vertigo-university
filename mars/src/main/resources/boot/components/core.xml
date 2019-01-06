@@ -44,11 +44,11 @@
 			</plugin>
 		</component>
 		<component api="TimeSeriesDataBaseManager" class="io.vertigo.database.impl.timeseries.TimeSeriesDataBaseManagerImpl">
-			<param name="dbNames" value="mars-test" />
 			<plugin class="io.vertigo.database.plugins.timeseries.influxdb.InfluxDbTimeSeriesPlugin">
 				<param name="host" value="http://mars.dev.klee.lan.net:8086" />
 				<param name="user" value="user" />
 				<param name="password" value="password" />
+				<param name="dbNames" value="mars-test;*" />
 			</plugin>
 		</component>
 	</module>
