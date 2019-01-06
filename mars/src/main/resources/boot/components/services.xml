@@ -12,10 +12,4 @@
 			<param name="initialEquipmentUnits" value="1500" />
 		</component>
 	</module>
-	<module name="jobs">
-		<component class="io.mars.jobs.services.JobServices" />
-	</module>
-	<module name="ticket-blockchain">
-		<!-- <component class="io.mars.maintenance.services.ticket.BlockchainTicketEventSubscriber" /> -->
-	</module>
 </config>

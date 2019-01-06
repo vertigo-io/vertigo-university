@@ -1,0 +1,165 @@
+{	
+	"boot" : {
+		"params" : {
+			"locales" : "fr_FR"
+		},
+		"plugins": [
+			{"io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin": {}},
+			{"io.vertigo.core.plugins.resource.local.LocalResourceResolverPlugin" :{}},
+			{"io.vertigo.vega.plugins.webservice.servlet.WebAppContextParamPlugin": {}},
+			{"io.vertigo.core.plugins.param.xml.XmlParamPlugin" : {
+				"url": "/boot/config/application-config.xml"
+			}}
+		]
+	},
+	"modules": {
+		"io.vertigo.commons.CommonsFeatures": {
+			"features": {
+				"script": {},
+				"cache": {}
+			},
+			"plugins": [
+				{"io.vertigo.commons.plugins.cache.memory.MemoryCachePlugin" :{}},
+				{"io.vertigo.commons.plugins.analytics.log.SocketLoggerAnalyticsConnectorPlugin" : {
+					"appName": "mars-analytics", 
+					"hostName": "mars.dev.klee.lan.net"
+				}}
+			]
+		},
+		"io.vertigo.database.DatabaseFeatures": {
+			"features": {
+				"sql": {},
+				"timeseries": {
+					"dbNames" :"mars-test"
+				}
+			},
+			"plugins": [ 
+				{"io.vertigo.database.plugins.sql.connection.datasource.DataSourceConnectionProviderPlugin" : {
+						"classname": "io.vertigo.database.impl.sql.vendor.h2.H2DataBase", 
+						"source": "java:/comp/env/jdbc/DataSource"
+				}},
+				{"io.vertigo.database.plugins.timeseries.influxdb.InfluxDbTimeSeriesPlugin" : {
+					"host": "http://smartheater.home:8086", 
+					"user": "user",
+					"password" :"password"
+				}}
+			]
+		},
+		"io.vertigo.dynamo.DynamoFeatures": {
+			"features": {
+				"store": {},
+				"kvStore": {},
+				"search" : {}
+			},
+			"plugins": [
+				{"io.vertigo.dynamo.plugins.store.datastore.sql.SqlDataStorePlugin" : {}},
+				{"io.vertigo.dynamo.plugins.store.datastore.sql.SqlDataStorePlugin" : {
+					"dataSpace": "orchestra" 
+				}},
+				{"io.vertigo.dynamo.plugins.store.filestore.fs.FsFileStorePlugin" : {
+					"storeDtName" : "DT_MEDIA_FILE_INFO",
+					"path" : "${user.home}/marsFiles/"
+				}},
+				{"io.vertigo.dynamo.plugins.store.filestore.fs.FsFullFileStorePlugin" : {
+					"name" : "temp",
+					"path" : "${java.io.tmpdir}/marsFiles/",
+					"purgeDelayMinutes" : "30"
+				}},
+				{"io.vertigo.dynamo.plugins.kvstore.delayedmemory.DelayedMemoryKVStorePlugin" : {
+					"collections" : "protected-value",
+					"timeToLiveSeconds" : "3600"
+				}},
+				{"io.vertigo.dynamo.plugins.kvstore.berkeley.BerkeleyKVStorePlugin" : {
+					"collections" : "VViewContext;TTL=43200",
+					"dbFilePath" : "${java.io.tmpdir}/vertigo/TestVViewContext"
+				}},
+				{"io.vertigo.dynamo.plugins.search.elasticsearch.embedded.ESEmbeddedSearchServicesPlugin" : {
+					"home" : "search/",
+					"envIndex" : "MARS",
+					"rowsPerQuery" :"50",
+					"config.file" : "search/elasticsearch.yml"
+				}}
+			]
+		},
+		"io.vertigo.account.AccountFeatures": {
+			"features": {
+				"security": {
+					"userSessionClassName" :"io.mars.commons.MarsUserSession"
+				},
+				"authentication": {}
+			},
+			"plugins": [
+				{"io.vertigo.account.plugins.account.store.datastore.StoreAccountStorePlugin" : {
+					"userIdentityEntity" :"DT_PERSON",
+					"groupIdentityEntity" :"DT_GROUPS",
+					"userAuthField" :"EMAIL",
+					"userToAccountMapping" :"id:PERSON_ID, displayName:LAST_NAME, email:EMAIL, authToken:EMAIL",
+					"groupToGroupAccountMapping" :"id:GROUP_ID, displayName:NAME"
+				}},
+				{"io.vertigo.account.plugins.authentication.text.TextAuthenticationPlugin" : {
+					"filePath" :"/initdata/userAccounts.txt"
+				}}
+			]
+		},
+		"io.vertigo.vega.VegaFeatures": {
+			"features": {
+				"token": {
+					"tokens" :"mars-api"
+				},
+				"rateLimiting": {},
+				"security": {},
+				"apiPrefix": {
+					"apiPrefix" :"/api"
+				}
+			}
+		},
+		"io.vertigo.orchestra.OrchestraFeatures": {
+			"features": {
+				"database": {
+					"nodeName" :"MARS1",
+					"daemonPeriodSeconds" :"30",
+					"workersCount" :"10",
+					"forecastDurationSeconds" :"60"
+					
+				},
+				"webapi": {}
+			}
+		},
+		"io.vertigo.social.SocialFeatures": {
+			"features": {
+				"notifications": {},
+				"comments": {},
+				"webapi": {}
+			},
+			"plugins" : [
+				{"io.vertigo.social.plugins.notification.memory.MemoryNotificationPlugin" : {}},
+				{"io.vertigo.social.plugins.comment.memory.MemoryCommentPlugin" : {}}
+			]
+		},
+		"io.vertigo.dashboard.DashboardFeatures": {
+			"features": {
+				"analytics": {
+					"appName" :"mars-analytics" 
+				}
+			}
+		},
+		"io.vertigo.ledger.LedgerFeatures": {
+			"plugins" : [
+				{"io.vertigo.ledger.plugins.fake.FakeLedgerPlugin" : {}}
+			]
+		},
+		"io.mars.commons.CommonsFeatures" :{},
+		"io.mars.catalog.CatalogFeatures" :{},
+		"io.mars.hr.HrFeatures" :{},
+		"io.mars.basemanagement.BasemanagementFeatures" :{},
+		"io.mars.maintenance.MaintenanceFeatures" :{},
+		"io.mars.opendata.OpendataFeatures" :{}
+	},
+	"initializers" : [
+		"io.mars.boot.MasterDataInitializer",
+		"io.mars.boot.I18nResourcesInitializer",
+		"io.mars.boot.SearchInitializer",
+		"io.mars.boot.OrchestraInitializer"
+	]
+	
+}

@@ -5,13 +5,11 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import javax.inject.Inject;
 
 import io.mars.maintenance.domain.Ticket;
-import io.vertigo.app.config.discovery.NotDiscoverable;
 import io.vertigo.commons.daemon.DaemonScheduled;
 import io.vertigo.commons.eventbus.EventBusSubscribed;
 import io.vertigo.core.component.Component;
 import io.vertigo.ledger.services.LedgerManager;
 
-@NotDiscoverable
 public class BlockchainTicketEventSubscriber implements Component {
 
 	private final ConcurrentLinkedQueue<String> messageQueue = new ConcurrentLinkedQueue<>();
