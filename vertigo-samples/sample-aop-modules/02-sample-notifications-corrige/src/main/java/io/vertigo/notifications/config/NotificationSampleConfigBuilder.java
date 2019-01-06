@@ -2,9 +2,9 @@ package io.vertigo.notifications.config;
 
 import io.vertigo.app.config.AppConfig;
 import io.vertigo.app.config.ModuleConfig;
-import io.vertigo.commons.impl.CommonsFeatures;
+import io.vertigo.commons.CommonsFeatures;
 import io.vertigo.core.param.Param;
-import io.vertigo.dynamo.impl.DynamoFeatures;
+import io.vertigo.dynamo.DynamoFeatures;
 import io.vertigo.mail.MailManager;
 import io.vertigo.mail.impl.MailManagerImpl;
 import io.vertigo.mail.plugins.javax.JavaxSendMailPlugin;

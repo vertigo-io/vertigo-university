@@ -10,7 +10,7 @@ import io.vertigo.app.config.AppConfigBuilder;
 import io.vertigo.app.config.ComponentConfig;
 import io.vertigo.app.config.DefinitionProviderConfig;
 import io.vertigo.app.config.ModuleConfig;
-import io.vertigo.commons.impl.CommonsFeatures;
+import io.vertigo.commons.CommonsFeatures;
 import io.vertigo.commons.plugins.cache.memory.MemoryCachePlugin;
 import io.vertigo.core.param.Param;
 import io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin;
@@ -18,7 +18,7 @@ import io.vertigo.core.plugins.resource.local.LocalResourceResolverPlugin;
 import io.vertigo.database.DatabaseFeatures;
 import io.vertigo.database.impl.sql.vendor.h2.H2DataBase;
 import io.vertigo.database.plugins.sql.connection.c3p0.C3p0ConnectionProviderPlugin;
-import io.vertigo.dynamo.impl.DynamoFeatures;
+import io.vertigo.dynamo.DynamoFeatures;
 import io.vertigo.dynamo.plugins.environment.DynamoDefinitionProvider;
 import io.vertigo.dynamo.plugins.store.datastore.sql.SqlDataStorePlugin;
 import io.vertigo.samples.account.webservices.TestUserSession;
@@ -57,14 +57,15 @@ public class SampleConfigBuilder {
 						.build())
 				//---- Account
 				.addModule(new AccountFeatures()
-						.withUserSession(TestUserSession.class)
-						.withAccountStorePlugin(StoreAccountStorePlugin.class,
+						.withSecurity(TestUserSession.class.getName())
+						.addPlugin(StoreAccountStorePlugin.class,
 								Param.of("userIdentityEntity", "DT_USER"),
 								Param.of("groupIdentityEntity", "DT_USER_GROUP"),
 								Param.of("userAuthField", "LOGIN"),
 								Param.of("userToAccountMapping", "id:LOGIN, displayName:NAME, email:EMAIL, authToken:LOGIN"),
 								Param.of("groupToGroupAccountMapping", "id:NAME, displayName:NAME"))
-						.withAuthentication(TextAuthenticationPlugin.class,
+						.withAuthentication()
+						.addPlugin(TextAuthenticationPlugin.class,
 								Param.of("filePath", "authentication/identities.txt"))
 						.build())
 				.addModule(ModuleConfig.builder("authorization")
@@ -75,7 +76,7 @@ public class SampleConfigBuilder {
 						.build())
 				.addModule(new VegaFeatures()
 						.withSecurity()
-						.withEmbeddedServer(8081)
+						.withEmbeddedServer("8081")
 						.build());
 
 		return appConfigBuilder;

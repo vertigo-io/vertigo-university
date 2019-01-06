@@ -10,7 +10,7 @@ import io.vertigo.app.config.AppConfigBuilder;
 import io.vertigo.app.config.ComponentConfig;
 import io.vertigo.app.config.DefinitionProviderConfig;
 import io.vertigo.app.config.ModuleConfig;
-import io.vertigo.commons.impl.CommonsFeatures;
+import io.vertigo.commons.CommonsFeatures;
 import io.vertigo.commons.plugins.cache.memory.MemoryCachePlugin;
 import io.vertigo.core.param.Param;
 import io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin;
@@ -18,7 +18,7 @@ import io.vertigo.core.plugins.resource.local.LocalResourceResolverPlugin;
 import io.vertigo.database.DatabaseFeatures;
 import io.vertigo.database.impl.sql.vendor.h2.H2DataBase;
 import io.vertigo.database.plugins.sql.connection.c3p0.C3p0ConnectionProviderPlugin;
-import io.vertigo.dynamo.impl.DynamoFeatures;
+import io.vertigo.dynamo.DynamoFeatures;
 import io.vertigo.dynamo.impl.task.proxy.TaskProxyMethod;
 import io.vertigo.dynamo.plugins.environment.DynamoDefinitionProvider;
 import io.vertigo.dynamo.plugins.search.elasticsearch.embedded.ESEmbeddedSearchServicesPlugin;
@@ -34,11 +34,13 @@ public class SampleConfigBuilder {
 				.addDataStorePlugin(SqlDataStorePlugin.class,
 						Param.of("sequencePrefix", "SEQ_"));
 		if (withSearch) {
-			dynamoFeatures.withSearch(ESEmbeddedSearchServicesPlugin.class,
-					Param.of("home", "D:/atelier/search"), //usage d'url impropre
-					Param.of("envIndex", "crystal-test"),
-					Param.of("rowsPerQuery", "50"),
-					Param.of("config.file", "elasticsearch.yml"));
+			dynamoFeatures
+					.withSearch()
+					.addPlugin(ESEmbeddedSearchServicesPlugin.class,
+							Param.of("home", "D:/atelier/search"), //usage d'url impropre
+							Param.of("envIndex", "crystal-test"),
+							Param.of("rowsPerQuery", "50"),
+							Param.of("config.file", "elasticsearch.yml"));
 		}
 
 		final AppConfigBuilder appConfigBuilder = AppConfig.builder()
@@ -68,7 +70,7 @@ public class SampleConfigBuilder {
 						.build());
 		if (withVega) {
 			appConfigBuilder.addModule(new VegaFeatures()
-					.withEmbeddedServer(8081)
+					.withEmbeddedServer("8081")
 					.build());
 		}
 
@@ -80,14 +82,15 @@ public class SampleConfigBuilder {
 		//---- Account (Level6)
 		if (withAccount) {
 			appConfigBuilder.addModule(new AccountFeatures()
-					.withUserSession(TestUserSession.class)
-					.withAccountStorePlugin(StoreAccountStorePlugin.class,
+					.withSecurity(TestUserSession.class.getName())
+					.addPlugin(StoreAccountStorePlugin.class,
 							Param.of("userIdentityEntity", "DT_USER"),
 							Param.of("groupIdentityEntity", "DT_USER_GROUP"),
 							Param.of("userAuthField", "LOGIN"),
 							Param.of("userToAccountMapping", "id:LOGIN, displayName:NAME, email:EMAIL, authToken:LOGIN"),
 							Param.of("groupToGroupAccountMapping", "id:NAME, displayName:NAME"))
-					.withAuthentication(LdapAuthenticationPlugin.class,
+					.withAuthentication()
+					.addPlugin(LdapAuthenticationPlugin.class,
 							Param.of("userLoginTemplate", "cn={0},dc=vertigo,dc=io"),
 							Param.of("ldapServerHost", "docker-vertigo.part.klee.lan.net"),
 							Param.of("ldapServerPort", "389"))
