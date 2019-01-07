@@ -18,7 +18,8 @@
  */
 package io.mars.iot;
 
-import io.mars.basemanagement.services.equipment.IotEquipmentServices;
+import io.mars.basemanagement.services.equipment.iot.IotEquipmentServices;
+import io.mars.basemanagement.services.equipment.iot.MqttShield;
 import io.vertigo.app.config.AppConfig;
 import io.vertigo.app.config.AppConfigBuilder;
 import io.vertigo.app.config.ModuleConfig;
@@ -49,6 +50,7 @@ public final class IotMarsTestConfig {
 						.build())
 				.addModule(ModuleConfig.builder("mars-iot")
 						.addComponent(IotEquipmentServices.class)
+						.addComponent(MqttShield.class)
 						.build());
 	}
 
