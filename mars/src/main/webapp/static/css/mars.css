@@ -74,15 +74,13 @@ nav a {
 
 
 nav.scroll-spy-nav a {
-	border-left-width:1px;
+	border-left-width:3px;
 	border-left-style:solid;
 	border-left-color:light-grey;		
 }
 
 nav.scroll-spy-nav a.q-item.active {
 	background: none;
-	border-left-width:5px;
-	border-left-style:solid;
 	border-left-color:var(--q-color-primary);	
 	color: var(--q-color-primary) !important;
 }
