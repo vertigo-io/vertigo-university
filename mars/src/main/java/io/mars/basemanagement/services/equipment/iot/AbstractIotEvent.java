@@ -1,4 +1,4 @@
-package io.mars.basemanagement.services.equipment;
+package io.mars.basemanagement.services.equipment.iot;
 
 import org.bouncycastle.crypto.RuntimeCryptoException;
 
@@ -10,7 +10,7 @@ import io.vertigo.lang.Assertion;
  *
  * @author rfelten
  */
-public final class ActuatorEvent implements Event {
+public class AbstractIotEvent implements Event {
 	/**
 	 * Type of event.
 	 */
@@ -33,21 +33,28 @@ public final class ActuatorEvent implements Event {
 	}
 
 	private final Type type;
+	private final String topic;
 
 	/**
 	 * Constructor.
 	 * @param type the type (on/off)
 	 */
-	public ActuatorEvent(final Type type) {
+	protected AbstractIotEvent(final Type type, final String topic) {
 		Assertion.checkNotNull(type);
+		Assertion.checkArgNotEmpty(topic);
 		//-----
 		this.type = type;
+		this.topic = topic;
 	}
 
 	/**
 	 * @return Store type
 	 */
-	public Type getType() {
+	public final Type getType() {
 		return type;
+	}
+
+	public final String getTopic() {
+		return topic;
 	}
 }

@@ -1,4 +1,4 @@
-package io.mars.basemanagement.services.equipment;
+package io.mars.basemanagement.services.equipment.iot;
 
 import java.time.Instant;
 
@@ -20,20 +20,16 @@ import io.vertigo.commons.eventbus.EventBusSubscribed;
 import io.vertigo.core.component.Activeable;
 import io.vertigo.core.component.Component;
 import io.vertigo.database.timeseries.Measure;
-import io.vertigo.database.timeseries.TimeSeriesDataBaseManager;
 import io.vertigo.lang.Assertion;
 import io.vertigo.lang.WrappedException;
 
 @NotDiscoverable
-public class IotEquipmentServices implements Component, Activeable {
+public class MqttShield implements Component, Activeable {
 	private static final String BROKER = "tcp://mars.dev.klee.lan.net:1883";
 	private static final String CLIENT_ID = "JavaSample";
 	private static final String CLIENT_ID_PUB = "MarsPublisher";
 
-	private static final Logger LOGGER = LogManager.getLogger(IotEquipmentServices.class);
-
-	@Inject
-	private TimeSeriesDataBaseManager timeSeriesDataBaseManager;
+	private static final Logger LOGGER = LogManager.getLogger(MqttShield.class);
 
 	@Inject
 	private EventBusManager eventBusManager;
@@ -85,7 +81,7 @@ public class IotEquipmentServices implements Component, Activeable {
 	@Override
 	public void stop() {
 		try {
-			//unsubcribe is automatically done when disconnecting
+			//unsubscribe is automatically done when disconnecting
 			disconnect();
 		} catch (final MqttException me) {
 			throw WrappedException.wrap(me);
@@ -124,6 +120,10 @@ public class IotEquipmentServices implements Component, Activeable {
 			mqttClient.disconnect();
 			LOGGER.info("Disconnected");
 		}
+		if (mqttClientPub != null) {
+			mqttClientPub.disconnect();
+			LOGGER.info("Disconnected");
+		}
 	}
 
 	private void handleMessage(final MqttMessage message, final String topic) {
@@ -133,22 +133,21 @@ public class IotEquipmentServices implements Component, Activeable {
 		LOGGER.info("Receive message " + message + " from " + topic);
 		final String[] data = parseMqttMessage(message);
 		LOGGER.info("data parsed");
-		final String[] location = parseTopic(topic);
+		final String[] parsedTopic = parseTopic(topic);
 		LOGGER.info("topic parsed");
-		if (location[1].equals("alarm")) {
+		if (parsedTopic[1].equals("fireAlarm")) {
 			LOGGER.info("Message from alarm dectected");
-			final ActuatorEvent actuatorEvent = createActuatorEvent(message);
+			final InputEvent actuatorEvent = createActuatorEvent(message, parsedTopic[0] + "/" + "relay");
 			eventBusManager.post(actuatorEvent);
 		}
-		LOGGER.info("data that will be stored " + data[1] + " from " + location[1]);
+		LOGGER.info("data that will be stored " + data[1] + " from " + parsedTopic[1]);
 		LOGGER.info("value of data: " + Double.parseDouble(data[1]));
-		final Measure mes = Measure.builder(location[1])
+		final Measure measure = Measure.builder(parsedTopic[1])
 				.time(Instant.now())
-				.addField("equipment", location[0])
+				.addField("equipment", parsedTopic[0])
 				.addField("value", Double.parseDouble(data[1]))
 				.build();
-		timeSeriesDataBaseManager.insertMeasure("mars-test", mes);
-		LOGGER.info("Added measure to mars-test");
+		eventBusManager.post(new MeasureEvent(measure));
 	}
 
 	private static String[] parseMqttMessage(final MqttMessage message) {
@@ -165,47 +164,21 @@ public class IotEquipmentServices implements Component, Activeable {
 		return dataParsed;
 	}
 
-	private static ActuatorEvent createActuatorEvent(final MqttMessage message) {
+	private static InputEvent createActuatorEvent(final MqttMessage message, final String topic) {
 		Assertion.checkNotNull(message);
 		//---
 		final Integer actuatorValue = Integer.parseInt(parseMqttMessage(message)[1]);
-		return new ActuatorEvent(ActuatorEvent.Type.of(actuatorValue));
+		return new InputEvent(InputEvent.Type.of(actuatorValue), topic);
 	}
 
-	//	private void alarmHandler(final Integer alarmValue, final String[] topicParsed) throws MqttException {
-	//		Assertion.checkNotNull(alarmValue);
-	//		Assertion.checkNotNull(topicParsed);
-	//		//--
-	//		final AlarmEvent alarmEvent = new AlarmEvent(AlarmEvent.Type.of(alarmValue));
-	//		eventBusManager.post(alarmEvent);
-	//		//		switch (value) {
-	//		//			case 0:
-	//		//				LOGGER.info("alarm is stopping");
-	//		//				setBeacon(topicParsed[0] + "/" + "beacon", Instant.now() + " " + "0");
-	//		//
-	//		//				break;
-	//		//			case 1:
-	//		//				LOGGER.info("alarm is triggering");
-	//		//				setBeacon(topicParsed[0] + "/" + "beacon", Instant.now() + " " + "1");
-	//		//
-	//		//				break;
-	//		//			default:
-	//		//				LOGGER.info("By default, trigger alarm. There is a problem");
-	//		//				setBeacon(topicParsed[0] + "/" + "beacon", Instant.now() + " " + "1");
-	//		//		}
-	//	}
-
-	//	private void setBeacon(final String topic, final String value) throws MqttException {
-	//		Assertion.checkNotNull(value);
-	//		Assertion.checkNotNull(topic);
-	//		//---
-	//		LOGGER.info("I will publish here" + topic);
-	//		final MqttMessage message = new MqttMessage(value.getBytes());
-	//		mqttClientPub.publish(topic, message);
-	//	}
-
 	@EventBusSubscribed
-	public void onActuator(final ActuatorEvent alarmEvent) {
-		LOGGER.info("Actuator is triggered " + alarmEvent.getType());
+	public void onOutput(final OutputEvent outputEvent) throws MqttException {
+		Assertion.checkNotNull(outputEvent);
+		//---
+		mqttClientPub.publish(outputEvent.getTopic(), createMessage(outputEvent.getValue()));
+	}
+
+	private static MqttMessage createMessage(final String message) {
+		return new MqttMessage((Instant.now() + " " + message).getBytes());
 	}
 }
