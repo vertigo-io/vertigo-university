@@ -73,7 +73,7 @@ public class TicketDetailController extends AbstractVSpringMvcController {
 
 	@PostMapping("/_create")
 	public String doCreate(@ViewAttribute("ticket") final Ticket ticket) {
-		ticketServices.save(ticket);
+		ticketServices.createTicket(ticket);
 		return "redirect:/maintenance/ticket/" + ticket.getTicketId();
 	}
 
