@@ -6,7 +6,10 @@
 		
 		<plugin class="io.vertigo.vega.plugins.webservice.servlet.WebAppContextParamPlugin"/>
 		<plugin class="io.vertigo.core.plugins.param.properties.PropertiesParamPlugin">
-			<param name="url" value="W:\\Digital Factory\\02 - Solutions\\Vertigo\\Blockchain\\accounts\\marsWalletAccount.properties"/>
+			<param name="url" value="W:\\Digital Factory\\02 - Solutions\\Vertigo\\Blockchain\\accounts\\marsWalletAccount.properties"/>			
+		</plugin>
+		<plugin class="io.vertigo.core.plugins.param.properties.PropertiesParamPlugin">
+			<param name="url" value="w:\\Digital Factory\\02 - Solutions\\Vertigo\\apiKeys\\marsApiKeys.properties"/>
 		</plugin>
 		<plugin class="io.vertigo.core.plugins.param.xml.XmlParamPlugin">
 			<param name="url" value="/boot/config/application-config.xml"/>
@@ -208,6 +211,7 @@
 		</component>
 		<component class="io.vertigo.social.webservices.account.AccountWebServices" />
 		<component class="io.vertigo.social.webservices.notification.NotificationWebServices" />
+		<component class="io.vertigo.social.webservices.comment.CommentWebServices" />
 	</module>
 	
 	<module name="dashboard" >
@@ -220,7 +224,8 @@
 	 
 	<module name="ledger">
 		<component api="LedgerManager" class="io.vertigo.ledger.impl.services.LedgerManagerImpl" >
-			<plugin class="io.vertigo.ledger.plugins.ethereum.EthereumLedgerPlugin">
+			<plugin class="io.vertigo.ledger.plugins.fake.FakeLedgerPlugin"/>
+			<!-- <plugin class="io.vertigo.ledger.plugins.ethereum.EthereumLedgerPlugin">
 				<param name="urlRpcEthNode" value="http://docker-vertigo:8545" />
 				<param name="myAccountName" value="${myAccountName}" />
 				<param name="myPublicAddr" value="${myPublicAddr}" />
@@ -228,7 +233,7 @@
 				<param name="defaultDestPublicAddr" value="${myPublicAddr}" />
 				<param name="walletPassword" value="${walletPassword}" />
 				<param name="walletPath" value="${walletPath}" />
-			</plugin>
+			</plugin> -->
 		</component>		
 	</module>
 
