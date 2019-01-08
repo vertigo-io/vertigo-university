@@ -60,7 +60,8 @@ public class WorkOrderDetailController extends AbstractVSpringMvcController {
 
 	@PostMapping("/_create")
 	public String doCreate(@ViewAttribute("workOrder") final WorkOrder workOrder) {
-		workOrderServices.save(workOrder);
+		//workOrderServices.save(workOrder);
+		workOrderServices.createWorkOrder(workOrder);
 		return "redirect:/maintenance/workorder/" + workOrder.getWoId();
 	}
 
