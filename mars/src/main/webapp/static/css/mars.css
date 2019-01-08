@@ -1,10 +1,15 @@
 /******** CSS SPECIFIQUE A CERTAINES PAGES *******/
 :root {
-  	--q-color-body-background: #fdf1e9;
-	--q-color-body-color: #101010;
-	--q-color-primary:	#ed7d31;
-	--q-color-secondary:#fad9c2;
-	--q-color-tertiary:	#ffe8cb;
+  	--q-color-body-background: #f5f5f5;
+	--q-color-body-color: #0c0c0c;
+	/*--q-color-primary:	#ed7d31;
+	--q-color-secondary:#fad9c2;*/
+	--q-color-tertiary:	#B2DFDB;
+	
+	/*--q-color-primary:	#2196F3;
+	--q-color-secondary:#64B5F6;
+	--q-color-tertiary:	#BBDEFB;*/
+	
 	--q-color-positive:	#21BA45;
 	--q-color-negative:	#DB2828;
 	--q-color-info:		#31CCEC;	
@@ -20,6 +25,7 @@ body {
 .container-bottom-padding {
 	padding-bottom: 64px;
 }
+
 
 body.login {
 	background: url(../img/loginBackground.png) !important;	
@@ -40,6 +46,10 @@ body.login {
     padding : 20px;
 }
 
+.content-body {
+	margin-top: -8px; /* mais d'ou vient cette marge ???*/
+}
+
 .q-list {
 	border: none;
 }
@@ -49,8 +59,11 @@ body.login {
 }
 
 .bg-primary .q-item-side {
-  color: currentColor !important;
-  text-align: center;	
+  color: currentColor !important;  
+}
+
+.q-item-side {
+    text-align: center;
 }
 
 .q-item-sublabel {
@@ -68,6 +81,21 @@ body.login {
 	border: none;
 }
 
+.image-gallery .q-carousel-quick-nav,
+.image-gallery .q-carousel-left-arrow,
+.image-gallery .q-carousel-right-arrow  {
+	background: rgba(255,255,255,.3);
+}
+
+.image-gallery .q-carousel-slide {
+	text-align:center;
+	padding: 0px;
+}
+
+.image-gallery img {
+	height:296px;
+}
+
 nav a {
 	text-decoration: none;	
 }
@@ -76,11 +104,14 @@ nav a {
 nav.scroll-spy-nav a {
 	border-left-width:3px;
 	border-left-style:solid;
-	border-left-color:light-grey;		
+	border-left-color:lightgrey;		
+}
+.q-list-link .q-item:hover {
+	background: lightgrey;
 }
 
+
 nav.scroll-spy-nav a.q-item.active {
-	background: none;
 	border-left-color:var(--q-color-primary);	
 	color: var(--q-color-primary) !important;
 }
@@ -88,6 +119,15 @@ nav.scroll-spy-nav a.q-item.active {
 nav a.q-item {
 	color: grey;	
 }
+
+.q-list-link> .q-item.no-hoverable {
+	cursor:default;	
+}
+
+.q-list-link> .q-item.no-hoverable:hover {
+	background: none;
+}
+
 .marsCard .q-card {
 	width:100%;	
 }
@@ -97,6 +137,10 @@ nav a.q-item {
 	width: 25%;
 }}
 
+.fullHeight {
+	height:100%;
+}
+
 .q-table-container {
 	background:#fff!important;
 }
@@ -105,12 +149,29 @@ nav a.q-item {
 	background:var(--q-color-secondary)!important;
 }
 
+.q-table-container th {
+  color: rgba(255,255,255,0.87);
+  font-size: 18px; //same as card-title
+  font-weight: 400;
+  letter-spacing: normal;
+  line-height: 2rem;
+}
+
+.q-table-container th.sortable:hover,
+.q-table-container th.sorted {
+  color: rgba(255,255,255,1);
+}
+
 .small-caps {
 	font-variant: small-caps;
 }
 
 .header-content {
 	height: 150px;
+}
+
+.header-content > div {
+	height: 100%;
 }
 
 .header-tabs a {
@@ -122,6 +183,7 @@ nav a.q-item {
 }
 
 .header-tabs a.active .q-btn-inner {
+	padding-top: 3px;
 	border-bottom: 3px solid black;
 }
 
@@ -157,3 +219,21 @@ nav a.q-item {
 	vertical-align: middle;
     line-height: 32px;
 }
+
+.version-watermark {
+	color: lightgrey;
+	margin: 10px 20px;
+}
+.version-watermark img {
+	opacity: 0.3;
+  	filter: alpha(opacity=30); /* For IE8 and earlier */
+}
+.poweredBy {
+	font-style: italic;
+}
+
+.poweredBy img {
+	width:50%;
+}
+
+

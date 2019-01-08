@@ -23,16 +23,16 @@
 	<body>
 		<section layout:fragment="page-container">
 		<q-page class="row col-12 layout-padding col justify-center">			
-			<div class="gutter-lg col">
-				<div class="row gutter-lg" >
+			<div class="gutter-lg col ">
+				<div class="row gutter-lg " >
 					<div class="col-md-3 col-xs-12 row justify-center items-center">
 						<span class="text-primary" style="font-size:6em;" th:text="${model.basesSummary.baseCount}"></span> 
-						<q-icon name="fas fa-store-alt" color="faded" size="3em"></q-icon>
+						<q-icon name="fas fa-igloo" color="faded on-right" size="3em"></q-icon>
 					</div>
 					<div class="col-md-3 col-xs-12">
 						<q-card color="white">
 							<q-card-title class="bg-secondary">Global Health Level</q-card-title>
-							<q-card-main class="row justify-center">
+							<q-card-main class="row justify-center" style="height: 92px;">
 								<q-rating readonly th::value="${model.basesSummary.baseMeanHealth} / 100 * 3 + 1" :max="3" size="3em;" icon="favorite"></q-rating>
 							</q-card-main>
 						</q-card>
@@ -84,8 +84,8 @@
 						<div>
 							<vu:table list="lastWorkOrders" componentId="lastWorkOrders" rowsPerPage="3" >
 								<vu:column field="name" />
-								<vu:column field="dateCreated" />
-								<vu:column field="dateClosed" />
+								<vu:column field="dateCreated" label="Creation Date" />
+								<vu:column field="dateClosed" label="Closing Date" />
 								<vu:column name="status" label="Status" >
 									<vu:field-read field="workOrderStatusId" list="workOrderStatus" listKey="workOrderStatusId" listDisplay="label" />
 								</vu:column>
@@ -118,7 +118,7 @@
 		</q-page>
 		</section>
 	</body>
-	<section layout:fragment="footer" >
+	<section layout:fragment="javscript-footer" >
 		<script type="text/javascript">
 			showCharts();
 		</script>

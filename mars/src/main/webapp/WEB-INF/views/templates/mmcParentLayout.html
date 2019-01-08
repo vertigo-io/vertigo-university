@@ -19,29 +19,32 @@
 </head>
 
 <body class="mat desktop no-touch platform-mat">
+
 	<vu:page>
+	
       <q-layout view="hHh LpR fff" id="page" v-cloak>
 			<!-- BEGIN HEADER-->
 			<q-layout-header class="items-center">
-				<q-toolbar inverted class="justify-between">
+				<q-toolbar class="justify-between">
 					<div class="row">
 						<q-btn flat round dense class="lt-lg"
 						th:with="showLeft=${model.vContext['componentStates'].addComponentState('navDrawer').addPrimitive('showLeft', true)}"
 						@click="componentStates.navDrawer.showLeft = !componentStates.navDrawer.showLeft" icon="menu" aria-label="Toggle menu on left side"></q-btn>
 						<div class="gt-md"><img th:src="@{/static/img/logo MMC v0.1.png}" height="40px"/></div>
-						<q-toolbar-title  class="gt-md">
+						<q-toolbar-title class="gt-md">
 								MMC Managment 
 								<span slot="subtitle">Mars Mining Company</span>
 						</q-toolbar-title>
 					</div>
 					<!-- Brand and toggle get grouped for better mobile display -->
-					<div>
+					<div><!-- 
 						<input type="text"/>
 						<i aria-hidden="true" class="q-icon material-icons">search</i>
+						 -->
 					</div>
 					<div>
 						<v-notifications th:base-url="@{/api/}" :type-icon-map="notificationTypes()" ></v-notifications>
-						<q-btn icon-right="arrow_drop_down" flat class="on-left gt-md">
+						<q-btn flat icon-right="arrow_drop_down" class="on-left gt-md">
 							<vu:include-data-protected object="connectedUser" field="picturefileId"/>
 							<img th::src="|'@{/hr/person/picture/}'+vueData.connectedUser.picturefileId|" class="avatar"/>
 							<div class="on-right"><span th:text="${model.vContext['connectedUser']['firstName']+' '+model.vContext['connectedUser']['lastName']}"></span><br/><small><span th:text="${model.vContext['activeProfile']}"></span></small></div>
@@ -122,82 +125,84 @@
 				</q-toolbar>
 			</q-layout-header>
         	<!-- END HEADER-->
-        				
-			<q-layout-footer>
-    			<q-toolbar  color="secondary" text-color="primary" class="justify-between gt-sm">
-					<div class="row col">
-					<div class="on-right gt-lg">
-						Connected since 
-						<div class="q-chip row no-wrap inline items-center q-chip-square bg-primary text-white">
-						<div class="q-chip-main ellipsis">2</div></div> hours
-					</div>
-					<!-- Brand and toggle get grouped for better mobile display -->
-					<div class="on-right">
-						Base managers connected to system : 
-						<div class="q-chip row no-wrap inline items-center q-chip-square bg-primary text-white">
-						<div class="q-chip-main ellipsis">5</div></div>
-					</div>
-					</div>
-					<div class="row col justify-end items-center">
-						<img th:src="@{/static/img/logo MMC grey v0.1.png}" height="30px" class="on-left"/>
-						&copy; 2153 Mars Mining Corp.
-					</div>
-				</q-toolbar>
-  			</q-layout-footer>
+        			
   			
   			<q-layout-drawer
-  			  content-class="bg-primary text-white"
+  			  content-class="bg-white text-primary"
 		      side="left"
 		      v-model="componentStates.navDrawer.showLeft">
 		      
 		      <q-list link style="height:100%">
 		      <nav class="text-no-wrap">
+		      	<q-list-header>Home</q-list-header>
 		        <q-item tag="a" th:href="@{/home/}">
 		          <q-item-side icon="fas fa-globe-asia "></q-item-side>
 		          <q-item-main label="Planetary Status"></q-item-main>
 		        </q-item>
+		        <q-item-separator></q-item-separator>
+		       	<q-list-header>Base managment</q-list-header>
 		        <q-item tag="a" th:href="@{/basemanagement/bases/}">
-		          <q-item-side icon="fas fa-store-alt"></q-item-side>
+		          <q-item-side icon="fas fa-igloo"></q-item-side>
 		          <q-item-main label="Managed Bases"></q-item-main>
 		        </q-item>
+		        <q-item tag="a" th:href="@{/basemanagement/equipments/}">
+		          <q-item-side icon="fas fa-rocket"></q-item-side>
+		          <q-item-main label="Equipments"></q-item-main>
+		        </q-item>
+		       	<q-item-separator></q-item-separator>
+		       	<q-list-header>Human resources</q-list-header>
 		        <q-item tag="a" th:href="@{/hr/persons/}">
 		          <q-item-side icon="fas fa-user-friends"></q-item-side>
 		          <q-item-main label="Personnel" sublabel="Base managers, Workers,..."></q-item-main>
 		        </q-item>
-		        <q-item tag="a" th:href="@{/maintenance/dashboard/}">
-		          <q-item-side icon="fas fa-exclamation"></q-item-side>
+		        <q-item-separator></q-item-separator>
+		       	<q-list-header>Maintenance</q-list-header>
+		       <q-item tag="a" th:href="@{/maintenance/dashboard/}">
+		          <q-item-side icon="fas fa-tools"></q-item-side>
 		          <q-item-main label="Maintenance" sublabel="Tickets, Work Orders"></q-item-main>
 		        </q-item>
+		        <q-item tag="a" th:href="@{/jobs/executionSummaries/}">
+		          <q-item-side icon="fas fa-tasks" ></q-item-side>
+		          <q-item-main label="Jobs" ></q-item-main>
+		        </q-item>
+		        <q-item-separator></q-item-separator>
+		       	<q-list-header>Data</q-list-header>
 		        <q-item tag="a" th:href="@{/opendata/opendatasets/}">
-		          <q-item-side icon="fas fa-box-open"></q-item-side>
+		          <q-item-side icon="fas fa-cubes"></q-item-side>
 		          <q-item-main label="Open Data"></q-item-main>
 		        </q-item>
-		        <q-item tag="a" th:href="@{/basemanagement/equipments/}">
-		          <q-item-side icon="fas fa-cubes"></q-item-side>
-		          <q-item-main label="Equipments"></q-item-main>
-		        </q-item>
 		        <q-item tag="a" th:href="@{#}">
-		          <q-item-side icon="fas fa-thermometer-empty"></q-item-side>
+		          <q-item-side icon="fas fa-cloud-sun"></q-item-side>
 		          <q-item-main label="Environment Monitoring" ></q-item-main>
 		        </q-item>
 		        <q-item tag="a" th:href="@{#}">
 		          <q-item-side icon="fas fa-chart-pie" ></q-item-side>
-		          <q-item-main label="My Analytics" ></q-item-main>
-		        </q-item>
-		        <q-item tag="a" th:href="@{/jobs/executionSummaries/}">
-		          <q-item-side icon="schedule" ></q-item-side>
-		          <q-item-main label="Jobs" ></q-item-main>
+		          <q-item-main label="Analytics" ></q-item-main>
 		        </q-item>
 		        </nav>
+		        <q-item class="no-hoverable">&nbsp;</q-item>
+		        <q-item class="no-hoverable">
+		       	 <div class="poweredBy"><div>Powered by</div> <div><img th:src="@{/static/img/logo-digital-factory-P3-petit.png}"/></div></div>
+		        </q-item>
 		        </q-list>
+		        
 		    </q-layout-drawer>
 		    
-			<q-page-container class="row justify-center  q-pb-lg" >
+			<q-page-container class="row justify-center q-pb-lg" >
 				<section class="col container-bottom-padding" layout:fragment="page-container"></section>
 			</q-page-container>
+			<div class="fixed-bottom-right version-watermark">
+    			<div class="row items-center">
+					<img th:src="@{/static/img/logo MMC grey v0.1.png}" height="30px" class="on-left"/> v1.0.0 &copy; 2153 Mars Mining Corp.
+				</div>
+  			</div>
 		</q-layout>
+		
 	</vu:page>
-	<div layout:fragment="footer">
+	
+	<div layout:fragment="javscript-footer">
 	</div>
+		
+			
 </body>
 </html>
