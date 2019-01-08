@@ -5,6 +5,9 @@
 		<plugin class="io.vertigo.core.plugins.resource.local.LocalResourceResolverPlugin" />
 		
 		<plugin class="io.vertigo.vega.plugins.webservice.servlet.WebAppContextParamPlugin"/>
+		<plugin class="io.vertigo.core.plugins.param.properties.PropertiesParamPlugin">
+			<param name="url" value="D:\\mars\\marsconf\\marsApiKeys.properties"/>
+		</plugin>
 		<plugin class="io.vertigo.core.plugins.param.xml.XmlParamPlugin">
 			<param name="url" value="/boot/config/application-config.xml"/>
 		</plugin>

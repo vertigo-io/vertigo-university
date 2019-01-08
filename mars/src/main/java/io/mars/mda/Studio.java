@@ -33,7 +33,7 @@ public class Studio {
 				.addPlugin(ClassPathResourceResolverPlugin.class)
 				.endBoot()
 				.addModule(new CommonsFeatures()
-						.withCache(MemoryCachePlugin.class)
+						.addPlugin(MemoryCachePlugin.class)
 						.withScript()
 						.build())
 				.addModule(new DynamoFeatures().build())

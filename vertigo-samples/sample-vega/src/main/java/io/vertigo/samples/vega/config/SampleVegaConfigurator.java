@@ -5,6 +5,7 @@ import io.vertigo.app.config.AppConfig;
 import io.vertigo.app.config.DefinitionProviderConfig;
 import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.commons.CommonsFeatures;
+import io.vertigo.core.param.Param;
 import io.vertigo.dynamo.DynamoFeatures;
 import io.vertigo.dynamo.kvstore.KVStoreManager;
 import io.vertigo.samples.vega.domain.SampleSession;
@@ -25,14 +26,14 @@ public final class SampleVegaConfigurator {
 				.addModule(new CommonsFeatures().build())
 				.addModule(new DynamoFeatures().build())
 				.addModule(new AccountFeatures()
-						.withSecurity(SampleSession.class.getName())
+						.withSecurity(Param.of("userSessionClassName", SampleSession.class.getName()))
 						.build())
 				.addModule( ModuleConfig.builder("dependencies")
 						.addComponent(KVStoreManager.class, io.vertigo.dynamo.impl.kvstore.KVStoreManagerImpl.class)
 						.build())
 				.addModule(new VegaFeatures()
-						.withEmbeddedServer(Integer.toString(port))
-						.withTokens("security-token")
+						.withEmbeddedServer(Param.of("port", Integer.toString(port)))
+						.withTokens(Param.of("tokens", "security-token"))
 						.build())
 				//-----Declaration of a module named 'Vega' which contains a webservice component.
 				.addModule( ModuleConfig.builder("Samples")
