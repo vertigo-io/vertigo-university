@@ -54,9 +54,7 @@ public class MqttShield implements Component, Activeable {
 			Assertion.checkNotNull(message);
 			//
 			handleMessage(message, topic);
-			LOGGER.info("Message from: " + topic);
-			LOGGER.info("Message: " + message.toString());
-
+			LOGGER.info("Message from: " + topic + "; message:" + message.toString());
 		}
 
 		@Override
@@ -130,18 +128,12 @@ public class MqttShield implements Component, Activeable {
 		Assertion.checkNotNull(message);
 		Assertion.checkNotNull(topic);
 		//---
-		LOGGER.info("Receive message " + message + " from " + topic);
 		final String[] data = parseMqttMessage(message);
-		LOGGER.info("data parsed");
 		final String[] parsedTopic = parseTopic(topic);
-		LOGGER.info("topic parsed");
 		if (parsedTopic[1].equals("fireAlarm")) {
-			LOGGER.info("Message from alarm dectected");
 			final InputEvent actuatorEvent = createActuatorEvent(message, parsedTopic[0] + "/" + "relay");
 			eventBusManager.post(actuatorEvent);
 		}
-		LOGGER.info("data that will be stored " + data[1] + " from " + parsedTopic[1]);
-		LOGGER.info("value of data: " + Double.parseDouble(data[1]));
 		final Measure measure = Measure.builder(parsedTopic[1])
 				.time(Instant.now())
 				.addField("equipment", parsedTopic[0])
