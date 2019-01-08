@@ -236,4 +236,7 @@ nav a.q-item {
 	width:50%;
 }
 
+.q-stepper.noContent > .q-stepper-step > .q-stepper-step-content {
+	display: none;
+} 
 

@@ -11,7 +11,12 @@
 	<body>
 	
 		<section layout:fragment="content-nav">
-			lifecycle
+			<vu:include-data object="ticket" field="dateCreated" />
+			<vu:include-data object="ticket" field="dateClosed" />
+			<q-timeline color="secondary">
+			  <q-timeline-entry v-if="vueData.ticket.ticketStatusId === 'CLOSED'" subtitle="Ticket closed" :title="vueData.ticket.dateClosed"></q-timeline-entry>
+			  <q-timeline-entry subtitle="Ticket created" :title="vueData.ticket.dateCreated" ></q-timeline-entry>
+			</q-timeline>
 		</section>
 		
 		<section>
@@ -29,6 +34,16 @@
 		
 		<section layout:fragment="content" >
 			<vu:form>
+				<div th:if="${model.modeReadOnly}" class="row q-ma-md">
+					<div class="col-12">
+						<vu:include-data object="ticket" field="ticketStatusId" />
+						<q-stepper v-bind:value="vueData.ticket.ticketStatusId" no-header-navigation class="noContent">
+							<q-step name="OPEN" title="Open"></q-step>
+							<q-step name="ASSIGNED" title="Assigned"></q-step>
+							<q-step name="CLOSED" title="Closed" active-icon="check"></q-step>
+						</q-stepper>
+					</div>
+				</div>
 				<vu:block title="Information">
 					<vu:grid cols="2">
 						<vu:text-field object="ticket" field="code" />
