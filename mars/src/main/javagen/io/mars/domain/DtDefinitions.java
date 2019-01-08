@@ -421,7 +421,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		CODE,
 		/** Propriété 'Ticket title'. */
 		TITLE,
-		/** Propriété 'Ticket Descrption'. */
+		/** Propriété 'Ticket Description'. */
 		DESCRIPTION,
 		/** Propriété 'Ticket Creation Date'. */
 		DATE_CREATED,

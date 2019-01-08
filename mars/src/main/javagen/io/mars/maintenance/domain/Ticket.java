@@ -118,17 +118,17 @@ public final class Ticket implements Entity {
 	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Ticket Descrption'.
+	 * Récupère la valeur de la propriété 'Ticket Description'.
 	 * @return String description
 	 */
-	@Field(domain = "DO_DESCRIPTION", label = "Ticket Descrption")
+	@Field(domain = "DO_DESCRIPTION", label = "Ticket Description")
 	public String getDescription() {
 		return description;
 	}
 
 	/**
 	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'Ticket Descrption'.
+	 * Définit la valeur de la propriété 'Ticket Description'.
 	 * @param description String
 	 */
 	public void setDescription(final String description) {

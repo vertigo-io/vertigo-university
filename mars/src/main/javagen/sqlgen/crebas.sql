@@ -535,7 +535,7 @@ comment on column TICKET.TITLE is
 'Ticket title';
 
 comment on column TICKET.DESCRIPTION is
-'Ticket Descrption';
+'Ticket Description';
 
 comment on column TICKET.DATE_CREATED is
 'Ticket Creation Date';
