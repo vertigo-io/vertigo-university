@@ -29,7 +29,6 @@ body {
 
 body.login {
 	background: url(../img/bcf60b99d4_121619_mars-bfrs.jpg) !important;	
-	background-size: cover;
 }
 
 .login form {
@@ -153,7 +152,7 @@ nav a.q-item {
 
 .q-table-container th {
   color: rgba(255,255,255,0.87);
-  font-size: 18px; //same as card-title
+  font-size: 18px; /*same as card-title*/
   font-weight: 400;
   letter-spacing: normal;
   line-height: 2rem;
@@ -162,6 +161,12 @@ nav a.q-item {
 .q-table-container th.sortable:hover,
 .q-table-container th.sorted {
   color: rgba(255,255,255,1);
+}
+
+
+.q-title {
+	color: var(--q-color-primary);
+	text-transform:uppercase;
 }
 
 .small-caps {
