@@ -36,8 +36,7 @@
 				<div layout:fragment="content-header-title">
 					<span class="text-bigger" th:text="${model.base.name}"></span> 
 				</div>
-				<div layout:fragment="content-header-actions" th:include="baseInformation :: #baseActions">
-					
+				<div layout:fragment="content-header-actions">					
 				</div>
 				<div layout:fragment="content-header-tabs">
 					<q-btn flat type="a" th:href="@{/basemanagement/base/information/} + ${model.base.baseId}">Base Informations</q-btn>
