@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="http://www.morphbit.com/thymeleaf/component"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{templates/mmcModalLayout}"
+>
+	<head>
+		<title>Job Execution Detail</title>		
+		<script th:src="@{/vertigo-ui/static/js/v-components/v-json-editor.js}"></script>
+	</head>
+	
+	<body class="bg-white">
+	
+		<section layout:fragment="page-container" >
+			<vu:include-data object="activityExecutions" field="'*'" />
+			<q-list color="secondary">
+			  <q-item v-for="activity in vueData.activityExecutions" :key="activity.aceId" :title="activity.label">
+			  	<span>Workspace in</span>
+			  	<v-json-editor :value="activity.workspaceIn" readonly="true" ></v-json-editor>
+			  	<span>Workspace out</span>
+			  	<v-json-editor :value="activity.workspaceOut" readonly="true" ></v-json-editor>
+			  </q-item>
+			</q-list>
+		</section>
+	</body>
+</html>

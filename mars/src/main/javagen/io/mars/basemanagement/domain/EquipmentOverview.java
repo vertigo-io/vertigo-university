@@ -16,6 +16,7 @@ public final class EquipmentOverview implements DtObject {
 	private Long businessId;
 	private Long count;
 	private String businessName;
+	private String businessIcon;
 	private Long okCount;
 	private Long downCount;
 	
@@ -74,6 +75,25 @@ public final class EquipmentOverview implements DtObject {
 	 */
 	public void setBusinessName(final String businessName) {
 		this.businessName = businessName;
+	}
+	
+	/**
+	 * Champ : DATA.
+	 * Récupère la valeur de la propriété 'Business'.
+	 * @return String businessIcon
+	 */
+	@Field(domain = "DO_LABEL", label = "Business")
+	public String getBusinessIcon() {
+		return businessIcon;
+	}
+
+	/**
+	 * Champ : DATA.
+	 * Définit la valeur de la propriété 'Business'.
+	 * @param businessIcon String
+	 */
+	public void setBusinessIcon(final String businessIcon) {
+		this.businessIcon = businessIcon;
 	}
 	
 	/**

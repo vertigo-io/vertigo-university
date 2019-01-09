@@ -25,7 +25,7 @@ import io.vertigo.lang.WrappedException;
 @Transactional
 public class ReferenceDataGenerator implements Component {
 
-	private static final int BUSINESS_CSV_FILE_COLUMN_NUMBER = 1;
+	private static final int BUSINESS_CSV_FILE_COLUMN_NUMBER = 2;
 	private static final int GEOSECTOR_CSV_FILE_COLUMN_NUMBER = 1;
 
 	@Inject
@@ -45,7 +45,8 @@ public class ReferenceDataGenerator implements Component {
 		Assertion.checkArgument(businessRecord.length == BUSINESS_CSV_FILE_COLUMN_NUMBER, "CSV File Format not suitable for Equipment Types");
 		// ---
 		final String businessName = businessRecord[0];
-		businessDAO.create(createBusiness(businessName));
+		final String businessIcon = businessRecord[1];
+		businessDAO.create(createBusiness(businessName, businessIcon));
 	}
 
 	private void createInitialGeosectorFromCSV(final String[] geoSectorRecord) {
@@ -55,9 +56,10 @@ public class ReferenceDataGenerator implements Component {
 		geosectorDAO.create(createGeosector(geosectorName));
 	}
 
-	private static Business createBusiness(final String businessName) {
+	private static Business createBusiness(final String businessName, final String businessIcon) {
 		final Business business = new Business();
 		business.setName(businessName);
+		business.setIcon(businessIcon);
 		return business;
 	}
 

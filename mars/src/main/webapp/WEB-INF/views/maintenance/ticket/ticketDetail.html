@@ -60,14 +60,14 @@
 					<vu:include-data object="ticket" field="ticketId" />
 					<vu:include-data object="workOrders" field="woId" />
 					<q-btn fab color="primary" icon="add" aria-label="Add work order" title="Add work order"
-					 th:@click="|openModal('workOrderEditModal', '@{/maintenance/workorder/new}', { 'ticketId' : vueData.ticket.ticketId })|"></q-btn>
+					 th:@click="|openModal('workOrderEditModal', '@{/maintenance/workorder/new}', { 'ticketId' : vueData.ticket.ticketId, 'successCallback' : 'onWorkOrderSuccess' })|"></q-btn>
 					<vu:table list="workOrders" componentId="workOrders" rowsPerPage="10">
 						<vu:column field="name" />
 						<vu:column field="dateCreated" />
 						<vu:column field="dueDate" />
 						<vu:column field="dateClosed" />
 						<vu:column name="action" label="Actions">
-							<q-btn round color="primary" icon="edit" label="View detail" th:@click="|openModal('workOrderEditModal', '@{/maintenance/workorder/}' + props.row.woId )|"></q-btn>
+							<q-btn round color="primary" icon="edit" label="View detail" th:@click="|openModal('workOrderEditModal', '@{/maintenance/workorder/}' + props.row.woId , {'successCallback' : 'onWorkOrderSuccess' })|"></q-btn>
 						</vu:column>
 					</vu:table>
 				</vu:block>
@@ -78,5 +78,25 @@
 			</vu:form>
 			<vu:modal componentId="workOrderEditModal" title="Work Order" iframe_width="800" iframe_height="400"  />
 		</section>
+		<section layout:fragment="javscript-footer" >
+			<script type="text/javascript">
+				function onWorkOrderSuccess() {
+					componentStates.workOrderEditModal.opened = false;
+					var params = {};
+					params['CTX'] = vueData.CTX;
+					Vue.http.post("[[@{/maintenance/ticket/_reloadWorkOrders}]]", params , { emulateJSON: true }).then( function (response ) {
+						if (response.body.CTX) {
+							vueData.CTX = response.body.CTX;
+						}
+						Object.keys(response.body).forEach(function (key) {
+							if ('CTX' != key) {
+								vueData[key] = response.body[key];
+							}
+						});
+					});
+				}
+			</script>
+		</section>
 	</body>
+	
 </html>

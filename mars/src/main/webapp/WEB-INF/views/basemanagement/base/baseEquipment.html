@@ -51,13 +51,13 @@
 				<vu:block id="overview" title="Equipment Overview">
 					<vu:include-data object="equipmentOverviews" field="'*'" />
 					<div class="row">
-						<div v-for="equipmentOverview in vueData.equipmentOverviews" :key="equipmentOverview.businessId" class="col-2 text-center" >
+						<div v-for="equipmentOverview in vueData.equipmentOverviews" :key="equipmentOverview.businessId" class="col-md-3 col-sm-4 col-xs-12 text-center" >
 							<q-knob
 								  :value="equipmentOverview.okCount"
 								  :min="0"
 								  :max="equipmentOverview.count"
 								  color="positive"
-								  :readonly="true" ><q-icon name="mdi-radio-tower" size="80px" color="primary"></q-icon></q-knob>
+								  :readonly="true" ><q-icon :name="equipmentOverview.businessIcon" size="60px" color="primary"></q-icon></q-knob>
 							<div class="text-primary small-caps">{{equipmentOverview.businessName}}</div>
 							<div class="text-italic">{{equipmentOverview.count}} Unit(s)</div>
 						</div>

@@ -65,17 +65,8 @@ create DtDefinition DT_EQUIPMENT_FEATURE {
 create DtDefinition DT_BUSINESS {
 	id BUSINESS_ID {domain: DO_ID label:"Id"}
 	field NAME {domain: DO_LABEL label: "Name" required:"false"}
+	field ICON {domain: DO_LABEL label: "Icon" required:"false"}
 }
-
-
-create DtDefinition DT_EQUIPMENT_OVERVIEW {
-	field BUSINESS_ID  {domain: DO_ID label: "Business Id" required:"false"}
-	field COUNT  {domain: DO_COUNT label: "Count by business" required:"false"}
-	field BUSINESS_NAME  {domain: DO_LABEL label: "Business" required:"false"}
-	field OK_COUNT  {domain: DO_COUNT label: "Ok count" required:"false"}
-	field DOWN_COUNT  {domain: DO_COUNT label: "Down count" required:"false"}
-}
-
 
 /* Associations */
 

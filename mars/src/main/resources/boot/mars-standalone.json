@@ -134,7 +134,8 @@
 		"io.mars.hr.HrFeatures" :{},
 		"io.mars.basemanagement.BasemanagementFeatures" :{},
 		"io.mars.maintenance.MaintenanceFeatures" :{},
-		"io.mars.opendata.OpendataFeatures" :{}
+		"io.mars.opendata.OpendataFeatures" :{},
+		"io.mars.datageneration.DataGenerationFeatures" : {}
 	},
 	"initializers" : [
 		"io.mars.boot.MasterDataInitializer",

@@ -148,6 +148,7 @@ create table BUSINESS
 (
     BUSINESS_ID 	 NUMERIC     	not null,
     NAME        	 VARCHAR(100)	,
+    ICON        	 VARCHAR(100)	,
     constraint PK_BUSINESS primary key (BUSINESS_ID)
 );
 
@@ -156,6 +157,9 @@ comment on column BUSINESS.BUSINESS_ID is
 
 comment on column BUSINESS.NAME is
 'Name';
+
+comment on column BUSINESS.ICON is
+'Icon';
 
 -- ============================================================
 --   Table : EQUIPMENT                                        

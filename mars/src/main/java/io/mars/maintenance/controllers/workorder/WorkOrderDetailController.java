@@ -24,45 +24,41 @@ public class WorkOrderDetailController extends AbstractVSpringMvcController {
 	private WorkOrderServices workOrderServices;
 
 	private final ViewContextKey<WorkOrder> workOrderKey = ViewContextKey.of("workOrder");
+	private final ViewContextKey<String> successCallbackKey = ViewContextKey.of("successCallback");
+	private final ViewContextKey<Boolean> closeSuccessKey = ViewContextKey.of("closeSuccess");
 
 	@GetMapping("/new")
-	public void initContextCreation(final ViewContext viewContext, @RequestParam("ticketId") final Long ticketId) {
+	public void initContextCreation(final ViewContext viewContext, @RequestParam("ticketId") final Long ticketId, @RequestParam("successCallback") final String successCallback) {
 		final WorkOrder workOrder = new WorkOrder();
 		workOrder.ticket().setId(ticketId);
 		//---
 		viewContext.publishDto(workOrderKey, workOrder);
+		viewContext.publishRef(successCallbackKey, successCallback);
+		viewContext.publishRef(closeSuccessKey, Boolean.FALSE);
 		//---
 		toModeCreate();
 	}
 
 	@GetMapping("/{workOrderId}")
-	public void initContext(final ViewContext viewContext, @PathVariable("workOrderId") final Long workOrderId) {
+	public void initContext(final ViewContext viewContext, @PathVariable("workOrderId") final Long workOrderId, @RequestParam("successCallback") final String successCallback) {
 		viewContext.publishDto(workOrderKey, workOrderServices.getWorkOrderFromId(workOrderId));
+		viewContext.publishRef(successCallbackKey, successCallback);
+		viewContext.publishRef(closeSuccessKey, Boolean.FALSE);
 		//---
 		toModeEdit();
 	}
 
-	@PostMapping("/_edit")
-	public void doEdit() {
-		toModeEdit();
-	}
-
-	@PostMapping("/_cancel")
-	public void doCancel() {
-		toModeReadOnly();
-	}
-
 	@PostMapping("/_save")
-	public String doSave(@ViewAttribute("workOrder") final WorkOrder workOrder) {
+	public void doSave(final ViewContext viewContext, @ViewAttribute("workOrder") final WorkOrder workOrder) {
 		workOrderServices.save(workOrder);
-		return "redirect:/maintenance/workorder/" + workOrder.getWoId();
+		viewContext.publishRef(closeSuccessKey, Boolean.TRUE);
 	}
 
 	@PostMapping("/_create")
-	public String doCreate(@ViewAttribute("workOrder") final WorkOrder workOrder) {
+	public void doCreate(final ViewContext viewContext, @ViewAttribute("workOrder") final WorkOrder workOrder) {
 		//workOrderServices.save(workOrder);
 		workOrderServices.createWorkOrder(workOrder);
-		return "redirect:/maintenance/workorder/" + workOrder.getWoId();
+		viewContext.publishRef(closeSuccessKey, Boolean.TRUE);
 	}
 
 }

@@ -55,6 +55,12 @@ public class TicketDetailController extends AbstractVSpringMvcController {
 		viewContext.publishMdl(ViewContextKey.of("workOrderStatus"), WorkOrderStatus.class, null);
 	}
 
+	@PostMapping("/_reloadWorkOrders")
+	public ViewContext doReloadWorkOrders(final ViewContext viewContext, @ViewAttribute("ticket") final Ticket ticket) {
+		viewContext.publishDtList(workOrdersKey, workOrderServices.getWorkOrdersByTicketId(ticket.getTicketId()));
+		return viewContext;
+	}
+
 	@PostMapping("/_edit")
 	public void doEdit() {
 		toModeEdit();

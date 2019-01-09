@@ -17,3 +17,12 @@ create DtDefinition DT_EQUIPMENT_MAINTENANCE_OVERVIEW {
 	field OPENED_TICKETS		 	{domain: DO_COUNT label: "Opened tickets" required: "true"}	
 	field WORK_ORDERS_INPROGRESS	{domain: DO_COUNT label: "Work orders in progress" required:"true"}
 }
+
+create DtDefinition DT_EQUIPMENT_OVERVIEW {
+	field BUSINESS_ID  {domain: DO_ID label: "Business Id" required:"false"}
+	field COUNT  {domain: DO_COUNT label: "Count by business" required:"false"}
+	field BUSINESS_NAME  {domain: DO_LABEL label: "Business" required:"false"}
+	field BUSINESS_ICON  {domain: DO_LABEL label: "Business" required:"false"}
+	field OK_COUNT  {domain: DO_COUNT label: "Ok count" required:"false"}
+	field DOWN_COUNT  {domain: DO_COUNT label: "Down count" required:"false"}
+}

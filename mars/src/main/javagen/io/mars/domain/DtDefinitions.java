@@ -171,7 +171,9 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		/** Propriété 'Id'. */
 		BUSINESS_ID,
 		/** Propriété 'Name'. */
-		NAME	}
+		NAME,
+		/** Propriété 'Icon'. */
+		ICON	}
 
 	/**
 	 * Enumération des champs de Equipment.
@@ -268,6 +270,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		COUNT,
 		/** Propriété 'Business'. */
 		BUSINESS_NAME,
+		/** Propriété 'Business'. */
+		BUSINESS_ICON,
 		/** Propriété 'Ok count'. */
 		OK_COUNT,
 		/** Propriété 'Down count'. */

@@ -16,6 +16,7 @@ public final class Business implements Entity {
 
 	private Long businessId;
 	private String name;
+	private String icon;
 
 	/** {@inheritDoc} */
 	@Override
@@ -59,6 +60,25 @@ public final class Business implements Entity {
 	 */
 	public void setName(final String name) {
 		this.name = name;
+	}
+	
+	/**
+	 * Champ : DATA.
+	 * Récupère la valeur de la propriété 'Icon'.
+	 * @return String icon
+	 */
+	@Field(domain = "DO_LABEL", label = "Icon")
+	public String getIcon() {
+		return icon;
+	}
+
+	/**
+	 * Champ : DATA.
+	 * Définit la valeur de la propriété 'Icon'.
+	 * @param icon String
+	 */
+	public void setIcon(final String icon) {
+		this.icon = icon;
 	}
 	
 	/** {@inheritDoc} */
