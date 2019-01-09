@@ -229,8 +229,10 @@
 				</div>
 </vu:block>	 
 </div>
-		<div class="row gutter-md"  th:case="*">
+		<div class="row q-ma-md justify-center"  th:case="*">
 		<vu:block title="No Sensors on this equipment">
+		<q-btn flat type="a" th:href="@{/basemanagement/equipment/} + ${model.equipment.equipmentId}">Back to Informations</q-btn>
+		
 		</vu:block>
 		</div>
 		</section>

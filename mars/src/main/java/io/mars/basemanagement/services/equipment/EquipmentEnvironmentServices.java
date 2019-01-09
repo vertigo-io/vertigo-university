@@ -67,7 +67,7 @@ public class EquipmentEnvironmentServices implements Component {
 				Collections.singletonList("value:last"),
 				DataFilter.builder("temperature").build(),
 				TimeFilter.builder("now() - 1h", "now() + 1h").build());
-		return (Double) lastTemperatures.getTabularDataSeries().get(0).getValues().get("value:last");
+		return Math.round((Double) lastTemperatures.getTabularDataSeries().get(0).getValues().get("value:last") * 10.0) / 10.0;
 	}
 
 	public Double getLastHumidity() {
@@ -76,7 +76,7 @@ public class EquipmentEnvironmentServices implements Component {
 				Collections.singletonList("value:last"),
 				DataFilter.builder("humidite").build(),
 				TimeFilter.builder("now() - 1h", "now() + 1h").build());
-		return (Double) lastHumidite.getTabularDataSeries().get(0).getValues().get("value:last");
+		return Math.round((Double) lastHumidite.getTabularDataSeries().get(0).getValues().get("value:last") * 10.0) / 10.0;
 	}
 
 	public Double getTotalTemperatureMeasured() {
@@ -86,6 +86,6 @@ public class EquipmentEnvironmentServices implements Component {
 				Collections.singletonList("value:count"),
 				DataFilter.builder("temperature").build(),
 				TimeFilter.builder("now() - 365d", "now() + 1h").build());
-		return (Double) totalMeasure.getTabularDataSeries().get(0).getValues().get("value:count");
+		return (double) Math.round((Double) totalMeasure.getTabularDataSeries().get(0).getValues().get("value:count") * 10) / 10;
 	}
 }

@@ -7,7 +7,7 @@
 	<head>
 		<title>Environment</title>
 		
-				<!-- graphs -->
+		<!-- graphs -->
 		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-color/1.0.3/d3-color.min.js" ></script>
@@ -24,11 +24,11 @@
 			        <q-item tag="a" href="#weatheroverview">Weather Overview</q-item>
 			        <q-item tag="a" href="#farmoverview">Farm Overview</q-item>
 			        <q-item tag="a" href="#securityoverview">Security overview</q-item>
-			        <q-item tag="a" href="#collaboratoroverview">Personnel overview</q-item>
+			        <q-item tag="a" href="#collaboratoroverview">Personnel overview</q-item>				      
 	        	</q-list>
 	        </nav>
 		</section>
-		
+	
 		<section>
 				<div layout:fragment="content-header-left">
 					<img th:src="@{/static/img/bases/Mars base 1.jpg}" class="detailImg gt-md"/>
@@ -36,171 +36,136 @@
 				<div layout:fragment="content-header-title">
 					<span class="text-bigger" th:text="${model.base.name}"></span> 
 				</div>
-				<div layout:fragment="content-header-actions">					
-				</div>
 				<div layout:fragment="content-header-tabs">
 					<q-btn flat type="a" th:href="@{/basemanagement/base/information/} + ${model.base.baseId}">Base Informations</q-btn>
 					<q-btn flat type="a" th:href="@{/basemanagement/base/equipment/} + ${model.base.baseId}">Equipment</q-btn>
-					<q-btn flat type="a" class="active" th:href="@{/basemanagement/base/environment/} + ${model.base.baseId}">Environment</q-btn>
+					<q-btn flat type="a" class="active" th:href="@{/basemanagement/base/environment/} + ${model.base.baseId}">Environment</q-btn>					
 				</div>
-		</section>
-		
-		<section layout:fragment="content" >
-				<q-card id="weatherooverview" class= q-ma-md>
-			<q-card-title class="bg-secondary">Weather Overview
-						<q-icon name="fas fa-sun" style="font-size: 2rem" slot="right" color="orange"/>
-						</q-card-title>
-<div id="weather" class="row justify-center gutter-lg" th:if="${!model.modeCreate}" >
-		<div class="col-md-4 col-xs-12">
-<q-card class="bg-white text-center" >
-
-	<q-card-title class="indicator-title text-faded">Current Temperature</q-card-title>
-		<q-card-main>
-			<q-knob
-				th::value="${model.lastTemperature}"
-				:min="0"
-				:max="50"
-				:decimals="1"
-				color="orange"
-				:readonly="true" style="font-size: 2rem">
-			</q-knob>
-				
-		<div class="chart chartjs linechart bg-white" 
-		   th:data-url="@{/api/basemanagment/equipment/environment/data/series}" 
-		   data-query-measures='["value:mean"]'
-		   data-query-data-filter='{ "measurement": "temperature", "filters": {"equipment": "*"}}'
-		   data-query-time-filter='{ "from": "now() - 3d", "to": "now()", "dim": "1h"}'
-		   data-labels='{"value:mean":"Mean Value from temperature"}' 
-		   data-colors='iGREEN2BLUE'></div> 
-		</q-card-main>
-		</q-card>
-
-		</div>
-		<div class="col-md-4 col-xs-12">
-		
-<q-card class="bg-white text-center" >
-
-	<q-card-title class="indicator-title text-faded">Current Humidity</q-card-title>
-		<q-card-main>
-			<q-knob
-				th::value="${model.lastHumidity}"
-				:min="0"
-				:max="50"
-				:decimals="1"
-				color="blue"
-				:readonly="true" style="font-size: 2rem">
-			</q-knob>
+		</section>	
 			
-		<div class="chart chartjs linechart bg-white" 
-		   th:data-url="@{/api/basemanagment/equipment/environment/data/series}" 
-		   data-query-measures='["value:mean"]'
-		   data-query-data-filter='{ "measurement": "humidite", "filters": {"equipment": "*"}}'
-		   data-query-time-filter='{ "from": "now() - 3d", "to": "now()", "dim": "1h"}'
-		   data-labels='{"value:mean":"Mean Value Humitidy"}' 
-		   data-colors='iRED2GREEN'></div> 
-		</q-card-main>
-		</q-card>		
-</div>
-</div>
+	
+		<section layout:fragment="content" >
 
+			<vu:block id="weatheroverview" title="Weather Overview" icon-right="fas fa-sun" style="font-size: 2rem" slot="right" color="orange">
+				<div class="row gutter-xs">
+					<div class="col-md-6 col-xs-12 text-center gutter-xs">
+						<div class="q-title">Current Temperature</div>
+						<q-knob
+							th::value="${model.lastTemperature}"
+							:min="0"
+							:max="50"
+							:decimals="1"
+							color="orange"
+							:readonly="true" style="font-size: 2rem">
+						</q-knob>
+							<div class="chart chartjs linechart bg-white" 
+						   		th:data-url="@{/api/basemanagment/equipment/environment/data/series}" 
+						   		data-query-measures='["value:mean"]'
+						   		data-query-data-filter='{ "measurement": "temperature", "filters": {"equipment": "*"}}'
+						   		data-query-time-filter='{ "from": "now() - 3d", "to": "now()", "dim": "1h"}'
+						   		data-labels='{"value:mean":"Mean Value from temperature"}' 
+						   		data-colors='iGREEN2BLUE'></div> 
+					</div>
+					<div class="col-md-6 col-xs-12 text-center">
+						<div class="q-title">Current Humidity</div>
+						<q-knob
+							th::value="${model.lastHumidity}"
+							:min="0"
+							:max="50"
+							:decimals="1"
+							color="blue"
+							:readonly="true" style="font-size: 2rem">
+						</q-knob>
+							<div class="chart chartjs linechart bg-white" 
+							   th:data-url="@{/api/basemanagment/equipment/environment/data/series}" 
+							   data-query-measures='["value:mean"]'
+							   data-query-data-filter='{ "measurement": "humidite", "filters": {"equipment": "*"}}'
+							   data-query-time-filter='{ "from": "now() - 3d", "to": "now()", "dim": "1h"}'
+							   data-labels='{"value:mean":"Mean Value Humitidy"}' 
+							   data-colors='iRED2GREEN'></div> 			
+					</div>							
+				</div>
+			</vu:block>
 
-</q-card>
-
-
-
-				<q-card id="farmoverview"  class= q-ma-md>
-			<q-card-title class="bg-secondary" >Farm Overview
-						<q-icon name="fas fa-tractor" style="font-size: 2rem" slot="right" color="deep-orange-9"/>
-						</q-card-title>
-<div id="farm" class="row gutter-lg justify-center" th:if="${!model.modeCreate}" >
-		<div class="col-md-4 col-xs-12">
-<q-card class="bg-white text-center" >
-
-		<q-card-title class="indicator-title text-faded">Farms to water:</q-card-title>
-		<q-card-main>
-<!-- TODO -->
-				<div class="chart chartjs linechart bg-white" 
-				th:data-url="@{/api/basemanagment/equipment/environment/data/series}" 
-				data-query-measures='["value:mean"]'
-				data-query-data-filter='{ "measurement": "moisture", "filters": {"equipment": "*"}}'
-				data-query-time-filter='{ "from": "now() - 1d", "to": "now()", "dim": "1h"}'
-				data-labels='{"value:mean":"Soil moisture"}' 
-				data-colors='iGREEN:INTENSITY'></div> 
-		</q-card-main>
-		</q-card>
-
-		</div>
-
-</div>
-</q-card>
-
-				<q-card id="securityoverview"  class= q-ma-md>
-			<q-card-title class="bg-secondary" >Security Overview
-						<q-icon name="fas fa-lock" style="font-size: 2rem" slot="right" color="black"/>
-						</q-card-title>
-<div id="security" class="row gutter-lg justify-center" th:if="${!model.modeCreate}" >
-		<div class="col-md-4 col-xs-12">
-<q-card class="bg-white text-center" >
-
-		<q-card-title class="indicator-title text-faded">Triggered alarm this month:</q-card-title>
-		<!-- TODO  appel du nombre d'alerte déclenché ce mois-ci tout équipement de sécurité confondu-->
-		<q-card-main>
-
-				<div>
-				<!-- TODO Graphe qui somme l'ensemble des alertes des équipements de sécurité et fait un graphe  -->
-				</div> 
-		</q-card-main>
-		</q-card>
-
-		</div>
-
-</div>
-</q-card>
-
-
-				<q-card id="collaboratoroverview"  class= q-ma-md>
-			<q-card-title class="bg-secondary" >Collaborator Overview
-						<q-icon name="fas fa-user" style="font-size: 2rem" slot="right" color="yellow-1"/>
-						</q-card-title>
-<div id="collaborator" class="row gutter-lg justify-center" th:if="${!model.modeCreate}" >
-		<div class="col-md-4 col-xs-12">
-<q-card class="bg-white text-center" >
-
-		<q-card-title class="indicator-title text-faded">Average stress over the last 24 hours:</q-card-title>
-		<q-card-main>
-				<!-- TODO  appel du nombre moyen de personnes stressés-->
-			<q-knob
-				th::value="16"
-				:min="0"
-				:max="50"
-				:decimals="1"
-				color="blue"
-				:readonly="true" style="font-size: 2rem">
+			<vu:block id="farmoverview" title="Farm Overview" icon-right="fas fa-tractor" style="font-size: 2rem" slot="right" color="deep-orange-9">
+				<div class="row">
+					<div class="col-md-6 col-xs-12 text-center gutter-xs">
+						<!-- TODO Farm to water -->
+						<div class="q-title">Farms to water: </div>
+					</div>
+					<div class="col-md-6 col-xs-12 text-center gutter-xs">
+							<div class="chart chartjs linechart bg-white" 
+								th:data-url="@{/api/basemanagment/equipment/environment/data/series}" 
+								data-query-measures='["value:mean"]'
+								data-query-data-filter='{ "measurement": "moisture", "filters": {"equipment": "*"}}'
+								data-query-time-filter='{ "from": "now() - 1d", "to": "now()", "dim": "1h"}'
+								data-labels='{"value:mean":"Soil moisture"}' 
+								data-colors='iGREEN:INTENSITY'></div> 				
+					</div>
+				</div>
+			</vu:block>
+			
+			<vu:block id=securityoverview title="Security Overview" icon-right="fas fa-lock" style="font-size: 2rem" slot="right" color="black">
+				<div class="row gutter-xs">
+					<div class="col-md-6 col-xs-12 text-center gutter-xs">
+						<div class="q-title">Triggered alarm this month:</div>
+						<!-- TODO  appel du nombre d'alerte déclenché ce mois-ci tout équipement de sécurité confondu-->
+						<!-- TODO Graphe qui somme l'ensemble des alertes des équipements de sécurité et fait un graphe  -->
+					</div>		
+					<div class="col-md-6 col-xs-12 text-center gutter-xs">
+						<!-- TODO  GROS bouton pour déclencher l'alarme  -->
+						<q-btn rounded size="2rem" color="red" icon-right="fas fa-bell" type="a" aria-label="Triggered alarm in base" title="Triggered alarm in base" class="on-left" push=true >Alert !</q-btn>
+						<!-- TODO une boite texte pour envoyer message au panneau d'affichage  -->
+						<div class="stacked-label">
+						  <textarea class="full-width"></textarea>
+						  <label>Send a message to the Led Displayer Panel</label>
+						</div>
+					</div>
+				</div>
 				
-			</q-knob>
-				<div>
-				<!-- TODO Graphe qui somme l'ensemble des alertes des équipements de sécurité-->
-				</div> 
-		</q-card-main>
+			</vu:block>
+			
+
+<!-- 				<q-card id="collaboratoroverview"  class= q-ma-md> -->
+<!-- 			<q-card-title class="bg-secondary" >Collaborator Overview -->
+<!-- 						<q-icon name="fas fa-user" style="font-size: 2rem" slot="right" color="yellow-1"/> -->
+<!-- 						</q-card-title> -->
+<!-- <div id="collaborator" class="row gutter-lg justify-center" th:if="${!model.modeCreate}" > -->
+<!-- 		<div class="col-md-4 col-xs-12"> -->
+<!-- <q-card class="bg-white text-center" > -->
+
+<!-- 		<q-card-title class="indicator-title text-faded">Average stress over the last 24 hours:</q-card-title> -->
+<!-- 		<q-card-main> -->
+<!-- 				TODO  appel du nombre moyen de personnes stressés -->
+<!-- 			<q-knob -->
+<!-- 				th::value="16" -->
+<!-- 				:min="0" -->
+<!-- 				:max="50" -->
+<!-- 				:decimals="1" -->
+<!-- 				color="blue" -->
+<!-- 				:readonly="true" style="font-size: 2rem"> -->
+				
+<!-- 			</q-knob> -->
+<!-- 				<div> -->
+<!-- 				TODO Graphe qui somme l'ensemble des alertes des équipements de sécurité -->
+<!-- 				</div>  -->
+<!-- 		</q-card-main> -->
 		
-		<q-card-title class="indicator-title text-faded">Collaborators overstressed over the last 24 hours :</q-card-title>
-		<!-- TODO  appel des équipements qui ont une mesure au-dessus du seuil de stress défini-->
-		<q-card-main>
-		</q-card>
+<!-- 		<q-card-title class="indicator-title text-faded">Collaborators overstressed over the last 24 hours :</q-card-title> -->
+<!-- 		<!-- TODO  appel des équipements qui ont une mesure au-dessus du seuil de stress défini-->
+<!-- 		<q-card-main> -->
+<!-- 		</q-card> -->
 
-		</div>
+<!-- 		</div> -->
 
-</div>
-</q-card>
+<!-- </div> -->
+<!-- </q-card> -->
 		</section>
 		
 		<section layout:fragment="javscript-footer" >
 			<script type="text/javascript">
-				componentStates.lastEquipments.columns[2].sort = VUi.methods.sortDatesAsString("DD/MM/YYYY");
+				showCharts();
 			</script>
-		<script type="text/javascript">
-			showCharts();
-		</script>
 		</section>
 	</body>
 </html>
