@@ -35,212 +35,137 @@
 		
 		<section layout:fragment="content"  th:switch="${model.equipmentType.label}">
 
-		<div class="row gutter-md"  th:case="'Mining Area'">
-		
-<!-- 		   <span th:text="${model.equipment.equipmentTypeId}"></span> -->
+			<div class="row gutter-md"  th:case="'Mining Area'">
+				<div class="col-md-2 col-xs-12 gutter-xs">
+					<vu:block  title="List of equipment sensors" >
+						<q-list link style="height:100%">
+				        	<q-item tag="a" href="#temperature">Temperature Sensor</q-item>
+				        	<q-item tag="a" href="#humidity">Humidity Sensor</q-item>
+				        	<q-item tag="a" href="#luminosity">Luminosity Sensor</q-item>
+		        		</q-list>
+					</vu:block>
+				</div>
 
-			<vu:block  title="List of equipment sensors" >
-			<q-list link style="height:100%">
-			        <q-item tag="a" href="#temperature">Temperature Sensor</q-item>
-			        <q-item tag="a" href="#humidity">Humidity Sensor</q-item>
-			        <q-item tag="a" href="#geiger">Geiger Sensor</q-item>
-	        </q-list>
-			</vu:block>
-			
-			<vu:block title="Data Overview">
-							<vu:grid cols="1">
-		<q-card class="bg-white text-center" >
-
-	<q-card-title class="indicator-title text-faded">Sensors connected to <span th:text="${model.equipment.name}"></span></q-card-title>
-		<q-card-main>
-			<q-knob
-				th::value="3"
-				:min="0"
-				:max="0"
-				:decimals="1"
-				color="black"
-				:readonly="true" style="font-size: 1.5rem">
-			</q-knob>
-		</q-card-main>
-		</q-card>
-			<q-card class="bg-white text-center" >
-
-	<q-card-title class="indicator-title text-faded">Amount of data collected:</q-card-title>
-		<q-card-main>
-			<q-knob
-				th::value="${model.TemperatureTotalMeasured}"
-				:min="0"
-				:max="0"
-				:decimals="1"
-				color="blue"
-				:readonly="true" style="font-size: 1.5rem">
-			</q-knob>
-		</q-card-main>
-		</q-card>
-					<q-card class="bg-white text-center" >
-
-	<q-card-title class="indicator-title text-faded">Actuators connected</q-card-title>
-		<q-card-main>
-			<q-knob
-				th::value="1"
-				:min="0"
-				:max="0"
-				:decimals="1"
-				color="green"
-				:readonly="true" style="font-size: 1.5rem">
-			</q-knob>
-		</q-card-main>
-		</q-card>
-			</vu:grid>
-			</vu:block>
-			
-			<vu:block title="Temperature sensor" id=temperature>
-
-				
-				<div class="col-md-6 col-xs-12" >
-					<div class="chart chartjs linechart bg-white" 
-							    th:data-url="@{/api/basemanagment/equipment/environment/data/series}" 
-							    data-query-measures='["value:MAX"]'
-							    data-query-data-filter='{ "measurement": "temperature", "filters": {"equipment": "ms01"}}'
-							    data-query-time-filter='{ "from": "now() - 3d", "to": "now()", "dim": "1h"}'
-								data-labels='{"value:mean":"Temperature mean values"}' 
-							    data-colors='iANDROID:LIGHT'></div> 
-							    </div>
-			</vu:block>
+				<div class="col-md-8 col-xs-12 gutter-xs">				
+					<vu:block title="Data Overview">
+						<vu:grid cols="1">
+							<div class="text-center"> <span class="indicator text-black" th:text="3" /><br/><span class="indicator-title text-faded">Sensors connected to <span th:text="${model.equipment.name}"></span></span></div>					
+							<div class="text-center"> <span class="indicator text-blue" th:text="${model.TemperatureTotalMeasured}" /><br/><span class="indicator-title text-faded">Amount of data collected</span></div>
+							<div class="text-center"> <span class="indicator text-positive" th:text="1" /><br/><span class="indicator-title text-faded">Actuators connected</span></div>
+						</vu:grid>
+					</vu:block>
+				</div>		
+						
+				<vu:block title="Temperature sensor" id=temperature>
+					<div class="col-md-6 col-xs-12" >
+						<div class="chart chartjs linechart bg-white" 
+								    th:data-url="@{/api/basemanagment/equipment/environment/data/series}" 
+								    data-query-measures='["value:MAX"]'
+								    data-query-data-filter='{ "measurement": "temperature", "filters": {"equipment": "ms01"}}'
+								    data-query-time-filter='{ "from": "now() - 3d", "to": "now()", "dim": "1h"}'
+									data-labels='{"value:mean":"Temperature mean values"}' 
+								    data-colors='iANDROID:LIGHT'></div> 
+					</div>
+				</vu:block>
 							    
-			<vu:block title="Humidity Sensor" id="humidity">
-				<div class="col-md-6 col-xs-12" >
-					<div class="chart chartjs linechart bg-white" 
+				<vu:block title="Humidity Sensor" id="humidity">
+					<div class="col-md-6 col-xs-12" >
+						<div class="chart chartjs linechart bg-white" 
 							    th:data-url="@{/api/basemanagment/equipment/environment/data/series}" 
 							    data-query-measures='["value:mean"]'
 							    data-query-data-filter='{ "measurement": "humidite", "filters": {"equipment": "ms01"}}'
 							    data-query-time-filter='{ "from": "now() - 3d", "to": "now()", "dim": "1h"}'
 								data-labels='{"value:mean":"Temperature mean values"}' 
 							    data-colors='iANDROID'></div> 
-				</div>
+						</div>
 
-</vu:block>		
-			<vu:block title="Geiger Sensor" id="geiger">
-				<div class="col-md-6 col-xs-12" >
-					<div class="chart chartjs linechart bg-white" 
+				</vu:block>		
+				
+				<vu:block title="Geiger Sensor" id="geiger">
+					<div class="col-md-6 col-xs-12" >
+						<div class="chart chartjs linechart bg-white" 
 							    th:data-url="@{/api/basemanagment/equipment/environment/data/series}" 
 							    data-query-measures='["value:mean"]'
 							    data-query-data-filter='{ "measurement": "geiger", "filters": {"equipment": "ms01"}}'
 							    data-query-time-filter='{ "from": "now() - 3d", "to": "now()", "dim": "1h"}'
 								data-labels='{"value:mean":"geiger value"}' 
 							    data-colors='iANDROID'></div> 
+					</div>
+				</vu:block>	 
+			</div>
+			
+			<div class="row gutter-md"  th:case="'Farming Area'">
+				<div class="col-md-2 col-xs-12 gutter-xs">
+					<vu:block  title="List of equipment sensors" >
+						<q-list link style="height:100%">
+				        	<q-item tag="a" href="#temperature">Temperature Sensor</q-item>
+				        	<q-item tag="a" href="#humidity">Humidity Sensor</q-item>
+				        	<q-item tag="a" href="#moisture">Soil Moisture Sensor</q-item>
+		        		</q-list>
+					</vu:block>
 				</div>
-</vu:block>	 
-</div>
-		<div class="row gutter-md"  th:case="'Farming Area'">
-		
-<!-- 		   <span th:text="${model.equipment.equipmentTypeId}"></span> -->
 
-			<vu:block  title="List of equipment sensors" >
-			<q-list link style="height:100%">
-			        <q-item tag="a" href="#temperature">Temperature Sensor</q-item>
-			        <q-item tag="a" href="#humidity">Humidity Sensor</q-item>
-			        <q-item tag="a" href="#moisture">Soil Moisture Sensor</q-item>
-	        </q-list>
-			</vu:block>
-			
-			<vu:block title="Data Overview">
-							<vu:grid cols="1">
-		<q-card class="bg-white text-center" >
-
-	<q-card-title class="indicator-title text-faded">Sensors connected to <span th:text="${model.equipment.name}"></span></q-card-title>
-		<q-card-main>
-			<q-knob
-				th::value="3"
-				:min="0"
-				:max="0"
-				:decimals="1"
-				color="black"
-				:readonly="true" style="font-size: 1.5rem">
-			</q-knob>
-		</q-card-main>
-		</q-card>
-			<q-card class="bg-white text-center" >
-
-	<q-card-title class="indicator-title text-faded">Amount of data collected:</q-card-title>
-		<q-card-main>
-			<q-knob
-				th::value="${model.TemperatureTotalMeasured}"
-				:min="0"
-				:max="0"
-				:decimals="1"
-				color="blue"
-				:readonly="true" style="font-size: 1.5rem">
-			</q-knob>
-		</q-card-main>
-		</q-card>
-					<q-card class="bg-white text-center" >
-
-	<q-card-title class="indicator-title text-faded">Actuators connected</q-card-title>
-		<q-card-main>
-			<q-knob
-				th::value="1"
-				:min="0"
-				:max="0"
-				:decimals="1"
-				color="green"
-				:readonly="true" style="font-size: 1.5rem">
-			</q-knob>
-		</q-card-main>
-		</q-card>
-			</vu:grid>
-			</vu:block>
-			
-			<vu:block title="Temperature sensor" id=temperature>
-
+				<div class="col-md-8 col-xs-12 gutter-xs">				
+					<vu:block title="Data Overview">
+						<vu:grid cols="1">
+							<div class="text-center"> <span class="indicator text-black" th:text="3" /><br/><span class="indicator-title text-faded">Sensors connected to <span th:text="${model.equipment.name}"></span></span></div>					
+							<div class="text-center"> <span class="indicator text-blue" th:text="${model.TemperatureTotalMeasured}" /><br/><span class="indicator-title text-faded">Amount of data collected</span></div>
+							<div class="text-center"> <span class="indicator text-positive" th:text="1" /><br/><span class="indicator-title text-faded">Actuators connected</span></div>
+						</vu:grid>
+					</vu:block>
+				</div>
 				
-				<div class="col-md-6 col-xs-12" >
-					<div class="chart chartjs linechart bg-white" 
-							    th:data-url="@{/api/basemanagment/equipment/environment/data/series}" 
-							    data-query-measures='["value:MAX"]'
-							    data-query-data-filter='{ "measurement": "temperature", "filters": {"equipment": "fs01"}}'
-							    data-query-time-filter='{ "from": "now() - 3d", "to": "now()", "dim": "1h"}'
-								data-labels='{"value:mean":"Temperature mean values"}' 
-							    data-colors='iANDROID:LIGHT'></div> 
-							    </div>
-			</vu:block>
-							    
-			<vu:block title="Humidity Sensor" id="humidity">
-				<div class="col-md-6 col-xs-12" >
-					<div class="chart chartjs linechart bg-white" 
-							    th:data-url="@{/api/basemanagment/equipment/environment/data/series}" 
-							    data-query-measures='["value:mean"]'
-							    data-query-data-filter='{ "measurement": "humidite", "filters": {"equipment": "fs01"}}'
-							    data-query-time-filter='{ "from": "now() - 3d", "to": "now()", "dim": "1h"}'
-								data-labels='{"value:mean":"Temperature mean values"}' 
-							    data-colors='iANDROID'></div> 
-				</div>
+				<vu:block title="Temperature sensor" id=temperature>
+	
+					
+					<div class="col-md-6 col-xs-12" >
+						<div class="chart chartjs linechart bg-white" 
+								    th:data-url="@{/api/basemanagment/equipment/environment/data/series}" 
+								    data-query-measures='["value:MAX"]'
+								    data-query-data-filter='{ "measurement": "temperature", "filters": {"equipment": "fs01"}}'
+								    data-query-time-filter='{ "from": "now() - 3d", "to": "now()", "dim": "1h"}'
+									data-labels='{"value:mean":"Temperature mean values"}' 
+								    data-colors='iANDROID:LIGHT'></div> 
+								    </div>
+				</vu:block>
+								    
+				<vu:block title="Humidity Sensor" id="humidity">
+					<div class="col-md-6 col-xs-12" >
+						<div class="chart chartjs linechart bg-white" 
+								    th:data-url="@{/api/basemanagment/equipment/environment/data/series}" 
+								    data-query-measures='["value:mean"]'
+								    data-query-data-filter='{ "measurement": "humidite", "filters": {"equipment": "fs01"}}'
+								    data-query-time-filter='{ "from": "now() - 3d", "to": "now()", "dim": "1h"}'
+									data-labels='{"value:mean":"Temperature mean values"}' 
+								    data-colors='iANDROID'></div> 
+					</div>
 
-</vu:block>		
-			<vu:block title="Moisture Sensor" id="moisture">
-				<div class="col-md-6 col-xs-12" >
-					<div class="chart chartjs linechart bg-white" 
+				</vu:block>
+						
+				<vu:block title="Moisture Sensor" id="moisture">
+					<div class="col-md-6 col-xs-12" >
+						<div class="chart chartjs linechart bg-white" 
 							    th:data-url="@{/api/basemanagment/equipment/environment/data/series}" 
 							    data-query-measures='["value:mean"]'
 							    data-query-data-filter='{ "measurement": "moisture", "filters": {"equipment": "fs01"}}'
 							    data-query-time-filter='{ "from": "now() - 3d", "to": "now()", "dim": "1h"}'
 								data-labels='{"value:mean":"Moisture mean values"}' 
 							    data-colors='iGREEN:INTENSITY'></div> 
-				</div>
-</vu:block>	 
-</div>
-		<div class="row q-ma-md justify-center"  th:case="*">
-		<vu:block title="No Sensors on this equipment">
-		<q-btn flat type="a" th:href="@{/basemanagement/equipment/} + ${model.equipment.equipmentId}">Back to Informations</q-btn>
+					</div>
+				</vu:block>
+				 
+			</div>
 		
-		</vu:block>
-		</div>
+			<div class="row q-ma-md justify-center"  th:case="*">
+				<vu:block title="No Sensors on this equipment">
+					<q-btn flat type="a" th:href="@{/basemanagement/equipment/} + ${model.equipment.equipmentId}">Back to Informations</q-btn>		
+				</vu:block>
+			</div>
+			
 		</section>
 
-	
-	<section layout:fragment="javscript-footer" >
-		<script type="text/javascript">
-			showCharts();
-		</script>
-	</section>
+		<section layout:fragment="javscript-footer" >
+			<script type="text/javascript">showCharts();</script>
+		</section>
+	</body>
 </html>
