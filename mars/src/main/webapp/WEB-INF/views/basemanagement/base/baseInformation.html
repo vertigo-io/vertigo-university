@@ -22,25 +22,29 @@
 		</section>
 		
 		<section>
-				<div layout:fragment="content-header-left">
+				<div layout:fragment="content-header-left" id="baseImg">
 					<img th:src="@{/static/img/bases/Mars base 1.jpg}" class="detailImg gt-md"/>
 				</div>
-				<div layout:fragment="content-header-title">
-					<span class="text-bigger" th:text="${model.base.name}"></span> 
+				<div layout:fragment="content-header-title" id="baseTitle">
+					<span class="text-bigger" th:text="${model.base.name}"></span>
+					<br/><span class="text-smaller" th:text="${model.base.code}"></span> 
+					<br/><span class="text-smaller" th:text="${model.baseTypes.getById('baseTypeId', model.base.baseTypeId).label}"></span>				
 				</div>
-				<div layout:fragment="content-header-actions" id="baseActions">
+				<div layout:fragment="content-header-actions">
 					<vu:button-submit th:if="${model.modeEdit}"   action="@{_cancel}" :round size="lg" color="primary" icon="fas fa-ban" :flat aria-label="Cancel" title="Cancel" class="on-left"  />
 					<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>
-					<q-btn round size="lg" color="primary" icon="fas fa-rocket" type="a" th:href="@{/basemanagement/equipments/}"  aria-label="Add equipment" title="See all equipments" class="on-left" ></q-btn>
-					<q-btn round size="lg" color="primary" icon="fas fa-rocket" type="a" th:href="@{/basemanagement/equipment/new}"  aria-label="Add equipment" title="Add equipment" class="on-left" >+</q-btn>
-					<q-btn round size="lg" color="primary" icon="more_horiz"  direction="down" aria-label="More actions" title="More actions" class="on-left"> 
-					  <q-popover><q-list link>
-					  	<q-item><q-btn flat>Add view</q-btn></q-item>
-					    <q-item><q-btn flat>Delete</q-btn></q-item>
-					    <q-item><q-btn flat>Archive</q-btn></q-item>
-					  </q-list>
-					  </q-popover>
-					</q-btn>
+					<th:block id="baseActions">
+						<q-btn round size="lg" color="primary" icon="fas fa-rocket" type="a" th:href="@{/basemanagement/equipments/}"  aria-label="Add equipment" title="See all equipments" class="on-left" ></q-btn>
+						<q-btn round size="lg" color="primary" icon="fas fa-rocket" type="a" th:href="@{/basemanagement/equipment/new}"  aria-label="Add equipment" title="Add equipment" class="on-left" >+</q-btn>
+						<q-btn round size="lg" color="primary" icon="more_horiz"  direction="down" aria-label="More actions" title="More actions" class="on-left"> 
+						  <q-popover><q-list link>
+						  	<q-item><q-btn flat>Add view</q-btn></q-item>
+						    <q-item><q-btn flat>Delete</q-btn></q-item>
+						    <q-item><q-btn flat>Archive</q-btn></q-item>
+						  </q-list>
+						  </q-popover>
+						</q-btn>
+					</th:block>
 				</div>
 				<div layout:fragment="content-header-tabs">
 					<q-btn flat type="a" class="active" th:href="@{/basemanagement/base/information/} + ${model.base.baseId}">Base Informations</q-btn>
@@ -52,8 +56,8 @@
 		
 		<section layout:fragment="content" >
 			<vu:form>
-				<div id="health" class="row q-ma-md" th:if="${!model.modeCreate}" >
-					<div class="col-md-3 col-xs-12">
+				<div id="health" class="row q-pa-md gutter-md" th:if="${!model.modeCreate}" >
+					<div class="col-md-3 col-sm-12">
 						<q-card class="bg-white text-center" >
 							<q-card-title class="indicator-title text-faded">Health</q-card-title>
 							<q-card-main>
@@ -66,7 +70,7 @@
 							</q-card-main>
 						</q-card>
 					</div>
-					<div class="col-md-9 col-xs-12 q-pl-md ">
+					<div class="col-md-9 col-sm-12 ">
 						<q-card class="bg-white row justify-around items-center" style="height:100%;">
 							<div class="text-center"> <span class="indicator text-positive" th:text="${model.baseOverview.equipmentCount}"/><br/><span class="indicator-title text-faded">Equipement(s)</span></div>
 							<div class="text-center"> <span class="indicator text-positive" th:text="${model.baseOverview.openedTickets}"/><br/><span class="indicator-title text-faded">Opened Tickets(s)</span></div>
@@ -76,7 +80,7 @@
 				</div>
 				
 				<vu:block id="views" title="Views">
-					<q-carousel arrows quick-nav style="height:300px;" class="image-gallery">
+					<q-carousel arrows quick-nav style="height:300px;" color="grey" class="image-gallery">
 					  <q-carousel-slide>
 					    <img th:src="@{/static/img/bases/Mars base 1.jpg}" style="max-width: 100%;" />
 					  </q-carousel-slide>

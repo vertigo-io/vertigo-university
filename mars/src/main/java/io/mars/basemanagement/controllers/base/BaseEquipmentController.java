@@ -7,10 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import io.mars.basemanagement.domain.Base;
 import io.mars.basemanagement.domain.Equipment;
 import io.mars.basemanagement.domain.EquipmentOverview;
-import io.mars.basemanagement.services.base.BaseServices;
 import io.mars.basemanagement.services.equipment.EquipmentServices;
 import io.mars.catalog.domain.EquipmentType;
 import io.mars.domain.DtDefinitions.EquipmentOverviewFields;
@@ -25,13 +23,12 @@ import io.vertigo.ui.impl.springmvc.controller.AbstractVSpringMvcController;
 public class BaseEquipmentController extends AbstractVSpringMvcController {
 
 	@Inject
-	private BaseServices baseServices;
-	@Inject
 	private EquipmentServices equipmentServices;
 	@Inject
 	private TicketServices ticketServices;
+	@Inject
+	private BaseDetailController baseDetailController;
 
-	private final ViewContextKey<Base> baseKey = ViewContextKey.of("base");
 	private final ViewContextKey<EquipmentOverview> equipmentOverviewsKey = ViewContextKey.of("equipmentOverviews");
 	private final ViewContextKey<EquipmentType> equipmentTypesKey = ViewContextKey.of("equipmentTypes");
 	private final ViewContextKey<Equipment> lastEquipmentsKey = ViewContextKey.of("lastEquipments");
@@ -39,8 +36,8 @@ public class BaseEquipmentController extends AbstractVSpringMvcController {
 
 	@GetMapping("/{baseId}")
 	public void initContext(final ViewContext viewContext, @PathVariable("baseId") final Long baseId) {
+		baseDetailController.initCommonContext(viewContext, baseId);
 		viewContext.publishMdl(equipmentTypesKey, EquipmentType.class, null);
-		viewContext.publishDto(baseKey, baseServices.get(baseId));
 		viewContext.publishDtList(equipmentOverviewsKey, EquipmentOverviewFields.BUSINESS_ID, equipmentServices.getEquipmentOverviewByBaseId(baseId));
 		viewContext.publishDtList(lastEquipmentsKey, equipmentServices.getLastPurchasedEquipmentsByBase(baseId));
 		viewContext.publishDtList(lastTicketsKey, ticketServices.getLastestTicketsByBase(baseId));

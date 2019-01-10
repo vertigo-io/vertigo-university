@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import io.mars.basemanagement.domain.Base;
 import io.mars.basemanagement.domain.BaseOverview;
-import io.mars.basemanagement.domain.BaseType;
 import io.mars.basemanagement.domain.Geosector;
 import io.mars.basemanagement.domain.Tag;
 import io.mars.basemanagement.services.base.BaseServices;
@@ -29,23 +28,21 @@ public class BaseInformationController extends AbstractVSpringMvcController {
 	private BaseServices baseServices;
 	@Inject
 	private MissionServices missionServices;
+	@Inject
+	private BaseDetailController baseDetailController;
 
-	private final ViewContextKey<Base> baseKey = ViewContextKey.of("base");
 	private final ViewContextKey<Person> baseManagerKey = ViewContextKey.of("baseManager");
-	private final ViewContextKey<BaseType> baseTypesKey = ViewContextKey.of("baseTypes");
 	private final ViewContextKey<Geosector> geosectorsKey = ViewContextKey.of("geosectors");
 	private final ViewContextKey<Tag> tagsKey = ViewContextKey.of("tags");
 	private final ViewContextKey<BaseOverview> baseOverview = ViewContextKey.of("baseOverview");
 
 	@GetMapping("/{baseId}")
 	public void initContext(final ViewContext viewContext, @PathVariable("baseId") final Long baseId) {
-		viewContext.publishMdl(baseTypesKey, BaseType.class, null); //all
+		baseDetailController.initCommonContext(viewContext, baseId);
 		viewContext.publishMdl(tagsKey, Tag.class, null); //all
 		viewContext.publishDtList(geosectorsKey, baseServices.getAllGeosectors());
 		//---
 		viewContext.publishDto(baseOverview, baseServices.getBaseOverview(baseId));
-		//---
-		viewContext.publishDto(baseKey, baseServices.get(baseId));
 		//---
 		final Person noManagerPerson = new Person();
 		noManagerPerson.setLastName("No manager");
