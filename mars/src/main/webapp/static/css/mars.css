@@ -41,12 +41,12 @@ body {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #027be3; 
+  background: #ddd; 
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #1565C0; 
+  background: #ccc; 
 }
 
 @media (max-width: 767px) {
