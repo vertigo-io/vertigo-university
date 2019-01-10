@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import io.mars.basemanagement.domain.Equipment;
-import io.mars.basemanagement.services.equipment.EquipmentServices;
 import io.mars.maintenance.domain.Ticket;
 import io.mars.maintenance.domain.TicketStatus;
 import io.mars.maintenance.services.ticket.TicketServices;
@@ -24,20 +23,21 @@ public class EquipmentMaintenanceController extends AbstractVSpringMvcController
 
 	@Inject
 	private TicketServices ticketServices;
-	@Inject
-	private EquipmentServices equipmentServices;
 
-	private final ViewContextKey<Equipment> equipmentKey = ViewContextKey.of("equipment");
 	private final ViewContextKey<Ticket> openedTicketsKey = ViewContextKey.of("openedTickets");
 	private final ViewContextKey<Ticket> closedTicketsKey = ViewContextKey.of("closedTickets");
 	private final ViewContextKey<TicketStatus> ticketStatusKey = ViewContextKey.of("ticketStatus");
 
+	@Inject
+	private EquipmentDetailController equipmentDetailController;
+
 	@GetMapping("/{equipmentId}")
 	public void initContext(final ViewContext viewContext, @PathVariable("equipmentId") final Long equipmentId) {
+		equipmentDetailController.initCommonContext(viewContext, equipmentId);
+		//---
 		viewContext.publishMdl(ticketStatusKey, TicketStatus.class, null); //all
 		viewContext.publishDtList(openedTicketsKey, ticketServices.getOpenedTicketsByEquipment(equipmentId));
 		viewContext.publishDtList(closedTicketsKey, ticketServices.getClosedTicketsByEquipment(equipmentId));
-		viewContext.publishDto(equipmentKey, equipmentServices.get(equipmentId));
 		//---
 		toModeReadOnly();
 	}

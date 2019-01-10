@@ -21,10 +21,10 @@
 		</section>
 		
 		<section>
-				<div layout:fragment="content-header-left">
+				<div layout:fragment="content-header-left" id="equipmentImg">
 					<img th:src="@{/static/img/bases/Mars base 1.jpg}" class="detailImg gt-md"/>
 				</div>
-				<div layout:fragment="content-header-title">
+				<div layout:fragment="content-header-title" id="equipmentTitle">
 					<span class="text-bigger" th:text="${model.equipment.code?:'New Equipment'}"></span>
 					<br/><span class="text-smaller" th:text="${model.equipment.name}"></span>
 				</div>
@@ -36,6 +36,7 @@
 					<q-btn flat type="a" class="active" th:href="@{/basemanagement/equipment/} + ${model.equipment.equipmentId}">Informations</q-btn>
 					<q-btn flat type="a" th:href="@{/basemanagement/equipment/maintenance/} + ${model.equipment.equipmentId}">Maintenance</q-btn>
 					<q-btn flat type="a" th:href="@{/basemanagement/equipment/environment/} + ${model.equipment.equipmentId}">Environment</q-btn>
+					<q-btn flat type="a" th:href="@{/basemanagement/equipment/vr/} + ${model.equipment.equipmentId}">VR View</q-btn>
 				</div>
 		</section>
 		

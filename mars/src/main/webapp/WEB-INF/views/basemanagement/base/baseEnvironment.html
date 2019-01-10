@@ -36,7 +36,8 @@
 				<div layout:fragment="content-header-tabs">
 					<q-btn flat type="a" th:href="@{/basemanagement/base/information/} + ${model.base.baseId}">Base Informations</q-btn>
 					<q-btn flat type="a" th:href="@{/basemanagement/base/equipment/} + ${model.base.baseId}">Equipment</q-btn>
-					<q-btn flat type="a" class="active" th:href="@{/basemanagement/base/environment/} + ${model.base.baseId}">Environment</q-btn>					
+					<q-btn flat type="a" class="active" th:href="@{/basemanagement/base/environment/} + ${model.base.baseId}">Environment</q-btn>			
+					<q-btn flat type="a" th:href="@{/basemanagement/base/vr/} + ${model.base.baseId}">VR View</q-btn>		
 				</div>
 		</section>	
 			
@@ -106,11 +107,11 @@
 				<div class="row gutter-xs">
 					<div class="col-md-6 col-xs-12 text-center gutter-xs">
 						<div class="q-title">Triggered alarm this month:</div>
-						<!-- TODO  appel du nombre d'alerte déclenché ce mois-ci tout équipement de sécurité confondu-->
-						<!-- TODO Graphe qui somme l'ensemble des alertes des équipements de sécurité et fait un graphe  -->
+						<!-- TODO  appel du nombre d'alerte dï¿½clenchï¿½ ce mois-ci tout ï¿½quipement de sï¿½curitï¿½ confondu-->
+						<!-- TODO Graphe qui somme l'ensemble des alertes des ï¿½quipements de sï¿½curitï¿½ et fait un graphe  -->
 					</div>		
 					<div class="col-md-6 col-xs-12 text-center gutter-xs">
-						<!-- TODO  GROS bouton pour déclencher l'alarme  -->
+						<!-- TODO  GROS bouton pour dï¿½clencher l'alarme  -->
 						<q-btn rounded push size="2rem" color="red" icon-right="fas fa-exclamation-circle" type="a" aria-label="Triggered alarm in base" title="Triggered alarm in base" class="on-left">Alert</q-btn>
 						<!-- TODO une boite texte pour envoyer message au panneau d'affichage  -->
 						<div class="stacked-label">

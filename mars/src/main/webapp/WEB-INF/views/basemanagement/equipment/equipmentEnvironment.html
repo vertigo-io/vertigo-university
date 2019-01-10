@@ -19,13 +19,8 @@
 	<body>
 		
 		<section>
-				<div layout:fragment="content-header-left">
-					<img th:src="@{/static/img/bases/Mars base 1.jpg}" class="detailImg gt-md"/>
-				</div>
-				<div layout:fragment="content-header-title">
-					<span class="text-bigger" th:text="${model.equipment.code}"></span>
-					<br/><span class="text-smaller" th:text="${model.equipment.name}"></span>
-				</div>
+				<div layout:fragment="content-header-left" th:include="basemanagement/equipment/equipmentInformation :: #equipmentImg"></div>				
+				<div layout:fragment="content-header-title" th:include="basemanagement/equipment/equipmentInformation :: #equipmentTitle"></div>
 				<div th:if="${!model.modeCreate}" layout:fragment="content-header-tabs">
 					<q-btn flat type="a" th:href="@{/basemanagement/equipment/} + ${model.equipment.equipmentId}">Informations</q-btn>
 					<q-btn flat type="a" th:href="@{/basemanagement/equipment/maintenance/} + ${model.equipment.equipmentId}">Maintenance</q-btn>

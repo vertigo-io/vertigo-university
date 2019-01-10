@@ -29,6 +29,8 @@ public class EquipmentInformationController extends AbstractVSpringMvcController
 	private EquipmentServices equipmentServices;
 	@Inject
 	private BaseServices baseServices;
+	@Inject
+	private EquipmentDetailController equipmentDetailController;
 
 	private final ViewContextKey<Equipment> equipmentKey = ViewContextKey.of("equipment");
 	private final ViewContextKey<EquipmentMaintenanceOverview> equipmentMaintenanceOverview = ViewContextKey.of("equipmentMaintenanceOverview");
@@ -44,6 +46,7 @@ public class EquipmentInformationController extends AbstractVSpringMvcController
 
 	@GetMapping("/{equipmentId}")
 	public void initContext(final ViewContext viewContext, @PathVariable("equipmentId") final Long equipmentId) {
+		equipmentDetailController.initCommonContext(viewContext, equipmentId);
 		loadLists(viewContext);
 		//---
 		viewContext.publishDto(equipmentKey, equipmentServices.get(equipmentId));

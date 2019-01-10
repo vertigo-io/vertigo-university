@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="http://www.morphbit.com/thymeleaf/component"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{templates/mmcDetailNavLayout}"
+>
+	<head>
+		<title>Base VR View</title>
+	</head>
+	
+	<body>
+	
+		<section>
+				<div layout:fragment="content-header-left" th:include="basemanagement/equipment/equipmentInformation :: #equipmentImg"></div>
+				<div layout:fragment="content-header-title" th:include="basemanagement/equipment/equipmentInformation :: #equipmentTitle"></div>
+				<div layout:fragment="content-header-tabs">
+					<q-btn flat type="a" th:href="@{/basemanagement/equipment/} + ${model.equipment.equipmentId}">Informations</q-btn>
+					<q-btn flat type="a" th:href="@{/basemanagement/equipment/maintenance/} + ${model.equipment.equipmentId}">Maintenance</q-btn>
+					<q-btn flat type="a" th:href="@{/basemanagement/equipment/environment/} + ${model.equipment.equipmentId}">Environment</q-btn>	
+					<q-btn flat type="a" class="active" th:href="@{/basemanagement/equipment/vr/} + ${model.equipment.equipmentId}">VR View</q-btn>			
+				</div>
+		</section>
+		
+		<section layout:fragment="content-nav">
+			<nav v-scroll-spy="{offset:150}">
+			    <q-list link style="height:100%">
+			        <q-item tag="a" href="#rover">Rover</q-item>
+			        <q-item tag="a" href="#spaceship">Spaceship</q-item>
+	        	</q-list>
+	        </nav>
+		</section>
+		
+		<section layout:fragment="content" >
+			<vu:block id="rover" title="Rover">
+				<div class="row col justify-center">
+					<iframe width="1200" height="480" src="https://sketchfab.com/models/edd362486ac2465888f15eab31df07b9/embed" frameborder="0" allow="autoplay; fullscreen; vr" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+				</div>
+			</vu:block>
+			<vu:block id="spaceship" title="Spaceship">
+				<div  class="row col justify-center">
+					<iframe width="1200" height="480" src="https://sketchfab.com/models/07f41daca5264bca99c7ab461cecd70f/embed" frameborder="0" allow="autoplay; fullscreen; vr" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+				</div>
+			</vu:block>
+		</section>
+	</body>
+</html>
