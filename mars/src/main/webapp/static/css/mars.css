@@ -2,11 +2,12 @@
 :root {
   	--q-color-body-background: #f5f5f5;
 	--q-color-body-color: #0c0c0c;
-	/*--q-color-primary:	#ed7d31;
+	/*--q-color-primary: #027be3;
 	--q-color-secondary:#fad9c2;*/
-	--q-color-tertiary:	#B2DFDB;
+	--q-color-secondary:#00BCD4;
+	--q-color-tertiary:	#B2EBF2;
 	
-	/*--q-color-primary:	#2196F3;
+	/*--q-color-primary:#2196F3;
 	--q-color-secondary:#64B5F6;
 	--q-color-tertiary:	#BBDEFB;*/
 	
@@ -16,10 +17,62 @@
 	--q-color-warning:	#F2C037;  
 }
 
+.bg-secondary  {
+	color:rgba(255, 255, 255, 0.9) !important; 
+}
+
+.bg-tertiary  {
+	color:rgba(60, 60, 60, 0.8) !important; 
+}
+
 body {
   background: white !important;
   background: var(--q-color-body-background) !important;
   color: var(--q-color-body-color) !important;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #027be3; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #1565C0; 
+}
+
+@media (max-width: 767px) {
+  .layout-padding {
+    padding: 1.5rem 0.5rem;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .layout-padding {
+    padding: 1rem 1.5rem;
+    margin: auto;
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .layout-padding {
+    padding: 1.5rem 2rem;
+    margin: auto;
+  }
+}
+@media (min-width: 1200px) {
+  .layout-padding {
+    padding: 2rem 3rem;
+    margin: auto;
+  }
 }
 
 .container-bottom-padding {
@@ -160,9 +213,12 @@ nav a.q-item {
 
 .q-table-container th.sortable:hover,
 .q-table-container th.sorted {
-  color: rgba(255,255,255,1);
+  color: rgba(255,255,255,1);  
 }
 
+.q-table-container tbody tr:hover {
+   color : var(--q-color-primary);
+}
 
 .q-title {
 	color: var(--q-color-primary);
@@ -179,10 +235,6 @@ nav a.q-item {
 
 .header-content > div {
 	height: 100%;
-}
-
-.header-tabs a {
-	color: grey;
 }
 
 .header-tabs a.active {
@@ -240,7 +292,7 @@ nav a.q-item {
 }
 
 .poweredBy img {
-	width:50%;
+	width:60%;
 }
 
 .q-stepper.noContent > .q-stepper-step > .q-stepper-step-content {
