@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import io.mars.basemanagement.domain.Equipment;
@@ -38,5 +39,10 @@ public class BaseEnvironmentController extends AbstractVSpringMvcController {
 		viewContext.publishRef(lastTemperature, equipmentEnvironmentServices.getLastTemperature());
 		viewContext.publishRef(lastHumidity, equipmentEnvironmentServices.getLastHumidity());
 		toModeReadOnly();
+	}
+
+	@PostMapping("/_alert")
+	public void doAlert() {
+		equipmentEnvironmentServices.sendBaseAlerte();
 	}
 }

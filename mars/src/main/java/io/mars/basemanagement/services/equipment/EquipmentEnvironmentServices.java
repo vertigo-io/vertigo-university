@@ -88,4 +88,8 @@ public class EquipmentEnvironmentServices implements Component {
 				TimeFilter.builder("now() - 365d", "now() + 1h").build());
 		return (double) Math.round((Double) totalMeasure.getTabularDataSeries().get(0).getValues().get("value:count") * 10) / 10;
 	}
+
+	public void sendBaseAlerte() {
+		System.out.println("TODO RFELTEN");
+	}
 }
