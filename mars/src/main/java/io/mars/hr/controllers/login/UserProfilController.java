@@ -45,7 +45,7 @@ public final class UserProfilController extends AbstractVSpringMvcController {
 
 	@ModelAttribute
 	public void initContext(final ViewContext viewContext) {
-		if (loginServices.isAuthenticated()) { //must support all cases
+		if (isNewContext() && loginServices.isAuthenticated()) { //must support all cases
 			viewContext.publishDto(connectedUserKey, loginServices.getLoggedPerson());
 			viewContext.publishRef(activeProfileKey, loginServices.getActiveProfile());
 		}
