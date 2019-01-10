@@ -160,7 +160,7 @@ create Domain DO_LABEL {
 	formatter : FMT_DEFAULT
 	constraint : [CK_MAX_LENGTH_100]
 	storeType : "VARCHAR(100)"
-	indexType : "text_fr:facetable"
+	indexType : "text_fr:sortable"
 }
 
 create Domain DO_DESCRIPTION {
