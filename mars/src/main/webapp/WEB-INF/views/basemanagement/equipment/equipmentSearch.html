@@ -13,10 +13,10 @@
 		<section layout:fragment="content" >	
 			<vu:search resultKey="equipments" searchUrl="@{/basemanagement/equipments/_search}" collectionComponentId="equipmentsTable">
 				<div class="row gutter-md">
-					<div class="col-2">
+					<div class="col-2 gt-md" style="flex-basis: 300px;">
 						<vu:facets resultKey="equipments" />
 					</div>
-					<div class="col-10">
+					<div class="col">
 						<vu:include-data-primitive key="criteria"/>
 						<q-search inverted-light color="white" icon="search" placeholder="Type, Name..." v-model="vueData.criteria" @input="search('equipments')"></q-search>
 						<br/>
