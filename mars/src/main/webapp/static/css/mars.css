@@ -4,8 +4,13 @@
 	--q-color-body-color: #0c0c0c;
 	/*--q-color-primary: #027be3;
 	--q-color-secondary:#fad9c2;*/
+	--q-color-primary: #027be3;
+	--q-color-primary-invert: rgba(255, 255, 255, 0.9);
 	--q-color-secondary:#00BCD4;
+	--q-color-secondary-invert: rgba(255, 255, 255, 0.9);
 	--q-color-tertiary:	#B2EBF2;
+	--q-color-tertiary-invert:	rgba(60, 60, 60, 0.8);
+	
 	
 	/*--q-color-primary:#2196F3;
 	--q-color-secondary:#64B5F6;
@@ -17,14 +22,6 @@
 	--q-color-warning:	#F2C037;  
 }
 
-.bg-secondary  {
-	color:rgba(255, 255, 255, 0.9) !important; 
-}
-
-.bg-tertiary  {
-	color:rgba(60, 60, 60, 0.8) !important; 
-}
-
 body {
   background: white !important;
   background: var(--q-color-body-background) !important;
@@ -34,6 +31,7 @@ body {
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
+  height: 10px;
 }
 
 /* Track */
@@ -78,7 +76,6 @@ body {
 .container-bottom-padding {
 	padding-bottom: 64px;
 }
-
 
 body.login {
 	background: url(../img/bcf60b99d4_121619_mars-bfrs.jpg) !important;	
@@ -193,31 +190,6 @@ nav a.q-item {
 
 .fullHeight {
 	height:100%;
-}
-
-.q-table-container {
-	background:#fff!important;
-}
-
-.q-table-container thead {
-	background:var(--q-color-secondary)!important;
-}
-
-.q-table-container th {
-  color: rgba(255,255,255,0.87);
-  font-size: 18px; /*same as card-title*/
-  font-weight: 400;
-  letter-spacing: normal;
-  line-height: 2rem;
-}
-
-.q-table-container th.sortable:hover,
-.q-table-container th.sorted {
-  color: rgba(255,255,255,1);  
-}
-
-.q-table-container tbody tr:hover {
-   color : var(--q-color-primary);
 }
 
 .q-title {

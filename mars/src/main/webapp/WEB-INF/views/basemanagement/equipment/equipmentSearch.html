@@ -12,21 +12,21 @@
 	<body>
 		<section layout:fragment="content" >	
 			<vu:search resultKey="equipments" searchUrl="@{/basemanagement/equipments/_search}" collectionComponentId="equipmentsTable">
-				<div class="row">
-					<div class="col-3 q-pr-xl">
+				<div class="row gutter-md">
+					<div class="col-2">
 						<vu:facets resultKey="equipments" />
 					</div>
-					<div class="col-9">
+					<div class="col-10">
 						<vu:include-data-primitive key="criteria"/>
 						<q-input placeholder="Type, Name..." v-model="vueData.criteria" @input="search('equipments')"></q-input>
-						<vu:table list="equipments_list" componentId="equipmentsTable" sortUrl="${searchUrl}">
+						<vu:table color="secondary" list="equipments_list" componentId="equipmentsTable" sortUrl="${searchUrl}">
 							<vu:column field="equipmentId" />
 							<vu:column field="name" />
 							<vu:column field="code" sortable="true"/>
 							<vu:column field="equipmentTypeName" />
 							<vu:column field="equipmentCategoryName" />
 							<vu:column name="actions" label="Actions" >
-								<q-btn round color="primary" icon="arrow_forward" type="a" th::href="|'@{/basemanagement/equipment/}'+props.row.equipmentId|"></q-btn>
+								<q-btn round icon="arrow_forward" type="a" th::href="|'@{/basemanagement/equipment/}'+props.row.equipmentId|"></q-btn>
 							</vu:column>
 						</vu:table>
 					</div>
