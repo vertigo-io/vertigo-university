@@ -6,6 +6,7 @@
 >
 	<head>
 		<title>Equipment Informations</title>
+		<script th:src="@{/vertigo-ui/static/js/v-components/v-comments.js}"></script>
 	</head>
 	
 	<body>
@@ -31,6 +32,7 @@
 				<div th:if="${!model.modeCreate}" layout:fragment="content-header-actions">
 					<vu:button-submit th:if="${model.modeEdit}"   action="@{_cancel}" :round size="lg" color="primary" icon="fas fa-ban" :flat aria-label="Cancel" title="Cancel" class="on-left"  />
 					<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>
+					<v-comments th:base-url="@{/api/}" concept="equipment" th:id="${model.equipment.equipmentId}" ></v-comments>	
 				</div>
 				<div th:if="${!model.modeCreate}" layout:fragment="content-header-tabs">
 					<q-btn flat type="a" class="active" th:href="@{/basemanagement/equipment/} + ${model.equipment.equipmentId}">Informations</q-btn>
