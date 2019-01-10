@@ -1,7 +1,6 @@
 package io.mars.basemanagement.services.equipment;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -13,7 +12,6 @@ import io.vertigo.database.timeseries.TabularDatas;
 import io.vertigo.database.timeseries.TimeFilter;
 import io.vertigo.database.timeseries.TimeSeriesDataBaseManager;
 import io.vertigo.database.timeseries.TimedDatas;
-import io.vertigo.lang.Assertion;
 
 public class EquipmentEnvironmentServices implements Component {
 	private final String appName = "mars-test"; // TODO: add a param
@@ -22,26 +20,11 @@ public class EquipmentEnvironmentServices implements Component {
 	private TimeSeriesDataBaseManager timeSeriesDataBaseManager;
 
 	public TimedDatas getTimeSeries(final List<String> measures, final DataFilter dataFilter, final TimeFilter timeFilter) {
-		Assertion.checkNotNull(measures);
-		Assertion.checkNotNull(dataFilter);
-		Assertion.checkNotNull(timeFilter.getDim());// we check dim is not null because we need it
-		//---
 		return timeSeriesDataBaseManager.getTimeSeries(appName, measures, dataFilter, timeFilter);
 
 	}
 
 	public TimedDatas getClusteredTimeSeries(final ClusteredMeasure clusteredMeasure, final DataFilter dataFilter, final TimeFilter timeFilter) {
-		Assertion.checkNotNull(dataFilter);
-		Assertion.checkNotNull(timeFilter);
-		Assertion.checkNotNull(timeFilter.getDim()); // we check dim is not null because we need it
-		Assertion.checkNotNull(clusteredMeasure);
-		//---
-		Assertion.checkArgNotEmpty(clusteredMeasure.getMeasure());
-		Assertion.checkNotNull(clusteredMeasure.getThresholds());
-		Assertion.checkState(!clusteredMeasure.getThresholds().isEmpty(), "For clustering the measure '{0}' you need to provide at least one threshold", clusteredMeasure.getMeasure());
-		//we use the natural order
-		clusteredMeasure.getThresholds().sort(Comparator.naturalOrder());
-		//---
 		return timeSeriesDataBaseManager.getClusteredTimeSeries(appName, clusteredMeasure, dataFilter, timeFilter);
 	}
 

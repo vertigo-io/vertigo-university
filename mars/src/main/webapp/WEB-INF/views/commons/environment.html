@@ -47,18 +47,6 @@
 	        </nav>
 		</section>
 	
-		<section>
-				<div layout:fragment="content-header-left" th:include="basemanagement/base/baseInformation :: #baseImg"></div>				
-				<div layout:fragment="content-header-title" th:include="basemanagement/base/baseInformation :: #baseTitle"></div>
-				<div layout:fragment="content-header-actions" th:include="basemanagement/base/baseInformation :: #baseActions"></div>
-				<div layout:fragment="content-header-tabs">
-					<q-btn flat type="a" th:href="@{/basemanagement/base/information/} + ${model.base.baseId}">Base Informations</q-btn>
-					<q-btn flat type="a" th:href="@{/basemanagement/base/equipment/} + ${model.base.baseId}">Equipment</q-btn>
-					<q-btn flat type="a" class="active" th:href="@{/basemanagement/base/environment/} + ${model.base.baseId}">Environment</q-btn>			
-					<q-btn flat type="a" th:href="@{/basemanagement/base/vr/} + ${model.base.baseId}">VR View</q-btn>		
-				</div>
-		</section>	
-			
 	
 		<section layout:fragment="content" >
 			<vu:block id="weatheroverview" title="Weather Overview" icon="fas fa-sun">
@@ -128,7 +116,7 @@
 						<!-- TODO Graphe qui somme l'ensemble des alertes des ï¿½quipements de sï¿½curitï¿½ et fait un graphe  -->
 					</div>		
 					<div class="col-md-6 col-xs-12 text-center gutter-xs">
-						<!-- TODO  GROS bouton pour déclencher l'alarme  -->
+						<!-- TODO  GROS bouton pour dï¿½clencher l'alarme  -->
 						<q-btn rounded push th:@click="|ajaxPostAlert('@{_alert}')|" :class="'on-left '+(dataX.alertButton.pushed?'inset-shadow':'shadow-8')" 
 						size="lg" color="red"  icon="fas fa-exclamation-circle"  icon-right="fas fa-exclamation-circle"
 						aria-label="Triggered alarm in base" title="Triggered alarm in base" >Alert</q-btn>
