@@ -86,8 +86,11 @@
 						<vu:text-field object="equipment" field="rentingFee" input_suffix="'&#8364;'"/>
 					</vu:grid>
 				</vu:block>
-				<vu:button-submit th:if="${model.modeEdit}"  label="Save" action="@{_save}" color="primary" />
-				<vu:button-submit th:if="${model.modeCreate}"  label="Create" action="@{_create}" color="primary" />
+				<q-page-sticky position="bottom-right" :offset="[48, 48]">
+					<vu:button-submit th:if="${model.modeEdit}"   size="lg" icon="save" label="Save" action="@{_save}" color="primary" />
+					<vu:button-submit th:if="${model.modeCreate}" size="lg" icon="save" label="Create" action="@{_create}" color="primary" />
+				</q-page-sticky>
+				
 			</vu:form>
 		</section>
 	</body>
