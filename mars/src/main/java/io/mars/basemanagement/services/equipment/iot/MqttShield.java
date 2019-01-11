@@ -213,7 +213,7 @@ public class MqttShield implements Component, Activeable {
 		LOGGER.info("outputEvent " + outputEvent);
 		//---
 		if (outputEvent.getPayloadOpt().isPresent()) {
-			mqttClientPub.publish(outputEvent.getTopic(), createMessage(outputEvent.getPayloadOpt().get()));
+			mqttClientPub.publish(outputEvent.getTopic(), createMessage(outputEvent.getValue() + " " + outputEvent.getPayloadOpt().get()));
 		} else {
 			mqttClientPub.publish(outputEvent.getTopic(), createMessage(outputEvent.getValue()));
 		}

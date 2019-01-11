@@ -15,11 +15,23 @@
 		<script th:src="@{/dashboard/static/dashboard.js}"></script>
 		<script th:src="@{/dashboard/static/dashboard.chartjs.js}"></script>
 		<script type="text/javascript">
-			VUiExtensions.dataX.alertButton = {pushed : false};
+			VUiExtensions.dataX.message = "";
 			VUiExtensions.methods.ajaxPostAlert = function ajaxPostAlert(url) { 
 				var params = {};
 				params['CTX'] = this.vueData.CTX;
 				 this.$http.post(url, params , { emulateJSON: true })
+				.then( function (response ) {
+					if (response.body.CTX) {
+						this.vueData.CTX = response.body.CTX;
+					}
+				});
+			}
+			VUiExtensions.methods.ajaxSendMessage = function ajaxSendMessage() { 
+				var params = {
+						message : VUiExtensions.dataX.message
+				};
+				params['CTX'] = this.vueData.CTX;
+				 this.$http.post("_sendMessage", params , { emulateJSON: true })
 				.then( function (response ) {
 					if (response.body.CTX) {
 						this.vueData.CTX = response.body.CTX;
@@ -125,10 +137,16 @@
 					</div>		
 					<div class="col-md-6 col-xs-12 column">
 						<!-- TODO une boite texte pour envoyer message au panneau d'affichage  -->
-						<div class="stacked-label">
-						  <textarea class="full-width"></textarea>
-						  <label>Send a message to the Led Displayer Panel</label>
-						</div>
+						<div class="q-title">Send a message to the Led Displayer Panel</div>
+						<q-input v-model="dataX.message"
+							:after="[
+								{
+									icon: 'arrow_forward',
+									handler () {
+										ajaxSendMessage();
+									}
+								}
+							]"></q-input>
 					</div>
 				</div>
 				
