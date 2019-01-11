@@ -18,12 +18,21 @@
  */
 package io.mars.basemanagement;
 
+import io.mars.basemanagement.services.equipment.iot.MqttShield;
 import io.vertigo.app.config.discovery.ModuleDiscoveryFeatures;
+import io.vertigo.app.config.json.Feature;
+import io.vertigo.core.param.Param;
 
-public class BasemanagementFeatures extends ModuleDiscoveryFeatures {
+public class BasemanagementFeatures extends ModuleDiscoveryFeatures<BasemanagementFeatures> {
 
 	public BasemanagementFeatures() {
 		super("basemanagement");
+	}
+
+	@Feature("mqtt")
+	public BasemanagementFeatures withMqtt(final Param... params) {
+		getModuleConfigBuilder().addComponent(MqttShield.class, params);
+		return this;
 	}
 
 	@Override

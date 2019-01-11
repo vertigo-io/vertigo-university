@@ -1,8 +1,11 @@
 package io.mars.basemanagement.services.equipment.iot;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.time.Instant;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -25,55 +28,32 @@ import io.vertigo.lang.WrappedException;
 
 @NotDiscoverable
 public class MqttShield implements Component, Activeable {
-	private static final String BROKER = "tcp://mars.dev.klee.lan.net:1883";
-	private static final String CLIENT_ID = "JavaSample";
-	private static final String CLIENT_ID_PUB = "MarsPublisher";
 
 	private static final Logger LOGGER = LogManager.getLogger(MqttShield.class);
 
 	@Inject
 	private EventBusManager eventBusManager;
 
-	private final MqttCallback callback = new MqttCallback() {
-		@Override
-		public void connectionLost(final Throwable cause) {
-			LOGGER.info("Connection lost");
-			//			try {
-			//				mqttClient.connect();
-			//				mqttClient.setCallback(callback);
-			//				logger.info("Reconnected");
-			//				start();
-			//			} catch (final MqttException me) {
-			//				throw WrappedException.wrap(me);
-			//			}
-		}
-
-		@Override
-		public void messageArrived(final String topic, final MqttMessage message) throws Exception {
-			Assertion.checkNotNull(topic);
-			Assertion.checkNotNull(message);
-			//
-			handleMessage(message, topic);
-			//LOGGER.info("Message from: " + topic + "; message:" + message.toString());
-		}
-
-		@Override
-		public void deliveryComplete(final IMqttDeliveryToken token) {
-			// TODO
-		}
-	};
-
 	private MqttClient mqttClient;
 	private MqttClient mqttClientPub;
 
-	@Override
-	public void start() {
+	@Inject
+	public MqttShield(
+			@Named("host") final String brokerHost) {
+		Assertion.checkArgNotEmpty(brokerHost);
+		//---
+		final String myHostName = retrieveHostName();
 		try {
-			connect();
+			connect(brokerHost, myHostName + "Subscriber", myHostName + "Publisher");
 			subscribe();
 		} catch (final MqttException me) {
 			throw WrappedException.wrap(me);
 		}
+	}
+
+	@Override
+	public void start() {
+		// string
 	}
 
 	@Override
@@ -86,6 +66,71 @@ public class MqttShield implements Component, Activeable {
 		}
 	}
 
+	private static String retrieveHostName() {
+		try {
+			return InetAddress.getLocalHost().getHostName();
+		} catch (final UnknownHostException e) {
+			LogManager.getRootLogger().info("Cannot retrieve hostname", e);
+			return "UnknownHost";
+		}
+	}
+
+	private final MqttCallback callback = new MqttCallback() {
+		@Override
+		public void connectionLost(final Throwable cause) {
+			LOGGER.info("Connection lost");
+		}
+
+		@Override
+		public void messageArrived(final String topic, final MqttMessage message) throws Exception {
+			Assertion.checkNotNull(topic);
+			Assertion.checkNotNull(message);
+			//
+			handleMessage(message, topic);
+		}
+
+		@Override
+		public void deliveryComplete(final IMqttDeliveryToken token) {
+			// nothing for now
+		}
+	};
+
+	private void connect(final String brokerHost, final String clientId, final String publisherId) throws MqttException {
+		final MqttClient sampleClient = new MqttClient(brokerHost, clientId, new MemoryPersistence());
+		final MqttClient samplePublisher = new MqttClient(brokerHost, publisherId, new MemoryPersistence());
+		final MqttConnectOptions connOpts = new MqttConnectOptions();
+		connOpts.setCleanSession(true);
+
+		// Connect to broker
+		LOGGER.info("Connecting to broker: " + brokerHost);
+		sampleClient.connect(connOpts);
+		connOpts.setCleanSession(true);
+		samplePublisher.connect();
+		sampleClient.setCallback(new MqttCallback() {
+			@Override
+			public void connectionLost(final Throwable cause) {
+				LOGGER.info("Connection lost");
+			}
+
+			@Override
+			public void messageArrived(final String topic, final MqttMessage message) throws Exception {
+				Assertion.checkNotNull(topic);
+				Assertion.checkNotNull(message);
+				//
+				handleMessage(message, topic);
+			}
+
+			@Override
+			public void deliveryComplete(final IMqttDeliveryToken token) {
+				// nothing for now
+			}
+		});
+		LOGGER.info("Connected");
+
+		mqttClient = sampleClient;
+		mqttClientPub = samplePublisher;
+	}
+
 	private void subscribe() throws MqttException {
 		//final String topicPub = "alpha/MQTT";
 		final String topicSub = "#";
@@ -93,24 +138,6 @@ public class MqttShield implements Component, Activeable {
 		mqttClient.subscribe(topicSub, 0);
 		LOGGER.info("Subscribed to channel: " + topicSub);
 
-	}
-
-	private void connect() throws MqttException {
-		final MqttClient sampleClient = new MqttClient(BROKER, CLIENT_ID, new MemoryPersistence());
-		final MqttClient samplePublisher = new MqttClient(BROKER, CLIENT_ID_PUB, new MemoryPersistence());
-		final MqttConnectOptions connOpts = new MqttConnectOptions();
-		connOpts.setCleanSession(true);
-
-		// Connect to broker
-		LOGGER.info("Connecting to broker: " + BROKER);
-		sampleClient.connect(connOpts);
-		connOpts.setCleanSession(true);
-		samplePublisher.connect();
-		sampleClient.setCallback(callback);
-		LOGGER.info("Connected");
-
-		mqttClient = sampleClient;
-		mqttClientPub = samplePublisher;
 	}
 
 	private void disconnect() throws MqttException {

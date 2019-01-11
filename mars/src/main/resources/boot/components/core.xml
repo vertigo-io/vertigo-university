@@ -236,6 +236,13 @@
 			</plugin> -->
 		</component>		
 	</module>
+	
+	<module name="iot">
+		<component class="io.mars.basemanagement.services.equipment.iot.MqttShield" >
+			<param name="host" value="tcp://mars.dev.klee.lan.net:1883" />
+		</component>
+	</module>
+
 
 	<init>
 <!-- 		<initializer class="io.mars.boot.DataBaseInitializer" />  -->
