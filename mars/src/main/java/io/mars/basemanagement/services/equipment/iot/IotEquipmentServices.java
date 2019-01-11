@@ -24,7 +24,11 @@ public class IotEquipmentServices implements Component {
 		Assertion.checkNotNull(inputEvent);
 		//---
 		LOGGER.info("Actuator is triggered " + inputEvent.getType());
-		eventBusManager.post(new OutputEvent(inputEvent.getType(), inputEvent.getTopic()));
+		if (inputEvent.getPayloadOpt().isPresent()) {
+			eventBusManager.post(new OutputEvent(inputEvent.getType(), inputEvent.getTopic(), inputEvent.getPayloadOpt().get()));
+		} else {
+			eventBusManager.post(new OutputEvent(inputEvent.getType(), inputEvent.getTopic()));
+		}
 	}
 
 	@EventBusSubscribed

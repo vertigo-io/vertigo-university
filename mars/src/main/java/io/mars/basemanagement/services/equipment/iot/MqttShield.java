@@ -54,7 +54,7 @@ public class MqttShield implements Component, Activeable {
 			Assertion.checkNotNull(message);
 			//
 			handleMessage(message, topic);
-			LOGGER.info("Message from: " + topic + "; message:" + message.toString());
+			//LOGGER.info("Message from: " + topic + "; message:" + message.toString());
 		}
 
 		@Override
@@ -97,7 +97,7 @@ public class MqttShield implements Component, Activeable {
 
 	private void connect() throws MqttException {
 		final MqttClient sampleClient = new MqttClient(BROKER, CLIENT_ID, new MemoryPersistence());
-		final MqttClient samplePublisher = new MqttClient(BROKER, CLIENT_ID_PUB);
+		final MqttClient samplePublisher = new MqttClient(BROKER, CLIENT_ID_PUB, new MemoryPersistence());
 		final MqttConnectOptions connOpts = new MqttConnectOptions();
 		connOpts.setCleanSession(true);
 
@@ -130,16 +130,26 @@ public class MqttShield implements Component, Activeable {
 		//---
 		final String[] data = parseMqttMessage(message);
 		final String[] parsedTopic = parseTopic(topic);
+		//Maybe change if condition by switch case ?
 		if (parsedTopic[1].equals("fireAlarm")) {
-			final InputEvent actuatorEvent = createActuatorEvent(message, parsedTopic[0] + "/" + "relay");
+			final InputEvent actuatorEvent = createActuatorEvent(message, "ss01" + "/" + "relay");
 			eventBusManager.post(actuatorEvent);
+		} else if (parsedTopic[1].equals("message")) {
+			//TODO: change ss01 by an automatic redistribution of the message in the dedicated topic
+			final InputEvent messageEvent = createActuatorEvent(message, "ss01" + "/" + "display");
+			eventBusManager.post(messageEvent);
+			//we don't want Influx save the data in database
+		} else if (parsedTopic[1].equals("display")) {
+			//we don't want Influx save the data in database
+		} else {
+			final Measure measure = Measure.builder(parsedTopic[1])
+
+					.time(Instant.now())
+					.addField("equipment", parsedTopic[0])
+					.addField("value", Double.parseDouble(data[1]))
+					.build();
+			eventBusManager.post(new MeasureEvent(measure));
 		}
-		final Measure measure = Measure.builder(parsedTopic[1])
-				.time(Instant.now())
-				.addField("equipment", parsedTopic[0])
-				.addField("value", Double.parseDouble(data[1]))
-				.build();
-		eventBusManager.post(new MeasureEvent(measure));
 	}
 
 	private static String[] parseMqttMessage(final MqttMessage message) {
@@ -159,18 +169,31 @@ public class MqttShield implements Component, Activeable {
 	private static InputEvent createActuatorEvent(final MqttMessage message, final String topic) {
 		Assertion.checkNotNull(message);
 		//---
-		final Integer actuatorValue = Integer.parseInt(parseMqttMessage(message)[1]);
+		final String[] parsedMessage = parseMqttMessage(message);
+		final Integer actuatorValue = Integer.parseInt(parsedMessage[1]);
+		LOGGER.info("inputEvent " + message);
+		if (parsedMessage.length == 3) {
+			final String payload = parsedMessage[2];
+			return new InputEvent(InputEvent.Type.of(actuatorValue), topic, payload);
+		}
+		LOGGER.info("inputEvent Case else");
 		return new InputEvent(InputEvent.Type.of(actuatorValue), topic);
 	}
 
 	@EventBusSubscribed
 	public void onOutput(final OutputEvent outputEvent) throws MqttException {
 		Assertion.checkNotNull(outputEvent);
+		LOGGER.info("outputEvent " + outputEvent);
 		//---
-		mqttClientPub.publish(outputEvent.getTopic(), createMessage(outputEvent.getValue()));
+		if (outputEvent.getPayloadOpt().isPresent()) {
+			mqttClientPub.publish(outputEvent.getTopic(), createMessage(outputEvent.getPayloadOpt().get()));
+		} else {
+			mqttClientPub.publish(outputEvent.getTopic(), createMessage(outputEvent.getValue()));
+		}
+
 	}
 
 	private static MqttMessage createMessage(final String message) {
-		return new MqttMessage((Instant.now() + " " + message).getBytes());
+		return new MqttMessage((Instant.now().getEpochSecond() + " " + message).getBytes());
 	}
 }

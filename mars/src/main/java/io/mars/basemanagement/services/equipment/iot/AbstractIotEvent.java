@@ -1,5 +1,7 @@
 package io.mars.basemanagement.services.equipment.iot;
 
+import java.util.Optional;
+
 import org.bouncycastle.crypto.RuntimeCryptoException;
 
 import io.vertigo.commons.eventbus.Event;
@@ -34,17 +36,20 @@ public class AbstractIotEvent implements Event {
 
 	private final Type type;
 	private final String topic;
+	private final Optional<String> payloadOpt;
 
 	/**
 	 * Constructor.
 	 * @param type the type (on/off)
 	 */
-	protected AbstractIotEvent(final Type type, final String topic) {
+	protected AbstractIotEvent(final Type type, final String topic, final Optional<String> payloadOpt) {
 		Assertion.checkNotNull(type);
 		Assertion.checkArgNotEmpty(topic);
+		Assertion.checkNotNull(payloadOpt);
 		//-----
 		this.type = type;
 		this.topic = topic;
+		this.payloadOpt = payloadOpt;
 	}
 
 	/**
@@ -56,5 +61,9 @@ public class AbstractIotEvent implements Event {
 
 	public final String getTopic() {
 		return topic;
+	}
+
+	public Optional<String> getPayloadOpt() {
+		return payloadOpt;
 	}
 }

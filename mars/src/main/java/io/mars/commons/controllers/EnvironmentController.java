@@ -31,6 +31,16 @@ public class EnvironmentController extends AbstractVSpringMvcController {
 
 	@PostMapping("/_alert")
 	public void doAlert() {
-		equipmentEnvironmentServices.sendBaseAlerte();
+		equipmentEnvironmentServices.sendBaseAlert();
+	}
+
+	@PostMapping("/_stop")
+	public void stopAlert() {
+		equipmentEnvironmentServices.stopBaseAlert();
+	}
+
+	@PostMapping("/_sendMessage")
+	public void doSend(final String message) {
+		equipmentEnvironmentServices.displayMessage(message);
 	}
 }
