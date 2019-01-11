@@ -10,11 +10,32 @@
 	
 	<body>
 		<section layout:fragment="page-container">
-		<q-page class="row col-12 layout-padding col justify-center">			
-			<div class="gutter-lg col ">
-				
-			</div>
-		</q-page>
+		 	<q-page class="row col-12 layout-padding">
+		 		<q-parallax th:src="@{/static/img/cms/face-id-android.jpg}" :height="300">
+				  <h1>Share</h1>
+				</q-parallax>
+				<div class="row col-12 justify-center">
+					<div>A description in here</div>
+				</div>
+				<div class="row col-12 justify-around" >
+			 		<div class="col-md-4 col-xs-12 q-jumbotron">
+					 	<div class="q-display-3">OpenData</div>
+					 	<div class="q-subheading">
+					      A text here
+			    		</div>
+			    		<hr class="q-hr q-my-lg"/>
+			    		<q-btn type="a" th:href="@{/opendata/opendatasets/}" color="primary" class="q-py-sm q-px-xl" label="View OpenData sets" ></q-btn>
+		    		</div>
+		    		<div class="col-md-4 col-xs-12 q-jumbotron">
+					 	<div class="q-display-3">Api</div>
+					 	<div class="q-subheading">
+					      A text here
+			    		</div>
+			    		<hr class="q-hr q-my-lg"/>
+			    		<q-btn type="a" href="https://mars.dev.klee.lan.net:9443/store/" color="primary" class="q-py-sm q-px-xl" label="Access API Management" target="_blank" ></q-btn>
+		    		</div>
+	    		</div>
+			</q-page>		
 		</section>
 	</body>
 </html>

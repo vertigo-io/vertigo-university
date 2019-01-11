@@ -42,6 +42,11 @@
 	        </nav>
 		</section>
 	
+		<section>
+			<div layout:fragment="content-header-title" id="equipmentTitle">
+				<span class="text-bigger">Environment</span>
+			</div>
+		</section>
 	
 		<section layout:fragment="content" >
 			<vu:block id="weatheroverview" title="Weather Overview" icon="fas fa-sun">
@@ -86,7 +91,7 @@
 			</vu:block>
 
 			<vu:block id="farmoverview" title="Farm Overview" icon="fas fa-tractor">
-				<div class="row">
+				<div class="row items-center">
 					<div class="col-md-6 col-xs-12 text-center gutter-xs">
 						<!-- TODO Farm to water -->
 						<div class="q-title">Farms to water: </div>
@@ -104,21 +109,21 @@
 			</vu:block>
 			
 			<vu:block id="securityoverview" title="Security Overview" icon="fas fa-lock">
-				<div class="row gutter-xs">
-					<div class="col-md-6 col-xs-12 text-center gutter-xs">
+				<div class="row items-center gutter-md">
+					<div class="col-md-6 col-xs-12 column items-center">
 						<div class="q-title">Triggered alarm this month:</div>
 						<!-- TODO  appel du nombre d'alerte declenche ce mois-ci tout equipement de securite confondu-->
 						<!-- TODO Graphe qui somme l'ensemble des alertes des equipements de securite et fait un graphe  -->
+						<div >
+							<q-btn rounded push th:@click="|ajaxPostAlert('@{_alert}')|" :class="'on-left '" 
+							size="lg" color="red"  icon-right="fas fa-exclamation-circle"
+							aria-label="Triggered alarm in base" title="Trigger alarm in base" >Alert</q-btn>
+							<q-btn rounded push th:@click="|ajaxPostAlert('@{_stop}')|" :class="'on-left '" 
+							size="lg" color="primary"    icon-right="fas fa-bell-slash"
+							aria-label="Triggered alarm in base" title="Stop alarm in base" >Stop</q-btn>
+						</div>
 					</div>		
-					<div class="col-md-6 col-xs-12 text-center gutter-xs">
-						<!-- TODO  GROS bouton pour déclencher l'alarme  -->
-						<q-btn rounded push th:@click="|ajaxPostAlert('@{_alert}')|" :class="'on-left '" 
-						size="lg" color="red"  icon-right="fas fa-exclamation-circle"
-						aria-label="Triggered alarm in base" title="Trigger alarm in base" >Alert</q-btn>
-						<q-btn rounded push th:@click="|ajaxPostAlert('@{_stop}')|" :class="'on-left '" 
-						size="lg" color="primary"    icon-right="fas fa-bell-slash"
-						aria-label="Triggered alarm in base" title="Stop alarm in base" >Stop</q-btn>
-					
+					<div class="col-md-6 col-xs-12 column">
 						<!-- TODO une boite texte pour envoyer message au panneau d'affichage  -->
 						<div class="stacked-label">
 						  <textarea class="full-width"></textarea>
