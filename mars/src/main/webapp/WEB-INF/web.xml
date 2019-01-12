@@ -5,7 +5,7 @@
 
 	<display-name>Vertigo SpringMVC</display-name>
 	<listener>
-		<listener-class>io.vertigo.vega.impl.webservice.servlet.AppServletContextListener</listener-class>
+		<listener-class>io.vertigo.vega.impl.webservice.servlet.AppServletContextListener2</listener-class>
 	</listener>
 
 
@@ -14,7 +14,11 @@
 		Task/MDM de execution.kpr -->
 	<context-param>
 		<param-name>boot.applicationConfiguration</param-name>
-		<param-value>/boot/components/core.xml;/boot/components/services.xml</param-value>
+		<param-value>/boot/mars.json</param-value>
+	</context-param>
+	<context-param>
+		<param-name>boot.activeFlags</param-name>
+		<param-value>klee</param-value>
 	</context-param>
 
 	<filter>
