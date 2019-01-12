@@ -8,10 +8,16 @@
 			{"io.vertigo.core.plugins.resource.local.LocalResourceResolverPlugin" :{}},
 			{"io.vertigo.core.plugins.resource.url.URLResourceResolverPlugin" :{}},
 			{"io.vertigo.core.plugins.param.properties.PropertiesParamPlugin" :{
+				"__flags__" : ["klee"],
 				"url" : "W:\\Digital Factory\\02 - Solutions\\Vertigo\\Blockchain\\accounts\\marsWalletAccount.properties"
 			}},
 			{"io.vertigo.core.plugins.param.properties.PropertiesParamPlugin" :{
+				"__flags__" : ["klee"],
 				"url" : "w:\\Digital Factory\\02 - Solutions\\Vertigo\\apiKeys\\marsApiKeys.properties"
+			}},
+			{"io.vertigo.core.plugins.param.properties.PropertiesParamPlugin" :{
+				"__flags__" : ["home"],
+				"url" : "D:\\mars\\marsconf\\marsApiKeys.properties"
 			}},
 			{"io.vertigo.vega.plugins.webservice.servlet.WebAppContextParamPlugin": {}},
 			{"io.vertigo.core.plugins.param.xml.XmlParamPlugin" : {
@@ -26,6 +32,7 @@
 				"cache": {},
 				"memoryCache" : {},
 				"redis" : {
+					"__flags__" : ["klee"],
 					"host" :"mars.dev.klee.lan.net",
 					"port" :"6379" ,
 					"database" :"0"
@@ -37,11 +44,13 @@
 				"sql": {},
 				"timeseries": {},
 				"influxdb" : {
+					"__flags__" : ["klee"],
 					"host" : "http://mars.dev.klee.lan.net:8086",
 					"user" : "user",
 					"password" : "password",
 					"dbNames" :"mars-test;*"
 				},
+				"fakeTimeseries" : {"__flags__" : ["home"]},
 				"datasource" : {
 					"classname": "io.vertigo.database.impl.sql.vendor.h2.H2DataBase", 
 					"source": "java:/comp/env/jdbc/DataSource"
@@ -124,9 +133,11 @@
 		"io.vertigo.social.SocialFeatures": {
 			"features": {
 				"notifications": {},
-				"redisNotifications" : {},
+				"redisNotifications" : {"__flags__" : ["klee"]},
+				"memoryNotifications" : {"__flags__" : ["home"]},
 				"comments": {},
-				"redisComments" : {},
+				"redisComments" : {"__flags__" : ["klee"]},
+				"memoryComments" : {"__flags__" : ["home"]},
 				"webapi": {}
 			}
 		},
@@ -140,6 +151,7 @@
 		"io.vertigo.ledger.LedgerFeatures": {
 			"features": {
 				"ethereum": {
+					"__flags__" : ["klee"],
 					"urlRpcEthNode" : "http://docker-vertigo:8545",
 					"myAccountName" : "${myAccountName}",
 					"myPublicAddr" : "${myPublicAddr}",
@@ -147,7 +159,8 @@
 					"defaultDestPublicAddr" : "${myPublicAddr}",
 					"walletPassword" : "${walletPassword}",
 					"walletPath" : "${walletPath}"
-				}
+				},
+				"fake" : {"__flags__" : ["home"]}
 			}
 		},
 		"io.mars.commons.CommonsFeatures" :{},
@@ -156,6 +169,7 @@
 		"io.mars.basemanagement.BasemanagementFeatures" :{
 			"features": {
 				"mqtt" :{
+					"__flags__" : ["klee"],
 					"host" : "tcp://mars.dev.klee.lan.net:1883"
 				}
 			}
