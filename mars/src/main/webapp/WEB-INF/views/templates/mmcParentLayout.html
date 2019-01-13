@@ -32,8 +32,8 @@
 						@click="componentStates.navDrawer.showLeft = !componentStates.navDrawer.showLeft" icon="menu" aria-label="Toggle menu on left side"></q-btn>
 						<div class="gt-md"><img th:src="@{/static/img/logo MMC v0.1.png}" height="40px"/></div>
 						<q-toolbar-title class="gt-md">
-								MMC Managment 
-								<span slot="subtitle">Mars Mining Company</span>
+								Command Center 
+								<span slot="subtitle">Observe, Orient, Decide and Act</span>
 						</q-toolbar-title>
 					</div>
 					<!-- Brand and toggle get grouped for better mobile display -->
@@ -143,7 +143,7 @@
 		       	<q-list-header>Base managment</q-list-header>
 		        <q-item tag="a" th:href="@{/basemanagement/bases/}">
 		          <q-item-side icon="fas fa-dice-d20"></q-item-side>
-		          <q-item-main label="Managed Bases"></q-item-main>
+		          <q-item-main label="Bases"></q-item-main>
 		          <q-chip color="primary" dense square class="q-mr-xs">VR</q-chip>
 		        </q-item>
 		        <q-item tag="a" th:href="@{/basemanagement/equipments/}">
