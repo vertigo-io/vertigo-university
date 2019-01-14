@@ -14,7 +14,8 @@
 			<nav v-scroll-spy="{offset:150}">
 			    <q-list link style="height:100%">
 			        <q-item tag="a" href="#information">Information</q-item>
-			        <q-item tag="a" href="#contact">Contact actions</q-item>				      
+			        <q-item tag="a" href="#contact">Contact actions</q-item>	
+			        <q-item tag="a" href="#missions">Missions</q-item>				      			      
 	        	</q-list>
 	        </nav>
 		</section>
@@ -64,11 +65,34 @@
 						<q-btn color="primary" icon="swap_calls" label="All Terrain Tires"></q-btn>
 					</div>				
 				</vu:block>
+				<vu:block th:if="${model.modeReadOnly}" id="missions" title="Missions" withFab>
+					<vu:include-data object="person" field="personId" />
+					<vu:include-data object="missions" field="missionId" />
+					<q-btn fab color="primary" icon="add" aria-label="Add mission" title="Add mission"
+					 th:@click="|openModal('missionEditModal', '@{/hr/mission/new}', { 'personId' : vueData.person.personId, 'successCallback' : 'onMissionSuccess' })|"></q-btn>
+					<vu:table list="missions" componentId="missions" rowsPerPage="10">
+						<vu:column field="role" />
+						<vu:column field="baseName" />
+						<vu:column field="businessName" />
+						<vu:column name="action" label="Actions">
+							<q-btn round color="primary" icon="edit" label="View detail" th:@click="|openModal('missionEditModal', '@{/hr/mission/}' + props.row.missionId , {'successCallback' : 'onMissionSuccess' })|"></q-btn>
+						</vu:column>
+					</vu:table>
+				</vu:block>
 				<q-page-sticky position="bottom-right" :offset="[64, 64]">
 					<vu:button-submit th:if="${model.modeEdit}"   icon="save" label="Save" action="@{_save}" size="lg" color="primary" />
 					<vu:button-submit th:if="${model.modeCreate}" icon="save" label="Create" action="@{_create}" size="lg" color="primary"/>
 				</q-page-sticky>				
+				<vu:modal componentId="missionEditModal" title="Mission" iframe_width="800" iframe_height="400"  />
 			</vu:form>
+		</section>
+		<section layout:fragment="javscript-footer" >
+			<script type="text/javascript">
+				function onMissionSuccess() {
+					componentStates.missionEditModal.opened = false;
+					VUi.methods.httpPostAjax("[[@{/hr/person/_reloadMissions}]]", {});
+				}
+			</script>
 		</section>
 	</body>
 </html>

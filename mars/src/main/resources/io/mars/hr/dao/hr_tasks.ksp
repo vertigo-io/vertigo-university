@@ -12,3 +12,20 @@ create Task TK_GET_BASE_MANAGER {
     attribute MANAGER     {domain : DO_DT_PERSON_DTO    required:"false"  inOut :"out"}
 }
 
+
+create Task TK_GET_MISSIONS_DISPLAY_BY_PERSON_ID {  
+    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+    request : "
+           select 
+            		mis.mission_id as MISSION_ID,
+            		mis.role as ROLE,
+            		bas.name as BASE_NAME,
+            		bus.name as BUSINESS_NAME
+            	from mission mis
+            	left join base bas on mis.base_id = bas.base_id
+				left join business bus on mis.business_id = bus.business_id
+            	where mis.person_id = #PERSON_ID#;
+             "
+    attribute PERSON_ID     {domain : DO_ID         		required:"true"  inOut :"in"}
+    attribute MISSIONS     {domain : DO_DT_MISSION_DISPLAY_DTC    required:"true"  inOut :"out"}
+}

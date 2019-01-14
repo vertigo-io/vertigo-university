@@ -25,6 +25,13 @@ create DtDefinition DT_MISSION {
 	field ROLE {domain: DO_CODE label:"Role" required:"false"}
 }
 
+create DtDefinition DT_MISSION_DISPLAY {
+	field MISSION_ID {domain: DO_ID label:"Id" required:"false"}
+	field ROLE {domain: DO_CODE label:"Role" required:"false"}
+	field BASE_NAME {domain: DO_LABEL label:"Base" required:"false"}
+	field BUSINESS_NAME {domain: DO_LABEL label:"Business" required:"false"}
+}
+
 
 /* Associations */
 

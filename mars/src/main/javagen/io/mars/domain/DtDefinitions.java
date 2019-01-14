@@ -51,6 +51,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		MediaFileInfo(io.mars.common.domain.tools.file.MediaFileInfo.class),
 		/** Objet de données Mission. */
 		Mission(io.mars.hr.domain.Mission.class),
+		/** Objet de données MissionDisplay. */
+		MissionDisplay(io.mars.hr.domain.MissionDisplay.class),
 		/** Objet de données OpendataSet. */
 		OpendataSet(io.mars.opendata.domain.OpendataSet.class),
 		/** Objet de données OpendataSetStatus. */
@@ -339,6 +341,19 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		BASE_ID,
 		/** Propriété 'Business'. */
 		BUSINESS_ID	}
+
+	/**
+	 * Enumération des champs de MissionDisplay.
+	 */
+	public enum MissionDisplayFields implements DtFieldName<io.mars.hr.domain.MissionDisplay> {
+		/** Propriété 'Id'. */
+		MISSION_ID,
+		/** Propriété 'Role'. */
+		ROLE,
+		/** Propriété 'Base'. */
+		BASE_NAME,
+		/** Propriété 'Business'. */
+		BUSINESS_NAME	}
 
 	/**
 	 * Enumération des champs de OpendataSet.
