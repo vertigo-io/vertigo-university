@@ -14,31 +14,6 @@
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-interpolate/1.1.5/d3-interpolate.min.js" ></script>
 		<script th:src="@{/dashboard/static/dashboard.js}"></script>
 		<script th:src="@{/dashboard/static/dashboard.chartjs.js}"></script>
-		<script type="text/javascript">
-			VUiExtensions.dataX.message = "";
-			VUiExtensions.methods.ajaxPostAlert = function ajaxPostAlert(url) { 
-				var params = {};
-				params['CTX'] = this.vueData.CTX;
-				 this.$http.post(url, params , { emulateJSON: true })
-				.then( function (response ) {
-					if (response.body.CTX) {
-						this.vueData.CTX = response.body.CTX;
-					}
-				});
-			}
-			VUiExtensions.methods.ajaxSendMessage = function ajaxSendMessage() { 
-				var params = {
-						message : VUiExtensions.dataX.message
-				};
-				params['CTX'] = this.vueData.CTX;
-				 this.$http.post("_sendMessage", params , { emulateJSON: true })
-				.then( function (response ) {
-					if (response.body.CTX) {
-						this.vueData.CTX = response.body.CTX;
-					}
-				});
-			}
-		</script>
 	</head>
 	
 	<body>
@@ -127,10 +102,10 @@
 						<!-- TODO  appel du nombre d'alerte declenche ce mois-ci tout equipement de securite confondu-->
 						<!-- TODO Graphe qui somme l'ensemble des alertes des equipements de securite et fait un graphe  -->
 						<div >
-							<q-btn rounded push th:@click="|ajaxPostAlert('@{_alert}')|" :class="'on-left '" 
+							<q-btn rounded push th:@click="|httpPostAjax('@{_alert}', {})|" :class="'on-left '" 
 							size="lg" color="red"  icon-right="fas fa-exclamation-circle"
 							aria-label="Triggered alarm in base" title="Trigger alarm in base" >Alert</q-btn>
-							<q-btn rounded push th:@click="|ajaxPostAlert('@{_stop}')|" :class="'on-left '" 
+							<q-btn rounded push th:@click="|httpPostAjax('@{_stop}', {})|" :class="'on-left '" 
 							size="lg" color="primary"    icon-right="fas fa-bell-slash"
 							aria-label="Triggered alarm in base" title="Stop alarm in base" >Stop</q-btn>
 						</div>
@@ -139,14 +114,14 @@
 						<!-- TODO une boite texte pour envoyer message au panneau d'affichage  -->
 						<div class="q-title">Send a message to the Led Displayer Panel</div>
 						<q-input v-model="dataX.message"
-							:after="[
+							th::after="|[
 								{
 									icon: 'arrow_forward',
 									handler () {
-										ajaxSendMessage();
+										httpPostAjax('@{_sendMessage}', {message : dataX.message});
 									}
 								}
-							]"></q-input>
+							]|"></q-input>
 					</div>
 				</div>
 				

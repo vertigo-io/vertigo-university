@@ -82,18 +82,7 @@
 			<script type="text/javascript">
 				function onWorkOrderSuccess() {
 					componentStates.workOrderEditModal.opened = false;
-					var params = {};
-					params['CTX'] = vueData.CTX;
-					Vue.http.post("[[@{/maintenance/ticket/_reloadWorkOrders}]]", params , { emulateJSON: true }).then( function (response ) {
-						if (response.body.CTX) {
-							vueData.CTX = response.body.CTX;
-						}
-						Object.keys(response.body).forEach(function (key) {
-							if ('CTX' != key) {
-								vueData[key] = response.body[key];
-							}
-						});
-					});
+					VUi.methods.httpPostAjax("[[@{/maintenance/ticket/_reloadWorkOrders}]]", {});
 				}
 			</script>
 		</section>
