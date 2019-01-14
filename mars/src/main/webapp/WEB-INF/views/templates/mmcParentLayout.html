@@ -12,9 +12,9 @@
     
   	<link rel="stylesheet" th:href="@{/static/css/mars.css}"/>
 	<link rel="icon" th:href="@{/static/img/favicon.ico}"/>
+   	<script src="https://unpkg.com/vue-cookies@1.5.12/vue-cookies.js"></script> 
 	
 	<script th:src="@{/vertigo-ui/static/js/v-components/v-notifications.js}"></script>
-    
    	<script th:src="@{/static/js/mars.js}"></script>
 </head>
 
@@ -28,7 +28,7 @@
 				<q-toolbar class="justify-between">
 					<div class="row">
 						<q-btn flat round dense class="lt-lg"
-						th:with="showLeft=${model.vContext['componentStates'].addComponentState('navDrawer').addPrimitive('showLeft', true)}"
+						th:with="showLeft=${model.vContext['componentStates'].addComponentState('navDrawer').addPrimitive('showLeft', true)}, mini=${model.vContext['componentStates']['navDrawer'].addPrimitive('mini', false)}"
 						@click="componentStates.navDrawer.showLeft = !componentStates.navDrawer.showLeft" icon="menu" aria-label="Toggle menu on left side"></q-btn>
 						<div class="gt-md"><img th:src="@{/static/img/logo MMC white v0.1.png}" height="40px"/></div>
 						<q-toolbar-title class="gt-md">
@@ -130,6 +130,7 @@
   			<q-layout-drawer
   			  content-class="bg-white text-primary"
 		      side="left"
+		      :mini="function() {var miniMenu = this.$cookies.get('miniMenu', true) === 'true';componentStates.navDrawer.mini = miniMenu;return miniMenu;}()"
 		      v-model="componentStates.navDrawer.showLeft">
 		      
 		      <q-list link style="height:100%">
@@ -144,13 +145,13 @@
 		        <q-item tag="a" th:href="@{/basemanagement/bases/}">
 		          <q-item-side icon="fas fa-dice-d20"></q-item-side>
 		          <q-item-main label="Bases"></q-item-main>
-		          <q-chip color="primary" dense square class="q-mr-xs">VR</q-chip>
+		          <q-chip color="primary" v-if="!componentStates.navDrawer.mini" dense square class="q-mr-xs">VR</q-chip>
 		        </q-item>
 		        <q-item tag="a" th:href="@{/basemanagement/equipments/}">
 		          <q-item-side icon="fas fa-rocket"></q-item-side>
 		          <q-item-main label="Equipments" ></q-item-main>
-		          <q-chip color="primary" dense square class="q-mr-xs">3D</q-chip>
-		          <q-chip color="primary" dense square class="q-mr-xs">VR</q-chip>
+		          <q-chip color="primary" v-if="!componentStates.navDrawer.mini" dense square class="q-mr-xs">3D</q-chip>
+		          <q-chip color="primary" v-if="!componentStates.navDrawer.mini" dense square class="q-mr-xs">VR</q-chip>
 		        </q-item>
 		       	<q-item-separator></q-item-separator>
 		       	<q-list-header>People</q-list-header>
@@ -177,13 +178,13 @@
 		        <q-item tag="a" th:href="@{/share/}">
 		          <q-item-side icon="fas fa-share-alt"></q-item-side>
 		          <q-item-main label="Share"></q-item-main>
-		          <q-chip color="primary" dense square class="q-mr-xs">API</q-chip>
-		          <q-chip color="primary" dense square class="q-mr-xs">OpenData</q-chip>
+		          <q-chip color="primary" v-if="!componentStates.navDrawer.mini" dense square class="q-mr-xs">API</q-chip>
+		          <q-chip color="primary" v-if="!componentStates.navDrawer.mini" dense square class="q-mr-xs">OpenData</q-chip>
 		        </q-item>
 		        <q-item tag="a" th:href="@{/environment/}">
 		          <q-item-side icon="fas fa-cloud-sun"></q-item-side>
 		          <q-item-main label="Environment" ></q-item-main>
-		          <q-chip color="primary" dense square class="q-mr-xs">IoT</q-chip>
+		          <q-chip color="primary" v-if="!componentStates.navDrawer.mini" dense square class="q-mr-xs">IoT</q-chip>
 		        </q-item>
 		        <q-item tag="a" th:href="@{/dashboard/modules/vui}" target="_blank">
 		          <q-item-side icon="fas fa-chart-bar" ></q-item-side>
@@ -194,18 +195,23 @@
 		        <q-item tag="a" th:href="@{/digitaltrust/}">
 		          <q-item-side icon="fas fa-award"></q-item-side>
 		          <q-item-main label="Digital Trust"></q-item-main>
-		          <q-chip color="primary" dense square class="q-mr-xs">Blockchain</q-chip>
+		          <q-chip color="primary" v-if="!componentStates.navDrawer.mini" dense square class="q-mr-xs">Blockchain</q-chip>
 		        </q-item>
 		        <q-item tag="a" th:href="@{/accesscontrol/}">
 		          <q-item-side icon="fas fa-address-card"></q-item-side>
 		          <q-item-main label="Access Control"></q-item-main>
-		          <q-chip color="primary" dense square class="q-mr-xs">AI</q-chip>
+		          <q-chip color="primary" v-if="!componentStates.navDrawer.mini" dense square class="q-mr-xs">AI</q-chip>
 		        </q-item>
+		        <q-item-separator></q-item-separator>
+		        <q-item v-if="componentStates.navDrawer.mini"
+						@click.native="componentStates.navDrawer.mini = false; $cookies.set('miniMenu', false)" title="Expand menu">
+					<q-item-side icon="arrow_right_alt"></q-item-side>
+				</q-item>
+				 <q-item v-if="!componentStates.navDrawer.mini"
+						@click.native="componentStates.navDrawer.mini = true; $cookies.set('miniMenu', true)" title="Minify menu">
+					<q-item-side icon="arrow_left" :right="true"></q-item-side>
+				</q-item>
 		        </nav>
-		        <q-item class="no-hoverable">&nbsp;</q-item>
-		        <q-item class="no-hoverable">
-		       	 <div class="poweredBy"><div>Powered by</div> <div><img th:src="@{/static/img/logo-digital-factory-P3-petit.png}"/></div></div>
-		        </q-item>
 		        </q-list>
 		        
 		    </q-layout-drawer>
@@ -213,6 +219,11 @@
 			<q-page-container class="row justify-center q-pb-lg" >
 				<section class="col container-bottom-padding" layout:fragment="page-container"></section>
 			</q-page-container>
+			
+			
+			<q-page-sticky position="bottom-left" :offset="[18,0]" class="poweredBy">
+			    <img th:src="@{/static/img/logo-digital-factory-P3-petit.png}"  />
+			</q-page-sticky>
 			<div class="fixed-bottom-right version-watermark">
     			<div class="row items-center">
 					<img th:src="@{/static/img/logo MMC grey v0.1.png}" height="30px" class="on-left"/> v1.0.0 &copy; 2153 Mars Mining Corp.
