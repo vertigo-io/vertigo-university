@@ -27,7 +27,7 @@
 			<div layout:fragment="content-header-actions">
 				<vu:button-submit th:if="${model.modeEdit}"   action="@{_cancel}" :round size="lg" color="primary" icon="fas fa-ban" :flat aria-label="Cancel" title="Cancel" class="on-left"  />
 				<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>
-				<q-btn th:if="${!model.modeCreate}" round size="lg" color="primary" icon="add" aria-label="Add work order" title="Add work order" th:@click="|openModal('workOrderEditModal', '@{/maintenance/workorder/new}', { 'ticketId' : vueData.ticket.ticketId })|"></q-btn>
+				<q-btn th:if="${!model.modeCreate}" round size="lg" color="primary" icon="add" aria-label="Add work order" title="Add work order" th:@click="|openModal('workOrderEditModal', '@{/maintenance/workorder/new}', { 'ticketId' : vueData.ticket.ticketId, 'successCallback' : 'onWorkOrderSuccess' })|"></q-btn>
 				<q-btn th:if="${!model.modeCreate}" round size="lg" color="primary" icon="fas fa-cubes" type="a" th:href="@{/basemanagement/equipment/} + ${model.ticket.equipmentId}"  aria-label="Go to equipment" title="Go to equipment" class="on-left" ></q-btn>
 			</div>
 		</section>

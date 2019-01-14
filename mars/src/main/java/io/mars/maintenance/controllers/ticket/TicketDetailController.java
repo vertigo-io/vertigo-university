@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import io.mars.maintenance.domain.Ticket;
 import io.mars.maintenance.domain.TicketStatus;
@@ -32,10 +33,12 @@ public class TicketDetailController extends AbstractVSpringMvcController {
 	private final ViewContextKey<WorkOrder> workOrdersKey = ViewContextKey.of("workOrders");
 
 	@GetMapping("/new")
-	public void initContext(final ViewContext viewContext) {
+	public void initCreateContext(final ViewContext viewContext, @RequestParam("equipmentId") final Long equipmentId) {
 		loadLists(viewContext);
 		//---
-		viewContext.publishDto(ticketKey, new Ticket());
+		final Ticket ticket = new Ticket();
+		ticket.setEquipmentId(equipmentId);
+		viewContext.publishDto(ticketKey, ticket);
 		//---
 		toModeCreate();
 	}
