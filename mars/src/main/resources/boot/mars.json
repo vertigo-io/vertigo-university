@@ -101,7 +101,8 @@
 					"userIdentityEntity" :"DT_PERSON",
 					"groupIdentityEntity" :"DT_GROUPS",
 					"userAuthField" :"EMAIL",
-					"userToAccountMapping" :"id:PERSON_ID, displayName:LAST_NAME, email:EMAIL, authToken:EMAIL",
+					"photoFileInfo" : "FI_FILE_INFO_STD",
+					"userToAccountMapping" :"id:PERSON_ID, displayName:LAST_NAME, email:EMAIL, authToken:EMAIL, photo: PICTUREFILE_ID",
 					"groupToGroupAccountMapping" :"id:GROUP_ID, displayName:NAME"
 				}
 			}
