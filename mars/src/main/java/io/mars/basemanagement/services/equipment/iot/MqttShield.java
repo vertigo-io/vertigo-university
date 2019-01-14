@@ -198,9 +198,16 @@ public class MqttShield implements Component, Activeable {
 		//---
 		final String[] parsedMessage = parseMqttMessage(message);
 		final Integer actuatorValue = Integer.parseInt(parsedMessage[1]);
+		final Integer parsedMessageLength = parsedMessage.length;
+
 		LOGGER.info("inputEvent " + message);
-		if (parsedMessage.length == 3) {
-			final String payload = parsedMessage[2];
+		if (parsedMessageLength >= 3) {
+			String tempMessage = "";
+			for (int i = 2; i < parsedMessageLength; i++) {
+				tempMessage += parsedMessage[i];
+				tempMessage += " ";
+			}
+			final String payload = tempMessage.substring(0, tempMessage.length() - 1);
 			return new InputEvent(InputEvent.Type.of(actuatorValue), topic, payload);
 		}
 		LOGGER.info("inputEvent Case else");
