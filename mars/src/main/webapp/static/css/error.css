@@ -107,7 +107,7 @@ body {
 }
 
 .denied__wrapper {
-  max-width: 390px;
+  max-width: 590px;
   width: 100%;
   height: 390px;
   display: block;
@@ -129,7 +129,6 @@ body {
   text-align: center;
   color: #fff;
   font-size: 19px;
-  line-height: 23px;
   max-width: 330px;
   margin: 0px auto 30px auto;
   font-family: "Dosis", sans-serif;
@@ -138,7 +137,6 @@ body {
 
 .permission_denied h3 span {
   position: relative;
-  width: 65px;
   display: inline-block;
 }
 
@@ -147,7 +145,7 @@ body {
   border-bottom: 3px solid #ffbb39;
   position: absolute;
   left: 0;
-  top: 43%;
+  top: 50%;
   width: 100%;
 }
 
@@ -241,4 +239,31 @@ body {
     transform: translateY(-3px);
   }
 }
+
+#noSession #planet {
+  animation: shrunk 60s infinite ease-out alternate;
+}
+
+@keyframes shrunk {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.01);
+  }
+}
+
+#noSession .c-rocket {
+  animation: growup 60s infinite ease-out alternate;
+}
+
+@keyframes growup {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.2);
+  }
+}
+
 
