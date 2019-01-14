@@ -37,9 +37,9 @@ public class OpendataSetServices implements Component, Activeable {
 	public void start() {
 
 		defaultOpendataSetPicture = fileManager.createFile(
-				"defaultPhoto.png",
+				"defaultOpendataSetPhoto.png",
 				"image/png",
-				OpendataSetServices.class.getResource("/defaultPhoto.png"));
+				OpendataSetServices.class.getResource("/defaultOpendataSetPhoto.png"));
 	}
 
 	@Override
