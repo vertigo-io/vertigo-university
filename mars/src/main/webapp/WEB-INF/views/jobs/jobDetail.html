@@ -94,7 +94,7 @@
 					<input type="hidden" name="vContext[job][initialParams]" v-bind:value="vueData.job.initialParams" ></input>
 					<v-json-editor v-model="vueData.job.initialParams" th::readonly="${model.modeReadOnly}" :cols="2"></v-json-editor>
 				</vu:block>
-				<q-page-sticky position="bottom-right" :offset="[48, 48]">
+				<q-page-sticky position="bottom-right" :offset="[64, 64]">
 					<vu:button-submit th:if="${model.modeEdit}"   icon="save" label="Save" action="@{_save}" size="lg" color="primary" />
 				</q-page-sticky>
 			</vu:form>
