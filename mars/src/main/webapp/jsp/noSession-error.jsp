@@ -19,7 +19,7 @@
   <div id="particles-js"></div>
   <div class="denied__wrapper">
     <h1>401</h1>
-    <h3>Oups, you have been inactive for too long, your <span>Spaceship</span> session go too far<br/> Hmm, looks like your login had expired.</h3>
+    <h3>Oups, you have been inactive for too long, your <span>Spaceship</span> session went too far<br/> Hmm, looks like your login has expired.</h3>
     
 	<svg class="c-rocket" xmlns="http://www.w3.org/2000/svg" viewBox="-450 -450 1500 1500" style="position: absolute; top: 100px;  left: 200px; z-index:-1">
 		<path d="M359.828 328.707L246.761 378.84l37.333 56.533 52.267-48c-5.333-21.333 3.2-44.8 23.467-58.666z" fill="#ced6e0"/>

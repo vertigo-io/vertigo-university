@@ -218,11 +218,6 @@ body {
   .permission_denied h3 span {
     width: 60px;
   }
-  #astronaut {
-    width: 35px;
-    right: 40px;
-    top: 170px;
-  }
 }
 
 .saturn,
