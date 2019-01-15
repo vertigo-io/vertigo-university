@@ -16,6 +16,7 @@
 	
 	<script th:src="@{/vertigo-ui/static/js/v-components/v-notifications.js}"></script>
    	<script th:src="@{/static/js/mars.js}"></script>
+   	<script th:src="@{/static/chatbot/chatbot.js}"></script>
 </head>
 
 <body class="mat desktop no-touch platform-mat">
@@ -238,10 +239,11 @@
 		</q-layout>
 		
 	</vu:page>
-	
+	<script type="text/javascript">
+		Chatbot.init({url : ".", botBaseUrl : "[[@{/static/chatbot/}]]"});
+	</script>
 	<div layout:fragment="javscript-footer">
 	</div>
-		
 			
 </body>
 </html>

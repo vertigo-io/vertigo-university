@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no,initial-scale=1,maximum-scale=1,minimum-scale=1,width=device-width">
+
+    <title>Nova-bot</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/quasar-framework@^0.17.17/dist/umd/quasar.mat.min.css" rel="stylesheet" type="text/css">
+
+    <style type="text/css">
+		body {
+			color: black;
+		}
+		
+		#page {
+			visibility: hidden;
+		}
+		
+		main.q-layout-page {
+			height:100vh;
+			padding: 50px 8px 10px 8px;
+		}
+		
+		.toolbar {
+			height: 40px;
+			min-height: 40px;
+			z-index: 10000;
+		}
+		
+		.toolbar button {
+			margin-right: 5px;
+		}
+		
+		.q-loading-bar.top {
+			top: 40px;
+			height: 4px !important;
+		}
+		
+		.message-processing {
+			width: 80px;
+		}
+		
+		.docs-btn .q-btn {
+			margin: 5px;
+		}
+
+		.scroll.fit {
+			height: auto !important;
+			align-self: stretch;
+		}
+		
+		.sys-chat .q-message-received .q-message-text {
+			border-radius: 10px;
+		}
+		
+		.q-message-received .q-message-text {
+			border-radius: 10px 10px 10px 0px;
+		}
+		
+		.q-message-sent .q-message-text {
+			border-radius: 10px 10px 0px 10px;
+		}
+		
+		.q-message-avatar {
+			background-color: #e0e0e0;
+			-moz-user-select: none !important;
+			-ms-user-select: none !important;
+			-webkit-user-select: none !important;
+			user-select: none !important;
+			pointer-events: none !important;
+		}
+    </style>
+  </head>
+  <body style="color:black">
+    <div id="q-app">
+      <q-layout view="lHh Lpr fff">
+        <q-page-container>
+			<div class="toolbar non-selectable fixed full-width bg-primary text-white row items-center">
+				<div class="title col-grow q-ml-md">
+					Nova-help
+				</div>
+				<q-btn round flat color="white" text-color="black" size="sm" @click="menu = !menu">
+					<q-icon name="menu"></q-icon>
+				</q-btn>
+				<q-btn round flat color="white" text-color="black" size="sm" @click="minimize()">
+					<q-icon name="minimize"></q-icon>
+				</q-btn>
+				<q-btn round flat color="white" text-color="black" size="sm" @click="close()">
+					<q-icon name="close"></q-icon>
+				</q-btn>
+			</div>
+			<div id="loading" class="column items-center q-pt-xl">Chargement ...</div>
+			<q-page id="page" padding class="column animate-fade">
+				<div v-if="!menu" id="main" class="column col-grow">
+					<q-scroll-area class="bg-grey-2 col-grow row q-pa-sm" ref="scroller">
+						<div class="q-pr-md">
+							<div v-for="(msg, index) in messages">
+								<q-chat-message
+									v-if = "msg.rating"
+									class = "animate-fade"
+									:key = "'msgRating-'+index"
+									:sent = "msg.sent"
+									:bg-color = "msg.bgColor"
+									:avatar = "msg.avatar"
+									>
+									<q-rating
+										v-model="msg.rating"
+										:max="5"
+										style="font-size: 2rem;"
+										readonly
+										></q-rating>
+								</q-chat-message>
+								<q-chat-message
+									v-if = "msg.text"
+									class = "animate-fade"
+									:key = "'msg-'+index"
+									:label = "msg.label"
+									:sent = "msg.sent"
+									:text-color = "msg.textColor"
+									:bg-color = "msg.bgColor"
+									:name = "msg.name"
+									:avatar = "msg.avatar"
+									:text = "msg.text"
+									:stamp = "msg.stamp"
+									></q-chat-message>
+							</div>
+							<div class="sys-chat">
+								<q-chat-message
+									v-if="error"
+									class = "animate-fade"
+									bg-color = "orange-4"
+									text-color = "black"
+									size = "12"
+									>
+									<div class="q-pb-sm">
+										Une erreur est survenue lors de l'envoi du message
+									</div>
+									<q-btn
+											class = "full-width"
+											@click = "askBot(lastPayload)"
+											label = "Essayez de nouveau"
+											color = "white"
+											text-color="black"
+											></q-btn>
+								</q-chat-message>
+							</div>
+							<div class="sys-chat non-selectable">
+								<q-chat-message
+									v-if = "inputConfig.buttons.length > 0"
+									class = "animate-fade"
+									bg-color = "primary"
+									size = "12"
+									>
+									<div class="text-blue-2 q-caption">
+										Réponses suggérées
+									</div>
+									<div class="row docs-btn">
+										<q-btn
+											v-for = "(btn, index) in inputConfig.buttons"
+											class = "full-width"
+											:key = "'repChatBtn-'+index"
+											@click = "postAnswerBtn(btn)"
+											:label = "btn.title"
+											color = "white"
+											text-color="black"
+											></q-btn>
+									</div>
+								</q-chat-message>
+							</div>
+							<div class="message-processing sys-chat non-selectable" >
+								<q-chat-message
+									v-if="processing" 
+									class = "animate-fade"
+									bg-color= "grey-4"
+								>
+									<q-spinner-dots size="2em"></q-spinner-dots>
+								</q-chat-message>
+							</div>
+							<div class="non-selectable">
+								<q-chat-message
+									v-if="inputConfig.showRating"
+									class="animate-fade"
+									bg-color = "primary"
+									sent
+								>
+									<q-rating
+										v-model="rating"
+										:max="4"
+										style="font-size: 2rem;"
+										></q-rating>
+								</q-chat-message>
+							</div>
+						</div>
+					</q-scroll-area>
+					<div class="message-response row docs-btn q-pl-sm non-selectable">
+						<q-input :type="inputConfig.modeTextarea ? 'textarea' : 'text'"
+								 ref="input"
+								 @keyup.enter="inputConfig.modeTextarea ? false : (inputConfig.responseText.trim() === '' && inputConfig.rating === 0) ? false : postAnswerText()"
+								 :max-height="100"
+								 class="col-grow"
+								 v-model="inputConfig.responseText"
+								 placeholder="Ecrire un message"
+								 :disable="processing || error"
+								 :loading="processing"></q-input>
+					
+						<q-btn round color="primary" @click="postAnswerText()" :disable="processing || (inputConfig.responseText.trim() === '' && inputConfig.rating === 0)">
+							<q-icon name="send"></q-icon>
+						</q-btn>
+						<q-btn round color="red" @click="restart" v-if="devMode === true">
+							<q-icon name="refresh"></q-icon>
+						</q-btn>
+					</div>
+				</div>
+				<div v-if="menu" id="menu" class="column col-grow bg-grey-2 q-pa-sm animate-fade">
+					Aucune données à caractère personnel n'est enregistré.
+					<q-btn
+						label="Fermer"
+						class="q-mt-md"
+						@click="menu = false"
+						color = "white"
+						text-color="black">
+					</q-btn>
+				</div>
+			</q-page>
+        </q-page-container>
+      </q-layout>
+    </div>
+
+
+	<script src="https://cdn.jsdelivr.net/npm/vue@latest/dist/vue.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/quasar-framework@^0.17.17/dist/umd/quasar.mat.umd.min.js"></script>
+	
+	<script src="https://cdn.jsdelivr.net/npm/quasar-framework@^0.17.17/dist/umd/quasar.ie.polyfills.umd.min.js"></script>
+<!--    <script src="https://cdn.jsdelivr.net/npm/quasar-framework@^0.17.17/dist/umd/i18n.fr.umd.min.js"></script>-->
+<!--
+    <script src="https://cdn.jsdelivr.net/npm/vue@latest/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quasar-framework@^0.17.17/dist/umd/quasar.mat.umd.js"></script>
+-->
+	<script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.1"></script>
+
+    <script>
+		var convId = 42;
+		var _botBaseUrl = "http://localhost:5005/";
+		
+		var sleep = function(milliseconds) {
+		  return new Promise(function(resolve) {setTimeout(resolve, milliseconds)});
+		}
+		
+		var getUrlVars = function() {
+			var vars = {};
+			var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+				vars[key] = value;
+			});
+			return vars;
+		}
+	
+		// Quasar.i18n.set(Quasar.i18n.fr)
+
+		var chatbot = new Vue({
+			el: '#q-app',
+			data: {
+				// config
+				botName: "Noa",
+				botUrl: _botBaseUrl + "webhooks/rest/webhook",
+				devMode: false,
+				minTimeBetweenMessages: 1000,
+				botAvatar: "images/avatar/avatar_chat.png",
+				// technique
+				inputConfig: {
+					modeTextarea : false, // TODO, il exste d'autres modes, par ex email
+					responseText: "",
+					responsePattern : "",
+					showRating : false,
+					rating: 0,
+					buttons: [],
+				},
+				prevInputConfig: {},
+				lastPayload: null,
+				processing: false,
+				error: false,
+				messages: [],
+				keepAction: false,
+				menu: false,
+				lastUserInteraction: 0,
+				watingMessagesStack: []
+			},
+			methods: {
+				initBot: function() {
+					document.getElementById('page').style.visibility="visible";
+					document.getElementById('loading').style.display="none";
+					convId = Math.random();
+					
+					chatbot.askBot('/start'+ JSON.stringify(getUrlVars())); // lancement de la phrase d'accueil
+				},
+				postAnswerBtn: function (btn) {
+					this.messages.push({
+						text: [btn.title],
+						sent: true,
+						bgColor: "primary",
+						textColor: "white"
+					});
+
+					chatbot._scrollToBottom();
+					
+					chatbot.askBot(btn.payload);
+				},
+				postAnswerText: function () {
+					var sanitizedString = chatbot.inputConfig.responseText.trim().replace(/(?:\r\n|\r|\n)/g, '<br>');
+					
+					this.messages.push({
+						text: sanitizedString !== '' ? [sanitizedString] : null,
+						rating: chatbot.inputConfig.rating > 0 ? chatbot.inputConfig.rating : null,
+						sent: true,
+						bgColor: "primary",
+						textColor: "white"
+					});
+
+					chatbot._scrollToBottom();
+					
+					var response = chatbot.inputConfig.responsePattern === "" ? sanitizedString.replace(/(")/g, "\"")
+																  : chatbot.inputConfig.responsePattern.replace("#", sanitizedString.replace(/(")/g, "\\\""));
+					
+					chatbot.askBot(response);
+				},
+				_scrollToBottom: function () {
+					this.$refs.scroller.setScrollPosition(this.$refs.scroller.scrollHeight, 400);
+				},
+				askBot: function (value) {
+					chatbot.prevInputConfig = JSON.parse(JSON.stringify(chatbot.inputConfig));
+					chatbot.reinitInput();
+					chatbot.lastPayload = value;
+					chatbot.processing = true;
+					
+					chatbot.lastUserInteraction = Date.now();
+					
+					Vue.http.post(chatbot.botUrl, {sender: convId, message: value})
+						.then(function(httpResponse) {
+							// success
+							httpResponse.body.forEach(function(value, key) {
+								chatbot.watingMessagesStack.push(value);
+							});
+							
+							chatbot._displayMessages();
+						},
+						function(httpResponse) {
+							// error
+							chatbot.error = true;
+							
+							chatbot.processing = false;
+							chatbot._scrollToBottom();
+						});
+						
+				},
+				_displayMessages: function () {
+					if (chatbot.watingMessagesStack.length > 0) {
+						var currentMessage = chatbot.watingMessagesStack.shift();
+						var watingTime = chatbot.lastUserInteraction - Date.now() + chatbot.minTimeBetweenMessages;
+						
+						sleep(watingTime).then(function() {
+							chatbot._processResponse(currentMessage);
+							chatbot.lastUserInteraction = Date.now();
+							chatbot._displayMessages();
+						});
+					} else {
+						chatbot.processing = false;
+						if (chatbot.keepAction) {
+							chatbot.inputConfig = chatbot.prevInputConfig;
+							chatbot.inputConfig.responseText = "";
+							chatbot.keepAction = false;
+						}
+						
+						sleep(1).then(function() { // en différé le temps que la vue soit mise à jour
+							chatbot.$refs.input.focus();
+						});
+					}
+				},
+				_processResponse: function (response) {
+				var lastMsg = chatbot.messages[chatbot.messages.length-1];
+					if (lastMsg && !lastMsg.sent) {
+						// ajoute un message à un précédent message du bot
+						lastMsg.text.push(response.text);
+					} else {
+						// première réponse du bot
+						chatbot.messages.push({
+							avatar: chatbot.botAvatar,
+							text: [response.text],
+							bgColor: "grey-4"
+						});
+					}
+					
+					if (response.buttons) {
+						response.buttons.forEach(function(value, key) {
+							if (value.title.startsWith("#")) {
+								var cmd = value.title.substring(1);
+								if (cmd === "textarea") chatbot.inputConfig.modeTextarea = true;
+								if (cmd === "eval") chatbot.inputConfig.showRating = true;
+								if (cmd === "keep_action") chatbot.keepAction = true;
+								if (value.payload) chatbot.inputConfig.responsePattern = value.payload;
+							} else {
+								chatbot.inputConfig.buttons.push(value);
+							}
+						});
+					}
+					
+					chatbot._scrollToBottom();
+				},
+				restart: function () {
+					this.messages.push({
+						text: ["Redémarrage de la conversation."],
+						bgColor: "orange"
+					});
+					chatbot._scrollToBottom();
+					
+					Vue.http.post(chatbot.botUrl, '{"sender":"' + convId + '","message":"/restart"}')
+					.then(function(httpResponse) {
+						chatbot.askBot("/start"); // lancement de la phrase d'accueil
+					});
+				},
+				reinitInput: function () {
+					chatbot.inputConfig.modeTextarea = false;
+					chatbot.inputConfig.responsePattern = "";
+					chatbot.inputConfig.responseText = "";
+					chatbot.inputConfig.showRating = false;
+					chatbot.inputConfig.rating = 0;
+					chatbot.inputConfig.buttons = [];
+					chatbot.error = false;
+				},
+				minimize: function() {
+					parent.postMessage("Chatbot.minimize", "*");
+				},
+				close: function() {
+					this.$q.dialog({
+						title: 'Confirmation',
+						message: 'Si vous fermez cette fenêtre, la conversation sera terminée.',
+						ok: 'Fermer',
+						cancel: 'Annuler'
+					}).then(function() {
+						parent.postMessage("Chatbot.close", "*");
+					});
+					
+				}
+			}
+		});
+		
+		chatbot.initBot();
+    </script>
+  </body>
+</html>
