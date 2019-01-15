@@ -20,7 +20,7 @@
 						<vu:include-data-primitive key="criteria"/>
 						<q-search inverted-light color="white" icon="search" placeholder="Type, Name..." v-model="vueData.criteria" @input="search('equipments')"></q-search>
 						<br/>
-						<vu:table color="secondary" list="equipments_list" componentId="equipmentsTable" sortUrl="${searchUrl}">
+						<vu:table list="equipments_list" componentId="equipmentsTable" sortUrl="${searchUrl}">
 							<vu:column field="equipmentId" />
 							<vu:column field="name" />
 							<vu:column field="code" sortable="true"/>
