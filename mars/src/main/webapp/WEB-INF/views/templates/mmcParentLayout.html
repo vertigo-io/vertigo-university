@@ -45,11 +45,12 @@
 					<div>
 						<v-notifications th:base-url="@{/api/}" :type-icon-map="notificationTypes()" ></v-notifications>
 						<q-btn flat icon-right="arrow_drop_down" class="on-left gt-md">
-							<vu:include-data-protected object="connectedUser" field="picturefileId"/>
-							<img th::src="|'@{/hr/person/picture/}'+vueData.connectedUser.picturefileId|" class="avatar"/>
+							<vu:include-data object="connectedUser" field="personId"/>
+							<img th::src="|'@{/api/x/accounts/api/}'+vueData.connectedUser.personId+'/photo'|" class="avatar"/>
 							<div class="on-right"><span th:text="${model.vContext['connectedUser']['firstName']+' '+model.vContext['connectedUser']['lastName']}"></span><br/><small><span th:text="${model.vContext['activeProfile']}"></span></small></div>
 							<q-popover>
 							  <q-list link>
+							  	<q-list-header class="q-py-none row items-center justify-between">Change current profil</q-list-header>
 							  	<q-item>
 							    	<q-item-main><q-btn type="a" flat label="Viewer" th:href="@{/userProfil/_changeProfile?profile=Viewer}" /></q-item-main>
 							    </q-item>
@@ -59,7 +60,12 @@
 							    <q-item>
 							    	<q-item-main><q-btn type="a" flat label="Administrator" th:href="@{/userProfil/_changeProfile?profile=Administrator}" /></q-item-main>
 							    </q-item>
-							    <q-item>
+							    <q-item-separator></q-item-separator>
+							  	<q-item>
+							    	<q-item-main><q-btn icon="edit" type="a" flat label="Edit my data" th::href="|'@{/hr/person/}'+vueData.connectedUser.personId|"/></q-item-main>
+							    </q-item>
+							  	<q-item-separator></q-item-separator>
+							    <q-item class="text-center">
 							    	<q-item-main><q-btn type="a" outline label="Disconnect" th:href="@{/login/_logout}" /></q-item-main>
 							    </q-item>
 							  </q-list>
