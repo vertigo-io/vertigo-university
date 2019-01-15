@@ -25,9 +25,13 @@
 		<q-page class="row col-12 layout-padding col justify-center">			
 			<div class="gutter-lg col ">
 				<div class="row gutter-lg " >
-					<div class="col-md-3 col-xs-12 row justify-center items-center">
+					<div class="col-md-3 col-xs-12">
+						<q-card color="white" >
+						<q-card-main class="row justify-center items-center" style="height: 156px;">
 						<span class="text-primary" style="font-size:6em;" th:text="${model.basesSummary.baseCount}"></span> 
 						<q-icon name="fas fa-dice-d20" color="faded on-right" size="4em"></q-icon>
+						</q-card-main>
+						</q-card>
 						
 					</div>
 					<div class="col-md-3 col-xs-12">
