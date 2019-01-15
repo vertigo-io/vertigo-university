@@ -18,6 +18,7 @@
 		<section layout:fragment="page-container" >
 			<vu:form th:if="${!model.closeSuccess}">
 				<vu:text-field object="workOrder" field="name" />
+				<vu:text-field object="workOrder" field="code" />
 				<vu:date object="workOrder" field="dueDate" :popover="true" />
 				<vu:text-area object="workOrder" field="description" />
 				<vu:button-submit th:if="${model.modeEdit}"  label="Save" action="@{_save}" color="primary" class="float-right q-mt-md"/>

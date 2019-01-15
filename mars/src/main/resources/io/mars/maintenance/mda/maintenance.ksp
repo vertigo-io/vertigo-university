@@ -12,7 +12,7 @@ create DtDefinition DT_TICKET {
 
 create DtDefinition DT_WORK_ORDER {
 	id WO_ID {domain: DO_ID label:"Id"}
-	field CODE {domain: DO_LABEL label: "Ticket Number" required:"false"}
+	field CODE {domain: DO_LABEL label: "Code" required:"false"}
 	field TICKET_CODE {domain: DO_LABEL label: "Ticket Number" required:"false"}
 	field NAME {domain: DO_LABEL label: "Mainenance Operation" required:"false"}
 	field DESCRIPTION {domain: DO_DESCRIPTION label: "Maintenance Operation Descrption" required:"false"}

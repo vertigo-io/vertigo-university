@@ -82,17 +82,17 @@ public final class WorkOrder implements Entity {
 	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Ticket Number'.
+	 * Récupère la valeur de la propriété 'Code'.
 	 * @return String code
 	 */
-	@Field(domain = "DO_LABEL", label = "Ticket Number")
+	@Field(domain = "DO_LABEL", label = "Code")
 	public String getCode() {
 		return code;
 	}
 
 	/**
 	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'Ticket Number'.
+	 * Définit la valeur de la propriété 'Code'.
 	 * @param code String
 	 */
 	public void setCode(final String code) {

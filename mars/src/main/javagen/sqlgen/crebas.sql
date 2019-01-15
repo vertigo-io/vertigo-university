@@ -591,7 +591,7 @@ comment on column WORK_ORDER.WO_ID is
 'Id';
 
 comment on column WORK_ORDER.CODE is
-'Ticket Number';
+'Code';
 
 comment on column WORK_ORDER.TICKET_CODE is
 'Ticket Number';
