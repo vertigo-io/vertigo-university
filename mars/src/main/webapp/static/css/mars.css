@@ -124,8 +124,9 @@ body.login {
   color: currentColor !important;
 }
 
-.q-list-header+.q-item { /*q-item after a q-list-header is nearer*/
-    margin-top: -12px;
+.q-popover .q-list-header+.q-item
+{ /*q-item after a q-list-header is nearer*/
+   margin-top: -12px;
 }
 
 .detailType, .detailType img {

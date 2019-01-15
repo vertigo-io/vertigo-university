@@ -152,13 +152,15 @@
 		        <q-item tag="a" th:href="@{/basemanagement/bases/}">
 		          <q-item-side icon="fas fa-dice-d20"></q-item-side>
 		          <q-item-main label="Bases"></q-item-main>
-		          <q-chip color="primary" v-if="!componentStates.navDrawer.mini" dense square class="q-mr-xs">VR</q-chip>
+		          <q-item-side right><q-chip color="primary" dense square class="q-mr-xs">VR</q-chip></q-item-side>
 		        </q-item>
 		        <q-item tag="a" th:href="@{/basemanagement/equipments/}">
 		          <q-item-side icon="fas fa-rocket"></q-item-side>
 		          <q-item-main label="Equipments" ></q-item-main>
-		          <q-chip color="primary" v-if="!componentStates.navDrawer.mini" dense square class="q-mr-xs">3D</q-chip>
-		          <q-chip color="primary" v-if="!componentStates.navDrawer.mini" dense square class="q-mr-xs">VR</q-chip>
+		          <q-item-side right>
+			          <q-chip color="primary" dense square class="q-mr-xs">3D</q-chip>
+			          <q-chip color="primary" dense square class="q-mr-xs">VR</q-chip>
+		          </q-item-side>
 		        </q-item>
 		       	<q-item-separator></q-item-separator>
 		       	<q-list-header>People</q-list-header>
@@ -185,13 +187,15 @@
 		        <q-item tag="a" th:href="@{/share/}">
 		          <q-item-side icon="fas fa-share-alt"></q-item-side>
 		          <q-item-main label="Share"></q-item-main>
-		          <q-chip color="primary" v-if="!componentStates.navDrawer.mini" dense square class="q-mr-xs">API</q-chip>
-		          <q-chip color="primary" v-if="!componentStates.navDrawer.mini" dense square class="q-mr-xs">OpenData</q-chip>
+		          <q-item-side right>
+			          <q-chip color="primary" dense square class="q-mr-xs">API</q-chip>
+			          <q-chip color="primary" dense square class="q-mr-xs">OpenData</q-chip>
+		          </q-item-side>
 		        </q-item>
 		        <q-item tag="a" th:href="@{/environment/}">
 		          <q-item-side icon="fas fa-cloud-sun"></q-item-side>
 		          <q-item-main label="Environment" ></q-item-main>
-		          <q-chip color="primary" v-if="!componentStates.navDrawer.mini" dense square class="q-mr-xs">IoT</q-chip>
+		          <q-item-side right><q-chip color="primary" dense square class="q-mr-xs">IoT</q-chip></q-item-side>
 		        </q-item>
 		        <q-item tag="a" th:href="@{/dashboard/modules/vui}" target="_blank">
 		          <q-item-side icon="fas fa-chart-bar" ></q-item-side>
@@ -202,21 +206,21 @@
 		        <q-item tag="a" th:href="@{/digitaltrust/}">
 		          <q-item-side icon="fas fa-award"></q-item-side>
 		          <q-item-main label="Digital Trust"></q-item-main>
-		          <q-chip color="primary" v-if="!componentStates.navDrawer.mini" dense square class="q-mr-xs">Blockchain</q-chip>
+		          <q-item-side right><q-chip color="primary" dense square class="q-mr-xs">Blockchain</q-chip></q-item-side>
 		        </q-item>
 		        <q-item tag="a" th:href="@{/accesscontrol/}">
 		          <q-item-side icon="fas fa-address-card"></q-item-side>
 		          <q-item-main label="Access Control"></q-item-main>
-		          <q-chip color="primary" v-if="!componentStates.navDrawer.mini" dense square class="q-mr-xs">AI</q-chip>
+		          <q-item-side right><q-chip color="primary" dense square class="q-mr-xs">AI</q-chip></q-item-side>
 		        </q-item>
 		        <q-item-separator></q-item-separator>
 		        <q-item v-if="componentStates.navDrawer.mini"
 						@click.native="componentStates.navDrawer.mini = false; $cookies.set('miniMenu', false)" title="Expand menu">
-					<q-item-side icon="arrow_right_alt"></q-item-side>
+					<q-item-side icon="arrow_right"></q-item-side>
 				</q-item>
 				 <q-item v-if="!componentStates.navDrawer.mini"
 						@click.native="componentStates.navDrawer.mini = true; $cookies.set('miniMenu', true)" title="Minify menu">
-					<q-item-side icon="arrow_left" :right="true"></q-item-side>
+					<q-item-main></q-item-main><q-item-side icon="arrow_left" right></q-item-side>
 				</q-item>
 		        </nav>
 		        </q-list>
