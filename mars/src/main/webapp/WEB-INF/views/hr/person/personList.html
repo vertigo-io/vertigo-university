@@ -9,28 +9,31 @@
 	</head>
 	
 	<body>
+	
 		<section layout:fragment="content" >
-		<div class="row justify-between q-mb-md">
-			<div>
-				<q-btn label="Add" type="a" color="primary" th:href="@{/humanresources/person/}"></q-btn>
-			</div>
-			<div class="row justify-end">
-				<vu:form>
-					<vu:button-submit icon="fas fa-grip-horizontal" action="@{_changeRenderer?renderer=cards}" th::flat="${model.listRenderer != 'cards'}"/>
+		<div class="row justify-between q-mb-md text-secondary">
+		
+		<div class="q-title q-mb-md">{{vueData.persons.length}} Persons 
+			<vu:form>
+					<vu:button-submit  icon="fas fa-grip-horizontal" action="@{_changeRenderer?renderer=cards}" th::flat="${model.listRenderer != 'cards'}"/>
 					<vu:button-submit icon="fas fa-table" action="@{_changeRenderer?renderer=table}" th::flat="${model.listRenderer != 'table'}" />
 					<vu:button-submit icon="fas fa-list" action="@{_changeRenderer?renderer=list}" th::flat="${model.listRenderer != 'list'}" />
 				</vu:form>
+		</div>
+			<div class="row justify-end">
+				
+				<q-btn icon="add" round size="lg" label="Add" type="a" color="primary" th:href="@{/humanresources/person/}"></q-btn>
 			</div>
 		</div>
 		
 		<th:block th:if="${model.listRenderer == 'table'}">
-			<vu:table list="persons" componentId="personsTable" sortUrl="@{/hr/persons/_sort}">
-				<vu:column field="personId" />
+			<vu:table list="persons" componentId="personsTable" sortUrl="@{/hr/persons/_sort}" actions="~{#actions}">
+				<vu:column field="personId" label="Buisness Code" />
 				<vu:column field="firstName" sortable="true" />
 				<vu:column field="lastName" sortable="true" />
 				<vu:column field="email" sortable="true" />
 				<vu:column name="actions" label="Actions" >
-					<q-btn round color="primary" icon="arrow_forward" type="a" th::href="|'@{/hr/person/}'+props.row.personId|"></q-btn>
+					<q-btn round  icon="arrow_forward" type="a" th::href="|'@{/hr/person/}'+props.row.personId|"></q-btn>
 				</vu:column>
 			</vu:table>
 		</th:block>
