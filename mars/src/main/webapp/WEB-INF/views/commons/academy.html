@@ -10,11 +10,48 @@
 	
 	<body>
 		<section layout:fragment="page-container">
-		<q-page class="row col-12 layout-padding col justify-center">			
-			<div class="gutter-lg col ">
-				
-			</div>
-		</q-page>
+			<q-page class="row col-12">		 		
+				<div class="row col-12">
+					<q-parallax th:src="@{/static/img/cms/academy/learning-girl.jpg}" :height="400" :speed="7">
+					 	<h1 class="q-my-lg" style="margin-top:auto">Academy</h1>
+					</q-parallax>
+				</div>
+				<div class="row col-12 justify-around" >
+					<q-jumbotron class="col-11 q-my-xl">
+<p>Klee Academy, is a alearning management system (LMS) for all our purposes. 
+<br/>Its a software application for the administration, documentation, tracking, reporting and delivery of educational courses, training programs, or learning and development programs.</p>
+
+<p>Klee Academy was designed to identify training and learning gaps, utilizing analytical data and reporting.
+<br/>Klee Academy is focused on online learning delivery but support a range of uses, acting as a platform for online content, including courses, both asynchronous based and synchronous based.
+<br/>Klee Academy's users found there their digital workspace for coures, supervised or not by teachers and experts, also self evaluation program.</p>     
+
+					</q-jumbotron>
+					<q-jumbotron class="bg-white col-md-3 col-xs-12">
+			 		 	<div class="q-display-3 text-center">
+					 		<q-icon name="fas fa-users"></q-icon>
+					 	</div>
+					 	<hr class="q-hr q-my-lg"/>
+			    		<div class="q-mb-md text-center q-display-1">Engaging in a collaborative learning experience </div>
+		    		</q-jumbotron>
+		    		<q-jumbotron class="bg-white col-md-3 col-xs-12">
+					 	<div class="q-display-3 text-center">
+					 		<q-icon name="fas fa-chart-line"></q-icon>
+					 	</div>					 	
+			    		<hr class="q-hr q-my-lg"/>
+			    		<div class="q-mb-md text-center q-display-1">Empowering teams to leverage their potential</div>
+		    		</q-jumbotron>
+		    		<q-jumbotron class="bg-white col-md-3 col-xs-12">
+					 	<div class="q-display-3 text-center">
+					 		<q-icon name="fas fa-globe"></q-icon>
+					 	</div>					 	
+			    		<hr class="q-hr q-my-lg"/>
+			    		<div class="q-mb-md text-center q-display-1">Learning anytime, anywhere</div>
+		    		</q-jumbotron>		 		
+	    		</div>
+	    		<div class="row col-12 justify-center  q-my-xl">
+					<q-btn type="a" href="https://kleeacademy.360learning.com" color="primary" label="Go to Klee Academy" target="_blank" ></q-btn>
+				</div>
+			</q-page>		
 		</section>
 	</body>
 </html>
