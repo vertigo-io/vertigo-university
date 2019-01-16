@@ -117,7 +117,7 @@
 		<description>
 			Filtre specifique vue.js
 			Remplace les tags vuejs autoclosed par une version avec start tag et end tag
-			Exemple : <v-textfield name="toto"/> => <v-textfield name="toto"></v-textfield>
+<!-- 			Exemple : <v-textfield name="toto"/> => <v-textfield name="toto"></v-textfield> -->
 		</description>
 		<filter-name>unAutoClosedTag</filter-name>
 		<filter-class>io.vertigo.ui.impl.vuejs.filter.UnAutoCloseTagsFilter</filter-class>
