@@ -50,7 +50,7 @@
 							<img th::src="|'@{/api/x/accounts/api/}'+vueData.connectedUser.personId+'/photo'|" class="avatar"/>
 							<div class="on-right"><span th:text="${model.vContext['connectedUser']['firstName']+' '+model.vContext['connectedUser']['lastName']}"></span><br/><small><span th:text="${model.vContext['activeProfile']}"></span></small></div>
 							<q-popover>
-							  <q-list link>
+							  <q-list link class="dense-list-header">
 							  	<q-list-header class="q-py-none row items-center justify-between">Change current profil</q-list-header>
 							  	<q-item>
 							    	<q-item-main><q-btn type="a" flat label="Viewer" th:href="@{/userProfil/_changeProfile?profile=Viewer}" /></q-item-main>
@@ -140,7 +140,7 @@
 		      :mini="function() {var miniMenu = this.$cookies.get('miniMenu', true) === 'true';componentStates.navDrawer.mini = miniMenu;return miniMenu;}()"
 		      v-model="componentStates.navDrawer.showLeft">
 		      
-		      <q-list link style="height:100%">
+		      <q-list link :class="{'dense-list-header':!componentStates.navDrawer.mini}" style="height:100%">
 		      <nav class="text-no-wrap">
 		      	<q-list-header>Home</q-list-header>
 		        <q-item tag="a" th:href="@{/home/}">

@@ -124,7 +124,7 @@ body.login {
   color: currentColor !important;
 }
 
-.q-popover .q-list-header+.q-item
+.dense-list-header .q-list-header+.q-item
 { /*q-item after a q-list-header is nearer*/
    margin-top: -12px;
 }
