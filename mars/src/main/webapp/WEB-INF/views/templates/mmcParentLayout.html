@@ -247,7 +247,9 @@
   			
   			<th:block th:if="${model.modeReadOnly}" th:with="botDrawer=${model.vContext['componentStates'].addComponentState('botDrawer').addPrimitive('open', false)}" >
   				<q-page-sticky position="bottom-right" :offset="[-16,36]" class="poweredBy">
-				    <q-btn color="primary" round size="lg" @click="componentStates.botDrawer.open = !componentStates.botDrawer.open" icon="fas fa-robot" ></q-btn>
+				    <q-btn style="background: #E82A2A" round size="lg" @click="componentStates.botDrawer.open = !componentStates.botDrawer.open">
+				    	<img th:src="@{/static/chatbot/images/avatar/avatar_bar.png}" style="width: 60px; height: 60px"/>
+				    </q-btn>
 				</q-page-sticky>
 	  			<q-layout-drawer v-model="componentStates.botDrawer.open" side="right" >
 	  				<v-chatbot v-if="componentStates.botDrawer.open" class="column chatbot-container" th:bot-avatar="@{/static/chatbot/images/avatar/avatar_chat.png}" bot-name="mars-bot" bot-url="http://mars.dev.klee.lan.net:5005/webhooks/rest/webhook"></v-chatbot>
