@@ -1,6 +1,9 @@
 package io.mars.basemanagement.controllers.base;
 
+import java.util.List;
+
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +18,7 @@ import io.mars.basemanagement.domain.Tag;
 import io.mars.basemanagement.services.base.BaseServices;
 import io.mars.hr.domain.Person;
 import io.mars.hr.services.mission.MissionServices;
+import io.vertigo.dynamo.domain.model.FileInfoURI;
 import io.vertigo.ui.core.ViewContext;
 import io.vertigo.ui.core.ViewContextKey;
 import io.vertigo.ui.impl.springmvc.argumentresolvers.ViewAttribute;
@@ -62,8 +66,8 @@ public class BaseInformationController extends AbstractVSpringMvcController {
 	}
 
 	@PostMapping("/_save")
-	public String doSave(@ViewAttribute("base") final Base base) {
-		baseServices.save(base);
+	public String doSave(@ViewAttribute("base") final Base base, @Named("baseTmpPictureUris") final List<FileInfoURI> addedPictureFile) {
+		baseServices.save(base, addedPictureFile);
 		return "redirect:/basemanagement/base/information/" + base.getBaseId();
 	}
 

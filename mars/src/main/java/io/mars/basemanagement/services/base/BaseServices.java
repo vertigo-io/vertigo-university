@@ -7,34 +7,84 @@ import javax.inject.Inject;
 import io.mars.basemanagement.BasemanagementPAO;
 import io.mars.basemanagement.dao.BaseDAO;
 import io.mars.basemanagement.dao.GeosectorDAO;
+import io.mars.basemanagement.dao.PictureDAO;
 import io.mars.basemanagement.domain.Base;
 import io.mars.basemanagement.domain.BaseOverview;
 import io.mars.basemanagement.domain.BasesSummary;
 import io.mars.basemanagement.domain.Geosector;
+import io.mars.basemanagement.domain.Picture;
 import io.mars.basemanagement.search.BaseIndex;
+import io.mars.commons.services.CommonsServices;
+import io.mars.domain.DtDefinitions.PictureFields;
+import io.mars.fileinfo.FileInfoStd;
+import io.mars.hr.services.person.PersonServices;
 import io.vertigo.commons.transaction.Transactional;
+import io.vertigo.core.component.Activeable;
 import io.vertigo.core.component.Component;
 import io.vertigo.dynamo.criteria.Criterions;
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.domain.model.DtListState;
+import io.vertigo.dynamo.domain.model.FileInfoURI;
+import io.vertigo.dynamo.file.FileManager;
+import io.vertigo.dynamo.file.metamodel.FileInfoDefinition;
+import io.vertigo.dynamo.file.model.FileInfo;
+import io.vertigo.dynamo.file.model.VFile;
+import io.vertigo.dynamo.store.StoreManager;
 
 @Transactional
-public class BaseServices implements Component {
+public class BaseServices implements Component, Activeable {
 
 	@Inject
 	private BaseDAO baseDAO;
+	@Inject
+	private PictureDAO pictureDAO;
 	@Inject
 	private GeosectorDAO geosectorDAO;
 
 	@Inject
 	private BasemanagementPAO basemanagementPAO;
 
+	@Inject
+	private CommonsServices commonsServices;
+	@Inject
+	private FileManager fileManager;
+	@Inject
+	private StoreManager storeManager;
+
+	private VFile defaultPhoto;
+
+	@Override
+	public void start() {
+		defaultPhoto = fileManager.createFile(
+				"defaultBase.png",
+				"image/png",
+				PersonServices.class.getResource("/defaultBase.png"));
+	}
+
+	@Override
+	public void stop() {
+		//rien
+	}
+
 	public Base get(final Long baseId) {
 		return baseDAO.get(baseId);
 	}
 
-	public void save(final Base base) {
+	public BaseOverview getBaseOverview(final Long baseId) {
+		return basemanagementPAO.getBaseOverview(baseId);
+	}
+
+	public void save(final Base base, final List<FileInfoURI> addedPictureFile) {
 		baseDAO.save(base);
+		for (final FileInfoURI fileInfoURI : addedPictureFile) {
+			final VFile fileTmp = commonsServices.getFileTmp(fileInfoURI);
+			final FileInfo fileInfo = storeManager.getFileStore().create(new FileInfoStd(fileTmp));
+
+			final Picture picture = new Picture();
+			picture.setBaseId(base.getBaseId());
+			picture.setPicturefileId((Long) fileInfo.getURI().getKey());
+			pictureDAO.create(picture);
+		}
 	}
 
 	public DtList<Base> getBases(final DtListState dtListState) {
@@ -53,7 +103,38 @@ public class BaseServices implements Component {
 		return basemanagementPAO.getBasesSummary();
 	}
 
-	public BaseOverview getBaseOverview(final Long baseId) {
-		return basemanagementPAO.getBaseOverview(baseId);
+	public VFile getBaseMainPicture(final Long baseId) {
+		final DtList<Picture> pictures = getPictures(baseId);
+		if (pictures.isEmpty()) {
+			return defaultPhoto;
+		}
+		return getBasePicture(pictures.get(0).getPicturefileId());
 	}
+
+	public VFile getBasePicture(final Long fileId) {
+		//apply security check
+		if (fileId == null) {
+			return defaultPhoto;
+		}
+		return storeManager.getFileStore().read(toFileInfoStdURI(fileId)).getVFile();
+	}
+
+	public void removeBasePicture(final Long baseId, final FileInfoURI basePicture) {
+		//apply security check
+		final Picture picture = pictureDAO.find(
+				Criterions.isEqualTo(PictureFields.BASE_ID, baseId)
+						.and(Criterions.isEqualTo(PictureFields.PICTUREFILE_ID, (Long) basePicture.getKey())));
+		pictureDAO.delete(picture.getPictureId());
+
+		storeManager.getFileStore().delete(basePicture);
+	}
+
+	private static FileInfoURI toFileInfoStdURI(final Long fileId) {
+		return new FileInfoURI(FileInfoDefinition.findFileInfoDefinition(FileInfoStd.class), fileId);
+	}
+
+	public DtList<Picture> getPictures(final Long baseId) {
+		return pictureDAO.findAll(Criterions.isEqualTo(PictureFields.BASE_ID, baseId), 20);
+	}
+
 }

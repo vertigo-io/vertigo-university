@@ -91,6 +91,7 @@
 					   <img th:src="@{/static/img/bases/Mars base 3.jpg}" style="max-width: 100%;"/>
 					  </q-carousel-slide>
 					</q-carousel>
+					<vu:fileupload float-label="Add new pictures here" th:url="'@{/commons/upload}'" key="baseTmpPictureUris" multiple />
 				</vu:block>
 				
 				<vu:block id="general" title="General Information">

@@ -21,11 +21,16 @@ package io.mars.basemanagement.controllers.base;
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import io.mars.basemanagement.domain.Base;
 import io.mars.basemanagement.domain.BaseType;
+import io.mars.basemanagement.domain.Picture;
 import io.mars.basemanagement.services.base.BaseServices;
+import io.vertigo.dynamo.file.model.VFile;
+import io.vertigo.ui.core.ProtectedValueUtil;
 import io.vertigo.ui.core.ViewContext;
 import io.vertigo.ui.core.ViewContextKey;
 import io.vertigo.ui.impl.springmvc.controller.AbstractVSpringMvcController;
@@ -35,6 +40,7 @@ import io.vertigo.ui.impl.springmvc.controller.AbstractVSpringMvcController;
 public final class BaseDetailController extends AbstractVSpringMvcController {
 	public final ViewContextKey<Base> baseKey = ViewContextKey.of("base");
 	public final ViewContextKey<BaseType> baseTypesKey = ViewContextKey.of("baseTypes");
+	public final ViewContextKey<Picture> basePictures = ViewContextKey.of("basePictures");
 
 	@Inject
 	private BaseServices baseServices;
@@ -42,8 +48,19 @@ public final class BaseDetailController extends AbstractVSpringMvcController {
 	public void initCommonContext(final ViewContext viewContext, final Long baseId) {
 		viewContext.publishMdl(baseTypesKey, BaseType.class, null); //all
 		viewContext.publishDto(baseKey, baseServices.get(baseId));
+		viewContext.publishDtListModifiable(basePictures, baseServices.getPictures(baseId));
 	}
 
+	@GetMapping("{baseId}/mainPicture")
+	public VFile loadFile(@PathVariable("baseId") final Long baseId) {
+		return baseServices.getBaseMainPicture(baseId);
+	}
+
+	@GetMapping("/picture/{protectedUrl}")
+	public VFile loadFile(@PathVariable("protectedUrl") final String protectedUrl) {
+		final Long fileKey = ProtectedValueUtil.readProtectedValue(protectedUrl, Long.class);
+		return baseServices.getBasePicture(fileKey);
+	}
 	/**
 	 * Here we can support some common actions with absolute redirect (common hav no page)
 	 */

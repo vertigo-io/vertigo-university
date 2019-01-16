@@ -192,6 +192,11 @@ nav a.q-item {
 	width:100%;	
 }
 
+.marsCard .q-card img {
+    height: 250px;
+    object-fit: cover;
+}
+
 @media (min-width: 1500px) {
 .row  .marsCard {
 	width: 25%;
