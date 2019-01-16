@@ -59,7 +59,7 @@
 				<vu:block th:if="${model.modeReadOnly}" id="workOrders" title="WorkOrders" withFab>
 					<vu:include-data object="ticket" field="ticketId" />
 					<vu:include-data object="workOrders" field="woId" />
-					<q-btn fab color="primary" icon="add" aria-label="Add work order" title="Add work order"
+					<q-btn round class="fab-block" size="md" color="primary" icon="add" aria-label="Add work order" title="Add work order"
 					 th:@click="|openModal('workOrderEditModal', '@{/maintenance/workorder/new}', { 'ticketId' : vueData.ticket.ticketId, 'successCallback' : 'onWorkOrderSuccess' })|"></q-btn>
 					<vu:table list="workOrders" componentId="workOrders" rowsPerPage="10">
 						<vu:column field="name" />
@@ -67,7 +67,7 @@
 						<vu:column field="dueDate" />
 						<vu:column field="dateClosed" />
 						<vu:column name="action" label="Actions">
-							<q-btn round color="primary" icon="edit" label="View detail" th:@click="|openModal('workOrderEditModal', '@{/maintenance/workorder/}' + props.row.woId , {'successCallback' : 'onWorkOrderSuccess' })|"></q-btn>
+							<q-btn round icon="edit" label="View detail" th:@click="|openModal('workOrderEditModal', '@{/maintenance/workorder/}' + props.row.woId , {'successCallback' : 'onWorkOrderSuccess' })|"></q-btn>
 						</vu:column>
 					</vu:table>
 				</vu:block>
