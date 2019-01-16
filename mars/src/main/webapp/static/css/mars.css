@@ -197,6 +197,19 @@ nav a.q-item {
     object-fit: cover;
 }
 
+.q-table tr:hover td {
+    overflow: visible; 
+    white-space: normal;
+    /*height:auto;  /* just added this line */
+}
+
+.q-table td, .q-table th {
+    max-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 @media (min-width: 1500px) {
 .row  .marsCard {
 	width: 25%;
