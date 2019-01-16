@@ -16,7 +16,10 @@
 	
 	<script th:src="@{/vertigo-ui/static/js/v-components/v-notifications.js}"></script>
    	<script th:src="@{/static/js/mars.js}"></script>
-   	<script th:src="@{/static/chatbot/chatbot.js}"></script>
+   	
+   	<link  th:href="@{/static/chatbot/chatbot.css}" rel="stylesheet"/>
+   	<script th:src="@{/vertigo-ui/static/js/v-components/v-chatbot.js}"></script>
+   	
 </head>
 
 <body class="mat desktop no-touch platform-mat">
@@ -240,12 +243,18 @@
 					<img th:src="@{/static/img/logo MMC grey v0.1.png}" height="30px" class="on-left"/> v1.0.0 &copy; 2153 Mars Mining Corp.
 				</div>
   			</div>
+  			
+  			<th:block th:if="${model.modeReadOnly}" th:with="botDrawer=${model.vContext['componentStates'].addComponentState('botDrawer').addPrimitive('open', false)}" >
+  				<q-page-sticky position="bottom-right" :offset="[-16,36]" class="poweredBy">
+				    <q-btn color="primary" round size="lg" @click="componentStates.botDrawer.open = !componentStates.botDrawer.open" icon="fas fa-robot" ></q-btn>
+				</q-page-sticky>
+	  			<q-layout-drawer v-model="componentStates.botDrawer.open" side="right" >
+	  				<v-chatbot v-if="componentStates.botDrawer.open" class="column chatbot-container" th:bot-avatar="@{/static/chatbot/images/avatar/avatar_chat.png}" bot-name="mars-bot" bot-url="http://mars.dev.klee.lan.net:5005/webhooks/rest/webhook"></v-chatbot>
+	  			</q-layout-drawer>
+  			</th:block>
 		</q-layout>
 		
 	</vu:page>
-	<script type="text/javascript">
-		Chatbot.init({url : ".", botBaseUrl : "[[@{/static/chatbot/}]]"});
-	</script>
 	<div layout:fragment="javscript-footer">
 	</div>
 			
