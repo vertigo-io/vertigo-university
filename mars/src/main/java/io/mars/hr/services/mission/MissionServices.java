@@ -45,6 +45,10 @@ public class MissionServices implements Component {
 		Assertion.checkArgument(mission.getMissionId() == null, "No id should be provided for a new ticket");
 		//---
 		missionDAO.save(mission);
+		// Loading person, base and business entities for the mission event
+		mission.person().load();
+		mission.base().load();
+		mission.business().load();
 		transactionManager.getCurrentTransaction()
 				.addAfterCompletion(txCommited -> {
 					if (txCommited) {
