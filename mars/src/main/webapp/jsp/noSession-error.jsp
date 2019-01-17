@@ -18,10 +18,10 @@
 <body id="noSession" class="permission_denied">
   <div id="particles-js"></div>
   <div class="denied__wrapper">
-    <h1>401</h1>
+ 	<h1><small>session</small><br/>LOST<br><span class="errorCode">Error 401</span></h1>
     <h3>Oups, you have been inactive for too long, your <span>Spaceship</span> session went too far<br/> Hmm, looks like your login has expired.</h3>
     
-	<svg class="c-rocket" xmlns="http://www.w3.org/2000/svg" viewBox="-450 -450 1500 1500" style="position: absolute; top: 100px;  left: 200px; z-index:-1">
+	<svg class="c-rocket" xmlns="http://www.w3.org/2000/svg" viewBox="-450 -450 1500 1500" style="position: absolute; top: 120px;  left: 200px">
 		<path d="M359.828 328.707L246.761 378.84l37.333 56.533 52.267-48c-5.333-21.333 3.2-44.8 23.467-58.666z" fill="#ced6e0"/>
 		<path d="M305.428 512.173l65.067-65.067c23.467-23.467 36.267-55.467 36.267-88.533-33.067 0-65.067 12.8-88.533 36.267l-65.067 65.067 52.266 52.266z" fill="#f3705a"/>
 		<path d="M120.894 176.173l-42.667 53.333 56.533 36.267 50.133-113.067c-15.999 21.334-41.599 29.867-63.999 23.467z" fill="#ced6e0"/>
@@ -43,7 +43,7 @@
 		<path class="c-rocket__flame c-rocket__flame--power" d="M137.961 455.64c-22.4 22.4-137.6 56.533-137.6 56.533s34.133-115.2 56.533-137.6c22.4-22.4 58.667-22.4 80 0 22.4 22.4 22.4 58.667 1.067 81.067z" fill="#ffd15c"/>
 		<path class="c-rocket__flame" d="M137.961 421.507c-12.8 12.8-80 33.067-80 33.067s20.267-67.2 33.067-80c12.8-12.8 34.133-12.8 46.933 0 12.8 12.799 12.8 34.133 0 46.933z" fill="#f7b64c"/>
     </svg>
-    <svg id="planet" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="position: absolute; right: 200px; z-index:-1">
+    <svg id="planet" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="position: absolute; right: 200px;">
     <circle class="saturn" cx="256" cy="256" r="149.536" fill="#FF4F54"/>
     <g class="saturn-2" fill="#EA4753">
       <path d="M109.388 285.56c42.515 1.428 157.943-2.613 289.462-73.807-5.11-16.448-13.02-31.882-23.322-45.604-42.716 29.386-140.403 83.922-268.457 76.27-1.354 14.666-.508 29.175 2.318 43.14zM400.734 293.587c3.976-15.31 5.422-30.68 4.614-45.672-33.75 25.31-137.237 92.367-277.65 84.876 6.507 10.874 14.383 20.93 23.472 29.88 44.354.286 137.696-6.443 245.93-57.163 1.362-3.89 2.58-7.86 3.634-11.92zM245.488 405.184c35.427 2.537 69.784-7.742 97.543-27.59-27.972 11.533-60.787 21.76-97.542 27.59zM348.02 138.097c-15.645-12.225-33.99-21.522-54.434-26.832-71.883-18.667-145.126 18.253-174.25 84.01 49.02-1.676 133.073-12.256 228.685-57.178z"/>

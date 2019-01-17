@@ -3,62 +3,13 @@
 body {
 	color: #01477B;
   	background-color: #DADEDF;
-}
-.errorPage2 {
-	margin: 0px;
-	padding: 0px; 
-	height: 100%;
-	font-size: 0.7em;
-	font-family: Verdana, Arial, Helvetica, sans-serif; 
-	color: #01477B;
-  	background-color: #DADEDF;
+  	margin: 0;
+  	min-height: 92vh;
 }
 
-.errorPanelAjax .errorPage2 div#bandeau {
-	display:none;
-}
-
-.errorPage2 div#content {
-	-moz-border-radius: 4px;
-    -webkit-border-radius: 4px;
-    -khtml-border-radius: 4px;
-    border-radius: 4px;
-	padding: 11px;
-	padding-left: 50px;
-	margin: 0px;
-	margin-bottom: 10px;
-	background: #FFF url(../img/icon/error.gif) no-repeat 5px 5px;
-	border: solid 2px #FA0000;
-}
-
-.errorPage2 div#bandeau {
-	height: 80px;
-	padding: 0px;	
-	font-size: 0.7em;
-}
-
-.errorPage2 h1 , .errorPanelAjax h1 {
-	margin: 0px;
-	padding : 0px;
-	font-size: 1.2em;
-	padding-left: 20px;
-	white-space: nowrap;
-	font-weight: bold;	
-}
-
-.errorPage2 h2 {
-	font-size: 1.1em;
-	background: #e0e0e0;
-	margin: 0px;
-	margin-top: 8px;
-	margin-bottom: 8px;	
-	padding: 2px;
-}
-
-.errorPage2 h3 {
-	display:inline;
-	font-size: 1.0em;
-	color:#D86f7D;
+svg {
+	z-index: -1; 
+	width: 100%;
 }
 
 .errorPage a {
@@ -68,18 +19,6 @@ body {
 .errorPage p {
 	margin-left: 10%;
 	margin-right: 10%;	
-}
-
-
-.errorPage2 .code {
-	padding: 8px;
-	color: #7f7f7f;
-	font-size: 0.8em;
-}
-
-.errorPage2 #showerrorlink {
-	color: #7f7f7f;
-	font-size: 0.8em;
 }
 
 .errorPage .content {
@@ -122,7 +61,6 @@ body {
   margin-top: 8vh;
 }
 
-
 .errorPage {
   color: #eee;
   width: 100%;
@@ -132,7 +70,7 @@ body {
   margin-top: 8vh;
 }
 
-.mars{
+.mars {
   left:0;
   right:0;
   bottom:0;
@@ -143,7 +81,9 @@ body {
 }
 
 .errorPage #errordetail {
-	margin :    0 20% 27vmin 20%;
+	/*margin :    0 20% 27vmin 20%;*/
+	margin: 0 auto 27vmin auto;
+    max-width: 80%;
 }
 
 .errorPage .fix_link {
@@ -174,32 +114,39 @@ body {
   color: #fff;
   font-family: "Dosis", sans-serif;
   font-size: 100px;
-  margin-bottom: 0px;
+  line-height: 70px;
+  margin-bottom: 30px;
   font-weight: 800;
+}
+
+.errorPage h1 small, .permission_denied h1 small {
+	font-size: 68px;
+	line-height: 70px;
+}
+
+.errorPage h1 .errorCode, .permission_denied h1 .errorCode {
+	font-size: 54px;
+	opacity: 0.2;
 }
 
 .errorPage h3, .permission_denied h3 {
   text-align: center;
   color: #fff;
-  font-size: 19px;
-  max-width: 330px;
+  font-size: 40px;
   margin: 0px auto 30px auto;
   font-family: "Dosis", sans-serif;
-  font-weight: 400;
+  font-weight: 600;
 }
 
 
 .errorPage .astronaut{
   position: absolute;
-  top: 18vmin;
-  left: 10vmin;
-  height: 30vmin;
-	animation: floating 3s infinite ease-in-out;
-
-  @include breakpoint(mobile){
-    top: 2vmin;
-  }
+  top: 3vw;
+  left: 5vw;
+  height: 16vw;
+  animation: floating 3s infinite ease-in-out;
 }
+
 
 @keyframes floating {
     from { transform: translateY(0px); }
@@ -209,13 +156,9 @@ body {
 
 .errorPage .spaceship{
   position: absolute;
-  bottom: 15vmin;
+  bottom: 18vmin;
   right: 24vmin;
-
-  @include breakpoint(mobile){
-    width: 45vmin;
-    bottom: 18vmin;
-  }
+  width: 20vw;
 }
 
 
