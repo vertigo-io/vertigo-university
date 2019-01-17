@@ -43,4 +43,14 @@ public class EnvironmentController extends AbstractVSpringMvcController {
 	public void doSend(final String message) {
 		equipmentEnvironmentServices.displayMessage(message);
 	}
+
+	@PostMapping("/_onFan")
+	public void onFan() {
+		equipmentEnvironmentServices.turnOnFan();
+	}
+
+	@PostMapping("/_offFan")
+	public void offFan() {
+		equipmentEnvironmentServices.turnOffFan();
+	}
 }

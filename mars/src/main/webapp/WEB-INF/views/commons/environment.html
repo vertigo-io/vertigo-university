@@ -82,6 +82,14 @@
 					<div class="col-md-6 col-xs-12 text-center gutter-xs">
 						<!-- TODO Farm to water -->
 						<div class="q-title">Farms to water: </div>
+							<div >
+								<q-btn rounded push th:@click="|httpPostAjax('@{_onFan}', {})|" :class="'on-left '" 
+								size="lg" color="red"  icon-right="fas fa-wind"
+								aria-label="Triggered alarm in base" title="Trigger alarm in base" >ON</q-btn>
+								<q-btn rounded push th:@click="|httpPostAjax('@{_offFan}', {})|" :class="'on-left '" 
+								size="lg" color="primary"    icon-right="fas fa-power-off"
+								aria-label="Triggered alarm in base" title="Stop alarm in base" >OFF</q-btn>
+							</div>
 					</div>
 					<div class="col-md-6 col-xs-12 text-center gutter-xs">
 							<div class="chart chartjs linechart bg-white" 

@@ -161,21 +161,40 @@ public class MqttShield implements Component, Activeable {
 		if (parsedTopic[1].equals("fireAlarm")) {
 			final InputEvent actuatorEvent = createActuatorEvent(message, "ss01" + "/" + "relay");
 			eventBusManager.post(actuatorEvent);
+			addMeasure(parsedTopic, data);
 		} else if (parsedTopic[1].equals("message")) {
 			//TODO: change ss01 by an automatic redistribution of the message in the dedicated topic
 			final InputEvent messageEvent = createActuatorEvent(message, "ss01" + "/" + "display");
 			eventBusManager.post(messageEvent);
 			//we don't want Influx save the data in database
+		} else if (parsedTopic[1].equals("turnFan")) {
+			final InputEvent fanEvent = createActuatorEvent(message, "fs01" + "/" + "fan");
+			eventBusManager.post(fanEvent);
+		} else if (parsedTopic[1].equals("actionShutters")) {
+			final InputEvent shuttersEvent = createActuatorEvent(message, "ms01" + "/" + "shutters");
+			eventBusManager.post(shuttersEvent);
+		} else if (parsedTopic[1].equals("light")) {
+			//command shutters function of lightning
+			if (Integer.parseInt(data[1]) < 100) {
+				final String turnAction = "90";
+				final InputEvent sendAction = new InputEvent(InputEvent.Type.of(1), "base/actionShutters", turnAction);
+				eventBusManager.post(sendAction);
+				addMeasure(parsedTopic, data);
+			} else {
+				final String turnAction = "0";
+				final InputEvent sendAction = new InputEvent(InputEvent.Type.of(1), "base/actionShutters", turnAction);
+				eventBusManager.post(sendAction);
+			}
 		} else if (parsedTopic[1].equals("display")) {
 			//we don't want Influx save the data in database
+		} else if (parsedTopic[1].equals("display")) {
+			//we don't want Influx save the data in database
+		} else if (parsedTopic[1].equals("fan")) {
+			//we don't want Influx save the data in database
+		} else if (parsedTopic[1].equals("shutters")) {
+			//we don't want Influx save the data in database
 		} else {
-			final Measure measure = Measure.builder(parsedTopic[1])
-
-					.time(Instant.now())
-					.addField("equipment", parsedTopic[0])
-					.addField("value", Double.parseDouble(data[1]))
-					.build();
-			eventBusManager.post(new MeasureEvent(measure));
+			addMeasure(parsedTopic, data);
 		}
 	}
 
@@ -229,5 +248,14 @@ public class MqttShield implements Component, Activeable {
 
 	private static MqttMessage createMessage(final String message) {
 		return new MqttMessage((Instant.now().getEpochSecond() + " " + message).getBytes());
+	}
+
+	private void addMeasure(final String[] parsedTopic, final String[] data) {
+		final Measure measure = Measure.builder(parsedTopic[1])
+				.time(Instant.now())
+				.addField("equipment", parsedTopic[0])
+				.addField("value", Double.parseDouble(data[1]))
+				.build();
+		eventBusManager.post(new MeasureEvent(measure));
 	}
 }

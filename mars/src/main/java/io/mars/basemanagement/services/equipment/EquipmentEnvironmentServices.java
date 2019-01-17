@@ -96,4 +96,35 @@ public class EquipmentEnvironmentServices implements Component {
 		final InputEvent sendMessage = new InputEvent(InputEvent.Type.of(1), "base/message", message);
 		eventBusManager.post(sendMessage);
 	}
+
+	public void turnOnFan() {
+		final InputEvent offFan = new InputEvent(InputEvent.Type.of(1), "base/turnFan");
+		eventBusManager.post(offFan);
+	}
+
+	public void turnOffFan() {
+		final InputEvent onFan = new InputEvent(InputEvent.Type.of(0), "base/turnFan");
+		eventBusManager.post(onFan);
+	}
+
+	public Integer getWeeklyTriggeredAlarm() {
+		final TabularDatas totalAlert = timeSeriesDataBaseManager.getTabularData(
+				"mars-test",
+				Collections.singletonList("value:sum"),
+				DataFilter.builder("fireAlarm").build(),
+				TimeFilter.builder("now() - 30d", "now() + 30d").build());
+		return (Integer) totalAlert.getTabularDataSeries().get(0).getValues().get("value:sum");
+	}
+
+	public String ActionMoistureLevel() {
+		final TabularDatas lastMoistureValue = timeSeriesDataBaseManager.getTabularData(
+				"mars-test",
+				Collections.singletonList("value:last"),
+				DataFilter.builder("moisture").build(),
+				TimeFilter.builder("now() - 365d", "now() + 1d").build());
+		if ((Integer) lastMoistureValue.getTabularDataSeries().get(0).getValues().get("value:last") <= 40) {
+			return lastMoistureValue.getTabularDataSeries().get(0).getValues().get("equipment:last").toString();
+		}
+		return null;
+	}
 }
