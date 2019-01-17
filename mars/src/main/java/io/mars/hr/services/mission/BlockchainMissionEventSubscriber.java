@@ -28,7 +28,7 @@ public class BlockchainMissionEventSubscriber implements Component {
 		final Business business = mission.business().get();
 		final StringBuilder sbSerializedTicket = new StringBuilder();
 		sbSerializedTicket.append(person.getFullName())
-		.append(" a été affectée à la base ")
+		.append(" a été affecté à la base ")
 		.append(base.getName())
 		.append(" pour le role de ")
 		.append(mission.getRole())

@@ -1,5 +1,6 @@
 package io.mars.maintenance.services.ticket;
 
+import java.time.format.DateTimeFormatter;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import javax.inject.Inject;
@@ -13,6 +14,7 @@ import io.vertigo.ledger.services.LedgerManager;
 public class BlockchainTicketEventSubscriber implements Component {
 
 	private final ConcurrentLinkedQueue<String> messageQueue = new ConcurrentLinkedQueue<>();
+	private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 	@Inject
 	private LedgerManager ledgerManager;
@@ -21,13 +23,16 @@ public class BlockchainTicketEventSubscriber implements Component {
 	public void onTicketEvent(final TicketEvent ticketEvent) {
 		if (ticketEvent.getType() == TicketEvent.Type.CREATE) {
 			final Ticket ticket = ticketEvent.getTicket();
+			
+			String strDateCreated = ticket.getDateCreated().format(FORMATTER);
+			
 			final StringBuilder sbSerializedTicket = new StringBuilder();
-			sbSerializedTicket.append("Création du ticket :")
+			sbSerializedTicket.append("Création du ticket ")
 					.append(ticket.getCode())
 					.append(".")
 					.append(ticket.getTitle())
 					.append(". Ticket créé le ")
-					.append(ticket.getDateCreated());
+					.append(strDateCreated);
 
 			messageQueue.add(sbSerializedTicket.toString());
 		}
