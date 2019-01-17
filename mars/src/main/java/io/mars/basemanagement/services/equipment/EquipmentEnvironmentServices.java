@@ -68,14 +68,14 @@ public class EquipmentEnvironmentServices implements Component {
 		return Math.round((Double) lastHumidite.getTabularDataSeries().get(0).getValues().get("value:last") * 10.0) / 10.0;
 	}
 
-	public Double getTotalTemperatureMeasured() {
+	public Integer getTotalTemperatureMeasured() {
 		//a changer pour V2
 		final TabularDatas totalMeasure = timeSeriesDataBaseManager.getTabularData(
 				"mars-test",
 				Collections.singletonList("value:count"),
 				DataFilter.builder("temperature").build(),
 				TimeFilter.builder("now() - 365d", "now() + 1h").build());
-		return (double) Math.round((Double) totalMeasure.getTabularDataSeries().get(0).getValues().get("value:count") * 10) / 10;
+		return ((Double) totalMeasure.getTabularDataSeries().get(0).getValues().get("value:count")).intValue();
 	}
 
 	public void sendBaseAlert() {
@@ -112,19 +112,24 @@ public class EquipmentEnvironmentServices implements Component {
 				"mars-test",
 				Collections.singletonList("value:sum"),
 				DataFilter.builder("fireAlarm").build(),
-				TimeFilter.builder("now() - 30d", "now() + 30d").build());
-		return (Integer) totalAlert.getTabularDataSeries().get(0).getValues().get("value:sum");
+				TimeFilter.builder("now() - 15d", "now() + 1h").build());
+		return ((Double) totalAlert.getTabularDataSeries().get(0).getValues().get("value:sum")).intValue();
 	}
 
-	public String ActionMoistureLevel() {
+	public String actionMoistureLevel() {
 		final TabularDatas lastMoistureValue = timeSeriesDataBaseManager.getTabularData(
 				"mars-test",
 				Collections.singletonList("value:last"),
 				DataFilter.builder("moisture").build(),
 				TimeFilter.builder("now() - 365d", "now() + 1d").build());
-		if ((Integer) lastMoistureValue.getTabularDataSeries().get(0).getValues().get("value:last") <= 40) {
-			return lastMoistureValue.getTabularDataSeries().get(0).getValues().get("equipment:last").toString();
+		final TabularDatas lastMoistureEquipment = timeSeriesDataBaseManager.getTabularData(
+				"mars-test",
+				Collections.singletonList("equipment:last"),
+				DataFilter.builder("moisture").build(),
+				TimeFilter.builder("now() - 365d", "now() + 1d").build());
+		if ((double) Math.round((Double) lastMoistureValue.getTabularDataSeries().get(0).getValues().get("value:last") * 10) / 10 <= 40) {
+			return lastMoistureEquipment.getTabularDataSeries().get(0).getValues().get("equipment:last").toString();
 		}
-		return null;
+		return "No Farms to Water";
 	}
 }

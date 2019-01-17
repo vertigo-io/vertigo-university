@@ -80,9 +80,8 @@
 			<vu:block id="farmoverview" title="Farm Overview" icon="fas fa-tractor">
 				<div class="row items-center">
 					<div class="col-md-6 col-xs-12 text-center gutter-xs">
-						<!-- TODO Farm to water -->
-						<div class="q-title">Farms to water: </div>
-							<div >
+						<div class="text-center"> <span class="indicator text-negative" th:text="${model.farmsToWater}" /><br/><span class="indicator-title text-faded">Farms to water</span></div>
+							<div class="ml-1">
 								<q-btn rounded push th:@click="|httpPostAjax('@{_onFan}', {})|" :class="'on-left '" 
 								size="lg" color="red"  icon-right="fas fa-wind"
 								aria-label="Triggered alarm in base" title="Trigger alarm in base" >ON</q-btn>
@@ -104,12 +103,22 @@
 			</vu:block>
 			
 			<vu:block id="securityoverview" title="Security Overview" icon="fas fa-lock">
-				<div class="row items-center gutter-md">
-					<div class="col-md-6 col-xs-12 column items-center">
-						<div class="q-title">Triggered alarm this month:</div>
-						<!-- TODO  appel du nombre d'alerte declenche ce mois-ci tout equipement de securite confondu-->
+				<div class="row items-center">
+					<div class="col-md-6 col-xs-12 column items-center gutter-md">
+						<div class="text-center"> <span class="indicator text-deep-orange" th:text="${model.totalAlert}" /><br/><span class="indicator-title text-faded">Triggered alarm this week</span></div>
+						<div class="chart chartjs stakedbarchart bg-white" 
+								th:data-url="@{/api/basemanagment/equipment/environment/data/series}" 
+								data-query-measures='["value:last"]'
+								data-query-data-filter='{ "measurement": "fireAlarm", "filters": {"equipment": "*"}}'
+								data-query-time-filter='{ "from": "now() - 1d", "to": "now() + 1h", "dim": "1d"}'
+								data-labels='{"value:last":"Number of alert today"}' 
+								data-colors='iRED2GREEN'>
+						</div> 				
 						<!-- TODO Graphe qui somme l'ensemble des alertes des equipements de securite et fait un graphe  -->
-						<div >
+
+					</div>		
+					<div class="col-md-6 col-xs-12 column gutter-md">
+						<div class="text-center">
 							<q-btn rounded push th:@click="|httpPostAjax('@{_alert}', {})|" :class="'on-left '" 
 							size="lg" color="red"  icon-right="fas fa-exclamation-circle"
 							aria-label="Triggered alarm in base" title="Trigger alarm in base" >Alert</q-btn>
@@ -117,9 +126,6 @@
 							size="lg" color="primary"    icon-right="fas fa-bell-slash"
 							aria-label="Triggered alarm in base" title="Stop alarm in base" >Stop</q-btn>
 						</div>
-					</div>		
-					<div class="col-md-6 col-xs-12 column">
-						<!-- TODO une boite texte pour envoyer message au panneau d'affichage  -->
 						<div class="q-title">Send a message to the Led Displayer Panel</div>
 						<q-input v-model="dataX.message"
 							th::after="|[
