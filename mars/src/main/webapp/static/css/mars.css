@@ -254,6 +254,21 @@ nav a.q-item {
 }
 
 
+.showButtonOnHover:hover > .q-btn {
+  opacity: 1;
+  transition: .5s;
+}
+
+.showButtonOnHover > .q-btn {
+  opacity: 0;
+  transition: .5s;
+}
+
+.image-gallery-modal .modal-body {
+	max-height: 80%
+}
+
+*/
 /** Home **/
 .indicator {
 	font-size: 3em;

@@ -119,14 +119,14 @@ public class BaseServices implements Component, Activeable {
 		return storeManager.getFileStore().read(toFileInfoStdURI(fileId)).getVFile();
 	}
 
-	public void removeBasePicture(final Long baseId, final FileInfoURI basePicture) {
+	public void removeBasePicture(final Long baseId, final Long basePictureId) {
 		//apply security check
 		final Picture picture = pictureDAO.find(
 				Criterions.isEqualTo(PictureFields.BASE_ID, baseId)
-						.and(Criterions.isEqualTo(PictureFields.PICTUREFILE_ID, (Long) basePicture.getKey())));
+						.and(Criterions.isEqualTo(PictureFields.PICTUREFILE_ID, basePictureId)));
 		pictureDAO.delete(picture.getPictureId());
 
-		storeManager.getFileStore().delete(basePicture);
+		storeManager.getFileStore().delete(toFileInfoStdURI(basePictureId));
 	}
 
 	private static FileInfoURI toFileInfoStdURI(final Long fileId) {
