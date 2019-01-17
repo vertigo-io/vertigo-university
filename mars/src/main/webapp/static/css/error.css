@@ -13,7 +13,7 @@ svg {
 }
 
 .errorPage a {
-	color: #D83A4E;
+	text-decoration: none;
 }
 
 .errorPage p {
@@ -129,13 +129,23 @@ svg {
 	opacity: 0.2;
 }
 
-.errorPage h3, .permission_denied h3 {
+.errorPage h2, .permission_denied h2 {
   text-align: center;
   color: #fff;
   font-size: 40px;
   margin: 0px auto 30px auto;
   font-family: "Dosis", sans-serif;
   font-weight: 600;
+}
+
+.errorPage h3, .permission_denied h3 {
+  text-align: center;
+  color: #fff;
+  font-size: 19px;
+  max-width: 330px;
+  margin: 0px auto 30px auto;
+  font-family: "Dosis", sans-serif;
+  font-weight: 400;
 }
 
 

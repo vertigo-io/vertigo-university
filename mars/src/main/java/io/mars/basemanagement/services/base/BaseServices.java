@@ -74,8 +74,18 @@ public class BaseServices implements Component, Activeable {
 		return basemanagementPAO.getBaseOverview(baseId);
 	}
 
-	public void save(final Base base, final List<FileInfoURI> addedPictureFile) {
+	public void save(final Base base, final List<FileInfoURI> addedPictureFile, final DtList<Picture> deletedPictures) {
+		//apply Security Checks
+
+		//update Base
 		baseDAO.save(base);
+
+		//remove deleted pictures
+		for (final Picture deletedPicture : deletedPictures) {
+			pictureDAO.delete(deletedPicture.getPictureId());
+			storeManager.getFileStore().delete(toFileInfoStdURI(deletedPicture.getPicturefileId()));
+		}
+		//create added pictures
 		for (final FileInfoURI fileInfoURI : addedPictureFile) {
 			final VFile fileTmp = commonsServices.getFileTmp(fileInfoURI);
 			final FileInfo fileInfo = storeManager.getFileStore().create(new FileInfoStd(fileTmp));
@@ -117,16 +127,6 @@ public class BaseServices implements Component, Activeable {
 			return defaultPhoto;
 		}
 		return storeManager.getFileStore().read(toFileInfoStdURI(fileId)).getVFile();
-	}
-
-	public void removeBasePicture(final Long baseId, final Long basePictureId) {
-		//apply security check
-		final Picture picture = pictureDAO.find(
-				Criterions.isEqualTo(PictureFields.BASE_ID, baseId)
-						.and(Criterions.isEqualTo(PictureFields.PICTUREFILE_ID, basePictureId)));
-		pictureDAO.delete(picture.getPictureId());
-
-		storeManager.getFileStore().delete(toFileInfoStdURI(basePictureId));
 	}
 
 	private static FileInfoURI toFileInfoStdURI(final Long fileId) {

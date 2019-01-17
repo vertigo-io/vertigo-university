@@ -1,5 +1,6 @@
 package io.mars.basemanagement.controllers.base;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -18,14 +19,18 @@ import io.mars.basemanagement.domain.Geosector;
 import io.mars.basemanagement.domain.Picture;
 import io.mars.basemanagement.domain.Tag;
 import io.mars.basemanagement.services.base.BaseServices;
+import io.mars.domain.DtDefinitions.PictureFields;
 import io.mars.hr.domain.Person;
 import io.mars.hr.services.mission.MissionServices;
 import io.vertigo.dynamo.domain.model.FileInfoURI;
+import io.vertigo.lang.VUserException;
+import io.vertigo.ui.core.BasicUiListModifiable;
 import io.vertigo.ui.core.ProtectedValueUtil;
 import io.vertigo.ui.core.ViewContext;
 import io.vertigo.ui.core.ViewContextKey;
 import io.vertigo.ui.impl.springmvc.argumentresolvers.ViewAttribute;
 import io.vertigo.ui.impl.springmvc.controller.AbstractVSpringMvcController;
+import io.vertigo.vega.webservice.validation.UiMessageStack;
 
 @Controller
 @RequestMapping("/basemanagement/base/information")
@@ -73,17 +78,25 @@ public class BaseInformationController extends AbstractVSpringMvcController {
 	}
 
 	@PostMapping("/_save")
-	public String doSave(@ViewAttribute("base") final Base base, @Named("baseTmpPictureUris") final List<FileInfoURI> addedPictureFile) {
-		baseServices.save(base, addedPictureFile);
+	public String doSave(final ViewContext viewContext, @ViewAttribute("base") final Base base, @Named("baseTmpPictureUris") final List<FileInfoURI> addedPictureFile, final UiMessageStack uiMessageStack) {
+		final BasicUiListModifiable<Picture> pictures = viewContext.getUiListModifiable(basePictures);
+		pictures.mergeAndCheckInput(Collections.EMPTY_LIST, uiMessageStack); //needed to populate Delta
+		baseServices.save(base, addedPictureFile, pictures.getDtListDelta().getDeleted()); //Warning : always one service call : one transaction
 		return "redirect:/basemanagement/base/information/" + base.getBaseId();
 	}
 
 	@PostMapping("/_remove")
-	public ViewContext doRemove(final ViewContext viewContext, @RequestParam("baseId") final Long baseId, @RequestParam("basePictureId") final String protectedId) {
+	public ViewContext doRemove(final ViewContext viewContext, @RequestParam("basePictureId") final String protectedId) {
+		//baseServices.removeBasePicture(baseId, basePictureId);
+		final BasicUiListModifiable<Picture> pictures = viewContext.getUiListModifiable(basePictures);
 		final Long basePictureId = ProtectedValueUtil.readProtectedValue(protectedId, Long.class);
-		baseServices.removeBasePicture(baseId, basePictureId);
-		viewContext.publishDtListModifiable(basePictures, baseServices.getPictures(baseId));
+		final boolean elementRemoved = pictures.removeIf((picture) -> basePictureId.equals(picture.getLong(PictureFields.PICTUREFILE_ID.name())));
+		if (!elementRemoved) {
+			throw new VUserException("Picture already removed");
+		}
+		viewContext.markModifiedKeys(basePictures);
 		return viewContext;
+		//return "redirect:/basemanagement/base/information/" + baseId;
 	}
 
 }
