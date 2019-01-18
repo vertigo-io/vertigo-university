@@ -100,9 +100,9 @@ public class BaseGenerator implements Component {
 		final List<String> nameSecondPartDictionnary2 = Arrays.asList("Centauri", "Aldebaran", "Pisces", "Cygnus", "Pegasus", "Dragon", "Andromeda");
 		final List<String> sampleTags = Arrays.asList("#mountain", "#sea", "#historic", "#cold", "#first", "#nasa", "#experimental");
 
-		final String exteriorPicturePrefix = "bases/mars base ";
+		final String exteriorPicturePrefix = "/initdata/files/bases/mars base ";
 		final String exteriorPictureSuffix = ".jpg";
-		final String interiorPicturePrefix = "bases/inner base ";
+		final String interiorPicturePrefix = "/initdata/files/bases/inner base ";
 		final String interiorPictureSuffix = ".jpg";
 
 		final FakeBaseListBuilder builder = new FakeBaseListBuilder()
