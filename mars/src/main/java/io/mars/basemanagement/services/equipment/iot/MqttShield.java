@@ -79,6 +79,29 @@ public class MqttShield implements Component, Activeable {
 		@Override
 		public void connectionLost(final Throwable cause) {
 			LOGGER.info("Connection lost");
+			LOGGER.info("Caused by: " + cause);
+			try {
+				if (!mqttClient.isConnected()) {
+					LOGGER.info("Trying to reconnect mqttClient");
+					mqttClient.reconnect();
+					Thread.sleep(5 * 1000);
+					subscribe();
+					LOGGER.info("mqttClient Reconnected");
+					LOGGER.info(mqttClient.isConnected());
+				}
+				if (!mqttClientPub.isConnected()) {
+					mqttClientPub.reconnect();
+					LOGGER.info("mqttClientPub Reconnected");
+				}
+
+			} catch (final MqttException me) {
+				// TODO Auto-generated catch block
+				throw WrappedException.wrap(me);
+			} catch (final InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 		}
 
 		@Override
@@ -106,25 +129,26 @@ public class MqttShield implements Component, Activeable {
 		sampleClient.connect(connOpts);
 		connOpts.setCleanSession(true);
 		samplePublisher.connect();
-		sampleClient.setCallback(new MqttCallback() {
-			@Override
-			public void connectionLost(final Throwable cause) {
-				LOGGER.info("Connection lost");
-			}
-
-			@Override
-			public void messageArrived(final String topic, final MqttMessage message) throws Exception {
-				Assertion.checkNotNull(topic);
-				Assertion.checkNotNull(message);
-				//
-				handleMessage(message, topic);
-			}
-
-			@Override
-			public void deliveryComplete(final IMqttDeliveryToken token) {
-				// nothing for now
-			}
-		});
+		sampleClient.setCallback(callback);
+		//		sampleClient.setCallback(new MqttCallback() {
+		//			@Override
+		//			public void connectionLost(final Throwable cause) {
+		//				LOGGER.info("Connection lost");
+		//			}
+		//
+		//			@Override
+		//			public void messageArrived(final String topic, final MqttMessage message) throws Exception {
+		//				Assertion.checkNotNull(topic);
+		//				Assertion.checkNotNull(message);
+		//				//
+		//				handleMessage(message, topic);
+		//			}
+		//
+		//			@Override
+		//			public void deliveryComplete(final IMqttDeliveryToken token) {
+		//				// nothing for now
+		//			}
+		//		});
 		LOGGER.info("Connected");
 
 		mqttClient = sampleClient;
@@ -159,6 +183,7 @@ public class MqttShield implements Component, Activeable {
 		final String[] parsedTopic = parseTopic(topic);
 		//Maybe change if condition by switch case ?
 		if (parsedTopic[1].equals("fireAlarm")) {
+			//TODO: change ss01 by an automatic redistribution of the message in the dedicated topic
 			final InputEvent actuatorEvent = createActuatorEvent(message, "ss01" + "/" + "relay");
 			eventBusManager.post(actuatorEvent);
 			addMeasure(parsedTopic, data);
@@ -168,9 +193,11 @@ public class MqttShield implements Component, Activeable {
 			eventBusManager.post(messageEvent);
 			//we don't want Influx save the data in database
 		} else if (parsedTopic[1].equals("turnFan")) {
+			//TODO: change fs01 by an automatic redistribution of the message in the dedicated topic
 			final InputEvent fanEvent = createActuatorEvent(message, "fs01" + "/" + "fan");
 			eventBusManager.post(fanEvent);
 		} else if (parsedTopic[1].equals("actionShutters")) {
+			//TODO: change ms01 by an automatic redistribution of the message in the dedicated topic
 			final InputEvent shuttersEvent = createActuatorEvent(message, "ms01" + "/" + "shutters");
 			eventBusManager.post(shuttersEvent);
 		} else if (parsedTopic[1].equals("light")) {
@@ -187,7 +214,7 @@ public class MqttShield implements Component, Activeable {
 			}
 		} else if (parsedTopic[1].equals("display")) {
 			//we don't want Influx save the data in database
-		} else if (parsedTopic[1].equals("display")) {
+		} else if (parsedTopic[1].equals("relay")) {
 			//we don't want Influx save the data in database
 		} else if (parsedTopic[1].equals("fan")) {
 			//we don't want Influx save the data in database
