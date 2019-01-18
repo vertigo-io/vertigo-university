@@ -7,9 +7,16 @@ import javax.inject.Inject;
 
 import io.mars.basemanagement.BasemanagementPAO;
 import io.mars.basemanagement.dao.BaseDAO;
+import io.mars.basemanagement.dao.PictureDAO;
 import io.mars.basemanagement.domain.Base;
+import io.mars.basemanagement.domain.Picture;
+import io.mars.fileinfo.FileInfoStd;
 import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.core.component.Component;
+import io.vertigo.dynamo.file.FileManager;
+import io.vertigo.dynamo.file.model.FileInfo;
+import io.vertigo.dynamo.file.model.VFile;
+import io.vertigo.dynamo.store.StoreManager;
 
 @Transactional
 public class BaseGenerator implements Component {
@@ -19,6 +26,13 @@ public class BaseGenerator implements Component {
 
 	@Inject
 	private BaseDAO baseDAO;
+	@Inject
+	private PictureDAO pictureDAO;
+
+	@Inject
+	private FileManager fileManager;
+	@Inject
+	private StoreManager storeManager;
 
 	public void generateInitialBases() {
 		final List<String> geoLocations = Arrays.asList(" { \"lon\": 9.55 , \"lat\" : 44.050000 } ", " { \"lon\": -54.283333 , \"lat\" : -36.500000 } ",
@@ -86,16 +100,41 @@ public class BaseGenerator implements Component {
 		final List<String> nameSecondPartDictionnary2 = Arrays.asList("Centauri", "Aldebaran", "Pisces", "Cygnus", "Pegasus", "Dragon", "Andromeda");
 		final List<String> sampleTags = Arrays.asList("#mountain", "#sea", "#historic", "#cold", "#first", "#nasa", "#experimental");
 
-		final List<Base> baseList = new FakeBaseListBuilder()
-				.withMaxValues(50)
+		final String exteriorPicturePrefix = "bases/mars base ";
+		final String exteriorPictureSuffix = ".jpg";
+		final String interiorPicturePrefix = "bases/inner base ";
+		final String interiorPictureSuffix = ".jpg";
+
+		final FakeBaseListBuilder builder = new FakeBaseListBuilder()
+				.withMaxValues(10)
 				.withGeosectorIds(basemanagementPAO.selectGeosectorId())
 				.withGeoLocations(geoLocations)
 				.withNameDictionnaries(nameFirstPartDictionnary1, nameSecondPartDictionnary2)
 				.withTagsDictionnary(sampleTags)
-				.build();
+				.withPictures(1, exteriorPicturePrefix, exteriorPictureSuffix)
+				.withPictures(2, interiorPicturePrefix, interiorPictureSuffix);
 
+		final List<Base> baseList = builder.build();
+		int baseIdx = 0;
 		for (final Base base : baseList) {
 			baseDAO.create(base);
+			baseIdx++;
+
+			//Add picture
+
+			for (final String picturePath : builder.generatePictures(baseIdx)) {
+				final VFile pictureFile = fileManager.createFile(
+						picturePath.substring(picturePath.lastIndexOf('/') + 1),
+						"image/" + picturePath.substring(picturePath.lastIndexOf('.') + 1),
+						this.getClass().getResource(picturePath));
+
+				final FileInfo fileInfo = storeManager.getFileStore().create(new FileInfoStd(pictureFile));
+
+				final Picture picture = new Picture();
+				picture.setBaseId(base.getBaseId());
+				picture.setPicturefileId((Long) fileInfo.getURI().getKey());
+				pictureDAO.create(picture);
+			}
 		}
 
 	}

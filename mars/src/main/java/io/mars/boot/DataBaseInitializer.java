@@ -29,6 +29,7 @@ import java.sql.SQLException;
 import javax.inject.Inject;
 
 import io.mars.datageneration.DataGenerator;
+import io.vertigo.app.Home;
 import io.vertigo.core.component.ComponentInitializer;
 import io.vertigo.core.resource.ResourceManager;
 import io.vertigo.database.sql.SqlDataBaseManager;
@@ -53,7 +54,9 @@ public class DataBaseInitializer implements ComponentInitializer {
 	@Override
 	public void init() {
 		createDataBase();
-		dataGenerator.generateInitialData();
+		Home.getApp().registerPreActivateFunction(() -> {
+			dataGenerator.generateInitialData();
+		});
 	}
 
 	private void createDataBase() {

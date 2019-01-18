@@ -22,6 +22,7 @@ public final class FakeBaseListBuilder implements Builder {
 	private List<String> myTagsDictionnary;
 	private List<Long> myGeosectorIds;
 	private List<String> myGeoLocations;
+	private final List<PictureGeneratorInfos> pictureGeneratorInfos = new ArrayList<>();
 
 	private int myMaxValues = 0;
 
@@ -62,6 +63,32 @@ public final class FakeBaseListBuilder implements Builder {
 
 	public FakeBaseListBuilder withTagsDictionnary(final List<String> sampleTags) {
 		myTagsDictionnary = sampleTags;
+		return this;
+	}
+
+	private final class PictureGeneratorInfos {
+		private final int picturePerBase;
+		private final String picturePrefix;
+		private final String pictureSuffix;
+
+		PictureGeneratorInfos(final int picturePerBase, final String picturePrefix, final String pictureSuffix) {
+			this.picturePerBase = picturePerBase;
+			this.picturePrefix = picturePrefix;
+			this.pictureSuffix = pictureSuffix;
+		}
+
+		List<String> generatePictures(final int baseNumber) {
+			final List<String> result = new ArrayList<>();
+			for (int i = 0; i < picturePerBase; i++) {
+				result.add(picturePrefix + ((baseNumber - 1) * picturePerBase + i + 1) + pictureSuffix);
+			}
+			return result;
+		}
+
+	}
+
+	public FakeBaseListBuilder withPictures(final int picturePerBase, final String picturePrefix, final String pictureSuffix) {
+		pictureGeneratorInfos.add(new PictureGeneratorInfos(picturePerBase, picturePrefix, pictureSuffix));
 		return this;
 	}
 
@@ -133,6 +160,14 @@ public final class FakeBaseListBuilder implements Builder {
 		base.geosector().setId(geosectorId);
 		base.setTags(tagString);
 		return base;
+	}
+
+	public List<String> generatePictures(final int baseNumber) {
+		final List<String> result = new ArrayList<>();
+		for (final PictureGeneratorInfos pictureGeneratorInfo : pictureGeneratorInfos) {
+			result.addAll(pictureGeneratorInfo.generatePictures(baseNumber));
+		}
+		return result;
 	}
 
 	@Override
