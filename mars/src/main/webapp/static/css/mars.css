@@ -76,9 +76,6 @@ body {
 	padding-bottom: 64px;
 }
 
-img.avatar {
-	object-fit: cover;
-}
 
 body.login {
 	background: url(../img/bcf60b99d4_121619_mars-bfrs.jpg) !important;	
@@ -108,21 +105,21 @@ body.login {
 	border: none;
 }
 
-.bg-primary .q-item {
+/*.bg-primary .q-item {
   color: currentColor !important;
 }
 
 .bg-primary .q-item-side {
   color: currentColor !important;  
-}
+}*/
 
 .q-item-side {
     text-align: center;
 }
-
+/*
 .q-item-sublabel {
   color: currentColor !important;
-}
+}*/
 
 .dense-list-header .q-list-header+.q-item
 { /*q-item after a q-list-header is nearer*/
