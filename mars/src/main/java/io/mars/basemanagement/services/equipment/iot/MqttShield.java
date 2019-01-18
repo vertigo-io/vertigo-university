@@ -203,14 +203,15 @@ public class MqttShield implements Component, Activeable {
 		} else if (parsedTopic[1].equals("light")) {
 			//command shutters function of lightning
 			if (Integer.parseInt(data[1]) < 100) {
-				final String turnAction = "90";
+				final String turnAction = "0";
 				final InputEvent sendAction = new InputEvent(InputEvent.Type.of(1), "base/actionShutters", turnAction);
 				eventBusManager.post(sendAction);
 				addMeasure(parsedTopic, data);
 			} else {
-				final String turnAction = "0";
+				final String turnAction = "180";
 				final InputEvent sendAction = new InputEvent(InputEvent.Type.of(1), "base/actionShutters", turnAction);
 				eventBusManager.post(sendAction);
+				LOGGER.info("light =" + data[1] + "Action sent");
 			}
 		} else if (parsedTopic[1].equals("display")) {
 			//we don't want Influx save the data in database
