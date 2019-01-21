@@ -34,7 +34,7 @@ public class BaseGenerator implements Component {
 	@Inject
 	private StoreManager storeManager;
 
-	public void generateInitialBases() {
+	public List<Base> generateInitialBases() {
 		final List<String> geoLocations = Arrays.asList(" { \"lon\": 9.55 , \"lat\" : 44.050000 } ", " { \"lon\": -54.283333 , \"lat\" : -36.500000 } ",
 				" { \"lon\": -49.35 , \"lat\" : 70.216667 } ", " { \"lon\": 31.766666666666666 , \"lat\" : 35.233333 } ", " { \"lon\": 60.116667 , \"lat\" : 19.900000 } ", " { \"lon\": -0.5477 , \"lat\" : 166.920867 } ", " { \"lon\": 18.0731 , \"lat\" : -63.082200 } ", " { \"lon\": -9.166667 , \"lat\" : -171.833333 } ",
 				" { \"lon\": 27.153611 , \"lat\" : -13.203333 } ", " { \"lon\": 34.516666666666666 , \"lat\" : 69.183333 } ", " { \"lon\": 41.31666666666667 , \"lat\" : 19.816667 } ", " { \"lon\": 36.75 , \"lat\" : 3.050000 } ",
@@ -114,9 +114,9 @@ public class BaseGenerator implements Component {
 				.withPictures(1, exteriorPicturePrefix, exteriorPictureSuffix)
 				.withPictures(2, interiorPicturePrefix, interiorPictureSuffix);
 
-		final List<Base> baseList = builder.build();
+		final List<Base> bases = builder.build();
 		int baseIdx = 0;
-		for (final Base base : baseList) {
+		for (final Base base : bases) {
 			baseDAO.create(base);
 			baseIdx++;
 
@@ -136,6 +136,7 @@ public class BaseGenerator implements Component {
 				pictureDAO.create(picture);
 			}
 		}
+		return bases;
 
 	}
 

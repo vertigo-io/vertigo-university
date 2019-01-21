@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
+import io.mars.basemanagement.domain.Base;
 import io.mars.basemanagement.domain.Business;
 import io.mars.basemanagement.domain.Equipment;
 import io.mars.catalog.domain.EquipmentType;
@@ -24,7 +25,7 @@ public class FakeEquipmentListBuilder implements Builder {
 
 	private DtList<Business> myBusinessList;
 	private DtList<EquipmentType> myEquipmentTypes;
-	private List<Long> myBaseIds;
+	private List<Base> myBases;
 	private List<Long> myGeosectorIds;
 
 	public FakeEquipmentListBuilder() {
@@ -60,10 +61,10 @@ public class FakeEquipmentListBuilder implements Builder {
 		return this;
 	}
 
-	public FakeEquipmentListBuilder withBaseIdList(final List<Long> baseIds) {
-		Assertion.checkNotNull(baseIds);
+	public FakeEquipmentListBuilder withBases(final List<Base> bases) {
+		Assertion.checkNotNull(bases);
 		//---
-		myBaseIds = baseIds;
+		myBases = bases;
 		return this;
 	}
 
@@ -113,13 +114,13 @@ public class FakeEquipmentListBuilder implements Builder {
 		return BigDecimal.valueOf(randomDouble);
 	}
 
-	private static Equipment createEquipment(final Long baseId,
+	private static Equipment createEquipment(
+			final Base base,
 			final Business business,
 			final EquipmentType equipmentType,
 			final Long geoSectorId,
 			final String code,
 			final BigDecimal equipmentValue,
-			final String geoLocation,
 			final Integer healthLevel,
 			final String name,
 			final String description,
@@ -127,13 +128,13 @@ public class FakeEquipmentListBuilder implements Builder {
 			final BigDecimal rentingFee,
 			final String tags) {
 		final Equipment equipment = new Equipment();
-		equipment.base().setId(baseId);
+		equipment.base().setId(base.getBaseId());
 		equipment.business().set(business);
 		equipment.equipmentType().set(equipmentType);
 		equipment.geosector().setId(geoSectorId);
 		equipment.setCode(code);
 		equipment.setEquipmentValue(equipmentValue);
-		equipment.setGeoLocation(geoLocation);
+		equipment.setGeoLocation(base.getGeoLocation());
 		equipment.setHealthLevel(healthLevel);
 		equipment.setName(name);
 		equipment.setDescription(description);
@@ -151,7 +152,7 @@ public class FakeEquipmentListBuilder implements Builder {
 	public DtList<Equipment> build() {
 		Assertion.checkNotNull(myEquipmentTypes);
 		Assertion.checkNotNull(myBusinessList);
-		Assertion.checkNotNull(myBaseIds);
+		Assertion.checkNotNull(myBases);
 		Assertion.checkNotNull(myGeosectorIds);
 		final DtList<Equipment> equipments = new DtList<>(Equipment.class);
 
@@ -159,16 +160,15 @@ public class FakeEquipmentListBuilder implements Builder {
 
 			final EquipmentType currentEquipmentType = myEquipmentTypes.get(DataGenerator.RND.nextInt(myEquipmentTypes.size()));
 			final Business currentBusiness = myBusinessList.get(DataGenerator.RND.nextInt(myBusinessList.size()));
-			final Long currentBaseId = myBaseIds.get(DataGenerator.RND.nextInt(myBaseIds.size()));
+			final Base base = myBases.get(DataGenerator.RND.nextInt(myBases.size()));
 			final Long currentGeosectorId = myGeosectorIds.get(DataGenerator.RND.nextInt(myGeosectorIds.size()));
-
-			final Equipment equipment = createEquipment(currentBaseId,
+			final Equipment equipment = createEquipment(
+					base,
 					currentBusiness,
 					currentEquipmentType,
 					currentGeosectorId,
 					getCode(currentEquipmentType.getLabel(), currentBusiness.getName(), currentCounter),
 					getEquipmentValue(),
-					getGeoLocation(),
 					getHealthLevel(),
 					getEquipmentName(currentEquipmentType.getLabel(), currentBusiness.getName(), currentCounter),
 					getDescription(),

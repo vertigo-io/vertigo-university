@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -14,6 +15,7 @@ import com.opencsv.CSVReaderBuilder;
 import io.mars.basemanagement.BasemanagementPAO;
 import io.mars.basemanagement.dao.BusinessDAO;
 import io.mars.basemanagement.dao.EquipmentDAO;
+import io.mars.basemanagement.domain.Base;
 import io.mars.basemanagement.domain.Equipment;
 import io.mars.catalog.dao.EquipmentCategoryDAO;
 import io.mars.catalog.dao.EquipmentTypeDAO;
@@ -46,16 +48,16 @@ public class EquipmentGenerator implements Component {
 	@Inject
 	private ResourceManager resourceManager;
 
-	public void createInitialEquipments(final int equipmentUnitsToGenerate) {
-		final DtList<Equipment> equipmentList = new FakeEquipmentListBuilder()
-				.withBaseIdList(basemanagementPAO.selectBaseId())
+	public void createInitialEquipments(final int equipmentUnitsToGenerate, final List<Base> bases) {
+		final DtList<Equipment> equipments = new FakeEquipmentListBuilder()
+				.withBases(bases)
 				.withGeosectorIdList(basemanagementPAO.selectGeosectorId())
 				.withBusinessList(businessDAO.selectBusiness())
 				.withEquipmentTypeList(equipmentTypeDAO.selectEquipmentType())
 				.withMaxValues(equipmentUnitsToGenerate)
 				.build();
 
-		equipmentDAO.insertEquipmentsBatch(equipmentList);
+		equipmentDAO.insertEquipmentsBatch(equipments);
 	}
 
 	public void createInitialEquipmentCategories() {

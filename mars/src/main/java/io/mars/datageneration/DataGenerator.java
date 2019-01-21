@@ -6,6 +6,7 @@ import java.time.LocalTime;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
 import java.util.Random;
 
 import javax.inject.Inject;
@@ -14,6 +15,7 @@ import javax.inject.Named;
 import io.mars.basemanagement.datageneration.BaseGenerator;
 import io.mars.basemanagement.datageneration.EquipmentGenerator;
 import io.mars.basemanagement.datageneration.ReferenceDataGenerator;
+import io.mars.basemanagement.domain.Base;
 import io.mars.hr.datageneration.PersonGenerator;
 import io.mars.maintenance.datageneration.TicketGenerator;
 import io.mars.opendata.datageneration.OpendataSetGenerator;
@@ -53,9 +55,9 @@ public class DataGenerator implements Component {
 
 	public void generateInitialData() {
 		generateReferenceData();
+		final List<Base> bases = generateInitialBases();
+		generateInitialEquipments(bases);
 		generateInitialPersons();
-		generateInitialBases();
-		generateInitialEquipments();
 		generateInitialOpendataSets();
 		generatePastData(ZonedDateTime.of(LocalDate.of(2018, 11, 19), LocalTime.of(0, 0), ZoneOffset.UTC).toInstant(), Instant.now());
 	}
@@ -64,18 +66,18 @@ public class DataGenerator implements Component {
 		opendataSetGenerator.createInitialOpendataSetsFromCSV("initdata/opendataSets.csv");
 	}
 
-	private void generateInitialEquipments() {
+	private void generateInitialEquipments(final List<Base> bases) {
 		equipmentGenerator.createInitialEquipmentCategories();
 		equipmentGenerator.createInitialEquipmentTypesFromCSV("initdata/equipmentTypes.csv");
-		equipmentGenerator.createInitialEquipments(initialEquipmentUnits);
+		equipmentGenerator.createInitialEquipments(initialEquipmentUnits, bases);
 	}
 
 	private void generateInitialPersons() {
 		personGenerator.createInitialPersonsFromCSV("initdata/persons.csv");
 	}
 
-	private void generateInitialBases() {
-		baseGenerator.generateInitialBases();
+	private List<Base> generateInitialBases() {
+		return baseGenerator.generateInitialBases();
 	}
 
 	private void generateReferenceData() {
