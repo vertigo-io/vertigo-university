@@ -36,6 +36,11 @@
 					"host" :"mars.dev.klee.lan.net",
 					"port" :"6379" ,
 					"database" :"0"
+				},
+				"socketLoggerAnalyticsConnector" : {
+					"__flags__" : ["klee"],
+					"appName" : "mars-analytics",
+					"hostName" : "mars.dev.klee.lan.net"
 				}
 			}
 		},
