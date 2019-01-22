@@ -215,6 +215,10 @@ nav a.q-item {
     /*height:auto;  /* just added this line */
 }
 
+.q-table tr.nav {
+	cursor: pointer;
+}
+
 .q-table td, .q-table th {
     max-width: 0;
     overflow: hidden;

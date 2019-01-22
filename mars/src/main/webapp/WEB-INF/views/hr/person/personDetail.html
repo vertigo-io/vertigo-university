@@ -68,9 +68,9 @@
 				<vu:block th:if="${model.modeReadOnly}" id="missions" title="Missions" withFab>
 					<vu:include-data object="person" field="personId" />
 					<vu:include-data object="missions" field="missionId" />
-					<q-btn fab color="primary" icon="add" aria-label="Add mission" title="Add mission"
+					<q-btn class="fab-block" round color="primary" icon="add" aria-label="Add mission" title="Add mission"
 					 th:@click="|openModal('missionEditModal', '@{/hr/mission/new}', { 'personId' : vueData.person.personId, 'successCallback' : 'onMissionSuccess' })|"></q-btn>
-					<vu:table list="missions" componentId="missions" rowsPerPage="10">
+					<vu:table list="missions" componentId="missions" rowsPerPage="10" >
 						<vu:column field="role" />
 						<vu:column field="baseName" />
 						<vu:column field="businessName" />

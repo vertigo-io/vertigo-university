@@ -25,14 +25,13 @@
 		</div>
 		
 		<th:block th:if="${model.listRenderer == 'table'}">
-			<vu:table list="persons" componentId="personsTable" sortUrl="@{/hr/persons/_sort}" top_left_slot="~{ :: tableTitle}" top_right_slot="~{ :: tableActions}" >
+			<vu:table list="persons" componentId="personsTable" sortUrl="@{/hr/persons/_sort}" 
+				tr_@click.native="|goTo('@{/hr/person/}'+props.row.personId)|" tr_class="nav"
+				top_left_slot="~{ :: tableTitle}" top_right_slot="~{ :: tableActions}" >
 				<vu:column field="personId" label="Buisness Code" />
 				<vu:column field="firstName" sortable="true" />
 				<vu:column field="lastName" sortable="true" />
-				<vu:column field="email" sortable="true" />
-				<vu:column name="actions" label="Actions" >
-					<q-btn round icon="arrow_forward" type="a" th::href="|'@{/hr/person/}'+props.row.personId|"></q-btn>
-				</vu:column>
+				<vu:column field="email" sortable="true" />				
 			</vu:table>
 		</th:block>
 		<th:block th:if="${model.listRenderer == 'cards'}">
@@ -65,6 +64,7 @@
 			</vu:cards>
 		</th:block>
 		<th:block th:if="${model.listRenderer == 'list'}">
+			<vu:include-data object="persons" field="personId" />
 			<vu:include-data-protected object="persons" field="picturefileId"/>	
 			<vu:list list="persons" componentId="personsList" sortUrl="@{/hr/persons/_sort}" rowsPerPage="8" pagination_:direction-links="true" pagination_:boundary-links="true" >
 				<q-item-side>
