@@ -26,21 +26,20 @@ public class BlockchainTicketEventSubscriber implements Component {
 
 	@Inject
 	private LedgerManager ledgerManager;
-	
+
 	@Inject
 	private PersonServices personServices;
-	
+
 	@Inject
 	private NotificationServices notificationServices;
-
 
 	@EventBusSubscribed
 	public void onTicketEvent(final TicketEvent ticketEvent) {
 		if (ticketEvent.getType() == TicketEvent.Type.CREATE) {
 			final Ticket ticket = ticketEvent.getTicket();
-			
-			String strDateCreated = ticket.getDateCreated().format(FORMATTER);
-			
+
+			final String strDateCreated = ticket.getDateCreated().format(FORMATTER);
+
 			final StringBuilder sbSerializedTicket = new StringBuilder();
 			sbSerializedTicket.append("Création du ticket ")
 					.append(ticket.getCode())
@@ -50,15 +49,15 @@ public class BlockchainTicketEventSubscriber implements Component {
 					.append(strDateCreated);
 
 			messageQueue.add(sbSerializedTicket.toString());
-			
-			Notification notification = Notification.builder()
-													.withSender("System")
-													.withTitle("Writing new ticket to the ledger")		
-													.withContent(sbSerializedTicket.toString())
-													.withTTLInSeconds(600)
-													.withType("MARS-TICKET-LEDGER") //should prefix by app, in case of multi-apps notifications
-													.withTargetUrl("#")
-													.build();
+
+			final Notification notification = Notification.builder()
+					.withSender("System")
+					.withTitle("Writing new ticket to the ledger")
+					.withContent(sbSerializedTicket.toString())
+					.withTTLInSeconds(600)
+					.withType("MARS-TICKET-LEDGER") //should prefix by app, in case of multi-apps notifications
+					.withTargetUrl("#")
+					.build();
 			sendNotificationToAll(notification);
 		}
 	}
@@ -72,13 +71,13 @@ public class BlockchainTicketEventSubscriber implements Component {
 			final String message = messageQueue.poll();
 			if (message != null) {
 				ledgerManager.sendData(message);
-				
-				Notification notification = Notification.builder()
+
+				final Notification notification = Notification.builder()
 						.withSender("System")
-						.withTitle("New ticket sucessfully written to the ledger")		
+						.withTitle("New ticket sucessfully written to the ledger")
 						.withContent(message)
 						.withTTLInSeconds(600)
-						.withType("MARS-MISSION-LEDGER") //should prefix by app, in case of multi-apps notifications
+						.withType("MARS-TICKET-LEDGER") //should prefix by app, in case of multi-apps notifications
 						.withTargetUrl("#")
 						.build();
 				sendNotificationToAll(notification);

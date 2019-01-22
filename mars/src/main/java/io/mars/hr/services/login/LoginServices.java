@@ -44,9 +44,9 @@ public class LoginServices implements Component {
 			sendNotificationToAll(Notification.builder()
 					.withSender("System")
 					.withTitle("Fail login attempt")
-					.withContent("Try to login:'" + login + "' with password:'123456'")
+					.withContent("Try to login:'" + login + "")
 					.withTTLInSeconds(600)
-					.withType("MARS-LOGIN") //should prefix by app, in case of multi-apps notifications
+					.withType("MARS-LOGIN-ATTEMP") //should prefix by app, in case of multi-apps notifications
 					.withTargetUrl("#")
 					.build());
 			throw new VUserException("Login or Password invalid");

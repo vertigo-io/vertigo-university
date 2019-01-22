@@ -1,6 +1,8 @@
 package io.mars.basemanagement.services.base;
 
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
@@ -18,6 +20,7 @@ import io.mars.commons.services.CommonsServices;
 import io.mars.domain.DtDefinitions.PictureFields;
 import io.mars.fileinfo.FileInfoStd;
 import io.mars.hr.services.person.PersonServices;
+import io.vertigo.account.account.Account;
 import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.core.component.Activeable;
 import io.vertigo.core.component.Component;
@@ -25,11 +28,14 @@ import io.vertigo.dynamo.criteria.Criterions;
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.domain.model.DtListState;
 import io.vertigo.dynamo.domain.model.FileInfoURI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.file.FileManager;
 import io.vertigo.dynamo.file.metamodel.FileInfoDefinition;
 import io.vertigo.dynamo.file.model.FileInfo;
 import io.vertigo.dynamo.file.model.VFile;
 import io.vertigo.dynamo.store.StoreManager;
+import io.vertigo.social.services.notification.Notification;
+import io.vertigo.social.services.notification.NotificationServices;
 
 @Transactional
 public class BaseServices implements Component, Activeable {
@@ -50,6 +56,11 @@ public class BaseServices implements Component, Activeable {
 	private FileManager fileManager;
 	@Inject
 	private StoreManager storeManager;
+
+	@Inject
+	private PersonServices personServices;
+	@Inject
+	private NotificationServices notificationServices;
 
 	private VFile defaultPhoto;
 
@@ -95,6 +106,16 @@ public class BaseServices implements Component, Activeable {
 			picture.setPicturefileId((Long) fileInfo.getURI().getKey());
 			pictureDAO.create(picture);
 		}
+
+		final Notification notification = Notification.builder()
+				.withSender("System")
+				.withTitle("Base updated")
+				.withContent("Base " + base.getCode() + " informations updated")
+				.withTTLInSeconds(600)
+				.withType("MARS-BASE") //should prefix by app, in case of multi-apps notifications
+				.withTargetUrl("/mars/basemanagement/base/information/" + base.getBaseId())
+				.build();
+		sendNotificationToAll(notification);
 	}
 
 	public DtList<Base> getBases(final DtListState dtListState) {
@@ -137,4 +158,11 @@ public class BaseServices implements Component, Activeable {
 		return pictureDAO.findAll(Criterions.isEqualTo(PictureFields.BASE_ID, baseId), 20);
 	}
 
+	private void sendNotificationToAll(final Notification notification) {
+		final Set<UID<Account>> accountUIDs = personServices.getPersons(DtListState.of(null, 0))
+				.stream()
+				.map((person) -> UID.of(Account.class, String.valueOf(person.getPersonId())))
+				.collect(Collectors.toSet());
+		notificationServices.send(notification, accountUIDs);
+	}
 }
