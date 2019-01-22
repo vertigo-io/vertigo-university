@@ -8,7 +8,8 @@ import io.vertigo.dynamo.domain.model.UID;
 public enum BaseTypeEnum implements MasterDataEnum<io.mars.basemanagement.domain.BaseType> {
 
 	hydro("HYDRO"), //
-	mine("MINE")
+	mine("MINE"), //
+	dwelling("DWELLING")
 	;
 
 	private final Serializable entityId;
