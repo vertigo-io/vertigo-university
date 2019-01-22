@@ -20,15 +20,13 @@
 						<vu:include-data-primitive key="criteria"/>
 						<q-search inverted-light color="white" icon="search" placeholder="Type, Name..." v-model="vueData.criteria" @input="search('equipments')"></q-search>
 						<br/>
-						<vu:table list="equipments_list" componentId="equipmentsTable" sortUrl="${searchUrl}">
+						<vu:table list="equipments_list" componentId="equipmentsTable" sortUrl="${searchUrl}"
+						tr_@click.native="|goTo('@{/basemanagement/equipment/}'+props.row.equipmentId)|" tr_class="nav">
 							<vu:column field="equipmentId" />
 							<vu:column field="name" />
 							<vu:column field="code" sortable="true"/>
 							<vu:column field="equipmentTypeName" />
-							<vu:column field="equipmentCategoryName" />
-							<vu:column name="actions" label="Actions" >
-								<q-btn round icon="arrow_forward" type="a" th::href="|'@{/basemanagement/equipment/}'+props.row.equipmentId|"></q-btn>
-							</vu:column>
+							<vu:column field="equipmentCategoryName" />							
 						</vu:table>
 					</div>
 				</div>
