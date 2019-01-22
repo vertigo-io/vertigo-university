@@ -97,7 +97,7 @@
 					<p>Digital trust is a key factor in the digital world. 
 					<br/>A ledger system can handle trust between actors without the need of a third party.</p>
 
-					<p>The Ethereum blockchain has been choosen to deliver this trust system.<br>
+					<p>The Ethereum blockchain has been chosen to deliver this trust system.<br>
 						<ul>
 							<li>Decentralised: Everyone has a copy and can check the authenticity of the copy</li>
 							<li>Unalterable: A written message can't be modified</li>
@@ -105,7 +105,7 @@
 						</ul>
 					</p>
 					<p>
-					   This ledger can be used to provide a trust mecanism inside an application, a customer information system, or between multiple actors.<br>
+					   This ledger can be used to provide a trust mechanism inside an application, a customer information system, or between multiple actors.<br>
 					</p>
 	    		<hr class="q-hr q-my-lg"/>
 	    		<div class="row justify-center">
@@ -115,6 +115,26 @@
 	    		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	    		
 	    		<script>
+	    		
+	    		function doesConnectionExist() {
+	    		    var xhr = new XMLHttpRequest();
+	    		    var file = "https://www.youtube.com/player_api";
+	    		    xhr.open('GET', file, true);
+	    		    xhr.send();
+	    		     
+	    		    xhr.addEventListener("readystatechange", processRequest, false);
+	    		 
+	    		    function processRequest(e) {
+	    		      if (xhr.readyState == 4) {
+	    		        if (xhr.status >= 200 && xhr.status < 304) {
+	    		          insertYTVideo();
+	    		        } else {
+	    		          
+	    		        }
+	    		      }
+	    		    }
+	    		}
+	    		
 	    		var tag = document.createElement('script');
 	    		tag.src = 'https://www.youtube.com/player_api';
 			    var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -123,7 +143,6 @@
 			    		playerDefaults = {autoplay: 0, autohide: 1, modestbranding: 0, rel: 0, showinfo: 0, controls: 0, disablekb: 1, enablejsapi: 0, iv_load_policy: 3};
 			    var vid = [
 			    			{'videoId': '70Fa3wjW6yo', 'suggestedQuality': 'hd720'}
-			    			//{'videoId': 'xm_ftNUKlTs', 'suggestedQuality': 'hd720'}
 			    		],
 			    		randomVid = Math.floor(Math.random() * vid.length),
 			        currVid = randomVid;
@@ -151,18 +170,9 @@
 			    }
 
 			    function vidRescale() {
-			      /*var w = $(window).width();
-			      var h = $(window).height();*/
 			      var w = $('main').width();
 			      var h = $('main').height();
-			      
-			      /*if (w/h > 16/9){
-			        tv.setSize(w, w/16*9);
-			        $('.tv .screen').css({'left': '0px'});
-			      } else {
-			        tv.setSize(h/9*16, h);
-			        $('.tv .screen').css({'left': -($('.tv .screen').outerWidth()-w)/2});
-			      }*/
+
 			      tv.setSize(w, h);
 			      $('.tv .screen').css({'left': '0px'});
 			    }
