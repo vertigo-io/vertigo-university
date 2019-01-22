@@ -11,7 +11,7 @@ import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.domain.model.DtListState;
 
 @Transactional
-public class BusinessServicesImpl implements Component {
+public class BusinessServices implements Component {
 
 	@Inject
 	private BusinessDAO businessDAO;
