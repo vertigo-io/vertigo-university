@@ -1,7 +1,5 @@
 package io.mars.basemanagement.datageneration;
 
-import java.util.function.Consumer;
-
 import javax.inject.Inject;
 
 import io.mars.basemanagement.dao.BusinessDAO;
@@ -28,21 +26,20 @@ public class ReferenceDataGenerator implements Component {
 	private ResourceManager resourceManager;
 
 	public void generateReferenceData() {
-		createInitialDataFromCSV("initdata/geosectors.csv", this::createInitialGeosectorFromCSV);
-		createInitialDataFromCSV("initdata/businesses.csv", this::createInitialBusinessFromCSV);
-
+		CSVReaderUtil.parseCSV(resourceManager, "initdata/geosectors.csv", this::createInitialGeosectorFromCSV);
+		CSVReaderUtil.parseCSV(resourceManager, "initdata/businesses.csv", this::createInitialBusinessFromCSV);
 	}
 
-	private void createInitialBusinessFromCSV(final String[] businessRecord) {
-		Assertion.checkArgument(businessRecord.length == BUSINESS_CSV_FILE_COLUMN_NUMBER, "CSV File Format not suitable for Equipment Types");
+	private void createInitialBusinessFromCSV(final String csvFilePath, final String[] businessRecord) {
+		Assertion.checkArgument(businessRecord.length == BUSINESS_CSV_FILE_COLUMN_NUMBER, "CSV File {0} Format not suitable for Equipment Types", csvFilePath);
 		// ---
 		final String businessName = businessRecord[0];
 		final String businessIcon = businessRecord[1];
 		businessDAO.create(createBusiness(businessName, businessIcon));
 	}
 
-	private void createInitialGeosectorFromCSV(final String[] geoSectorRecord) {
-		Assertion.checkArgument(geoSectorRecord.length == GEOSECTOR_CSV_FILE_COLUMN_NUMBER, "CSV File Format not suitable for Equipment Types");
+	private void createInitialGeosectorFromCSV(final String csvFilePath, final String[] geoSectorRecord) {
+		Assertion.checkArgument(geoSectorRecord.length == GEOSECTOR_CSV_FILE_COLUMN_NUMBER, "CSV File {0} Format not suitable for Equipment Types", csvFilePath);
 		// ---
 		final String geosectorName = geoSectorRecord[0];
 		geosectorDAO.create(createGeosector(geosectorName));
@@ -59,11 +56,5 @@ public class ReferenceDataGenerator implements Component {
 		final Geosector geosector = new Geosector();
 		geosector.setSectorLabel(geosectorName);
 		return geosector;
-	}
-
-	private void createInitialDataFromCSV(final String csvFilePath, final Consumer<String[]> lineHandler) {
-		CSVReaderUtil.parseCSV(resourceManager, csvFilePath, (StrcsvFilePath, record) -> {
-			lineHandler.accept(record);
-		});
 	}
 }

@@ -42,7 +42,7 @@ public class PersonGenerator implements Component {
 	}
 
 	private void consume(String csvFilePath, String[] record) {
-		Assertion.checkArgument(record.length == PERSON_CSV_FILE_COLUMN_NUMBER, "CSV File Format not suitable for Persons");
+		Assertion.checkArgument(record.length == PERSON_CSV_FILE_COLUMN_NUMBER, "CSV File {0} Format not suitable for Persons", csvFilePath);
 		// ---
 		final String firstName = record[0];
 		final String lastName = record[1];
@@ -51,9 +51,11 @@ public class PersonGenerator implements Component {
 		final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 		final LocalDate dateHired = LocalDate.parse(record[4], dateFormatter);
 		final String picturePath = record[5];
+		final Long pictureId;
 
-		Long pictureId = null;
-		if (!picturePath.isEmpty()) {
+		if (picturePath.isEmpty()) {
+			pictureId = null;
+		} else {
 			final VFile pictureFile = fileManager.createFile(
 					picturePath.substring(picturePath.lastIndexOf('/') + 1),
 					"image/" + picturePath.substring(picturePath.lastIndexOf('.') + 1),
@@ -61,6 +63,7 @@ public class PersonGenerator implements Component {
 			final FileInfo fileInfo = storeManager.getFileStore().create(new FileInfoStd(pictureFile));
 			pictureId = (Long) fileInfo.getURI().getKey();
 		}
+
 		personDAO.create(createPerson(firstName, lastName, email, tags, dateHired, pictureId));
 	}
 
