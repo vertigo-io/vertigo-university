@@ -25,7 +25,7 @@
 		<q-page class="row col-12 layout-padding col justify-center">			
 			<div class="gutter-lg col ">
 				<div class="row gutter-lg " >
-					<div class="col-md-3 col-xs-12">
+					<div class="col-lg-3 col-md-6 col-xs-12">
 						<q-card color="white" >
 						<q-card-main class="row justify-center items-center" style="height: 156px;">
 						<span class="text-primary" style="font-size:6em;" th:text="${model.basesSummary.baseCount}"></span> 
@@ -34,7 +34,7 @@
 						</q-card>
 						
 					</div>
-					<div class="col-md-3 col-xs-12">
+					<div class="col-lg-3 col-md-6 col-xs-12">
 						<q-card color="white">
 							<q-card-title class="bg-secondary">Global Health Level</q-card-title>
 							<q-card-main class="row justify-center" style="height: 92px;">
@@ -42,7 +42,7 @@
 							</q-card-main>
 						</q-card>
 					</div>
-					<div class="col-md-3 col-xs-12">
+					<div class="col-lg-3 col-md-6 col-xs-12">
 						<q-card color="white">
 							<q-card-title class="bg-secondary">Equipment</q-card-title>
 							<q-card-main>
@@ -53,7 +53,7 @@
 							</q-card-main>
 						</q-card>
 					</div>
-					<div class="col-md-3 col-xs-12">
+					<div class="col-lg-3 col-md-6 col-xs-12">
 						<q-card color="white">
 							<q-card-title class="bg-secondary">Maintenance</q-card-title>
 							<q-card-main>
@@ -65,8 +65,14 @@
 						</q-card>
 					</div>
 				</div>
+				<div class="row col-12" >
+					<div style="width:100%;">
+						<vu:include-data object="bases" field="geoLocation" />
+						<v-map  style="height: 600px;" id="map" marker-color="#027BE3" :list="vueData.bases" field="geoLocation"></v-map>
+					</div>
+				</div>
 				<div class="row gutter-lg" >
-					<div class="col-md-6 col-xs-12 column">
+					<div class="col-lg-6 col-md-12 column">
 						<div>
 							<q-card color="white">
 								<q-card-title class="bg-secondary">Supplies</q-card-title>
@@ -87,7 +93,11 @@
 							</q-card>
 						</div>
 						<div>
-							<vu:table list="lastWorkOrders" componentId="lastWorkOrders" rowsPerPage="3" >
+							
+						</div>
+					</div>
+					<div class="col-lg-6 col-md-12">
+						<vu:table list="lastWorkOrders" componentId="lastWorkOrders" rowsPerPage="3" >
 								<vu:column field="name" />
 								<vu:column field="dateCreated" label="Creation Date" />
 								<vu:column field="dateClosed" label="Closing Date" />
@@ -95,28 +105,6 @@
 									<vu:field-read field="workOrderStatusId" list="workOrderStatus" listKey="workOrderStatusId" listDisplay="label" />
 								</vu:column>
 							</vu:table>
-						</div>
-					</div>
-					<div class="col-md-6 col-xs-12">
-						<q-card color="white">
-							<q-card-title class="bg-secondary">Equipments</q-card-title>
-							<q-card-main>
-								<div class="chart chartjs stakedbarchart"
-								    th:data-url="@{/api/dashboard/data/series/clustered}" 
-								    data-query-clustered-measure='{ "measure": "duration:count", "thresholds": ["10","20","50","100","200","500","1000","2000"] }'
-								    data-query-data-filter='{ "measurement": "page", "filters": {"location": "*", "name": "*", "module": "*", "feature": "*" }}'
-								    data-query-time-filter='{ "from": "now() - 3d", "to": "now()", "dim": "1h" }'
-								    data-labels='{"duration:count<10":"<10ms","duration:count_20":"<20ms","duration:count_50":"<50ms","duration:count_100":"<100ms", "duration:count_200":"<200ms", "duration:count_500":"<500ms", "duration:count_1000":"<1s", "duration:count_2000":"<2s", "duration:count>2000":">2s"}'
-								    data-colors='iRED2GREEN'></div>
-								repartition des équipements par catégories
-							</q-card-main>
-						</q-card>
-					</div>
-				</div>
-				<div class="row col-12" >
-					<div style="width:100%">
-						<vu:include-data object="bases" field="geoLocation" />
-						<v-map id="map" marker-color="#027BE3" :list="vueData.bases" field="geoLocation"></v-map>
 					</div>
 				</div>
 			</div>
