@@ -23,7 +23,7 @@ create Formatter FMT_ID{
 
 create Formatter FMT_DATE {
      className :"io.vertigo.dynamox.domain.formatter.FormatterDate"
-     args : "dd/MM/yy;dd/MM/yyyy"
+     args : "dd/MM/yyyy"
 }
 
 create Formatter FMT_DATE_HEURE {
