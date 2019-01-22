@@ -6,7 +6,6 @@
 >
 	<head>
 		<title>Digital Trust</title>
-		
 		<style>
 		#ethVideo {
 		  max-width: 100%; 
@@ -15,6 +14,62 @@
 		  max-width: 20%; 
 		  max-height: 20%;
 		}
+		
+		.cover {
+		  position: absolute;
+		  top: 0;
+		  left: 0;
+		  z-index: 2;
+		  width: 100%;
+		  height: 100%;
+		}
+		.cover .hi {
+		  position: absolute;
+		  top: 50%;
+		  left: 50%;
+		  transform: translate(-50%, -50%);
+		  color: #fff;
+		  font-family: 'Roboto Slab', serif;
+		  font-size: 24px;
+		  line-height: 26px;
+		  text-align: center;
+		}
+		.cover .hi span {
+		  color: #ff0;
+		  cursor: pointer;
+		  text-decoration: underline;
+		}
+		.cover .hi em {
+		  font-style: normal;
+		}
+		.cover .hi em.hidden {
+		  display: none;
+		}
+		.tv {
+		  position: absolute;
+		  top: 0;
+		  left: 0;
+		  z-index: 1;
+		  width: 100%;
+		  height: 100%;
+		  overflow: hidden;
+		}
+		.tv .screen {
+		  position: absolute;
+		  top: 0;
+		  right: 0;
+		  bottom: 0;
+		  left: 0;
+		  z-index: 1;
+		  margin: auto;
+		  opacity: 0;
+		  transition: opacity 0.5s;
+		}
+		.tv .screen.active {
+		  opacity: 1;
+		}
+
+		
 		</style>
 		
 	</head>
@@ -28,9 +83,12 @@
 				</q-parallax>
 				
 		 		<q-parallax style="height: 400px;">
-				  <video autoplay muted loop id="ethVideo">
-  						<source th:src="@{/static/img/cms/eth.mp4}" type="video/mp4">
-					</video>
+<!-- 				  <video autoplay muted loop id="ethVideo"> -->
+<!--   						<source th:src="@{/static/img/cms/eth.mp4}" type="video/mp4"> -->
+<!-- 				  </video> -->
+					<div class="tv">
+						  <div class="screen" id="tv"></div>
+					</div>
 				</q-parallax>
 		 		
 		 		<q-jumbotron class="col-11 q-my-xl">
@@ -44,20 +102,82 @@
 							<li>Decentralised: Everyone has a copy and can check the authenticity of the copy</li>
 							<li>Unalterable: A written message can't be modified</li>
 							<li>Secured: Cryptography is used to ensure the technical reliability of the system</li>
-							
-						</ul>							
+						</ul>
 					</p>
 					<p>
 					   This ledger can be used to provide a trust mecanism inside an application, a customer information system, or between multiple actors.<br>
 					</p>
-					
-	    		</q-jumbotron>
 	    		<hr class="q-hr q-my-lg"/>
-	    		
 	    		<div class="row justify-center">
 	    			<q-btn type="a" href="http://mars.dev.klee.lan.net:4000" color="primary" class="q-py-sm q-px-xl " label="View Blockchain Explorer" target="_blank"></q-btn>
 	    		</div>
+	    		
+	    		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	    		
+	    		<script>
+	    		var tag = document.createElement('script');
+	    		tag.src = 'https://www.youtube.com/player_api';
+			    var firstScriptTag = document.getElementsByTagName('script')[0];
+			    		firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+			    var tv,
+			    		playerDefaults = {autoplay: 0, autohide: 1, modestbranding: 0, rel: 0, showinfo: 0, controls: 0, disablekb: 1, enablejsapi: 0, iv_load_policy: 3};
+			    var vid = [
+			    			{'videoId': '70Fa3wjW6yo', 'suggestedQuality': 'hd720'}
+			    			//{'videoId': 'xm_ftNUKlTs', 'suggestedQuality': 'hd720'}
+			    		],
+			    		randomVid = Math.floor(Math.random() * vid.length),
+			        currVid = randomVid;
+
+			    function onYouTubePlayerAPIReady(){
+			      tv = new YT.Player('tv', {events: {'onReady': onPlayerReady, 'onStateChange': onPlayerStateChange}, playerVars: playerDefaults});
+			    }
+
+			    function onPlayerReady(){
+			      tv.loadVideoById(vid[currVid]);
+			      tv.mute();
+			    }
+
+			    function onPlayerStateChange(e) {
+			      console.log('onPlayerStateChange');
+			      console.log(e);
+			      if (e.data === 1){
+			        $('#tv').addClass('active');
+			      } else if (e.data === 2){
+			        $('#tv').removeClass('active');
+			        tv.loadVideoById(vid[currVid]);
+			      } else if (e.data === 0){
+			    	  tv.loadVideoById(vid[currVid]);
+			      }
+			    }
+
+			    function vidRescale() {
+			      /*var w = $(window).width();
+			      var h = $(window).height();*/
+			      var w = $('main').width();
+			      var h = $('main').height();
+			      
+			      /*if (w/h > 16/9){
+			        tv.setSize(w, w/16*9);
+			        $('.tv .screen').css({'left': '0px'});
+			      } else {
+			        tv.setSize(h/9*16, h);
+			        $('.tv .screen').css({'left': -($('.tv .screen').outerWidth()-w)/2});
+			      }*/
+			      tv.setSize(w, h);
+			      $('.tv .screen').css({'left': '0px'});
+			    }
+		
+			    $(window).on('load resize', function(){
+			      vidRescale();
+			    });
+
+				</script>
+		
+	    		</q-jumbotron>
 			</q-page>
 		</section>
+		
+		
+		
 	</body>
 </html>
