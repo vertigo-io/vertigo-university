@@ -66,10 +66,9 @@
 					</div>
 				</div>
 				<div class="row col-12" >
-					<div style="width:100%;">
-						<vu:include-data object="bases" field="geoLocation" />
-						<v-map  tabindex="1" style="height: 600px;" id="map" marker-color="#027BE3" :list="vueData.bases" field="geoLocation"></v-map>
-					</div>
+					<vu:include-data object="bases" field="geoLocation" />
+					<vu:include-data object="bases" field="name" />
+					<v-map  tabindex="1" style="width:100%; height: 600px;" id="map" marker-color="#027BE3" :list="vueData.bases" field="geoLocation" name-field="name"></v-map>
 				</div>
 				<div class="row gutter-lg" >
 					<div class="col-lg-6 col-md-12 column">
