@@ -26,8 +26,8 @@
 					<img th::src="|'@{/hr/person/picture/}'+vueData.person.picturefileId|" class="detailImg gt-md"/>
 				</div>
 				<div layout:fragment="content-header-title">
-					<span class="text-bigger" th:text="${model.person.fullName}"></span> 
-					<br/><span class="text-smaller">Base Manager</span>
+					<span class="text-bigger" th:text="${model.modeCreate?'New Person':model.person.fullName}"></span> 
+					<br/><span th:if="${!model.modeCreate}" class="text-smaller">Base Manager</span>
 				</div>
 				<div layout:fragment="content-header-actions">
 					<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>

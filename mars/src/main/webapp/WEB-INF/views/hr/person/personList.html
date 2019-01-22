@@ -16,7 +16,7 @@
 				
 			</div>
 			<div th:ref="tableActions" class="row justify-end text-primary">
-				<q-btn icon="add" round label="Add" type="a" color="primary" th:href="@{/humanresources/person/}"></q-btn>
+				<q-btn icon="add" round label="Add" type="a" color="primary" th:href="@{/hr/person/new}"></q-btn>
 				<div class="vertical-separator"></div>
 				<q-btn icon="fas fa-grip-horizontal" type="a" th:href="@{?renderer=cards}" th::flat="${model.listRenderer != 'cards'}"> </q-btn>
 				<q-btn icon="fas fa-table" type="a" th:href="@{?renderer=table}" th::flat="${model.listRenderer != 'table'}" > </q-btn>

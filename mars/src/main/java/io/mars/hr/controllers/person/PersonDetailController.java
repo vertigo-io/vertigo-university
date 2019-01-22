@@ -46,9 +46,10 @@ public class PersonDetailController extends AbstractVSpringMvcController {
 		toModeReadOnly();
 	}
 
-	@GetMapping("/")
+	@GetMapping("/new")
 	public void initContext(final ViewContext viewContext) {
 		viewContext.publishDto(personKey, personServices.initPerson());
+		viewContext.publishMdl(tagsKey, Tag.class, null); //all
 		toModeCreate();
 	}
 
