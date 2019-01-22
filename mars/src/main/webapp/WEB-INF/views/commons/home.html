@@ -15,8 +15,8 @@
 		<script th:src="@{/dashboard/static/dashboard.chartjs.js}"></script>
 		
 		<!-- maps -->
-		<link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.2.0/css/ol.css" type="text/css"/>
-		<script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.2.0/build/ol.js"></script>
+		<link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css" type="text/css"/>
+		<script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js"></script>
 		<script th:src="@{/vertigo-ui/static/js/v-components/v-map.js}"></script>
 	</head>
 	
@@ -68,7 +68,7 @@
 				<div class="row col-12" >
 					<div style="width:100%;">
 						<vu:include-data object="bases" field="geoLocation" />
-						<v-map  style="height: 600px;" id="map" marker-color="#027BE3" :list="vueData.bases" field="geoLocation"></v-map>
+						<v-map  tabindex="1" style="height: 600px;" id="map" marker-color="#027BE3" :list="vueData.bases" field="geoLocation"></v-map>
 					</div>
 				</div>
 				<div class="row gutter-lg" >
