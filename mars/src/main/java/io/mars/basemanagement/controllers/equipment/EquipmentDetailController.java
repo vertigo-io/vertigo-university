@@ -23,6 +23,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import io.mars.basemanagement.domain.Business;
 import io.mars.basemanagement.domain.Equipment;
 import io.mars.basemanagement.services.equipment.EquipmentServices;
 import io.mars.catalog.domain.EquipmentType;
@@ -31,10 +32,11 @@ import io.vertigo.ui.core.ViewContextKey;
 import io.vertigo.ui.impl.springmvc.controller.AbstractVSpringMvcController;
 
 @Controller
-@RequestMapping("/basemanagement/base/")
+@RequestMapping("/basemanagement/equipment/")
 public final class EquipmentDetailController extends AbstractVSpringMvcController {
 	public final ViewContextKey<Equipment> equipmentKey = ViewContextKey.of("equipment");
 	private final ViewContextKey<EquipmentType> equipmentTypeKey = ViewContextKey.of("equipmentType");
+	private final ViewContextKey<Business> businessKey = ViewContextKey.of("business");
 
 	@Inject
 	private EquipmentServices equipmentServices;
@@ -43,6 +45,7 @@ public final class EquipmentDetailController extends AbstractVSpringMvcControlle
 		final Equipment equipment = equipmentServices.get(equipmentId);
 		viewContext.publishDto(equipmentKey, equipment);
 		viewContext.publishDto(equipmentTypeKey, equipment.equipmentType().get());
+		viewContext.publishDto(businessKey, equipment.business().get());
 	}
 
 	/**

@@ -43,6 +43,7 @@ public class EquipmentServices implements Component {
 	public Equipment get(final Long equipmentId) {
 		final Equipment equipment = equipmentDAO.get(equipmentId);
 		equipment.equipmentType().load();
+		equipment.business().load();
 		return equipment;
 	}
 

@@ -20,13 +20,8 @@
 		</section>
 		
 		<section>
-				<div layout:fragment="content-header-left">
-					<img th:src="@{/static/img/bases/Mars base 1.jpg}" class="detailImg gt-md"/>
-				</div>
-				<div layout:fragment="content-header-title">
-					<span class="text-bigger" th:text="${model.equipment.code}"></span>
-					<br/><span class="text-smaller" th:text="${model.equipment.name}"></span>
-				</div>
+				<div layout:fragment="content-header-left" th:include="basemanagement/equipment/equipmentInformation :: #equipmentIcon"></div>
+				<div layout:fragment="content-header-title" th:include="basemanagement/equipment/equipmentInformation :: #equipmentTitle"></div>
 				<div layout:fragment="content-header-actions">
 					<q-btn round size="lg" class="on-left" color="primary" icon="add" aria-label="Add Ticket" title="Add Ticket" type="a" th:href="@{/maintenance/ticket/new?equipmentId=__${model.equipment.equipmentId}__}"></q-btn>
 				</div>

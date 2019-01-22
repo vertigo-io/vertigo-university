@@ -22,12 +22,14 @@
 		</section>
 		
 		<section>
-				<div layout:fragment="content-header-left" id="equipmentImg">
-					<img th:src="@{|/static/img/TypesLogo/EtyRobotics.png|}" class="detailImg gt-md"/>
+				<div layout:fragment="content-header-left" id="equipmentIcon" >
+					<div class="detailType" >
+						<q-icon th:name="${model.business.icon}" class="detailTypeIcon q-mx-md" ></q-icon>
+					</div>
 				</div>
 				<div layout:fragment="content-header-title" id="equipmentTitle">
-					<span class="text-bigger" th:text="${model.equipment.code?:'New Equipment'}"></span>
-					<br/><span class="text-smaller" th:text="${model.equipment.name}"></span>
+					<span class="text-bigger" th:text="${model.equipment.name?:'New Equipment'}"></span>
+					<br/><span class="text-smaller" th:text="${model.equipment.code}"></span>
 				</div>
 				<div th:if="${!model.modeCreate}" layout:fragment="content-header-actions">
 					<vu:button-submit th:if="${model.modeEdit}"   action="@{_cancel}" :round size="lg" color="primary" icon="fas fa-ban" :flat aria-label="Cancel" title="Cancel" class="on-left"  />
@@ -83,8 +85,8 @@
 				</vu:block>
 				<vu:block id="financial" title="Financial value">
 					<vu:grid cols="2">
-						<vu:text-field object="equipment" field="equipmentValue" input_suffix="'&#8364;'"/>
-						<vu:text-field object="equipment" field="rentingFee" input_suffix="'&#8364;'"/>
+						<vu:text-field object="equipment" field="equipmentValue" suffix=" €"/>
+						<vu:text-field object="equipment" field="rentingFee" suffix=" €"/>
 					</vu:grid>
 				</vu:block>
 				<q-page-sticky position="bottom-right" :offset="[64, 64]">
