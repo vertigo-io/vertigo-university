@@ -10,7 +10,6 @@ import io.mars.hr.dao.PersonDAO;
 import io.mars.hr.domain.Person;
 import io.mars.util.CSVReaderUtil;
 import io.vertigo.commons.transaction.Transactional;
-import io.vertigo.commons.transaction.VTransactionManager;
 import io.vertigo.core.component.Component;
 import io.vertigo.core.resource.ResourceManager;
 import io.vertigo.dynamo.file.FileManager;
@@ -23,9 +22,6 @@ import io.vertigo.lang.Assertion;
 public class PersonGenerator implements Component {
 
 	private static final int PERSON_CSV_FILE_COLUMN_NUMBER = 6;
-
-	@Inject
-	private VTransactionManager transactionManager;
 
 	@Inject
 	private PersonDAO personDAO;
