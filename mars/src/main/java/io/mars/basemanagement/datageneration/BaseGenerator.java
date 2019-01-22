@@ -119,7 +119,7 @@ public class BaseGenerator implements Component {
 		//base location
 		bases.get(0).setName("Aldebaran (Paris)");
 		bases.get(0).setGeoLocation("{ \"lon\": 2.333333 , \"lat\" : 48.866667 } ");
-		bases.get(0).setCode("Paris - Aldebaran");
+		bases.get(0).setCode("Paris-Aldebaran");
 		bases.get(0).setDescription("The Aldebaran base was the first base of the MMC and managed by Paris."
 				+ " The first settlers, led by James T. Kirk, planted the flag in a crater, near a frozen lake.\n"
 				+ "The crater is one kilometer deep, which offers a mountain-like landscape.\n"
@@ -127,7 +127,7 @@ public class BaseGenerator implements Component {
 
 		bases.get(1).setName("Centauri (Oslo)");
 		bases.get(1).setGeoLocation("{ \"lon\": 10.752245399999993 , \"lat\" : 59.9138688 } ");
-		bases.get(1).setCode("Oslo - Centauri");
+		bases.get(1).setCode("Oslo-Centauri");
 		bases.get(1).setDescription("The Centauri base is managed by Oslo. "
 				+ "The first settlers, led by John König, planted the flag near Utopia Planitia.\n"
 				+ "The area is flat and several kilometers long.\n"
@@ -135,7 +135,7 @@ public class BaseGenerator implements Component {
 
 		bases.get(2).setName("Pisces (Stockholm)");
 		bases.get(2).setGeoLocation("{ \"lon\": 18.06216022  , \"lat\" : 59.3294824 } ");
-		bases.get(2).setCode("Stockholm - Pisces");
+		bases.get(2).setCode("Stockholm-Pisces");
 		bases.get(2).setDescription("The Pisces base is managed by Stockholm. "
 				+ "The first settlers, led by Jean-Luc Picard, planted the flag in Olympus Mons.\n"
 				+ "The base offers a wonderful landscape around the Olympus Mons which offers a natural watchtower.\n"
@@ -143,7 +143,7 @@ public class BaseGenerator implements Component {
 
 		bases.get(3).setName("Cygnus (Copenhagen)");
 		bases.get(3).setGeoLocation("{ \"lon\": 12.568337 , \"lat\" : 55.676098 } ");
-		bases.get(3).setCode("Copenhagen - Cygnus");
+		bases.get(3).setCode("Copenhagen-Cygnus");
 		bases.get(3).setDescription("The Cygnus base is managed by Copenhagen. "
 				+ "The first settlers, led by Darth Vader, planted the flag in Tharsis.\n"
 				+ "The base offers a wonderful maritime landscape and is well-known for its seaside resort and its retirement house\n"
@@ -151,7 +151,7 @@ public class BaseGenerator implements Component {
 
 		bases.get(4).setName("Dragon (Roma)");
 		bases.get(4).setGeoLocation("{ \"lon\": 12.48327333 , \"lat\" : 41.89988 } ");
-		bases.get(4).setCode("Roma - Dragon");
+		bases.get(4).setCode("Roma-Dragon");
 		bases.get(4).setDescription("The Dragon base is managed by Roma."
 				+ " The first settlers, led by Han Solo, planted the flag in a crater, near a frozen lake.\n"
 				+ "The crater is one kilometer deep, which offers a mountain-like landscape.\n"
@@ -159,7 +159,7 @@ public class BaseGenerator implements Component {
 
 		bases.get(5).setName("Andromeda (London)");
 		bases.get(5).setGeoLocation("{ \"lon\": -0.1255 , \"lat\" : 51.5084 }");
-		bases.get(5).setCode("London - Andromeda");
+		bases.get(5).setCode("London-Andromeda");
 		bases.get(5).setDescription("The Andromeda base is managed by London. "
 				+ "The first settlers, led by Jim Lovell, planted the flag near Utopia Planitia.\n"
 				+ "The area is flat and several kilometers long.\n"
@@ -167,7 +167,7 @@ public class BaseGenerator implements Component {
 
 		bases.get(6).setName("Proxima (Barcelona)");
 		bases.get(6).setGeoLocation("{ \"lon\": 2.166117778 , \"lat\" : 41.38961111 } ");
-		bases.get(6).setCode("Barcelona - Proxima");
+		bases.get(6).setCode("Barcelona-Proxima");
 		bases.get(6).setDescription("The Proxima base is managed by Barcelona. "
 				+ "The first settlers, led by William Adama, planted the flag in Olympus Mons.\n"
 				+ "The base offers a wonderful landscape around the Olympus Mons which offers a natural watchtower.\n"
@@ -175,7 +175,7 @@ public class BaseGenerator implements Component {
 
 		bases.get(7).setName("Cassiopeiae (Hamburg)");
 		bases.get(7).setGeoLocation("{ \"lon\": 10.002914 , \"lat\" : 53.561012 } ");
-		bases.get(7).setCode("Hamburg - Cassiopeiae");
+		bases.get(7).setCode("Hamburg-Cassiopeiae");
 		bases.get(7).setDescription("The Cassiopeiae base is managed by Hamburg. "
 				+ "The first settlers, led by HAL, planted the flag in Tharsis.\n"
 				+ "The base offers a wonderful maritime landscape and is well-known for its seaside resort and its retirement house\n"
@@ -183,7 +183,7 @@ public class BaseGenerator implements Component {
 
 		bases.get(8).setName("Persei (Moscow)");
 		bases.get(8).setGeoLocation("{ \"lon\": -4.3833 , \"lat\" : 55.5833 }");
-		bases.get(8).setCode("Moscow - Persei");
+		bases.get(8).setCode("Moscow-Persei");
 		bases.get(8).setDescription("The Persei base is managed by Moscow."
 				+ " The first settlers, led by Arthur Dallas, planted the flag in a crater, near a frozen lake.\n"
 				+ "The crater is one kilometer deep, which offers a mountain-like landscape.\n"
@@ -191,7 +191,7 @@ public class BaseGenerator implements Component {
 
 		bases.get(9).setName("Pegasus (Munich)");
 		bases.get(9).setGeoLocation("{ \"lon\": 11.576124 , \"lat\" : 48.137154 } ");
-		bases.get(9).setCode("Munich - Pegasus");
+		bases.get(9).setCode("Munich-Pegasus");
 		bases.get(9).setDescription("The Pegasus base is managed by Munich. "
 				+ "The first settlers, led by Ellen Louise Ripley, planted the flag near Utopia Planitia.\n"
 				+ "The area is flat and several kilometers long.\n"
