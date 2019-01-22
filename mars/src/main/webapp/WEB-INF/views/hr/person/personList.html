@@ -65,6 +65,7 @@
 			</vu:cards>
 		</th:block>
 		<th:block th:if="${model.listRenderer == 'list'}">
+			<vu:include-data object="persons" field="personId" />
 			<vu:include-data-protected object="persons" field="picturefileId"/>	
 			<vu:list list="persons" componentId="personsList" sortUrl="@{/hr/persons/_sort}" rowsPerPage="8" pagination_:direction-links="true" pagination_:boundary-links="true" >
 				<q-item-side>
