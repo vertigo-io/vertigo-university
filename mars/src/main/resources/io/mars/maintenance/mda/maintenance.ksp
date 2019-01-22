@@ -3,21 +3,21 @@ package io.mars.maintenance.domain
 
 create DtDefinition DT_TICKET {
 	id TICKET_ID {domain: DO_ID label:"Id"}
-	field CODE {domain: DO_LABEL label: "Ticket Number" required:"false"}
-	field TITLE {domain: DO_LABEL label: "Ticket title" required:"false"}
-	field DESCRIPTION {domain: DO_DESCRIPTION label: "Ticket Description" required:"false"}
-	field DATE_CREATED {domain: DO_LOCALDATE label: "Ticket Creation Date" required:"false"}
-	field DATE_CLOSED {domain: DO_LOCALDATE label: "Ticket Closing Date" required:"false"}
+	field CODE {domain: DO_LABEL label: "Number" required:"false"}
+	field TITLE {domain: DO_LABEL label: "Title" required:"false"}
+	field DESCRIPTION {domain: DO_DESCRIPTION label: "Description" required:"false"}
+	field DATE_CREATED {domain: DO_LOCALDATE label: "Creation Date" required:"false"}
+	field DATE_CLOSED {domain: DO_LOCALDATE label: "Closing Date" required:"false"}
 }
 
 create DtDefinition DT_WORK_ORDER {
 	id WO_ID {domain: DO_ID label:"Id"}
 	field CODE {domain: DO_LABEL label: "Code" required:"false"}
-	field TICKET_CODE {domain: DO_LABEL label: "Ticket Number" required:"false"}
-	field NAME {domain: DO_LABEL label: "Mainenance Operation" required:"false"}
-	field DESCRIPTION {domain: DO_DESCRIPTION label: "Maintenance Operation Descrption" required:"false"}
-	field DATE_CREATED {domain: DO_LOCALDATE label: "Work Order Creation Date" required:"false"}
-	field DATE_CLOSED {domain: DO_LOCALDATE label: "Work Order Closing Date" required:"false"}
+	field TICKET_CODE {domain: DO_LABEL label: "Number" required:"false"}
+	field NAME {domain: DO_LABEL label: "Name" required:"false"}
+	field DESCRIPTION {domain: DO_DESCRIPTION label: "Description" required:"false"}
+	field DATE_CREATED {domain: DO_LOCALDATE label: "Creation Date" required:"false"}
+	field DATE_CLOSED {domain: DO_LOCALDATE label: "Closing Date" required:"false"}
 	field DUE_DATE {domain: DO_LOCALDATE label: "Due Date" required:"false"}	
 }
 

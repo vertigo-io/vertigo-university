@@ -53,7 +53,7 @@ public class TicketDetailController extends AbstractVSpringMvcController {
 		toModeReadOnly();
 	}
 
-	private void loadLists(final ViewContext viewContext) {
+	private static void loadLists(final ViewContext viewContext) {
 		viewContext.publishMdl(ViewContextKey.of("ticketStatus"), TicketStatus.class, null);
 		viewContext.publishMdl(ViewContextKey.of("workOrderStatus"), WorkOrderStatus.class, null);
 	}
@@ -72,6 +72,11 @@ public class TicketDetailController extends AbstractVSpringMvcController {
 	@PostMapping("/_cancel")
 	public void doCancel() {
 		toModeReadOnly();
+	}
+
+	@PostMapping("/_closeTicket")
+	public void doCloseTicket(@ViewAttribute("ticket") final Ticket ticket) {
+		ticketServices.closeTicket(ticket);
 	}
 
 	@PostMapping("/_save")

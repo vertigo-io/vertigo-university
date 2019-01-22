@@ -533,19 +533,19 @@ comment on column TICKET.TICKET_ID is
 'Id';
 
 comment on column TICKET.CODE is
-'Ticket Number';
+'Number';
 
 comment on column TICKET.TITLE is
-'Ticket title';
+'Title';
 
 comment on column TICKET.DESCRIPTION is
-'Ticket Description';
+'Description';
 
 comment on column TICKET.DATE_CREATED is
-'Ticket Creation Date';
+'Creation Date';
 
 comment on column TICKET.DATE_CLOSED is
-'Ticket Closing Date';
+'Closing Date';
 
 comment on column TICKET.TICKET_STATUS_ID is
 'Ticket Status';
@@ -594,19 +594,19 @@ comment on column WORK_ORDER.CODE is
 'Code';
 
 comment on column WORK_ORDER.TICKET_CODE is
-'Ticket Number';
+'Number';
 
 comment on column WORK_ORDER.NAME is
-'Mainenance Operation';
+'Name';
 
 comment on column WORK_ORDER.DESCRIPTION is
-'Maintenance Operation Descrption';
+'Description';
 
 comment on column WORK_ORDER.DATE_CREATED is
-'Work Order Creation Date';
+'Creation Date';
 
 comment on column WORK_ORDER.DATE_CLOSED is
-'Work Order Closing Date';
+'Closing Date';
 
 comment on column WORK_ORDER.DUE_DATE is
 'Due Date';

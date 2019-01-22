@@ -21,6 +21,7 @@
 				<vu:text-field object="workOrder" field="code" />
 				<vu:date object="workOrder" field="dueDate" :popover="true" />
 				<vu:text-area object="workOrder" field="description" />
+				<vu:select th:if="${model.modeEdit}" object="workOrder" field="workOrderStatusId" list="workOrderStatus"/>
 				<vu:button-submit th:if="${model.modeEdit}"  label="Save" action="@{_save}" color="primary" class="float-right q-mt-md"/>
 				<vu:button-submit th:if="${model.modeCreate}"  label="Create" action="@{_create}" color="primary" class="float-right q-mt-md" />
 			</vu:form>

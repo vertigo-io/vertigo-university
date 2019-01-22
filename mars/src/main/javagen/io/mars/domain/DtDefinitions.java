@@ -436,15 +436,15 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	public enum TicketFields implements DtFieldName<io.mars.maintenance.domain.Ticket> {
 		/** Propriété 'Id'. */
 		TICKET_ID,
-		/** Propriété 'Ticket Number'. */
+		/** Propriété 'Number'. */
 		CODE,
-		/** Propriété 'Ticket title'. */
+		/** Propriété 'Title'. */
 		TITLE,
-		/** Propriété 'Ticket Description'. */
+		/** Propriété 'Description'. */
 		DESCRIPTION,
-		/** Propriété 'Ticket Creation Date'. */
+		/** Propriété 'Creation Date'. */
 		DATE_CREATED,
-		/** Propriété 'Ticket Closing Date'. */
+		/** Propriété 'Closing Date'. */
 		DATE_CLOSED,
 		/** Propriété 'Ticket Status'. */
 		TICKET_STATUS_ID,
@@ -468,15 +468,15 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		WO_ID,
 		/** Propriété 'Code'. */
 		CODE,
-		/** Propriété 'Ticket Number'. */
+		/** Propriété 'Number'. */
 		TICKET_CODE,
-		/** Propriété 'Mainenance Operation'. */
+		/** Propriété 'Name'. */
 		NAME,
-		/** Propriété 'Maintenance Operation Descrption'. */
+		/** Propriété 'Description'. */
 		DESCRIPTION,
-		/** Propriété 'Work Order Creation Date'. */
+		/** Propriété 'Creation Date'. */
 		DATE_CREATED,
-		/** Propriété 'Work Order Closing Date'. */
+		/** Propriété 'Closing Date'. */
 		DATE_CLOSED,
 		/** Propriété 'Due Date'. */
 		DUE_DATE,

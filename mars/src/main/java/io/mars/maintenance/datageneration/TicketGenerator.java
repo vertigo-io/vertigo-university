@@ -99,6 +99,8 @@ public class TicketGenerator implements Component {
 				ticket.setDescription("<p><strong>Ce ticket a été créé le " + ticket.getDateCreated() + "</strong></p><p>Il a été créé pour l'équipement " + equipmentItem.getName() + "</p><p>En cas de non résolution, merci de contacter :</p><ul><li>Votre centre de maintenance MarsAssistance</li><li>Votre supérieur hiérarchique</li></ul>");
 				if (ticket.getDateClosed().isBefore(nowLocalDate)) {
 					ticket.ticketStatus().setEnumValue(TicketStatusEnum.closed);
+				} else {
+					ticket.ticketStatus().setEnumValue(TicketStatusEnum.open);
 				}
 				ticketDAO.create(ticket);
 				workOrderGenerator.createWorkOrdersForTicket(ticket, nowLocalDate);

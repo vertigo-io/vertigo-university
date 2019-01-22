@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import io.mars.maintenance.domain.WorkOrder;
+import io.mars.maintenance.domain.WorkOrderStatus;
 import io.mars.maintenance.services.workorder.WorkOrderServices;
 import io.vertigo.ui.core.ViewContext;
 import io.vertigo.ui.core.ViewContextKey;
@@ -24,6 +25,7 @@ public class WorkOrderDetailController extends AbstractVSpringMvcController {
 	private WorkOrderServices workOrderServices;
 
 	private final ViewContextKey<WorkOrder> workOrderKey = ViewContextKey.of("workOrder");
+	private final ViewContextKey<WorkOrderStatus> workOrderStatusKey = ViewContextKey.of("workOrderStatus");
 	private final ViewContextKey<String> successCallbackKey = ViewContextKey.of("successCallback");
 	private final ViewContextKey<Boolean> closeSuccessKey = ViewContextKey.of("closeSuccess");
 
@@ -44,6 +46,7 @@ public class WorkOrderDetailController extends AbstractVSpringMvcController {
 		viewContext.publishDto(workOrderKey, workOrderServices.getWorkOrderFromId(workOrderId));
 		viewContext.publishRef(successCallbackKey, successCallback);
 		viewContext.publishRef(closeSuccessKey, Boolean.FALSE);
+		viewContext.publishMdl(workOrderStatusKey, WorkOrderStatus.class, null);//all
 		//---
 		toModeEdit();
 	}

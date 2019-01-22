@@ -101,17 +101,17 @@ public final class WorkOrder implements Entity {
 	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Ticket Number'.
+	 * Récupère la valeur de la propriété 'Number'.
 	 * @return String ticketCode
 	 */
-	@Field(domain = "DO_LABEL", label = "Ticket Number")
+	@Field(domain = "DO_LABEL", label = "Number")
 	public String getTicketCode() {
 		return ticketCode;
 	}
 
 	/**
 	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'Ticket Number'.
+	 * Définit la valeur de la propriété 'Number'.
 	 * @param ticketCode String
 	 */
 	public void setTicketCode(final String ticketCode) {
@@ -120,17 +120,17 @@ public final class WorkOrder implements Entity {
 	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Mainenance Operation'.
+	 * Récupère la valeur de la propriété 'Name'.
 	 * @return String name
 	 */
-	@Field(domain = "DO_LABEL", label = "Mainenance Operation")
+	@Field(domain = "DO_LABEL", label = "Name")
 	public String getName() {
 		return name;
 	}
 
 	/**
 	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'Mainenance Operation'.
+	 * Définit la valeur de la propriété 'Name'.
 	 * @param name String
 	 */
 	public void setName(final String name) {
@@ -139,17 +139,17 @@ public final class WorkOrder implements Entity {
 	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Maintenance Operation Descrption'.
+	 * Récupère la valeur de la propriété 'Description'.
 	 * @return String description
 	 */
-	@Field(domain = "DO_DESCRIPTION", label = "Maintenance Operation Descrption")
+	@Field(domain = "DO_DESCRIPTION", label = "Description")
 	public String getDescription() {
 		return description;
 	}
 
 	/**
 	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'Maintenance Operation Descrption'.
+	 * Définit la valeur de la propriété 'Description'.
 	 * @param description String
 	 */
 	public void setDescription(final String description) {
@@ -158,17 +158,17 @@ public final class WorkOrder implements Entity {
 	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Work Order Creation Date'.
+	 * Récupère la valeur de la propriété 'Creation Date'.
 	 * @return LocalDate dateCreated
 	 */
-	@Field(domain = "DO_LOCALDATE", label = "Work Order Creation Date")
+	@Field(domain = "DO_LOCALDATE", label = "Creation Date")
 	public java.time.LocalDate getDateCreated() {
 		return dateCreated;
 	}
 
 	/**
 	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'Work Order Creation Date'.
+	 * Définit la valeur de la propriété 'Creation Date'.
 	 * @param dateCreated LocalDate
 	 */
 	public void setDateCreated(final java.time.LocalDate dateCreated) {
@@ -177,17 +177,17 @@ public final class WorkOrder implements Entity {
 	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Work Order Closing Date'.
+	 * Récupère la valeur de la propriété 'Closing Date'.
 	 * @return LocalDate dateClosed
 	 */
-	@Field(domain = "DO_LOCALDATE", label = "Work Order Closing Date")
+	@Field(domain = "DO_LOCALDATE", label = "Closing Date")
 	public java.time.LocalDate getDateClosed() {
 		return dateClosed;
 	}
 
 	/**
 	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'Work Order Closing Date'.
+	 * Définit la valeur de la propriété 'Closing Date'.
 	 * @param dateClosed LocalDate
 	 */
 	public void setDateClosed(final java.time.LocalDate dateClosed) {

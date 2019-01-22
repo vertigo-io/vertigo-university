@@ -34,3 +34,8 @@ alter DtDefinition DT_BUSINESS {
 	sortField : "NAME"
  	displayField : "NAME"
 }
+
+alter DtDefinition DT_TICKET_STATUS {
+	sortField : "LABEL"
+ 	displayField : "LABEL"
+}

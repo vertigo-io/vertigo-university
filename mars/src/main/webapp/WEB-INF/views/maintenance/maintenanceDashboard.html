@@ -36,6 +36,9 @@
 						<vu:column field="code" />
 						<vu:column field="title" />
 						<vu:column field="dateCreated" />
+						<vu:column name="status" label="Status" >
+							<vu:field-read field="ticketStatusId" list="ticketStatus" />
+						</vu:column>
 						<vu:column name="actions" label="Actions" >
 							<vu:include-data object="lastTickets" field="ticketId" />
 							<q-btn round icon="arrow_forward" type="a" th::href="|'@{/maintenance/ticket/}'+props.row.ticketId|"></q-btn>

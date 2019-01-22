@@ -49,6 +49,11 @@ public class TicketServices implements Component {
 				});
 	}
 
+	public void closeTicket(final Ticket ticket) {
+		ticket.ticketStatus().setEnumValue(TicketStatusEnum.closed);
+		ticketDAO.update(ticket);
+	}
+
 	public DtList<Ticket> getTickets(final DtListState dtListState) {
 		return ticketDAO.findAll(Criterions.alwaysTrue(), dtListState.getMaxRows().orElse(50));
 	}
