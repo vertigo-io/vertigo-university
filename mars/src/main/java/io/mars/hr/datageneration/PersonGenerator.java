@@ -38,38 +38,6 @@ public class PersonGenerator implements Component {
 	private StoreManager storeManager;
 
 	public void createInitialPersonsFromCSV(final String csvFilePath) {
-		try (
-				VTransactionWritable tx = transactionManager.createCurrentTransaction();
-				Reader reader = new BufferedReader(new InputStreamReader(resourceManager.resolve(csvFilePath).openStream(), "UTF-8"));
-				CSVReader csvReader = new CSVReaderBuilder(reader)
-						.withCSVParser(new CSVParserBuilder()
-								.withSeparator(';')
-								.build())
-						.withSkipLines(1)
-						.build();) {
-			String[] nextRecord;
-
-			while ((nextRecord = csvReader.readNext()) != null) {
-				Assertion.checkArgument(nextRecord.length == PERSON_CSV_FILE_COLUMN_NUMBER, "CSV File Format not suitable for Persons");
-				// ---
-				final String firstName = nextRecord[0];
-				final String lastName = nextRecord[1];
-				final String email = nextRecord[2];
-				final String tags = nextRecord[3];
-				final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-				final LocalDate dateHired = LocalDate.parse(nextRecord[4], dateFormatter);
-				final String picturePath = nextRecord[5];
-
-				Long pictureId = null;
-				if (!picturePath.isEmpty()) {
-					final VFile pictureFile = fileManager.createFile(
-							picturePath.substring(picturePath.lastIndexOf('/') + 1),
-							"image/" + picturePath.substring(picturePath.lastIndexOf('.') + 1),
-							this.getClass().getResource(picturePath));
-					final FileInfo fileInfo = storeManager.getFileStore().create(new FileInfoStd(pictureFile));
-					pictureId = (Long) fileInfo.getURI().getKey();
-				}
-				personDAO.create(createPerson(firstName, lastName, email, tags, dateHired, pictureId));
 		CSVReaderUtil.parseCSV(resourceManager, csvFilePath, this::consume);
 	}
 
