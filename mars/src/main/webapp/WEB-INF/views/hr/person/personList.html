@@ -11,32 +11,21 @@
 	<body>
 	
 		<section layout:fragment="content" >
-		<div class="row justify-between q-mb-md text-secondary">
-		
-		<div class="q-title q-mb-md">{{vueData.persons.length}} Persons 
-			<vu:form>
-					<vu:button-submit  icon="fas fa-grip-horizontal" action="@{_changeRenderer?renderer=cards}" th::flat="${model.listRenderer != 'cards'}"/>
-					<vu:button-submit icon="fas fa-table" action="@{_changeRenderer?renderer=table}" th::flat="${model.listRenderer != 'table'}" />
-					<vu:button-submit icon="fas fa-list" action="@{_changeRenderer?renderer=list}" th::flat="${model.listRenderer != 'list'}" />
-				</vu:form>
-		</div>
-			<div class="row justify-end">
-				<q-btn icon="add" round size="lg" label="Add" type="a" color="primary" th:href="@{/humanresources/person/}"></q-btn>
+		<div class="row justify-between q-mb-md text-secondary" th:if="${model.listRenderer != 'table'}">
+			<div th:ref="tableTitle" class="q-title q-mb-md">{{vueData.persons.length}} Persons 
+				
+			</div>
+			<div th:ref="tableActions" class="row justify-end text-primary">
+				<q-btn icon="add" round label="Add" type="a" color="primary" th:href="@{/humanresources/person/}"></q-btn>
+				<div class="vertical-separator"></div>
+				<q-btn icon="fas fa-grip-horizontal" type="a" th:href="@{?renderer=cards}" th::flat="${model.listRenderer != 'cards'}"> </q-btn>
+				<q-btn icon="fas fa-table" type="a" th:href="@{?renderer=table}" th::flat="${model.listRenderer != 'table'}" > </q-btn>
+				<q-btn icon="fas fa-list" type="a" th:href="@{?renderer=list}" th::flat="${model.listRenderer != 'list'}" > </q-btn>
 			</div>
 		</div>
 		
 		<th:block th:if="${model.listRenderer == 'table'}">
-			<vu:table list="persons" componentId="personsTable" sortUrl="@{/hr/persons/_sort}">
-				<vu:slot name="top_left_slot">
-					<div class="q-title q-mb-md">{{vueData.persons.length}} Persons 
-						<vu:form>
-							<vu:button-submit  icon="fas fa-grip-horizontal" action="@{_changeRenderer?renderer=cards}" th::flat="${model.listRenderer != 'cards'}"/>
-							<vu:button-submit icon="fas fa-table" action="@{_changeRenderer?renderer=table}" th::flat="${model.listRenderer != 'table'}" />
-							<vu:button-submit icon="fas fa-list" action="@{_changeRenderer?renderer=list}" th::flat="${model.listRenderer != 'list'}" />
-						</vu:form>
-					</div>
-				</vu:slot>
-				<vu:slot name="top_right_slot"><q-btn icon="add" round size="lg" label="Add" type="a" color="primary" th:href="@{/humanresources/person/}"></q-btn></vu:slot>
+			<vu:table list="persons" componentId="personsTable" sortUrl="@{/hr/persons/_sort}" top_left_slot="~{ :: tableTitle}" top_right_slot="~{ :: tableActions}" >
 				<vu:column field="personId" label="Buisness Code" />
 				<vu:column field="firstName" sortable="true" />
 				<vu:column field="lastName" sortable="true" />
@@ -47,7 +36,7 @@
 			</vu:table>
 		</th:block>
 		<th:block th:if="${model.listRenderer == 'cards'}">
-				<vu:include-data object="persons" field="personId" />
+			<vu:include-data object="persons" field="personId" />
 			<vu:include-data object="persons" field="fullName" />
 			<vu:include-data object="persons" field="email" />
 			<vu:include-data object="persons" field="dateHired" />

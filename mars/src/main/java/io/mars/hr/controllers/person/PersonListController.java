@@ -1,5 +1,7 @@
 package io.mars.hr.controllers.person;
 
+import java.util.Optional;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
@@ -26,8 +28,8 @@ public class PersonListController extends AbstractVSpringMvcController {
 	private PersonServices personServices;
 
 	@GetMapping("/")
-	public void initContext(final ViewContext viewContext) {
-		viewContext.publishRef(listRenderer, "table");
+	public void initContext(final ViewContext viewContext, @RequestParam("renderer") final Optional<String> renderer) {
+		viewContext.publishRef(listRenderer, renderer.orElse("table"));
 		final DtListState dtListState = DtListState.of(200, 0);
 		viewContext.publishDtList(persons, personServices.getPersons(dtListState));
 	}
@@ -37,10 +39,4 @@ public class PersonListController extends AbstractVSpringMvcController {
 		viewContext.publishDtList(persons, personServices.getPersons(dtListState));
 		return viewContext;
 	}
-
-	@PostMapping("/_changeRenderer")
-	public void changeRenderer(final ViewContext viewContext, @RequestParam("renderer") final String renderer) {
-		viewContext.publishRef(listRenderer, renderer);
-	}
-
 }

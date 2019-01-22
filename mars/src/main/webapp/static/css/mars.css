@@ -324,3 +324,8 @@ nav a.q-item {
 	display: none;
 } 
 
+.vertical-separator {
+	border-right: 1px solid #e5e5e5;
+    width: 1px;
+    margin: -0.2em 10px;
+}
