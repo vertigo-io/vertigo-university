@@ -1,26 +1,18 @@
 package io.mars.basemanagement.datageneration;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.util.function.Consumer;
 
 import javax.inject.Inject;
-
-import com.opencsv.CSVParserBuilder;
-import com.opencsv.CSVReader;
-import com.opencsv.CSVReaderBuilder;
 
 import io.mars.basemanagement.dao.BusinessDAO;
 import io.mars.basemanagement.dao.GeosectorDAO;
 import io.mars.basemanagement.domain.Business;
 import io.mars.basemanagement.domain.Geosector;
+import io.mars.util.CSVReaderUtil;
 import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.core.component.Component;
 import io.vertigo.core.resource.ResourceManager;
 import io.vertigo.lang.Assertion;
-import io.vertigo.lang.WrappedException;
 
 @Transactional
 public class ReferenceDataGenerator implements Component {
@@ -69,23 +61,9 @@ public class ReferenceDataGenerator implements Component {
 		return geosector;
 	}
 
-	private void createInitialDataFromCSV(
-			final String csvFilePath, final Consumer<String[]> lineHandler) {
-		try (Reader reader = new BufferedReader(new InputStreamReader(resourceManager.resolve(csvFilePath).openStream()));
-				CSVReader csvReader = new CSVReaderBuilder(reader)
-						.withCSVParser(new CSVParserBuilder()
-								.withSeparator(';')
-								.build())
-						.withSkipLines(1)
-						.build();) {
-			String[] nextRecord;
-
-			while ((nextRecord = csvReader.readNext()) != null) {
-				lineHandler.accept(nextRecord);
-			}
-		} catch (final IOException e) {
-			throw WrappedException.wrap(e, "Can't load csv file {0}", csvFilePath);
-		}
-
+	private void createInitialDataFromCSV(final String csvFilePath, final Consumer<String[]> lineHandler) {
+		CSVReaderUtil.parseCSV(resourceManager, csvFilePath, (StrcsvFilePath, record) -> {
+			lineHandler.accept(record);
+		});
 	}
 }

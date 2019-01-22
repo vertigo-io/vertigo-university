@@ -1,23 +1,16 @@
 package io.mars.hr.datageneration;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import javax.inject.Inject;
 
-import com.opencsv.CSVParserBuilder;
-import com.opencsv.CSVReader;
-import com.opencsv.CSVReaderBuilder;
-
 import io.mars.fileinfo.FileInfoStd;
 import io.mars.hr.dao.PersonDAO;
 import io.mars.hr.domain.Person;
+import io.mars.util.CSVReaderUtil;
+import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.commons.transaction.VTransactionManager;
-import io.vertigo.commons.transaction.VTransactionWritable;
 import io.vertigo.core.component.Component;
 import io.vertigo.core.resource.ResourceManager;
 import io.vertigo.dynamo.file.FileManager;
@@ -25,9 +18,9 @@ import io.vertigo.dynamo.file.model.FileInfo;
 import io.vertigo.dynamo.file.model.VFile;
 import io.vertigo.dynamo.store.StoreManager;
 import io.vertigo.lang.Assertion;
-import io.vertigo.lang.WrappedException;
 
-public final class PersonGenerator implements Component {
+@Transactional
+public class PersonGenerator implements Component {
 
 	private static final int PERSON_CSV_FILE_COLUMN_NUMBER = 6;
 
@@ -77,14 +70,30 @@ public final class PersonGenerator implements Component {
 					pictureId = (Long) fileInfo.getURI().getKey();
 				}
 				personDAO.create(createPerson(firstName, lastName, email, tags, dateHired, pictureId));
-			}
+		CSVReaderUtil.parseCSV(resourceManager, csvFilePath, this::consume);
+	}
 
-			tx.commit();
+	private void consume(String csvFilePath, String[] record) {
+		Assertion.checkArgument(record.length == PERSON_CSV_FILE_COLUMN_NUMBER, "CSV File Format not suitable for Persons");
+		// ---
+		final String firstName = record[0];
+		final String lastName = record[1];
+		final String email = record[2];
+		final String tags = record[3];
+		final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+		final LocalDate dateHired = LocalDate.parse(record[4], dateFormatter);
+		final String picturePath = record[5];
 
-		} catch (final IOException e) {
-			throw WrappedException.wrap(e, "Can't load csv file {0}", csvFilePath);
+		Long pictureId = null;
+		if (!picturePath.isEmpty()) {
+			final VFile pictureFile = fileManager.createFile(
+					picturePath.substring(picturePath.lastIndexOf('/') + 1),
+					"image/" + picturePath.substring(picturePath.lastIndexOf('.') + 1),
+					this.getClass().getResource(picturePath));
+			final FileInfo fileInfo = storeManager.getFileStore().create(new FileInfoStd(pictureFile));
+			pictureId = (Long) fileInfo.getURI().getKey();
 		}
-
+		personDAO.create(createPerson(firstName, lastName, email, tags, dateHired, pictureId));
 	}
 
 	private static Person createPerson(final String firstName,
