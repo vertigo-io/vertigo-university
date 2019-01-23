@@ -5,7 +5,7 @@
   layout:decorate="~{templates/mmcDetailNavLayout}"
 >
 	<head>
-		<title>Base Informations</title>
+		<title>Base Information</title>
 	</head>
 	
 	<body>
@@ -48,7 +48,7 @@
 					</th:block>
 				</div>
 				<div layout:fragment="content-header-tabs">
-					<q-btn flat type="a" class="active" th:href="@{/basemanagement/base/information/} + ${model.base.baseId}">Base Informations</q-btn>
+					<q-btn flat type="a" class="active" th:href="@{/basemanagement/base/information/} + ${model.base.baseId}">Base Information</q-btn>
 					<q-btn flat type="a" th:href="@{/basemanagement/base/equipment/} + ${model.base.baseId}">Equipment</q-btn>
 					<q-btn flat type="a" th:href="@{/basemanagement/base/vr/} + ${model.base.baseId}">VR View</q-btn>	
 					

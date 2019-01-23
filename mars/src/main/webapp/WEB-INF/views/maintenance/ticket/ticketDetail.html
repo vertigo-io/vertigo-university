@@ -57,7 +57,7 @@
 					<pre th:if="${model.modeReadOnly}" th:utext="${model.ticket.description}"></pre>
 					<input type="hidden" name="vContext[ticket][description]" v-bind:value="vueData.ticket.description" />
 				</vu:block>
-				<vu:block th:if="${model.modeReadOnly}" id="workOrders" title="WorkOrders" withFab>
+				<vu:block th:if="${model.modeReadOnly}" id="workOrders" title="Work Orders" withFab>
 					<vu:include-data object="ticket" field="ticketId" />
 					<vu:include-data object="workOrders" field="woId" />
 					<q-btn round class="fab-block" size="md" color="primary" icon="add" aria-label="Add work order" title="Add work order"
