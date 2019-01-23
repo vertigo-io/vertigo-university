@@ -140,7 +140,7 @@ public class FakeEquipmentListBuilder implements Builder {
 		equipment.setDescription(description);
 		equipment.setPurchaseDate(purchaseDate);
 		equipment.setRentingFee(rentingFee);
-		equipment.setTags(tags);
+		equipment.setTags(base.getTags());
 		return equipment;
 	}
 
