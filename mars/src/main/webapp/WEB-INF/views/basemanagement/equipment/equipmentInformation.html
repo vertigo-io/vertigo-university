@@ -24,7 +24,7 @@
 		<section>
 				<div layout:fragment="content-header-left" id="equipmentIcon" >
 					<div class="detailType" >
-						<q-icon th:name="${model.business.icon}" class="detailTypeIcon q-mx-md" ></q-icon>
+						<q-icon th:name="${model.containsKey('business') ? model.business.icon : 'fas fa-rocket'}" class="detailTypeIcon q-mx-md" ></q-icon>
 					</div>
 				</div>
 				<div layout:fragment="content-header-title" id="equipmentTitle">

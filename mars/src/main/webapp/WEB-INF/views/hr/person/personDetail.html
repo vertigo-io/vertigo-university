@@ -14,8 +14,8 @@
 			<nav v-scroll-spy="{offset:150}">
 			    <q-list link style="height:100%">
 			        <q-item tag="a" href="#information">Information</q-item>
-			        <q-item tag="a" href="#contact">Contact actions</q-item>	
-			        <q-item tag="a" href="#missions">Missions</q-item>				      			      
+			        <q-item th:if="${!model.modeCreate}" tag="a" href="#contact">Contact actions</q-item>	
+			        <q-item th:if="${!model.modeCreate}" tag="a" href="#missions">Missions</q-item>				      			      
 	        	</q-list>
 	        </nav>
 		</section>
@@ -32,7 +32,7 @@
 				<div layout:fragment="content-header-actions">
 					<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>
 					<vu:button-submit th:if="${model.modeEdit}"   action="@{_cancel}" :round size="lg" color="primary" icon="fas fa-ban" :flat aria-label="Cancel" title="Cancel" class="on-left"  />					
-					<q-btn round size="lg" color="primary" icon="more_horiz"  direction="down" aria-label="More actions" title="More actions" class="on-left"> 
+					<q-btn th:if="${model.modeReadOnly}" round size="lg" color="primary" icon="more_horiz"  direction="down" aria-label="More actions" title="More actions" class="on-left"> 
 					  <q-popover><q-list link>
 					    <q-item><q-btn flat>Delete</q-btn></q-item>
 					    <q-item><q-btn flat>Archive</q-btn></q-item>
@@ -56,7 +56,7 @@
 						</vu:label-edit>
 					</vu:grid>
 				</vu:block>
-				<vu:block id="contact" title="Contact actions">
+				<vu:block th:if="${!model.modeCreate}" id="contact" title="Contact actions">
 					<div class="row justify-between">
 						<q-btn color="primary" icon="email" label="Mail"></q-btn>
 						<q-btn color="primary" icon="chat" label="Chat"></q-btn>
@@ -66,7 +66,7 @@
 					</div>				
 				</vu:block>
 				
-				<vu:table id="missions" list="missions" componentId="missions" rowsPerPage="10"	>
+				<vu:table th:if="${!model.modeCreate}" id="missions" list="missions" componentId="missions" rowsPerPage="10"	>
 						<vu:slot name="top_left_slot">Missions</vu:slot>
 						<vu:slot name="top_right_slot"><q-btn class="fab-block" round color="primary" icon="add" aria-label="Add mission" title="Add mission" th:@click="|openModal('missionEditModal', '@{/hr/mission/new}', { 'personId' : vueData.person.personId, 'successCallback' : 'onMissionSuccess' })|"></q-btn></vu:slot>
 						<vu:include-data object="person" field="personId" />

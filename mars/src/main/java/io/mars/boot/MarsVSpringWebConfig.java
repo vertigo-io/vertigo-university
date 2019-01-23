@@ -18,4 +18,9 @@ import io.vertigo.ui.impl.springmvc.config.VSpringWebConfig;
 		"io.mars.opendata.controllers" })
 public class MarsVSpringWebConfig extends VSpringWebConfig {
 	// nothing basic config is enough
+
+	@Override
+	protected boolean isDevMode() {
+		return true;
+	}
 }
