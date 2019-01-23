@@ -41,12 +41,12 @@
 					<div class="col-md-6 col-xs-12 text-center">
 						<div class="q-title">Current Temperature</div>
 						<q-knob
-							th::value="${model.lastTemperature}"
+							th:text="|${model.lastTemperature}°C|"
 							:min="0"
 							:max="50"
 							:decimals="1"
 							color="orange"
-							:readonly="true" style="font-size: 2rem">°C
+							:readonly="true" style="font-size: 1.5rem">
 						</q-knob>
 							<div class="chart chartjs linechart bg-white" 
 						   		th:data-url="@{/api/basemanagment/equipment/environment/data/series}" 
@@ -60,12 +60,12 @@
 					<div class="col-md-6 col-xs-12 text-center">
 						<div class="q-title">Current Humidity</div>
 						<q-knob
-							th::value="${model.lastHumidity}"
+							th:text="|${model.lastHumidity}%|"
 							:min="0"
 							:max="50"
 							:decimals="1"
 							color="blue"
-							:readonly="true" style="font-size: 2rem">%
+							:readonly="true" style="font-size: 1.5rem">
 						</q-knob>
 							<div class="chart chartjs linechart bg-white" 
 							   th:data-url="@{/api/basemanagment/equipment/environment/data/series}" 
