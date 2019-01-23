@@ -49,6 +49,7 @@ body {
   background: #ccc; 
 }
 
+
 @media (max-width: 767px) {
   .layout-padding {
     padding: 1.5rem 0.5rem;
@@ -76,7 +77,6 @@ body {
 	padding-bottom: 64px;
 }
 
-
 body.login {
 	background: url(../img/bcf60b99d4_121619_mars-bfrs.jpg) !important;	
 }
@@ -84,7 +84,7 @@ body.login {
 .login form {
 	background: rgba(255, 255, 255, 0.8);
 	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.2), 0 1px 1px rgba(0,0,0,0.14), 0 2px 1px -1px rgba(0,0,0,0.12);
-          box-shadow: 0 1px 3px rgba(0,0,0,0.2), 0 1px 1px rgba(0,0,0,0.14), 0 2px 1px -1px rgba(0,0,0,0.12);
+       		box-shadow: 0 1px 3px rgba(0,0,0,0.2), 0 1px 1px rgba(0,0,0,0.14), 0 2px 1px -1px rgba(0,0,0,0.12);
 	width: 400px;
     height: 250px;
     position: absolute;
@@ -168,10 +168,18 @@ body.login {
 	height:296px;
 }
 
-nav a {
-	text-decoration: none;	
+.nav {
+	cursor: pointer;
 }
 
+.q-card .nav>div:first-child {
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+}
+
+nav a, .nav a {
+	text-decoration: none;	
+}
 
 nav.scroll-spy-nav a {
 	border-left-width:3px;
@@ -188,7 +196,7 @@ nav.scroll-spy-nav a.q-item.active {
 	color: var(--q-color-primary) !important;
 }
 
-nav a.q-item {
+nav a.q-item, .nav a.q_item {
 	color: grey;	
 }
 
@@ -202,11 +210,21 @@ nav a.q-item {
 
 .marsCard .q-card {
 	width:100%;	
+	transition: -webkit-box-shadow .2s;
+	transition: box-shadow .2s;
+	transition: transform .2s;
 }
 
 .marsCard .q-card img {
     height: 250px;
-    object-fit: cover;
+    object-fit: cover;    
+}
+
+
+.marsCard:hover .q-card  {
+    transform: translate(-2px,-5px);
+    -webkit-box-shadow: 3px 7px 5px rgba(0,0,0,.2), 1px 3px 2px rgba(0,0,0,.14), 0px 1px 1px -2px rgba(0,0,0,.12);
+    		box-shadow: 3px 7px 5px rgba(0,0,0,.2), 1px 3px 2px rgba(0,0,0,.14), 0px 1px 1px -2px rgba(0,0,0,.12);
 }
 
 .q-table tr:hover td {
@@ -215,9 +233,6 @@ nav a.q-item {
     /*height:auto;  /* just added this line */
 }
 
-.q-table tr.nav {
-	cursor: pointer;
-}
 
 .q-table td, .q-table th {
     max-width: 0;
@@ -332,4 +347,13 @@ nav a.q-item {
 	border-right: 1px solid #e5e5e5;
     width: 1px;
     margin: -0.2em 10px;
+    height: 100%;
 }
+
+th.dom_id {
+	width:150px;
+}
+tr th.dom_id:nth-child(1){
+ display:none;
+}
+

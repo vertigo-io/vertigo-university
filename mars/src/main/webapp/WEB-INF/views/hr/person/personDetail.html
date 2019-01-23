@@ -65,20 +65,20 @@
 						<q-btn color="primary" icon="swap_calls" label="All Terrain Tires"></q-btn>
 					</div>				
 				</vu:block>
-				<vu:block th:if="${model.modeReadOnly}" id="missions" title="Missions" withFab>
-					<vu:include-data object="person" field="personId" />
-					<vu:include-data object="missions" field="missionId" />
-					<q-btn class="fab-block" round color="primary" icon="add" aria-label="Add mission" title="Add mission"
-					 th:@click="|openModal('missionEditModal', '@{/hr/mission/new}', { 'personId' : vueData.person.personId, 'successCallback' : 'onMissionSuccess' })|"></q-btn>
-					<vu:table list="missions" componentId="missions" rowsPerPage="10" >
+				
+				<vu:table id="missions" list="missions" componentId="missions" rowsPerPage="10"	>
+						<vu:slot name="top_left_slot">Missions</vu:slot>
+						<vu:slot name="top_right_slot"><q-btn class="fab-block" round color="primary" icon="add" aria-label="Add mission" title="Add mission"></q-btn></vu:slot>
+						<vu:include-data object="person" field="personId" />
+						<vu:include-data object="missions" field="missionId" />
 						<vu:column field="role" />
 						<vu:column field="baseName" />
 						<vu:column field="businessName" />
-						<vu:column name="action" label="Actions">
+						<vu:column name="action" label="">
 							<q-btn round color="primary" icon="edit" label="View detail" th:@click="|openModal('missionEditModal', '@{/hr/mission/}' + props.row.missionId , {'successCallback' : 'onMissionSuccess' })|"></q-btn>
 						</vu:column>
-					</vu:table>
-				</vu:block>
+				</vu:table>
+					
 				<q-page-sticky position="bottom-right" :offset="[64, 64]">
 					<vu:button-submit th:if="${model.modeEdit}"   icon="save" label="Save" action="@{_save}" size="lg" color="primary" />
 					<vu:button-submit th:if="${model.modeCreate}" icon="save" label="Create" action="@{_create}" size="lg" color="primary"/>
