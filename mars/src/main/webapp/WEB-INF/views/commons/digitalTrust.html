@@ -14,7 +14,6 @@
 		  max-width: 20%; 
 		  max-height: 20%;
 		}
-
 		.tv {
 		  position: absolute;
 		  top: 0;
@@ -38,7 +37,6 @@
 		.tv .screen.active {
 		  opacity: 1;
 		}
-		
 		</style>
 		
 	</head>
@@ -61,8 +59,8 @@
 					</div>
 				</q-parallax>
 		 		
-		 		<q-jumbotron class="col-12 q-my-xl">
-		    		<div class="q-title q-mb-md">Blockchain Ethereum</div>
+		 		<q-jumbotron class="col-12">
+		    		<div class="q-title">Blockchain Ethereum</div>
 	    			<img class="smallEthLogo" th:src="@{/static/img/cms/logoEthereum.png}"/>
 					<p>Digital trust is a key factor in the digital world. 
 					<br/>A ledger system can handle trust between actors without the need of a third party.</p>
@@ -98,7 +96,7 @@
 	    		}
 	    		
 			    var tv,	playerDefaults = {autoplay: 0, autohide: 1, modestbranding: 0, rel: 0, showinfo: 0, controls: 0, disablekb: 1, enablejsapi: 0, iv_load_policy: 3};
-			    var currVid = {'videoId': '70Fa3wjW6yo', 'suggestedQuality': 'hd720'};
+			    var currVid = {'videoId': '70Fa3wjW6yo', 'startSeconds': 5, 'suggestedQuality': 'hd720'};
 
 			    function onYouTubePlayerAPIReady(){
 			      tv = new YT.Player('tv', {events: {'onReady': onPlayerReady, 'onStateChange': onPlayerStateChange}, playerVars: playerDefaults});
