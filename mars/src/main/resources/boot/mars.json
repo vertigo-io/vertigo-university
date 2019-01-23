@@ -190,11 +190,12 @@
 			}
 		}
 	},
-	"initializers" : [
-		"io.mars.boot.MasterDataInitializer",
-		"io.mars.boot.I18nResourcesInitializer",
-		"io.mars.boot.SearchInitializer",
-		"io.mars.boot.OrchestraInitializer"
-	] 
+	"initializers" : {
+		"io.mars.boot.DataBaseInitializer" : { "__flags__" : ["initdb"]},
+		"io.mars.boot.MasterDataInitializer" : {},
+		"io.mars.boot.I18nResourcesInitializer" :{},
+		"io.mars.boot.SearchInitializer": {},
+		"io.mars.boot.OrchestraInitializer" : {}
+	}
 	
 }
