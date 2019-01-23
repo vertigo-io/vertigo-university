@@ -92,7 +92,7 @@ public class PersonGenerator implements Component {
 	private void createMissions(final DtList<Person> persons, final List<Base> bases) {
 		persons.forEach(person -> createMissionForPerson(bases, person));
 		for (final Person person : persons) {
-			for (int i = 1; i < DataGenerator.RND.nextInt(4); i++) {
+			for (int i = 0; i < 1 + DataGenerator.RND.nextInt(3); i++) {
 				missionServices.createMission(createMissionForPerson(bases, person));
 			}
 		}
