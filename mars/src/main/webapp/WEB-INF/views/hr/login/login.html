@@ -27,7 +27,7 @@
 		      		<q-field label="Login"	orientation="vertical">
 						<q-input v-model="vueData.login" name="login"></q-input>			
 					</q-field>
-					<q-field label="Password"	orientation="vertical">
+					<q-field label="Password"	orientation="vertical" :error="uiMessageStack.globalErrors.length > 0" :error-label="uiMessageStack.globalErrors.toString()">
 						<q-input type="password" v-model="vueData.password" name="password"></q-input>			
 					</q-field>
 					<div class="float-right">
