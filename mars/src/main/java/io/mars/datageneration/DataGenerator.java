@@ -57,7 +57,7 @@ public class DataGenerator implements Component {
 		generateReferenceData();
 		final List<Base> bases = generateInitialBases();
 		generateInitialEquipments(bases);
-		generateInitialPersons();
+		generateInitialPersons(bases);
 		generateInitialOpendataSets();
 		generatePastData(ZonedDateTime.of(LocalDate.of(2018, 11, 19), LocalTime.of(0, 0), ZoneOffset.UTC).toInstant(), Instant.now());
 	}
@@ -72,8 +72,8 @@ public class DataGenerator implements Component {
 		equipmentGenerator.createInitialEquipments(initialEquipmentUnits, bases);
 	}
 
-	private void generateInitialPersons() {
-		personGenerator.createInitialPersonsFromCSV("initdata/persons.csv");
+	private void generateInitialPersons(final List<Base> bases) {
+		personGenerator.createInitialPersonsFromCSV("initdata/persons.csv", bases);
 	}
 
 	private List<Base> generateInitialBases() {

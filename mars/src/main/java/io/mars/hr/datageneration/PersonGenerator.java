@@ -2,16 +2,23 @@ package io.mars.hr.datageneration;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import javax.inject.Inject;
 
+import io.mars.basemanagement.domain.Base;
+import io.mars.datageneration.DataGenerator;
 import io.mars.fileinfo.FileInfoStd;
 import io.mars.hr.dao.PersonDAO;
+import io.mars.hr.domain.Mission;
 import io.mars.hr.domain.Person;
+import io.mars.hr.services.mission.MissionServices;
 import io.mars.util.CSVReaderUtil;
 import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.core.component.Component;
 import io.vertigo.core.resource.ResourceManager;
+import io.vertigo.dynamo.criteria.Criterions;
+import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.file.FileManager;
 import io.vertigo.dynamo.file.model.FileInfo;
 import io.vertigo.dynamo.file.model.VFile;
@@ -27,17 +34,20 @@ public class PersonGenerator implements Component {
 	private PersonDAO personDAO;
 	@Inject
 	private ResourceManager resourceManager;
-
 	@Inject
 	private FileManager fileManager;
 	@Inject
 	private StoreManager storeManager;
+	@Inject
+	private MissionServices missionServices;
 
-	public void createInitialPersonsFromCSV(final String csvFilePath) {
+	public void createInitialPersonsFromCSV(final String csvFilePath, final List<Base> bases) {
 		CSVReaderUtil.parseCSV(resourceManager, csvFilePath, this::consume);
+		final DtList<Person> persons = personDAO.findAll(Criterions.alwaysTrue(), 500);
+		createMissions(persons, bases);
 	}
 
-	private void consume(String csvFilePath, String[] record) {
+	private void consume(final String csvFilePath, final String[] record) {
 		Assertion.checkArgument(record.length == PERSON_CSV_FILE_COLUMN_NUMBER, "CSV File {0} Format not suitable for Persons", csvFilePath);
 		// ---
 		final String firstName = record[0];
@@ -77,6 +87,23 @@ public class PersonGenerator implements Component {
 		person.setDateHired(dateHired);
 		person.setPicturefileId(pictureId);
 		return person;
+	}
+
+	private void createMissions(final DtList<Person> persons, final List<Base> bases) {
+		persons.forEach(person -> createMissionForPerson(bases, person));
+		for (final Person person : persons) {
+			for (int i = 1; i < DataGenerator.RND.nextInt(4); i++) {
+				missionServices.createMission(createMissionForPerson(bases, person));
+			}
+		}
+	}
+
+	private static Mission createMissionForPerson(final List<Base> bases, final Person person) {
+		final Mission mission = new Mission();
+		mission.setPersonId(person.getPersonId());
+		mission.setBaseId(bases.get(DataGenerator.RND.nextInt(bases.size())).getBaseId());
+		mission.setRole("Base Manager");
+		return mission;
 	}
 
 }
