@@ -22,7 +22,6 @@
 						<br/>
 						<vu:table list="equipments_list" componentId="equipmentsTable" sortUrl="${searchUrl}"
 						tr_@click.native="|goTo('@{/basemanagement/equipment/}'+props.row.equipmentId)|" tr_class="nav">
-							<vu:column field="equipmentId" />
 							<vu:column field="name" />
 							<vu:column field="code" sortable="true"/>
 							<vu:column field="equipmentTypeName" />

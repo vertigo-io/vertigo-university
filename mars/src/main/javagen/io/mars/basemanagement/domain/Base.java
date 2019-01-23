@@ -100,17 +100,17 @@ public final class Base implements KeyConcept {
 	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Base Code'.
+	 * Récupère la valeur de la propriété 'Code'.
 	 * @return String code
 	 */
-	@Field(domain = "DO_CODE", label = "Base Code")
+	@Field(domain = "DO_CODE", label = "Code")
 	public String getCode() {
 		return code;
 	}
 
 	/**
 	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'Base Code'.
+	 * Définit la valeur de la propriété 'Code'.
 	 * @param code String
 	 */
 	public void setCode(final String code) {
@@ -157,17 +157,17 @@ public final class Base implements KeyConcept {
 	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Base Creation Date'.
+	 * Récupère la valeur de la propriété 'Creation Date'.
 	 * @return LocalDate creationDate
 	 */
-	@Field(domain = "DO_LOCALDATE", label = "Base Creation Date")
+	@Field(domain = "DO_LOCALDATE", label = "Creation Date")
 	public java.time.LocalDate getCreationDate() {
 		return creationDate;
 	}
 
 	/**
 	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'Base Creation Date'.
+	 * Définit la valeur de la propriété 'Creation Date'.
 	 * @param creationDate LocalDate
 	 */
 	public void setCreationDate(final java.time.LocalDate creationDate) {

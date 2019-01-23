@@ -93,7 +93,7 @@ comment on column BASE.BASE_ID is
 'Id';
 
 comment on column BASE.CODE is
-'Base Code';
+'Code';
 
 comment on column BASE.NAME is
 'Name';
@@ -102,7 +102,7 @@ comment on column BASE.HEALTH_LEVEL is
 'Health Level';
 
 comment on column BASE.CREATION_DATE is
-'Base Creation Date';
+'Creation Date';
 
 comment on column BASE.DESCRIPTION is
 'Description';
@@ -190,7 +190,7 @@ comment on column EQUIPMENT.NAME is
 'Name';
 
 comment on column EQUIPMENT.CODE is
-'Equipment Code';
+'Code';
 
 comment on column EQUIPMENT.HEALTH_LEVEL is
 'Health Level';

@@ -19,17 +19,17 @@ public final class BaseOverview implements DtObject {
 	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Equipements count'.
+	 * Récupère la valeur de la propriété 'Equipments count'.
 	 * @return Long equipmentCount <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_COUNT", required = true, label = "Equipements count")
+	@Field(domain = "DO_COUNT", required = true, label = "Equipments count")
 	public Long getEquipmentCount() {
 		return equipmentCount;
 	}
 
 	/**
 	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'Equipements count'.
+	 * Définit la valeur de la propriété 'Equipments count'.
 	 * @param equipmentCount Long <b>Obligatoire</b>
 	 */
 	public void setEquipmentCount(final Long equipmentCount) {
@@ -38,17 +38,17 @@ public final class BaseOverview implements DtObject {
 	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Opened tickets'.
+	 * Récupère la valeur de la propriété 'Open tickets'.
 	 * @return Long openedTickets <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_COUNT", required = true, label = "Opened tickets")
+	@Field(domain = "DO_COUNT", required = true, label = "Open tickets")
 	public Long getOpenedTickets() {
 		return openedTickets;
 	}
 
 	/**
 	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'Opened tickets'.
+	 * Définit la valeur de la propriété 'Open tickets'.
 	 * @param openedTickets Long <b>Obligatoire</b>
 	 */
 	public void setOpenedTickets(final Long openedTickets) {
@@ -57,17 +57,17 @@ public final class BaseOverview implements DtObject {
 	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Work orders in progress'.
+	 * Récupère la valeur de la propriété 'Work Orders in progress'.
 	 * @return Long workOrdersInprogress <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_COUNT", required = true, label = "Work orders in progress")
+	@Field(domain = "DO_COUNT", required = true, label = "Work Orders in progress")
 	public Long getWorkOrdersInprogress() {
 		return workOrdersInprogress;
 	}
 
 	/**
 	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'Work orders in progress'.
+	 * Définit la valeur de la propriété 'Work Orders in progress'.
 	 * @param workOrdersInprogress Long <b>Obligatoire</b>
 	 */
 	public void setWorkOrdersInprogress(final Long workOrdersInprogress) {

@@ -62,17 +62,17 @@ public final class EquipmentIndex implements DtObject {
 	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Base Code'.
+	 * Récupère la valeur de la propriété 'Code'.
 	 * @return String code
 	 */
-	@Field(domain = "DO_CODE", label = "Base Code")
+	@Field(domain = "DO_CODE", label = "Code")
 	public String getCode() {
 		return code;
 	}
 
 	/**
 	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'Base Code'.
+	 * Définit la valeur de la propriété 'Code'.
 	 * @param code String
 	 */
 	public void setCode(final String code) {
@@ -138,17 +138,17 @@ public final class EquipmentIndex implements DtObject {
 	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Equipment Type'.
+	 * Récupère la valeur de la propriété 'Type'.
 	 * @return String equipmentTypeName
 	 */
-	@Field(domain = "DO_LABEL", label = "Equipment Type")
+	@Field(domain = "DO_LABEL", label = "Type")
 	public String getEquipmentTypeName() {
 		return equipmentTypeName;
 	}
 
 	/**
 	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'Equipment Type'.
+	 * Définit la valeur de la propriété 'Type'.
 	 * @param equipmentTypeName String
 	 */
 	public void setEquipmentTypeName(final String equipmentTypeName) {
@@ -157,17 +157,17 @@ public final class EquipmentIndex implements DtObject {
 	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Equipment Category'.
+	 * Récupère la valeur de la propriété 'Category'.
 	 * @return String equipmentCategoryName
 	 */
-	@Field(domain = "DO_LABEL", label = "Equipment Category")
+	@Field(domain = "DO_LABEL", label = "Category")
 	public String getEquipmentCategoryName() {
 		return equipmentCategoryName;
 	}
 
 	/**
 	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'Equipment Category'.
+	 * Définit la valeur de la propriété 'Category'.
 	 * @param equipmentCategoryName String
 	 */
 	public void setEquipmentCategoryName(final String equipmentCategoryName) {

@@ -132,17 +132,17 @@ public final class Equipment implements KeyConcept {
 	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Equipment Code'.
+	 * Récupère la valeur de la propriété 'Code'.
 	 * @return String code
 	 */
-	@Field(domain = "DO_CODE", label = "Equipment Code")
+	@Field(domain = "DO_CODE", label = "Code")
 	public String getCode() {
 		return code;
 	}
 
 	/**
 	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'Equipment Code'.
+	 * Définit la valeur de la propriété 'Code'.
 	 * @param code String
 	 */
 	public void setCode(final String code) {

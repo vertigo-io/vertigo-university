@@ -8,9 +8,9 @@ package io.mars.basemanagement.search
 create DtDefinition DT_BASE_INDEX {
   field BASE_ID {domain: DO_ID label: "id" required:"true" }
   field NAME {domain: DO_LABEL label: "Name" required:"false"}
-  field CODE {domain: DO_CODE label: "Base Code" required:"false"}
-  field CREATION_DATE {domain: DO_LOCALDATE label: "Base Creation Date" required:"false"}
+  field CODE {domain: DO_CODE label: "Code" required:"false"}
+  field CREATION_DATE {domain: DO_LOCALDATE label: "Creation Date" required:"false"}
   field TAGS {domain: DO_TAGS label: "Tags" required:"false"}
-  field BASE_TYPE_LABEL {domain: DO_LABEL label: "Base Type" required:"false" }
+  field BASE_TYPE_LABEL {domain: DO_LABEL label: "Type" required:"false" }
 }
 

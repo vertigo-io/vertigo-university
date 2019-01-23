@@ -20,17 +20,17 @@ public final class BasesSummary implements DtObject {
 	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Base Code'.
+	 * Récupère la valeur de la propriété 'Bases count'.
 	 * @return Long baseCount <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_COUNT", required = true, label = "Base Code")
+	@Field(domain = "DO_COUNT", required = true, label = "Bases count")
 	public Long getBaseCount() {
 		return baseCount;
 	}
 
 	/**
 	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'Base Code'.
+	 * Définit la valeur de la propriété 'Bases count'.
 	 * @param baseCount Long <b>Obligatoire</b>
 	 */
 	public void setBaseCount(final Long baseCount) {
@@ -77,17 +77,17 @@ public final class BasesSummary implements DtObject {
 	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'Base Creation Date'.
+	 * Récupère la valeur de la propriété 'Equipment Health'.
 	 * @return Integer onlineEquipmentPercent <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_HEALTH", required = true, label = "Base Creation Date")
+	@Field(domain = "DO_HEALTH", required = true, label = "Equipment Health")
 	public Integer getOnlineEquipmentPercent() {
 		return onlineEquipmentPercent;
 	}
 
 	/**
 	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'Base Creation Date'.
+	 * Définit la valeur de la propriété 'Equipment Health'.
 	 * @param onlineEquipmentPercent Integer <b>Obligatoire</b>
 	 */
 	public void setOnlineEquipmentPercent(final Integer onlineEquipmentPercent) {

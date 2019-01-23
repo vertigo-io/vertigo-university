@@ -93,13 +93,13 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	public enum BaseFields implements DtFieldName<io.mars.basemanagement.domain.Base> {
 		/** Propriété 'Id'. */
 		BASE_ID,
-		/** Propriété 'Base Code'. */
+		/** Propriété 'Code'. */
 		CODE,
 		/** Propriété 'Name'. */
 		NAME,
 		/** Propriété 'Health Level'. */
 		HEALTH_LEVEL,
-		/** Propriété 'Base Creation Date'. */
+		/** Propriété 'Creation Date'. */
 		CREATION_DATE,
 		/** Propriété 'Description'. */
 		DESCRIPTION,
@@ -120,13 +120,13 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	 * Enumération des champs de BasesSummary.
 	 */
 	public enum BasesSummaryFields implements DtFieldName<io.mars.basemanagement.domain.BasesSummary> {
-		/** Propriété 'Base Code'. */
+		/** Propriété 'Bases count'. */
 		BASE_COUNT,
 		/** Propriété 'Name'. */
 		BASE_MEAN_HEALTH,
 		/** Propriété 'Health Level'. */
 		OPENED_TICKETS,
-		/** Propriété 'Base Creation Date'. */
+		/** Propriété 'Equipment Health'. */
 		ONLINE_EQUIPMENT_PERCENT	}
 
 	/**
@@ -137,24 +137,24 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		BASE_ID,
 		/** Propriété 'Name'. */
 		NAME,
-		/** Propriété 'Base Code'. */
+		/** Propriété 'Code'. */
 		CODE,
-		/** Propriété 'Base Creation Date'. */
+		/** Propriété 'Creation Date'. */
 		CREATION_DATE,
 		/** Propriété 'Tags'. */
 		TAGS,
-		/** Propriété 'Base Type'. */
+		/** Propriété 'Type'. */
 		BASE_TYPE_LABEL	}
 
 	/**
 	 * Enumération des champs de BaseOverview.
 	 */
 	public enum BaseOverviewFields implements DtFieldName<io.mars.basemanagement.domain.BaseOverview> {
-		/** Propriété 'Equipements count'. */
+		/** Propriété 'Equipments count'. */
 		EQUIPMENT_COUNT,
-		/** Propriété 'Opened tickets'. */
+		/** Propriété 'Open tickets'. */
 		OPENED_TICKETS,
-		/** Propriété 'Work orders in progress'. */
+		/** Propriété 'Work Orders in progress'. */
 		WORK_ORDERS_INPROGRESS	}
 
 	/**
@@ -185,7 +185,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		EQUIPMENT_ID,
 		/** Propriété 'Name'. */
 		NAME,
-		/** Propriété 'Equipment Code'. */
+		/** Propriété 'Code'. */
 		CODE,
 		/** Propriété 'Health Level'. */
 		HEALTH_LEVEL,
@@ -240,7 +240,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		EQUIPMENT_ID,
 		/** Propriété 'Name'. */
 		NAME,
-		/** Propriété 'Base Code'. */
+		/** Propriété 'Code'. */
 		CODE,
 		/** Propriété 'Date of purchase'. */
 		PURCHASE_DATE,
@@ -248,18 +248,18 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		DESCRIPTION,
 		/** Propriété 'Tags'. */
 		TAGS,
-		/** Propriété 'Equipment Type'. */
+		/** Propriété 'Type'. */
 		EQUIPMENT_TYPE_NAME,
-		/** Propriété 'Equipment Category'. */
+		/** Propriété 'Category'. */
 		EQUIPMENT_CATEGORY_NAME	}
 
 	/**
 	 * Enumération des champs de EquipmentMaintenanceOverview.
 	 */
 	public enum EquipmentMaintenanceOverviewFields implements DtFieldName<io.mars.basemanagement.domain.EquipmentMaintenanceOverview> {
-		/** Propriété 'Opened tickets'. */
+		/** Propriété 'Open tickets'. */
 		OPENED_TICKETS,
-		/** Propriété 'Work orders in progress'. */
+		/** Propriété 'Work Orders in progress'. */
 		WORK_ORDERS_INPROGRESS	}
 
 	/**
