@@ -22,7 +22,7 @@
 				<div layout:fragment="content-header-left" th:include="basemanagement/equipment/equipmentInformation :: #equipmentIcon"></div>
 				<div layout:fragment="content-header-title" th:include="basemanagement/equipment/equipmentInformation :: #equipmentTitle"></div>
 				<div th:if="${!model.modeCreate}" layout:fragment="content-header-tabs">
-					<q-btn flat type="a" th:href="@{/basemanagement/equipment/} + ${model.equipment.equipmentId}">Informations</q-btn>
+					<q-btn flat type="a" th:href="@{/basemanagement/equipment/} + ${model.equipment.equipmentId}">Information</q-btn>
 					<q-btn flat type="a" th:href="@{/basemanagement/equipment/maintenance/} + ${model.equipment.equipmentId}">Maintenance</q-btn>
 					<q-btn flat type="a" class="active" th:href="@{/basemanagement/equipment/environment/} + ${model.equipment.equipmentId}">Environment</q-btn>
 					<q-btn flat type="a" th:href="@{/basemanagement/equipment/vr/} + ${model.equipment.equipmentId}">VR View</q-btn>
@@ -145,7 +145,7 @@
 			</th:block>
 			<th:block th:case="*" >
 				<vu:block title="No Sensors on this equipment">
-					<q-btn flat type="a" th:href="@{/basemanagement/equipment/} + ${model.equipment.equipmentId}">Back to Informations</q-btn>		
+					<q-btn flat type="a" th:href="@{/basemanagement/equipment/} + ${model.equipment.equipmentId}">Back to Information</q-btn>		
 				</vu:block>
 			</th:block>
 		</section>

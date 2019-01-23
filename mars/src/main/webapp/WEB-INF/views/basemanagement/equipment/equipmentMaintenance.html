@@ -26,7 +26,7 @@
 					<q-btn round size="lg" class="on-left" color="primary" icon="add" aria-label="Add Ticket" title="Add Ticket" type="a" th:href="@{/maintenance/ticket/new?equipmentId=__${model.equipment.equipmentId}__}"></q-btn>
 				</div>
 				<div layout:fragment="content-header-tabs">
-					<q-btn flat type="a" th:href="@{/basemanagement/equipment/} + ${model.equipment.equipmentId}">Informations</q-btn>
+					<q-btn flat type="a" th:href="@{/basemanagement/equipment/} + ${model.equipment.equipmentId}">Information</q-btn>
 					<q-btn flat type="a" class="active" th:href="@{/basemanagement/equipment/maintenance/} + ${model.equipment.equipmentId}">Maintenance</q-btn>
 					<q-btn flat type="a" th:href="@{/basemanagement/equipment/environment/} + ${model.equipment.equipmentId}">Environment</q-btn>
 					<q-btn flat type="a" th:href="@{/basemanagement/equipment/vr/} + ${model.equipment.equipmentId}">VR View</q-btn>

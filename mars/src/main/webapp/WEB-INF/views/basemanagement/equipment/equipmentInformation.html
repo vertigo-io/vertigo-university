@@ -5,7 +5,7 @@
   layout:decorate="~{templates/mmcDetailNavLayout}"
 >
 	<head>
-		<title>Equipment Informations</title>
+		<title>Equipment Information</title>
 		<script th:src="@{/vertigo-ui/static/js/v-components/v-comments.js}"></script>
 	</head>
 	
@@ -37,7 +37,7 @@
 					<v-comments th:base-url="@{/api/}" concept="equipment" th:id="${model.equipment.equipmentId}" :connected-account="vueData.connectedUser.personId" ></v-comments>	
 				</div>
 				<div th:if="${!model.modeCreate}" layout:fragment="content-header-tabs">
-					<q-btn flat type="a" class="active" th:href="@{/basemanagement/equipment/} + ${model.equipment.equipmentId}">Informations</q-btn>
+					<q-btn flat type="a" class="active" th:href="@{/basemanagement/equipment/} + ${model.equipment.equipmentId}">Information</q-btn>
 					<q-btn flat type="a" th:href="@{/basemanagement/equipment/maintenance/} + ${model.equipment.equipmentId}">Maintenance</q-btn>
 					<q-btn flat type="a" th:href="@{/basemanagement/equipment/environment/} + ${model.equipment.equipmentId}">Environment</q-btn>
 					<q-btn flat type="a" th:href="@{/basemanagement/equipment/vr/} + ${model.equipment.equipmentId}">VR View</q-btn>
