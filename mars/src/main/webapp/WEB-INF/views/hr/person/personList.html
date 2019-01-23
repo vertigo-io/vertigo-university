@@ -25,8 +25,8 @@
 		
 		<th:block th:if="${model.listRenderer == 'table'}">
 			<vu:table list="persons" color="primary" componentId="personsTable" sortUrl="@{/hr/persons/_sort}" 
-				tr_@click.native="|goTo('@{/hr/person/}'+props.row.personId)|" tr_class="nav" >				
-				<vu:column field="personId" label="Code" class="dom_id"/>
+				tr_@click.native="|goTo('@{/hr/person/}'+props.row.personId)|" tr_class="nav" >		
+				<vu:include-data object="persons" field="personId" />
 				<vu:column field="firstName" sortable="true" />
 				<vu:column field="lastName" sortable="true" />
 				<vu:column field="email" sortable="true" />				

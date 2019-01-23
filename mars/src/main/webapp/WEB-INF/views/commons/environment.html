@@ -46,7 +46,7 @@
 							:max="50"
 							:decimals="1"
 							color="orange"
-							:readonly="true" style="font-size: 2rem">
+							:readonly="true" style="font-size: 2rem">°C
 						</q-knob>
 							<div class="chart chartjs linechart bg-white" 
 						   		th:data-url="@{/api/basemanagment/equipment/environment/data/series}" 
@@ -54,7 +54,8 @@
 						   		data-query-data-filter='{ "measurement": "temperature", "filters": {"equipment": "*"}}'
 						   		data-query-time-filter='{ "from": "now() - 3d", "to": "now()", "dim": "1h"}'
 						   		data-labels='{"value:mean":"Mean Value from temperature"}' 
-						   		data-colors='iGREEN2BLUE'></div> 
+						   		data-colors='iGREEN2BLUE'
+						   		data-options='{"scales" : { "yAxes" : [{ "ticks" : { "beginAtZero": false, "min": 15, "max" : 30 } }] }}'></div> 
 					</div>
 					<div class="col-md-6 col-xs-12 text-center">
 						<div class="q-title">Current Humidity</div>
@@ -64,7 +65,7 @@
 							:max="50"
 							:decimals="1"
 							color="blue"
-							:readonly="true" style="font-size: 2rem">
+							:readonly="true" style="font-size: 2rem">%
 						</q-knob>
 							<div class="chart chartjs linechart bg-white" 
 							   th:data-url="@{/api/basemanagment/equipment/environment/data/series}" 
@@ -72,7 +73,8 @@
 							   data-query-data-filter='{ "measurement": "humidite", "filters": {"equipment": "*"}}'
 							   data-query-time-filter='{ "from": "now() - 3d", "to": "now()", "dim": "1h"}'
 							   data-labels='{"value:mean":"Mean Value Humitidy"}' 
-							   data-colors='iRED2GREEN'></div> 			
+							   data-colors='iRED2GREEN'
+							   data-options='{"scales" : { "yAxes" : [{ "ticks" : { "beginAtZero": false, "min": 20, "max" : 50 } }] }}'></div> 			
 					</div>							
 				</div>
 			</vu:block>

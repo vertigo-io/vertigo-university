@@ -353,7 +353,8 @@ nav a.q-item, .nav a.q_item {
 th.dom_id {
 	width:150px;
 }
+/**
 tr th.dom_id:nth-child(1){
  display:none;
-}
+}*/
 

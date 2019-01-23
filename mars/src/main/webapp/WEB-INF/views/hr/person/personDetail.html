@@ -68,7 +68,7 @@
 				
 				<vu:table id="missions" list="missions" componentId="missions" rowsPerPage="10"	>
 						<vu:slot name="top_left_slot">Missions</vu:slot>
-						<vu:slot name="top_right_slot"><q-btn class="fab-block" round color="primary" icon="add" aria-label="Add mission" title="Add mission"></q-btn></vu:slot>
+						<vu:slot name="top_right_slot"><q-btn class="fab-block" round color="primary" icon="add" aria-label="Add mission" title="Add mission" th:@click="|openModal('missionEditModal', '@{/hr/mission/new}', { 'personId' : vueData.person.personId, 'successCallback' : 'onMissionSuccess' })|"></q-btn></vu:slot>
 						<vu:include-data object="person" field="personId" />
 						<vu:include-data object="missions" field="missionId" />
 						<vu:column field="role" />

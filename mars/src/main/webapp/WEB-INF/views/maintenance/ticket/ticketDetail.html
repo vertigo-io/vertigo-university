@@ -57,21 +57,19 @@
 					<pre th:if="${model.modeReadOnly}" th:utext="${model.ticket.description}"></pre>
 					<input type="hidden" name="vContext[ticket][description]" v-bind:value="vueData.ticket.description" />
 				</vu:block>
-				<vu:block th:if="${model.modeReadOnly}" id="workOrders" title="Work Orders" withFab>
+				<vu:table th:if="${model.modeReadOnly}" list="workOrders" componentId="workOrders" rowsPerPage="10">
+					<vu:slot name="top_left_slot">Work Orders</vu:slot>
+					<vu:slot name="top_right_slot"><q-btn round class="fab-block" size="md" color="primary" icon="add" aria-label="Add work order" title="Add work order" th:@click="|openModal('workOrderEditModal', '@{/maintenance/workorder/new}', { 'ticketId' : vueData.ticket.ticketId, 'successCallback' : 'onWorkOrderSuccess' })|"></q-btn></vu:slot>
 					<vu:include-data object="ticket" field="ticketId" />
 					<vu:include-data object="workOrders" field="woId" />
-					<q-btn round class="fab-block" size="md" color="primary" icon="add" aria-label="Add work order" title="Add work order"
-					 th:@click="|openModal('workOrderEditModal', '@{/maintenance/workorder/new}', { 'ticketId' : vueData.ticket.ticketId, 'successCallback' : 'onWorkOrderSuccess' })|"></q-btn>
-					<vu:table list="workOrders" componentId="workOrders" rowsPerPage="10">
-						<vu:column field="name" />
-						<vu:column field="dateCreated" />
-						<vu:column field="dueDate" />
-						<vu:column field="dateClosed" />
-						<vu:column name="action" label="Actions">
-							<q-btn round icon="edit" label="View detail" th:@click="|openModal('workOrderEditModal', '@{/maintenance/workorder/}' + props.row.woId , {'successCallback' : 'onWorkOrderSuccess' })|"></q-btn>
-						</vu:column>
-					</vu:table>
-				</vu:block>
+					<vu:column field="name" />
+					<vu:column field="dateCreated" />
+					<vu:column field="dueDate" />
+					<vu:column field="dateClosed" />
+					<vu:column name="action" label="Actions">
+						<q-btn round icon="edit" label="View detail" th:@click="|openModal('workOrderEditModal', '@{/maintenance/workorder/}' + props.row.woId , {'successCallback' : 'onWorkOrderSuccess' })|"></q-btn>
+					</vu:column>
+				</vu:table>
 				<q-page-sticky position="bottom-right" :offset="[64, 64]">
 					<vu:button-submit th:if="${model.modeEdit}"   icon="save" label="Save" action="@{_save}" size="lg" color="primary" />
 					<vu:button-submit th:if="${model.modeCreate}" icon="save" label="Create" action="@{_create}" size="lg" color="primary"/>
