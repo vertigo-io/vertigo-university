@@ -11,13 +11,9 @@
 	<body>
 	
 		<section layout:fragment="content-nav">
-			<nav v-scroll-spy="{offset:150}">
-			    <q-list link style="height:100%">
 			        <q-item tag="a" href="#information">Information</q-item>
 			        <q-item th:if="${!model.modeCreate}" tag="a" href="#contact">Contact actions</q-item>	
-			        <q-item th:if="${!model.modeCreate}" tag="a" href="#missions">Missions</q-item>				      			      
-	        	</q-list>
-	        </nav>
+			        <q-item th:if="${!model.modeCreate}" tag="a" href="#missions">Missions</q-item>		
 		</section>
 		
 		<section>

@@ -13,7 +13,13 @@
 	 	<section th:replace="~{templates/mmcDetailLayout::detailHeader}" />
 		
 		<q-page class="row col-12 layout-padding">
-			<div class="col-2 gt-md "><section layout:fragment="content-nav"></section></div>
+			<div class="col-2 gt-md ">
+				<nav v-scroll-spy="{offset:66+50}">
+				    <q-list link style="height:100%">
+				    	<section layout:fragment="content-nav"></section>
+				    </q-list>
+		        </nav>
+	        </div>
 			<div class="col content-body q-ml-md">
 	 			<section layout:fragment="content"></section>
 	 		</div>

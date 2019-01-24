@@ -32,12 +32,9 @@
 		
 		<section layout:fragment="content-nav">
 			<th:block th:if="${model.equipmentType.label == 'Mining Area' || model.equipmentType.label == 'Farming Area' }">
-				<nav v-scroll-spy="{offset:150}">
-				    <q-list link style="height:100%">
 						<q-item tag="a" href="#overview">Overview</q-item>
 						<q-item tag="a" href="#sensors">Sensors</q-item>
-		        	</q-list>
-		        </nav>
+		    </th:block>
 		</section>
 		
 		<section layout:fragment="content" th:switch="${model.equipmentType.label}">

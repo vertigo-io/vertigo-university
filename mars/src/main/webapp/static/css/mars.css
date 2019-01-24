@@ -132,6 +132,14 @@ body.login {
 	content : '>\00a0'
 }
 
+.mini br {
+  display: none;
+}
+.mini br + span:before { /* means : all span juste after a br, are prefixed with ' - ' */
+	content : '\00a0-\00a0';
+	font-size:1.5em;
+}
+
 .dense-list-header .q-list-header+.q-item
 { /*q-item after a q-list-header is nearer*/
    margin-top: -12px;
@@ -154,11 +162,18 @@ body.login {
     color: black;
     border: 4px solid black;
 }
-
 .detailType {
     line-height: 150px;
 }
-
+.mini .detailTypeIcon {
+	height: 40px;
+    width: 40px;
+    font-size: 23px;
+    border-width: 1.5px;
+}
+.mini .detailType {
+    line-height: 50px;
+}
 .image-gallery .q-carousel-quick-nav,
 .image-gallery .q-carousel-left-arrow,
 .image-gallery .q-carousel-right-arrow  {

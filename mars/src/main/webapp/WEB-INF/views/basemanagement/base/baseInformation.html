@@ -11,14 +11,10 @@
 	<body>
 	
 		<section layout:fragment="content-nav">
-			<nav v-scroll-spy="{offset:66+50}">
-			    <q-list link style="height:100%">
 			        <q-item tag="a" href="#health">Health Condition</q-item>
 			        <q-item tag="a" href="#general">General Information</q-item>
 			        <q-item tag="a" href="#views">Views</q-item>
-			        <q-item tag="a" href="#financial">Financial value</q-item>				      
-	        	</q-list>
-	        </nav>
+			        <q-item tag="a" href="#financial">Financial value</q-item>
 		</section>
 		
 		<section>
@@ -27,8 +23,7 @@
 				</div>
 				<div layout:fragment="content-header-title" id="baseTitle">
 					<span class="text-bigger" th:text="${model.base.name}"></span>
-					<span class="eq-mini"> - </span>
-					<br class="ne-mini"/><span class="text-smaller ne-mini" th:text="${model.base.code}"></span> 
+					<br/><span class="text-smaller ne-mini" th:text="${model.base.code}"></span> 
 					<br class="ne-mini"/><span class="text-smaller" th:text="${model.baseTypes.getById('baseTypeId', model.base.baseTypeId).label}"></span>				
 				</div>
 				<div layout:fragment="content-header-actions">
