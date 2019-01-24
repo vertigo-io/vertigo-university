@@ -28,6 +28,31 @@ body {
   color: var(--q-color-body-color) !important;
 }
 
+.not-mini .eq-mini { /* can't revert display:none (on IE of course), we must use a concrete selector*/
+	display:none;
+}
+
+.mini {
+	transition: top .5s;
+    z-index:1;
+    top:0;/*-200px; /*hidden*/
+    position:fixed;
+    right:0;
+    left:0;
+    width:auto;
+}
+
+.mini.visible {
+}
+
+.mini .ne-mini {
+	display:none;
+}
+
+.mini .eq-mini {
+	display: unset; /* can't revert display:none (on IE of course), we must use a concrete selector : .not_mini*/
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
@@ -131,7 +156,7 @@ body.login {
 	border-radius: 50%;
 }
 .detailImg, .detailImg img {
-	height: 150px;
+	height: 100%;
 }
 
 .detailTypeIcon {
@@ -212,7 +237,7 @@ nav a.q-item, .nav a.q_item {
 	width:100%;	
 	transition: -webkit-box-shadow .2s;
 	transition: box-shadow .2s;
-	transition: transform .2s;
+	transition: translate .2s;
 }
 
 .marsCard .q-card img {
@@ -262,6 +287,11 @@ nav a.q-item, .nav a.q_item {
 .header-content {
 	height: 150px;
 }
+
+.mini .header-content {
+	height: 50px;
+}
+
 
 .header-content > div {
 	height: 100%;

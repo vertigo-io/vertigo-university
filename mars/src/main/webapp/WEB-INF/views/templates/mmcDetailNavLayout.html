@@ -6,26 +6,30 @@
   
   	<head>
 		<script th:src="@{/vertigo-ui/static/js/v-components/v-scroll-spy.js}"></script>
+		<script th:src="@{/vertigo-ui/static/js/v-components/v-minify.js}"></script>
 	</head>
 	
   	<section layout:fragment="page-container">
-	 	<section class="col-12">
-		 	<div class="row justify-between items-center bg-secondary header-content">
+	 	<section id="detailHeader" class="col-12" v-minify="{offsetEl:'header', leftOffsetEl:'.q-layout-drawer-left'}">
+			<div class="row justify-between items-center bg-secondary header-content maxi-header">
 				<div layout:fragment="content-header-left"></div>
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="col column ">				
 					<div class="row col justify-between">
 						<div class="detailTitle q-pa-md self-center  text-secondary-inverted" layout:fragment="content-header-title"></div>
-						<div class="row self-center">
+						<div class="row self-center ne-mini">
 							<vu:form>
 								<div class="primary" layout:fragment="content-header-actions"></div>
 							</vu:form>
 						</div>
 					</div>
-					<div class="row bg-tertiary text-tertiary-inverted items-center header-tabs" layout:fragment="content-header-tabs"></div>
+					<div class="row bg-tertiary text-tertiary-inverted items-center header-tabs ne-mini" layout:fragment="content-header-tabs"></div>
 				</div>
-			</div>		
+			</div>
+			<div class="bg-secondary mini" th:insert="~{::.maxi-header}"/>
 		</section>
+		
+		
 		<q-page class="row col-12 layout-padding">
 			<div class="col-2 gt-md "><section layout:fragment="content-nav"></section></div>
 			<div class="col content-body q-ml-md">
