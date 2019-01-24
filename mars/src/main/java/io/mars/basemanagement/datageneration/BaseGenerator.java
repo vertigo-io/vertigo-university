@@ -66,7 +66,7 @@ public class BaseGenerator implements Component {
 				+ " The first settlers, led by James T. Kirk, planted the flag in a crater, near a frozen lake.\n"
 				+ "The crater is one kilometer deep, which offers a mountain-like landscape.\n"
 				+ "The place is rich in minerals, especially in antimony.");
-		aldebaran.setTags("#esa;#cnes;#crater;#mine");
+		aldebaran.setTags("#cnes;#crater;#mine");
 
 		final Base centauri = bases.get(1);
 		centauri.setName("Centauri (Oslo)");
@@ -106,7 +106,7 @@ public class BaseGenerator implements Component {
 				+ " The first settlers, led by Han Solo, planted the flag in a crater, near a frozen lake.\n"
 				+ "The crater is one kilometer deep, which offers a mountain-like landscape.\n"
 				+ "The place is rich in minerals, especially in antimony.");
-		dragon.setTags("#cnsa;#experimental;#crater;#mine");
+		dragon.setTags("#cnsa;#crater;#mine");
 
 		final Base andromeda = bases.get(5);
 		andromeda.setName("Andromeda (London)");
@@ -116,7 +116,7 @@ public class BaseGenerator implements Component {
 				+ "The first settlers, led by Jim Lovell, planted the flag near Utopia Planitia.\n"
 				+ "The area is flat and several kilometers long.\n"
 				+ "The place is ideal for agriculture, with a soil rich in potassium.");
-		andromeda.setTags("#esa;#roscosmos;#powerplant;#energy");
+		andromeda.setTags("#esa;#powerplant;#energy");
 
 		final Base proxima = bases.get(6);
 		proxima.setName("Proxima (Barcelona)");
@@ -126,7 +126,7 @@ public class BaseGenerator implements Component {
 				+ "The first settlers, led by William Adama, planted the flag in Olympus Mons.\n"
 				+ "The base offers a wonderful landscape around the Olympus Mons which offers a natural watchtower.\n"
 				+ "The place is used as a refinery thanks to blast furnaces.");
-		proxima.setTags("#esa;#cnsa;#mountain;#gas");
+		proxima.setTags("#cnsa;#mountain;#gas");
 
 		final Base cassiopeiae = bases.get(7);
 		cassiopeiae.setName("Cassiopeiae (Hamburg)");
@@ -136,7 +136,7 @@ public class BaseGenerator implements Component {
 				+ "The first settlers, led by HAL, planted the flag in Tharsis.\n"
 				+ "The base offers a wonderful maritime landscape and is well-known for its seaside resort and its retirement house\n"
 				+ "The place is used as a rest place.");
-		cassiopeiae.setTags("#roscomos;#maritime;#hollidays;#rest");
+		cassiopeiae.setTags("#roscomos;#maritime;#hollidays");
 
 		final Base persei = bases.get(8);
 		persei.setName("Persei (Moscow)");
@@ -146,7 +146,7 @@ public class BaseGenerator implements Component {
 				+ " The first settlers, led by Arthur Dallas, planted the flag in a crater, near a frozen lake.\n"
 				+ "The crater is one kilometer deep, which offers a mountain-like landscape.\n"
 				+ "The place is rich in minerals, especially in antimony.");
-		persei.setTags("#nasa;#roscosmos;#cnsa;#mine");
+		persei.setTags(";#roscosmos;#crater;#mine");
 
 		final Base pegasus = bases.get(9);
 		pegasus.setName("Pegasus (Munich)");
@@ -156,7 +156,7 @@ public class BaseGenerator implements Component {
 				+ "The first settlers, led by Ellen Louise Ripley, planted the flag near Utopia Planitia.\n"
 				+ "The area is flat and several kilometers long.\n"
 				+ "The place is ideal for agriculture, with a soil rich in potassium.");
-		pegasus.setTags("#nasa;#cnes;#flat;#farming");
+		pegasus.setTags("#nasa;#flat;#farming");
 
 		int baseIdx = 0;
 		for (final Base base : bases) {
