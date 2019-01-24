@@ -49,32 +49,26 @@
 					</div>
 					
 				</vu:block>				
-				<vu:block id="equipments" title="Recently purchased equipment units">
-					<vu:table list="lastEquipments" componentId="lastEquipments" rowsPerPage="5">
-						<vu:column field="code" />
-						<vu:column field="name" sortable="true" />
-						<vu:column field="purchaseDate" sortable="true" />
-						<vu:column name="equipmentType" label="Equipment Type" >
-							<vu:field-read field="equipmentTypeId" list="equipmentTypes" listKey="equipmentTypeId" listDisplay="label" />
-						</vu:column>
-						<vu:column name="actions" label="Actions" >
-							<vu:include-data object="lastEquipments" field="equipmentId" />
-							<q-btn round color="primary" icon="arrow_forward" type="a" th::href="|'@{/basemanagement/equipment/}'+props.row.equipmentId|"></q-btn>
-						</vu:column>
-					</vu:table>
-				</vu:block>
+				<vu:table list="lastEquipments" id="equipments" componentId="lastEquipments" rowsPerPage="5"
+					tr_@click.native="|goTo('@{/basemanagement/equipment/}'+props.row.equipmentId)|" tr_class="nav" >
+					<vu:slot name="top_left_slot">Recently purchased equipment units</vu:slot>		
+					<vu:include-data object="lastEquipments" field="equipmentId" />
+					<vu:column field="code" />
+					<vu:column field="name" sortable="true" />
+					<vu:column field="purchaseDate" sortable="true" />
+					<vu:column name="equipmentType" label="Equipment Type" >
+						<vu:field-read field="equipmentTypeId" list="equipmentTypes" listKey="equipmentTypeId" listDisplay="label" />
+					</vu:column>
+				</vu:table>
 				
-				<vu:block id="maintenance" title="Lastest maintenance tickets">
-					<vu:table list="lastTickets" componentId="lastTickets" rowsPerPage="5">
-						<vu:column field="code" />
-						<vu:column field="title" />
-						<vu:column field="dateCreated" />
-						<vu:column name="actions" label="Actions" >
-							<vu:include-data object="lastTickets" field="ticketId" />
-							<q-btn round color="primary" icon="arrow_forward" type="a" th::href="|'@{/maintenance/ticket/}'+props.row.ticketId|"></q-btn>
-						</vu:column>
-					</vu:table>
-				</vu:block>
+				<vu:table list="lastTickets" id="maintenance" componentId="lastTickets" rowsPerPage="5"
+					tr_@click.native="|goTo('@{/maintenance/ticket/}'+props.row.ticketId)|" tr_class="nav" >
+					<vu:slot name="top_left_slot">Lastest maintenance tickets</vu:slot>		
+					<vu:include-data object="lastTickets" field="ticketId" />
+					<vu:column field="code" />
+					<vu:column field="title" />
+					<vu:column field="dateCreated" />
+				</vu:table>
 			</vu:form>
 		</section>
 		
