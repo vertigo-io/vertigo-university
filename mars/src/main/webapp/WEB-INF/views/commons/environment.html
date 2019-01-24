@@ -53,8 +53,8 @@
 						   		data-query-measures='["value:mean"]'
 						   		data-query-data-filter='{ "measurement": "temperature", "filters": {"equipment": "*"}}'
 						   		data-query-time-filter='{ "from": "now() - 3d", "to": "now()", "dim": "1h"}'
-						   		data-labels='{"value:mean":"Mean Value from temperature"}' 
-						   		data-colors='iGREEN2BLUE'
+						   		data-labels='{"value:mean":"Temperature (°C)"}' 
+						   		data-colors='iSPECTRUM'
 						   		data-options='{"scales" : { "yAxes" : [{ "ticks" : { "beginAtZero": false, "min": 15, "max" : 30 } }] }}'></div> 
 					</div>
 					<div class="col-md-6 col-xs-12 text-center">
@@ -72,8 +72,8 @@
 							   data-query-measures='["value:mean"]'
 							   data-query-data-filter='{ "measurement": "humidite", "filters": {"equipment": "*"}}'
 							   data-query-time-filter='{ "from": "now() - 3d", "to": "now()", "dim": "1h"}'
-							   data-labels='{"value:mean":"Mean Value Humitidy"}' 
-							   data-colors='iRED2GREEN'
+							   data-labels='{"value:mean":"Humitidy (%)"}' 
+							   data-colors='iGREEN2BLUE'
 							   data-options='{"scales" : { "yAxes" : [{ "ticks" : { "beginAtZero": false, "min": 20, "max" : 50 } }] }}'></div> 			
 					</div>							
 				</div>
@@ -86,10 +86,10 @@
 							<div class="ml-1">
 								<q-btn rounded push th:@click="|httpPostAjax('@{_onFan}', {})|" :class="'on-left '" 
 								size="lg" color="red"  icon-right="fas fa-wind"
-								aria-label="Triggered alarm in base" title="Trigger alarm in base" >ON</q-btn>
+								aria-label="Fan control" title="Start fan" >ON</q-btn>
 								<q-btn rounded push th:@click="|httpPostAjax('@{_offFan}', {})|" :class="'on-left '" 
 								size="lg" color="primary"    icon-right="fas fa-power-off"
-								aria-label="Triggered alarm in base" title="Stop alarm in base" >OFF</q-btn>
+								aria-label="Fan control" title="Stop fan" >OFF</q-btn>
 							</div>
 					</div>
 					<div class="col-md-6 col-xs-12 text-center gutter-xs">
@@ -98,7 +98,7 @@
 								data-query-measures='["value:mean"]'
 								data-query-data-filter='{ "measurement": "moisture", "filters": {"equipment": "*"}}'
 								data-query-time-filter='{ "from": "now() - 1d", "to": "now()", "dim": "1h"}'
-								data-labels='{"value:mean":"Soil moisture"}' 
+								data-labels='{"value:mean":"Soil moisture (%)"}' 
 								data-colors='iGREEN:INTENSITY'></div> 				
 					</div>
 				</div>
@@ -110,10 +110,10 @@
 						<div class="text-center"> <span class="indicator text-deep-orange" th:text="${model.totalAlert}" /><br/><span class="indicator-title text-faded">Triggered alarm this week</span></div>
 						<div class="chart chartjs stakedbarchart bg-white" 
 								th:data-url="@{/api/basemanagment/equipment/environment/data/series}" 
-								data-query-measures='["value:last"]'
-								data-query-data-filter='{ "measurement": "fireAlarm", "filters": {"equipment": "*"}}'
-								data-query-time-filter='{ "from": "now() - 1d", "to": "now() + 1h", "dim": "1d"}'
-								data-labels='{"value:last":"Number of alert today"}' 
+								data-query-measures='["value:count"]'
+								data-query-data-filter='{ "measurement": "fireAlarm", "filters": {}, "additionalWhereClause" : "value = 1"}'
+								data-query-time-filter='{ "from": "now() - 1w", "to": "now()", "dim": "1d"}'
+								data-labels='{"value:count":"Number of alert"}' 
 								data-colors='iRED2GREEN'>
 						</div> 				
 						<!-- TODO Graphe qui somme l'ensemble des alertes des equipements de securite et fait un graphe  -->
