@@ -28,30 +28,6 @@ body {
   color: var(--q-color-body-color) !important;
 }
 
-.not-mini .eq-mini { /* can't revert display:none (on IE of course), we must use a concrete selector*/
-	display:none;
-}
-
-.mini {
-	transition: top .5s;
-    z-index:1;
-    top:0;/*-200px; /*hidden*/
-    position:fixed;
-    right:0;
-    left:0;
-    width:auto;
-}
-
-.mini.visible {
-}
-
-.mini .ne-mini {
-	display:none;
-}
-
-.mini .eq-mini {
-	display: unset; /* can't revert display:none (on IE of course), we must use a concrete selector : .not_mini*/
-}
 
 /* width */
 ::-webkit-scrollbar {
