@@ -35,7 +35,7 @@
 			<vu:form>
 				<vu:block id="overview" title="Equipment Overview">
 					<vu:include-data object="equipmentOverviews" field="'*'" />
-					<div class="row">
+					<div class="row gutter-md">
 						<div v-for="equipmentOverview in vueData.equipmentOverviews" :key="equipmentOverview.businessId" class="col-md-3 col-sm-4 col-xs-12 text-center" >
 							<q-knob
 								  :value="equipmentOverview.okCount"

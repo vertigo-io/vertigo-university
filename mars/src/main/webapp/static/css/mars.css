@@ -97,7 +97,6 @@ body.login {
     padding : 20px;
 }
 
-
 .content-body {
 	margin-top: -8px; /* mais d'ou vient cette marge ???*/
 }
@@ -121,6 +120,17 @@ body.login {
 .q-item-sublabel {
   color: currentColor !important;
 }*/
+.mini a {
+	display:none;
+}
+
+.mini a.active {
+	display:inline-flex;
+}
+
+.mini a.active .q-btn-inner:before {
+	content : '>\00a0'
+}
 
 .dense-list-header .q-list-header+.q-item
 { /*q-item after a q-list-header is nearer*/
@@ -147,11 +157,6 @@ body.login {
 
 .detailType {
     line-height: 150px;
-}
-
-
-.q-list {
-	border: none;
 }
 
 .image-gallery .q-carousel-quick-nav,
