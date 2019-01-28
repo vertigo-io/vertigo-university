@@ -12,19 +12,22 @@
 	<body>
 		<section layout:fragment="content" >	
 			<vu:search resultKey="equipments" searchUrl="@{/basemanagement/equipments/_search}" collectionComponentId="equipmentsTable">
-				<div class="row gutter-md">
+				<div class="row mgutter-md">
+					<div class="q-title self-center" style="flex-basis: 300px;">{{vueData.equipments_totalcount}} Equipments</div>
+					<div class="col">
+						<vu:include-data-primitive key="criteria"/>
+						<q-search inverted-light color="white" icon="search" placeholder="Type, Name..." v-model="vueData.criteria" @input="search('equipments')"></q-search>
+					</div>
+					<div class="col-break"></div>
 					<div class="gt-md" style="flex-basis: 300px;">
 						<vu:facets resultKey="equipments" />
 					</div>
 					<div class="col">
-						<vu:include-data-primitive key="criteria"/>
-						<q-search inverted-light color="white" icon="search" placeholder="Type, Name..." v-model="vueData.criteria" @input="search('equipments')"></q-search>
-						<br/>
 						<vu:table list="equipments_list" componentId="equipmentsTable" sortUrl="${searchUrl}" color="primary"
 						tr_@click.native="|goTo('@{/basemanagement/equipment/}'+props.row.equipmentId)|" tr_class="nav">
 							<vu:include-data object="equipments_list" field="equipmentId" />
 							<vu:column field="name" />
-							<vu:column field="code" sortable="true"/>
+							<vu:column field="code"/>
 							<vu:column field="equipmentTypeName" />
 							<vu:column field="equipmentCategoryName" />							
 						</vu:table>
