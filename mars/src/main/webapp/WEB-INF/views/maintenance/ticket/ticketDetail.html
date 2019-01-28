@@ -2,24 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org" 
   xmlns:vu="http://www.morphbit.com/thymeleaf/component"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{templates/mmcDetailNavLayout}"
+  layout:decorate="~{templates/mmcDetailLayout}"
 >
 	<head>
 		<title>Ticket detail</title>		
 	</head>
 	
 	<body>
-	
-		<section layout:fragment="content-nav">
-			<vu:include-data object="ticket" field="dateCreated" />
-			<vu:include-data object="ticket" field="dateClosed" />
-			<q-timeline color="secondary">
-			  <q-timeline-entry v-if="vueData.ticket.ticketStatusId === 'CLOSED'" subtitle="Ticket closed" :title="vueData.ticket.dateClosed"></q-timeline-entry>
-			  <q-timeline-entry subtitle="Ticket created" :title="vueData.ticket.dateCreated" ></q-timeline-entry>
-			</q-timeline>
-		</section>
-		
 		<section>
+			<div layout:fragment="content-header-left" >
+				<div class="detailType" >
+					<q-icon name="fas fa-tools" class="detailTypeIcon q-mx-md" ></q-icon>
+				</div>
+			</div>
 			<div layout:fragment="content-header-title">
 				<span class="text-bigger" th:text="${model.modeCreate ? 'New Ticket' : model.ticket.title}"></span> 
 				<br/><span class="text-smaller" th:text="${model.ticket.code}"></span>
@@ -33,49 +28,59 @@
 			</div>
 		</section>
 		
-		<section layout:fragment="content" >
-			<vu:form>
-				<div th:if="${model.modeReadOnly}" class="row q-ma-md">
-					<div class="col-12">
-						<vu:include-data object="ticket" field="ticketStatusId" />
-						<q-stepper v-bind:value="vueData.ticket.ticketStatusId" no-header-navigation class="noContent">
-							<q-step name="OPEN" title="Open"></q-step>
-							<q-step name="ASSIGNED" title="Assigned"></q-step>
-							<q-step name="CLOSED" title="Closed" active-icon="check"></q-step>
-						</q-stepper>
+		<section layout:fragment="content" class="row" >
+			<div class="col-2 gt-md">
+				<vu:include-data object="ticket" field="dateCreated" />
+				<vu:include-data object="ticket" field="dateClosed" />
+				<q-timeline color="secondary">
+				  <q-timeline-entry v-if="vueData.ticket.ticketStatusId === 'CLOSED'" subtitle="Ticket closed" :title="vueData.ticket.dateClosed"></q-timeline-entry>
+				  <q-timeline-entry subtitle="Ticket created" :title="vueData.ticket.dateCreated" ></q-timeline-entry>
+				</q-timeline>
+			</div>
+			<div class="col q-ml-md">
+				<vu:form>
+					<div th:if="${model.modeReadOnly}" class="row">
+						<div class="col-12">
+							<vu:include-data object="ticket" field="ticketStatusId" />
+							<q-stepper v-bind:value="vueData.ticket.ticketStatusId" no-header-navigation class="noContent">
+								<q-step name="OPEN" title="Open"></q-step>
+								<q-step name="ASSIGNED" title="Assigned"></q-step>
+								<q-step name="CLOSED" title="Closed" active-icon="check"></q-step>
+							</q-stepper>
+						</div>
 					</div>
-				</div>
-				<vu:block title="Information">
-					<vu:grid cols="2">
-						<vu:text-field object="ticket" field="code" />
-						<vu:text-field object="ticket" field="title" />
-					</vu:grid>
-				</vu:block>
-				<vu:block title="Description">
-					<vu:include-data object="ticket" field="description" />
-					<q-editor th:v-if="${!model.modeReadOnly}" v-model="vueData.ticket.description" ></q-editor>
-					<pre th:if="${model.modeReadOnly}" th:utext="${model.ticket.description}"></pre>
-					<input type="hidden" name="vContext[ticket][description]" v-bind:value="vueData.ticket.description" />
-				</vu:block>
-				<vu:table th:if="${model.modeReadOnly}" list="workOrders" componentId="workOrders" rowsPerPage="10">
-					<vu:slot name="top_left_slot">Work Orders</vu:slot>
-					<vu:slot name="top_right_slot"><q-btn round class="fab-block" size="md" color="primary" icon="add" aria-label="Add work order" title="Add work order" th:@click="|openModal('workOrderEditModal', '@{/maintenance/workorder/new}', { 'ticketId' : vueData.ticket.ticketId, 'successCallback' : 'onWorkOrderSuccess' })|"></q-btn></vu:slot>
-					<vu:include-data object="ticket" field="ticketId" />
-					<vu:include-data object="workOrders" field="woId" />
-					<vu:column field="name" />
-					<vu:column field="dateCreated" />
-					<vu:column field="dueDate" />
-					<vu:column field="dateClosed" />
-					<vu:column name="action" label="Actions">
-						<q-btn round icon="edit" label="View detail" th:@click="|openModal('workOrderEditModal', '@{/maintenance/workorder/}' + props.row.woId , {'successCallback' : 'onWorkOrderSuccess' })|"></q-btn>
-					</vu:column>
-				</vu:table>
-				<q-page-sticky position="bottom-right" :offset="[64, 64]">
-					<vu:button-submit th:if="${model.modeEdit}"   icon="save" label="Save" action="@{_save}" size="lg" color="primary" />
-					<vu:button-submit th:if="${model.modeCreate}" icon="save" label="Create" action="@{_create}" size="lg" color="primary"/>
-				</q-page-sticky>
-			</vu:form>
-			<vu:modal componentId="workOrderEditModal" title="Work Order" iframe_width="800" iframe_height="400"  />
+					<vu:block title="Information">
+						<vu:grid cols="2">
+							<vu:text-field object="ticket" field="code" />
+							<vu:text-field object="ticket" field="title" />
+						</vu:grid>
+					</vu:block>
+					<vu:block title="Description">
+						<vu:include-data object="ticket" field="description" />
+						<q-editor th:v-if="${!model.modeReadOnly}" v-model="vueData.ticket.description" ></q-editor>
+						<pre th:if="${model.modeReadOnly}" th:utext="${model.ticket.description}"></pre>
+						<input type="hidden" name="vContext[ticket][description]" v-bind:value="vueData.ticket.description" />
+					</vu:block>
+					<vu:table th:if="${model.modeReadOnly}" list="workOrders" componentId="workOrders" rowsPerPage="10">
+						<vu:slot name="top_left_slot">Work Orders</vu:slot>
+						<vu:slot name="top_right_slot"><q-btn round class="fab-block" size="md" color="primary" icon="add" aria-label="Add work order" title="Add work order" th:@click="|openModal('workOrderEditModal', '@{/maintenance/workorder/new}', { 'ticketId' : vueData.ticket.ticketId, 'successCallback' : 'onWorkOrderSuccess' })|"></q-btn></vu:slot>
+						<vu:include-data object="ticket" field="ticketId" />
+						<vu:include-data object="workOrders" field="woId" />
+						<vu:column field="name" />
+						<vu:column field="dateCreated" />
+						<vu:column field="dueDate" />
+						<vu:column field="dateClosed" />
+						<vu:column name="action" label="Actions">
+							<q-btn round icon="edit" label="View detail" th:@click="|openModal('workOrderEditModal', '@{/maintenance/workorder/}' + props.row.woId , {'successCallback' : 'onWorkOrderSuccess' })|"></q-btn>
+						</vu:column>
+					</vu:table>
+					<q-page-sticky position="bottom-right" :offset="[64, 64]">
+						<vu:button-submit th:if="${model.modeEdit}"   icon="save" label="Save" action="@{_save}" size="lg" color="primary" />
+						<vu:button-submit th:if="${model.modeCreate}" icon="save" label="Create" action="@{_create}" size="lg" color="primary"/>
+					</q-page-sticky>
+				</vu:form>
+				<vu:modal componentId="workOrderEditModal" title="Work Order" iframe_width="800" iframe_height="400"  />
+			</div>
 		</section>
 		<section layout:fragment="javscript-footer" >
 			<script type="text/javascript">
