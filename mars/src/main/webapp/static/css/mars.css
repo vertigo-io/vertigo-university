@@ -105,39 +105,17 @@ body.login {
 	border: none;
 }
 
-/*.bg-primary .q-item {
-  color: currentColor !important;
-}
-
-.bg-primary .q-item-side {
-  color: currentColor !important;  
-}*/
-
 .q-item-side {
     text-align: center;
-}
-/*
-.q-item-sublabel {
-  color: currentColor !important;
-}*/
-.mini a {
-	display:none;
-}
-
-.mini a.active {
-	display:inline-flex;
-}
-
-.mini a.active .q-btn-inner:before {
-	content : '>\00a0'
 }
 
 .mini br {
   display: none;
 }
+
 .mini br + span:before { /* means : all span juste after a br, are prefixed with ' - ' */
 	content : '\00a0-\00a0';
-	font-size:1.5em;
+	/*font-size:1.5em;*/
 }
 
 .dense-list-header .q-list-header+.q-item

@@ -28,7 +28,7 @@
 				</div>
 				<div layout:fragment="content-header-actions">
 					<q-btn th:if="${model.modeEdit}" type="a" th:href="@{/basemanagement/base/information/} + ${model.base.baseId}"
-					 round size="lg" icon="fas fa-ban" flat aria-label="Cancel" title="Cancel" class="bg-primary on-left"></q-btn>
+					 flat round size="lg" icon="fas fa-ban" aria-label="Cancel" title="Cancel" class="text-tertiary-inverted on-left"></q-btn>
 					<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>
 					<th:block id="baseActions">
 						<q-btn round size="lg" color="primary" icon="fas fa-rocket" type="a" th:href="@{/basemanagement/equipments/}"  aria-label="Add equipment" title="See all equipments" class="on-left" ></q-btn>
