@@ -213,6 +213,10 @@ nav a.q-item, .nav a.q_item {
 	background: none;
 }
 
+.q-page-sticky.fixed-bottom-right {
+	margin: 50px 3vw;
+}
+
 .marsCard .q-card {
 	width:100%;	
 	/*transition: translate .2s, box-shadow .2s, -webkit-box-shadow .2s;*/
@@ -282,6 +286,12 @@ nav a.q-item, .nav a.q_item {
 .header-tabs a.active .q-btn-inner {
 	padding-top: 3px;
 	border-bottom: 3px solid black;
+}
+
+.header-tabs {
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .text-bigger{

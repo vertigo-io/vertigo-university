@@ -22,11 +22,11 @@
 					<q-btn round size="lg" class="on-left" color="primary" icon="add" aria-label="Add Ticket" title="Add Ticket" type="a" th:href="@{/maintenance/ticket/new?equipmentId=__${model.equipment.equipmentId}__}"></q-btn>
 				</div>
 				<div layout:fragment="content-header-tabs">
-					<q-btn flat type="a" th:href="@{/basemanagement/equipment/} + ${model.equipment.equipmentId}">Information</q-btn>
-					<q-btn flat type="a" class="active" th:href="@{/basemanagement/equipment/maintenance/} + ${model.equipment.equipmentId}">Maintenance</q-btn>
-					<q-btn flat type="a" th:href="@{/basemanagement/equipment/environment/} + ${model.equipment.equipmentId}">Environment</q-btn>
-					<q-btn flat type="a" th:href="@{/basemanagement/equipment/vr/} + ${model.equipment.equipmentId}">VR View</q-btn>
-					<q-btn flat type="a" th:href="@{/basemanagement/equipment/spare/} + ${model.equipment.equipmentId}">Spare Parts</q-btn>
+					<vu:button-link flat label="Information" url="@{/basemanagement/equipment/} + ${model.equipment.equipmentId}"/>
+					<vu:button-link class="active" flat label="Maintenance" url="@{/basemanagement/equipment/maintenance/} + ${model.equipment.equipmentId}"/>
+					<vu:button-link flat label="Environment" url="@{/basemanagement/equipment/environment/} + ${model.equipment.equipmentId}"/>
+					<vu:button-link flat label="VR View" url="@{/basemanagement/equipment/vr/} + ${model.equipment.equipmentId}"/>
+					<vu:button-link flat label="Spare Parts" url="@{/basemanagement/equipment/spare/} + ${model.equipment.equipmentId}"/>
 				</div>
 		</section>
 		

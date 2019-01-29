@@ -26,9 +26,9 @@
 					<br/><span th:if="${!model.modeCreate}" class="text-smaller">Base Manager</span>
 				</div>
 				<div layout:fragment="content-header-actions">
-					<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>
-					<vu:button-submit th:if="${model.modeEdit}"   action="@{_cancel}" :round size="lg" color="primary" icon="fas fa-ban" :flat aria-label="Cancel" title="Cancel" class="on-left"  />					
-					<q-btn th:if="${model.modeReadOnly}" round size="lg" color="primary" icon="more_horiz"  direction="down" aria-label="More actions" title="More actions" class="on-left"> 
+					<vu:button-link th:if="${model.modeEdit}"  url="@{/hr/person/} + ${model.person.personId}" :round size="lg" color="primary" icon="fas fa-ban" :flat ariaLabel="Cancel" class="on-left"  />					
+					<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" ariaLabel="Edit" class="on-left"/>
+					<q-btn round size="lg" color="primary" icon="more_horiz"  direction="down" aria-label="More actions" title="More actions" class="on-left"> 
 					  <q-popover><q-list link>
 					    <q-item><q-btn flat>Delete</q-btn></q-item>
 					    <q-item><q-btn flat>Archive</q-btn></q-item>
@@ -75,7 +75,7 @@
 						</vu:column>
 				</vu:table>
 					
-				<q-page-sticky position="bottom-right" :offset="[64, 64]">
+				<q-page-sticky position="bottom-right">
 					<vu:button-submit th:if="${model.modeEdit}"   icon="save" label="Save" action="@{_save}" size="lg" color="primary" />
 					<vu:button-submit th:if="${model.modeCreate}" icon="save" label="Create" action="@{_create}" size="lg" color="primary"/>
 				</q-page-sticky>				

@@ -20,9 +20,9 @@
 				<div layout:fragment="content-header-title" th:include="basemanagement/base/baseInformation :: #baseTitle"></div>
 				<div layout:fragment="content-header-actions" th:include="basemanagement/base/baseInformation :: #baseActions"></div>				
 				<div layout:fragment="content-header-tabs">
-					<q-btn flat type="a" th:href="@{/basemanagement/base/information/} + ${model.base.baseId}">Base Information</q-btn>
-					<q-btn flat type="a" class="active" th:href="@{/basemanagement/base/equipment/} + ${model.base.baseId}">Equipment</q-btn>
-					<q-btn flat type="a" th:href="@{/basemanagement/base/vr/} + ${model.base.baseId}">VR View</q-btn>			
+					<vu:button-link flat label="Base Information" url="@{/basemanagement/base/information/} + ${model.base.baseId}"/>
+					<vu:button-link class="active" flat label="Equipment" url="@{/basemanagement/base/equipment/} + ${model.base.baseId}"/>
+					<vu:button-link flat label="VR View" url="@{/basemanagement/base/vr/} + ${model.base.baseId}"/>
 				</div>
 		</section>
 		

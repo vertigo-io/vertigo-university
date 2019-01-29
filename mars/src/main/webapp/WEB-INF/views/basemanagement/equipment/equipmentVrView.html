@@ -14,11 +14,11 @@
 				<div layout:fragment="content-header-left" th:include="basemanagement/equipment/equipmentInformation :: #equipmentIcon"></div>
 				<div layout:fragment="content-header-title" th:include="basemanagement/equipment/equipmentInformation :: #equipmentTitle"></div>
 				<div layout:fragment="content-header-tabs">
-					<q-btn flat type="a" th:href="@{/basemanagement/equipment/} + ${model.equipment.equipmentId}">Information</q-btn>
-					<q-btn flat type="a" th:href="@{/basemanagement/equipment/maintenance/} + ${model.equipment.equipmentId}">Maintenance</q-btn>
-					<q-btn flat type="a" th:href="@{/basemanagement/equipment/environment/} + ${model.equipment.equipmentId}">Environment</q-btn>	
-					<q-btn flat type="a" class="active" th:href="@{/basemanagement/equipment/vr/} + ${model.equipment.equipmentId}">VR View</q-btn>
-					<q-btn flat type="a" th:href="@{/basemanagement/equipment/spare/} + ${model.equipment.equipmentId}">Spare Parts</q-btn>			
+					<vu:button-link flat label="Information" url="@{/basemanagement/equipment/} + ${model.equipment.equipmentId}"/>
+					<vu:button-link flat label="Maintenance" url="@{/basemanagement/equipment/maintenance/} + ${model.equipment.equipmentId}"/>
+					<vu:button-link flat label="Environment" url="@{/basemanagement/equipment/environment/} + ${model.equipment.equipmentId}"/>
+					<vu:button-link class="active" flat label="VR View" url="@{/basemanagement/equipment/vr/} + ${model.equipment.equipmentId}"/>
+					<vu:button-link flat label="Spare Parts" url="@{/basemanagement/equipment/spare/} + ${model.equipment.equipmentId}"/>		
 				</div>
 		</section>
 		

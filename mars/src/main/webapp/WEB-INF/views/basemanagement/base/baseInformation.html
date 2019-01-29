@@ -18,8 +18,8 @@
 		</section>
 		
 		<section>
-				<div layout:fragment="content-header-left" id="baseImg" class="gt-md">
-					<img th:src="@{|/basemanagement/base/${model.base.baseId}/mainPicture|}" class="detailImg"/>
+				<div layout:fragment="content-header-left" id="baseImg" >
+					<img th:src="@{|/basemanagement/base/${model.base.baseId}/mainPicture|}" class="detailImg gt-md" />
 				</div>
 				<div layout:fragment="content-header-title" id="baseTitle">
 					<span class="text-bigger" th:text="${model.base.name}"></span>
@@ -27,12 +27,12 @@
 					<br class="ne-mini"/><span class="text-smaller" th:text="${model.baseTypes.getById('baseTypeId', model.base.baseTypeId).label}"></span>				
 				</div>
 				<div layout:fragment="content-header-actions">
-					<q-btn th:if="${model.modeEdit}" type="a" th:href="@{/basemanagement/base/information/} + ${model.base.baseId}"
-					 flat round size="lg" icon="fas fa-ban" aria-label="Cancel" title="Cancel" class="text-tertiary-inverted on-left"></q-btn>
-					<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>
+					<vu:button-link th:if="${model.modeEdit}" class="text-tertiary-inverted on-left"
+						flat round size="lg" icon="fas fa-ban" url="@{/basemanagement/base/information/} + ${model.base.baseId}" ariaLabel="Cancel" />
+					<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" ariaLabel="Edit" class="on-left"/>
 					<th:block id="baseActions">
-						<q-btn round size="lg" color="primary" icon="fas fa-rocket" type="a" th:href="@{/basemanagement/equipments/}"  aria-label="Add equipment" title="See all equipments" class="on-left" ></q-btn>
-						<q-btn round size="lg" color="primary" icon="fas fa-rocket" type="a" th:href="@{/basemanagement/equipment/new}"  aria-label="Add equipment" title="Add equipment" class="on-left" >+</q-btn>
+						<vu:button-link url="@{/basemanagement/equipments/}" ariaLabel="See all equipments" icon="fas fa-rocket" color="primary" round size="lg" class="on-left" />
+						<vu:button-link url="@{/basemanagement/equipment/new}" ariaLabel="Add equipment" icon="fas fa-rocket" color="primary" round size="lg" class="on-left" >+</vu:button-link>
 						<q-btn round size="lg" color="primary" icon="more_horiz"  direction="down" aria-label="More actions" title="More actions" class="on-left"> 
 						  <q-popover><q-list link>
 						  	<q-item><q-btn flat>Add view</q-btn></q-item>
@@ -44,9 +44,9 @@
 					</th:block>
 				</div>
 				<div layout:fragment="content-header-tabs">
-					<q-btn flat type="a" class="active" th:href="@{/basemanagement/base/information/} + ${model.base.baseId}">Base Information</q-btn>
-					<q-btn flat type="a" th:href="@{/basemanagement/base/equipment/} + ${model.base.baseId}">Equipment</q-btn>
-					<q-btn flat type="a" th:href="@{/basemanagement/base/vr/} + ${model.base.baseId}">VR View</q-btn>					
+					<vu:button-link class="active" flat label="Base Information" url="@{/basemanagement/base/information/} + ${model.base.baseId}"/>
+					<vu:button-link flat label="Equipment" url="@{/basemanagement/base/equipment/} + ${model.base.baseId}"/>
+					<vu:button-link flat label="VR View" url="@{/basemanagement/base/vr/} + ${model.base.baseId}"/>					
 				</div>
 		</section>
 		
@@ -124,7 +124,7 @@
 						<vu:text-field object="base" field="rentingFee" suffix=" €"/>
 					</vu:grid>
 				</vu:block>
-				<q-page-sticky position="bottom-right" :offset="[64, 64]">
+				<q-page-sticky position="bottom-right">
 					<vu:button-submit th:if="${model.modeEdit}"   icon="save" label="Save" action="@{_save}" size="lg" color="primary" />
 				</q-page-sticky>	
 			</vu:form>

@@ -29,8 +29,8 @@
 				<vu:button-submit action="@{_executeNow}" :round size="lg" color="primary" icon="play_circle_outline" aria-label="Execute now" title="Execute" class="on-left"/>
 			</div>
 			<div layout:fragment="content-header-tabs">
-				<q-btn flat type="a" class="active" th:href="@{/jobDetail/} + ${model.job.name} ">Detail</q-btn>
-				<q-btn flat type="a" th:href="@{/jobExecutions/} + ${model.job.name} ">Executions</q-btn>
+				<vu:button-link class="active" flat label="Detail" url="@{/jobDetail/} + ${model.job.name}"/>
+				<vu:button-link flat label="Executions" url="@{/jobExecutions/} + ${model.job.name}"/>
 			</div>
 		</section>
 		
@@ -90,7 +90,7 @@
 					<input type="hidden" name="vContext[job][initialParams]" v-bind:value="vueData.job.initialParams" ></input>
 					<v-json-editor v-model="vueData.job.initialParams" th::readonly="${model.modeReadOnly}" :cols="2"></v-json-editor>
 				</vu:block>
-				<q-page-sticky position="bottom-right" :offset="[64, 64]">
+				<q-page-sticky position="bottom-right">
 					<vu:button-submit th:if="${model.modeEdit}"   icon="save" label="Save" action="@{_save}" size="lg" color="primary" />
 				</q-page-sticky>
 			</vu:form>

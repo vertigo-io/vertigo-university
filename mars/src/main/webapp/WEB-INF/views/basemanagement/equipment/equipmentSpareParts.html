@@ -57,22 +57,19 @@
 		<section>
 				<div layout:fragment="content-header-left" th:include="basemanagement/equipment/equipmentInformation :: #equipmentIcon"></div>
 				<div layout:fragment="content-header-title" th:include="basemanagement/equipment/equipmentInformation :: #equipmentTitle"></div>
-				<!--  <div layout:fragment="content-header-actions">
-					<vu:button-submit action="@{_addTicket}" :round size="lg" color="primary" icon="add" aria-label="Create ticket" title="Create ticket" class="on-left"/>
-				</div> -->
 				<div layout:fragment="content-header-tabs">
-					<q-btn flat type="a" th:href="@{/basemanagement/equipment/} + ${model.equipment.equipmentId}">Information</q-btn>
-					<q-btn flat type="a" th:href="@{/basemanagement/equipment/maintenance/} + ${model.equipment.equipmentId}">Maintenance</q-btn>
-					<q-btn flat type="a" th:href="@{/basemanagement/equipment/environment/} + ${model.equipment.equipmentId}">Environment</q-btn>
-					<q-btn flat type="a" th:href="@{/basemanagement/equipment/vr/} + ${model.equipment.equipmentId}">VR View</q-btn>
-					<q-btn flat type="a" class="active" th:href="@{/basemanagement/equipment/spare/} + ${model.equipment.equipmentId}">Spare Parts</q-btn>
+					<vu:button-link flat label="Information" url="@{/basemanagement/equipment/} + ${model.equipment.equipmentId}"/>
+					<vu:button-link flat label="Maintenance" url="@{/basemanagement/equipment/maintenance/} + ${model.equipment.equipmentId}"/>
+					<vu:button-link flat label="Environment" url="@{/basemanagement/equipment/environment/} + ${model.equipment.equipmentId}"/>
+					<vu:button-link flat label="VR View" url="@{/basemanagement/equipment/vr/} + ${model.equipment.equipmentId}"/>
+					<vu:button-link class="active" flat label="Spare Parts" url="@{/basemanagement/equipment/spare/} + ${model.equipment.equipmentId}"/>
 				</div>
 		</section>
 		
 		<section layout:fragment="content">
-			<div class="row">
+			<div class="row mgutter-md">
 				<div class="col-9">
-					<vu:block id="featuredPart" title="Featured Part - Standard Nut" style="margin-bottom: 0px">
+					<vu:block id="featuredPart" title="Featured Part - Standard Nut" >
 						<div class="row">
 							<div class="col-9">
 								<model-stl 
@@ -98,7 +95,7 @@
 						</div>
 					</vu:block>
 				</div>
-				<div class="col-3 q-mt-md q-pr-md" >
+				<div class="col-3" >
 					<q-card inline class="bigger q-mb-md bg-white" style="height: 100%">
 				    	<q-card-media class="bg-grey-3">
 				        	<img th:src="@{/static/3d/Ulti2eE.png}">

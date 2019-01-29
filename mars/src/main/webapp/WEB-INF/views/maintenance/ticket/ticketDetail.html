@@ -12,7 +12,7 @@
 		<section>
 			<div layout:fragment="content-header-left" >
 				<div class="detailType" >
-					<q-icon name="fas fa-tools" class="detailTypeIcon q-mx-md" ></q-icon>
+					<q-icon name="fas fa-tools" class="detailTypeIcon q-mx-md gt-md" ></q-icon>
 				</div>
 			</div>
 			<div layout:fragment="content-header-title">
@@ -20,11 +20,11 @@
 				<br/><span class="text-smaller" th:text="${model.ticket.code}"></span>
 			</div>
 			<div layout:fragment="content-header-actions">
-				<vu:button-submit th:if="${model.modeEdit}"   action="@{_cancel}" :round size="lg" color="primary" icon="fas fa-ban" :flat aria-label="Cancel" title="Cancel" class="on-left"  />
+				<vu:button-submit th:if="${model.modeEdit}"   action="@{_cancel}" :round size="lg" color="primary" icon="cancel" :flat aria-label="Cancel" title="Cancel" class="on-left"  />
 				<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>
-				<vu:button-submit th:if="${model.modeReadOnly}"  action="@{_closeTicket}" :round size="lg" color="primary" icon="fas fa-check" aria-label="Close ticket" title="Close ticket" class="on-left"  />
-				<q-btn th:if="${!model.modeCreate}" round size="lg" color="primary" icon="fas fa-plus" aria-label="Add work order" title="Add work order" class="on-left" th:@click="|openModal('workOrderEditModal', '@{/maintenance/workorder/new}', { 'ticketId' : vueData.ticket.ticketId, 'successCallback' : 'onWorkOrderSuccess' })|"></q-btn>
-				<q-btn th:if="${!model.modeCreate}" round size="lg" color="primary" icon="fas fa-cubes" type="a" th:href="@{/basemanagement/equipment/} + ${model.ticket.equipmentId}"  aria-label="Go to equipment" title="Go to equipment" class="on-left" ></q-btn>
+				<vu:button-submit th:if="${model.modeReadOnly}"  action="@{_closeTicket}" :round size="lg" color="primary" icon="check" aria-label="Close ticket" title="Close ticket" class="on-left"  />
+				<q-btn th:if="${!model.modeCreate}" round size="lg" color="primary" icon="add" aria-label="Add work order" title="Add work order" class="on-left" th:@click="|openModal('workOrderEditModal', '@{/maintenance/workorder/new}', { 'ticketId' : vueData.ticket.ticketId, 'successCallback' : 'onWorkOrderSuccess' })|"></q-btn>
+				<vu:button-link th:if="${!model.modeCreate}" icon="fas fa-rocket" url="@{/basemanagement/equipment/} + ${model.ticket.equipmentId}" ariaLabel="Go to equipment" round size="lg" color="primary" class="on-left" />
 			</div>
 		</section>
 		
@@ -74,7 +74,7 @@
 							<q-btn round icon="edit" label="View detail" th:@click="|openModal('workOrderEditModal', '@{/maintenance/workorder/}' + props.row.woId , {'successCallback' : 'onWorkOrderSuccess' })|"></q-btn>
 						</vu:column>
 					</vu:table>
-					<q-page-sticky position="bottom-right" :offset="[64, 64]">
+					<q-page-sticky position="bottom-right" >
 						<vu:button-submit th:if="${model.modeEdit}"   icon="save" label="Save" action="@{_save}" size="lg" color="primary" />
 						<vu:button-submit th:if="${model.modeCreate}" icon="save" label="Create" action="@{_create}" size="lg" color="primary"/>
 					</q-page-sticky>

@@ -13,8 +13,8 @@
 			<big th:text="${model.job.label}"></big> 
 		</div>
 		<div layout:fragment="content-header-tabs">
-			<q-btn flat type="a"  th:href="@{/jobDetail/} + ${model.job.name}">Detail</q-btn>
-			<q-btn flat type="a" class="active" th:href="@{/jobExecutions/} + ${model.job.name}">Executions</q-btn>
+			<vu:button-link flat label="Detail" url="@{/jobDetail/} + ${model.job.name}"/>
+			<vu:button-link class="active" flat label="Executions" url="@{/jobExecutions/} + ${model.job.name}"/>
 		</div>
 	</section>
 	
