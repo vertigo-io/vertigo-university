@@ -242,7 +242,7 @@ nav a.q-item, .nav a.q_item {
 
 
 .q-table td, .q-table th {
-    max-width: 0;
+    max-width: 200px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -274,7 +274,6 @@ nav a.q-item, .nav a.q_item {
 	height: 50px;
 }
 
-
 .header-content > div {
 	height: 100%;
 }
@@ -304,6 +303,11 @@ nav a.q-item, .nav a.q_item {
 
 
 .showButtonOnHover:hover > .q-btn {
+  opacity: 1;
+  transition: .5s;
+}
+
+tr:hover .showButtonOnHover > .q-btn {
   opacity: 1;
   transition: .5s;
 }
@@ -368,8 +372,9 @@ nav a.q-item, .nav a.q_item {
     height: 100%;
 }
 
-th.dom_id {
-	width:150px;
+.q-table .col_action {
+	text-align:right;
+	white-space: nowrap;
 }
 /**
 tr th.dom_id:nth-child(1){
