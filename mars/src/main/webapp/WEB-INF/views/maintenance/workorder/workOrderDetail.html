@@ -5,18 +5,13 @@
   layout:decorate="~{templates/mmcModalLayout}"
 >
 	<head>
-		<title>Work Order Detail</title>
-		<th:block th:if="${model.closeSuccess}">
-		    <script>
-		       	window.parent.[[${model.successCallback}]]();
-			</script>
-		</th:block>		
+		<title>Work Order Detail</title>			
 	</head>
 	
-	<body class="bg-white">
-		
+	<body>		
 		<section layout:fragment="page-container" >
 			<vu:form th:if="${!model.closeSuccess}">
+			<vu:grid>
 				<vu:text-field object="workOrder" field="name" />
 				<vu:text-field object="workOrder" field="code" />
 				<vu:date object="workOrder" field="dueDate" :popover="true" />
@@ -24,6 +19,7 @@
 				<vu:select th:if="${model.modeEdit}" object="workOrder" field="workOrderStatusId" list="workOrderStatus"/>
 				<vu:button-submit th:if="${model.modeEdit}"  label="Save" action="@{_save}" color="primary" class="float-right q-mt-md"/>
 				<vu:button-submit th:if="${model.modeCreate}"  label="Create" action="@{_create}" color="primary" class="float-right q-mt-md" />
+			</vu:grid>
 			</vu:form>
 		</section>
 	</body>

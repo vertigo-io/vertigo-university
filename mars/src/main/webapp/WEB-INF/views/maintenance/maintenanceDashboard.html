@@ -32,16 +32,14 @@
 					</div>
 				<div class="col-12">
 					<div class="q-title q-my-md">Lastest created tickets</div>
-					<vu:table list="lastTickets" componentId="lastTickets" rowsPerPage="5">
+					<vu:table list="lastTickets" componentId="lastTickets" rowsPerPage="5"
+					tr_@click.native="|goTo('@{/maintenance/ticket/}'+props.row.ticketId)|" tr_class="nav">
+						<vu:include-data object="lastTickets" field="ticketId" />
 						<vu:column field="code" />
 						<vu:column field="title" />
 						<vu:column field="dateCreated" />
 						<vu:column name="status" label="Status" >
 							<vu:field-read field="ticketStatusId" list="ticketStatus" />
-						</vu:column>
-						<vu:column name="actions" label="Actions" >
-							<vu:include-data object="lastTickets" field="ticketId" />
-							<q-btn round icon="arrow_forward" type="a" th::href="|'@{/maintenance/ticket/}'+props.row.ticketId|"></q-btn>
 						</vu:column>
 					</vu:table>
 					</div>

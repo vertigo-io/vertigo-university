@@ -1,133 +1,108 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" 
-  xmlns:vu="http://www.morphbit.com/thymeleaf/component"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{templates/mmcDetailNavLayout}"
->
-	<head>
-		<title>Base Information</title>
-	</head>
-	
-	<body>
-	
-		<section layout:fragment="content-nav">
-			        <q-item tag="a" href="#health">Health Condition</q-item>
-			        <q-item tag="a" href="#general">General Information</q-item>
-			        <q-item tag="a" href="#views">Views</q-item>
-			        <q-item tag="a" href="#financial">Financial value</q-item>
-		</section>
-		
-		<section>
-				<div layout:fragment="content-header-left" id="baseImg" >
-					<img th:src="@{|/basemanagement/base/${model.base.baseId}/mainPicture|}" class="detailImg gt-md" />
-				</div>
-				<div layout:fragment="content-header-title" id="baseTitle">
-					<span class="text-bigger" th:text="${model.base.name}"></span>
-					<br/><span class="text-smaller ne-mini" th:text="${model.base.code}"></span> 
-					<br class="ne-mini"/><span class="text-smaller" th:text="${model.baseTypes.getById('baseTypeId', model.base.baseTypeId).label}"></span>				
-				</div>
-				<div layout:fragment="content-header-actions">
-					<vu:button-link th:if="${model.modeEdit}" class="text-tertiary-inverted on-left"
-						flat round size="lg" icon="fas fa-ban" url="@{/basemanagement/base/information/} + ${model.base.baseId}" ariaLabel="Cancel" />
-					<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" ariaLabel="Edit" class="on-left"/>
-					<th:block id="baseActions">
-						<vu:button-link url="@{/basemanagement/equipments/}" ariaLabel="See all equipments" icon="fas fa-rocket" color="primary" round size="lg" class="on-left" />
-						<vu:button-link url="@{/basemanagement/equipment/new}" ariaLabel="Add equipment" icon="fas fa-rocket" color="primary" round size="lg" class="on-left" >+</vu:button-link>
-						<q-btn round size="lg" color="primary" icon="more_horiz"  direction="down" aria-label="More actions" title="More actions" class="on-left"> 
-						  <q-popover><q-list link>
-						  	<q-item><q-btn flat>Add view</q-btn></q-item>
-						    <q-item><q-btn flat>Delete</q-btn></q-item>
-						    <q-item><q-btn flat>Archive</q-btn></q-item>
-						  </q-list>
-						  </q-popover>
-						</q-btn>
-					</th:block>
-				</div>
-				<div layout:fragment="content-header-tabs">
-					<vu:button-link class="active" flat label="Base Information" url="@{/basemanagement/base/information/} + ${model.base.baseId}"/>
-					<vu:button-link flat label="Equipment" url="@{/basemanagement/base/equipment/} + ${model.base.baseId}"/>
-					<vu:button-link flat label="VR View" url="@{/basemanagement/base/vr/} + ${model.base.baseId}"/>					
-				</div>
-		</section>
-		
-		<section layout:fragment="content" >
-			<vu:form>
-				<div id="health" class="row mgutter-md" th:if="${!model.modeCreate}" >
-					<div class="col-md-3 col-xs-12">
-						<q-card class="bg-white text-center" >
-							<q-card-title class="indicator-title text-faded">Health</q-card-title>
-							<q-card-main>
-								<q-knob
-								  th::value="${model.base.healthLevel}"
-								  :min="0"
-								  :max="100"
-								  color="positive"
-								  :readonly="true" style="font-size: 2rem"></q-knob>
-							</q-card-main>
-						</q-card>
-					</div>
-					<div class="col-md-9 col-xs-12 ">
-						<q-card class="bg-white row justify-around items-center" style="height:100%;">
-							<div class="text-center"> <span class="indicator text-secondary" th:text="${model.baseOverview.equipmentCount}"/><br/><span class="indicator-title text-faded">Equipment(s)</span></div>
-							<div class="text-center"> <span class="indicator text-secondary" th:text="${model.baseOverview.openedTickets}"/><br/><span class="indicator-title text-faded">Open Tickets(s)</span></div>
-							<div class="text-center"> <span class="indicator text-secondary" th:text="${model.baseOverview.workOrdersInprogress}"/><br/><span class="indicator-title text-faded">Work Order(s) in progress</span></div>
-						</q-card>
-					</div>
-				</div>
-								
-				<vu:block id="general" title="General Information">
-					<vu:grid cols="2">
-						<vu:text-field object="base" field="name"/>
-						<vu:text-field object="base" field="code"/>
-						<vu:text-field-read object="baseManager" field="lastName" label="Base Manager" />
-						<vu:autocomplete object="base" field="geosectorId" list="geosectors" />
-						<vu:text-field object="base" field="geoLocation" />
-						<vu:radio object="base" field="baseTypeId" list="baseTypes" />
-						<vu:date object="base" field="creationDate" />
-						<vu:chips-autocomplete object="base" field="tags" list="tags" staticData="true"/>
-						<vu:grid-cell>
-							<vu:text-area object="base" field="description"/>
-						</vu:grid-cell>
-					</vu:grid>
-				</vu:block>
-								
-				<vu:block id="views" title="Views">
-					<vu:include-data-protected object="basePictures" field="picturefileId"/>
-					<q-carousel th:if="${not #lists.isEmpty(model.basePictures)}" arrows quick-nav style="height:300px;" color="grey" class="image-gallery">
-					 	<q-carousel-slide v-for="item in vueData.basePictures" th:class="|${cardClass?:''}  showButtonOnHover|">
-					 		<img th::src="|'@{/basemanagement/base/picture/}'+item.picturefileId|" 
-  							@click="componentStates.basePictureZoomDialog.opened = true;componentStates.basePictureZoomDialog.imgSrc = item.picturefileId" style="max-width: 100%;" />
-  							<q-btn th:if="${!model.modeEdit}" 
-					 			color="primary" round icon="fullscreen" class="absolute-center bg-grey" aria-label="Zoom picture" title="Zoom picture" ></q-btn>
-  							
-  							<q-btn th:if="${model.modeEdit}" th:@click="|httpPostAjax('@{_remove}', {'baseId':${model.base.baseId}, 'basePictureId':item.picturefileId})|" 
-					 			color="primary" round icon="delete" class="absolute-center bg-grey" aria-label="Remove picture" title="Remove picture" ></q-btn>
-					 		
-					 	</q-carousel-slide>	
-					</q-carousel>
-					<q-dialog v-model="componentStates.basePictureZoomDialog.opened" class="image-gallery-modal"
-					th:attr="objectKey=${model.vContext['componentStates'].addComponentState('basePictureZoomDialog').addPrimitive('opened', false)}, objectKey=${model.vContext['componentStates']['basePictureZoomDialog'].addPrimitive('imgSrc', '')}">
-						<div slot="body">
-						<img v-if="componentStates.basePictureZoomDialog.imgSrc" 
-						th::src="|'@{/basemanagement/base/picture/}'+componentStates.basePictureZoomDialog.imgSrc|" 
-						style="width: 50vw; object-fit: contain;" />
-						</div>
-					</q-dialog>
-					
-					<div th:if="${#lists.isEmpty(model.basePictures)}">No pictures for this base</div>
-					<vu:fileupload th:if="${model.modeEdit}" float-label="Add new pictures here" th:url="'@{/commons/upload}'" key="baseTmpPictureUris" multiple />
-				</vu:block>
-				
-				<vu:block id="financial" title="Financial value">
-					<vu:grid cols="2">
-						<vu:text-field object="base" field="assetsValue" suffix=" €"/>
-						<vu:text-field object="base" field="rentingFee" suffix=" €"/>
-					</vu:grid>
-				</vu:block>
-				<q-page-sticky position="bottom-right">
-					<vu:button-submit th:if="${model.modeEdit}"   icon="save" label="Save" action="@{_save}" size="lg" color="primary" />
-				</q-page-sticky>	
-			</vu:form>
-		</section>
-	</body>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:vu="http://www.morphbit.com/thymeleaf/component" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{templates/mmcDetailNavLayout}">
+<head>
+<title>Base Information</title>
+</head>
+<body>
+	<section layout:fragment="content-nav">
+		<q-item tag="a" href="#health">Health Condition</q-item>
+		<q-item tag="a" href="#general">General Information</q-item>
+		<q-item tag="a" href="#views">Views</q-item>
+		<q-item tag="a" href="#financial">Financial value</q-item>
+	</section>
+	<section>
+		<div layout:fragment="content-header-left" id="baseImg">
+			<img th:src="@{|/basemanagement/base/${model.base.baseId}/mainPicture|}" class="detailImg gt-md" />
+		</div>
+		<div layout:fragment="content-header-title" id="baseTitle">
+			<span class="text-bigger" th:text="${model.base.name}"></span> <br />
+			<span class="text-smaller ne-mini" th:text="${model.base.code}"></span> <br class="ne-mini" />
+			<span class="text-smaller" th:text="${model.baseTypes.getById('baseTypeId', model.base.baseTypeId).label}"></span>
+		</div>
+		<div layout:fragment="content-header-actions">
+			<vu:button-link th:if="${model.modeEdit}" class="text-tertiary-inverted on-left" flat round size="lg" icon="fas fa-ban"
+				url="@{/basemanagement/base/information/} + ${model.base.baseId}" ariaLabel="Cancel" />
+			<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" ariaLabel="Edit" class="on-left" />
+			<th:block id="baseActions">
+				<vu:button-link url="@{/basemanagement/equipments/}" ariaLabel="See all equipments" icon="fas fa-rocket" color="primary" round size="lg" class="on-left" />
+				<vu:button-link url="@{/basemanagement/equipment/new}" ariaLabel="Add equipment" icon="fas fa-rocket" color="primary" round size="lg" class="on-left">+</vu:button-link>
+				<q-btn round size="lg" color="primary" icon="more_horiz" direction="down" aria-label="More actions" title="More actions" class="on-left"> <q-popover>
+				<q-list link> <q-item>
+				<q-btn flat>Add view</q-btn></q-item> <q-item>
+				<q-btn flat>Delete</q-btn></q-item> <q-item>
+				<q-btn flat>Archive</q-btn></q-item> </q-list> </q-popover> </q-btn>
+			</th:block>
+		</div>
+		<div layout:fragment="content-header-tabs">
+			<vu:button-link class="active" flat label="Base Information" url="@{/basemanagement/base/information/} + ${model.base.baseId}" />
+			<vu:button-link flat label="Equipment" url="@{/basemanagement/base/equipment/} + ${model.base.baseId}" />
+			<vu:button-link flat label="VR View" url="@{/basemanagement/base/vr/} + ${model.base.baseId}" />
+		</div>
+	</section>
+	<section layout:fragment="content">
+		<div id="health" class="col-md-3 col-xs-12" th:if="${!model.modeCreate}">
+			<q-card class="bg-white text-center"> <q-card-title class="indicator-title text-faded">Health</q-card-title> <q-card-main> <q-knob
+				th::value="${model.base.healthLevel}" :min="0" :max="100" color="positive" :readonly="true" style="font-size: 2rem"></q-knob> </q-card-main> </q-card>
+		</div>
+		<div class="col-md-9 col-xs-12" th:if="${!model.modeCreate}">
+			<q-card class="bg-white row justify-around items-center" style="height:100%;">
+			<div class="text-center">
+				<span class="indicator text-secondary" th:text="${model.baseOverview.equipmentCount}" /><br />
+				<span class="indicator-title text-faded">Equipment(s)</span>
+			</div>
+			<div class="text-center">
+				<span class="indicator text-secondary" th:text="${model.baseOverview.openedTickets}" /><br />
+				<span class="indicator-title text-faded">Open Tickets(s)</span>
+			</div>
+			<div class="text-center">
+				<span class="indicator text-secondary" th:text="${model.baseOverview.workOrdersInprogress}" /><br />
+				<span class="indicator-title text-faded">Work Order(s) in progress</span>
+			</div>
+			</q-card>
+		</div>
+		<vu:block id="general" title="General Information">
+			<vu:grid cols="2">
+				<vu:text-field object="base" field="name" />
+				<vu:text-field object="base" field="code" />
+				<vu:text-field-read object="baseManager" field="lastName" label="Base Manager" />
+				<vu:autocomplete object="base" field="geosectorId" list="geosectors" />
+				<vu:text-field object="base" field="geoLocation" />
+				<vu:radio object="base" field="baseTypeId" list="baseTypes" />
+				<vu:date object="base" field="creationDate" />
+				<vu:chips-autocomplete object="base" field="tags" list="tags" staticData="true" />
+				<vu:grid-cell>
+					<vu:text-area object="base" field="description" />
+				</vu:grid-cell>
+			</vu:grid>
+		</vu:block>
+		<vu:block id="views" title="Views">
+			<vu:include-data-protected object="basePictures" field="picturefileId" />
+			<q-carousel th:if="${not #lists.isEmpty(model.basePictures)}" arrows quick-nav style="height:300px;" color="grey" class="image-gallery"> <q-carousel-slide
+				v-for="item in vueData.basePictures" th:class="|${cardClass?:''}  showButtonOnHover|"> <img
+				th::src="|'@{/basemanagement/base/picture/}'+item.picturefileId|"
+				@click="componentStates.basePictureZoomDialog.opened = true;componentStates.basePictureZoomDialog.imgSrc = item.picturefileId" style="max-width: 100%;" />
+			<q-btn th:if="${!model.modeEdit}" color="primary" round icon="fullscreen" class="absolute-center bg-grey" aria-label="Zoom picture" title="Zoom picture"></q-btn>
+			<q-btn th:if="${model.modeEdit}" th:@click="|httpPostAjax('@{_remove}', {'baseId':${model.base.baseId}, 'basePictureId':item.picturefileId})|"
+				color="primary" round icon="delete" class="absolute-center bg-grey" aria-label="Remove picture" title="Remove picture"></q-btn> </q-carousel-slide> </q-carousel>
+			<q-dialog v-model="componentStates.basePictureZoomDialog.opened" class="image-gallery-modal"
+				th:attr="objectKey=${model.vContext['componentStates'].addComponentState('basePictureZoomDialog').addPrimitive('opened', false)}, objectKey=${model.vContext['componentStates']['basePictureZoomDialog'].addPrimitive('imgSrc', '')}">
+			<div slot="body">
+				<img v-if="componentStates.basePictureZoomDialog.imgSrc" th::src="|'@{/basemanagement/base/picture/}'+componentStates.basePictureZoomDialog.imgSrc|"
+					style="width: 50vw; object-fit: contain;" />
+			</div>
+			</q-dialog>
+			<div th:if="${#lists.isEmpty(model.basePictures)}">No pictures for this base</div>
+			<vu:fileupload th:if="${model.modeEdit}" float-label="Add new pictures here" th:url="'@{/commons/upload}'" key="baseTmpPictureUris" multiple />
+		</vu:block>
+		<vu:block id="financial" title="Financial value">
+			<vu:grid cols="2">
+				<vu:text-field object="base" field="assetsValue" suffix=" €" />
+				<vu:text-field object="base" field="rentingFee" suffix=" €" />
+			</vu:grid>
+		</vu:block>
+		<q-page-sticky position="bottom-right"> <vu:button-submit th:if="${model.modeEdit}" icon="save" label="Save" action="@{_save}" size="lg"
+			color="primary" /> </q-page-sticky>
+	</section>
+</body>
 </html>

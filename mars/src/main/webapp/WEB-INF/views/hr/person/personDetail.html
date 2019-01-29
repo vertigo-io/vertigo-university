@@ -40,7 +40,6 @@
 		</section>
 		
 		<section layout:fragment="content" >
-			<vu:form>
 				<vu:block id="information" title="Information">
 					<vu:grid cols="2">
 						<vu:text-field object="person" field="firstName"/>
@@ -80,7 +79,6 @@
 					<vu:button-submit th:if="${model.modeCreate}" icon="save" label="Create" action="@{_create}" size="lg" color="primary"/>
 				</q-page-sticky>				
 				<vu:modal componentId="missionEditModal" title="Mission" iframe_width="800" iframe_height="400"  />
-			</vu:form>
 		</section>
 		<section layout:fragment="javscript-footer" >
 			<script type="text/javascript">
