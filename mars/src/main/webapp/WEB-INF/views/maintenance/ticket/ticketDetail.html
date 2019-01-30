@@ -15,14 +15,14 @@
 					<q-icon name="fas fa-tools" class="detailTypeIcon q-mx-md gt-md" ></q-icon>
 				</div>
 			</div>
-			<div layout:fragment="content-header-title">
-				<span class="text-bigger" th:text="${model.modeCreate ? 'New Ticket' : model.ticket.title}"></span> 
+			<div layout:fragment="content-header-title">				
+				<span class="text-bigger" th:text="${model.modeCreate ? 'New Ticket' : model.ticket.title}"> - <vu:field-read object="ticket" field="ticketStatusId" /></span> 
 				<br/><span class="text-smaller" th:text="${model.ticket.code}"></span>
 			</div>
 			<div layout:fragment="content-header-actions">
 				<vu:button-submit th:if="${model.modeEdit}"   action="@{_cancel}" :round size="lg" color="primary" icon="cancel" :flat aria-label="Cancel" title="Cancel" class="on-left"  />
 				<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>
-				<vu:button-submit th:if="${model.modeReadOnly}"  action="@{_closeTicket}" :round size="lg" color="primary" icon="check" aria-label="Close ticket" title="Close ticket" class="on-left"  />
+				<vu:button-submit th:if="${model.modeReadOnly && model.ticket.ticketStatusId != 'CLOSED'}" action="@{_closeTicket}" :round size="lg" color="primary" icon="check" aria-label="Close ticket" title="Close ticket" class="on-left"  />
 				<q-btn th:if="${!model.modeCreate}" round size="lg" color="primary" icon="add" aria-label="Add work order" title="Add work order" class="on-left" th:@click="|openModal('workOrderEditModal', '@{/maintenance/workorder/new}', { 'ticketId' : vueData.ticket.ticketId, 'successCallback' : 'onWorkOrderSuccess' })|"></q-btn>
 				<vu:button-link th:if="${!model.modeCreate}" icon="fas fa-rocket" url="@{/basemanagement/equipment/} + ${model.ticket.equipmentId}" ariaLabel="Go to equipment" round size="lg" color="primary" class="on-left" />
 			</div>
@@ -60,16 +60,14 @@
 					</vu:block>
 					<vu:table th:if="${model.modeReadOnly}" list="workOrders" componentId="workOrders" rowsPerPage="10">
 						<vu:slot name="top_left_slot">Work Orders</vu:slot>
-						<vu:slot name="top_right_slot"><q-btn round class="fab-block" size="md" color="primary" icon="add" aria-label="Add work order" title="Add work order" th:@click="|openModal('workOrderEditModal', '@{/maintenance/workorder/new}', { 'ticketId' : vueData.ticket.ticketId, 'successCallback' : 'onWorkOrderSuccess' })|"></q-btn></vu:slot>
+						<vu:slot name="top_right_slot"><q-btn class="fab-block" round color="primary" icon="add" aria-label="Add work order" title="Add work order" th:@click="|openModal('workOrderEditModal', '@{/maintenance/workorder/new}', { 'ticketId' : vueData.ticket.ticketId, 'successCallback' : 'onWorkOrderSuccess' })|"></q-btn></vu:slot>
+						<vu:slot name="actions_slot"><q-btn round icon="edit" label="View detail" th:@click="|openModal('workOrderEditModal', '@{/maintenance/workorder/}' + props.row.woId , {'successCallback' : 'onWorkOrderSuccess' })|"></q-btn></vu:slot>
 						<vu:include-data object="ticket" field="ticketId" />
 						<vu:include-data object="workOrders" field="woId" />
 						<vu:column field="name" />
 						<vu:column field="dateCreated" />
 						<vu:column field="dueDate" />
 						<vu:column field="dateClosed" />
-						<vu:column name="action" label="Actions">
-							<q-btn round icon="edit" label="View detail" th:@click="|openModal('workOrderEditModal', '@{/maintenance/workorder/}' + props.row.woId , {'successCallback' : 'onWorkOrderSuccess' })|"></q-btn>
-						</vu:column>
 					</vu:table>
 					<q-page-sticky position="bottom-right" >
 						<vu:button-submit th:if="${model.modeEdit}"   icon="save" label="Save" action="@{_save}" size="lg" color="primary" />

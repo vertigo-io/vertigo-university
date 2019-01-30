@@ -61,17 +61,15 @@
 					</div>				
 				</vu:block>
 				
-				<vu:table th:if="${!model.modeCreate}" id="missions" list="missions" componentId="missions" rowsPerPage="10">
+				<vu:table th:if="${!model.modeCreate}" id="missions" list="missions" componentId="missions" rowsPerPage="10" autoColClass >
 						<vu:slot name="top_left_slot">Missions</vu:slot>
 						<vu:slot name="top_right_slot"><q-btn class="fab-block" round color="primary" icon="add" aria-label="Add mission" title="Add mission" th:@click="|openModal('missionEditModal', '@{/hr/mission/new}', { 'personId' : vueData.person.personId, 'successCallback' : 'onMissionSuccess' })|"></q-btn></vu:slot>
+						<vu:slot name="actions_slot"><q-btn round color="primary" icon="edit" label="View detail" th:@click="|openModal('missionEditModal', '@{/hr/mission/}' + props.row.missionId , {'successCallback' : 'onMissionSuccess' })|"></q-btn></vu:slot>
 						<vu:include-data object="person" field="personId" />
 						<vu:include-data object="missions" field="missionId" />
 						<vu:column field="role" />
 						<vu:column field="baseName" />
 						<vu:column field="businessName" />
-						<vu:column name="action" label="" sortable="false" class="col_action showButtonOnHover">
-							<q-btn round color="primary" icon="edit" label="View detail" th:@click="|openModal('missionEditModal', '@{/hr/mission/}' + props.row.missionId , {'successCallback' : 'onMissionSuccess' })|"></q-btn>
-						</vu:column>
 				</vu:table>
 					
 				<q-page-sticky position="bottom-right">

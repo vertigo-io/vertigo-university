@@ -11,7 +11,7 @@
 	<body>		
 		<section layout:fragment="page-container" >
 			<vu:form th:if="${!model.closeSuccess}">
-			<vu:grid>
+			<vu:grid cols="1">
 				<vu:text-field object="workOrder" field="name" />
 				<vu:text-field object="workOrder" field="code" />
 				<vu:date object="workOrder" field="dueDate" :popover="true" />
