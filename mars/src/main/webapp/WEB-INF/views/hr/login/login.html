@@ -17,21 +17,21 @@
 </head>
 
 <body class="mat desktop no-touch platform-mat login" >
-	<vu:page >
-	<div id="page" class="row justify-center items-center">
-      	<div><h2><img th:src="@{/static/img/titleMarsBaseNetwork.png}"></h2></div>
-      	<vu:form >
+	<vu:page>
+	<div id="page" class="column justify-center items-center" v-cloak>
+      	<div class="title"><h2><img th:src="@{/static/img/titleMarsBaseNetwork.png}"></h2></div>
+      	<vu:form>
       			<vu:include-data-primitive key="login" />
 	      		<vu:include-data-primitive key="password" />
 	      		<div class="gutter-y-md">
-		      		<q-field label="Login"	orientation="vertical">
+		      		<q-field label="Login" orientation="vertical">
 						<q-input v-model="vueData.login" name="login"></q-input>			
 					</q-field>
-					<q-field label="Password"	orientation="vertical" :error="uiMessageStack.globalErrors.length > 0" :error-label="uiMessageStack.globalErrors.toString()">
+					<q-field label="Password" orientation="vertical" :error="uiMessageStack.globalErrors.length > 0" :error-label="uiMessageStack.globalErrors.toString()">
 						<q-input type="password" v-model="vueData.password" name="password"></q-input>			
 					</q-field>
 					<div class="float-right">
-						<vu:button-submit label="Login" action="@{_login}" class="bg-primary text-white" :flat />
+						<vu:button-submit label="Login" action="@{_login}" class="bg-primary text-white" flat />
 					</div>
 				</div>
 		</vu:form>

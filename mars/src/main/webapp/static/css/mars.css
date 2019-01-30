@@ -80,22 +80,30 @@ body {
 }
 
 body.login {
-	background: url(../img/bcf60b99d4_121619_mars-bfrs.jpg) !important;	
+	background: url(../img/bcf60b99d4_121619_mars-bfrs.jpg) !important;
 }
 
+.login #page {
+	height:100vh;
+}
+
+.login .title {
+	position: absolute;
+    top: 0;
+}
+
+.login .title img {
+	width:90vw;
+	max-width:700px;
+}
 .login form {
 	background: rgba(255, 255, 255, 0.8);
 	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.2), 0 1px 1px rgba(0,0,0,0.14), 0 2px 1px -1px rgba(0,0,0,0.12);
        		box-shadow: 0 1px 3px rgba(0,0,0,0.2), 0 1px 1px rgba(0,0,0,0.14), 0 2px 1px -1px rgba(0,0,0,0.12);
-	width: 400px;
-    height: 250px;
-    position: absolute;
-    top:0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    padding : 20px;
+	padding : 20px;
+	display:inline-block;
+	margin: auto;
+	min-width: 400px;
 }
 
 .content-body {
@@ -302,21 +310,6 @@ nav a.q-item, .nav a.q_item {
 }
 
 
-.showButtonOnHover:hover > .q-btn {
-  opacity: 1;
-  transition: .5s;
-}
-
-tr:hover .showButtonOnHover > .q-btn {
-  opacity: 1;
-  transition: .5s;
-}
-
-.showButtonOnHover > .q-btn {
-  opacity: 0;
-  transition: .5s;
-}
-
 .image-gallery-modal .modal-body {
 	max-height: 80%
 }
@@ -372,10 +365,6 @@ tr:hover .showButtonOnHover > .q-btn {
     height: 100%;
 }
 
-.q-table .col_action {
-	text-align:right;
-	white-space: nowrap;
-}
 /**
 tr th.dom_id:nth-child(1){
  display:none;
