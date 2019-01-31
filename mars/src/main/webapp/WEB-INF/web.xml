@@ -18,7 +18,7 @@
 	</context-param>
 	<context-param>
 		<param-name>boot.activeFlags</param-name>
-		<param-value>klee</param-value>
+		<param-value>klee;initdb</param-value>
 	</context-param>
 
 	<filter>

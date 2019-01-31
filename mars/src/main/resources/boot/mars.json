@@ -9,11 +9,11 @@
 			{"io.vertigo.core.plugins.resource.url.URLResourceResolverPlugin" :{}},
 			{"io.vertigo.core.plugins.param.properties.PropertiesParamPlugin" :{
 				"__flags__" : ["klee"],
-				"url" : "W:\\Digital Factory\\02 - Solutions\\Vertigo\\Blockchain\\accounts\\marsWalletAccount.properties"
+				"url" : "${boot.walletParamsUrl}"
 			}},
 			{"io.vertigo.core.plugins.param.properties.PropertiesParamPlugin" :{
 				"__flags__" : ["klee"],
-				"url" : "w:\\Digital Factory\\02 - Solutions\\Vertigo\\apiKeys\\marsApiKeys.properties"
+				"url" : "${boot.apiKeysUrl}"
 			}},
 			{"io.vertigo.core.plugins.param.properties.PropertiesParamPlugin" :{
 				"__flags__" : ["home"],
@@ -33,14 +33,14 @@
 				"memoryCache" : {},
 				"redis" : {
 					"__flags__" : ["klee"],
-					"host" :"mars.dev.klee.lan.net",
+					"host" :"${redisHost}",
 					"port" :"6379" ,
 					"database" :"0"
 				},
 				"socketLoggerAnalyticsConnector" : {
 					"__flags__" : ["klee"],
 					"appName" : "mars-analytics",
-					"hostName" : "mars.dev.klee.lan.net"
+					"hostName" : "${analyticsHost}"
 				}
 			}
 		},
@@ -50,14 +50,14 @@
 				"timeseries": {},
 				"influxdb" : {
 					"__flags__" : ["klee"],
-					"host" : "http://mars.dev.klee.lan.net:8086",
+					"host" : "${influxdbHost}",
 					"user" : "user",
 					"password" : "password",
 					"dbNames" :"mars-test;*"
 				},
 				"fakeTimeseries" : {"__flags__" : ["home"]},
 				"datasource" : {
-					"classname": "io.vertigo.database.impl.sql.vendor.h2.H2DataBase", 
+					"classname": "io.vertigo.database.impl.sql.vendor.postgresql.PostgreSqlDataBase", 
 					"source": "java:/comp/env/jdbc/DataSource"
 				}
 			}
@@ -70,8 +70,17 @@
 				"sqlStore" : [{}, {"dataSpace" : "orchestra"}],
 				"luceneIndex" : {},
 				"esEmbedded" :{
+					"__flags__" : ["home"],
 					"home" : "search/",
 					"envIndex" : "MARS",
+					"rowsPerQuery" :"50",
+					"config.file" : "search/elasticsearch.yml"
+				},
+				"esTransport" :{
+					"__flags__" : ["klee"],
+					"servers.names" : "${esHost}",
+					"envIndex" : "MARS",
+					"cluster.name" : "mars",
 					"rowsPerQuery" :"50",
 					"config.file" : "search/elasticsearch.yml"
 				},
@@ -159,7 +168,7 @@
 			"features": {
 				"ethereum": {
 					"__flags__" : ["klee"],
-					"urlRpcEthNode" : "http://mars.dev.klee.lan.net:8545",
+					"urlRpcEthNode" : "${ledgerHost}",
 					"myAccountName" : "${myAccountName}",
 					"myPublicAddr" : "${myPublicAddr}",
 					"defaultDestAccountName" : "${myAccountName}",
@@ -177,7 +186,7 @@
 			"features": {
 				"mqtt" :{
 					"__flags__" : ["klee"],
-					"host" : "tcp://mars.dev.klee.lan.net:1883"
+					"host" : "${mosquittoHost}"
 				}
 			}
 		},

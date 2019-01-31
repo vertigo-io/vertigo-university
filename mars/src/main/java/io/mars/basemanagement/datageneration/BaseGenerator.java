@@ -140,13 +140,13 @@ public class BaseGenerator implements Component {
 
 		final Base persei = bases.get(8);
 		persei.setName("Persei (Moscow)");
-		persei.setGeoLocation("{ \"lon\": -4.3833 , \"lat\" : 55.5833 }");
+		persei.setGeoLocation("{ \"lon\": 37.619183 , \"lat\" : 55.757425}");
 		persei.setCode("Moscow-Persei");
 		persei.setDescription("The Persei base is managed by Moscow."
 				+ " The first settlers, led by Arthur Dallas, planted the flag in a crater, near a frozen lake.\n"
 				+ "The crater is one kilometer deep, which offers a mountain-like landscape.\n"
 				+ "The place is rich in minerals, especially in antimony.");
-		persei.setTags(";#roscosmos;#crater;#mine");
+		persei.setTags("#roscosmos;#crater;#mine");
 
 		final Base pegasus = bases.get(9);
 		pegasus.setName("Pegasus (Munich)");
