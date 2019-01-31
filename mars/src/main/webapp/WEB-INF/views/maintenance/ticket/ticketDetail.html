@@ -16,8 +16,8 @@
 				</div>
 			</div>
 			<div layout:fragment="content-header-title">				
-				<span class="text-bigger" th:text="${model.modeCreate ? 'New Ticket' : model.ticket.title}"> - <vu:field-read object="ticket" field="ticketStatusId" /></span> 
-				<br/><span class="text-smaller" th:text="${model.ticket.code}"></span>
+				<span class="text-bigger" th:text="${model.modeCreate ? 'New Ticket' : model.ticket.title}"></span><span class="text-bigger"> - <vu:field-read object="ticket" field="ticketStatusId" /></span> 
+				<br class="ne-mini"/><span class="text-smaller ne-mini" th:text="${model.ticket.code}"></span>
 			</div>
 			<div layout:fragment="content-header-actions">
 				<vu:button-submit th:if="${model.modeEdit}"   action="@{_cancel}" :round size="lg" color="primary" icon="cancel" :flat aria-label="Cancel" title="Cancel" class="on-left"  />
