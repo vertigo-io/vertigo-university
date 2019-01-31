@@ -1,11 +1,13 @@
 <?xml version="1.0"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.vertigo</groupId>
-    <artifactId>mars</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+	<groupId>io.vertigo</groupId>
+	<artifactId>mars</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
 	<name>mars</name>
 
 	<properties>
@@ -17,64 +19,64 @@
 		<vertigo.version>2.0.0-SNAPSHOT</vertigo.version>
 	</properties>
 
-    <dependencies>
-    	<dependency>
+	<dependencies>
+		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
 
-        <dependency>
-            <groupId>io.vertigo</groupId>
-            <artifactId>vertigo-ui</artifactId>
-            <version>${vertigo.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.vertigo</groupId>
-            <artifactId>vertigo-orchestra</artifactId>
-            <version>${vertigo.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.vertigo</groupId>
-            <artifactId>vertigo-adapters</artifactId>
-            <version>${vertigo.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.vertigo</groupId>
-            <artifactId>vertigo-dashboard</artifactId>
-            <version>${vertigo.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>io.vertigo</groupId>
-            <artifactId>vertigo-studio</artifactId>
-            <version>${vertigo.version}</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.vertigo</groupId>
-            <artifactId>vertigo-ledger</artifactId>
-            <version>${vertigo.version}</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>io.vertigo</groupId>
-            <artifactId>vertigo-social</artifactId>
-            <version>${vertigo.version}</version>
-        </dependency>
-        
-        <dependency>
-    		<groupId>com.opencsv</groupId>
-    		<artifactId>opencsv</artifactId>
-    		<version>4.0</version>
-		</dependency>
-		
 		<dependency>
-		    <groupId>org.postgresql</groupId>
-		    <artifactId>postgresql</artifactId>
-		    <version>42.2.5</version>
+			<groupId>io.vertigo</groupId>
+			<artifactId>vertigo-ui</artifactId>
+			<version>${vertigo.version}</version>
 		</dependency>
-		
+		<dependency>
+			<groupId>io.vertigo</groupId>
+			<artifactId>vertigo-orchestra</artifactId>
+			<version>${vertigo.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.vertigo</groupId>
+			<artifactId>vertigo-adapters</artifactId>
+			<version>${vertigo.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.vertigo</groupId>
+			<artifactId>vertigo-dashboard</artifactId>
+			<version>${vertigo.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.vertigo</groupId>
+			<artifactId>vertigo-studio</artifactId>
+			<version>${vertigo.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.vertigo</groupId>
+			<artifactId>vertigo-ledger</artifactId>
+			<version>${vertigo.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.vertigo</groupId>
+			<artifactId>vertigo-social</artifactId>
+			<version>${vertigo.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>4.0</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.2.5</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.influxdb</groupId>
 			<artifactId>influxdb-java</artifactId>
@@ -85,8 +87,8 @@
 			<artifactId>org.eclipse.paho.client.mqttv3</artifactId>
 			<version>1.2.0</version>
 		</dependency>
-        
-		<!-- test-->
+
+		<!-- test -->
 		<dependency>
 			<groupId>io.vertigo</groupId>
 			<artifactId>vertigo-core</artifactId>
@@ -120,8 +122,8 @@
 			<version>0.9.5.2</version>
 			<scope>test</scope>
 		</dependency>
-    	
-    	<dependency>
+
+		<dependency>
 			<groupId>org.apache.lucene</groupId>
 			<artifactId>lucene-core</artifactId>
 			<version>6.6.1</version> <!-- 6.6.1 compatible with ElasticSearch 5.6.8 -->
@@ -136,30 +138,30 @@
 			<artifactId>lucene-queryparser</artifactId>
 			<version>6.6.1</version> <!-- 6.6.1 compatible with ElasticSearch 5.6.8 -->
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.elasticsearch</groupId>
 			<artifactId>elasticsearch</artifactId>
 			<version>5.6.8</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.elasticsearch.client</groupId>
-		    <artifactId>transport</artifactId>
-		    <version>5.6.8</version><!-- EsTransportSearchServicesPlugin -->
+			<groupId>org.elasticsearch.client</groupId>
+			<artifactId>transport</artifactId>
+			<version>5.6.8</version><!-- EsTransportSearchServicesPlugin -->
 		</dependency>
 		<dependency>
 			<groupId>org.elasticsearch.plugin</groupId>
 			<artifactId>transport-netty4-client</artifactId>
 			<version>5.6.8</version>
 		</dependency>
-    	<!-- ES requires 2.9.1 -->
-	    <dependency>
-		    <groupId>org.apache.logging.log4j</groupId>
-		    <artifactId>log4j-api</artifactId>
-		    <version>2.11.0</version>
+		<!-- ES requires 2.9.1 -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>2.11.0</version>
 		</dependency>
-    	
-    	
+
+
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
@@ -167,26 +169,26 @@
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
-    		<artifactId>jackson-dataformat-smile</artifactId>
-    		<version>2.9.7</version> <!-- version for spring -->
+			<artifactId>jackson-dataformat-smile</artifactId>
+			<version>2.9.7</version> <!-- version for spring -->
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
-    		<artifactId>jackson-dataformat-yaml</artifactId>
-    		<version>2.9.7</version> <!-- version for spring -->
+			<artifactId>jackson-dataformat-yaml</artifactId>
+			<version>2.9.7</version> <!-- version for spring -->
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
-    		<artifactId>jackson-dataformat-cbor</artifactId>
-    		<version>2.9.7</version> <!-- version for spring -->
+			<artifactId>jackson-dataformat-cbor</artifactId>
+			<version>2.9.7</version> <!-- version for spring -->
 		</dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>2.9.7</version> <!-- version for spring -->
 		</dependency>
-		
-    </dependencies>
+
+	</dependencies>
 
 	<build>
 		<plugins>
@@ -203,12 +205,12 @@
 					<!-- <argLine>-Dfile.encoding=${project.build.sourceEncoding} ${argLine}</argLine> -->
 				</configuration>
 				<dependencies>
-	                <dependency>
-	                    <groupId>org.junit.platform</groupId>
-	                    <artifactId>junit-platform-surefire-provider</artifactId>
-	                    <version>1.2.0</version>
-	                </dependency>
-            	</dependencies>
+					<dependency>
+						<groupId>org.junit.platform</groupId>
+						<artifactId>junit-platform-surefire-provider</artifactId>
+						<version>1.2.0</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -227,6 +229,20 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.2</version>
+				<configuration>
+					<webResources>
+						<resource>
+							<!-- this is relative to the pom.xml directory -->
+							<directory>src/main/javagen/sqlgen/</directory>
+							<targetPath>WEB-INF/classes/sqlgen</targetPath>
+						</resource>
+					</webResources>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
