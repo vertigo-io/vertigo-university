@@ -1,6 +1,7 @@
 <%@ page session="false" import="java.util.*, javax.servlet.*" %>
 <%!
-	private String printException(Throwable t) throws Exception {
+	
+private String printException(Throwable t) throws Exception {
         int i;
         StringBuffer sw = new StringBuffer();
         StackTraceElement[] stack = t.getStackTrace();
@@ -27,6 +28,8 @@
 %>
 
 <%
+		final String baseUrl = request.getRequestURL().substring(0, request.getRequestURL().indexOf(request.getServletPath()))+"/";
+
 		Throwable e = (Throwable) request.getAttribute("javax.servlet.error.exception"), t;
 		String errorMessage = (String) request.getAttribute("javax.servlet.error.message");
 		Integer errorCode = (Integer) request.getAttribute("javax.servlet.error.status_code");
@@ -37,11 +40,18 @@
         boolean contextException = false;
         boolean securityException = false;
         boolean noObjectFoundException = false;
-       for (; e != null;) {
+       	
+        if (errorCode!=null && errorCode.equals(401)) {
+        	response.sendRedirect(baseUrl+"login/?code=401");
+        }
+        
+        for (; e != null;) {
             list.add(e);
             if (e instanceof io.vertigo.vega.webservice.exception.SessionException) {
-            	sessionException = true;%>
-            	<jsp:forward page="noSession-error.jsp" />
+            	sessionException = true;
+            	response.sendRedirect(baseUrl+"login/?code=400");
+            	%>
+            	<%-- jsp:forward page="noSession-error.jsp" / --%>
             <%}
             if (e instanceof io.vertigo.ui.exception.ExpiredViewContextException) contextException = true;
             if (e instanceof io.vertigo.account.authorization.VSecurityException || errorCode == 403) securityException = true;
@@ -52,8 +62,7 @@
             e = t;
         }
         Collections.reverse(list);
-        String baseUrl = request.getRequestURL().substring(0, request.getRequestURL().indexOf(request.getServletPath()))+"/";
-
+       
        StringBuilder sbHome = new StringBuilder("");
  	   sbHome.append("<a class=\"lien\" href=\"home/\">");
  	   sbHome.append("<button class=\"fix_link\">l'&eacute;cran d'accueil</button>");
@@ -81,7 +90,7 @@
 	<meta http-equiv="Content-Script-Type" content="text/javascript"/>
 	
 	<base href="<%=baseUrl%>"></base>	
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>	
+    <script th:src="@{/vertigo-ui/static/3rdParty/cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js}"></script>	
 	<link href="static/css/error.css" type="text/css" rel="stylesheet"/>
 	<title>Vertigo - <%=errorCode%></title>
 </head>

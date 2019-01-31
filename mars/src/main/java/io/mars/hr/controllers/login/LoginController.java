@@ -10,10 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import io.mars.hr.services.login.LoginServices;
-import io.vertigo.account.impl.authentication.PasswordHelper;
+import io.vertigo.lang.VUserException;
 import io.vertigo.ui.core.ViewContext;
 import io.vertigo.ui.core.ViewContextKey;
 import io.vertigo.ui.impl.springmvc.controller.AbstractVSpringMvcController;
+import io.vertigo.util.StringUtil;
+import io.vertigo.vega.webservice.validation.UiMessageStack;
 
 @Controller
 @RequestMapping("/login")
@@ -26,8 +28,15 @@ public class LoginController extends AbstractVSpringMvcController {
 	private LoginServices loginServices;
 
 	@GetMapping("/")
-	public String initContext(final ViewContext viewContext) {
+	public String initContext(final ViewContext viewContext, final UiMessageStack uiMessageStack, @RequestParam(name = "code", required = false) final Integer code) {
 		if (!loginServices.isAuthenticated()) {
+			if (code != null && code.equals(401)) {
+				uiMessageStack.warning("You have been disconnected");
+				return "redirect:/login/";
+			} else if (code != null && code.equals(400)) {
+				uiMessageStack.warning("You have been inactive for too long, your login has expired");
+				return "redirect:/login/";
+			}
 			viewContext.publishRef(loginKey, "");
 			viewContext.publishRef(passwordKey, "");
 			return null;
@@ -38,8 +47,9 @@ public class LoginController extends AbstractVSpringMvcController {
 
 	@PostMapping("/_login")
 	public String doLogin(@RequestParam("login") final String login, @RequestParam("password") final String password) {
-		final String pass = new PasswordHelper().createPassword(password);
-		System.out.println("createInputPass:" + pass);
+		if (StringUtil.isEmpty(login) || StringUtil.isEmpty(password)) {
+			throw new VUserException("Login and Password are mandatory");
+		}
 		loginServices.login(login, password);
 		return "redirect:/home/";
 	}
