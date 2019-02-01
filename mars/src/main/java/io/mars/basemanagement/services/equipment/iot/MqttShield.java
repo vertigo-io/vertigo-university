@@ -211,7 +211,7 @@ public class MqttShield implements Component, Activeable {
 				final String turnAction = "180";
 				final InputEvent sendAction = new InputEvent(InputEvent.Type.of(1), "base/actionShutters", turnAction);
 				eventBusManager.post(sendAction);
-				LOGGER.info("light =" + data[1] + "Action sent");
+				addMeasure(parsedTopic, data);
 			}
 		} else if (parsedTopic[1].equals("display")) {
 			//we don't want Influx save the data in database
@@ -283,6 +283,7 @@ public class MqttShield implements Component, Activeable {
 				.time(Instant.now())
 				.addField("equipment", parsedTopic[0])
 				.addField("value", Double.parseDouble(data[1]))
+				.tag("equipment", parsedTopic[0])
 				.build();
 		eventBusManager.post(new MeasureEvent(measure));
 	}

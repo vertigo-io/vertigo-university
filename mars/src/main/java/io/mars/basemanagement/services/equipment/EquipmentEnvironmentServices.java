@@ -1,5 +1,6 @@
 package io.mars.basemanagement.services.equipment;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -56,16 +57,22 @@ public class EquipmentEnvironmentServices implements Component {
 				Collections.singletonList("value:last"),
 				DataFilter.builder("temperature").build(),
 				TimeFilter.builder("now() - 3d", "now() + 3d").build());
-		return Math.round((Double) lastTemperatures.getTabularDataSeries().get(0).getValues().get("value:last") * 10.0) / 10.0;
+		if (!lastTemperatures.getTabularDataSeries().isEmpty()) {
+			return Math.round((Double) lastTemperatures.getTabularDataSeries().get(0).getValues().get("value:last") * 10.0) / 10.0;
+		}
+		return 0.0;
 	}
 
 	public Double getLastHumidity() {
-		final TabularDatas lastHumidite = timeSeriesDataBaseManager.getTabularData(
+		final TabularDatas lastHumidities = timeSeriesDataBaseManager.getTabularData(
 				"mars-test",
 				Collections.singletonList("value:last"),
 				DataFilter.builder("humidite").build(),
 				TimeFilter.builder("now() - 3d", "now() + 3d").build());
-		return Math.round((Double) lastHumidite.getTabularDataSeries().get(0).getValues().get("value:last") * 10.0) / 10.0;
+		if (!lastHumidities.getTabularDataSeries().isEmpty()) {
+			return Math.round((Double) lastHumidities.getTabularDataSeries().get(0).getValues().get("value:last") * 10.0) / 10.0;
+		}
+		return 0.0;
 	}
 
 	public Integer getTotalTemperatureMeasured() {
@@ -74,8 +81,12 @@ public class EquipmentEnvironmentServices implements Component {
 				"mars-test",
 				Collections.singletonList("value:count"),
 				DataFilter.builder("temperature").build(),
-				TimeFilter.builder("now() - 365d", "now() + 1h").build());
-		return ((Double) totalMeasure.getTabularDataSeries().get(0).getValues().get("value:count")).intValue();
+				TimeFilter.builder("now() - 365d", "now()").build());
+
+		if (!totalMeasure.getTabularDataSeries().isEmpty()) {
+			return ((Double) totalMeasure.getTabularDataSeries().get(0).getValues().get("value:count")).intValue();
+		}
+		return 0;
 	}
 
 	public void sendBaseAlert() {
@@ -108,27 +119,27 @@ public class EquipmentEnvironmentServices implements Component {
 	}
 
 	public Integer getWeeklyTriggeredAlarm() {
-		final TabularDatas totalAlert = timeSeriesDataBaseManager.getTabularData(
+		final TabularDatas totalAlerts = timeSeriesDataBaseManager.getTabularData(
 				"mars-test",
 				Collections.singletonList("value:sum"),
 				DataFilter.builder("fireAlarm").build(),
 				TimeFilter.builder("now() - 15d", "now() + 1h").build());
-		return ((Double) totalAlert.getTabularDataSeries().get(0).getValues().get("value:sum")).intValue();
+		if (!totalAlerts.getTabularDataSeries().isEmpty()) {
+			return ((Double) totalAlerts.getTabularDataSeries().get(0).getValues().get("value:sum")).intValue();
+		}
+		return 0;
 	}
 
 	public String actionMoistureLevel() {
 		final TabularDatas lastMoistureValue = timeSeriesDataBaseManager.getTabularData(
 				"mars-test",
-				Collections.singletonList("value:last"),
+				Arrays.asList("value:last", "equipment:last"),
 				DataFilter.builder("moisture").build(),
 				TimeFilter.builder("now() - 365d", "now() + 1d").build());
-		final TabularDatas lastMoistureEquipment = timeSeriesDataBaseManager.getTabularData(
-				"mars-test",
-				Collections.singletonList("equipment:last"),
-				DataFilter.builder("moisture").build(),
-				TimeFilter.builder("now() - 365d", "now() + 1d").build());
-		if ((double) Math.round((Double) lastMoistureValue.getTabularDataSeries().get(0).getValues().get("value:last") * 10) / 10 <= 40) {
-			return lastMoistureEquipment.getTabularDataSeries().get(0).getValues().get("equipment:last").toString();
+		if (!lastMoistureValue.getTabularDataSeries().isEmpty()) {
+			if ((double) Math.round((Double) lastMoistureValue.getTabularDataSeries().get(0).getValues().get("value:last") * 10) / 10 <= 40) {
+				return lastMoistureValue.getTabularDataSeries().get(0).getValues().get("equipment:last").toString();
+			}
 		}
 		return "No Farms to Water";
 	}
