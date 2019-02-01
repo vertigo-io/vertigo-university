@@ -1,7 +1,12 @@
 package io.mars.boot;
 
+import java.util.Optional;
+
 import org.springframework.context.annotation.ComponentScan;
 
+import io.vertigo.app.Home;
+import io.vertigo.core.param.Param;
+import io.vertigo.core.param.ParamManager;
 import io.vertigo.ui.impl.springmvc.config.VSpringWebConfig;
 
 @ComponentScan({
@@ -21,6 +26,11 @@ public class MarsVSpringWebConfig extends VSpringWebConfig {
 
 	@Override
 	protected boolean isDevMode() {
+		final ParamManager paramManager = Home.getApp().getComponentSpace().resolve(ParamManager.class);
+		final Optional<Param> devModeOpt = paramManager.getOptionalParam("devMode");
+		if (devModeOpt.isPresent()) {
+			return devModeOpt.get().getValueAsBoolean();
+		}
 		return true;
 	}
 }
