@@ -179,7 +179,7 @@
 	</error-page>
 	<error-page>
 		<error-code>401</error-code>
-		<location>/index.html</location>
+		<location>/jsp/application-error.jsp</location>
 	</error-page>
 	<error-page>
 		<error-code>404</error-code>
