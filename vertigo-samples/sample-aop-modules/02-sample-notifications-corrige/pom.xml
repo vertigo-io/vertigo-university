@@ -33,11 +33,9 @@
 			<artifactId>vertigo-dynamo-impl</artifactId>
 			<version>${vertigo.version}</version>
 		</dependency>
-		
-		<!-- Vertigo Tempo (pour le MailManager) -->
 		<dependency>
 			<groupId>io.vertigo</groupId>
-			<artifactId>vertigo-mail</artifactId>
+			<artifactId>vertigo-social</artifactId>
 			<version>${vertigo.version}</version>
 		</dependency>
 		

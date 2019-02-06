@@ -5,7 +5,6 @@ import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.commons.CommonsFeatures;
 import io.vertigo.core.param.Param;
 import io.vertigo.dynamo.DynamoFeatures;
-import io.vertigo.mail.MailFeatures;
 import io.vertigo.notifications.NotificationManager;
 import io.vertigo.notifications.aspects.supervision.SupervisionAspect;
 import io.vertigo.notifications.aspects.supervision.SupervisionManager;
@@ -17,6 +16,7 @@ import io.vertigo.notifications.impl.NotificationManagerImpl;
 import io.vertigo.notifications.plugins.ifttt.IftttNotificationPlugin;
 import io.vertigo.notifications.plugins.mail.MailNotificationPlugin;
 import io.vertigo.notifications.plugins.twitter.TwitterNotificationPlugin;
+import io.vertigo.social.SocialFeatures;
 
 /**
  * Notification Config Builder
@@ -38,8 +38,9 @@ public class NotificationSampleConfigBuilder {
 						.addAspect(SupervisionAspect.class)
 						.addAspect(TraceAspect.class)
 						.build())
-				.addModule(new MailFeatures()
-						.withJavax(
+				.addModule(new SocialFeatures()
+						.withMails()
+						.withJavaxMail(
 								Param.of("storeProtocol", "smtp"),
 								Param.of("host", "localdelivery.klee.lan.net"),
 								Param.of("developmentMode", "true"),

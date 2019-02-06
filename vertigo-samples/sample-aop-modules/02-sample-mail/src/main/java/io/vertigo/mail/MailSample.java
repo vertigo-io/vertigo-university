@@ -2,6 +2,8 @@ package io.vertigo.mail;
 
 import io.vertigo.app.AutoCloseableApp;
 import io.vertigo.config.MailSampleConfigBuilder;
+import io.vertigo.social.services.mail.Mail;
+import io.vertigo.social.services.mail.MailManager;
 
 /**
  * Send a mail.
@@ -19,7 +21,7 @@ public class MailSample {
 
 			final MailManager mailManager = app.getComponentSpace().resolve(MailManager.class);
 
-			final Mail mail = new MailBuilder()
+			final Mail mail = Mail.builder()
 					.from(DT_MAIL)
 					.to(DT_MAIL)
 					.withSubject("Message from MailSample")

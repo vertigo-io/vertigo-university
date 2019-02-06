@@ -34,7 +34,7 @@
 		<!-- Pour le MailManager -->
 		<dependency>
 			<groupId>io.vertigo</groupId>
-			<artifactId>vertigo-mail</artifactId>
+			<artifactId>vertigo-social</artifactId>
 			<version>${vertigo.version}</version>
 		</dependency>
 	</dependencies>

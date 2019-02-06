@@ -18,8 +18,8 @@
  */
 package io.mars.datageneration;
 
+import io.vertigo.app.config.Feature;
 import io.vertigo.app.config.Features;
-import io.vertigo.app.config.json.Feature;
 import io.vertigo.core.param.Param;
 
 public class DataGenerationFeatures extends Features<DataGenerationFeatures> {
