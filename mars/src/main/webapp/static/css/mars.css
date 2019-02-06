@@ -50,31 +50,6 @@ body {
   background: #ccc; 
 }
 
-
-@media (max-width: 767px) {
-  .layout-padding {
-    margin: 1.5rem 0.5rem;
-    padding: 0;
-  }
-}
-@media (min-width: 768px) and (max-width: 991px) {
-  .layout-padding {
-    margin: 1rem 1.5rem;
-    padding: 0;
-  }
-}
-@media (min-width: 992px) and (max-width: 1199px) {
-  .layout-padding {
-    margin: 1.5rem 2rem;
-    padding: 0;
-  }
-}
-@media (min-width: 1200px) {
-  .layout-padding {
-    margin: 2rem 3rem;
-    padding: 0;
-  }
-}
 .container-bottom-padding {
 	padding-bottom: 64px;
 }
