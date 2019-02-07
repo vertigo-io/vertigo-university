@@ -24,6 +24,7 @@ import io.vertigo.account.account.Account;
 import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.core.component.Activeable;
 import io.vertigo.core.component.Component;
+import io.vertigo.dynamo.collections.CollectionsManager;
 import io.vertigo.dynamo.criteria.Criterions;
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.domain.model.DtListState;
@@ -56,6 +57,8 @@ public class BaseServices implements Component, Activeable {
 	private FileManager fileManager;
 	@Inject
 	private StoreManager storeManager;
+	@Inject
+	private CollectionsManager collectionsManager;
 
 	@Inject
 	private PersonServices personServices;
@@ -119,7 +122,11 @@ public class BaseServices implements Component, Activeable {
 	}
 
 	public DtList<Base> getBases(final DtListState dtListState) {
-		return baseDAO.findAll(Criterions.alwaysTrue(), dtListState.getMaxRows().orElse(50));
+		final DtList<Base> bases = baseDAO.findAll(Criterions.alwaysTrue(), dtListState.getMaxRows().orElse(50));
+		if (dtListState.getSortFieldName().isPresent()) {
+			return collectionsManager.sort(bases, dtListState.getSortFieldName().get(), dtListState.isSortDesc().get());
+		}
+		return bases;
 	}
 
 	public DtList<Geosector> getAllGeosectors() {

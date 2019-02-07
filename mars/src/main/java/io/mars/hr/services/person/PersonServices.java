@@ -9,6 +9,7 @@ import io.mars.hr.domain.Person;
 import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.core.component.Activeable;
 import io.vertigo.core.component.Component;
+import io.vertigo.dynamo.collections.CollectionsManager;
 import io.vertigo.dynamo.criteria.Criterions;
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.domain.model.DtListState;
@@ -33,6 +34,9 @@ public class PersonServices implements Component, Activeable {
 
 	@Inject
 	private CommonsServices commonsServices;
+
+	@Inject
+	private CollectionsManager collectionsManager;
 
 	private VFile defaultPhoto;
 
@@ -66,7 +70,11 @@ public class PersonServices implements Component, Activeable {
 	}
 
 	public DtList<Person> getPersons(final DtListState dtListState) {
-		return personDAO.findAll(Criterions.alwaysTrue(), dtListState.getMaxRows().orElse(50));
+		final DtList<Person> persons = personDAO.findAll(Criterions.alwaysTrue(), dtListState.getMaxRows().orElse(50));
+		if (dtListState.getSortFieldName().isPresent()) {
+			return collectionsManager.sort(persons, dtListState.getSortFieldName().get(), dtListState.isSortDesc().get());
+		}
+		return persons;
 	}
 
 	public VFile getPersonPicture(final Long fileId) {

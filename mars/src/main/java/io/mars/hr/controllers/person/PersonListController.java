@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import io.mars.domain.DtDefinitions.PersonFields;
 import io.mars.hr.domain.Person;
 import io.mars.hr.services.person.PersonServices;
 import io.vertigo.dynamo.domain.model.DtListState;
@@ -30,7 +31,7 @@ public class PersonListController extends AbstractVSpringMvcController {
 	@GetMapping("/")
 	public void initContext(final ViewContext viewContext, @RequestParam("renderer") final Optional<String> renderer) {
 		viewContext.publishRef(listRenderer, renderer.orElse("table"));
-		final DtListState dtListState = DtListState.of(200, 0);
+		final DtListState dtListState = DtListState.of(200, 0, PersonFields.FULL_NAME.name(), false);
 		viewContext.publishDtList(persons, personServices.getPersons(dtListState));
 	}
 

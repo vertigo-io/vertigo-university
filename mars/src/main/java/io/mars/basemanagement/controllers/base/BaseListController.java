@@ -11,6 +11,7 @@ import io.mars.basemanagement.domain.Base;
 import io.mars.basemanagement.domain.BaseType;
 import io.mars.basemanagement.domain.Geosector;
 import io.mars.basemanagement.services.base.BaseServices;
+import io.mars.domain.DtDefinitions.BaseFields;
 import io.vertigo.dynamo.domain.model.DtListState;
 import io.vertigo.ui.core.ViewContext;
 import io.vertigo.ui.core.ViewContextKey;
@@ -31,7 +32,7 @@ public class BaseListController extends AbstractVSpringMvcController {
 	public void initContext(final ViewContext viewContext) {
 		viewContext.publishMdl(geosectors, Geosector.class, null); //all
 		viewContext.publishMdl(baseTypes, BaseType.class, null); //all
-		final DtListState dtListState = DtListState.of(200, 0);
+		final DtListState dtListState = DtListState.of(200, 0, BaseFields.CODE.name(), false);
 		viewContext.publishDtList(bases, baseServices.getBases(dtListState));
 	}
 
