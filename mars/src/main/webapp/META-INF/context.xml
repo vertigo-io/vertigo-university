@@ -8,6 +8,12 @@
 		username="mars"
 		password="mars" />
 		
+	<Resource name="jdbc/DataSourceHome"
+		auth="SERVLET"
+		type="javax.sql.DataSource"
+		driverClassName="org.h2.Driver"
+		url="jdbc:h2:~/marsdb/mars;AUTO_SERVER=TRUE" />
+		
 	<Parameter name="boot.apiKeysUrl" value="w:\\Digital Factory\\02 - Solutions\\Vertigo\\apiKeys\\marsApiKeys.properties" override="false"/>
 	<Parameter name="boot.walletParamsUrl" value="W:\\Digital Factory\\02 - Solutions\\Vertigo\\Blockchain\\accounts\\marsWalletAccount.properties" override="false"/>
 	<Parameter name="redisHost" value="mars.dev.klee.lan.net" override="false"/>
