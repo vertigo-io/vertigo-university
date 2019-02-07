@@ -251,6 +251,8 @@ nav a.q-item, .nav a.q_item {
 
 .header-content {
 	height: 150px;
+	position: relative;
+    z-index: 100;
 }
 
 .mini .header-content {
