@@ -95,10 +95,6 @@ public class FakeEquipmentListBuilder implements Builder {
 		return DataGenerator.RND.nextInt(101);
 	}
 
-	private static String getGeoLocation() {
-		return "";
-	}
-
 	private static BigDecimal getEquipmentValue() {
 		final Double randomDouble = myNextDouble(MIN_EQUIPMENT_VALUE, MAX_EQUIPMENT_VALUE);
 		return BigDecimal.valueOf(randomDouble);
