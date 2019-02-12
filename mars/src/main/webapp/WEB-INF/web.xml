@@ -38,6 +38,7 @@
 		<description>
 			Filtre de modification des entétes HTTP pour gérer le cache.
 			Désactive le cache navigateur et proxy sur toutes les URLs sauf les /static/*
+			Ce filtre ne surcharge pas les headers déjà posés par le serveur, s'il y a déjà un header 'Cache-Control'
 		</description>
 		<filter-name>client-no-cache</filter-name>
 		<filter-class>io.vertigo.vega.impl.servlet.filter.CacheControlFilter</filter-class>
@@ -74,6 +75,10 @@
 		<init-param>
 			<param-name>Cache-Control</param-name>
 			<param-value>max-age=86400, public</param-value>
+		</init-param>
+		<init-param>
+			<param-name>force-override</param-name>
+			<param-value>true</param-value>
 		</init-param>
 	</filter>
 	<filter-mapping>
