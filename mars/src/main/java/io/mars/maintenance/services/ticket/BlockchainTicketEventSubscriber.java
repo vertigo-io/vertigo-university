@@ -41,11 +41,11 @@ public class BlockchainTicketEventSubscriber implements Component {
 			final String strDateCreated = ticket.getDateCreated().format(FORMATTER);
 
 			final StringBuilder sbSerializedTicket = new StringBuilder();
-			sbSerializedTicket.append("Création du ticket ")
+			sbSerializedTicket.append("Creating ticket ")
 					.append(ticket.getCode())
 					.append(".")
 					.append(ticket.getTitle())
-					.append(". Ticket créé le ")
+					.append(". Ticket created at ")
 					.append(strDateCreated);
 
 			messageQueue.add(sbSerializedTicket.toString());

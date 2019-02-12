@@ -27,10 +27,10 @@ public class BlockchainMissionEventSubscriber implements Component {
 
 	@Inject
 	private LedgerManager ledgerManager;
-	
+
 	@Inject
 	private PersonServices personServices;
-	
+
 	@Inject
 	private NotificationServices notificationServices;
 
@@ -42,19 +42,18 @@ public class BlockchainMissionEventSubscriber implements Component {
 		final Business business = mission.business().get();
 		final StringBuilder sbSerializedTicket = new StringBuilder();
 		sbSerializedTicket.append(person.getFullName())
-		.append(" a été affecté à la base ")
-		.append(base.getName())
-		.append(" pour le role de ")
-		.append(mission.getRole())
-		.append(" pour l'entreprise ")
-		.append(business.getName());
+				.append(" has been affected to base ")
+				.append(base.getName())
+				.append(" with the role ")
+				.append(mission.getRole())
+				.append(" for the company ")
+				.append(business.getName());
 
 		messageQueue.add(sbSerializedTicket.toString());
-		
-		
-		Notification notification = Notification.builder()
+
+		final Notification notification = Notification.builder()
 				.withSender("System")
-				.withTitle("Writing new assignement to the ledger")		
+				.withTitle("Writing new assignement to the ledger")
 				.withContent(sbSerializedTicket.toString())
 				.withTTLInSeconds(600)
 				.withType("MARS-MISSION-LEDGER") //should prefix by app, in case of multi-apps notifications
@@ -72,10 +71,10 @@ public class BlockchainMissionEventSubscriber implements Component {
 			final String message = messageQueue.poll();
 			if (message != null) {
 				ledgerManager.sendData(message);
-				
-				Notification notification = Notification.builder()
+
+				final Notification notification = Notification.builder()
 						.withSender("System")
-						.withTitle("New assignement sucessfully written to the ledger")		
+						.withTitle("New assignement sucessfully written to the ledger")
 						.withContent(message)
 						.withTTLInSeconds(600)
 						.withType("MARS-MISSION-LEDGER") //should prefix by app, in case of multi-apps notifications
@@ -85,7 +84,7 @@ public class BlockchainMissionEventSubscriber implements Component {
 			}
 		}
 	}
-	
+
 	private void sendNotificationToAll(final Notification notification) {
 		final Set<UID<Account>> accountUIDs = personServices.getPersons(DtListState.of(null, 0))
 				.stream()
