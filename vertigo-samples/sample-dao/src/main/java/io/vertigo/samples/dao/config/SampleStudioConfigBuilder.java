@@ -44,8 +44,7 @@ public class SampleStudioConfigBuilder {
 							Param.of("targetSubDir", "."),
 							Param.of("generateDtResources", "false"),
 							Param.of("generateDtDefinitions", "false"),
-							Param.of("generateDtObject", "true"),
-							Param.of("generateJpaAnnotations", "false"))
+							Param.of("generateDtObject", "true"))
 					.addPlugin(TaskGeneratorPlugin.class, Param.of("targetSubDir", "."))
 					.addPlugin(FileInfoGeneratorPlugin.class, Param.of("targetSubDir", "."))
 					.addPlugin(SqlGeneratorPlugin.class, Param.of("targetSubDir", "."),

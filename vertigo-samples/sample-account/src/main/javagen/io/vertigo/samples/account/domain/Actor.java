@@ -84,7 +84,7 @@ public final class Actor implements Entity {
 	 */
 	@Field(domain = "DO_CODE", type = "FOREIGN_KEY", label = "Sexe")
 	public String getSexCd() {
-		return (String)  sexCdAccessor.getId();
+		return (String) sexCdAccessor.getId();
 	}
 
 	/**
@@ -102,24 +102,6 @@ public final class Actor implements Entity {
 	 */
 	public VAccessor<io.vertigo.samples.account.domain.Sexe> sexe() {
 		return sexCdAccessor;
-	}
-	
-	@Deprecated
-	public io.vertigo.samples.account.domain.Sexe getSexe() {
-		// we keep the lazyness
-		if (!sexCdAccessor.isLoaded()) {
-			sexCdAccessor.load();
-		}
-		return sexCdAccessor.get();
-	}
-
-	/**
-	 * Retourne l'UID: Sexe.
-	 * @return UID de l'association
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.UID<io.vertigo.samples.account.domain.Sexe> getSexeUID() {
-		return sexCdAccessor.getUID();
 	}
 	
 	/** {@inheritDoc} */

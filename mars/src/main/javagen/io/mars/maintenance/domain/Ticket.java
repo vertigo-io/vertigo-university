@@ -1,9 +1,9 @@
 package io.mars.maintenance.domain;
 
 import io.vertigo.dynamo.domain.model.Entity;
+import io.vertigo.dynamo.domain.model.EnumVAccessor;
 import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.model.VAccessor;
-import io.vertigo.dynamo.domain.model.EnumVAccessor;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.lang.Generated;
@@ -180,7 +180,7 @@ public final class Ticket implements Entity {
 	 */
 	@Field(domain = "DO_CODE", type = "FOREIGN_KEY", label = "Ticket Status")
 	public String getTicketStatusId() {
-		return (String)  ticketStatusIdAccessor.getId();
+		return (String) ticketStatusIdAccessor.getId();
 	}
 
 	/**
@@ -199,7 +199,7 @@ public final class Ticket implements Entity {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Equipment")
 	public Long getEquipmentId() {
-		return (Long)  equipmentIdAccessor.getId();
+		return (Long) equipmentIdAccessor.getId();
 	}
 
 	/**
@@ -218,24 +218,6 @@ public final class Ticket implements Entity {
 	public VAccessor<io.mars.basemanagement.domain.Equipment> equipment() {
 		return equipmentIdAccessor;
 	}
-	
-	@Deprecated
-	public io.mars.basemanagement.domain.Equipment getEquipment() {
-		// we keep the lazyness
-		if (!equipmentIdAccessor.isLoaded()) {
-			equipmentIdAccessor.load();
-		}
-		return equipmentIdAccessor.get();
-	}
-
-	/**
-	 * Retourne l'UID: Equipment.
-	 * @return UID de l'association
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.UID<io.mars.basemanagement.domain.Equipment> getEquipmentUID() {
-		return equipmentIdAccessor.getUID();
-	}
 
  	/**
 	 * Association : Ticket Status.
@@ -243,24 +225,6 @@ public final class Ticket implements Entity {
 	 */
 	public EnumVAccessor<io.mars.maintenance.domain.TicketStatus, io.mars.maintenance.domain.TicketStatusEnum> ticketStatus() {
 		return ticketStatusIdAccessor;
-	}
-	
-	@Deprecated
-	public io.mars.maintenance.domain.TicketStatus getTicketStatus() {
-		// we keep the lazyness
-		if (!ticketStatusIdAccessor.isLoaded()) {
-			ticketStatusIdAccessor.load();
-		}
-		return ticketStatusIdAccessor.get();
-	}
-
-	/**
-	 * Retourne l'UID: Ticket Status.
-	 * @return UID de l'association
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.UID<io.mars.maintenance.domain.TicketStatus> getTicketStatusUID() {
-		return ticketStatusIdAccessor.getUID();
 	}
 	
 	/** {@inheritDoc} */

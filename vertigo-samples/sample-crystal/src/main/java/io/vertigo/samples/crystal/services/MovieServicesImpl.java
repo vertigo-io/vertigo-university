@@ -49,7 +49,9 @@ public class MovieServicesImpl implements MovieServices {
 	public DtList<Role> getRolesByMovie(final Long movId) {
 		Assertion.checkNotNull(movId);
 		// ---
-		return movieDAO.get(movId).getRoleList();
+		final Movie movie = movieDAO.get(movId);
+		movie.role().load();
+		return movie.role().get();
 	}
 
 	@Override

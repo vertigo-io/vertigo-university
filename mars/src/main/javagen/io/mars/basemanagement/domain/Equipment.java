@@ -289,7 +289,7 @@ public final class Equipment implements KeyConcept {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Base")
 	public Long getBaseId() {
-		return (Long)  baseIdAccessor.getId();
+		return (Long) baseIdAccessor.getId();
 	}
 
 	/**
@@ -308,7 +308,7 @@ public final class Equipment implements KeyConcept {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Equipment Geosector")
 	public Long getGeosectorId() {
-		return (Long)  geosectorIdAccessor.getId();
+		return (Long) geosectorIdAccessor.getId();
 	}
 
 	/**
@@ -327,7 +327,7 @@ public final class Equipment implements KeyConcept {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Business")
 	public Long getBusinessId() {
-		return (Long)  businessIdAccessor.getId();
+		return (Long) businessIdAccessor.getId();
 	}
 
 	/**
@@ -346,7 +346,7 @@ public final class Equipment implements KeyConcept {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Equipment Type")
 	public Long getEquipmentTypeId() {
-		return (Long)  equipmentTypeIdAccessor.getId();
+		return (Long) equipmentTypeIdAccessor.getId();
 	}
 
 	/**
@@ -365,24 +365,6 @@ public final class Equipment implements KeyConcept {
 	public VAccessor<io.mars.basemanagement.domain.Base> base() {
 		return baseIdAccessor;
 	}
-	
-	@Deprecated
-	public io.mars.basemanagement.domain.Base getBase() {
-		// we keep the lazyness
-		if (!baseIdAccessor.isLoaded()) {
-			baseIdAccessor.load();
-		}
-		return baseIdAccessor.get();
-	}
-
-	/**
-	 * Retourne l'UID: Base.
-	 * @return UID de l'association
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.UID<io.mars.basemanagement.domain.Base> getBaseUID() {
-		return baseIdAccessor.getUID();
-	}
 
  	/**
 	 * Association : Business.
@@ -390,24 +372,6 @@ public final class Equipment implements KeyConcept {
 	 */
 	public VAccessor<io.mars.basemanagement.domain.Business> business() {
 		return businessIdAccessor;
-	}
-	
-	@Deprecated
-	public io.mars.basemanagement.domain.Business getBusiness() {
-		// we keep the lazyness
-		if (!businessIdAccessor.isLoaded()) {
-			businessIdAccessor.load();
-		}
-		return businessIdAccessor.get();
-	}
-
-	/**
-	 * Retourne l'UID: Business.
-	 * @return UID de l'association
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.UID<io.mars.basemanagement.domain.Business> getBusinessUID() {
-		return businessIdAccessor.getUID();
 	}
 
  	/**
@@ -417,24 +381,6 @@ public final class Equipment implements KeyConcept {
 	public VAccessor<io.mars.catalog.domain.EquipmentType> equipmentType() {
 		return equipmentTypeIdAccessor;
 	}
-	
-	@Deprecated
-	public io.mars.catalog.domain.EquipmentType getEquipmentType() {
-		// we keep the lazyness
-		if (!equipmentTypeIdAccessor.isLoaded()) {
-			equipmentTypeIdAccessor.load();
-		}
-		return equipmentTypeIdAccessor.get();
-	}
-
-	/**
-	 * Retourne l'UID: Equipment Type.
-	 * @return UID de l'association
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.UID<io.mars.catalog.domain.EquipmentType> getEquipmentTypeUID() {
-		return equipmentTypeIdAccessor.getUID();
-	}
 
  	/**
 	 * Association : Equipment Geosector.
@@ -442,24 +388,6 @@ public final class Equipment implements KeyConcept {
 	 */
 	public VAccessor<io.mars.basemanagement.domain.Geosector> geosector() {
 		return geosectorIdAccessor;
-	}
-	
-	@Deprecated
-	public io.mars.basemanagement.domain.Geosector getGeosector() {
-		// we keep the lazyness
-		if (!geosectorIdAccessor.isLoaded()) {
-			geosectorIdAccessor.load();
-		}
-		return geosectorIdAccessor.get();
-	}
-
-	/**
-	 * Retourne l'UID: Equipment Geosector.
-	 * @return UID de l'association
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.UID<io.mars.basemanagement.domain.Geosector> getGeosectorUID() {
-		return geosectorIdAccessor.getUID();
 	}
 	
 	/** {@inheritDoc} */

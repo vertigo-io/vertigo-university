@@ -1,8 +1,8 @@
 package io.mars.opendata.domain;
 
 import io.vertigo.dynamo.domain.model.Entity;
-import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.model.EnumVAccessor;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.lang.Generated;
@@ -184,7 +184,7 @@ public final class OpendataSet implements Entity {
 	 */
 	@Field(domain = "DO_CODE", type = "FOREIGN_KEY", label = "Opendata Set Status")
 	public String getOpendataSetStatusId() {
-		return (String)  opendataSetStatusIdAccessor.getId();
+		return (String) opendataSetStatusIdAccessor.getId();
 	}
 
 	/**
@@ -202,24 +202,6 @@ public final class OpendataSet implements Entity {
 	 */
 	public EnumVAccessor<io.mars.opendata.domain.OpendataSetStatus, io.mars.opendata.domain.OpendataSetStatusEnum> opendataSetStatus() {
 		return opendataSetStatusIdAccessor;
-	}
-	
-	@Deprecated
-	public io.mars.opendata.domain.OpendataSetStatus getOpendataSetStatus() {
-		// we keep the lazyness
-		if (!opendataSetStatusIdAccessor.isLoaded()) {
-			opendataSetStatusIdAccessor.load();
-		}
-		return opendataSetStatusIdAccessor.get();
-	}
-
-	/**
-	 * Retourne l'UID: Opendata Set Status.
-	 * @return UID de l'association
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.UID<io.mars.opendata.domain.OpendataSetStatus> getOpendataSetStatusUID() {
-		return opendataSetStatusIdAccessor.getUID();
 	}
 	
 	/** {@inheritDoc} */

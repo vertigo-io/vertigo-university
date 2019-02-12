@@ -77,7 +77,7 @@ comment on column MY_MOVIE.NAME is
 'Code du pays';
 
 comment on column MY_MOVIE.YEAR is
-'AnnÃ©e';
+'Année';
 
 comment on column MY_MOVIE.IMDBID is
 'Id Imdb';

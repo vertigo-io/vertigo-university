@@ -81,7 +81,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		MOV_ID,
 		/** Propriété 'Code du pays'. */
 		NAME,
-		/** Propriété 'AnnÃ©e'. */
+		/** Propriété 'Année'. */
 		YEAR,
 		/** Propriété 'Id Imdb'. */
 		IMDBID,
@@ -92,7 +92,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	 * Enumération des champs de MovieByYear.
 	 */
 	public enum MovieByYearFields implements DtFieldName<io.vertigo.samples.dao.domain.MovieByYear> {
-		/** Propriété 'AnnÃ©e'. */
+		/** Propriété 'Année'. */
 		YEAR,
 		/** Propriété 'Nombre de film'. */
 		MOVIES_COUNT	}
@@ -103,7 +103,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	public enum MovieDisplayFields implements DtFieldName<io.vertigo.samples.dao.domain.MovieDisplay> {
 		/** Propriété 'Titre'. */
 		NAME,
-		/** Propriété 'AnnÃ©e'. */
+		/** Propriété 'Année'. */
 		YEAR,
 		/** Propriété 'Pays'. */
 		COUNTRY,
@@ -138,7 +138,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		MOV_ID,
 		/** Propriété 'Code du pays'. */
 		NAME,
-		/** Propriété 'AnnÃ©e'. */
+		/** Propriété 'Année'. */
 		YEAR,
 		/** Propriété 'Id Imdb'. */
 		IMDBID,

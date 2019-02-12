@@ -104,7 +104,7 @@ public final class EquipmentType implements Entity {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Equipment Category")
 	public Long getEquipmentCategoryId() {
-		return (Long)  equipmentCategoryIdAccessor.getId();
+		return (Long) equipmentCategoryIdAccessor.getId();
 	}
 
 	/**
@@ -122,24 +122,6 @@ public final class EquipmentType implements Entity {
 	 */
 	public VAccessor<io.mars.catalog.domain.EquipmentCategory> equipmentCategory() {
 		return equipmentCategoryIdAccessor;
-	}
-	
-	@Deprecated
-	public io.mars.catalog.domain.EquipmentCategory getEquipmentCategory() {
-		// we keep the lazyness
-		if (!equipmentCategoryIdAccessor.isLoaded()) {
-			equipmentCategoryIdAccessor.load();
-		}
-		return equipmentCategoryIdAccessor.get();
-	}
-
-	/**
-	 * Retourne l'UID: Equipment Category.
-	 * @return UID de l'association
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.UID<io.mars.catalog.domain.EquipmentCategory> getEquipmentCategoryUID() {
-		return equipmentCategoryIdAccessor.getUID();
 	}
 	
 	/** {@inheritDoc} */

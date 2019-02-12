@@ -114,7 +114,7 @@ public final class Mission implements Entity {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Person")
 	public Long getPersonId() {
-		return (Long)  personIdAccessor.getId();
+		return (Long) personIdAccessor.getId();
 	}
 
 	/**
@@ -133,7 +133,7 @@ public final class Mission implements Entity {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Base")
 	public Long getBaseId() {
-		return (Long)  baseIdAccessor.getId();
+		return (Long) baseIdAccessor.getId();
 	}
 
 	/**
@@ -152,7 +152,7 @@ public final class Mission implements Entity {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Business")
 	public Long getBusinessId() {
-		return (Long)  businessIdAccessor.getId();
+		return (Long) businessIdAccessor.getId();
 	}
 
 	/**
@@ -171,24 +171,6 @@ public final class Mission implements Entity {
 	public VAccessor<io.mars.basemanagement.domain.Business> business() {
 		return businessIdAccessor;
 	}
-	
-	@Deprecated
-	public io.mars.basemanagement.domain.Business getBusiness() {
-		// we keep the lazyness
-		if (!businessIdAccessor.isLoaded()) {
-			businessIdAccessor.load();
-		}
-		return businessIdAccessor.get();
-	}
-
-	/**
-	 * Retourne l'UID: Business.
-	 * @return UID de l'association
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.UID<io.mars.basemanagement.domain.Business> getBusinessUID() {
-		return businessIdAccessor.getUID();
-	}
 
  	/**
 	 * Association : Base.
@@ -197,24 +179,6 @@ public final class Mission implements Entity {
 	public VAccessor<io.mars.basemanagement.domain.Base> base() {
 		return baseIdAccessor;
 	}
-	
-	@Deprecated
-	public io.mars.basemanagement.domain.Base getBase() {
-		// we keep the lazyness
-		if (!baseIdAccessor.isLoaded()) {
-			baseIdAccessor.load();
-		}
-		return baseIdAccessor.get();
-	}
-
-	/**
-	 * Retourne l'UID: Base.
-	 * @return UID de l'association
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.UID<io.mars.basemanagement.domain.Base> getBaseUID() {
-		return baseIdAccessor.getUID();
-	}
 
  	/**
 	 * Association : Person.
@@ -222,24 +186,6 @@ public final class Mission implements Entity {
 	 */
 	public VAccessor<io.mars.hr.domain.Person> person() {
 		return personIdAccessor;
-	}
-	
-	@Deprecated
-	public io.mars.hr.domain.Person getPerson() {
-		// we keep the lazyness
-		if (!personIdAccessor.isLoaded()) {
-			personIdAccessor.load();
-		}
-		return personIdAccessor.get();
-	}
-
-	/**
-	 * Retourne l'UID: Person.
-	 * @return UID de l'association
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.UID<io.mars.hr.domain.Person> getPersonUID() {
-		return personIdAccessor.getUID();
 	}
 	
 	/** {@inheritDoc} */

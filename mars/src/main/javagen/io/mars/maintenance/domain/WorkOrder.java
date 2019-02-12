@@ -1,9 +1,9 @@
 package io.mars.maintenance.domain;
 
 import io.vertigo.dynamo.domain.model.Entity;
+import io.vertigo.dynamo.domain.model.EnumVAccessor;
 import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.model.VAccessor;
-import io.vertigo.dynamo.domain.model.EnumVAccessor;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.lang.Generated;
@@ -220,7 +220,7 @@ public final class WorkOrder implements Entity {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Ticket")
 	public Long getTicketId() {
-		return (Long)  ticketIdAccessor.getId();
+		return (Long) ticketIdAccessor.getId();
 	}
 
 	/**
@@ -239,7 +239,7 @@ public final class WorkOrder implements Entity {
 	 */
 	@Field(domain = "DO_CODE", type = "FOREIGN_KEY", label = "Work Order Status")
 	public String getWorkOrderStatusId() {
-		return (String)  workOrderStatusIdAccessor.getId();
+		return (String) workOrderStatusIdAccessor.getId();
 	}
 
 	/**
@@ -258,24 +258,6 @@ public final class WorkOrder implements Entity {
 	public VAccessor<io.mars.maintenance.domain.Ticket> ticket() {
 		return ticketIdAccessor;
 	}
-	
-	@Deprecated
-	public io.mars.maintenance.domain.Ticket getTicket() {
-		// we keep the lazyness
-		if (!ticketIdAccessor.isLoaded()) {
-			ticketIdAccessor.load();
-		}
-		return ticketIdAccessor.get();
-	}
-
-	/**
-	 * Retourne l'UID: Ticket.
-	 * @return UID de l'association
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.UID<io.mars.maintenance.domain.Ticket> getTicketUID() {
-		return ticketIdAccessor.getUID();
-	}
 
  	/**
 	 * Association : Work Order Status.
@@ -283,24 +265,6 @@ public final class WorkOrder implements Entity {
 	 */
 	public EnumVAccessor<io.mars.maintenance.domain.WorkOrderStatus, io.mars.maintenance.domain.WorkOrderStatusEnum> workOrderStatus() {
 		return workOrderStatusIdAccessor;
-	}
-	
-	@Deprecated
-	public io.mars.maintenance.domain.WorkOrderStatus getWorkOrderStatus() {
-		// we keep the lazyness
-		if (!workOrderStatusIdAccessor.isLoaded()) {
-			workOrderStatusIdAccessor.load();
-		}
-		return workOrderStatusIdAccessor.get();
-	}
-
-	/**
-	 * Retourne l'UID: Work Order Status.
-	 * @return UID de l'association
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.UID<io.mars.maintenance.domain.WorkOrderStatus> getWorkOrderStatusUID() {
-		return workOrderStatusIdAccessor.getUID();
 	}
 	
 	/** {@inheritDoc} */

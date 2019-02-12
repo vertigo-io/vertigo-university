@@ -84,7 +84,7 @@ public final class Picture implements Entity {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", required = true, label = "Base")
 	public Long getBaseId() {
-		return (Long)  baseIdAccessor.getId();
+		return (Long) baseIdAccessor.getId();
 	}
 
 	/**

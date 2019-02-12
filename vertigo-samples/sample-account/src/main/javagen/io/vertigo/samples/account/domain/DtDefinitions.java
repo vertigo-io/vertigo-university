@@ -75,7 +75,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		MOV_ID,
 		/** Propriété 'Titre du film'. */
 		NAME,
-		/** Propriété 'AnnÃ©e'. */
+		/** Propriété 'Année'. */
 		YEAR,
 		/** Propriété 'Id Imdb'. */
 		IMDBID,

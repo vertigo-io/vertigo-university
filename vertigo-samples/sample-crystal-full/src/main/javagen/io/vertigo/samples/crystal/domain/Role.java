@@ -99,7 +99,7 @@ public final class Role implements Entity {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Movie")
 	public Long getMovId() {
-		return (Long)  movIdAccessor.getId();
+		return (Long) movIdAccessor.getId();
 	}
 
 	/**
@@ -118,7 +118,7 @@ public final class Role implements Entity {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Actor")
 	public Long getActId() {
-		return (Long)  actIdAccessor.getId();
+		return (Long) actIdAccessor.getId();
 	}
 
 	/**
@@ -136,24 +136,6 @@ public final class Role implements Entity {
 	 */
 	public VAccessor<io.vertigo.samples.crystal.domain.Actor> actor() {
 		return actIdAccessor;
-	}
-	
-	@Deprecated
-	public io.vertigo.samples.crystal.domain.Actor getActor() {
-		// we keep the lazyness
-		if (!actIdAccessor.isLoaded()) {
-			actIdAccessor.load();
-		}
-		return actIdAccessor.get();
-	}
-
-	/**
-	 * Retourne l'UID: Actor.
-	 * @return UID de l'association
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.UID<io.vertigo.samples.crystal.domain.Actor> getActorUID() {
-		return actIdAccessor.getUID();
 	}
 
  	/**

@@ -11,6 +11,7 @@ import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.dynamo.collections.metamodel.FacetDefinition;
 import io.vertigo.dynamo.collections.model.FacetedQueryResult;
 import io.vertigo.dynamo.collections.model.SelectedFacetValues;
+import io.vertigo.dynamo.domain.metamodel.association.DtListURIForNNAssociation;
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.domain.model.DtListState;
 import io.vertigo.dynamo.domain.model.Fragment;
@@ -95,22 +96,22 @@ public class MovieServicesImpl implements MovieServices {
 
 	@Override
 	public void saveWriters(final Movie movie, final List<UID> personURIs) {
-		movieDAO.updateNN(movie.getWritersDtListURI(), personURIs);
+		movieDAO.updateNN((DtListURIForNNAssociation) movie.writers().getDtListURI(), personURIs);
 	}
 
 	@Override
 	public void saveCamera(final Movie movie, final List<UID> personURIs) {
-		movieDAO.updateNN(movie.getCameraDtListURI(), personURIs);
+		movieDAO.updateNN((DtListURIForNNAssociation) movie.camera().getDtListURI(), personURIs);
 	}
 
 	@Override
 	public void saveProducers(final Movie movie, final List<UID> personURIs) {
-		movieDAO.updateNN(movie.getProducersDtListURI(), personURIs);
+		movieDAO.updateNN((DtListURIForNNAssociation) movie.producers().getDtListURI(), personURIs);
 	}
 
 	@Override
 	public void saveDirectors(final Movie movie, final List<UID> personURIs) {
-		movieDAO.updateNN(movie.getDirectorsDtListURI(), personURIs);
+		movieDAO.updateNN((DtListURIForNNAssociation) movie.directors().getDtListURI(), personURIs);
 	}
 
 	@Override
@@ -166,9 +167,11 @@ public class MovieServicesImpl implements MovieServices {
 	@Override
 	public DtList<PersonActorRoleLink> getActors(final long id) {
 		final DtList<PersonActorRoleLink> actorRoleLinks = new DtList<>(PersonActorRoleLink.class);
-		final DtList<ActorRole> actorRoles = getMovie(id).getRolesList();
-		for (final ActorRole actorRole : actorRoles) {
-			final Person person = actorRole.getActor(); //load actor in ActorRole
+		final Movie movie = getMovie(id);
+		movie.roles().load();
+		for (final ActorRole actorRole : movie.roles().get()) {
+			actorRole.actor().load();
+			final Person person = actorRole.actor().get(); //load actor in ActorRole
 			final PersonActorRoleLink actorRoleLink = new PersonActorRoleLink();
 			actorRoleLink.setPerId(person.getPerId());
 			actorRoleLink.setFullName(person.getFullName());
@@ -181,22 +184,30 @@ public class MovieServicesImpl implements MovieServices {
 
 	@Override
 	public DtList<Person> getWriters(final long id) {
-		return getMovie(id).getWritersList();
+		final Movie movie = getMovie(id);
+		movie.writers().load();
+		return movie.writers().get();
 	}
 
 	@Override
 	public DtList<Person> getCamera(final long id) {
-		return getMovie(id).getCameraList();
+		final Movie movie = getMovie(id);
+		movie.camera().load();
+		return movie.camera().get();
 	}
 
 	@Override
 	public DtList<Person> getProducers(final long id) {
-		return getMovie(id).getProducersList();
+		final Movie movie = getMovie(id);
+		movie.producers().load();
+		return movie.producers().get();
 	}
 
 	@Override
 	public DtList<Person> getDirectors(final long id) {
-		return getMovie(id).getDirectorsList();
+		final Movie movie = getMovie(id);
+		movie.directors().load();
+		return movie.directors().get();
 	}
 
 }

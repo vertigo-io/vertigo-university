@@ -99,7 +99,7 @@ public final class ActorRole implements Entity {
 	 */
 	@Field(domain = "DO_IDENTITY", type = "FOREIGN_KEY", label = "Actor")
 	public Long getPerId() {
-		return (Long)  perIdAccessor.getId();
+		return (Long) perIdAccessor.getId();
 	}
 
 	/**
@@ -118,7 +118,7 @@ public final class ActorRole implements Entity {
 	 */
 	@Field(domain = "DO_IDENTITY", type = "FOREIGN_KEY", label = "Movie")
 	public Long getMovId() {
-		return (Long)  movIdAccessor.getId();
+		return (Long) movIdAccessor.getId();
 	}
 
 	/**
@@ -144,24 +144,6 @@ public final class ActorRole implements Entity {
 	 */
 	public VAccessor<io.vertigo.pandora.domain.persons.Person> actor() {
 		return perIdAccessor;
-	}
-	
-	@Deprecated
-	public io.vertigo.pandora.domain.persons.Person getActor() {
-		// we keep the lazyness
-		if (!perIdAccessor.isLoaded()) {
-			perIdAccessor.load();
-		}
-		return perIdAccessor.get();
-	}
-
-	/**
-	 * Retourne l'UID: Actor.
-	 * @return UID de l'association
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.UID<io.vertigo.pandora.domain.persons.Person> getActorUID() {
-		return perIdAccessor.getUID();
 	}
 	
 	/** {@inheritDoc} */

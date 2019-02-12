@@ -9,7 +9,9 @@ import io.vertigo.core.param.Param;
 import io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin;
 import io.vertigo.core.plugins.resource.local.LocalResourceResolverPlugin;
 import io.vertigo.dynamo.plugins.environment.DynamoDefinitionProvider;
+import io.vertigo.studio.impl.masterdata.MasterDataManagerImpl;
 import io.vertigo.studio.impl.mda.MdaManagerImpl;
+import io.vertigo.studio.masterdata.MasterDataManager;
 import io.vertigo.studio.mda.MdaManager;
 import io.vertigo.studio.plugins.mda.domain.java.DomainGeneratorPlugin;
 import io.vertigo.studio.plugins.mda.domain.sql.SqlGeneratorPlugin;
@@ -127,6 +129,7 @@ public final class PandoraConfigurator {
 		//		} else {
 		appConfigBuilder
 				.addModule(ModuleConfig.builder("studio")
+						.addComponent(MasterDataManager.class, MasterDataManagerImpl.class)
 						.addComponent(MdaManager.class, MdaManagerImpl.class,
 								Param.of("projectPackageName", "io.vertigo.pandora"),
 								Param.of("targetGenDir", "src/main/"),
@@ -134,7 +137,6 @@ public final class PandoraConfigurator {
 						.addPlugin(DomainGeneratorPlugin.class,
 								Param.of("targetSubDir", "javagen"),
 								Param.of("generateDtResources", "false"),
-								Param.of("generateJpaAnnotations", "false"),
 								Param.of("generateDtDefinitions", "true"),
 								Param.of("generateDtObject", "true"))
 						.addPlugin(TaskGeneratorPlugin.class,

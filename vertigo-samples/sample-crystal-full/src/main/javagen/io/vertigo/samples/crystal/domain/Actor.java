@@ -1,8 +1,8 @@
 package io.vertigo.samples.crystal.domain;
 
 import io.vertigo.dynamo.domain.model.Entity;
-import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.model.EnumVAccessor;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.lang.Generated;
@@ -84,7 +84,7 @@ public final class Actor implements Entity {
 	 */
 	@Field(domain = "DO_CODE", type = "FOREIGN_KEY", label = "Sexe")
 	public String getSexCd() {
-		return (String)  sexCdAccessor.getId();
+		return (String) sexCdAccessor.getId();
 	}
 
 	/**
@@ -102,24 +102,6 @@ public final class Actor implements Entity {
 	 */
 	public EnumVAccessor<io.vertigo.samples.crystal.domain.Sexe, io.vertigo.samples.crystal.domain.SexeEnum> sexe() {
 		return sexCdAccessor;
-	}
-	
-	@Deprecated
-	public io.vertigo.samples.crystal.domain.Sexe getSexe() {
-		// we keep the lazyness
-		if (!sexCdAccessor.isLoaded()) {
-			sexCdAccessor.load();
-		}
-		return sexCdAccessor.get();
-	}
-
-	/**
-	 * Retourne l'UID: Sexe.
-	 * @return UID de l'association
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.UID<io.vertigo.samples.crystal.domain.Sexe> getSexeUID() {
-		return sexCdAccessor.getUID();
 	}
 	
 	/** {@inheritDoc} */

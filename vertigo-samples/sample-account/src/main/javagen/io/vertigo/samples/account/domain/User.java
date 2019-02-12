@@ -139,7 +139,7 @@ public final class User implements Entity {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Country")
 	public Long getCouId() {
-		return (Long)  couIdAccessor.getId();
+		return (Long) couIdAccessor.getId();
 	}
 
 	/**
@@ -158,7 +158,7 @@ public final class User implements Entity {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Group")
 	public Long getGrpId() {
-		return (Long)  grpIdAccessor.getId();
+		return (Long) grpIdAccessor.getId();
 	}
 
 	/**
@@ -177,24 +177,6 @@ public final class User implements Entity {
 	public VAccessor<io.vertigo.samples.account.domain.Country> country() {
 		return couIdAccessor;
 	}
-	
-	@Deprecated
-	public io.vertigo.samples.account.domain.Country getCountry() {
-		// we keep the lazyness
-		if (!couIdAccessor.isLoaded()) {
-			couIdAccessor.load();
-		}
-		return couIdAccessor.get();
-	}
-
-	/**
-	 * Retourne l'UID: Country.
-	 * @return UID de l'association
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.UID<io.vertigo.samples.account.domain.Country> getCountryUID() {
-		return couIdAccessor.getUID();
-	}
 
  	/**
 	 * Association : Group.
@@ -202,24 +184,6 @@ public final class User implements Entity {
 	 */
 	public VAccessor<io.vertigo.samples.account.domain.UserGroup> group() {
 		return grpIdAccessor;
-	}
-	
-	@Deprecated
-	public io.vertigo.samples.account.domain.UserGroup getGroup() {
-		// we keep the lazyness
-		if (!grpIdAccessor.isLoaded()) {
-			grpIdAccessor.load();
-		}
-		return grpIdAccessor.get();
-	}
-
-	/**
-	 * Retourne l'UID: Group.
-	 * @return UID de l'association
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.UID<io.vertigo.samples.account.domain.UserGroup> getGroupUID() {
-		return grpIdAccessor.getUID();
 	}
 	
 	/** {@inheritDoc} */

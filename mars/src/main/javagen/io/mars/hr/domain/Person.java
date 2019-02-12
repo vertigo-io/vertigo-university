@@ -204,7 +204,7 @@ public final class Person implements Entity {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Group")
 	public Long getGroupId() {
-		return (Long)  groupIdAccessor.getId();
+		return (Long) groupIdAccessor.getId();
 	}
 
 	/**
@@ -232,24 +232,6 @@ public final class Person implements Entity {
 	 */
 	public VAccessor<io.mars.hr.domain.Groups> group() {
 		return groupIdAccessor;
-	}
-	
-	@Deprecated
-	public io.mars.hr.domain.Groups getGroup() {
-		// we keep the lazyness
-		if (!groupIdAccessor.isLoaded()) {
-			groupIdAccessor.load();
-		}
-		return groupIdAccessor.get();
-	}
-
-	/**
-	 * Retourne l'UID: Group.
-	 * @return UID de l'association
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.UID<io.mars.hr.domain.Groups> getGroupUID() {
-		return groupIdAccessor.getUID();
 	}
 	
 	/** {@inheritDoc} */

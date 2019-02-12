@@ -1,8 +1,8 @@
 package io.vertigo.pandora.domain.movies;
 
 import io.vertigo.dynamo.domain.model.KeyConcept;
-import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.model.ListVAccessor;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.lang.Generated;
@@ -52,9 +52,9 @@ public final class Movie implements KeyConcept {
 			dtDefinitionB = "DT_PERSON",
 			navigabilityA = false,
 			navigabilityB = true,
-			roleA = "Movie",
+			roleA = "MoviesAsCamera",
 			roleB = "Camera",
-			labelA = "Movie",
+			labelA = "MoviesAsCamera",
 			labelB = "Camera")
 	private final ListVAccessor<io.vertigo.pandora.domain.persons.Person> cameraAccessor = new ListVAccessor<>(this, "ANN_CAMERA", "Camera");
 
@@ -65,9 +65,9 @@ public final class Movie implements KeyConcept {
 			dtDefinitionB = "DT_PERSON",
 			navigabilityA = false,
 			navigabilityB = true,
-			roleA = "Movie",
+			roleA = "MoviesAsDirector",
 			roleB = "Directors",
-			labelA = "Movie",
+			labelA = "MoviesAsDirector",
 			labelB = "Directors")
 	private final ListVAccessor<io.vertigo.pandora.domain.persons.Person> directorsAccessor = new ListVAccessor<>(this, "ANN_DIRECTORS", "Directors");
 
@@ -78,9 +78,9 @@ public final class Movie implements KeyConcept {
 			dtDefinitionB = "DT_PERSON",
 			navigabilityA = false,
 			navigabilityB = true,
-			roleA = "Movie",
+			roleA = "MoviesAsProducer",
 			roleB = "Producers",
-			labelA = "Movie",
+			labelA = "MoviesAsProducer",
 			labelB = "Producers")
 	private final ListVAccessor<io.vertigo.pandora.domain.persons.Person> producersAccessor = new ListVAccessor<>(this, "ANN_PRODUCERS", "Producers");
 
@@ -91,9 +91,9 @@ public final class Movie implements KeyConcept {
 			dtDefinitionB = "DT_PERSON",
 			navigabilityA = false,
 			navigabilityB = true,
-			roleA = "Movie",
+			roleA = "MoviesAsWriter",
 			roleB = "Writers",
-			labelA = "Movie",
+			labelA = "MoviesAsWriter",
 			labelB = "Writers")
 	private final ListVAccessor<io.vertigo.pandora.domain.persons.Person> writersAccessor = new ListVAccessor<>(this, "ANN_WRITERS", "Writers");
 
@@ -376,28 +376,6 @@ public final class Movie implements KeyConcept {
 	public ListVAccessor<io.vertigo.pandora.domain.persons.ActorRole> roles() {
 		return rolesAccessor;
 	}
-	
-	/**
-	 * Association : Roles.
-	 * @return DtList de io.vertigo.pandora.domain.persons.ActorRole
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.ActorRole> getRolesList() {
-		// we keep the lazyness
-		if (!rolesAccessor.isLoaded()) {
-			rolesAccessor.load();
-		}
-		return rolesAccessor.get();
-	}
-
-	/**
-	 * Association UID: Roles.
-	 * @return UID de l'association
-	 */
-	@Deprecated	
-	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation getRolesDtListURI() {
-		return (io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation) rolesAccessor.getDtListURI();
-	}
 
 	/**
 	 * Association : Camera.
@@ -405,28 +383,6 @@ public final class Movie implements KeyConcept {
 	 */
 	public ListVAccessor<io.vertigo.pandora.domain.persons.Person> camera() {
 		return cameraAccessor;
-	}
-	
-	/**
-	 * Association : Camera.
-	 * @return DtList de io.vertigo.pandora.domain.persons.Person
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.Person> getCameraList() {
-		// we keep the lazyness
-		if (!cameraAccessor.isLoaded()) {
-			cameraAccessor.load();
-		}
-		return cameraAccessor.get();
-	}
-
-	/**
-	 * Association UID: Camera.
-	 * @return UID de l'association
-	 */
-	@Deprecated	
-	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForNNAssociation getCameraDtListURI() {
-		return (io.vertigo.dynamo.domain.metamodel.association.DtListURIForNNAssociation) cameraAccessor.getDtListURI();
 	}
 
 	/**
@@ -436,28 +392,6 @@ public final class Movie implements KeyConcept {
 	public ListVAccessor<io.vertigo.pandora.domain.persons.Person> directors() {
 		return directorsAccessor;
 	}
-	
-	/**
-	 * Association : Directors.
-	 * @return DtList de io.vertigo.pandora.domain.persons.Person
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.Person> getDirectorsList() {
-		// we keep the lazyness
-		if (!directorsAccessor.isLoaded()) {
-			directorsAccessor.load();
-		}
-		return directorsAccessor.get();
-	}
-
-	/**
-	 * Association UID: Directors.
-	 * @return UID de l'association
-	 */
-	@Deprecated	
-	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForNNAssociation getDirectorsDtListURI() {
-		return (io.vertigo.dynamo.domain.metamodel.association.DtListURIForNNAssociation) directorsAccessor.getDtListURI();
-	}
 
 	/**
 	 * Association : Producers.
@@ -466,28 +400,6 @@ public final class Movie implements KeyConcept {
 	public ListVAccessor<io.vertigo.pandora.domain.persons.Person> producers() {
 		return producersAccessor;
 	}
-	
-	/**
-	 * Association : Producers.
-	 * @return DtList de io.vertigo.pandora.domain.persons.Person
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.Person> getProducersList() {
-		// we keep the lazyness
-		if (!producersAccessor.isLoaded()) {
-			producersAccessor.load();
-		}
-		return producersAccessor.get();
-	}
-
-	/**
-	 * Association UID: Producers.
-	 * @return UID de l'association
-	 */
-	@Deprecated	
-	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForNNAssociation getProducersDtListURI() {
-		return (io.vertigo.dynamo.domain.metamodel.association.DtListURIForNNAssociation) producersAccessor.getDtListURI();
-	}
 
 	/**
 	 * Association : Writers.
@@ -495,28 +407,6 @@ public final class Movie implements KeyConcept {
 	 */
 	public ListVAccessor<io.vertigo.pandora.domain.persons.Person> writers() {
 		return writersAccessor;
-	}
-	
-	/**
-	 * Association : Writers.
-	 * @return DtList de io.vertigo.pandora.domain.persons.Person
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.Person> getWritersList() {
-		// we keep the lazyness
-		if (!writersAccessor.isLoaded()) {
-			writersAccessor.load();
-		}
-		return writersAccessor.get();
-	}
-
-	/**
-	 * Association UID: Writers.
-	 * @return UID de l'association
-	 */
-	@Deprecated	
-	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForNNAssociation getWritersDtListURI() {
-		return (io.vertigo.dynamo.domain.metamodel.association.DtListURIForNNAssociation) writersAccessor.getDtListURI();
 	}
 	
 	/** {@inheritDoc} */

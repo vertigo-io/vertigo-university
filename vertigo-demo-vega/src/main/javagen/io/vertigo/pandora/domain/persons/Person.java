@@ -49,11 +49,11 @@ public final class Person implements KeyConcept {
 			dtDefinitionB = "DT_PERSON",
 			navigabilityA = false,
 			navigabilityB = true,
-			roleA = "Movie",
+			roleA = "MoviesAsCamera",
 			roleB = "Camera",
-			labelA = "Movie",
+			labelA = "MoviesAsCamera",
 			labelB = "Camera")
-	private final ListVAccessor<io.vertigo.pandora.domain.movies.Movie> camerasAccessor = new ListVAccessor<>(this, "ANN_CAMERA", "Movie");
+	private final ListVAccessor<io.vertigo.pandora.domain.movies.Movie> moviesAsCameraAccessor = new ListVAccessor<>(this, "ANN_CAMERA", "MoviesAsCamera");
 
 	@io.vertigo.dynamo.domain.stereotype.AssociationNN(
 			name = "ANN_DIRECTORS",
@@ -62,11 +62,11 @@ public final class Person implements KeyConcept {
 			dtDefinitionB = "DT_PERSON",
 			navigabilityA = false,
 			navigabilityB = true,
-			roleA = "Movie",
+			roleA = "MoviesAsDirector",
 			roleB = "Directors",
-			labelA = "Movie",
+			labelA = "MoviesAsDirector",
 			labelB = "Directors")
-	private final ListVAccessor<io.vertigo.pandora.domain.movies.Movie> directorsAccessor = new ListVAccessor<>(this, "ANN_DIRECTORS", "Movie");
+	private final ListVAccessor<io.vertigo.pandora.domain.movies.Movie> moviesAsDirectorAccessor = new ListVAccessor<>(this, "ANN_DIRECTORS", "MoviesAsDirector");
 
 	@io.vertigo.dynamo.domain.stereotype.AssociationNN(
 			name = "ANN_PRODUCERS",
@@ -75,11 +75,11 @@ public final class Person implements KeyConcept {
 			dtDefinitionB = "DT_PERSON",
 			navigabilityA = false,
 			navigabilityB = true,
-			roleA = "Movie",
+			roleA = "MoviesAsProducer",
 			roleB = "Producers",
-			labelA = "Movie",
+			labelA = "MoviesAsProducer",
 			labelB = "Producers")
-	private final ListVAccessor<io.vertigo.pandora.domain.movies.Movie> producersAccessor = new ListVAccessor<>(this, "ANN_PRODUCERS", "Movie");
+	private final ListVAccessor<io.vertigo.pandora.domain.movies.Movie> moviesAsProducerAccessor = new ListVAccessor<>(this, "ANN_PRODUCERS", "MoviesAsProducer");
 
 	@io.vertigo.dynamo.domain.stereotype.AssociationNN(
 			name = "ANN_WRITERS",
@@ -88,18 +88,18 @@ public final class Person implements KeyConcept {
 			dtDefinitionB = "DT_PERSON",
 			navigabilityA = false,
 			navigabilityB = true,
-			roleA = "Movie",
+			roleA = "MoviesAsWriter",
 			roleB = "Writers",
-			labelA = "Movie",
+			labelA = "MoviesAsWriter",
 			labelB = "Writers")
-	private final ListVAccessor<io.vertigo.pandora.domain.movies.Movie> movieAccessor = new ListVAccessor<>(this, "ANN_WRITERS", "Movie");
+	private final ListVAccessor<io.vertigo.pandora.domain.movies.Movie> moviesAsWriterAccessor = new ListVAccessor<>(this, "ANN_WRITERS", "MoviesAsWriter");
 
 	/** {@inheritDoc} */
 	@Override
 	public UID<Person> getUID() {
 		return UID.of(this);
 	}
-
+	
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'PER ID'.
@@ -118,7 +118,7 @@ public final class Person implements KeyConcept {
 	public void setPerId(final Long perId) {
 		this.perId = perId;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'FULL NAME'.
@@ -137,7 +137,7 @@ public final class Person implements KeyConcept {
 	public void setFullName(final String fullName) {
 		this.fullName = fullName;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'FIRST NAME'.
@@ -156,7 +156,7 @@ public final class Person implements KeyConcept {
 	public void setFirstName(final String firstName) {
 		this.firstName = firstName;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'LAST NAME'.
@@ -175,7 +175,7 @@ public final class Person implements KeyConcept {
 	public void setLastName(final String lastName) {
 		this.lastName = lastName;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'BIOGRAPHY'.
@@ -194,7 +194,7 @@ public final class Person implements KeyConcept {
 	public void setBiography(final String biography) {
 		this.biography = biography;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'SHORT BIOGRAPHY'.
@@ -213,7 +213,7 @@ public final class Person implements KeyConcept {
 	public void setShortBiography(final String shortBiography) {
 		this.shortBiography = shortBiography;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'SEX'.
@@ -232,7 +232,7 @@ public final class Person implements KeyConcept {
 	public void setSex(final String sex) {
 		this.sex = sex;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'PHOTO HREF'.
@@ -251,7 +251,7 @@ public final class Person implements KeyConcept {
 	public void setPhotoHref(final String photoHref) {
 		this.photoHref = photoHref;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'BIRTH DATE'.
@@ -270,7 +270,7 @@ public final class Person implements KeyConcept {
 	public void setBirthDate(final String birthDate) {
 		this.birthDate = birthDate;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'BIRTH PLACE'.
@@ -289,7 +289,7 @@ public final class Person implements KeyConcept {
 	public void setBirthPlace(final String birthPlace) {
 		this.birthPlace = birthPlace;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'ACTIVITY'.
@@ -316,29 +316,7 @@ public final class Person implements KeyConcept {
 	public ListVAccessor<io.vertigo.pandora.domain.persons.ActorRole> roles() {
 		return rolesAccessor;
 	}
-
-	/**
-	 * Association : Roles.
-	 * @return DtList de io.vertigo.pandora.domain.persons.ActorRole
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.ActorRole> getRolesList() {
-		// we keep the lazyness
-		if (!rolesAccessor.isLoaded()) {
-			rolesAccessor.load();
-		}
-		return rolesAccessor.get();
-	}
-
-	/**
-	 * Association UID: Roles.
-	 * @return UID de l'association
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation getRolesDtListURI() {
-		return (io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation) rolesAccessor.getDtListURI();
-	}
-
+	
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

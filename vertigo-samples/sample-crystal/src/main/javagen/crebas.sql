@@ -86,7 +86,7 @@ comment on column MOVIE.NAME is
 'Titre du film';
 
 comment on column MOVIE.YEAR is
-'AnnÃ©e';
+'Année';
 
 comment on column MOVIE.IMDBID is
 'Id Imdb';

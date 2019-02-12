@@ -1,10 +1,10 @@
 package io.mars.basemanagement.domain;
 
 import io.vertigo.dynamo.domain.model.KeyConcept;
-import io.vertigo.dynamo.domain.model.UID;
-import io.vertigo.dynamo.domain.model.VAccessor;
 import io.vertigo.dynamo.domain.model.EnumVAccessor;
 import io.vertigo.dynamo.domain.model.ListVAccessor;
+import io.vertigo.dynamo.domain.model.UID;
+import io.vertigo.dynamo.domain.model.VAccessor;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.lang.Generated;
@@ -276,7 +276,7 @@ public final class Base implements KeyConcept {
 	 */
 	@Field(domain = "DO_CODE", type = "FOREIGN_KEY", label = "Base Type")
 	public String getBaseTypeId() {
-		return (String)  baseTypeIdAccessor.getId();
+		return (String) baseTypeIdAccessor.getId();
 	}
 
 	/**
@@ -295,7 +295,7 @@ public final class Base implements KeyConcept {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Base Geosector")
 	public Long getGeosectorId() {
-		return (Long)  geosectorIdAccessor.getId();
+		return (Long) geosectorIdAccessor.getId();
 	}
 
 	/**
@@ -314,24 +314,6 @@ public final class Base implements KeyConcept {
 	public EnumVAccessor<io.mars.basemanagement.domain.BaseType, io.mars.basemanagement.domain.BaseTypeEnum> baseType() {
 		return baseTypeIdAccessor;
 	}
-	
-	@Deprecated
-	public io.mars.basemanagement.domain.BaseType getBaseType() {
-		// we keep the lazyness
-		if (!baseTypeIdAccessor.isLoaded()) {
-			baseTypeIdAccessor.load();
-		}
-		return baseTypeIdAccessor.get();
-	}
-
-	/**
-	 * Retourne l'UID: Base Type.
-	 * @return UID de l'association
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.UID<io.mars.basemanagement.domain.BaseType> getBaseTypeUID() {
-		return baseTypeIdAccessor.getUID();
-	}
 
  	/**
 	 * Association : Base Geosector.
@@ -340,24 +322,6 @@ public final class Base implements KeyConcept {
 	public VAccessor<io.mars.basemanagement.domain.Geosector> geosector() {
 		return geosectorIdAccessor;
 	}
-	
-	@Deprecated
-	public io.mars.basemanagement.domain.Geosector getGeosector() {
-		// we keep the lazyness
-		if (!geosectorIdAccessor.isLoaded()) {
-			geosectorIdAccessor.load();
-		}
-		return geosectorIdAccessor.get();
-	}
-
-	/**
-	 * Retourne l'UID: Base Geosector.
-	 * @return UID de l'association
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.UID<io.mars.basemanagement.domain.Geosector> getGeosectorUID() {
-		return geosectorIdAccessor.getUID();
-	}
 
 	/**
 	 * Association : Base Pictures.
@@ -365,28 +329,6 @@ public final class Base implements KeyConcept {
 	 */
 	public ListVAccessor<io.mars.basemanagement.domain.Picture> pictures() {
 		return picturesAccessor;
-	}
-	
-	/**
-	 * Association : Base Pictures.
-	 * @return DtList de io.mars.basemanagement.domain.Picture
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.domain.Picture> getPicturesList() {
-		// we keep the lazyness
-		if (!picturesAccessor.isLoaded()) {
-			picturesAccessor.load();
-		}
-		return picturesAccessor.get();
-	}
-
-	/**
-	 * Association UID: Base Pictures.
-	 * @return UID de l'association
-	 */
-	@Deprecated	
-	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation getPicturesDtListURI() {
-		return (io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation) picturesAccessor.getDtListURI();
 	}
 	
 	/** {@inheritDoc} */

@@ -1,9 +1,9 @@
 package io.vertigo.samples.dao.domain;
 
 import io.vertigo.dynamo.domain.model.Entity;
+import io.vertigo.dynamo.domain.model.ListVAccessor;
 import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.model.VAccessor;
-import io.vertigo.dynamo.domain.model.ListVAccessor;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.lang.Generated;
@@ -98,17 +98,17 @@ public final class MyMovie implements Entity {
 	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'AnnÃ©e'.
+	 * Récupère la valeur de la propriété 'Année'.
 	 * @return Integer year
 	 */
-	@Field(domain = "DO_YEAR", label = "AnnÃ©e")
+	@Field(domain = "DO_YEAR", label = "Année")
 	public Integer getYear() {
 		return year;
 	}
 
 	/**
 	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'AnnÃ©e'.
+	 * Définit la valeur de la propriété 'Année'.
 	 * @param year Integer
 	 */
 	public void setYear(final Integer year) {
@@ -141,7 +141,7 @@ public final class MyMovie implements Entity {
 	 */
 	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Country")
 	public Long getCouId() {
-		return (Long)  couIdAccessor.getId();
+		return (Long) couIdAccessor.getId();
 	}
 
 	/**
@@ -160,24 +160,6 @@ public final class MyMovie implements Entity {
 	public VAccessor<io.vertigo.samples.dao.domain.MyCountry> country() {
 		return couIdAccessor;
 	}
-	
-	@Deprecated
-	public io.vertigo.samples.dao.domain.MyCountry getCountry() {
-		// we keep the lazyness
-		if (!couIdAccessor.isLoaded()) {
-			couIdAccessor.load();
-		}
-		return couIdAccessor.get();
-	}
-
-	/**
-	 * Retourne l'UID: Country.
-	 * @return UID de l'association
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.UID<io.vertigo.samples.dao.domain.MyCountry> getCountryUID() {
-		return couIdAccessor.getUID();
-	}
 
 	/**
 	 * Association : Role.
@@ -185,28 +167,6 @@ public final class MyMovie implements Entity {
 	 */
 	public ListVAccessor<io.vertigo.samples.dao.domain.MyRole> role() {
 		return roleAccessor;
-	}
-	
-	/**
-	 * Association : Role.
-	 * @return DtList de io.vertigo.samples.dao.domain.MyRole
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.MyRole> getRoleList() {
-		// we keep the lazyness
-		if (!roleAccessor.isLoaded()) {
-			roleAccessor.load();
-		}
-		return roleAccessor.get();
-	}
-
-	/**
-	 * Association UID: Role.
-	 * @return UID de l'association
-	 */
-	@Deprecated	
-	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation getRoleDtListURI() {
-		return (io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation) roleAccessor.getDtListURI();
 	}
 	
 	/** {@inheritDoc} */
