@@ -1,6 +1,6 @@
 package io.mars.jobs.services;
 
-import java.util.Date;
+import java.time.Instant;
 import java.util.Optional;
 
 import javax.inject.Inject;
@@ -33,11 +33,11 @@ public class JobServices implements Component {
 		return uiexecutionsPAO.getExecutionsByProcessName(processName, status, limit, offset);
 	}
 
-	public DtList<OExecutionSummary> getSummariesByDate(final Date minDate, final Date maxDate, final Optional<String> status) {
+	public DtList<OExecutionSummary> getSummariesByDate(final Instant minDate, final Instant maxDate, final Optional<String> status) {
 		return summaryPAO.getExecutionSummariesByDate(minDate, maxDate, status.orElse(null));
 	}
 
-	public OExecutionSummary getSummaryByDate(final String processName, final Date minDate, final Date maxDate) {
+	public OExecutionSummary getSummaryByDate(final String processName, final Instant minDate, final Instant maxDate) {
 		Assertion.checkArgNotEmpty(processName);
 		//---
 		return summaryPAO.getExecutionSummaryByDateAndName(minDate, maxDate, processName);

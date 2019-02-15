@@ -1,8 +1,8 @@
 package io.mars.jobs.controllers;
 
+import java.time.Instant;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.Optional;
@@ -49,7 +49,7 @@ public class JobDetailController extends AbstractVSpringMvcController {
 		viewContext.publishDto(jobKey, jobServices.getProcessDefinition(jobName));
 		// We take the first day of the current week
 		final Calendar firstDayOfWeek = getFirstDayOfWeek();
-		viewContext.publishDto(executionSummary, jobServices.getSummaryByDate(jobName, firstDayOfWeek.getTime(), getFirstDayOfNextWeekDate(firstDayOfWeek)));
+		viewContext.publishDto(executionSummary, jobServices.getSummaryByDate(jobName, firstDayOfWeek.toInstant(), getFirstDayOfNextWeekDate(firstDayOfWeek)));
 		toModeReadOnly();
 	}
 
@@ -77,15 +77,15 @@ public class JobDetailController extends AbstractVSpringMvcController {
 
 	@PostMapping("/_executeNow")
 	public void doExecuteNow(@ViewAttribute("job") final OProcessUi job) {
-		orchestraServices.getScheduler().scheduleAt(orchestraDefinitionManager.getProcessDefinition(job.getName()), new Date(), Collections.emptyMap());
+		orchestraServices.getScheduler().scheduleAt(orchestraDefinitionManager.getProcessDefinition(job.getName()), Instant.now(), Collections.emptyMap());
 	}
 
-	private static Date getFirstDayOfNextWeekDate(final Calendar first) {
+	private static Instant getFirstDayOfNextWeekDate(final Calendar first) {
 		// and add seven days to the end date
 		final Calendar last = (Calendar) first.clone();
 		last.add(Calendar.DAY_OF_YEAR, 7);
 
-		return last.getTime();
+		return last.toInstant();
 	}
 
 	private static Calendar getFirstDayOfWeek() {

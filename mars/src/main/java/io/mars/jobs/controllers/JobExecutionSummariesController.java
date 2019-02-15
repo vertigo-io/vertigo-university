@@ -1,7 +1,7 @@
 package io.mars.jobs.controllers;
 
+import java.time.Instant;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.Optional;
@@ -35,15 +35,15 @@ public class JobExecutionSummariesController extends AbstractVSpringMvcControlle
 		final Calendar firstDayOfWeek = getFirstDayOfWeek();
 		// We make the call with the proper week dates
 		viewContext.publishDtList(summaries, OExecutionSummaryFields.PRO_ID, jobServices.getSummariesByDate(
-				firstDayOfWeek.getTime(), getFirstDayOfNextWeekDate(firstDayOfWeek), Optional.of("ALL")));
+				firstDayOfWeek.toInstant(), getFirstDayOfNextWeekDate(firstDayOfWeek), Optional.of("ALL")));
 	}
 
-	private static Date getFirstDayOfNextWeekDate(final Calendar first) {
+	private static Instant getFirstDayOfNextWeekDate(final Calendar first) {
 		// and add seven days to the end date
 		final Calendar last = (Calendar) first.clone();
 		last.add(Calendar.DAY_OF_YEAR, WEEK_DAYS);
 
-		return last.getTime();
+		return last.toInstant();
 	}
 
 	private static Calendar getFirstDayOfWeek() {
