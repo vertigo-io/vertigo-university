@@ -78,7 +78,7 @@ create Domain DO_IDS {
 	multiple : "true"
 }
 create Domain DO_DATE {
-	dataType : Date
+	dataType : LocalDate
 	formatter : FMT_DATE
 	storeType : "DATE"
 }
@@ -206,7 +206,7 @@ create Domain DO_FILE_NAME {
 }
 
 create Domain DO_TIMESTAMP {
-	dataType : Date
+	dataType : Instant
 	formatter : FMT_DATE_HEURE
 	storeType : "TIMESTAMP"
 }
