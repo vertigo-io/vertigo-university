@@ -3,8 +3,6 @@ package io.vertigo.samples.crystal.config;
 import io.vertigo.account.AccountFeatures;
 import io.vertigo.account.authorization.AuthorizationManager;
 import io.vertigo.account.impl.authorization.AuthorizationManagerImpl;
-import io.vertigo.account.plugins.account.store.datastore.StoreAccountStorePlugin;
-import io.vertigo.account.plugins.authentication.ldap.LdapAuthenticationPlugin;
 import io.vertigo.app.config.AppConfig;
 import io.vertigo.app.config.AppConfigBuilder;
 import io.vertigo.app.config.ComponentConfig;
@@ -67,7 +65,8 @@ public class SampleConfigBuilder {
 						.build());
 		if (withVega) {
 			appConfigBuilder.addModule(new VegaFeatures()
-					.withEmbeddedServer(Param.of("port", "8081"))
+					.withWebServices()
+					.withWebServicesEmbeddedServer(Param.of("port", "8081"))
 					.build());
 		}
 
@@ -80,14 +79,15 @@ public class SampleConfigBuilder {
 		if (withAccount) {
 			appConfigBuilder.addModule(new AccountFeatures()
 					.withSecurity(Param.of("userSessionClassName", TestUserSession.class.getName()))
-					.addPlugin(StoreAccountStorePlugin.class,
+					.withAccount()
+					.withStoreAccount(
 							Param.of("userIdentityEntity", "DT_USER"),
 							Param.of("groupIdentityEntity", "DT_USER_GROUP"),
 							Param.of("userAuthField", "LOGIN"),
 							Param.of("userToAccountMapping", "id:LOGIN, displayName:NAME, email:EMAIL, authToken:LOGIN"),
 							Param.of("groupToGroupAccountMapping", "id:NAME, displayName:NAME"))
 					.withAuthentication()
-					.addPlugin(LdapAuthenticationPlugin.class,
+					.withLdapAuthentication(
 							Param.of("userLoginTemplate", "cn={0},dc=vertigo,dc=io"),
 							Param.of("ldapServerHost", "docker-vertigo.part.klee.lan.net"),
 							Param.of("ldapServerPort", "389"))

@@ -32,8 +32,9 @@ public final class SampleVegaConfigurator {
 						.addComponent(KVStoreManager.class, io.vertigo.dynamo.impl.kvstore.KVStoreManagerImpl.class)
 						.build())
 				.addModule(new VegaFeatures()
-						.withEmbeddedServer(Param.of("port", Integer.toString(port)))
-						.withTokens(Param.of("tokens", "security-token"))
+						.withWebServices()
+						.withWebServicesEmbeddedServer(Param.of("port", Integer.toString(port)))
+						.withWebServicesTokens(Param.of("tokens", "security-token"))
 						.build())
 				//-----Declaration of a module named 'Vega' which contains a webservice component.
 				.addModule( ModuleConfig.builder("Samples")

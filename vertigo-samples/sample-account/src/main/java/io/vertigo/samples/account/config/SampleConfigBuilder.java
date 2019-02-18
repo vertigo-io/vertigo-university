@@ -53,6 +53,7 @@ public class SampleConfigBuilder {
 				//---- Account
 				.addModule(new AccountFeatures()
 						.withSecurity(Param.of("userSessionClassName", TestUserSession.class.getName()))
+						.withAccount()
 						.withStoreAccount(
 								Param.of("userIdentityEntity", "DT_USER"),
 								Param.of("groupIdentityEntity", "DT_USER_GROUP"),
@@ -70,8 +71,9 @@ public class SampleConfigBuilder {
 								.build())
 						.build())
 				.addModule(new VegaFeatures()
-						.withSecurity()
-						.withEmbeddedServer(Param.of("port", "8081"))
+						.withWebServices()
+						.withWebServicesSecurity()
+						.withWebServicesEmbeddedServer(Param.of("port", "8081"))
 						.build());
 
 		return appConfigBuilder;

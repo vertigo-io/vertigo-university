@@ -56,7 +56,8 @@ public class SampleConfigBuilder {
 
 		if (withVega) {
 			appConfigBuilder.addModule(new VegaFeatures()
-					.withEmbeddedServer(Param.of("port", "8081"))
+					.withWebServices()
+					.withWebServicesEmbeddedServer(Param.of("port", "8081"))
 					.build());
 		}
 

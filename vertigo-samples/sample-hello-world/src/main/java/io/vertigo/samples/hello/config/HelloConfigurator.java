@@ -11,7 +11,7 @@ public final class HelloConfigurator {
 	public static AppConfig config(final int port) {
 		return AppConfig.builder()
 				.addModule(new CommonsFeatures().build())
-				.addModule(new VegaFeatures().withEmbeddedServer(Param.of("port", Integer.toString(port))).build())
+				.addModule(new VegaFeatures().withWebServices().withWebServicesEmbeddedServer(Param.of("port", Integer.toString(port))).build())
 				//-----Declaration of a module named 'Hello' which contains a webservice component.
 				.addModule(ModuleConfig.builder("Hello")
 						.addComponent(HelloWebServices.class)
