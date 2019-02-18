@@ -47,6 +47,7 @@ public class SampleConfigBuilder {
 						.withCache()
 						.withMemoryCache()
 						.withScript()
+						.withJaninoScript()
 						.build())
 				.addModule(new DatabaseFeatures()
 						.withSqlDataBase()

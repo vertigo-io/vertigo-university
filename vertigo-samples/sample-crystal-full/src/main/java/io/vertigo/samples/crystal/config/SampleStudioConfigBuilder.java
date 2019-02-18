@@ -32,6 +32,7 @@ public class SampleStudioConfigBuilder {
 						.withCache()
 						.withMemoryCache()
 						.withScript()
+						.withJaninoScript()
 						.build())
 				.addModule(new DynamoFeatures().build())
 				//----Definitions
