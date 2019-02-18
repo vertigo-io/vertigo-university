@@ -17,11 +17,13 @@
 		
 		<section layout:fragment="page-container" >
 			<vu:form th:if="${!model.closeSuccess}">
-				<vu:text-field object="mission" field="role" />
-				<vu:select object="mission" field="baseId" list="bases" labelField="name" valueField="baseId" />
-				<vu:select object="mission" field="businessId" list="businesses" labelField="name" valueField="businessId"/>
-				<vu:button-submit th:if="${model.modeEdit}"  label="Save" action="@{_save}" color="primary" class="float-right q-mt-md"/>
-				<vu:button-submit th:if="${model.modeCreate}"  label="Create" action="@{_create}" color="primary" class="float-right q-mt-md" />
+				<vu:grid cols="1">
+					<vu:text-field object="mission" field="role" />
+					<vu:select object="mission" field="baseId" list="bases" labelField="name" valueField="baseId" />
+					<vu:select object="mission" field="businessId" list="businesses" labelField="name" valueField="businessId"/>
+					<vu:button-submit th:if="${model.modeEdit}"  label="Save" action="@{_save}" color="primary" class="float-right q-mt-md"/>
+					<vu:button-submit th:if="${model.modeCreate}"  label="Create" action="@{_create}" color="primary" class="float-right q-mt-md" />
+				</vu:grid>
 			</vu:form>
 		</section>
 	</body>
