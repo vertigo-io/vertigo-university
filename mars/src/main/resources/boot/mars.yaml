@@ -23,13 +23,15 @@ modules:
     features:
       - script:
       - cache:
-      - memoryCache:
       - redis:
           __flags__: ["klee"]
           host: ${redisHost}
           port: 6379
           database: 0
-      - socketLoggerAnalyticsConnector:
+    featuresConfig:
+      - script.janino:
+      - cache.memory:
+      - analytics.socketLoggerConnector:
           __flags__: ["klee"]
           appName: mars-analytics
           hostName: ${analyticsHost}
@@ -37,19 +39,20 @@ modules:
     features:
       - sql:
       - timeseries:
-      - influxdb: 
+    featuresConfig:
+      - timeseries.influxdb: 
           __flags__: ["klee"]
           host: ${influxdbHost}
           user: user
           password: password
           dbNames: mars-test;*
-      - fakeTimeseries:
+      - timeseries.fake:
           __flags__: ["home"]
-      - datasource:
+      - sql.datasource:
           __flags__: ["klee"]
           classname: io.vertigo.database.impl.sql.vendor.postgresql.PostgreSqlDataBase
           source: java:/comp/env/jdbc/DataSource
-      - datasource:
+      - sql.datasource:
           __flags__: ["home"]
           classname: io.vertigo.database.impl.sql.vendor.h2.H2DataBase
           source: java:/comp/env/jdbc/DataSourceHome
@@ -58,96 +61,103 @@ modules:
       - store:
       - kvStore:
       - search:
-      - sqlStore:
-      - sqlStore:
+    featuresConfig:
+      - store.data.sql:
+      - store.data.sql:
           dataSpace: orchestra
-      - luceneIndex:
-      - esEmbedded:
+      - collections.luceneIndex:
+      - search.elasticsearchEmbedded:
           __flags__: ["home"]
           home: search/
           envIndex: MARS
           rowsPerQuery: 50
           config.file: search/elasticsearch.yml
-      - esTransport:
+      - search.elasticsearchTransport:
           __flags__: ["klee"]
           servers.names: ${esHost}
           envIndex: MARS
           cluster.name: mars
           rowsPerQuery: 50
           config.file: search/elasticsearch.yml
-      - fsFile:
+      - store.file.filesystem:
           storeDtName: DT_MEDIA_FILE_INFO
           path: ${user.home}/marsFiles/
-      - fsFullFile:
+      - store.file.fullFilesystem:
           name: temp
           path: ${java.io.tmpdir}/marsFiles/
           purgeDelayMinutes: 30
-      - delayedMemoryKV:
+      - kvStore.delayedMemory:
           collections: protected-value
           timeToLiveSeconds: 3600
-      - berkeleyKV:
+      - kvStore.berkeley:
           collections: VViewContext;TTL=43200
           dbFilePath: ${java.io.tmpdir}/vertigo/TestVViewContext
   io.vertigo.account.AccountFeatures:
     features:
       - security:
           userSessionClassName: io.mars.commons.MarsUserSession
+      - account:
       - authentication:
-      - textAuthentication:
-          filePath: /initdata/userAccounts.txt
-      - storeAccount:
+      - authorization:
+    featuresConfig:
+      - account.store.store:
           userIdentityEntity: DT_PERSON
           groupIdentityEntity: DT_GROUPS
           userAuthField: EMAIL
           photoFileInfo: FI_FILE_INFO_STD
           userToAccountMapping: 'id:PERSON_ID, displayName:LAST_NAME, email:EMAIL, authToken:EMAIL, photo: PICTUREFILE_ID'
           groupToGroupAccountMapping: 'id:GROUP_ID, displayName:NAME'
+      - authentication.text:
+          filePath: /initdata/userAccounts.txt
   io.vertigo.vega.VegaFeatures:
     features:
-        - token:
+        - webservices:
+    featuresConfig:
+        - webservices.token:
             tokens: mars-api
-        - rateLimiting:
-        - security:
-        - apiPrefix:
+        - webservices.rateLimiting:
+        - webservices.security:
+        - webservices.apiPrefix:
             apiPrefix: /api
   io.vertigo.orchestra.OrchestraFeatures:
-    features:
-      - database:
+    featuresConfig:
+      - orchestra.database:
           nodeName: MARS1
           daemonPeriodSeconds: 30
           workersCount: 10
           forecastDurationSeconds: 60
-      - webapi:
+      - orchestra.webapi:
   io.vertigo.social.SocialFeatures:
     features:
       - notifications:
-      - redisNotifications:
-          __flags__: ["klee"]
-      - memoryNotifications:
-          __flags__: ["home"]
       - comments:
-      - redisComments:
-          __flags__: ["klee"]
-      - memoryComments:
-          __flags__: ["home"]
       - webapi:
+    featuresConfig:
+      - notifications.redis:
+          __flags__: ["klee"]
+      - notifications.memory:
+          __flags__: ["home"]
+      - comments.redis:
+          __flags__: ["klee"]
+      - comments.memory:
+          __flags__: ["home"]
   io.vertigo.dashboard.DashboardFeatures:
     features:
       - analytics:
           appName: mars-analytics
   io.vertigo.ledger.LedgerFeatures:
-    features:
-        - ethereum:
-            __flags__: ["klee"]
-            urlRpcEthNode: ${ledgerHost}
-            myAccountName: ${myAccountName}
-            myPublicAddr: ${myPublicAddr}
-            defaultDestAccountName: ${myAccountName}
-            defaultDestPublicAddr: ${myPublicAddr}
-            walletPassword: ${walletPassword}
-            walletPath: ${walletPath}
-        - fake:
-            __flags__: ["home"]
+    featuresConfig:
+      - ledger.ethereum:
+          __flags__: ["klee"]
+          urlRpcEthNode: ${ledgerHost}
+          myAccountName: ${myAccountName}
+          myPublicAddr: ${myPublicAddr}
+          defaultDestAccountName: ${myAccountName}
+          defaultDestPublicAddr: ${myPublicAddr}
+          walletPassword: ${walletPassword}
+          walletPath: ${walletPath}
+      - ledger.fake:
+          __flags__: ["home"]
   io.mars.commons.CommonsFeatures:
   io.mars.catalog.CatalogFeatures:
   io.mars.hr.HrFeatures:
