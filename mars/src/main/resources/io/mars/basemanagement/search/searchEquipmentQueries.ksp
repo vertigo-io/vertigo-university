@@ -2,20 +2,22 @@ package io.mars.basemanagement.search
 
 create IndexDefinition IDX_EQUIPMENT {  
   keyConcept : DT_EQUIPMENT
-  dtIndex : DT_EQUIPMENT_INDEX
+  dtIndex : DT_EQUIPMENT_INDEX 
+  indexCopyTo ALL_TEXT { from: "NAME,CODE,DESCRIPTION,TAGS,EQUIPMENT_TYPE_NAME,EQUIPMENT_CATEGORY_NAME" }
   loaderId : "EquipmentSearchLoader"
 }
 
+alter DtDefinition DT_EQUIPMENT_INDEX {
+    computed ALL_TEXT {	domain : DO_DESCRIPTION, label:"ALL_TEXT", expression:"throw new VSystemException(\"Can't use index copyTo field\");"    }
+}
 
 create FacetDefinition FCT_EQUIPMENT_EQUIPMENT_TYPE_NAME {
 	dtDefinition:DT_EQUIPMENT_INDEX, fieldName:"EQUIPMENT_TYPE_NAME", label:"Equipment Type"
-} 
-
+}
 
 create FacetDefinition FCT_EQUIPMENT_EQUIPMENT_CATEGORY_NAME {
 	dtDefinition:DT_EQUIPMENT_INDEX, fieldName:"EQUIPMENT_CATEGORY_NAME", label:"Equipment Category"
 } 
-
 
 create FacetDefinition FCT_EQUIPMENT_PURCHASE_DATE {
 	dtDefinition:DT_EQUIPMENT_INDEX, fieldName:"PURCHASE_DATE", label:"Purchase Date"
@@ -24,12 +26,10 @@ create FacetDefinition FCT_EQUIPMENT_PURCHASE_DATE {
 	range R3 { filter:"PURCHASE_DATE:[01/01/2016 TO *]", label:"after 2016"}
 }
 
-
-
 create FacetedQueryDefinition QRY_EQUIPMENT {
 	keyConcept : DT_EQUIPMENT
 	facets : [FCT_EQUIPMENT_EQUIPMENT_TYPE_NAME, FCT_EQUIPMENT_PURCHASE_DATE, FCT_EQUIPMENT_EQUIPMENT_CATEGORY_NAME ]
 	domainCriteria : DO_LABEL
 	listFilterBuilderClass : "io.vertigo.dynamox.search.DslListFilterBuilder"  
-	listFilterBuilderQuery : "_all:#+query*#"
+	listFilterBuilderQuery : "ALL_TEXT:#+query*#"
 }
