@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import javax.inject.Inject;
 
+import io.vertigo.account.security.VSecurityManager;
 import io.vertigo.app.Home;
 import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.core.locale.MessageText;
@@ -26,7 +27,6 @@ import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.dynamo.store.StoreManager;
 import io.vertigo.lang.Assertion;
 import io.vertigo.lang.VUserException;
-import io.vertigo.persona.security.VSecurityManager;
 import io.vertigo.util.DateUtil;
 
 /**
@@ -165,7 +165,7 @@ public class UtilisateurServicesImpl implements UtilisateurServices {
 		session.authenticate();
 
 		for (final Role role : utilisateur.getRoleList()) {
-			session.addRole(Home.getApp().getDefinitionSpace().resolve(role.getRolCode(), io.vertigo.persona.security.metamodel.Role.class));
+			session.addRole(Home.getApp().getDefinitionSpace().resolve(role.getRolCode(), io.vertigo.account.security.metamodel.Role.class));
 		}
 
 		return utilisateur;

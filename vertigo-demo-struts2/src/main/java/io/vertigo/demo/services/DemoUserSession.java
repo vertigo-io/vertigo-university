@@ -2,8 +2,8 @@ package io.vertigo.demo.services;
 
 import java.util.Locale;
 
+import io.vertigo.account.security.PersonaUserSession;
 import io.vertigo.demo.domain.administration.utilisateur.Utilisateur;
-import io.vertigo.persona.security.PersonaUserSession;
 
 /**
  * Session d'un utilisateur<br>

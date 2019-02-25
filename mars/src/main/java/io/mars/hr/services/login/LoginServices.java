@@ -14,13 +14,13 @@ import io.vertigo.account.account.Account;
 import io.vertigo.account.authentication.AuthenticationManager;
 import io.vertigo.account.authorization.VSecurityException;
 import io.vertigo.account.impl.authentication.UsernamePasswordAuthenticationToken;
+import io.vertigo.account.security.VSecurityManager;
 import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.core.component.Component;
 import io.vertigo.core.locale.MessageText;
 import io.vertigo.dynamo.domain.model.DtListState;
 import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.lang.VUserException;
-import io.vertigo.persona.security.VSecurityManager;
 import io.vertigo.social.services.notification.Notification;
 import io.vertigo.social.services.notification.NotificationServices;
 

@@ -2,10 +2,10 @@ package io.vertigo.demo.boot.initializer;
 
 import javax.inject.Inject;
 
+import io.vertigo.account.security.VSecurityManager;
 import io.vertigo.core.component.ComponentInitializer;
 import io.vertigo.demo.domain.produit.Produit;
 import io.vertigo.persona.impl.security.BeanResourceNameFactory;
-import io.vertigo.persona.security.VSecurityManager;
 
 /**
  * Initialisation du manager de Securit�.

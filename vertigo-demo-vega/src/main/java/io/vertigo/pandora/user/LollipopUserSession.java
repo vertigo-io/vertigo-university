@@ -2,7 +2,7 @@ package io.vertigo.pandora.user;
 
 import java.util.Locale;
 
-import io.vertigo.persona.security.UserSession;
+import io.vertigo.account.security.UserSession;
 
 public final class LollipopUserSession extends UserSession {
 	private static final long serialVersionUID = 3522402730076977461L;
