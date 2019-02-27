@@ -8,7 +8,7 @@ create IndexDefinition IDX_EQUIPMENT {
 }
 
 alter DtDefinition DT_EQUIPMENT_INDEX {
-    computed ALL_TEXT {	domain : DO_DESCRIPTION, label:"ALL_TEXT", expression:"throw new VSystemException(\"Can't use index copyTo field\");"    }
+    computed ALL_TEXT {	domain : DO_DESCRIPTION, label:"ALL_TEXT", expression:"throw new io.vertigo.lang.VSystemException(\"Can't use index copyTo field\");"    }
 }
 
 create FacetDefinition FCT_EQUIPMENT_EQUIPMENT_TYPE_NAME {

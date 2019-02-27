@@ -251,7 +251,9 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		/** Propriété 'Type'. */
 		EQUIPMENT_TYPE_NAME,
 		/** Propriété 'Category'. */
-		EQUIPMENT_CATEGORY_NAME	}
+		EQUIPMENT_CATEGORY_NAME,
+		/** Propriété 'ALL_TEXT'. */
+		ALL_TEXT	}
 
 	/**
 	 * Enumération des champs de EquipmentMaintenanceOverview.

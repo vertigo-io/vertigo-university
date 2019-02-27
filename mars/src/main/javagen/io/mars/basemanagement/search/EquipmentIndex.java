@@ -174,6 +174,16 @@ public final class EquipmentIndex implements DtObject {
 		this.equipmentCategoryName = equipmentCategoryName;
 	}
 	
+	/**
+	 * Champ : COMPUTED.
+	 * Récupère la valeur de la propriété calculée 'ALL_TEXT'.
+	 * @return String allText
+	 */
+	@Field(domain = "DO_DESCRIPTION", type = "COMPUTED", persistent = false, label = "ALL_TEXT")
+	public String getAllText() {
+		throw new io.vertigo.lang.VSystemException("Can't use index copyTo field");
+	}
+	
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

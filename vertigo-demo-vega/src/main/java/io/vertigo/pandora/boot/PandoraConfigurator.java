@@ -9,14 +9,7 @@ import io.vertigo.core.param.Param;
 import io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin;
 import io.vertigo.core.plugins.resource.local.LocalResourceResolverPlugin;
 import io.vertigo.dynamo.plugins.environment.DynamoDefinitionProvider;
-import io.vertigo.studio.impl.masterdata.MasterDataManagerImpl;
-import io.vertigo.studio.impl.mda.MdaManagerImpl;
-import io.vertigo.studio.masterdata.MasterDataManager;
-import io.vertigo.studio.mda.MdaManager;
-import io.vertigo.studio.plugins.mda.domain.java.DomainGeneratorPlugin;
-import io.vertigo.studio.plugins.mda.domain.sql.SqlGeneratorPlugin;
-import io.vertigo.studio.plugins.mda.domain.ts.TSGeneratorPlugin;
-import io.vertigo.studio.plugins.mda.task.TaskGeneratorPlugin;
+import io.vertigo.studio.StudioFeatures;
 import io.vertigo.studio.plugins.mda.webservice.WsTsGeneratorPlugin;
 
 public final class PandoraConfigurator {
@@ -128,27 +121,18 @@ public final class PandoraConfigurator {
 		//							.build());
 		//		} else {
 		appConfigBuilder
-				.addModule(ModuleConfig.builder("studio")
-						.addComponent(MasterDataManager.class, MasterDataManagerImpl.class)
-						.addComponent(MdaManager.class, MdaManagerImpl.class,
-								Param.of("projectPackageName", "io.vertigo.pandora"),
-								Param.of("targetGenDir", "src/main/"),
-								Param.of("encoding", "utf8"))
-						.addPlugin(DomainGeneratorPlugin.class,
-								Param.of("targetSubDir", "javagen"),
-								Param.of("generateDtResources", "false"),
-								Param.of("generateDtDefinitions", "true"),
-								Param.of("generateDtObject", "true"))
-						.addPlugin(TaskGeneratorPlugin.class,
-								Param.of("targetSubDir", "javagen"))
-						.addPlugin(SqlGeneratorPlugin.class,
-								Param.of("targetSubDir", "sqlgen"),
+				.addModule(new StudioFeatures()
+						.withMasterData()
+						.withMda(
+								Param.of("projectPackageName", "io.vertigo.pandora"))
+						.withJavaDomainGenerator(
+								Param.of("generateDtResources", "false"))
+						.withTaskGenerator()
+						.withSqlDomainGenerator(
 								Param.of("generateDrop", "false"),
 								Param.of("baseCible", "H2"))
-						.addPlugin(TSGeneratorPlugin.class,
-								Param.of("targetSubDir", "tsgen"),
-								Param.of("generateDtResourcesTS", "false"),
-								Param.of("generateTsDtDefinitions", "true"))
+						.withTsDomainGenerator(
+								Param.of("generateDtResourcesTS", "false"))
 						.addPlugin(WsTsGeneratorPlugin.class,
 								Param.of("targetSubDir", "wstsgen"))
 						.build())
