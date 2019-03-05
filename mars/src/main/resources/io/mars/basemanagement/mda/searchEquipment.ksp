@@ -16,3 +16,7 @@ create DtDefinition DT_EQUIPMENT_INDEX {
 	field EQUIPMENT_CATEGORY_NAME {domain: DO_LABEL label:"Category" required:"false"}
 }
 
+
+alter DtDefinition DT_EQUIPMENT_INDEX {
+    computed ALL_TEXT {	domain : DO_DESCRIPTION, label:"ALL_TEXT", expression:"throw new io.vertigo.lang.VSystemException(\"Can't use index copyTo field\");"    }
+}
