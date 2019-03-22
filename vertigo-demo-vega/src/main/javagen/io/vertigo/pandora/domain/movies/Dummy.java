@@ -14,8 +14,6 @@ public final class Dummy implements DtObject {
 	private static final long serialVersionUID = 1L;
 
 	private Long value;
-
-
 	
 	/**
 	 * Champ : DATA.

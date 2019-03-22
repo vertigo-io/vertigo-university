@@ -30,6 +30,8 @@ import io.vertigo.dynamo.search.model.SearchQuery;
 import io.vertigo.lang.WrappedException;
 import io.vertigo.pandora.dao.movies.MovieDAO;
 import io.vertigo.pandora.dao.movies.MoviesPAO;
+import io.vertigo.pandora.dao.persons.ActorRoleDAO;
+import io.vertigo.pandora.dao.persons.PersonDAO;
 import io.vertigo.pandora.dao.persons.PersonsPAO;
 import io.vertigo.pandora.domain.movies.Movie;
 import io.vertigo.pandora.domain.movies.MovieIndex;
@@ -56,7 +58,11 @@ public class CommonServicesImpl implements CommonServices {
 	@Inject
 	private PersonsPAO personsPAO;
 	@Inject
+	private ActorRoleDAO actorRoleDAO;
+	@Inject
 	private MovieDAO movieDAO;
+	@Inject
+	private PersonDAO personDAO;
 
 	/** {@inheritDoc} */
 	@Override
@@ -96,7 +102,7 @@ public class CommonServicesImpl implements CommonServices {
 
 		persons.addAll(personMaps.values());
 		personsPAO.removeAllPersons();
-		personsPAO.importPersons(persons);
+		personDAO.importPersons(persons);
 
 		System.out.println("RELOAD ALL persons " + persons.size());
 		return persons.size();
@@ -130,12 +136,12 @@ public class CommonServicesImpl implements CommonServices {
 
 		movies.addAll(movieMaps.values());
 		moviesPAO.removeAllMovies();
-		moviesPAO.importMovies(movies);
+		movieDAO.importMovies(movies);
 		System.out.println("RELOAD DB " + movies.size() + " movies");
 
 		final DtList<ActorRole> actorRoles = readActorRoles();
 		moviesPAO.removeAllActorRoles();
-		moviesPAO.importActorRoles(actorRoles);
+		actorRoleDAO.importActorRoles(actorRoles);
 		System.out.println("RELOAD DB " + actorRoles.size() + " actors");
 
 		reloadMoviesPersonsNN(movieMaps);

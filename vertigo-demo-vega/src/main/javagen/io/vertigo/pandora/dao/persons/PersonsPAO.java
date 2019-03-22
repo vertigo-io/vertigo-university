@@ -41,17 +41,6 @@ public final class PersonsPAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TK_IMPORT_PERSONS.
-	 * @param dtc io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.Person> 
-	*/
-	public void importPersons(final io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.Person> dtc) {
-		final Task task = createTaskBuilder("TK_IMPORT_PERSONS")
-				.addValue("DTC", dtc)
-				.build();
-		getTaskManager().execute(task);
-	}
-
-	/**
 	 * Execute la tache TK_LOAD_ACTOR_ROLE_LINK.
 	 * @param movId Long 
 	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.PersonActorRoleLink> dtc

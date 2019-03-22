@@ -5,7 +5,7 @@
 
 /* tslint:disable */
 import { EntityField, StoreNode } from "focus4/entity";
-import * as domains from "../../../common/domain"
+import * as domains from "../../../../00-core/domain"
 
 export interface MovieCaract {
 	title?: string;
@@ -18,13 +18,13 @@ export interface MovieCaract {
 }
 
 export interface MovieCaractNode extends StoreNode<MovieCaract> {
-	title: EntityField<string>;
-	originalTitle: EntityField<string>;
-	keywords: EntityField<string>;
-	runtime: EntityField<number>;
-	movieType: EntityField<string>;
-	productionYear: EntityField<number>;
-	movId: EntityField<number>;
+	title: EntityField<string, typeof domains.DO_LABEL>;
+	originalTitle: EntityField<string, typeof domains.DO_LABEL>;
+	keywords: EntityField<string, typeof domains.DO_LABEL>;
+	runtime: EntityField<number, typeof domains.DO_RUNTIME>;
+	movieType: EntityField<string, typeof domains.DO_LABEL_SHORT>;
+	productionYear: EntityField<number, typeof domains.DO_YEAR>;
+	movId: EntityField<number, typeof domains.DO_IDENTITY>;
 }
 
 export const MovieCaractEntity = {

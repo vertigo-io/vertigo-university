@@ -1,6 +1,7 @@
 package io.vertigo.pandora.domain.persons;
 
 import io.vertigo.dynamo.domain.model.KeyConcept;
+import io.vertigo.dynamo.domain.model.ListVAccessor;
 import io.vertigo.dynamo.domain.model.URI;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
@@ -15,28 +16,83 @@ public final class Person implements KeyConcept {
 	private static final long serialVersionUID = 1L;
 
 	private Long perId;
-
 	private String fullName;
-
 	private String firstName;
-
 	private String lastName;
-
 	private String biography;
-
 	private String shortBiography;
-
 	private String sex;
-
 	private String photoHref;
-
 	private String birthDate;
-
 	private String birthPlace;
-
 	private String activity;
 
-	private io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.ActorRole> roles;
+	@io.vertigo.dynamo.domain.stereotype.Association(
+			name = "A_MRO_PER",
+			fkFieldName = "PER_ID",
+			primaryDtDefinitionName = "DT_PERSON",
+			primaryIsNavigable = true,
+			primaryRole = "Actor",
+			primaryLabel = "Actor",
+			primaryMultiplicity = "0..1",
+			foreignDtDefinitionName = "DT_ACTOR_ROLE",
+			foreignIsNavigable = true,
+			foreignRole = "Roles",
+			foreignLabel = "Roles",
+			foreignMultiplicity = "0..*")
+	private final ListVAccessor<io.vertigo.pandora.domain.persons.ActorRole> rolesAccessor = new ListVAccessor<>(this, "A_MRO_PER", "Roles");
+
+	@io.vertigo.dynamo.domain.stereotype.AssociationNN(
+			name = "ANN_CAMERA",
+			tableName = "CAMERA",
+			dtDefinitionA = "DT_MOVIE",
+			dtDefinitionB = "DT_PERSON",
+			navigabilityA = false,
+			navigabilityB = true,
+			roleA = "Movie",
+			roleB = "Camera",
+			labelA = "Movie",
+			labelB = "Camera")
+	private final ListVAccessor<io.vertigo.pandora.domain.movies.Movie> movieCamerasAccessor = new ListVAccessor<>(this, "ANN_CAMERA", "Movie");
+
+	@io.vertigo.dynamo.domain.stereotype.AssociationNN(
+			name = "ANN_DIRECTORS",
+			tableName = "DIRECTORS",
+			dtDefinitionA = "DT_MOVIE",
+			dtDefinitionB = "DT_PERSON",
+			navigabilityA = false,
+			navigabilityB = true,
+			roleA = "Movie",
+			roleB = "Directors",
+			labelA = "Movie",
+			labelB = "Directors")
+	private final ListVAccessor<io.vertigo.pandora.domain.movies.Movie> movieDirectorsAccessor = new ListVAccessor<>(this, "ANN_DIRECTORS", "Movie");
+
+	@io.vertigo.dynamo.domain.stereotype.AssociationNN(
+			name = "ANN_PRODUCERS",
+			tableName = "PRODUCERS",
+			dtDefinitionA = "DT_MOVIE",
+			dtDefinitionB = "DT_PERSON",
+			navigabilityA = false,
+			navigabilityB = true,
+			roleA = "Movie",
+			roleB = "Producers",
+			labelA = "Movie",
+			labelB = "Producers")
+	private final ListVAccessor<io.vertigo.pandora.domain.movies.Movie> movieProducersAccessor = new ListVAccessor<>(this, "ANN_PRODUCERS", "Movie");
+
+	@io.vertigo.dynamo.domain.stereotype.AssociationNN(
+			name = "ANN_WRITERS",
+			tableName = "WRITERS",
+			dtDefinitionA = "DT_MOVIE",
+			dtDefinitionB = "DT_PERSON",
+			navigabilityA = false,
+			navigabilityB = true,
+			roleA = "Movie",
+			roleB = "Writers",
+			labelA = "Movie",
+			labelB = "Writers")
+	private final ListVAccessor<io.vertigo.pandora.domain.movies.Movie> movieWritersAccessor = new ListVAccessor<>(this, "ANN_WRITERS", "Movie");
 
 	/** {@inheritDoc} */
 	@Override
@@ -44,7 +100,6 @@ public final class Person implements KeyConcept {
 		return DtObjectUtil.createURI(this);
 	}
 
-	
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'PER ID'.
@@ -63,8 +118,7 @@ public final class Person implements KeyConcept {
 	public void setPerId(final Long perId) {
 		this.perId = perId;
 	}
-	
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'FULL NAME'.
@@ -83,8 +137,7 @@ public final class Person implements KeyConcept {
 	public void setFullName(final String fullName) {
 		this.fullName = fullName;
 	}
-	
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'FIRST NAME'.
@@ -103,8 +156,7 @@ public final class Person implements KeyConcept {
 	public void setFirstName(final String firstName) {
 		this.firstName = firstName;
 	}
-	
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'LAST NAME'.
@@ -123,8 +175,7 @@ public final class Person implements KeyConcept {
 	public void setLastName(final String lastName) {
 		this.lastName = lastName;
 	}
-	
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'BIOGRAPHY'.
@@ -143,8 +194,7 @@ public final class Person implements KeyConcept {
 	public void setBiography(final String biography) {
 		this.biography = biography;
 	}
-	
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'SHORT BIOGRAPHY'.
@@ -163,8 +213,7 @@ public final class Person implements KeyConcept {
 	public void setShortBiography(final String shortBiography) {
 		this.shortBiography = shortBiography;
 	}
-	
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'SEX'.
@@ -183,8 +232,7 @@ public final class Person implements KeyConcept {
 	public void setSex(final String sex) {
 		this.sex = sex;
 	}
-	
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'PHOTO HREF'.
@@ -203,8 +251,7 @@ public final class Person implements KeyConcept {
 	public void setPhotoHref(final String photoHref) {
 		this.photoHref = photoHref;
 	}
-	
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'BIRTH DATE'.
@@ -223,8 +270,7 @@ public final class Person implements KeyConcept {
 	public void setBirthDate(final String birthDate) {
 		this.birthDate = birthDate;
 	}
-	
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'BIRTH PLACE'.
@@ -243,8 +289,7 @@ public final class Person implements KeyConcept {
 	public void setBirthPlace(final String birthPlace) {
 		this.birthPlace = birthPlace;
 	}
-	
-	
+
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'ACTIVITY'.
@@ -263,33 +308,35 @@ public final class Person implements KeyConcept {
 	public void setActivity(final String activity) {
 		this.activity = activity;
 	}
-	
+
 	/**
 	 * Association : Roles.
-	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.ActorRole>
+	 * @return l'accesseur vers la propriété 'Roles'
 	 */
+	public ListVAccessor<io.vertigo.pandora.domain.persons.ActorRole> roles() {
+		return rolesAccessor;
+	}
+
+	/**
+	 * Association : Roles.
+	 * @return DtList de io.vertigo.pandora.domain.persons.ActorRole
+	 */
+	@Deprecated
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.ActorRole> getRolesList() {
-		// On doit avoir une clé primaire renseignée. Si ce n'est pas le cas, on renvoie une liste vide
-		if (io.vertigo.dynamo.domain.util.DtObjectUtil.getId(this) == null) {
-			return new io.vertigo.dynamo.domain.model.DtList<>(io.vertigo.pandora.domain.persons.ActorRole.class);
+		// we keep the lazyness
+		if (!rolesAccessor.isLoaded()) {
+			rolesAccessor.load();
 		}
-		final io.vertigo.dynamo.domain.model.DtListURI fkDtListURI = getRolesDtListURI();
-		io.vertigo.lang.Assertion.checkNotNull(fkDtListURI);
-		//---------------------------------------------------------------------
-		//On est toujours dans un mode lazy.
-		if (roles == null) {
-			roles = io.vertigo.app.Home.getApp().getComponentSpace().resolve(io.vertigo.dynamo.store.StoreManager.class).getDataStore().findAll(fkDtListURI);
-		}
-		return roles;
+		return rolesAccessor.get();
 	}
 
 	/**
 	 * Association URI: Roles.
 	 * @return URI de l'association
 	 */
-					
+	@Deprecated
 	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation getRolesDtListURI() {
-		return io.vertigo.dynamo.domain.util.DtObjectUtil.createDtListURIForSimpleAssociation(this, "A_MRO_PER", "Roles");
+		return (io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation) rolesAccessor.getDtListURI();
 	}
 
 	/** {@inheritDoc} */

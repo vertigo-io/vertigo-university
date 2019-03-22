@@ -41,28 +41,6 @@ public final class MoviesPAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TK_IMPORT_ACTOR_ROLES.
-	 * @param dtc io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.ActorRole> 
-	*/
-	public void importActorRoles(final io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.ActorRole> dtc) {
-		final Task task = createTaskBuilder("TK_IMPORT_ACTOR_ROLES")
-				.addValue("DTC", dtc)
-				.build();
-		getTaskManager().execute(task);
-	}
-
-	/**
-	 * Execute la tache TK_IMPORT_MOVIES.
-	 * @param dtc io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.movies.Movie> 
-	*/
-	public void importMovies(final io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.movies.Movie> dtc) {
-		final Task task = createTaskBuilder("TK_IMPORT_MOVIES")
-				.addValue("DTC", dtc)
-				.build();
-		getTaskManager().execute(task);
-	}
-
-	/**
 	 * Execute la tache TK_LOAD_MOVIE_INDEX.
 	 * @param dtc io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.movies.Dummy> 
 	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.movies.MovieIndex> dtcIndex

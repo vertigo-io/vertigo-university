@@ -16,7 +16,6 @@ public final class ActorRole implements Entity {
 	private static final long serialVersionUID = 1L;
 
 	private Long aroId;
-
 	private String role;
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
@@ -32,7 +31,7 @@ public final class ActorRole implements Entity {
 			foreignRole = "Roles",
 			foreignLabel = "Roles",
 			foreignMultiplicity = "0..*")
-	private final VAccessor<io.vertigo.pandora.domain.persons.Person> perIdAccessor = new VAccessor<>(io.vertigo.pandora.domain.persons.Person.class, "actor");
+	private final VAccessor<io.vertigo.pandora.domain.persons.Person> perIdAccessor = new VAccessor<>(io.vertigo.pandora.domain.persons.Person.class, "Actor");
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
 			name = "A_MOV_MRO",
@@ -47,15 +46,13 @@ public final class ActorRole implements Entity {
 			foreignRole = "Roles",
 			foreignLabel = "Roles",
 			foreignMultiplicity = "0..*")
-	private final VAccessor<io.vertigo.pandora.domain.movies.Movie> movIdAccessor = new VAccessor<>(io.vertigo.pandora.domain.movies.Movie.class, "movie");
-
+	private final VAccessor<io.vertigo.pandora.domain.movies.Movie> movIdAccessor = new VAccessor<>(io.vertigo.pandora.domain.movies.Movie.class, "Movie");
 
 	/** {@inheritDoc} */
 	@Override
 	public URI<ActorRole> getURI() {
 		return DtObjectUtil.createURI(this);
 	}
-
 	
 	/**
 	 * Champ : ID.
@@ -76,7 +73,6 @@ public final class ActorRole implements Entity {
 		this.aroId = aroId;
 	}
 	
-	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'ROLE'.
@@ -95,7 +91,6 @@ public final class ActorRole implements Entity {
 	public void setRole(final String role) {
 		this.role = role;
 	}
-	
 	
 	/**
 	 * Champ : FOREIGN_KEY.
@@ -116,7 +111,6 @@ public final class ActorRole implements Entity {
 		perIdAccessor.setId(perId);
 	}
 	
-	
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Movie'.
@@ -135,13 +129,29 @@ public final class ActorRole implements Entity {
 	public void setMovId(final Long movId) {
 		movIdAccessor.setId(movId);
 	}
-	
-	/**
-	 * Association : Actor.
-	 * @return io.vertigo.pandora.domain.persons.Person
+
+ 	/**
+	 * Association : Movie.
+	 * @return l'accesseur vers la propriété 'Movie'
 	 */
-				
+	public VAccessor<io.vertigo.pandora.domain.movies.Movie> movie() {
+		return movIdAccessor;
+	}
+
+ 	/**
+	 * Association : Actor.
+	 * @return l'accesseur vers la propriété 'Actor'
+	 */
+	public VAccessor<io.vertigo.pandora.domain.persons.Person> actor() {
+		return perIdAccessor;
+	}
+	
+	@Deprecated
 	public io.vertigo.pandora.domain.persons.Person getActor() {
+		// we keep the lazyness
+		if (!perIdAccessor.isLoaded()) {
+			perIdAccessor.load();
+		}
 		return perIdAccessor.get();
 	}
 
@@ -149,10 +159,11 @@ public final class ActorRole implements Entity {
 	 * Retourne l'URI: Actor.
 	 * @return URI de l'association
 	 */
+	@Deprecated
 	public io.vertigo.dynamo.domain.model.URI<io.vertigo.pandora.domain.persons.Person> getActorURI() {
 		return perIdAccessor.getURI();
 	}
-
+	
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

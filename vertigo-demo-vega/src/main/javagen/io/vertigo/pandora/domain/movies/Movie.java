@@ -2,6 +2,7 @@ package io.vertigo.pandora.domain.movies;
 
 import io.vertigo.dynamo.domain.model.KeyConcept;
 import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.ListVAccessor;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.lang.Generated;
@@ -15,45 +16,92 @@ public final class Movie implements KeyConcept {
 	private static final long serialVersionUID = 1L;
 
 	private Long movId;
-
 	private String title;
-
 	private String originalTitle;
-
 	private String synopsis;
-
 	private String shortSynopsis;
-
 	private String keywords;
-
 	private String poster;
-
 	private String trailerName;
-
 	private String trailerHref;
-
 	private Integer runtime;
-
 	private String movieType;
-
 	private Integer productionYear;
-
 	private Integer userRating;
-
 	private Integer pressRating;
 
-	private io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.ActorRole> roles;
-	private io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.Person> camera;
-	private io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.Person> directors;
-	private io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.Person> producers;
-	private io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.Person> writers;
+	@io.vertigo.dynamo.domain.stereotype.Association(
+			name = "A_MOV_MRO",
+			fkFieldName = "MOV_ID",
+			primaryDtDefinitionName = "DT_MOVIE",
+			primaryIsNavigable = false,
+			primaryRole = "Movie",
+			primaryLabel = "Movie",
+			primaryMultiplicity = "0..1",
+			foreignDtDefinitionName = "DT_ACTOR_ROLE",
+			foreignIsNavigable = true,
+			foreignRole = "Roles",
+			foreignLabel = "Roles",
+			foreignMultiplicity = "0..*")
+	private final ListVAccessor<io.vertigo.pandora.domain.persons.ActorRole> rolesAccessor = new ListVAccessor<>(this, "A_MOV_MRO", "Roles");
+
+	@io.vertigo.dynamo.domain.stereotype.AssociationNN(
+			name = "ANN_CAMERA",
+			tableName = "CAMERA",
+			dtDefinitionA = "DT_MOVIE",
+			dtDefinitionB = "DT_PERSON",
+			navigabilityA = false,
+			navigabilityB = true,
+			roleA = "Movie",
+			roleB = "Camera",
+			labelA = "Movie",
+			labelB = "Camera")
+	private final ListVAccessor<io.vertigo.pandora.domain.persons.Person> cameraAccessor = new ListVAccessor<>(this, "ANN_CAMERA", "Camera");
+
+	@io.vertigo.dynamo.domain.stereotype.AssociationNN(
+			name = "ANN_DIRECTORS",
+			tableName = "DIRECTORS",
+			dtDefinitionA = "DT_MOVIE",
+			dtDefinitionB = "DT_PERSON",
+			navigabilityA = false,
+			navigabilityB = true,
+			roleA = "Movie",
+			roleB = "Directors",
+			labelA = "Movie",
+			labelB = "Directors")
+	private final ListVAccessor<io.vertigo.pandora.domain.persons.Person> directorsAccessor = new ListVAccessor<>(this, "ANN_DIRECTORS", "Directors");
+
+	@io.vertigo.dynamo.domain.stereotype.AssociationNN(
+			name = "ANN_PRODUCERS",
+			tableName = "PRODUCERS",
+			dtDefinitionA = "DT_MOVIE",
+			dtDefinitionB = "DT_PERSON",
+			navigabilityA = false,
+			navigabilityB = true,
+			roleA = "Movie",
+			roleB = "Producers",
+			labelA = "Movie",
+			labelB = "Producers")
+	private final ListVAccessor<io.vertigo.pandora.domain.persons.Person> producersAccessor = new ListVAccessor<>(this, "ANN_PRODUCERS", "Producers");
+
+	@io.vertigo.dynamo.domain.stereotype.AssociationNN(
+			name = "ANN_WRITERS",
+			tableName = "WRITERS",
+			dtDefinitionA = "DT_MOVIE",
+			dtDefinitionB = "DT_PERSON",
+			navigabilityA = false,
+			navigabilityB = true,
+			roleA = "Movie",
+			roleB = "Writers",
+			labelA = "Movie",
+			labelB = "Writers")
+	private final ListVAccessor<io.vertigo.pandora.domain.persons.Person> writersAccessor = new ListVAccessor<>(this, "ANN_WRITERS", "Writers");
 
 	/** {@inheritDoc} */
 	@Override
 	public URI<Movie> getURI() {
 		return DtObjectUtil.createURI(this);
 	}
-
 	
 	/**
 	 * Champ : ID.
@@ -74,7 +122,6 @@ public final class Movie implements KeyConcept {
 		this.movId = movId;
 	}
 	
-	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'TITLE'.
@@ -93,7 +140,6 @@ public final class Movie implements KeyConcept {
 	public void setTitle(final String title) {
 		this.title = title;
 	}
-	
 	
 	/**
 	 * Champ : DATA.
@@ -114,7 +160,6 @@ public final class Movie implements KeyConcept {
 		this.originalTitle = originalTitle;
 	}
 	
-	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'SYNOPSIS'.
@@ -133,7 +178,6 @@ public final class Movie implements KeyConcept {
 	public void setSynopsis(final String synopsis) {
 		this.synopsis = synopsis;
 	}
-	
 	
 	/**
 	 * Champ : DATA.
@@ -154,7 +198,6 @@ public final class Movie implements KeyConcept {
 		this.shortSynopsis = shortSynopsis;
 	}
 	
-	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'KEYWORDS'.
@@ -173,7 +216,6 @@ public final class Movie implements KeyConcept {
 	public void setKeywords(final String keywords) {
 		this.keywords = keywords;
 	}
-	
 	
 	/**
 	 * Champ : DATA.
@@ -194,7 +236,6 @@ public final class Movie implements KeyConcept {
 		this.poster = poster;
 	}
 	
-	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'TRAILER NAME'.
@@ -213,7 +254,6 @@ public final class Movie implements KeyConcept {
 	public void setTrailerName(final String trailerName) {
 		this.trailerName = trailerName;
 	}
-	
 	
 	/**
 	 * Champ : DATA.
@@ -234,7 +274,6 @@ public final class Movie implements KeyConcept {
 		this.trailerHref = trailerHref;
 	}
 	
-	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'RUNTIME'.
@@ -253,7 +292,6 @@ public final class Movie implements KeyConcept {
 	public void setRuntime(final Integer runtime) {
 		this.runtime = runtime;
 	}
-	
 	
 	/**
 	 * Champ : DATA.
@@ -274,7 +312,6 @@ public final class Movie implements KeyConcept {
 		this.movieType = movieType;
 	}
 	
-	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'PRODUCTION YEAR'.
@@ -293,7 +330,6 @@ public final class Movie implements KeyConcept {
 	public void setProductionYear(final Integer productionYear) {
 		this.productionYear = productionYear;
 	}
-	
 	
 	/**
 	 * Champ : DATA.
@@ -314,7 +350,6 @@ public final class Movie implements KeyConcept {
 		this.userRating = userRating;
 	}
 	
-	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'PRESS RATING'.
@@ -333,147 +368,157 @@ public final class Movie implements KeyConcept {
 	public void setPressRating(final Integer pressRating) {
 		this.pressRating = pressRating;
 	}
+
+	/**
+	 * Association : Roles.
+	 * @return l'accesseur vers la propriété 'Roles'
+	 */
+	public ListVAccessor<io.vertigo.pandora.domain.persons.ActorRole> roles() {
+		return rolesAccessor;
+	}
 	
 	/**
 	 * Association : Roles.
-	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.ActorRole>
+	 * @return DtList de io.vertigo.pandora.domain.persons.ActorRole
 	 */
+	@Deprecated
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.ActorRole> getRolesList() {
-		// On doit avoir une clé primaire renseignée. Si ce n'est pas le cas, on renvoie une liste vide
-		if (io.vertigo.dynamo.domain.util.DtObjectUtil.getId(this) == null) {
-			return new io.vertigo.dynamo.domain.model.DtList<>(io.vertigo.pandora.domain.persons.ActorRole.class);
+		// we keep the lazyness
+		if (!rolesAccessor.isLoaded()) {
+			rolesAccessor.load();
 		}
-		final io.vertigo.dynamo.domain.model.DtListURI fkDtListURI = getRolesDtListURI();
-		io.vertigo.lang.Assertion.checkNotNull(fkDtListURI);
-		//---------------------------------------------------------------------
-		//On est toujours dans un mode lazy.
-		if (roles == null) {
-			roles = io.vertigo.app.Home.getApp().getComponentSpace().resolve(io.vertigo.dynamo.store.StoreManager.class).getDataStore().findAll(fkDtListURI);
-		}
-		return roles;
+		return rolesAccessor.get();
 	}
 
 	/**
 	 * Association URI: Roles.
 	 * @return URI de l'association
 	 */
-					
+	@Deprecated	
 	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation getRolesDtListURI() {
-		return io.vertigo.dynamo.domain.util.DtObjectUtil.createDtListURIForSimpleAssociation(this, "A_MOV_MRO", "Roles");
+		return (io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation) rolesAccessor.getDtListURI();
 	}
 
 	/**
 	 * Association : Camera.
-	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.Person>
+	 * @return l'accesseur vers la propriété 'Camera'
 	 */
+	public ListVAccessor<io.vertigo.pandora.domain.persons.Person> camera() {
+		return cameraAccessor;
+	}
+	
+	/**
+	 * Association : Camera.
+	 * @return DtList de io.vertigo.pandora.domain.persons.Person
+	 */
+	@Deprecated
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.Person> getCameraList() {
-		// On doit avoir une clé primaire renseignée. Si ce n'est pas le cas, on renvoie une liste vide
-		if (io.vertigo.dynamo.domain.util.DtObjectUtil.getId(this) == null) {
-			return new io.vertigo.dynamo.domain.model.DtList<>(io.vertigo.pandora.domain.persons.Person.class);
+		// we keep the lazyness
+		if (!cameraAccessor.isLoaded()) {
+			cameraAccessor.load();
 		}
-		final io.vertigo.dynamo.domain.model.DtListURI fkDtListURI = getCameraDtListURI();
-		io.vertigo.lang.Assertion.checkNotNull(fkDtListURI);
-		//---------------------------------------------------------------------
-		//On est toujours dans un mode lazy.
-		if (camera == null) {
-			camera = io.vertigo.app.Home.getApp().getComponentSpace().resolve(io.vertigo.dynamo.store.StoreManager.class).getDataStore().findAll(fkDtListURI);
-		}
-		return camera;
+		return cameraAccessor.get();
 	}
 
 	/**
 	 * Association URI: Camera.
 	 * @return URI de l'association
 	 */
-					
+	@Deprecated	
 	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForNNAssociation getCameraDtListURI() {
-		return io.vertigo.dynamo.domain.util.DtObjectUtil.createDtListURIForNNAssociation(this, "ANN_CAMERA", "Camera");
+		return (io.vertigo.dynamo.domain.metamodel.association.DtListURIForNNAssociation) cameraAccessor.getDtListURI();
 	}
 
 	/**
 	 * Association : Directors.
-	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.Person>
+	 * @return l'accesseur vers la propriété 'Directors'
 	 */
+	public ListVAccessor<io.vertigo.pandora.domain.persons.Person> directors() {
+		return directorsAccessor;
+	}
+	
+	/**
+	 * Association : Directors.
+	 * @return DtList de io.vertigo.pandora.domain.persons.Person
+	 */
+	@Deprecated
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.Person> getDirectorsList() {
-		// On doit avoir une clé primaire renseignée. Si ce n'est pas le cas, on renvoie une liste vide
-		if (io.vertigo.dynamo.domain.util.DtObjectUtil.getId(this) == null) {
-			return new io.vertigo.dynamo.domain.model.DtList<>(io.vertigo.pandora.domain.persons.Person.class);
+		// we keep the lazyness
+		if (!directorsAccessor.isLoaded()) {
+			directorsAccessor.load();
 		}
-		final io.vertigo.dynamo.domain.model.DtListURI fkDtListURI = getDirectorsDtListURI();
-		io.vertigo.lang.Assertion.checkNotNull(fkDtListURI);
-		//---------------------------------------------------------------------
-		//On est toujours dans un mode lazy.
-		if (directors == null) {
-			directors = io.vertigo.app.Home.getApp().getComponentSpace().resolve(io.vertigo.dynamo.store.StoreManager.class).getDataStore().findAll(fkDtListURI);
-		}
-		return directors;
+		return directorsAccessor.get();
 	}
 
 	/**
 	 * Association URI: Directors.
 	 * @return URI de l'association
 	 */
-					
+	@Deprecated	
 	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForNNAssociation getDirectorsDtListURI() {
-		return io.vertigo.dynamo.domain.util.DtObjectUtil.createDtListURIForNNAssociation(this, "ANN_DIRECTORS", "Directors");
+		return (io.vertigo.dynamo.domain.metamodel.association.DtListURIForNNAssociation) directorsAccessor.getDtListURI();
 	}
 
 	/**
 	 * Association : Producers.
-	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.Person>
+	 * @return l'accesseur vers la propriété 'Producers'
 	 */
+	public ListVAccessor<io.vertigo.pandora.domain.persons.Person> producers() {
+		return producersAccessor;
+	}
+	
+	/**
+	 * Association : Producers.
+	 * @return DtList de io.vertigo.pandora.domain.persons.Person
+	 */
+	@Deprecated
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.Person> getProducersList() {
-		// On doit avoir une clé primaire renseignée. Si ce n'est pas le cas, on renvoie une liste vide
-		if (io.vertigo.dynamo.domain.util.DtObjectUtil.getId(this) == null) {
-			return new io.vertigo.dynamo.domain.model.DtList<>(io.vertigo.pandora.domain.persons.Person.class);
+		// we keep the lazyness
+		if (!producersAccessor.isLoaded()) {
+			producersAccessor.load();
 		}
-		final io.vertigo.dynamo.domain.model.DtListURI fkDtListURI = getProducersDtListURI();
-		io.vertigo.lang.Assertion.checkNotNull(fkDtListURI);
-		//---------------------------------------------------------------------
-		//On est toujours dans un mode lazy.
-		if (producers == null) {
-			producers = io.vertigo.app.Home.getApp().getComponentSpace().resolve(io.vertigo.dynamo.store.StoreManager.class).getDataStore().findAll(fkDtListURI);
-		}
-		return producers;
+		return producersAccessor.get();
 	}
 
 	/**
 	 * Association URI: Producers.
 	 * @return URI de l'association
 	 */
-					
+	@Deprecated	
 	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForNNAssociation getProducersDtListURI() {
-		return io.vertigo.dynamo.domain.util.DtObjectUtil.createDtListURIForNNAssociation(this, "ANN_PRODUCERS", "Producers");
+		return (io.vertigo.dynamo.domain.metamodel.association.DtListURIForNNAssociation) producersAccessor.getDtListURI();
 	}
 
 	/**
 	 * Association : Writers.
-	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.Person>
+	 * @return l'accesseur vers la propriété 'Writers'
 	 */
+	public ListVAccessor<io.vertigo.pandora.domain.persons.Person> writers() {
+		return writersAccessor;
+	}
+	
+	/**
+	 * Association : Writers.
+	 * @return DtList de io.vertigo.pandora.domain.persons.Person
+	 */
+	@Deprecated
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.Person> getWritersList() {
-		// On doit avoir une clé primaire renseignée. Si ce n'est pas le cas, on renvoie une liste vide
-		if (io.vertigo.dynamo.domain.util.DtObjectUtil.getId(this) == null) {
-			return new io.vertigo.dynamo.domain.model.DtList<>(io.vertigo.pandora.domain.persons.Person.class);
+		// we keep the lazyness
+		if (!writersAccessor.isLoaded()) {
+			writersAccessor.load();
 		}
-		final io.vertigo.dynamo.domain.model.DtListURI fkDtListURI = getWritersDtListURI();
-		io.vertigo.lang.Assertion.checkNotNull(fkDtListURI);
-		//---------------------------------------------------------------------
-		//On est toujours dans un mode lazy.
-		if (writers == null) {
-			writers = io.vertigo.app.Home.getApp().getComponentSpace().resolve(io.vertigo.dynamo.store.StoreManager.class).getDataStore().findAll(fkDtListURI);
-		}
-		return writers;
+		return writersAccessor.get();
 	}
 
 	/**
 	 * Association URI: Writers.
 	 * @return URI de l'association
 	 */
-					
+	@Deprecated	
 	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForNNAssociation getWritersDtListURI() {
-		return io.vertigo.dynamo.domain.util.DtObjectUtil.createDtListURIForNNAssociation(this, "ANN_WRITERS", "Writers");
+		return (io.vertigo.dynamo.domain.metamodel.association.DtListURIForNNAssociation) writersAccessor.getDtListURI();
 	}
-
+	
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

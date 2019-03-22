@@ -5,7 +5,7 @@
 
 /* tslint:disable */
 import { EntityField, StoreNode } from "focus4/entity";
-import * as domains from "../../../common/domain"
+import * as domains from "../../../../00-core/domain"
 
 export interface MovieIndex {
 	movId: number;
@@ -29,24 +29,24 @@ export interface MovieIndex {
 }
 
 export interface MovieIndexNode extends StoreNode<MovieIndex> {
-	movId: EntityField<number>;
-	title: EntityField<string>;
-	titleSortOnly: EntityField<string>;
-	originalTitle: EntityField<string>;
-	synopsis: EntityField<string>;
-	shortSynopsis: EntityField<string>;
-	keywords: EntityField<string>;
-	poster: EntityField<string>;
-	runtime: EntityField<number>;
-	movieType: EntityField<string>;
-	productionYear: EntityField<number>;
-	userRating: EntityField<number>;
-	pressRating: EntityField<number>;
-	actorRoles: EntityField<string>;
-	writers: EntityField<string>;
-	camera: EntityField<string>;
-	producers: EntityField<string>;
-	directors: EntityField<string>;
+	movId: EntityField<number, typeof domains.DO_IDENTITY>;
+	title: EntityField<string, typeof domains.DO_LABEL>;
+	titleSortOnly: EntityField<string, typeof domains.DO_TEXT_NOT_TOKENIZED>;
+	originalTitle: EntityField<string, typeof domains.DO_LABEL>;
+	synopsis: EntityField<string, typeof domains.DO_TEXT>;
+	shortSynopsis: EntityField<string, typeof domains.DO_TEXT>;
+	keywords: EntityField<string, typeof domains.DO_LABEL>;
+	poster: EntityField<string, typeof domains.DO_TEXT_NOT_TOKENIZED>;
+	runtime: EntityField<number, typeof domains.DO_RUNTIME>;
+	movieType: EntityField<string, typeof domains.DO_LABEL_SHORT>;
+	productionYear: EntityField<number, typeof domains.DO_YEAR>;
+	userRating: EntityField<number, typeof domains.DO_RATING>;
+	pressRating: EntityField<number, typeof domains.DO_RATING>;
+	actorRoles: EntityField<string, typeof domains.DO_MULTI_VALUES>;
+	writers: EntityField<string, typeof domains.DO_MULTI_VALUES>;
+	camera: EntityField<string, typeof domains.DO_MULTI_VALUES>;
+	producers: EntityField<string, typeof domains.DO_MULTI_VALUES>;
+	directors: EntityField<string, typeof domains.DO_MULTI_VALUES>;
 }
 
 export const MovieIndexEntity = {

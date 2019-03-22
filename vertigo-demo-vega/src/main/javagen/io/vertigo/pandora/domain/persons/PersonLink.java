@@ -16,20 +16,15 @@ public final class PersonLink implements Fragment<Person> {
 	private static final long serialVersionUID = 1L;
 
 	private String fullName;
-
 	private String photoHref;
-
 	private Boolean existsInBdd;
-
 	private Long perId;
-
 
 	/** {@inheritDoc} */
 	@Override
 	public URI<Person> getEntityURI() {
 		return DtObjectUtil.createEntityURI(this); 
 	}
-
 	
 	/**
 	 * Champ : DATA.
@@ -50,7 +45,6 @@ public final class PersonLink implements Fragment<Person> {
 		this.fullName = fullName;
 	}
 	
-	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'PHOTO HREF'.
@@ -70,7 +64,6 @@ public final class PersonLink implements Fragment<Person> {
 		this.photoHref = photoHref;
 	}
 	
-	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Movie type'.
@@ -89,7 +82,6 @@ public final class PersonLink implements Fragment<Person> {
 	public void setExistsInBdd(final Boolean existsInBdd) {
 		this.existsInBdd = existsInBdd;
 	}
-	
 	
 	/**
 	 * Champ : FOREIGN_KEY.
