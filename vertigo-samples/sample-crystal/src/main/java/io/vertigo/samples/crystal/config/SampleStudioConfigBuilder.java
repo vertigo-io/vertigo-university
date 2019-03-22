@@ -1,6 +1,6 @@
 package io.vertigo.samples.crystal.config;
 
-import io.vertigo.app.config.AppConfig;
+import io.vertigo.app.config.NodeConfig;
 import io.vertigo.app.config.DefinitionProviderConfig;
 import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.core.param.Param;
@@ -9,8 +9,8 @@ import io.vertigo.dynamo.plugins.environment.DynamoDefinitionProvider;
 import io.vertigo.studio.StudioFeatures;
 
 public class SampleStudioConfigBuilder {
-	public AppConfig build() {
-		return AppConfig.builder()
+	public NodeConfig build() {
+		return NodeConfig.builder()
 		// @formatter:off
 				.beginBoot()
 					.withLocales("fr_FR")

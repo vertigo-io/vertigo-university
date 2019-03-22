@@ -5,7 +5,7 @@ import javax.inject.Inject;
 import org.apache.logging.log4j.LogManager;
 
 import io.vertigo.app.AutoCloseableApp;
-import io.vertigo.app.config.AppConfigBuilder;
+import io.vertigo.app.config.NodeConfigBuilder;
 import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.core.component.di.injector.DIInjector;
 import io.vertigo.samples.SamplesPAO;
@@ -23,8 +23,8 @@ public class DaoSample {
 	private MovieServices movieServices;
 
 	public static void main(final String[] args) {
-		final AppConfigBuilder appConfigBuilder = SampleConfigBuilder.createAppConfigBuilder();
-		appConfigBuilder.addModule(ModuleConfig.builder("mineDAO")
+		final NodeConfigBuilder nodeConfigBuilder = SampleConfigBuilder.createNodeConfigBuilder();
+		nodeConfigBuilder.addModule(ModuleConfig.builder("mineDAO")
 				.addComponent(MyMovieDAO.class)
 				.build())
 				.addModule(ModuleConfig.builder("mineServices")
@@ -34,7 +34,7 @@ public class DaoSample {
 						.addComponent(RoleDAO.class)
 						.addComponent(SamplesPAO.class)
 						.build());
-		try (final AutoCloseableApp app = new AutoCloseableApp(appConfigBuilder.build())) {
+		try (final AutoCloseableApp app = new AutoCloseableApp(nodeConfigBuilder.build())) {
 			final DaoSample sample = new DaoSample();
 			DIInjector.injectMembers(sample, app.getComponentSpace());
 			//-----

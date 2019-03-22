@@ -1,7 +1,7 @@
 package io.vertigo.samples.dao.config;
 
-import io.vertigo.app.config.AppConfig;
-import io.vertigo.app.config.AppConfigBuilder;
+import io.vertigo.app.config.NodeConfig;
+import io.vertigo.app.config.NodeConfigBuilder;
 import io.vertigo.app.config.DefinitionProviderConfig;
 import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.commons.CommonsFeatures;
@@ -15,16 +15,16 @@ import io.vertigo.samples.dao.aspect.SupervisionAspect;
 import io.vertigo.samples.dao.boot.DataBaseInitializer;
 
 public class SampleConfigBuilder {
-	public static AppConfigBuilder createAppConfigBuilder() {
+	public static NodeConfigBuilder createNodeConfigBuilder() {
 		// @formatter:off
-				return createAppConfigBuilderWithoutCrebase()
+				return createNodeConfigBuilderWithoutCrebase()
 					.addInitializer(DataBaseInitializer.class);
 		// @formatter:on
 	}
 
-	public static AppConfigBuilder createAppConfigBuilderWithoutCrebase() {
+	public static NodeConfigBuilder createNodeConfigBuilderWithoutCrebase() {
 		// @formatter:off
-				return AppConfig.builder()
+				return NodeConfig.builder()
 						.beginBoot()
 							.withLocales("fr_FR")
 							.addPlugin(ClassPathResourceResolverPlugin.class)
@@ -67,9 +67,9 @@ public class SampleConfigBuilder {
 		// @formatter:on
 	}
 
-	public static AppConfigBuilder createAppConfigBuilderRemoteDb() {
+	public static NodeConfigBuilder createNodeConfigBuilderRemoteDb() {
 		// @formatter:off
-			return  AppConfig.builder()
+			return  NodeConfig.builder()
 					.beginBoot()
 					.withLocales("fr_FR")
 					.addPlugin(ClassPathResourceResolverPlugin.class)

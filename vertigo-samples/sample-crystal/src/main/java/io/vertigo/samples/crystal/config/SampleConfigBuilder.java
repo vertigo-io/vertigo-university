@@ -1,7 +1,7 @@
 package io.vertigo.samples.crystal.config;
 
-import io.vertigo.app.config.AppConfig;
-import io.vertigo.app.config.AppConfigBuilder;
+import io.vertigo.app.config.NodeConfig;
+import io.vertigo.app.config.NodeConfigBuilder;
 import io.vertigo.app.config.DefinitionProviderConfig;
 import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.commons.CommonsFeatures;
@@ -16,7 +16,7 @@ import io.vertigo.vega.VegaFeatures;
 
 public class SampleConfigBuilder {
 
-	public static AppConfigBuilder createAppConfigBuilder(final boolean withSearch, final boolean withVega) {
+	public static NodeConfigBuilder createNodeConfigBuilder(final boolean withSearch, final boolean withVega) {
 		final DynamoFeatures dynamoFeatures = new DynamoFeatures()
 				.withStore()
 				.withSqlStore();
@@ -29,7 +29,7 @@ public class SampleConfigBuilder {
 							Param.of("config.file", "elasticsearch.yml"));
 		}
 
-		final AppConfigBuilder appConfigBuilder = AppConfig.builder()
+		final NodeConfigBuilder nodeConfigBuilder = NodeConfig.builder()
 				.beginBoot()
 				.withLocales("fr_FR")
 				.addPlugin(ClassPathResourceResolverPlugin.class)
@@ -56,13 +56,13 @@ public class SampleConfigBuilder {
 						.build());
 
 		if (withVega) {
-			appConfigBuilder.addModule(new VegaFeatures()
+			nodeConfigBuilder.addModule(new VegaFeatures()
 					.withWebServices()
 					.withWebServicesEmbeddedServer(Param.of("port", "8081"))
 					.build());
 		}
 
-		return appConfigBuilder;
+		return nodeConfigBuilder;
 	}
 
 }

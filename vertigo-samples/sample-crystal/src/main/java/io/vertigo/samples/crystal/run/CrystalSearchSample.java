@@ -1,7 +1,7 @@
 package io.vertigo.samples.crystal.run;
 
 import io.vertigo.app.AutoCloseableApp;
-import io.vertigo.app.config.AppConfigBuilder;
+import io.vertigo.app.config.NodeConfigBuilder;
 import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.core.component.di.injector.DIInjector;
 import io.vertigo.samples.crystal.CrystalPAO;
@@ -15,13 +15,13 @@ import io.vertigo.samples.crystal.webservices.MovieWebServices;
 public class CrystalSearchSample {
 
 	public static void main(final String[] args) {
-		final AppConfigBuilder appConfigBuilder = SampleConfigBuilder.createAppConfigBuilder(true, true);
-		appConfigBuilder
+		final NodeConfigBuilder nodeConfigBuilder = SampleConfigBuilder.createNodeConfigBuilder(true, true);
+		nodeConfigBuilder
 				.addModule(ModuleConfig.builder("stepDao")
 						.build())
 				.addModule(defaultSampleModule());
 
-		try (final AutoCloseableApp app = new AutoCloseableApp(appConfigBuilder.build())) {
+		try (final AutoCloseableApp app = new AutoCloseableApp(nodeConfigBuilder.build())) {
 			final CrystalSearchSample sample = new CrystalSearchSample();
 			DIInjector.injectMembers(sample, app.getComponentSpace());
 			//-----

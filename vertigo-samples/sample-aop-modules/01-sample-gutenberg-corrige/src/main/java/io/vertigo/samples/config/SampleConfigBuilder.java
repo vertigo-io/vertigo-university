@@ -1,6 +1,6 @@
 package io.vertigo.samples.config;
 
-import io.vertigo.app.config.AppConfig;
+import io.vertigo.app.config.NodeConfig;
 import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.samples.components.scrabble.ScrabbleManager;
 import io.vertigo.samples.components.scrabble.ScrabbleManagerImpl;
@@ -13,8 +13,8 @@ import io.vertigo.samples.components.text.TextProcessorManagerImpl;
  *
  */
 public class SampleConfigBuilder {
-	public AppConfig build() {
-		return AppConfig.builder()
+	public NodeConfig build() {
+		return NodeConfig.builder()
 				.addModule(ModuleConfig.builder("gutenberg")
 						.addComponent(TextProcessorManager.class, TextProcessorManagerImpl.class)
 						.addComponent(ScrabbleManager.class, ScrabbleManagerImpl.class)

@@ -10,7 +10,7 @@ import io.vertigo.account.plugins.authorization.loaders.JsonSecurityDefinitionPr
 import io.vertigo.account.security.UserSession;
 import io.vertigo.account.security.VSecurityManager;
 import io.vertigo.app.AutoCloseableApp;
-import io.vertigo.app.config.AppConfigBuilder;
+import io.vertigo.app.config.NodeConfigBuilder;
 import io.vertigo.app.config.DefinitionProviderConfig;
 import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.core.component.di.injector.DIInjector;
@@ -40,8 +40,8 @@ public class Level7 {
 	private VSecurityManager securityManager;
 
 	public static void main(final String[] args) {
-		final AppConfigBuilder appConfigBuilder = SampleConfigBuilder.createAppConfigBuilder(true, true, true);
-		appConfigBuilder
+		final NodeConfigBuilder nodeConfigBuilder = SampleConfigBuilder.createNodeConfigBuilder(true, true, true);
+		nodeConfigBuilder
 				.addModule(ModuleConfig.builder("stepDao")
 						.addComponent(ActorDAO.class)
 						.addComponent(RoleDAO.class)
@@ -51,7 +51,7 @@ public class Level7 {
 								.build())
 						.build())
 				.addModule(defaultSampleModule());
-		try (final AutoCloseableApp app = new AutoCloseableApp(appConfigBuilder.build())) {
+		try (final AutoCloseableApp app = new AutoCloseableApp(nodeConfigBuilder.build())) {
 			final Level7 sample = new Level7();
 			DIInjector.injectMembers(sample, app.getComponentSpace());
 			//-----

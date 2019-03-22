@@ -27,7 +27,6 @@ import io.vertigo.pandora.domain.movies.MovieIndex;
 import io.vertigo.pandora.domain.persons.ActorRole;
 import io.vertigo.pandora.domain.persons.Person;
 import io.vertigo.pandora.domain.persons.PersonActorRoleLink;
-import io.vertigo.vega.webservice.model.UiListState;
 
 @Transactional
 public class MovieServicesImpl implements MovieServices {
@@ -152,7 +151,7 @@ public class MovieServicesImpl implements MovieServices {
 	}
 
 	public List<Movie> getRankingByField(final String fieldName) {
-		final DtListState dtListState = new UiListState(6, 0, fieldName, true, "").toDtListState();
+		final DtListState dtListState = DtListState.of(6, 0, fieldName, true);
 		final SelectedFacetValues listFilters = SelectedFacetValues.empty().build();
 		final Optional<String> group = Optional.empty();
 		final SearchQueryBuilder searchQueryBuilder = movieDAO.createSearchQueryBuilderMovieWithPoster("", listFilters);

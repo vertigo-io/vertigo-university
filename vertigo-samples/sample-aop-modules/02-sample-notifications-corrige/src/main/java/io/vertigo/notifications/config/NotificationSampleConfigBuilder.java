@@ -1,6 +1,6 @@
 package io.vertigo.notifications.config;
 
-import io.vertigo.app.config.AppConfig;
+import io.vertigo.app.config.NodeConfig;
 import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.commons.CommonsFeatures;
 import io.vertigo.core.param.Param;
@@ -25,8 +25,8 @@ import io.vertigo.social.SocialFeatures;
  */
 public class NotificationSampleConfigBuilder {
 
-	public AppConfig build() {
-		return AppConfig.builder()
+	public NodeConfig build() {
+		return NodeConfig.builder()
 				.beginBoot()
 				.withLocales("fr")
 				.endBoot()

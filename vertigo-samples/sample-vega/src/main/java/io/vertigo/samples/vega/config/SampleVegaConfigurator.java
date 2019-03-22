@@ -1,7 +1,7 @@
 package io.vertigo.samples.vega.config;
 
 import io.vertigo.account.AccountFeatures;
-import io.vertigo.app.config.AppConfig;
+import io.vertigo.app.config.NodeConfig;
 import io.vertigo.app.config.DefinitionProviderConfig;
 import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.commons.CommonsFeatures;
@@ -16,10 +16,10 @@ import io.vertigo.samples.vega.webservices.TokenWebServices;
 import io.vertigo.vega.VegaFeatures;
 
 public final class SampleVegaConfigurator {
-	public static AppConfig config(final int port) {
+	public static NodeConfig config(final int port) {
 		final String locales = "fr_FR, en , de_DE";
 		// @formatter:off
-		return  AppConfig.builder()
+		return  NodeConfig.builder()
 				.beginBoot()
 				.withLocales(locales)
 				.endBoot()

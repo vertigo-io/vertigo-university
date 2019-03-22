@@ -1,7 +1,7 @@
 package io.vertigo.pandora.boot;
 
-import io.vertigo.app.config.AppConfig;
-import io.vertigo.app.config.AppConfigBuilder;
+import io.vertigo.app.config.NodeConfig;
+import io.vertigo.app.config.NodeConfigBuilder;
 import io.vertigo.app.config.DefinitionProviderConfig;
 import io.vertigo.app.config.LogConfig;
 import io.vertigo.app.config.ModuleConfig;
@@ -13,11 +13,11 @@ import io.vertigo.studio.StudioFeatures;
 import io.vertigo.studio.plugins.mda.webservice.WsTsGeneratorPlugin;
 
 public final class PandoraConfigurator {
-	public static AppConfig config(final boolean activeStudio) {
+	public static NodeConfig config(final boolean activeStudio) {
 		final String pandoraHome = System.getProperty("pandora.home", "d:/pandora");
 		final int pandoraPort = Integer.parseInt(System.getProperty("pandora.port", "8080"));
 
-		final AppConfigBuilder appConfigBuilder = AppConfig.builder()
+		final NodeConfigBuilder nodeConfigBuilder = NodeConfig.builder()
 				.beginBoot()
 				.withLocales("fr")
 				.addPlugin(ClassPathResourceResolverPlugin.class)
@@ -26,7 +26,7 @@ public final class PandoraConfigurator {
 				.endBoot();
 
 		//		if (!activeStudio) {
-		//			appConfigBuilder
+		//			nodeConfigBuilder
 		//					.addModule(new PersonaFeatures()
 		//							.withUserSession(LollipopUserSession.class).build())
 		//					.addModule(new CommonsFeatures()
@@ -115,12 +115,12 @@ public final class PandoraConfigurator {
 		//							.addComponent(DomainMetricsProvider.class)
 		//							.build())
 		//					.addInitializer(DashboardInitializer.class);
-		//			appConfigBuilder.withNodeConfig(
+		//			nodeConfigBuilder.withNodeConfig(
 		//					NodeConfig.builder()
 		//							.withAppName("pandora")
 		//							.build());
 		//		} else {
-		appConfigBuilder
+		nodeConfigBuilder
 				.addModule(new StudioFeatures()
 						.withMasterData()
 						.withMda(
@@ -144,6 +144,6 @@ public final class PandoraConfigurator {
 								.build())
 						.build());
 		//	}
-		return appConfigBuilder.build();
+		return nodeConfigBuilder.build();
 	}
 }

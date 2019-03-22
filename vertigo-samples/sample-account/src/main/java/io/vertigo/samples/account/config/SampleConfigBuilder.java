@@ -3,8 +3,8 @@ package io.vertigo.samples.account.config;
 import io.vertigo.account.AccountFeatures;
 import io.vertigo.account.authorization.AuthorizationManager;
 import io.vertigo.account.impl.authorization.AuthorizationManagerImpl;
-import io.vertigo.app.config.AppConfig;
-import io.vertigo.app.config.AppConfigBuilder;
+import io.vertigo.app.config.NodeConfig;
+import io.vertigo.app.config.NodeConfigBuilder;
 import io.vertigo.app.config.ComponentConfig;
 import io.vertigo.app.config.DefinitionProviderConfig;
 import io.vertigo.app.config.ModuleConfig;
@@ -21,8 +21,8 @@ import io.vertigo.vega.VegaFeatures;
 
 public class SampleConfigBuilder {
 
-	public static AppConfigBuilder createAppConfigBuilder() {
-		final AppConfigBuilder appConfigBuilder = AppConfig.builder()
+	public static NodeConfigBuilder createNodeConfigBuilder() {
+		final NodeConfigBuilder nodeConfigBuilder = NodeConfig.builder()
 				.beginBoot()
 				.withLocales("fr_FR")
 				.addPlugin(ClassPathResourceResolverPlugin.class)
@@ -77,7 +77,7 @@ public class SampleConfigBuilder {
 						.withWebServicesEmbeddedServer(Param.of("port", "8081"))
 						.build());
 
-		return appConfigBuilder;
+		return nodeConfigBuilder;
 	}
 
 }

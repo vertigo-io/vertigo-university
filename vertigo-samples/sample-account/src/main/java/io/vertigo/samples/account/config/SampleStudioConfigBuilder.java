@@ -1,7 +1,7 @@
 package io.vertigo.samples.account.config;
 
 import io.vertigo.account.plugins.authorization.loaders.JsonSecurityDefinitionProvider;
-import io.vertigo.app.config.AppConfig;
+import io.vertigo.app.config.NodeConfig;
 import io.vertigo.app.config.DefinitionProviderConfig;
 import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.core.param.Param;
@@ -11,8 +11,8 @@ import io.vertigo.studio.StudioFeatures;
 
 public class SampleStudioConfigBuilder {
 
-	public AppConfig build() {
-		return AppConfig.builder()
+	public NodeConfig build() {
+		return NodeConfig.builder()
 				.beginBoot()
 				.withLocales("fr_FR")
 				.addPlugin(ClassPathResourceResolverPlugin.class)

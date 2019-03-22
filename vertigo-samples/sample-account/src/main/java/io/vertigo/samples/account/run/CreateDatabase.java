@@ -27,7 +27,7 @@ public class CreateDatabase {
 	private SqlDataBaseManager sqlDataBaseManager;
 
 	public static void main(final String[] args) {
-		try (final AutoCloseableApp app = new AutoCloseableApp(SampleConfigBuilder.createAppConfigBuilder().build())) {
+		try (final AutoCloseableApp app = new AutoCloseableApp(SampleConfigBuilder.createNodeConfigBuilder().build())) {
 			final CreateDatabase createDatabase = new CreateDatabase();
 			DIInjector.injectMembers(createDatabase, app.getComponentSpace());
 			//-----

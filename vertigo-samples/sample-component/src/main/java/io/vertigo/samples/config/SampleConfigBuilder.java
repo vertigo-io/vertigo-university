@@ -1,6 +1,6 @@
 package io.vertigo.samples.config;
 
-import io.vertigo.app.config.AppConfig;
+import io.vertigo.app.config.NodeConfig;
 import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.core.param.Param;
 import io.vertigo.samples.aspects.SpyAspect;
@@ -20,8 +20,8 @@ import io.vertigo.samples.plugins.MultOperationlugin;
 import io.vertigo.samples.plugins.SumOperationPlugin;
 
 public class SampleConfigBuilder {
-	public AppConfig build() {
-		return AppConfig.builder()
+	public NodeConfig build() {
+		return NodeConfig.builder()
 				.addModule(ModuleConfig.builder("aspects")
 						.addComponent(SpyManager.class)
 						.addAspect(SpyAspect.class)

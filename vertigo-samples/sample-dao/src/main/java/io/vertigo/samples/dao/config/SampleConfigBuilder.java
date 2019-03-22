@@ -1,7 +1,7 @@
 package io.vertigo.samples.dao.config;
 
-import io.vertigo.app.config.AppConfig;
-import io.vertigo.app.config.AppConfigBuilder;
+import io.vertigo.app.config.NodeConfig;
+import io.vertigo.app.config.NodeConfigBuilder;
 import io.vertigo.app.config.DefinitionProviderConfig;
 import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.commons.CommonsFeatures;
@@ -14,15 +14,15 @@ import io.vertigo.dynamo.plugins.environment.DynamoDefinitionProvider;
 import io.vertigo.samples.dao.aspect.SupervisionAspect;
 
 public class SampleConfigBuilder {
-	public static AppConfigBuilder createAppConfigBuilder() {
+	public static NodeConfigBuilder createNodeConfigBuilder() {
 		// @formatter:off
-				return createAppConfigBuilderCore();
+				return createNodeConfigBuilderCore();
 		// @formatter:on
 	}
 
-	public static AppConfigBuilder createAppConfigBuilderCore() {
+	public static NodeConfigBuilder createNodeConfigBuilderCore() {
 		// @formatter:off
-		return AppConfig.builder()
+		return NodeConfig.builder()
 				.beginBoot()
 					.withLocales("fr_FR")
 					.addPlugin(ClassPathResourceResolverPlugin.class)

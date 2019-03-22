@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import io.vertigo.commons.node.NodeManager;
+import io.vertigo.commons.app.AppManager;
 import io.vertigo.ui.core.ViewContext;
 import io.vertigo.ui.impl.springmvc.controller.AbstractVSpringMvcController;
 
@@ -17,7 +17,7 @@ import io.vertigo.ui.impl.springmvc.controller.AbstractVSpringMvcController;
 public class ExtensionsStoreController extends AbstractVSpringMvcController {
 
 	@Inject
-	private NodeManager nodeManager;
+	private AppManager nodeManager;
 
 	@GetMapping("/")
 	public void initContext(final ViewContext viewContext) {

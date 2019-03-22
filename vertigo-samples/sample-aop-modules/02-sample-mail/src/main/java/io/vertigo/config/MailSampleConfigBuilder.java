@@ -1,6 +1,6 @@
 package io.vertigo.config;
 
-import io.vertigo.app.config.AppConfig;
+import io.vertigo.app.config.NodeConfig;
 import io.vertigo.commons.CommonsFeatures;
 import io.vertigo.core.param.Param;
 import io.vertigo.dynamo.DynamoFeatures;
@@ -13,8 +13,8 @@ import io.vertigo.social.SocialFeatures;
  */
 public class MailSampleConfigBuilder {
 
-	public AppConfig build() {
-		return AppConfig.builder()
+	public NodeConfig build() {
+		return NodeConfig.builder()
 				.beginBoot()
 				.withLocales("fr")
 				.endBoot()

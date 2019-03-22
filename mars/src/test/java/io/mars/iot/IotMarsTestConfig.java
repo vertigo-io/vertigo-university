@@ -20,8 +20,8 @@ package io.mars.iot;
 
 import io.mars.basemanagement.services.equipment.iot.IotEquipmentServices;
 import io.mars.basemanagement.services.equipment.iot.MqttShield;
-import io.vertigo.app.config.AppConfig;
-import io.vertigo.app.config.AppConfigBuilder;
+import io.vertigo.app.config.NodeConfig;
+import io.vertigo.app.config.NodeConfigBuilder;
 import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.commons.CommonsFeatures;
 import io.vertigo.core.param.Param;
@@ -32,8 +32,8 @@ import io.vertigo.database.plugins.timeseries.influxdb.InfluxDbTimeSeriesPlugin;
 
 public final class IotMarsTestConfig {
 
-	public static AppConfigBuilder createAppConfigBuilder() {
-		return AppConfig.builder().beginBoot()
+	public static NodeConfigBuilder createNodeConfigBuilder() {
+		return NodeConfig.builder().beginBoot()
 				.withLocales("fr_FR")
 				.addPlugin(ClassPathResourceResolverPlugin.class)
 				.addPlugin(URLResourceResolverPlugin.class)
@@ -54,8 +54,8 @@ public final class IotMarsTestConfig {
 						.build());
 	}
 
-	public static AppConfig config() {
-		return createAppConfigBuilder().build();
+	public static NodeConfig config() {
+		return createNodeConfigBuilder().build();
 	}
 
 }
