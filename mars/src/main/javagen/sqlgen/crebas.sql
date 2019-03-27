@@ -53,6 +53,9 @@ create sequence SEQ_PERSON
 create sequence SEQ_PICTURE
 	start with 1000 cache 20; 
 
+create sequence SEQ_SUPPLIER
+	start with 1000 cache 20; 
+
 create sequence SEQ_TAG
 	start with 1000 cache 20; 
 
@@ -496,6 +499,90 @@ comment on column PICTURE.PICTUREFILE_ID is
 
 comment on column PICTURE.BASE_ID is
 'Base';
+
+-- ============================================================
+--   Table : SUPPLIER                                        
+-- ============================================================
+create table SUPPLIER
+(
+    SIREN       	 VARCHAR(100)	not null,
+    STATUT_DIFFUSION	 VARCHAR(100)	,
+    DATE_CREATION	 DATE        	,
+    SEXE        	 VARCHAR(100)	,
+    PRENOM_USUEL	 VARCHAR(100)	,
+    TRANCHE_EFFECTIFS	 VARCHAR(100)	,
+    DATE_DERNIER_TRAITEMENT	 TIMESTAMP   	,
+    NOMBRE_PERIODES	 NUMERIC     	,
+    CATEGORIE_ENTREPRISE	 VARCHAR(100)	,
+    DATE_DEBUT  	 DATE        	,
+    ETAT_ADMINISTRATIF	 VARCHAR(100)	,
+    NOM         	 VARCHAR(100)	,
+    NOM_USAGE   	 VARCHAR(100)	,
+    DENOMINATION	 VARCHAR(100)	,
+    CATEGORIE_JURIDIQUE	 VARCHAR(100)	,
+    ACTIVITE_PRINCIPALE	 VARCHAR(100)	,
+    NOMENCLATURE_ACTIVITE	 VARCHAR(100)	,
+    NIC_SIEGE   	 NUMERIC     	,
+    CARACTERE_EMPLOYEUR	 bool        	,
+    constraint PK_SUPPLIER primary key (SIREN)
+);
+
+comment on column SUPPLIER.SIREN is
+'Siren';
+
+comment on column SUPPLIER.STATUT_DIFFUSION is
+'Broadcast status';
+
+comment on column SUPPLIER.DATE_CREATION is
+'Creation date';
+
+comment on column SUPPLIER.SEXE is
+'Sex';
+
+comment on column SUPPLIER.PRENOM_USUEL is
+'Firstname';
+
+comment on column SUPPLIER.TRANCHE_EFFECTIFS is
+'Workforce range';
+
+comment on column SUPPLIER.DATE_DERNIER_TRAITEMENT is
+'Last treatment';
+
+comment on column SUPPLIER.NOMBRE_PERIODES is
+'Number of periods';
+
+comment on column SUPPLIER.CATEGORIE_ENTREPRISE is
+'Business category';
+
+comment on column SUPPLIER.DATE_DEBUT is
+'Start date';
+
+comment on column SUPPLIER.ETAT_ADMINISTRATIF is
+'Administrative State';
+
+comment on column SUPPLIER.NOM is
+'Name';
+
+comment on column SUPPLIER.NOM_USAGE is
+'Use name';
+
+comment on column SUPPLIER.DENOMINATION is
+'Denomination';
+
+comment on column SUPPLIER.CATEGORIE_JURIDIQUE is
+'Legal category';
+
+comment on column SUPPLIER.ACTIVITE_PRINCIPALE is
+'Core business';
+
+comment on column SUPPLIER.NOMENCLATURE_ACTIVITE is
+'Business nomenclature';
+
+comment on column SUPPLIER.NIC_SIEGE is
+'Nic Siege';
+
+comment on column SUPPLIER.CARACTERE_EMPLOYEUR is
+'Employer';
 
 -- ============================================================
 --   Table : TAG                                        

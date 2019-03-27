@@ -1,0 +1,28 @@
+package io.mars.catalog.domain
+
+
+create DtDefinition DT_SUPPLIER {
+	stereotype: "KeyConcept"
+	id SIREN                                 	{domain: DO_LABEL 		label:"Siren" }
+	field STATUT_DIFFUSION                      {domain: DO_CODE 		label:"Broadcast status" 		required:"false"}
+	field DATE_CREATION                         {domain: DO_LOCALDATE 	label:"Creation date" 			required:"false"}
+	field SEXE                                  {domain: DO_CODE 		label:"Sex" 						required:"false"}
+	field PRENOM_USUEL                          {domain: DO_LABEL 		label:"Firstname" 				required:"false"}
+	field TRANCHE_EFFECTIFS                     {domain: DO_CODE 		label:"Workforce range" 		required:"false"}
+	field DATE_DERNIER_TRAITEMENT               {domain: DO_INSTANT 	label:"Last treatment" 	required:"false"}
+	field NOMBRE_PERIODES                       {domain: DO_COUNT 		label:"Number of periods" 			required:"false"}
+	field CATEGORIE_ENTREPRISE                  {domain: DO_CODE 		label:"Business category" 		required:"false"}
+	field DATE_DEBUT                            {domain: DO_LOCALDATE 	label:"Start date" 					required:"false"}
+	field ETAT_ADMINISTRATIF                    {domain: DO_CODE 		label:"Administrative State" 			required:"false"}
+	field NOM                                   {domain: DO_LABEL 		label:"Name" 						required:"false"}
+	field NOM_USAGE                             {domain: DO_LABEL 		label:"Use name" 				required:"false"}
+	field DENOMINATION                          {domain: DO_LABEL 		label:"Denomination" 				required:"false"}
+	field CATEGORIE_JURIDIQUE                   {domain: DO_CODE 		label:"Legal category" 		required:"false"}
+	field ACTIVITE_PRINCIPALE                   {domain: DO_CODE 		label:"Core business" 		required:"false"}
+	field NOMENCLATURE_ACTIVITE				    {domain: DO_CODE 		label:"Business nomenclature" 	required:"false"}
+	field NIC_SIEGE                             {domain: DO_COUNT 		label:"Nic Siege" 					required:"false"}
+	field CARACTERE_EMPLOYEUR                   {domain: DO_YES_NO 		label:"Employer" 		required:"false"}
+	
+}
+
+

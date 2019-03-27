@@ -61,6 +61,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		Person(io.mars.hr.domain.Person.class),
 		/** Objet de données Picture. */
 		Picture(io.mars.basemanagement.domain.Picture.class),
+		/** Objet de données Supplier. */
+		Supplier(io.mars.catalog.domain.Supplier.class),
 		/** Objet de données Tag. */
 		Tag(io.mars.basemanagement.domain.Tag.class),
 		/** Objet de données Ticket. */
@@ -422,6 +424,49 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		PICTUREFILE_ID,
 		/** Propriété 'Base'. */
 		BASE_ID	}
+
+	/**
+	 * Enumération des champs de Supplier.
+	 */
+	public enum SupplierFields implements DtFieldName<io.mars.catalog.domain.Supplier> {
+		/** Propriété 'Siren'. */
+		SIREN,
+		/** Propriété 'Broadcast status'. */
+		STATUT_DIFFUSION,
+		/** Propriété 'Creation date'. */
+		DATE_CREATION,
+		/** Propriété 'Sex'. */
+		SEXE,
+		/** Propriété 'Firstname'. */
+		PRENOM_USUEL,
+		/** Propriété 'Workforce range'. */
+		TRANCHE_EFFECTIFS,
+		/** Propriété 'Last treatment'. */
+		DATE_DERNIER_TRAITEMENT,
+		/** Propriété 'Number of periods'. */
+		NOMBRE_PERIODES,
+		/** Propriété 'Business category'. */
+		CATEGORIE_ENTREPRISE,
+		/** Propriété 'Start date'. */
+		DATE_DEBUT,
+		/** Propriété 'Administrative State'. */
+		ETAT_ADMINISTRATIF,
+		/** Propriété 'Name'. */
+		NOM,
+		/** Propriété 'Use name'. */
+		NOM_USAGE,
+		/** Propriété 'Denomination'. */
+		DENOMINATION,
+		/** Propriété 'Legal category'. */
+		CATEGORIE_JURIDIQUE,
+		/** Propriété 'Core business'. */
+		ACTIVITE_PRINCIPALE,
+		/** Propriété 'Business nomenclature'. */
+		NOMENCLATURE_ACTIVITE,
+		/** Propriété 'Nic Siege'. */
+		NIC_SIEGE,
+		/** Propriété 'Employer'. */
+		CARACTERE_EMPLOYEUR	}
 
 	/**
 	 * Enumération des champs de Tag.

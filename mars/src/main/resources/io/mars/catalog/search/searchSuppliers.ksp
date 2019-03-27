@@ -1,0 +1,43 @@
+package io.mars.catalog.search
+
+create IndexDefinition IDX_SUPPLIER {  
+  keyConcept : DT_SUPPLIER
+  dtIndex : DT_SUPPLIER
+  loaderId : "SupplierSearchLoader"
+}
+
+
+
+create FacetDefinition FCT_SUPPLIER_TRANCHE_EFFECTIFS {
+	dtDefinition:DT_SUPPLIER, fieldName:"TRANCHE_EFFECTIFS", label:"Workforce range"
+} 
+
+create FacetDefinition FCT_SUPPLIER_CATEGORIE_ENTREPRISE {
+	dtDefinition:DT_SUPPLIER, fieldName:"CATEGORIE_ENTREPRISE", label:"Business category"
+} 
+
+create FacetDefinition FCT_SUPPLIER_CATEGORIE_JURIDIQUE {
+	dtDefinition:DT_SUPPLIER, fieldName:"CATEGORIE_JURIDIQUE", label:"Legal category"
+} 
+
+create FacetDefinition FCT_SUPPLIER_ACTIVITE_PRINCIPALE {
+	dtDefinition:DT_SUPPLIER, fieldName:"ACTIVITE_PRINCIPALE", label:"Core business"
+} 
+
+
+create FacetDefinition FCT_SUPPLIER_DATE_CREATION {
+	dtDefinition:DT_SUPPLIER, fieldName:"DATE_CREATION", label:"Creation date"
+	range R1 { filter:"DATE_CREATION:[01/01/2000 TO 01/01/2005]", label:"2000-2005"},
+	range R2 { filter:"DATE_CREATION:[01/01/2005 TO 01/01/2010]", label:"2005-2010"},
+	range R2 { filter:"DATE_CREATION:[01/01/2010 TO 01/01/2015]", label:"2010-2015"},
+	range R3 { filter:"DATE_CREATION:[01/01/2015 TO *]", label:"depuis 2015"}
+}
+
+create FacetedQueryDefinition QRY_SUPPLIER {
+	keyConcept : DT_SUPPLIER
+	facets : [FCT_SUPPLIER_TRANCHE_EFFECTIFS, FCT_SUPPLIER_CATEGORIE_ENTREPRISE, FCT_SUPPLIER_CATEGORIE_JURIDIQUE, FCT_SUPPLIER_ACTIVITE_PRINCIPALE, FCT_SUPPLIER_DATE_CREATION ]
+	domainCriteria : DO_LABEL
+	listFilterBuilderClass : "io.vertigo.dynamox.search.DslListFilterBuilder"  
+	listFilterBuilderQuery : "[NOM,DENOMINATION]:#+query*#"
+}
+

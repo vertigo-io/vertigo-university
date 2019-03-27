@@ -176,6 +176,12 @@
 		          <q-item-main label="Academy"></q-item-main>
 		        </q-item>
 		        <q-item-separator></q-item-separator>
+		        <q-list-header>Catalog</q-list-header>
+		       <q-item tag="a" th:href="@{/catalog/suppliers/}">
+		          <q-item-side icon="fas fa-building"></q-item-side>
+		          <q-item-main label="Suppliers"></q-item-main>
+		        </q-item>
+		        <q-item-separator></q-item-separator>
 		       	<q-list-header>Maintenance</q-list-header>
 		       <q-item tag="a" th:href="@{/maintenance/dashboard/}">
 		          <q-item-side icon="fas fa-tools"></q-item-side>
@@ -200,7 +206,7 @@
 		          <q-item-main label="Environment" ></q-item-main>
 		          <q-item-side right><q-chip color="primary" dense square class="q-mr-xs">IoT</q-chip></q-item-side>
 		        </q-item>
-		        <q-item tag="a" th:href="@{/dashboard/modules/vui}" target="_blank">
+		        <q-item tag="a" th:href="@{/dashboard/modules/vertigo-ui}" target="_blank">
 		          <q-item-side icon="fas fa-chart-bar" ></q-item-side>
 		          <q-item-main label="Analytics" ></q-item-main>
 		        </q-item>

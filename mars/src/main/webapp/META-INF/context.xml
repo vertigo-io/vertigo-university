@@ -22,5 +22,6 @@
 	<Parameter name="esHost" value="mars.dev.klee.lan.net:9300" override="false"/>
 	<Parameter name="ledgerHost" value="http://mars.dev.klee.lan.net:8545" override="false"/>
 	<Parameter name="mosquittoHost" value="tcp://mars.dev.klee.lan.net:1883" override="false"/>
-		
+	<Parameter name="orchestra.root.directory" value="d:/data/"/>	
+	<Parameter name="suppliersImportLimit" value="20000" />
 </Context>
