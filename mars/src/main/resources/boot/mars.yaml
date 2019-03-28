@@ -91,7 +91,7 @@ modules:
           timeToLiveSeconds: 3600
       - kvStore.berkeley:
           collections: VViewContext;TTL=43200
-          dbFilePath: ${java.io.tmpdir}/vertigo/TestVViewContext
+          dbFilePath: ${java.io.tmpdir}/vertigo-ui/MarsVViewContext
   io.vertigo.account.AccountFeatures:
     features:
       - security:
