@@ -63,6 +63,8 @@ public class CommonServicesImpl implements CommonServices {
 	private ActorRoleDAO actorRoleDAO;
 	@Inject
 	private MovieDAO movieDAO;
+	@Inject
+	private PersonDAO personDAO;
 
 	/** {@inheritDoc} */
 	@Override
