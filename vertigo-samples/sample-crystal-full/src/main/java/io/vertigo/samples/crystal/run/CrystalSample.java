@@ -5,8 +5,8 @@ import javax.inject.Inject;
 import org.apache.logging.log4j.LogManager;
 
 import io.vertigo.app.AutoCloseableApp;
-import io.vertigo.app.config.NodeConfigBuilder;
 import io.vertigo.app.config.ModuleConfig;
+import io.vertigo.app.config.NodeConfigBuilder;
 import io.vertigo.core.component.di.injector.DIInjector;
 import io.vertigo.samples.SamplesPAO;
 import io.vertigo.samples.crystal.CrystalPAO;
@@ -25,7 +25,7 @@ public class CrystalSample {
 	private MovieServices movieServices;
 
 	public static void main(final String[] args) {
-		final NodeConfigBuilder nodeConfigBuilder = SampleConfigBuilder.createNodeConfigBuilder(false, false, false);
+		final NodeConfigBuilder nodeConfigBuilder = SampleConfigBuilder.createNodeConfigBuilder(true, false, false);
 		nodeConfigBuilder
 				.addModule(ModuleConfig.builder("stepDao")
 						.addComponent(ActorDAO.class)

@@ -27,6 +27,7 @@ import io.vertigo.dynamo.domain.model.DtObject;
 import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.search.SearchManager;
 import io.vertigo.dynamo.search.model.SearchQuery;
+import io.vertigo.dynamo.store.StoreManager;
 import io.vertigo.lang.WrappedException;
 import io.vertigo.pandora.dao.movies.MovieDAO;
 import io.vertigo.pandora.dao.movies.MoviesPAO;
@@ -63,6 +64,8 @@ public class CommonServicesImpl implements CommonServices {
 	private ActorRoleDAO actorRoleDAO;
 	@Inject
 	private MovieDAO movieDAO;
+	@Inject
+	private StoreManager storeManager;
 
 	/** {@inheritDoc} */
 	@Override
@@ -185,10 +188,10 @@ public class CommonServicesImpl implements CommonServices {
 			final List<UID> cameraUris = extractURIs(jsonMovie, "camera");
 			final List<UID> producersUris = extractURIs(jsonMovie, "producers");
 			final List<UID> directorsUris = extractURIs(jsonMovie, "directors");
-			movieDAO.updateNN((DtListURIForNNAssociation) movie.writers().getDtListURI(), writersUris);
-			movieDAO.updateNN((DtListURIForNNAssociation) movie.camera().getDtListURI(), cameraUris);
-			movieDAO.updateNN((DtListURIForNNAssociation) movie.producers().getDtListURI(), producersUris);
-			movieDAO.updateNN((DtListURIForNNAssociation) movie.directors().getDtListURI(), directorsUris);
+			storeManager.getDataStore().getBrokerNN().updateNN((DtListURIForNNAssociation) movie.writers().getDtListURI(), writersUris);
+			storeManager.getDataStore().getBrokerNN().updateNN((DtListURIForNNAssociation) movie.camera().getDtListURI(), cameraUris);
+			storeManager.getDataStore().getBrokerNN().updateNN((DtListURIForNNAssociation) movie.producers().getDtListURI(), producersUris);
+			storeManager.getDataStore().getBrokerNN().updateNN((DtListURIForNNAssociation) movie.directors().getDtListURI(), directorsUris);
 			writersCount += writersUris.size();
 			cameraCount += cameraUris.size();
 			producersCount += producersUris.size();

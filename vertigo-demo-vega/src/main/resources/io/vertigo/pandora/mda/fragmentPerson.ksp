@@ -3,15 +3,15 @@ package io.vertigo.pandora.domain.persons
 
 create Fragment DT_PERSON_LINK {
   from : DT_PERSON
-  alias FULL_NAME {}
-  alias PHOTO_HREF {}
-  field EXISTS_IN_BDD {domain: DO_ACTIVE label: "Movie type" required:"false" persistent:"false" }
+  alias fullName {}
+  alias photoHref {}
+  field existsInBdd {domain: DO_ACTIVE label: "Movie type" required:"false" persistent:"false" }
 }
 
 
 create Fragment DT_PERSON_ACTOR_ROLE_LINK {
   from : DT_PERSON
-  alias FULL_NAME {}
-  alias PHOTO_HREF {}
-  field ROLE { domain: DO_LABEL label: "Role" required:"false" persistent:"false"  }
+  alias fullName {}
+  alias photoHref {}
+  field role { domain: DO_LABEL label: "Role" required:"false" persistent:"false"  }
 }

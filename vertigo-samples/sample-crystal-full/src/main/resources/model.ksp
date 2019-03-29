@@ -1,36 +1,36 @@
 package io.vertigo.samples.crystal.domain
 
 create DtDefinition DT_COUNTRY {
-  id COU_ID {domain: DO_ID label: "Id" }
-  field NAME {domain: DO_LABEL label: "Nom du pays" required:"false"}
+  id couId {domain: DO_ID label: "Id" }
+  field name {domain: DO_LABEL label: "Nom du pays" required:"false"}
 }
 
 create DtDefinition DT_MOVIE {
   stereotype : "KeyConcept"
-  id MOV_ID {domain: DO_ID label: "Id" }
-  field NAME {domain: DO_LABEL_LONG label: "Titre du film" required:"true"}
-  field YEAR {domain: DO_YEAR label: "Année" required:"false"}
-  field IMDBID {domain: DO_LABEL label: "Id Imdb" required:"false"}
+  id movId {domain: DO_ID label: "Id" }
+  field name {domain: DO_LABEL_LONG label: "Titre du film" required:"true"}
+  field year {domain: DO_YEAR label: "Année" required:"false"}
+  field imdbid {domain: DO_LABEL label: "Id Imdb" required:"false"}
 }
 
 create DtDefinition DT_ACTOR {
-  id ACT_ID {domain: DO_ID label: "Id" }
-  field NAME {domain: DO_LABEL_LONG label: "Nom" required:"true"}
+  id actId {domain: DO_ID label: "Id" }
+  field name {domain: DO_LABEL_LONG label: "Nom" required:"true"}
 }
 
 create DtDefinition DT_SEXE {
-  id SEX_CD {domain: DO_CODE label: "Id" }
-  field LABEL {domain: DO_LABEL_LONG label: "Label" required:"true"}
+  id sexCd {domain: DO_CODE label: "Id" }
+  field label {domain: DO_LABEL_LONG label: "Label" required:"true"}
 }
 
 
 create DtDefinition DT_ROLE {
-  id ROL_ID {domain: DO_ID label: "Id" }
-  field AS_CHARACTER {domain: DO_LABEL_VERY_LONG label: "Dans le role de" required:"true"}
+  id rolId {domain: DO_ID label: "Id" }
+  field asCharacter {domain: DO_LABEL_VERY_LONG label: "Dans le role de" required:"true"}
 }
 
 create Association A_MOV_COU {
-  fkFieldName : "COU_ID"
+  fkFieldName : "couId"
     
  	dtDefinitionA : DT_MOVIE
 	dtDefinitionB : DT_COUNTRY
@@ -49,7 +49,7 @@ create Association A_MOV_COU {
 }
 
 create Association A_ROL_MOV {
-  fkFieldName : "MOV_ID"
+  fkFieldName : "movId"
     
  	dtDefinitionA : DT_ROLE
 	dtDefinitionB : DT_MOVIE
@@ -69,7 +69,7 @@ create Association A_ROL_MOV {
 
 
 create Association A_ROL_ACT {
-  fkFieldName : "ACT_ID"
+  fkFieldName : "actId"
     
  	dtDefinitionA : DT_ROLE
 	dtDefinitionB : DT_ACTOR
@@ -88,7 +88,7 @@ create Association A_ROL_ACT {
 }
 
 create Association A_ACT_SEX {
-  fkFieldName : "SEX_CD"
+  fkFieldName : "sexCd"
     
  	dtDefinitionA : DT_ACTOR
 	dtDefinitionB : DT_SEXE

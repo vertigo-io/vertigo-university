@@ -150,7 +150,7 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.crystal.domain.Movie> getMoviesInCountries(final java.util.List<Long> countriesIds) {
 		final Task task = createTaskBuilder("TK_GET_MOVIES_IN_COUNTRIES")
-				.addValue("COUNTRIES_IDS", countriesIds)
+				.addValue("countriesIds", countriesIds)
 				.build();
 		return getTaskManager()
 				.execute(task)

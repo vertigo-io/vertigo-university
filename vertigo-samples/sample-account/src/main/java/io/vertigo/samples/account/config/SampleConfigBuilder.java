@@ -3,11 +3,11 @@ package io.vertigo.samples.account.config;
 import io.vertigo.account.AccountFeatures;
 import io.vertigo.account.authorization.AuthorizationManager;
 import io.vertigo.account.impl.authorization.AuthorizationManagerImpl;
-import io.vertigo.app.config.NodeConfig;
-import io.vertigo.app.config.NodeConfigBuilder;
 import io.vertigo.app.config.ComponentConfig;
 import io.vertigo.app.config.DefinitionProviderConfig;
 import io.vertigo.app.config.ModuleConfig;
+import io.vertigo.app.config.NodeConfig;
+import io.vertigo.app.config.NodeConfigBuilder;
 import io.vertigo.commons.CommonsFeatures;
 import io.vertigo.core.param.Param;
 import io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin;
@@ -58,9 +58,9 @@ public class SampleConfigBuilder {
 						.withStoreAccount(
 								Param.of("userIdentityEntity", "DT_USER"),
 								Param.of("groupIdentityEntity", "DT_USER_GROUP"),
-								Param.of("userAuthField", "LOGIN"),
-								Param.of("userToAccountMapping", "id:LOGIN, displayName:NAME, email:EMAIL, authToken:LOGIN"),
-								Param.of("groupToGroupAccountMapping", "id:NAME, displayName:NAME"))
+								Param.of("userAuthField", "login"),
+								Param.of("userToAccountMapping", "id:login, displayName:name, email:email, authToken:login"),
+								Param.of("groupToGroupAccountMapping", "id:name, displayName:name"))
 						.withAuthentication()
 						.withTextAuthentication(
 								Param.of("filePath", "authentication/identities.txt"))

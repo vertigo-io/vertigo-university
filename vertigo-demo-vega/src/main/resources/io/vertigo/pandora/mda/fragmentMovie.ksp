@@ -3,30 +3,30 @@ package io.vertigo.pandora.domain.movies
 
 create Fragment DT_MOVIE_LINK {
   from : DT_MOVIE
-  alias TITLE {}
-  alias POSTER {}
-  alias MOVIE_TYPE {}
-  alias PRODUCTION_YEAR {}
+  alias title {}
+  alias poster {}
+  alias movieType {}
+  alias productionYear {}
 }
 
 create Fragment DT_MOVIE_CARACT {
   from : DT_MOVIE
-  alias TITLE {}
-  alias ORIGINAL_TITLE {}
-  alias KEYWORDS {}
-  alias RUNTIME {}
-  alias MOVIE_TYPE {}
-  alias PRODUCTION_YEAR {}
+  alias title {}
+  alias originalTitle {}
+  alias keywords {}
+  alias runtime {}
+  alias movieType {}
+  alias productionYear {}
 }
 
 create Fragment DT_MOVIE_SYNOPSIS {
   from : DT_MOVIE
-  alias SYNOPSIS {}
-  alias SHORT_SYNOPSIS {}
+  alias synopsis {}
+  alias shortSynopsis {}
 }
 
 create Fragment DT_MOVIE_TRAILER {
   from : DT_MOVIE
-  alias TRAILER_NAME {}
-  alias TRAILER_HREF {}
+  alias trailerName {}
+  alias trailerHref {}
 }

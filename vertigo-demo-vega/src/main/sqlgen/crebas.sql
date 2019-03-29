@@ -159,7 +159,6 @@ comment on column PERSON.ACTIVITY is
 'ACTIVITY';
 
 
-
 alter table ACTOR_ROLE
 	add constraint FK_MOV_MRO_MOVIE foreign key (MOV_ID)
 	references MOVIE (MOV_ID);

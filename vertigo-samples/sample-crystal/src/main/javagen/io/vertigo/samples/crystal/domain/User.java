@@ -22,7 +22,7 @@ public final class User implements Entity {
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
 			name = "A_USR_COU",
-			fkFieldName = "COU_ID",
+			fkFieldName = "couId",
 			primaryDtDefinitionName = "DT_COUNTRY",
 			primaryIsNavigable = true,
 			primaryRole = "Country",
@@ -37,7 +37,7 @@ public final class User implements Entity {
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
 			name = "A_USR_GRP",
-			fkFieldName = "GRP_ID",
+			fkFieldName = "grpId",
 			primaryDtDefinitionName = "DT_USER_GROUP",
 			primaryIsNavigable = true,
 			primaryRole = "Group",

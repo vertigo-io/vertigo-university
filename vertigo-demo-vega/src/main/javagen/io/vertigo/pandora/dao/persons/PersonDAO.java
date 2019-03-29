@@ -137,7 +137,7 @@ public final class PersonDAO extends DAO<Person, java.lang.Long> implements Stor
 	*/
 	public void importPersons(final io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.Person> dtc) {
 		final Task task = createTaskBuilder("TK_IMPORT_PERSONS")
-				.addValue("DTC", dtc)
+				.addValue("dtc", dtc)
 				.build();
 		getTaskManager().execute(task);
 	}

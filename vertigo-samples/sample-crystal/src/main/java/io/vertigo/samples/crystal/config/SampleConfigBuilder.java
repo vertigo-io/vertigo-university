@@ -1,9 +1,9 @@
 package io.vertigo.samples.crystal.config;
 
-import io.vertigo.app.config.NodeConfig;
-import io.vertigo.app.config.NodeConfigBuilder;
 import io.vertigo.app.config.DefinitionProviderConfig;
 import io.vertigo.app.config.ModuleConfig;
+import io.vertigo.app.config.NodeConfig;
+import io.vertigo.app.config.NodeConfigBuilder;
 import io.vertigo.commons.CommonsFeatures;
 import io.vertigo.core.param.Param;
 import io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin;
@@ -24,7 +24,7 @@ public class SampleConfigBuilder {
 			dynamoFeatures.withSearch()
 					.withESEmbedded(
 							Param.of("home", "D:/atelier/search"), //usage d'url impropre
-							Param.of("envIndex", "crystal-test"),
+							Param.of("envIndex", "crystal-test_"),
 							Param.of("rowsPerQuery", "50"),
 							Param.of("config.file", "elasticsearch.yml"));
 		}

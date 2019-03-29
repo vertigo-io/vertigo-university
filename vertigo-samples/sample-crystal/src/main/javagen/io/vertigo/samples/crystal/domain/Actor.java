@@ -20,7 +20,7 @@ public final class Actor implements Entity {
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
 			name = "A_ACT_SEX",
-			fkFieldName = "SEX_CD",
+			fkFieldName = "sexCd",
 			primaryDtDefinitionName = "DT_SEXE",
 			primaryIsNavigable = true,
 			primaryRole = "Sexe",

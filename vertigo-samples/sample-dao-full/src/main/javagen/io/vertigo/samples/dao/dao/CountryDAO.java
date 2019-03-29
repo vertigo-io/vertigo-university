@@ -47,7 +47,7 @@ public final class CountryDAO extends DAO<Country, java.lang.Long> implements St
 	*/
 	public void insertCountriesBatch(final io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Country> countryList) {
 		final Task task = createTaskBuilder("TK_INSERT_COUNTRIES_BATCH")
-				.addValue("COUNTRY_LIST", countryList)
+				.addValue("countryList", countryList)
 				.build();
 		getTaskManager().execute(task);
 	}

@@ -43,8 +43,8 @@ public class MovieServicesImpl implements MovieServices {
 
 	@Override
 	public DtList<Movie> findMoviesByCriteria(final String title, final Integer year) {
-		final Criteria<Movie> criteria = Criterions.startsWith(MovieFields.NAME, title)
-				.and(Criterions.isEqualTo(MovieFields.YEAR, year));
+		final Criteria<Movie> criteria = Criterions.startsWith(MovieFields.name, title)
+				.and(Criterions.isEqualTo(MovieFields.year, year));
 		return movieDAO.findAll(criteria, 500);
 	}
 

@@ -47,7 +47,7 @@ public final class MoviesPAO implements StoreServices {
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.movies.MovieIndex> loadMovieIndex(final io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.movies.Dummy> dtc) {
 		final Task task = createTaskBuilder("TK_LOAD_MOVIE_INDEX")
-				.addValue("DTC", dtc)
+				.addValue("dtc", dtc)
 				.build();
 		return getTaskManager()
 				.execute(task)

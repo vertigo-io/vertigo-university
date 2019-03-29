@@ -47,7 +47,7 @@ public final class PersonsPAO implements StoreServices {
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.PersonActorRoleLink> loadActorRoleLink(final Long movId) {
 		final Task task = createTaskBuilder("TK_LOAD_ACTOR_ROLE_LINK")
-				.addValue("MOV_ID", movId)
+				.addValue("movId", movId)
 				.build();
 		return getTaskManager()
 				.execute(task)
@@ -61,7 +61,7 @@ public final class PersonsPAO implements StoreServices {
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.PersonIndex> loadFullPersonIndex(final io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.movies.Dummy> dtc) {
 		final Task task = createTaskBuilder("TK_LOAD_FULL_PERSON_INDEX")
-				.addValue("DTC", dtc)
+				.addValue("dtc", dtc)
 				.build();
 		return getTaskManager()
 				.execute(task)
@@ -75,7 +75,7 @@ public final class PersonsPAO implements StoreServices {
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.PersonIndex> loadPersonIndex(final io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.movies.Dummy> dtc) {
 		final Task task = createTaskBuilder("TK_LOAD_PERSON_INDEX")
-				.addValue("DTC", dtc)
+				.addValue("dtc", dtc)
 				.build();
 		return getTaskManager()
 				.execute(task)

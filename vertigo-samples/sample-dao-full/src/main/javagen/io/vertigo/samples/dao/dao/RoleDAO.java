@@ -47,7 +47,7 @@ public final class RoleDAO extends DAO<Role, java.lang.Long> implements StoreSer
 	*/
 	public void insertRolesBatch(final io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Role> rolesList) {
 		final Task task = createTaskBuilder("TK_INSERT_ROLES_BATCH")
-				.addValue("ROLES_LIST", rolesList)
+				.addValue("rolesList", rolesList)
 				.build();
 		getTaskManager().execute(task);
 	}
@@ -60,8 +60,8 @@ public final class RoleDAO extends DAO<Role, java.lang.Long> implements StoreSer
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Role> loadRolesByChunk(final Long limit, final Long offset) {
 		final Task task = createTaskBuilder("TK_LOAD_ROLES_BY_CHUNK")
-				.addValue("LIMIT", limit)
-				.addValue("OFFSET", offset)
+				.addValue("limit", limit)
+				.addValue("offset", offset)
 				.build();
 		return getTaskManager()
 				.execute(task)

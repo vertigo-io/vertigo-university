@@ -47,7 +47,7 @@ public final class SamplesPAO implements StoreServices {
 	*/
 	public java.util.List<Long> getActorsIdsByMovie(final Long movId) {
 		final Task task = createTaskBuilder("TK_GET_ACTORS_IDS_BY_MOVIE")
-				.addValue("MOV_ID", movId)
+				.addValue("movId", movId)
 				.build();
 		return getTaskManager()
 				.execute(task)

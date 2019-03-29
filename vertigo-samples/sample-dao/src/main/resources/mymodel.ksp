@@ -2,33 +2,33 @@ package io.vertigo.samples.dao.domain
 
 create DtDefinition DT_MY_COUNTRY {
   storeName : "mine"
-  id COU_ID {domain: DO_ID label: "Id" }
-  field NAME {domain: DO_LABEL label: "Code du pays" required:"false"}
+  id couId {domain: DO_ID label: "Id" }
+  field name {domain: DO_LABEL label: "Code du pays" required:"false"}
 }
 
 create DtDefinition DT_MY_MOVIE {
   storeName : "mine"
-  id MOV_ID {domain: DO_ID label: "Id" }
-  field NAME {domain: DO_LABEL_LONG label: "Code du pays" required:"true"}
-  field YEAR {domain: DO_YEAR label: "Année" required:"false"}
-  field IMDBID {domain: DO_LABEL label: "Id Imdb" required:"false"}
+  id movId {domain: DO_ID label: "Id" }
+  field name {domain: DO_LABEL_LONG label: "Code du pays" required:"true"}
+  field year {domain: DO_YEAR label: "Année" required:"false"}
+  field imdbid {domain: DO_LABEL label: "Id Imdb" required:"false"}
 }
 
 create DtDefinition DT_MY_ACTOR {
   storeName : "mine"
-  id ACT_ID {domain: DO_ID label: "Id" }
-  field NAME {domain: DO_LABEL_LONG label: "Nom" required:"true"}
-  field SEXE {domain: DO_CODE label: "Sexe" required:"false"}
+  id actId {domain: DO_ID label: "Id" }
+  field name {domain: DO_LABEL_LONG label: "Nom" required:"true"}
+  field sexe {domain: DO_CODE label: "Sexe" required:"false"}
 }
 
 create DtDefinition DT_MY_ROLE {
   storeName : "mine"
-  id ROL_ID {domain: DO_ID label: "Id" }
-  field AS_CHARACTER {domain: DO_LABEL_VERY_LONG label: "Dans le role de" required:"true"}
+  id rolId {domain: DO_ID label: "Id" }
+  field asCharacter {domain: DO_LABEL_VERY_LONG label: "Dans le role de" required:"true"}
 }
 
 create Association A_MMOV_MCOU {
-  fkFieldName : "COU_ID"
+  fkFieldName : "couId"
     
  	dtDefinitionA : DT_MY_MOVIE
 	dtDefinitionB : DT_MY_COUNTRY
@@ -47,7 +47,7 @@ create Association A_MMOV_MCOU {
 }
 
 create Association A_MROL_MMOV {
-  fkFieldName : "MOV_ID"
+  fkFieldName : "movId"
     
  	dtDefinitionA : DT_MY_ROLE
 	dtDefinitionB : DT_MY_MOVIE
@@ -67,7 +67,7 @@ create Association A_MROL_MMOV {
 
 
 create Association A_MROL_MACT {
-  fkFieldName : "ACT_ID"
+  fkFieldName : "actId"
     
  	dtDefinitionA : DT_MY_ROLE
 	dtDefinitionB : DT_MY_ACTOR

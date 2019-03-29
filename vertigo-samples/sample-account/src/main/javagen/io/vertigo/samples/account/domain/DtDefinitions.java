@@ -52,83 +52,83 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	 */
 	public enum ActorFields implements DtFieldName<io.vertigo.samples.account.domain.Actor> {
 		/** Propriété 'Id'. */
-		ACT_ID,
+		actId,
 		/** Propriété 'Nom'. */
-		NAME,
+		name,
 		/** Propriété 'Sexe'. */
-		SEX_CD	}
+		sexCd	}
 
 	/**
 	 * Enumération des champs de Country.
 	 */
 	public enum CountryFields implements DtFieldName<io.vertigo.samples.account.domain.Country> {
 		/** Propriété 'Id'. */
-		COU_ID,
+		couId,
 		/** Propriété 'Nom du pays'. */
-		NAME	}
+		name	}
 
 	/**
 	 * Enumération des champs de Movie.
 	 */
 	public enum MovieFields implements DtFieldName<io.vertigo.samples.account.domain.Movie> {
 		/** Propriété 'Id'. */
-		MOV_ID,
+		movId,
 		/** Propriété 'Titre du film'. */
-		NAME,
+		name,
 		/** Propriété 'Année'. */
-		YEAR,
+		year,
 		/** Propriété 'Id Imdb'. */
-		IMDBID,
+		imdbid,
 		/** Propriété 'Country'. */
-		COU_ID	}
+		couId	}
 
 	/**
 	 * Enumération des champs de Role.
 	 */
 	public enum RoleFields implements DtFieldName<io.vertigo.samples.account.domain.Role> {
 		/** Propriété 'Id'. */
-		ROL_ID,
+		rolId,
 		/** Propriété 'Dans le role de'. */
-		AS_CHARACTER,
+		asCharacter,
 		/** Propriété 'Movie'. */
-		MOV_ID,
+		movId,
 		/** Propriété 'Actor'. */
-		ACT_ID	}
+		actId	}
 
 	/**
 	 * Enumération des champs de Sexe.
 	 */
 	public enum SexeFields implements DtFieldName<io.vertigo.samples.account.domain.Sexe> {
 		/** Propriété 'Id'. */
-		SEX_CD,
+		sexCd,
 		/** Propriété 'Label'. */
-		LABEL	}
+		label	}
 
 	/**
 	 * Enumération des champs de User.
 	 */
 	public enum UserFields implements DtFieldName<io.vertigo.samples.account.domain.User> {
 		/** Propriété 'Id'. */
-		USR_ID,
+		usrId,
 		/** Propriété 'Login'. */
-		LOGIN,
+		login,
 		/** Propriété 'Nom'. */
-		NAME,
+		name,
 		/** Propriété 'email'. */
-		EMAIL,
+		email,
 		/** Propriété 'Country'. */
-		COU_ID,
+		couId,
 		/** Propriété 'Group'. */
-		GRP_ID	}
+		grpId	}
 
 	/**
 	 * Enumération des champs de UserGroup.
 	 */
 	public enum UserGroupFields implements DtFieldName<io.vertigo.samples.account.domain.UserGroup> {
 		/** Propriété 'Id'. */
-		GRP_ID,
+		grpId,
 		/** Propriété 'Nom'. */
-		NAME	}
+		name	}
 
 	/** {@inheritDoc} */
 	@Override

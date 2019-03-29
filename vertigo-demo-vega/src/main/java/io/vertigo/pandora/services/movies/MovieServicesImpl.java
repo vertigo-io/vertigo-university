@@ -18,6 +18,7 @@ import io.vertigo.dynamo.domain.model.Fragment;
 import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.search.model.SearchQuery;
 import io.vertigo.dynamo.search.model.SearchQueryBuilder;
+import io.vertigo.dynamo.store.StoreManager;
 import io.vertigo.pandora.dao.movies.MovieDAO;
 import io.vertigo.pandora.dao.movies.MoviesPAO;
 import io.vertigo.pandora.dao.persons.ActorRoleDAO;
@@ -37,6 +38,8 @@ public class MovieServicesImpl implements MovieServices {
 	private MoviesPAO moviesPAO;
 	@Inject
 	private ActorRoleDAO actorRoleDAO;
+	@Inject
+	private StoreManager storeManager;
 
 	@Override
 	public Movie getMovie(final long id) {
@@ -95,22 +98,22 @@ public class MovieServicesImpl implements MovieServices {
 
 	@Override
 	public void saveWriters(final Movie movie, final List<UID> personURIs) {
-		movieDAO.updateNN((DtListURIForNNAssociation) movie.writers().getDtListURI(), personURIs);
+		storeManager.getDataStore().getBrokerNN().updateNN((DtListURIForNNAssociation) movie.writers().getDtListURI(), personURIs);
 	}
 
 	@Override
 	public void saveCamera(final Movie movie, final List<UID> personURIs) {
-		movieDAO.updateNN((DtListURIForNNAssociation) movie.camera().getDtListURI(), personURIs);
+		storeManager.getDataStore().getBrokerNN().updateNN((DtListURIForNNAssociation) movie.camera().getDtListURI(), personURIs);
 	}
 
 	@Override
 	public void saveProducers(final Movie movie, final List<UID> personURIs) {
-		movieDAO.updateNN((DtListURIForNNAssociation) movie.producers().getDtListURI(), personURIs);
+		storeManager.getDataStore().getBrokerNN().updateNN((DtListURIForNNAssociation) movie.producers().getDtListURI(), personURIs);
 	}
 
 	@Override
 	public void saveDirectors(final Movie movie, final List<UID> personURIs) {
-		movieDAO.updateNN((DtListURIForNNAssociation) movie.directors().getDtListURI(), personURIs);
+		storeManager.getDataStore().getBrokerNN().updateNN((DtListURIForNNAssociation) movie.directors().getDtListURI(), personURIs);
 	}
 
 	@Override

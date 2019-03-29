@@ -3,11 +3,11 @@ package io.vertigo.samples.crystal.config;
 import io.vertigo.account.AccountFeatures;
 import io.vertigo.account.authorization.AuthorizationManager;
 import io.vertigo.account.impl.authorization.AuthorizationManagerImpl;
-import io.vertigo.app.config.NodeConfig;
-import io.vertigo.app.config.NodeConfigBuilder;
 import io.vertigo.app.config.ComponentConfig;
 import io.vertigo.app.config.DefinitionProviderConfig;
 import io.vertigo.app.config.ModuleConfig;
+import io.vertigo.app.config.NodeConfig;
+import io.vertigo.app.config.NodeConfigBuilder;
 import io.vertigo.commons.CommonsFeatures;
 import io.vertigo.core.param.Param;
 import io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin;
@@ -32,7 +32,7 @@ public class SampleConfigBuilder {
 					.withSearch()
 					.addPlugin(ESEmbeddedSearchServicesPlugin.class,
 							Param.of("home", "D:/atelier/search"), //usage d'url impropre
-							Param.of("envIndex", "crystal-test"),
+							Param.of("envIndex", "crystal-test_"),
 							Param.of("rowsPerQuery", "50"),
 							Param.of("config.file", "elasticsearch.yml"));
 		}

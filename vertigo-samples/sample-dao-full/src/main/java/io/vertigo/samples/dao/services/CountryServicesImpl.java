@@ -21,7 +21,7 @@ public class CountryServicesImpl implements CountryServices {
 		Assertion.checkArgNotEmpty(prefix);
 		// ---
 
-		return countryDAO.findAll(Criterions.startsWith(CountryFields.NAME, prefix), 50);
+		return countryDAO.findAll(Criterions.startsWith(CountryFields.name, prefix), 50);
 	}
 
 }

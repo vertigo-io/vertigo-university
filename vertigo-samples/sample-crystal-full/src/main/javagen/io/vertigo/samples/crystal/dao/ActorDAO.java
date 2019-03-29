@@ -48,7 +48,7 @@ public final class ActorDAO extends DAO<Actor, java.lang.Long> implements StoreS
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.crystal.domain.Actor> getActorsByMovie(final Long movId) {
 		final Task task = createTaskBuilder("TK_GET_ACTORS_BY_MOVIE")
-				.addValue("MOV_ID", movId)
+				.addValue("movId", movId)
 				.build();
 		return getTaskManager()
 				.execute(task)

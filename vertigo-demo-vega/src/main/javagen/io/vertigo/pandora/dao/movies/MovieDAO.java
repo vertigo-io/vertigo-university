@@ -149,7 +149,7 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	*/
 	public void importMovies(final io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.movies.Movie> dtc) {
 		final Task task = createTaskBuilder("TK_IMPORT_MOVIES")
-				.addValue("DTC", dtc)
+				.addValue("dtc", dtc)
 				.build();
 		getTaskManager().execute(task);
 	}

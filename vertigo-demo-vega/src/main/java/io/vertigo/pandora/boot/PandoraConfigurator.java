@@ -1,10 +1,10 @@
 package io.vertigo.pandora.boot;
 
-import io.vertigo.app.config.NodeConfig;
-import io.vertigo.app.config.NodeConfigBuilder;
 import io.vertigo.app.config.DefinitionProviderConfig;
 import io.vertigo.app.config.LogConfig;
 import io.vertigo.app.config.ModuleConfig;
+import io.vertigo.app.config.NodeConfig;
+import io.vertigo.app.config.NodeConfigBuilder;
 import io.vertigo.core.param.Param;
 import io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin;
 import io.vertigo.core.plugins.resource.local.LocalResourceResolverPlugin;
@@ -138,6 +138,7 @@ public final class PandoraConfigurator {
 						.build())
 				.addModule(ModuleConfig.builder("myAppGen")
 						.addDefinitionProvider(DefinitionProviderConfig.builder(DynamoDefinitionProvider.class)
+								.addParam(Param.of("constFieldName", "true"))
 								.addDefinitionResource("kpr", "io/vertigo/pandora/boot/application.kpr")
 								.addDefinitionResource("oom", "io/vertigo/pandora/mda/pandora.oom")
 								.addDefinitionResource("kpr", "io/vertigo/pandora/mda/generation.kpr")

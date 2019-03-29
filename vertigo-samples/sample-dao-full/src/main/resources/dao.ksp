@@ -8,15 +8,15 @@ create Task TK_GET_MOVIES_BY_CRITERIA {
         	where 
         	1=1
         	<%if(title != null) {%>
-        	 and mov.NAME like concat(#TITLE#, '%%')
+        	 and mov.NAME like concat(#title#, '%%')
         	<%}%>
         	<%if(year != null) {%>
-        	 and mov.YEAR = #YEAR#
+        	 and mov.YEAR = #year#
         	<%}%>
 			"
-	attribute TITLE	 	{domain : DO_LABEL_LONG 		required:"true" 	inOut :"in"}
-	attribute YEAR	 	{domain : DO_YEAR 				required:"true" 	inOut :"in"}
-	attribute MOVIES	{domain : DO_DT_MOVIE_DTC 	required:"true" 	inOut :"out"}
+	attribute title	 	{domain : DO_LABEL_LONG 		required:"true" 	inOut :"in"}
+	attribute year	 	{domain : DO_YEAR 				required:"true" 	inOut :"in"}
+	attribute movies	{domain : DO_DT_MOVIE_DTC 	required:"true" 	inOut :"out"}
 }
 
 create Task TK_GET_MOVIES_BY_CRITERIA_WITH_COUNTRY {
@@ -27,19 +27,19 @@ create Task TK_GET_MOVIES_BY_CRITERIA_WITH_COUNTRY {
         	where 
         	1=1
         	<%if(title != null) {%>
-        	 and mov.NAME like concat(#TITLE#, '%%')
+        	 and mov.NAME like concat(#title#, '%%')
         	<%}%>
         	<%if(year != null) {%>
-        	 and mov.YEAR = #YEAR#
+        	 and mov.YEAR = #year#
         	<%}%>
         	<%if(!countries.isEmpty()) {%>
-        	 and mov.COU_ID in (#COUNTRIES.ROWNUM.COU_ID#)
+        	 and mov.COU_ID in (#countries.rownum.couId#)
         	<%}%>
 			"
-	attribute TITLE	 	{domain : DO_LABEL_LONG 		required:"true" 	inOut :"in"}
-	attribute YEAR	 	{domain : DO_YEAR 				required:"false"	inOut :"in"}
-	attribute COUNTRIES	{domain : DO_DT_COUNTRY_DTC 	required:"true" 	inOut :"in"}
-	attribute MOVIES	{domain : DO_DT_MOVIE_DTC 	required:"true" 	inOut :"out"}
+	attribute title	 	{domain : DO_LABEL_LONG 		required:"true" 	inOut :"in"}
+	attribute year	 	{domain : DO_YEAR 				required:"false"	inOut :"in"}
+	attribute countries	{domain : DO_DT_COUNTRY_DTC 	required:"true" 	inOut :"in"}
+	attribute movies	{domain : DO_DT_MOVIE_DTC 	required:"true" 	inOut :"out"}
 }
 
 
@@ -49,10 +49,10 @@ create Task TK_GET_ACTORS_IN_MOVIE {
         	select act.*
         	from role rol
         	join actor act on act.ACT_ID = rol.ACT_ID
-        	where rol.MOV_ID = #MOV_ID#
+        	where rol.MOV_ID = #movId#
 			"
-	attribute MOV_ID	{domain : DO_ID 	required:"true" 	inOut :"in"}
-	attribute ACTORS	{domain : DO_DT_ACTOR_DTC 	required:"true" 	inOut :"out"}
+	attribute movId		{domain : DO_ID 	required:"true" 	inOut :"in"}
+	attribute actors	{domain : DO_DT_ACTOR_DTC 	required:"true" 	inOut :"out"}
 }
 
 
@@ -64,7 +64,7 @@ create Task TK_GET_MOVIES_WITH_100_ACTORS {
 			join (select MOV_ID, count(*) cnt from role group by mov_id ) hv on hv.MOV_ID = mov.MOV_ID
 			where hv.cnt> 100
 			"
-	attribute MOVIES	{domain : DO_DT_MOVIE_DTC 	required:"true" 	inOut :"out"}
+	attribute movies	{domain : DO_DT_MOVIE_DTC 	required:"true" 	inOut :"out"}
 }
 
 
@@ -78,7 +78,7 @@ create Task TK_GET_MOVIE_DISPLAY {
 		where mov.YEAR > 2010
 		limit 500
 			"
-	attribute MOVIES	{domain : DO_DT_MOVIE_DISPLAY_DTC 	required:"true" 	inOut :"out"}
+	attribute movies	{domain : DO_DT_MOVIE_DISPLAY_DTC 	required:"true" 	inOut :"out"}
 }
 
 create Task TK_GET_MOVIE_BY_YEAR {
@@ -86,7 +86,7 @@ create Task TK_GET_MOVIE_BY_YEAR {
         request : "
 		select YEAR, count(*) as MOVIES_COUNT from movie where YEAR is not null group by year order by YEAR asc
 			"
-	attribute MOVIES	{domain : DO_DT_MOVIE_BY_YEAR_DTC 	required:"true" 	inOut :"out"}
+	attribute movies	{domain : DO_DT_MOVIE_BY_YEAR_DTC 	required:"true" 	inOut :"out"}
 }
 
 

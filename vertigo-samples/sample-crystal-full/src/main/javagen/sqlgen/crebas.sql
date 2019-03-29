@@ -183,7 +183,6 @@ comment on column USER_GROUP.NAME is
 'Nom';
 
 
-
 alter table ACTOR
 	add constraint FK_ACT_SEX_SEXE foreign key (SEX_CD)
 	references SEXE (SEX_CD);

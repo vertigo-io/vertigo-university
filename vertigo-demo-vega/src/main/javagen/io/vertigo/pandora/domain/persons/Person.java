@@ -29,7 +29,7 @@ public final class Person implements KeyConcept {
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
 			name = "A_MRO_PER",
-			fkFieldName = "PER_ID",
+			fkFieldName = "perId",
 			primaryDtDefinitionName = "DT_PERSON",
 			primaryIsNavigable = true,
 			primaryRole = "Actor",

@@ -110,7 +110,6 @@ comment on column MY_ROLE.ACT_ID is
 'Actor';
 
 
-
 alter table MY_MOVIE
 	add constraint FK_MMOV_MCOU_MY_COUNTRY foreign key (COU_ID)
 	references MY_COUNTRY (COU_ID);

@@ -50,8 +50,8 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Movie> getMoviesByCriteria(final String title, final Integer year) {
 		final Task task = createTaskBuilder("TK_GET_MOVIES_BY_CRITERIA")
-				.addValue("TITLE", title)
-				.addValue("YEAR", year)
+				.addValue("title", title)
+				.addValue("year", year)
 				.build();
 		return getTaskManager()
 				.execute(task)
@@ -67,9 +67,9 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Movie> getMoviesByCriteriaWithCountry(final String title, final Optional<Integer> year, final io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Country> countries) {
 		final Task task = createTaskBuilder("TK_GET_MOVIES_BY_CRITERIA_WITH_COUNTRY")
-				.addValue("TITLE", title)
-				.addValue("YEAR", year.orElse(null))
-				.addValue("COUNTRIES", countries)
+				.addValue("title", title)
+				.addValue("year", year.orElse(null))
+				.addValue("countries", countries)
 				.build();
 		return getTaskManager()
 				.execute(task)
@@ -94,7 +94,7 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	*/
 	public void insertMoviesBatch(final io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Movie> moviesList) {
 		final Task task = createTaskBuilder("TK_INSERT_MOVIES_BATCH")
-				.addValue("MOVIES_LIST", moviesList)
+				.addValue("moviesList", moviesList)
 				.build();
 		getTaskManager().execute(task);
 	}
@@ -107,8 +107,8 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Movie> loadMoviesByChunk(final Long limit, final Long offset) {
 		final Task task = createTaskBuilder("TK_LOAD_MOVIES_BY_CHUNK")
-				.addValue("LIMIT", limit)
-				.addValue("OFFSET", offset)
+				.addValue("limit", limit)
+				.addValue("offset", offset)
 				.build();
 		return getTaskManager()
 				.execute(task)

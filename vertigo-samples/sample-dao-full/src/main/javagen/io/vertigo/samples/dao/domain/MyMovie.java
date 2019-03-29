@@ -24,7 +24,7 @@ public final class MyMovie implements Entity {
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
 			name = "A_MMOV_MCOU",
-			fkFieldName = "COU_ID",
+			fkFieldName = "couId",
 			primaryDtDefinitionName = "DT_MY_COUNTRY",
 			primaryIsNavigable = true,
 			primaryRole = "Country",
@@ -39,7 +39,7 @@ public final class MyMovie implements Entity {
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
 			name = "A_MROL_MMOV",
-			fkFieldName = "MOV_ID",
+			fkFieldName = "movId",
 			primaryDtDefinitionName = "DT_MY_MOVIE",
 			primaryIsNavigable = false,
 			primaryRole = "Movie",

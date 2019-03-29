@@ -32,7 +32,7 @@ public final class Movie implements KeyConcept {
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
 			name = "A_MOV_MRO",
-			fkFieldName = "MOV_ID",
+			fkFieldName = "movId",
 			primaryDtDefinitionName = "DT_MOVIE",
 			primaryIsNavigable = false,
 			primaryRole = "Movie",
