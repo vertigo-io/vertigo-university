@@ -33,23 +33,23 @@ public final class EquipmentDAO extends DAO<Equipment, java.lang.Long> implement
 
 	/**
 	 * Indique que le keyConcept associé à cette UID va être modifié.
-	 * Techniquement cela interdit les opérations d'ecriture en concurrence 
-	 * et envoie un évenement de modification du keyConcept (à la fin de transaction eventuellement) 
+	 * Techniquement cela interdit les opérations d'ecriture en concurrence
+	 * et envoie un évenement de modification du keyConcept (à la fin de transaction eventuellement)
 	 * @param UID UID du keyConcept modifié
 	 * @return KeyConcept à modifier
 	 */
-	 public Equipment readOneForUpdate(final UID<Equipment> uid) {
+	public Equipment readOneForUpdate(final UID<Equipment> uid) {
 		return dataStore.readOneForUpdate(uid);
 	}
 
 	/**
 	 * Indique que le keyConcept associé à cet id va être modifié.
-	 * Techniquement cela interdit les opérations d'ecriture en concurrence 
-	 * et envoie un évenement de modification du keyConcept (à la fin de transaction eventuellement) 
+	 * Techniquement cela interdit les opérations d'ecriture en concurrence
+	 * et envoie un évenement de modification du keyConcept (à la fin de transaction eventuellement)
 	 * @param id Clé du keyConcept modifié
 	 * @return KeyConcept à modifier
 	 */
-	 public Equipment readOneForUpdate(final java.lang.Long id) {
+	public Equipment readOneForUpdate(final java.lang.Long id) {
 		return readOneForUpdate(createDtObjectUID(id));
 	}
 

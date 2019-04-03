@@ -29,23 +29,23 @@ public final class SupplierDAO extends DAO<Supplier, java.lang.String> implement
 
 	/**
 	 * Indique que le keyConcept associé à cette UID va être modifié.
-	 * Techniquement cela interdit les opérations d'ecriture en concurrence 
-	 * et envoie un évenement de modification du keyConcept (à la fin de transaction eventuellement) 
+	 * Techniquement cela interdit les opérations d'ecriture en concurrence
+	 * et envoie un évenement de modification du keyConcept (à la fin de transaction eventuellement)
 	 * @param UID UID du keyConcept modifié
 	 * @return KeyConcept à modifier
 	 */
-	 public Supplier readOneForUpdate(final UID<Supplier> uid) {
+	public Supplier readOneForUpdate(final UID<Supplier> uid) {
 		return dataStore.readOneForUpdate(uid);
 	}
 
 	/**
 	 * Indique que le keyConcept associé à cet id va être modifié.
-	 * Techniquement cela interdit les opérations d'ecriture en concurrence 
-	 * et envoie un évenement de modification du keyConcept (à la fin de transaction eventuellement) 
+	 * Techniquement cela interdit les opérations d'ecriture en concurrence
+	 * et envoie un évenement de modification du keyConcept (à la fin de transaction eventuellement)
 	 * @param id Clé du keyConcept modifié
 	 * @return KeyConcept à modifier
 	 */
-	 public Supplier readOneForUpdate(final java.lang.String id) {
+	public Supplier readOneForUpdate(final java.lang.String id) {
 		return readOneForUpdate(createDtObjectUID(id));
 	}
 }

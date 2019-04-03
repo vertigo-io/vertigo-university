@@ -30,7 +30,7 @@ public final class SupplierSearchAo implements Component {
 
 	private final SearchManager searchManager;
 	private final VTransactionManager transactionManager;
-	
+
 	/**
 	 * Contructeur.
 	 * @param searchManager Search Manager
@@ -59,13 +59,13 @@ public final class SupplierSearchAo implements Component {
 	 * Récupération du résultat issu d'une requête.
 	 * @param searchQuery critères initiaux
 	 * @param listState Etat de la liste (tri et pagination)
-	 * @return Résultat correspondant à la requête (de type Supplier) 
+	 * @return Résultat correspondant à la requête (de type Supplier)
 	 */
 	public FacetedQueryResult<Supplier, SearchQuery> loadList(final SearchQuery searchQuery, final DtListState listState) {
 		final SearchIndexDefinition indexDefinition = searchManager.findFirstIndexDefinitionByKeyConcept(Supplier.class);
 		return searchManager.loadList(indexDefinition, searchQuery, listState);
 	}
-	
+
 	/**
 	 * Mark an entity as dirty. Index of these elements will be reindexed if Tx commited.
 	 * Reindexation isn't synchrone, strategy is dependant of plugin's parameters.
@@ -79,11 +79,11 @@ public final class SupplierSearchAo implements Component {
 			}
 		});
 	}
-	
+
 	/**
 	 * Mark an entity as dirty. Index of these elements will be reindexed if Tx commited.
 	 * Reindexation isn't synchrone, strategy is dependant of plugin's parameters.
-	 * 
+	 *
 	 * @param entity Key concept
 	 */
 	public void markAsDirty(final Supplier entity) {
