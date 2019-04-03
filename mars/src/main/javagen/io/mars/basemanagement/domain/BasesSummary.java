@@ -23,7 +23,7 @@ public final class BasesSummary implements DtObject {
 	 * Récupère la valeur de la propriété 'Bases count'.
 	 * @return Long baseCount <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_COUNT", required = true, label = "Bases count")
+	@Field(domain = "DoCount", required = true, label = "Bases count")
 	public Long getBaseCount() {
 		return baseCount;
 	}
@@ -42,7 +42,7 @@ public final class BasesSummary implements DtObject {
 	 * Récupère la valeur de la propriété 'Name'.
 	 * @return Integer baseMeanHealth <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_HEALTH", required = true, label = "Name")
+	@Field(domain = "DoHealth", required = true, label = "Name")
 	public Integer getBaseMeanHealth() {
 		return baseMeanHealth;
 	}
@@ -61,7 +61,7 @@ public final class BasesSummary implements DtObject {
 	 * Récupère la valeur de la propriété 'Health Level'.
 	 * @return Long openedTickets <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_COUNT", required = true, label = "Health Level")
+	@Field(domain = "DoCount", required = true, label = "Health Level")
 	public Long getOpenedTickets() {
 		return openedTickets;
 	}
@@ -80,7 +80,7 @@ public final class BasesSummary implements DtObject {
 	 * Récupère la valeur de la propriété 'Equipment Health'.
 	 * @return Integer onlineEquipmentPercent <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_HEALTH", required = true, label = "Equipment Health")
+	@Field(domain = "DoHealth", required = true, label = "Equipment Health")
 	public Integer getOnlineEquipmentPercent() {
 		return onlineEquipmentPercent;
 	}

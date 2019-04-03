@@ -34,7 +34,7 @@ public class JobExecutionSummariesController extends AbstractVSpringMvcControlle
 		// We take the first day of the current week
 		final Calendar firstDayOfWeek = getFirstDayOfWeek();
 		// We make the call with the proper week dates
-		viewContext.publishDtList(summaries, OExecutionSummaryFields.PRO_ID, jobServices.getSummariesByDate(
+		viewContext.publishDtList(summaries, OExecutionSummaryFields.proId, jobServices.getSummariesByDate(
 				firstDayOfWeek.toInstant(), getFirstDayOfNextWeekDate(firstDayOfWeek), Optional.of("ALL")));
 	}
 

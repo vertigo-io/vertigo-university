@@ -25,7 +25,7 @@ public final class BaseIndex implements DtObject {
 	 * Récupère la valeur de la propriété 'id'.
 	 * @return Long baseId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_ID", required = true, label = "id")
+	@Field(domain = "DoId", required = true, label = "id")
 	public Long getBaseId() {
 		return baseId;
 	}
@@ -44,7 +44,7 @@ public final class BaseIndex implements DtObject {
 	 * Récupère la valeur de la propriété 'Name'.
 	 * @return String name
 	 */
-	@Field(domain = "DO_LABEL", label = "Name")
+	@Field(domain = "DoLabel", label = "Name")
 	public String getName() {
 		return name;
 	}
@@ -63,7 +63,7 @@ public final class BaseIndex implements DtObject {
 	 * Récupère la valeur de la propriété 'Code'.
 	 * @return String code
 	 */
-	@Field(domain = "DO_CODE", label = "Code")
+	@Field(domain = "DoCode", label = "Code")
 	public String getCode() {
 		return code;
 	}
@@ -82,7 +82,7 @@ public final class BaseIndex implements DtObject {
 	 * Récupère la valeur de la propriété 'Creation Date'.
 	 * @return LocalDate creationDate
 	 */
-	@Field(domain = "DO_LOCALDATE", label = "Creation Date")
+	@Field(domain = "DoLocaldate", label = "Creation Date")
 	public java.time.LocalDate getCreationDate() {
 		return creationDate;
 	}
@@ -101,7 +101,7 @@ public final class BaseIndex implements DtObject {
 	 * Récupère la valeur de la propriété 'Tags'.
 	 * @return String tags
 	 */
-	@Field(domain = "DO_TAGS", label = "Tags")
+	@Field(domain = "DoTags", label = "Tags")
 	public String getTags() {
 		return tags;
 	}
@@ -120,7 +120,7 @@ public final class BaseIndex implements DtObject {
 	 * Récupère la valeur de la propriété 'Type'.
 	 * @return String baseTypeLabel
 	 */
-	@Field(domain = "DO_LABEL", label = "Type")
+	@Field(domain = "DoLabel", label = "Type")
 	public String getBaseTypeLabel() {
 		return baseTypeLabel;
 	}

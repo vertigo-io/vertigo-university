@@ -42,7 +42,7 @@ public class PersonDetailController extends AbstractVSpringMvcController {
 	public void initContext(final ViewContext viewContext, @PathVariable("personId") final Long personId) {
 		viewContext.publishMdl(tagsKey, Tag.class, null); //all
 		viewContext.publishDto(personKey, personServices.getPerson(personId));
-		viewContext.publishDtList(missionsKey, MissionDisplayFields.MISSION_ID, missionServices.getMissionsByPersonId(personId));
+		viewContext.publishDtList(missionsKey, MissionDisplayFields.missionId, missionServices.getMissionsByPersonId(personId));
 		toModeReadOnly();
 	}
 
@@ -90,7 +90,7 @@ public class PersonDetailController extends AbstractVSpringMvcController {
 
 	@PostMapping("/_reloadMissions")
 	public ViewContext doReloadMissions(final ViewContext viewContext, @ViewAttribute("person") final Person person) {
-		viewContext.publishDtList(missionsKey, MissionDisplayFields.MISSION_ID, missionServices.getMissionsByPersonId(person.getPersonId()));
+		viewContext.publishDtList(missionsKey, MissionDisplayFields.missionId, missionServices.getMissionsByPersonId(person.getPersonId()));
 		return viewContext;
 	}
 

@@ -1,26 +1,26 @@
 package io.mars.opendata.domain
 
-create DtDefinition DT_OPENDATA_SET {
-	id ODS_ID {domain: DO_ID label:"Id"}
-	field CODE {domain: DO_CODE label: "Code" required:"false"}
-	field TITLE {domain: DO_LABEL label: "Title" required:"false"}
-	field DESCRIPTION {domain: DO_DESCRIPTION label: "Description" required:"false"}
-	field END_POINT_URL {domain: DO_URL label:"Service Endpoint URL" required: "false"}
-	field PICTUREFILE_ID {domain: DO_ID label:"Picture" required:"false"}
-	field TAGS {domain: DO_MULTIPLE_IDS label: "Tags" required:"false"}
+create DtDefinition DtOpendataSet {
+	id odsId {domain: DoId label:"Id"}
+	field code {domain: DoCode label: "Code" required:"false"}
+	field title {domain: DoLabel label: "Title" required:"false"}
+	field description {domain: DoDescription label: "Description" required:"false"}
+	field endPointUrl {domain: DoUrl label:"Service Endpoint URL" required: "false"}
+	field picturefileId {domain: DoId label:"Picture" required:"false"}
+	field tags {domain: DoMultipleIds label: "Tags" required:"false"}
 }
 
-create DtDefinition DT_OPENDATA_SET_STATUS {
+create DtDefinition DtOpendataSetStatus {
 	stereotype: "StaticMasterData"
-	id OPENDATA_SET_STATUS_ID {domain: DO_CODE label:"Id"}
-	field LABEL {domain: DO_LABEL label:"Status Label" required:"false"}
+	id opendataSetStatusId {domain: DoCode label:"Id"}
+	field label {domain: DoLabel label:"Status Label" required:"false"}
 }
 
-create Association A_OPENDATA_SET_OPENDATA_SET_STATUS {
-	fkFieldName : "OPENDATA_SET_STATUS_ID"
+create Association AOpendataSetOpendataSetStatus {
+	fkFieldName : "opendataSetStatusId"
     
- 	dtDefinitionA : DT_OPENDATA_SET
-	dtDefinitionB : DT_OPENDATA_SET_STATUS
+ 	dtDefinitionA : DtOpendataSet
+	dtDefinitionB : DtOpendataSetStatus
 			
 	navigabilityA : "false"
 	navigabilityB : "true"

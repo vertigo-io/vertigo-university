@@ -72,8 +72,8 @@ public class TicketServices implements Component {
 		Assertion.checkNotNull(equipmentId);
 		//---
 		return ticketDAO.findAll(
-				Criterions.isEqualTo(TicketFields.EQUIPMENT_ID, equipmentId)
-						.and(Criterions.isNotEqualTo(TicketFields.TICKET_STATUS_ID, (String) TicketStatusEnum.closed.getEntityUID().getId())),
+				Criterions.isEqualTo(TicketFields.equipmentId, equipmentId)
+						.and(Criterions.isNotEqualTo(TicketFields.ticketStatusId, (String) TicketStatusEnum.closed.getEntityUID().getId())),
 				Integer.MAX_VALUE);
 	}
 
@@ -81,8 +81,8 @@ public class TicketServices implements Component {
 		Assertion.checkNotNull(equipmentId);
 		//---
 		return ticketDAO.findAll(
-				Criterions.isEqualTo(TicketFields.EQUIPMENT_ID, equipmentId)
-						.and(Criterions.isEqualTo(TicketFields.TICKET_STATUS_ID, (String) TicketStatusEnum.closed.getEntityUID().getId())),
+				Criterions.isEqualTo(TicketFields.equipmentId, equipmentId)
+						.and(Criterions.isEqualTo(TicketFields.ticketStatusId, (String) TicketStatusEnum.closed.getEntityUID().getId())),
 				Integer.MAX_VALUE);
 	}
 

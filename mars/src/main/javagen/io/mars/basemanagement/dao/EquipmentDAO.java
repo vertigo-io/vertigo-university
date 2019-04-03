@@ -80,7 +80,7 @@ public final class EquipmentDAO extends DAO<Equipment, java.lang.Long> implement
 	 * @return SearchQueryBuilder pour ce type de recherche
 	 */
 	public SearchQueryBuilder createSearchQueryBuilderEquipment(final String criteria, final SelectedFacetValues selectedFacetValues) {
-		final FacetedQueryDefinition facetedQueryDefinition = Home.getApp().getDefinitionSpace().resolve("QRY_EQUIPMENT", FacetedQueryDefinition.class);
+		final FacetedQueryDefinition facetedQueryDefinition = Home.getApp().getDefinitionSpace().resolve("QryEquipment", FacetedQueryDefinition.class);
 		final ListFilterBuilder<String> listFilterBuilder = DIInjector.newInstance(facetedQueryDefinition.getListFilterBuilderClass(), Home.getApp().getComponentSpace());
 		final ListFilter criteriaListFilter = listFilterBuilder.withBuildQuery(facetedQueryDefinition.getListFilterBuilderQuery()).withCriteria(criteria).build();
 		return SearchQuery.builder(criteriaListFilter).withFacetStrategy(facetedQueryDefinition, selectedFacetValues);
@@ -132,13 +132,13 @@ public final class EquipmentDAO extends DAO<Equipment, java.lang.Long> implement
 	}
 
 	/**
-	 * Execute la tache TK_GET_EQUIPMENTS_BY_BASE_CODE.
+	 * Execute la tache TkGetEquipmentsByBaseCode.
 	 * @param code String 
 	 * @return io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.domain.Equipment> equipments
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.domain.Equipment> getEquipmentsByBaseCode(final String code) {
-		final Task task = createTaskBuilder("TK_GET_EQUIPMENTS_BY_BASE_CODE")
-				.addValue("CODE", code)
+		final Task task = createTaskBuilder("TkGetEquipmentsByBaseCode")
+				.addValue("code", code)
 				.build();
 		return getTaskManager()
 				.execute(task)
@@ -146,13 +146,13 @@ public final class EquipmentDAO extends DAO<Equipment, java.lang.Long> implement
 	}
 
 	/**
-	 * Execute la tache TK_GET_LAST_PURCHASED_EQUIPMENTS_BY_BASE_ID.
+	 * Execute la tache TkGetLastPurchasedEquipmentsByBaseId.
 	 * @param baseId Long 
 	 * @return io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.domain.Equipment> equipments
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.domain.Equipment> getLastPurchasedEquipmentsByBaseId(final Long baseId) {
-		final Task task = createTaskBuilder("TK_GET_LAST_PURCHASED_EQUIPMENTS_BY_BASE_ID")
-				.addValue("BASE_ID", baseId)
+		final Task task = createTaskBuilder("TkGetLastPurchasedEquipmentsByBaseId")
+				.addValue("baseId", baseId)
 				.build();
 		return getTaskManager()
 				.execute(task)
@@ -160,28 +160,28 @@ public final class EquipmentDAO extends DAO<Equipment, java.lang.Long> implement
 	}
 
 	/**
-	 * Execute la tache TK_INSERT_EQUIPMENTS_BATCH.
+	 * Execute la tache TkInsertEquipmentsBatch.
 	 * @param equipmentsList io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.domain.Equipment> 
 	*/
 	public void insertEquipmentsBatch(final io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.domain.Equipment> equipmentsList) {
-		final Task task = createTaskBuilder("TK_INSERT_EQUIPMENTS_BATCH")
-				.addValue("EQUIPMENTS_LIST", equipmentsList)
+		final Task task = createTaskBuilder("TkInsertEquipmentsBatch")
+				.addValue("equipmentsList", equipmentsList)
 				.build();
 		getTaskManager().execute(task);
 	}
 
 	/**
-	 * Execute la tache TK_LOAD_EQUIPMENTS_BY_CHUNK.
+	 * Execute la tache TkLoadEquipmentsByChunk.
 	 * @param limit Long 
 	 * @param offset Long 
 	 * @param dateExist java.time.Instant 
 	 * @return io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.domain.Equipment> equipmentList
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.domain.Equipment> loadEquipmentsByChunk(final Long limit, final Long offset, final java.time.Instant dateExist) {
-		final Task task = createTaskBuilder("TK_LOAD_EQUIPMENTS_BY_CHUNK")
-				.addValue("LIMIT", limit)
-				.addValue("OFFSET", offset)
-				.addValue("DATE_EXIST", dateExist)
+		final Task task = createTaskBuilder("TkLoadEquipmentsByChunk")
+				.addValue("limit", limit)
+				.addValue("offset", offset)
+				.addValue("dateExist", dateExist)
 				.build();
 		return getTaskManager()
 				.execute(task)

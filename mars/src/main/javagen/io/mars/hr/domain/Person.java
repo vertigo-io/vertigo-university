@@ -25,14 +25,14 @@ public final class Person implements Entity {
 	private java.time.LocalDate dateHired;
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_PERSON_GROUPS",
-			fkFieldName = "GROUP_ID",
-			primaryDtDefinitionName = "DT_GROUPS",
+			name = "APersonGroups",
+			fkFieldName = "groupId",
+			primaryDtDefinitionName = "DtGroups",
 			primaryIsNavigable = true,
 			primaryRole = "Group",
 			primaryLabel = "Group",
 			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_PERSON",
+			foreignDtDefinitionName = "DtPerson",
 			foreignIsNavigable = false,
 			foreignRole = "Person",
 			foreignLabel = "Person",
@@ -50,7 +50,7 @@ public final class Person implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long personId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_ID", type = "ID", required = true, label = "Id")
+	@Field(domain = "DoId", type = "ID", required = true, label = "Id")
 	public Long getPersonId() {
 		return personId;
 	}
@@ -69,7 +69,7 @@ public final class Person implements Entity {
 	 * Récupère la valeur de la propriété 'First Name'.
 	 * @return String firstName
 	 */
-	@Field(domain = "DO_LABEL", label = "First Name")
+	@Field(domain = "DoLabel", label = "First Name")
 	public String getFirstName() {
 		return firstName;
 	}
@@ -88,7 +88,7 @@ public final class Person implements Entity {
 	 * Récupère la valeur de la propriété 'Last Name'.
 	 * @return String lastName
 	 */
-	@Field(domain = "DO_LABEL", label = "Last Name")
+	@Field(domain = "DoLabel", label = "Last Name")
 	public String getLastName() {
 		return lastName;
 	}
@@ -107,7 +107,7 @@ public final class Person implements Entity {
 	 * Récupère la valeur de la propriété 'E-mail'.
 	 * @return String email
 	 */
-	@Field(domain = "DO_EMAIL", label = "E-mail")
+	@Field(domain = "DoEmail", label = "E-mail")
 	public String getEmail() {
 		return email;
 	}
@@ -126,7 +126,7 @@ public final class Person implements Entity {
 	 * Récupère la valeur de la propriété 'Picture'.
 	 * @return Long picturefileId
 	 */
-	@Field(domain = "DO_ID", label = "Picture")
+	@Field(domain = "DoId", label = "Picture")
 	public Long getPicturefileId() {
 		return picturefileId;
 	}
@@ -145,7 +145,7 @@ public final class Person implements Entity {
 	 * Récupère la valeur de la propriété 'Picture'.
 	 * @return String picturefileIdTmp
 	 */
-	@Field(domain = "DO_LABEL", persistent = false, label = "Picture")
+	@Field(domain = "DoLabel", persistent = false, label = "Picture")
 	public String getPicturefileIdTmp() {
 		return picturefileIdTmp;
 	}
@@ -164,7 +164,7 @@ public final class Person implements Entity {
 	 * Récupère la valeur de la propriété 'Tags'.
 	 * @return String tags
 	 */
-	@Field(domain = "DO_MULTIPLE_IDS", label = "Tags")
+	@Field(domain = "DoMultipleIds", label = "Tags")
 	public String getTags() {
 		return tags;
 	}
@@ -183,7 +183,7 @@ public final class Person implements Entity {
 	 * Récupère la valeur de la propriété 'Date hired'.
 	 * @return LocalDate dateHired
 	 */
-	@Field(domain = "DO_LOCALDATE", label = "Date hired")
+	@Field(domain = "DoLocaldate", label = "Date hired")
 	public java.time.LocalDate getDateHired() {
 		return dateHired;
 	}
@@ -202,7 +202,7 @@ public final class Person implements Entity {
 	 * Récupère la valeur de la propriété 'Group'.
 	 * @return Long groupId
 	 */
-	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Group")
+	@Field(domain = "DoId", type = "FOREIGN_KEY", label = "Group")
 	public Long getGroupId() {
 		return (Long) groupIdAccessor.getId();
 	}
@@ -221,7 +221,7 @@ public final class Person implements Entity {
 	 * Récupère la valeur de la propriété calculée 'Full name'.
 	 * @return String fullName
 	 */
-	@Field(domain = "DO_LABEL", type = "COMPUTED", persistent = false, label = "Full name")
+	@Field(domain = "DoLabel", type = "COMPUTED", persistent = false, label = "Full name")
 	public String getFullName() {
 		return getFirstName() + " " + getLastName();
 	}

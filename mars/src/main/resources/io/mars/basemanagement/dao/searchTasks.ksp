@@ -1,6 +1,6 @@
 package io.mars.basemanagement
 
-create Task TK_LOAD_BASE_INDEX {
+create Task TkLoadBaseIndex {
 	className : "io.vertigo.dynamox.task.TaskEngineSelect",
 	request : "	select 	bas.BASE_ID, 
 						bas.NAME, 
@@ -10,13 +10,13 @@ create Task TK_LOAD_BASE_INDEX {
 						bastype.LABEL as BASE_TYPE_LABEL
 				from BASE bas
 				join BASE_TYPE bastype on bastype.base_type_id = bas.base_type_id
-				where BASE_ID in (#BASE_IDS.ROWNUM#);"
-	attribute BASE_IDS {domain : DO_LONGS, required:"true", inOut :"in",} 
-	attribute DTC_INDEX {domain : DO_DT_BASE_INDEX_DTC, required:"true", inOut :"out",} 
+				where BASE_ID in (#baseIds.rownum#);"
+	attribute baseIds {domain : DoLongs, required:"true", inOut :"in",} 
+	attribute dtcIndex {domain : DoDtBaseIndexDtc, required:"true", inOut :"out",} 
 }
 
 
-create Task TK_LOAD_EQUIPMENT_INDEX {
+create Task TkLoadEquipmentIndex {
 	className : "io.vertigo.dynamox.task.TaskEngineSelect",
 	request : "	select 	equ.EQUIPMENT_ID,
 						equ.NAME, 
@@ -28,7 +28,7 @@ create Task TK_LOAD_EQUIPMENT_INDEX {
 				from EQUIPMENT equ
 				join EQUIPMENT_TYPE equipmentType on equipmentType.equipment_type_id = equ.equipment_type_id
 				join EQUIPMENT_CATEGORY equipmentCategory on equipmentCategory.equipment_category_id = equipmentType.equipment_category_id
-				where EQUIPMENT_ID in (#EQUIPMENT_IDS.ROWNUM#);"
-	attribute EQUIPMENT_IDS {domain : DO_LONGS, required:"true", inOut :"in",} 
-	attribute DTC_INDEX {domain : DO_DT_EQUIPMENT_INDEX_DTC, required:"true", inOut :"out",} 
+				where EQUIPMENT_ID in (#equipmentIds.rownum#);"
+	attribute equipmentIds {domain : DoLongs, required:"true", inOut :"in",} 
+	attribute dtcIndex {domain : DoDtEquipmentIndexDtc, required:"true", inOut :"out",} 
 }

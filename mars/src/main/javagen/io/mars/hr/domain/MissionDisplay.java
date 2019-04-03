@@ -23,7 +23,7 @@ public final class MissionDisplay implements DtObject {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long missionId
 	 */
-	@Field(domain = "DO_ID", label = "Id")
+	@Field(domain = "DoId", label = "Id")
 	public Long getMissionId() {
 		return missionId;
 	}
@@ -42,7 +42,7 @@ public final class MissionDisplay implements DtObject {
 	 * Récupère la valeur de la propriété 'Role'.
 	 * @return String role
 	 */
-	@Field(domain = "DO_CODE", label = "Role")
+	@Field(domain = "DoCode", label = "Role")
 	public String getRole() {
 		return role;
 	}
@@ -61,7 +61,7 @@ public final class MissionDisplay implements DtObject {
 	 * Récupère la valeur de la propriété 'Base'.
 	 * @return String baseName
 	 */
-	@Field(domain = "DO_LABEL", label = "Base")
+	@Field(domain = "DoLabel", label = "Base")
 	public String getBaseName() {
 		return baseName;
 	}
@@ -80,7 +80,7 @@ public final class MissionDisplay implements DtObject {
 	 * Récupère la valeur de la propriété 'Business'.
 	 * @return String businessName
 	 */
-	@Field(domain = "DO_LABEL", label = "Business")
+	@Field(domain = "DoLabel", label = "Business")
 	public String getBusinessName() {
 		return businessName;
 	}

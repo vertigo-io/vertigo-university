@@ -45,7 +45,7 @@ public class WorkOrderServices implements Component {
 		Assertion.checkNotNull(ticketId);
 		//---
 		return workOrderDAO.findAll(
-				Criterions.isEqualTo(WorkOrderFields.TICKET_ID, ticketId), Integer.MAX_VALUE);
+				Criterions.isEqualTo(WorkOrderFields.ticketId, ticketId), Integer.MAX_VALUE);
 	}
 
 	public DtList<WorkOrder> getLastWorkOrders() {

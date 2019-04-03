@@ -1,10 +1,10 @@
 package io.mars
 
-create FileInfo FI_FILE_INFO_STD {
+create FileInfo FiFileInfoStd {
 	storeName : "main"
 }
 
-create FileInfo FI_FILE_INFO_TMP {
+create FileInfo FiFileInfoTmp {
 	storeName : "temp"
 }
 
@@ -12,31 +12,31 @@ create FileInfo FI_FILE_INFO_TMP {
 /**************************************************************************************************/
 /********************************* Formatters *****************************************************/
 /**************************************************************************************************/
-create Formatter FMT_DEFAULT{
+create Formatter FmtDefault{
 	className : "io.vertigo.dynamox.domain.formatter.FormatterDefault"
 }
 
-create Formatter FMT_ID{
+create Formatter FmtId{
 	className : "io.vertigo.ui.formatter.FormatterId"
 }
 
 
-create Formatter FMT_DATE {
+create Formatter FmtDate {
      className :"io.vertigo.dynamox.domain.formatter.FormatterDate"
      args : "dd/MM/yyyy"
 }
 
-create Formatter FMT_DATE_HEURE {
+create Formatter FmtDateHeure {
      className :"io.vertigo.dynamox.domain.formatter.FormatterDate"
      args : "dd/MM/yyyy '�' HH'h'mm"
 }
 
-create Formatter FMT_TAGS {
+create Formatter FmtTags {
 	className : "io.vertigo.dynamox.domain.formatter.FormatterDefault"
 	/* TODO implement tags formatter */
 }
 
-create Formatter FMT_CURRENCY {
+create Formatter FmtCurrency {
 	className : "io.vertigo.dynamox.domain.formatter.FormatterDefault"
 	/* TODO implement currency formatter */
 }
@@ -46,58 +46,58 @@ create Formatter FMT_CURRENCY {
 /********************************* Constraints ****************************************************/
 /**************************************************************************************************/
 
-create Constraint CK_EMAIL {
+create Constraint CkEmail {
 	className: "io.vertigo.dynamox.domain.constraint.ConstraintRegex"
 	args : "^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*(\.[a-zA-Z0-9-]{2,3})+$"
 	msg : "L'email n'est pas valide"
 }
 
-create Constraint CK_MAX_LENGTH_20 {
+create Constraint CkMaxLength20 {
 	className: "io.vertigo.dynamox.domain.constraint.ConstraintStringLength"
 	args :"20"
 }
 
-create Constraint CK_MAX_LENGTH_32 {
+create Constraint CkMaxLength32 {
 	className: "io.vertigo.dynamox.domain.constraint.ConstraintStringLength"
 	args :"32"
 }
 
-create Constraint CK_MAX_LENGTH_50 {
+create Constraint CkMaxLength50 {
 	className: "io.vertigo.dynamox.domain.constraint.ConstraintStringLength"
 	args :"50"
 }
 
-create Constraint CK_MAX_LENGTH_100 {
+create Constraint CkMaxLength100 {
 	className: "io.vertigo.dynamox.domain.constraint.ConstraintStringLength"
 	args :"100"
 }
 
-create Constraint CK_MAX_LENGTH_150 {
+create Constraint CkMaxLength150 {
 	className: "io.vertigo.dynamox.domain.constraint.ConstraintStringLength"
 	args :"150"
 }
 
-create Constraint CK_MAX_LENGTH_250 {
+create Constraint CkMaxLength250 {
 	className: "io.vertigo.dynamox.domain.constraint.ConstraintStringLength"
 	args :"250"
 }
 
-create Constraint CK_MAX_LENGTH_350 {
+create Constraint CkMaxLength350 {
 	className: "io.vertigo.dynamox.domain.constraint.ConstraintStringLength"
 	args :"350"
 }
 
-create Constraint CK_MAX_LENGTH_3000 {
+create Constraint CkMaxLength3000 {
 	className: "io.vertigo.dynamox.domain.constraint.ConstraintStringLength"
 	args :"3000"
 }
 
-create Constraint CK_MIN_HEALTH_VALUE_0 {
+create Constraint CkMinHealthValue0 {
 	className: "io.vertigo.dynamox.domain.constraint.ConstraintNumberMinimum"
 	args :"0"
 }
 
-create Constraint CK_MAX_HEALTH_VALUE_100 {
+create Constraint CkMaxHealthValue100 {
 	className: "io.vertigo.dynamox.domain.constraint.ConstraintNumberMaximum"
 	args :"100"
 }
@@ -107,133 +107,133 @@ create Constraint CK_MAX_HEALTH_VALUE_100 {
 /********************************* Domains ********************************************************/
 /**************************************************************************************************/
 
-create Domain DO_LONGS {  
+create Domain DoLongs {  
     dataType : Long
     multiple : "true"
-    formatter : FMT_DEFAULT
+    formatter : FmtDefault
 }
 
-create Domain DO_ID {
+create Domain DoId {
 	dataType : Long
-	formatter : FMT_ID
+	formatter : FmtId
 	storeType : "NUMERIC"
 }
 
-create Domain DO_MULTIPLE_IDS {
+create Domain DoMultipleIds {
 	dataType : String
-	formatter : FMT_DEFAULT
+	formatter : FmtDefault
     storeType : "TEXT"
 }
 
 
 
-create Domain DO_INSTANT {
+create Domain DoInstant {
 	dataType : Instant
-	formatter : FMT_DATE_HEURE
+	formatter : FmtDateHeure
 	storeType : "TIMESTAMP"
 }
 
-create Domain DO_LOCALDATE {
+create Domain DoLocaldate {
 	dataType : LocalDate
-	formatter : FMT_DATE
+	formatter : FmtDate
 	storeType : "DATE"
 }
 
 
-create Domain DO_CURRENCY {
+create Domain DoCurrency {
 	dataType : BigDecimal
-	formatter : FMT_CURRENCY
+	formatter : FmtCurrency
 	unit : "$"
 	storeType: "NUMERIC(12,2)"
 }
 
 
-create Domain DO_HEALTH {
+create Domain DoHealth {
 	dataType: Integer
-	formatter : FMT_DEFAULT
-	constraint : [CK_MIN_HEALTH_VALUE_0, CK_MAX_HEALTH_VALUE_100]
+	formatter : FmtDefault
+	constraint : [CkMinHealthValue0, CkMaxHealthValue100]
 	storeType : "NUMERIC"
 }
 
-create Domain DO_LABEL {
+create Domain DoLabel {
 	dataType : String
-	formatter : FMT_DEFAULT
-	constraint : [CK_MAX_LENGTH_100]
+	formatter : FmtDefault
+	constraint : [CkMaxLength100]
 	storeType : "VARCHAR(100)"
 	indexType : "text_fr:sortable"
 }
 
-create Domain DO_DESCRIPTION {
+create Domain DoDescription {
 	dataType : String
-	formatter : FMT_DEFAULT
-	constraint : [CK_MAX_LENGTH_350]
+	formatter : FmtDefault
+	constraint : [CkMaxLength350]
 	storeType : "VARCHAR(350)"
 	indexType : "text_fr"
 }
 
-create Domain DO_EMAIL {
+create Domain DoEmail {
 	dataType : String
-	formatter : FMT_DEFAULT
-	constraint : [CK_EMAIL, CK_MAX_LENGTH_150]
+	formatter : FmtDefault
+	constraint : [CkEmail, CkMaxLength150]
 	storeType : "VARCHAR(150)"
 }
 
-create Domain DO_URL {
+create Domain DoUrl {
 	dataType : String
-	formatter : FMT_DEFAULT
+	formatter : FmtDefault
 	storeType : "TEXT"
 }
 
-create Domain DO_CODE {
+create Domain DoCode {
 	dataType : String
-	formatter : FMT_DEFAULT
-	constraint : [CK_MAX_LENGTH_100]
+	formatter : FmtDefault
+	constraint : [CkMaxLength100]
 	storeType : "VARCHAR(100)"
 	indexType : "code:keyword"
 }
 
 
-create Domain DO_PASSWORD {
+create Domain DoPassword {
 	dataType : String
-	formatter : FMT_DEFAULT
-	constraint : [CK_MAX_LENGTH_32]
+	formatter : FmtDefault
+	constraint : [CkMaxLength32]
 	storeType : "VARCHAR(32)"
 }
 
-create Domain DO_TEXT {
+create Domain DoText {
 	dataType : String
-	formatter : FMT_DEFAULT
+	formatter : FmtDefault
 	storeType : "TEXT"
 }
 
-create Domain DO_FILE_PATH {
+create Domain DoFilePath {
 	dataType : String
-	formatter : FMT_DEFAULT
+	formatter : FmtDefault
 	storeType : "VARCHAR(500)"
 }
 
-create Domain DO_TAGS {
+create Domain DoTags {
 	dataType : String
-	formatter : FMT_TAGS
+	formatter : FmtTags
 	storeType : "TEXT"
 	indexType : "multiple_code:facetable"
 }
 
-create Domain DO_YES_NO {
+create Domain DoYesNo {
 	dataType : Boolean
-	formatter : FMT_DEFAULT
+	formatter : FmtDefault
 	storeType : "bool"
 }
 
 
-create Domain DO_SIZE {
+create Domain DoSize {
 	dataType : Long
-	formatter : FMT_DEFAULT
+	formatter : FmtDefault
 	storeType : "NUMERIC"
 }
 
-create Domain DO_COUNT {
+create Domain DoCount {
 	dataType : Long
-	formatter : FMT_DEFAULT
+	formatter : FmtDefault
 	storeType : "NUMERIC"
 }

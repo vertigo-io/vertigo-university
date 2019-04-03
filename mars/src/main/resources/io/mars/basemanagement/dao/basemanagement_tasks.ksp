@@ -1,35 +1,35 @@
 package io.mars.basemanagement
 
-create Task TK_GET_LAST_PURCHASED_EQUIPMENTS_BY_BASE_ID {  
+create Task TkGetLastPurchasedEquipmentsByBaseId {  
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
     request : "
             select 
             	equ.*
 			from equipment equ
-			where equ.base_id = #BASE_ID#
+			where equ.base_id = #baseId#
 			order by equ.purchase_date desc
 			limit 50
              "
-    attribute BASE_ID     	 {domain : DO_ID         		required:"true"  inOut :"in"}
-    attribute EQUIPMENTS     {domain : DO_DT_EQUIPMENT_DTC    required:"true"  inOut :"out"}
+    attribute baseId     	 {domain : DoId         		required:"true"  inOut :"in"}
+    attribute equipments     {domain : DoDtEquipmentDtc    required:"true"  inOut :"out"}
 }
 
-create Task TK_GET_EQUIPMENTS_BY_BASE_CODE {  
+create Task TkGetEquipmentsByBaseCode {  
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
     request : "
             select 
             	equ.*
 			from equipment equ
 				join base bas on bas.base_id = equ.base_id
-			where bas.code = #CODE#
+			where bas.code = #code#
              "
-    attribute CODE     	 	{domain : DO_CODE         		required:"true"  inOut :"in"}
-    attribute EQUIPMENTS    {domain : DO_DT_EQUIPMENT_DTC   required:"true"  inOut :"out"}
+    attribute code     	 	{domain : DoCode         		required:"true"  inOut :"in"}
+    attribute equipments    {domain : DoDtEquipmentDtc   required:"true"  inOut :"out"}
 }
 
 
 
-create Task TK_INSERT_EQUIPMENTS_BATCH {
+create Task TkInsertEquipmentsBatch {
     className : "io.vertigo.dynamox.task.TaskEngineProcBatch"
         request : "
         	INSERT INTO EQUIPMENT (EQUIPMENT_ID, 
@@ -46,34 +46,34 @@ create Task TK_INSERT_EQUIPMENTS_BATCH {
         							GEOSECTOR_ID, 
         							BUSINESS_ID, 
         							EQUIPMENT_TYPE_ID) values (nextval('SEQ_EQUIPMENT'),
-        														#EQUIPMENTS_LIST.NAME#,
-        														#EQUIPMENTS_LIST.CODE#,
-        														#EQUIPMENTS_LIST.HEALTH_LEVEL#,
-        														#EQUIPMENTS_LIST.PURCHASE_DATE#,
-        														#EQUIPMENTS_LIST.DESCRIPTION#,
-        														#EQUIPMENTS_LIST.TAGS#,
-        														#EQUIPMENTS_LIST.GEO_LOCATION#,
-        														#EQUIPMENTS_LIST.RENTING_FEE#,
-        														#EQUIPMENTS_LIST.EQUIPMENT_VALUE#,
-        														#EQUIPMENTS_LIST.BASE_ID#,
-        														#EQUIPMENTS_LIST.GEOSECTOR_ID#,
-        														#EQUIPMENTS_LIST.BUSINESS_ID#,
-        														#EQUIPMENTS_LIST.EQUIPMENT_TYPE_ID#)
+        														#equipmentsList.name#,
+        														#equipmentsList.code#,
+        														#equipmentsList.healthLevel#,
+        														#equipmentsList.purchaseDate#,
+        														#equipmentsList.description#,
+        														#equipmentsList.tags#,
+        														#equipmentsList.geoLocation#,
+        														#equipmentsList.rentingFee#,
+        														#equipmentsList.equipmentValue#,
+        														#equipmentsList.baseId#,
+        														#equipmentsList.geosectorId#,
+        														#equipmentsList.businessId#,
+        														#equipmentsList.equipmentTypeId#)
 			"
-	attribute EQUIPMENTS_LIST	 	{domain : DO_DT_EQUIPMENT_DTC		required:"true" 	inOut :"in"}
+	attribute equipmentsList	 	{domain : DoDtEquipmentDtc		required:"true" 	inOut :"in"}
 }
 
-create Task TK_LOAD_EQUIPMENTS_BY_CHUNK {
+create Task TkLoadEquipmentsByChunk {
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
         request : "
         	select * from EQUIPMENT
-			where EQUIPMENT_ID > #OFFSET#
-			and PURCHASE_DATE <= #DATE_EXIST#
+			where EQUIPMENT_ID > #offset#
+			and PURCHASE_DATE <= #dateExist#
         	order by EQUIPMENT_ID asc
-			limit #LIMIT#
+			limit #limit#
 			"
-	attribute LIMIT	 	{domain : DO_ID		required:"true" 	inOut :"in"}
-	attribute OFFSET	 	{domain : DO_ID		required:"true" 	inOut :"in"}
-	attribute DATE_EXIST {domain : DO_INSTANT required:"true" inOut:"in"}
-	attribute EQUIPMENT_LIST	 	{domain : DO_DT_EQUIPMENT_DTC		required:"true" 	inOut :"out"}
+	attribute limit	 	{domain : DoId		required:"true" 	inOut :"in"}
+	attribute offset	 	{domain : DoId		required:"true" 	inOut :"in"}
+	attribute dateExist {domain : DoInstant required:"true" inOut:"in"}
+	attribute equipmentList	 	{domain : DoDtEquipmentDtc		required:"true" 	inOut :"out"}
 }

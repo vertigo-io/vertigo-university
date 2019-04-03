@@ -42,11 +42,11 @@ public final class WorkOrderDAO extends DAO<WorkOrder, java.lang.Long> implement
 	}
 
 	/**
-	 * Execute la tache TK_GET_LAST_WORK_ORDERS.
+	 * Execute la tache TkGetLastWorkOrders.
 	 * @return io.vertigo.dynamo.domain.model.DtList<io.mars.maintenance.domain.WorkOrder> workOrders
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.mars.maintenance.domain.WorkOrder> getLastWorkOrders() {
-		final Task task = createTaskBuilder("TK_GET_LAST_WORK_ORDERS")
+		final Task task = createTaskBuilder("TkGetLastWorkOrders")
 				.build();
 		return getTaskManager()
 				.execute(task)

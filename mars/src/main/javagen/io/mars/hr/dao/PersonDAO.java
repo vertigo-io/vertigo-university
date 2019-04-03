@@ -43,13 +43,13 @@ public final class PersonDAO extends DAO<Person, java.lang.Long> implements Stor
 	}
 
 	/**
-	 * Execute la tache TK_GET_BASE_MANAGER.
+	 * Execute la tache TkGetBaseManager.
 	 * @param baseId Long 
 	 * @return Option de io.mars.hr.domain.Person manager
 	*/
 	public Optional<io.mars.hr.domain.Person> getBaseManager(final Long baseId) {
-		final Task task = createTaskBuilder("TK_GET_BASE_MANAGER")
-				.addValue("BASE_ID", baseId)
+		final Task task = createTaskBuilder("TkGetBaseManager")
+				.addValue("baseId", baseId)
 				.build();
 		return Optional.ofNullable((io.mars.hr.domain.Person) getTaskManager()
 				.execute(task)

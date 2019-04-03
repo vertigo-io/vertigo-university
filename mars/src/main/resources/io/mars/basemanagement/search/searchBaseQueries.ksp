@@ -1,27 +1,27 @@
 package io.mars.basemanagement.search
 
-create IndexDefinition IDX_BASE {  
-  keyConcept : DT_BASE
-  dtIndex : DT_BASE_INDEX
+create IndexDefinition IdxBase {  
+  keyConcept : DtBase
+  dtIndex : DtBaseIndex
   loaderId : "BaseSearchLoader"
 }
 
 
-create FacetDefinition FCT_BASE_BASE_TYPE_LABEL {
-	dtDefinition:DT_BASE_INDEX, fieldName:"BASE_TYPE_LABEL", label:"Base Type"
+create FacetDefinition FctBaseBaseTypeLabel {
+	dtDefinition:DtBaseIndex, fieldName:"baseTypeLabel", label:"Base Type"
 } 
 
-create FacetDefinition FCT_BASE_CREATION_DATE {
-	dtDefinition:DT_BASE_INDEX, fieldName:"CREATION_DATE", label:"Creation Date"
-	range R1 { filter:"CREATION_DATE:[01/01/2008 TO 01/01/2012]", label:"2008-2012"},
-	range R2 { filter:"CREATION_DATE:[01/01/2012 TO 01/01/2016]", label:"2012-2016"},
-	range R3 { filter:"CREATION_DATE:[01/01/2016 TO *]", label:"after 2016"}
+create FacetDefinition FctBaseCreationDate {
+	dtDefinition:DtBaseIndex, fieldName:"creationDate", label:"Creation Date"
+	range r1 { filter:"creationDate:[01/01/2008 TO 01/01/2012]", label:"2008-2012"},
+	range r2 { filter:"creationDate:[01/01/2012 TO 01/01/2016]", label:"2012-2016"},
+	range r3 { filter:"creationDate:[01/01/2016 TO *]", label:"after 2016"}
 }
 
-create FacetedQueryDefinition QRY_BASE {
-	keyConcept : DT_BASE
-	facets : [FCT_BASE_BASE_TYPE_LABEL,  FCT_BASE_CREATION_DATE ]
-	domainCriteria : DO_LABEL
+create FacetedQueryDefinition QryBase {
+	keyConcept : DtBase
+	facets : [FctBaseBaseTypeLabel,  FctBaseCreationDate ]
+	domainCriteria : DoLabel
 	listFilterBuilderClass : "io.vertigo.dynamox.search.DslListFilterBuilder"  
-	listFilterBuilderQuery : "BASE_ID:#query# NAME:#query# CODE:#+query*#"
+	listFilterBuilderQuery : "baseId:#query# name:#query# code:#+query*#"
 }

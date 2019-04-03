@@ -5,18 +5,18 @@ package io.mars.basemanagement.search
 /***** Index Base  *****/
 /************************/
 
-create DtDefinition DT_EQUIPMENT_INDEX {
-	field EQUIPMENT_ID {domain: DO_ID label:"Id" required:"true"}
-	field NAME {domain: DO_LABEL label: "Name" required:"false"}
-	field CODE {domain: DO_CODE label: "Code" required:"false"}
-	field PURCHASE_DATE {domain: DO_LOCALDATE label: "Date of purchase" required:"false"}
-	field DESCRIPTION {domain: DO_DESCRIPTION label: "Description" required:"false"}
-	field TAGS {domain: DO_TAGS label: "Tags" required:"false"}
-	field EQUIPMENT_TYPE_NAME {domain: DO_LABEL label:"Type" required:"false"}
-	field EQUIPMENT_CATEGORY_NAME {domain: DO_LABEL label:"Category" required:"false"}
+create DtDefinition DtEquipmentIndex {
+	field equipmentId {domain: DoId label:"Id" required:"true"}
+	field name {domain: DoLabel label: "Name" required:"false"}
+	field code {domain: DoCode label: "Code" required:"false"}
+	field purchaseDate {domain: DoLocaldate label: "Date of purchase" required:"false"}
+	field description {domain: DoDescription label: "Description" required:"false"}
+	field tags {domain: DoTags label: "Tags" required:"false"}
+	field equipmentTypeName {domain: DoLabel label:"Type" required:"false"}
+	field equipmentCategoryName {domain: DoLabel label:"Category" required:"false"}
 }
 
 
-alter DtDefinition DT_EQUIPMENT_INDEX {
-    computed ALL_TEXT {	domain : DO_DESCRIPTION, label:"ALL_TEXT", expression:"throw new io.vertigo.lang.VSystemException(\"Can't use index copyTo field\");"    }
+alter DtDefinition DtEquipmentIndex {
+    computed allText {	domain : DoDescription, label:"ALL_TEXT", expression:"throw new io.vertigo.lang.VSystemException(\"Can't use index copyTo field\");"    }
 }

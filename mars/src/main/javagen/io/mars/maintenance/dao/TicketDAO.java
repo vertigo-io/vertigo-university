@@ -42,11 +42,11 @@ public final class TicketDAO extends DAO<Ticket, java.lang.Long> implements Stor
 	}
 
 	/**
-	 * Execute la tache TK_GET_LAST_TICKETS.
+	 * Execute la tache TkGetLastTickets.
 	 * @return io.vertigo.dynamo.domain.model.DtList<io.mars.maintenance.domain.Ticket> tickets
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.mars.maintenance.domain.Ticket> getLastTickets() {
-		final Task task = createTaskBuilder("TK_GET_LAST_TICKETS")
+		final Task task = createTaskBuilder("TkGetLastTickets")
 				.build();
 		return getTaskManager()
 				.execute(task)
@@ -54,13 +54,13 @@ public final class TicketDAO extends DAO<Ticket, java.lang.Long> implements Stor
 	}
 
 	/**
-	 * Execute la tache TK_GET_LAST_TICKETS_BY_BASE_ID.
+	 * Execute la tache TkGetLastTicketsByBaseId.
 	 * @param baseId Long 
 	 * @return io.vertigo.dynamo.domain.model.DtList<io.mars.maintenance.domain.Ticket> tickets
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.mars.maintenance.domain.Ticket> getLastTicketsByBaseId(final Long baseId) {
-		final Task task = createTaskBuilder("TK_GET_LAST_TICKETS_BY_BASE_ID")
-				.addValue("BASE_ID", baseId)
+		final Task task = createTaskBuilder("TkGetLastTicketsByBaseId")
+				.addValue("baseId", baseId)
 				.build();
 		return getTaskManager()
 				.execute(task)

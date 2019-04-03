@@ -24,14 +24,14 @@ public final class OpendataSet implements Entity {
 	private String tags;
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_OPENDATA_SET_OPENDATA_SET_STATUS",
-			fkFieldName = "OPENDATA_SET_STATUS_ID",
-			primaryDtDefinitionName = "DT_OPENDATA_SET_STATUS",
+			name = "AOpendataSetOpendataSetStatus",
+			fkFieldName = "opendataSetStatusId",
+			primaryDtDefinitionName = "DtOpendataSetStatus",
 			primaryIsNavigable = true,
 			primaryRole = "OpendataSetStatus",
 			primaryLabel = "Opendata Set Status",
 			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_OPENDATA_SET",
+			foreignDtDefinitionName = "DtOpendataSet",
 			foreignIsNavigable = false,
 			foreignRole = "OpendataSet",
 			foreignLabel = "Opendata Set",
@@ -49,7 +49,7 @@ public final class OpendataSet implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long odsId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_ID", type = "ID", required = true, label = "Id")
+	@Field(domain = "DoId", type = "ID", required = true, label = "Id")
 	public Long getOdsId() {
 		return odsId;
 	}
@@ -68,7 +68,7 @@ public final class OpendataSet implements Entity {
 	 * Récupère la valeur de la propriété 'Code'.
 	 * @return String code
 	 */
-	@Field(domain = "DO_CODE", label = "Code")
+	@Field(domain = "DoCode", label = "Code")
 	public String getCode() {
 		return code;
 	}
@@ -87,7 +87,7 @@ public final class OpendataSet implements Entity {
 	 * Récupère la valeur de la propriété 'Title'.
 	 * @return String title
 	 */
-	@Field(domain = "DO_LABEL", label = "Title")
+	@Field(domain = "DoLabel", label = "Title")
 	public String getTitle() {
 		return title;
 	}
@@ -106,7 +106,7 @@ public final class OpendataSet implements Entity {
 	 * Récupère la valeur de la propriété 'Description'.
 	 * @return String description
 	 */
-	@Field(domain = "DO_DESCRIPTION", label = "Description")
+	@Field(domain = "DoDescription", label = "Description")
 	public String getDescription() {
 		return description;
 	}
@@ -125,7 +125,7 @@ public final class OpendataSet implements Entity {
 	 * Récupère la valeur de la propriété 'Service Endpoint URL'.
 	 * @return String endPointUrl
 	 */
-	@Field(domain = "DO_URL", label = "Service Endpoint URL")
+	@Field(domain = "DoUrl", label = "Service Endpoint URL")
 	public String getEndPointUrl() {
 		return endPointUrl;
 	}
@@ -144,7 +144,7 @@ public final class OpendataSet implements Entity {
 	 * Récupère la valeur de la propriété 'Picture'.
 	 * @return Long picturefileId
 	 */
-	@Field(domain = "DO_ID", label = "Picture")
+	@Field(domain = "DoId", label = "Picture")
 	public Long getPicturefileId() {
 		return picturefileId;
 	}
@@ -163,7 +163,7 @@ public final class OpendataSet implements Entity {
 	 * Récupère la valeur de la propriété 'Tags'.
 	 * @return String tags
 	 */
-	@Field(domain = "DO_MULTIPLE_IDS", label = "Tags")
+	@Field(domain = "DoMultipleIds", label = "Tags")
 	public String getTags() {
 		return tags;
 	}
@@ -182,7 +182,7 @@ public final class OpendataSet implements Entity {
 	 * Récupère la valeur de la propriété 'Opendata Set Status'.
 	 * @return String opendataSetStatusId
 	 */
-	@Field(domain = "DO_CODE", type = "FOREIGN_KEY", label = "Opendata Set Status")
+	@Field(domain = "DoCode", type = "FOREIGN_KEY", label = "Opendata Set Status")
 	public String getOpendataSetStatusId() {
 		return (String) opendataSetStatusIdAccessor.getId();
 	}

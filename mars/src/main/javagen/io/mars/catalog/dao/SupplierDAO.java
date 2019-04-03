@@ -76,7 +76,7 @@ public final class SupplierDAO extends DAO<Supplier, java.lang.String> implement
 	 * @return SearchQueryBuilder pour ce type de recherche
 	 */
 	public SearchQueryBuilder createSearchQueryBuilderSupplier(final String criteria, final SelectedFacetValues selectedFacetValues) {
-		final FacetedQueryDefinition facetedQueryDefinition = Home.getApp().getDefinitionSpace().resolve("QRY_SUPPLIER", FacetedQueryDefinition.class);
+		final FacetedQueryDefinition facetedQueryDefinition = Home.getApp().getDefinitionSpace().resolve("QrySupplier", FacetedQueryDefinition.class);
 		final ListFilterBuilder<String> listFilterBuilder = DIInjector.newInstance(facetedQueryDefinition.getListFilterBuilderClass(), Home.getApp().getComponentSpace());
 		final ListFilter criteriaListFilter = listFilterBuilder.withBuildQuery(facetedQueryDefinition.getListFilterBuilderQuery()).withCriteria(criteria).build();
 		return SearchQuery.builder(criteriaListFilter).withFacetStrategy(facetedQueryDefinition, selectedFacetValues);

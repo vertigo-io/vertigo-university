@@ -25,7 +25,7 @@ public class JobListController extends AbstractVSpringMvcController {
 	@GetMapping("/")
 	public void initContext(final ViewContext viewContext) {
 		// We make the call with the proper week dates
-		viewContext.publishDtList(jobs, OProcessUiFields.NAME, jobServices.getProcessDefinitions());
+		viewContext.publishDtList(jobs, OProcessUiFields.name, jobServices.getProcessDefinitions());
 	}
 
 }

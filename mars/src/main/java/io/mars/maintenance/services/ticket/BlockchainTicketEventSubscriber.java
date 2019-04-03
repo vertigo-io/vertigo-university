@@ -65,7 +65,7 @@ public class BlockchainTicketEventSubscriber implements Component {
 	/**
 	 * Daemon to unstack processes to end them
 	 */
-	@DaemonScheduled(name = "DMN_FLUSH_LEDGER_MESSAGES_TICKET", periodInSeconds = 10)
+	@DaemonScheduled(name = "DmnFlushLedgerMessagesTicket", periodInSeconds = 10)
 	public void pollQueue() {
 		while (!messageQueue.isEmpty()) {
 			final String message = messageQueue.poll();

@@ -42,11 +42,11 @@ public final class EquipmentTypeDAO extends DAO<EquipmentType, java.lang.Long> i
 	}
 
 	/**
-	 * Execute la tache TK_SELECT_EQUIPMENT_TYPE.
+	 * Execute la tache TkSelectEquipmentType.
 	 * @return io.vertigo.dynamo.domain.model.DtList<io.mars.catalog.domain.EquipmentType> dtcEquipmentType
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.mars.catalog.domain.EquipmentType> selectEquipmentType() {
-		final Task task = createTaskBuilder("TK_SELECT_EQUIPMENT_TYPE")
+		final Task task = createTaskBuilder("TkSelectEquipmentType")
 				.build();
 		return getTaskManager()
 				.execute(task)

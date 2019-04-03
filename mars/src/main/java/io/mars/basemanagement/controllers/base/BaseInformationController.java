@@ -90,7 +90,7 @@ public class BaseInformationController extends AbstractVSpringMvcController {
 		//baseServices.removeBasePicture(baseId, basePictureId);
 		final BasicUiListModifiable<Picture> pictures = viewContext.getUiListModifiable(basePictures);
 		final Long basePictureId = ProtectedValueUtil.readProtectedValue(protectedId, Long.class);
-		final boolean elementRemoved = pictures.removeIf((picture) -> basePictureId.equals(picture.getLong(PictureFields.PICTUREFILE_ID.name())));
+		final boolean elementRemoved = pictures.removeIf((picture) -> basePictureId.equals(picture.getLong(PictureFields.picturefileId.name())));
 		if (!elementRemoved) {
 			throw new VUserException("Picture already removed");
 		}

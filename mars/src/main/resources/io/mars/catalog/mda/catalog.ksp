@@ -1,27 +1,27 @@
 package io.mars.catalog.domain
 
 /* Exemple : "Drone", "Rover" */
-create DtDefinition DT_EQUIPMENT_TYPE {
-	id EQUIPMENT_TYPE_ID {domain: DO_ID label:"Id"}
-	field LABEL {domain: DO_LABEL label:"Equipment Type Label" required:"false"}
-	field ACTIVE {domain: DO_YES_NO label:"Equipment type is active" required:"false"}
+create DtDefinition DtEquipmentType {
+	id equipmentTypeId {domain: DoId label:"Id"}
+	field label {domain: DoLabel label:"Equipment Type Label" required:"false"}
+	field active {domain: DoYesNo label:"Equipment type is active" required:"false"}
 }
 
 
 /* Exemple : "Robotics Unit", "Transport Unit"... */
-create DtDefinition DT_EQUIPMENT_CATEGORY {
-	id EQUIPMENT_CATEGORY_ID {domain: DO_ID label:"Id"}
-	field LABEL {domain: DO_LABEL label:"Equipment Category Label" required:"false"}
-	field ACTIVE {domain: DO_YES_NO label:"Equipment category is active" required:"false"}
+create DtDefinition DtEquipmentCategory {
+	id equipmentCategoryId {domain: DoId label:"Id"}
+	field label {domain: DoLabel label:"Equipment Category Label" required:"false"}
+	field active {domain: DoYesNo label:"Equipment category is active" required:"false"}
 }
 
 
 
-create Association A_EQUIPMENT_TYPE_EQUIPMENT_CATEGORY {
-	fkFieldName : "EQUIPMENT_CATEGORY_ID"
+create Association AEquipmentTypeEquipmentCategory {
+	fkFieldName : "equipmentCategoryId"
     
- 	dtDefinitionA : DT_EQUIPMENT_TYPE
-	dtDefinitionB : DT_EQUIPMENT_CATEGORY
+ 	dtDefinitionA : DtEquipmentType
+	dtDefinitionB : DtEquipmentCategory
 			
 	navigabilityA : "false"
 	navigabilityB : "true"

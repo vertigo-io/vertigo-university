@@ -20,14 +20,14 @@ public final class EquipmentType implements Entity {
 	private Boolean active;
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_EQUIPMENT_TYPE_EQUIPMENT_CATEGORY",
-			fkFieldName = "EQUIPMENT_CATEGORY_ID",
-			primaryDtDefinitionName = "DT_EQUIPMENT_CATEGORY",
+			name = "AEquipmentTypeEquipmentCategory",
+			fkFieldName = "equipmentCategoryId",
+			primaryDtDefinitionName = "DtEquipmentCategory",
 			primaryIsNavigable = true,
 			primaryRole = "EquipmentCategory",
 			primaryLabel = "Equipment Category",
 			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_EQUIPMENT_TYPE",
+			foreignDtDefinitionName = "DtEquipmentType",
 			foreignIsNavigable = false,
 			foreignRole = "EquipmentType",
 			foreignLabel = "Equipment Type",
@@ -45,7 +45,7 @@ public final class EquipmentType implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long equipmentTypeId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_ID", type = "ID", required = true, label = "Id")
+	@Field(domain = "DoId", type = "ID", required = true, label = "Id")
 	public Long getEquipmentTypeId() {
 		return equipmentTypeId;
 	}
@@ -64,7 +64,7 @@ public final class EquipmentType implements Entity {
 	 * Récupère la valeur de la propriété 'Equipment Type Label'.
 	 * @return String label
 	 */
-	@Field(domain = "DO_LABEL", label = "Equipment Type Label")
+	@Field(domain = "DoLabel", label = "Equipment Type Label")
 	public String getLabel() {
 		return label;
 	}
@@ -83,7 +83,7 @@ public final class EquipmentType implements Entity {
 	 * Récupère la valeur de la propriété 'Equipment type is active'.
 	 * @return Boolean active
 	 */
-	@Field(domain = "DO_YES_NO", label = "Equipment type is active")
+	@Field(domain = "DoYesNo", label = "Equipment type is active")
 	public Boolean getActive() {
 		return active;
 	}
@@ -102,7 +102,7 @@ public final class EquipmentType implements Entity {
 	 * Récupère la valeur de la propriété 'Equipment Category'.
 	 * @return Long equipmentCategoryId
 	 */
-	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Equipment Category")
+	@Field(domain = "DoId", type = "FOREIGN_KEY", label = "Equipment Category")
 	public Long getEquipmentCategoryId() {
 		return (Long) equipmentCategoryIdAccessor.getId();
 	}

@@ -721,7 +721,6 @@ comment on column WORK_ORDER_STATUS.LABEL is
 'Status Label';
 
 
-
 alter table BASE
 	add constraint FK_BASE_BASETYPE_BASE_TYPE foreign key (BASE_TYPE_ID)
 	references BASE_TYPE (BASE_TYPE_ID);

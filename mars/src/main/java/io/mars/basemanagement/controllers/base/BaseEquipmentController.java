@@ -38,7 +38,7 @@ public class BaseEquipmentController extends AbstractVSpringMvcController {
 	public void initContext(final ViewContext viewContext, @PathVariable("baseId") final Long baseId) {
 		baseDetailController.initCommonContext(viewContext, baseId);
 		viewContext.publishMdl(equipmentTypesKey, EquipmentType.class, null);
-		viewContext.publishDtList(equipmentOverviewsKey, EquipmentOverviewFields.BUSINESS_ID, equipmentServices.getEquipmentOverviewByBaseId(baseId));
+		viewContext.publishDtList(equipmentOverviewsKey, EquipmentOverviewFields.businessId, equipmentServices.getEquipmentOverviewByBaseId(baseId));
 		viewContext.publishDtList(lastEquipmentsKey, equipmentServices.getLastPurchasedEquipmentsByBase(baseId));
 		viewContext.publishDtList(lastTicketsKey, ticketServices.getLastestTicketsByBase(baseId));
 		toModeReadOnly();

@@ -24,14 +24,14 @@ public final class Ticket implements Entity {
 	private java.time.LocalDate dateClosed;
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_TICKET_TICKET_STATUS",
-			fkFieldName = "TICKET_STATUS_ID",
-			primaryDtDefinitionName = "DT_TICKET_STATUS",
+			name = "ATicketTicketStatus",
+			fkFieldName = "ticketStatusId",
+			primaryDtDefinitionName = "DtTicketStatus",
 			primaryIsNavigable = true,
 			primaryRole = "TicketStatus",
 			primaryLabel = "Ticket Status",
 			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_TICKET",
+			foreignDtDefinitionName = "DtTicket",
 			foreignIsNavigable = false,
 			foreignRole = "Ticketr",
 			foreignLabel = "Ticket",
@@ -39,14 +39,14 @@ public final class Ticket implements Entity {
 	private final EnumVAccessor<io.mars.maintenance.domain.TicketStatus, io.mars.maintenance.domain.TicketStatusEnum> ticketStatusIdAccessor = new EnumVAccessor<>(io.mars.maintenance.domain.TicketStatus.class, "TicketStatus", io.mars.maintenance.domain.TicketStatusEnum.class);
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_EQUIPMENT_TICKET",
-			fkFieldName = "EQUIPMENT_ID",
-			primaryDtDefinitionName = "DT_EQUIPMENT",
+			name = "AEquipmentTicket",
+			fkFieldName = "equipmentId",
+			primaryDtDefinitionName = "DtEquipment",
 			primaryIsNavigable = true,
 			primaryRole = "Equipment",
 			primaryLabel = "Equipment",
 			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_TICKET",
+			foreignDtDefinitionName = "DtTicket",
 			foreignIsNavigable = false,
 			foreignRole = "EquipmentTickets",
 			foreignLabel = "Equipment tickets",
@@ -64,7 +64,7 @@ public final class Ticket implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long ticketId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_ID", type = "ID", required = true, label = "Id")
+	@Field(domain = "DoId", type = "ID", required = true, label = "Id")
 	public Long getTicketId() {
 		return ticketId;
 	}
@@ -83,7 +83,7 @@ public final class Ticket implements Entity {
 	 * Récupère la valeur de la propriété 'Number'.
 	 * @return String code
 	 */
-	@Field(domain = "DO_LABEL", label = "Number")
+	@Field(domain = "DoLabel", label = "Number")
 	public String getCode() {
 		return code;
 	}
@@ -102,7 +102,7 @@ public final class Ticket implements Entity {
 	 * Récupère la valeur de la propriété 'Title'.
 	 * @return String title
 	 */
-	@Field(domain = "DO_LABEL", label = "Title")
+	@Field(domain = "DoLabel", label = "Title")
 	public String getTitle() {
 		return title;
 	}
@@ -121,7 +121,7 @@ public final class Ticket implements Entity {
 	 * Récupère la valeur de la propriété 'Description'.
 	 * @return String description
 	 */
-	@Field(domain = "DO_DESCRIPTION", label = "Description")
+	@Field(domain = "DoDescription", label = "Description")
 	public String getDescription() {
 		return description;
 	}
@@ -140,7 +140,7 @@ public final class Ticket implements Entity {
 	 * Récupère la valeur de la propriété 'Creation Date'.
 	 * @return LocalDate dateCreated
 	 */
-	@Field(domain = "DO_LOCALDATE", label = "Creation Date")
+	@Field(domain = "DoLocaldate", label = "Creation Date")
 	public java.time.LocalDate getDateCreated() {
 		return dateCreated;
 	}
@@ -159,7 +159,7 @@ public final class Ticket implements Entity {
 	 * Récupère la valeur de la propriété 'Closing Date'.
 	 * @return LocalDate dateClosed
 	 */
-	@Field(domain = "DO_LOCALDATE", label = "Closing Date")
+	@Field(domain = "DoLocaldate", label = "Closing Date")
 	public java.time.LocalDate getDateClosed() {
 		return dateClosed;
 	}
@@ -178,7 +178,7 @@ public final class Ticket implements Entity {
 	 * Récupère la valeur de la propriété 'Ticket Status'.
 	 * @return String ticketStatusId
 	 */
-	@Field(domain = "DO_CODE", type = "FOREIGN_KEY", label = "Ticket Status")
+	@Field(domain = "DoCode", type = "FOREIGN_KEY", label = "Ticket Status")
 	public String getTicketStatusId() {
 		return (String) ticketStatusIdAccessor.getId();
 	}
@@ -197,7 +197,7 @@ public final class Ticket implements Entity {
 	 * Récupère la valeur de la propriété 'Equipment'.
 	 * @return Long equipmentId
 	 */
-	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Equipment")
+	@Field(domain = "DoId", type = "FOREIGN_KEY", label = "Equipment")
 	public Long getEquipmentId() {
 		return (Long) equipmentIdAccessor.getId();
 	}

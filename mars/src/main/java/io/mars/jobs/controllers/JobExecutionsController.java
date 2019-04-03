@@ -28,7 +28,7 @@ public class JobExecutionsController extends AbstractVSpringMvcController {
 	@GetMapping("/{jobName}")
 	public void initContext(final ViewContext viewContext, @PathVariable("jobName") final String jobName) {
 		viewContext.publishDto(jobKey, jobServices.getProcessDefinition(jobName));
-		viewContext.publishDtList(jobExecutions, OProcessExecutionUiFields.PRE_ID, jobServices.getProcessExecutions(jobName, "", 250, 0));
+		viewContext.publishDtList(jobExecutions, OProcessExecutionUiFields.preId, jobServices.getProcessExecutions(jobName, "", 250, 0));
 	}
 
 }

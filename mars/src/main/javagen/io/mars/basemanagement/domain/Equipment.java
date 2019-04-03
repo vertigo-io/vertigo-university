@@ -27,14 +27,14 @@ public final class Equipment implements KeyConcept {
 	private java.math.BigDecimal equipmentValue;
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_BASE_EQUIPMENT",
-			fkFieldName = "BASE_ID",
-			primaryDtDefinitionName = "DT_BASE",
+			name = "ABaseEquipment",
+			fkFieldName = "baseId",
+			primaryDtDefinitionName = "DtBase",
 			primaryIsNavigable = true,
 			primaryRole = "Base",
 			primaryLabel = "Base",
 			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_EQUIPMENT",
+			foreignDtDefinitionName = "DtEquipment",
 			foreignIsNavigable = false,
 			foreignRole = "BaseEquipments",
 			foreignLabel = "Base Equipments",
@@ -42,14 +42,14 @@ public final class Equipment implements KeyConcept {
 	private final VAccessor<io.mars.basemanagement.domain.Base> baseIdAccessor = new VAccessor<>(io.mars.basemanagement.domain.Base.class, "Base");
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_EQUIPMENT_GEOSECTOR",
-			fkFieldName = "GEOSECTOR_ID",
-			primaryDtDefinitionName = "DT_GEOSECTOR",
+			name = "AEquipmentGeosector",
+			fkFieldName = "geosectorId",
+			primaryDtDefinitionName = "DtGeosector",
 			primaryIsNavigable = true,
 			primaryRole = "Geosector",
 			primaryLabel = "Equipment Geosector",
 			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_EQUIPMENT",
+			foreignDtDefinitionName = "DtEquipment",
 			foreignIsNavigable = false,
 			foreignRole = "Equipment",
 			foreignLabel = "Equipment",
@@ -57,14 +57,14 @@ public final class Equipment implements KeyConcept {
 	private final VAccessor<io.mars.basemanagement.domain.Geosector> geosectorIdAccessor = new VAccessor<>(io.mars.basemanagement.domain.Geosector.class, "Geosector");
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_BUSINESS_EQUIPMENT",
-			fkFieldName = "BUSINESS_ID",
-			primaryDtDefinitionName = "DT_BUSINESS",
+			name = "ABusinessEquipment",
+			fkFieldName = "businessId",
+			primaryDtDefinitionName = "DtBusiness",
 			primaryIsNavigable = true,
 			primaryRole = "Business",
 			primaryLabel = "Business",
 			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_EQUIPMENT",
+			foreignDtDefinitionName = "DtEquipment",
 			foreignIsNavigable = false,
 			foreignRole = "BusinessEquipment",
 			foreignLabel = "Business Equipment",
@@ -72,14 +72,14 @@ public final class Equipment implements KeyConcept {
 	private final VAccessor<io.mars.basemanagement.domain.Business> businessIdAccessor = new VAccessor<>(io.mars.basemanagement.domain.Business.class, "Business");
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_EQUIPMENT_EQUIPMENT_TYPE",
-			fkFieldName = "EQUIPMENT_TYPE_ID",
-			primaryDtDefinitionName = "DT_EQUIPMENT_TYPE",
+			name = "AEquipmentEquipmentType",
+			fkFieldName = "equipmentTypeId",
+			primaryDtDefinitionName = "DtEquipmentType",
 			primaryIsNavigable = true,
 			primaryRole = "EquipmentType",
 			primaryLabel = "Equipment Type",
 			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_EQUIPMENT",
+			foreignDtDefinitionName = "DtEquipment",
 			foreignIsNavigable = false,
 			foreignRole = "Equipment",
 			foreignLabel = "Equipment",
@@ -97,7 +97,7 @@ public final class Equipment implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long equipmentId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_ID", type = "ID", required = true, label = "Id")
+	@Field(domain = "DoId", type = "ID", required = true, label = "Id")
 	public Long getEquipmentId() {
 		return equipmentId;
 	}
@@ -116,7 +116,7 @@ public final class Equipment implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Name'.
 	 * @return String name
 	 */
-	@Field(domain = "DO_LABEL", label = "Name")
+	@Field(domain = "DoLabel", label = "Name")
 	public String getName() {
 		return name;
 	}
@@ -135,7 +135,7 @@ public final class Equipment implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Code'.
 	 * @return String code
 	 */
-	@Field(domain = "DO_CODE", label = "Code")
+	@Field(domain = "DoCode", label = "Code")
 	public String getCode() {
 		return code;
 	}
@@ -154,7 +154,7 @@ public final class Equipment implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Health Level'.
 	 * @return Integer healthLevel
 	 */
-	@Field(domain = "DO_HEALTH", label = "Health Level")
+	@Field(domain = "DoHealth", label = "Health Level")
 	public Integer getHealthLevel() {
 		return healthLevel;
 	}
@@ -173,7 +173,7 @@ public final class Equipment implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Date of purchase'.
 	 * @return LocalDate purchaseDate
 	 */
-	@Field(domain = "DO_LOCALDATE", label = "Date of purchase")
+	@Field(domain = "DoLocaldate", label = "Date of purchase")
 	public java.time.LocalDate getPurchaseDate() {
 		return purchaseDate;
 	}
@@ -192,7 +192,7 @@ public final class Equipment implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Description'.
 	 * @return String description
 	 */
-	@Field(domain = "DO_DESCRIPTION", label = "Description")
+	@Field(domain = "DoDescription", label = "Description")
 	public String getDescription() {
 		return description;
 	}
@@ -211,7 +211,7 @@ public final class Equipment implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Tags'.
 	 * @return String tags
 	 */
-	@Field(domain = "DO_MULTIPLE_IDS", label = "Tags")
+	@Field(domain = "DoMultipleIds", label = "Tags")
 	public String getTags() {
 		return tags;
 	}
@@ -230,7 +230,7 @@ public final class Equipment implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Geographic Location'.
 	 * @return String geoLocation
 	 */
-	@Field(domain = "DO_LABEL", label = "Geographic Location")
+	@Field(domain = "DoLabel", label = "Geographic Location")
 	public String getGeoLocation() {
 		return geoLocation;
 	}
@@ -249,7 +249,7 @@ public final class Equipment implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Renting Fee'.
 	 * @return BigDecimal rentingFee
 	 */
-	@Field(domain = "DO_CURRENCY", label = "Renting Fee")
+	@Field(domain = "DoCurrency", label = "Renting Fee")
 	public java.math.BigDecimal getRentingFee() {
 		return rentingFee;
 	}
@@ -268,7 +268,7 @@ public final class Equipment implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Current equipment value'.
 	 * @return BigDecimal equipmentValue
 	 */
-	@Field(domain = "DO_CURRENCY", label = "Current equipment value")
+	@Field(domain = "DoCurrency", label = "Current equipment value")
 	public java.math.BigDecimal getEquipmentValue() {
 		return equipmentValue;
 	}
@@ -287,7 +287,7 @@ public final class Equipment implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Base'.
 	 * @return Long baseId
 	 */
-	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Base")
+	@Field(domain = "DoId", type = "FOREIGN_KEY", label = "Base")
 	public Long getBaseId() {
 		return (Long) baseIdAccessor.getId();
 	}
@@ -306,7 +306,7 @@ public final class Equipment implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Equipment Geosector'.
 	 * @return Long geosectorId
 	 */
-	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Equipment Geosector")
+	@Field(domain = "DoId", type = "FOREIGN_KEY", label = "Equipment Geosector")
 	public Long getGeosectorId() {
 		return (Long) geosectorIdAccessor.getId();
 	}
@@ -325,7 +325,7 @@ public final class Equipment implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Business'.
 	 * @return Long businessId
 	 */
-	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Business")
+	@Field(domain = "DoId", type = "FOREIGN_KEY", label = "Business")
 	public Long getBusinessId() {
 		return (Long) businessIdAccessor.getId();
 	}
@@ -344,7 +344,7 @@ public final class Equipment implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Equipment Type'.
 	 * @return Long equipmentTypeId
 	 */
-	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Equipment Type")
+	@Field(domain = "DoId", type = "FOREIGN_KEY", label = "Equipment Type")
 	public Long getEquipmentTypeId() {
 		return (Long) equipmentTypeIdAccessor.getId();
 	}

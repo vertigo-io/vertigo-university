@@ -1,19 +1,19 @@
 package io.mars.hr
 
-create Task TK_GET_BASE_MANAGER {  
+create Task TkGetBaseManager {  
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
     request : "
             select per.*
             	from mission mis
             	join person per on mis.person_id = per.person_id
-            	where mis.base_id = #BASE_ID# and mis.role= 'MANAGER';
+            	where mis.base_id = #baseId# and mis.role= 'MANAGER';
              "
-    attribute BASE_ID     {domain : DO_ID         		required:"true"  inOut :"in"}
-    attribute MANAGER     {domain : DO_DT_PERSON_DTO    required:"false"  inOut :"out"}
+    attribute baseId     {domain : DoId         		required:"true"  inOut :"in"}
+    attribute manager     {domain : DoDtPersonDto    required:"false"  inOut :"out"}
 }
 
 
-create Task TK_GET_MISSIONS_DISPLAY_BY_PERSON_ID {  
+create Task TkGetMissionsDisplayByPersonId {  
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
     request : "
            select 
@@ -24,8 +24,8 @@ create Task TK_GET_MISSIONS_DISPLAY_BY_PERSON_ID {
             	from mission mis
             	left join base bas on mis.base_id = bas.base_id
 				left join business bus on mis.business_id = bus.business_id
-            	where mis.person_id = #PERSON_ID#;
+            	where mis.person_id = #personId#;
              "
-    attribute PERSON_ID     {domain : DO_ID         		required:"true"  inOut :"in"}
-    attribute MISSIONS     {domain : DO_DT_MISSION_DISPLAY_DTC    required:"true"  inOut :"out"}
+    attribute personId     {domain : DoId         		required:"true"  inOut :"in"}
+    attribute missions     {domain : DoDtMissionDisplayDtc    required:"true"  inOut :"out"}
 }

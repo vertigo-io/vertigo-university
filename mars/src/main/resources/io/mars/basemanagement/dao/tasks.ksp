@@ -1,37 +1,37 @@
 package io.mars.basemanagement
 
-create Task TK_SELECT_BUSINESS_ID {  
+create Task TkSelectBusinessId {  
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
     request : "
             select BUSINESS_ID from BUSINESS
              "
-    attribute BUSINESS_ID_LIST     {domain : DO_LONGS         required:"true"  inOut :"out"}
+    attribute businessIdList     {domain : DoLongs         required:"true"  inOut :"out"}
 }
 
-create Task TK_SELECT_BUSINESS {  
+create Task TkSelectBusiness {  
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
     request : "
             select BUSINESS_ID, NAME from BUSINESS
              "
-    attribute DTC_BUSINESS     {domain : DO_DT_BUSINESS_DTC required:"true"  inOut :"out"}
+    attribute dtcBusiness     {domain : DoDtBusinessDtc required:"true"  inOut :"out"}
 }
 
 
-create Task TK_SELECT_BASE_ID {
+create Task TkSelectBaseId {
    className : "io.vertigo.dynamox.task.TaskEngineSelect"
    request : "
             select BASE_ID from BASE
              "
-    attribute BASE_ID_LIST     {domain : DO_LONGS         required:"true"  inOut :"out"}
+    attribute baseIdList     {domain : DoLongs         required:"true"  inOut :"out"}
 
 }
 
-create Task TK_SELECT_GEOSECTOR_ID {
+create Task TkSelectGeosectorId {
    className : "io.vertigo.dynamox.task.TaskEngineSelect"
    request : "
             select GEOSECTOR_ID from GEOSECTOR
              "
-    attribute GEOSECTOR_ID_LIST     {domain : DO_LONGS         required:"true"  inOut :"out"}
+    attribute geosectorIdList     {domain : DoLongs         required:"true"  inOut :"out"}
 
 }
 

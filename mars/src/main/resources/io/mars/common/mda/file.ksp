@@ -1,11 +1,11 @@
 package io.mars.common.domain.tools.file
 
 
-create DtDefinition DT_MEDIA_FILE_INFO {
-	 id  FIL_ID 			{domain : DO_ID 		label : "Id" }
-	 field FILE_NAME 		{domain : DO_LABEL 		label : "Name" 				required : "true" }
-	 field MIME_TYPE		{domain : DO_LABEL 		label : "MimeType" 			required : "true" }
- 	 field LENGTH 			{domain : DO_SIZE 		label : "Size" 			    required : "true" }
-	 field LAST_MODIFIED 	{domain : DO_INSTANT	label : "Modification Date" required : "true" }
-	 field FILE_PATH 		{domain : DO_FILE_PATH	label : "path" 				required : "true"}	 
+create DtDefinition DtMediaFileInfo {
+	 id  filId 			{domain : DoId 		label : "Id" }
+	 field fileName 		{domain : DoLabel 		label : "Name" 				required : "true" }
+	 field mimeType		{domain : DoLabel 		label : "MimeType" 			required : "true" }
+ 	 field length 			{domain : DoSize 		label : "Size" 			    required : "true" }
+	 field lastModified 	{domain : DoInstant	label : "Modification Date" required : "true" }
+	 field filePath 		{domain : DoFilePath	label : "path" 				required : "true"}	 
 }

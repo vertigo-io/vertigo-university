@@ -1,45 +1,45 @@
 package io.mars.maintenance.domain
 
 
-create DtDefinition DT_TICKET {
-	id TICKET_ID {domain: DO_ID label:"Id"}
-	field CODE {domain: DO_LABEL label: "Number" required:"false"}
-	field TITLE {domain: DO_LABEL label: "Title" required:"false"}
-	field DESCRIPTION {domain: DO_DESCRIPTION label: "Description" required:"false"}
-	field DATE_CREATED {domain: DO_LOCALDATE label: "Creation Date" required:"false"}
-	field DATE_CLOSED {domain: DO_LOCALDATE label: "Closing Date" required:"false"}
+create DtDefinition DtTicket {
+	id ticketId {domain: DoId label:"Id"}
+	field code {domain: DoLabel label: "Number" required:"false"}
+	field title {domain: DoLabel label: "Title" required:"false"}
+	field description {domain: DoDescription label: "Description" required:"false"}
+	field dateCreated {domain: DoLocaldate label: "Creation Date" required:"false"}
+	field dateClosed {domain: DoLocaldate label: "Closing Date" required:"false"}
 }
 
-create DtDefinition DT_WORK_ORDER {
-	id WO_ID {domain: DO_ID label:"Id"}
-	field CODE {domain: DO_LABEL label: "Code" required:"false"}
-	field TICKET_CODE {domain: DO_LABEL label: "Number" required:"false"}
-	field NAME {domain: DO_LABEL label: "Name" required:"false"}
-	field DESCRIPTION {domain: DO_DESCRIPTION label: "Description" required:"false"}
-	field DATE_CREATED {domain: DO_LOCALDATE label: "Creation Date" required:"false"}
-	field DATE_CLOSED {domain: DO_LOCALDATE label: "Closing Date" required:"false"}
-	field DUE_DATE {domain: DO_LOCALDATE label: "Due Date" required:"false"}	
+create DtDefinition DtWorkOrder {
+	id woId {domain: DoId label:"Id"}
+	field code {domain: DoLabel label: "Code" required:"false"}
+	field ticketCode {domain: DoLabel label: "Number" required:"false"}
+	field name {domain: DoLabel label: "Name" required:"false"}
+	field description {domain: DoDescription label: "Description" required:"false"}
+	field dateCreated {domain: DoLocaldate label: "Creation Date" required:"false"}
+	field dateClosed {domain: DoLocaldate label: "Closing Date" required:"false"}
+	field dueDate {domain: DoLocaldate label: "Due Date" required:"false"}	
 }
 
-create DtDefinition DT_WORK_ORDER_STATUS {
+create DtDefinition DtWorkOrderStatus {
 	stereotype: "StaticMasterData"
-	id WORK_ORDER_STATUS_ID {domain: DO_CODE label:"Id"}
-	field LABEL {domain: DO_LABEL label:"Status Label" required:"false"}
+	id workOrderStatusId {domain: DoCode label:"Id"}
+	field label {domain: DoLabel label:"Status Label" required:"false"}
 }
 
-create DtDefinition DT_TICKET_STATUS {
+create DtDefinition DtTicketStatus {
 	stereotype: "StaticMasterData"
-	id TICKET_STATUS_ID {domain: DO_CODE label:"Id"}
-	field LABEL {domain: DO_LABEL label:"Status Label" required:"false"}
+	id ticketStatusId {domain: DoCode label:"Id"}
+	field label {domain: DoLabel label:"Status Label" required:"false"}
 }
 
 
 
-create Association A_TICKET_WORK_ORDER {
-	fkFieldName : "TICKET_ID"
+create Association ATicketWorkOrder {
+	fkFieldName : "ticketId"
     
- 	dtDefinitionA : DT_TICKET
-	dtDefinitionB : DT_WORK_ORDER
+ 	dtDefinitionA : DtTicket
+	dtDefinitionB : DtWorkOrder
 			
 	navigabilityA : "true"
 	navigabilityB : "false"
@@ -53,11 +53,11 @@ create Association A_TICKET_WORK_ORDER {
 	roleB : "TicketWorkOrders"
 }
 
-create Association A_TICKET_TICKET_STATUS {
-	fkFieldName : "TICKET_STATUS_ID"
+create Association ATicketTicketStatus {
+	fkFieldName : "ticketStatusId"
     
- 	dtDefinitionA : DT_TICKET
-	dtDefinitionB : DT_TICKET_STATUS
+ 	dtDefinitionA : DtTicket
+	dtDefinitionB : DtTicketStatus
 			
 	navigabilityA : "false"
 	navigabilityB : "true"
@@ -72,11 +72,11 @@ create Association A_TICKET_TICKET_STATUS {
 }
 
 
-create Association A_WORK_ORDER_WORK_ORDER_STATUS {
-	fkFieldName : "WORK_ORDER_STATUS_ID"
+create Association AWorkOrderWorkOrderStatus {
+	fkFieldName : "workOrderStatusId"
     
- 	dtDefinitionA : DT_WORK_ORDER
-	dtDefinitionB : DT_WORK_ORDER_STATUS
+ 	dtDefinitionA : DtWorkOrder
+	dtDefinitionB : DtWorkOrderStatus
 			
 	navigabilityA : "false"
 	navigabilityB : "true"
@@ -90,11 +90,11 @@ create Association A_WORK_ORDER_WORK_ORDER_STATUS {
 	roleB : "WorkOrderStatus"
 }
 
-create Association A_EQUIPMENT_TICKET {
-	fkFieldName : "EQUIPMENT_ID"
+create Association AEquipmentTicket {
+	fkFieldName : "equipmentId"
     
- 	dtDefinitionA : DT_EQUIPMENT
-	dtDefinitionB : DT_TICKET
+ 	dtDefinitionA : DtEquipment
+	dtDefinitionB : DtTicket
 			
 	navigabilityA : "true"
 	navigabilityB : "false"

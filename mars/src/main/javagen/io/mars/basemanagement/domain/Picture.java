@@ -19,14 +19,14 @@ public final class Picture implements Entity {
 	private Long picturefileId;
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_BASE_PICTURE",
-			fkFieldName = "BASE_ID",
-			primaryDtDefinitionName = "DT_BASE",
+			name = "ABasePicture",
+			fkFieldName = "baseId",
+			primaryDtDefinitionName = "DtBase",
 			primaryIsNavigable = false,
 			primaryRole = "Base",
 			primaryLabel = "Base",
 			primaryMultiplicity = "1..1",
-			foreignDtDefinitionName = "DT_PICTURE",
+			foreignDtDefinitionName = "DtPicture",
 			foreignIsNavigable = true,
 			foreignRole = "Pictures",
 			foreignLabel = "Base Pictures",
@@ -44,7 +44,7 @@ public final class Picture implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long pictureId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_ID", type = "ID", required = true, label = "Id")
+	@Field(domain = "DoId", type = "ID", required = true, label = "Id")
 	public Long getPictureId() {
 		return pictureId;
 	}
@@ -63,7 +63,7 @@ public final class Picture implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long picturefileId
 	 */
-	@Field(domain = "DO_ID", label = "Id")
+	@Field(domain = "DoId", label = "Id")
 	public Long getPicturefileId() {
 		return picturefileId;
 	}
@@ -82,7 +82,7 @@ public final class Picture implements Entity {
 	 * Récupère la valeur de la propriété 'Base'.
 	 * @return Long baseId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_ID", type = "FOREIGN_KEY", required = true, label = "Base")
+	@Field(domain = "DoId", type = "FOREIGN_KEY", required = true, label = "Base")
 	public Long getBaseId() {
 		return (Long) baseIdAccessor.getId();
 	}

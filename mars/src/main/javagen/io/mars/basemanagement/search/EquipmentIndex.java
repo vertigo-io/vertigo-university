@@ -27,7 +27,7 @@ public final class EquipmentIndex implements DtObject {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long equipmentId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_ID", required = true, label = "Id")
+	@Field(domain = "DoId", required = true, label = "Id")
 	public Long getEquipmentId() {
 		return equipmentId;
 	}
@@ -46,7 +46,7 @@ public final class EquipmentIndex implements DtObject {
 	 * Récupère la valeur de la propriété 'Name'.
 	 * @return String name
 	 */
-	@Field(domain = "DO_LABEL", label = "Name")
+	@Field(domain = "DoLabel", label = "Name")
 	public String getName() {
 		return name;
 	}
@@ -65,7 +65,7 @@ public final class EquipmentIndex implements DtObject {
 	 * Récupère la valeur de la propriété 'Code'.
 	 * @return String code
 	 */
-	@Field(domain = "DO_CODE", label = "Code")
+	@Field(domain = "DoCode", label = "Code")
 	public String getCode() {
 		return code;
 	}
@@ -84,7 +84,7 @@ public final class EquipmentIndex implements DtObject {
 	 * Récupère la valeur de la propriété 'Date of purchase'.
 	 * @return LocalDate purchaseDate
 	 */
-	@Field(domain = "DO_LOCALDATE", label = "Date of purchase")
+	@Field(domain = "DoLocaldate", label = "Date of purchase")
 	public java.time.LocalDate getPurchaseDate() {
 		return purchaseDate;
 	}
@@ -103,7 +103,7 @@ public final class EquipmentIndex implements DtObject {
 	 * Récupère la valeur de la propriété 'Description'.
 	 * @return String description
 	 */
-	@Field(domain = "DO_DESCRIPTION", label = "Description")
+	@Field(domain = "DoDescription", label = "Description")
 	public String getDescription() {
 		return description;
 	}
@@ -122,7 +122,7 @@ public final class EquipmentIndex implements DtObject {
 	 * Récupère la valeur de la propriété 'Tags'.
 	 * @return String tags
 	 */
-	@Field(domain = "DO_TAGS", label = "Tags")
+	@Field(domain = "DoTags", label = "Tags")
 	public String getTags() {
 		return tags;
 	}
@@ -141,7 +141,7 @@ public final class EquipmentIndex implements DtObject {
 	 * Récupère la valeur de la propriété 'Type'.
 	 * @return String equipmentTypeName
 	 */
-	@Field(domain = "DO_LABEL", label = "Type")
+	@Field(domain = "DoLabel", label = "Type")
 	public String getEquipmentTypeName() {
 		return equipmentTypeName;
 	}
@@ -160,7 +160,7 @@ public final class EquipmentIndex implements DtObject {
 	 * Récupère la valeur de la propriété 'Category'.
 	 * @return String equipmentCategoryName
 	 */
-	@Field(domain = "DO_LABEL", label = "Category")
+	@Field(domain = "DoLabel", label = "Category")
 	public String getEquipmentCategoryName() {
 		return equipmentCategoryName;
 	}
@@ -179,7 +179,7 @@ public final class EquipmentIndex implements DtObject {
 	 * Récupère la valeur de la propriété calculée 'ALL_TEXT'.
 	 * @return String allText
 	 */
-	@Field(domain = "DO_DESCRIPTION", type = "COMPUTED", persistent = false, label = "ALL_TEXT")
+	@Field(domain = "DoDescription", type = "COMPUTED", persistent = false, label = "ALL_TEXT")
 	public String getAllText() {
 		throw new io.vertigo.lang.VSystemException("Can't use index copyTo field");
 	}

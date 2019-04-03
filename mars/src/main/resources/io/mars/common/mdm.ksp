@@ -1,41 +1,41 @@
 package io.mars
 
-alter DtDefinition DT_BASE_TYPE {
-	sortField : "LABEL"
- 	displayField : "LABEL"
+alter DtDefinition DtBaseType {
+	sortField : "label"
+ 	displayField : "label"
 }
 
-alter DtDefinition DT_GEOSECTOR {
-	sortField : "SECTOR_LABEL"
- 	displayField : "SECTOR_LABEL"
+alter DtDefinition DtGeosector {
+	sortField : "sectorLabel"
+ 	displayField : "sectorLabel"
 }
 
-alter DtDefinition DT_EQUIPMENT_TYPE {
-	sortField : "LABEL"
- 	displayField : "LABEL"
+alter DtDefinition DtEquipmentType {
+	sortField : "label"
+ 	displayField : "label"
 }
 
-alter DtDefinition DT_WORK_ORDER_STATUS {
-	sortField : "LABEL"
- 	displayField : "LABEL"
+alter DtDefinition DtWorkOrderStatus {
+	sortField : "label"
+ 	displayField : "label"
 }
 
-alter DtDefinition DT_TAG {
-	sortField : "LABEL"
- 	displayField : "LABEL"
+alter DtDefinition DtTag {
+	sortField : "label"
+ 	displayField : "label"
 }
 
-alter DtDefinition DT_GEOSECTOR {
-	sortField : "SECTOR_LABEL"
- 	displayField : "SECTOR_LABEL"
+alter DtDefinition DtGeosector {
+	sortField : "sectorLabel"
+ 	displayField : "sectorLabel"
 }
 
-alter DtDefinition DT_BUSINESS {
-	sortField : "NAME"
- 	displayField : "NAME"
+alter DtDefinition DtBusiness {
+	sortField : "name"
+ 	displayField : "name"
 }
 
-alter DtDefinition DT_TICKET_STATUS {
-	sortField : "LABEL"
- 	displayField : "LABEL"
+alter DtDefinition DtTicketStatus {
+	sortField : "label"
+ 	displayField : "label"
 }

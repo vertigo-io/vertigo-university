@@ -25,7 +25,7 @@ public final class EquipmentOverview implements DtObject {
 	 * Récupère la valeur de la propriété 'Business Id'.
 	 * @return Long businessId
 	 */
-	@Field(domain = "DO_ID", label = "Business Id")
+	@Field(domain = "DoId", label = "Business Id")
 	public Long getBusinessId() {
 		return businessId;
 	}
@@ -44,7 +44,7 @@ public final class EquipmentOverview implements DtObject {
 	 * Récupère la valeur de la propriété 'Count by business'.
 	 * @return Long count
 	 */
-	@Field(domain = "DO_COUNT", label = "Count by business")
+	@Field(domain = "DoCount", label = "Count by business")
 	public Long getCount() {
 		return count;
 	}
@@ -63,7 +63,7 @@ public final class EquipmentOverview implements DtObject {
 	 * Récupère la valeur de la propriété 'Business'.
 	 * @return String businessName
 	 */
-	@Field(domain = "DO_LABEL", label = "Business")
+	@Field(domain = "DoLabel", label = "Business")
 	public String getBusinessName() {
 		return businessName;
 	}
@@ -82,7 +82,7 @@ public final class EquipmentOverview implements DtObject {
 	 * Récupère la valeur de la propriété 'Business'.
 	 * @return String businessIcon
 	 */
-	@Field(domain = "DO_LABEL", label = "Business")
+	@Field(domain = "DoLabel", label = "Business")
 	public String getBusinessIcon() {
 		return businessIcon;
 	}
@@ -101,7 +101,7 @@ public final class EquipmentOverview implements DtObject {
 	 * Récupère la valeur de la propriété 'Ok count'.
 	 * @return Long okCount
 	 */
-	@Field(domain = "DO_COUNT", label = "Ok count")
+	@Field(domain = "DoCount", label = "Ok count")
 	public Long getOkCount() {
 		return okCount;
 	}
@@ -120,7 +120,7 @@ public final class EquipmentOverview implements DtObject {
 	 * Récupère la valeur de la propriété 'Down count'.
 	 * @return Long downCount
 	 */
-	@Field(domain = "DO_COUNT", label = "Down count")
+	@Field(domain = "DoCount", label = "Down count")
 	public Long getDownCount() {
 		return downCount;
 	}

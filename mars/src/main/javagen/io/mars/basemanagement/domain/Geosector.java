@@ -28,7 +28,7 @@ public final class Geosector implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long geosectorId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_ID", type = "ID", required = true, label = "Id")
+	@Field(domain = "DoId", type = "ID", required = true, label = "Id")
 	public Long getGeosectorId() {
 		return geosectorId;
 	}
@@ -47,7 +47,7 @@ public final class Geosector implements Entity {
 	 * Récupère la valeur de la propriété 'Sector Label'.
 	 * @return String sectorLabel
 	 */
-	@Field(domain = "DO_LABEL", label = "Sector Label")
+	@Field(domain = "DoLabel", label = "Sector Label")
 	public String getSectorLabel() {
 		return sectorLabel;
 	}

@@ -41,25 +41,13 @@ public final class BasemanagementPAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TK_GET_BASES_SUMMARY.
-	 * @return io.mars.basemanagement.domain.BasesSummary basesSummary
-	*/
-	public io.mars.basemanagement.domain.BasesSummary getBasesSummary() {
-		final Task task = createTaskBuilder("TK_GET_BASES_SUMMARY")
-				.build();
-		return getTaskManager()
-				.execute(task)
-				.getResult();
-	}
-
-	/**
-	 * Execute la tache TK_GET_BASE_OVERVIEW.
+	 * Execute la tache TkGetBaseOverview.
 	 * @param baseId Long 
 	 * @return io.mars.basemanagement.domain.BaseOverview baseOverview
 	*/
 	public io.mars.basemanagement.domain.BaseOverview getBaseOverview(final Long baseId) {
-		final Task task = createTaskBuilder("TK_GET_BASE_OVERVIEW")
-				.addValue("BASE_ID", baseId)
+		final Task task = createTaskBuilder("TkGetBaseOverview")
+				.addValue("baseId", baseId)
 				.build();
 		return getTaskManager()
 				.execute(task)
@@ -67,13 +55,11 @@ public final class BasemanagementPAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TK_GET_EQUIPMENTS_OVERVIEW.
-	 * @param baseId Long 
-	 * @return io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.domain.EquipmentOverview> overview
+	 * Execute la tache TkGetBasesSummary.
+	 * @return io.mars.basemanagement.domain.BasesSummary basesSummary
 	*/
-	public io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.domain.EquipmentOverview> getEquipmentsOverview(final Long baseId) {
-		final Task task = createTaskBuilder("TK_GET_EQUIPMENTS_OVERVIEW")
-				.addValue("BASE_ID", baseId)
+	public io.mars.basemanagement.domain.BasesSummary getBasesSummary() {
+		final Task task = createTaskBuilder("TkGetBasesSummary")
 				.build();
 		return getTaskManager()
 				.execute(task)
@@ -81,13 +67,13 @@ public final class BasemanagementPAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TK_GET_EQUIPMENT_MAINTENANCE_OVERVIEW.
+	 * Execute la tache TkGetEquipmentMaintenanceOverview.
 	 * @param equipmentId Long 
 	 * @return io.mars.basemanagement.domain.EquipmentMaintenanceOverview equipmentMaintenanceOverview
 	*/
 	public io.mars.basemanagement.domain.EquipmentMaintenanceOverview getEquipmentMaintenanceOverview(final Long equipmentId) {
-		final Task task = createTaskBuilder("TK_GET_EQUIPMENT_MAINTENANCE_OVERVIEW")
-				.addValue("EQUIPMENT_ID", equipmentId)
+		final Task task = createTaskBuilder("TkGetEquipmentMaintenanceOverview")
+				.addValue("equipmentId", equipmentId)
 				.build();
 		return getTaskManager()
 				.execute(task)
@@ -95,13 +81,27 @@ public final class BasemanagementPAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TK_LOAD_BASE_INDEX.
+	 * Execute la tache TkGetEquipmentsOverview.
+	 * @param baseId Long 
+	 * @return io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.domain.EquipmentOverview> overview
+	*/
+	public io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.domain.EquipmentOverview> getEquipmentsOverview(final Long baseId) {
+		final Task task = createTaskBuilder("TkGetEquipmentsOverview")
+				.addValue("baseId", baseId)
+				.build();
+		return getTaskManager()
+				.execute(task)
+				.getResult();
+	}
+
+	/**
+	 * Execute la tache TkLoadBaseIndex.
 	 * @param baseIds java.util.List<Long> 
 	 * @return io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.search.BaseIndex> dtcIndex
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.search.BaseIndex> loadBaseIndex(final java.util.List<Long> baseIds) {
-		final Task task = createTaskBuilder("TK_LOAD_BASE_INDEX")
-				.addValue("BASE_IDS", baseIds)
+		final Task task = createTaskBuilder("TkLoadBaseIndex")
+				.addValue("baseIds", baseIds)
 				.build();
 		return getTaskManager()
 				.execute(task)
@@ -109,13 +109,13 @@ public final class BasemanagementPAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TK_LOAD_EQUIPMENT_INDEX.
+	 * Execute la tache TkLoadEquipmentIndex.
 	 * @param equipmentIds java.util.List<Long> 
 	 * @return io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.search.EquipmentIndex> dtcIndex
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.search.EquipmentIndex> loadEquipmentIndex(final java.util.List<Long> equipmentIds) {
-		final Task task = createTaskBuilder("TK_LOAD_EQUIPMENT_INDEX")
-				.addValue("EQUIPMENT_IDS", equipmentIds)
+		final Task task = createTaskBuilder("TkLoadEquipmentIndex")
+				.addValue("equipmentIds", equipmentIds)
 				.build();
 		return getTaskManager()
 				.execute(task)
@@ -123,11 +123,11 @@ public final class BasemanagementPAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TK_SELECT_BASE_ID.
+	 * Execute la tache TkSelectBaseId.
 	 * @return java.util.List<Long> baseIdList
 	*/
 	public java.util.List<Long> selectBaseId() {
-		final Task task = createTaskBuilder("TK_SELECT_BASE_ID")
+		final Task task = createTaskBuilder("TkSelectBaseId")
 				.build();
 		return getTaskManager()
 				.execute(task)
@@ -135,11 +135,11 @@ public final class BasemanagementPAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TK_SELECT_BUSINESS_ID.
+	 * Execute la tache TkSelectBusinessId.
 	 * @return java.util.List<Long> businessIdList
 	*/
 	public java.util.List<Long> selectBusinessId() {
-		final Task task = createTaskBuilder("TK_SELECT_BUSINESS_ID")
+		final Task task = createTaskBuilder("TkSelectBusinessId")
 				.build();
 		return getTaskManager()
 				.execute(task)
@@ -147,11 +147,11 @@ public final class BasemanagementPAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TK_SELECT_GEOSECTOR_ID.
+	 * Execute la tache TkSelectGeosectorId.
 	 * @return java.util.List<Long> geosectorIdList
 	*/
 	public java.util.List<Long> selectGeosectorId() {
-		final Task task = createTaskBuilder("TK_SELECT_GEOSECTOR_ID")
+		final Task task = createTaskBuilder("TkSelectGeosectorId")
 				.build();
 		return getTaskManager()
 				.execute(task)

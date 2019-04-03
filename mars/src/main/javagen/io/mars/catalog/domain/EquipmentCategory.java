@@ -29,7 +29,7 @@ public final class EquipmentCategory implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long equipmentCategoryId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_ID", type = "ID", required = true, label = "Id")
+	@Field(domain = "DoId", type = "ID", required = true, label = "Id")
 	public Long getEquipmentCategoryId() {
 		return equipmentCategoryId;
 	}
@@ -48,7 +48,7 @@ public final class EquipmentCategory implements Entity {
 	 * Récupère la valeur de la propriété 'Equipment Category Label'.
 	 * @return String label
 	 */
-	@Field(domain = "DO_LABEL", label = "Equipment Category Label")
+	@Field(domain = "DoLabel", label = "Equipment Category Label")
 	public String getLabel() {
 		return label;
 	}
@@ -67,7 +67,7 @@ public final class EquipmentCategory implements Entity {
 	 * Récupère la valeur de la propriété 'Equipment category is active'.
 	 * @return Boolean active
 	 */
-	@Field(domain = "DO_YES_NO", label = "Equipment category is active")
+	@Field(domain = "DoYesNo", label = "Equipment category is active")
 	public Boolean getActive() {
 		return active;
 	}

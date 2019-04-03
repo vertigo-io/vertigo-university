@@ -34,7 +34,7 @@ public class EquipmentSearchController extends AbstractVSpringMvcController {
 		final DtListState dtListState = DtListState.of(50, 0);
 		viewContext.publishRef(criteriaKey, "");
 		final FacetedQueryResult<EquipmentIndex, SearchQuery> facetedQueryResult = equipmentServices.searchEquipments("", SelectedFacetValues.empty().build(), dtListState);
-		viewContext.publishFacetedQueryResult(equipments, EquipmentIndexFields.EQUIPMENT_ID, facetedQueryResult, criteriaKey);
+		viewContext.publishFacetedQueryResult(equipments, EquipmentIndexFields.equipmentId, facetedQueryResult, criteriaKey);
 	}
 
 	@PostMapping("/_search")
@@ -44,7 +44,7 @@ public class EquipmentSearchController extends AbstractVSpringMvcController {
 			@ViewAttribute("equipments") final SelectedFacetValues selectedFacetValues,
 			final DtListState dtListState) {
 		final FacetedQueryResult<EquipmentIndex, SearchQuery> facetedQueryResult = equipmentServices.searchEquipments(criteria, selectedFacetValues, dtListState);
-		viewContext.publishFacetedQueryResult(equipments, EquipmentIndexFields.EQUIPMENT_ID, facetedQueryResult, criteriaKey);
+		viewContext.publishFacetedQueryResult(equipments, EquipmentIndexFields.equipmentId, facetedQueryResult, criteriaKey);
 		return viewContext;
 	}
 

@@ -19,14 +19,14 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	public enum Definitions {
 		/** Objet de données Base. */
 		Base(io.mars.basemanagement.domain.Base.class),
-		/** Objet de données BasesSummary. */
-		BasesSummary(io.mars.basemanagement.domain.BasesSummary.class),
 		/** Objet de données BaseIndex. */
 		BaseIndex(io.mars.basemanagement.search.BaseIndex.class),
 		/** Objet de données BaseOverview. */
 		BaseOverview(io.mars.basemanagement.domain.BaseOverview.class),
 		/** Objet de données BaseType. */
 		BaseType(io.mars.basemanagement.domain.BaseType.class),
+		/** Objet de données BasesSummary. */
+		BasesSummary(io.mars.basemanagement.domain.BasesSummary.class),
 		/** Objet de données Business. */
 		Business(io.mars.basemanagement.domain.Business.class),
 		/** Objet de données Equipment. */
@@ -94,452 +94,452 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	 */
 	public enum BaseFields implements DtFieldName<io.mars.basemanagement.domain.Base> {
 		/** Propriété 'Id'. */
-		BASE_ID,
+		baseId,
 		/** Propriété 'Code'. */
-		CODE,
+		code,
 		/** Propriété 'Name'. */
-		NAME,
+		name,
 		/** Propriété 'Health Level'. */
-		HEALTH_LEVEL,
+		healthLevel,
 		/** Propriété 'Creation Date'. */
-		CREATION_DATE,
+		creationDate,
 		/** Propriété 'Description'. */
-		DESCRIPTION,
+		description,
 		/** Propriété 'Geographic Location'. */
-		GEO_LOCATION,
+		geoLocation,
 		/** Propriété 'Current base assets value'. */
-		ASSETS_VALUE,
+		assetsValue,
 		/** Propriété 'Renting Fee'. */
-		RENTING_FEE,
+		rentingFee,
 		/** Propriété 'Tags'. */
-		TAGS,
+		tags,
 		/** Propriété 'Base Type'. */
-		BASE_TYPE_ID,
+		baseTypeId,
 		/** Propriété 'Base Geosector'. */
-		GEOSECTOR_ID	}
-
-	/**
-	 * Enumération des champs de BasesSummary.
-	 */
-	public enum BasesSummaryFields implements DtFieldName<io.mars.basemanagement.domain.BasesSummary> {
-		/** Propriété 'Bases count'. */
-		BASE_COUNT,
-		/** Propriété 'Name'. */
-		BASE_MEAN_HEALTH,
-		/** Propriété 'Health Level'. */
-		OPENED_TICKETS,
-		/** Propriété 'Equipment Health'. */
-		ONLINE_EQUIPMENT_PERCENT	}
+		geosectorId	}
 
 	/**
 	 * Enumération des champs de BaseIndex.
 	 */
 	public enum BaseIndexFields implements DtFieldName<io.mars.basemanagement.search.BaseIndex> {
 		/** Propriété 'id'. */
-		BASE_ID,
+		baseId,
 		/** Propriété 'Name'. */
-		NAME,
+		name,
 		/** Propriété 'Code'. */
-		CODE,
+		code,
 		/** Propriété 'Creation Date'. */
-		CREATION_DATE,
+		creationDate,
 		/** Propriété 'Tags'. */
-		TAGS,
+		tags,
 		/** Propriété 'Type'. */
-		BASE_TYPE_LABEL	}
+		baseTypeLabel	}
 
 	/**
 	 * Enumération des champs de BaseOverview.
 	 */
 	public enum BaseOverviewFields implements DtFieldName<io.mars.basemanagement.domain.BaseOverview> {
 		/** Propriété 'Equipments count'. */
-		EQUIPMENT_COUNT,
+		equipmentCount,
 		/** Propriété 'Open tickets'. */
-		OPENED_TICKETS,
+		openedTickets,
 		/** Propriété 'Work Orders in progress'. */
-		WORK_ORDERS_INPROGRESS	}
+		workOrdersInprogress	}
 
 	/**
 	 * Enumération des champs de BaseType.
 	 */
 	public enum BaseTypeFields implements DtFieldName<io.mars.basemanagement.domain.BaseType> {
 		/** Propriété 'Id'. */
-		BASE_TYPE_ID,
+		baseTypeId,
 		/** Propriété 'Base Type Label'. */
-		LABEL	}
+		label	}
+
+	/**
+	 * Enumération des champs de BasesSummary.
+	 */
+	public enum BasesSummaryFields implements DtFieldName<io.mars.basemanagement.domain.BasesSummary> {
+		/** Propriété 'Bases count'. */
+		baseCount,
+		/** Propriété 'Name'. */
+		baseMeanHealth,
+		/** Propriété 'Health Level'. */
+		openedTickets,
+		/** Propriété 'Equipment Health'. */
+		onlineEquipmentPercent	}
 
 	/**
 	 * Enumération des champs de Business.
 	 */
 	public enum BusinessFields implements DtFieldName<io.mars.basemanagement.domain.Business> {
 		/** Propriété 'Id'. */
-		BUSINESS_ID,
+		businessId,
 		/** Propriété 'Name'. */
-		NAME,
+		name,
 		/** Propriété 'Icon'. */
-		ICON	}
+		icon	}
 
 	/**
 	 * Enumération des champs de Equipment.
 	 */
 	public enum EquipmentFields implements DtFieldName<io.mars.basemanagement.domain.Equipment> {
 		/** Propriété 'Id'. */
-		EQUIPMENT_ID,
+		equipmentId,
 		/** Propriété 'Name'. */
-		NAME,
+		name,
 		/** Propriété 'Code'. */
-		CODE,
+		code,
 		/** Propriété 'Health Level'. */
-		HEALTH_LEVEL,
+		healthLevel,
 		/** Propriété 'Date of purchase'. */
-		PURCHASE_DATE,
+		purchaseDate,
 		/** Propriété 'Description'. */
-		DESCRIPTION,
+		description,
 		/** Propriété 'Tags'. */
-		TAGS,
+		tags,
 		/** Propriété 'Geographic Location'. */
-		GEO_LOCATION,
+		geoLocation,
 		/** Propriété 'Renting Fee'. */
-		RENTING_FEE,
+		rentingFee,
 		/** Propriété 'Current equipment value'. */
-		EQUIPMENT_VALUE,
+		equipmentValue,
 		/** Propriété 'Base'. */
-		BASE_ID,
+		baseId,
 		/** Propriété 'Equipment Geosector'. */
-		GEOSECTOR_ID,
+		geosectorId,
 		/** Propriété 'Business'. */
-		BUSINESS_ID,
+		businessId,
 		/** Propriété 'Equipment Type'. */
-		EQUIPMENT_TYPE_ID	}
+		equipmentTypeId	}
 
 	/**
 	 * Enumération des champs de EquipmentCategory.
 	 */
 	public enum EquipmentCategoryFields implements DtFieldName<io.mars.catalog.domain.EquipmentCategory> {
 		/** Propriété 'Id'. */
-		EQUIPMENT_CATEGORY_ID,
+		equipmentCategoryId,
 		/** Propriété 'Equipment Category Label'. */
-		LABEL,
+		label,
 		/** Propriété 'Equipment category is active'. */
-		ACTIVE	}
+		active	}
 
 	/**
 	 * Enumération des champs de EquipmentFeature.
 	 */
 	public enum EquipmentFeatureFields implements DtFieldName<io.mars.basemanagement.domain.EquipmentFeature> {
 		/** Propriété 'Id'. */
-		EQUIPMENT_FEATURE_ID,
+		equipmentFeatureId,
 		/** Propriété 'Name'. */
-		NAME,
+		name,
 		/** Propriété 'Equipment'. */
-		EQUIPMENT_ID	}
+		equipmentId	}
 
 	/**
 	 * Enumération des champs de EquipmentIndex.
 	 */
 	public enum EquipmentIndexFields implements DtFieldName<io.mars.basemanagement.search.EquipmentIndex> {
 		/** Propriété 'Id'. */
-		EQUIPMENT_ID,
+		equipmentId,
 		/** Propriété 'Name'. */
-		NAME,
+		name,
 		/** Propriété 'Code'. */
-		CODE,
+		code,
 		/** Propriété 'Date of purchase'. */
-		PURCHASE_DATE,
+		purchaseDate,
 		/** Propriété 'Description'. */
-		DESCRIPTION,
+		description,
 		/** Propriété 'Tags'. */
-		TAGS,
+		tags,
 		/** Propriété 'Type'. */
-		EQUIPMENT_TYPE_NAME,
+		equipmentTypeName,
 		/** Propriété 'Category'. */
-		EQUIPMENT_CATEGORY_NAME,
+		equipmentCategoryName,
 		/** Propriété 'ALL_TEXT'. */
-		ALL_TEXT	}
+		allText	}
 
 	/**
 	 * Enumération des champs de EquipmentMaintenanceOverview.
 	 */
 	public enum EquipmentMaintenanceOverviewFields implements DtFieldName<io.mars.basemanagement.domain.EquipmentMaintenanceOverview> {
 		/** Propriété 'Open tickets'. */
-		OPENED_TICKETS,
+		openedTickets,
 		/** Propriété 'Work Orders in progress'. */
-		WORK_ORDERS_INPROGRESS	}
+		workOrdersInprogress	}
 
 	/**
 	 * Enumération des champs de EquipmentOverview.
 	 */
 	public enum EquipmentOverviewFields implements DtFieldName<io.mars.basemanagement.domain.EquipmentOverview> {
 		/** Propriété 'Business Id'. */
-		BUSINESS_ID,
+		businessId,
 		/** Propriété 'Count by business'. */
-		COUNT,
+		count,
 		/** Propriété 'Business'. */
-		BUSINESS_NAME,
+		businessName,
 		/** Propriété 'Business'. */
-		BUSINESS_ICON,
+		businessIcon,
 		/** Propriété 'Ok count'. */
-		OK_COUNT,
+		okCount,
 		/** Propriété 'Down count'. */
-		DOWN_COUNT	}
+		downCount	}
 
 	/**
 	 * Enumération des champs de EquipmentType.
 	 */
 	public enum EquipmentTypeFields implements DtFieldName<io.mars.catalog.domain.EquipmentType> {
 		/** Propriété 'Id'. */
-		EQUIPMENT_TYPE_ID,
+		equipmentTypeId,
 		/** Propriété 'Equipment Type Label'. */
-		LABEL,
+		label,
 		/** Propriété 'Equipment type is active'. */
-		ACTIVE,
+		active,
 		/** Propriété 'Equipment Category'. */
-		EQUIPMENT_CATEGORY_ID	}
+		equipmentCategoryId	}
 
 	/**
 	 * Enumération des champs de Geosector.
 	 */
 	public enum GeosectorFields implements DtFieldName<io.mars.basemanagement.domain.Geosector> {
 		/** Propriété 'Id'. */
-		GEOSECTOR_ID,
+		geosectorId,
 		/** Propriété 'Sector Label'. */
-		SECTOR_LABEL	}
+		sectorLabel	}
 
 	/**
 	 * Enumération des champs de Groups.
 	 */
 	public enum GroupsFields implements DtFieldName<io.mars.hr.domain.Groups> {
 		/** Propriété 'Id'. */
-		GROUP_ID,
+		groupId,
 		/** Propriété 'Name'. */
-		NAME	}
+		name	}
 
 	/**
 	 * Enumération des champs de MediaFileInfo.
 	 */
 	public enum MediaFileInfoFields implements DtFieldName<io.mars.common.domain.tools.file.MediaFileInfo> {
 		/** Propriété 'Id'. */
-		FIL_ID,
+		filId,
 		/** Propriété 'Name'. */
-		FILE_NAME,
+		fileName,
 		/** Propriété 'MimeType'. */
-		MIME_TYPE,
+		mimeType,
 		/** Propriété 'Size'. */
-		LENGTH,
+		length,
 		/** Propriété 'Modification Date'. */
-		LAST_MODIFIED,
+		lastModified,
 		/** Propriété 'path'. */
-		FILE_PATH	}
+		filePath	}
 
 	/**
 	 * Enumération des champs de Mission.
 	 */
 	public enum MissionFields implements DtFieldName<io.mars.hr.domain.Mission> {
 		/** Propriété 'Id'. */
-		MISSION_ID,
+		missionId,
 		/** Propriété 'Role'. */
-		ROLE,
+		role,
 		/** Propriété 'Person'. */
-		PERSON_ID,
+		personId,
 		/** Propriété 'Base'. */
-		BASE_ID,
+		baseId,
 		/** Propriété 'Business'. */
-		BUSINESS_ID	}
+		businessId	}
 
 	/**
 	 * Enumération des champs de MissionDisplay.
 	 */
 	public enum MissionDisplayFields implements DtFieldName<io.mars.hr.domain.MissionDisplay> {
 		/** Propriété 'Id'. */
-		MISSION_ID,
+		missionId,
 		/** Propriété 'Role'. */
-		ROLE,
+		role,
 		/** Propriété 'Base'. */
-		BASE_NAME,
+		baseName,
 		/** Propriété 'Business'. */
-		BUSINESS_NAME	}
+		businessName	}
 
 	/**
 	 * Enumération des champs de OpendataSet.
 	 */
 	public enum OpendataSetFields implements DtFieldName<io.mars.opendata.domain.OpendataSet> {
 		/** Propriété 'Id'. */
-		ODS_ID,
+		odsId,
 		/** Propriété 'Code'. */
-		CODE,
+		code,
 		/** Propriété 'Title'. */
-		TITLE,
+		title,
 		/** Propriété 'Description'. */
-		DESCRIPTION,
+		description,
 		/** Propriété 'Service Endpoint URL'. */
-		END_POINT_URL,
+		endPointUrl,
 		/** Propriété 'Picture'. */
-		PICTUREFILE_ID,
+		picturefileId,
 		/** Propriété 'Tags'. */
-		TAGS,
+		tags,
 		/** Propriété 'Opendata Set Status'. */
-		OPENDATA_SET_STATUS_ID	}
+		opendataSetStatusId	}
 
 	/**
 	 * Enumération des champs de OpendataSetStatus.
 	 */
 	public enum OpendataSetStatusFields implements DtFieldName<io.mars.opendata.domain.OpendataSetStatus> {
 		/** Propriété 'Id'. */
-		OPENDATA_SET_STATUS_ID,
+		opendataSetStatusId,
 		/** Propriété 'Status Label'. */
-		LABEL	}
+		label	}
 
 	/**
 	 * Enumération des champs de Person.
 	 */
 	public enum PersonFields implements DtFieldName<io.mars.hr.domain.Person> {
 		/** Propriété 'Id'. */
-		PERSON_ID,
+		personId,
 		/** Propriété 'First Name'. */
-		FIRST_NAME,
+		firstName,
 		/** Propriété 'Last Name'. */
-		LAST_NAME,
+		lastName,
 		/** Propriété 'E-mail'. */
-		EMAIL,
+		email,
 		/** Propriété 'Picture'. */
-		PICTUREFILE_ID,
+		picturefileId,
 		/** Propriété 'Picture'. */
-		PICTUREFILE_ID_TMP,
+		picturefileIdTmp,
 		/** Propriété 'Tags'. */
-		TAGS,
+		tags,
 		/** Propriété 'Date hired'. */
-		DATE_HIRED,
+		dateHired,
 		/** Propriété 'Full name'. */
-		FULL_NAME,
+		fullName,
 		/** Propriété 'Group'. */
-		GROUP_ID	}
+		groupId	}
 
 	/**
 	 * Enumération des champs de Picture.
 	 */
 	public enum PictureFields implements DtFieldName<io.mars.basemanagement.domain.Picture> {
 		/** Propriété 'Id'. */
-		PICTURE_ID,
+		pictureId,
 		/** Propriété 'Id'. */
-		PICTUREFILE_ID,
+		picturefileId,
 		/** Propriété 'Base'. */
-		BASE_ID	}
+		baseId	}
 
 	/**
 	 * Enumération des champs de Supplier.
 	 */
 	public enum SupplierFields implements DtFieldName<io.mars.catalog.domain.Supplier> {
 		/** Propriété 'Siren'. */
-		SIREN,
+		siren,
 		/** Propriété 'Broadcast status'. */
-		STATUT_DIFFUSION,
+		statutDiffusion,
 		/** Propriété 'Creation date'. */
-		DATE_CREATION,
+		dateCreation,
 		/** Propriété 'Sex'. */
-		SEXE,
+		sexe,
 		/** Propriété 'Firstname'. */
-		PRENOM_USUEL,
+		prenomUsuel,
 		/** Propriété 'Workforce range'. */
-		TRANCHE_EFFECTIFS,
+		trancheEffectifs,
 		/** Propriété 'Last treatment'. */
-		DATE_DERNIER_TRAITEMENT,
+		dateDernierTraitement,
 		/** Propriété 'Number of periods'. */
-		NOMBRE_PERIODES,
+		nombrePeriodes,
 		/** Propriété 'Business category'. */
-		CATEGORIE_ENTREPRISE,
+		categorieEntreprise,
 		/** Propriété 'Start date'. */
-		DATE_DEBUT,
+		dateDebut,
 		/** Propriété 'Administrative State'. */
-		ETAT_ADMINISTRATIF,
+		etatAdministratif,
 		/** Propriété 'Name'. */
-		NOM,
+		nom,
 		/** Propriété 'Use name'. */
-		NOM_USAGE,
+		nomUsage,
 		/** Propriété 'Denomination'. */
-		DENOMINATION,
+		denomination,
 		/** Propriété 'Legal category'. */
-		CATEGORIE_JURIDIQUE,
+		categorieJuridique,
 		/** Propriété 'Core business'. */
-		ACTIVITE_PRINCIPALE,
+		activitePrincipale,
 		/** Propriété 'Business nomenclature'. */
-		NOMENCLATURE_ACTIVITE,
+		nomenclatureActivite,
 		/** Propriété 'Nic Siege'. */
-		NIC_SIEGE,
+		nicSiege,
 		/** Propriété 'Employer'. */
-		CARACTERE_EMPLOYEUR	}
+		caractereEmployeur	}
 
 	/**
 	 * Enumération des champs de Tag.
 	 */
 	public enum TagFields implements DtFieldName<io.mars.basemanagement.domain.Tag> {
 		/** Propriété 'Id'. */
-		TAG_ID,
+		tagId,
 		/** Propriété 'Label'. */
-		LABEL	}
+		label	}
 
 	/**
 	 * Enumération des champs de Ticket.
 	 */
 	public enum TicketFields implements DtFieldName<io.mars.maintenance.domain.Ticket> {
 		/** Propriété 'Id'. */
-		TICKET_ID,
+		ticketId,
 		/** Propriété 'Number'. */
-		CODE,
+		code,
 		/** Propriété 'Title'. */
-		TITLE,
+		title,
 		/** Propriété 'Description'. */
-		DESCRIPTION,
+		description,
 		/** Propriété 'Creation Date'. */
-		DATE_CREATED,
+		dateCreated,
 		/** Propriété 'Closing Date'. */
-		DATE_CLOSED,
+		dateClosed,
 		/** Propriété 'Ticket Status'. */
-		TICKET_STATUS_ID,
+		ticketStatusId,
 		/** Propriété 'Equipment'. */
-		EQUIPMENT_ID	}
+		equipmentId	}
 
 	/**
 	 * Enumération des champs de TicketStatus.
 	 */
 	public enum TicketStatusFields implements DtFieldName<io.mars.maintenance.domain.TicketStatus> {
 		/** Propriété 'Id'. */
-		TICKET_STATUS_ID,
+		ticketStatusId,
 		/** Propriété 'Status Label'. */
-		LABEL	}
+		label	}
 
 	/**
 	 * Enumération des champs de WorkOrder.
 	 */
 	public enum WorkOrderFields implements DtFieldName<io.mars.maintenance.domain.WorkOrder> {
 		/** Propriété 'Id'. */
-		WO_ID,
+		woId,
 		/** Propriété 'Code'. */
-		CODE,
+		code,
 		/** Propriété 'Number'. */
-		TICKET_CODE,
+		ticketCode,
 		/** Propriété 'Name'. */
-		NAME,
+		name,
 		/** Propriété 'Description'. */
-		DESCRIPTION,
+		description,
 		/** Propriété 'Creation Date'. */
-		DATE_CREATED,
+		dateCreated,
 		/** Propriété 'Closing Date'. */
-		DATE_CLOSED,
+		dateClosed,
 		/** Propriété 'Due Date'. */
-		DUE_DATE,
+		dueDate,
 		/** Propriété 'Ticket'. */
-		TICKET_ID,
+		ticketId,
 		/** Propriété 'Work Order Status'. */
-		WORK_ORDER_STATUS_ID	}
+		workOrderStatusId	}
 
 	/**
 	 * Enumération des champs de WorkOrderStatus.
 	 */
 	public enum WorkOrderStatusFields implements DtFieldName<io.mars.maintenance.domain.WorkOrderStatus> {
 		/** Propriété 'Id'. */
-		WORK_ORDER_STATUS_ID,
+		workOrderStatusId,
 		/** Propriété 'Status Label'. */
-		LABEL	}
+		label	}
 
 	/** {@inheritDoc} */
 	@Override

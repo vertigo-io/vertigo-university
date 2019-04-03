@@ -29,14 +29,14 @@ public final class Base implements KeyConcept {
 	private String tags;
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_BASE_BASETYPE",
-			fkFieldName = "BASE_TYPE_ID",
-			primaryDtDefinitionName = "DT_BASE_TYPE",
+			name = "ABaseBasetype",
+			fkFieldName = "baseTypeId",
+			primaryDtDefinitionName = "DtBaseType",
 			primaryIsNavigable = true,
 			primaryRole = "BaseType",
 			primaryLabel = "Base Type",
 			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_BASE",
+			foreignDtDefinitionName = "DtBase",
 			foreignIsNavigable = false,
 			foreignRole = "Base",
 			foreignLabel = "Base",
@@ -44,14 +44,14 @@ public final class Base implements KeyConcept {
 	private final EnumVAccessor<io.mars.basemanagement.domain.BaseType, io.mars.basemanagement.domain.BaseTypeEnum> baseTypeIdAccessor = new EnumVAccessor<>(io.mars.basemanagement.domain.BaseType.class, "BaseType", io.mars.basemanagement.domain.BaseTypeEnum.class);
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_BASE_GEOSECTOR",
-			fkFieldName = "GEOSECTOR_ID",
-			primaryDtDefinitionName = "DT_GEOSECTOR",
+			name = "ABaseGeosector",
+			fkFieldName = "geosectorId",
+			primaryDtDefinitionName = "DtGeosector",
 			primaryIsNavigable = true,
 			primaryRole = "Geosector",
 			primaryLabel = "Base Geosector",
 			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_BASE",
+			foreignDtDefinitionName = "DtBase",
 			foreignIsNavigable = false,
 			foreignRole = "Base",
 			foreignLabel = "Base",
@@ -59,19 +59,19 @@ public final class Base implements KeyConcept {
 	private final VAccessor<io.mars.basemanagement.domain.Geosector> geosectorIdAccessor = new VAccessor<>(io.mars.basemanagement.domain.Geosector.class, "Geosector");
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_BASE_PICTURE",
-			fkFieldName = "BASE_ID",
-			primaryDtDefinitionName = "DT_BASE",
+			name = "ABasePicture",
+			fkFieldName = "baseId",
+			primaryDtDefinitionName = "DtBase",
 			primaryIsNavigable = false,
 			primaryRole = "Base",
 			primaryLabel = "Base",
 			primaryMultiplicity = "1..1",
-			foreignDtDefinitionName = "DT_PICTURE",
+			foreignDtDefinitionName = "DtPicture",
 			foreignIsNavigable = true,
 			foreignRole = "Pictures",
 			foreignLabel = "Base Pictures",
 			foreignMultiplicity = "0..*")
-	private final ListVAccessor<io.mars.basemanagement.domain.Picture> picturesAccessor = new ListVAccessor<>(this, "A_BASE_PICTURE", "Pictures");
+	private final ListVAccessor<io.mars.basemanagement.domain.Picture> picturesAccessor = new ListVAccessor<>(this, "ABasePicture", "Pictures");
 
 	/** {@inheritDoc} */
 	@Override
@@ -84,7 +84,7 @@ public final class Base implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long baseId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_ID", type = "ID", required = true, label = "Id")
+	@Field(domain = "DoId", type = "ID", required = true, label = "Id")
 	public Long getBaseId() {
 		return baseId;
 	}
@@ -103,7 +103,7 @@ public final class Base implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Code'.
 	 * @return String code
 	 */
-	@Field(domain = "DO_CODE", label = "Code")
+	@Field(domain = "DoCode", label = "Code")
 	public String getCode() {
 		return code;
 	}
@@ -122,7 +122,7 @@ public final class Base implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Name'.
 	 * @return String name
 	 */
-	@Field(domain = "DO_LABEL", label = "Name")
+	@Field(domain = "DoLabel", label = "Name")
 	public String getName() {
 		return name;
 	}
@@ -141,7 +141,7 @@ public final class Base implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Health Level'.
 	 * @return Integer healthLevel
 	 */
-	@Field(domain = "DO_HEALTH", label = "Health Level")
+	@Field(domain = "DoHealth", label = "Health Level")
 	public Integer getHealthLevel() {
 		return healthLevel;
 	}
@@ -160,7 +160,7 @@ public final class Base implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Creation Date'.
 	 * @return LocalDate creationDate
 	 */
-	@Field(domain = "DO_LOCALDATE", label = "Creation Date")
+	@Field(domain = "DoLocaldate", label = "Creation Date")
 	public java.time.LocalDate getCreationDate() {
 		return creationDate;
 	}
@@ -179,7 +179,7 @@ public final class Base implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Description'.
 	 * @return String description
 	 */
-	@Field(domain = "DO_DESCRIPTION", label = "Description")
+	@Field(domain = "DoDescription", label = "Description")
 	public String getDescription() {
 		return description;
 	}
@@ -198,7 +198,7 @@ public final class Base implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Geographic Location'.
 	 * @return String geoLocation
 	 */
-	@Field(domain = "DO_LABEL", label = "Geographic Location")
+	@Field(domain = "DoLabel", label = "Geographic Location")
 	public String getGeoLocation() {
 		return geoLocation;
 	}
@@ -217,7 +217,7 @@ public final class Base implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Current base assets value'.
 	 * @return BigDecimal assetsValue
 	 */
-	@Field(domain = "DO_CURRENCY", label = "Current base assets value")
+	@Field(domain = "DoCurrency", label = "Current base assets value")
 	public java.math.BigDecimal getAssetsValue() {
 		return assetsValue;
 	}
@@ -236,7 +236,7 @@ public final class Base implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Renting Fee'.
 	 * @return BigDecimal rentingFee
 	 */
-	@Field(domain = "DO_CURRENCY", label = "Renting Fee")
+	@Field(domain = "DoCurrency", label = "Renting Fee")
 	public java.math.BigDecimal getRentingFee() {
 		return rentingFee;
 	}
@@ -255,7 +255,7 @@ public final class Base implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Tags'.
 	 * @return String tags
 	 */
-	@Field(domain = "DO_MULTIPLE_IDS", label = "Tags")
+	@Field(domain = "DoMultipleIds", label = "Tags")
 	public String getTags() {
 		return tags;
 	}
@@ -274,7 +274,7 @@ public final class Base implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Base Type'.
 	 * @return String baseTypeId
 	 */
-	@Field(domain = "DO_CODE", type = "FOREIGN_KEY", label = "Base Type")
+	@Field(domain = "DoCode", type = "FOREIGN_KEY", label = "Base Type")
 	public String getBaseTypeId() {
 		return (String) baseTypeIdAccessor.getId();
 	}
@@ -293,7 +293,7 @@ public final class Base implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Base Geosector'.
 	 * @return Long geosectorId
 	 */
-	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Base Geosector")
+	@Field(domain = "DoId", type = "FOREIGN_KEY", label = "Base Geosector")
 	public Long getGeosectorId() {
 		return (Long) geosectorIdAccessor.getId();
 	}

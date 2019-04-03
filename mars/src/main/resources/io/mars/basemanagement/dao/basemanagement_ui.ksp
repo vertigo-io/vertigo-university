@@ -2,7 +2,7 @@ package io.mars.basemanagement
 
 
 
-create Task TK_GET_EQUIPMENTS_OVERVIEW {  
+create Task TkGetEquipmentsOverview {  
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
     request : "
             select 
@@ -14,14 +14,14 @@ create Task TK_GET_EQUIPMENTS_OVERVIEW {
             	sum(case when equ.health_level < 30 then 1 else 0 end) as down_count
 			from equipment equ
 				join business bus on bus.business_id = equ.business_id 
-			where equ.base_id = #BASE_ID#
+			where equ.base_id = #baseId#
 			group by business_name, bus.business_id
              "
-    attribute BASE_ID     {domain : DO_ID         		required:"true"  inOut :"in"}
-    attribute OVERVIEW     {domain : DO_DT_EQUIPMENT_OVERVIEW_DTC    required:"true"  inOut :"out"}
+    attribute baseId     {domain : DoId         		required:"true"  inOut :"in"}
+    attribute overview     {domain : DoDtEquipmentOverviewDtc    required:"true"  inOut :"out"}
 }
 
-create Task TK_GET_BASES_SUMMARY {  
+create Task TkGetBasesSummary {  
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
     request : "
             select 
@@ -30,29 +30,29 @@ create Task TK_GET_BASES_SUMMARY {
 				(select count(*) from ticket tic where tic.ticket_status_id = 'OPEN' or tic.ticket_status_id = 'ASSIGNED') as opened_tickets,
 				(select sum(case when health_level > 30 then 1.0 else 0.0 end) / count(*) * 100 from equipment) as online_equipment_percent;
              "
-    attribute BASES_SUMMARY     {domain : DO_DT_BASES_SUMMARY_DTO    required:"true"  inOut :"out"}
+    attribute basesSummary     {domain : DoDtBasesSummaryDto    required:"true"  inOut :"out"}
 }
 
-create Task TK_GET_BASE_OVERVIEW {  
+create Task TkGetBaseOverview {  
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
     request : "
            select 
-				(select count(*) from equipment equ where equ.base_id = #BASE_ID#) as equipment_count,
-				(select count(*) from ticket tic join equipment equ on equ.equipment_id = tic.equipment_id where equ.base_id = #BASE_ID# and ( tic.ticket_status_id = 'OPEN' or tic.ticket_status_id = 'ASSIGNED')) as opened_tickets,
-				(select count(*) from work_order wor join ticket tic on tic.ticket_id = wor.ticket_id join equipment equ on equ.equipment_id = tic.equipment_id where equ.base_id = #BASE_ID#  and wor.work_order_status_id = 'INPROGRESS') as work_orders_inprogress
+				(select count(*) from equipment equ where equ.base_id = #baseId#) as equipment_count,
+				(select count(*) from ticket tic join equipment equ on equ.equipment_id = tic.equipment_id where equ.base_id = #baseId# and ( tic.ticket_status_id = 'OPEN' or tic.ticket_status_id = 'ASSIGNED')) as opened_tickets,
+				(select count(*) from work_order wor join ticket tic on tic.ticket_id = wor.ticket_id join equipment equ on equ.equipment_id = tic.equipment_id where equ.base_id = #baseId#  and wor.work_order_status_id = 'INPROGRESS') as work_orders_inprogress
              "
-    attribute BASE_ID     		{domain : DO_ID    						required:"true"  inOut :"in"}
-    attribute BASE_OVERVIEW     {domain : DO_DT_BASE_OVERVIEW_DTO    	required:"true"  inOut :"out"}
+    attribute baseId     		{domain : DoId    						required:"true"  inOut :"in"}
+    attribute baseOverview     {domain : DoDtBaseOverviewDto    	required:"true"  inOut :"out"}
 }
 
 
-create Task TK_GET_EQUIPMENT_MAINTENANCE_OVERVIEW {  
+create Task TkGetEquipmentMaintenanceOverview {  
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
     request : "
            select 
-				(select count(*) from ticket tic where tic.equipment_id = #EQUIPMENT_ID# and ( tic.ticket_status_id = 'OPEN' or tic.ticket_status_id = 'ASSIGNED')) as opened_tickets,
-				(select count(*) from work_order wor join ticket tic on tic.ticket_id = wor.ticket_id join equipment equ on equ.equipment_id = #EQUIPMENT_ID#  and wor.work_order_status_id = 'INPROGRESS') as work_orders_inprogress
+				(select count(*) from ticket tic where tic.equipment_id = #equipmentId# and ( tic.ticket_status_id = 'OPEN' or tic.ticket_status_id = 'ASSIGNED')) as opened_tickets,
+				(select count(*) from work_order wor join ticket tic on tic.ticket_id = wor.ticket_id join equipment equ on equ.equipment_id = #equipmentId#  and wor.work_order_status_id = 'INPROGRESS') as work_orders_inprogress
              "
-    attribute EQUIPMENT_ID     		{domain : DO_ID    						required:"true"  inOut :"in"}
-    attribute EQUIPMENT_MAINTENANCE_OVERVIEW     {domain : DO_DT_EQUIPMENT_MAINTENANCE_OVERVIEW_DTO    	required:"true"  inOut :"out"}
+    attribute equipmentId     		{domain : DoId    						required:"true"  inOut :"in"}
+    attribute equipmentMaintenanceOverview     {domain : DoDtEquipmentMaintenanceOverviewDto    	required:"true"  inOut :"out"}
 }

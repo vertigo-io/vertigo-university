@@ -28,7 +28,7 @@ public final class TicketStatus implements DtStaticMasterData {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return String ticketStatusId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_CODE", type = "ID", required = true, label = "Id")
+	@Field(domain = "DoCode", type = "ID", required = true, label = "Id")
 	public String getTicketStatusId() {
 		return ticketStatusId;
 	}
@@ -47,7 +47,7 @@ public final class TicketStatus implements DtStaticMasterData {
 	 * Récupère la valeur de la propriété 'Status Label'.
 	 * @return String label
 	 */
-	@Field(domain = "DO_LABEL", label = "Status Label")
+	@Field(domain = "DoLabel", label = "Status Label")
 	public String getLabel() {
 		return label;
 	}

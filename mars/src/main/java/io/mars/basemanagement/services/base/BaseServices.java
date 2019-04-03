@@ -162,7 +162,7 @@ public class BaseServices implements Component, Activeable {
 	}
 
 	public DtList<Picture> getPictures(final Long baseId) {
-		return pictureDAO.findAll(Criterions.isEqualTo(PictureFields.BASE_ID, baseId), 20);
+		return pictureDAO.findAll(Criterions.isEqualTo(PictureFields.baseId, baseId), 20);
 	}
 
 	private void sendNotificationToAll(final Notification notification) {

@@ -58,14 +58,14 @@ public class EquipmentGenerator implements Component {
 		equipmentCategoryDAO.create(createEquipmentCategory(true, "Vehicle"));
 	}
 
-	private void consume(String csvFilePath, final String[] record) {
+	private void consume(final String csvFilePath, final String[] record) {
 		Assertion.checkArgument(record.length == EQUIPMENT_TYPE_CSV_FILE_COLUMN_NUMBER,
 				"CSV File {0} Format not suitable for Equipment Types", csvFilePath);
 		//---
 		final Boolean enabled = Boolean.valueOf(record[0]);
 		final String nextCategoryLabel = record[1];
 		final String equipmentTypeName = record[2];
-		final EquipmentCategory equipmentCategory = equipmentCategoryDAO.find(Criterions.isEqualTo(EquipmentCategoryFields.LABEL, nextCategoryLabel));
+		final EquipmentCategory equipmentCategory = equipmentCategoryDAO.find(Criterions.isEqualTo(EquipmentCategoryFields.label, nextCategoryLabel));
 
 		equipmentTypeDAO.create(createEquipmentType(enabled, equipmentTypeName, equipmentCategory));
 	}

@@ -19,14 +19,14 @@ public final class Mission implements Entity {
 	private String role;
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_PERSON_MISSION",
-			fkFieldName = "PERSON_ID",
-			primaryDtDefinitionName = "DT_PERSON",
+			name = "APersonMission",
+			fkFieldName = "personId",
+			primaryDtDefinitionName = "DtPerson",
 			primaryIsNavigable = true,
 			primaryRole = "Person",
 			primaryLabel = "Person",
 			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_MISSION",
+			foreignDtDefinitionName = "DtMission",
 			foreignIsNavigable = false,
 			foreignRole = "Mission",
 			foreignLabel = "Mission",
@@ -34,14 +34,14 @@ public final class Mission implements Entity {
 	private final VAccessor<io.mars.hr.domain.Person> personIdAccessor = new VAccessor<>(io.mars.hr.domain.Person.class, "Person");
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_MISSION_BASE",
-			fkFieldName = "BASE_ID",
-			primaryDtDefinitionName = "DT_BASE",
+			name = "AMissionBase",
+			fkFieldName = "baseId",
+			primaryDtDefinitionName = "DtBase",
 			primaryIsNavigable = true,
 			primaryRole = "Base",
 			primaryLabel = "Base",
 			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_MISSION",
+			foreignDtDefinitionName = "DtMission",
 			foreignIsNavigable = false,
 			foreignRole = "Mission",
 			foreignLabel = "Mission",
@@ -49,14 +49,14 @@ public final class Mission implements Entity {
 	private final VAccessor<io.mars.basemanagement.domain.Base> baseIdAccessor = new VAccessor<>(io.mars.basemanagement.domain.Base.class, "Base");
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_BUSINESS_MISSION",
-			fkFieldName = "BUSINESS_ID",
-			primaryDtDefinitionName = "DT_BUSINESS",
+			name = "ABusinessMission",
+			fkFieldName = "businessId",
+			primaryDtDefinitionName = "DtBusiness",
 			primaryIsNavigable = true,
 			primaryRole = "Business",
 			primaryLabel = "Business",
 			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_MISSION",
+			foreignDtDefinitionName = "DtMission",
 			foreignIsNavigable = false,
 			foreignRole = "BusinessMissions",
 			foreignLabel = "Business Missions",
@@ -74,7 +74,7 @@ public final class Mission implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long missionId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_ID", type = "ID", required = true, label = "Id")
+	@Field(domain = "DoId", type = "ID", required = true, label = "Id")
 	public Long getMissionId() {
 		return missionId;
 	}
@@ -93,7 +93,7 @@ public final class Mission implements Entity {
 	 * Récupère la valeur de la propriété 'Role'.
 	 * @return String role
 	 */
-	@Field(domain = "DO_CODE", label = "Role")
+	@Field(domain = "DoCode", label = "Role")
 	public String getRole() {
 		return role;
 	}
@@ -112,7 +112,7 @@ public final class Mission implements Entity {
 	 * Récupère la valeur de la propriété 'Person'.
 	 * @return Long personId
 	 */
-	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Person")
+	@Field(domain = "DoId", type = "FOREIGN_KEY", label = "Person")
 	public Long getPersonId() {
 		return (Long) personIdAccessor.getId();
 	}
@@ -131,7 +131,7 @@ public final class Mission implements Entity {
 	 * Récupère la valeur de la propriété 'Base'.
 	 * @return Long baseId
 	 */
-	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Base")
+	@Field(domain = "DoId", type = "FOREIGN_KEY", label = "Base")
 	public Long getBaseId() {
 		return (Long) baseIdAccessor.getId();
 	}
@@ -150,7 +150,7 @@ public final class Mission implements Entity {
 	 * Récupère la valeur de la propriété 'Business'.
 	 * @return Long businessId
 	 */
-	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Business")
+	@Field(domain = "DoId", type = "FOREIGN_KEY", label = "Business")
 	public Long getBusinessId() {
 		return (Long) businessIdAccessor.getId();
 	}

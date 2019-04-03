@@ -1,22 +1,22 @@
 package io.mars.maintenance
 
 
-create Task TK_GET_LAST_TICKETS_BY_BASE_ID {  
+create Task TkGetLastTicketsByBaseId {  
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
     request : "
             select 
             	tic.*
 			from ticket tic
 			join equipment equ on equ.equipment_id = tic.equipment_id
-			where equ.base_id = #BASE_ID#
+			where equ.base_id = #baseId#
 			order by tic.date_created desc
 			limit 50
              "
-    attribute BASE_ID     {domain : DO_ID         		required:"true"  inOut :"in"}
-    attribute TICKETS     {domain : DO_DT_TICKET_DTC    required:"true"  inOut :"out"}
+    attribute baseId     {domain : DoId         		required:"true"  inOut :"in"}
+    attribute tickets     {domain : DoDtTicketDtc    required:"true"  inOut :"out"}
 }
 
-create Task TK_GET_LAST_TICKETS {  
+create Task TkGetLastTickets {  
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
     request : "
             select 
@@ -25,10 +25,10 @@ create Task TK_GET_LAST_TICKETS {
 			order by tic.date_created desc
 			limit 50
              "
-    attribute TICKETS     {domain : DO_DT_TICKET_DTC    required:"true"  inOut :"out"}
+    attribute tickets     {domain : DoDtTicketDtc    required:"true"  inOut :"out"}
 }
 
-create Task TK_GET_LAST_WORK_ORDERS {  
+create Task TkGetLastWorkOrders {  
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
     request : "
             select 
@@ -37,5 +37,5 @@ create Task TK_GET_LAST_WORK_ORDERS {
 			order by wor.date_created desc
 			limit 20
              "
-    attribute WORK_ORDERS     {domain : DO_DT_WORK_ORDER_DTC    required:"true"  inOut :"out"}
+    attribute workOrders     {domain : DoDtWorkOrderDtc    required:"true"  inOut :"out"}
 }

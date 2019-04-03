@@ -77,7 +77,7 @@ public final class BaseDAO extends DAO<Base, java.lang.Long> implements StoreSer
 	 * @return SearchQueryBuilder pour ce type de recherche
 	 */
 	public SearchQueryBuilder createSearchQueryBuilderBase(final String criteria, final SelectedFacetValues selectedFacetValues) {
-		final FacetedQueryDefinition facetedQueryDefinition = Home.getApp().getDefinitionSpace().resolve("QRY_BASE", FacetedQueryDefinition.class);
+		final FacetedQueryDefinition facetedQueryDefinition = Home.getApp().getDefinitionSpace().resolve("QryBase", FacetedQueryDefinition.class);
 		final ListFilterBuilder<String> listFilterBuilder = DIInjector.newInstance(facetedQueryDefinition.getListFilterBuilderClass(), Home.getApp().getComponentSpace());
 		final ListFilter criteriaListFilter = listFilterBuilder.withBuildQuery(facetedQueryDefinition.getListFilterBuilderQuery()).withCriteria(criteria).build();
 		return SearchQuery.builder(criteriaListFilter).withFacetStrategy(facetedQueryDefinition, selectedFacetValues);

@@ -45,7 +45,7 @@ public final class Supplier implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Siren'.
 	 * @return String siren <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_LABEL", type = "ID", required = true, label = "Siren")
+	@Field(domain = "DoLabel", type = "ID", required = true, label = "Siren")
 	public String getSiren() {
 		return siren;
 	}
@@ -64,7 +64,7 @@ public final class Supplier implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Broadcast status'.
 	 * @return String statutDiffusion
 	 */
-	@Field(domain = "DO_CODE", label = "Broadcast status")
+	@Field(domain = "DoCode", label = "Broadcast status")
 	public String getStatutDiffusion() {
 		return statutDiffusion;
 	}
@@ -83,7 +83,7 @@ public final class Supplier implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Creation date'.
 	 * @return LocalDate dateCreation
 	 */
-	@Field(domain = "DO_LOCALDATE", label = "Creation date")
+	@Field(domain = "DoLocaldate", label = "Creation date")
 	public java.time.LocalDate getDateCreation() {
 		return dateCreation;
 	}
@@ -102,7 +102,7 @@ public final class Supplier implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Sex'.
 	 * @return String sexe
 	 */
-	@Field(domain = "DO_CODE", label = "Sex")
+	@Field(domain = "DoCode", label = "Sex")
 	public String getSexe() {
 		return sexe;
 	}
@@ -121,7 +121,7 @@ public final class Supplier implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Firstname'.
 	 * @return String prenomUsuel
 	 */
-	@Field(domain = "DO_LABEL", label = "Firstname")
+	@Field(domain = "DoLabel", label = "Firstname")
 	public String getPrenomUsuel() {
 		return prenomUsuel;
 	}
@@ -140,7 +140,7 @@ public final class Supplier implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Workforce range'.
 	 * @return String trancheEffectifs
 	 */
-	@Field(domain = "DO_CODE", label = "Workforce range")
+	@Field(domain = "DoCode", label = "Workforce range")
 	public String getTrancheEffectifs() {
 		return trancheEffectifs;
 	}
@@ -159,7 +159,7 @@ public final class Supplier implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Last treatment'.
 	 * @return Instant dateDernierTraitement
 	 */
-	@Field(domain = "DO_INSTANT", label = "Last treatment")
+	@Field(domain = "DoInstant", label = "Last treatment")
 	public java.time.Instant getDateDernierTraitement() {
 		return dateDernierTraitement;
 	}
@@ -178,7 +178,7 @@ public final class Supplier implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Number of periods'.
 	 * @return Long nombrePeriodes
 	 */
-	@Field(domain = "DO_COUNT", label = "Number of periods")
+	@Field(domain = "DoCount", label = "Number of periods")
 	public Long getNombrePeriodes() {
 		return nombrePeriodes;
 	}
@@ -197,7 +197,7 @@ public final class Supplier implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Business category'.
 	 * @return String categorieEntreprise
 	 */
-	@Field(domain = "DO_CODE", label = "Business category")
+	@Field(domain = "DoCode", label = "Business category")
 	public String getCategorieEntreprise() {
 		return categorieEntreprise;
 	}
@@ -216,7 +216,7 @@ public final class Supplier implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Start date'.
 	 * @return LocalDate dateDebut
 	 */
-	@Field(domain = "DO_LOCALDATE", label = "Start date")
+	@Field(domain = "DoLocaldate", label = "Start date")
 	public java.time.LocalDate getDateDebut() {
 		return dateDebut;
 	}
@@ -235,7 +235,7 @@ public final class Supplier implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Administrative State'.
 	 * @return String etatAdministratif
 	 */
-	@Field(domain = "DO_CODE", label = "Administrative State")
+	@Field(domain = "DoCode", label = "Administrative State")
 	public String getEtatAdministratif() {
 		return etatAdministratif;
 	}
@@ -254,7 +254,7 @@ public final class Supplier implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Name'.
 	 * @return String nom
 	 */
-	@Field(domain = "DO_LABEL", label = "Name")
+	@Field(domain = "DoLabel", label = "Name")
 	public String getNom() {
 		return nom;
 	}
@@ -273,7 +273,7 @@ public final class Supplier implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Use name'.
 	 * @return String nomUsage
 	 */
-	@Field(domain = "DO_LABEL", label = "Use name")
+	@Field(domain = "DoLabel", label = "Use name")
 	public String getNomUsage() {
 		return nomUsage;
 	}
@@ -292,7 +292,7 @@ public final class Supplier implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Denomination'.
 	 * @return String denomination
 	 */
-	@Field(domain = "DO_LABEL", label = "Denomination")
+	@Field(domain = "DoLabel", label = "Denomination")
 	public String getDenomination() {
 		return denomination;
 	}
@@ -311,7 +311,7 @@ public final class Supplier implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Legal category'.
 	 * @return String categorieJuridique
 	 */
-	@Field(domain = "DO_CODE", label = "Legal category")
+	@Field(domain = "DoCode", label = "Legal category")
 	public String getCategorieJuridique() {
 		return categorieJuridique;
 	}
@@ -330,7 +330,7 @@ public final class Supplier implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Core business'.
 	 * @return String activitePrincipale
 	 */
-	@Field(domain = "DO_CODE", label = "Core business")
+	@Field(domain = "DoCode", label = "Core business")
 	public String getActivitePrincipale() {
 		return activitePrincipale;
 	}
@@ -349,7 +349,7 @@ public final class Supplier implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Business nomenclature'.
 	 * @return String nomenclatureActivite
 	 */
-	@Field(domain = "DO_CODE", label = "Business nomenclature")
+	@Field(domain = "DoCode", label = "Business nomenclature")
 	public String getNomenclatureActivite() {
 		return nomenclatureActivite;
 	}
@@ -368,7 +368,7 @@ public final class Supplier implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Nic Siege'.
 	 * @return Long nicSiege
 	 */
-	@Field(domain = "DO_COUNT", label = "Nic Siege")
+	@Field(domain = "DoCount", label = "Nic Siege")
 	public Long getNicSiege() {
 		return nicSiege;
 	}
@@ -387,7 +387,7 @@ public final class Supplier implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Employer'.
 	 * @return Boolean caractereEmployeur
 	 */
-	@Field(domain = "DO_YES_NO", label = "Employer")
+	@Field(domain = "DoYesNo", label = "Employer")
 	public Boolean getCaractereEmployeur() {
 		return caractereEmployeur;
 	}

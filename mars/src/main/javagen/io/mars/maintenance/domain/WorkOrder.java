@@ -26,14 +26,14 @@ public final class WorkOrder implements Entity {
 	private java.time.LocalDate dueDate;
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_TICKET_WORK_ORDER",
-			fkFieldName = "TICKET_ID",
-			primaryDtDefinitionName = "DT_TICKET",
+			name = "ATicketWorkOrder",
+			fkFieldName = "ticketId",
+			primaryDtDefinitionName = "DtTicket",
 			primaryIsNavigable = true,
 			primaryRole = "Ticket",
 			primaryLabel = "Ticket",
 			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_WORK_ORDER",
+			foreignDtDefinitionName = "DtWorkOrder",
 			foreignIsNavigable = false,
 			foreignRole = "TicketWorkOrders",
 			foreignLabel = "Ticket Work Orders",
@@ -41,14 +41,14 @@ public final class WorkOrder implements Entity {
 	private final VAccessor<io.mars.maintenance.domain.Ticket> ticketIdAccessor = new VAccessor<>(io.mars.maintenance.domain.Ticket.class, "Ticket");
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_WORK_ORDER_WORK_ORDER_STATUS",
-			fkFieldName = "WORK_ORDER_STATUS_ID",
-			primaryDtDefinitionName = "DT_WORK_ORDER_STATUS",
+			name = "AWorkOrderWorkOrderStatus",
+			fkFieldName = "workOrderStatusId",
+			primaryDtDefinitionName = "DtWorkOrderStatus",
 			primaryIsNavigable = true,
 			primaryRole = "WorkOrderStatus",
 			primaryLabel = "Work Order Status",
 			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_WORK_ORDER",
+			foreignDtDefinitionName = "DtWorkOrder",
 			foreignIsNavigable = false,
 			foreignRole = "WorkOrder",
 			foreignLabel = "Work Order",
@@ -66,7 +66,7 @@ public final class WorkOrder implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long woId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_ID", type = "ID", required = true, label = "Id")
+	@Field(domain = "DoId", type = "ID", required = true, label = "Id")
 	public Long getWoId() {
 		return woId;
 	}
@@ -85,7 +85,7 @@ public final class WorkOrder implements Entity {
 	 * Récupère la valeur de la propriété 'Code'.
 	 * @return String code
 	 */
-	@Field(domain = "DO_LABEL", label = "Code")
+	@Field(domain = "DoLabel", label = "Code")
 	public String getCode() {
 		return code;
 	}
@@ -104,7 +104,7 @@ public final class WorkOrder implements Entity {
 	 * Récupère la valeur de la propriété 'Number'.
 	 * @return String ticketCode
 	 */
-	@Field(domain = "DO_LABEL", label = "Number")
+	@Field(domain = "DoLabel", label = "Number")
 	public String getTicketCode() {
 		return ticketCode;
 	}
@@ -123,7 +123,7 @@ public final class WorkOrder implements Entity {
 	 * Récupère la valeur de la propriété 'Name'.
 	 * @return String name
 	 */
-	@Field(domain = "DO_LABEL", label = "Name")
+	@Field(domain = "DoLabel", label = "Name")
 	public String getName() {
 		return name;
 	}
@@ -142,7 +142,7 @@ public final class WorkOrder implements Entity {
 	 * Récupère la valeur de la propriété 'Description'.
 	 * @return String description
 	 */
-	@Field(domain = "DO_DESCRIPTION", label = "Description")
+	@Field(domain = "DoDescription", label = "Description")
 	public String getDescription() {
 		return description;
 	}
@@ -161,7 +161,7 @@ public final class WorkOrder implements Entity {
 	 * Récupère la valeur de la propriété 'Creation Date'.
 	 * @return LocalDate dateCreated
 	 */
-	@Field(domain = "DO_LOCALDATE", label = "Creation Date")
+	@Field(domain = "DoLocaldate", label = "Creation Date")
 	public java.time.LocalDate getDateCreated() {
 		return dateCreated;
 	}
@@ -180,7 +180,7 @@ public final class WorkOrder implements Entity {
 	 * Récupère la valeur de la propriété 'Closing Date'.
 	 * @return LocalDate dateClosed
 	 */
-	@Field(domain = "DO_LOCALDATE", label = "Closing Date")
+	@Field(domain = "DoLocaldate", label = "Closing Date")
 	public java.time.LocalDate getDateClosed() {
 		return dateClosed;
 	}
@@ -199,7 +199,7 @@ public final class WorkOrder implements Entity {
 	 * Récupère la valeur de la propriété 'Due Date'.
 	 * @return LocalDate dueDate
 	 */
-	@Field(domain = "DO_LOCALDATE", label = "Due Date")
+	@Field(domain = "DoLocaldate", label = "Due Date")
 	public java.time.LocalDate getDueDate() {
 		return dueDate;
 	}
@@ -218,7 +218,7 @@ public final class WorkOrder implements Entity {
 	 * Récupère la valeur de la propriété 'Ticket'.
 	 * @return Long ticketId
 	 */
-	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Ticket")
+	@Field(domain = "DoId", type = "FOREIGN_KEY", label = "Ticket")
 	public Long getTicketId() {
 		return (Long) ticketIdAccessor.getId();
 	}
@@ -237,7 +237,7 @@ public final class WorkOrder implements Entity {
 	 * Récupère la valeur de la propriété 'Work Order Status'.
 	 * @return String workOrderStatusId
 	 */
-	@Field(domain = "DO_CODE", type = "FOREIGN_KEY", label = "Work Order Status")
+	@Field(domain = "DoCode", type = "FOREIGN_KEY", label = "Work Order Status")
 	public String getWorkOrderStatusId() {
 		return (String) workOrderStatusIdAccessor.getId();
 	}

@@ -28,7 +28,7 @@ public final class BaseType implements DtStaticMasterData {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return String baseTypeId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_CODE", type = "ID", required = true, label = "Id")
+	@Field(domain = "DoCode", type = "ID", required = true, label = "Id")
 	public String getBaseTypeId() {
 		return baseTypeId;
 	}
@@ -47,7 +47,7 @@ public final class BaseType implements DtStaticMasterData {
 	 * Récupère la valeur de la propriété 'Base Type Label'.
 	 * @return String label
 	 */
-	@Field(domain = "DO_LABEL", label = "Base Type Label")
+	@Field(domain = "DoLabel", label = "Base Type Label")
 	public String getLabel() {
 		return label;
 	}

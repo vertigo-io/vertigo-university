@@ -41,13 +41,13 @@ public final class HrPAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TK_GET_MISSIONS_DISPLAY_BY_PERSON_ID.
+	 * Execute la tache TkGetMissionsDisplayByPersonId.
 	 * @param personId Long 
 	 * @return io.vertigo.dynamo.domain.model.DtList<io.mars.hr.domain.MissionDisplay> missions
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.mars.hr.domain.MissionDisplay> getMissionsDisplayByPersonId(final Long personId) {
-		final Task task = createTaskBuilder("TK_GET_MISSIONS_DISPLAY_BY_PERSON_ID")
-				.addValue("PERSON_ID", personId)
+		final Task task = createTaskBuilder("TkGetMissionsDisplayByPersonId")
+				.addValue("personId", personId)
 				.build();
 		return getTaskManager()
 				.execute(task)

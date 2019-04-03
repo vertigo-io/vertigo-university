@@ -69,7 +69,7 @@ modules:
       - search.elasticsearchEmbedded:
           __flags__: ["home"]
           home: search/
-          envIndex: MARS_
+          envIndex: mars
           rowsPerQuery: 50
           config.file: search/elasticsearch.yml
       - search.elasticsearchTransport:
@@ -80,7 +80,7 @@ modules:
           rowsPerQuery: 50
           config.file: search/elasticsearch.yml
       - store.file.filesystem:
-          storeDtName: DT_MEDIA_FILE_INFO
+          storeDtName: DtMediaFileInfo
           path: ${user.home}/marsFiles/
       - store.file.fullFilesystem:
           name: temp
@@ -101,12 +101,12 @@ modules:
       - authorization:
     featuresConfig:
       - account.store.store:
-          userIdentityEntity: DT_PERSON
-          groupIdentityEntity: DT_GROUPS
-          userAuthField: EMAIL
-          photoFileInfo: FI_FILE_INFO_STD
-          userToAccountMapping: 'id:PERSON_ID, displayName:LAST_NAME, email:EMAIL, authToken:EMAIL, photo: PICTUREFILE_ID'
-          groupToGroupAccountMapping: 'id:GROUP_ID, displayName:NAME'
+          userIdentityEntity: DtPerson
+          groupIdentityEntity: DtGroups
+          userAuthField: email
+          photoFileInfo: FiFileInfoStd
+          userToAccountMapping: 'id:personId, displayName:lastName, email:email, authToken:email, photo: picturefileId'
+          groupToGroupAccountMapping: 'id:groupId, displayName:name'
       - authentication.text:
           filePath: /initdata/userAccounts.txt
   io.vertigo.vega.VegaFeatures:

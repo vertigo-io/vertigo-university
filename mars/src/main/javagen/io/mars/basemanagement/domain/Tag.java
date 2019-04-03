@@ -28,7 +28,7 @@ public final class Tag implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long tagId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_ID", type = "ID", required = true, label = "Id")
+	@Field(domain = "DoId", type = "ID", required = true, label = "Id")
 	public Long getTagId() {
 		return tagId;
 	}
@@ -47,7 +47,7 @@ public final class Tag implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Label'.
 	 * @return String label
 	 */
-	@Field(domain = "DO_LABEL", label = "Label")
+	@Field(domain = "DoLabel", label = "Label")
 	public String getLabel() {
 		return label;
 	}

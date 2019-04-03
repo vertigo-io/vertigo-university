@@ -19,14 +19,14 @@ public final class EquipmentFeature implements Entity {
 	private String name;
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_EQUIPMENT_EQUIPMENT_FEATURE",
-			fkFieldName = "EQUIPMENT_ID",
-			primaryDtDefinitionName = "DT_EQUIPMENT",
+			name = "AEquipmentEquipmentFeature",
+			fkFieldName = "equipmentId",
+			primaryDtDefinitionName = "DtEquipment",
 			primaryIsNavigable = true,
 			primaryRole = "Equipment",
 			primaryLabel = "Equipment",
 			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_EQUIPMENT_FEATURE",
+			foreignDtDefinitionName = "DtEquipmentFeature",
 			foreignIsNavigable = false,
 			foreignRole = "EquipmentFeatures",
 			foreignLabel = "Equipment Features",
@@ -44,7 +44,7 @@ public final class EquipmentFeature implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long equipmentFeatureId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_ID", type = "ID", required = true, label = "Id")
+	@Field(domain = "DoId", type = "ID", required = true, label = "Id")
 	public Long getEquipmentFeatureId() {
 		return equipmentFeatureId;
 	}
@@ -63,7 +63,7 @@ public final class EquipmentFeature implements Entity {
 	 * Récupère la valeur de la propriété 'Name'.
 	 * @return String name
 	 */
-	@Field(domain = "DO_LABEL", label = "Name")
+	@Field(domain = "DoLabel", label = "Name")
 	public String getName() {
 		return name;
 	}
@@ -82,7 +82,7 @@ public final class EquipmentFeature implements Entity {
 	 * Récupère la valeur de la propriété 'Equipment'.
 	 * @return Long equipmentId
 	 */
-	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Equipment")
+	@Field(domain = "DoId", type = "FOREIGN_KEY", label = "Equipment")
 	public Long getEquipmentId() {
 		return (Long) equipmentIdAccessor.getId();
 	}
