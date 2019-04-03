@@ -19,14 +19,14 @@ public final class Actor implements Entity {
 	private String name;
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_ACT_SEX",
+			name = "AActSex",
 			fkFieldName = "sexCd",
-			primaryDtDefinitionName = "DT_SEXE",
+			primaryDtDefinitionName = "DtSexe",
 			primaryIsNavigable = true,
 			primaryRole = "Sexe",
 			primaryLabel = "Sexe",
 			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_ACTOR",
+			foreignDtDefinitionName = "DtActor",
 			foreignIsNavigable = false,
 			foreignRole = "Actor",
 			foreignLabel = "Actor",
@@ -44,7 +44,7 @@ public final class Actor implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long actId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_ID", type = "ID", required = true, label = "Id")
+	@Field(domain = "DoId", type = "ID", required = true, label = "Id")
 	public Long getActId() {
 		return actId;
 	}
@@ -63,7 +63,7 @@ public final class Actor implements Entity {
 	 * Récupère la valeur de la propriété 'Nom'.
 	 * @return String name <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_LABEL_LONG", required = true, label = "Nom")
+	@Field(domain = "DoLabelLong", required = true, label = "Nom")
 	public String getName() {
 		return name;
 	}
@@ -82,7 +82,7 @@ public final class Actor implements Entity {
 	 * Récupère la valeur de la propriété 'Sexe'.
 	 * @return String sexCd
 	 */
-	@Field(domain = "DO_CODE", type = "FOREIGN_KEY", label = "Sexe")
+	@Field(domain = "DoCode", type = "FOREIGN_KEY", label = "Sexe")
 	public String getSexCd() {
 		return (String) sexCdAccessor.getId();
 	}

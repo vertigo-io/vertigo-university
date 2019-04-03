@@ -30,8 +30,8 @@ public class UserServicesImpl implements UserServices {
 	}
 
 	private void addSecurity() {
-		authorizationManager.obtainUserAuthorizations().addAuthorization(GlobalAuthorizations.ATZ_SPECIAL.getAuthorization());
-		authorizationManager.obtainUserAuthorizations().addAuthorization(MovieAuthorizations.ATZ_MOVIE$READ.getAuthorization());
+		authorizationManager.obtainUserAuthorizations().addAuthorization(GlobalAuthorizations.AtzSpecial.getAuthorization());
+		authorizationManager.obtainUserAuthorizations().addAuthorization(MovieAuthorizations.AtzMovie$read.getAuthorization());
 		authorizationManager.obtainUserAuthorizations().withSecurityKeys("couId", 1178);
 	}
 

@@ -10,9 +10,9 @@ import io.vertigo.account.plugins.authorization.loaders.JsonSecurityDefinitionPr
 import io.vertigo.account.security.UserSession;
 import io.vertigo.account.security.VSecurityManager;
 import io.vertigo.app.AutoCloseableApp;
-import io.vertigo.app.config.NodeConfigBuilder;
 import io.vertigo.app.config.DefinitionProviderConfig;
 import io.vertigo.app.config.ModuleConfig;
+import io.vertigo.app.config.NodeConfigBuilder;
 import io.vertigo.core.component.di.injector.DIInjector;
 import io.vertigo.samples.SamplesPAO;
 import io.vertigo.samples.crystal.CrystalPAO;
@@ -78,7 +78,7 @@ public class Level7 {
 			final Account account = loginServices.login("admin", "v3rt1g0");
 			LogManager.getLogger(this.getClass()).info("account: " + account.getDisplayName());
 
-			final String query = authorizationManager.getSearchSecurity(Movie.class, MovieOperations.READ);
+			final String query = authorizationManager.getSearchSecurity(Movie.class, MovieOperations.read);
 			LogManager.getLogger(this.getClass()).info("query: " + query);
 		} finally {
 			securityManager.stopCurrentUserSession();

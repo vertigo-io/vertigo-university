@@ -23,7 +23,7 @@ public final class MovieIndex implements DtObject {
 	 * Récupère la valeur de la propriété 'id'.
 	 * @return Long movId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_ID", required = true, label = "id")
+	@Field(domain = "DoId", required = true, label = "id")
 	public Long getMovId() {
 		return movId;
 	}
@@ -42,7 +42,7 @@ public final class MovieIndex implements DtObject {
 	 * Récupère la valeur de la propriété 'Titre'.
 	 * @return String name
 	 */
-	@Field(domain = "DO_LABEL_LONG", label = "Titre")
+	@Field(domain = "DoLabelLong", label = "Titre")
 	public String getName() {
 		return name;
 	}
@@ -61,7 +61,7 @@ public final class MovieIndex implements DtObject {
 	 * Récupère la valeur de la propriété 'Année'.
 	 * @return Integer year
 	 */
-	@Field(domain = "DO_YEAR", label = "Année")
+	@Field(domain = "DoYear", label = "Année")
 	public Integer getYear() {
 		return year;
 	}
@@ -80,7 +80,7 @@ public final class MovieIndex implements DtObject {
 	 * Récupère la valeur de la propriété 'Pays'.
 	 * @return String country
 	 */
-	@Field(domain = "DO_LABEL", label = "Pays")
+	@Field(domain = "DoLabel", label = "Pays")
 	public String getCountry() {
 		return country;
 	}
@@ -99,7 +99,7 @@ public final class MovieIndex implements DtObject {
 	 * Récupère la valeur de la propriété calculée 'Titre'.
 	 * @return String nameSortOnly
 	 */
-	@Field(domain = "DO_LABEL_LONG_SORT", type = "COMPUTED", persistent = false, label = "Titre")
+	@Field(domain = "DoLabelLongSort", type = "COMPUTED", persistent = false, label = "Titre")
 	public String getNameSortOnly() {
 		return getName();
 	}

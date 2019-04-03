@@ -21,7 +21,7 @@ public final class MovieByYear implements DtObject {
 	 * Récupère la valeur de la propriété 'Année'.
 	 * @return Integer year
 	 */
-	@Field(domain = "DO_YEAR", label = "Année")
+	@Field(domain = "DoYear", label = "Année")
 	public Integer getYear() {
 		return year;
 	}
@@ -40,7 +40,7 @@ public final class MovieByYear implements DtObject {
 	 * Récupère la valeur de la propriété 'Nombre de film'.
 	 * @return Long moviesCount
 	 */
-	@Field(domain = "DO_ID", label = "Nombre de film")
+	@Field(domain = "DoId", label = "Nombre de film")
 	public Long getMoviesCount() {
 		return moviesCount;
 	}

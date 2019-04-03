@@ -6,9 +6,9 @@ import io.vertigo.dynamo.domain.stereotype.Field;
 
 public final class Movie implements KeyConcept {
 	private static final long serialVersionUID = -5975848806293357234L;
-	@Field(domain = "DO_IDENTITY", type = "ID", required = true, label = "id")
+	@Field(domain = "DoIdentity", type = "ID", required = true, label = "id")
 	private int id;
-	@Field(domain = "DO_TEXT", label = "name")
+	@Field(domain = "DoText", label = "name")
 	private String title;
 
 	public Movie setId(final int id) {

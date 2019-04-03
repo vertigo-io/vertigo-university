@@ -24,7 +24,7 @@ public class SampleConfigBuilder {
 			dynamoFeatures.withSearch()
 					.withESEmbedded(
 							Param.of("home", "D:/atelier/search"), //usage d'url impropre
-							Param.of("envIndex", "crystal-test_"),
+							Param.of("envIndex", "CrystalTest"),
 							Param.of("rowsPerQuery", "50"),
 							Param.of("config.file", "elasticsearch.yml"));
 		}

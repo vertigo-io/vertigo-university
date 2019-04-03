@@ -28,7 +28,7 @@ public final class Sexe implements DtStaticMasterData {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return String sexCd <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_CODE", type = "ID", required = true, label = "Id")
+	@Field(domain = "DoCode", type = "ID", required = true, label = "Id")
 	public String getSexCd() {
 		return sexCd;
 	}
@@ -47,7 +47,7 @@ public final class Sexe implements DtStaticMasterData {
 	 * Récupère la valeur de la propriété 'Label'.
 	 * @return String label <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_LABEL_LONG", required = true, label = "Label")
+	@Field(domain = "DoLabelLong", required = true, label = "Label")
 	public String getLabel() {
 		return label;
 	}

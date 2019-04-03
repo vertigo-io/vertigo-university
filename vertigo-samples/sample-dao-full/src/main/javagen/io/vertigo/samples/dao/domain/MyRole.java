@@ -20,14 +20,14 @@ public final class MyRole implements Entity {
 	private String asCharacter;
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_MROL_MMOV",
+			name = "AMrolMmov",
 			fkFieldName = "movId",
-			primaryDtDefinitionName = "DT_MY_MOVIE",
+			primaryDtDefinitionName = "DtMyMovie",
 			primaryIsNavigable = false,
 			primaryRole = "Movie",
 			primaryLabel = "Movie",
 			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_MY_ROLE",
+			foreignDtDefinitionName = "DtMyRole",
 			foreignIsNavigable = true,
 			foreignRole = "Role",
 			foreignLabel = "Role",
@@ -35,14 +35,14 @@ public final class MyRole implements Entity {
 	private final VAccessor<io.vertigo.samples.dao.domain.MyMovie> movIdAccessor = new VAccessor<>(io.vertigo.samples.dao.domain.MyMovie.class, "Movie");
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_MROL_MACT",
+			name = "AMrolMact",
 			fkFieldName = "actId",
-			primaryDtDefinitionName = "DT_MY_ACTOR",
+			primaryDtDefinitionName = "DtMyActor",
 			primaryIsNavigable = true,
 			primaryRole = "Actor",
 			primaryLabel = "Actor",
 			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_MY_ROLE",
+			foreignDtDefinitionName = "DtMyRole",
 			foreignIsNavigable = false,
 			foreignRole = "Role",
 			foreignLabel = "Role",
@@ -60,7 +60,7 @@ public final class MyRole implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long rolId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_ID", type = "ID", required = true, label = "Id")
+	@Field(domain = "DoId", type = "ID", required = true, label = "Id")
 	public Long getRolId() {
 		return rolId;
 	}
@@ -79,7 +79,7 @@ public final class MyRole implements Entity {
 	 * Récupère la valeur de la propriété 'Dans le role de'.
 	 * @return String asCharacter <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_LABEL_VERY_LONG", required = true, label = "Dans le role de")
+	@Field(domain = "DoLabelVeryLong", required = true, label = "Dans le role de")
 	public String getAsCharacter() {
 		return asCharacter;
 	}
@@ -98,7 +98,7 @@ public final class MyRole implements Entity {
 	 * Récupère la valeur de la propriété 'Movie'.
 	 * @return Long movId
 	 */
-	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Movie")
+	@Field(domain = "DoId", type = "FOREIGN_KEY", label = "Movie")
 	public Long getMovId() {
 		return (Long) movIdAccessor.getId();
 	}
@@ -117,7 +117,7 @@ public final class MyRole implements Entity {
 	 * Récupère la valeur de la propriété 'Actor'.
 	 * @return Long actId
 	 */
-	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Actor")
+	@Field(domain = "DoId", type = "FOREIGN_KEY", label = "Actor")
 	public Long getActId() {
 		return (Long) actIdAccessor.getId();
 	}

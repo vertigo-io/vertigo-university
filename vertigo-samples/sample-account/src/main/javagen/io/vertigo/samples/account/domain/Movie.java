@@ -22,14 +22,14 @@ public final class Movie implements KeyConcept {
 	private String imdbid;
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_MOV_COU",
+			name = "AMovCou",
 			fkFieldName = "couId",
-			primaryDtDefinitionName = "DT_COUNTRY",
+			primaryDtDefinitionName = "DtCountry",
 			primaryIsNavigable = true,
 			primaryRole = "Country",
 			primaryLabel = "Country",
 			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_MOVIE",
+			foreignDtDefinitionName = "DtMovie",
 			foreignIsNavigable = false,
 			foreignRole = "Movie",
 			foreignLabel = "Movie",
@@ -37,19 +37,19 @@ public final class Movie implements KeyConcept {
 	private final VAccessor<io.vertigo.samples.account.domain.Country> couIdAccessor = new VAccessor<>(io.vertigo.samples.account.domain.Country.class, "Country");
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_ROL_MOV",
+			name = "ARolMov",
 			fkFieldName = "movId",
-			primaryDtDefinitionName = "DT_MOVIE",
+			primaryDtDefinitionName = "DtMovie",
 			primaryIsNavigable = false,
 			primaryRole = "Movie",
 			primaryLabel = "Movie",
 			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_ROLE",
+			foreignDtDefinitionName = "DtRole",
 			foreignIsNavigable = true,
 			foreignRole = "Role",
 			foreignLabel = "Role",
 			foreignMultiplicity = "0..*")
-	private final ListVAccessor<io.vertigo.samples.account.domain.Role> roleAccessor = new ListVAccessor<>(this, "A_ROL_MOV", "Role");
+	private final ListVAccessor<io.vertigo.samples.account.domain.Role> roleAccessor = new ListVAccessor<>(this, "ARolMov", "Role");
 
 	/** {@inheritDoc} */
 	@Override
@@ -62,7 +62,7 @@ public final class Movie implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long movId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_ID", type = "ID", required = true, label = "Id")
+	@Field(domain = "DoId", type = "ID", required = true, label = "Id")
 	public Long getMovId() {
 		return movId;
 	}
@@ -81,7 +81,7 @@ public final class Movie implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Titre du film'.
 	 * @return String name <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_LABEL_LONG", required = true, label = "Titre du film")
+	@Field(domain = "DoLabelLong", required = true, label = "Titre du film")
 	public String getName() {
 		return name;
 	}
@@ -100,7 +100,7 @@ public final class Movie implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Année'.
 	 * @return Integer year
 	 */
-	@Field(domain = "DO_YEAR", label = "Année")
+	@Field(domain = "DoYear", label = "Année")
 	public Integer getYear() {
 		return year;
 	}
@@ -119,7 +119,7 @@ public final class Movie implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Id Imdb'.
 	 * @return String imdbid
 	 */
-	@Field(domain = "DO_LABEL", label = "Id Imdb")
+	@Field(domain = "DoLabel", label = "Id Imdb")
 	public String getImdbid() {
 		return imdbid;
 	}
@@ -138,7 +138,7 @@ public final class Movie implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Country'.
 	 * @return Long couId
 	 */
-	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Country")
+	@Field(domain = "DoId", type = "FOREIGN_KEY", label = "Country")
 	public Long getCouId() {
 		return (Long) couIdAccessor.getId();
 	}

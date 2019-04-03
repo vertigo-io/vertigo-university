@@ -1,12 +1,12 @@
 package io.vertigo.samples.crystal
 
     
-create Task TK_LOAD_MOVIE_INDEX {
+create Task TkLoadMovieIndex {
 	className : "io.vertigo.dynamox.task.TaskEngineSelect",
 	request : "	select MOV_ID, mov.NAME, YEAR, cou.NAME as COUNTRY
 				from MOVIE mov
 				join COUNTRY cou on cou.cou_id = mov.cou_id
 				where MOV_ID in (#movieIds.rownum#);"
-	attribute movieIds {domain : DO_IDS, required:"true", inOut :"in",} 
-	attribute dtcIndex {domain : DO_DT_MOVIE_INDEX_DTC, required:"true", inOut :"out",} 
+	attribute movieIds {domain : DoIds, required:"true", inOut :"in",} 
+	attribute dtcIndex {domain : DoDtMovieIndexDtc, required:"true", inOut :"out",} 
 }

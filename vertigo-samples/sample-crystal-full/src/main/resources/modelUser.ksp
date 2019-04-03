@@ -1,22 +1,22 @@
 package io.vertigo.samples.crystal.domain
 
-create DtDefinition DT_USER {
-  id usrId {domain: DO_ID label: "Id" }
-  field login {domain: DO_LABEL label: "Login" required:"false"}
-  field name {domain: DO_LABEL label: "Nom" required:"false"}
-  field email {domain: DO_LABEL label: "email" required:"false"}
+create DtDefinition DtUser {
+  id usrId {domain: DoId label: "Id" }
+  field login {domain: DoLabel label: "Login" required:"false"}
+  field name {domain: DoLabel label: "Nom" required:"false"}
+  field email {domain: DoLabel label: "email" required:"false"}
 }
 
-create DtDefinition DT_USER_GROUP {
-  id grpId {domain: DO_ID label: "Id" }
-  field name {domain: DO_LABEL label: "Nom" required:"false"}
+create DtDefinition DtUserGroup {
+  id grpId {domain: DoId label: "Id" }
+  field name {domain: DoLabel label: "Nom" required:"false"}
 }
 
-create Association A_USR_COU {
+create Association AUsrCou {
   fkFieldName : "couId"
     
- 	dtDefinitionA : DT_USER
-	dtDefinitionB : DT_COUNTRY
+ 	dtDefinitionA : DtUser
+	dtDefinitionB : DtCountry
 			
 	navigabilityA : "false"
 	navigabilityB : "true"
@@ -31,11 +31,11 @@ create Association A_USR_COU {
 			
 }
 
-create Association A_USR_GRP {
+create Association AUsrGrp {
   fkFieldName : "grpId"
     
- 	dtDefinitionA : DT_USER
-	dtDefinitionB : DT_USER_GROUP
+ 	dtDefinitionA : DtUser
+	dtDefinitionB : DtUserGroup
 			
 	navigabilityA : "false"
 	navigabilityB : "true"

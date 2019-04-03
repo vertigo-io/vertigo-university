@@ -56,8 +56,8 @@ public class SampleConfigBuilder {
 						.withSecurity(Param.of("userSessionClassName", TestUserSession.class.getName()))
 						.withAccount()
 						.withStoreAccount(
-								Param.of("userIdentityEntity", "DT_USER"),
-								Param.of("groupIdentityEntity", "DT_USER_GROUP"),
+								Param.of("userIdentityEntity", "DtUser"),
+								Param.of("groupIdentityEntity", "DtUserGroup"),
 								Param.of("userAuthField", "login"),
 								Param.of("userToAccountMapping", "id:login, displayName:name, email:email, authToken:login"),
 								Param.of("groupToGroupAccountMapping", "id:name, displayName:name"))

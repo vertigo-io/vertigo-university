@@ -28,7 +28,7 @@ public final class Country implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long couId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_ID", type = "ID", required = true, label = "Id")
+	@Field(domain = "DoId", type = "ID", required = true, label = "Id")
 	public Long getCouId() {
 		return couId;
 	}
@@ -47,7 +47,7 @@ public final class Country implements Entity {
 	 * Récupère la valeur de la propriété 'Nom du pays'.
 	 * @return String name
 	 */
-	@Field(domain = "DO_LABEL", label = "Nom du pays")
+	@Field(domain = "DoLabel", label = "Nom du pays")
 	public String getName() {
 		return name;
 	}

@@ -23,14 +23,14 @@ public final class MyMovie implements Entity {
 	private String imdbid;
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_MMOV_MCOU",
+			name = "AMmovMcou",
 			fkFieldName = "couId",
-			primaryDtDefinitionName = "DT_MY_COUNTRY",
+			primaryDtDefinitionName = "DtMyCountry",
 			primaryIsNavigable = true,
 			primaryRole = "Country",
 			primaryLabel = "Country",
 			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_MY_MOVIE",
+			foreignDtDefinitionName = "DtMyMovie",
 			foreignIsNavigable = false,
 			foreignRole = "Movie",
 			foreignLabel = "Movie",
@@ -38,19 +38,19 @@ public final class MyMovie implements Entity {
 	private final VAccessor<io.vertigo.samples.dao.domain.MyCountry> couIdAccessor = new VAccessor<>(io.vertigo.samples.dao.domain.MyCountry.class, "Country");
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_MROL_MMOV",
+			name = "AMrolMmov",
 			fkFieldName = "movId",
-			primaryDtDefinitionName = "DT_MY_MOVIE",
+			primaryDtDefinitionName = "DtMyMovie",
 			primaryIsNavigable = false,
 			primaryRole = "Movie",
 			primaryLabel = "Movie",
 			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_MY_ROLE",
+			foreignDtDefinitionName = "DtMyRole",
 			foreignIsNavigable = true,
 			foreignRole = "Role",
 			foreignLabel = "Role",
 			foreignMultiplicity = "0..*")
-	private final ListVAccessor<io.vertigo.samples.dao.domain.MyRole> roleAccessor = new ListVAccessor<>(this, "A_MROL_MMOV", "Role");
+	private final ListVAccessor<io.vertigo.samples.dao.domain.MyRole> roleAccessor = new ListVAccessor<>(this, "AMrolMmov", "Role");
 
 	/** {@inheritDoc} */
 	@Override
@@ -63,7 +63,7 @@ public final class MyMovie implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long movId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_ID", type = "ID", required = true, label = "Id")
+	@Field(domain = "DoId", type = "ID", required = true, label = "Id")
 	public Long getMovId() {
 		return movId;
 	}
@@ -82,7 +82,7 @@ public final class MyMovie implements Entity {
 	 * Récupère la valeur de la propriété 'Code du pays'.
 	 * @return String name <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_LABEL_LONG", required = true, label = "Code du pays")
+	@Field(domain = "DoLabelLong", required = true, label = "Code du pays")
 	public String getName() {
 		return name;
 	}
@@ -101,7 +101,7 @@ public final class MyMovie implements Entity {
 	 * Récupère la valeur de la propriété 'Année'.
 	 * @return Integer year
 	 */
-	@Field(domain = "DO_YEAR", label = "Année")
+	@Field(domain = "DoYear", label = "Année")
 	public Integer getYear() {
 		return year;
 	}
@@ -120,7 +120,7 @@ public final class MyMovie implements Entity {
 	 * Récupère la valeur de la propriété 'Id Imdb'.
 	 * @return String imdbid
 	 */
-	@Field(domain = "DO_LABEL", label = "Id Imdb")
+	@Field(domain = "DoLabel", label = "Id Imdb")
 	public String getImdbid() {
 		return imdbid;
 	}
@@ -139,7 +139,7 @@ public final class MyMovie implements Entity {
 	 * Récupère la valeur de la propriété 'Country'.
 	 * @return Long couId
 	 */
-	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Country")
+	@Field(domain = "DoId", type = "FOREIGN_KEY", label = "Country")
 	public Long getCouId() {
 		return (Long) couIdAccessor.getId();
 	}
