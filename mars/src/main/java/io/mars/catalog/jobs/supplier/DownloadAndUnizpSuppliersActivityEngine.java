@@ -13,7 +13,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import javax.inject.Inject;
@@ -57,7 +56,7 @@ public class DownloadAndUnizpSuppliersActivityEngine extends AbstractActivityEng
 		}
 		try (InputStream inputStream = new FileInputStream(Paths.get(new URL(rootDirectory + "StockUniteLegale_utf8.zip").toURI()).toFile())) {
 			try (ZipInputStream zis = new ZipInputStream(inputStream)) {
-				final ZipEntry zipEntry = zis.getNextEntry(); // only one entry
+				//final ZipEntry zipEntry = zis.getNextEntry(); // only one entry
 				final File destFile = Paths.get(new URL(rootDirectory + "StockUniteLegale_utf8.csv").toURI()).toFile();
 				destFile.delete();
 				try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(destFile))) {
