@@ -5,8 +5,8 @@ import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
-import io.mars.catalog.dao.SupplierDAO;
 import io.mars.catalog.domain.Supplier;
+import io.mars.catalog.search.SupplierSearchAo;
 import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.core.component.Component;
 import io.vertigo.dynamo.collections.ListFilter;
@@ -25,7 +25,7 @@ public class SupplierServices implements Component {
 	@Inject
 	private SearchManager searchManager;
 	@Inject
-	private SupplierDAO supplierDAO;
+	private SupplierSearchAo supplierSearchAo;
 
 	public void indexChunk(final List<Supplier> suppliers) {
 		final SearchIndexDefinition searchIndexDefinition = searchManager.findFirstIndexDefinitionByKeyConcept(Supplier.class);
@@ -42,7 +42,7 @@ public class SupplierServices implements Component {
 	}
 
 	public FacetedQueryResult<Supplier, SearchQuery> searchSuppliers(final String criteria, final SelectedFacetValues selectedFacetValues, final DtListState dtListState) {
-		final SearchQuery searchQuery = supplierDAO.createSearchQueryBuilderSupplier(criteria, selectedFacetValues).build();
-		return supplierDAO.loadList(searchQuery, dtListState);
+		final SearchQuery searchQuery = supplierSearchAo.createSearchQueryBuilderSupplier(criteria, selectedFacetValues).build();
+		return supplierSearchAo.loadList(searchQuery, dtListState);
 	}
 }

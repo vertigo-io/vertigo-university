@@ -44,7 +44,7 @@ public class SearchInitializer implements ComponentInitializer {
 			Home.getApp().getDefinitionSpace()
 					.getAll(SearchIndexDefinition.class)
 					.stream()
-					.filter(indexDefinition -> !"IDX_SUPPLIER".equals(indexDefinition.getName()))
+					.filter(indexDefinition -> !"IdxSupplier".equals(indexDefinition.getName()))
 					.forEach((indexDefinition) -> searchManager.reindexAll(indexDefinition));
 		});
 	}

@@ -3,9 +3,9 @@ package io.mars.mda;
 import javax.inject.Inject;
 
 import io.vertigo.app.AutoCloseableApp;
-import io.vertigo.app.config.NodeConfig;
 import io.vertigo.app.config.DefinitionProviderConfig;
 import io.vertigo.app.config.ModuleConfig;
+import io.vertigo.app.config.NodeConfig;
 import io.vertigo.commons.CommonsFeatures;
 import io.vertigo.core.component.di.injector.DIInjector;
 import io.vertigo.core.param.Param;
@@ -44,6 +44,7 @@ public class Studio {
 						.withJavaDomainGenerator(
 								Param.of("generateDtResources", "false"))
 						.withTaskGenerator()
+						.withSearchGenerator()
 						.withFileGenerator()
 						.withSqlDomainGenerator(
 								Param.of("targetSubDir", "javagen/sqlgen"),
