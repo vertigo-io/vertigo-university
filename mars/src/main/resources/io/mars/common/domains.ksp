@@ -212,6 +212,12 @@ create Domain DoFilePath {
 	storeType : "VARCHAR(500)"
 }
 
+create Domain DoFileData {
+	dataType : DataStream
+	formatter : FmtDefault
+	storeType : "BLOB"
+}
+
 create Domain DoTags {
 	dataType : String
 	formatter : FmtTags
