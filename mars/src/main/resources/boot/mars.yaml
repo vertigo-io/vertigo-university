@@ -79,7 +79,11 @@ modules:
           cluster.name: mars
           rowsPerQuery: 50
           config.file: search/elasticsearch.yml
+      - store.file.db:
+          __flags__: ["klee"]
+          storeDtName: DtMediaFileInfo
       - store.file.filesystem:
+          __flags__: ["home"]
           storeDtName: DtMediaFileInfo
           path: ${user.home}/marsFiles/
       - store.file.fullFilesystem:

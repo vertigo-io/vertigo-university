@@ -20,6 +20,7 @@ public final class MediaFileInfo implements Entity {
 	private Long length;
 	private java.time.Instant lastModified;
 	private String filePath;
+	private io.vertigo.lang.DataStream fileData;
 
 	/** {@inheritDoc} */
 	@Override
@@ -125,9 +126,9 @@ public final class MediaFileInfo implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'path'.
-	 * @return String filePath <b>Obligatoire</b>
+	 * @return String filePath
 	 */
-	@Field(domain = "DoFilePath", required = true, label = "path")
+	@Field(domain = "DoFilePath", label = "path")
 	public String getFilePath() {
 		return filePath;
 	}
@@ -135,10 +136,29 @@ public final class MediaFileInfo implements Entity {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'path'.
-	 * @param filePath String <b>Obligatoire</b>
+	 * @param filePath String
 	 */
 	public void setFilePath(final String filePath) {
 		this.filePath = filePath;
+	}
+	
+	/**
+	 * Champ : DATA.
+	 * Récupère la valeur de la propriété 'data'.
+	 * @return DataStream fileData
+	 */
+	@Field(domain = "DoFileData", label = "data")
+	public io.vertigo.lang.DataStream getFileData() {
+		return fileData;
+	}
+
+	/**
+	 * Champ : DATA.
+	 * Définit la valeur de la propriété 'data'.
+	 * @param fileData DataStream
+	 */
+	public void setFileData(final io.vertigo.lang.DataStream fileData) {
+		this.fileData = fileData;
 	}
 	
 	/** {@inheritDoc} */
