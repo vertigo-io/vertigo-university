@@ -2,6 +2,52 @@
 --   SGBD      		  :  H2                     
 -- ============================================================
 
+-- ============================================================
+--   Drop                                       
+-- ============================================================
+drop table IF EXISTS BASE cascade;
+drop sequence IF EXISTS SEQ_BASE;
+drop table IF EXISTS BASE_TYPE cascade;
+drop sequence IF EXISTS SEQ_BASE_TYPE;
+drop table IF EXISTS BUSINESS cascade;
+drop sequence IF EXISTS SEQ_BUSINESS;
+drop table IF EXISTS EQUIPMENT cascade;
+drop sequence IF EXISTS SEQ_EQUIPMENT;
+drop table IF EXISTS EQUIPMENT_CATEGORY cascade;
+drop sequence IF EXISTS SEQ_EQUIPMENT_CATEGORY;
+drop table IF EXISTS EQUIPMENT_FEATURE cascade;
+drop sequence IF EXISTS SEQ_EQUIPMENT_FEATURE;
+drop table IF EXISTS EQUIPMENT_TYPE cascade;
+drop sequence IF EXISTS SEQ_EQUIPMENT_TYPE;
+drop table IF EXISTS GEOSECTOR cascade;
+drop sequence IF EXISTS SEQ_GEOSECTOR;
+drop table IF EXISTS GROUPS cascade;
+drop sequence IF EXISTS SEQ_GROUPS;
+drop table IF EXISTS MEDIA_FILE_INFO cascade;
+drop sequence IF EXISTS SEQ_MEDIA_FILE_INFO;
+drop table IF EXISTS MISSION cascade;
+drop sequence IF EXISTS SEQ_MISSION;
+drop table IF EXISTS OPENDATA_SET cascade;
+drop sequence IF EXISTS SEQ_OPENDATA_SET;
+drop table IF EXISTS OPENDATA_SET_STATUS cascade;
+drop sequence IF EXISTS SEQ_OPENDATA_SET_STATUS;
+drop table IF EXISTS PERSON cascade;
+drop sequence IF EXISTS SEQ_PERSON;
+drop table IF EXISTS PICTURE cascade;
+drop sequence IF EXISTS SEQ_PICTURE;
+drop table IF EXISTS SUPPLIER cascade;
+drop sequence IF EXISTS SEQ_SUPPLIER;
+drop table IF EXISTS TAG cascade;
+drop sequence IF EXISTS SEQ_TAG;
+drop table IF EXISTS TICKET cascade;
+drop sequence IF EXISTS SEQ_TICKET;
+drop table IF EXISTS TICKET_STATUS cascade;
+drop sequence IF EXISTS SEQ_TICKET_STATUS;
+drop table IF EXISTS WORK_ORDER cascade;
+drop sequence IF EXISTS SEQ_WORK_ORDER;
+drop table IF EXISTS WORK_ORDER_STATUS cascade;
+drop sequence IF EXISTS SEQ_WORK_ORDER_STATUS;
+
 
 
 
@@ -335,7 +381,7 @@ create table MEDIA_FILE_INFO
     LENGTH      	 NUMERIC     	not null,
     LAST_MODIFIED	 TIMESTAMP   	not null,
     FILE_PATH   	 VARCHAR(500)	,
-    FILE_DATA   	 BLOB        	,
+    FILE_DATA   	 bytea       	,
     constraint PK_MEDIA_FILE_INFO primary key (FIL_ID)
 );
 

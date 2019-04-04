@@ -8,5 +8,5 @@ create DtDefinition DtMediaFileInfo {
  	 field length 		{domain : DoSize 		label : "Size" 			    required : "true" }
 	 field lastModified {domain : DoInstant		label : "Modification Date" required : "true" }
 	 field filePath 	{domain : DoFilePath	label : "path" 				required : "false"}	 
-	 field fileData 	{domain : DoFileData	label : "data" 				required : "false" }	
+	 field fileData 	{domain : DoFileData	label : "data" 				required : "false"}	
 }

@@ -7,8 +7,7 @@
 		url="jdbc:postgresql://mars.dev.klee.lan.net:5432/mars"
 		username="mars"
 		password="mars" />
-		
-		
+				
 		<Resource name="jdbc/DataSourceHomePg"
 		auth="SERVLET"
 		type="javax.sql.DataSource"
@@ -32,5 +31,5 @@
 	<Parameter name="ledgerHost" value="http://mars.dev.klee.lan.net:8545" override="false"/>
 	<Parameter name="mosquittoHost" value="tcp://mars.dev.klee.lan.net:1883" override="false"/>
 	<Parameter name="orchestra.root.directory" value="d:/data/"/>	
-	<Parameter name="suppliersImportLimit" value="20000" />
+	<Parameter name="suppliersImportLimit" value="500000" />
 </Context>

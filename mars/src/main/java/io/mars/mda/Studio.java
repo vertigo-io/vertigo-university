@@ -49,7 +49,7 @@ public class Studio {
 						.withSqlDomainGenerator(
 								Param.of("targetSubDir", "javagen/sqlgen"),
 								Param.of("baseCible", "H2"),
-								Param.of("generateDrop", "false"),
+								Param.of("generateDrop", "true"),
 								Param.of("generateMasterData", "true"))
 						.withJsonMasterDataValuesProvider(
 								Param.of("fileName", "io/mars/masterDataValues.json"))

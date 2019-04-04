@@ -215,7 +215,7 @@ create Domain DoFilePath {
 create Domain DoFileData {
 	dataType : DataStream
 	formatter : FmtDefault
-	storeType : "BLOB"
+	storeType : "bytea"
 }
 
 create Domain DoTags {
