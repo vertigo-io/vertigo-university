@@ -43,7 +43,7 @@ public class ParseCSVSuppliersActivityEngine extends AbstractActivityEngine {
 				int count = 0;
 				rd.readLine();// skip first line
 				while ((line = rd.readLine()) != null) {
-					if (supplierLimit.isPresent() && count > supplierLimit.get().getValueAsInt()) {
+					if (supplierLimit.isPresent() && count >= supplierLimit.get().getValueAsInt()) {
 						break;
 					}
 					count++;
