@@ -38,37 +38,21 @@ create DtDefinition DtTicketStatus {
 create Association ATicketWorkOrder {
 	fkFieldName : "ticketId"
     
- 	dtDefinitionA : DtTicket
-	dtDefinitionB : DtWorkOrder
+ 	dtDefinitionA : DtWorkOrder
+ 	type : "*>?"
+	dtDefinitionB : DtTicket
 			
-	navigabilityA : "true"
-	navigabilityB : "false"
-	
-	multiplicityA:"0..1"
-	multiplicityB:"0..*"
-	
-	labelA : "Ticket"
-	labelB : "Ticket Work Orders"
-	roleA : "Ticket"
-	roleB : "TicketWorkOrders"
+	labelB : "Ticket"
 }
 
 create Association ATicketTicketStatus {
 	fkFieldName : "ticketStatusId"
     
  	dtDefinitionA : DtTicket
+ 	type : "*>?"
 	dtDefinitionB : DtTicketStatus
 			
-	navigabilityA : "false"
-	navigabilityB : "true"
-	
-	multiplicityA:"0..*"	
-	multiplicityB:"0..1"
-	
-	labelA : "Ticket"
 	labelB : "Ticket Status"
-	roleA : "Ticketr"
-	roleB : "TicketStatus"
 }
 
 
@@ -76,35 +60,19 @@ create Association AWorkOrderWorkOrderStatus {
 	fkFieldName : "workOrderStatusId"
     
  	dtDefinitionA : DtWorkOrder
+ 	type : "*>?"
 	dtDefinitionB : DtWorkOrderStatus
 			
-	navigabilityA : "false"
-	navigabilityB : "true"
-	
-	multiplicityA:"0..*"	
-	multiplicityB:"0..1"
-	
-	labelA : "Work Order"
 	labelB : "Work Order Status"
-	roleA : "WorkOrder"
-	roleB : "WorkOrderStatus"
 }
 
 create Association AEquipmentTicket {
 	fkFieldName : "equipmentId"
     
- 	dtDefinitionA : DtEquipment
-	dtDefinitionB : DtTicket
+ 	dtDefinitionA : DtTicket
+ 	type : "*>?"
+	dtDefinitionB : DtEquipment
 			
-	navigabilityA : "true"
-	navigabilityB : "false"
-	
-	multiplicityA:"0..1"
-	multiplicityB:"0..*"
-	
-	labelA : "Equipment"
-	labelB : "Equipment tickets"
-	roleA : "Equipment"
-	roleB : "EquipmentTickets"
+	labelB : "Equipment"
 }
 

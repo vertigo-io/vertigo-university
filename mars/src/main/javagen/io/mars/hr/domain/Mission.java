@@ -58,8 +58,8 @@ public final class Mission implements Entity {
 			primaryMultiplicity = "0..1",
 			foreignDtDefinitionName = "DtMission",
 			foreignIsNavigable = false,
-			foreignRole = "BusinessMissions",
-			foreignLabel = "Business Missions",
+			foreignRole = "Mission",
+			foreignLabel = "Mission",
 			foreignMultiplicity = "0..*")
 	private final VAccessor<io.mars.basemanagement.domain.Business> businessIdAccessor = new VAccessor<>(io.mars.basemanagement.domain.Business.class, "Business");
 

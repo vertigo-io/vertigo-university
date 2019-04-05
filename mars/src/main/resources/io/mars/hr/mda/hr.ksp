@@ -38,35 +38,19 @@ create DtDefinition DtMissionDisplay {
 create Association APersonMission {
 	fkFieldName : "personId"
     
- 	dtDefinitionA : DtPerson
-	dtDefinitionB : DtMission
+ 	dtDefinitionA : DtMission
+ 	type : "*>?"
+	dtDefinitionB : DtPerson
 			
-	navigabilityA : "true"
-	navigabilityB : "false"
-	
-	multiplicityA:"0..1"	
-	multiplicityB:"0..*"
-	
-	labelA : "Person"
-	labelB : "Mission"
-	roleA : "Person"
-	roleB : "Mission"
+	labelB : "Person"
 }
 
 create Association APersonGroups {
 	fkFieldName : "groupId"
     
  	dtDefinitionA : DtPerson
+ 	type : "*>?"
 	dtDefinitionB : DtGroups
-			
-	navigabilityA : "false"
-	navigabilityB : "true"
 	
-	multiplicityA:"0..*"	
-	multiplicityB:"0..1"
-	
-	labelA : "Person"
 	labelB : "Group"
-	roleA : "Person"
-	roleB : "Group"
 }

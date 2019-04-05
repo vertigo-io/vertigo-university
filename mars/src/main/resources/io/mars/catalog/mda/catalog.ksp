@@ -21,16 +21,8 @@ create Association AEquipmentTypeEquipmentCategory {
 	fkFieldName : "equipmentCategoryId"
     
  	dtDefinitionA : DtEquipmentType
+ 	type : "*>?"
 	dtDefinitionB : DtEquipmentCategory
 			
-	navigabilityA : "false"
-	navigabilityB : "true"
-	
-	multiplicityA:"0..*"	
-	multiplicityB:"0..1"
-	
-	labelA : "Equipment Type"
 	labelB : "Equipment Category"
-	roleA : "EquipmentType"
-	roleB : "EquipmentCategory"
 }

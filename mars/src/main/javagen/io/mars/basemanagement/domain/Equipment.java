@@ -36,8 +36,8 @@ public final class Equipment implements KeyConcept {
 			primaryMultiplicity = "0..1",
 			foreignDtDefinitionName = "DtEquipment",
 			foreignIsNavigable = false,
-			foreignRole = "BaseEquipments",
-			foreignLabel = "Base Equipments",
+			foreignRole = "Equipment",
+			foreignLabel = "Equipment",
 			foreignMultiplicity = "0..*")
 	private final VAccessor<io.mars.basemanagement.domain.Base> baseIdAccessor = new VAccessor<>(io.mars.basemanagement.domain.Base.class, "Base");
 
@@ -66,8 +66,8 @@ public final class Equipment implements KeyConcept {
 			primaryMultiplicity = "0..1",
 			foreignDtDefinitionName = "DtEquipment",
 			foreignIsNavigable = false,
-			foreignRole = "BusinessEquipment",
-			foreignLabel = "Business Equipment",
+			foreignRole = "Equipment",
+			foreignLabel = "Equipment",
 			foreignMultiplicity = "0..*")
 	private final VAccessor<io.mars.basemanagement.domain.Business> businessIdAccessor = new VAccessor<>(io.mars.basemanagement.domain.Business.class, "Business");
 

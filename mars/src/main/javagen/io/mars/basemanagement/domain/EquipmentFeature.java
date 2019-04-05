@@ -28,8 +28,8 @@ public final class EquipmentFeature implements Entity {
 			primaryMultiplicity = "0..1",
 			foreignDtDefinitionName = "DtEquipmentFeature",
 			foreignIsNavigable = false,
-			foreignRole = "EquipmentFeatures",
-			foreignLabel = "Equipment Features",
+			foreignRole = "EquipmentFeature",
+			foreignLabel = "EquipmentFeature",
 			foreignMultiplicity = "0..*")
 	private final VAccessor<io.mars.basemanagement.domain.Equipment> equipmentIdAccessor = new VAccessor<>(io.mars.basemanagement.domain.Equipment.class, "Equipment");
 

@@ -74,18 +74,10 @@ create Association AMissionBase {
 	fkFieldName : "baseId"
     
  	dtDefinitionA : DtMission
+ 	type : "*>?"
 	dtDefinitionB : DtBase
-			
-	navigabilityA : "false"
-	navigabilityB : "true"
 	
-	multiplicityA:"0..*"	
-	multiplicityB:"0..1"
-	
-	labelA : "Mission"
 	labelB : "Base"
-	roleA : "Mission"
-	roleB : "Base"
 }
 
 
@@ -93,18 +85,10 @@ create Association ABaseBasetype {
 	fkFieldName : "baseTypeId"
     
  	dtDefinitionA : DtBase
+ 	type : "*>?"
 	dtDefinitionB : DtBaseType
-			
-	navigabilityA : "false"
-	navigabilityB : "true"
 	
-	multiplicityA:"0..*"	
-	multiplicityB:"0..1"
-	
-	labelA : "Base"
 	labelB : "Base Type"
-	roleA : "Base"
-	roleB : "BaseType"
 	
 }
 
@@ -112,72 +96,40 @@ create Association ABaseGeosector {
 	fkFieldName : "geosectorId"
     
  	dtDefinitionA : DtBase
+ 	type : "*>?"
 	dtDefinitionB : DtGeosector
-			
-	navigabilityA : "false"
-	navigabilityB : "true"
 	
-	multiplicityA:"0..*"
-	multiplicityB:"0..1"
-	
-	labelA : "Base"
 	labelB : "Base Geosector"
-	roleA : "Base"
-	roleB : "Geosector"
 }
 
 create Association ABasePicture {
 	fkFieldName : "baseId"
     
- 	dtDefinitionA : DtBase
-	dtDefinitionB : DtPicture
+ 	dtDefinitionA : DtPicture
+ 	type : "*>1"
+	dtDefinitionB : DtBase
 			
-	navigabilityA : "false"
-	navigabilityB : "true"
-	
-	multiplicityA:"1..1"
-	multiplicityB:"0..*"
-	
-	labelA : "Base"
-	labelB : "Base Pictures"
-	roleA : "Base"
-	roleB : "Pictures"
+	labelB : "Base"
 }
 
 create Association ABaseEquipment {
 	fkFieldName : "baseId"
     
- 	dtDefinitionA : DtBase
-	dtDefinitionB : DtEquipment
+ 	dtDefinitionA : DtEquipment
+ 	type : "*>?"
+	dtDefinitionB : DtBase
 			
-	navigabilityA : "true"
-	navigabilityB : "false"
-	
-	multiplicityA:"0..1"
-	multiplicityB:"0..*"
-	
-	labelA : "Base"
-	labelB : "Base Equipments"
-	roleA : "Base"
-	roleB : "BaseEquipments"
+	labelB : "Base"
 }
 
 create Association AEquipmentEquipmentType {
 	fkFieldName : "equipmentTypeId"
     
  	dtDefinitionA : DtEquipment
+ 	type : "*>?"
 	dtDefinitionB : DtEquipmentType
 			
-	navigabilityA : "false"
-	navigabilityB : "true"
-	
-	multiplicityA:"0..*"	
-	multiplicityB:"0..1"
-	
-	labelA : "Equipment"
 	labelB : "Equipment Type"
-	roleA : "Equipment"
-	roleB : "EquipmentType"
 }
 
 
@@ -185,71 +137,39 @@ create Association AEquipmentGeosector {
 	fkFieldName : "geosectorId"
     
  	dtDefinitionA : DtEquipment
+ 	type : "*>?"
 	dtDefinitionB : DtGeosector
 			
-	navigabilityA : "false"
-	navigabilityB : "true"
-	
-	multiplicityA:"0..*"
-	multiplicityB:"0..1"
-	
-	labelA : "Equipment"
 	labelB : "Equipment Geosector"
-	roleA : "Equipment"
-	roleB : "Geosector"
 	
 }
 
 create Association AEquipmentEquipmentFeature {
 	fkFieldName : "equipmentId"
     
- 	dtDefinitionA : DtEquipment
-	dtDefinitionB : DtEquipmentFeature
+ 	dtDefinitionA : DtEquipmentFeature
+ 	type : "*>?"
+	dtDefinitionB : DtEquipment
 			
-	navigabilityA : "true"
-	navigabilityB : "false"
-	
-	multiplicityA:"0..1"	
-	multiplicityB:"0..*"
-	
-	labelA : "Equipment"
-	labelB : "Equipment Features"
-	roleA : "Equipment"
-	roleB : "EquipmentFeatures"
+	labelB : "Equipment"
 }
 
 create Association ABusinessMission {
 	fkFieldName : "businessId"
     
- 	dtDefinitionA : DtBusiness
-	dtDefinitionB : DtMission
+ 	dtDefinitionA : DtMission
+ 	type : "*>?"
+	dtDefinitionB : DtBusiness
 			
-	navigabilityA : "true"
-	navigabilityB : "false"
-	
-	multiplicityA:"0..1"	
-	multiplicityB:"0..*"
-	
-	labelA : "Business"
-	labelB : "Business Missions"
-	roleA : "Business"
-	roleB : "BusinessMissions"
+	labelB : "Business"
 }
 
 create Association ABusinessEquipment {
 	fkFieldName : "businessId"
     
- 	dtDefinitionA : DtBusiness
-	dtDefinitionB : DtEquipment
+ 	dtDefinitionA : DtEquipment
+ 	type : "*>?"
+	dtDefinitionB : DtBusiness
 			
-	navigabilityA : "true"
-	navigabilityB : "false"
-	
-	multiplicityA:"0..1"	
-	multiplicityB:"0..*"
-	
-	labelA : "Business"
-	labelB : "Business Equipment"
-	roleA : "Business"
-	roleB : "BusinessEquipment"
+	labelB : "Business"
 }

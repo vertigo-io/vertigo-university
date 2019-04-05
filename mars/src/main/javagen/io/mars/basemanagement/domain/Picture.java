@@ -22,14 +22,14 @@ public final class Picture implements Entity {
 			name = "ABasePicture",
 			fkFieldName = "baseId",
 			primaryDtDefinitionName = "DtBase",
-			primaryIsNavigable = false,
+			primaryIsNavigable = true,
 			primaryRole = "Base",
 			primaryLabel = "Base",
 			primaryMultiplicity = "1..1",
 			foreignDtDefinitionName = "DtPicture",
-			foreignIsNavigable = true,
-			foreignRole = "Pictures",
-			foreignLabel = "Base Pictures",
+			foreignIsNavigable = false,
+			foreignRole = "Picture",
+			foreignLabel = "Picture",
 			foreignMultiplicity = "0..*")
 	private final VAccessor<io.mars.basemanagement.domain.Base> baseIdAccessor = new VAccessor<>(io.mars.basemanagement.domain.Base.class, "Base");
 

@@ -2,7 +2,6 @@ package io.mars.basemanagement.domain;
 
 import io.vertigo.dynamo.domain.model.KeyConcept;
 import io.vertigo.dynamo.domain.model.EnumVAccessor;
-import io.vertigo.dynamo.domain.model.ListVAccessor;
 import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.model.VAccessor;
 import io.vertigo.dynamo.domain.stereotype.Field;
@@ -57,21 +56,6 @@ public final class Base implements KeyConcept {
 			foreignLabel = "Base",
 			foreignMultiplicity = "0..*")
 	private final VAccessor<io.mars.basemanagement.domain.Geosector> geosectorIdAccessor = new VAccessor<>(io.mars.basemanagement.domain.Geosector.class, "Geosector");
-
-	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "ABasePicture",
-			fkFieldName = "baseId",
-			primaryDtDefinitionName = "DtBase",
-			primaryIsNavigable = false,
-			primaryRole = "Base",
-			primaryLabel = "Base",
-			primaryMultiplicity = "1..1",
-			foreignDtDefinitionName = "DtPicture",
-			foreignIsNavigable = true,
-			foreignRole = "Pictures",
-			foreignLabel = "Base Pictures",
-			foreignMultiplicity = "0..*")
-	private final ListVAccessor<io.mars.basemanagement.domain.Picture> picturesAccessor = new ListVAccessor<>(this, "ABasePicture", "Pictures");
 
 	/** {@inheritDoc} */
 	@Override
@@ -321,14 +305,6 @@ public final class Base implements KeyConcept {
 	 */
 	public VAccessor<io.mars.basemanagement.domain.Geosector> geosector() {
 		return geosectorIdAccessor;
-	}
-
-	/**
-	 * Association : Base Pictures.
-	 * @return l'accesseur vers la propriété 'Base Pictures'
-	 */
-	public ListVAccessor<io.mars.basemanagement.domain.Picture> pictures() {
-		return picturesAccessor;
 	}
 	
 	/** {@inheritDoc} */
