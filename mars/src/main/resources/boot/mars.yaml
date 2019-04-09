@@ -55,7 +55,7 @@ modules:
       - sql.datasource:
           __flags__: ["home"]
           classname: io.vertigo.database.impl.sql.vendor.h2.H2DataBase
-          source: java:/comp/env/jdbc/DataSourceHomePg
+          source: java:/comp/env/jdbc/DataSourceHome
   io.vertigo.dynamo.DynamoFeatures:
     features:
       - store:
