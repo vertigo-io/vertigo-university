@@ -10,7 +10,7 @@
 	<link rel="stylesheet" th:href="@{/static/css/mars.css}" />
 	<link rel="icon" th:href="@{/static/img/favicon.ico}" />
 	<script th:src="@{/static/js/mars.js}"></script>
-	<th:block th:if="${model.closeSuccess}">
+	<th:block th:if="${model.containsKey('closeSuccess') && model.closeSuccess}">
 		<script>
 		       	window.parent.[[${model.successCallback}]]();
 			</script>
@@ -21,7 +21,7 @@
 		<q-layout view="hHh LpR fff" id="page" v-cloak>
 			<q-page-container class="row justify-center">
 				<q-page	class="q-layout-page row col-12 mgutter-md">
-					<div class="col content-body">
+					<div class="col-12 content-body">
 						<section layout:fragment="page-container"></section>
 					</div>
 				</q-page>

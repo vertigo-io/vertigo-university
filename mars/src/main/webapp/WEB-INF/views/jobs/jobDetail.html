@@ -44,8 +44,8 @@
 							<vu:include-data object="executionSummary" field="misfiredCount" />
 							<vu:include-data object="executionSummary" field="averageExecutionTime" />
 							<div class="health" >
-								<q-icon v-if="vueData.executionSummary.health == 'ERROR'" name="favorite" color="negative" size="32px"></q-icon>
-								<q-icon v-if="vueData.executionSummary.health == 'WARNING'" name="favorite" color="warning" size="32px"></q-icon>
+								<q-icon v-if="vueData.executionSummary.health === 'ERROR'" name="favorite" color="negative" size="32px"></q-icon>
+								<q-icon v-else-if="vueData.executionSummary.health === 'WARNING'" name="favorite" color="warning" size="32px"></q-icon>
 								<q-icon v-else name="favorite" color="positive" size="32px"></q-icon>
 								<span>&nbsp;</span>
 							</div>

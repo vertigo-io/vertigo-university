@@ -36,7 +36,7 @@
 					<q-btn label="View detail" th:@click="|openModal('jobExecutionDetailModal', '@{/jobExecutionDetail/}' + props.row.preId )|"></q-btn>
 				</vu:column>
 			</vu:table>
-			<vu:modal componentId="jobExecutionDetailModal" closeLabel="Close" iframe_width="1000" iframe_height="800" />
+			<vu:modal componentId="jobExecutionDetailModal" title="Execution Detail" iframe_width="1000" iframe_height="800" />
 		</section>
 	</body>
 </html>
