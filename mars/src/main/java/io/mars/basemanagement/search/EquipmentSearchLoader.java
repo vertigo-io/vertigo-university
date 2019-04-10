@@ -7,42 +7,29 @@ import javax.inject.Inject;
 
 import io.mars.basemanagement.domain.Equipment;
 import io.mars.basemanagement.services.equipment.EquipmentServices;
+import io.vertigo.app.Home;
 import io.vertigo.commons.transaction.VTransactionManager;
-import io.vertigo.core.component.Activeable;
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.domain.model.UID;
-import io.vertigo.dynamo.search.SearchManager;
 import io.vertigo.dynamo.search.metamodel.SearchChunk;
 import io.vertigo.dynamo.search.metamodel.SearchIndexDefinition;
 import io.vertigo.dynamo.search.model.SearchIndex;
 import io.vertigo.dynamo.task.TaskManager;
 import io.vertigo.dynamox.search.AbstractSqlSearchLoader;
 
-public final class EquipmentSearchLoader extends AbstractSqlSearchLoader<Long, Equipment, EquipmentIndex> implements Activeable {
+public final class EquipmentSearchLoader extends AbstractSqlSearchLoader<Long, Equipment, EquipmentIndex> {
 
 	private final EquipmentServices myEquipmentServices;
-	private final SearchManager searchManager;
-	private SearchIndexDefinition indexDefinition;
 
 	@Inject
-	public EquipmentSearchLoader(final TaskManager taskManager, final SearchManager searchManager, final VTransactionManager transactionManager, final EquipmentServices equipmentServices) {
+	public EquipmentSearchLoader(final TaskManager taskManager, final VTransactionManager transactionManager, final EquipmentServices equipmentServices) {
 		super(taskManager, transactionManager);
-		this.searchManager = searchManager;
 		myEquipmentServices = equipmentServices;
 	}
 
 	@Override
-	public void start() {
-		indexDefinition = searchManager.findFirstIndexDefinitionByKeyConcept(Equipment.class);
-	}
-
-	@Override
-	public void stop() {
-		indexDefinition = null;
-	}
-
-	@Override
 	public List<SearchIndex<Equipment, EquipmentIndex>> loadData(final SearchChunk<Equipment> searchChunk) {
+		final SearchIndexDefinition indexDefinition = Home.getApp().getDefinitionSpace().resolve("IdxEquipment", SearchIndexDefinition.class);
 		final List<Long> equipmentIds = new ArrayList<>();
 		for (final UID<Equipment> uid : searchChunk.getAllUIDs()) {
 			equipmentIds.add((Long) uid.getId());

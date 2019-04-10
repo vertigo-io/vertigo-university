@@ -75,7 +75,7 @@ modules:
       - search.elasticsearchTransport:
           __flags__: ["klee"]
           servers.names: ${esHost}
-          envIndex: MARS_
+          envIndex: mars
           cluster.name: mars
           rowsPerQuery: 50
           config.file: search/elasticsearch.yml
