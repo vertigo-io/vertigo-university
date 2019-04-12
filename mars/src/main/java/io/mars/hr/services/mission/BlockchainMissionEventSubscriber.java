@@ -1,7 +1,6 @@
 package io.mars.hr.services.mission;
 
 import java.util.Set;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.stream.Collectors;
 
 import javax.inject.Inject;
@@ -12,7 +11,6 @@ import io.mars.hr.domain.Mission;
 import io.mars.hr.domain.Person;
 import io.mars.hr.services.person.PersonServices;
 import io.vertigo.account.account.Account;
-import io.vertigo.commons.daemon.DaemonScheduled;
 import io.vertigo.commons.eventbus.EventBusSubscribed;
 import io.vertigo.core.component.Component;
 import io.vertigo.dynamo.domain.model.DtListState;
@@ -23,14 +21,11 @@ import io.vertigo.social.services.notification.NotificationServices;
 
 public class BlockchainMissionEventSubscriber implements Component {
 
-	private final ConcurrentLinkedQueue<String> messageQueue = new ConcurrentLinkedQueue<>();
-
 	@Inject
 	private LedgerManager ledgerManager;
 
 	@Inject
 	private PersonServices personServices;
-
 	@Inject
 	private NotificationServices notificationServices;
 
@@ -49,7 +44,18 @@ public class BlockchainMissionEventSubscriber implements Component {
 				.append(" for the company ")
 				.append(business.getName());
 
-		messageQueue.add(sbSerializedTicket.toString());
+		final String message = sbSerializedTicket.toString();
+		ledgerManager.sendDataAsync(message, () -> {
+			final Notification notification = Notification.builder()
+					.withSender("System")
+					.withTitle("New assignement sucessfully written to the ledger")
+					.withContent(message)
+					.withTTLInSeconds(600)
+					.withType("MARS-MISSION-LEDGER") //should prefix by app, in case of multi-apps notifications
+					.withTargetUrl("#")
+					.build();
+			sendNotificationToAll(notification);
+		});
 
 		final Notification notification = Notification.builder()
 				.withSender("System")
@@ -60,29 +66,6 @@ public class BlockchainMissionEventSubscriber implements Component {
 				.withTargetUrl("#")
 				.build();
 		sendNotificationToAll(notification);
-	}
-
-	/**
-	 * Daemon to unstack processes to end them
-	 */
-	@DaemonScheduled(name = "DmnFlushLedgerMessagesMission", periodInSeconds = 10)
-	public void pollQueue() {
-		while (!messageQueue.isEmpty()) {
-			final String message = messageQueue.poll();
-			if (message != null) {
-				ledgerManager.sendData(message);
-
-				final Notification notification = Notification.builder()
-						.withSender("System")
-						.withTitle("New assignement sucessfully written to the ledger")
-						.withContent(message)
-						.withTTLInSeconds(600)
-						.withType("MARS-MISSION-LEDGER") //should prefix by app, in case of multi-apps notifications
-						.withTargetUrl("#")
-						.build();
-				sendNotificationToAll(notification);
-			}
-		}
 	}
 
 	private void sendNotificationToAll(final Notification notification) {

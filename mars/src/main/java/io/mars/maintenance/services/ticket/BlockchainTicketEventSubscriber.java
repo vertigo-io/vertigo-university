@@ -10,7 +10,6 @@ import javax.inject.Inject;
 import io.mars.hr.services.person.PersonServices;
 import io.mars.maintenance.domain.Ticket;
 import io.vertigo.account.account.Account;
-import io.vertigo.commons.daemon.DaemonScheduled;
 import io.vertigo.commons.eventbus.EventBusSubscribed;
 import io.vertigo.core.component.Component;
 import io.vertigo.dynamo.domain.model.DtListState;
@@ -48,7 +47,18 @@ public class BlockchainTicketEventSubscriber implements Component {
 					.append(". Ticket created at ")
 					.append(strDateCreated);
 
-			messageQueue.add(sbSerializedTicket.toString());
+			final String message = sbSerializedTicket.toString();
+			ledgerManager.sendDataAsync(message, () -> {
+				final Notification notification = Notification.builder()
+						.withSender("System")
+						.withTitle("New ticket sucessfully written to the ledger")
+						.withContent(message)
+						.withTTLInSeconds(600)
+						.withType("MARS-TICKET-LEDGER") //should prefix by app, in case of multi-apps notifications
+						.withTargetUrl("#")
+						.build();
+				sendNotificationToAll(notification);
+			});
 
 			final Notification notification = Notification.builder()
 					.withSender("System")
@@ -59,29 +69,6 @@ public class BlockchainTicketEventSubscriber implements Component {
 					.withTargetUrl("#")
 					.build();
 			sendNotificationToAll(notification);
-		}
-	}
-
-	/**
-	 * Daemon to unstack processes to end them
-	 */
-	@DaemonScheduled(name = "DmnFlushLedgerMessagesTicket", periodInSeconds = 10)
-	public void pollQueue() {
-		while (!messageQueue.isEmpty()) {
-			final String message = messageQueue.poll();
-			if (message != null) {
-				ledgerManager.sendData(message);
-
-				final Notification notification = Notification.builder()
-						.withSender("System")
-						.withTitle("New ticket sucessfully written to the ledger")
-						.withContent(message)
-						.withTTLInSeconds(600)
-						.withType("MARS-TICKET-LEDGER") //should prefix by app, in case of multi-apps notifications
-						.withTargetUrl("#")
-						.build();
-				sendNotificationToAll(notification);
-			}
 		}
 	}
 
