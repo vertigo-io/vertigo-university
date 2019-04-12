@@ -6,16 +6,79 @@
 >
 	<head>
 		<title>Jobs</title>
-		<script type="text/javascript">
-		VUiExtensions.methods.navigate =  function navigate(url) { window.location.href = url; }
-	</script>
 	</head>
 	
 	<body>
 		<section layout:fragment="content" >
+			<div class="row q-mb-md text-secondary">
+				<div th:ref="tableTitle" class="q-title self-center">Week Summary</div>
+			</div>
+			<vu:include-data object="summaries" field="processName" />
+			<vu:list list="summaries" componentId="baseCards" rowsPerPage="10" item_@click.native="|goTo('@{/jobDetail/}'+item.processName)|" item_class="q-mb-sm bg-white nav" >
+				<q-item-main>
+					<div class="row col items-center">
+						<div class="col-4 text-bold uppercase">
+							<vu:include-data object="summaries" field="processLabel" />
+							{{item.processLabel}}
+						</div>
+						<div class="col-4 execution-summary row justify-start items-center">
+							<vu:include-data object="summaries" field="health" />
+							<vu:include-data object="summaries" field="errorsCount" />
+							<vu:include-data object="summaries" field="successfulCount" />
+							<vu:include-data object="summaries" field="runningCount" />
+							<vu:include-data object="summaries" field="misfiredCount" />
+							<vu:include-data object="summaries" field="averageExecutionTime" />
+							<div class="health" >
+								<q-icon v-if="item.health === 'ERROR'" name="favorite" color="negative" size="24px"></q-icon>
+								<q-icon v-else-if="item.health === 'WARNING'" name="favorite" color="warning" size="24px"></q-icon>
+								<q-icon v-else name="favorite" color="positive" size="24px"></q-icon>
+							</div>
+							<div class="error" >
+								<q-icon name="report_problem" color="negative" size="24px"></q-icon>
+								<span>{{item.errorsCount}}</span>
+							</div>
+							<div class="success" >
+								<q-icon name="verified_user" color="positive" size="24px" ></q-icon>
+								<span>{{item.successfulCount}}</span>
+							</div>
+							<div class="misfired" >
+								<q-icon name="alarm_off" color="faded" size="24px"></q-icon>
+								<span>{{item.misfiredCount}}</span>
+							</div>
+							<div class="time" >
+								<q-icon name="timer" size="24px"></q-icon>
+								<span>{{item.averageExecutionTime}}</span>
+							</div>
+							<div v-if="item.runningCount > 0" >
+								<div class="row col inline relative-position bg-primary q-pa-sm text-white">
+								RUNNING
+								<q-chip floating>{{item.runningCount}}</q-chip>
+								</div>
+							</div>
+						</div>
+						<div class="col-2">
+							<vu:include-data object="summaries" field="lastExecutionTime" />
+							<div class="column items-center">
+								<div>Last execution</div>
+								<div class="text-bold">{{item.lastExecutionTime}}</div>
+							</div>
+						</div>
+						<div class="col-2">
+							<vu:include-data object="summaries" field="nextExecutionTime" />
+							<div class="column items-center">
+								<div>Next execution</div>
+								<div class="text-bold">{{item.nextExecutionTime}}</div>
+							</div>
+						</div>
+					</div>
+				</q-item-main>
+			</vu:list>
+			<div class="row q-my-md text-secondary">
+				<div th:ref="tableTitle" class="q-title self-center">All jobs</div>
+			</div>
 			<vu:include-data object="jobs" field="name"/>
 			<vu:include-data object="jobs" field="label"/>
-			<vu:list list="jobs" componentId="jobsList" rowsPerPage="20" >
+			<vu:list list="jobs" componentId="jobsList" rowsPerPage="10" item_@click.native="|goTo('@{/jobDetail/}'+item.name)|" item_class="q-mb-sm bg-white nav">
 				<q-item-main>
 					<div class="row" >
 						<div class="col-6">
@@ -26,9 +89,6 @@
 						</div>
 					</div>
 				</q-item-main>
-				<q-item-side>
-					<q-btn round color="primary" icon="arrow_forward" type="a" th::href="|'@{/jobDetail/}'+item.name|"></q-btn>
-				</q-item-side>
 			</vu:list>
 		</section>
 	</body>
