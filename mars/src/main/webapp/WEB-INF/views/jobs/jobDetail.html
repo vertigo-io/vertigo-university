@@ -26,7 +26,7 @@
 			<div layout:fragment="content-header-actions">
 				<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>
 				<vu:button-submit th:if="${model.modeEdit}"   action="@{_cancel}" :round size="lg" color="primary" icon="fas fa-ban" :flat aria-label="Cancel" title="Cancel" class="on-left"  />
-				<vu:button-submit action="@{_executeNow}" :round size="lg" color="primary" icon="play_circle_outline" aria-label="Execute now" title="Execute" class="on-left"/>
+				<q-btn round size="lg" color="primary" icon="play_circle_outline" class="on-left"  th:@click="|httpPostAjax('@{_executeNow}', {}, function(response){ this.$q.notify({message : 'Job scheduled', type : 'positive'});})|" ></q-btn>
 			</div>
 			<div layout:fragment="content-header-tabs">
 				<vu:button-link class="active" flat label="Detail" url="@{/jobDetail/} + ${model.job.name}"/>
@@ -64,6 +64,12 @@
 							<div class="time" >
 								<q-icon name="timer" size="32px"></q-icon>
 								<span>{{vueData.executionSummary.averageExecutionTime}}</span>
+							</div>
+							<div v-if="vueData.executionSummary.runningCount > 0" >
+								<div class="row col inline relative-position bg-primary q-pa-sm text-white">
+								RUNNING
+								<q-chip floating>{{vueData.executionSummary.runningCount}}</q-chip>
+								</div>
 							</div>
 						</div>
 				</vu:block>

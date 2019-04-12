@@ -76,8 +76,9 @@ public class JobDetailController extends AbstractVSpringMvcController {
 	}
 
 	@PostMapping("/_executeNow")
-	public void doExecuteNow(@ViewAttribute("job") final OProcessUi job) {
+	public ViewContext doExecuteNow(final ViewContext viewContext, @ViewAttribute("job") final OProcessUi job) {
 		orchestraServices.getScheduler().scheduleAt(orchestraDefinitionManager.getProcessDefinition(job.getName()), Instant.now(), Collections.emptyMap());
+		return viewContext;
 	}
 
 	private static Instant getFirstDayOfNextWeekDate(final Calendar first) {
