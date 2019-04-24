@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import io.mars.basemanagement.domain.Base;
 import io.mars.basemanagement.domain.Business;
 import io.mars.basemanagement.services.base.BaseServices;
 import io.mars.hr.domain.Mission;
@@ -58,8 +59,7 @@ public class MissionDetailController extends AbstractVSpringMvcController {
 	}
 
 	private void loadLists(final ViewContext viewContext) {
-		final DtListState dtListState = DtListState.of(null, 0);
-		viewContext.publishDtList(ViewContextKey.of("bases"), baseServices.getBases(dtListState));
+		viewContext.publishDtList(ViewContextKey.of("bases"), baseServices.getBases(DtListState.defaultOf(Base.class)));
 		viewContext.publishMdl(ViewContextKey.of("businesses"), Business.class, null);
 	}
 

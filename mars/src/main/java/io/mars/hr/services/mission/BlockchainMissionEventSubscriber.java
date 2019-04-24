@@ -69,7 +69,7 @@ public class BlockchainMissionEventSubscriber implements Component {
 	}
 
 	private void sendNotificationToAll(final Notification notification) {
-		final Set<UID<Account>> accountUIDs = personServices.getPersons(DtListState.of(null, 0))
+		final Set<UID<Account>> accountUIDs = personServices.getPersons(DtListState.of(null))
 				.stream()
 				.map((person) -> UID.of(Account.class, String.valueOf(person.getPersonId())))
 				.collect(Collectors.toSet());

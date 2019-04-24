@@ -2,7 +2,6 @@ package io.mars.maintenance.services.ticket;
 
 import java.time.format.DateTimeFormatter;
 import java.util.Set;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.stream.Collectors;
 
 import javax.inject.Inject;
@@ -20,7 +19,6 @@ import io.vertigo.social.services.notification.NotificationServices;
 
 public class BlockchainTicketEventSubscriber implements Component {
 
-	private final ConcurrentLinkedQueue<String> messageQueue = new ConcurrentLinkedQueue<>();
 	private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 	@Inject
@@ -73,7 +71,7 @@ public class BlockchainTicketEventSubscriber implements Component {
 	}
 
 	private void sendNotificationToAll(final Notification notification) {
-		final Set<UID<Account>> accountUIDs = personServices.getPersons(DtListState.of(null, 0))
+		final Set<UID<Account>> accountUIDs = personServices.getPersons(DtListState.of(null))
 				.stream()
 				.map((person) -> UID.of(Account.class, String.valueOf(person.getPersonId())))
 				.collect(Collectors.toSet());

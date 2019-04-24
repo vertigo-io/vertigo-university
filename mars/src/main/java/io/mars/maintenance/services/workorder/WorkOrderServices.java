@@ -37,15 +37,11 @@ public class WorkOrderServices implements Component {
 		workOrderDAO.save(workOrder);
 	}
 
-	public DtList<WorkOrder> getWorkOrders(final DtListState dtListState) {
-		return workOrderDAO.findAll(Criterions.alwaysTrue(), dtListState.getMaxRows().orElse(50));
-	}
-
 	public DtList<WorkOrder> getWorkOrdersByTicketId(final Long ticketId) {
 		Assertion.checkNotNull(ticketId);
 		//---
 		return workOrderDAO.findAll(
-				Criterions.isEqualTo(WorkOrderFields.ticketId, ticketId), Integer.MAX_VALUE);
+				Criterions.isEqualTo(WorkOrderFields.ticketId, ticketId), DtListState.defaultOf(WorkOrder.class));
 	}
 
 	public DtList<WorkOrder> getLastWorkOrders() {

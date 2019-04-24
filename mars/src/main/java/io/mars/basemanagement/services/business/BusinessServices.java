@@ -25,6 +25,6 @@ public class BusinessServices implements Component {
 	}
 
 	public DtList<Business> getBusinesss(final DtListState dtListState) {
-		return businessDAO.findAll(Criterions.alwaysTrue(), dtListState.getMaxRows().orElse(50));
+		return businessDAO.findAll(Criterions.alwaysTrue(), dtListState);
 	}
 }

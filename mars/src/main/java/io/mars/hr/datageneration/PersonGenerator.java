@@ -19,6 +19,7 @@ import io.vertigo.core.component.Component;
 import io.vertigo.core.resource.ResourceManager;
 import io.vertigo.dynamo.criteria.Criterions;
 import io.vertigo.dynamo.domain.model.DtList;
+import io.vertigo.dynamo.domain.model.DtListState;
 import io.vertigo.dynamo.file.FileManager;
 import io.vertigo.dynamo.file.model.FileInfo;
 import io.vertigo.dynamo.file.model.VFile;
@@ -43,7 +44,7 @@ public class PersonGenerator implements Component {
 
 	public void createInitialPersonsFromCSV(final String csvFilePath, final List<Base> bases) {
 		CSVReaderUtil.parseCSV(resourceManager, csvFilePath, this::consume);
-		final DtList<Person> persons = personDAO.findAll(Criterions.alwaysTrue(), 500);
+		final DtList<Person> persons = personDAO.findAll(Criterions.alwaysTrue(), DtListState.defaultOf(Person.class));
 		createMissions(persons, bases);
 	}
 

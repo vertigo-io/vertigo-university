@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import io.mars.basemanagement.domain.Base;
 import io.mars.basemanagement.domain.Business;
 import io.mars.basemanagement.domain.Equipment;
 import io.mars.basemanagement.domain.EquipmentMaintenanceOverview;
@@ -56,8 +57,7 @@ public class EquipmentInformationController extends AbstractVSpringMvcController
 	}
 
 	private void loadLists(final ViewContext viewContext) {
-		final DtListState dtListState = DtListState.of(null, 0);
-		viewContext.publishDtList(ViewContextKey.of("bases"), baseServices.getBases(dtListState));
+		viewContext.publishDtList(ViewContextKey.of("bases"), baseServices.getBases(DtListState.defaultOf(Base.class)));
 		//---
 		viewContext.publishMdl(ViewContextKey.of("businesses"), Business.class, null);
 		viewContext.publishMdl(ViewContextKey.of("equipmentTypes"), EquipmentType.class, null);

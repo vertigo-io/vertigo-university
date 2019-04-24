@@ -54,10 +54,6 @@ public class TicketServices implements Component {
 		ticketDAO.update(ticket);
 	}
 
-	public DtList<Ticket> getTickets(final DtListState dtListState) {
-		return ticketDAO.findAll(Criterions.alwaysTrue(), dtListState.getMaxRows().orElse(50));
-	}
-
 	public DtList<Ticket> getLastestTicketsByBase(final Long baseId) {
 		Assertion.checkNotNull(baseId);
 		//---
@@ -74,7 +70,7 @@ public class TicketServices implements Component {
 		return ticketDAO.findAll(
 				Criterions.isEqualTo(TicketFields.equipmentId, equipmentId)
 						.and(Criterions.isNotEqualTo(TicketFields.ticketStatusId, (String) TicketStatusEnum.closed.getEntityUID().getId())),
-				Integer.MAX_VALUE);
+				DtListState.defaultOf(Ticket.class));
 	}
 
 	public DtList<Ticket> getClosedTicketsByEquipment(final Long equipmentId) {
@@ -83,7 +79,7 @@ public class TicketServices implements Component {
 		return ticketDAO.findAll(
 				Criterions.isEqualTo(TicketFields.equipmentId, equipmentId)
 						.and(Criterions.isEqualTo(TicketFields.ticketStatusId, (String) TicketStatusEnum.closed.getEntityUID().getId())),
-				Integer.MAX_VALUE);
+				DtListState.defaultOf(Ticket.class));
 	}
 
 }

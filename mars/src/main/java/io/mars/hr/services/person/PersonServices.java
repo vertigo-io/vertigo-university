@@ -70,7 +70,7 @@ public class PersonServices implements Component, Activeable {
 	}
 
 	public DtList<Person> getPersons(final DtListState dtListState) {
-		final DtList<Person> persons = personDAO.findAll(Criterions.alwaysTrue(), dtListState.getMaxRows().orElse(50));
+		final DtList<Person> persons = personDAO.findAll(Criterions.alwaysTrue(), dtListState);
 		if (dtListState.getSortFieldName().isPresent()) {
 			return collectionsManager.sort(persons, dtListState.getSortFieldName().get(), dtListState.isSortDesc().get());
 		}

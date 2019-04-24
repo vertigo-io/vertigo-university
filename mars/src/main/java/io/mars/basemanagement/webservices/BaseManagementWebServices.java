@@ -29,8 +29,7 @@ public class BaseManagementWebServices implements WebServices {
 	@AnonymousAccessAllowed
 	@GET("/bases")
 	public DtList<Base> bases() {
-		final DtListState dtListState = DtListState.of(null, 0);
-		return baseServices.getBases(dtListState);
+		return baseServices.getBases(DtListState.defaultOf(Base.class));
 	}
 
 	@AnonymousAccessAllowed
@@ -42,8 +41,7 @@ public class BaseManagementWebServices implements WebServices {
 	@AnonymousAccessAllowed
 	@GET("/equipmentTypes")
 	public DtList<EquipmentType> equimentTypes() {
-		final DtListState dtListState = DtListState.of(null, 0);
-		return equipmentTypeServices.getEquipmentTypes(dtListState);
+		return equipmentTypeServices.getEquipmentTypes(DtListState.defaultOf(EquipmentType.class));
 	}
 
 }

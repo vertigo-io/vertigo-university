@@ -31,9 +31,8 @@ public class SupplierSearchController extends AbstractVSpringMvcController {
 
 	@GetMapping("/")
 	public void initContext(final ViewContext viewContext) {
-		final DtListState dtListState = DtListState.of(50, 0);
 		viewContext.publishRef(criteriaKey, "");
-		final FacetedQueryResult<Supplier, SearchQuery> facetedQueryResult = supplierServices.searchSuppliers("", SelectedFacetValues.empty().build(), dtListState);
+		final FacetedQueryResult<Supplier, SearchQuery> facetedQueryResult = supplierServices.searchSuppliers("", SelectedFacetValues.empty().build(), DtListState.defaultOf(Supplier.class));
 		viewContext.publishFacetedQueryResult(supliers, SupplierFields.siren, facetedQueryResult, criteriaKey);
 	}
 

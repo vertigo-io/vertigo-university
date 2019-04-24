@@ -60,7 +60,7 @@ public class OpendataSetServices implements Component, Activeable {
 	}
 
 	public DtList<OpendataSet> getOpendataSets(final DtListState dtListState) {
-		return opendataSetDAO.findAll(Criterions.alwaysTrue(), dtListState.getMaxRows().orElse(50));
+		return opendataSetDAO.findAll(Criterions.alwaysTrue(), dtListState);
 	}
 
 	public VFile getOpendataSetPicture(final Long fileId) {

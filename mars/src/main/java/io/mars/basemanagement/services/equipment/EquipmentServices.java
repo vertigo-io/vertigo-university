@@ -55,7 +55,7 @@ public class EquipmentServices implements Component {
 	}
 
 	public DtList<Equipment> getEquipments(final DtListState dtListState) {
-		return equipmentDAO.findAll(Criterions.alwaysTrue(), dtListState.getMaxRows().orElse(50));
+		return equipmentDAO.findAll(Criterions.alwaysTrue(), dtListState);
 	}
 
 	public DtList<EquipmentIndex> getEquipmentIndex(final List<Long> equipmentIds) {

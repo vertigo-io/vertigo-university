@@ -14,9 +14,7 @@ import io.vertigo.commons.eventbus.EventBusManager;
 import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.commons.transaction.VTransactionManager;
 import io.vertigo.core.component.Component;
-import io.vertigo.dynamo.criteria.Criterions;
 import io.vertigo.dynamo.domain.model.DtList;
-import io.vertigo.dynamo.domain.model.DtListState;
 import io.vertigo.lang.Assertion;
 
 @Transactional
@@ -67,9 +65,5 @@ public class MissionServices implements Component {
 		Assertion.checkNotNull(personId);
 		//---
 		return hrPAO.getMissionsDisplayByPersonId(personId);
-	}
-
-	public DtList<Mission> getMissions(final DtListState dtListState) {
-		return missionDAO.findAll(Criterions.alwaysTrue(), dtListState.getMaxRows().orElse(50));
 	}
 }

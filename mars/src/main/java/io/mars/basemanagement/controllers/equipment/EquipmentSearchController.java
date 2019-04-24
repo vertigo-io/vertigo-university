@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import io.mars.basemanagement.domain.Equipment;
 import io.mars.basemanagement.search.EquipmentIndex;
 import io.mars.basemanagement.services.equipment.EquipmentServices;
 import io.mars.domain.DtDefinitions.EquipmentIndexFields;
@@ -31,9 +32,8 @@ public class EquipmentSearchController extends AbstractVSpringMvcController {
 
 	@GetMapping("/")
 	public void initContext(final ViewContext viewContext) {
-		final DtListState dtListState = DtListState.of(50, 0);
 		viewContext.publishRef(criteriaKey, "");
-		final FacetedQueryResult<EquipmentIndex, SearchQuery> facetedQueryResult = equipmentServices.searchEquipments("", SelectedFacetValues.empty().build(), dtListState);
+		final FacetedQueryResult<EquipmentIndex, SearchQuery> facetedQueryResult = equipmentServices.searchEquipments("", SelectedFacetValues.empty().build(), DtListState.defaultOf(Equipment.class));
 		viewContext.publishFacetedQueryResult(equipments, EquipmentIndexFields.equipmentId, facetedQueryResult, criteriaKey);
 	}
 

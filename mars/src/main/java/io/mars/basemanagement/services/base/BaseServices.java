@@ -24,7 +24,6 @@ import io.vertigo.account.account.Account;
 import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.core.component.Activeable;
 import io.vertigo.core.component.Component;
-import io.vertigo.dynamo.collections.CollectionsManager;
 import io.vertigo.dynamo.criteria.Criterions;
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.domain.model.DtListState;
@@ -57,8 +56,6 @@ public class BaseServices implements Component, Activeable {
 	private FileManager fileManager;
 	@Inject
 	private StoreManager storeManager;
-	@Inject
-	private CollectionsManager collectionsManager;
 
 	@Inject
 	private PersonServices personServices;
@@ -122,15 +119,12 @@ public class BaseServices implements Component, Activeable {
 	}
 
 	public DtList<Base> getBases(final DtListState dtListState) {
-		final DtList<Base> bases = baseDAO.findAll(Criterions.alwaysTrue(), dtListState.getMaxRows().orElse(50));
-		if (dtListState.getSortFieldName().isPresent()) {
-			return collectionsManager.sort(bases, dtListState.getSortFieldName().get(), dtListState.isSortDesc().get());
-		}
+		final DtList<Base> bases = baseDAO.findAll(Criterions.alwaysTrue(), dtListState);
 		return bases;
 	}
 
 	public DtList<Geosector> getAllGeosectors() {
-		return geosectorDAO.findAll(Criterions.alwaysTrue(), Integer.MAX_VALUE);
+		return geosectorDAO.findAll(Criterions.alwaysTrue(), DtListState.defaultOf(Geosector.class));
 	}
 
 	public DtList<BaseIndex> getBaseIndex(final List<Long> baseIds) {
@@ -162,11 +156,11 @@ public class BaseServices implements Component, Activeable {
 	}
 
 	public DtList<Picture> getPictures(final Long baseId) {
-		return pictureDAO.findAll(Criterions.isEqualTo(PictureFields.baseId, baseId), 20);
+		return pictureDAO.findAll(Criterions.isEqualTo(PictureFields.baseId, baseId), DtListState.defaultOf(Picture.class));
 	}
 
 	private void sendNotificationToAll(final Notification notification) {
-		final Set<UID<Account>> accountUIDs = personServices.getPersons(DtListState.of(null, 0))
+		final Set<UID<Account>> accountUIDs = personServices.getPersons(DtListState.of(null))
 				.stream()
 				.map((person) -> UID.of(Account.class, String.valueOf(person.getPersonId())))
 				.collect(Collectors.toSet());
