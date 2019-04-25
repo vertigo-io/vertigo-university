@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.dynamo.criteria.Criterions;
 import io.vertigo.dynamo.domain.model.DtList;
+import io.vertigo.dynamo.domain.model.DtListState;
 import io.vertigo.lang.Assertion;
 import io.vertigo.samples.dao.dao.CountryDAO;
 import io.vertigo.samples.dao.domain.Country;
@@ -21,7 +22,7 @@ public class CountryServicesImpl implements CountryServices {
 		Assertion.checkArgNotEmpty(prefix);
 		// ---
 
-		return countryDAO.findAll(Criterions.startsWith(CountryFields.name, prefix), 50);
+		return countryDAO.findAll(Criterions.startsWith(CountryFields.name, prefix), DtListState.of(50));
 	}
 
 }

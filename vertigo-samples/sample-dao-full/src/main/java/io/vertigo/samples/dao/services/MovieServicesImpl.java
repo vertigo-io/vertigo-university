@@ -9,6 +9,7 @@ import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.dynamo.criteria.Criteria;
 import io.vertigo.dynamo.criteria.Criterions;
 import io.vertigo.dynamo.domain.model.DtList;
+import io.vertigo.dynamo.domain.model.DtListState;
 import io.vertigo.lang.Assertion;
 import io.vertigo.samples.SamplesPAO;
 import io.vertigo.samples.dao.dao.ActorDAO;
@@ -45,7 +46,7 @@ public class MovieServicesImpl implements MovieServices {
 	public DtList<Movie> findMoviesByCriteria(final String title, final Integer year) {
 		final Criteria<Movie> criteria = Criterions.startsWith(MovieFields.name, title)
 				.and(Criterions.isEqualTo(MovieFields.year, year));
-		return movieDAO.findAll(criteria, 500);
+		return movieDAO.findAll(criteria, DtListState.of(500));
 	}
 
 	@Override
