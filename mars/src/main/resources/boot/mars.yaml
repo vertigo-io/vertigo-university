@@ -61,6 +61,7 @@ modules:
       - store:
       - kvStore:
       - search:
+      - domainMetrics:
     featuresConfig:
       - store.data.sql:
       - store.data.sql:

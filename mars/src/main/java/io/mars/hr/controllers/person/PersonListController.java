@@ -31,7 +31,7 @@ public class PersonListController extends AbstractVSpringMvcController {
 	@GetMapping("/")
 	public void initContext(final ViewContext viewContext, @RequestParam("renderer") final Optional<String> renderer) {
 		viewContext.publishRef(listRenderer, renderer.orElse("table"));
-		final DtListState dtListState = DtListState.of(200, 0, PersonFields.fullName.name(), false);
+		final DtListState dtListState = DtListState.of(200, 0, PersonFields.lastName.name(), false);
 		viewContext.publishDtList(persons, personServices.getPersons(dtListState));
 	}
 
