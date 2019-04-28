@@ -18,6 +18,7 @@
  */
 package io.mars.commons;
 
+import io.mars.boot.MarsMasterDataDefinitionProvider;
 import io.mars.jobs.services.JobServices;
 import io.vertigo.app.config.DefinitionProviderConfig;
 import io.vertigo.app.config.discovery.ModuleDiscoveryFeatures;
@@ -37,7 +38,9 @@ public class CommonsFeatures extends ModuleDiscoveryFeatures {
 				.addDefinitionProvider(DefinitionProviderConfig.builder(DynamoDefinitionProvider.class)
 						.addDefinitionResource("kpr", "io/mars/run.kpr")
 						.addDefinitionResource("classes", "io.mars.domain.DtDefinitions")
-						.build());
+						.build())
+				.addDefinitionProvider(MarsMasterDataDefinitionProvider.class);
+
 	}
 
 	@Override
