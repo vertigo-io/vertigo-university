@@ -1,32 +1,33 @@
 package io.vertigo.pandora.dao.persons;
 
+import java.util.Arrays;
+
 import javax.inject.Inject;
 
-import java.util.Arrays;
 import io.vertigo.app.Home;
-import io.vertigo.core.component.di.injector.DIInjector;
-import io.vertigo.dynamo.search.SearchManager;
-import io.vertigo.dynamo.search.metamodel.SearchIndexDefinition;
-import io.vertigo.dynamo.search.model.SearchQuery;
-import io.vertigo.dynamo.search.model.SearchQueryBuilder;
-import io.vertigo.dynamo.domain.model.DtListState;
+import io.vertigo.commons.transaction.VTransactionManager;
+import io.vertigo.core.component.di.DIInjector;
 import io.vertigo.dynamo.collections.ListFilter;
 import io.vertigo.dynamo.collections.metamodel.FacetedQueryDefinition;
 import io.vertigo.dynamo.collections.metamodel.ListFilterBuilder;
 import io.vertigo.dynamo.collections.model.FacetedQueryResult;
 import io.vertigo.dynamo.collections.model.SelectedFacetValues;
-import io.vertigo.commons.transaction.VTransactionManager;
-import io.vertigo.pandora.domain.persons.PersonIndex;
-import io.vertigo.dynamo.task.metamodel.TaskDefinition;
-import io.vertigo.dynamo.task.model.Task;
-import io.vertigo.dynamo.task.model.TaskBuilder;
+import io.vertigo.dynamo.domain.model.DtListState;
 import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.impl.store.util.DAO;
+import io.vertigo.dynamo.search.SearchManager;
+import io.vertigo.dynamo.search.metamodel.SearchIndexDefinition;
+import io.vertigo.dynamo.search.model.SearchQuery;
+import io.vertigo.dynamo.search.model.SearchQueryBuilder;
 import io.vertigo.dynamo.store.StoreManager;
 import io.vertigo.dynamo.store.StoreServices;
 import io.vertigo.dynamo.task.TaskManager;
-import io.vertigo.pandora.domain.persons.Person;
+import io.vertigo.dynamo.task.metamodel.TaskDefinition;
+import io.vertigo.dynamo.task.model.Task;
+import io.vertigo.dynamo.task.model.TaskBuilder;
 import io.vertigo.lang.Generated;
+import io.vertigo.pandora.domain.persons.Person;
+import io.vertigo.pandora.domain.persons.PersonIndex;
 
 /**
  * This class is automatically generated.
@@ -58,7 +59,7 @@ public final class PersonDAO extends DAO<Person, java.lang.Long> implements Stor
 	 * @param UID UID du keyConcept modifié
 	 * @return KeyConcept à modifier
 	 */
-	 public Person readOneForUpdate(final UID<Person> uid) {
+	public Person readOneForUpdate(final UID<Person> uid) {
 		return dataStore.readOneForUpdate(uid);
 	}
 
@@ -69,7 +70,7 @@ public final class PersonDAO extends DAO<Person, java.lang.Long> implements Stor
 	 * @param id Clé du keyConcept modifié
 	 * @return KeyConcept à modifier
 	 */
-	 public Person readOneForUpdate(final java.lang.Long id) {
+	public Person readOneForUpdate(final java.lang.Long id) {
 		return readOneForUpdate(createDtObjectUID(id));
 	}
 
@@ -81,7 +82,7 @@ public final class PersonDAO extends DAO<Person, java.lang.Long> implements Stor
 	 */
 	public SearchQueryBuilder createSearchQueryBuilderPerson(final String criteria, final SelectedFacetValues selectedFacetValues) {
 		final FacetedQueryDefinition facetedQueryDefinition = Home.getApp().getDefinitionSpace().resolve("QRY_PERSON", FacetedQueryDefinition.class);
-		final ListFilterBuilder<String> listFilterBuilder = DIInjector.newInstance(facetedQueryDefinition.getListFilterBuilderClass(), Home.getApp().getComponentSpace());
+		final ListFilterBuilder<String> listFilterBuilder = DIInjector.newInstance(facetedQueryDefinition.getListFilterBuilderClass());
 		final ListFilter criteriaListFilter = listFilterBuilder.withBuildQuery(facetedQueryDefinition.getListFilterBuilderQuery()).withCriteria(criteria).build();
 		return SearchQuery.builder(criteriaListFilter).withFacet(facetedQueryDefinition, selectedFacetValues);
 	}
@@ -96,13 +97,13 @@ public final class PersonDAO extends DAO<Person, java.lang.Long> implements Stor
 		final SearchIndexDefinition indexDefinition = searchManager.findFirstIndexDefinitionByKeyConcept(Person.class);
 		return searchManager.loadList(indexDefinition, searchQuery, listState);
 	}
-	
-/**
-	 * Mark an entity as dirty. Index of these elements will be reindexed if Tx commited.
-	 * Reindexation isn't synchrone, strategy is dependant of plugin's parameters.
-	 *
-	 * @param entityUID Key concept's UID
-	 */
+
+	/**
+		 * Mark an entity as dirty. Index of these elements will be reindexed if Tx commited.
+		 * Reindexation isn't synchrone, strategy is dependant of plugin's parameters.
+		 *
+		 * @param entityUID Key concept's UID
+		 */
 	public void markAsDirty(final UID<Person> entityUID) {
 		transactionManager.getCurrentTransaction().addAfterCompletion((final boolean txCommitted) -> {
 			if (txCommitted) {// reindex only is tx successful
@@ -110,7 +111,7 @@ public final class PersonDAO extends DAO<Person, java.lang.Long> implements Stor
 			}
 		});
 	}
-	
+
 	/**
 	 * Mark an entity as dirty. Index of these elements will be reindexed if Tx commited.
 	 * Reindexation isn't synchrone, strategy is dependant of plugin's parameters.

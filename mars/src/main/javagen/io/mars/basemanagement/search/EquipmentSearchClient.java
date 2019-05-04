@@ -1,25 +1,25 @@
 package io.mars.basemanagement.search;
 
+import java.util.Arrays;
+
 import javax.inject.Inject;
 
-import java.util.Arrays;
+import io.mars.basemanagement.domain.Equipment;
 import io.vertigo.app.Home;
+import io.vertigo.commons.transaction.VTransactionManager;
 import io.vertigo.core.component.Component;
-import io.vertigo.core.component.di.injector.DIInjector;
-import io.vertigo.dynamo.search.SearchManager;
-import io.vertigo.dynamo.search.metamodel.SearchIndexDefinition;
-import io.vertigo.dynamo.search.model.SearchQuery;
-import io.vertigo.dynamo.search.model.SearchQueryBuilder;
-import io.vertigo.dynamo.domain.model.DtListState;
+import io.vertigo.core.component.di.DIInjector;
 import io.vertigo.dynamo.collections.ListFilter;
 import io.vertigo.dynamo.collections.metamodel.FacetedQueryDefinition;
 import io.vertigo.dynamo.collections.metamodel.ListFilterBuilder;
 import io.vertigo.dynamo.collections.model.FacetedQueryResult;
 import io.vertigo.dynamo.collections.model.SelectedFacetValues;
-import io.vertigo.commons.transaction.VTransactionManager;
-import io.mars.basemanagement.search.EquipmentIndex;
+import io.vertigo.dynamo.domain.model.DtListState;
 import io.vertigo.dynamo.domain.model.UID;
-import io.mars.basemanagement.domain.Equipment;
+import io.vertigo.dynamo.search.SearchManager;
+import io.vertigo.dynamo.search.metamodel.SearchIndexDefinition;
+import io.vertigo.dynamo.search.model.SearchQuery;
+import io.vertigo.dynamo.search.model.SearchQueryBuilder;
 import io.vertigo.lang.Generated;
 
 /**
@@ -51,7 +51,7 @@ public final class EquipmentSearchClient implements Component {
 	 */
 	public SearchQueryBuilder createSearchQueryBuilderEquipment(final String criteria, final SelectedFacetValues selectedFacetValues) {
 		final FacetedQueryDefinition facetedQueryDefinition = Home.getApp().getDefinitionSpace().resolve("QryEquipment", FacetedQueryDefinition.class);
-		final ListFilterBuilder<String> listFilterBuilder = DIInjector.newInstance(facetedQueryDefinition.getListFilterBuilderClass(), Home.getApp().getComponentSpace());
+		final ListFilterBuilder<String> listFilterBuilder = DIInjector.newInstance(facetedQueryDefinition.getListFilterBuilderClass());
 		final ListFilter criteriaListFilter = listFilterBuilder.withBuildQuery(facetedQueryDefinition.getListFilterBuilderQuery()).withCriteria(criteria).build();
 		return SearchQuery.builder(criteriaListFilter).withFacet(facetedQueryDefinition, selectedFacetValues);
 	}

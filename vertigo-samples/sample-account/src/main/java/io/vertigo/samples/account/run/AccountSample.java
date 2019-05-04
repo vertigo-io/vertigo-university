@@ -13,7 +13,7 @@ import io.vertigo.app.AutoCloseableApp;
 import io.vertigo.app.config.DefinitionProviderConfig;
 import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.app.config.NodeConfigBuilder;
-import io.vertigo.core.component.di.injector.DIInjector;
+import io.vertigo.core.component.di.DIInjector;
 import io.vertigo.samples.account.authorization.SecuredEntities.MovieOperations;
 import io.vertigo.samples.account.config.SampleConfigBuilder;
 import io.vertigo.samples.account.dao.ActorDAO;
