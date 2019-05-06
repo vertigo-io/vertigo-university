@@ -8,7 +8,6 @@
 drop table IF EXISTS BASE cascade;
 drop sequence IF EXISTS SEQ_BASE;
 drop table IF EXISTS BASE_TYPE cascade;
-drop sequence IF EXISTS SEQ_BASE_TYPE;
 drop table IF EXISTS BUSINESS cascade;
 drop sequence IF EXISTS SEQ_BUSINESS;
 drop table IF EXISTS EQUIPMENT cascade;
@@ -30,23 +29,19 @@ drop sequence IF EXISTS SEQ_MISSION;
 drop table IF EXISTS OPENDATA_SET cascade;
 drop sequence IF EXISTS SEQ_OPENDATA_SET;
 drop table IF EXISTS OPENDATA_SET_STATUS cascade;
-drop sequence IF EXISTS SEQ_OPENDATA_SET_STATUS;
 drop table IF EXISTS PERSON cascade;
 drop sequence IF EXISTS SEQ_PERSON;
 drop table IF EXISTS PICTURE cascade;
 drop sequence IF EXISTS SEQ_PICTURE;
 drop table IF EXISTS SUPPLIER cascade;
-drop sequence IF EXISTS SEQ_SUPPLIER;
 drop table IF EXISTS TAG cascade;
 drop sequence IF EXISTS SEQ_TAG;
 drop table IF EXISTS TICKET cascade;
 drop sequence IF EXISTS SEQ_TICKET;
 drop table IF EXISTS TICKET_STATUS cascade;
-drop sequence IF EXISTS SEQ_TICKET_STATUS;
 drop table IF EXISTS WORK_ORDER cascade;
 drop sequence IF EXISTS SEQ_WORK_ORDER;
 drop table IF EXISTS WORK_ORDER_STATUS cascade;
-drop sequence IF EXISTS SEQ_WORK_ORDER_STATUS;
 
 
 
@@ -57,8 +52,6 @@ drop sequence IF EXISTS SEQ_WORK_ORDER_STATUS;
 create sequence SEQ_BASE
 	start with 1000 cache 20; 
 
-create sequence SEQ_BASE_TYPE
-	start with 1000 cache 20; 
 
 create sequence SEQ_BUSINESS
 	start with 1000 cache 20; 
@@ -90,8 +83,6 @@ create sequence SEQ_MISSION
 create sequence SEQ_OPENDATA_SET
 	start with 1000 cache 20; 
 
-create sequence SEQ_OPENDATA_SET_STATUS
-	start with 1000 cache 20; 
 
 create sequence SEQ_PERSON
 	start with 1000 cache 20; 
@@ -99,8 +90,6 @@ create sequence SEQ_PERSON
 create sequence SEQ_PICTURE
 	start with 1000 cache 20; 
 
-create sequence SEQ_SUPPLIER
-	start with 1000 cache 20; 
 
 create sequence SEQ_TAG
 	start with 1000 cache 20; 
@@ -108,14 +97,10 @@ create sequence SEQ_TAG
 create sequence SEQ_TICKET
 	start with 1000 cache 20; 
 
-create sequence SEQ_TICKET_STATUS
-	start with 1000 cache 20; 
 
 create sequence SEQ_WORK_ORDER
 	start with 1000 cache 20; 
 
-create sequence SEQ_WORK_ORDER_STATUS
-	start with 1000 cache 20; 
 
 
 -- ============================================================

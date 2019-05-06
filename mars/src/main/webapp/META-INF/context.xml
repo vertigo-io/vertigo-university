@@ -8,6 +8,13 @@
 		username="mars"
 		password="mars" />
 				
+		<Resource name="jdbc/DataSourceHomePg"
+		auth="SERVLET"
+		type="javax.sql.DataSource"
+		driverClassName="org.postgresql.Driver"
+		url="jdbc:postgresql://localhost:5432/mars"
+		username="mars"
+		password="mars" />
 		
 	<Resource name="jdbc/DataSourceHome"
 		auth="SERVLET"

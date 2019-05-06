@@ -35,8 +35,8 @@ public final class WorkOrder implements Entity {
 			primaryMultiplicity = "0..1",
 			foreignDtDefinitionName = "DtWorkOrder",
 			foreignIsNavigable = false,
-			foreignRole = "TicketWorkOrders",
-			foreignLabel = "Ticket Work Orders",
+			foreignRole = "WorkOrder",
+			foreignLabel = "WorkOrder",
 			foreignMultiplicity = "0..*")
 	private final VAccessor<io.mars.maintenance.domain.Ticket> ticketIdAccessor = new VAccessor<>(io.mars.maintenance.domain.Ticket.class, "Ticket");
 
@@ -51,7 +51,7 @@ public final class WorkOrder implements Entity {
 			foreignDtDefinitionName = "DtWorkOrder",
 			foreignIsNavigable = false,
 			foreignRole = "WorkOrder",
-			foreignLabel = "Work Order",
+			foreignLabel = "WorkOrder",
 			foreignMultiplicity = "0..*")
 	private final EnumVAccessor<io.mars.maintenance.domain.WorkOrderStatus, io.mars.maintenance.domain.WorkOrderStatusEnum> workOrderStatusIdAccessor = new EnumVAccessor<>(io.mars.maintenance.domain.WorkOrderStatus.class, "WorkOrderStatus", io.mars.maintenance.domain.WorkOrderStatusEnum.class);
 

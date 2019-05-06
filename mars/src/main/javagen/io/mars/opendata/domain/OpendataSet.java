@@ -34,7 +34,7 @@ public final class OpendataSet implements Entity {
 			foreignDtDefinitionName = "DtOpendataSet",
 			foreignIsNavigable = false,
 			foreignRole = "OpendataSet",
-			foreignLabel = "Opendata Set",
+			foreignLabel = "OpendataSet",
 			foreignMultiplicity = "0..*")
 	private final EnumVAccessor<io.mars.opendata.domain.OpendataSetStatus, io.mars.opendata.domain.OpendataSetStatusEnum> opendataSetStatusIdAccessor = new EnumVAccessor<>(io.mars.opendata.domain.OpendataSetStatus.class, "OpendataSetStatus", io.mars.opendata.domain.OpendataSetStatusEnum.class);
 

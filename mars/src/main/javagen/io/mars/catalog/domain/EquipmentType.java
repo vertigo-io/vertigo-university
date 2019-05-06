@@ -30,7 +30,7 @@ public final class EquipmentType implements Entity {
 			foreignDtDefinitionName = "DtEquipmentType",
 			foreignIsNavigable = false,
 			foreignRole = "EquipmentType",
-			foreignLabel = "Equipment Type",
+			foreignLabel = "EquipmentType",
 			foreignMultiplicity = "0..*")
 	private final VAccessor<io.mars.catalog.domain.EquipmentCategory> equipmentCategoryIdAccessor = new VAccessor<>(io.mars.catalog.domain.EquipmentCategory.class, "EquipmentCategory");
 

@@ -6,9 +6,9 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import io.vertigo.app.AutoCloseableApp;
-import io.vertigo.app.config.NodeConfigBuilder;
 import io.vertigo.app.config.ModuleConfig;
-import io.vertigo.core.component.di.injector.DIInjector;
+import io.vertigo.app.config.NodeConfigBuilder;
+import io.vertigo.core.component.di.DIInjector;
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.samples.SamplesPAO;
 import io.vertigo.samples.dao.config.SampleConfigBuilder;

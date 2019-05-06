@@ -33,7 +33,7 @@ public final class Ticket implements Entity {
 			primaryMultiplicity = "0..1",
 			foreignDtDefinitionName = "DtTicket",
 			foreignIsNavigable = false,
-			foreignRole = "Ticketr",
+			foreignRole = "Ticket",
 			foreignLabel = "Ticket",
 			foreignMultiplicity = "0..*")
 	private final EnumVAccessor<io.mars.maintenance.domain.TicketStatus, io.mars.maintenance.domain.TicketStatusEnum> ticketStatusIdAccessor = new EnumVAccessor<>(io.mars.maintenance.domain.TicketStatus.class, "TicketStatus", io.mars.maintenance.domain.TicketStatusEnum.class);
@@ -48,8 +48,8 @@ public final class Ticket implements Entity {
 			primaryMultiplicity = "0..1",
 			foreignDtDefinitionName = "DtTicket",
 			foreignIsNavigable = false,
-			foreignRole = "EquipmentTickets",
-			foreignLabel = "Equipment tickets",
+			foreignRole = "Ticket",
+			foreignLabel = "Ticket",
 			foreignMultiplicity = "0..*")
 	private final VAccessor<io.mars.basemanagement.domain.Equipment> equipmentIdAccessor = new VAccessor<>(io.mars.basemanagement.domain.Equipment.class, "Equipment");
 

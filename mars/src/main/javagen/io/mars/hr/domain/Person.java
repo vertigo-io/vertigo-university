@@ -29,7 +29,7 @@ public final class Person implements Entity {
 			fkFieldName = "groupId",
 			primaryDtDefinitionName = "DtGroups",
 			primaryIsNavigable = true,
-			primaryRole = "Group",
+			primaryRole = "Groups",
 			primaryLabel = "Group",
 			primaryMultiplicity = "0..1",
 			foreignDtDefinitionName = "DtPerson",
@@ -37,7 +37,7 @@ public final class Person implements Entity {
 			foreignRole = "Person",
 			foreignLabel = "Person",
 			foreignMultiplicity = "0..*")
-	private final VAccessor<io.mars.hr.domain.Groups> groupIdAccessor = new VAccessor<>(io.mars.hr.domain.Groups.class, "Group");
+	private final VAccessor<io.mars.hr.domain.Groups> groupIdAccessor = new VAccessor<>(io.mars.hr.domain.Groups.class, "Groups");
 
 	/** {@inheritDoc} */
 	@Override
@@ -230,7 +230,7 @@ public final class Person implements Entity {
 	 * Association : Group.
 	 * @return l'accesseur vers la propriété 'Group'
 	 */
-	public VAccessor<io.mars.hr.domain.Groups> group() {
+	public VAccessor<io.mars.hr.domain.Groups> groups() {
 		return groupIdAccessor;
 	}
 	

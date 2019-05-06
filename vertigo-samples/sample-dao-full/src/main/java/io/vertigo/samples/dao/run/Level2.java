@@ -3,9 +3,9 @@ package io.vertigo.samples.dao.run;
 import javax.inject.Inject;
 
 import io.vertigo.app.AutoCloseableApp;
-import io.vertigo.app.config.NodeConfigBuilder;
 import io.vertigo.app.config.ModuleConfig;
-import io.vertigo.core.component.di.injector.DIInjector;
+import io.vertigo.app.config.NodeConfigBuilder;
+import io.vertigo.core.component.di.DIInjector;
 import io.vertigo.samples.SamplesPAO;
 import io.vertigo.samples.dao.config.SampleConfigBuilder;
 import io.vertigo.samples.dao.dao.ActorDAO;

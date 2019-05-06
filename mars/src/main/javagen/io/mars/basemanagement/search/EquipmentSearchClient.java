@@ -4,7 +4,6 @@ import java.util.Arrays;
 
 import javax.inject.Inject;
 
-import io.mars.basemanagement.domain.Equipment;
 import io.vertigo.app.Home;
 import io.vertigo.commons.transaction.VTransactionManager;
 import io.vertigo.core.component.Component;
@@ -21,6 +20,8 @@ import io.vertigo.dynamo.search.metamodel.SearchIndexDefinition;
 import io.vertigo.dynamo.search.model.SearchQuery;
 import io.vertigo.dynamo.search.model.SearchQueryBuilder;
 import io.vertigo.lang.Generated;
+import io.mars.basemanagement.search.EquipmentIndex;
+import io.mars.basemanagement.domain.Equipment;
 
 /**
  * This class is automatically generated.
