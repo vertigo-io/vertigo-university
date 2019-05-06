@@ -3,7 +3,7 @@ package io.vertigo.samples.crystal.run;
 import javax.inject.Inject;
 
 import io.vertigo.app.AutoCloseableApp;
-import io.vertigo.core.component.di.injector.DIInjector;
+import io.vertigo.core.component.di.DIInjector;
 import io.vertigo.samples.crystal.config.SampleStudioConfigBuilder;
 import io.vertigo.studio.mda.MdaManager;
 

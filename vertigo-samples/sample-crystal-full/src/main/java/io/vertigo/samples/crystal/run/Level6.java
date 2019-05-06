@@ -9,10 +9,10 @@ import io.vertigo.account.plugins.authorization.loaders.JsonSecurityDefinitionPr
 import io.vertigo.account.security.UserSession;
 import io.vertigo.account.security.VSecurityManager;
 import io.vertigo.app.AutoCloseableApp;
-import io.vertigo.app.config.NodeConfigBuilder;
 import io.vertigo.app.config.DefinitionProviderConfig;
 import io.vertigo.app.config.ModuleConfig;
-import io.vertigo.core.component.di.injector.DIInjector;
+import io.vertigo.app.config.NodeConfigBuilder;
+import io.vertigo.core.component.di.DIInjector;
 import io.vertigo.samples.SamplesPAO;
 import io.vertigo.samples.crystal.CrystalPAO;
 import io.vertigo.samples.crystal.config.SampleConfigBuilder;
