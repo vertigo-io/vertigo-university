@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +21,7 @@ import io.mars.basemanagement.services.base.BaseServices;
 import io.mars.domain.DtDefinitions.PictureFields;
 import io.mars.hr.domain.Person;
 import io.mars.hr.services.mission.MissionServices;
+import io.vertigo.core.param.ParamValue;
 import io.vertigo.dynamo.domain.model.FileInfoURI;
 import io.vertigo.lang.VUserException;
 import io.vertigo.ui.core.BasicUiListModifiable;
@@ -78,7 +78,7 @@ public class BaseInformationController extends AbstractVSpringMvcController {
 	}
 
 	@PostMapping("/_save")
-	public String doSave(final ViewContext viewContext, @ViewAttribute("base") final Base base, @Named("baseTmpPictureUris") final List<FileInfoURI> addedPictureFile, final UiMessageStack uiMessageStack) {
+	public String doSave(final ViewContext viewContext, @ViewAttribute("base") final Base base, @ParamValue("baseTmpPictureUris") final List<FileInfoURI> addedPictureFile, final UiMessageStack uiMessageStack) {
 		final BasicUiListModifiable<Picture> pictures = viewContext.getUiListModifiable(basePictures);
 		pictures.mergeAndCheckInput(Collections.EMPTY_LIST, uiMessageStack); //needed to populate Delta
 		baseServices.save(base, addedPictureFile, pictures.getDtListDelta().getDeleted()); //Warning : always one service call : one transaction

@@ -5,7 +5,6 @@ import java.net.UnknownHostException;
 import java.time.Instant;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,6 +21,7 @@ import io.vertigo.commons.eventbus.EventBusManager;
 import io.vertigo.commons.eventbus.EventBusSubscribed;
 import io.vertigo.core.component.Activeable;
 import io.vertigo.core.component.Component;
+import io.vertigo.core.param.ParamValue;
 import io.vertigo.database.timeseries.Measure;
 import io.vertigo.lang.Assertion;
 import io.vertigo.lang.WrappedException;
@@ -39,7 +39,7 @@ public class MqttShield implements Component, Activeable {
 
 	@Inject
 	public MqttShield(
-			@Named("host") final String brokerHost) {
+			@ParamValue("host") final String brokerHost) {
 		Assertion.checkArgNotEmpty(brokerHost);
 		//---
 		final String myHostName = retrieveHostName();

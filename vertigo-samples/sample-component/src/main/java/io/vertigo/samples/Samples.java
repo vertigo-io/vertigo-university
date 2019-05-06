@@ -4,6 +4,7 @@ import javax.inject.Inject;
 
 import io.vertigo.app.AutoCloseableApp;
 import io.vertigo.app.Home;
+import io.vertigo.core.component.ComponentSpace;
 import io.vertigo.core.component.di.DIInjector;
 import io.vertigo.samples.components.a_basics.Calculator1;
 import io.vertigo.samples.components.a_basics.Calculator2;
@@ -46,7 +47,7 @@ public class Samples {
 		try (AutoCloseableApp app = new AutoCloseableApp(new SampleConfigBuilder().build())) {
 			final Samples sample = new Samples();
 			DIInjector.injectMembers(sample, app.getComponentSpace());
-			final Samples sample2 = DIInjector.newInstance(Samples.class);
+			final Samples sample2 = ComponentSpace.newInstance(Samples.class);
 			//-----
 			sample.step1();
 			sample2.step2();

@@ -3,7 +3,6 @@ package io.mars.opendata.controllers;
 import java.util.Optional;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import io.mars.basemanagement.domain.Tag;
 import io.mars.opendata.domain.OpendataSet;
 import io.mars.opendata.services.OpendataSetServices;
+import io.vertigo.core.param.ParamValue;
 import io.vertigo.dynamo.domain.model.FileInfoURI;
 import io.vertigo.dynamo.file.model.VFile;
 import io.vertigo.ui.core.ProtectedValueUtil;
@@ -63,7 +63,7 @@ public class OpendataSetDetailController extends AbstractVSpringMvcController {
 	}
 
 	@PostMapping("/_create")
-	public String doCreate(@ViewAttribute("opendataSet") final OpendataSet opendataSet, @Named("opendataSetTmpPictureUri") final Optional<FileInfoURI> opendataSetPictureFile) {
+	public String doCreate(@ViewAttribute("opendataSet") final OpendataSet opendataSet, @ParamValue("opendataSetTmpPictureUri") final Optional<FileInfoURI> opendataSetPictureFile) {
 		opendataSetServices.createOpendataSet(opendataSet);
 		if (opendataSetPictureFile.isPresent()) {
 			opendataSetServices.saveOpendataSetPicture(opendataSet.getOdsId(), opendataSetPictureFile.get());
@@ -72,7 +72,7 @@ public class OpendataSetDetailController extends AbstractVSpringMvcController {
 	}
 
 	@PostMapping("/_save")
-	public String doSave(@ViewAttribute("opendataSet") final OpendataSet opendataSet, @Named("opendataSetTmpPictureUri") final Optional<FileInfoURI> opendataSetPictureFile) {
+	public String doSave(@ViewAttribute("opendataSet") final OpendataSet opendataSet, @ParamValue("opendataSetTmpPictureUri") final Optional<FileInfoURI> opendataSetPictureFile) {
 		opendataSetServices.updateOpendataSet(opendataSet);
 		if (opendataSetPictureFile.isPresent()) {
 			opendataSetServices.saveOpendataSetPicture(opendataSet.getOdsId(), opendataSetPictureFile.get());

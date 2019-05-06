@@ -8,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 import io.vertigo.app.AutoCloseableApp;
 import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.app.config.NodeConfigBuilder;
-import io.vertigo.core.component.di.DIInjector;
+import io.vertigo.core.component.ComponentSpace;
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.samples.SamplesPAO;
 import io.vertigo.samples.dao.config.SampleConfigBuilder;
@@ -62,7 +62,7 @@ public class Level5 {
 						.build());
 		try (final AutoCloseableApp app = new AutoCloseableApp(nodeConfigBuilder.build())) {
 			final Level5 level5 = new Level5();
-			DIInjector.injectMembers(level5, app.getComponentSpace());
+			ComponentSpace.injectMembers(level5);
 			//-----
 			level5.step1();
 			level5.step2();

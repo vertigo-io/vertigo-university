@@ -8,7 +8,6 @@ import java.util.Locale;
 import java.util.Optional;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import io.mars.jobs.services.JobServices;
+import io.vertigo.core.param.ParamValue;
 import io.vertigo.dynamo.domain.model.FileInfoURI;
 import io.vertigo.orchestra.definitions.OrchestraDefinitionManager;
 import io.vertigo.orchestra.monitoring.domain.summary.OExecutionSummary;
@@ -64,7 +64,7 @@ public class JobDetailController extends AbstractVSpringMvcController {
 	}
 
 	@PostMapping("/_save")
-	public String doSave(@ViewAttribute("job") final OProcessUi job, @Named("personTmpPictureUri") final Optional<FileInfoURI> personPictureFile) {
+	public String doSave(@ViewAttribute("job") final OProcessUi job, @ParamValue("personTmpPictureUri") final Optional<FileInfoURI> personPictureFile) {
 		orchestraDefinitionManager.updateProcessDefinitionProperties(
 				job.getName(),
 				Optional.ofNullable(job.getCronExpression()),

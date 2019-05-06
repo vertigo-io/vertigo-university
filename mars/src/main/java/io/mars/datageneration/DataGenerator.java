@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Random;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import io.mars.basemanagement.datageneration.BaseGenerator;
 import io.mars.basemanagement.datageneration.EquipmentGenerator;
@@ -20,6 +19,7 @@ import io.mars.hr.datageneration.PersonGenerator;
 import io.mars.maintenance.datageneration.TicketGenerator;
 import io.mars.opendata.datageneration.OpendataSetGenerator;
 import io.vertigo.core.component.Component;
+import io.vertigo.core.param.ParamValue;
 import io.vertigo.lang.Assertion;
 
 public class DataGenerator implements Component {
@@ -47,7 +47,7 @@ public class DataGenerator implements Component {
 
 	@Inject
 	public DataGenerator(
-			@Named("initialEquipmentUnits") final Integer initialEquipmentUnits) {
+			@ParamValue("initialEquipmentUnits") final Integer initialEquipmentUnits) {
 		Assertion.checkNotNull(initialEquipmentUnits);
 		//---
 		this.initialEquipmentUnits = initialEquipmentUnits;

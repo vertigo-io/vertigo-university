@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import io.vertigo.app.AutoCloseableApp;
 import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.app.config.NodeConfigBuilder;
-import io.vertigo.core.component.di.DIInjector;
+import io.vertigo.core.component.ComponentSpace;
 import io.vertigo.samples.SamplesPAO;
 import io.vertigo.samples.dao.config.SampleConfigBuilder;
 import io.vertigo.samples.dao.dao.ActorDAO;
@@ -53,7 +53,7 @@ public class Reprise {
 
 		try (final AutoCloseableApp app = new AutoCloseableApp(nodeConfigBuilder.build())) {
 			final Reprise sample = new Reprise();
-			DIInjector.injectMembers(sample, app.getComponentSpace());
+			ComponentSpace.injectMembers(sample);
 			//-----
 			sample.step1();
 			sample.step2();

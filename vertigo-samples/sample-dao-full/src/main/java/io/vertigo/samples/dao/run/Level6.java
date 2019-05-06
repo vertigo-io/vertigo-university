@@ -10,7 +10,7 @@ import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.app.config.NodeConfigBuilder;
 import io.vertigo.commons.transaction.VTransactionManager;
 import io.vertigo.commons.transaction.VTransactionWritable;
-import io.vertigo.core.component.di.DIInjector;
+import io.vertigo.core.component.ComponentSpace;
 import io.vertigo.samples.SamplesPAO;
 import io.vertigo.samples.dao.config.SampleConfigBuilder;
 import io.vertigo.samples.dao.dao.ActorDAO;
@@ -64,7 +64,7 @@ public class Level6 {
 						.build());
 		try (final AutoCloseableApp app = new AutoCloseableApp(nodeConfigBuilder.build())) {
 			final Level6 level6 = new Level6();
-			DIInjector.injectMembers(level6, app.getComponentSpace());
+			ComponentSpace.injectMembers(level6);
 			//-----
 			level6.step1();
 			level6.step2();
