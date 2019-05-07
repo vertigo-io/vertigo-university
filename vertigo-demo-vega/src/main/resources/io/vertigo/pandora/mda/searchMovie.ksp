@@ -1,8 +1,8 @@
 package io.vertigo.pandora.domain.movies
 
 
-create DtDefinition DT_DUMMY {
-  field value {domain: DO_IDENTITY label: "value" required:"true" }
+create DtDefinition DtDummy {
+  field value {domain: DoIdentity label: "value" required:"true" }
 }
 
 
@@ -10,24 +10,24 @@ create DtDefinition DT_DUMMY {
 /***** Index Movie  *****/
 /************************/
 
-create DtDefinition DT_MOVIE_INDEX {
-  field movId 			{domain: DO_IDENTITY label: "id" required:"true" }
-  field title 			{domain: DO_LABEL label: "Title" required:"false"}
-  field titleSortOnly	{domain: DO_TEXT_NOT_TOKENIZED label: "Title" required:"false" persistent:"false"} /* index only */
-  field originalTitle 	{domain: DO_LABEL label: "Original Title" required:"false"}
-  field synopsis 		{domain: DO_TEXT label:"Synopsis" required:"false"}
-  field shortSynopsis 	{domain: DO_TEXT label: "shortSynopsis" required:"false"}
-  field keywords 		{domain: DO_LABEL label: "keywords" required:"false"}
-  field poster 			{domain: DO_TEXT_NOT_TOKENIZED label: "poster" required:"false"}
-  field runtime 		{domain: DO_RUNTIME label: "runtime" required:"false"}
-  field movieType		{domain: DO_LABEL_SHORT label: "Movie type" required:"false"}
-  field productionYear 	{domain: DO_YEAR label: "productionYear" required:"false"}
-  field userRating 		{domain: DO_RATING label: "userRating" required:"false"}
-  field pressRating 	{domain: DO_RATING label: "presRating" required:"false"}
-  field actorRoles	 	{domain: DO_MULTI_VALUES label: "Roles" required:"false"}
-  field writers 		{domain: DO_MULTI_VALUES label: "Writers" required:"false"}
-  field camera 			{domain: DO_MULTI_VALUES label: "Camera" required:"false"}
-  field producers 		{domain: DO_MULTI_VALUES label: "Producers" required:"false"}
-  field directors 		{domain: DO_MULTI_VALUES label: "Directors" required:"false"}
+create DtDefinition DtMovieIndex {
+  field movId 			{domain: DoIdentity label: "id" required:"true" }
+  field title 			{domain: DoLabel label: "Title" required:"false"}
+  field titleSortOnly	{domain: DoTextNotTokenized label: "Title" required:"false" persistent:"false"} /* index only */
+  field originalTitle 	{domain: DoLabel label: "Original Title" required:"false"}
+  field synopsis 		{domain: DoText label:"Synopsis" required:"false"}
+  field shortSynopsis 	{domain: DoText label: "shortSynopsis" required:"false"}
+  field keywords 		{domain: DoLabel label: "keywords" required:"false"}
+  field poster 			{domain: DoTextNotTokenized label: "poster" required:"false"}
+  field runtime 		{domain: DoRuntime label: "runtime" required:"false"}
+  field movieType		{domain: DoLabelShort label: "Movie type" required:"false"}
+  field productionYear 	{domain: DoYear label: "productionYear" required:"false"}
+  field userRating 		{domain: DoRating label: "userRating" required:"false"}
+  field pressRating 	{domain: DoRating label: "presRating" required:"false"}
+  field actorRoles	 	{domain: DoMultiValues label: "Roles" required:"false"}
+  field writers 		{domain: DoMultiValues label: "Writers" required:"false"}
+  field camera 			{domain: DoMultiValues label: "Camera" required:"false"}
+  field producers 		{domain: DoMultiValues label: "Producers" required:"false"}
+  field directors 		{domain: DoMultiValues label: "Directors" required:"false"}
 }
 

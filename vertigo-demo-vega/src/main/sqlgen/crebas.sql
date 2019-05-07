@@ -177,66 +177,66 @@ create table CAMERA
 	MOV_ID      	 LONG        	 not null,
 	PER_ID      	 LONG        	 not null,
 	constraint PK_CAMERA primary key (MOV_ID, PER_ID),
-	constraint FK_CAMERA_MOVIE 
+	constraint FK_amera_MOVIE 
 		foreign key(MOV_ID)
 		references MOVIE (MOV_ID),
-	constraint FK_CAMERA_PERSON 
+	constraint FK_amera_PERSON 
 		foreign key(PER_ID)
 		references PERSON (PER_ID)
 );
 
-create index CAMERA_MOVIE_FK on CAMERA (MOV_ID asc);
+create index amera_MOVIE_FK on CAMERA (MOV_ID asc);
 
-create index CAMERA_PERSON_FK on CAMERA (PER_ID asc);
+create index amera_PERSON_FK on CAMERA (PER_ID asc);
 
 create table DIRECTORS
 (
 	MOV_ID      	 LONG        	 not null,
 	PER_ID      	 LONG        	 not null,
 	constraint PK_DIRECTORS primary key (MOV_ID, PER_ID),
-	constraint FK_DIRECTORS_MOVIE 
+	constraint FK_irectors_MOVIE 
 		foreign key(MOV_ID)
 		references MOVIE (MOV_ID),
-	constraint FK_DIRECTORS_PERSON 
+	constraint FK_irectors_PERSON 
 		foreign key(PER_ID)
 		references PERSON (PER_ID)
 );
 
-create index DIRECTORS_MOVIE_FK on DIRECTORS (MOV_ID asc);
+create index irectors_MOVIE_FK on DIRECTORS (MOV_ID asc);
 
-create index DIRECTORS_PERSON_FK on DIRECTORS (PER_ID asc);
+create index irectors_PERSON_FK on DIRECTORS (PER_ID asc);
 
 create table PRODUCERS
 (
 	MOV_ID      	 LONG        	 not null,
 	PER_ID      	 LONG        	 not null,
 	constraint PK_PRODUCERS primary key (MOV_ID, PER_ID),
-	constraint FK_PRODUCERS_MOVIE 
+	constraint FK_roducers_MOVIE 
 		foreign key(MOV_ID)
 		references MOVIE (MOV_ID),
-	constraint FK_PRODUCERS_PERSON 
+	constraint FK_roducers_PERSON 
 		foreign key(PER_ID)
 		references PERSON (PER_ID)
 );
 
-create index PRODUCERS_MOVIE_FK on PRODUCERS (MOV_ID asc);
+create index roducers_MOVIE_FK on PRODUCERS (MOV_ID asc);
 
-create index PRODUCERS_PERSON_FK on PRODUCERS (PER_ID asc);
+create index roducers_PERSON_FK on PRODUCERS (PER_ID asc);
 
 create table WRITERS
 (
 	MOV_ID      	 LONG        	 not null,
 	PER_ID      	 LONG        	 not null,
 	constraint PK_WRITERS primary key (MOV_ID, PER_ID),
-	constraint FK_WRITERS_MOVIE 
+	constraint FK_riters_MOVIE 
 		foreign key(MOV_ID)
 		references MOVIE (MOV_ID),
-	constraint FK_WRITERS_PERSON 
+	constraint FK_riters_PERSON 
 		foreign key(PER_ID)
 		references PERSON (PER_ID)
 );
 
-create index WRITERS_MOVIE_FK on WRITERS (MOV_ID asc);
+create index riters_MOVIE_FK on WRITERS (MOV_ID asc);
 
-create index WRITERS_PERSON_FK on WRITERS (PER_ID asc);
+create index riters_PERSON_FK on WRITERS (PER_ID asc);
 

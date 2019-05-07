@@ -28,12 +28,15 @@ import io.vertigo.pandora.domain.movies.MovieIndex;
 import io.vertigo.pandora.domain.persons.ActorRole;
 import io.vertigo.pandora.domain.persons.Person;
 import io.vertigo.pandora.domain.persons.PersonActorRoleLink;
+import io.vertigo.pandora.search.movies.MovieSearchClient;
 
 @Transactional
 public class MovieServicesImpl implements MovieServices {
 
 	@Inject
 	private MovieDAO movieDAO;
+	@Inject
+	private MovieSearchClient movieSearchClient;
 	@Inject
 	private MoviesPAO moviesPAO;
 	@Inject
@@ -118,7 +121,7 @@ public class MovieServicesImpl implements MovieServices {
 
 	@Override
 	public FacetedQueryResult<MovieIndex, SearchQuery> searchMovies(final String criteria, final SelectedFacetValues listFilters, final DtListState dtListState, final Optional<String> group) {
-		final SearchQueryBuilder searchQueryBuilder = movieDAO.createSearchQueryBuilderMovie(criteria, listFilters);
+		final SearchQueryBuilder searchQueryBuilder = movieSearchClient.createSearchQueryBuilderMovie(criteria, listFilters);
 		return searchMovieCommon(dtListState, group, searchQueryBuilder);
 	}
 
@@ -129,7 +132,7 @@ public class MovieServicesImpl implements MovieServices {
 			final FacetDefinition clusteringFacetDefinition = Home.getApp().getDefinitionSpace().resolve(group.get(), FacetDefinition.class);
 			searchQueryBuilder.withFacetClustering(clusteringFacetDefinition);
 		}
-		return movieDAO.loadList(searchQueryBuilder.build(), dtListState);
+		return movieSearchClient.loadList(searchQueryBuilder.build(), dtListState);
 	}
 
 	@Override
@@ -157,7 +160,7 @@ public class MovieServicesImpl implements MovieServices {
 		final DtListState dtListState = DtListState.of(6, 0, fieldName, true);
 		final SelectedFacetValues listFilters = SelectedFacetValues.empty().build();
 		final Optional<String> group = Optional.empty();
-		final SearchQueryBuilder searchQueryBuilder = movieDAO.createSearchQueryBuilderMovieWithPoster("", listFilters);
+		final SearchQueryBuilder searchQueryBuilder = movieSearchClient.createSearchQueryBuilderMovieWithPoster("", listFilters);
 		final FacetedQueryResult<MovieIndex, SearchQuery> result = searchMovieCommon(dtListState, group, searchQueryBuilder);
 		final List<Movie> movies = new ArrayList<>();
 		for (final MovieIndex movieIndex : result.getDtList()) {

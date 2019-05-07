@@ -17,12 +17,15 @@ import io.vertigo.pandora.dao.persons.PersonsPAO;
 import io.vertigo.pandora.domain.movies.Dummy;
 import io.vertigo.pandora.domain.persons.Person;
 import io.vertigo.pandora.domain.persons.PersonIndex;
+import io.vertigo.pandora.search.persons.PersonSearchClient;
 
 @Transactional
 public class PersonServicesImpl implements PersonServices {
 
 	@Inject
 	private PersonDAO personDAO;
+	@Inject
+	private PersonSearchClient personSearchClient;
 	@Inject
 	private PersonsPAO personsPAO;
 
@@ -68,10 +71,10 @@ public class PersonServicesImpl implements PersonServices {
 
 	@Override
 	public FacetedQueryResult<PersonIndex, SearchQuery> searchPersons(final String criteria, final SelectedFacetValues listFilters, final DtListState dtListState, final Optional<String> group) {
-		final SearchQueryBuilder searchQueryBuilder = personDAO.createSearchQueryBuilderPerson(criteria, listFilters);
+		final SearchQueryBuilder searchQueryBuilder = personSearchClient.createSearchQueryBuilderPerson(criteria, listFilters);
 		if (group.isPresent()) {
 			searchQueryBuilder.withFacetClustering(group.get());
 		}
-		return personDAO.loadList(searchQueryBuilder.build(), dtListState);
+		return personSearchClient.loadList(searchQueryBuilder.build(), dtListState);
 	}
 }

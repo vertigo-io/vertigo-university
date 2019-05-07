@@ -1,16 +1,16 @@
 package io.vertigo.pandora.domain.movies
 
 
-create Fragment DT_MOVIE_LINK {
-  from : DT_MOVIE
+create Fragment DtMovieLink {
+  from : DtMovie
   alias title {}
   alias poster {}
   alias movieType {}
   alias productionYear {}
 }
 
-create Fragment DT_MOVIE_CARACT {
-  from : DT_MOVIE
+create Fragment DtMovieCaract {
+  from : DtMovie
   alias title {}
   alias originalTitle {}
   alias keywords {}
@@ -19,14 +19,14 @@ create Fragment DT_MOVIE_CARACT {
   alias productionYear {}
 }
 
-create Fragment DT_MOVIE_SYNOPSIS {
-  from : DT_MOVIE
+create Fragment DtMovieSynopsis {
+  from : DtMovie
   alias synopsis {}
   alias shortSynopsis {}
 }
 
-create Fragment DT_MOVIE_TRAILER {
-  from : DT_MOVIE
+create Fragment DtMovieTrailer {
+  from : DtMovie
   alias trailerName {}
   alias trailerHref {}
 }

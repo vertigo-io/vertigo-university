@@ -12,7 +12,7 @@ export interface Dummy {
 }
 
 export interface DummyNode extends StoreNode<Dummy> {
-	value: EntityField<number, typeof domains.DO_IDENTITY>;
+	value: EntityField<number, typeof domains.DoIdentity>;
 }
 
 export const DummyEntity = {
@@ -21,7 +21,7 @@ export const DummyEntity = {
         value: {
             name: "value",
             type: "field" as "field",
-            domain: domains.DO_IDENTITY,
+            domain: domains.DoIdentity,
             isRequired: true,
             translationKey: "movies.dummy.value"
         }

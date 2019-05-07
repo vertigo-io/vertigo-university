@@ -41,12 +41,12 @@ public final class MoviesPAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TK_LOAD_MOVIE_INDEX.
+	 * Execute la tache TkLoadMovieIndex.
 	 * @param dtc io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.movies.Dummy> 
 	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.movies.MovieIndex> dtcIndex
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.movies.MovieIndex> loadMovieIndex(final io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.movies.Dummy> dtc) {
-		final Task task = createTaskBuilder("TK_LOAD_MOVIE_INDEX")
+		final Task task = createTaskBuilder("TkLoadMovieIndex")
 				.addValue("dtc", dtc)
 				.build();
 		return getTaskManager()
@@ -55,19 +55,19 @@ public final class MoviesPAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TK_REMOVE_ALL_ACTOR_ROLES.
+	 * Execute la tache TkRemoveAllActorRoles.
 	*/
 	public void removeAllActorRoles() {
-		final Task task = createTaskBuilder("TK_REMOVE_ALL_ACTOR_ROLES")
+		final Task task = createTaskBuilder("TkRemoveAllActorRoles")
 				.build();
 		getTaskManager().execute(task);
 	}
 
 	/**
-	 * Execute la tache TK_REMOVE_ALL_MOVIES.
+	 * Execute la tache TkRemoveAllMovies.
 	*/
 	public void removeAllMovies() {
-		final Task task = createTaskBuilder("TK_REMOVE_ALL_MOVIES")
+		final Task task = createTaskBuilder("TkRemoveAllMovies")
 				.build();
 		getTaskManager().execute(task);
 	}

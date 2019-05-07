@@ -7,113 +7,104 @@
 import { EntityField, StoreNode } from "focus4/entity";
 import * as domains from "../../../../00-core/domain"
 
-export interface Person {
+export interface PersonIndex {
 	perId: number;
 	fullName?: string;
-	firstName?: string;
-	lastName?: string;
+	fullNameSortOnly?: string;
 	biography?: string;
-	shortBiography?: string;
 	sex?: string;
-	photoHref?: string;
+	photoUrl?: string;
 	birthDate?: string;
 	birthPlace?: string;
 	activity?: string;
+	movies?: string;
 }
 
-export interface PersonNode extends StoreNode<Person> {
+export interface PersonIndexNode extends StoreNode<PersonIndex> {
 	perId: EntityField<number, typeof domains.DoIdentity>;
 	fullName: EntityField<string, typeof domains.DoLabel>;
-	firstName: EntityField<string, typeof domains.DoLabel>;
-	lastName: EntityField<string, typeof domains.DoLabel>;
+	fullNameSortOnly: EntityField<string, typeof domains.DoTextNotTokenized>;
 	biography: EntityField<string, typeof domains.DoText>;
-	shortBiography: EntityField<string, typeof domains.DoText>;
-	sex: EntityField<string, typeof domains.DoCode>;
-	photoHref: EntityField<string, typeof domains.DoHref>;
+	sex: EntityField<string, typeof domains.DoLabelShort>;
+	photoUrl: EntityField<string, typeof domains.DoHref>;
 	birthDate: EntityField<string, typeof domains.DoDate>;
 	birthPlace: EntityField<string, typeof domains.DoLabel>;
 	activity: EntityField<string, typeof domains.DoMultiValues>;
+	movies: EntityField<string, typeof domains.DoMultiValues>;
 }
 
-export const PersonEntity = {
-    name: "person",
+export const PersonIndexEntity = {
+    name: "personIndex",
     fields: {
         perId: {
             name: "perId",
             type: "field" as "field",
             domain: domains.DoIdentity,
             isRequired: true,
-            translationKey: "persons.person.perId"
+            translationKey: "persons.personIndex.perId"
         },
         fullName: {
             name: "fullName",
             type: "field" as "field",
             domain: domains.DoLabel,
             isRequired: false,
-            translationKey: "persons.person.fullName"
+            translationKey: "persons.personIndex.fullName"
         },
-        firstName: {
-            name: "firstName",
+        fullNameSortOnly: {
+            name: "fullNameSortOnly",
             type: "field" as "field",
-            domain: domains.DoLabel,
+            domain: domains.DoTextNotTokenized,
             isRequired: false,
-            translationKey: "persons.person.firstName"
-        },
-        lastName: {
-            name: "lastName",
-            type: "field" as "field",
-            domain: domains.DoLabel,
-            isRequired: false,
-            translationKey: "persons.person.lastName"
+            translationKey: "persons.personIndex.fullNameSortOnly"
         },
         biography: {
             name: "biography",
             type: "field" as "field",
             domain: domains.DoText,
             isRequired: false,
-            translationKey: "persons.person.biography"
-        },
-        shortBiography: {
-            name: "shortBiography",
-            type: "field" as "field",
-            domain: domains.DoText,
-            isRequired: false,
-            translationKey: "persons.person.shortBiography"
+            translationKey: "persons.personIndex.biography"
         },
         sex: {
             name: "sex",
             type: "field" as "field",
-            domain: domains.DoCode,
+            domain: domains.DoLabelShort,
             isRequired: false,
-            translationKey: "persons.person.sex"
+            translationKey: "persons.personIndex.sex"
         },
-        photoHref: {
-            name: "photoHref",
+        photoUrl: {
+            name: "photoUrl",
             type: "field" as "field",
             domain: domains.DoHref,
             isRequired: false,
-            translationKey: "persons.person.photoHref"
+            translationKey: "persons.personIndex.photoUrl"
         },
         birthDate: {
             name: "birthDate",
             type: "field" as "field",
             domain: domains.DoDate,
             isRequired: false,
-            translationKey: "persons.person.birthDate"
+            translationKey: "persons.personIndex.birthDate"
         },
         birthPlace: {
             name: "birthPlace",
             type: "field" as "field",
             domain: domains.DoLabel,
             isRequired: false,
-            translationKey: "persons.person.birthPlace"
+            translationKey: "persons.personIndex.birthPlace"
         },
         activity: {
             name: "activity",
             type: "field" as "field",
             domain: domains.DoMultiValues,
             isRequired: false,
-            translationKey: "persons.person.activity"
+            translationKey: "persons.personIndex.activity"
+        },
+        movies: {
+            name: "movies",
+            type: "field" as "field",
+            domain: domains.DoMultiValues,
+            isRequired: false,
+            translationKey: "persons.personIndex.movies"
         }
     }
 };
