@@ -16,7 +16,6 @@ import io.mars.hr.domain.MissionDisplay;
 import io.mars.hr.domain.Person;
 import io.mars.hr.services.mission.MissionServices;
 import io.mars.hr.services.person.PersonServices;
-import io.vertigo.core.param.ParamValue;
 import io.vertigo.dynamo.domain.model.FileInfoURI;
 import io.vertigo.dynamo.file.model.VFile;
 import io.vertigo.ui.core.ProtectedValueUtil;
@@ -24,6 +23,7 @@ import io.vertigo.ui.core.ViewContext;
 import io.vertigo.ui.core.ViewContextKey;
 import io.vertigo.ui.impl.springmvc.argumentresolvers.ViewAttribute;
 import io.vertigo.ui.impl.springmvc.controller.AbstractVSpringMvcController;
+import io.vertigo.vega.webservice.stereotype.QueryParam;
 
 @Controller
 @RequestMapping("/hr/person")
@@ -71,7 +71,7 @@ public class PersonDetailController extends AbstractVSpringMvcController {
 	}
 
 	@PostMapping("/_create")
-	public String doCreate(@ViewAttribute("person") final Person person, @ParamValue("personTmpPictureUri") final Optional<FileInfoURI> personPictureFile) {
+	public String doCreate(@ViewAttribute("person") final Person person, @QueryParam("personTmpPictureUri") final Optional<FileInfoURI> personPictureFile) {
 		personServices.createPerson(person);
 		if (personPictureFile.isPresent()) {
 			personServices.savePersonPicture(person.getPersonId(), personPictureFile.get());
@@ -80,7 +80,7 @@ public class PersonDetailController extends AbstractVSpringMvcController {
 	}
 
 	@PostMapping("/_save")
-	public String doSave(@ViewAttribute("person") final Person person, @ParamValue("personTmpPictureUri") final Optional<FileInfoURI> personPictureFile) {
+	public String doSave(@ViewAttribute("person") final Person person, @QueryParam("personTmpPictureUri") final Optional<FileInfoURI> personPictureFile) {
 		personServices.updatePerson(person);
 		if (personPictureFile.isPresent()) {
 			personServices.savePersonPicture(person.getPersonId(), personPictureFile.get());
