@@ -13,7 +13,7 @@ import io.vertigo.app.AutoCloseableApp;
 import io.vertigo.app.config.DefinitionProviderConfig;
 import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.app.config.NodeConfigBuilder;
-import io.vertigo.core.component.di.DIInjector;
+import io.vertigo.core.component.ComponentSpace;
 import io.vertigo.samples.account.authorization.SecuredEntities.MovieOperations;
 import io.vertigo.samples.account.config.SampleConfigBuilder;
 import io.vertigo.samples.account.dao.ActorDAO;
@@ -44,7 +44,7 @@ public class AccountSample {
 				.addModule(defaultSampleModule());
 		try (final AutoCloseableApp app = new AutoCloseableApp(nodeConfigBuilder.build())) {
 			final AccountSample sample = new AccountSample();
-			DIInjector.injectMembers(sample, app.getComponentSpace());
+			ComponentSpace.injectMembers(sample);
 			//-----
 			final VSecurityManager mySecurityManager = app.getComponentSpace().resolve(VSecurityManager.class);
 			final UserSession userSession = mySecurityManager.<TestUserSession> createUserSession();

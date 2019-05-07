@@ -3,7 +3,7 @@ package io.vertigo.samples.crystal.run;
 import io.vertigo.app.AutoCloseableApp;
 import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.app.config.NodeConfigBuilder;
-import io.vertigo.core.component.di.DIInjector;
+import io.vertigo.core.component.ComponentSpace;
 import io.vertigo.samples.crystal.CrystalPAO;
 import io.vertigo.samples.crystal.config.SampleConfigBuilder;
 import io.vertigo.samples.crystal.dao.MovieDAO;
@@ -23,7 +23,7 @@ public class CrystalSearchSample {
 
 		try (final AutoCloseableApp app = new AutoCloseableApp(nodeConfigBuilder.build())) {
 			final CrystalSearchSample sample = new CrystalSearchSample();
-			DIInjector.injectMembers(sample, app.getComponentSpace());
+			ComponentSpace.injectMembers(sample);
 			//-----
 			sample.step1();
 		}

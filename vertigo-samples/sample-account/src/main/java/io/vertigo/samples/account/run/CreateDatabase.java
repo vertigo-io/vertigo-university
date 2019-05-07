@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import javax.inject.Inject;
 
 import io.vertigo.app.AutoCloseableApp;
-import io.vertigo.core.component.di.DIInjector;
+import io.vertigo.core.component.ComponentSpace;
 import io.vertigo.core.resource.ResourceManager;
 import io.vertigo.database.sql.SqlDataBaseManager;
 import io.vertigo.database.sql.connection.SqlConnection;
@@ -29,7 +29,7 @@ public class CreateDatabase {
 	public static void main(final String[] args) {
 		try (final AutoCloseableApp app = new AutoCloseableApp(SampleConfigBuilder.createNodeConfigBuilder().build())) {
 			final CreateDatabase createDatabase = new CreateDatabase();
-			DIInjector.injectMembers(createDatabase, app.getComponentSpace());
+			ComponentSpace.injectMembers(createDatabase);
 			//-----
 			createDatabase.createDataBase();
 			createDatabase.initData();
