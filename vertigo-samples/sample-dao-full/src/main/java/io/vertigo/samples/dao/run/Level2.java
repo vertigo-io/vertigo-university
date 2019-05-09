@@ -5,7 +5,6 @@ import javax.inject.Inject;
 import io.vertigo.app.AutoCloseableApp;
 import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.app.config.NodeConfigBuilder;
-import io.vertigo.core.component.ComponentSpace;
 import io.vertigo.samples.SamplesPAO;
 import io.vertigo.samples.dao.config.SampleConfigBuilder;
 import io.vertigo.samples.dao.dao.ActorDAO;
@@ -24,6 +23,7 @@ import io.vertigo.samples.dao.services.MovieServicesImpl;
 import io.vertigo.samples.dao.services.RepriseServices;
 import io.vertigo.samples.dao.services.RepriseServicesImpl;
 import io.vertigo.samples.reprise.ReprisePAO;
+import io.vertigo.util.InjectorUtil;
 
 public class Level2 {
 
@@ -51,7 +51,7 @@ public class Level2 {
 						.build());
 		try (final AutoCloseableApp app = new AutoCloseableApp(nodeConfigBuilder.build())) {
 			final Level2 level2 = new Level2();
-			ComponentSpace.injectMembers(level2);
+			InjectorUtil.injectMembers(level2);
 			//-----
 			level2.step1();
 		}

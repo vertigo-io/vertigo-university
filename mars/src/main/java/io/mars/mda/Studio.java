@@ -7,13 +7,13 @@ import io.vertigo.app.config.DefinitionProviderConfig;
 import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.app.config.NodeConfig;
 import io.vertigo.commons.CommonsFeatures;
-import io.vertigo.core.component.ComponentSpace;
 import io.vertigo.core.param.Param;
 import io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin;
 import io.vertigo.dynamo.DynamoFeatures;
 import io.vertigo.dynamo.plugins.environment.DynamoDefinitionProvider;
 import io.vertigo.studio.StudioFeatures;
 import io.vertigo.studio.mda.MdaManager;
+import io.vertigo.util.InjectorUtil;
 
 public class Studio {
 
@@ -65,7 +65,7 @@ public class Studio {
 	public static void main(final String[] args) {
 		try (final AutoCloseableApp app = new AutoCloseableApp(buildNodeConfig())) {
 			final Studio sample = new Studio();
-			ComponentSpace.injectMembers(sample);
+			InjectorUtil.injectMembers(sample);
 			//-----
 			sample.cleanGenerate();
 		}

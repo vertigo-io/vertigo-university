@@ -7,7 +7,6 @@ import org.apache.logging.log4j.LogManager;
 import io.vertigo.app.AutoCloseableApp;
 import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.app.config.NodeConfigBuilder;
-import io.vertigo.core.component.ComponentSpace;
 import io.vertigo.samples.SamplesPAO;
 import io.vertigo.samples.crystal.CrystalPAO;
 import io.vertigo.samples.crystal.config.SampleConfigBuilder;
@@ -19,6 +18,7 @@ import io.vertigo.samples.crystal.services.MovieSearchLoader;
 import io.vertigo.samples.crystal.services.MovieServices;
 import io.vertigo.samples.crystal.services.MovieServicesImpl;
 import io.vertigo.samples.crystal.webservices.MovieWebServices;
+import io.vertigo.util.InjectorUtil;
 
 public class Level4 {
 
@@ -37,7 +37,7 @@ public class Level4 {
 				.addModule(defaultSampleModule());
 		try (final AutoCloseableApp app = new AutoCloseableApp(nodeConfigBuilder.build())) {
 			final Level4 sample = new Level4();
-			ComponentSpace.injectMembers(sample);
+			InjectorUtil.injectMembers(sample);
 			//-----
 			sample.step1();
 		}

@@ -3,9 +3,9 @@ package io.vertigo.samples.crystal.run;
 import javax.inject.Inject;
 
 import io.vertigo.app.AutoCloseableApp;
-import io.vertigo.core.component.ComponentSpace;
 import io.vertigo.samples.crystal.config.SampleStudioConfigBuilder;
 import io.vertigo.studio.mda.MdaManager;
+import io.vertigo.util.InjectorUtil;
 
 public class Studio {
 	@Inject
@@ -14,7 +14,7 @@ public class Studio {
 	public static void main(final String[] args) {
 		try (final AutoCloseableApp app = new AutoCloseableApp(new SampleStudioConfigBuilder().build())) {
 			final Studio sample = new Studio();
-			ComponentSpace.injectMembers(sample);
+			InjectorUtil.injectMembers(sample);
 			//-----
 			sample.cleanGenerate();
 		}

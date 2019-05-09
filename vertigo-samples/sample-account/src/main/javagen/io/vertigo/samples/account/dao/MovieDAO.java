@@ -29,23 +29,23 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 
 	/**
 	 * Indique que le keyConcept associé à cette UID va être modifié.
-	 * Techniquement cela interdit les opérations d'ecriture en concurrence 
-	 * et envoie un évenement de modification du keyConcept (à la fin de transaction eventuellement) 
+	 * Techniquement cela interdit les opérations d'ecriture en concurrence
+	 * et envoie un évenement de modification du keyConcept (à la fin de transaction eventuellement)
 	 * @param UID UID du keyConcept modifié
 	 * @return KeyConcept à modifier
 	 */
-	 public Movie readOneForUpdate(final UID<Movie> uid) {
+	public Movie readOneForUpdate(final UID<Movie> uid) {
 		return dataStore.readOneForUpdate(uid);
 	}
 
 	/**
 	 * Indique que le keyConcept associé à cet id va être modifié.
-	 * Techniquement cela interdit les opérations d'ecriture en concurrence 
-	 * et envoie un évenement de modification du keyConcept (à la fin de transaction eventuellement) 
+	 * Techniquement cela interdit les opérations d'ecriture en concurrence
+	 * et envoie un évenement de modification du keyConcept (à la fin de transaction eventuellement)
 	 * @param id Clé du keyConcept modifié
 	 * @return KeyConcept à modifier
 	 */
-	 public Movie readOneForUpdate(final java.lang.Long id) {
+	public Movie readOneForUpdate(final java.lang.Long id) {
 		return readOneForUpdate(createDtObjectUID(id));
 	}
 }

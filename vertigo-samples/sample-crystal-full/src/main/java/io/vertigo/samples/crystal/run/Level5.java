@@ -3,7 +3,6 @@ package io.vertigo.samples.crystal.run;
 import io.vertigo.app.AutoCloseableApp;
 import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.app.config.NodeConfigBuilder;
-import io.vertigo.core.component.ComponentSpace;
 import io.vertigo.samples.SamplesPAO;
 import io.vertigo.samples.crystal.CrystalPAO;
 import io.vertigo.samples.crystal.config.SampleConfigBuilder;
@@ -14,6 +13,7 @@ import io.vertigo.samples.crystal.services.MovieSearchLoader;
 import io.vertigo.samples.crystal.services.MovieServices;
 import io.vertigo.samples.crystal.services.MovieServicesImpl;
 import io.vertigo.samples.crystal.webservices.MovieWebServices;
+import io.vertigo.util.InjectorUtil;
 
 public class Level5 {
 
@@ -28,7 +28,7 @@ public class Level5 {
 				.addModule(defaultSampleModule());
 		try (final AutoCloseableApp app = new AutoCloseableApp(nodeConfigBuilder.build())) {
 			final Level5 sample = new Level5();
-			ComponentSpace.injectMembers(sample);
+			InjectorUtil.injectMembers(sample);
 			//-----
 			sample.step1();
 		}

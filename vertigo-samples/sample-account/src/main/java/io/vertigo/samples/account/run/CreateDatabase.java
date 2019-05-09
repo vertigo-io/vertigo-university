@@ -11,13 +11,13 @@ import java.sql.SQLException;
 import javax.inject.Inject;
 
 import io.vertigo.app.AutoCloseableApp;
-import io.vertigo.core.component.ComponentSpace;
 import io.vertigo.core.resource.ResourceManager;
 import io.vertigo.database.sql.SqlDataBaseManager;
 import io.vertigo.database.sql.connection.SqlConnection;
 import io.vertigo.database.sql.statement.SqlStatement;
 import io.vertigo.lang.WrappedException;
 import io.vertigo.samples.account.config.SampleConfigBuilder;
+import io.vertigo.util.InjectorUtil;
 
 public class CreateDatabase {
 
@@ -29,7 +29,7 @@ public class CreateDatabase {
 	public static void main(final String[] args) {
 		try (final AutoCloseableApp app = new AutoCloseableApp(SampleConfigBuilder.createNodeConfigBuilder().build())) {
 			final CreateDatabase createDatabase = new CreateDatabase();
-			ComponentSpace.injectMembers(createDatabase);
+			InjectorUtil.injectMembers(createDatabase);
 			//-----
 			createDatabase.createDataBase();
 			createDatabase.initData();

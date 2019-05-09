@@ -20,8 +20,6 @@ create sequence SEQ_MOVIE
 create sequence SEQ_ROLE
 	start with 1000 cache 20; 
 
-create sequence SEQ_SEXE
-	start with 1000 cache 20; 
 
 create sequence SEQ_USER
 	start with 1000 cache 20; 
