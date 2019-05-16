@@ -1,0 +1,27 @@
+package io.mars.basemanagement.search
+
+create IndexDefinition IdxBase {  
+  keyConcept : DtBase
+  dtIndex : DtBaseIndex
+  loaderId : "BaseSearchLoader"
+}
+
+
+create FacetDefinition FctBaseBaseTypeLabel {
+	dtDefinition:DtBaseIndex, fieldName:"baseTypeLabel", label:"Base Type"
+} 
+
+create FacetDefinition FctBaseCreationDate {
+	dtDefinition:DtBaseIndex, fieldName:"creationDate", label:"Creation Date"
+	range r1 { filter:"creationDate:[01/01/2008 TO 01/01/2012]", label:"2008-2012"},
+	range r2 { filter:"creationDate:[01/01/2012 TO 01/01/2016]", label:"2012-2016"},
+	range r3 { filter:"creationDate:[01/01/2016 TO *]", label:"after 2016"}
+}
+
+create FacetedQueryDefinition QryBase {
+	keyConcept : DtBase
+	facets : [FctBaseBaseTypeLabel,  FctBaseCreationDate ]
+	domainCriteria : DoLabel
+	listFilterBuilderClass : "io.vertigo.dynamox.search.DslListFilterBuilder"  
+	listFilterBuilderQuery : "baseId:#query# name:#query# code:#+query*#"
+}

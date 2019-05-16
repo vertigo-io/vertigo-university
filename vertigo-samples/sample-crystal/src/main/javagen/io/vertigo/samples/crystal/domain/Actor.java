@@ -1,7 +1,7 @@
 package io.vertigo.samples.crystal.domain;
 
 import io.vertigo.dynamo.domain.model.Entity;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.model.VAccessor;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
@@ -19,14 +19,14 @@ public final class Actor implements Entity {
 	private String name;
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_ACT_SEX",
-			fkFieldName = "SEX_CD",
-			primaryDtDefinitionName = "DT_SEXE",
+			name = "AActSex",
+			fkFieldName = "sexCd",
+			primaryDtDefinitionName = "DtSexe",
 			primaryIsNavigable = true,
 			primaryRole = "Sexe",
 			primaryLabel = "Sexe",
 			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_ACTOR",
+			foreignDtDefinitionName = "DtActor",
 			foreignIsNavigable = false,
 			foreignRole = "Actor",
 			foreignLabel = "Actor",
@@ -35,8 +35,8 @@ public final class Actor implements Entity {
 
 	/** {@inheritDoc} */
 	@Override
-	public URI<Actor> getURI() {
-		return DtObjectUtil.createURI(this);
+	public UID<Actor> getUID() {
+		return UID.of(this);
 	}
 	
 	/**
@@ -44,7 +44,7 @@ public final class Actor implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long actId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_ID", type = "ID", required = true, label = "Id")
+	@Field(domain = "DoId", type = "ID", required = true, label = "Id")
 	public Long getActId() {
 		return actId;
 	}
@@ -63,7 +63,7 @@ public final class Actor implements Entity {
 	 * Récupère la valeur de la propriété 'Nom'.
 	 * @return String name <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_LABEL_LONG", required = true, label = "Nom")
+	@Field(domain = "DoLabelLong", required = true, label = "Nom")
 	public String getName() {
 		return name;
 	}
@@ -82,9 +82,9 @@ public final class Actor implements Entity {
 	 * Récupère la valeur de la propriété 'Sexe'.
 	 * @return String sexCd
 	 */
-	@Field(domain = "DO_CODE", type = "FOREIGN_KEY", label = "Sexe")
+	@Field(domain = "DoCode", type = "FOREIGN_KEY", label = "Sexe")
 	public String getSexCd() {
-		return (String)  sexCdAccessor.getId();
+		return (String) sexCdAccessor.getId();
 	}
 
 	/**
@@ -102,24 +102,6 @@ public final class Actor implements Entity {
 	 */
 	public VAccessor<io.vertigo.samples.crystal.domain.Sexe> sexe() {
 		return sexCdAccessor;
-	}
-	
-	@Deprecated
-	public io.vertigo.samples.crystal.domain.Sexe getSexe() {
-		// we keep the lazyness
-		if (!sexCdAccessor.isLoaded()) {
-			sexCdAccessor.load();
-		}
-		return sexCdAccessor.get();
-	}
-
-	/**
-	 * Retourne l'URI: Sexe.
-	 * @return URI de l'association
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.URI<io.vertigo.samples.crystal.domain.Sexe> getSexeURI() {
-		return sexCdAccessor.getURI();
 	}
 	
 	/** {@inheritDoc} */

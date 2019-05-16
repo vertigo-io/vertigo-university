@@ -4,9 +4,9 @@ import java.util.Optional;
 import java.util.stream.IntStream;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import io.vertigo.core.component.Component;
+import io.vertigo.core.param.ParamValue;
 
 public final class Calculator3 implements Component {
 	/**
@@ -14,7 +14,7 @@ public final class Calculator3 implements Component {
 	 * Params must be named using the annotation.
 	 */
 	@Inject
-	@Named("log")
+	@ParamValue("log")
 	private boolean log;
 
 	private final int offset;
@@ -27,7 +27,7 @@ public final class Calculator3 implements Component {
 	 * it is similar to how to do when the components were created manually
 	 */
 	@Inject
-	public Calculator3(@Named("offset") final Optional<Integer> offset) {
+	public Calculator3(@ParamValue("offset") final Optional<Integer> offset) {
 		this.offset = offset.orElse(0);
 	}
 

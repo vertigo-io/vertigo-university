@@ -41,13 +41,13 @@ public final class PersonsPAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TK_LOAD_ACTOR_ROLE_LINK.
+	 * Execute la tache TkLoadActorRoleLink.
 	 * @param movId Long 
 	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.PersonActorRoleLink> dtc
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.PersonActorRoleLink> loadActorRoleLink(final Long movId) {
-		final Task task = createTaskBuilder("TK_LOAD_ACTOR_ROLE_LINK")
-				.addValue("MOV_ID", movId)
+		final Task task = createTaskBuilder("TkLoadActorRoleLink")
+				.addValue("movId", movId)
 				.build();
 		return getTaskManager()
 				.execute(task)
@@ -55,13 +55,13 @@ public final class PersonsPAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TK_LOAD_FULL_PERSON_INDEX.
+	 * Execute la tache TkLoadFullPersonIndex.
 	 * @param dtc io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.movies.Dummy> 
 	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.PersonIndex> dtcIndex
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.PersonIndex> loadFullPersonIndex(final io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.movies.Dummy> dtc) {
-		final Task task = createTaskBuilder("TK_LOAD_FULL_PERSON_INDEX")
-				.addValue("DTC", dtc)
+		final Task task = createTaskBuilder("TkLoadFullPersonIndex")
+				.addValue("dtc", dtc)
 				.build();
 		return getTaskManager()
 				.execute(task)
@@ -69,13 +69,13 @@ public final class PersonsPAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TK_LOAD_PERSON_INDEX.
+	 * Execute la tache TkLoadPersonIndex.
 	 * @param dtc io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.movies.Dummy> 
 	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.PersonIndex> dtcIndex
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.PersonIndex> loadPersonIndex(final io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.movies.Dummy> dtc) {
-		final Task task = createTaskBuilder("TK_LOAD_PERSON_INDEX")
-				.addValue("DTC", dtc)
+		final Task task = createTaskBuilder("TkLoadPersonIndex")
+				.addValue("dtc", dtc)
 				.build();
 		return getTaskManager()
 				.execute(task)
@@ -83,10 +83,10 @@ public final class PersonsPAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TK_REMOVE_ALL_PERSONS.
+	 * Execute la tache TkRemoveAllPersons.
 	*/
 	public void removeAllPersons() {
-		final Task task = createTaskBuilder("TK_REMOVE_ALL_PERSONS")
+		final Task task = createTaskBuilder("TkRemoveAllPersons")
 				.build();
 		getTaskManager().execute(task);
 	}

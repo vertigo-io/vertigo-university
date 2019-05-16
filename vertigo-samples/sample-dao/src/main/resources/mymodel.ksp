@@ -1,37 +1,37 @@
 package io.vertigo.samples.dao.domain
 
-create DtDefinition DT_MY_COUNTRY {
+create DtDefinition DtMyCountry {
   storeName : "mine"
-  key COU_ID {domain: DO_ID label: "Id" notNull:"false"}
-  field NAME {domain: DO_LABEL label: "Code du pays" notNull:"false"}
+  id couId {domain: DoId label: "Id" }
+  field name {domain: DoLabel label: "Code du pays" required:"false"}
 }
 
-create DtDefinition DT_MY_MOVIE {
+create DtDefinition DtMyMovie {
   storeName : "mine"
-  key MOV_ID {domain: DO_ID label: "Id" notNull:"true"}
-  field NAME {domain: DO_LABEL_LONG label: "Code du pays" notNull:"true"}
-  field YEAR {domain: DO_YEAR label: "Année" notNull:"false"}
-  field IMDBID {domain: DO_LABEL label: "Id Imdb" notNull:"false"}
+  id movId {domain: DoId label: "Id" }
+  field name {domain: DoLabelLong label: "Code du pays" required:"true"}
+  field year {domain: DoYear label: "Année" required:"false"}
+  field imdbid {domain: DoLabel label: "Id Imdb" required:"false"}
 }
 
-create DtDefinition DT_MY_ACTOR {
+create DtDefinition DtMyActor {
   storeName : "mine"
-  key ACT_ID {domain: DO_ID label: "Id" notNull:"true"}
-  field NAME {domain: DO_LABEL_LONG label: "Nom" notNull:"true"}
-  field SEXE {domain: DO_CODE label: "Sexe" notNull:"false"}
+  id actId {domain: DoId label: "Id" }
+  field name {domain: DoLabelLong label: "Nom" required:"true"}
+  field sexe {domain: DoCode label: "Sexe" required:"false"}
 }
 
-create DtDefinition DT_MY_ROLE {
+create DtDefinition DtMyRole {
   storeName : "mine"
-  key ROL_ID {domain: DO_ID label: "Id" notNull:"true"}
-  field AS_CHARACTER {domain: DO_LABEL_VERY_LONG label: "Dans le role de" notNull:"true"}
+  id rolId {domain: DoId label: "Id" }
+  field asCharacter {domain: DoLabelVeryLong label: "Dans le role de" required:"true"}
 }
 
-create Association A_MMOV_MCOU {
-  fkFieldName : "COU_ID"
+create Association AMmovMcou {
+  fkFieldName : "couId"
     
- 	dtDefinitionA : DT_MY_MOVIE
-	dtDefinitionB : DT_MY_COUNTRY
+ 	dtDefinitionA : DtMyMovie
+	dtDefinitionB : DtMyCountry
 			
 	navigabilityA : "false"
 	navigabilityB : "true"
@@ -46,11 +46,11 @@ create Association A_MMOV_MCOU {
 			
 }
 
-create Association A_MROL_MMOV {
-  fkFieldName : "MOV_ID"
+create Association AMrolMmov {
+  fkFieldName : "movId"
     
- 	dtDefinitionA : DT_MY_ROLE
-	dtDefinitionB : DT_MY_MOVIE
+ 	dtDefinitionA : DtMyRole
+	dtDefinitionB : DtMyMovie
 			
 	navigabilityA : "true"
 	navigabilityB : "false"
@@ -66,11 +66,11 @@ create Association A_MROL_MMOV {
 }
 
 
-create Association A_MROL_MACT {
-  fkFieldName : "ACT_ID"
+create Association AMrolMact {
+  fkFieldName : "actId"
     
- 	dtDefinitionA : DT_MY_ROLE
-	dtDefinitionB : DT_MY_ACTOR
+ 	dtDefinitionA : DtMyRole
+	dtDefinitionB : DtMyActor
 			
 	navigabilityA : "false"
 	navigabilityB : "true"

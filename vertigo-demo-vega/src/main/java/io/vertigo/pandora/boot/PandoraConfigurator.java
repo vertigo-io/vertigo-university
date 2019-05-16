@@ -3,36 +3,29 @@ package io.vertigo.pandora.boot;
 import org.h2.Driver;
 
 import io.vertigo.account.AccountFeatures;
-import io.vertigo.account.plugins.account.store.loader.LoaderAccountStorePlugin;
 import io.vertigo.account.plugins.authentication.mock.MockAuthenticationPlugin;
-import io.vertigo.app.config.AppConfig;
-import io.vertigo.app.config.AppConfigBuilder;
 import io.vertigo.app.config.DefinitionProviderConfig;
 import io.vertigo.app.config.LogConfig;
 import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.app.config.NodeConfig;
-import io.vertigo.commons.impl.CommonsFeatures;
+import io.vertigo.app.config.NodeConfigBuilder;
+import io.vertigo.commons.CommonsFeatures;
 import io.vertigo.commons.plugins.analytics.log.SocketLoggerAnalyticsConnectorPlugin;
-import io.vertigo.commons.plugins.cache.memory.MemoryCachePlugin;
 import io.vertigo.core.param.Param;
 import io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin;
 import io.vertigo.core.plugins.resource.local.LocalResourceResolverPlugin;
-import io.vertigo.dashboard.DashboardFeatures;
-import io.vertigo.dashboard.DashboardInitializer;
 import io.vertigo.database.DatabaseFeatures;
 import io.vertigo.database.impl.sql.vendor.h2.H2DataBase;
-import io.vertigo.database.plugins.sql.connection.c3p0.C3p0ConnectionProviderPlugin;
-import io.vertigo.dynamo.impl.DynamoFeatures;
+import io.vertigo.dynamo.DynamoFeatures;
 import io.vertigo.dynamo.plugins.environment.DynamoDefinitionProvider;
-import io.vertigo.dynamo.plugins.search.elasticsearch.embedded.ESEmbeddedSearchServicesPlugin;
-import io.vertigo.dynamo.plugins.store.datastore.sql.SqlDataStorePlugin;
-import io.vertigo.dynamox.metric.domain.DomainMetricsProvider;
 import io.vertigo.pandora.dao.movies.MovieDAO;
 import io.vertigo.pandora.dao.movies.MoviesPAO;
 import io.vertigo.pandora.dao.persons.ActorRoleDAO;
 import io.vertigo.pandora.dao.persons.PersonDAO;
 import io.vertigo.pandora.dao.persons.PersonsPAO;
 import io.vertigo.pandora.domain.DtDefinitions;
+import io.vertigo.pandora.search.movies.MovieSearchClient;
+import io.vertigo.pandora.search.persons.PersonSearchClient;
 import io.vertigo.pandora.services.common.CommonServices;
 import io.vertigo.pandora.services.common.CommonServicesImpl;
 import io.vertigo.pandora.services.masterdata.MasterdataServices;
@@ -48,24 +41,19 @@ import io.vertigo.pandora.webservices.common.CommonWebServices;
 import io.vertigo.pandora.webservices.masterdata.MasterdataWebservices;
 import io.vertigo.pandora.webservices.movies.MovieWebServices;
 import io.vertigo.pandora.webservices.persons.PersonWebServices;
-import io.vertigo.persona.impl.security.PersonaFeatures;
 import io.vertigo.social.SocialFeatures;
 import io.vertigo.social.webservices.notification.NotificationWebServices;
-import io.vertigo.studio.impl.mda.MdaManagerImpl;
-import io.vertigo.studio.mda.MdaManager;
-import io.vertigo.studio.plugins.mda.domain.java.DomainGeneratorPlugin;
-import io.vertigo.studio.plugins.mda.domain.sql.SqlGeneratorPlugin;
-import io.vertigo.studio.plugins.mda.domain.ts.TSGeneratorPlugin;
-import io.vertigo.studio.plugins.mda.task.TaskGeneratorPlugin;
+import io.vertigo.studio.StudioFeatures;
 import io.vertigo.studio.plugins.mda.webservice.WsTsGeneratorPlugin;
 import io.vertigo.vega.VegaFeatures;
 
 public final class PandoraConfigurator {
-	public static AppConfig config(final boolean activeStudio) {
+	public static NodeConfig config(final boolean activeStudio) {
 		final String pandoraHome = System.getProperty("pandora.home", "d:/pandora");
-		final int pandoraPort = Integer.parseInt(System.getProperty("pandora.port", "8080"));
+		final String pandoraPort = System.getProperty("pandora.port", "8080");
 
-		final AppConfigBuilder appConfigBuilder = AppConfig.builder()
+		final NodeConfigBuilder nodeConfigBuilder = NodeConfig.builder()
+				.withAppName("pandora")
 				.beginBoot()
 				.withLocales("fr")
 				.addPlugin(ClassPathResourceResolverPlugin.class)
@@ -74,26 +62,25 @@ public final class PandoraConfigurator {
 				.endBoot();
 
 		if (!activeStudio) {
-			appConfigBuilder
-					.addModule(new PersonaFeatures()
-							.withUserSession(LollipopUserSession.class).build())
+			nodeConfigBuilder
 					.addModule(new CommonsFeatures()
-							.withCache(MemoryCachePlugin.class)
+							.withCache()
 							.withScript()
+							.withMemoryCache()
+							.withJaninoScript()
 							.addAnalyticsConnectorPlugin(SocketLoggerAnalyticsConnectorPlugin.class)
 							.build())
 					.addModule(new DatabaseFeatures()
 							.withSqlDataBase()
-							.addSqlConnectionProviderPlugin(C3p0ConnectionProviderPlugin.class,
+							.withC3p0(
 									Param.of("dataBaseClass", H2DataBase.class.getName()),
 									Param.of("jdbcDriver", Driver.class.getName()),
 									Param.of("jdbcUrl", "jdbc:h2:" + pandoraHome + "/data/demo"))
 							.build())
 					.addModule(new DynamoFeatures()
 							.withStore()
-							.addDataStorePlugin(SqlDataStorePlugin.class,
-									Param.of("sequencePrefix", "SEQ_"))
-							.withSearch(ESEmbeddedSearchServicesPlugin.class,
+							.withSqlStore()
+							.withESEmbedded(
 									Param.of("home", pandoraHome + "/search"), //usage d'url impropre
 									Param.of("envIndex", "test"),
 									Param.of("rowsPerQuery", "50"),
@@ -106,17 +93,19 @@ public final class PandoraConfigurator {
 							.build())
 
 					.addModule(new VegaFeatures()
-							.withSecurity()
+							.withWebServicesSecurity()
 							//.withTokens("vega")
-							.withMisc()
-							.withEmbeddedServer(pandoraPort)
+							.withWebServicesRateLimiting()
+							.withWebServicesEmbeddedServer(Param.of("port", pandoraPort))
 							.build())
 					.addModule(ModuleConfig.builder("identities")
 							.addComponent(MockIdentities.class)
 							.build())
 					.addModule(new AccountFeatures()
-							.withAuthentication(MockAuthenticationPlugin.class)
-							.withAccountStorePlugin(LoaderAccountStorePlugin.class,
+							.withAuthentication()
+							.withSecurity(Param.of("userSessionClassName", LollipopUserSession.class.getName()))
+							.addPlugin(MockAuthenticationPlugin.class)
+							.withLoaderAccount(
 									Param.of("accountLoaderName", "MockIdentities"),
 									Param.of("groupLoaderName", "MockIdentities"))
 							.build())
@@ -126,8 +115,10 @@ public final class PandoraConfigurator {
 					//-----
 					.addModule(ModuleConfig.builder("pandora-dao")
 							.addComponent(MovieDAO.class)
+							.addComponent(MovieSearchClient.class)
 							.addComponent(MoviesPAO.class)
 							.addComponent(PersonDAO.class)
+							.addComponent(PersonSearchClient.class)
 							.addComponent(PersonsPAO.class)
 							.addComponent(ActorRoleDAO.class)
 							.build())
@@ -155,52 +146,34 @@ public final class PandoraConfigurator {
 									.addDefinitionResource("classes", DtDefinitions.class.getName())
 									.addDefinitionResource("kpr", "io/vertigo/pandora/boot/application.kpr")
 									.build())
-							.build())
-					.addModule(new DashboardFeatures()
-							.withInfluxDb("http://analytica.part.klee.lan.net:8086", "analytica", "kleeklee")
-							.build())
-					.addModule(ModuleConfig.builder("metrics-provider")
-							.addComponent(DomainMetricsProvider.class)
-							.build())
-					.addInitializer(DashboardInitializer.class);
-			appConfigBuilder.withNodeConfig(
-					NodeConfig.builder()
-							.withAppName("pandora")
 							.build());
 		} else {
-			appConfigBuilder
-					.addModule(ModuleConfig.builder("studio")
-							.addComponent(MdaManager.class, MdaManagerImpl.class,
-									Param.of("projectPackageName", "io.vertigo.pandora"),
-									Param.of("targetGenDir", "src/main/"),
-									Param.of("encoding", "utf8"))
-							.addPlugin(DomainGeneratorPlugin.class,
-									Param.of("targetSubDir", "javagen"),
-									Param.of("generateDtResources", "false"),
-									Param.of("generateJpaAnnotations", "false"),
-									Param.of("generateDtDefinitions", "true"),
-									Param.of("generateDtObject", "true"))
-							.addPlugin(TaskGeneratorPlugin.class,
-									Param.of("targetSubDir", "javagen"))
-							.addPlugin(SqlGeneratorPlugin.class,
-									Param.of("targetSubDir", "sqlgen"),
+			nodeConfigBuilder
+					.addModule(new StudioFeatures()
+							.withMasterData()
+							.withMda(
+									Param.of("projectPackageName", "io.vertigo.pandora"))
+							.withJavaDomainGenerator(
+									Param.of("generateDtResources", "false"))
+							.withTaskGenerator()
+							.withSearchGenerator()
+							.withSqlDomainGenerator(
 									Param.of("generateDrop", "false"),
 									Param.of("baseCible", "H2"))
-							.addPlugin(TSGeneratorPlugin.class,
-									Param.of("targetSubDir", "tsgen"),
-									Param.of("generateDtResourcesTS", "false"),
-									Param.of("generateTsDtDefinitions", "true"))
+							.withTsDomainGenerator(
+									Param.of("generateDtResourcesTS", "false"))
 							.addPlugin(WsTsGeneratorPlugin.class,
 									Param.of("targetSubDir", "wstsgen"))
 							.build())
 					.addModule(ModuleConfig.builder("myAppGen")
 							.addDefinitionProvider(DefinitionProviderConfig.builder(DynamoDefinitionProvider.class)
+									.addParam(Param.of("constFieldName", "true"))
 									.addDefinitionResource("kpr", "io/vertigo/pandora/boot/application.kpr")
 									.addDefinitionResource("oom", "io/vertigo/pandora/mda/pandora.oom")
 									.addDefinitionResource("kpr", "io/vertigo/pandora/mda/generation.kpr")
 									.build())
 							.build());
 		}
-		return appConfigBuilder.build();
+		return nodeConfigBuilder.build();
 	}
 }

@@ -2,7 +2,7 @@ package io.vertigo.samples.vega.domain;
 
 import java.util.Locale;
 
-import io.vertigo.persona.security.UserSession;
+import io.vertigo.account.security.UserSession;
 
 public class SampleSession extends UserSession {
 

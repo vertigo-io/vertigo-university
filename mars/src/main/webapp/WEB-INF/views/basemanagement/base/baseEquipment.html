@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="http://www.morphbit.com/thymeleaf/component"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{templates/mmcDetailNavLayout}"
+>
+	<head>
+		<title>Base Jobs</title>
+	</head>
+	
+	<body>	
+		<section layout:fragment="content-nav">
+			  	<q-item tag="a" href="#overview">Equipment Overview</q-item>
+			  	<q-item tag="a" href="#equipments">Recently purchased equipment units</q-item>
+			  	<q-item tag="a" href="#maintenance">Lastest maintenance tickets</q-item>
+		</section>
+		
+		<section>
+				<div layout:fragment="content-header-left" th:include="basemanagement/base/baseInformation :: #baseImg"></div>
+				<div layout:fragment="content-header-title" th:include="basemanagement/base/baseInformation :: #baseTitle"></div>
+				<div layout:fragment="content-header-actions" th:include="basemanagement/base/baseInformation :: #baseActions"></div>				
+				<div layout:fragment="content-header-tabs">
+					<vu:button-link flat label="Base Information" url="@{/basemanagement/base/information/} + ${model.base.baseId}"/>
+					<vu:button-link class="active" flat label="Equipment" url="@{/basemanagement/base/equipment/} + ${model.base.baseId}"/>
+					<vu:button-link flat label="VR View" url="@{/basemanagement/base/vr/} + ${model.base.baseId}"/>
+				</div>
+		</section>
+		
+		<section layout:fragment="content" >
+				<vu:block id="overview" title="Equipment Overview">
+					<vu:include-data object="equipmentOverviews" field="'*'" />
+					<div class="row gutter-md">
+						<div v-for="equipmentOverview in vueData.equipmentOverviews" :key="equipmentOverview.businessId" class="col-md-3 col-sm-4 col-xs-12 text-center" >
+							<q-knob
+								  :value="equipmentOverview.okCount"
+								  :min="0"
+								  :max="equipmentOverview.count"
+								  color="positive"
+								  :readonly="true" ><q-icon :name="equipmentOverview.businessIcon" size="60px" color="primary"></q-icon></q-knob>
+							<div class="text-primary small-caps">{{equipmentOverview.businessName}}</div>
+							<div class="text-italic">{{equipmentOverview.count}} Unit(s)</div>
+						</div>
+					</div>
+					
+				</vu:block>				
+				<vu:table list="lastEquipments" id="equipments" componentId="lastEquipments" rowsPerPage="5"
+					tr_@click.native="|goTo('@{/basemanagement/equipment/}'+props.row.equipmentId)|" tr_class="nav" >
+					<vu:slot name="top_left_slot">Recently purchased equipment units</vu:slot>		
+					<vu:include-data object="lastEquipments" field="equipmentId" />
+					<vu:column field="code" />
+					<vu:column field="name" sortable="true" />
+					<vu:column field="purchaseDate" sortable="true" />
+					<vu:column name="equipmentType" label="Equipment Type" >
+						<vu:field-read field="equipmentTypeId" list="equipmentTypes" listKey="equipmentTypeId" listDisplay="label" />
+					</vu:column>
+				</vu:table>
+				
+				<vu:table list="lastTickets" id="maintenance" componentId="lastTickets" rowsPerPage="5"
+					tr_@click.native="|goTo('@{/maintenance/ticket/}'+props.row.ticketId)|" tr_class="nav" >
+					<vu:slot name="top_left_slot">Lastest maintenance tickets</vu:slot>		
+					<vu:include-data object="lastTickets" field="ticketId" />
+					<vu:column field="code" />
+					<vu:column field="title" />
+					<vu:column field="dateCreated" />
+				</vu:table>
+		</section>
+		
+		<section layout:fragment="javscript-footer" >
+			<script type="text/javascript">
+				componentStates.lastEquipments.columns[2].sort = VUi.methods.sortDatesAsString("DD/MM/YYYY");
+			</script>
+		</section>
+	</body>
+</html>

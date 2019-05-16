@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="http://www.morphbit.com/thymeleaf/component"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{templates/mmcParentLayout}"
+>
+	<head>
+		<title>Digital Trust</title>
+		<style>
+		#ethVideo {
+		  max-width: 100%; 
+		}
+		.smallEthLogo{
+		  max-width: 20%; 
+		  max-height: 20%;
+		}
+		.tv {
+		  position: absolute;
+		  top: 0;
+		  left: 0;
+		  z-index: 1;
+		  width: 100%;
+		  height: 100%;
+		  overflow: hidden;
+		}
+		.tv .screen {
+		  position: absolute;
+		  top: 0;
+		  right: 0;
+		  bottom: 0;
+		  left: 0;
+		  z-index: 1;
+		  margin: auto;
+		  opacity: 0;
+		  transition: opacity 0.5s;
+		}
+		.tv .screen.active {
+		  opacity: 1;
+		}
+		</style>
+		
+	</head>
+	
+	<body>
+		<section layout:fragment="page-container">
+		 	<q-page class="row col-12 layout-padding">
+
+				<q-parallax style="height: 130px;">
+					<h1>Digital Trust</h1>
+				</q-parallax>
+				
+		 		<q-parallax style="height: 460px;">
+<!-- 				  <video autoplay muted loop id="ethVideo"> -->
+<!--   						<source th:src="@{/static/img/cms/eth.mp4}" type="video/mp4"> -->
+<!-- 				  </video> -->
+					<div class="tv">
+						  <div class="screen" id="tv"></div>
+						  <img id="imgOffline" th:src="@{/static/img/cms/ethereum_offline.png}" ></div>
+					</div>
+				</q-parallax>
+		 		
+		 		<q-jumbotron class="col-12">
+		    		<div class="q-title">Blockchain Ethereum</div>
+	    			<img class="smallEthLogo" th:src="@{/static/img/cms/logoEthereum.png}"/>
+					<p>Digital trust is a key factor in the digital world. 
+					<br/>A ledger system can handle trust between actors without the need of a third party.</p>
+					<p>The Ethereum blockchain has been chosen to deliver this trust system.<br>
+						<ul>
+							<li>Decentralised: Everyone has a copy and can check the authenticity of the copy</li>
+							<li>Unalterable: A written message can't be modified</li>
+							<li>Secured: Cryptography is used to ensure the technical reliability of the system</li>
+						</ul>
+					</p>
+					<p>
+					   This ledger can be used to provide a trust mechanism inside an application, a customer information system, or between multiple actors.<br>
+					</p>
+	    		<hr class="q-hr q-my-lg"/>
+	    		<div class="row justify-center">
+	    			<q-btn type="a" href="http://mars.dev.klee.lan.net:4000" color="primary" class="q-py-sm q-px-xl " label="View Blockchain Explorer" target="_blank"></q-btn>
+	    		</div>
+	    		
+	    		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	    		
+	    		<script>
+	    		function launchVideo() {
+					if (navigator.onLine) {
+						var tag = document.createElement('script');
+						tag.src = 'https://www.youtube.com/player_api';
+						var firstScriptTag = document.getElementsByTagName('script')[0];
+   				    	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+   					    
+   				    	$(window).on('load resize', function(){
+							vidRescale();
+   						});
+   		        	}
+	    		}
+	    		
+			    var tv,	playerDefaults = {autoplay: 0, autohide: 1, modestbranding: 0, rel: 0, showinfo: 0, controls: 0, disablekb: 1, enablejsapi: 0, iv_load_policy: 3};
+			    var currVid = {'videoId': '70Fa3wjW6yo', 'startSeconds': 5, 'suggestedQuality': 'hd720'};
+
+			    function onYouTubePlayerAPIReady(){
+			      tv = new YT.Player('tv', {events: {'onReady': onPlayerReady, 'onStateChange': onPlayerStateChange}, playerVars: playerDefaults});
+			    }
+
+			    function onPlayerReady(){
+			      tv.loadVideoById(currVid);
+			      tv.mute();
+			    }
+
+			    function onPlayerStateChange(e) {
+					if (e.data === 1){
+						$('#tv').addClass('active');
+						$("#imgOffline").hide();
+					} else if (e.data === 2){
+						$('#tv').removeClass('active');
+						tv.loadVideoById(currVid);
+			      	} else if (e.data === 0){
+						tv.loadVideoById(currVid);
+			      	}
+			    }
+
+			    function vidRescale() {
+					var w = $('main').width();
+					var h = $('main').height();
+
+			      	tv.setSize(w, h);
+					$('.tv .screen').css({'left': '0px'});
+			    }
+			    
+			    launchVideo();
+				</script>
+				
+	    		</q-jumbotron>
+			</q-page>
+		</section>
+	</body>
+</html>

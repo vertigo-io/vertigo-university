@@ -15,7 +15,7 @@ public class MasterdataWebservices implements WebServices {
 
 	@Inject
 	private MasterdataServices masterdataServices;
-	
+
 	@AnonymousAccessAllowed
 	@GET("/genders")
 	public DtList<Gender> getGenderList() {

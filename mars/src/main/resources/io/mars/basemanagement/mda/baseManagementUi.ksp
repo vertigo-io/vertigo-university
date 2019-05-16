@@ -1,0 +1,28 @@
+package io.mars.basemanagement.domain
+
+create DtDefinition DtBasesSummary {
+	field baseCount 				{domain: DoCount label: "Bases count" required:"true"}
+	field baseMeanHealth 			{domain: DoHealth label: "Name" required:"true"}
+	field openedTickets		 	{domain: DoCount label: "Health Level" required: "true"}	
+	field onlineEquipmentPercent	{domain: DoHealth label: "Equipment Health" required:"true"}
+}
+
+create DtDefinition DtBaseOverview {
+	field equipmentCount 			{domain: DoCount label: "Equipments count" required:"true"}
+	field openedTickets		 	{domain: DoCount label: "Open tickets" required: "true"}	
+	field workOrdersInprogress	{domain: DoCount label: "Work Orders in progress" required:"true"}
+}
+
+create DtDefinition DtEquipmentMaintenanceOverview {
+	field openedTickets		 	{domain: DoCount label: "Open tickets" required: "true"}	
+	field workOrdersInprogress	{domain: DoCount label: "Work Orders in progress" required:"true"}
+}
+
+create DtDefinition DtEquipmentOverview {
+	field businessId  {domain: DoId label: "Business Id" required:"false"}
+	field count  {domain: DoCount label: "Count by business" required:"false"}
+	field businessName  {domain: DoLabel label: "Business" required:"false"}
+	field businessIcon  {domain: DoLabel label: "Business" required:"false"}
+	field okCount  {domain: DoCount label: "Ok count" required:"false"}
+	field downCount  {domain: DoCount label: "Down count" required:"false"}
+}

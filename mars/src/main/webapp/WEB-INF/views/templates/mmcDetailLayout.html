@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="http://www.morphbit.com/thymeleaf/component"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{templates/mmcParentLayout}">
+  
+  	<head>
+		<script th:src="@{/vertigo-ui/static/js/v-components/v-minify.js}"></script>
+	</head>
+	
+  	<section layout:fragment="page-container">
+  		<section th:ref="detailHeader" class="col-12" v-minify="{topOffsetEl:'header', leftOffsetEl:'.q-layout-drawer-left'}">
+			<div th:ref="maxiHeader" class="row justify-between items-center bg-secondary header-content " >
+				<div layout:fragment="content-header-left"></div>
+				<!-- Brand and toggle get grouped for better mobile display -->
+				<div class="col column ">				
+					<div class="row col">
+						<div class="detailTitle q-px-md self-center  text-secondary-inverted" layout:fragment="content-header-title"></div>
+						<div class="col self-end bg-tertiary header-tabs text-tertiary-inverted eq-mini gt-md" layout:fragment="content-header-tabs"></div>
+						<div class="col ne-mini"></div>
+						<div class="row self-center ne-mini">
+							<vu:form>
+								<div class="primary" layout:fragment="content-header-actions"></div>
+							</vu:form>
+						</div>
+					</div>
+					<div class="row bg-tertiary text-tertiary-inverted items-center header-tabs ne-mini" layout:fragment="content-header-tabs"></div>
+				</div>
+			</div>
+			<div class="bg-secondary mini" th:insert="~{:: maxiHeader}"/>
+		</section>
+  		<q-page class="row col-12 mgutter-md layout-padding">
+			<div class="col content-body">
+			<vu:form>
+	 			<vu:messages/>
+				<section layout:fragment="content"></section>
+	 		</vu:form>
+	 		</div>
+		</q-page>
+	</section>
+</html>

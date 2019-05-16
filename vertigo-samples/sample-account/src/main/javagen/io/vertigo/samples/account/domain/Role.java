@@ -1,7 +1,7 @@
 package io.vertigo.samples.account.domain;
 
 import io.vertigo.dynamo.domain.model.Entity;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.model.VAccessor;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
@@ -19,14 +19,14 @@ public final class Role implements Entity {
 	private String asCharacter;
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_ROL_MOV",
-			fkFieldName = "MOV_ID",
-			primaryDtDefinitionName = "DT_MOVIE",
+			name = "ARolMov",
+			fkFieldName = "movId",
+			primaryDtDefinitionName = "DtMovie",
 			primaryIsNavigable = false,
 			primaryRole = "Movie",
 			primaryLabel = "Movie",
 			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_ROLE",
+			foreignDtDefinitionName = "DtRole",
 			foreignIsNavigable = true,
 			foreignRole = "Role",
 			foreignLabel = "Role",
@@ -34,14 +34,14 @@ public final class Role implements Entity {
 	private final VAccessor<io.vertigo.samples.account.domain.Movie> movIdAccessor = new VAccessor<>(io.vertigo.samples.account.domain.Movie.class, "Movie");
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_ROL_ACT",
-			fkFieldName = "ACT_ID",
-			primaryDtDefinitionName = "DT_ACTOR",
+			name = "ARolAct",
+			fkFieldName = "actId",
+			primaryDtDefinitionName = "DtActor",
 			primaryIsNavigable = true,
 			primaryRole = "Actor",
 			primaryLabel = "Actor",
 			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_ROLE",
+			foreignDtDefinitionName = "DtRole",
 			foreignIsNavigable = false,
 			foreignRole = "Role",
 			foreignLabel = "Role",
@@ -50,8 +50,8 @@ public final class Role implements Entity {
 
 	/** {@inheritDoc} */
 	@Override
-	public URI<Role> getURI() {
-		return DtObjectUtil.createURI(this);
+	public UID<Role> getUID() {
+		return UID.of(this);
 	}
 	
 	/**
@@ -59,7 +59,7 @@ public final class Role implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long rolId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_ID", type = "ID", required = true, label = "Id")
+	@Field(domain = "DoId", type = "ID", required = true, label = "Id")
 	public Long getRolId() {
 		return rolId;
 	}
@@ -78,7 +78,7 @@ public final class Role implements Entity {
 	 * Récupère la valeur de la propriété 'Dans le role de'.
 	 * @return String asCharacter <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_LABEL_VERY_LONG", required = true, label = "Dans le role de")
+	@Field(domain = "DoLabelVeryLong", required = true, label = "Dans le role de")
 	public String getAsCharacter() {
 		return asCharacter;
 	}
@@ -97,9 +97,9 @@ public final class Role implements Entity {
 	 * Récupère la valeur de la propriété 'Movie'.
 	 * @return Long movId
 	 */
-	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Movie")
+	@Field(domain = "DoId", type = "FOREIGN_KEY", label = "Movie")
 	public Long getMovId() {
-		return (Long)  movIdAccessor.getId();
+		return (Long) movIdAccessor.getId();
 	}
 
 	/**
@@ -116,9 +116,9 @@ public final class Role implements Entity {
 	 * Récupère la valeur de la propriété 'Actor'.
 	 * @return Long actId
 	 */
-	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Actor")
+	@Field(domain = "DoId", type = "FOREIGN_KEY", label = "Actor")
 	public Long getActId() {
-		return (Long)  actIdAccessor.getId();
+		return (Long) actIdAccessor.getId();
 	}
 
 	/**
@@ -136,24 +136,6 @@ public final class Role implements Entity {
 	 */
 	public VAccessor<io.vertigo.samples.account.domain.Actor> actor() {
 		return actIdAccessor;
-	}
-	
-	@Deprecated
-	public io.vertigo.samples.account.domain.Actor getActor() {
-		// we keep the lazyness
-		if (!actIdAccessor.isLoaded()) {
-			actIdAccessor.load();
-		}
-		return actIdAccessor.get();
-	}
-
-	/**
-	 * Retourne l'URI: Actor.
-	 * @return URI de l'association
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.URI<io.vertigo.samples.account.domain.Actor> getActorURI() {
-		return actIdAccessor.getURI();
 	}
 
  	/**

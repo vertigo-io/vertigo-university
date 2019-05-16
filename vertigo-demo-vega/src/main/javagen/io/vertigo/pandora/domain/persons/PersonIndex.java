@@ -29,7 +29,7 @@ public final class PersonIndex implements DtObject {
 	 * Récupère la valeur de la propriété 'id'.
 	 * @return Long perId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_IDENTITY", required = true, label = "id")
+	@Field(domain = "DoIdentity", required = true, label = "id")
 	public Long getPerId() {
 		return perId;
 	}
@@ -48,7 +48,7 @@ public final class PersonIndex implements DtObject {
 	 * Récupère la valeur de la propriété 'Nom'.
 	 * @return String fullName
 	 */
-	@Field(domain = "DO_LABEL", label = "Nom")
+	@Field(domain = "DoLabel", label = "Nom")
 	public String getFullName() {
 		return fullName;
 	}
@@ -67,7 +67,7 @@ public final class PersonIndex implements DtObject {
 	 * Récupère la valeur de la propriété 'Nom'.
 	 * @return String fullNameSortOnly
 	 */
-	@Field(domain = "DO_TEXT_NOT_TOKENIZED", persistent = false, label = "Nom")
+	@Field(domain = "DoTextNotTokenized", persistent = false, label = "Nom")
 	public String getFullNameSortOnly() {
 		return fullNameSortOnly;
 	}
@@ -86,7 +86,7 @@ public final class PersonIndex implements DtObject {
 	 * Récupère la valeur de la propriété 'Biographie'.
 	 * @return String biography
 	 */
-	@Field(domain = "DO_TEXT", persistent = false, label = "Biographie")
+	@Field(domain = "DoText", persistent = false, label = "Biographie")
 	public String getBiography() {
 		return biography;
 	}
@@ -105,7 +105,7 @@ public final class PersonIndex implements DtObject {
 	 * Récupère la valeur de la propriété 'Sexe'.
 	 * @return String sex
 	 */
-	@Field(domain = "DO_LABEL_SHORT", label = "Sexe")
+	@Field(domain = "DoLabelShort", label = "Sexe")
 	public String getSex() {
 		return sex;
 	}
@@ -124,7 +124,7 @@ public final class PersonIndex implements DtObject {
 	 * Récupère la valeur de la propriété 'photo'.
 	 * @return String photoUrl
 	 */
-	@Field(domain = "DO_HREF", label = "photo")
+	@Field(domain = "DoHref", label = "photo")
 	public String getPhotoUrl() {
 		return photoUrl;
 	}
@@ -143,7 +143,7 @@ public final class PersonIndex implements DtObject {
 	 * Récupère la valeur de la propriété 'Date de naissance'.
 	 * @return String birthDate
 	 */
-	@Field(domain = "DO_DATE", label = "Date de naissance")
+	@Field(domain = "DoDate", label = "Date de naissance")
 	public String getBirthDate() {
 		return birthDate;
 	}
@@ -162,7 +162,7 @@ public final class PersonIndex implements DtObject {
 	 * Récupère la valeur de la propriété 'Lieu de naissance'.
 	 * @return String birthPlace
 	 */
-	@Field(domain = "DO_LABEL", label = "Lieu de naissance")
+	@Field(domain = "DoLabel", label = "Lieu de naissance")
 	public String getBirthPlace() {
 		return birthPlace;
 	}
@@ -181,7 +181,7 @@ public final class PersonIndex implements DtObject {
 	 * Récupère la valeur de la propriété 'Activity'.
 	 * @return String activity
 	 */
-	@Field(domain = "DO_MULTI_VALUES", label = "Activity")
+	@Field(domain = "DoMultiValues", label = "Activity")
 	public String getActivity() {
 		return activity;
 	}
@@ -200,7 +200,7 @@ public final class PersonIndex implements DtObject {
 	 * Récupère la valeur de la propriété 'Movies'.
 	 * @return String movies
 	 */
-	@Field(domain = "DO_MULTI_VALUES", label = "Movies")
+	@Field(domain = "DoMultiValues", label = "Movies")
 	public String getMovies() {
 		return movies;
 	}

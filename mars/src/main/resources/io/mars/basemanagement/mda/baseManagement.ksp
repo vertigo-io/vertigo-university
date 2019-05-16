@@ -1,0 +1,175 @@
+package io.mars.basemanagement.domain
+
+create DtDefinition DtBase {
+	stereotype: "KeyConcept"
+	id baseId {domain: DoId label: "Id"}
+	field code {domain: DoCode label: "Code" required:"false"}
+	field name {domain: DoLabel label: "Name" required:"false"}
+	field healthLevel {domain: DoHealth label: "Health Level" required: "false"}	
+	field creationDate {domain: DoLocaldate label: "Creation Date" required:"false"}
+	field description {domain: DoDescription label: "Description" required:"false"}
+	field geoLocation {domain: DoLabel label:"Geographic Location" required:"false"}
+	field assetsValue {domain: DoCurrency label:"Current base assets value" required:"false"}
+	field rentingFee {domain: DoCurrency label: "Renting Fee" required:"false"}
+	field tags {domain: DoMultipleIds label: "Tags" required:"false"}
+}
+
+
+create DtDefinition DtTag {
+	stereotype: "KeyConcept"
+	id tagId {domain: DoId label: "Id"}
+	field label {domain: DoLabel label: "Label" required:"false"}
+}
+
+
+create DtDefinition DtBaseType {
+	stereotype : "StaticMasterData"
+	id baseTypeId {domain: DoCode label:"Id"}
+	field label {domain: DoLabel label:"Base Type Label" required:"false"}	
+}
+
+create DtDefinition DtPicture {
+	id pictureId {domain: DoId label:"Id"}
+	field picturefileId {domain: DoId label:"Id" required:"false"}
+}
+
+
+create DtDefinition DtGeosector {
+	id geosectorId {domain: DoId label:"Id"}
+	field sectorLabel {domain: DoLabel label:"Sector Label" required:"false"}
+}
+
+create DtDefinition DtEquipment {
+	stereotype: "KeyConcept"
+	id equipmentId {domain: DoId label:"Id"}
+	field name {domain: DoLabel label: "Name" required:"false"}
+	field code {domain: DoCode label: "Code" required:"false"}
+	field healthLevel {domain: DoHealth label: "Health Level" required: "false"}	
+	field purchaseDate {domain: DoLocaldate label: "Date of purchase" required:"false"}
+	field description {domain: DoDescription label: "Description" required:"false"}
+	field tags {domain: DoMultipleIds label: "Tags" required:"false"}
+	field geoLocation {domain: DoLabel label:"Geographic Location" required:"false"}
+	field rentingFee {domain: DoCurrency label: "Renting Fee" required:"false"}
+	field equipmentValue {domain: DoCurrency label:"Current equipment value" required:"false"}
+}
+
+
+
+/* Exemple : "Long Range Antenna","High Res Camera", "All Terrain Tires" */
+create DtDefinition DtEquipmentFeature {
+	id equipmentFeatureId {domain: DoId label:"Id"}
+	field name {domain: DoLabel label: "Name" required:"false"}
+}
+
+
+create DtDefinition DtBusiness {
+	id businessId {domain: DoId label:"Id"}
+	field name {domain: DoLabel label: "Name" required:"false"}
+	field icon {domain: DoLabel label: "Icon" required:"false"}
+}
+
+/* Associations */
+
+create Association AMissionBase {
+	fkFieldName : "baseId"
+    
+ 	dtDefinitionA : DtMission
+ 	type : "*>?"
+	dtDefinitionB : DtBase
+	
+	labelB : "Base"
+}
+
+
+create Association ABaseBasetype {
+	fkFieldName : "baseTypeId"
+    
+ 	dtDefinitionA : DtBase
+ 	type : "*>?"
+	dtDefinitionB : DtBaseType
+	
+	labelB : "Base Type"
+	
+}
+
+create Association ABaseGeosector {
+	fkFieldName : "geosectorId"
+    
+ 	dtDefinitionA : DtBase
+ 	type : "*>?"
+	dtDefinitionB : DtGeosector
+	
+	labelB : "Base Geosector"
+}
+
+create Association ABasePicture {
+	fkFieldName : "baseId"
+    
+ 	dtDefinitionA : DtPicture
+ 	type : "*>1"
+	dtDefinitionB : DtBase
+			
+	labelB : "Base"
+}
+
+create Association ABaseEquipment {
+	fkFieldName : "baseId"
+    
+ 	dtDefinitionA : DtEquipment
+ 	type : "*>?"
+	dtDefinitionB : DtBase
+			
+	labelB : "Base"
+}
+
+create Association AEquipmentEquipmentType {
+	fkFieldName : "equipmentTypeId"
+    
+ 	dtDefinitionA : DtEquipment
+ 	type : "*>?"
+	dtDefinitionB : DtEquipmentType
+			
+	labelB : "Equipment Type"
+}
+
+
+create Association AEquipmentGeosector {
+	fkFieldName : "geosectorId"
+    
+ 	dtDefinitionA : DtEquipment
+ 	type : "*>?"
+	dtDefinitionB : DtGeosector
+			
+	labelB : "Equipment Geosector"
+	
+}
+
+create Association AEquipmentEquipmentFeature {
+	fkFieldName : "equipmentId"
+    
+ 	dtDefinitionA : DtEquipmentFeature
+ 	type : "*>?"
+	dtDefinitionB : DtEquipment
+			
+	labelB : "Equipment"
+}
+
+create Association ABusinessMission {
+	fkFieldName : "businessId"
+    
+ 	dtDefinitionA : DtMission
+ 	type : "*>?"
+	dtDefinitionB : DtBusiness
+			
+	labelB : "Business"
+}
+
+create Association ABusinessEquipment {
+	fkFieldName : "businessId"
+    
+ 	dtDefinitionA : DtEquipment
+ 	type : "*>?"
+	dtDefinitionB : DtBusiness
+			
+	labelB : "Business"
+}

@@ -1,0 +1,78 @@
+package io.mars.maintenance.domain
+
+
+create DtDefinition DtTicket {
+	id ticketId {domain: DoId label:"Id"}
+	field code {domain: DoLabel label: "Number" required:"false"}
+	field title {domain: DoLabel label: "Title" required:"false"}
+	field description {domain: DoDescription label: "Description" required:"false"}
+	field dateCreated {domain: DoLocaldate label: "Creation Date" required:"false"}
+	field dateClosed {domain: DoLocaldate label: "Closing Date" required:"false"}
+}
+
+create DtDefinition DtWorkOrder {
+	id woId {domain: DoId label:"Id"}
+	field code {domain: DoLabel label: "Code" required:"false"}
+	field ticketCode {domain: DoLabel label: "Number" required:"false"}
+	field name {domain: DoLabel label: "Name" required:"false"}
+	field description {domain: DoDescription label: "Description" required:"false"}
+	field dateCreated {domain: DoLocaldate label: "Creation Date" required:"false"}
+	field dateClosed {domain: DoLocaldate label: "Closing Date" required:"false"}
+	field dueDate {domain: DoLocaldate label: "Due Date" required:"false"}	
+}
+
+create DtDefinition DtWorkOrderStatus {
+	stereotype: "StaticMasterData"
+	id workOrderStatusId {domain: DoCode label:"Id"}
+	field label {domain: DoLabel label:"Status Label" required:"false"}
+}
+
+create DtDefinition DtTicketStatus {
+	stereotype: "StaticMasterData"
+	id ticketStatusId {domain: DoCode label:"Id"}
+	field label {domain: DoLabel label:"Status Label" required:"false"}
+}
+
+
+
+create Association ATicketWorkOrder {
+	fkFieldName : "ticketId"
+    
+ 	dtDefinitionA : DtWorkOrder
+ 	type : "*>?"
+	dtDefinitionB : DtTicket
+			
+	labelB : "Ticket"
+}
+
+create Association ATicketTicketStatus {
+	fkFieldName : "ticketStatusId"
+    
+ 	dtDefinitionA : DtTicket
+ 	type : "*>?"
+	dtDefinitionB : DtTicketStatus
+			
+	labelB : "Ticket Status"
+}
+
+
+create Association AWorkOrderWorkOrderStatus {
+	fkFieldName : "workOrderStatusId"
+    
+ 	dtDefinitionA : DtWorkOrder
+ 	type : "*>?"
+	dtDefinitionB : DtWorkOrderStatus
+			
+	labelB : "Work Order Status"
+}
+
+create Association AEquipmentTicket {
+	fkFieldName : "equipmentId"
+    
+ 	dtDefinitionA : DtTicket
+ 	type : "*>?"
+	dtDefinitionB : DtEquipment
+			
+	labelB : "Equipment"
+}
+

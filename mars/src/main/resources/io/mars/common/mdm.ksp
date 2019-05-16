@@ -1,0 +1,41 @@
+package io.mars
+
+alter DtDefinition DtBaseType {
+	sortField : "label"
+ 	displayField : "label"
+}
+
+alter DtDefinition DtGeosector {
+	sortField : "sectorLabel"
+ 	displayField : "sectorLabel"
+}
+
+alter DtDefinition DtEquipmentType {
+	sortField : "label"
+ 	displayField : "label"
+}
+
+alter DtDefinition DtWorkOrderStatus {
+	sortField : "label"
+ 	displayField : "label"
+}
+
+alter DtDefinition DtTag {
+	sortField : "label"
+ 	displayField : "label"
+}
+
+alter DtDefinition DtGeosector {
+	sortField : "sectorLabel"
+ 	displayField : "sectorLabel"
+}
+
+alter DtDefinition DtBusiness {
+	sortField : "name"
+ 	displayField : "name"
+}
+
+alter DtDefinition DtTicketStatus {
+	sortField : "label"
+ 	displayField : "label"
+}

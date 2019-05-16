@@ -1,7 +1,7 @@
 package io.vertigo.pandora.domain.persons;
 
 import io.vertigo.dynamo.domain.model.Entity;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.model.VAccessor;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
@@ -19,14 +19,14 @@ public final class ActorRole implements Entity {
 	private String role;
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_MRO_PER",
-			fkFieldName = "PER_ID",
-			primaryDtDefinitionName = "DT_PERSON",
+			name = "AMroPer",
+			fkFieldName = "perId",
+			primaryDtDefinitionName = "DtPerson",
 			primaryIsNavigable = true,
 			primaryRole = "Actor",
 			primaryLabel = "Actor",
 			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_ACTOR_ROLE",
+			foreignDtDefinitionName = "DtActorRole",
 			foreignIsNavigable = true,
 			foreignRole = "Roles",
 			foreignLabel = "Roles",
@@ -34,14 +34,14 @@ public final class ActorRole implements Entity {
 	private final VAccessor<io.vertigo.pandora.domain.persons.Person> perIdAccessor = new VAccessor<>(io.vertigo.pandora.domain.persons.Person.class, "Actor");
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_MOV_MRO",
-			fkFieldName = "MOV_ID",
-			primaryDtDefinitionName = "DT_MOVIE",
+			name = "AMovMro",
+			fkFieldName = "movId",
+			primaryDtDefinitionName = "DtMovie",
 			primaryIsNavigable = false,
 			primaryRole = "Movie",
 			primaryLabel = "Movie",
 			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_ACTOR_ROLE",
+			foreignDtDefinitionName = "DtActorRole",
 			foreignIsNavigable = true,
 			foreignRole = "Roles",
 			foreignLabel = "Roles",
@@ -50,8 +50,8 @@ public final class ActorRole implements Entity {
 
 	/** {@inheritDoc} */
 	@Override
-	public URI<ActorRole> getURI() {
-		return DtObjectUtil.createURI(this);
+	public UID<ActorRole> getUID() {
+		return UID.of(this);
 	}
 	
 	/**
@@ -59,7 +59,7 @@ public final class ActorRole implements Entity {
 	 * Récupère la valeur de la propriété 'ARO ID'.
 	 * @return Long aroId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_IDENTITY", type = "ID", required = true, label = "ARO ID")
+	@Field(domain = "DoIdentity", type = "ID", required = true, label = "ARO ID")
 	public Long getAroId() {
 		return aroId;
 	}
@@ -78,7 +78,7 @@ public final class ActorRole implements Entity {
 	 * Récupère la valeur de la propriété 'ROLE'.
 	 * @return String role
 	 */
-	@Field(domain = "DO_LABEL", label = "ROLE")
+	@Field(domain = "DoLabel", label = "ROLE")
 	public String getRole() {
 		return role;
 	}
@@ -97,9 +97,9 @@ public final class ActorRole implements Entity {
 	 * Récupère la valeur de la propriété 'Actor'.
 	 * @return Long perId
 	 */
-	@Field(domain = "DO_IDENTITY", type = "FOREIGN_KEY", label = "Actor")
+	@Field(domain = "DoIdentity", type = "FOREIGN_KEY", label = "Actor")
 	public Long getPerId() {
-		return (Long)  perIdAccessor.getId();
+		return (Long) perIdAccessor.getId();
 	}
 
 	/**
@@ -116,9 +116,9 @@ public final class ActorRole implements Entity {
 	 * Récupère la valeur de la propriété 'Movie'.
 	 * @return Long movId
 	 */
-	@Field(domain = "DO_IDENTITY", type = "FOREIGN_KEY", label = "Movie")
+	@Field(domain = "DoIdentity", type = "FOREIGN_KEY", label = "Movie")
 	public Long getMovId() {
-		return (Long)  movIdAccessor.getId();
+		return (Long) movIdAccessor.getId();
 	}
 
 	/**
@@ -144,24 +144,6 @@ public final class ActorRole implements Entity {
 	 */
 	public VAccessor<io.vertigo.pandora.domain.persons.Person> actor() {
 		return perIdAccessor;
-	}
-	
-	@Deprecated
-	public io.vertigo.pandora.domain.persons.Person getActor() {
-		// we keep the lazyness
-		if (!perIdAccessor.isLoaded()) {
-			perIdAccessor.load();
-		}
-		return perIdAccessor.get();
-	}
-
-	/**
-	 * Retourne l'URI: Actor.
-	 * @return URI de l'association
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.URI<io.vertigo.pandora.domain.persons.Person> getActorURI() {
-		return perIdAccessor.getURI();
 	}
 	
 	/** {@inheritDoc} */

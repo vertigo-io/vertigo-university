@@ -41,11 +41,11 @@ public final class ReprisePAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TK_COUNT_ACTORS.
+	 * Execute la tache TkCountActors.
 	 * @return Long count
 	*/
 	public Long countActors() {
-		final Task task = createTaskBuilder("TK_COUNT_ACTORS")
+		final Task task = createTaskBuilder("TkCountActors")
 				.build();
 		return getTaskManager()
 				.execute(task)
@@ -53,11 +53,11 @@ public final class ReprisePAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TK_COUNT_MOVIES.
+	 * Execute la tache TkCountMovies.
 	 * @return Long count
 	*/
 	public Long countMovies() {
-		final Task task = createTaskBuilder("TK_COUNT_MOVIES")
+		final Task task = createTaskBuilder("TkCountMovies")
 				.build();
 		return getTaskManager()
 				.execute(task)
@@ -65,11 +65,11 @@ public final class ReprisePAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TK_COUNT_ROLES.
+	 * Execute la tache TkCountRoles.
 	 * @return Long count
 	*/
 	public Long countRoles() {
-		final Task task = createTaskBuilder("TK_COUNT_ROLES")
+		final Task task = createTaskBuilder("TkCountRoles")
 				.build();
 		return getTaskManager()
 				.execute(task)

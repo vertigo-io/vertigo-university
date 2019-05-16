@@ -14,14 +14,14 @@ public final class VegaDefinitionProvider implements SimpleDefinitionProvider {
 
 	@Override
 	public List<Definition> provideDefinitions(final DefinitionSpace definitionSpace) {
-		final Domain domainId = Domain.builder("DO_IDENTITY", DataType.String).build();
-		final Domain domainText = Domain.builder("DO_TEXT", DataType.String).build();
+		final Domain domainId = Domain.builder("DoIdentity", DataType.String).build();
+		final Domain domainText = Domain.builder("DoText", DataType.String).build();
 
-		final DtDefinition movieDtDefinition = DtDefinition.builder("DT_MOVIE")
-				.addIdField("ID", "id", domainId)
-				.addDataField("TITLE", "title", domainText, true, false/*persistent*/)
-				.withSortField("TITLE")
-				.withDisplayField("TITLE")
+		final DtDefinition movieDtDefinition = DtDefinition.builder("DtMovie")
+				.addIdField("id", "id", domainId)
+				.addDataField("title", "title", domainText, true, false/*persistent*/)
+				.withSortField("title")
+				.withDisplayField("title")
 				.build();
 
 		return new ListBuilder<Definition>()

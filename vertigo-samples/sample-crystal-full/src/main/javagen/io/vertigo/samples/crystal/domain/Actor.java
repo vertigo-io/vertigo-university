@@ -2,7 +2,7 @@ package io.vertigo.samples.crystal.domain;
 
 import io.vertigo.dynamo.domain.model.Entity;
 import io.vertigo.dynamo.domain.model.EnumVAccessor;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.lang.Generated;
@@ -18,21 +18,33 @@ public final class Actor implements Entity {
 	private Long actId;
 	private String name;
 
-	@io.vertigo.dynamo.domain.stereotype.Association(name = "A_ACT_SEX", fkFieldName = "SEX_CD", primaryDtDefinitionName = "DT_SEXE", primaryIsNavigable = true, primaryRole = "Sexe", primaryLabel = "Sexe", primaryMultiplicity = "0..1", foreignDtDefinitionName = "DT_ACTOR", foreignIsNavigable = false, foreignRole = "Actor", foreignLabel = "Actor", foreignMultiplicity = "0..*")
+	@io.vertigo.dynamo.domain.stereotype.Association(
+			name = "AActSex",
+			fkFieldName = "sexCd",
+			primaryDtDefinitionName = "DtSexe",
+			primaryIsNavigable = true,
+			primaryRole = "Sexe",
+			primaryLabel = "Sexe",
+			primaryMultiplicity = "0..1",
+			foreignDtDefinitionName = "DtActor",
+			foreignIsNavigable = false,
+			foreignRole = "Actor",
+			foreignLabel = "Actor",
+			foreignMultiplicity = "0..*")
 	private final EnumVAccessor<io.vertigo.samples.crystal.domain.Sexe, io.vertigo.samples.crystal.domain.SexeEnum> sexCdAccessor = new EnumVAccessor<>(io.vertigo.samples.crystal.domain.Sexe.class, "Sexe", io.vertigo.samples.crystal.domain.SexeEnum.class);
 
 	/** {@inheritDoc} */
 	@Override
-	public URI<Actor> getURI() {
-		return DtObjectUtil.createURI(this);
+	public UID<Actor> getUID() {
+		return UID.of(this);
 	}
-
+	
 	/**
 	 * Champ : ID.
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long actId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_ID", type = "ID", required = true, label = "Id")
+	@Field(domain = "DoId", type = "ID", required = true, label = "Id")
 	public Long getActId() {
 		return actId;
 	}
@@ -45,13 +57,13 @@ public final class Actor implements Entity {
 	public void setActId(final Long actId) {
 		this.actId = actId;
 	}
-
+	
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Nom'.
 	 * @return String name <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_LABEL_LONG", required = true, label = "Nom")
+	@Field(domain = "DoLabelLong", required = true, label = "Nom")
 	public String getName() {
 		return name;
 	}
@@ -64,13 +76,13 @@ public final class Actor implements Entity {
 	public void setName(final String name) {
 		this.name = name;
 	}
-
+	
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Sexe'.
 	 * @return String sexCd
 	 */
-	@Field(domain = "DO_CODE", type = "FOREIGN_KEY", label = "Sexe")
+	@Field(domain = "DoCode", type = "FOREIGN_KEY", label = "Sexe")
 	public String getSexCd() {
 		return (String) sexCdAccessor.getId();
 	}
@@ -84,32 +96,14 @@ public final class Actor implements Entity {
 		sexCdAccessor.setId(sexCd);
 	}
 
-	/**
+ 	/**
 	 * Association : Sexe.
 	 * @return l'accesseur vers la propriété 'Sexe'
 	 */
 	public EnumVAccessor<io.vertigo.samples.crystal.domain.Sexe, io.vertigo.samples.crystal.domain.SexeEnum> sexe() {
 		return sexCdAccessor;
 	}
-
-	@Deprecated
-	public io.vertigo.samples.crystal.domain.Sexe getSexe() {
-		// we keep the lazyness
-		if (!sexCdAccessor.isLoaded()) {
-			sexCdAccessor.load();
-		}
-		return sexCdAccessor.get();
-	}
-
-	/**
-	 * Retourne l'URI: Sexe.
-	 * @return URI de l'association
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.URI<io.vertigo.samples.crystal.domain.Sexe> getSexeURI() {
-		return sexCdAccessor.getURI();
-	}
-
+	
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {

@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="http://www.morphbit.com/thymeleaf/component"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <vu:head-meta/>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Demo Application of Vertigo UI powered by SpringMvc, Thymeleaf and Quasar Framework"/>
+    <meta name="author" content="Klee Group"/>
+    
+  	<link rel="stylesheet" th:href="@{/static/css/mars.css}"/>
+	<link rel="icon" th:href="@{/static/img/favicon.ico}"/>
+   	<script src="https://unpkg.com/vue-cookies@1.5.12/vue-cookies.js"></script> 
+	
+	<script th:src="@{/vertigo-ui/static/js/v-components/v-notifications.js}"></script>
+   	<script th:src="@{/static/js/mars.js}"></script>
+   	
+   	<link  th:href="@{/static/chatbot/chatbot.css}" rel="stylesheet"/>
+   	<script th:src="@{/vertigo-ui/static/js/v-components/v-chatbot.js}"></script>
+   	
+</head>
+
+<body class="mat desktop no-touch platform-mat">
+
+	<vu:page>
+	
+      <q-layout view="hHh LpR fff" id="page" v-cloak>
+			<!-- BEGIN HEADER-->
+			<q-layout-header class="items-center">
+				<q-toolbar class="justify-between">
+					<div class="row">
+						<q-btn flat round dense class="lt-lg"
+						th:with="showLeft=${model.vContext['componentStates'].addComponentState('navDrawer').addPrimitive('showLeft', true)}, mini=${model.vContext['componentStates']['navDrawer'].addPrimitive('mini', false)}"
+						@click="componentStates.navDrawer.showLeft = !componentStates.navDrawer.showLeft" icon="menu" aria-label="Toggle menu on left side"></q-btn>
+						<div class="gt-md"><img th:src="@{/static/img/logo MMC white v0.1.png}" height="40px"/></div>
+						<q-toolbar-title class="gt-md">
+								Command Center 
+								<span slot="subtitle">Observe, Orient, Decide and Act</span>
+						</q-toolbar-title>
+					</div>
+					<!-- Brand and toggle get grouped for better mobile display -->
+					<div><!-- 
+						<input type="text"/>
+						<i aria-hidden="true" class="q-icon material-icons">search</i>
+						 -->
+					</div>
+					<div>
+						<v-notifications th:base-url="@{/api/}" :type-icon-map="notificationTypes()" ></v-notifications>
+						<q-btn flat icon-right="arrow_drop_down" class="on-left gt-md">
+							<vu:include-data object="connectedUser" field="personId"/>
+							<img th::src="|'@{/api/x/accounts/api/}'+vueData.connectedUser.personId+'/photo'|" class="avatar"/>
+							<div class="on-right"><span th:text="${model.vContext['connectedUser']['firstName']+' '+model.vContext['connectedUser']['lastName']}"></span><br/><small><span th:text="${model.vContext['activeProfile']}"></span></small></div>
+							<q-popover>
+							  <q-list link class="dense-list-header">
+							  	<q-list-header class="q-py-none row items-center justify-between">Change current profil</q-list-header>
+							  	<q-item>
+							    	<q-item-main><q-btn type="a" flat label="Viewer" th:href="@{/userProfil/_changeProfile?profile=Viewer}" /></q-item-main>
+							    </q-item>
+							    <q-item>
+							    	<q-item-main><q-btn type="a" flat label="Editor" th:href="@{/userProfil/_changeProfile?profile=Editor}" /></q-item-main>
+							    </q-item>
+							    <q-item>
+							    	<q-item-main><q-btn type="a" flat label="Administrator" th:href="@{/userProfil/_changeProfile?profile=Administrator}" /></q-item-main>
+							    </q-item>
+							    <q-item-separator></q-item-separator>
+							  	<q-item>
+							    	<q-item-main><q-btn icon="edit" type="a" flat label="Edit my data" th::href="|'@{/hr/person/}'+vueData.connectedUser.personId|"/></q-item-main>
+							    </q-item>
+							  	<q-item-separator></q-item-separator>
+							    <q-item class="text-center">
+							    	<q-item-main><q-btn type="a" outline label="Disconnect" th:href="@{/login/_logout}" /></q-item-main>
+							    </q-item>
+							  </q-list>
+							 </q-popover>
+						</q-btn>
+						<q-btn flat round dense icon="apps" size="lg" aria-label="Toggle apps">
+							<q-popover>
+								<div class="row gutter-sm q-pa-md" style="width: 300px;">
+									<div class="col-6" >
+										<q-btn type="a" href="https://klee-digital-factory.slack.com"  target="_blank" class="full-width" style="height:68px">
+											<div class="column items-center col-12">
+												<div class="col-12"><q-icon size="36px"name="fab fa-slack" ></q-icon></div>
+												<div class="col-12">Slack</div>
+											</div>
+										</q-btn>
+									</div>
+									<div class="col-6" >
+										<q-btn type="a" href="https://kleeacademy.360learning.com/" target="_blank" class="full-width" style="height:68px">
+											<div class="column items-center">
+												<div class="col-12"><img th:src="@{/static/img/logo_360Learning.png}" width="100%"></img></div>
+												<div class="col-12">Academy</div>
+											</div>
+										</q-btn>
+									</div>
+									<div class="col-6" >
+										<q-btn type="a" href="https://trello.com/b/fKf74LSW/mars-maintenance" target="_blank" class="full-width" style="height:68px">
+											<div class="column items-center">
+												<div class="col-12"><q-icon size="36px"name="fab fa-trello" color="blue" ></q-icon></div>
+												<div class="col-12">Trello</div>
+											</div>
+										</q-btn>
+									</div>
+									<div class="col-6" >
+									</div>
+									<div class="col-6" >
+										<q-btn type="a" href="https://mars.dev.klee.lan.net:9443/store/" target="_blank" class="full-width" style="height:68px">
+											<div class="column items-center">
+												<div class="col-12"><img th:src="@{/static/img/logo_WSO2.png}" width="100%"></img></div>
+												<div class="col-12">API</div>
+											</div>
+										</q-btn>
+									</div>
+									<div class="col-6" >
+										<q-btn type="a" href="https://klee.opendatasoft.com/explore/dataset/dt-tests/information/" target="_blank" class="full-width" style="height:68px">
+											<div class="column items-center">
+												<div class="col-12"><img th:src="@{/static/img/logo_ods.png}" width="100%"></img></div>
+												<div class="col-12">OpenData</div>
+											</div>
+										</q-btn>
+									</div>
+									<div class="col-6" >
+										<q-btn type="a" href="https://aframe.io/examples/showcase/a-blast/" target="_blank" class="full-width" style="height:68px">
+											<div class="column items-center">
+												<div class="col-12"><img th:src="@{/static/img/logo_aframe.png}" height="36px"></img></div>
+												<div class="col-12">VR</div>
+											</div>
+										</q-btn>
+									</div>
+								</div>
+							</q-popover>
+						</q-btn>
+					</div>
+				</q-toolbar>
+			</q-layout-header>
+        	<!-- END HEADER-->
+        			
+  			
+  			<q-layout-drawer
+  			  content-class="bg-white text-primary"
+		      side="left"
+		      :mini="function() {var miniMenu = this.$cookies.get('miniMenu', true) === 'true';componentStates.navDrawer.mini = miniMenu;return miniMenu;}()"
+		      v-model="componentStates.navDrawer.showLeft">
+		      
+		      <q-list link :class="{'dense-list-header':!componentStates.navDrawer.mini}" style="height:100%">
+		      <nav class="text-no-wrap">
+		      	<q-list-header>Home</q-list-header>
+		        <q-item tag="a" th:href="@{/home/}">
+		          <q-item-side icon="fas fa-globe-europe "></q-item-side>
+		          <q-item-main label="Planetary Status"></q-item-main>
+		        </q-item>
+		        <q-item-separator></q-item-separator>
+		       	<q-list-header>Base managment</q-list-header>
+		        <q-item tag="a" th:href="@{/basemanagement/bases/}">
+		          <q-item-side icon="fas fa-dice-d20"></q-item-side>
+		          <q-item-main label="Bases"></q-item-main>
+		          <q-item-side right><q-chip color="primary" dense square class="q-mr-xs">VR</q-chip></q-item-side>
+		        </q-item>
+		        <q-item tag="a" th:href="@{/basemanagement/equipments/}">
+		          <q-item-side icon="fas fa-rocket"></q-item-side>
+		          <q-item-main label="Equipments" ></q-item-main>
+		          <q-item-side right>
+			          <q-chip color="primary" dense square class="q-mr-xs">3D</q-chip>
+			          <q-chip color="primary" dense square class="q-mr-xs">VR</q-chip>
+		          </q-item-side>
+		        </q-item>
+		       	<q-item-separator></q-item-separator>
+		       	<q-list-header>People</q-list-header>
+		        <q-item tag="a" th:href="@{/hr/persons/}">
+		          <q-item-side icon="fas fa-user-friends"></q-item-side>
+		          <q-item-main label="Teams" sublabel="Base managers, Workers,..."></q-item-main>
+		        </q-item>
+		        <q-item tag="a" th:href="@{/academy/}">
+		          <q-item-side icon="fas fa-graduation-cap"></q-item-side>
+		          <q-item-main label="Academy"></q-item-main>
+		        </q-item>
+		        <q-item-separator></q-item-separator>
+		        <q-list-header>Catalog</q-list-header>
+		       <q-item tag="a" th:href="@{/catalog/suppliers/}">
+		          <q-item-side icon="fas fa-building"></q-item-side>
+		          <q-item-main label="Suppliers"></q-item-main>
+		        </q-item>
+		        <q-item-separator></q-item-separator>
+		       	<q-list-header>Maintenance</q-list-header>
+		       <q-item tag="a" th:href="@{/maintenance/dashboard/}">
+		          <q-item-side icon="fas fa-tools"></q-item-side>
+		          <q-item-main label="Maintenance" sublabel="Tickets, Work Orders"></q-item-main>
+		        </q-item>
+		        <q-item tag="a" th:href="@{/jobs/}">
+		          <q-item-side icon="fas fa-tasks" ></q-item-side>
+		          <q-item-main label="Jobs" ></q-item-main>
+		        </q-item>
+		        <q-item-separator></q-item-separator>
+		       	<q-list-header>Data Hub</q-list-header>
+		        <q-item tag="a" th:href="@{/share/}">
+		          <q-item-side icon="fas fa-share-alt"></q-item-side>
+		          <q-item-main label="Share"></q-item-main>
+		          <q-item-side right>
+			          <q-chip color="primary" dense square class="q-mr-xs">API</q-chip>
+			          <q-chip color="primary" dense square class="q-mr-xs">OpenData</q-chip>
+		          </q-item-side>
+		        </q-item>
+		        <q-item tag="a" th:href="@{/environment/}">
+		          <q-item-side icon="fas fa-cloud-sun"></q-item-side>
+		          <q-item-main label="Environment" ></q-item-main>
+		          <q-item-side right><q-chip color="primary" dense square class="q-mr-xs">IoT</q-chip></q-item-side>
+		        </q-item>
+		        <q-item tag="a" th:href="@{/dashboard/modules/vertigo-ui}" target="_blank">
+		          <q-item-side icon="fas fa-chart-bar" ></q-item-side>
+		          <q-item-main label="Analytics" ></q-item-main>
+		        </q-item>
+		         <q-item-separator></q-item-separator>
+		       	<q-list-header>Security</q-list-header>
+		        <q-item tag="a" th:href="@{/digitaltrust/}">
+		          <q-item-side icon="fas fa-award"></q-item-side>
+		          <q-item-main label="Digital Trust"></q-item-main>
+		          <q-item-side right><q-chip color="primary" dense square class="q-mr-xs">Blockchain</q-chip></q-item-side>
+		        </q-item>
+		        <q-item tag="a" th:href="@{/accesscontrol/}">
+		          <q-item-side icon="fas fa-address-card"></q-item-side>
+		          <q-item-main label="Access Control"></q-item-main>
+		          <q-item-side right><q-chip color="primary" dense square class="q-mr-xs">AI</q-chip></q-item-side>
+		        </q-item>
+		        <q-item-separator></q-item-separator>
+		        <q-item tag="a" th:href="@{/extensionsStore/}">
+		          <q-item-side icon="fas fa-puzzle-piece"></q-item-side>
+		          <q-item-main label="Extensions Store"></q-item-main>
+		        </q-item>
+		        <q-item-separator></q-item-separator>
+		        <q-item tag="a" th:href="@{/spiders/}">
+		          <q-item-side icon="fas fa-spider"></q-item-side>
+		          <q-item-main label="Spiders"></q-item-main>
+		        </q-item>
+		        <q-item-separator></q-item-separator>
+		        <q-item v-if="componentStates.navDrawer.mini"
+						@click.native="componentStates.navDrawer.mini = false; $cookies.set('miniMenu', false)" title="Expand menu">
+					<q-item-side icon="arrow_right"></q-item-side>
+				</q-item>
+				 <q-item v-if="!componentStates.navDrawer.mini"
+						@click.native="componentStates.navDrawer.mini = true; $cookies.set('miniMenu', true)" title="Minify menu">
+					<q-item-main></q-item-main><q-item-side icon="arrow_left" right></q-item-side>
+				</q-item>
+		        </nav>
+		        </q-list>
+		        
+		    </q-layout-drawer>
+		    
+			<q-page-container class="row justify-center q-pb-lg" >
+				<section class="col container-bottom-padding" layout:fragment="page-container"></section>
+			</q-page-container>
+			
+			
+			<q-page-sticky position="bottom-left" :offset="[18,0]" class="poweredBy">
+				<div>Powered by</div>
+			    <img th:src="@{/static/img/logo-digital-factory-P3-petit.png}"  />
+			</q-page-sticky>
+			<div class="fixed-bottom-right version-watermark">
+    			<div class="row items-center">
+					<img th:src="@{/static/img/logo MMC grey v0.1.png}" height="30px" class="on-left"/> v1.0.0 &copy; 2153 Mars Mining Corp.
+				</div>
+  			</div>
+  			
+  			<th:block th:if="${model.modeReadOnly}" th:with="botDrawer=${model.vContext['componentStates'].addComponentState('botDrawer').addPrimitive('open', false)}" >
+  				<q-page-sticky position="bottom-right" :offset="[-16,36]" class="poweredBy">
+				    <q-btn style="background: #E82A2A" round size="lg" @click="componentStates.botDrawer.open = !componentStates.botDrawer.open">
+				    	<img th:src="@{/static/chatbot/images/avatar/avatar_bar.png}" style="width: 60px; height: 60px"/>
+				    </q-btn>
+				</q-page-sticky>
+	  			<q-layout-drawer v-model="componentStates.botDrawer.open" side="right" >
+	  				<v-chatbot v-if="componentStates.botDrawer.open" class="column chatbot-container" th:bot-avatar="@{/static/chatbot/images/avatar/avatar_chat.png}" bot-name="mars-bot" bot-url="http://mars.dev.klee.lan.net:5005/webhooks/rest/webhook"></v-chatbot>
+	  			</q-layout-drawer>
+  			</th:block>
+		</q-layout>
+		
+	</vu:page>
+	<div layout:fragment="javscript-footer">
+	</div>
+			
+</body>
+</html>

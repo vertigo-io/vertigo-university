@@ -11,9 +11,7 @@ import io.vertigo.samples.crystal.domain.Movie;
 import io.vertigo.samples.crystal.domain.MovieIndex;
 import io.vertigo.samples.crystal.domain.Role;
 import io.vertigo.samples.crystal.services.MovieServices;
-import io.vertigo.vega.engines.webservice.json.UiSelectedFacets;
 import io.vertigo.vega.webservice.WebServices;
-import io.vertigo.vega.webservice.model.UiListState;
 import io.vertigo.vega.webservice.stereotype.AnonymousAccessAllowed;
 import io.vertigo.vega.webservice.stereotype.GET;
 import io.vertigo.vega.webservice.stereotype.InnerBodyParam;
@@ -42,14 +40,14 @@ public class MovieWebServices implements WebServices {
 	@AnonymousAccessAllowed
 	@GET("/_search")
 	public FacetedQueryResult<MovieIndex, SearchQuery> searchMovies(@QueryParam("q") final String criteria) {
-		return movieServices.searchMovies(criteria, SelectedFacetValues.empty().build(), new DtListState(5, 0, null, true));
+		return movieServices.searchMovies(criteria, SelectedFacetValues.empty().build(), DtListState.of(5));
 	}
 
 	@AnonymousAccessAllowed
 	@POST("/_search")
 	public FacetedQueryResult<MovieIndex, SearchQuery> search(@InnerBodyParam("criteria") final String criteria,
-			@InnerBodyParam("facets") final UiSelectedFacets uiSelectedFacets,
-			@InnerBodyParam("state") final UiListState uiListState) {
-		return movieServices.searchMovies(criteria, uiSelectedFacets.toSelectedFacetValues(), uiListState.toDtListState());
+			@InnerBodyParam("facets") final SelectedFacetValues selectedFacetValues,
+			@InnerBodyParam("state") final DtListState dtListState) {
+		return movieServices.searchMovies(criteria, selectedFacetValues, dtListState);
 	}
 }

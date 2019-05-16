@@ -1,118 +1,118 @@
 package io.vertigo.samples.reprise
 
-create Task TK_INSERT_COUNTRIES_BATCH {
+create Task TkInsertCountriesBatch {
 	storeName : "mine"
     className : "io.vertigo.dynamox.task.TaskEngineProcBatch"
         request : "
         	INSERT INTO MY_COUNTRY (COU_ID, NAME) values (#COUNTRY_LIST.COU_ID#, #COUNTRY_LIST.NAME#) 
 			"
-	attribute COUNTRY_LIST	 	{domain : DO_DT_COUNTRY_DTC		notNull:"true" 	inOut :"in"}
+	attribute countryList	 	{domain : DoDtCountryDtc		required:"true" 	inOut :"in"}
 }
 
 
-create Task TK_LOAD_COUNTRIES {
+create Task TkLoadCountries {
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
         request : "
         	select * from COUNTRY
 			"
-	attribute COUNTRY_LIST	 	{domain : DO_DT_COUNTRY_DTC		notNull:"true" 	inOut :"out"}
+	attribute countryList	 	{domain : DoDtCountryDtc		required:"true" 	inOut :"out"}
 }
 
-create Task TK_COUNT_ACTORS {
+create Task TkCountActors {
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
         request : "
         	select count(*) from ACTOR
 			"
-	attribute COUNT	 	{domain : DO_ID		notNull:"true" 	inOut :"out"}
+	attribute count	 	{domain : DoId		required:"true" 	inOut :"out"}
 }
 
-create Task TK_INSERT_ACTORS_BATCH {
+create Task TkInsertActorsBatch {
 	storeName : "mine"
     className : "io.vertigo.dynamox.task.TaskEngineProcBatch"
         request : "
         	INSERT INTO MY_ACTOR (ACT_ID, NAME, SEXE) values (#ACTORS_LIST.ACT_ID#, #ACTORS_LIST.NAME#, #ACTORS_LIST.SEXE#) 
 			"
-	attribute ACTORS_LIST	 	{domain : DO_DT_ACTOR_DTC		notNull:"true" 	inOut :"in"}
+	attribute actorsList	 	{domain : DoDtActorDtc		required:"true" 	inOut :"in"}
 }
 
 
-create Task TK_LOAD_ACTORS_BY_CHUNK {
+create Task TkLoadActorsByChunk {
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
         request : "
         	select * from ACTOR
-			where ACT_ID > #OFFSET#
+			where ACT_ID > #offset#
         	order by ACT_ID asc
 			limit 1000
 			"
-	attribute LIMIT	 	{domain : DO_ID		notNull:"true" 	inOut :"in"}
-	attribute OFFSET	 	{domain : DO_ID		notNull:"true" 	inOut :"in"}
-	attribute ACTORS_LIST	 	{domain : DO_DT_ACTOR_DTC		notNull:"true" 	inOut :"out"}
+	attribute limit	 	{domain : DoId		required:"true" 	inOut :"in"}
+	attribute offset	 	{domain : DoId		required:"true" 	inOut :"in"}
+	attribute actorsList	 	{domain : DoDtActorDtc		required:"true" 	inOut :"out"}
 }
 
 
-create Task TK_COUNT_MOVIES {
+create Task TkCountMovies {
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
         request : "
         	select count(*) from MOVIE
         	where NAME like 'S%%'
 			"
-	attribute COUNT	 	{domain : DO_ID		notNull:"true" 	inOut :"out"}
+	attribute count	 	{domain : DoId		required:"true" 	inOut :"out"}
 }
 
-create Task TK_INSERT_MOVIES_BATCH {
+create Task TkInsertMoviesBatch {
 	storeName : "mine"
     className : "io.vertigo.dynamox.task.TaskEngineProcBatch"
         request : "
         	INSERT INTO MY_MOVIE (MOV_ID, NAME, YEAR, IMDBID, COU_ID) values (#MOVIES_LIST.MOV_ID#, #MOVIES_LIST.NAME#, #MOVIES_LIST.YEAR#, #MOVIES_LIST.IMDBID#, #MOVIES_LIST.COU_ID#) 
 			"
-	attribute MOVIES_LIST	 	{domain : DO_DT_MOVIE_DTC		notNull:"true" 	inOut :"in"}
+	attribute moviesList	 	{domain : DoDtMovieDtc		required:"true" 	inOut :"in"}
 }
 
 
-create Task TK_LOAD_MOVIES_BY_CHUNK {
+create Task TkLoadMoviesByChunk {
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
         request : "
         	select * from movie
-        	where MOV_ID > #OFFSET#
+        	where MOV_ID > #offset#
         	order by MOV_ID asc
-        	limit #LIMIT#
+        	limit #limit#
 			"
-	attribute LIMIT	 	{domain : DO_ID		notNull:"true" 	inOut :"in"}
-	attribute OFFSET	 	{domain : DO_ID		notNull:"true" 	inOut :"in"}
-	attribute MOVIES_LIST	 	{domain : DO_DT_MOVIE_DTC		notNull:"true" 	inOut :"out"}
+	attribute limit	 	{domain : DoId		required:"true" 	inOut :"in"}
+	attribute offset	 	{domain : DoId		required:"true" 	inOut :"in"}
+	attribute moviesList	 	{domain : DoDtMovieDtc		required:"true" 	inOut :"out"}
 }
 
 
-create Task TK_COUNT_ROLES {
+create Task TkCountRoles {
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
         request : "
         	select count(*) from ROLE rol
         	join movie mov on mov.MOV_ID = rol.MOV_ID
         	where mov.name like 'S%%'
 			"
-	attribute COUNT	 	{domain : DO_ID		notNull:"true" 	inOut :"out"}
+	attribute count	 	{domain : DoId		required:"true" 	inOut :"out"}
 }
 
-create Task TK_INSERT_ROLES_BATCH {
+create Task TkInsertRolesBatch {
 	storeName : "mine"
     className : "io.vertigo.dynamox.task.TaskEngineProcBatch"
         request : "
-        	INSERT INTO MY_ROLE (ROL_ID, MOV_ID, ACT_ID, AS_CHARACTER) values (#ROLES_LIST.ROL_ID#, #ROLES_LIST.MOV_ID#, #ROLES_LIST.ACT_ID#, #ROLES_LIST.AS_CHARACTER#) 
+        	INSERT INTO MY_ROLE (ROL_ID, MOV_ID, ACT_ID, AS_CHARACTER) values (#rolesList.rolId#, #rolesList.movId#, #rolesList.actId#, #rolesList.asCharacter#) 
 			"
-	attribute ROLES_LIST	 	{domain : DO_DT_ROLE_DTC		notNull:"true" 	inOut :"in"}
+	attribute rolesList	 	{domain : DoDtRoleDtc		required:"true" 	inOut :"in"}
 }
 
 
-create Task TK_LOAD_ROLES_BY_CHUNK {
+create Task TkLoadRolesByChunk {
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
         request : "
         	select rol.* from role rol
-        	where ROL_ID > #OFFSET#
+        	where ROL_ID > #offset#
         	order by rol.ROL_ID asc
-        	limit #LIMIT#
+        	limit #limit#
 			"
-	attribute LIMIT	 	{domain : DO_ID		notNull:"true" 	inOut :"in"}
-	attribute OFFSET	 	{domain : DO_ID		notNull:"true" 	inOut :"in"}
-	attribute MOVIES_LIST	 	{domain : DO_DT_ROLE_DTC		notNull:"true" 	inOut :"out"}
+	attribute limit	 	{domain : DoId		required:"true" 	inOut :"in"}
+	attribute offset	 	{domain : DoId		required:"true" 	inOut :"in"}
+	attribute moviesList	 	{domain : DoDtRoleDtc		required:"true" 	inOut :"out"}
 }
 

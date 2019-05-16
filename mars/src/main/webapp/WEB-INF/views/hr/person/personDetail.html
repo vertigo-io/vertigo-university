@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="http://www.morphbit.com/thymeleaf/component"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{templates/mmcDetailNavLayout}"
+>
+	<head>
+		<title>Person detail</title>		
+	</head>
+	
+	<body>
+	
+		<section layout:fragment="content-nav">
+			        <q-item tag="a" href="#information">Information</q-item>
+			        <q-item th:if="${!model.modeCreate}" tag="a" href="#contact">Contact actions</q-item>	
+			        <q-item th:if="${!model.modeCreate}" tag="a" href="#missions">Missions</q-item>		
+		</section>
+		
+		<section>
+				<div layout:fragment="content-header-left">
+					<vu:include-data-protected object="person" field="picturefileId"/>
+					<img th::src="|'@{/hr/person/picture/}'+vueData.person.picturefileId|" class="detailImg gt-md"/>
+				</div>
+				<div layout:fragment="content-header-title">
+					<span class="text-bigger" th:text="${model.modeCreate?'New Person':model.person.fullName}"></span> 
+					<br/><span th:if="${!model.modeCreate}" class="text-smaller">Base Manager</span>
+				</div>
+				<div layout:fragment="content-header-actions">
+					<vu:button-link th:if="${model.modeEdit}"  url="@{/hr/person/} + ${model.person.personId}" :round size="lg" color="primary" icon="fas fa-ban" :flat ariaLabel="Cancel" class="on-left"  />					
+					<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" ariaLabel="Edit" class="on-left"/>
+					<q-btn round size="lg" color="primary" icon="more_horiz"  direction="down" aria-label="More actions" title="More actions" class="on-left"> 
+					  <q-popover><q-list link>
+					    <q-item><q-btn flat>Delete</q-btn></q-item>
+					    <q-item><q-btn flat>Archive</q-btn></q-item>
+					    <q-item><q-btn flat>Bind to base</q-btn></q-item>
+					  </q-list>
+					  </q-popover>
+					</q-btn>
+				</div>
+		</section>
+		
+		<section layout:fragment="content" >
+				<vu:block id="information" title="Information">
+					<vu:grid cols="2">
+						<vu:text-field object="person" field="firstName"/>
+						<vu:text-field object="person" field="lastName" />
+						<vu:text-field object="person" field="email" />
+						<vu:chips-autocomplete object="person" field="tags" list="tags" staticData="true"/>
+						<vu:label-edit object="person" field="picturefileId" th:if="${viewMode=='edit'}"  >
+							<vu:fileupload th:url="'@{/commons/upload}'" key="personTmpPictureUri" />
+						</vu:label-edit>
+					</vu:grid>
+				</vu:block>
+				<vu:block th:if="${!model.modeCreate}" id="contact" title="Contact actions">
+					<div class="row justify-between">
+						<q-btn color="primary" icon="email" label="Mail"></q-btn>
+						<q-btn color="primary" icon="chat" label="Chat"></q-btn>
+						<q-btn color="primary" icon="voicemail" label="Voice mail"></q-btn>
+						<q-btn color="primary" icon="duo" label="High Res. Camera"></q-btn>
+						<q-btn color="primary" icon="swap_calls" label="All Terrain Tires"></q-btn>
+					</div>				
+				</vu:block>
+				
+				<vu:table th:if="${!model.modeCreate}" id="missions" list="missions" componentId="missions" rowsPerPage="10" autoColClass >
+						<vu:slot name="top_left_slot">Missions</vu:slot>
+						<vu:slot name="top_right_slot"><q-btn class="fab-block" round color="primary" icon="add" aria-label="Add mission" title="Add mission" th:@click="|openModal('missionEditModal', '@{/hr/mission/new}', { 'personId' : vueData.person.personId, 'successCallback' : 'onMissionSuccess' })|"></q-btn></vu:slot>
+						<vu:slot name="actions_slot"><q-btn round color="primary" icon="edit" label="View detail" th:@click="|openModal('missionEditModal', '@{/hr/mission/}' + props.row.missionId , {'successCallback' : 'onMissionSuccess' })|"></q-btn></vu:slot>
+						<vu:include-data object="person" field="personId" />
+						<vu:include-data object="missions" field="missionId" />
+						<vu:column field="role" />
+						<vu:column field="baseName" />
+						<vu:column field="businessName" />
+				</vu:table>
+					
+				<q-page-sticky position="bottom-right">
+					<vu:button-submit th:if="${model.modeEdit}"   icon="save" label="Save" action="@{_save}" size="lg" color="primary" />
+					<vu:button-submit th:if="${model.modeCreate}" icon="save" label="Create" action="@{_create}" size="lg" color="primary"/>
+				</q-page-sticky>				
+				<vu:modal componentId="missionEditModal" title="Mission" iframe_width="800" iframe_height="400"  />
+		</section>
+		<section layout:fragment="javscript-footer" >
+			<script type="text/javascript">
+				function onMissionSuccess() {
+					componentStates.missionEditModal.opened = false;
+					VUi.methods.httpPostAjax("[[@{/hr/person/_reloadMissions}]]", {});
+				}
+			</script>
+		</section>
+	</body>
+</html>

@@ -21,8 +21,8 @@ public final class SecuredEntities {
 	 * Authorizations of Movie.
 	 */
 	public enum MovieAuthorizations implements AuthorizationName {
-		/** ATZ_MOVIE$READ. */
-		ATZ_MOVIE$READ;
+		/** AtzMovie$read. */
+		AtzMovie$read;
 
 		/**
 		 * Get the associated authorization.
@@ -48,7 +48,7 @@ public final class SecuredEntities {
 	 * Operations of Movie.
 	 */
 	public enum MovieOperations implements OperationName<Movie> {
-		/** READ. */
-		READ;
+		/** read. */
+		read;
 	}
 }

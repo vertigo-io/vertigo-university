@@ -1,17 +1,17 @@
 package io.vertigo.pandora.domain.persons
 
 
-create Fragment DT_PERSON_LINK {
-  from : DT_PERSON
-  alias FULL_NAME {}
-  alias PHOTO_HREF {}
-  field EXISTS_IN_BDD {domain: DO_ACTIVE label: "Movie type" notNull:"false" persistent:"false" }
+create Fragment DtPersonLink {
+  from : DtPerson
+  alias fullName {}
+  alias photoHref {}
+  field existsInBdd {domain: DoActive label: "Movie type" required:"false" persistent:"false" }
 }
 
 
-create Fragment DT_PERSON_ACTOR_ROLE_LINK {
-  from : DT_PERSON
-  alias FULL_NAME {}
-  alias PHOTO_HREF {}
-  field ROLE { domain: DO_LABEL label: "Role" notNull:"false" persistent:"false"  }
+create Fragment DtPersonActorRoleLink {
+  from : DtPerson
+  alias fullName {}
+  alias photoHref {}
+  field role { domain: DoLabel label: "Role" required:"false" persistent:"false"  }
 }

@@ -1,0 +1,37 @@
+.bot.chatbot-container {
+	height:100%;
+}
+
+.bot .message-processing {
+	width: 80px;
+}
+
+.bot .docs-btn .q-btn {
+	margin: 5px;
+}
+
+.bot .scroll.fit {
+	height: auto !important;
+	align-self: stretch;
+}
+
+.bot .sys-chat .q-message-received .q-message-text {
+	border-radius: 10px;
+}
+
+.bot .q-message-received .q-message-text {
+	border-radius: 10px 10px 10px 0px;
+}
+
+.bot .q-message-sent .q-message-text {
+	border-radius: 10px 10px 0px 10px;
+}
+
+.bot .q-message-avatar {
+	background-color: #e0e0e0;
+	-moz-user-select: none !important;
+	-ms-user-select: none !important;
+	-webkit-user-select: none !important;
+	user-select: none !important;
+	pointer-events: none !important;
+}

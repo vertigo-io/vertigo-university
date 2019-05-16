@@ -20,7 +20,7 @@ package io.vertigo.orchestra.ui.user;
 
 import java.util.Locale;
 
-import io.vertigo.persona.security.UserSession;
+import io.vertigo.account.security.UserSession;
 
 /**
  * UserSession.

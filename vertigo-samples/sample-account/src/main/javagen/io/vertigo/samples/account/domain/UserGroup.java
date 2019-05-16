@@ -1,7 +1,7 @@
 package io.vertigo.samples.account.domain;
 
 import io.vertigo.dynamo.domain.model.Entity;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.lang.Generated;
@@ -19,8 +19,8 @@ public final class UserGroup implements Entity {
 
 	/** {@inheritDoc} */
 	@Override
-	public URI<UserGroup> getURI() {
-		return DtObjectUtil.createURI(this);
+	public UID<UserGroup> getUID() {
+		return UID.of(this);
 	}
 	
 	/**
@@ -28,7 +28,7 @@ public final class UserGroup implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long grpId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_ID", type = "ID", required = true, label = "Id")
+	@Field(domain = "DoId", type = "ID", required = true, label = "Id")
 	public Long getGrpId() {
 		return grpId;
 	}
@@ -47,7 +47,7 @@ public final class UserGroup implements Entity {
 	 * Récupère la valeur de la propriété 'Nom'.
 	 * @return String name
 	 */
-	@Field(domain = "DO_LABEL", label = "Nom")
+	@Field(domain = "DoLabel", label = "Nom")
 	public String getName() {
 		return name;
 	}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:vu="http://www.morphbit.com/thymeleaf/component" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{templates/mmcListLayout}">
+<head>
+	<title>Persons</title>
+</head>
+<body>
+	<section layout:fragment="content">
+		<div class="row q-mb-md text-secondary">
+			<div th:ref="tableTitle" class="q-title self-center">{{vueData.persons.length}} Persons</div>
+			<div class="col"></div>
+			<div th:ref="tableActions" class="row justify-end items-center text-primary">
+				<q-btn icon="add" size="lg" round label="Add" type="a" color="primary" th:href="@{/hr/person/new}"></q-btn>
+				<div class="vertical-separator"></div>
+				<q-btn round icon="fas fa-grip-horizontal" type="a" th:href="@{?renderer=cards}" th::flat="${model.listRenderer != 'cards'}"> </q-btn>
+				<q-btn round icon="fas fa-table" type="a" th:href="@{?renderer=table}" th::flat="${model.listRenderer != 'table'}"> </q-btn>
+				<q-btn round icon="fas fa-list" type="a" th:href="@{?renderer=list}" th::flat="${model.listRenderer != 'list'}"> </q-btn>
+			</div>
+		</div>
+		<th:block th:if="${model.listRenderer == 'table'}">
+			<vu:table list="persons" color="primary" componentId="personsTable" sortUrl="@{/hr/persons/_sort}"
+				tr_@click.native="|goTo('@{/hr/person/}'+props.row.personId)|" tr_class="nav">
+				<vu:include-data object="persons" field="personId" />
+				<vu:column field="firstName" sortable="true" />
+				<vu:column field="lastName" sortable="true" />
+				<vu:column field="email" sortable="true" />
+			</vu:table>
+		</th:block>
+		<th:block th:if="${model.listRenderer == 'cards'}">
+			<vu:include-data object="persons" field="personId" />
+			<vu:include-data object="persons" field="fullName" />
+			<vu:include-data object="persons" field="email" />
+			<vu:include-data object="persons" field="dateHired" />
+			<vu:include-data object="persons" field="tags" />
+			<vu:include-data-protected object="persons" field="picturefileId" />
+			<vu:cards list="persons" cardClass="marsCard col-xl-4 col-md-6 col-xs-12" componentId="personsCards" sortUrl="@{/hr/persons/_sort}" rowsPerPage="8"
+				showMore="true" showMoreLabel="Show more">
+				<div class="nav" th:@click="|goTo('@{/hr/person/}'+item.personId)|">
+					<q-card-media> <img th::src="|'@{/hr/person/picture/}'+item.picturefileId|" /> </q-card-media>
+					<q-card-main class="row">
+						<div class="col-3 text-center" style="max-width: 100px;">
+							<q-icon name="fas fa-user" size="3em" color="primary"></q-icon>
+						</div>
+						<div class="col">
+							<span class="text-primary small-caps text-bigger">{{item.fullName}}</span><br /> Email : {{item.email}}<br /> Hired : {{item.dateHired}}<br />
+						</div>
+					</q-card-main>
+					<q-card-separator></q-card-separator>
+				</div>
+				<q-card-actions> <q-chips-input :value="item.tags" :readonly="true" :hide-underline="true"></q-chips-input> </q-card-actions>
+			</vu:cards>
+		</th:block>
+		<th:block th:if="${model.listRenderer == 'list'}">
+			<vu:include-data object="persons" field="personId" />
+			<vu:include-data-protected object="persons" field="picturefileId" />
+			<vu:list list="persons" componentId="personsList" sortUrl="@{/hr/persons/_sort}" rowsPerPage="8" pagination_:direction-links="true"
+				pagination_:boundary-links="true">
+				<q-item-side> <img th::src="|'@{/hr/person/picture/}'+item.picturefileId|" class="avatar" /> </q-item-side>
+				<q-item-main>
+					<div class="row">
+						<div class="col-6">
+							<vu:include-data object="persons" field="fullName" />
+							<vu:include-data object="persons" field="dateHired" />
+							<a class="text-primary small-caps text-bigger" th::href="|'@{/hr/person/}'+item.personId|">{{item.fullName}}</a><br /> Hired : {{item.dateHired}}<br />
+						</div>
+						<div class="col-6">
+							<vu:include-data object="persons" field="email_fmt" />
+							<vu:include-data object="persons" field="tags" />
+							<q-icon name="mail"></q-icon>
+							{{item.email}}<br />
+							<q-chips-input :value="item.tags" :readonly="true" :hide-underline="true"></q-chips-input>
+						</div>
+					</div>
+				</q-item-main>
+				<q-item-side> <q-btn round color="primary" icon="arrow_forward" type="a" th::href="|'@{/hr/person/}'+item.personId|"></q-btn> </q-item-side>
+			</vu:list>
+		</th:block>
+	</section>
+</body>
+</html>

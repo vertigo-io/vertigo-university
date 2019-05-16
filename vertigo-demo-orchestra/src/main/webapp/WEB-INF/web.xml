@@ -6,7 +6,7 @@
 	<display-name>orchestra</display-name>
 	<context-param>
 		<param-name>boot.applicationConfiguration</param-name>
-		<param-value>/META-INF/managers.xml</param-value>
+		<param-value>/META-INF/config.yaml</param-value>
 	</context-param>
 	<context-param>
 		<param-name>boot.db.source</param-name>

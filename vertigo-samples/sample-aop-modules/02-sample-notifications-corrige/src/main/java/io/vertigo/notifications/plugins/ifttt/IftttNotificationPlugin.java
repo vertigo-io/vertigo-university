@@ -9,7 +9,6 @@ import java.util.Optional;
 import java.util.Properties;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Entity;
@@ -23,6 +22,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import io.vertigo.core.component.Activeable;
+import io.vertigo.core.param.ParamValue;
 import io.vertigo.lang.Assertion;
 import io.vertigo.lang.VSystemException;
 import io.vertigo.lang.WrappedException;
@@ -42,8 +42,8 @@ public class IftttNotificationPlugin implements NotificationPlugin, Activeable {
 	private String url;
 
 	@Inject
-	public IftttNotificationPlugin(@Named("proxyHost") final Optional<String> proxyHost,
-			@Named("proxyPort") final Optional<String> proxyPort) {
+	public IftttNotificationPlugin(@ParamValue("proxyHost") final Optional<String> proxyHost,
+			@ParamValue("proxyPort") final Optional<String> proxyPort) {
 		Assertion.checkNotNull(proxyHost);
 		Assertion.checkNotNull(proxyPort);
 		Assertion.checkArgument(

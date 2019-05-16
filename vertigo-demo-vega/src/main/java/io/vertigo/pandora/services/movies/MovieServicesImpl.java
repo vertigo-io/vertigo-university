@@ -11,12 +11,14 @@ import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.dynamo.collections.metamodel.FacetDefinition;
 import io.vertigo.dynamo.collections.model.FacetedQueryResult;
 import io.vertigo.dynamo.collections.model.SelectedFacetValues;
+import io.vertigo.dynamo.domain.metamodel.association.DtListURIForNNAssociation;
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.domain.model.DtListState;
 import io.vertigo.dynamo.domain.model.Fragment;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.search.model.SearchQuery;
 import io.vertigo.dynamo.search.model.SearchQueryBuilder;
+import io.vertigo.dynamo.store.StoreManager;
 import io.vertigo.pandora.dao.movies.MovieDAO;
 import io.vertigo.pandora.dao.movies.MoviesPAO;
 import io.vertigo.pandora.dao.persons.ActorRoleDAO;
@@ -26,7 +28,7 @@ import io.vertigo.pandora.domain.movies.MovieIndex;
 import io.vertigo.pandora.domain.persons.ActorRole;
 import io.vertigo.pandora.domain.persons.Person;
 import io.vertigo.pandora.domain.persons.PersonActorRoleLink;
-import io.vertigo.vega.webservice.model.UiListState;
+import io.vertigo.pandora.search.movies.MovieSearchClient;
 
 @Transactional
 public class MovieServicesImpl implements MovieServices {
@@ -34,9 +36,13 @@ public class MovieServicesImpl implements MovieServices {
 	@Inject
 	private MovieDAO movieDAO;
 	@Inject
+	private MovieSearchClient movieSearchClient;
+	@Inject
 	private MoviesPAO moviesPAO;
 	@Inject
 	private ActorRoleDAO actorRoleDAO;
+	@Inject
+	private StoreManager storeManager;
 
 	@Override
 	public Movie getMovie(final long id) {
@@ -94,28 +100,28 @@ public class MovieServicesImpl implements MovieServices {
 	}
 
 	@Override
-	public void saveWriters(final Movie movie, final List<URI> personURIs) {
-		movieDAO.updateNN(movie.getWritersDtListURI(), personURIs);
+	public void saveWriters(final Movie movie, final List<UID> personURIs) {
+		storeManager.getDataStore().getBrokerNN().updateNN((DtListURIForNNAssociation) movie.writers().getDtListURI(), personURIs);
 	}
 
 	@Override
-	public void saveCamera(final Movie movie, final List<URI> personURIs) {
-		movieDAO.updateNN(movie.getCameraDtListURI(), personURIs);
+	public void saveCamera(final Movie movie, final List<UID> personURIs) {
+		storeManager.getDataStore().getBrokerNN().updateNN((DtListURIForNNAssociation) movie.camera().getDtListURI(), personURIs);
 	}
 
 	@Override
-	public void saveProducers(final Movie movie, final List<URI> personURIs) {
-		movieDAO.updateNN(movie.getProducersDtListURI(), personURIs);
+	public void saveProducers(final Movie movie, final List<UID> personURIs) {
+		storeManager.getDataStore().getBrokerNN().updateNN((DtListURIForNNAssociation) movie.producers().getDtListURI(), personURIs);
 	}
 
 	@Override
-	public void saveDirectors(final Movie movie, final List<URI> personURIs) {
-		movieDAO.updateNN(movie.getDirectorsDtListURI(), personURIs);
+	public void saveDirectors(final Movie movie, final List<UID> personURIs) {
+		storeManager.getDataStore().getBrokerNN().updateNN((DtListURIForNNAssociation) movie.directors().getDtListURI(), personURIs);
 	}
 
 	@Override
 	public FacetedQueryResult<MovieIndex, SearchQuery> searchMovies(final String criteria, final SelectedFacetValues listFilters, final DtListState dtListState, final Optional<String> group) {
-		final SearchQueryBuilder searchQueryBuilder = movieDAO.createSearchQueryBuilderMovie(criteria, listFilters);
+		final SearchQueryBuilder searchQueryBuilder = movieSearchClient.createSearchQueryBuilderMovie(criteria, listFilters);
 		return searchMovieCommon(dtListState, group, searchQueryBuilder);
 	}
 
@@ -126,7 +132,7 @@ public class MovieServicesImpl implements MovieServices {
 			final FacetDefinition clusteringFacetDefinition = Home.getApp().getDefinitionSpace().resolve(group.get(), FacetDefinition.class);
 			searchQueryBuilder.withFacetClustering(clusteringFacetDefinition);
 		}
-		return movieDAO.loadList(searchQueryBuilder.build(), dtListState);
+		return movieSearchClient.loadList(searchQueryBuilder.build(), dtListState);
 	}
 
 	@Override
@@ -151,10 +157,10 @@ public class MovieServicesImpl implements MovieServices {
 	}
 
 	public List<Movie> getRankingByField(final String fieldName) {
-		final DtListState dtListState = new UiListState(6, 0, fieldName, true, "").toDtListState();
+		final DtListState dtListState = DtListState.of(6, 0, fieldName, true);
 		final SelectedFacetValues listFilters = SelectedFacetValues.empty().build();
 		final Optional<String> group = Optional.empty();
-		final SearchQueryBuilder searchQueryBuilder = movieDAO.createSearchQueryBuilderMovieWithPoster("", listFilters);
+		final SearchQueryBuilder searchQueryBuilder = movieSearchClient.createSearchQueryBuilderMovieWithPoster("", listFilters);
 		final FacetedQueryResult<MovieIndex, SearchQuery> result = searchMovieCommon(dtListState, group, searchQueryBuilder);
 		final List<Movie> movies = new ArrayList<>();
 		for (final MovieIndex movieIndex : result.getDtList()) {
@@ -166,9 +172,11 @@ public class MovieServicesImpl implements MovieServices {
 	@Override
 	public DtList<PersonActorRoleLink> getActors(final long id) {
 		final DtList<PersonActorRoleLink> actorRoleLinks = new DtList<>(PersonActorRoleLink.class);
-		final DtList<ActorRole> actorRoles = getMovie(id).getRolesList();
-		for (final ActorRole actorRole : actorRoles) {
-			final Person person = actorRole.getActor(); //load actor in ActorRole
+		final Movie movie = getMovie(id);
+		movie.roles().load();
+		for (final ActorRole actorRole : movie.roles().get()) {
+			actorRole.actor().load();
+			final Person person = actorRole.actor().get(); //load actor in ActorRole
 			final PersonActorRoleLink actorRoleLink = new PersonActorRoleLink();
 			actorRoleLink.setPerId(person.getPerId());
 			actorRoleLink.setFullName(person.getFullName());
@@ -181,22 +189,30 @@ public class MovieServicesImpl implements MovieServices {
 
 	@Override
 	public DtList<Person> getWriters(final long id) {
-		return getMovie(id).getWritersList();
+		final Movie movie = getMovie(id);
+		movie.writers().load();
+		return movie.writers().get();
 	}
 
 	@Override
 	public DtList<Person> getCamera(final long id) {
-		return getMovie(id).getCameraList();
+		final Movie movie = getMovie(id);
+		movie.camera().load();
+		return movie.camera().get();
 	}
 
 	@Override
 	public DtList<Person> getProducers(final long id) {
-		return getMovie(id).getProducersList();
+		final Movie movie = getMovie(id);
+		movie.producers().load();
+		return movie.producers().get();
 	}
 
 	@Override
 	public DtList<Person> getDirectors(final long id) {
-		return getMovie(id).getDirectorsList();
+		final Movie movie = getMovie(id);
+		movie.directors().load();
+		return movie.directors().get();
 	}
 
 }

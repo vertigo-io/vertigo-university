@@ -1,13 +1,10 @@
 package io.vertigo.config;
 
-import io.vertigo.app.config.AppConfig;
-import io.vertigo.app.config.ModuleConfig;
-import io.vertigo.commons.impl.CommonsFeatures;
+import io.vertigo.app.config.NodeConfig;
+import io.vertigo.commons.CommonsFeatures;
 import io.vertigo.core.param.Param;
-import io.vertigo.dynamo.impl.DynamoFeatures;
-import io.vertigo.mail.MailManager;
-import io.vertigo.mail.impl.MailManagerImpl;
-import io.vertigo.mail.plugins.javax.JavaxSendMailPlugin;
+import io.vertigo.dynamo.DynamoFeatures;
+import io.vertigo.social.SocialFeatures;
 
 /**
  * Mail Sample Config Builder
@@ -16,17 +13,16 @@ import io.vertigo.mail.plugins.javax.JavaxSendMailPlugin;
  */
 public class MailSampleConfigBuilder {
 
-	public AppConfig build() {
-		//@formatter:off
-		return  AppConfig.builder()
+	public NodeConfig build() {
+		return NodeConfig.builder()
 				.beginBoot()
 				.withLocales("fr")
 				.endBoot()
 				.addModule(new CommonsFeatures().build())
 				.addModule(new DynamoFeatures().build())
-				.addModule( ModuleConfig.builder("mail")
-						.addComponent(MailManager.class, MailManagerImpl.class)
-						.addPlugin(JavaxSendMailPlugin.class,
+				.addModule(new SocialFeatures()
+						.withMails()
+						.withJavaxMail(
 								Param.of("storeProtocol", "smtp"),
 								Param.of("host", "localdelivery.klee.lan.net"),
 								Param.of("developmentMode", "true"),

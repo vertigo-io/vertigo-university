@@ -23,6 +23,7 @@ import io.vertigo.samples.crystal.dao.MovieDAO;
 import io.vertigo.samples.crystal.domain.Movie;
 import io.vertigo.samples.crystal.domain.MovieIndex;
 import io.vertigo.samples.crystal.domain.Role;
+import io.vertigo.samples.crystal.search.MovieSearchClient;
 
 @Transactional
 public class MovieServicesImpl implements MovieServices {
@@ -31,6 +32,8 @@ public class MovieServicesImpl implements MovieServices {
 
 	@Inject
 	private MovieDAO movieDAO;
+	@Inject
+	private MovieSearchClient movieSearchClient;
 
 	@Inject
 	private CrystalPAO crystalPAO;
@@ -49,7 +52,9 @@ public class MovieServicesImpl implements MovieServices {
 	public DtList<Role> getRolesByMovie(final Long movId) {
 		Assertion.checkNotNull(movId);
 		// ---
-		return movieDAO.get(movId).getRoleList();
+		final Movie movie = movieDAO.get(movId);
+		movie.role().load();
+		return movie.role().get();
 	}
 
 	@Override
@@ -69,8 +74,8 @@ public class MovieServicesImpl implements MovieServices {
 	@Override
 	public FacetedQueryResult searchMovies(final String criteria, final SelectedFacetValues selectedFacetValues, final DtListState listState) {
 		try {
-			final SearchQueryBuilder searchQueryBuilder = movieDAO.createSearchQueryBuilderMovie(criteria, selectedFacetValues);
-			return movieDAO.loadList(searchQueryBuilder.build(), listState);
+			final SearchQueryBuilder searchQueryBuilder = movieSearchClient.createSearchQueryBuilderMovie(criteria, selectedFacetValues);
+			return movieSearchClient.loadList(searchQueryBuilder.build(), listState);
 		} catch (final VUserException e) {
 			if (e.getCause() != null) {
 				logger.warn(e.getCause());

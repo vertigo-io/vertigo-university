@@ -41,13 +41,13 @@ public final class CrystalPAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TK_LOAD_MOVIE_INDEX.
+	 * Execute la tache TkLoadMovieIndex.
 	 * @param movieIds java.util.List<Long> 
 	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.crystal.domain.MovieIndex> dtcIndex
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.crystal.domain.MovieIndex> loadMovieIndex(final java.util.List<Long> movieIds) {
-		final Task task = createTaskBuilder("TK_LOAD_MOVIE_INDEX")
-				.addValue("MOVIE_IDS", movieIds)
+		final Task task = createTaskBuilder("TkLoadMovieIndex")
+				.addValue("movieIds", movieIds)
 				.build();
 		return getTaskManager()
 				.execute(task)

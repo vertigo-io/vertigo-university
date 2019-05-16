@@ -42,12 +42,12 @@ public final class ActorRoleDAO extends DAO<ActorRole, java.lang.Long> implement
 	}
 
 	/**
-	 * Execute la tache TK_IMPORT_ACTOR_ROLES.
+	 * Execute la tache TkImportActorRoles.
 	 * @param dtc io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.ActorRole> 
 	*/
 	public void importActorRoles(final io.vertigo.dynamo.domain.model.DtList<io.vertigo.pandora.domain.persons.ActorRole> dtc) {
-		final Task task = createTaskBuilder("TK_IMPORT_ACTOR_ROLES")
-				.addValue("DTC", dtc)
+		final Task task = createTaskBuilder("TkImportActorRoles")
+				.addValue("dtc", dtc)
 				.build();
 		getTaskManager().execute(task);
 	}

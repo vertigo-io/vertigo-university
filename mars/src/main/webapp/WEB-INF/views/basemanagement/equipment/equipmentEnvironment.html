@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="http://www.morphbit.com/thymeleaf/component"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{templates/mmcDetailNavLayout}"
+>
+	<head>
+		<title>Equipment Environment</title>
+		
+		<!-- graphs -->
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-color/1.0.3/d3-color.min.js" ></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-interpolate/1.1.5/d3-interpolate.min.js" ></script>
+		<script th:src="@{/dashboard/static/dashboard.js}"></script>
+		<script th:src="@{/dashboard/static/dashboard.chartjs.js}"></script>
+	</head>
+	
+	<body>
+		
+		<section>
+				<div layout:fragment="content-header-left" th:include="basemanagement/equipment/equipmentInformation :: #equipmentIcon"></div>
+				<div layout:fragment="content-header-title" th:include="basemanagement/equipment/equipmentInformation :: #equipmentTitle"></div>
+				<div th:if="${!model.modeCreate}" layout:fragment="content-header-tabs">
+					<vu:button-link flat label="Information" url="@{/basemanagement/equipment/} + ${model.equipment.equipmentId}"/>
+					<vu:button-link flat label="Maintenance" url="@{/basemanagement/equipment/maintenance/} + ${model.equipment.equipmentId}"/>
+					<vu:button-link class="active" flat label="Environment" url="@{/basemanagement/equipment/environment/} + ${model.equipment.equipmentId}"/>
+					<vu:button-link flat label="VR View" url="@{/basemanagement/equipment/vr/} + ${model.equipment.equipmentId}"/>
+					<vu:button-link flat label="Spare Parts" url="@{/basemanagement/equipment/spare/} + ${model.equipment.equipmentId}"/>	
+				</div>
+		</section>
+		
+		<section layout:fragment="content-nav">
+			<th:block th:if="${model.equipmentType.label == 'Mining Area' || model.equipmentType.label == 'Farming Area' }">
+						<q-item tag="a" href="#overview">Overview</q-item>
+						<q-item tag="a" href="#sensors">Sensors</q-item>
+		    </th:block>
+		</section>
+		
+		<section layout:fragment="content" th:switch="${model.equipmentType.label}">
+			<th:block th:case="'Mining Area'">
+				<div class="row" >		
+					<div class="col">
+						<vu:block title="Data Overview" id="overview">
+							<div class="column col">
+								<div class="text-center"> <span class="indicator text-black" th:text="3" /><br/><span class="indicator-title text-faded">Sensors connected to <span th:text="${model.equipment.name}"></span></span></div>					
+								<div class="text-center"> <span class="indicator text-blue" th:text="${model.TemperatureTotalMeasured}" /><br/><span class="indicator-title text-faded">Amount of data collected</span></div>
+								<div class="text-center"> <span class="indicator text-positive" th:text="1" /><br/><span class="indicator-title text-faded">Actuators connected</span></div>
+							</div>
+						</vu:block>
+					</div>
+				</div>		
+				<div class="row" id="sensors">	
+					<div class="col-md-4 col-xs-12">
+						<vu:block title="Temperature sensor"  >
+							<div class="chart chartjs linechart bg-white" 
+								    th:data-url="@{/api/basemanagment/equipment/environment/data/series}" 
+								    data-query-measures='["value:MAX"]'
+								    data-query-data-filter='{ "measurement": "temperature", "filters": {"equipment": "ms01"}}'
+								    data-query-time-filter='{ "from": "now() - 3d", "to": "now()", "dim": "1h"}'
+									data-labels='{"value:mean":"Temperature mean values"}' 
+								    data-colors='iANDROID:LIGHT'>
+							</div> 
+						</vu:block>
+					</div>
+					<div class="col-md-4 col-xs-12">
+						<vu:block title="Humidity Sensor" >
+							<div class="chart chartjs linechart bg-white" 
+								    th:data-url="@{/api/basemanagment/equipment/environment/data/series}" 
+								    data-query-measures='["value:mean"]'
+								    data-query-data-filter='{ "measurement": "humidite", "filters": {"equipment": "ms01"}}'
+								    data-query-time-filter='{ "from": "now() - 3d", "to": "now()", "dim": "1h"}'
+									data-labels='{"value:mean":"Temperature mean values"}' 
+								    data-colors='iANDROID'> 
+							</div>
+						</vu:block>	
+					</div>
+					<div class="col-md-4 col-xs-12">	
+						<vu:block title="Geiger Sensor" >
+							<div class="chart chartjs linechart bg-white" 
+								    th:data-url="@{/api/basemanagment/equipment/environment/data/series}" 
+								    data-query-measures='["value:mean"]'
+								    data-query-data-filter='{ "measurement": "geiger", "filters": {"equipment": "ms01"}}'
+								    data-query-time-filter='{ "from": "now() - 3d", "to": "now()", "dim": "1h"}'
+									data-labels='{"value:mean":"geiger value"}' 
+								    data-colors='iANDROID'> 
+							</div>
+						</vu:block>	 		
+					</div>    
+				</div>
+			</th:block>
+			<th:block th:case="'Farming Area'">
+				<div class="row" >		
+					<div class="col">
+						<vu:block title="Data Overview" id="overview">
+							<div class="column col">
+								<div class="text-center"> <span class="indicator text-black" th:text="3" /><br/><span class="indicator-title text-faded">Sensors connected to <span th:text="${model.equipment.name}"></span></span></div>					
+								<div class="text-center"> <span class="indicator text-blue" th:text="${model.TemperatureTotalMeasured}" /><br/><span class="indicator-title text-faded">Amount of data collected</span></div>
+								<div class="text-center"> <span class="indicator text-positive" th:text="1" /><br/><span class="indicator-title text-faded">Actuators connected</span></div>
+							</div>
+						</vu:block>
+					</div>
+				</div>
+				<div class="row" id="sensors">
+					<div class="col-md-4 col-xs-12">
+						<vu:block title="Temperature sensor" >
+							<div class="chart chartjs linechart bg-white" 
+									    th:data-url="@{/api/basemanagment/equipment/environment/data/series}" 
+									    data-query-measures='["value:MAX"]'
+									    data-query-data-filter='{ "measurement": "temperature", "filters": {"equipment": "fs01"}}'
+									    data-query-time-filter='{ "from": "now() - 3d", "to": "now()", "dim": "1h"}'
+										data-labels='{"value:mean":"Temperature mean values"}' 
+									    data-colors='iANDROID:LIGHT'> 
+							</div>
+						</vu:block>
+					</div>
+					<div class="col-md-4 col-xs-12">
+						<vu:block title="Humidity Sensor" >
+							<div class="chart chartjs linechart bg-white" 
+									    th:data-url="@{/api/basemanagment/equipment/environment/data/series}" 
+									    data-query-measures='["value:mean"]'
+									    data-query-data-filter='{ "measurement": "humidite", "filters": {"equipment": "fs01"}}'
+									    data-query-time-filter='{ "from": "now() - 3d", "to": "now()", "dim": "1h"}'
+										data-labels='{"value:mean":"Temperature mean values"}' 
+									    data-colors='iANDROID'> 
+							</div>
+						</vu:block>
+					</div>
+					<div class="col-md-4 col-xs-12">
+						<vu:block title="Moisture Sensor" >
+							<div class="chart chartjs linechart bg-white" 
+								    th:data-url="@{/api/basemanagment/equipment/environment/data/series}" 
+								    data-query-measures='["value:mean"]'
+								    data-query-data-filter='{ "measurement": "moisture", "filters": {"equipment": "fs01"}}'
+								    data-query-time-filter='{ "from": "now() - 3d", "to": "now()", "dim": "1h"}'
+									data-labels='{"value:mean":"Moisture mean values"}' 
+								    data-colors='iGREEN:INTENSITY'>
+							</div>
+						</vu:block>
+					</div>
+				</div>
+			</th:block>
+			<th:block th:case="*" >
+				<vu:block title="No Sensors on this equipment">
+					<q-btn flat type="a" th:href="@{/basemanagement/equipment/} + ${model.equipment.equipmentId}">Back to Information</q-btn>		
+				</vu:block>
+			</th:block>
+		</section>
+		<section layout:fragment="javscript-footer" >
+			<script type="text/javascript">showCharts();</script>
+		</section>
+	</body>
+</html>

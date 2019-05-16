@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:vu="http://www.morphbit.com/thymeleaf/component" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<vu:head-meta />
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="description" content="Demo Application of Vertigo UI powered by SpringMvc, Thymeleaf and Quasar Framework" />
+	<meta name="author" content="Klee Group" />
+	<link rel="stylesheet" th:href="@{/static/css/mars.css}" />
+	<link rel="icon" th:href="@{/static/img/favicon.ico}" />
+	<script th:src="@{/static/js/mars.js}"></script>
+	<th:block th:if="${model.containsKey('closeSuccess') && model.closeSuccess}">
+		<script>
+		       	window.parent.[[${model.successCallback}]]();
+			</script>
+	</th:block>
+</head>
+<body class="mat desktop no-touch platform-mat bg-white">
+	<vu:page>
+		<q-layout view="hHh LpR fff" id="page" v-cloak>
+			<q-page-container class="row justify-center">
+				<q-page	class="q-layout-page row col-12 mgutter-md">
+					<div class="col-12 content-body">
+						<section layout:fragment="page-container"></section>
+					</div>
+				</q-page>
+			</q-page-container>
+		</q-layout>
+	</vu:page>
+	<div layout:fragment="javscript-footer"></div>
+</body>
+</html>

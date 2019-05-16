@@ -1,5 +1,5 @@
 -- ============================================================
---   SGBD      		  :  PostgreSql                     
+--   SGBD      		  :  H2                     
 -- ============================================================
 
 
@@ -77,7 +77,7 @@ comment on column MY_MOVIE.NAME is
 'Code du pays';
 
 comment on column MY_MOVIE.YEAR is
-'AnnÃ©e';
+'Année';
 
 comment on column MY_MOVIE.IMDBID is
 'Id Imdb';
@@ -108,7 +108,6 @@ comment on column MY_ROLE.MOV_ID is
 
 comment on column MY_ROLE.ACT_ID is
 'Actor';
-
 
 
 alter table MY_MOVIE

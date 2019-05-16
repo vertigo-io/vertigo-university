@@ -3,16 +3,16 @@ package lollipop
 /**************************************************************************************************/
 /********************************* Formatters *****************************************************/
 /**************************************************************************************************/
-create Formatter FMT_DEFAULT{
+create Formatter FmtDefault{
 	className : "io.vertigo.dynamox.domain.formatter.FormatterDefault"
 }
 
-create Formatter FMT_DATE {
+create Formatter FmtDate {
      className :"io.vertigo.dynamox.domain.formatter.FormatterDate"
      args : "dd/MM/yy;dd/MM/yyyy"
 }
 
-create Formatter FMT_DATE_HEURE {
+create Formatter FmtDateHeure {
      className :"io.vertigo.dynamox.domain.formatter.FormatterDate"
      args : "dd/MM/yyyy '�' HH'h'mm"
 }
@@ -21,43 +21,43 @@ create Formatter FMT_DATE_HEURE {
 /********************************* Constraints ****************************************************/
 /**************************************************************************************************/
 
-create Constraint CK_EMAIL {
+create Constraint CkEmail {
 	className: "io.vertigo.dynamox.domain.constraint.ConstraintRegex"
 	args : "^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*(\.[a-zA-Z0-9-]{2,3})+$"
 	msg : "L'email n'est pas valide"
 }
 
-create Constraint CK_MAX_LENGTH_20 {
+create Constraint CkMaxLength20 {
 	className: "io.vertigo.dynamox.domain.constraint.ConstraintStringLength"
 	args :"20"
 }
 
-create Constraint CK_MAX_LENGTH_32 {
+create Constraint CkMaxLength32 {
 	className: "io.vertigo.dynamox.domain.constraint.ConstraintStringLength"
 	args :"32"
 }
 
-create Constraint CK_MAX_LENGTH_50 {
+create Constraint CkMaxLength50 {
 	className: "io.vertigo.dynamox.domain.constraint.ConstraintStringLength"
 	args :"50"
 }
 
-create Constraint CK_MAX_LENGTH_100 {
+create Constraint CkMaxLength100 {
 	className: "io.vertigo.dynamox.domain.constraint.ConstraintStringLength"
 	args :"100"
 }
 
-create Constraint CK_MAX_LENGTH_150 {
+create Constraint CkMaxLength150 {
 	className: "io.vertigo.dynamox.domain.constraint.ConstraintStringLength"
 	args :"150"
 }
 
-create Constraint CK_MAX_LENGTH_250 {
+create Constraint CkMaxLength250 {
 	className: "io.vertigo.dynamox.domain.constraint.ConstraintStringLength"
 	args :"250"
 }
 
-create Constraint CK_MAX_LENGTH_3000 {
+create Constraint CkMaxLength3000 {
 	className: "io.vertigo.dynamox.domain.constraint.ConstraintStringLength"
 	args :"3000"
 }
@@ -66,160 +66,160 @@ create Constraint CK_MAX_LENGTH_3000 {
 /********************************* Domains ********************************************************/
 /**************************************************************************************************/
 
-create Domain DO_ID {
+create Domain DoId {
 	dataType : Long
-	formatter : FMT_DEFAULT
+	formatter : FmtDefault
 	storeType : "NUMERIC"
 }
 
-create Domain DO_IDS {
+create Domain DoIds {
 	dataType : Long
-	formatter : FMT_DEFAULT
+	formatter : FmtDefault
 	multiple : "true"
 }
-create Domain DO_DATE {
-	dataType : Date
-	formatter : FMT_DATE
+create Domain DoDate {
+	dataType : LocalDate
+	formatter : FmtDate
 	storeType : "DATE"
 }
 
-create Domain DO_YEAR {
+create Domain DoYear {
 	dataType : Integer
-	formatter : FMT_DEFAULT
+	formatter : FmtDefault
 	storeType : "NUMERIC"
 }
 
-create Domain DO_DURATION {
+create Domain DoDuration {
 	dataType : Integer
-	formatter : FMT_DEFAULT
+	formatter : FmtDefault
 	storeType : "NUMERIC"
 }
 
-create Domain DO_COMMENT {
+create Domain DoComment {
 	dataType : String
-	formatter : FMT_DEFAULT
-	constraint : [CK_MAX_LENGTH_3000]
+	formatter : FmtDefault
+	constraint : [CkMaxLength3000]
 	storeType : "VARCHAR(3000)"
 }
 
-create Domain DO_LABEL_SHORT {
+create Domain DoLabelShort {
 	dataType : String
-	formatter : FMT_DEFAULT
-	constraint : [CK_MAX_LENGTH_50]
+	formatter : FmtDefault
+	constraint : [CkMaxLength50]
 	storeType : "VARCHAR(50)"
 }
 
-create Domain DO_LABEL {
+create Domain DoLabel {
 	dataType : String
-	formatter : FMT_DEFAULT
-	constraint : [CK_MAX_LENGTH_100]
+	formatter : FmtDefault
+	constraint : [CkMaxLength100]
 	storeType : "VARCHAR(100)"
 	indexType : "text_fr"
 }
 
-create Domain DO_LABEL_LONG {
+create Domain DoLabelLong {
 	dataType : String
-	formatter : FMT_DEFAULT
+	formatter : FmtDefault
 	storeType : "VARCHAR(500)"
 	indexType : "text_fr"
 }
 
-create Domain DO_LABEL_LONG_SORT {
+create Domain DoLabelLongSort {
 	dataType : String
-	formatter : FMT_DEFAULT
+	formatter : FmtDefault
 	storeType : "VARCHAR(500)"
 	indexType:"text_fr_not_tokenized"
 }
 
 
-create Domain DO_LABEL_VERY_LONG {
+create Domain DoLabelVeryLong {
 	dataType : String
-	formatter : FMT_DEFAULT
+	formatter : FmtDefault
 	storeType : "VARCHAR(1000)"
 }
 
-create Domain DO_EMAIL {
+create Domain DoEmail {
 	dataType : String
-	formatter : FMT_DEFAULT
-	constraint : [CK_EMAIL, CK_MAX_LENGTH_150]
+	formatter : FmtDefault
+	constraint : [CkEmail, CkMaxLength150]
 	storeType : "VARCHAR(150)"
 }
 
-create Domain DO_CODE {
+create Domain DoCode {
 	dataType : String
-	formatter : FMT_DEFAULT
-	constraint : [CK_MAX_LENGTH_100]
+	formatter : FmtDefault
+	constraint : [CkMaxLength100]
 	storeType : "VARCHAR(100)"
 }
 
-create Domain DO_MULTI_VALUES_FIELD {
+create Domain DoMultiValuesField {
 	dataType : String
-	formatter : FMT_DEFAULT
-	constraint : [CK_MAX_LENGTH_3000]
+	formatter : FmtDefault
+	constraint : [CkMaxLength3000]
 	storeType : "VARCHAR(3000)"
 }
 
-create Domain DO_NAME {
+create Domain DoName {
 	dataType : String
-	formatter : FMT_DEFAULT
-	constraint : [CK_MAX_LENGTH_50]
+	formatter : FmtDefault
+	constraint : [CkMaxLength50]
 	storeType : "VARCHAR(50)"
 }
 
-create Domain DO_FIRSTNAME {
+create Domain DoFirstname {
 	dataType : String
-	formatter : FMT_DEFAULT
-	constraint : [CK_MAX_LENGTH_50]
+	formatter : FmtDefault
+	constraint : [CkMaxLength50]
 	storeType : "VARCHAR(50)"
 }
 
-create Domain DO_PASSWORD {
+create Domain DoPassword {
 	dataType : String
-	formatter : FMT_DEFAULT
-	constraint : [CK_MAX_LENGTH_32]
+	formatter : FmtDefault
+	constraint : [CkMaxLength32]
 	storeType : "VARCHAR(32)"
 }
 
-create Domain DO_TEXT {
+create Domain DoText {
 	dataType : String
-	formatter : FMT_DEFAULT
+	formatter : FmtDefault
 	storeType : "TEXT"
 }
 
-create Domain DO_TEXT_NOT_ANALYZED {
+create Domain DoTextNotAnalyzed {
 	dataType : String
-	formatter : FMT_DEFAULT
+	formatter : FmtDefault
 }
 
-create Domain DO_YES_NO {
+create Domain DoYesNo {
 	dataType : Boolean
-	formatter : FMT_DEFAULT
+	formatter : FmtDefault
 	storeType : "bool"
 }
 
 
-create Domain DO_FILE_NAME {
+create Domain DoFileName {
 	dataType : String
-	formatter : FMT_DEFAULT
-	constraint : [CK_MAX_LENGTH_100]
+	formatter : FmtDefault
+	constraint : [CkMaxLength100]
 	storeType : "VARCHAR(100)"
 }
 
-create Domain DO_TIMESTAMP {
-	dataType : Date
-	formatter : FMT_DATE_HEURE
+create Domain DoTimestamp {
+	dataType : Instant
+	formatter : FmtDateHeure
 	storeType : "TIMESTAMP"
 }
 
-create Domain DO_FILE_LENGTH {
+create Domain DoFileLength {
 	dataType : Long
-	formatter : FMT_DEFAULT
+	formatter : FmtDefault
 	storeType : "NUMERIC"
 }
 
-create Domain DO_FILE_PATH {
+create Domain DoFilePath {
 	dataType : String
-	formatter : FMT_DEFAULT
-	constraint : [CK_MAX_LENGTH_250]
+	formatter : FmtDefault
+	constraint : [CkMaxLength250]
 	storeType : "VARCHAR(250)"
 }

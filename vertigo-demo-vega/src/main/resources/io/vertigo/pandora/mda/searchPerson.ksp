@@ -5,16 +5,16 @@ package io.vertigo.pandora.domain.persons
 /***** Index Person *****/
 /************************/
 
-create DtDefinition DT_PERSON_INDEX {
-  field PER_ID {domain: DO_IDENTITY label: "id" notNull:"true" }
-  field FULL_NAME {domain: DO_LABEL label: "Nom" notNull:"false"}
-  field FULL_NAME_SORT_ONLY {domain: DO_TEXT_NOT_TOKENIZED label: "Nom" notNull:"false" persistent:"false"} /* index only */ 
-  field BIOGRAPHY {domain: DO_TEXT label: "Biographie" notNull:"false" persistent:"false"} /* index only */
-  field SEX {domain: DO_LABEL_SHORT label: "Sexe" notNull:"false"}
-  field PHOTO_URL {domain: DO_HREF label:"photo" notNull:"false"}
-  field BIRTH_DATE {domain: DO_DATE label: "Date de naissance" notNull:"false"}
-  field BIRTH_PLACE {domain: DO_LABEL label: "Lieu de naissance" notNull:"false"}
-  field ACTIVITY {domain: DO_MULTI_VALUES label: "Activity" notNull:"false"}
-  field MOVIES {domain: DO_MULTI_VALUES label: "Movies" notNull:"false"}
+create DtDefinition DtPersonIndex {
+  field perId 					{domain: DoIdentity label: "id" required:"true" }
+  field fullName				{domain: DoLabel label: "Nom" required:"false"}
+  field fullNameSortOnly	 	{domain: DoTextNotTokenized label: "Nom" required:"false" persistent:"false"} /* index only */ 
+  field biography 				{domain: DoText label: "Biographie" required:"false" persistent:"false"} /* index only */
+  field sex 					{domain: DoLabelShort label: "Sexe" required:"false"}
+  field photoUrl 				{domain: DoHref label:"photo" required:"false"}
+  field birthDate 				{domain: DoDate label: "Date de naissance" required:"false"}
+  field birthPlace	 			{domain: DoLabel label: "Lieu de naissance" required:"false"}
+  field activity 				{domain: DoMultiValues label: "Activity" required:"false"}
+  field movies 					{domain: DoMultiValues label: "Movies" required:"false"}
 }
 

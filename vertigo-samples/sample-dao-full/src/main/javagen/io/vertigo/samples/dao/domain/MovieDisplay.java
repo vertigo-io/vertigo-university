@@ -23,7 +23,7 @@ public final class MovieDisplay implements DtObject {
 	 * Récupère la valeur de la propriété 'Titre'.
 	 * @return String name <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_LABEL_LONG", required = true, label = "Titre")
+	@Field(domain = "DoLabelLong", required = true, label = "Titre")
 	public String getName() {
 		return name;
 	}
@@ -39,17 +39,17 @@ public final class MovieDisplay implements DtObject {
 	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'AnnÃ©e'.
+	 * Récupère la valeur de la propriété 'Année'.
 	 * @return Integer year
 	 */
-	@Field(domain = "DO_YEAR", label = "AnnÃ©e")
+	@Field(domain = "DoYear", label = "Année")
 	public Integer getYear() {
 		return year;
 	}
 
 	/**
 	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'AnnÃ©e'.
+	 * Définit la valeur de la propriété 'Année'.
 	 * @param year Integer
 	 */
 	public void setYear(final Integer year) {
@@ -61,7 +61,7 @@ public final class MovieDisplay implements DtObject {
 	 * Récupère la valeur de la propriété 'Pays'.
 	 * @return String country
 	 */
-	@Field(domain = "DO_LABEL", label = "Pays")
+	@Field(domain = "DoLabel", label = "Pays")
 	public String getCountry() {
 		return country;
 	}
@@ -80,7 +80,7 @@ public final class MovieDisplay implements DtObject {
 	 * Récupère la valeur de la propriété 'Nombre d'acteur'.
 	 * @return Long actorsCount
 	 */
-	@Field(domain = "DO_ID", label = "Nombre d'acteur")
+	@Field(domain = "DoId", label = "Nombre d'acteur")
 	public Long getActorsCount() {
 		return actorsCount;
 	}

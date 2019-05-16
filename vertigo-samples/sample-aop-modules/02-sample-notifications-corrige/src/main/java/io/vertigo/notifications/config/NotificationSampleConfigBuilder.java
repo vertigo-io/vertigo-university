@@ -1,13 +1,10 @@
 package io.vertigo.notifications.config;
 
-import io.vertigo.app.config.AppConfig;
+import io.vertigo.app.config.NodeConfig;
 import io.vertigo.app.config.ModuleConfig;
-import io.vertigo.commons.impl.CommonsFeatures;
+import io.vertigo.commons.CommonsFeatures;
 import io.vertigo.core.param.Param;
-import io.vertigo.dynamo.impl.DynamoFeatures;
-import io.vertigo.mail.MailManager;
-import io.vertigo.mail.impl.MailManagerImpl;
-import io.vertigo.mail.plugins.javax.JavaxSendMailPlugin;
+import io.vertigo.dynamo.DynamoFeatures;
 import io.vertigo.notifications.NotificationManager;
 import io.vertigo.notifications.aspects.supervision.SupervisionAspect;
 import io.vertigo.notifications.aspects.supervision.SupervisionManager;
@@ -19,6 +16,7 @@ import io.vertigo.notifications.impl.NotificationManagerImpl;
 import io.vertigo.notifications.plugins.ifttt.IftttNotificationPlugin;
 import io.vertigo.notifications.plugins.mail.MailNotificationPlugin;
 import io.vertigo.notifications.plugins.twitter.TwitterNotificationPlugin;
+import io.vertigo.social.SocialFeatures;
 
 /**
  * Notification Config Builder
@@ -27,35 +25,35 @@ import io.vertigo.notifications.plugins.twitter.TwitterNotificationPlugin;
  */
 public class NotificationSampleConfigBuilder {
 
-	public AppConfig build() {
-		//@formatter:off
-		return AppConfig.builder()
+	public NodeConfig build() {
+		return NodeConfig.builder()
 				.beginBoot()
 				.withLocales("fr")
 				.endBoot()
 				.addModule(new CommonsFeatures().build())
 				.addModule(new DynamoFeatures().build())
-				.addModule( ModuleConfig.builder("notificationAspects")
+				.addModule(ModuleConfig.builder("notificationAspects")
 						.addComponent(SupervisionManager.class, SupervisionManagerImpl.class)
 						.addComponent(TraceManager.class, TraceManagerImpl.class)
 						.addAspect(SupervisionAspect.class)
 						.addAspect(TraceAspect.class)
 						.build())
-				.addModule( ModuleConfig.builder("notifications")
+				.addModule(new SocialFeatures()
+						.withMails()
+						.withJavaxMail(
+								Param.of("storeProtocol", "smtp"),
+								Param.of("host", "localdelivery.klee.lan.net"),
+								Param.of("developmentMode", "true"),
+								Param.of("developmentMailTo", "prenom.nom@kleegroup.com"))
+						.build())
+				.addModule(ModuleConfig.builder("notifications")
 						.addComponent(NotificationManager.class, NotificationManagerImpl.class)
-							.addPlugin(IftttNotificationPlugin.class,
-									Param.of("proxyHost", "172.20.0.9"),
-									Param.of("proxyPort", "3128"))
-							.addPlugin(TwitterNotificationPlugin.class)
-							.addPlugin(MailNotificationPlugin.class)
-						.addComponent(MailManager.class, MailManagerImpl.class)
-							.addPlugin(JavaxSendMailPlugin.class,
-									Param.of("storeProtocol", "smtp"),
-									Param.of("host", "localdelivery.klee.lan.net"),
-									Param.of("developmentMode", "true"),
-									Param.of("developmentMailTo", "prenom.nom@kleegroup.com"))
-						.build()
-						)
+						.addPlugin(IftttNotificationPlugin.class,
+								Param.of("proxyHost", "172.20.0.9"),
+								Param.of("proxyPort", "3128"))
+						.addPlugin(TwitterNotificationPlugin.class)
+						.addPlugin(MailNotificationPlugin.class)
+						.build())
 				.build();
 	}
 

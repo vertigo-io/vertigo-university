@@ -1,0 +1,42 @@
+package io.mars.catalog.search
+
+create IndexDefinition IdxSupplier {  
+  keyConcept : DtSupplier
+  dtIndex : DtSupplier
+  loaderId : "SupplierSearchLoader"
+}
+
+
+create FacetDefinition FctSupplierTrancheEffectifs {
+	dtDefinition:DtSupplier, fieldName:"trancheEffectifs", label:"Workforce range"
+} 
+
+create FacetDefinition FctSupplierCategorieEntreprise {
+	dtDefinition:DtSupplier, fieldName:"categorieEntreprise", label:"Business category"
+} 
+
+create FacetDefinition FctSupplierCategorieJuridique {
+	dtDefinition:DtSupplier, fieldName:"categorieJuridique", label:"Legal category"
+} 
+
+create FacetDefinition FctSupplierActivitePrincipale {
+	dtDefinition:DtSupplier, fieldName:"activitePrincipale", label:"Core business"
+} 
+
+
+create FacetDefinition FctSupplierDateCreation {
+	dtDefinition:DtSupplier, fieldName:"dateCreation", label:"Creation date"
+	range r1 { filter:"dateCreation:[01/01/2000 TO 01/01/2005]", label:"2000-2005"},
+	range r2 { filter:"dateCreation:[01/01/2005 TO 01/01/2010]", label:"2005-2010"},
+	range r2 { filter:"dateCreation:[01/01/2010 TO 01/01/2015]", label:"2010-2015"},
+	range r3 { filter:"dateCreation:[01/01/2015 TO *]", label:"depuis 2015"}
+}
+
+create FacetedQueryDefinition QrySupplier {
+	keyConcept : DtSupplier
+	facets : [FctSupplierTrancheEffectifs, FctSupplierCategorieEntreprise, FctSupplierCategorieJuridique, FctSupplierActivitePrincipale, FctSupplierDateCreation ]
+	domainCriteria : DoLabel
+	listFilterBuilderClass : "io.vertigo.dynamox.search.DslListFilterBuilder"  
+	listFilterBuilderQuery : "[nom,denomination]:#+query*#"
+}
+

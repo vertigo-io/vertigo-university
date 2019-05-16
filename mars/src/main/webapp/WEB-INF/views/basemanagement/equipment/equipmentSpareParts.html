@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="http://www.morphbit.com/thymeleaf/component"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{templates/mmcDetailNavLayout}"
+>
+	<head>
+		<title>Equipment Spare Parts</title>
+		<script src="https://unpkg.com/vue-3d-model/dist/vue-3d-model.js"></script>
+		<script type="text/javascript">
+			VUiExtensions.dataX.vue3dModel = {
+				scale : {
+	                x: 1,
+	                y: 1,
+	                z: 1
+				},
+				zoomAmount: 0.1
+            };
+			VUiExtensions.methods.alert = function(message) {
+				this.$q.dialog(
+						{
+							title: message
+						});
+			};
+			VUiExtensions.methods.zoomOut = function() {
+				VUiExtensions.dataX.vue3dModel.scale = {
+						x: data.dataX.vue3dModel.scale.x - data.dataX.vue3dModel.zoomAmount,
+						y: data.dataX.vue3dModel.scale.y - data.dataX.vue3dModel.zoomAmount,
+						z: data.dataX.vue3dModel.scale.z - data.dataX.vue3dModel.zoomAmount
+				};
+			};
+			VUiExtensions.methods.zoomIn = function() {
+				VUiExtensions.dataX.vue3dModel.scale = {
+						x: data.dataX.vue3dModel.scale.x + data.dataX.vue3dModel.zoomAmount,
+						y: data.dataX.vue3dModel.scale.y + data.dataX.vue3dModel.zoomAmount,
+						z: data.dataX.vue3dModel.scale.z + data.dataX.vue3dModel.zoomAmount
+				};
+			};
+			VUiExtensions.methods.resetZoom = function() {
+				VUiExtensions.dataX.vue3dModel.scale = {
+						x: 1,
+						y: 1,
+						z: 1
+				};
+			};
+
+		</script>
+	</head>
+	
+	<body>
+	
+		<section layout:fragment="content-nav">
+			        <q-item tag="a" href="#featuredPart">Featured Part</q-item>
+			        <q-item tag="a" href="#spareParts">Spare Parts</q-item>
+		</section>
+		
+		<section>
+				<div layout:fragment="content-header-left" th:include="basemanagement/equipment/equipmentInformation :: #equipmentIcon"></div>
+				<div layout:fragment="content-header-title" th:include="basemanagement/equipment/equipmentInformation :: #equipmentTitle"></div>
+				<div layout:fragment="content-header-tabs">
+					<vu:button-link flat label="Information" url="@{/basemanagement/equipment/} + ${model.equipment.equipmentId}"/>
+					<vu:button-link flat label="Maintenance" url="@{/basemanagement/equipment/maintenance/} + ${model.equipment.equipmentId}"/>
+					<vu:button-link flat label="Environment" url="@{/basemanagement/equipment/environment/} + ${model.equipment.equipmentId}"/>
+					<vu:button-link flat label="VR View" url="@{/basemanagement/equipment/vr/} + ${model.equipment.equipmentId}"/>
+					<vu:button-link class="active" flat label="Spare Parts" url="@{/basemanagement/equipment/spare/} + ${model.equipment.equipmentId}"/>
+				</div>
+		</section>
+		
+		<section layout:fragment="content">
+				<div class="col-9">
+					<vu:block id="featuredPart" title="Featured Part - Standard Nut" >
+						<div class="row">
+							<div class="col-9">
+								<model-stl 
+									:height="400"
+									:background-color="'#FAFAFA'"
+									:scale="dataX.vue3dModel.scale"
+									th:src="@{/static/3d/models/nut.stl}"></model-obj>
+							</div>
+							<div class="col-3">
+								<div class="row q-pl-sm q-pr-none">
+									<q-btn class="full-width q-mb-sm" color="primary" type="a" th:href="@{/static/3d/models/nut.stl}">Download model</q-btn>	
+									<q-btn class=" full-width q-mb-xl" type="a" @click="alert('Model has been sent to printer')">Send to printer</q-btn>
+								</div>
+								<div class="row justify-around">
+									<q-btn round color="primary" @click="zoomIn"  icon="fas fa-search-plus" ></q-btn>
+									<q-btn round color="primary" @click="zoomOut" icon="fas fa-search-minus" ></q-btn>
+									<q-btn round color="primary" @click="resetZoom" icon="fas fa-search" ></q-btn>
+								</div>
+								<div class="row q-mt-md justify-center">
+									<p>Use mouse to rotate part</p>
+								</div>
+							</div>
+						</div>
+					</vu:block>
+				</div>
+				<div class="col-3" >
+					<q-card inline class="bigger q-mb-md bg-white" style="height: 100%">
+				    	<q-card-media class="bg-grey-3">
+				        	<img th:src="@{/static/3d/Ulti2eE.png}">
+				      	</q-card-media>
+				      	<q-card-title class="bg-white relative-position">
+					        <div class="ellipsis">Connected Printer</div>
+				      	</q-card-title>
+				    	<q-card-main class="bg-white q-mb-none">
+				        	<p>Ultimaker 2 extended+</p>
+				        	<p class="text-faded">Simple extruder</p>
+				        	<p class="text-red">Printer is busy</p>
+				      	</q-card-main>
+					</q-card>
+				</div>
+			<div class="col-12">
+				<vu:block id="spareParts" title="Spare Parts">
+					<q-list id="spareParts">
+						<q-item>
+							<q-item-side>
+								<img width="90px" th:src="@{/static/3d/thumbnails/cog.png}" />
+							</q-item-side>
+							<q-item-main>
+								<div class="row justify-center items-center">
+									<div class="col-4 self-center">
+										<p class="q-title self-center text-primary text-center small-caps">Cog</p>
+									</div>
+									<div class="col-8">
+										<div class="row q-mb-sm">
+											<span>This standard nut is used for all bolts in this equipment</span>
+										</div>
+										<div class="row">
+											<q-chip class="q-mr-sm" dense square color="primary">#titanium</q-chip>
+											<q-chip class="q-mr-sm" dense square color="primary">#link</q-chip>
+										</div>
+									</div>
+								</div>
+							</q-item-main>
+							<q-item-side>
+								<q-btn color="primary" type="a" th:href="@{/static/3d/models/cog.stl}" icon="fas fa-download" label="Download Model"></q-btn>
+							</q-item-side>
+						</q-item>
+						<q-item inset-separator>
+							<q-item-side>
+								<img width="90px" th:src="@{/static/3d/thumbnails/bolt_handle.png}" />
+							</q-item-side>
+							<q-item-main>
+								<div class="row justify-center items-center">
+									<div class="col-4 self-center">
+										<p class="q-title self-center text-primary text-center small-caps">Bolt Handle</p>
+									</div>
+									<div class="col-8">
+										<div class="row q-mb-sm">
+											<span>This handle is used to remove usual bolts during maintenance</span>
+										</div>
+										<div class="row">
+											<q-chip class="q-mr-sm" dense square color="primary">#titanium</q-chip>
+											<q-chip class="q-mr-sm" dense square color="primary">#tools</q-chip>
+										</div>
+									</div>
+								</div>
+							</q-item-main>
+							<q-item-side>
+								<q-btn color="primary" type="a" th:href="@{/static/3d/models/bolt_handle.stl}" icon="fas fa-download" label="Download Model"></q-btn>
+							</q-item-side>
+						</q-item>
+						<q-item inset-separator>
+							<q-item-side>
+								<img width="90px" th:src="@{/static/3d/thumbnails/ball_joint.png}" />
+							</q-item-side>
+							<q-item-main>
+								<div class="row justify-center items-center">
+									<div class="col-4 self-center">
+										<p class="q-title self-center text-primary text-center small-caps">Ball Joint</p>
+									</div>
+									<div class="col-8">
+										<div class="row q-mb-sm">
+											<span>Flexible link between robotic arms</span>
+										</div>
+										<div class="row">
+											<q-chip class="q-mr-sm" dense square color="primary">#robot</q-chip>
+											<q-chip class="q-mr-sm" dense square color="primary">#movement</q-chip>
+										</div>
+									</div>
+								</div>
+							</q-item-main>
+							<q-item-side>
+								<q-btn color="primary" type="a" th:href="@{/static/3d/models/ball_joint.stl}" icon="fas fa-download" label="Download Model"></q-btn>
+							</q-item-side>
+						</q-item>
+						<q-item inset-separator>
+							<q-item-side>
+								<img width="90px" th:src="@{/static/3d/thumbnails/wormspur.png}" />
+							</q-item-side>
+							<q-item-main>
+								<div class="row justify-center items-center">
+									<div class="col-4 self-center">
+										<p class="q-title self-center text-primary text-center small-caps">Worm Cog</p>
+									</div>
+									<div class="col-8">
+										<div class="row q-mb-sm">
+											<span>Very precise cog for millimetric movement</span>
+										</div>
+										<div class="row">
+											<q-chip class="q-mr-sm" dense square color="primary">#fragile</q-chip>
+											<q-chip class="q-mr-sm" dense square color="primary">#plastic</q-chip>
+										</div>
+									</div>
+								</div>
+							</q-item-main>
+							<q-item-side>
+								<q-btn color="primary" type="a" th:href="@{/static/3d/models/spur.stl}" icon="fas fa-download" label="Download Model"></q-btn>
+							</q-item-side>
+						</q-item>
+					</q-list>
+				</vu:block>
+			</div>
+		</section>
+
+		
+		
+		
+	</body>
+</html>

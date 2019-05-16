@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="http://www.morphbit.com/thymeleaf/component"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{templates/mmcParentLayout}">
+  
+  	<head>
+		<script th:src="@{/vertigo-ui/static/js/v-components/v-scroll-spy.js}"></script>
+		<script th:src="@{/vertigo-ui/static/js/v-components/v-minify.js}"></script>
+	</head>
+	
+  	<section layout:fragment="page-container">
+	 	<section th:replace="~{templates/mmcDetailLayout::detailHeader}" />
+		
+		<q-page class="row col-12 mgutter-md layout-padding">
+			<div class="col-2 gt-md ">
+				<nav v-scroll-spy="{offset:66+50+32}">
+				    <q-list link style="height:100%">
+				    	<section layout:fragment="content-nav"></section>
+				    </q-list>
+		        </nav>
+	        </div>
+			<div class="col content-body">
+				<vu:form>
+					<vu:messages/>
+					<section layout:fragment="content" class="row mgutter-md"></section>
+	 			</vu:form>
+	 		</div>
+		</q-page>
+	</section>
+</html>

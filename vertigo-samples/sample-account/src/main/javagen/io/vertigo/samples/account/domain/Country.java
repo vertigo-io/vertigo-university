@@ -1,7 +1,7 @@
 package io.vertigo.samples.account.domain;
 
 import io.vertigo.dynamo.domain.model.Entity;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.lang.Generated;
@@ -19,8 +19,8 @@ public final class Country implements Entity {
 
 	/** {@inheritDoc} */
 	@Override
-	public URI<Country> getURI() {
-		return DtObjectUtil.createURI(this);
+	public UID<Country> getUID() {
+		return UID.of(this);
 	}
 	
 	/**
@@ -28,7 +28,7 @@ public final class Country implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long couId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_ID", type = "ID", required = true, label = "Id")
+	@Field(domain = "DoId", type = "ID", required = true, label = "Id")
 	public Long getCouId() {
 		return couId;
 	}
@@ -47,7 +47,7 @@ public final class Country implements Entity {
 	 * Récupère la valeur de la propriété 'Nom du pays'.
 	 * @return String name
 	 */
-	@Field(domain = "DO_LABEL", label = "Nom du pays")
+	@Field(domain = "DoLabel", label = "Nom du pays")
 	public String getName() {
 		return name;
 	}

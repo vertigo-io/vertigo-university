@@ -1,92 +1,92 @@
 package com.kleegroup.lollipop
 
-create Formatter FMT_DEFAULT {
+create Formatter FmtDefault {
 	className : "io.vertigo.dynamox.domain.formatter.FormatterDefault"
 }
 
-create Domain DO_IDENTITY {
+create Domain DoIdentity {
 	dataType : Long
-	formatter : FMT_DEFAULT
+	formatter : FmtDefault
 	storeType : "LONG"
 }
 
-create Domain DO_LABEL {
+create Domain DoLabel {
 	dataType : String
-	formatter : FMT_DEFAULT
+	formatter : FmtDefault
 	storeType : "VARCHAR(300)"
 	indexType : "text_fr"
 }
 
-create Domain DO_HREF {
+create Domain DoHref {
 	dataType : String
-	formatter : FMT_DEFAULT
+	formatter : FmtDefault
 	storeType : "VARCHAR(250)"
 	indexType : "code"
 }
 
-create Domain DO_MULTI_VALUES {
+create Domain DoMultiValues {
 	dataType : String
-	formatter : FMT_DEFAULT
+	formatter : FmtDefault
 	storeType : "VARCHAR(500)"
 	indexType : "multiple_code"
 }
 
-create Domain DO_CODE {
+create Domain DoCode {
 	dataType : String
-	formatter : FMT_DEFAULT
+	formatter : FmtDefault
 	storeType : "VARCHAR(5)"
 	indexType : "code"
 }
 
-create Domain DO_TEXT_NOT_TOKENIZED {
+create Domain DoTextNotTokenized {
 	dataType : String
-	formatter : FMT_DEFAULT
+	formatter : FmtDefault
 	storeType : "VARCHAR(250)"
 	indexType : "text_fr_not_tokenized"
 }
 
-create Domain DO_TEXT {
+create Domain DoText {
 	dataType : String
-	formatter : FMT_DEFAULT
+	formatter : FmtDefault
 	storeType : "VARCHAR(10000)"
 	indexType : "text_fr"
 }
 
-create Domain DO_LABEL_SHORT {
+create Domain DoLabelShort {
 	dataType : String
-	formatter : FMT_DEFAULT
+	formatter : FmtDefault
 	storeType : "VARCHAR(100)"
 	indexType : "code"
 }
 
-create Domain DO_YEAR {
+create Domain DoYear {
 	dataType : Integer
-	formatter : FMT_DEFAULT
+	formatter : FmtDefault
 	storeType : "INT"
 }
 
-create Domain DO_RUNTIME{
+create Domain DoRuntime{
 	dataType : Integer
-	formatter : FMT_DEFAULT
+	formatter : FmtDefault
 	storeType : "INT"
 }
 
 
-create Domain DO_ACTIVE {
+create Domain DoActive {
 	dataType : Boolean
-	formatter : FMT_DEFAULT
+	formatter : FmtDefault
 	storeType : "BOOLEAN"
 }
 
-create Domain DO_RATING {
+create Domain DoRating {
 	dataType : Integer
-	formatter : FMT_DEFAULT
+	formatter : FmtDefault
 	storeType : "INT"
 }
 
-create Domain DO_DATE {
+create Domain DoDate {
 	dataType : String
-	formatter : FMT_DEFAULT
+	formatter : FmtDefault
 	storeType : "VARCHAR(20)"
 	indexType : "code"
 }

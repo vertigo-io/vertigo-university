@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="http://www.morphbit.com/thymeleaf/component"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{templates/mmcDetailNavLayout}"
+>
+	<head>
+		<title>Base VR View</title>
+	</head>
+	
+	<body>
+	
+		<section>
+				<div layout:fragment="content-header-left" th:include="basemanagement/base/baseInformation :: #baseImg"></div>
+				<div layout:fragment="content-header-title" th:include="basemanagement/base/baseInformation :: #baseTitle"></div>
+				<div layout:fragment="content-header-actions" th:include="basemanagement/base/baseInformation :: #baseActions"></div>				
+				<div layout:fragment="content-header-tabs">
+					<vu:button-link flat label="Base Information" url="@{/basemanagement/base/information/} + ${model.base.baseId}"/>
+					<vu:button-link flat label="Equipment" url="@{/basemanagement/base/equipment/} + ${model.base.baseId}"/>
+					<vu:button-link class="active" flat label="VR View" url="@{/basemanagement/base/vr/} + ${model.base.baseId}"/>					
+				</div>
+		</section>
+		
+		<section layout:fragment="content-nav">
+			        <q-item tag="a" href="#headquarters">Headquarters</q-item>
+			        <q-item tag="a" href="#launchpad">Launchpad</q-item>
+		</section>
+		
+		<section layout:fragment="content" >
+			<vu:block id="headquarters" title="Headquarters">
+				<div class="row col justify-center">
+					<iframe width="1200" height="480" src="https://sketchfab.com/models/83ced347037f47aba8473147d65df074/embed" frameborder="0" allow="autoplay; fullscreen; vr" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+				</div>
+			</vu:block>
+			<vu:block id="launchpad" title="Launchpad">
+				<div  class="row col justify-center">
+					<iframe width="1200" height="480" src="https://sketchfab.com/models/9910c38d9c504ff8984ae7be0d8a0cc5/embed" frameborder="0" allow="autoplay; fullscreen; vr" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+				</div>
+			</vu:block>
+		</section>
+	</body>
+</html>

@@ -7,5 +7,5 @@ import io.vertigo.pandora.domain.masterdata.Gender;
 public interface MasterdataServices extends Component {
 
 	DtList<Gender> getGenderList();
-	
+
 }

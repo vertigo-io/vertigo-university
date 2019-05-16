@@ -1,0 +1,5 @@
+Status;Code;Title;Description;Endpoint URL;Tags
+enabled;WS-BASES;Open Bases Directory;<p>This <strong>service</strong> enables listing all bases managed by the Mars Mining Company</p>;/api/bases;"#base;#captain"
+enabled;WS-EQUIPMENTS;Open Equipment Directory;<p>This <strong>service</strong> lists all equipment units in the primary MMC base</p>;/api/base/Alpha-1/equipments;#equipment
+enabled;WS-PERSONS;Open Persons Directory;<p>This <strong>service</strong> lists all team members in the MMC</p>;/api/persons;"#directory;#human;#hr"
+enabled;WS-EQUIPMENT-TYPES;Open Equipment Types Directory;<p>This <strong>service</strong> lists all equipment types available from the MMC</p>;/api/equipmentTypes;"#catalog;#categories"

@@ -12,9 +12,9 @@ import io.vertigo.app.Home;
 public enum GlobalAuthorizations implements AuthorizationName {
 
 	/**
-	 * ATZ_SPECIAL.
+	 * AtzSpecial.
 	 */
-	ATZ_SPECIAL;
+	AtzSpecial;
 
 	/**
 	 * Get the associated authorization.

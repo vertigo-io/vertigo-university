@@ -1,9 +1,9 @@
 package io.vertigo.samples.dao.domain;
 
 import io.vertigo.dynamo.domain.model.Entity;
-import io.vertigo.dynamo.domain.model.URI;
-import io.vertigo.dynamo.domain.model.VAccessor;
 import io.vertigo.dynamo.domain.model.ListVAccessor;
+import io.vertigo.dynamo.domain.model.UID;
+import io.vertigo.dynamo.domain.model.VAccessor;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.lang.Generated;
@@ -23,14 +23,14 @@ public final class MyMovie implements Entity {
 	private String imdbid;
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_MMOV_MCOU",
-			fkFieldName = "COU_ID",
-			primaryDtDefinitionName = "DT_MY_COUNTRY",
+			name = "AMmovMcou",
+			fkFieldName = "couId",
+			primaryDtDefinitionName = "DtMyCountry",
 			primaryIsNavigable = true,
 			primaryRole = "Country",
 			primaryLabel = "Country",
 			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_MY_MOVIE",
+			foreignDtDefinitionName = "DtMyMovie",
 			foreignIsNavigable = false,
 			foreignRole = "Movie",
 			foreignLabel = "Movie",
@@ -38,24 +38,24 @@ public final class MyMovie implements Entity {
 	private final VAccessor<io.vertigo.samples.dao.domain.MyCountry> couIdAccessor = new VAccessor<>(io.vertigo.samples.dao.domain.MyCountry.class, "Country");
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_MROL_MMOV",
-			fkFieldName = "MOV_ID",
-			primaryDtDefinitionName = "DT_MY_MOVIE",
+			name = "AMrolMmov",
+			fkFieldName = "movId",
+			primaryDtDefinitionName = "DtMyMovie",
 			primaryIsNavigable = false,
 			primaryRole = "Movie",
 			primaryLabel = "Movie",
 			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_MY_ROLE",
+			foreignDtDefinitionName = "DtMyRole",
 			foreignIsNavigable = true,
 			foreignRole = "Role",
 			foreignLabel = "Role",
 			foreignMultiplicity = "0..*")
-	private final ListVAccessor<io.vertigo.samples.dao.domain.MyRole> roleAccessor = new ListVAccessor<>(this, "A_MROL_MMOV", "Role");
+	private final ListVAccessor<io.vertigo.samples.dao.domain.MyRole> roleAccessor = new ListVAccessor<>(this, "AMrolMmov", "Role");
 
 	/** {@inheritDoc} */
 	@Override
-	public URI<MyMovie> getURI() {
-		return DtObjectUtil.createURI(this);
+	public UID<MyMovie> getUID() {
+		return UID.of(this);
 	}
 	
 	/**
@@ -63,7 +63,7 @@ public final class MyMovie implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long movId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_ID", type = "ID", required = true, label = "Id")
+	@Field(domain = "DoId", type = "ID", required = true, label = "Id")
 	public Long getMovId() {
 		return movId;
 	}
@@ -82,7 +82,7 @@ public final class MyMovie implements Entity {
 	 * Récupère la valeur de la propriété 'Code du pays'.
 	 * @return String name <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_LABEL_LONG", required = true, label = "Code du pays")
+	@Field(domain = "DoLabelLong", required = true, label = "Code du pays")
 	public String getName() {
 		return name;
 	}
@@ -98,17 +98,17 @@ public final class MyMovie implements Entity {
 	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'AnnÃ©e'.
+	 * Récupère la valeur de la propriété 'Année'.
 	 * @return Integer year
 	 */
-	@Field(domain = "DO_YEAR", label = "AnnÃ©e")
+	@Field(domain = "DoYear", label = "Année")
 	public Integer getYear() {
 		return year;
 	}
 
 	/**
 	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'AnnÃ©e'.
+	 * Définit la valeur de la propriété 'Année'.
 	 * @param year Integer
 	 */
 	public void setYear(final Integer year) {
@@ -120,7 +120,7 @@ public final class MyMovie implements Entity {
 	 * Récupère la valeur de la propriété 'Id Imdb'.
 	 * @return String imdbid
 	 */
-	@Field(domain = "DO_LABEL", label = "Id Imdb")
+	@Field(domain = "DoLabel", label = "Id Imdb")
 	public String getImdbid() {
 		return imdbid;
 	}
@@ -139,9 +139,9 @@ public final class MyMovie implements Entity {
 	 * Récupère la valeur de la propriété 'Country'.
 	 * @return Long couId
 	 */
-	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Country")
+	@Field(domain = "DoId", type = "FOREIGN_KEY", label = "Country")
 	public Long getCouId() {
-		return (Long)  couIdAccessor.getId();
+		return (Long) couIdAccessor.getId();
 	}
 
 	/**
@@ -160,24 +160,6 @@ public final class MyMovie implements Entity {
 	public VAccessor<io.vertigo.samples.dao.domain.MyCountry> country() {
 		return couIdAccessor;
 	}
-	
-	@Deprecated
-	public io.vertigo.samples.dao.domain.MyCountry getCountry() {
-		// we keep the lazyness
-		if (!couIdAccessor.isLoaded()) {
-			couIdAccessor.load();
-		}
-		return couIdAccessor.get();
-	}
-
-	/**
-	 * Retourne l'URI: Country.
-	 * @return URI de l'association
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.URI<io.vertigo.samples.dao.domain.MyCountry> getCountryURI() {
-		return couIdAccessor.getURI();
-	}
 
 	/**
 	 * Association : Role.
@@ -185,28 +167,6 @@ public final class MyMovie implements Entity {
 	 */
 	public ListVAccessor<io.vertigo.samples.dao.domain.MyRole> role() {
 		return roleAccessor;
-	}
-	
-	/**
-	 * Association : Role.
-	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.MyRole>
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.MyRole> getRoleList() {
-		// we keep the lazyness
-		if (!roleAccessor.isLoaded()) {
-			roleAccessor.load();
-		}
-		return roleAccessor.get();
-	}
-
-	/**
-	 * Association URI: Role.
-	 * @return URI de l'association
-	 */
-	@Deprecated	
-	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation getRoleDtListURI() {
-		return (io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation) roleAccessor.getDtListURI();
 	}
 	
 	/** {@inheritDoc} */

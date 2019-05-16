@@ -20,7 +20,7 @@ public final class Dummy implements DtObject {
 	 * Récupère la valeur de la propriété 'value'.
 	 * @return Long value <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_IDENTITY", required = true, label = "value")
+	@Field(domain = "DoIdentity", required = true, label = "value")
 	public Long getValue() {
 		return value;
 	}

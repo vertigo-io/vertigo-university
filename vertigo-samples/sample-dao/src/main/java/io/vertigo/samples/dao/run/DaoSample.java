@@ -5,13 +5,13 @@ import javax.inject.Inject;
 import org.apache.logging.log4j.LogManager;
 
 import io.vertigo.app.AutoCloseableApp;
-import io.vertigo.app.config.AppConfigBuilder;
 import io.vertigo.app.config.ModuleConfig;
-import io.vertigo.core.component.di.injector.DIInjector;
+import io.vertigo.app.config.NodeConfigBuilder;
 import io.vertigo.samples.dao.config.SampleConfigBuilder;
 import io.vertigo.samples.dao.dao.MovieDAO;
 import io.vertigo.samples.dao.services.MovieServices;
 import io.vertigo.samples.dao.services.MovieServicesImpl;
+import io.vertigo.util.InjectorUtil;
 
 public class DaoSample {
 
@@ -19,8 +19,8 @@ public class DaoSample {
 	private MovieServices movieServices;
 
 	public static void main(final String[] args) {
-		final AppConfigBuilder appConfigBuilder = SampleConfigBuilder.createAppConfigBuilder();
-		appConfigBuilder
+		final NodeConfigBuilder nodeConfigBuilder = SampleConfigBuilder.createNodeConfigBuilder();
+		nodeConfigBuilder
 				.addModule(ModuleConfig.builder("DAO")
 						.addComponent(MovieDAO.class)
 						.build())
@@ -28,9 +28,9 @@ public class DaoSample {
 						.addComponent(MovieServices.class, MovieServicesImpl.class)
 						.build());
 
-		try (final AutoCloseableApp app = new AutoCloseableApp(appConfigBuilder.build())) {
+		try (final AutoCloseableApp app = new AutoCloseableApp(nodeConfigBuilder.build())) {
 			final DaoSample sample = new DaoSample();
-			DIInjector.injectMembers(sample, app.getComponentSpace());
+			InjectorUtil.injectMembers(sample);
 			//-----
 			sample.step1();
 		}

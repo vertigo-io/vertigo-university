@@ -5,13 +5,13 @@ import java.util.Optional;
 import javax.inject.Inject;
 
 import io.vertigo.dynamo.collections.model.FacetedQueryResult;
+import io.vertigo.dynamo.collections.model.SelectedFacetValues;
+import io.vertigo.dynamo.domain.model.DtListState;
 import io.vertigo.dynamo.search.model.SearchQuery;
 import io.vertigo.pandora.domain.persons.Person;
 import io.vertigo.pandora.domain.persons.PersonIndex;
 import io.vertigo.pandora.services.persons.PersonServices;
-import io.vertigo.vega.engines.webservice.json.UiSelectedFacets;
 import io.vertigo.vega.webservice.WebServices;
-import io.vertigo.vega.webservice.model.UiListState;
 import io.vertigo.vega.webservice.stereotype.AnonymousAccessAllowed;
 import io.vertigo.vega.webservice.stereotype.GET;
 import io.vertigo.vega.webservice.stereotype.InnerBodyParam;
@@ -29,16 +29,16 @@ public class PersonWebServices implements WebServices {
 	@AnonymousAccessAllowed
 	@GET("/search")
 	public FacetedQueryResult<PersonIndex, SearchQuery> searchPersons(@QueryParam("q") final String criteria,
-			@QueryParam("group") final Optional<String> clusteringFacetName, final UiListState uiListState) {
-		return search(criteria, new UiSelectedFacets(), clusteringFacetName, uiListState);
+			@QueryParam("group") final Optional<String> clusteringFacetName, final DtListState dtListState) {
+		return search(criteria, SelectedFacetValues.empty().build(), clusteringFacetName, dtListState);
 	}
 
 	@AnonymousAccessAllowed
 	@POST("/search")
 	public FacetedQueryResult search(@InnerBodyParam("criteria") final String criteria,
-			@InnerBodyParam("facets") final UiSelectedFacets uiSelectedFacets,
-			@InnerBodyParam("group") final Optional<String> clusteringFacetName, final UiListState uiListState) {
-		return personServices.searchPersons(criteria, uiSelectedFacets.toSelectedFacetValues(), uiListState.toDtListState(),
+			@InnerBodyParam("facets") final SelectedFacetValues selectedFacetValues,
+			@InnerBodyParam("group") final Optional<String> clusteringFacetName, final DtListState dtListState) {
+		return personServices.searchPersons(criteria, selectedFacetValues, dtListState,
 				clusteringFacetName);
 	}
 

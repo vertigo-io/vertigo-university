@@ -6,6 +6,8 @@ import java.util.Optional;
 import javax.inject.Inject;
 
 import io.vertigo.dynamo.collections.model.FacetedQueryResult;
+import io.vertigo.dynamo.collections.model.SelectedFacetValues;
+import io.vertigo.dynamo.domain.model.DtListState;
 import io.vertigo.dynamo.search.model.SearchQuery;
 import io.vertigo.pandora.domain.movies.Movie;
 import io.vertigo.pandora.domain.movies.MovieCaract;
@@ -14,9 +16,7 @@ import io.vertigo.pandora.domain.movies.MovieSynopsis;
 import io.vertigo.pandora.domain.movies.MovieTrailer;
 import io.vertigo.pandora.services.movies.MovieServices;
 import io.vertigo.vega.engines.webservice.json.UiContext;
-import io.vertigo.vega.engines.webservice.json.UiSelectedFacets;
 import io.vertigo.vega.webservice.WebServices;
-import io.vertigo.vega.webservice.model.UiListState;
 import io.vertigo.vega.webservice.stereotype.AnonymousAccessAllowed;
 import io.vertigo.vega.webservice.stereotype.GET;
 import io.vertigo.vega.webservice.stereotype.IncludedFields;
@@ -35,16 +35,16 @@ public class MovieWebServices implements WebServices {
 	@AnonymousAccessAllowed
 	@GET("/search")
 	public FacetedQueryResult<MovieIndex, SearchQuery> searchMovies(@QueryParam("q") final String criteria,
-			@QueryParam("group") final Optional<String> clusteringFacetName, final UiListState uiListState) {
-		return search(criteria, new UiSelectedFacets(), clusteringFacetName, uiListState);
+			@QueryParam("group") final Optional<String> clusteringFacetName, final DtListState dtListState) {
+		return search(criteria, SelectedFacetValues.empty().build(), clusteringFacetName, dtListState);
 	}
 
 	@AnonymousAccessAllowed
 	@POST("/search")
 	public FacetedQueryResult search(@InnerBodyParam("criteria") final String criteria,
-			@InnerBodyParam("facets") final UiSelectedFacets uiSelectedFacets,
-			@InnerBodyParam("group") final Optional<String> clusteringFacetName, final UiListState uiListState) {
-		return movieServices.searchMovies(criteria, uiSelectedFacets.toSelectedFacetValues(), uiListState.toDtListState(),
+			@InnerBodyParam("facets") final SelectedFacetValues selectedFacetValues,
+			@InnerBodyParam("group") final Optional<String> clusteringFacetName, final DtListState dtListState) {
+		return movieServices.searchMovies(criteria, selectedFacetValues, dtListState,
 				clusteringFacetName);
 	}
 

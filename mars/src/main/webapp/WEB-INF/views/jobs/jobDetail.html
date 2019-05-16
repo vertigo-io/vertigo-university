@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="http://www.morphbit.com/thymeleaf/component"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{templates/mmcDetailNavLayout}"
+>
+	<head>
+		<title>Job detail</title>		
+		<script th:src="@{/vertigo-ui/static/js/v-components/v-json-editor.js}"></script>
+	</head>
+	
+	<body>
+	
+		<section layout:fragment="content-nav">
+			    	<q-item tag="a" href="#week">Week's executions</q-item>
+			        <q-item tag="a" href="#information">Information</q-item>
+			        <q-item tag="a" href="#metadatas">Metadatas</q-item>
+			        <q-item tag="a" href="#technical_information">Technical informations</q-item>
+			        <q-item tag="a" href="#params">Params</q-item>
+		</section>
+		
+		<section>
+			<div layout:fragment="content-header-title">
+				<span class="text-bigger" th:text="${model.job.label}"></span> 
+			</div>
+			<div layout:fragment="content-header-actions">
+				<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>
+				<vu:button-submit th:if="${model.modeEdit}"   action="@{_cancel}" :round size="lg" color="primary" icon="fas fa-ban" :flat aria-label="Cancel" title="Cancel" class="on-left"  />
+				<q-btn round size="lg" color="primary" icon="play_circle_outline" class="on-left"  th:@click="|httpPostAjax('@{_executeNow}', {}, function(response){ this.$q.notify({message : 'Job scheduled', type : 'positive'});})|" ></q-btn>
+			</div>
+			<div layout:fragment="content-header-tabs">
+				<vu:button-link class="active" flat label="Detail" url="@{/jobDetail/} + ${model.job.name}"/>
+				<vu:button-link flat label="Executions" url="@{/jobExecutions/} + ${model.job.name}"/>
+			</div>
+		</section>
+		
+		<section layout:fragment="content" >
+			<vu:form>
+				<vu:block id="week" title="'Week\'s executions'">
+						<div class="execution-summary row justify-start items-center">
+							<vu:include-data object="executionSummary" field="health" />
+							<vu:include-data object="executionSummary" field="errorsCount" />
+							<vu:include-data object="executionSummary" field="successfulCount" />
+							<vu:include-data object="executionSummary" field="runningCount" />
+							<vu:include-data object="executionSummary" field="misfiredCount" />
+							<vu:include-data object="executionSummary" field="averageExecutionTime" />
+							<div class="health" >
+								<q-icon v-if="vueData.executionSummary.health === 'ERROR'" name="favorite" color="negative" size="32px"></q-icon>
+								<q-icon v-else-if="vueData.executionSummary.health === 'WARNING'" name="favorite" color="warning" size="32px"></q-icon>
+								<q-icon v-else name="favorite" color="positive" size="32px"></q-icon>
+								<span>&nbsp;</span>
+							</div>
+							<div class="error" >
+								<q-icon name="report_problem" color="negative" size="32px"></q-icon>
+								<span>{{vueData.executionSummary.errorsCount}}</span>
+							</div>
+							<div class="success" >
+								<q-icon name="verified_user" color="positive" size="32px" ></q-icon>
+								<span>{{vueData.executionSummary.successfulCount}}</span>
+							</div>
+							<div class="misfired" >
+								<q-icon name="alarm_off" color="faded" size="32px"></q-icon>
+								<span>{{vueData.executionSummary.misfiredCount}}</span>
+							</div>
+							<div class="time" >
+								<q-icon name="timer" size="32px"></q-icon>
+								<span>{{vueData.executionSummary.averageExecutionTime}}</span>
+							</div>
+							<div v-if="vueData.executionSummary.runningCount > 0" >
+								<div class="row col inline relative-position bg-primary q-pa-sm text-white">
+								RUNNING
+								<q-chip floating>{{vueData.executionSummary.runningCount}}</q-chip>
+								</div>
+							</div>
+						</div>
+				</vu:block>
+				<vu:block id="information" title="Information">
+					<vu:grid cols="2">
+						<vu:text-field-read object="job" field="name"/>
+						<vu:text-field-read object="job" field="label" />
+					</vu:grid>
+				</vu:block>
+				<vu:block id="metadatas" title="Metadatas">
+					<vu:include-data object="job" field="metadatas" />
+					<v-json-editor v-model="vueData.job.metadatas" :readonly="true" :cols="2" ></v-json-editor>
+				</vu:block>
+				<vu:block id="technical_information" title="Technical informations">
+					<vu:grid cols="2">
+						<vu:text-field object="job" field="cronExpression"/>
+						<vu:checkbox object="job" field="active" />
+						<vu:checkbox object="job" field="multiexecution" />
+						<vu:text-field object="job" field="rescuePeriod" />
+					</vu:grid>
+				</vu:block>
+				<vu:block id="params" title="Params">
+					<vu:include-data object="job" field="initialParams" />
+					<input type="hidden" name="vContext[job][initialParams]" v-bind:value="vueData.job.initialParams" ></input>
+					<v-json-editor v-model="vueData.job.initialParams" th::readonly="${model.modeReadOnly}" :cols="2"></v-json-editor>
+				</vu:block>
+				<q-page-sticky position="bottom-right">
+					<vu:button-submit th:if="${model.modeEdit}"   icon="save" label="Save" action="@{_save}" size="lg" color="primary" />
+				</q-page-sticky>
+			</vu:form>
+		</section>
+	</body>
+</html>

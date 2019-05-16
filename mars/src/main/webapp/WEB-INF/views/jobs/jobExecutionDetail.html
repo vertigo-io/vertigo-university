@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="http://www.morphbit.com/thymeleaf/component"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{templates/mmcModalLayout}"
+>
+	<head>
+		<title>Job Execution Detail</title>		
+		<script th:src="@{/vertigo-ui/static/js/v-components/v-json-editor.js}"></script>
+		<script type="text/javascript">
+			VUiExtensions.dataX.selectedActivity = null;
+		</script>
+	</head>
+	
+	<body class="bg-white">
+	
+		<section layout:fragment="page-container" >
+			<vu:grid>
+				<vu:datetime-read object="jobExecution" field="beginTime" />
+				<vu:datetime-read object="jobExecution" field="endTime" />
+			</vu:grid>
+			<vu:include-data object="activityExecutions" field="'*'" />
+			<div class="row">
+				<div class="col-4">
+					<q-list separator>
+					  <q-item v-for="activity in vueData.activityExecutions" :key="activity.aceId" :title="activity.label" @click.native="dataX.selectedActivity = activity" style="cursor:pointer;" v-bind:class="{ active : dataX.selectedActivity != null && activity.aceId === dataX.selectedActivity.aceId}" >
+					  	<q-item-side>
+					  		<q-icon name="fas fa-chevron-right" ></q-icon>
+					  	</q-item-side>
+					  	<q-item-main>
+					  		{{activity.label}}
+					  	</q-item-main>
+					  	<q-item-side>
+					  		<q-icon v-if="activity.status === 'DONE'" name="fas fa-check-circle" color="positive" ></q-icon>
+					  		<q-icon v-else-if="activity.status === 'ERROR'" name="fas fa-exclamation-circle" color="negative" ></q-icon>
+					  		<q-icon v-else-if="activity.status === 'RUNNING' || activity.status === 'WAITING'" name="fas fa-spinner" color="primary" ></q-icon>
+					  	</q-item-side>
+					  </q-item>
+					</q-list>
+				</div>
+				<q-separator></q-separator>
+				<div v-if="dataX.selectedActivity" class="col-8 col q-pl-md mgutter-md">
+					<div class="bg-secondary text-white text-center"><h6>{{dataX.selectedActivity.label}}</h6></div>
+					<vu:block title="Logs" >
+						<vu:include-data object="jobExecution" field="preId" />
+				  		<q-btn v-if="dataX.selectedActivity.hasTechnicalLog" type="a" th::href="|'@{/api/orchestra/executions/}' + vueData.jobExecution.preId + '/activities/' + dataX.selectedActivity.aceId + '/logFile'|" label="Log technique" target="_blank" ></q-btn>
+				  		<q-btn v-if="dataX.selectedActivity.hasAttachment" type="a" th::href="|'@{/api/orchestra/executions/}' + vueData.jobExecution.preId + '/activities/' + dataX.selectedActivity.aceId + '/attachment'|" label="Log fonctionnel" target="_blank" ></q-btn>
+				  	</vu:block>
+					<vu:block title="Workspace In" >
+				  		<v-json-editor :value="dataX.selectedActivity.workspaceIn" readonly="true" ></v-json-editor>
+				  	</vu:block>
+				  	<vu:block title="Workspace Out">
+				  		<v-json-editor :value="dataX.selectedActivity.workspaceOut" readonly="true" ></v-json-editor>
+				  	</vu:block>
+				</div>
+			</div>
+		</section>
+	</body>
+</html>

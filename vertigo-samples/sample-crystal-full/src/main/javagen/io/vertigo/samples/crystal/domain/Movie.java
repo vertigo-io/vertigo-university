@@ -1,9 +1,9 @@
 package io.vertigo.samples.crystal.domain;
 
 import io.vertigo.dynamo.domain.model.KeyConcept;
-import io.vertigo.dynamo.domain.model.URI;
-import io.vertigo.dynamo.domain.model.VAccessor;
 import io.vertigo.dynamo.domain.model.ListVAccessor;
+import io.vertigo.dynamo.domain.model.UID;
+import io.vertigo.dynamo.domain.model.VAccessor;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.lang.Generated;
@@ -22,14 +22,14 @@ public final class Movie implements KeyConcept {
 	private String imdbid;
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_MOV_COU",
-			fkFieldName = "COU_ID",
-			primaryDtDefinitionName = "DT_COUNTRY",
+			name = "AMovCou",
+			fkFieldName = "couId",
+			primaryDtDefinitionName = "DtCountry",
 			primaryIsNavigable = true,
 			primaryRole = "Country",
 			primaryLabel = "Country",
 			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_MOVIE",
+			foreignDtDefinitionName = "DtMovie",
 			foreignIsNavigable = false,
 			foreignRole = "Movie",
 			foreignLabel = "Movie",
@@ -37,24 +37,24 @@ public final class Movie implements KeyConcept {
 	private final VAccessor<io.vertigo.samples.crystal.domain.Country> couIdAccessor = new VAccessor<>(io.vertigo.samples.crystal.domain.Country.class, "Country");
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
-			name = "A_ROL_MOV",
-			fkFieldName = "MOV_ID",
-			primaryDtDefinitionName = "DT_MOVIE",
+			name = "ARolMov",
+			fkFieldName = "movId",
+			primaryDtDefinitionName = "DtMovie",
 			primaryIsNavigable = false,
 			primaryRole = "Movie",
 			primaryLabel = "Movie",
 			primaryMultiplicity = "0..1",
-			foreignDtDefinitionName = "DT_ROLE",
+			foreignDtDefinitionName = "DtRole",
 			foreignIsNavigable = true,
 			foreignRole = "Role",
 			foreignLabel = "Role",
 			foreignMultiplicity = "0..*")
-	private final ListVAccessor<io.vertigo.samples.crystal.domain.Role> roleAccessor = new ListVAccessor<>(this, "A_ROL_MOV", "Role");
+	private final ListVAccessor<io.vertigo.samples.crystal.domain.Role> roleAccessor = new ListVAccessor<>(this, "ARolMov", "Role");
 
 	/** {@inheritDoc} */
 	@Override
-	public URI<Movie> getURI() {
-		return DtObjectUtil.createURI(this);
+	public UID<Movie> getUID() {
+		return UID.of(this);
 	}
 	
 	/**
@@ -62,7 +62,7 @@ public final class Movie implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long movId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_ID", type = "ID", required = true, label = "Id")
+	@Field(domain = "DoId", type = "ID", required = true, label = "Id")
 	public Long getMovId() {
 		return movId;
 	}
@@ -81,7 +81,7 @@ public final class Movie implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Titre du film'.
 	 * @return String name <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_LABEL_LONG", required = true, label = "Titre du film")
+	@Field(domain = "DoLabelLong", required = true, label = "Titre du film")
 	public String getName() {
 		return name;
 	}
@@ -97,17 +97,17 @@ public final class Movie implements KeyConcept {
 	
 	/**
 	 * Champ : DATA.
-	 * Récupère la valeur de la propriété 'AnnÃ©e'.
+	 * Récupère la valeur de la propriété 'Année'.
 	 * @return Integer year
 	 */
-	@Field(domain = "DO_YEAR", label = "AnnÃ©e")
+	@Field(domain = "DoYear", label = "Année")
 	public Integer getYear() {
 		return year;
 	}
 
 	/**
 	 * Champ : DATA.
-	 * Définit la valeur de la propriété 'AnnÃ©e'.
+	 * Définit la valeur de la propriété 'Année'.
 	 * @param year Integer
 	 */
 	public void setYear(final Integer year) {
@@ -119,7 +119,7 @@ public final class Movie implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Id Imdb'.
 	 * @return String imdbid
 	 */
-	@Field(domain = "DO_LABEL", label = "Id Imdb")
+	@Field(domain = "DoLabel", label = "Id Imdb")
 	public String getImdbid() {
 		return imdbid;
 	}
@@ -138,9 +138,9 @@ public final class Movie implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Country'.
 	 * @return Long couId
 	 */
-	@Field(domain = "DO_ID", type = "FOREIGN_KEY", label = "Country")
+	@Field(domain = "DoId", type = "FOREIGN_KEY", label = "Country")
 	public Long getCouId() {
-		return (Long)  couIdAccessor.getId();
+		return (Long) couIdAccessor.getId();
 	}
 
 	/**
@@ -159,24 +159,6 @@ public final class Movie implements KeyConcept {
 	public VAccessor<io.vertigo.samples.crystal.domain.Country> country() {
 		return couIdAccessor;
 	}
-	
-	@Deprecated
-	public io.vertigo.samples.crystal.domain.Country getCountry() {
-		// we keep the lazyness
-		if (!couIdAccessor.isLoaded()) {
-			couIdAccessor.load();
-		}
-		return couIdAccessor.get();
-	}
-
-	/**
-	 * Retourne l'URI: Country.
-	 * @return URI de l'association
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.URI<io.vertigo.samples.crystal.domain.Country> getCountryURI() {
-		return couIdAccessor.getURI();
-	}
 
 	/**
 	 * Association : Role.
@@ -184,28 +166,6 @@ public final class Movie implements KeyConcept {
 	 */
 	public ListVAccessor<io.vertigo.samples.crystal.domain.Role> role() {
 		return roleAccessor;
-	}
-	
-	/**
-	 * Association : Role.
-	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.crystal.domain.Role>
-	 */
-	@Deprecated
-	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.crystal.domain.Role> getRoleList() {
-		// we keep the lazyness
-		if (!roleAccessor.isLoaded()) {
-			roleAccessor.load();
-		}
-		return roleAccessor.get();
-	}
-
-	/**
-	 * Association URI: Role.
-	 * @return URI de l'association
-	 */
-	@Deprecated	
-	public io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation getRoleDtListURI() {
-		return (io.vertigo.dynamo.domain.metamodel.association.DtListURIForSimpleAssociation) roleAccessor.getDtListURI();
 	}
 	
 	/** {@inheritDoc} */

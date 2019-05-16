@@ -62,228 +62,228 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	 */
 	public enum ActorRoleFields implements DtFieldName<io.vertigo.pandora.domain.persons.ActorRole> {
 		/** Propriété 'ARO ID'. */
-		ARO_ID,
+		aroId,
 		/** Propriété 'ROLE'. */
-		ROLE,
+		role,
 		/** Propriété 'Actor'. */
-		PER_ID,
+		perId,
 		/** Propriété 'Movie'. */
-		MOV_ID	}
+		movId	}
 
 	/**
 	 * Enumération des champs de Dummy.
 	 */
 	public enum DummyFields implements DtFieldName<io.vertigo.pandora.domain.movies.Dummy> {
 		/** Propriété 'value'. */
-		VALUE	}
+		value	}
 
 	/**
 	 * Enumération des champs de Movie.
 	 */
 	public enum MovieFields implements DtFieldName<io.vertigo.pandora.domain.movies.Movie> {
 		/** Propriété 'MOV ID'. */
-		MOV_ID,
+		movId,
 		/** Propriété 'TITLE'. */
-		TITLE,
+		title,
 		/** Propriété 'ORIGINAL TITLE'. */
-		ORIGINAL_TITLE,
+		originalTitle,
 		/** Propriété 'SYNOPSIS'. */
-		SYNOPSIS,
+		synopsis,
 		/** Propriété 'SHORT SYNOPSIS'. */
-		SHORT_SYNOPSIS,
+		shortSynopsis,
 		/** Propriété 'KEYWORDS'. */
-		KEYWORDS,
+		keywords,
 		/** Propriété 'POSTER'. */
-		POSTER,
+		poster,
 		/** Propriété 'TRAILER NAME'. */
-		TRAILER_NAME,
+		trailerName,
 		/** Propriété 'TRAILER HREF'. */
-		TRAILER_HREF,
+		trailerHref,
 		/** Propriété 'RUNTIME'. */
-		RUNTIME,
+		runtime,
 		/** Propriété 'MOVIE TYPE'. */
-		MOVIE_TYPE,
+		movieType,
 		/** Propriété 'PRODUCTION YEAR'. */
-		PRODUCTION_YEAR,
+		productionYear,
 		/** Propriété 'USER RATING'. */
-		USER_RATING,
+		userRating,
 		/** Propriété 'PRESS RATING'. */
-		PRESS_RATING	}
+		pressRating	}
 
 	/**
 	 * Enumération des champs de MovieCaract.
 	 */
 	public enum MovieCaractFields implements DtFieldName<io.vertigo.pandora.domain.movies.MovieCaract> {
 		/** Propriété 'TITLE'. */
-		TITLE,
+		title,
 		/** Propriété 'ORIGINAL TITLE'. */
-		ORIGINAL_TITLE,
+		originalTitle,
 		/** Propriété 'KEYWORDS'. */
-		KEYWORDS,
+		keywords,
 		/** Propriété 'RUNTIME'. */
-		RUNTIME,
+		runtime,
 		/** Propriété 'MOVIE TYPE'. */
-		MOVIE_TYPE,
+		movieType,
 		/** Propriété 'PRODUCTION YEAR'. */
-		PRODUCTION_YEAR,
+		productionYear,
 		/** Propriété 'MOV ID'. */
-		MOV_ID	}
+		movId	}
 
 	/**
 	 * Enumération des champs de MovieIndex.
 	 */
 	public enum MovieIndexFields implements DtFieldName<io.vertigo.pandora.domain.movies.MovieIndex> {
 		/** Propriété 'id'. */
-		MOV_ID,
+		movId,
 		/** Propriété 'Title'. */
-		TITLE,
+		title,
 		/** Propriété 'Title'. */
-		TITLE_SORT_ONLY,
+		titleSortOnly,
 		/** Propriété 'Original Title'. */
-		ORIGINAL_TITLE,
+		originalTitle,
 		/** Propriété 'Synopsis'. */
-		SYNOPSIS,
+		synopsis,
 		/** Propriété 'shortSynopsis'. */
-		SHORT_SYNOPSIS,
+		shortSynopsis,
 		/** Propriété 'keywords'. */
-		KEYWORDS,
+		keywords,
 		/** Propriété 'poster'. */
-		POSTER,
+		poster,
 		/** Propriété 'runtime'. */
-		RUNTIME,
+		runtime,
 		/** Propriété 'Movie type'. */
-		MOVIE_TYPE,
+		movieType,
 		/** Propriété 'productionYear'. */
-		PRODUCTION_YEAR,
+		productionYear,
 		/** Propriété 'userRating'. */
-		USER_RATING,
+		userRating,
 		/** Propriété 'presRating'. */
-		PRESS_RATING,
+		pressRating,
 		/** Propriété 'Roles'. */
-		ACTOR_ROLES,
+		actorRoles,
 		/** Propriété 'Writers'. */
-		WRITERS,
+		writers,
 		/** Propriété 'Camera'. */
-		CAMERA,
+		camera,
 		/** Propriété 'Producers'. */
-		PRODUCERS,
+		producers,
 		/** Propriété 'Directors'. */
-		DIRECTORS	}
+		directors	}
 
 	/**
 	 * Enumération des champs de MovieLink.
 	 */
 	public enum MovieLinkFields implements DtFieldName<io.vertigo.pandora.domain.movies.MovieLink> {
 		/** Propriété 'TITLE'. */
-		TITLE,
+		title,
 		/** Propriété 'POSTER'. */
-		POSTER,
+		poster,
 		/** Propriété 'MOVIE TYPE'. */
-		MOVIE_TYPE,
+		movieType,
 		/** Propriété 'PRODUCTION YEAR'. */
-		PRODUCTION_YEAR,
+		productionYear,
 		/** Propriété 'MOV ID'. */
-		MOV_ID	}
+		movId	}
 
 	/**
 	 * Enumération des champs de MovieSynopsis.
 	 */
 	public enum MovieSynopsisFields implements DtFieldName<io.vertigo.pandora.domain.movies.MovieSynopsis> {
 		/** Propriété 'SYNOPSIS'. */
-		SYNOPSIS,
+		synopsis,
 		/** Propriété 'SHORT SYNOPSIS'. */
-		SHORT_SYNOPSIS,
+		shortSynopsis,
 		/** Propriété 'MOV ID'. */
-		MOV_ID	}
+		movId	}
 
 	/**
 	 * Enumération des champs de MovieTrailer.
 	 */
 	public enum MovieTrailerFields implements DtFieldName<io.vertigo.pandora.domain.movies.MovieTrailer> {
 		/** Propriété 'TRAILER NAME'. */
-		TRAILER_NAME,
+		trailerName,
 		/** Propriété 'TRAILER HREF'. */
-		TRAILER_HREF,
+		trailerHref,
 		/** Propriété 'MOV ID'. */
-		MOV_ID	}
+		movId	}
 
 	/**
 	 * Enumération des champs de Person.
 	 */
 	public enum PersonFields implements DtFieldName<io.vertigo.pandora.domain.persons.Person> {
 		/** Propriété 'PER ID'. */
-		PER_ID,
+		perId,
 		/** Propriété 'FULL NAME'. */
-		FULL_NAME,
+		fullName,
 		/** Propriété 'FIRST NAME'. */
-		FIRST_NAME,
+		firstName,
 		/** Propriété 'LAST NAME'. */
-		LAST_NAME,
+		lastName,
 		/** Propriété 'BIOGRAPHY'. */
-		BIOGRAPHY,
+		biography,
 		/** Propriété 'SHORT BIOGRAPHY'. */
-		SHORT_BIOGRAPHY,
+		shortBiography,
 		/** Propriété 'SEX'. */
-		SEX,
+		sex,
 		/** Propriété 'PHOTO HREF'. */
-		PHOTO_HREF,
+		photoHref,
 		/** Propriété 'BIRTH DATE'. */
-		BIRTH_DATE,
+		birthDate,
 		/** Propriété 'BIRTH PLACE'. */
-		BIRTH_PLACE,
+		birthPlace,
 		/** Propriété 'ACTIVITY'. */
-		ACTIVITY	}
+		activity	}
 
 	/**
 	 * Enumération des champs de PersonActorRoleLink.
 	 */
 	public enum PersonActorRoleLinkFields implements DtFieldName<io.vertigo.pandora.domain.persons.PersonActorRoleLink> {
 		/** Propriété 'FULL NAME'. */
-		FULL_NAME,
+		fullName,
 		/** Propriété 'PHOTO HREF'. */
-		PHOTO_HREF,
+		photoHref,
 		/** Propriété 'Role'. */
-		ROLE,
+		role,
 		/** Propriété 'PER ID'. */
-		PER_ID	}
+		perId	}
 
 	/**
 	 * Enumération des champs de PersonIndex.
 	 */
 	public enum PersonIndexFields implements DtFieldName<io.vertigo.pandora.domain.persons.PersonIndex> {
 		/** Propriété 'id'. */
-		PER_ID,
+		perId,
 		/** Propriété 'Nom'. */
-		FULL_NAME,
+		fullName,
 		/** Propriété 'Nom'. */
-		FULL_NAME_SORT_ONLY,
+		fullNameSortOnly,
 		/** Propriété 'Biographie'. */
-		BIOGRAPHY,
+		biography,
 		/** Propriété 'Sexe'. */
-		SEX,
+		sex,
 		/** Propriété 'photo'. */
-		PHOTO_URL,
+		photoUrl,
 		/** Propriété 'Date de naissance'. */
-		BIRTH_DATE,
+		birthDate,
 		/** Propriété 'Lieu de naissance'. */
-		BIRTH_PLACE,
+		birthPlace,
 		/** Propriété 'Activity'. */
-		ACTIVITY,
+		activity,
 		/** Propriété 'Movies'. */
-		MOVIES	}
+		movies	}
 
 	/**
 	 * Enumération des champs de PersonLink.
 	 */
 	public enum PersonLinkFields implements DtFieldName<io.vertigo.pandora.domain.persons.PersonLink> {
 		/** Propriété 'FULL NAME'. */
-		FULL_NAME,
+		fullName,
 		/** Propriété 'PHOTO HREF'. */
-		PHOTO_HREF,
+		photoHref,
 		/** Propriété 'Movie type'. */
-		EXISTS_IN_BDD,
+		existsInBdd,
 		/** Propriété 'PER ID'. */
-		PER_ID	}
+		perId	}
 
 	/** {@inheritDoc} */
 	@Override

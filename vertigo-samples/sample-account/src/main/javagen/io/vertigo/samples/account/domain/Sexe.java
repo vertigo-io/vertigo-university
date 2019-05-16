@@ -1,7 +1,7 @@
 package io.vertigo.samples.account.domain;
 
 import io.vertigo.dynamo.domain.model.Entity;
-import io.vertigo.dynamo.domain.model.URI;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 import io.vertigo.lang.Generated;
@@ -19,8 +19,8 @@ public final class Sexe implements Entity {
 
 	/** {@inheritDoc} */
 	@Override
-	public URI<Sexe> getURI() {
-		return DtObjectUtil.createURI(this);
+	public UID<Sexe> getUID() {
+		return UID.of(this);
 	}
 	
 	/**
@@ -28,7 +28,7 @@ public final class Sexe implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return String sexCd <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_CODE", type = "ID", required = true, label = "Id")
+	@Field(domain = "DoCode", type = "ID", required = true, label = "Id")
 	public String getSexCd() {
 		return sexCd;
 	}
@@ -47,7 +47,7 @@ public final class Sexe implements Entity {
 	 * Récupère la valeur de la propriété 'Label'.
 	 * @return String label <b>Obligatoire</b>
 	 */
-	@Field(domain = "DO_LABEL_LONG", required = true, label = "Label")
+	@Field(domain = "DoLabelLong", required = true, label = "Label")
 	public String getLabel() {
 		return label;
 	}

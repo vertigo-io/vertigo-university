@@ -1,6 +1,6 @@
 package io.vertigo.samples
 
-create Task TK_GET_MOVIES_BY_CRITERIA {
+create Task TkGetMoviesByCriteria {
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
         request : "
         	select mov.*
@@ -8,18 +8,18 @@ create Task TK_GET_MOVIES_BY_CRITERIA {
         	where 
         	1=1
         	<%if(title != null) {%>
-        	 and mov.NAME like concat(#TITLE#, '%%')
+        	 and mov.NAME like concat(#title#, '%%')
         	<%}%>
         	<%if(year != null) {%>
-        	 and mov.YEAR = #YEAR#
+        	 and mov.YEAR = #year#
         	<%}%>
 			"
-	attribute TITLE	 	{domain : DO_LABEL_LONG 		notNull:"true" 	inOut :"in"}
-	attribute YEAR	 	{domain : DO_YEAR 				notNull:"true" 	inOut :"in"}
-	attribute MOVIES	{domain : DO_DT_MOVIE_DTC 	notNull:"true" 	inOut :"out"}
+	attribute title	 	{domain : DoLabelLong 		required:"true" 	inOut :"in"}
+	attribute year	 	{domain : DoYear 				required:"true" 	inOut :"in"}
+	attribute movies	{domain : DoDtMovieDtc 	required:"true" 	inOut :"out"}
 }
 
-create Task TK_GET_MOVIES_BY_CRITERIA_WITH_COUNTRY {
+create Task TkGetMoviesByCriteriaWithCountry {
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
         request : "
         	select mov.*
@@ -27,36 +27,36 @@ create Task TK_GET_MOVIES_BY_CRITERIA_WITH_COUNTRY {
         	where 
         	1=1
         	<%if(title != null) {%>
-        	 and mov.NAME like concat(#TITLE#, '%%')
+        	 and mov.NAME like concat(#title#, '%%')
         	<%}%>
         	<%if(year != null) {%>
-        	 and mov.YEAR = #YEAR#
+        	 and mov.YEAR = #year#
         	<%}%>
         	<%if(!countries.isEmpty()) {%>
-        	 and mov.COU_ID in (#COUNTRIES.ROWNUM.COU_ID#)
+        	 and mov.COU_ID in (#countries.rownum.couId#)
         	<%}%>
 			"
-	attribute TITLE	 	{domain : DO_LABEL_LONG 		notNull:"true" 	inOut :"in"}
-	attribute YEAR	 	{domain : DO_YEAR 				notNull:"false"	inOut :"in"}
-	attribute COUNTRIES	{domain : DO_DT_COUNTRY_DTC 	notNull:"true" 	inOut :"in"}
-	attribute MOVIES	{domain : DO_DT_MOVIE_DTC 	notNull:"true" 	inOut :"out"}
+	attribute title	 	{domain : DoLabelLong 		required:"true" 	inOut :"in"}
+	attribute year	 	{domain : DoYear 				required:"false"	inOut :"in"}
+	attribute countries	{domain : DoDtCountryDtc 	required:"true" 	inOut :"in"}
+	attribute movies	{domain : DoDtMovieDtc 	required:"true" 	inOut :"out"}
 }
 
 
-create Task TK_GET_ACTORS_IN_MOVIE {
+create Task TkGetActorsInMovie {
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
         request : "
         	select act.*
         	from role rol
         	join actor act on act.ACT_ID = rol.ACT_ID
-        	where rol.MOV_ID = #MOV_ID#
+        	where rol.MOV_ID = #movId#
 			"
-	attribute MOV_ID	{domain : DO_ID 	notNull:"true" 	inOut :"in"}
-	attribute ACTORS	{domain : DO_DT_ACTOR_DTC 	notNull:"true" 	inOut :"out"}
+	attribute movId		{domain : DoId 	required:"true" 	inOut :"in"}
+	attribute actors	{domain : DoDtActorDtc 	required:"true" 	inOut :"out"}
 }
 
 
-create Task TK_GET_MOVIES_WITH_100_ACTORS {
+create Task TkGetMoviesWith100Actors {
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
         request : "
         	select mov.*
@@ -64,11 +64,11 @@ create Task TK_GET_MOVIES_WITH_100_ACTORS {
 			join (select MOV_ID, count(*) cnt from role group by mov_id ) hv on hv.MOV_ID = mov.MOV_ID
 			where hv.cnt> 100
 			"
-	attribute MOVIES	{domain : DO_DT_MOVIE_DTC 	notNull:"true" 	inOut :"out"}
+	attribute movies	{domain : DoDtMovieDtc 	required:"true" 	inOut :"out"}
 }
 
 
-create Task TK_GET_MOVIE_DISPLAY {
+create Task TkGetMovieDisplay {
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
         request : "
 		select mov.NAME,mov.YEAR, cou.NAME as COUNTRY, hv.CNT as ACTORS_COUNT
@@ -78,15 +78,15 @@ create Task TK_GET_MOVIE_DISPLAY {
 		where mov.YEAR > 2010
 		limit 500
 			"
-	attribute MOVIES	{domain : DO_DT_MOVIE_DISPLAY_DTC 	notNull:"true" 	inOut :"out"}
+	attribute movies	{domain : DoDtMovieDisplayDtc 	required:"true" 	inOut :"out"}
 }
 
-create Task TK_GET_MOVIE_BY_YEAR {
+create Task TkGetMovieByYear {
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
         request : "
 		select YEAR, count(*) as MOVIES_COUNT from movie where YEAR is not null group by year order by YEAR asc
 			"
-	attribute MOVIES	{domain : DO_DT_MOVIE_BY_YEAR_DTC 	notNull:"true" 	inOut :"out"}
+	attribute movies	{domain : DoDtMovieByYearDtc 	required:"true" 	inOut :"out"}
 }
 
 

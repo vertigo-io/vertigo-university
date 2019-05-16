@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="http://www.morphbit.com/thymeleaf/component"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{templates/mmcDetailNavLayout}"
+>
+	<head>
+		<title>OpendataSet detail</title>		
+	</head>
+	
+	<body>
+	<!-- 
+		<section layout:fragment="content-nav">
+			        <q-item tag="a" href="#information">Information</q-item>
+			        <q-item tag="a" href="#contact">Contact actions</q-item>	
+		</section>
+	-->
+	
+		<section>
+				<div layout:fragment="content-header-left">
+					<vu:include-data-protected object="opendataSet" field="picturefileId"/>
+					<img th::src="|'@{/opendata/opendataset/picture/}'+vueData.opendataSet.picturefileId|" class="detailImg gt-md"/>
+				</div>
+				<div layout:fragment="content-header-title">
+					<vu:include-data object="opendataSet" field="code"/>
+					<span class="text-bigger" th:text="${model.opendataSet.title}"></span> 
+					<br/><div>{{vueData.opendataSet.code}}</div>
+				</div>
+				<div layout:fragment="content-header-actions">
+					<vu:button-submit th:if="${model.modeEdit}"   action="@{_cancel}" :round size="lg" color="primary" icon="fas fa-ban" :flat aria-label="Cancel" title="Cancel" class="on-left"  />
+					<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>
+					
+					<q-btn round size="lg" color="primary" icon="more_horiz"  direction="down" aria-label="More actions" title="More actions" class="on-left"> 
+					  <q-popover><q-list link>
+					    <q-item><q-btn flat>Delete</q-btn></q-item>
+					    <q-item><q-btn flat>Archive</q-btn></q-item>
+					    <q-item><q-btn flat>Bind to base</q-btn></q-item>
+					  </q-list>
+					  </q-popover>
+					</q-btn>
+				</div>
+		</section>
+		
+		<section layout:fragment="content" >
+			<vu:form>
+				<vu:block id="information" title="Information">
+					<vu:grid cols="2">
+						<vu:text-field object="opendataSet" field="endPointUrl"/>
+						<vu:text-field object="opendataSet" field="code" />
+						<vu:chips-autocomplete object="opendataSet" field="tags" list="tags" staticData="true"/>
+						<vu:label-edit object="opendataSet" field="picturefileId" th:if="${viewMode=='edit'}"  >
+							<vu:fileupload th:url="'@{/commons/upload}'" key="opendataSetTmpPictureUri" />
+						</vu:label-edit>
+					</vu:grid>
+					<div class="row justify-end">
+					<vu:button-submit th:if="${model.modeEdit}"  label="Cancel" action="@{_cancel}" :flat />
+					<vu:button-submit th:if="${model.modeEdit}"  label="Save" action="@{_save}" color="primary" />
+					<vu:button-submit th:if="${model.modeCreate}" label="Create" action="@{_create}" color="primary"/>
+					</div>				
+				</vu:block>
+				
+				<vu:block title="Description">
+					<vu:include-data object="opendataSet" field="description" />
+					<q-editor th:v-if="${!model.modeReadOnly}" v-model="vueData.opendataSet.description" ></q-editor>
+					<span th:if="${model.modeReadOnly}" th:utext="${model.opendataSet.description}"></span>
+					<input th:v-if="${!model.modeReadOnly}" type="hidden" name="vContext[opendataSet][description]" v-bind:value="vueData.opendataSet.description" />
+				</vu:block>
+				
+				<vu:block id="links" title="Opendata Set actions">
+					<div class="row justify-between">
+						<q-btn color="primary" type="a" th:href="@{/api/swaggerUi/}" target="new" icon="email" label="Interface swagger"></q-btn>
+						<q-btn color="primary" type="a" th:href="@{__${model.opendataSet.endPointUrl}__}" target="new" icon="chat" label="Fichier JSON"></q-btn>
+						<q-btn color="primary" icon="voicemail" label="Fichier CSV"></q-btn>
+					</div>				
+				</vu:block>
+				<q-page-sticky position="bottom-right">
+					<vu:button-submit th:if="${model.modeEdit}"   icon="save" label="Save" action="@{_save}" size="lg" color="primary" />
+				</q-page-sticky>
+			</vu:form>
+		</section>
+	</body>
+</html>

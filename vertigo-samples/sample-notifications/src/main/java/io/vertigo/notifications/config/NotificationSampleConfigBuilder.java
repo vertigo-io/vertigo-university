@@ -1,6 +1,6 @@
 package io.vertigo.notifications.config;
 
-import io.vertigo.app.config.AppConfig;
+import io.vertigo.app.config.NodeConfig;
 import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.commons.impl.CommonsFeatures;
 import io.vertigo.core.param.Param;
@@ -27,9 +27,9 @@ import io.vertigo.notifications.plugins.twitter.TwitterNotificationPlugin;
  */
 public class NotificationSampleConfigBuilder {
 
-	public AppConfig build() {
+	public NodeConfig build() {
 		//@formatter:off
-		return  AppConfig.builder()
+		return  NodeConfig.builder()
 				.beginBoot()
 				.withLocales("fr")
 				.endBoot()

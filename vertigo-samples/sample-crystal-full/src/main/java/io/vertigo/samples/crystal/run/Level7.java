@@ -7,13 +7,12 @@ import org.apache.logging.log4j.LogManager;
 import io.vertigo.account.account.Account;
 import io.vertigo.account.authorization.AuthorizationManager;
 import io.vertigo.account.plugins.authorization.loaders.JsonSecurityDefinitionProvider;
+import io.vertigo.account.security.UserSession;
+import io.vertigo.account.security.VSecurityManager;
 import io.vertigo.app.AutoCloseableApp;
-import io.vertigo.app.config.AppConfigBuilder;
 import io.vertigo.app.config.DefinitionProviderConfig;
 import io.vertigo.app.config.ModuleConfig;
-import io.vertigo.core.component.di.injector.DIInjector;
-import io.vertigo.persona.security.UserSession;
-import io.vertigo.persona.security.VSecurityManager;
+import io.vertigo.app.config.NodeConfigBuilder;
 import io.vertigo.samples.SamplesPAO;
 import io.vertigo.samples.crystal.CrystalPAO;
 import io.vertigo.samples.crystal.authorization.SecuredEntities.MovieOperations;
@@ -29,6 +28,7 @@ import io.vertigo.samples.crystal.services.MovieServices;
 import io.vertigo.samples.crystal.services.MovieServicesImpl;
 import io.vertigo.samples.crystal.webservices.MovieWebServices;
 import io.vertigo.samples.crystal.webservices.TestUserSession;
+import io.vertigo.util.InjectorUtil;
 
 public class Level7 {
 
@@ -40,8 +40,8 @@ public class Level7 {
 	private VSecurityManager securityManager;
 
 	public static void main(final String[] args) {
-		final AppConfigBuilder appConfigBuilder = SampleConfigBuilder.createAppConfigBuilder(true, true, true);
-		appConfigBuilder
+		final NodeConfigBuilder nodeConfigBuilder = SampleConfigBuilder.createNodeConfigBuilder(true, true, true);
+		nodeConfigBuilder
 				.addModule(ModuleConfig.builder("stepDao")
 						.addComponent(ActorDAO.class)
 						.addComponent(RoleDAO.class)
@@ -51,9 +51,9 @@ public class Level7 {
 								.build())
 						.build())
 				.addModule(defaultSampleModule());
-		try (final AutoCloseableApp app = new AutoCloseableApp(appConfigBuilder.build())) {
+		try (final AutoCloseableApp app = new AutoCloseableApp(nodeConfigBuilder.build())) {
 			final Level7 sample = new Level7();
-			DIInjector.injectMembers(sample, app.getComponentSpace());
+			InjectorUtil.injectMembers(sample);
 			//-----
 			sample.step1();
 		}
@@ -78,7 +78,7 @@ public class Level7 {
 			final Account account = loginServices.login("admin", "v3rt1g0");
 			LogManager.getLogger(this.getClass()).info("account: " + account.getDisplayName());
 
-			final String query = authorizationManager.getSearchSecurity(Movie.class, MovieOperations.READ);
+			final String query = authorizationManager.getSearchSecurity(Movie.class, MovieOperations.read);
 			LogManager.getLogger(this.getClass()).info("query: " + query);
 		} finally {
 			securityManager.stopCurrentUserSession();

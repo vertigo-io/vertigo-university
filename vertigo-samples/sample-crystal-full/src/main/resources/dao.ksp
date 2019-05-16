@@ -1,41 +1,41 @@
 package io.vertigo.samples
 
-create Task TK_GET_ACTORS_IDS_BY_MOVIE {
+create Task TkGetActorsIdsByMovie {
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
         request : "
         	select act.act_id 
 			from role rol
 			join actor act on rol.act_id= act.act_id 
 			join movie mov on rol.mov_id = mov.mov_id 
-			where mov.mov_id = #MOV_ID#
+			where mov.mov_id = #movId#
 			"
-	attribute MOV_ID	{domain : DO_ID 				notNull:"true" 	inOut :"in"}
-	attribute ACTORS	{domain : DO_LONGS			 	notNull:"true" 	inOut :"out"}
+	attribute movId	{domain : DoId 				required:"true" 	inOut :"in"}
+	attribute actors	{domain : DoLongs			 	required:"true" 	inOut :"out"}
 }
 
-create Task TK_GET_ACTORS_BY_MOVIE {
+create Task TkGetActorsByMovie {
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
         request : "
         	select act.*
 			from role rol
 			join actor act on rol.act_id= act.act_id 
 			join movie mov on rol.mov_id = mov.mov_id 
-			where mov.mov_id = #MOV_ID#
+			where mov.mov_id = #movId#
 			"
-	attribute MOV_ID	{domain : DO_ID 				notNull:"true" 	inOut :"in"}
-	attribute ACTORS	{domain : DO_DT_ACTOR_DTC	 	notNull:"true" 	inOut :"out"}
+	attribute movId	{domain : DoId 				required:"true" 	inOut :"in"}
+	attribute actors	{domain : DoDtActorDtc	 	required:"true" 	inOut :"out"}
 }
 
 
-create Task TK_GET_MOVIES_IN_COUNTRIES {
+create Task TkGetMoviesInCountries {
     className : "io.vertigo.dynamox.task.TaskEngineSelect"
         request : "
         	select * 
         	from movie 
-        	where cou_id in ( #COUNTRIES_IDS.ROWNUM#)
+        	where cou_id in ( #countriesIds.rownum#)
 			"
-	attribute COUNTRIES_IDS	{domain : DO_LONGS 				notNull:"true" 	inOut :"in"}
-	attribute MOVIES		{domain : DO_DT_MOVIE_DTC		notNull:"true" 	inOut :"out"}
+	attribute countriesIds	{domain : DoLongs 				required:"true" 	inOut :"in"}
+	attribute movies		{domain : DoDtMovieDtc		required:"true" 	inOut :"out"}
 }
 
 

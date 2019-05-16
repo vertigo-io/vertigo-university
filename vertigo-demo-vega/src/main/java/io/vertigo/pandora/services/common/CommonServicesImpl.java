@@ -20,13 +20,14 @@ import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.dynamo.collections.model.FacetedQueryResult;
 import io.vertigo.dynamo.collections.model.FacetedQueryResultMerger;
 import io.vertigo.dynamo.collections.model.SelectedFacetValues;
+import io.vertigo.dynamo.domain.metamodel.association.DtListURIForNNAssociation;
 import io.vertigo.dynamo.domain.model.DtList;
 import io.vertigo.dynamo.domain.model.DtListState;
 import io.vertigo.dynamo.domain.model.DtObject;
-import io.vertigo.dynamo.domain.model.URI;
-import io.vertigo.dynamo.domain.util.DtObjectUtil;
+import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.search.SearchManager;
 import io.vertigo.dynamo.search.model.SearchQuery;
+import io.vertigo.dynamo.store.StoreManager;
 import io.vertigo.lang.WrappedException;
 import io.vertigo.pandora.dao.movies.MovieDAO;
 import io.vertigo.pandora.dao.movies.MoviesPAO;
@@ -58,11 +59,13 @@ public class CommonServicesImpl implements CommonServices {
 	@Inject
 	private PersonsPAO personsPAO;
 	@Inject
+	private PersonDAO personDAO;
+	@Inject
 	private ActorRoleDAO actorRoleDAO;
 	@Inject
 	private MovieDAO movieDAO;
 	@Inject
-	private PersonDAO personDAO;
+	private StoreManager storeManager;
 
 	/** {@inheritDoc} */
 	@Override
@@ -181,14 +184,14 @@ public class CommonServicesImpl implements CommonServices {
 
 		for (final JsonMovie jsonMovie : jsonMovies) {
 			final Movie movie = movieMaps.get(jsonMovie.getCode());
-			final List<URI> writersUris = extractURIs(jsonMovie, "writers");
-			final List<URI> cameraUris = extractURIs(jsonMovie, "camera");
-			final List<URI> producersUris = extractURIs(jsonMovie, "producers");
-			final List<URI> directorsUris = extractURIs(jsonMovie, "directors");
-			movieDAO.updateNN(movie.getWritersDtListURI(), writersUris);
-			movieDAO.updateNN(movie.getCameraDtListURI(), cameraUris);
-			movieDAO.updateNN(movie.getProducersDtListURI(), producersUris);
-			movieDAO.updateNN(movie.getDirectorsDtListURI(), directorsUris);
+			final List<UID> writersUris = extractURIs(jsonMovie, "writers");
+			final List<UID> cameraUris = extractURIs(jsonMovie, "camera");
+			final List<UID> producersUris = extractURIs(jsonMovie, "producers");
+			final List<UID> directorsUris = extractURIs(jsonMovie, "directors");
+			storeManager.getDataStore().getBrokerNN().updateNN((DtListURIForNNAssociation) movie.writers().getDtListURI(), writersUris);
+			storeManager.getDataStore().getBrokerNN().updateNN((DtListURIForNNAssociation) movie.camera().getDtListURI(), cameraUris);
+			storeManager.getDataStore().getBrokerNN().updateNN((DtListURIForNNAssociation) movie.producers().getDtListURI(), producersUris);
+			storeManager.getDataStore().getBrokerNN().updateNN((DtListURIForNNAssociation) movie.directors().getDtListURI(), directorsUris);
 			writersCount += writersUris.size();
 			cameraCount += cameraUris.size();
 			producersCount += producersUris.size();
@@ -229,7 +232,7 @@ public class CommonServicesImpl implements CommonServices {
 	/*private List<URI> idsToURIs(final List<Long> personIds, final List<URI> personURIs) {
 	final List<URI> personURIs = new ArrayList<>();
 	for (final Long personId : personIds) {
-		personURIs.add(DtObjectUtil.createURI(Person.class, personId));
+		personURIs.add(URI.of(Person.class, personId));
 	}
 	return personURIs;
 	}*/
@@ -243,12 +246,12 @@ public class CommonServicesImpl implements CommonServices {
 		}
 	}
 
-	private List<URI> extractURIs(final JsonMovie jsonMovie, final String propertyName) {
+	private List<UID> extractURIs(final JsonMovie jsonMovie, final String propertyName) {
 		final JsonPersonLink[] jsonPersonLinks = (JsonPersonLink[]) BeanUtil.getValue(jsonMovie, propertyName);
-		final Set<URI> personURIs = new HashSet<>();
+		final Set<UID> personURIs = new HashSet<>();
 		if (jsonPersonLinks != null) {
 			for (final JsonPersonLink jsonPersonLink : jsonPersonLinks) {
-				personURIs.add(DtObjectUtil.createURI(Person.class, jsonPersonLink.getCode()));
+				personURIs.add(UID.of(Person.class, jsonPersonLink.getCode()));
 			}
 		}
 		return new ArrayList<>(personURIs);

@@ -42,13 +42,13 @@ public final class ActorDAO extends DAO<Actor, java.lang.Long> implements StoreS
 	}
 
 	/**
-	 * Execute la tache TK_GET_ACTORS_IN_MOVIE.
+	 * Execute la tache TkGetActorsInMovie.
 	 * @param movId Long 
 	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Actor> actors
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Actor> getActorsInMovie(final Long movId) {
-		final Task task = createTaskBuilder("TK_GET_ACTORS_IN_MOVIE")
-				.addValue("MOV_ID", movId)
+		final Task task = createTaskBuilder("TkGetActorsInMovie")
+				.addValue("movId", movId)
 				.build();
 		return getTaskManager()
 				.execute(task)
@@ -56,26 +56,26 @@ public final class ActorDAO extends DAO<Actor, java.lang.Long> implements StoreS
 	}
 
 	/**
-	 * Execute la tache TK_INSERT_ACTORS_BATCH.
+	 * Execute la tache TkInsertActorsBatch.
 	 * @param actorsList io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Actor> 
 	*/
 	public void insertActorsBatch(final io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Actor> actorsList) {
-		final Task task = createTaskBuilder("TK_INSERT_ACTORS_BATCH")
-				.addValue("ACTORS_LIST", actorsList)
+		final Task task = createTaskBuilder("TkInsertActorsBatch")
+				.addValue("actorsList", actorsList)
 				.build();
 		getTaskManager().execute(task);
 	}
 
 	/**
-	 * Execute la tache TK_LOAD_ACTORS_BY_CHUNK.
+	 * Execute la tache TkLoadActorsByChunk.
 	 * @param limit Long 
 	 * @param offset Long 
 	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Actor> actorsList
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Actor> loadActorsByChunk(final Long limit, final Long offset) {
-		final Task task = createTaskBuilder("TK_LOAD_ACTORS_BY_CHUNK")
-				.addValue("LIMIT", limit)
-				.addValue("OFFSET", offset)
+		final Task task = createTaskBuilder("TkLoadActorsByChunk")
+				.addValue("limit", limit)
+				.addValue("offset", offset)
 				.build();
 		return getTaskManager()
 				.execute(task)
