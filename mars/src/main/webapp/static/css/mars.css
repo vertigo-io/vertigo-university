@@ -250,10 +250,15 @@ nav a.q-item, .nav a.q_item {
 }
 
 .header-content {
-	height: 150px;
+	height: 160px;
 	position: relative;
     z-index: 100;
 }
+
+@media (min-width: 1500px) {
+.header-content {
+	height: 150px;
+}}
 
 .mini .header-content {
 	height: 50px;
