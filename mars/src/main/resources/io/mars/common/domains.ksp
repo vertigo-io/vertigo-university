@@ -28,7 +28,7 @@ create Formatter FmtDate {
 
 create Formatter FmtDateHeure {
      className :"io.vertigo.dynamox.domain.formatter.FormatterDate"
-     args : "dd/MM/yyyy '�' HH'h'mm"
+     args : "dd/MM/yyyy ' ' HH'h'mm"
 }
 
 create Formatter FmtTags {

@@ -67,7 +67,7 @@
 							<vu:include-data object="persons" field="email_fmt" />
 							<vu:include-data object="persons" field="tags" />
 							<q-icon name="mail"></q-icon>
-							{{item.email}}<br />
+							{{item.email_fmt}}<br />
 							<q-chips-input :value="item.tags" :readonly="true" :hide-underline="true"></q-chips-input>
 						</div>
 					</div>
