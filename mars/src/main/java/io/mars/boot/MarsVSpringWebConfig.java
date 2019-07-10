@@ -21,7 +21,8 @@ import io.vertigo.ui.impl.springmvc.config.VSpringWebConfig;
 		"io.mars.maintenance.controllers.ticket",
 		"io.mars.maintenance.controllers.workorder",
 		"io.mars.jobs.controllers",
-		"io.mars.opendata.controllers" })
+		"io.mars.opendata.controllers",
+		"io.mars.command.controllers" })
 public class MarsVSpringWebConfig extends VSpringWebConfig {
 	// nothing basic config is enough
 

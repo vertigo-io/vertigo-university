@@ -16,31 +16,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.mars.commons;
+package io.mars.command;
 
-import io.mars.boot.MarsMasterDataDefinitionProvider;
-import io.mars.jobs.services.JobServices;
-import io.vertigo.app.config.DefinitionProviderConfig;
 import io.vertigo.app.config.discovery.ModuleDiscoveryFeatures;
-import io.vertigo.dynamo.plugins.environment.DynamoDefinitionProvider;
 
-public class CommonsFeatures extends ModuleDiscoveryFeatures<CommonsFeatures> {
+public class CommandFeatures extends ModuleDiscoveryFeatures<CommandFeatures> {
 
-	public CommonsFeatures() {
-		super("Commons");
-	}
-
-	@Override
-	protected void buildFeatures() {
-		super.buildFeatures();
-		getModuleConfigBuilder()
-				.addComponent(JobServices.class)
-				.addDefinitionProvider(DefinitionProviderConfig.builder(DynamoDefinitionProvider.class)
-						.addDefinitionResource("kpr", "io/mars/run.kpr")
-						.addDefinitionResource("classes", "io.mars.domain.DtDefinitions")
-						.build())
-				.addDefinitionProvider(MarsMasterDataDefinitionProvider.class);
-
+	public CommandFeatures() {
+		super("Commands");
 	}
 
 	@Override

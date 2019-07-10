@@ -28,6 +28,7 @@ modules:
           host: ${redisHost}
           port: 6379
           database: 0
+      - command:
     featuresConfig:
       - script.janino:
       - cache.memory:
@@ -177,6 +178,7 @@ modules:
     features:
       - datageneration:
           initialEquipmentUnits: 1500
+  io.mars.command.CommandFeatures:
 initializers:
   - io.mars.boot.DataBaseInitializer:
       __flags__: ["initdb"]
