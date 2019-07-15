@@ -3,6 +3,7 @@
  */
 package io.mars.boot;
 
+import io.mars.basemanagement.domain.Base;
 import io.mars.basemanagement.domain.BaseType;
 import io.mars.basemanagement.domain.Business;
 import io.mars.basemanagement.domain.Geosector;
@@ -27,6 +28,7 @@ public class MarsMasterDataDefinitionProvider extends AbstractMasterDataDefiniti
 		registerDtMasterDatas(Tag.class);
 		registerDtMasterDatas(Geosector.class);
 		registerDtMasterDatas(Business.class);
+		registerDtMasterDatas(Base.class);
 
 	}
 

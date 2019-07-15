@@ -39,3 +39,8 @@ alter DtDefinition DtTicketStatus {
 	sortField : "label"
  	displayField : "label"
 }
+
+alter DtDefinition DtBase {
+	sortField : "name"
+ 	displayField : "name"
+}

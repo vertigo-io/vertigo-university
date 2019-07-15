@@ -6,7 +6,8 @@ create Task TkGetBaseManager {
             select per.*
             	from mission mis
             	join person per on mis.person_id = per.person_id
-            	where mis.base_id = #baseId# and mis.role= 'MANAGER';
+            	where mis.base_id = #baseId# and mis.role= 'Base Manager'
+            	limit 1;
              "
     attribute baseId     {domain : DoId         		required:"true"  inOut :"in"}
     attribute manager     {domain : DoDtPersonDto    required:"false"  inOut :"out"}
