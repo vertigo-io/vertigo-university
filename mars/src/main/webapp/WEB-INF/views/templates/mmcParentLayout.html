@@ -19,7 +19,7 @@
    	
    	<link  th:href="@{/static/chatbot/chatbot.css}" rel="stylesheet"/>
    	<script th:src="@{/vertigo-ui/static/js/v-components/v-chatbot.js}"></script>
-   	
+   	<script th:src="@{/vertigo-ui/static/js/v-components/v-commands.js}"></script>
 </head>
 
 <body class="mat desktop no-touch platform-mat">
@@ -41,10 +41,8 @@
 						</q-toolbar-title>
 					</div>
 					<!-- Brand and toggle get grouped for better mobile display -->
-					<div><!-- 
-						<input type="text"/>
-						<i aria-hidden="true" class="q-icon material-icons">search</i>
-						 -->
+					<div class="col q-mx-xl">
+						 <v-commands th:base-url="@{/}" ></v-commands> 
 					</div>
 					<div>
 						<v-notifications th:base-url="@{/api/}" :type-icon-map="notificationTypes()" ></v-notifications>

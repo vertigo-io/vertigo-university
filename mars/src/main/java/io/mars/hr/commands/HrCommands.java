@@ -26,6 +26,7 @@ public class HrCommands implements Component {
 				.withStatus(CommandResponseStatus.OK)
 				.withDisplay(managerOpt.isPresent() ? "Manager is " + managerOpt.get().getFullName() : "There is no manager")
 				.withPayload(managerOpt)
+				.withTargetUrl(managerOpt.isPresent() ? "/hr/person/" + managerOpt.get().getPersonId() : null)
 				.build();
 	}
 
