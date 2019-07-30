@@ -40,7 +40,7 @@ public class BlockchainTicketEventSubscriber implements Component {
 			final StringBuilder sbSerializedTicket = new StringBuilder();
 			sbSerializedTicket.append("Creating ticket ")
 					.append(ticket.getCode())
-					.append(".")
+					.append('.')
 					.append(ticket.getTitle())
 					.append(". Ticket created at ")
 					.append(strDateCreated);

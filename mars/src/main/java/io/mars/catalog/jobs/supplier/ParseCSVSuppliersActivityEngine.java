@@ -41,7 +41,7 @@ public class ParseCSVSuppliersActivityEngine extends AbstractActivityEngine {
 				final DtList<Supplier> suppliers = new DtList<>(Supplier.class);
 				String line;
 				int count = 0;
-				rd.readLine();// skip first line
+				line = rd.readLine();// skip first line
 				while ((line = rd.readLine()) != null) {
 					if (supplierLimit.isPresent() && count >= supplierLimit.get().getValueAsInt()) {
 						break;

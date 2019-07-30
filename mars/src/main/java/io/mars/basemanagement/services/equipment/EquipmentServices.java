@@ -109,7 +109,7 @@ public class EquipmentServices implements Component {
 
 	public List<String> getComments(final Long equipmentId) {
 		return commentServices.getComments(UID.of(Equipment.class, equipmentId)).stream()
-				.map((c) -> c.getMsg())
+				.map(Comment::getMsg)
 				.collect(Collectors.toList());
 	}
 }

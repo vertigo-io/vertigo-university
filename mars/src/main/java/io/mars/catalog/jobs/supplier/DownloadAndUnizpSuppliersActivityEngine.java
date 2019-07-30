@@ -1,9 +1,6 @@
 package io.mars.catalog.jobs.supplier;
 
 import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -54,12 +51,14 @@ public class DownloadAndUnizpSuppliersActivityEngine extends AbstractActivityEng
 		} catch (final MalformedURLException e) {
 			throw WrappedException.wrap(e);
 		}
-		try (InputStream inputStream = new FileInputStream(Paths.get(new URL(rootDirectory + "StockUniteLegale_utf8.zip").toURI()).toFile())) {
-			try (ZipInputStream zis = new ZipInputStream(inputStream)) {
+		try (final InputStream inputStream = java.nio.file.Files.newInputStream(Paths.get(new URL(rootDirectory + "StockUniteLegale_utf8.zip").toURI()))) {
+			try (final ZipInputStream zis = new ZipInputStream(inputStream)) {
 				zis.getNextEntry(); // only one entry
-				final File destFile = Paths.get(new URL(rootDirectory + "StockUniteLegale_utf8.csv").toURI()).toFile();
-				destFile.delete();
-				try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(destFile))) {
+				final Path destFile = Paths.get(new URL(rootDirectory + "StockUniteLegale_utf8.csv").toURI());
+				if (Files.exists(destFile)) { //replaced old file
+					Files.delete(destFile);
+				}
+				try (BufferedOutputStream bos = new BufferedOutputStream(java.nio.file.Files.newOutputStream(destFile))) {
 					final byte[] bytesIn = new byte[1024];
 					int read = 0;
 					while ((read = zis.read(bytesIn)) != -1) {
