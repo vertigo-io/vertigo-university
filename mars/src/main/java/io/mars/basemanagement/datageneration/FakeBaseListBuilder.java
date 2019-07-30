@@ -66,7 +66,7 @@ public final class FakeBaseListBuilder implements Builder {
 		return this;
 	}
 
-	private final class PictureGeneratorInfos {
+	private final static class PictureGeneratorInfos {
 		private final int picturePerBase;
 		private final String picturePrefix;
 		private final String pictureSuffix;
@@ -93,10 +93,10 @@ public final class FakeBaseListBuilder implements Builder {
 	}
 
 	private static String getTagsFromDictionnary(final List<String> tagDictionnary) {
-		String tagString = "";
+		final StringBuilder tagString = new StringBuilder();
 		final int tagNumber = ThreadLocalRandom.current().nextInt(MIN_TAG_NUMBER, MAX_TAG_NUMBER);
 		for (int i = 0; i < tagNumber; i++) {
-			tagString += tagDictionnary.get(ThreadLocalRandom.current().nextInt(tagDictionnary.size() - 1)) + ";";
+			tagString.append(tagDictionnary.get(ThreadLocalRandom.current().nextInt(tagDictionnary.size() - 1))).append(';');
 		}
 		return tagString.substring(0, tagString.length() - 1);
 

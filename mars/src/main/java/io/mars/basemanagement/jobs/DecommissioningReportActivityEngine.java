@@ -36,7 +36,8 @@ public class DecommissioningReportActivityEngine extends AbstractActivityEngine 
 		try {
 			Thread.sleep(1000 * 10L);
 		} catch (final InterruptedException e) {
-			e.printStackTrace();
+			// restore interruption status of the corresponding thread
+			Thread.currentThread().interrupt();
 		}
 		return workspace;
 	}
