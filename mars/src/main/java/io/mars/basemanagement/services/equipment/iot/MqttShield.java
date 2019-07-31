@@ -98,8 +98,7 @@ public class MqttShield implements Component, Activeable {
 				// TODO Auto-generated catch block
 				throw WrappedException.wrap(me);
 			} catch (final InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				Thread.currentThread().interrupt();
 			}
 
 		}
