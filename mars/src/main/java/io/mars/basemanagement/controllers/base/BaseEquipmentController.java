@@ -29,10 +29,10 @@ public class BaseEquipmentController extends AbstractVSpringMvcController {
 	@Inject
 	private BaseDetailController baseDetailController;
 
-	private final ViewContextKey<EquipmentOverview> equipmentOverviewsKey = ViewContextKey.of("equipmentOverviews");
-	private final ViewContextKey<EquipmentType> equipmentTypesKey = ViewContextKey.of("equipmentTypes");
-	private final ViewContextKey<Equipment> lastEquipmentsKey = ViewContextKey.of("lastEquipments");
-	private final ViewContextKey<Ticket> lastTicketsKey = ViewContextKey.of("lastTickets");
+	private static final ViewContextKey<EquipmentOverview> equipmentOverviewsKey = ViewContextKey.of("equipmentOverviews");
+	private static final ViewContextKey<EquipmentType> equipmentTypesKey = ViewContextKey.of("equipmentTypes");
+	private static final ViewContextKey<Equipment> lastEquipmentsKey = ViewContextKey.of("lastEquipments");
+	private static final ViewContextKey<Ticket> lastTicketsKey = ViewContextKey.of("lastTickets");
 
 	@GetMapping("/{baseId}")
 	public void initContext(final ViewContext viewContext, @PathVariable("baseId") final Long baseId) {

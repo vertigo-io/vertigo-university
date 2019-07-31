@@ -42,7 +42,7 @@ public class JobDetailController extends AbstractVSpringMvcController {
 	@Inject
 	private OrchestraServices orchestraServices;
 
-	private final MapCodec mapCodec = new MapCodec();
+	private static final MapCodec mapCodec = new MapCodec();
 
 	@GetMapping("/{jobName}")
 	public void initContext(final ViewContext viewContext, @PathVariable("jobName") final String jobName) {

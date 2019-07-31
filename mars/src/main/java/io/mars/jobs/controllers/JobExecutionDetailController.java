@@ -22,8 +22,8 @@ public class JobExecutionDetailController extends AbstractVSpringMvcController {
 	@Inject
 	private JobServices jobServices;
 
-	private final ViewContextKey<OProcessExecutionUi> jobExecution = ViewContextKey.of("jobExecution");
-	private final ViewContextKey<OActivityExecutionUi> activityExecutions = ViewContextKey.of("activityExecutions");
+	private static final ViewContextKey<OProcessExecutionUi> jobExecution = ViewContextKey.of("jobExecution");
+	private static final ViewContextKey<OActivityExecutionUi> activityExecutions = ViewContextKey.of("activityExecutions");
 
 	@GetMapping("/{preId}")
 	public void initContext(final ViewContext viewContext, @PathVariable("preId") final Long preId) {
