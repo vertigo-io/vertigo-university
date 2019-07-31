@@ -21,7 +21,7 @@ public class MaintenanceDashboardController extends AbstractVSpringMvcController
 	@Inject
 	private TicketServices ticketServices;
 
-	private final ViewContextKey<Ticket> lastTickets = ViewContextKey.of("lastTickets");
+	private static final ViewContextKey<Ticket> lastTickets = ViewContextKey.of("lastTickets");
 
 	@GetMapping("/")
 	public void initContext(final ViewContext viewContext) {

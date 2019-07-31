@@ -21,7 +21,7 @@ public class EquipmentEnvironmentController extends AbstractVSpringMvcController
 	@Inject
 	private EquipmentDetailController equipmentDetailController;
 
-	private final ViewContextKey<Integer> TemperatureTotalMeasured = ViewContextKey.of("TemperatureTotalMeasured");
+	private static final ViewContextKey<Integer> TemperatureTotalMeasured = ViewContextKey.of("TemperatureTotalMeasured");
 
 	@GetMapping("/{equipmentId}")
 	public void initContext(final ViewContext viewContext, @PathVariable("equipmentId") final Long equipmentId) {

@@ -19,10 +19,10 @@ public class EnvironmentController extends AbstractVSpringMvcController {
 	@Inject
 	private EquipmentEnvironmentServices equipmentEnvironmentServices;
 
-	private final ViewContextKey<Double> lastTemperature = ViewContextKey.of("lastTemperature");
-	private final ViewContextKey<Double> lastHumidity = ViewContextKey.of("lastHumidity");
-	private final ViewContextKey<Integer> totalAlert = ViewContextKey.of("totalAlert");
-	private final ViewContextKey<String> farmsToWater = ViewContextKey.of("farmsToWater");
+	private static final ViewContextKey<Double> lastTemperature = ViewContextKey.of("lastTemperature");
+	private static final ViewContextKey<Double> lastHumidity = ViewContextKey.of("lastHumidity");
+	private static final ViewContextKey<Integer> totalAlert = ViewContextKey.of("totalAlert");
+	private static final ViewContextKey<String> farmsToWater = ViewContextKey.of("farmsToWater");
 
 	@GetMapping("/")
 	public void initContext(final ViewContext viewContext) {

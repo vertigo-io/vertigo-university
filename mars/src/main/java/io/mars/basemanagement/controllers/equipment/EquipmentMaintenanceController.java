@@ -21,9 +21,9 @@ public class EquipmentMaintenanceController extends AbstractVSpringMvcController
 	@Inject
 	private TicketServices ticketServices;
 
-	private final ViewContextKey<Ticket> openedTicketsKey = ViewContextKey.of("openedTickets");
-	private final ViewContextKey<Ticket> closedTicketsKey = ViewContextKey.of("closedTickets");
-	private final ViewContextKey<TicketStatus> ticketStatusKey = ViewContextKey.of("ticketStatus");
+	private static final ViewContextKey<Ticket> openedTicketsKey = ViewContextKey.of("openedTickets");
+	private static final ViewContextKey<Ticket> closedTicketsKey = ViewContextKey.of("closedTickets");
+	private static final ViewContextKey<TicketStatus> ticketStatusKey = ViewContextKey.of("ticketStatus");
 
 	@Inject
 	private EquipmentDetailController equipmentDetailController;

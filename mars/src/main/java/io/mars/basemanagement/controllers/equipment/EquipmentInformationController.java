@@ -33,8 +33,8 @@ public class EquipmentInformationController extends AbstractVSpringMvcController
 	@Inject
 	private EquipmentDetailController equipmentDetailController;
 
-	private final ViewContextKey<Equipment> equipmentKey = ViewContextKey.of("equipment");
-	private final ViewContextKey<EquipmentMaintenanceOverview> equipmentMaintenanceOverview = ViewContextKey.of("equipmentMaintenanceOverview");
+	private static final ViewContextKey<Equipment> equipmentKey = ViewContextKey.of("equipment");
+	private static final ViewContextKey<EquipmentMaintenanceOverview> equipmentMaintenanceOverview = ViewContextKey.of("equipmentMaintenanceOverview");
 
 	@GetMapping("/new")
 	public void initContext(final ViewContext viewContext) {

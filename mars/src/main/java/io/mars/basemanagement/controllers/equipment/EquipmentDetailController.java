@@ -34,9 +34,9 @@ import io.vertigo.ui.impl.springmvc.controller.AbstractVSpringMvcController;
 @Controller
 @RequestMapping("/basemanagement/equipment/")
 public final class EquipmentDetailController extends AbstractVSpringMvcController {
-	public final ViewContextKey<Equipment> equipmentKey = ViewContextKey.of("equipment");
-	private final ViewContextKey<EquipmentType> equipmentTypeKey = ViewContextKey.of("equipmentType");
-	private final ViewContextKey<Business> businessKey = ViewContextKey.of("business");
+	private static final ViewContextKey<Equipment> equipmentKey = ViewContextKey.of("equipment");
+	private static final ViewContextKey<EquipmentType> equipmentTypeKey = ViewContextKey.of("equipmentType");
+	private static final ViewContextKey<Business> businessKey = ViewContextKey.of("business");
 
 	@Inject
 	private EquipmentServices equipmentServices;

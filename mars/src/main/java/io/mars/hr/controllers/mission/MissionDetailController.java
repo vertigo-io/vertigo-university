@@ -29,9 +29,9 @@ public class MissionDetailController extends AbstractVSpringMvcController {
 	@Inject
 	private BaseServices baseServices;
 
-	private final ViewContextKey<Mission> missionKey = ViewContextKey.of("mission");
-	private final ViewContextKey<String> successCallbackKey = ViewContextKey.of("successCallback");
-	private final ViewContextKey<Boolean> closeSuccessKey = ViewContextKey.of("closeSuccess");
+	private static final ViewContextKey<Mission> missionKey = ViewContextKey.of("mission");
+	private static final ViewContextKey<String> successCallbackKey = ViewContextKey.of("successCallback");
+	private static final ViewContextKey<Boolean> closeSuccessKey = ViewContextKey.of("closeSuccess");
 
 	@GetMapping("/new")
 	public void initContextCreation(final ViewContext viewContext, @RequestParam("personId") final Long personId, @RequestParam("successCallback") final String successCallback) {

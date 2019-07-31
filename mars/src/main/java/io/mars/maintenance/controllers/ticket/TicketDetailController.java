@@ -29,8 +29,8 @@ public class TicketDetailController extends AbstractVSpringMvcController {
 	@Inject
 	private WorkOrderServices workOrderServices;
 
-	private final ViewContextKey<Ticket> ticketKey = ViewContextKey.of("ticket");
-	private final ViewContextKey<WorkOrder> workOrdersKey = ViewContextKey.of("workOrders");
+	private static final ViewContextKey<Ticket> ticketKey = ViewContextKey.of("ticket");
+	private static final ViewContextKey<WorkOrder> workOrdersKey = ViewContextKey.of("workOrders");
 
 	@GetMapping("/new")
 	public void initCreateContext(final ViewContext viewContext, @RequestParam("equipmentId") final Long equipmentId) {

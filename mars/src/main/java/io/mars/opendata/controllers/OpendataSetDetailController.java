@@ -27,7 +27,7 @@ import io.vertigo.ui.impl.springmvc.controller.AbstractVSpringMvcController;
 public class OpendataSetDetailController extends AbstractVSpringMvcController {
 
 	private static final ViewContextKey<OpendataSet> opendataSetKey = ViewContextKey.of("opendataSet");
-	private final ViewContextKey<Tag> tagsKey = ViewContextKey.of("tags");
+	private static final ViewContextKey<Tag> tagsKey = ViewContextKey.of("tags");
 
 	@Inject
 	private OpendataSetServices opendataSetServices;

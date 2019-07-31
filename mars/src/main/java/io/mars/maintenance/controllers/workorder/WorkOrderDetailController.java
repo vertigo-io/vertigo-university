@@ -24,10 +24,10 @@ public class WorkOrderDetailController extends AbstractVSpringMvcController {
 	@Inject
 	private WorkOrderServices workOrderServices;
 
-	private final ViewContextKey<WorkOrder> workOrderKey = ViewContextKey.of("workOrder");
-	private final ViewContextKey<WorkOrderStatus> workOrderStatusKey = ViewContextKey.of("workOrderStatus");
-	private final ViewContextKey<String> successCallbackKey = ViewContextKey.of("successCallback");
-	private final ViewContextKey<Boolean> closeSuccessKey = ViewContextKey.of("closeSuccess");
+	private static final ViewContextKey<WorkOrder> workOrderKey = ViewContextKey.of("workOrder");
+	private static final ViewContextKey<WorkOrderStatus> workOrderStatusKey = ViewContextKey.of("workOrderStatus");
+	private static final ViewContextKey<String> successCallbackKey = ViewContextKey.of("successCallback");
+	private static final ViewContextKey<Boolean> closeSuccessKey = ViewContextKey.of("closeSuccess");
 
 	@GetMapping("/new")
 	public void initContextCreation(final ViewContext viewContext, @RequestParam("ticketId") final Long ticketId, @RequestParam("successCallback") final String successCallback) {

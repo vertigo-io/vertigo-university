@@ -43,11 +43,11 @@ public class BaseInformationController extends AbstractVSpringMvcController {
 	@Inject
 	private BaseDetailController baseDetailController;
 
-	private final ViewContextKey<Person> baseManagerKey = ViewContextKey.of("baseManager");
-	private final ViewContextKey<Geosector> geosectorsKey = ViewContextKey.of("geosectors");
-	private final ViewContextKey<Tag> tagsKey = ViewContextKey.of("tags");
-	private final ViewContextKey<BaseOverview> baseOverview = ViewContextKey.of("baseOverview");
-	private final ViewContextKey<Picture> basePictures = ViewContextKey.of("basePictures");
+	private static final ViewContextKey<Person> baseManagerKey = ViewContextKey.of("baseManager");
+	private static final ViewContextKey<Geosector> geosectorsKey = ViewContextKey.of("geosectors");
+	private static final ViewContextKey<Tag> tagsKey = ViewContextKey.of("tags");
+	private static final ViewContextKey<BaseOverview> baseOverview = ViewContextKey.of("baseOverview");
+	private static final ViewContextKey<Picture> basePictures = ViewContextKey.of("basePictures");
 
 	@GetMapping("/{baseId}")
 	public void initContext(final ViewContext viewContext, @PathVariable("baseId") final Long baseId) {

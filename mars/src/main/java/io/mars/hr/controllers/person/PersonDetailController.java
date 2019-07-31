@@ -31,7 +31,7 @@ public class PersonDetailController extends AbstractVSpringMvcController {
 
 	private static final ViewContextKey<Person> personKey = ViewContextKey.of("person");
 	private static final ViewContextKey<MissionDisplay> missionsKey = ViewContextKey.of("missions");
-	private final ViewContextKey<Tag> tagsKey = ViewContextKey.of("tags");
+	private static final ViewContextKey<Tag> tagsKey = ViewContextKey.of("tags");
 
 	@Inject
 	private PersonServices personServices;
