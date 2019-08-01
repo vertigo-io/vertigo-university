@@ -20,12 +20,12 @@
    	<link  th:href="@{/static/chatbot/chatbot.css}" rel="stylesheet"/>
    	<script th:src="@{/vertigo-ui/static/js/v-components/v-chatbot.js}"></script>
    	<script th:src="@{/vertigo-ui/static/js/v-components/v-commands.js}"></script>
-   	<script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.js"></script>
 </head>
 
 <body class="mat desktop no-touch platform-mat">
 
 	<vu:page>
+	
       <q-layout view="hHh LpR fff" id="page" v-cloak>
 			<!-- BEGIN HEADER-->
 			<q-layout-header class="items-center">
@@ -40,10 +40,10 @@
 								<span slot="subtitle">Observe, Orient, Decide and Act</span>
 						</q-toolbar-title>
 					</div>
-					<div class="col q-mx-xl">
-						<v-commands th:base-url="@{/}"></v-commands>
-					</div>
 					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="col q-mx-xl">
+						 <v-commands th:base-url="@{/}" ></v-commands> 
+					</div>
 					<div>
 						<v-notifications th:base-url="@{/api/}" :type-icon-map="notificationTypes()" ></v-notifications>
 						<q-btn flat icon-right="arrow_drop_down" class="on-left gt-md">
@@ -266,13 +266,14 @@
 				    </q-btn>
 				</q-page-sticky>
 	  			<q-layout-drawer v-model="componentStates.botDrawer.open" side="right" >
-	  				<v-chatbot v-if="componentStates.botDrawer.open" class="column chatbot-container" th:bot-avatar="@{/static/chatbot/images/avatar/avatar_chat.png}" bot-name="mars-bot" bot-url="http://mlaroche2-port.klee.lan.net:5005/webhooks/rest/webhook"></v-chatbot>
+	  				<v-chatbot v-if="componentStates.botDrawer.open" class="column chatbot-container" th:bot-avatar="@{/static/chatbot/images/avatar/avatar_chat.png}" bot-name="mars-bot" bot-url="http://mars.dev.klee.lan.net:5005/webhooks/rest/webhook"></v-chatbot>
 	  			</q-layout-drawer>
   			</th:block>
 		</q-layout>
+		
 	</vu:page>
 	<div layout:fragment="javscript-footer">
 	</div>
-		
+			
 </body>
 </html>
