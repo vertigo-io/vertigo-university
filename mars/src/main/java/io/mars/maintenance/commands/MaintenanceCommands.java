@@ -26,8 +26,13 @@ public class MaintenanceCommands implements Component {
 				.build();
 	}
 
-	@Command(handle = "/m/ticket", description = "Creates a ticket")
-	public CommandResponse<Ticket> checkTicket(final String code, final String content) {
+	@Command(
+			handle = "/m/createTicket",
+			description = "Creates a ticket",
+			questions = {
+					"Create a ticket with code {0} and description {1}",
+					"Crée moi un ticket avec le contenu {1} et le code {0}" })
+	public CommandResponse<Ticket> createTicket(final String code, final String content) {
 		return CommandResponse.<Ticket> builder()
 				.withStatus(CommandResponseStatus.OK)
 				.withDisplay("Ticket ok")

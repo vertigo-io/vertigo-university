@@ -1,0 +1,30 @@
+{
+	"/hr/baseManager" : {
+		"0" : {
+			"type" : "fromDb",
+			"dtDefinition" : "DtBase",
+			"dtField" : "code",
+			"limit" : "50"
+		}
+	},
+	"/m/createPerson" : {
+		"0" : {
+			"type" : "fromDb",
+			"dtDefinition" : "DtPerson",
+			"dtField" : "firstName",
+			"limit" : "5"
+		},
+		"1" : {
+			"type" : "fromDb",
+			"dtDefinition" : "DtPerson",
+			"dtField" : "lastName",
+			"limit" : "5"
+		}
+	},
+	"/bm/sendGlobalMessage" : {
+		"0" : {
+			"type" : "static",
+			"values" : ["go get your reward", "evacuate all mines"]
+		}
+	}  
+}
