@@ -17,13 +17,11 @@
 			<vu:include-data object="bases" field="geosectorId" />
 			<vu:include-data object="bases" field="healthLevel" />
 			<vu:include-data object="bases" field="creationDate" />
-			<div class="q-title q-mb-md">{{vueData.bases.length}} Bases</div>
-			<vu:cards list="bases" componentId="baseCards" cardClass="marsCard col-xl-4 col-md-6 col-xs-12"  sortUrl="@{/basemanagement/bases/_sort}" rowsPerPage="8" showMore="true" showMoreLabel="Show more" >
+			<div class="text-h6 q-mb-md">{{vueData.bases.length}} Bases</div>
+			<vu:cards list="bases" componentId="baseCards" cardClass="marsCard col-lg-3 col-md-6 col-xs-12"  sortUrl="@{/basemanagement/bases/_sort}" rowsPerPage="8" showMore="true" showMoreLabel="Show more" >
 					<div class="nav" th:@click="|goTo('@{/basemanagement/base/information/}'+item.baseId)|">
-						<q-card-media>
-							<img th::src="|'@{/basemanagement/base/}'+item.baseId+'/mainPicture'|"/>
-						</q-card-media>
-						<q-card-main class="row" >
+						<q-img th::src="|'@{/basemanagement/base/}'+item.baseId+'/mainPicture'|"></q-img>
+						<q-card-section class="row" >
 							<div class="col-4 q-mr-sm" style="max-width: 100px;" >
 								<div><q-knob
 									  :value="item.healthLevel"
@@ -40,11 +38,11 @@
 								Created : {{item.creationDate}}<br/>
 								<q-icon name="location_on" size="25px"></q-icon><vu:field-read field="geosectorId" list="geosectors" listKey="geosectorId" listDisplay="sectorLabel" /><br/>		
 							</div>		
-					</q-card-main>
+					</q-card-section>
 					</div>
-					<q-card-separator></q-card-separator>
+					<q-separator></q-separator>
 					<q-card-actions>
-						<q-chips-input :value="item.tags"  :readonly="true"  :hide-underline="true" ></q-chips-input>
+						<q-chip v-for="tag in item.tags" :hide-underline="true" >{{tag}}</q-chip>
 					</q-card-actions>
 				</vu:cards>
 		</section>

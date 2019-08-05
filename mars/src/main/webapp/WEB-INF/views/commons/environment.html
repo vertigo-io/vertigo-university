@@ -35,7 +35,7 @@
 			<vu:block id="weatheroverview" title="Weather Overview" icon="fas fa-sun">
 				<div class="row gutter-xl" >
 					<div class="col-md-6 col-xs-12 text-center">
-						<div class="q-title">Current Temperature</div>
+						<div class="text-h6">Current Temperature</div>
 						<q-knob
 							th:text="|${model.lastTemperature}°C|"
 							:min="0"
@@ -54,7 +54,7 @@
 						   		data-options='{"scales" : { "yAxes" : [{ "ticks" : { "beginAtZero": false, "min": 15, "max" : 30 } }] }}'></div> 
 					</div>
 					<div class="col-md-6 col-xs-12 text-center">
-						<div class="q-title">Current Humidity</div>
+						<div class="text-h6">Current Humidity</div>
 						<q-knob
 							th:text="|${model.lastHumidity}%|"
 							:min="0"
@@ -124,7 +124,7 @@
 							size="lg" color="primary"    icon-right="fas fa-bell-slash"
 							aria-label="Triggered alarm in base" title="Stop alarm in base" >Stop</q-btn>
 						</div>
-						<div class="q-title">Send a message to the Led Displayer Panel</div>
+						<div class="text-h6">Send a message to the Led Displayer Panel</div>
 						<q-input v-model="dataX.message"
 							th::after="|[
 								{
@@ -144,7 +144,7 @@
 			</vu:block>
 		</section>
 		
-		<section layout:fragment="javscript-footer" >
+		<section layout:fragment="javascript-footer" >
 			<script type="text/javascript">
 				showCharts();
 			</script>

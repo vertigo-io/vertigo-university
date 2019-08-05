@@ -24,22 +24,22 @@
 				<div class="col-4">
 					<q-list separator>
 					  <q-item v-for="activity in vueData.activityExecutions" :key="activity.aceId" :title="activity.label" @click.native="dataX.selectedActivity = activity" style="cursor:pointer;" v-bind:class="{ active : dataX.selectedActivity != null && activity.aceId === dataX.selectedActivity.aceId}" >
-					  	<q-item-side>
+					  	<q-item-section avatar>
 					  		<q-icon name="fas fa-chevron-right" ></q-icon>
-					  	</q-item-side>
-					  	<q-item-main>
+					  	</q-item-section>
+					  	<q-item-section>
 					  		{{activity.label}}
-					  	</q-item-main>
-					  	<q-item-side>
+					  	</q-item-section>
+					  	<q-item-section side>
 					  		<q-icon v-if="activity.status === 'DONE'" name="fas fa-check-circle" color="positive" ></q-icon>
 					  		<q-icon v-else-if="activity.status === 'ERROR'" name="fas fa-exclamation-circle" color="negative" ></q-icon>
 					  		<q-icon v-else-if="activity.status === 'RUNNING' || activity.status === 'WAITING'" name="fas fa-spinner" color="primary" ></q-icon>
-					  	</q-item-side>
+					  	</q-item-section>
 					  </q-item>
 					</q-list>
 				</div>
 				<q-separator></q-separator>
-				<div v-if="dataX.selectedActivity" class="col-8 col q-pl-md mgutter-md">
+				<div v-if="dataX.selectedActivity" class="col-8 col q-pl-md q-col-gutter-md">
 					<div class="bg-secondary text-white text-center"><h6>{{dataX.selectedActivity.label}}</h6></div>
 					<vu:block title="Logs" >
 						<vu:include-data object="jobExecution" field="preId" />

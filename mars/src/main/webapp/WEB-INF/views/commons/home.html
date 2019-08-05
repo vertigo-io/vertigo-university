@@ -22,44 +22,44 @@
 	
 	<body>
 		<section layout:fragment="page-container">
-		<q-page class="row col-12 mgutter-md layout-padding col justify-center">			
+		<q-page padding class="row col-12 q-col-gutter-md col justify-center">			
 					<div class="col-lg-3 col-md-6 col-12">
 						<q-card color="white" >
-							<q-card-title class="bg-secondary">Bases</q-card-title>
-							<q-card-main class="row justify-center items-center" style="height: 100px;">
+							<q-card-section class="bg-secondary">Bases</q-card-section>
+							<q-card-section class="row justify-center items-center" style="height: 100px;">
 								<span class="text-secondary" style="font-size:6em;" th:text="${model.basesSummary.baseCount}"></span> 
 								<q-icon name="fas fa-dice-d20" color="faded on-right" size="4em"></q-icon>
-							</q-card-main>
+							</q-card-section>
 						</q-card>
 					</div>
 					<div class="col-lg-3 col-md-6 col-12">
 						<q-card color="white">
-							<q-card-title class="bg-secondary">Global Health Level</q-card-title>
-							<q-card-main class="row justify-center" style="height: 100px;">
+							<q-card-section class="bg-secondary">Global Health Level</q-card-section>
+							<q-card-section class="row justify-center" style="height: 100px;">
 								<q-rating readonly th::value="${model.basesSummary.baseMeanHealth} / 100 * 3 + 1" :max="3" size="3em;" icon="favorite" color="negative"></q-rating>
-							</q-card-main>
+							</q-card-section>
 						</q-card>
 					</div>
 					<div class="col-lg-3 col-md-6 col-12">
 						<q-card color="white">
-							<q-card-title class="bg-secondary">Equipment</q-card-title>
-							<q-card-main  style="height: 100px;">
+							<q-card-section class="bg-secondary">Equipment</q-card-section>
+							<q-card-section  style="height: 100px;">
 								<div class="column items-center">
 									<div class="row text-secondary indicator" th:text="|${model.basesSummary.onlineEquipmentPercent} %|" ></div>
 									<div class="row text-faded indicator-title">Equipments online</div>
 								</div>
-							</q-card-main>
+							</q-card-section>
 						</q-card>
 					</div>
 					<div class="col-lg-3 col-md-6 col-12">
 						<q-card color="white">
-							<q-card-title class="bg-secondary">Maintenance</q-card-title>
-							<q-card-main  style="height: 100px;">
+							<q-card-section class="bg-secondary">Maintenance</q-card-section>
+							<q-card-section  style="height: 100px;">
 								<div class="column items-center">
 									<div class="row text-secondary indicator" th:text="${model.basesSummary.openedTickets}" ></div>
 									<div class="row text-faded indicator-title">Opened Tickets</div>
 								</div>
-							</q-card-main>
+							</q-card-section>
 						</q-card>
 					</div>
 				<div class="col-12" >
@@ -69,8 +69,8 @@
 				</div>
 					<div class="col-lg-6 col-12">
 						<q-card color="white">
-							<q-card-title class="bg-secondary">Supplies</q-card-title>
-							<q-card-main class="gutter-sm">
+							<q-card-section class="bg-secondary">Supplies</q-card-section>
+							<q-card-section class="gutter-sm">
 								<div class="row q-mt-md">
 									<span class="col-1 text-blue justify-between"><q-icon name="fas fa-tint" color="blue"></q-icon> 75%</span>
 									<q-progress class="col" :percentage="75" stripe color="blue" style="height: 20px">sdd</q-progress> 
@@ -83,7 +83,7 @@
 									<span class="col-1 text-grey"><q-icon name="fas fa-cloud" color="grey"></q-icon> 20%</span>
 									<q-progress class="col" :percentage="20" stripe  color="grey" style="height: 20px"></q-progress>
 								</div>
-							</q-card-main>
+							</q-card-section>
 						</q-card>
 					</div>
 					<div class="col-lg-6 col-12">
@@ -99,7 +99,7 @@
 		</q-page>
 		</section>
 	</body>
-	<section layout:fragment="javscript-footer" >
+	<section layout:fragment="javascript-footer" >
 		<script type="text/javascript">
 			showCharts();
 		</script>

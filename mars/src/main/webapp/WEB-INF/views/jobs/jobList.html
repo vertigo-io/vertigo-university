@@ -11,13 +11,13 @@
 	<body>
 		<section layout:fragment="content" >
 			<div class="row q-mb-md text-secondary">
-				<div th:ref="tableTitle" class="q-title self-center">Week Summary</div>
+				<div th:ref="tableTitle" class="text-h6 self-center">Week Summary</div>
 			</div>
 			<vu:include-data object="summaries" field="processName" />
 			<vu:list list="summaries" componentId="baseCards" rowsPerPage="10" item_@click.native="|goTo('@{/jobDetail/}'+item.processName)|" item_class="q-mb-sm bg-white nav" >
-				<q-item-main>
+				<q-item-section>
 					<div class="row col items-center">
-						<div class="col-4 text-bold uppercase">
+						<div class="col-4 text-bold text-uppercase">
 							<vu:include-data object="summaries" field="processLabel" />
 							{{item.processLabel}}
 						</div>
@@ -71,15 +71,15 @@
 							</div>
 						</div>
 					</div>
-				</q-item-main>
+				</q-item-section>
 			</vu:list>
 			<div class="row q-my-md text-secondary">
-				<div th:ref="tableTitle" class="q-title self-center">All jobs</div>
+				<div th:ref="tableTitle" class="text-h6 self-center">All jobs</div>
 			</div>
 			<vu:include-data object="jobs" field="name"/>
 			<vu:include-data object="jobs" field="label"/>
 			<vu:list list="jobs" componentId="jobsList" rowsPerPage="10" item_@click.native="|goTo('@{/jobDetail/}'+item.name)|" item_class="q-mb-sm bg-white nav">
-				<q-item-main>
+				<q-item-section>
 					<div class="row" >
 						<div class="col-6">
 							{{item.name}}
@@ -88,7 +88,7 @@
 							{{item.label}}
 						</div>
 					</div>
-				</q-item-main>
+				</q-item-section>
 			</vu:list>
 		</section>
 	</body>

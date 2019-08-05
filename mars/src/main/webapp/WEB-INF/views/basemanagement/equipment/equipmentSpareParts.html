@@ -95,31 +95,31 @@
 					</vu:block>
 				</div>
 				<div class="col-3" >
-					<q-card inline class="bigger q-mb-md bg-white" style="height: 100%">
-				    	<q-card-media class="bg-grey-3">
-				        	<img th:src="@{/static/3d/Ulti2eE.png}">
+					<q-card class="bigger q-mb-md bg-white" style="height: 100%">
+				    	<q-card-section class="bg-grey-3">
+				    		<q-img th:src="@{/static/3d/Ulti2eE.png}"></q-img>
 				      	</q-card-media>
-				      	<q-card-title class="bg-white relative-position">
+				      	<q-card-section class="bg-white relative-position">
 					        <div class="ellipsis">Connected Printer</div>
-				      	</q-card-title>
-				    	<q-card-main class="bg-white q-mb-none">
+				      	</q-card-section>
+				    	<q-card-section class="bg-white q-mb-none">
 				        	<p>Ultimaker 2 extended+</p>
 				        	<p class="text-faded">Simple extruder</p>
 				        	<p class="text-red">Printer is busy</p>
-				      	</q-card-main>
+				      	</q-card-section>
 					</q-card>
 				</div>
 			<div class="col-12">
 				<vu:block id="spareParts" title="Spare Parts">
 					<q-list id="spareParts">
 						<q-item>
-							<q-item-side>
+							<q-item-section avatar>
 								<img width="90px" th:src="@{/static/3d/thumbnails/cog.png}" />
-							</q-item-side>
-							<q-item-main>
+							</q-item-section>
+							<q-item-section>
 								<div class="row justify-center items-center">
 									<div class="col-4 self-center">
-										<p class="q-title self-center text-primary text-center small-caps">Cog</p>
+										<p class="text-h6 self-center text-primary text-center small-caps">Cog</p>
 									</div>
 									<div class="col-8">
 										<div class="row q-mb-sm">
@@ -131,19 +131,19 @@
 										</div>
 									</div>
 								</div>
-							</q-item-main>
-							<q-item-side>
+							</q-item-section>
+							<q-item-section side>
 								<q-btn color="primary" type="a" th:href="@{/static/3d/models/cog.stl}" icon="fas fa-download" label="Download Model"></q-btn>
-							</q-item-side>
+							</q-item-section>
 						</q-item>
-						<q-item inset-separator>
-							<q-item-side>
+						<q-item>
+							<q-item-section avatar>
 								<img width="90px" th:src="@{/static/3d/thumbnails/bolt_handle.png}" />
-							</q-item-side>
-							<q-item-main>
+							</q-item-section>
+							<q-item-section>
 								<div class="row justify-center items-center">
 									<div class="col-4 self-center">
-										<p class="q-title self-center text-primary text-center small-caps">Bolt Handle</p>
+										<p class="text-h6 self-center text-primary text-center small-caps">Bolt Handle</p>
 									</div>
 									<div class="col-8">
 										<div class="row q-mb-sm">
@@ -155,19 +155,19 @@
 										</div>
 									</div>
 								</div>
-							</q-item-main>
-							<q-item-side>
+							</q-item-section>
+							<q-item-section side>
 								<q-btn color="primary" type="a" th:href="@{/static/3d/models/bolt_handle.stl}" icon="fas fa-download" label="Download Model"></q-btn>
-							</q-item-side>
+							</q-item-section>
 						</q-item>
-						<q-item inset-separator>
-							<q-item-side>
+						<q-item>
+							<q-item-section avatar>
 								<img width="90px" th:src="@{/static/3d/thumbnails/ball_joint.png}" />
-							</q-item-side>
-							<q-item-main>
+							</q-item-section>
+							<q-item-section>
 								<div class="row justify-center items-center">
 									<div class="col-4 self-center">
-										<p class="q-title self-center text-primary text-center small-caps">Ball Joint</p>
+										<p class="text-h6 self-center text-primary text-center small-caps">Ball Joint</p>
 									</div>
 									<div class="col-8">
 										<div class="row q-mb-sm">
@@ -179,19 +179,19 @@
 										</div>
 									</div>
 								</div>
-							</q-item-main>
-							<q-item-side>
+							</q-item-section>
+							<q-item-section side>
 								<q-btn color="primary" type="a" th:href="@{/static/3d/models/ball_joint.stl}" icon="fas fa-download" label="Download Model"></q-btn>
-							</q-item-side>
+							</q-item-section>
 						</q-item>
-						<q-item inset-separator>
-							<q-item-side>
+						<q-item>
+							<q-item-section avatar>
 								<img width="90px" th:src="@{/static/3d/thumbnails/wormspur.png}" />
-							</q-item-side>
-							<q-item-main>
+							</q-item-section>
+							<q-item-section>
 								<div class="row justify-center items-center">
 									<div class="col-4 self-center">
-										<p class="q-title self-center text-primary text-center small-caps">Worm Cog</p>
+										<p class="text-h6 self-center text-primary text-center small-caps">Worm Cog</p>
 									</div>
 									<div class="col-8">
 										<div class="row q-mb-sm">
@@ -203,10 +203,10 @@
 										</div>
 									</div>
 								</div>
-							</q-item-main>
-							<q-item-side>
+							</q-item-section>
+							<q-item-section side>
 								<q-btn color="primary" type="a" th:href="@{/static/3d/models/spur.stl}" icon="fas fa-download" label="Download Model"></q-btn>
-							</q-item-side>
+							</q-item-section>
 						</q-item>
 					</q-list>
 				</vu:block>

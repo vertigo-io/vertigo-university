@@ -29,7 +29,7 @@
 					<vu:button-link th:if="${model.modeEdit}"  url="@{/hr/person/} + ${model.person.personId}" :round size="lg" color="primary" icon="fas fa-ban" :flat ariaLabel="Cancel" class="on-left"  />					
 					<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" ariaLabel="Edit" class="on-left"/>
 					<q-btn round size="lg" color="primary" icon="more_horiz"  direction="down" aria-label="More actions" title="More actions" class="on-left"> 
-					  <q-popover><q-list link>
+					  <q-popover><q-list>
 					    <q-item><q-btn flat>Delete</q-btn></q-item>
 					    <q-item><q-btn flat>Archive</q-btn></q-item>
 					    <q-item><q-btn flat>Bind to base</q-btn></q-item>
@@ -78,7 +78,7 @@
 				</q-page-sticky>				
 				<vu:modal componentId="missionEditModal" title="Mission" iframe_width="800" iframe_height="400"  />
 		</section>
-		<section layout:fragment="javscript-footer" >
+		<section layout:fragment="javascript-footer" >
 			<script type="text/javascript">
 				function onMissionSuccess() {
 					componentStates.missionEditModal.opened = false;

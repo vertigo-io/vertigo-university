@@ -12,7 +12,7 @@
   	<section layout:fragment="page-container">
 	 	<section th:replace="~{templates/mmcDetailLayout::detailHeader}" />
 		
-		<q-page class="row col-12 mgutter-md layout-padding">
+		<q-page padding class="row col-12 q-gutter-md">
 			<div class="col-2 gt-md ">
 				<nav v-scroll-spy="{offset:66+50+32}">
 				    <q-list link style="height:100%">
@@ -23,7 +23,7 @@
 			<div class="col content-body">
 				<vu:form>
 					<vu:messages/>
-					<section layout:fragment="content" class="row mgutter-md"></section>
+					<section layout:fragment="content" class="row q-gutter-md"></section>
 	 			</vu:form>
 	 		</div>
 		</q-page>

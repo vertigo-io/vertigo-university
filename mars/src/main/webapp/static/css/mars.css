@@ -8,8 +8,8 @@
 	--q-color-primary-invert: rgba(255, 255, 255, 0.9);
 	--q-color-secondary:#00BCD4;
 	--q-color-secondary-invert: rgba(255, 255, 255, 0.9);
-	--q-color-tertiary:	#B2EBF2;
-	--q-color-tertiary-invert:	rgba(60, 60, 60, 0.8);
+	--q-color-accent:	#B2EBF2;
+	--q-color-accent-invert:	rgba(60, 60, 60, 0.8);
 	
 	
 	/*--q-color-primary:#2196F3;
@@ -85,13 +85,15 @@ body.login {
 	margin-top: -8px; /* mais d'ou vient cette marge ???*/
 }
 
+/*
 .q-list {
 	border: none;
 }
-
+ 
 .q-item-side {
     text-align: center;
 }
+*/
 
 .mini br {
   display: none;
@@ -159,11 +161,12 @@ nav .q-list, .nav .q-list {
 	padding: 0;
 }
 
-
+/*
 .q-card .nav>div:first-child {
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
 }
+*/
 
 nav a, .nav a {
 	text-decoration: none;	
@@ -173,9 +176,6 @@ nav.scroll-spy-nav a {
 	border-left-width:3px;
 	border-left-style:solid;
 	border-left-color:lightgrey;		
-}
-.q-list-link .q-item:hover {
-	background: lightgrey;
 }
 
 
@@ -188,6 +188,13 @@ nav a.q-item, .nav a.q_item {
 	color: grey;	
 }
 
+/*
+.q-list-link .q-item:hover {
+	background: lightgrey;
+}
+
+
+
 .q-list-link> .q-item.no-hoverable {
 	cursor:default;	
 }
@@ -199,6 +206,7 @@ nav a.q-item, .nav a.q_item {
 .q-page-sticky.fixed-bottom-right {
 	margin: 50px 3vw;
 }
+*/
 
 .marsCard .q-card {
 	width:100%;	
@@ -239,12 +247,12 @@ nav a.q-item, .nav a.q_item {
 .fullHeight {
 	height:100%;
 }
-
+/*
 .q-title {
 	color: var(--q-color-primary);
 	text-transform:uppercase;
 }
-
+*/
 .small-caps {
 	font-variant: small-caps;
 }
@@ -335,11 +343,11 @@ nav a.q-item, .nav a.q_item {
 .poweredBy img {
 	width:40%;
 }
-
+/*
 .q-stepper.noContent > .q-stepper-step > .q-stepper-step-content {
 	display: none;
 } 
-
+*/
 .vertical-separator {
 	border-right: 1px solid #e5e5e5;
     width: 1px;

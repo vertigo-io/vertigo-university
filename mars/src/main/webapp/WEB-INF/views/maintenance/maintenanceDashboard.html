@@ -31,7 +31,7 @@
 						</q-card>
 					</div>
 				<div class="col-12">
-					<div class="q-title q-my-md">Lastest created tickets</div>
+					<div class="text-h6 q-my-md">Lastest created tickets</div>
 					<vu:table list="lastTickets" componentId="lastTickets" rowsPerPage="5"
 					tr_@click.native="|goTo('@{/maintenance/ticket/}'+props.row.ticketId)|" tr_class="nav">
 						<vu:include-data object="lastTickets" field="ticketId" />

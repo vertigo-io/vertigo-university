@@ -28,7 +28,7 @@
 			</div>
 		</section>
 		
-		<section layout:fragment="content" class="row mgutter-md">
+		<section layout:fragment="content" class="row q-col-gutter-md">
 			<div class="col-2 gt-md">
 				<vu:include-data object="ticket" field="dateCreated" />
 				<vu:include-data object="ticket" field="dateClosed" />
@@ -37,7 +37,7 @@
 				  <q-timeline-entry subtitle="Ticket created" :title="vueData.ticket.dateCreated" ></q-timeline-entry>
 				</q-timeline>
 			</div>
-			<div class="col row mgutter-md">
+			<div class="col row q-col-gutter-md">
 					<div class="col-12" th:if="${model.modeReadOnly}">
 							<vu:include-data object="ticket" field="ticketStatusId" />
 							<q-stepper v-bind:value="vueData.ticket.ticketStatusId" no-header-navigation class="noContent">
@@ -76,7 +76,7 @@
 				<vu:modal componentId="workOrderEditModal" title="Work Order" iframe_width="800" iframe_height="400"  />
 			</div>
 		</section>
-		<section layout:fragment="javscript-footer" >
+		<section layout:fragment="javascript-footer" >
 			<script type="text/javascript">
 				function onWorkOrderSuccess() {
 					componentStates.workOrderEditModal.opened = false;
