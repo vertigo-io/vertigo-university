@@ -156,6 +156,8 @@ body.login {
 
 .image-gallery img {
 	height:296px;
+	width:100%;
+	object-fit:contain;
 }
 
 .nav {

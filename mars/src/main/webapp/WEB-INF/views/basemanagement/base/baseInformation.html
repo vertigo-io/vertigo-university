@@ -82,19 +82,22 @@
 		</vu:block>
 		<vu:block id="views" title="Views">
 			<vu:include-data-protected object="basePictures" field="picturefileId" />
-			<q-carousel th:if="${not #lists.isEmpty(model.basePictures)}" arrows quick-nav style="height:300px;" color="grey" class="image-gallery"> <q-carousel-slide
-				v-for="item in vueData.basePictures" th:class="|${cardClass?:''}  showButtonOnHover|"> <img
-				th::src="|'@{/basemanagement/base/picture/}'+item.picturefileId|"
-				@click="componentStates.basePictureZoomDialog.opened = true;componentStates.basePictureZoomDialog.imgSrc = item.picturefileId" style="max-width: 100%;" />
-			<q-btn th:if="${!model.modeEdit}" color="primary" round icon="fullscreen" class="absolute-center bg-grey" aria-label="Zoom picture" title="Zoom picture"></q-btn>
-			<q-btn th:if="${model.modeEdit}" th:@click="|httpPostAjax('@{_remove}', {'baseId':${model.base.baseId}, 'basePictureId':item.picturefileId})|"
-				color="primary" round icon="delete" class="absolute-center bg-grey" aria-label="Remove picture" title="Remove picture"></q-btn> </q-carousel-slide> </q-carousel>
+			<q-carousel th:if="${not #lists.isEmpty(model.basePictures)}" th:attr="objectKey=${model.vContext['componentStates'].addComponentState('basePicturesCarousel').addPrimitive('current', 0)}" 
+			v-model="componentStates.basePicturesCarousel.current" control-color="primary" arrows navigation style="height:300px;" color="grey" class="image-gallery"> 
+				<q-carousel-slide
+					v-for="(item, index) in vueData.basePictures" th:class="|${cardClass?:''}  showButtonOnHover|" :name="index" > 
+					<img 
+						th::src="|'@{/basemanagement/base/picture/}'+item.picturefileId|"
+						@click="componentStates.basePictureZoomDialog.opened = true;componentStates.basePictureZoomDialog.imgSrc = item.picturefileId" style="max-width: 100%;" />
+					<q-btn th:if="${!model.modeEdit}" color="primary" round icon="fullscreen" class="absolute-center bg-grey" aria-label="Zoom picture" title="Zoom picture"></q-btn>
+					<q-btn th:if="${model.modeEdit}" th:@click="|httpPostAjax('@{_remove}', {'baseId':${model.base.baseId}, 'basePictureId':item.picturefileId})|"
+					color="primary" round icon="delete" class="absolute-center bg-grey" aria-label="Remove picture" title="Remove picture"></q-btn> 
+				</q-carousel-slide>
+			</q-carousel>
 			<q-dialog v-model="componentStates.basePictureZoomDialog.opened" class="image-gallery-modal"
 				th:attr="objectKey=${model.vContext['componentStates'].addComponentState('basePictureZoomDialog').addPrimitive('opened', false)}, objectKey=${model.vContext['componentStates']['basePictureZoomDialog'].addPrimitive('imgSrc', '')}">
-			<div slot="body">
 				<img v-if="componentStates.basePictureZoomDialog.imgSrc" th::src="|'@{/basemanagement/base/picture/}'+componentStates.basePictureZoomDialog.imgSrc|"
 					style="width: 50vw; object-fit: contain;" />
-			</div>
 			</q-dialog>
 			<div th:if="${#lists.isEmpty(model.basePictures)}">No pictures for this base</div>
 			<vu:fileupload th:if="${model.modeEdit}" float-label="Add new pictures here" th:url="'@{/commons/upload}'" key="baseTmpPictureUris" multiple />
