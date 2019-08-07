@@ -28,16 +28,16 @@
 	
       <q-layout view="hHh LpR fff" id="page" v-cloak>
 			<!-- BEGIN HEADER-->
-			<q-header class="items-center">
-				<q-toolbar class="justify-between">
-					<div class="row">
+			<q-header>
+				<q-toolbar class="shadow-2">
+					<div class="row items-center">
 						<q-btn flat round dense class="lt-lg"
 						th:with="showLeft=${model.vContext['componentStates'].addComponentState('navDrawer').addPrimitive('showLeft', true)}, mini=${model.vContext['componentStates']['navDrawer'].addPrimitive('mini', false)}"
 						@click="componentStates.navDrawer.showLeft = !componentStates.navDrawer.showLeft" icon="menu" aria-label="Toggle menu on left side"></q-btn>
-						<div class="gt-md"><img th:src="@{/static/img/logo MMC white v0.1.png}" height="40px"/></div>
+						<img th:src="@{/static/img/logo MMC white v0.1.png}" height="40px" class="gt-md"/>
 						<q-toolbar-title class="gt-md">
-								Command Center 
-								<span slot="subtitle">Observe, Orient, Decide and Act</span>
+								<div>Command Center</div>
+								<div class="text-subtitle2">Observe, Orient, Decide and Act</div>
 						</q-toolbar-title>
 					</div>
 					<!-- Brand and toggle get grouped for better mobile display -->
@@ -50,32 +50,32 @@
 							<vu:include-data object="connectedUser" field="personId"/>
 							<img th::src="|'@{/api/x/accounts/api/}'+vueData.connectedUser.personId+'/photo'|" class="avatar"/>
 							<div class="on-right"><span th:text="${model.vContext['connectedUser']['firstName']+' '+model.vContext['connectedUser']['lastName']}"></span><br/><small><span th:text="${model.vContext['activeProfile']}"></span></small></div>
-							<q-menu>
-							  <q-list class="dense-list-header">
-							  	<q-list-header class="q-py-none row items-center justify-between">Change current profil</q-item-label>
-							  	<q-item>
-							    	<q-item-main><q-btn type="a" flat label="Viewer" th:href="@{/userProfil/_changeProfile?profile=Viewer}" /></q-item-main>
+							<q-menu fit>
+							  <q-list>
+							  	<q-item-label header dense>Change current profil</q-item-label>
+							  	<q-item dense>
+							    	<q-btn type="a" flat label="Viewer" th:href="@{/userProfil/_changeProfile?profile=Viewer}" />
 							    </q-item>
-							    <q-item>
-							    	<q-item-main><q-btn type="a" flat label="Editor" th:href="@{/userProfil/_changeProfile?profile=Editor}" /></q-item-main>
+							    <q-item dense>
+							    	<q-btn type="a" flat label="Editor" th:href="@{/userProfil/_changeProfile?profile=Editor}" />
 							    </q-item>
-							    <q-item>
-							    	<q-item-main><q-btn type="a" flat label="Administrator" th:href="@{/userProfil/_changeProfile?profile=Administrator}" /></q-item-main>
+							    <q-item dense>
+							    	<q-btn type="a" flat label="Administrator" th:href="@{/userProfil/_changeProfile?profile=Administrator}" />
 							    </q-item>
 							    <q-separator></q-separator>
 							  	<q-item>
-							    	<q-item-main><q-btn icon="edit" type="a" flat label="Edit my data" th::href="|'@{/hr/person/}'+vueData.connectedUser.personId|"/></q-item-main>
+							    	<q-item-section><q-btn icon="edit" type="a" flat label="Edit my data" th::href="|'@{/hr/person/}'+vueData.connectedUser.personId|"/></q-item-section>
 							    </q-item>
 							  	<q-separator></q-separator>
-							    <q-item class="text-center">
-							    	<q-item-main><q-btn type="a" outline label="Disconnect" th:href="@{/login/_logout}" /></q-item-main>
+							    <q-item>
+							    	<q-item-section><q-btn type="a" outline label="Disconnect" th:href="@{/login/_logout}" /></q-item-section>
 							    </q-item>
 							  </q-list>
 							 </q-menu>
 						</q-btn>
 						<q-btn flat round dense icon="apps" size="lg" aria-label="Toggle apps">
 							<q-menu>
-								<div class="row gutter-sm q-pa-md" style="width: 300px;">
+								<div class="row q-col-gutter-sm q-pa-md" style="width: 300px;">
 									<div class="col-6" >
 										<q-btn type="a" href="https://klee-digital-factory.slack.com"  target="_blank" class="full-width" style="height:68px">
 											<div class="column items-center col-12">
@@ -157,7 +157,7 @@
 		          	<q-icon name="fas fa-dice-d20"></q-icon>
 		          </q-item-section>
 		          <q-item-section>Bases</q-item-section>
-		          <q-item-section side><q-chip color="primary" dense square class="q-mr-xs">VR</q-chip></q-item-section>
+		          <q-item-section side><q-chip color="primary" text-color="white" dense square class="q-mr-xs">VR</q-chip></q-item-section>
 		        </q-item>
 		        <q-item tag="a" th:href="@{/basemanagement/equipments/}">
 		          <q-item-section avatar>
@@ -165,8 +165,10 @@
 		          </q-item-section>
 		          <q-item-section>Equipments</q-item-section>
 		          <q-item-section side>
-			          <q-chip color="primary" dense square class="q-mr-xs">3D</q-chip>
-			          <q-chip color="primary" dense square class="q-mr-xs">VR</q-chip>
+			          <div>
+			            <q-chip color="primary" text-color="white" dense square class="q-mr-xs">3D</q-chip>
+			            <q-chip color="primary" text-color="white" dense square class="q-mr-xs">VR</q-chip>
+			          </div>
 		          </q-item-section>
 		        </q-item>
 		       	<q-separator></q-separator>
@@ -219,8 +221,10 @@
 		          </q-item-section>
 		          <q-item-section>Share</q-item-section>
 		          <q-item-section side>
-			          <q-chip color="primary" dense square class="q-mr-xs">API</q-chip>
-			          <q-chip color="primary" dense square class="q-mr-xs">OpenData</q-chip>
+			          <div>
+			            <q-chip color="primary" text-color="white" dense square class="q-mr-xs">API</q-chip>
+			            <q-chip color="primary" text-color="white" dense square class="q-mr-xs">OpenData</q-chip>
+			          </div>
 		          </q-item-section>
 		        </q-item>
 		        <q-item tag="a" th:href="@{/environment/}">
@@ -228,7 +232,7 @@
 		          	<q-icon name="fas fa-cloud-sun"></q-icon>
 		          </q-item-section>
 		          <q-item-section>Environment</q-item-section>
-		          <q-item-section side><q-chip color="primary" dense square class="q-mr-xs">IoT</q-chip></q-item-section>
+		          <q-item-section side><q-chip color="primary" text-color="white" dense square class="q-mr-xs">IoT</q-chip></q-item-section>
 		        </q-item>
 		        <q-item tag="a" th:href="@{/dashboard/modules/vertigo-ui}" target="_blank">
 		          <q-item-section avatar>
@@ -243,14 +247,14 @@
 		          	<q-icon name="fas fa-award"></q-icon>
 		          </q-item-section>
 		          <q-item-section>Digital Trust</q-item-section>
-		          <q-item-section side><q-chip color="primary" dense square class="q-mr-xs">Blockchain</q-chip></q-item-section>
+		          <q-item-section side><q-chip color="primary" text-color="white" dense square class="q-mr-xs">Blockchain</q-chip></q-item-section>
 		        </q-item>
 		        <q-item tag="a" th:href="@{/accesscontrol/}">
 		          <q-item-section avatar>
 		          	<q-icon name="fas fa-address-card"></q-icon>
 		          </q-item-section>
 		          <q-item-section>Access Control</q-item-section>
-		          <q-item-section side><q-chip color="primary" dense square class="q-mr-xs">AI</q-chip></q-item-section>
+		          <q-item-section side><q-chip color="primary" text-color="white" dense square class="q-mr-xs">AI</q-chip></q-item-section>
 		        </q-item>
 		        <q-separator></q-separator>
 		        <q-item tag="a" th:href="@{/extensionsStore/}">

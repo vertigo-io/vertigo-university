@@ -28,6 +28,11 @@ body {
   color: var(--q-color-body-color) !important;
 }
 
+img {
+  /* needed, else there is a bottom-margin like for text */ 
+  display: block;
+}
+
 
 /* width */
 ::-webkit-scrollbar {
@@ -180,6 +185,7 @@ nav.scroll-spy-nav a {
 nav.scroll-spy-nav a.q-item.active {
 	border-left-color:var(--q-color-primary);	
 	color: var(--q-color-primary) !important;
+	background: hsla(0,0%,74.1%,.4);
 }
 
 nav a.q-item, .nav a.q_item {
@@ -278,7 +284,7 @@ nav a.q-item, .nav a.q_item {
 	color: black;
 }
 
-.header-tabs a.active .q-btn-inner {
+.header-tabs a.active .q-btn__content {
 	padding-top: 3px;
 	border-bottom: 3px solid black;
 }
