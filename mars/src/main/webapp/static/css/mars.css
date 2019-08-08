@@ -245,6 +245,18 @@ nav a.q-item, .nav a.q_item {
     white-space: nowrap;
 }
 
+.q-table th {
+    padding: 16px; /** same as block */
+}
+
+.q-table th.sortable:hover, .q-table th.sorted {
+    opacity: 0.96;
+}
+
+.q-table th.sortable {
+    opacity: 0.66;
+}
+
 @media (min-width: 1500px) {
 .row  .marsCard {
 	width: 25%;

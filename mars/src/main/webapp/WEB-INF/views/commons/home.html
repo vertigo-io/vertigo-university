@@ -27,8 +27,8 @@
 						<q-card >
 							<q-card-section class="text-h6 bg-secondary text-white">Bases</q-card-section>
 							<q-card-section class="row justify-center items-center" style="height: 100px;">
-								<span class="text-secondary" style="font-size:6em;" th:text="${model.basesSummary.baseCount}"></span> 
-								<q-icon name="fas fa-dice-d20" color="faded on-right" size="4em"></q-icon>
+								<span class="text-secondary" style="font-size:5em;" th:text="${model.basesSummary.baseCount}"></span> 
+								<q-icon name="fas fa-dice-d20" color="grey on-right" size="4em"></q-icon>
 							</q-card-section>
 						</q-card>
 					</div>
@@ -46,7 +46,7 @@
 							<q-card-section  style="height: 100px;">
 								<div class="column items-center">
 									<div class="row text-secondary indicator" th:text="|${model.basesSummary.onlineEquipmentPercent} %|" ></div>
-									<div class="row text-faded indicator-title">Equipments online</div>
+									<div class="row text-grey indicator-title">Equipments online</div>
 								</div>
 							</q-card-section>
 						</q-card>
@@ -57,7 +57,7 @@
 							<q-card-section  style="height: 100px;">
 								<div class="column items-center">
 									<div class="row text-secondary indicator" th:text="${model.basesSummary.openedTickets}" ></div>
-									<div class="row text-faded indicator-title">Opened Tickets</div>
+									<div class="row text-grey indicator-title">Opened Tickets</div>
 								</div>
 							</q-card-section>
 						</q-card>
