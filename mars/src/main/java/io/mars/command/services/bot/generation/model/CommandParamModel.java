@@ -13,4 +13,8 @@ public class CommandParamModel {
 		this.commandParam = commandParam;
 	}
 
+	public CommandParam getCommandParam() {
+		return commandParam;
+	}
+
 }
