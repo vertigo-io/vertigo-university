@@ -344,6 +344,7 @@ nav a.q-item, .nav a.q_item {
 .execution-summary span {
 	vertical-align: middle;
     line-height: 32px;
+    font-size:1rem;
 }
 
 .version-watermark {
