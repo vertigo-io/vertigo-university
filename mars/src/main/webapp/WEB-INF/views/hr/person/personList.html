@@ -7,9 +7,9 @@
 <body>
 	<section layout:fragment="content">
 		<div class="row q-mb-md text-primary">
-			<div th:ref="tableTitle" class="text-h6 self-center">{{vueData.persons.length}} Persons</div>
+			<div class="m-title text-h6 self-center">{{vueData.persons.length}} Persons</div>
 			<div class="col"></div>
-			<div th:ref="tableActions" class="row justify-end items-center text-primary">
+			<div class="row justify-end items-center text-primary">
 				<vu:button-link url="@{/hr/person/new}" ariaLabel="Add person" icon="fas fa-user" color="primary" round size="lg" class="on-left" >+</vu:button-link>
 				<div class="vertical-separator"></div>
 				<q-btn round icon="fas fa-grip-horizontal" type="a" th:href="@{?renderer=cards}" th::flat="${model.listRenderer != 'cards'}"> </q-btn>

@@ -30,18 +30,16 @@
 							<div class="text-center"> <span class="indicator text-positive" th:text="2" /> day(s) <q-icon size="20px" color="positive" name="fas fa-arrow-up" ></q-icon><br/><span class="indicator-title text-faded">Weekly work orders' delay</span></div>
 						</q-card>
 					</div>
-					<div class="col-12">
-						<vu:table title="Lastest created tickets" list="lastTickets" componentId="lastTickets" rowsPerPage="5"
-						tr_@click.native="|goTo('@{/maintenance/ticket/}'+props.row.ticketId)|" tr_class="nav">
-							<vu:include-data object="lastTickets" field="ticketId" />
-							<vu:column field="code" />
-							<vu:column field="title" />
-							<vu:column field="dateCreated" />
-							<vu:column name="status" label="Status" >
-								<vu:field-read field="ticketStatusId" list="ticketStatus" />
-							</vu:column>
-						</vu:table>
-					</div>
+					<vu:table title="Lastest created tickets" list="lastTickets" componentId="lastTickets" rowsPerPage="5"
+					tr_@click.native="|goTo('@{/maintenance/ticket/}'+props.row.ticketId)|" tr_class="nav">
+						<vu:include-data object="lastTickets" field="ticketId" />
+						<vu:column field="code" />
+						<vu:column field="title" />
+						<vu:column field="dateCreated" />
+						<vu:column name="status" label="Status" >
+							<vu:field-read field="ticketStatusId" list="ticketStatus" />
+						</vu:column>
+					</vu:table>
 	 			</div>
 		</q-page>
 	</section>

@@ -13,10 +13,12 @@
 		<section layout:fragment="content" >	
 			<vu:search resultKey="equipments" searchUrl="@{/basemanagement/equipments/_search}" collectionComponentId="equipmentsTable">
 				<div class="row q-col-gutter-md">
-					<div class="text-h6 self-center" style="flex-basis: 300px;">{{vueData.equipments_totalcount}} Equipments</div>
+					<div class="m-title text-h6 self-center" style="flex-basis: 300px;">{{vueData.equipments_totalcount}} Equipments</div>
 					<div class="col">
 						<vu:include-data-primitive key="criteria"/>
-						<q-search inverted-light color="white" icon="search" placeholder="Type, Name..." v-model="vueData.criteria" @input="search('equipments')"></q-search>
+						<q-input placeholder="Type, Name..." v-model="vueData.criteria" @input="search('equipments')" :debounce="300"  outlined bg-color="white" dense >
+							<template v-slot:prepend><q-icon name="search" /></template>
+						</q-input>
 					</div>
 					<div class="col-break"></div>
 					<div class="gt-md" style="flex-basis: 300px;">
