@@ -9,12 +9,13 @@
 	</head>
 	
 	<body>
-	<!-- 
-		<section layout:fragment="content-nav">
-			        <q-item tag="a" href="#information">Information</q-item>
-			        <q-item tag="a" href="#contact">Contact actions</q-item>	
-		</section>
-	-->
+	
+	<section layout:fragment="content-nav">
+		<q-item tag="a" href="#information">Information</q-item>
+		<q-item tag="a" href="#description">Description</q-item>
+		<q-item tag="a" href="#links">Opendata Set actions</q-item>	
+	</section>
+	
 	
 		<section>
 				<div layout:fragment="content-header-left">
@@ -31,12 +32,12 @@
 					<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" aria-label="Edit" title="Edit" class="on-left"/>
 					
 					<q-btn round size="lg" color="primary" icon="more_horiz"  direction="down" aria-label="More actions" title="More actions" class="on-left"> 
-					  <q-popover><q-list>
+					  <q-menu><q-list class="column items-center">
 					    <q-item><q-btn flat>Delete</q-btn></q-item>
 					    <q-item><q-btn flat>Archive</q-btn></q-item>
 					    <q-item><q-btn flat>Bind to base</q-btn></q-item>
 					  </q-list>
-					  </q-popover>
+					  </q-menu>
 					</q-btn>
 				</div>
 		</section>
@@ -59,7 +60,7 @@
 					</div>				
 				</vu:block>
 				
-				<vu:block title="Description">
+				<vu:block id="description" title="Description">
 					<vu:include-data object="opendataSet" field="description" />
 					<q-editor th:v-if="${!model.modeReadOnly}" v-model="vueData.opendataSet.description" ></q-editor>
 					<span th:if="${model.modeReadOnly}" th:utext="${model.opendataSet.description}"></span>

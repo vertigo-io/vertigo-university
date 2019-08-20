@@ -19,9 +19,9 @@
 		</section>
 		
 		<section layout:fragment="page-container">
-	 	<q-page class="row col-12 layout-padding">
+	 	<q-page padding class="row col-12 q-gutter-md">
 			<div class="col content-body ">
-	 			<div class="row gutter-md">
+	 			<div class="row q-col-gutter-md">
 					<div class="col-12">
 						<q-card class="bg-white row justify-around items-center" style="height:100%;">
 							<div class="text-center"> <span class="indicator text-positive" th:text="12" /><br/><span class="indicator-title text-faded">Closed ticket(s) this week</span></div>
@@ -30,18 +30,17 @@
 							<div class="text-center"> <span class="indicator text-positive" th:text="2" /> day(s) <q-icon size="20px" color="positive" name="fas fa-arrow-up" ></q-icon><br/><span class="indicator-title text-faded">Weekly work orders' delay</span></div>
 						</q-card>
 					</div>
-				<div class="col-12">
-					<div class="text-h6 q-my-md">Lastest created tickets</div>
-					<vu:table list="lastTickets" componentId="lastTickets" rowsPerPage="5"
-					tr_@click.native="|goTo('@{/maintenance/ticket/}'+props.row.ticketId)|" tr_class="nav">
-						<vu:include-data object="lastTickets" field="ticketId" />
-						<vu:column field="code" />
-						<vu:column field="title" />
-						<vu:column field="dateCreated" />
-						<vu:column name="status" label="Status" >
-							<vu:field-read field="ticketStatusId" list="ticketStatus" />
-						</vu:column>
-					</vu:table>
+					<div class="col-12">
+						<vu:table title="Lastest created tickets" list="lastTickets" componentId="lastTickets" rowsPerPage="5"
+						tr_@click.native="|goTo('@{/maintenance/ticket/}'+props.row.ticketId)|" tr_class="nav">
+							<vu:include-data object="lastTickets" field="ticketId" />
+							<vu:column field="code" />
+							<vu:column field="title" />
+							<vu:column field="dateCreated" />
+							<vu:column name="status" label="Status" >
+								<vu:field-read field="ticketStatusId" list="ticketStatus" />
+							</vu:column>
+						</vu:table>
 					</div>
 	 			</div>
 		</q-page>

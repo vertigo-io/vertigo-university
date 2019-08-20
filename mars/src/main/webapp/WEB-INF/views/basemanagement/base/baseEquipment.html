@@ -43,9 +43,8 @@
 					</div>
 					
 				</vu:block>				
-				<vu:table list="lastEquipments" id="equipments" componentId="lastEquipments" rowsPerPage="5"
+				<vu:table title="Recently purchased equipment units" list="lastEquipments" id="equipments" componentId="lastEquipments" rowsPerPage="5"
 					tr_@click.native="|goTo('@{/basemanagement/equipment/}'+props.row.equipmentId)|" tr_class="nav" >
-					<vu:slot name="top_left_slot">Recently purchased equipment units</vu:slot>		
 					<vu:include-data object="lastEquipments" field="equipmentId" />
 					<vu:column field="code" />
 					<vu:column field="name" sortable="true" />
@@ -55,9 +54,8 @@
 					</vu:column>
 				</vu:table>
 				
-				<vu:table list="lastTickets" id="maintenance" componentId="lastTickets" rowsPerPage="5"
+				<vu:table title="Lastest maintenance tickets" list="lastTickets" id="maintenance" componentId="lastTickets" rowsPerPage="5"
 					tr_@click.native="|goTo('@{/maintenance/ticket/}'+props.row.ticketId)|" tr_class="nav" >
-					<vu:slot name="top_left_slot">Lastest maintenance tickets</vu:slot>		
 					<vu:include-data object="lastTickets" field="ticketId" />
 					<vu:column field="code" />
 					<vu:column field="title" />

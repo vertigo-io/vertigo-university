@@ -10,38 +10,32 @@
 	
 	<body>
 		<section layout:fragment="content" >
-			<br/><br/>
-			
 			<vu:include-data-protected object="opendataSets" field="picturefileId"/>	
 			<vu:list list="opendataSets" componentId="opendataSetsList" sortUrl="@{/opendata/opendatasets/_sort}" rowsPerPage="8" pagination_:direction-links="true" pagination_:boundary-links="true" item_@click.native="|goTo('@{/opendata/opendataset/}'+item.odsId)|" item_class="q-mb-sm bg-white nav" >
+				<vu:include-data object="opendataSets" field="odsId" />
+				<vu:include-data object="opendataSets" field="title" />
+				<vu:include-data object="opendataSets" field="code" />
+				<vu:include-data object="opendataSets" field="endPointUrl" />
 				<q-item-section avatar>
 					<img th::src="|'@{/opendata/opendataset/picture/}'+item.picturefileId|" class="avatar"  />
 				</q-item-section>
+				<q-item-section class="col-3">
+					<span class="text-primary small-caps text-bigger">{{item.title}}</span>
+					Web service reference : {{item.code}}
+				</q-item-section>
 				<q-item-section>
-					<div class="row">
-						<div class="col-3">
-							<vu:include-data object="opendataSets" field="odsId" />
-							<vu:include-data object="opendataSets" field="title" />
-							<vu:include-data object="opendataSets" field="code" />
-							<vu:include-data object="opendataSets" field="endPointUrl" />
-							<span class="text-primary small-caps text-bigger">{{item.title}}</a><br/>
-							Web service reference : {{item.code}}<br/>
-						</div>
-						<div class="col-9">
-							<vu:include-data object="opendataSets" field="description" />
-							<vu:include-data object="opendataSets" field="tags" />
-							<span v-html="item.description"></span>
-							<q-chips-input :value="item.tags"  :readonly="true"  :hide-underline="true" ></q-chips-input>
-						</div>
-					</div>
+						<vu:include-data object="opendataSets" field="description" />
+						<vu:include-data object="opendataSets" field="tags" />
+						<span v-html="item.description"></span>
+						<q-chips-input :value="item.tags"  :readonly="true"  :hide-underline="true" ></q-chips-input>					
 				</q-item-section>
 				<q-item-section side>
-					<q-btn round color="primary" icon="email" type="a" th:href="@{/api/swaggerUi/}"></q-btn>
-					<q-btn color="primary" type="a" th::href="|'@{/.}'+ item.endPointUrl|" target="new" icon="chat" label="Fichier JSON"></q-btn>
+					<div class="q-gutter-md">
+						<q-btn round color="primary" icon="email" type="a" th:href="@{/api/swaggerUi/}"></q-btn>
+						<q-btn color="primary" type="a" th::href="|'@{/.}'+ item.endPointUrl|" target="new" icon="chat" label="Fichier JSON"></q-btn>
+					</div>
 				</q-item-section>
 			</vu:list>
-			
-			
 		</section>
 	</body>
 </html>
