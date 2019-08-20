@@ -10,15 +10,14 @@
 	
   	<section layout:fragment="page-container">
   		<section th:ref="detailHeader" class="col-12" v-minify="{topOffsetEl:'.q-header', leftOffsetEl:'.q-drawer--left'}">
-			<div th:ref="maxiHeader" class="row justify-between items-center bg-secondary header-content " >
+			<div th:ref="maxiHeader" class="row justify-between items-center bg-secondary header-content" >
 				<div layout:fragment="content-header-left"></div>
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="col column ">				
 					<div class="row col">
 						<div class="detailTitle q-px-md self-center text-secondary-inverted" layout:fragment="content-header-title"></div>
 						<div class="col self-end bg-accent header-tabs text-accent-inverted eq-mini gt-md" layout:fragment="content-header-tabs"></div>
-						<div class="col ne-mini"></div>
-						<div class="row self-center ne-mini justify-end col-12">
+						<div class="row self-center ne-mini justify-end col">
 							<vu:form>
 								<div class="primary" layout:fragment="content-header-actions"></div>
 							</vu:form>
