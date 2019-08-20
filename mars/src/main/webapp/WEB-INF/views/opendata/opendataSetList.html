@@ -24,10 +24,10 @@
 					Web service reference : {{item.code}}
 				</q-item-section>
 				<q-item-section>
-						<vu:include-data object="opendataSets" field="description" />
-						<vu:include-data object="opendataSets" field="tags" />
-						<span v-html="item.description"></span>
-						<q-chips-input :value="item.tags"  :readonly="true"  :hide-underline="true" ></q-chips-input>					
+					<vu:include-data object="opendataSets" field="description" />
+					<vu:include-data object="opendataSets" field="tags" />
+					<span v-html="item.description"></span>
+					<q-chips-input :value="item.tags"  :readonly="true"  :hide-underline="true" ></q-chips-input>					
 				</q-item-section>
 				<q-item-section side>
 					<div class="q-gutter-md">

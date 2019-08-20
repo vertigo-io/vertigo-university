@@ -188,7 +188,7 @@ nav.scroll-spy-nav a.q-item.active {
 
 nav a.q-item, .nav a.q_item {
 	color: grey;
-	line-height:32px; /** replaced using q-item-section every times */
+	align-items: center; /** replaced using q-item-section every times */
 }
 
 /*
