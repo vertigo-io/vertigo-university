@@ -29,12 +29,13 @@
 					<vu:button-link th:if="${model.modeEdit}"  url="@{/hr/person/} + ${model.person.personId}" :round size="lg" color="primary" icon="fas fa-ban" :flat ariaLabel="Cancel" class="on-left"  />					
 					<vu:button-submit th:if="${model.modeReadOnly}" action="@{_edit}" :round size="lg" color="primary" icon="edit" ariaLabel="Edit" class="on-left"/>
 					<q-btn round size="lg" color="primary" icon="more_horiz"  direction="down" aria-label="More actions" title="More actions" class="on-left"> 
-					  <q-popover><q-list>
-					    <q-item><q-btn flat>Delete</q-btn></q-item>
-					    <q-item><q-btn flat>Archive</q-btn></q-item>
-					    <q-item><q-btn flat>Bind to base</q-btn></q-item>
-					  </q-list>
-					  </q-popover>
+					  <q-menu>
+				        <q-list class="column items-center">
+					      <q-item><q-btn flat>Delete</q-btn></q-item>
+					      <q-item><q-btn flat>Archive</q-btn></q-item>
+					      <q-item><q-btn flat>Bind to base</q-btn></q-item>
+					    </q-list>
+					  </q-menu>
 					</q-btn>
 				</div>
 		</section>
@@ -62,7 +63,7 @@
 				</vu:block>
 				
 				<vu:table th:if="${!model.modeCreate}" id="missions" list="missions" componentId="missions" rowsPerPage="10" autoColClass >
-						<vu:slot name="top_left_slot">Missions</vu:slot>
+						<vu:slot name="top_left_slot"><div class="text-h6">Missions</div></vu:slot>
 						<vu:slot name="top_right_slot"><q-btn class="fab-block" round color="primary" icon="add" aria-label="Add mission" title="Add mission" th:@click="|openModal('missionEditModal', '@{/hr/mission/new}', { 'personId' : vueData.person.personId, 'successCallback' : 'onMissionSuccess' })|"></q-btn></vu:slot>
 						<vu:slot name="actions_slot"><q-btn round color="primary" icon="edit" label="View detail" th:@click="|openModal('missionEditModal', '@{/hr/mission/}' + props.row.missionId , {'successCallback' : 'onMissionSuccess' })|"></q-btn></vu:slot>
 						<vu:include-data object="person" field="personId" />
