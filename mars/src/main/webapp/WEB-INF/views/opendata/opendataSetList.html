@@ -27,7 +27,7 @@
 					<vu:include-data object="opendataSets" field="description" />
 					<vu:include-data object="opendataSets" field="tags" />
 					<span v-html="item.description"></span>
-					<q-chips-input :value="item.tags"  :readonly="true"  :hide-underline="true" ></q-chips-input>					
+					<div><q-chip v-for="tag in item.tags" :label="tag" dense></q-chip></div>					
 				</q-item-section>
 				<q-item-section side>
 					<div class="q-gutter-md">

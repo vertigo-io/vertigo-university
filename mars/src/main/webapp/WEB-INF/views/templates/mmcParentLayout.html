@@ -141,151 +141,150 @@
 		      :mini="function() {var miniMenu = this.$cookies.get('miniMenu', true) === 'true';componentStates.navDrawer.mini = miniMenu;return miniMenu;}()"
 		      v-model="componentStates.navDrawer.showLeft">
 		      
-		      <q-list :class="{'dense-list-header':!componentStates.navDrawer.mini}" style="height:100%">
-		      <nav class="text-no-wrap">
-		      	<q-item-label header>Home</q-item-label>
-		        <q-item tag="a" th:href="@{/home/}">
-		          <q-item-section avatar>
-		          	<q-icon name="fas fa-globe-europe"></q-icon>
-		          </q-item-section>
-		          <q-item-section>Planetary Status</q-item-section>
-		        </q-item>
-		        <q-separator></q-separator>
-		       	<q-item-label header>Base managment</q-item-label>
-		        <q-item tag="a" th:href="@{/basemanagement/bases/}">
-		          <q-item-section avatar>
-		          	<q-icon name="fas fa-dice-d20"></q-icon>
-		          </q-item-section>
-		          <q-item-section>Bases</q-item-section>
-		          <q-item-section side><q-chip color="primary" text-color="white" dense square class="q-mr-xs">VR</q-chip></q-item-section>
-		        </q-item>
-		        <q-item tag="a" th:href="@{/basemanagement/equipments/}">
-		          <q-item-section avatar>
-		          	<q-icon name="fas fa-rocket"></q-icon>
-		          </q-item-section>
-		          <q-item-section>Equipments</q-item-section>
-		          <q-item-section side>
-			          <div>
-			            <q-chip color="primary" text-color="white" dense square class="q-mr-xs">3D</q-chip>
-			            <q-chip color="primary" text-color="white" dense square class="q-mr-xs">VR</q-chip>
-			          </div>
-		          </q-item-section>
-		        </q-item>
-		       	<q-separator></q-separator>
-		       	<q-item-label header>People</q-item-label>
-		        <q-item tag="a" th:href="@{/hr/persons/}">
-		          <q-item-section avatar>
-		          	<q-icon name="fas fa-user-friends"></q-icon>
-		          </q-item-section>
-		          <q-item-section>
-		           <q-item-label>Teams</q-item-label>
-		           <q-item-label caption>Base managers, Workers,..."</q-item-label>
-		          </q-item-section>
-		        </q-item>
-		        <q-item tag="a" th:href="@{/academy/}">
-		          <q-item-section avatar>
-		          	<q-icon name="fas fa-graduation-cap"></q-icon>
-		          </q-item-section>
-		          <q-item-section>Academy</q-item-section>
-		        </q-item>
-		        <q-separator></q-separator>
-		        <q-item-label header>Catalog</q-item-label>
-		       <q-item tag="a" th:href="@{/catalog/suppliers/}">
-		         <q-item-section avatar>
-		          	<q-icon name="fas fa-building"></q-icon>
-		          </q-item-section>
-		          <q-item-section>Suppliers</q-item-section>
-		        </q-item>
-		        <q-separator></q-separator>
-		       	<q-item-label header>Maintenance</q-item-label>
-		       <q-item tag="a" th:href="@{/maintenance/dashboard/}">
-		         <q-item-section avatar>
-		          	<q-icon name="fas fa-tools"></q-icon>
-		          </q-item-section>
-		          <q-item-section>
-		          	<q-item-label>Maintenance</q-item-label>
-		          	<q-item-label caption>Tickets, Work Orders</q-item-label>
-		          </q-item-section>
-		        </q-item>
-		        <q-item tag="a" th:href="@{/jobs/}">
-		          <q-item-section avatar>
-		          	<q-icon name="fas fa-tasks"></q-icon>
-		          </q-item-section>
-		          <q-item-section>Jobs</q-item-section>
-		        </q-item>
-		        <q-separator></q-separator>
-		       	<q-item-label header>Data Hub</q-item-label>
-		        <q-item tag="a" th:href="@{/share/}">
-		          <q-item-section avatar>
-		          	<q-icon name="fas fa-share-alt"></q-icon>
-		          </q-item-section>
-		          <q-item-section>Share</q-item-section>
-		          <q-item-section side>
-			          <div>
-			            <q-chip color="primary" text-color="white" dense square class="q-mr-xs">API</q-chip>
-			            <q-chip color="primary" text-color="white" dense square class="q-mr-xs">OpenData</q-chip>
-			          </div>
-		          </q-item-section>
-		        </q-item>
-		        <q-item tag="a" th:href="@{/environment/}">
-		          <q-item-section avatar>
-		          	<q-icon name="fas fa-cloud-sun"></q-icon>
-		          </q-item-section>
-		          <q-item-section>Environment</q-item-section>
-		          <q-item-section side><q-chip color="primary" text-color="white" dense square class="q-mr-xs">IoT</q-chip></q-item-section>
-		        </q-item>
-		        <q-item tag="a" th:href="@{/dashboard/modules/vertigo-ui}" target="_blank">
-		          <q-item-section avatar>
-		          	<q-icon name="fas fa-chart-bar"></q-icon>
-		          </q-item-section>
-		          <q-item-section>Analytics</q-item-section>
-		        </q-item>
-		         <q-separator></q-separator>
-		       	<q-item-label header>Security</q-item-label>
-		        <q-item tag="a" th:href="@{/digitaltrust/}">
-		          <q-item-section avatar>
-		          	<q-icon name="fas fa-award"></q-icon>
-		          </q-item-section>
-		          <q-item-section>Digital Trust</q-item-section>
-		          <q-item-section side><q-chip color="primary" text-color="white" dense square class="q-mr-xs">Blockchain</q-chip></q-item-section>
-		        </q-item>
-		        <q-item tag="a" th:href="@{/accesscontrol/}">
-		          <q-item-section avatar>
-		          	<q-icon name="fas fa-address-card"></q-icon>
-		          </q-item-section>
-		          <q-item-section>Access Control</q-item-section>
-		          <q-item-section side><q-chip color="primary" text-color="white" dense square class="q-mr-xs">AI</q-chip></q-item-section>
-		        </q-item>
-		        <q-separator></q-separator>
-		        <q-item tag="a" th:href="@{/extensionsStore/}">
-		          <q-item-section avatar>
-		          	<q-icon name="fas fa-puzzle-piece"></q-icon>
-		          </q-item-section>
-		          <q-item-section>Extensions Store</q-item-section>
-		        </q-item>
-		        <q-separator></q-separator>
-		        <q-item tag="a" th:href="@{/spiders/}">
-		          <q-item-section avatar>
-		          	<q-icon name="fas fa-spider"></q-icon>
-		          </q-item-section>
-		          <q-item-section>Spiders</q-item-section>
-		        </q-item>
-		        <q-separator></q-separator>
-		        <q-item v-if="componentStates.navDrawer.mini"
-						@click.native="componentStates.navDrawer.mini = false; $cookies.set('miniMenu', false)" title="Expand menu">
-						<q-item-section avatar>
-		          			<q-icon name="arrow_right"></q-icon>
-		          		</q-item-section>
-				</q-item>
-				 <q-item v-if="!componentStates.navDrawer.mini"
-						@click.native="componentStates.navDrawer.mini = true; $cookies.set('miniMenu', true)" title="Minify menu">
-					<q-item-section side>
-		          		<q-icon name="arrow_left"></q-icon>
-		          	</q-item-section>
-				</q-item>
-		        </nav>
-		        </q-list>
-		        
+			    <nav class="text-no-wrap">
+			      <q-list :class="{'dense-list-header':!componentStates.navDrawer.mini}" style="height:100%">
+			      	<q-item-label header>Home</q-item-label>
+			        <q-item tag="a" th:href="@{/home/}">
+			          <q-item-section avatar>
+			          	<q-icon name="fas fa-globe-europe"></q-icon>
+			          </q-item-section>
+			          <q-item-section>Planetary Status</q-item-section>
+			        </q-item>
+			        <q-separator></q-separator>
+			       	<q-item-label header>Base managment</q-item-label>
+			        <q-item tag="a" th:href="@{/basemanagement/bases/}">
+			          <q-item-section avatar>
+			          	<q-icon name="fas fa-dice-d20"></q-icon>
+			          </q-item-section>
+			          <q-item-section>Bases</q-item-section>
+			          <q-item-section side><q-chip color="primary" text-color="white" dense square class="q-mr-xs">VR</q-chip></q-item-section>
+			        </q-item>
+			        <q-item tag="a" th:href="@{/basemanagement/equipments/}">
+			          <q-item-section avatar>
+			          	<q-icon name="fas fa-rocket"></q-icon>
+			          </q-item-section>
+			          <q-item-section>Equipments</q-item-section>
+			          <q-item-section side>
+				          <div>
+				            <q-chip color="primary" text-color="white" dense square class="q-mr-xs">3D</q-chip>
+				            <q-chip color="primary" text-color="white" dense square class="q-mr-xs">VR</q-chip>
+				          </div>
+			          </q-item-section>
+			        </q-item>
+			       	<q-separator></q-separator>
+			       	<q-item-label header>People</q-item-label>
+			        <q-item tag="a" th:href="@{/hr/persons/}">
+			          <q-item-section avatar>
+			          	<q-icon name="fas fa-user-friends"></q-icon>
+			          </q-item-section>
+			          <q-item-section>
+			           <q-item-label>Teams</q-item-label>
+			           <q-item-label caption>Base managers, Workers,..."</q-item-label>
+			          </q-item-section>
+			        </q-item>
+			        <q-item tag="a" th:href="@{/academy/}">
+			          <q-item-section avatar>
+			          	<q-icon name="fas fa-graduation-cap"></q-icon>
+			          </q-item-section>
+			          <q-item-section>Academy</q-item-section>
+			        </q-item>
+			        <q-separator></q-separator>
+			        <q-item-label header>Catalog</q-item-label>
+			       <q-item tag="a" th:href="@{/catalog/suppliers/}">
+			         <q-item-section avatar>
+			          	<q-icon name="fas fa-building"></q-icon>
+			          </q-item-section>
+			          <q-item-section>Suppliers</q-item-section>
+			        </q-item>
+			        <q-separator></q-separator>
+			       	<q-item-label header>Maintenance</q-item-label>
+			       <q-item tag="a" th:href="@{/maintenance/dashboard/}">
+			         <q-item-section avatar>
+			          	<q-icon name="fas fa-tools"></q-icon>
+			          </q-item-section>
+			          <q-item-section>
+			          	<q-item-label>Maintenance</q-item-label>
+			          	<q-item-label caption>Tickets, Work Orders</q-item-label>
+			          </q-item-section>
+			        </q-item>
+			        <q-item tag="a" th:href="@{/jobs/}">
+			          <q-item-section avatar>
+			          	<q-icon name="fas fa-tasks"></q-icon>
+			          </q-item-section>
+			          <q-item-section>Jobs</q-item-section>
+			        </q-item>
+			        <q-separator></q-separator>
+			       	<q-item-label header>Data Hub</q-item-label>
+			        <q-item tag="a" th:href="@{/share/}">
+			          <q-item-section avatar>
+			          	<q-icon name="fas fa-share-alt"></q-icon>
+			          </q-item-section>
+			          <q-item-section>Share</q-item-section>
+			          <q-item-section side>
+				          <div>
+				            <q-chip color="primary" text-color="white" dense square class="q-mr-xs">API</q-chip>
+				            <q-chip color="primary" text-color="white" dense square class="q-mr-xs">OpenData</q-chip>
+				          </div>
+			          </q-item-section>
+			        </q-item>
+			        <q-item tag="a" th:href="@{/environment/}">
+			          <q-item-section avatar>
+			          	<q-icon name="fas fa-cloud-sun"></q-icon>
+			          </q-item-section>
+			          <q-item-section>Environment</q-item-section>
+			          <q-item-section side><q-chip color="primary" text-color="white" dense square class="q-mr-xs">IoT</q-chip></q-item-section>
+			        </q-item>
+			        <q-item tag="a" th:href="@{/dashboard/modules/vertigo-ui}" target="_blank">
+			          <q-item-section avatar>
+			          	<q-icon name="fas fa-chart-bar"></q-icon>
+			          </q-item-section>
+			          <q-item-section>Analytics</q-item-section>
+			        </q-item>
+			         <q-separator></q-separator>
+			       	<q-item-label header>Security</q-item-label>
+			        <q-item tag="a" th:href="@{/digitaltrust/}">
+			          <q-item-section avatar>
+			          	<q-icon name="fas fa-award"></q-icon>
+			          </q-item-section>
+			          <q-item-section>Digital Trust</q-item-section>
+			          <q-item-section side><q-chip color="primary" text-color="white" dense square class="q-mr-xs">Blockchain</q-chip></q-item-section>
+			        </q-item>
+			        <q-item tag="a" th:href="@{/accesscontrol/}">
+			          <q-item-section avatar>
+			          	<q-icon name="fas fa-address-card"></q-icon>
+			          </q-item-section>
+			          <q-item-section>Access Control</q-item-section>
+			          <q-item-section side><q-chip color="primary" text-color="white" dense square class="q-mr-xs">AI</q-chip></q-item-section>
+			        </q-item>
+			        <q-separator></q-separator>
+			        <q-item tag="a" th:href="@{/extensionsStore/}">
+			          <q-item-section avatar>
+			          	<q-icon name="fas fa-puzzle-piece"></q-icon>
+			          </q-item-section>
+			          <q-item-section>Extensions Store</q-item-section>
+			        </q-item>
+			        <q-separator></q-separator>
+			        <q-item tag="a" th:href="@{/spiders/}">
+			          <q-item-section avatar>
+			          	<q-icon name="fas fa-spider"></q-icon>
+			          </q-item-section>
+			          <q-item-section>Spiders</q-item-section>
+			        </q-item>
+			        <q-separator></q-separator>
+			        <q-item v-if="componentStates.navDrawer.mini"
+							@click.native="componentStates.navDrawer.mini = false; $cookies.set('miniMenu', false)" title="Expand menu">
+							<q-item-section avatar>
+			          			<q-icon name="arrow_right"></q-icon>
+			          		</q-item-section>
+					</q-item>
+					 <q-item v-if="!componentStates.navDrawer.mini"
+							@click.native="componentStates.navDrawer.mini = true; $cookies.set('miniMenu', true)" title="Minify menu">
+						<q-item-section side>
+			          		<q-icon name="arrow_left"></q-icon>
+			          	</q-item-section>
+					</q-item>
+			        </q-list>
+			    </nav>
 		    </q-drawer>
 		    
 			<q-page-container class="row justify-center q-pb-lg" >

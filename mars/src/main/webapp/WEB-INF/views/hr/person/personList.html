@@ -46,8 +46,8 @@
 						</div>
 					</q-card-section>
 					<q-card-separator></q-card-separator>
+					<q-card-actions><q-chip v-for="tag in item.tags" :label="tag" dense ></q-chip></q-card-actions>
 				</div>
-				<q-card-actions> <q-chips-input :value="item.tags" :readonly="true" :hide-underline="true"></q-chips-input> </q-card-actions>
 			</vu:cards>
 		</th:block>
 		<th:block th:if="${model.listRenderer == 'list'}">
@@ -55,22 +55,20 @@
 			<vu:include-data-protected object="persons" field="picturefileId" />
 			<vu:list list="persons" componentId="personsList" sortUrl="@{/hr/persons/_sort}" rowsPerPage="8" pagination_:direction-links="true"
 				pagination_:boundary-links="true">
-				<q-item-section avatar> <q-img th::src="|'@{/hr/person/picture/}'+item.picturefileId|" class="avatar" ></q-img> </q-item-section>
+				<q-item-section avatar > <img th::src="|'@{/hr/person/picture/}'+item.picturefileId|" class="avatar" ></img> </q-item-section>
 				<q-item-section>
-					<div class="row">
-						<div class="col-6">
-							<vu:include-data object="persons" field="fullName" />
-							<vu:include-data object="persons" field="dateHired" />
-							<a class="text-primary small-caps text-bigger" th::href="|'@{/hr/person/}'+item.personId|">{{item.fullName}}</a><br /> Hired : {{item.dateHired}}<br />
-						</div>
-						<div class="col-6">
-							<vu:include-data object="persons" field="email_fmt" />
-							<vu:include-data object="persons" field="tags" />
-							<q-icon name="mail"></q-icon>
-							{{item.email_fmt}}<br />
-							<q-chips-input :value="item.tags" :readonly="true" :hide-underline="true"></q-chips-input>
-						</div>
+					<vu:include-data object="persons" field="fullName" />
+					<vu:include-data object="persons" field="dateHired" />
+					<a class="text-primary small-caps text-bigger" th::href="|'@{/hr/person/}'+item.personId|">{{item.fullName}}</a>Hired : {{item.dateHired}}
+				</q-item-section>
+				<q-item-section>
+					<vu:include-data object="persons" field="email_fmt" />
+					<vu:include-data object="persons" field="tags" />
+					<div>
+						<q-icon name="mail"></q-icon>
+						<span>{{item.email_fmt}}</span>
 					</div>
+					<div><q-chip v-for="tag in item.tags" :label="tag" dense ></q-chip></div>
 				</q-item-section>
 				<q-item-section side> <q-btn round color="primary" icon="arrow_forward" type="a" th::href="|'@{/hr/person/}'+item.personId|"></q-btn> </q-item-section>
 			</vu:list>
