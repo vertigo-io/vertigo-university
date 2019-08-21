@@ -36,7 +36,10 @@
 								  :min="0"
 								  :max="equipmentOverview.count"
 								  color="positive"
-								  :readonly="true" ><q-icon :name="equipmentOverview.businessIcon" size="60px" color="primary"></q-icon></q-knob>
+								  :readonly="true" 
+								  size="100px"
+								  :thickness="0.15"
+								  show-value><q-icon :name="equipmentOverview.businessIcon" size="54px" color="primary"></q-icon></q-knob>
 							<div class="text-primary small-caps">{{equipmentOverview.businessName}}</div>
 							<div class="text-italic">{{equipmentOverview.count}} Unit(s)</div>
 						</div>

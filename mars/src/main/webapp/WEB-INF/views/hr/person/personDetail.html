@@ -62,10 +62,9 @@
 					</div>				
 				</vu:block>
 				
-				<vu:table th:if="${!model.modeCreate}" id="missions" list="missions" componentId="missions" rowsPerPage="10" autoColClass >
-						<vu:slot name="top_left_slot"><div class="text-h6">Missions</div></vu:slot>
+				<vu:table th:if="${!model.modeCreate}" id="missions" list="missions" title="Missions" componentId="missions" rowsPerPage="10" autoColClass >
 						<vu:slot name="top_right_slot"><q-btn class="fab-block" round color="primary" icon="add" aria-label="Add mission" title="Add mission" th:@click="|openModal('missionEditModal', '@{/hr/mission/new}', { 'personId' : vueData.person.personId, 'successCallback' : 'onMissionSuccess' })|"></q-btn></vu:slot>
-						<vu:slot name="actions_slot"><q-btn round color="primary" icon="edit" label="View detail" th:@click="|openModal('missionEditModal', '@{/hr/mission/}' + props.row.missionId , {'successCallback' : 'onMissionSuccess' })|"></q-btn></vu:slot>
+						<vu:slot name="actions_slot"><q-btn round color="primary" icon="edit" title="View detail" aria-label="View detail" th:@click="|openModal('missionEditModal', '@{/hr/mission/}' + props.row.missionId , {'successCallback' : 'onMissionSuccess' })|"></q-btn></vu:slot>
 						<vu:include-data object="person" field="personId" />
 						<vu:include-data object="missions" field="missionId" />
 						<vu:column field="role" />

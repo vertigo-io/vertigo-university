@@ -58,10 +58,9 @@
 						<pre th:if="${model.modeReadOnly}" th:utext="${model.ticket.description}"></pre>
 						<input type="hidden" name="vContext[ticket][description]" v-bind:value="vueData.ticket.description" />
 					</vu:block>
-					<vu:table th:if="${model.modeReadOnly}" list="workOrders" componentId="workOrders" rowsPerPage="10">
-						<vu:slot name="top_left_slot">Work Orders</vu:slot>
+					<vu:table th:if="${model.modeReadOnly}" list="workOrders" title="Work Orders" componentId="workOrders" rowsPerPage="10">
 						<vu:slot name="top_right_slot"><q-btn class="fab-block" round color="primary" icon="add" aria-label="Add work order" title="Add work order" th:@click="|openModal('workOrderEditModal', '@{/maintenance/workorder/new}', { 'ticketId' : vueData.ticket.ticketId, 'successCallback' : 'onWorkOrderSuccess' })|"></q-btn></vu:slot>
-						<vu:slot name="actions_slot"><q-btn round icon="edit" label="View detail" th:@click="|openModal('workOrderEditModal', '@{/maintenance/workorder/}' + props.row.woId , {'successCallback' : 'onWorkOrderSuccess' })|"></q-btn></vu:slot>
+						<vu:slot name="actions_slot"><q-btn round icon="edit" title="View detail" aria-label="View detail" th:@click="|openModal('workOrderEditModal', '@{/maintenance/workorder/}' + props.row.woId , {'successCallback' : 'onWorkOrderSuccess' })|"></q-btn></vu:slot>
 						<vu:include-data object="ticket" field="ticketId" />
 						<vu:include-data object="workOrders" field="woId" />
 						<vu:column field="name" />

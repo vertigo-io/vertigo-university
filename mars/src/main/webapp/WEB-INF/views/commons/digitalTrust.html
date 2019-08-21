@@ -43,7 +43,7 @@
 	
 	<body>
 		<section layout:fragment="page-container">
-		 	<q-page class="row col-12 layout-padding">
+		 	<q-page class="row col-12 q-layout-padding">
 
 				<q-parallax style="height: 130px;">
 					<h1>Digital Trust</h1>
@@ -59,28 +59,32 @@
 					</div>
 				</q-parallax>
 		 		
-		 		<q-jumbotron class="col-12">
-		    		<div class="text-h6">Blockchain Ethereum</div>
-	    			<img class="smallEthLogo" th:src="@{/static/img/cms/logoEthereum.png}"/>
-					<p>Digital trust is a key factor in the digital world. 
-					<br/>A ledger system can handle trust between actors without the need of a third party.</p>
-					<p>The Ethereum blockchain has been chosen to deliver this trust system.<br>
-						<ul>
-							<li>Decentralised: Everyone has a copy and can check the authenticity of the copy</li>
-							<li>Unalterable: A written message can't be modified</li>
-							<li>Secured: Cryptography is used to ensure the technical reliability of the system</li>
-						</ul>
-					</p>
-					<p>
-					   This ledger can be used to provide a trust mechanism inside an application, a customer information system, or between multiple actors.<br>
-					</p>
-	    		<hr class="q-hr q-my-lg"/>
-	    		<div class="row justify-center">
-	    			<q-btn type="a" href="http://mars.dev.klee.lan.net:4000" color="primary" class="q-py-sm q-px-xl " label="View Blockchain Explorer" target="_blank"></q-btn>
-	    		</div>
+		 		<q-card class="col-12">
+		 			<q-card-section>
+		    			<div class="m-title text-h6">Blockchain Ethereum</div>
+		    		</q-card-section>
+		    		<q-card-section>
+		    			<img class="smallEthLogo" th:src="@{/static/img/cms/logoEthereum.png}"/>
+						<p>Digital trust is a key factor in the digital world. 
+						<br/>A ledger system can handle trust between actors without the need of a third party.</p>
+						<p>The Ethereum blockchain has been chosen to deliver this trust system.<br>
+							<ul>
+								<li>Decentralised: Everyone has a copy and can check the authenticity of the copy</li>
+								<li>Unalterable: A written message can't be modified</li>
+								<li>Secured: Cryptography is used to ensure the technical reliability of the system</li>
+							</ul>
+						</p>
+						<p>
+						   This ledger can be used to provide a trust mechanism inside an application, a customer information system, or between multiple actors.<br>
+						</p>
+					</q-card-section>
+	    			<q-separator></q-separator>
+	    			<q-card-section class="row justify-center">
+	    				<q-btn type="a" href="http://mars.dev.klee.lan.net:4000" color="primary" class="q-py-sm q-px-xl " label="View Blockchain Explorer" target="_blank"></q-btn>
+	    			</q-card-section>
+	    		</q-card>
 	    		
 	    		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-	    		
 	    		<script>
 	    		function launchVideo() {
 					if (navigator.onLine) {
@@ -129,8 +133,7 @@
 			    
 			    launchVideo();
 				</script>
-				
-	    		</q-jumbotron>
+	    		
 			</q-page>
 		</section>
 	</body>

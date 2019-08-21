@@ -6,7 +6,7 @@
 >
 	<head>
 		<title>Equipment Spare Parts</title>
-		<script src="https://unpkg.com/vue-3d-model/dist/vue-3d-model.js"></script>
+		<script src="https://unpkg.com/vue-3d-model/dist/vue-3d-model.umd.js"></script>
 		<script type="text/javascript">
 			VUiExtensions.dataX.vue3dModel = {
 				scale : {
@@ -98,11 +98,9 @@
 					<q-card class="bigger q-mb-md bg-white" style="height: 100%">
 				    	<q-card-section class="bg-grey-3">
 				    		<q-img th:src="@{/static/3d/Ulti2eE.png}"></q-img>
-				      	</q-card-media>
-				      	<q-card-section class="bg-white relative-position">
-					        <div class="ellipsis">Connected Printer</div>
 				      	</q-card-section>
-				    	<q-card-section class="bg-white q-mb-none">
+				      	<q-card-section class="bg-white relative-position">
+					        <div class="text-h6">Connected Printer</div>
 				        	<p>Ultimaker 2 extended+</p>
 				        	<p class="text-faded">Simple extruder</p>
 				        	<p class="text-red">Printer is busy</p>
@@ -126,8 +124,8 @@
 											<span>This standard nut is used for all bolts in this equipment</span>
 										</div>
 										<div class="row">
-											<q-chip class="q-mr-sm" dense square color="primary">#titanium</q-chip>
-											<q-chip class="q-mr-sm" dense square color="primary">#link</q-chip>
+											<q-chip class="q-mr-sm" dense square >#titanium</q-chip>
+											<q-chip class="q-mr-sm" dense square >#link</q-chip>
 										</div>
 									</div>
 								</div>
@@ -150,8 +148,8 @@
 											<span>This handle is used to remove usual bolts during maintenance</span>
 										</div>
 										<div class="row">
-											<q-chip class="q-mr-sm" dense square color="primary">#titanium</q-chip>
-											<q-chip class="q-mr-sm" dense square color="primary">#tools</q-chip>
+											<q-chip class="q-mr-sm" dense square>#titanium</q-chip>
+											<q-chip class="q-mr-sm" dense square>#tools</q-chip>
 										</div>
 									</div>
 								</div>
@@ -174,8 +172,8 @@
 											<span>Flexible link between robotic arms</span>
 										</div>
 										<div class="row">
-											<q-chip class="q-mr-sm" dense square color="primary">#robot</q-chip>
-											<q-chip class="q-mr-sm" dense square color="primary">#movement</q-chip>
+											<q-chip class="q-mr-sm" dense square>#robot</q-chip>
+											<q-chip class="q-mr-sm" dense square>#movement</q-chip>
 										</div>
 									</div>
 								</div>
@@ -198,8 +196,8 @@
 											<span>Very precise cog for millimetric movement</span>
 										</div>
 										<div class="row">
-											<q-chip class="q-mr-sm" dense square color="primary">#fragile</q-chip>
-											<q-chip class="q-mr-sm" dense square color="primary">#plastic</q-chip>
+											<q-chip class="q-mr-sm" dense square>#fragile</q-chip>
+											<q-chip class="q-mr-sm" dense square>#plastic</q-chip>
 										</div>
 									</div>
 								</div>
