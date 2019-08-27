@@ -42,7 +42,7 @@
 					</div>
 					<!-- Brand and toggle get grouped for better mobile display -->
 					<div class="col q-mx-xl">
-						 <v-commands th:base-url="@{/}" ></v-commands> 
+						 <v-commands v-if="$q.platform.is.desktop" th:base-url="@{/}" ></v-commands> 
 					</div>
 					<div>
 						<v-notifications th:base-url="@{/api/}" :type-icon-map="notificationTypes()" ></v-notifications>
