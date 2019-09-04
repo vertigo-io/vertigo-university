@@ -43,7 +43,7 @@ public class MarsUserSession extends UserSession {
 	/** {@inheritDoc} */
 	@Override
 	public Locale getLocale() {
-		return Locale.FRANCE;
+		return Locale.US;
 	}
 
 	public final Person getLoggedPerson() {

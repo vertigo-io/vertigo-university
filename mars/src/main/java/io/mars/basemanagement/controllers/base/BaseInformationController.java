@@ -99,4 +99,10 @@ public class BaseInformationController extends AbstractVSpringMvcController {
 		//return "redirect:/basemanagement/base/information/" + baseId;
 	}
 
+	@PostMapping("/_ajaxValidation")
+	public ViewContext doAjaxValidation(final ViewContext viewContext, @ViewAttribute("base") final Base base) {
+		// do something or just validation from retrieving a view attribute
+		return viewContext;
+	}
+
 }
