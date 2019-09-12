@@ -13,6 +13,10 @@
   	<link rel="stylesheet" th:href="@{/static/css/mars.css}"/>
 	<link rel="icon" th:href="@{/static/img/favicon.ico}"/>
    	<script src="https://unpkg.com/vue-cookies@1.5.12/vue-cookies.js"></script> 
+	<script th:src="@{/vertigo-ui/static/3rdParty/cdn.jsdelivr.net/npm/vue-shortkey@3.1.7/dist/index.js}"></script>
+	<script type="text/javascript">
+		Vue.use(VueShortkey);
+	</script>
 	
 	<script th:src="@{/vertigo-ui/static/js/v-components/v-notifications.js}"></script>
    	<script th:src="@{/static/js/mars.js}"></script>
@@ -20,6 +24,7 @@
    	<link  th:href="@{/static/chatbot/chatbot.css}" rel="stylesheet"/>
    	<script th:src="@{/vertigo-ui/static/js/v-components/v-chatbot.js}"></script>
    	<script th:src="@{/vertigo-ui/static/js/v-components/v-commands.js}"></script>
+   	<script th:src="@{/vertigo-ui/static/js/v-components/v-handles.js}"></script>
 </head>
 
 <body class="mat desktop no-touch platform-mat">
@@ -312,6 +317,15 @@
 	  				<v-chatbot v-if="componentStates.botDrawer.open" class="column chatbot-container" th:bot-avatar="@{/static/chatbot/images/avatar/avatar_chat.png}" bot-name="mars-bot" bot-url="http://mars.dev.klee.lan.net:5005/webhooks/rest/webhook"></v-chatbot>
 	  			</q-drawer>
   			</th:block>
+  			<div v-shortkey.once="['alt', 'q']" @shortkey="$refs.quicknav.show()">
+  				<q-dialog ref="quicknav" position="top">
+  					<q-card style="width: 66%; max-width: 66%;">
+  						<q-card-section>
+		  					<v-handles th:base-url="@{/}"></v-handles>
+						</q-card-section>
+					</q-card>
+  				</q-dialog>
+  			</div>
 		</q-layout>
 		
 	</vu:page>

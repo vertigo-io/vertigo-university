@@ -137,6 +137,7 @@ modules:
     features:
       - notifications:
       - comments:
+      - handles:
       - webapi:
     featuresConfig:
       - notifications.redis:
@@ -147,6 +148,8 @@ modules:
           __flags__: ["klee"]
       - comments.memory:
           __flags__: ["home"]
+      - handles.redis:
+          __flags__: ["klee"]
   io.vertigo.dashboard.DashboardFeatures:
     features:
       - analytics:

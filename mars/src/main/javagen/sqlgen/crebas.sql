@@ -109,7 +109,7 @@ create sequence SEQ_WORK_ORDER
 create table BASE
 (
     BASE_ID     	 NUMERIC     	not null,
-    CODE        	 VARCHAR(100)	,
+    CODE        	 VARCHAR(100)	not null,
     NAME        	 VARCHAR(100)	,
     HEALTH_LEVEL	 NUMERIC     	,
     CREATION_DATE	 DATE        	,

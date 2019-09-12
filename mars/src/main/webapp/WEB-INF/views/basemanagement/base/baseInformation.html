@@ -79,6 +79,7 @@
 					<vu:text-area object="base" field="description" />
 				</vu:grid-cell>
 			</vu:grid>
+			<q-btn th:if="${model.modeEdit}" th:@click="|httpPostAjax('@{_ajaxValidation}', vueDataParams('base'))|" color="primary" label="Ajax Validation" ></q-btn> 
 		</vu:block>
 		<vu:block id="views" title="Views">
 			<vu:include-data-protected object="basePictures" field="picturefileId" />

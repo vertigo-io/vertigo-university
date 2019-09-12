@@ -17,7 +17,7 @@ create Formatter FmtDefault{
 }
 
 create Formatter FmtId{
-	className : "io.vertigo.ui.formatter.FormatterId"
+	className : "io.vertigo.dynamox.domain.formatter.FormatterId"
 }
 
 

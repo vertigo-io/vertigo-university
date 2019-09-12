@@ -85,9 +85,9 @@ public final class Base implements KeyConcept {
 	/**
 	 * Champ : DATA.
 	 * Récupère la valeur de la propriété 'Code'.
-	 * @return String code
+	 * @return String code <b>Obligatoire</b>
 	 */
-	@Field(domain = "DoCode", label = "Code")
+	@Field(domain = "DoCode", required = true, label = "Code")
 	public String getCode() {
 		return code;
 	}
@@ -95,7 +95,7 @@ public final class Base implements KeyConcept {
 	/**
 	 * Champ : DATA.
 	 * Définit la valeur de la propriété 'Code'.
-	 * @param code String
+	 * @param code String <b>Obligatoire</b>
 	 */
 	public void setCode(final String code) {
 		this.code = code;
