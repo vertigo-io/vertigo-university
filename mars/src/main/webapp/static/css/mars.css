@@ -205,11 +205,12 @@ nav a.q-item, .nav a.q_item {
 .q-list-link> .q-item.no-hoverable:hover {
 	background: none;
 }
+*/
 
 .q-page-sticky.fixed-bottom-right {
 	margin: 50px 3vw;
 }
-*/
+
 
 .marsCard .q-card {
 	width:100%;	
