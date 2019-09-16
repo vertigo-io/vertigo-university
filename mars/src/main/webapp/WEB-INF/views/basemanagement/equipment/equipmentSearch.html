@@ -14,7 +14,7 @@
 			<vu:search resultKey="equipments" searchUrl="@{/basemanagement/equipments/_search}" collectionComponentId="equipmentsTable">
 				<div class="row q-col-gutter-md">
 					<div class="m-title text-h6 self-center" style="flex-basis: 300px;">{{vueData.equipments_totalcount}} Equipments</div>
-					<div class="col">
+					<div class="col-md col-sm-12">
 						<vu:include-data-primitive key="criteria"/>
 						<q-input placeholder="Type, Name..." v-model="vueData.criteria" @input="search('equipments')" :debounce="300"  outlined bg-color="white" dense >
 							<template v-slot:prepend><q-icon name="search" /></template>

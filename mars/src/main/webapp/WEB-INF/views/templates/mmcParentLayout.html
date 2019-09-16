@@ -37,8 +37,8 @@
 				<q-toolbar class="shadow-2">
 					<div class="row items-center">
 						<q-btn flat round dense class="lt-lg"
-						th:with="showLeft=${model.vContext['componentStates'].addComponentState('navDrawer').addPrimitive('showLeft', true)}, mini=${model.vContext['componentStates']['navDrawer'].addPrimitive('mini', false)}"
-						@click="componentStates.navDrawer.showLeft = !componentStates.navDrawer.showLeft" icon="menu" aria-label="Toggle menu on left side"></q-btn>
+						th:with="mini=${model.vContext['componentStates'].addComponentState('navDrawer').addPrimitive('mini', false)}"
+						@click="$refs.menuDrawer.toggle()" icon="menu" aria-label="Toggle menu on left side"></q-btn>
 						<img th:src="@{/static/img/logo MMC white v0.1.png}" height="40px" class="gt-md"/>
 						<q-toolbar-title class="gt-md">
 								<div>Command Center</div>
@@ -47,7 +47,7 @@
 					</div>
 					<!-- Brand and toggle get grouped for better mobile display -->
 					<div class="col q-mx-xl">
-						 <v-commands v-if="$q.platform.is.desktop" th:base-url="@{/}" ></v-commands> 
+						 <v-commands class="gt-md" v-if="$q.platform.is.desktop" th:base-url="@{/}" ></v-commands> 
 					</div>
 					<div>
 						<v-notifications th:base-url="@{/api/}" :type-icon-map="notificationTypes()" ></v-notifications>
@@ -143,8 +143,10 @@
   			<q-drawer
   			  content-class="bg-white text-primary"
 		      side="left"
+		      ref="menuDrawer"
+		      show-if-above
 		      :mini="function() {var miniMenu = this.$cookies.get('miniMenu', true) === 'true';componentStates.navDrawer.mini = miniMenu;return miniMenu;}()"
-		      v-model="componentStates.navDrawer.showLeft">
+		    >
 		      
 			    <nav class="text-no-wrap">
 			      <q-list :class="{'dense-list-header':!componentStates.navDrawer.mini}" style="height:100%">
@@ -313,13 +315,13 @@
 				    	<img th:src="@{/static/chatbot/images/avatar/avatar_bar.png}" style="width: 60px; height: 60px"/>
 				    </q-btn>
 				</q-page-sticky>
-	  			<q-drawer v-model="componentStates.botDrawer.open" side="right" >
+	  			<q-drawer v-model="componentStates.botDrawer.open" side="right" @on-layout="componentStates.botDrawer.open = false" >
 	  				<v-chatbot v-if="componentStates.botDrawer.open" class="column chatbot-container" th:bot-avatar="@{/static/chatbot/images/avatar/avatar_chat.png}" bot-name="mars-bot" bot-url="http://mars.dev.klee.lan.net:5005/webhooks/rest/webhook"></v-chatbot>
 	  			</q-drawer>
   			</th:block>
-  			<div v-shortkey.once="['alt', 'q']" @shortkey="$refs.quicknav.show()">
-  				<q-dialog ref="quicknav" position="top">
-  					<q-card style="width: 66%; max-width: 66%;">
+  			<div v-if="$q.platform.is.desktop" v-shortkey.once="['alt', 'q']" @shortkey="$refs.quicknav.show()">
+  				<q-dialog ref="quicknav" >
+  					<q-card style="width: 66%; max-width: 66%; height:50%;">
   						<q-card-section>
 		  					<v-handles th:base-url="@{/}"></v-handles>
 						</q-card-section>

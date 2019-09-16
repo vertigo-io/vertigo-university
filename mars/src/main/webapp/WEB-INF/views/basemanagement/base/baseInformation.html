@@ -66,6 +66,9 @@
 			</q-card>
 		</div>
 		<vu:block id="general" title="General Information">
+			<vu:slot name="actions_slot" th:if="${model.modeEdit}">
+				<q-btn th:@click="|httpPostAjax('@{_ajaxValidation}', vueDataParams('base'))|" color="primary" label="Ajax Validation" ></q-btn>
+			</vu:slot>
 			<vu:grid cols="2">
 				<vu:text-field object="base" field="name" />
 				<vu:text-field object="base" field="code" />
@@ -79,7 +82,6 @@
 					<vu:text-area object="base" field="description" />
 				</vu:grid-cell>
 			</vu:grid>
-			<q-btn th:if="${model.modeEdit}" th:@click="|httpPostAjax('@{_ajaxValidation}', vueDataParams('base'))|" color="primary" label="Ajax Validation" ></q-btn> 
 		</vu:block>
 		<vu:block id="views" title="Views">
 			<vu:include-data-protected object="basePictures" field="picturefileId" />
