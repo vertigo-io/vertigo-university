@@ -150,6 +150,8 @@ modules:
           __flags__: ["home"]
       - handles.redis:
           __flags__: ["klee"]
+      - handles.memory:
+          __flags__: ["home"]
   io.vertigo.dashboard.DashboardFeatures:
     features:
       - analytics:
