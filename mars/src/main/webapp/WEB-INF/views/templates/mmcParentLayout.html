@@ -33,8 +33,8 @@
 	
       <q-layout view="hHh LpR fff" id="page" v-cloak>
 			<!-- BEGIN HEADER-->
-			<q-header>
-				<q-toolbar class="shadow-2">
+			<q-header elevated>
+				<q-toolbar>
 					<div class="row items-center">
 						<q-btn flat round dense class="lt-lg"
 						th:with="mini=${model.vContext['componentStates'].addComponentState('navDrawer').addPrimitive('mini', false)}"
@@ -145,6 +145,7 @@
 		      side="left"
 		      ref="menuDrawer"
 		      show-if-above
+		      elevated
 		      :mini="function() {var miniMenu = this.$cookies.get('miniMenu', true) === 'true';componentStates.navDrawer.mini = miniMenu;return miniMenu;}()"
 		    >
 		      
