@@ -108,7 +108,7 @@
 									<div class="col-6" >
 									</div>
 									<div class="col-6" >
-										<q-btn type="a" href="https://mars.dev.klee.lan.net:9443/store/" target="_blank" class="full-width" style="height:68px">
+										<q-btn type="a" th:href="${model.apiManagementUrl}" target="_blank" class="full-width" style="height:68px">
 											<div class="column items-center">
 												<div class="col-12"><img th:src="@{/static/img/logo_WSO2.png}" width="100%"></img></div>
 												<div class="col-12">API</div>
@@ -317,7 +317,7 @@
 				    </q-btn>
 				</q-page-sticky>
 	  			<q-drawer v-model="componentStates.botDrawer.open" side="right" @on-layout="componentStates.botDrawer.open = false" >
-	  				<v-chatbot v-if="componentStates.botDrawer.open" class="column chatbot-container" th:bot-avatar="@{/static/chatbot/images/avatar/avatar_chat.png}" bot-name="mars-bot" bot-url="http://mars.dev.klee.lan.net:5005/webhooks/rest/webhook"></v-chatbot>
+	  				<v-chatbot v-if="componentStates.botDrawer.open" class="column chatbot-container" th:bot-avatar="@{/static/chatbot/images/avatar/avatar_chat.png}" bot-name="mars-bot" th:bot-url="${model.chatbotUrl}"></v-chatbot>
 	  			</q-drawer>
   			</th:block>
   			<div v-if="$q.platform.is.desktop" v-shortkey.once="['alt', 'q']" @shortkey="$refs.quicknav.show()">
