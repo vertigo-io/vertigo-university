@@ -316,7 +316,7 @@
 				    	<img th:src="@{/static/chatbot/images/avatar/avatar_bar.png}" style="width: 60px; height: 60px"/>
 				    </q-btn>
 				</q-page-sticky>
-	  			<q-drawer v-model="componentStates.botDrawer.open" side="right" @on-layout="componentStates.botDrawer.open = false" >
+	  			<q-drawer :value="componentStates.botDrawer.open" ref="botDrawer" side="right" @on-layout="function(state) {componentStates.botDrawer.open = componentStates.botDrawer.open && state; if (!componentStates.botDrawer.open) {$refs.botDrawer.hide()} }" >
 	  				<v-chatbot v-if="componentStates.botDrawer.open" class="column chatbot-container" th:bot-avatar="@{/static/chatbot/images/avatar/avatar_chat.png}" bot-name="mars-bot" th:bot-url="${model.chatbotUrl}"></v-chatbot>
 	  			</q-drawer>
   			</th:block>
