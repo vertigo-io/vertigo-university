@@ -16,10 +16,10 @@ import io.mars.basemanagement.domain.BasesSummary;
 import io.mars.basemanagement.domain.Geosector;
 import io.mars.basemanagement.domain.Picture;
 import io.mars.basemanagement.search.BaseIndex;
-import io.mars.commons.services.CommonsServices;
 import io.mars.domain.DtDefinitions.PictureFields;
 import io.mars.fileinfo.FileInfoStd;
 import io.mars.hr.services.person.PersonServices;
+import io.mars.support.services.MarsFileServices;
 import io.vertigo.account.account.Account;
 import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.core.component.Activeable;
@@ -51,7 +51,7 @@ public class BaseServices implements Component, Activeable {
 	private BasemanagementPAO basemanagementPAO;
 
 	@Inject
-	private CommonsServices commonsServices;
+	private MarsFileServices commonsServices;
 	@Inject
 	private FileManager fileManager;
 	@Inject

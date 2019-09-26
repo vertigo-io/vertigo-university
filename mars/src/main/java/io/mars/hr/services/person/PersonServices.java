@@ -2,10 +2,10 @@ package io.mars.hr.services.person;
 
 import javax.inject.Inject;
 
-import io.mars.commons.services.CommonsServices;
 import io.mars.fileinfo.FileInfoStd;
 import io.mars.hr.dao.PersonDAO;
 import io.mars.hr.domain.Person;
+import io.mars.support.services.MarsFileServices;
 import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.core.component.Activeable;
 import io.vertigo.core.component.Component;
@@ -33,7 +33,7 @@ public class PersonServices implements Component, Activeable {
 	private FileManager fileManager;
 
 	@Inject
-	private CommonsServices commonsServices;
+	private MarsFileServices commonsServices;
 
 	@Inject
 	private CollectionsManager collectionsManager;

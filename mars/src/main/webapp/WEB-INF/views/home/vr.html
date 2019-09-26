@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="http://www.morphbit.com/thymeleaf/component"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{templates/mmcParentLayout}"
+>
+	<head>
+		<title>Vr</title>
+		<script src="https://aframe.io/releases/0.9.1/aframe.min.js"></script>
+		<script src="https://unpkg.com/aframe-html-shader@0.2.0/dist/aframe-html-shader.min.js"></script>
+		<script src="https://unpkg.com/aframe-teleport-controls@0.3.0/dist/aframe-teleport-controls.min.js"></script>
+	</head>
+	
+	<body>
+		<section layout:fragment="page-container">
+		 	<vu:include-data object="bases" field="'*'" />
+		 	
+		    <a-scene background="color: #ECECEC">
+		      
+			  <a-assets>
+			    <a-asset-item id="cityModel" th:src="@{/static/3d/models/out.glb}"></a-asset-item>
+			  </a-assets>
+			  <a-entity gltf-model="#cityModel" scale="1 1 1" position="0 0 0" rotation="0 0 0" modify-materials></a-entity>
+			  <a-plane material="shader: html; target: #baseDetail; ratio: height; transparent: true; side: double; fps: 1" position="4 2 -4" height="2"></a-plane>
+			  <a-box position="-1 0.5 -4" color="#4CC3D9" shadow></a-box>
+			  <a-entity id="cameraRig">
+			  	<a-entity id="head" camera wasd-controls look-controls position="0 1.6 0"></a-entity>
+			  	<a-entity id="rightHand" hand-controls="right" teleport-controls="cameraRig: #cameraRig; teleportOrgin: #head;"></a-entity>
+			  </a-entity>
+			</a-scene>
+			
+			<div style="width: 100%; height: 100%; position: fixed; left: 0; top: 0; z-index: -1; overflow: hidden">
+		      <div id="baseDetail">
+		      	<q-card color="white" text-color="grey" >
+		        	<q-card-section>
+						<q-img th::src="|'@{/basemanagement/base/}'+vueData.bases[0].baseId+'/mainPicture'|"></q-img>
+					</q-card-section>
+					<q-card-section class="row" >				
+							<div class="col-4 q-mr-sm" style="max-width: 100px;" >
+								<div><q-knob
+									  :value="vueData.bases[0].healthLevel"
+									  :min="0"
+									  :max="100"
+									  color="positive"
+									  size="100%"
+									  :readonly="true" 
+									  show-value><q-icon name="fas fa-dice-d20" size="3em" color="primary" style="margin-top:-8px" ></q-icon></q-knob></div>
+							</div>
+							<div class="col ellipsis" >
+								<span class="text-primary small-caps text-bigger">{{vueData.bases[0].name}}</span><br/>
+								<span >{{vueData.bases[0].code}}</span><br/>
+								Created : {{vueData.bases[0].creationDate}}<br/>
+								<q-icon name="location_on" size="25px"></q-icon><br/>		
+							</div>		
+					</q-card-section>
+					<q-card-separator></q-card-separator>
+					<q-card-actions>
+						<q-chips-input :value="vueData.bases[0].tags"  :readonly="true"  :hide-underline="true" ></q-chips-input>
+					</q-card-actions>
+				</q-card>
+		      </div>
+		    </div>
+		</section>
+		 
+		<div layout:fragment="javascript-footer">
+			
+		</div>
+	</body>
+</html>

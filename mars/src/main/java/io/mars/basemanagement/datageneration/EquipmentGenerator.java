@@ -14,7 +14,7 @@ import io.mars.catalog.dao.EquipmentTypeDAO;
 import io.mars.catalog.domain.EquipmentCategory;
 import io.mars.catalog.domain.EquipmentType;
 import io.mars.domain.DtDefinitions.EquipmentCategoryFields;
-import io.mars.util.CSVReaderUtil;
+import io.mars.support.util.CSVReaderUtil;
 import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.core.component.Component;
 import io.vertigo.core.resource.ResourceManager;

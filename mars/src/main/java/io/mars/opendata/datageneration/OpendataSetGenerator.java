@@ -5,7 +5,7 @@ import javax.inject.Inject;
 import io.mars.opendata.dao.OpendataSetDAO;
 import io.mars.opendata.domain.OpendataSet;
 import io.mars.opendata.domain.OpendataSetStatusEnum;
-import io.mars.util.CSVReaderUtil;
+import io.mars.support.util.CSVReaderUtil;
 import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.core.component.Component;
 import io.vertigo.core.resource.ResourceManager;

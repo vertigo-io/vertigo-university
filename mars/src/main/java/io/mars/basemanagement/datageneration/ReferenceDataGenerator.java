@@ -6,7 +6,7 @@ import io.mars.basemanagement.dao.BusinessDAO;
 import io.mars.basemanagement.dao.GeosectorDAO;
 import io.mars.basemanagement.domain.Business;
 import io.mars.basemanagement.domain.Geosector;
-import io.mars.util.CSVReaderUtil;
+import io.mars.support.util.CSVReaderUtil;
 import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.core.component.Component;
 import io.vertigo.core.resource.ResourceManager;

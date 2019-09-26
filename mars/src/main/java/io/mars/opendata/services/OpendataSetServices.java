@@ -2,10 +2,10 @@ package io.mars.opendata.services;
 
 import javax.inject.Inject;
 
-import io.mars.commons.services.CommonsServices;
 import io.mars.fileinfo.FileInfoStd;
 import io.mars.opendata.dao.OpendataSetDAO;
 import io.mars.opendata.domain.OpendataSet;
+import io.mars.support.services.MarsFileServices;
 import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.core.component.Activeable;
 import io.vertigo.core.component.Component;
@@ -27,7 +27,7 @@ public class OpendataSetServices implements Component, Activeable {
 	@Inject
 	private StoreManager storeManager;
 	@Inject
-	private CommonsServices commonsServices;
+	private MarsFileServices commonsServices;
 	@Inject
 	private FileManager fileManager;
 

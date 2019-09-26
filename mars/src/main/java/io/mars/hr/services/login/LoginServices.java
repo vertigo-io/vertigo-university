@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
-import io.mars.commons.MarsUserSession;
 import io.mars.hr.domain.Person;
 import io.mars.hr.services.person.PersonServices;
+import io.mars.support.MarsUserSession;
 import io.vertigo.account.account.Account;
 import io.vertigo.account.authentication.AuthenticationManager;
 import io.vertigo.account.authorization.VSecurityException;

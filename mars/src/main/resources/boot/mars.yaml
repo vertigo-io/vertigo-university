@@ -101,7 +101,7 @@ modules:
   io.vertigo.account.AccountFeatures:
     features:
       - security:
-          userSessionClassName: io.mars.commons.MarsUserSession
+          userSessionClassName: io.mars.support.MarsUserSession
       - account:
       - authentication:
       - authorization:
@@ -169,7 +169,7 @@ modules:
           walletPath: ${walletPath}
       - ledger.fake:
           __flags__: ["home"]
-  io.mars.commons.CommonsFeatures:
+  io.mars.support.SupportFeatures:
   io.mars.catalog.CatalogFeatures:
   io.mars.hr.HrFeatures:
   io.mars.basemanagement.BasemanagementFeatures:
@@ -179,14 +179,16 @@ modules:
           host: ${mosquittoHost}
   io.mars.maintenance.MaintenanceFeatures:
   io.mars.opendata.OpendataFeatures:
+  io.mars.job.JobFeatures:
   io.mars.datageneration.DataGenerationFeatures:
     features:
       - datageneration:
           initialEquipmentUnits: 1500
+  io.mars.home.HomeFeatures:
   io.mars.command.CommandFeatures:
 initializers:
-  - io.mars.boot.DataBaseInitializer:
+  - io.mars.support.boot.DataBaseInitializer:
       __flags__: ["initdb"]
-  - io.mars.boot.I18nResourcesInitializer:
-  - io.mars.boot.SearchInitializer:
-  - io.mars.boot.OrchestraInitializer:
+  - io.mars.support.boot.I18nResourcesInitializer:
+  - io.mars.support.boot.SearchInitializer:
+  - io.mars.support.boot.OrchestraInitializer:
