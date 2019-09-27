@@ -114,7 +114,7 @@ modules:
           userToAccountMapping: 'id:personId, displayName:lastName, email:email, authToken:email, photo: picturefileId'
           groupToGroupAccountMapping: 'id:groupId, displayName:name'
       - authentication.text:
-          filePath: /initdata/userAccounts.txt
+          filePath: /io/mars/support/userAccounts.txt
   io.vertigo.vega.VegaFeatures:
     features:
         - webservices:

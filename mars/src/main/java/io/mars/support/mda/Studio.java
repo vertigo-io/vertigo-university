@@ -1,4 +1,4 @@
-package io.mars.mda;
+package io.mars.support.mda;
 
 import javax.inject.Inject;
 
@@ -52,7 +52,7 @@ public class Studio {
 								Param.of("generateDrop", "true"),
 								Param.of("generateMasterData", "true"))
 						.withJsonMasterDataValuesProvider(
-								Param.of("fileName", "io/mars/masterDataValues.json"))
+								Param.of("fileName", "io/mars/support/masterDataValues.json"))
 
 						.build())
 				.build();

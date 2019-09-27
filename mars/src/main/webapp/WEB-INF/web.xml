@@ -17,7 +17,7 @@
 	</context-param>
 	<context-param>
 		<param-name>boot.activeFlags</param-name>
-		<param-value>klee</param-value>
+		<param-value>home</param-value>
 	</context-param>
 
 	<filter>

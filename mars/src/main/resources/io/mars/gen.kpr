@@ -1,6 +1,6 @@
 run.kpr
 
-common/mda/file.ksp
+support/mda/file.ksp
 basemanagement/basemanagement_mda.kpr
 catalog/catalog_mda.kpr
 hr/hr_mda.kpr

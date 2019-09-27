@@ -63,17 +63,17 @@ public class DataGenerator implements Component {
 	}
 
 	private void generateInitialOpendataSets() {
-		opendataSetGenerator.createInitialOpendataSetsFromCSV("initdata/opendataSets.csv");
+		opendataSetGenerator.createInitialOpendataSetsFromCSV("io/mars/datageneration/opendataSets.csv");
 	}
 
 	private void generateInitialEquipments(final List<Base> bases) {
 		equipmentGenerator.createInitialEquipmentCategories();
-		equipmentGenerator.createInitialEquipmentTypesFromCSV("initdata/equipmentTypes.csv");
+		equipmentGenerator.createInitialEquipmentTypesFromCSV("io/mars/datageneration/equipmentTypes.csv");
 		equipmentGenerator.createInitialEquipments(initialEquipmentUnits, bases);
 	}
 
 	private void generateInitialPersons(final List<Base> bases) {
-		personGenerator.createInitialPersonsFromCSV("initdata/persons.csv", bases);
+		personGenerator.createInitialPersonsFromCSV("io/mars/datageneration/persons.csv", bases);
 	}
 
 	private List<Base> generateInitialBases() {

@@ -1,0 +1,12 @@
+FirstName;LastName;Email;Tags;DateHired;Picture
+James T.;Kirk;jtkirk@mmc.co.mars;"#historic;#captain";12/07/2023;/io/mars/datageneration/files/persons/jtkirk.png
+John;König;jkonig@mmc.co.mars;"#moon;#1999";04/12/2033;/io/mars/datageneration/files/persons/jkonig.png
+Neil;Armstrong;narmstrong@mmc.co.mars;"#nasa;#first;#giant";05/12/2033;/io/mars/datageneration/files/persons/narmstrong.png
+Jean-Luc;Picard;jlpicard@mmc.co.mars;"#enterprise;#french";06/12/2005;/io/mars/datageneration/files/persons/jlpicard.png
+Darth;Vader;dvader@mmc.co.mars;#evil;07/01/2008;/io/mars/datageneration/files/persons/dvader.png
+Han;Solo;hsolo@mmc.co.mars;"#hero;#general";04/12/2033;/io/mars/datageneration/files/persons/hsolo.png
+Jim;Lovell;jlovell@mmc.co.mars;"#houston;#problem";05/12/2033;/io/mars/datageneration/files/persons/jlovell.png
+William;Adama;wadama@mmc.co.mars;#lost;06/12/2005;/io/mars/datageneration/files/persons/wadama.png
+Worker;One;wone@mmc.co.mars;#plumber;07/01/2008;
+Worker;Two;wtwo@mmc.co.mars;#worker;12/12/2033;
+Worker;Three;wthree@mmc.co.mars;"#worker;#efficient";13/12/2033;

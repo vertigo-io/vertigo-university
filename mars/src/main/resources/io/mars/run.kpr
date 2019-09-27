@@ -1,5 +1,5 @@
-common/domains.ksp
-common/mdm.ksp
+support/domains.ksp
+support/mdm.ksp
 
 basemanagement/basemanagement_run.kpr
 catalog/catalog_run.kpr

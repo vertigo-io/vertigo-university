@@ -26,8 +26,8 @@ public class ReferenceDataGenerator implements Component {
 	private ResourceManager resourceManager;
 
 	public void generateReferenceData() {
-		CSVReaderUtil.parseCSV(resourceManager, "initdata/geosectors.csv", this::createInitialGeosectorFromCSV);
-		CSVReaderUtil.parseCSV(resourceManager, "initdata/businesses.csv", this::createInitialBusinessFromCSV);
+		CSVReaderUtil.parseCSV(resourceManager, "io/mars/datageneration/geosectors.csv", this::createInitialGeosectorFromCSV);
+		CSVReaderUtil.parseCSV(resourceManager, "io/mars/datageneration/businesses.csv", this::createInitialBusinessFromCSV);
 	}
 
 	private void createInitialBusinessFromCSV(final String csvFilePath, final String[] businessRecord) {
