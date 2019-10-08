@@ -43,7 +43,7 @@ public final class TicketDAO extends DAO<Ticket, java.lang.Long> implements Stor
 
 	/**
 	 * Execute la tache TkGetLastTickets.
-	 * @return io.vertigo.dynamo.domain.model.DtList<io.mars.maintenance.domain.Ticket> tickets
+	 * @return DtList de Ticket tickets
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.mars.maintenance.domain.Ticket> getLastTickets() {
 		final Task task = createTaskBuilder("TkGetLastTickets")
@@ -56,7 +56,7 @@ public final class TicketDAO extends DAO<Ticket, java.lang.Long> implements Stor
 	/**
 	 * Execute la tache TkGetLastTicketsByBaseId.
 	 * @param baseId Long 
-	 * @return io.vertigo.dynamo.domain.model.DtList<io.mars.maintenance.domain.Ticket> tickets
+	 * @return DtList de Ticket tickets
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.mars.maintenance.domain.Ticket> getLastTicketsByBaseId(final Long baseId) {
 		final Task task = createTaskBuilder("TkGetLastTicketsByBaseId")

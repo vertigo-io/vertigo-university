@@ -66,7 +66,7 @@ public final class EquipmentDAO extends DAO<Equipment, java.lang.Long> implement
 	/**
 	 * Execute la tache TkGetEquipmentsByBaseCode.
 	 * @param code String 
-	 * @return io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.domain.Equipment> equipments
+	 * @return DtList de Equipment equipments
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.domain.Equipment> getEquipmentsByBaseCode(final String code) {
 		final Task task = createTaskBuilder("TkGetEquipmentsByBaseCode")
@@ -80,7 +80,7 @@ public final class EquipmentDAO extends DAO<Equipment, java.lang.Long> implement
 	/**
 	 * Execute la tache TkGetLastPurchasedEquipmentsByBaseId.
 	 * @param baseId Long 
-	 * @return io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.domain.Equipment> equipments
+	 * @return DtList de Equipment equipments
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.domain.Equipment> getLastPurchasedEquipmentsByBaseId(final Long baseId) {
 		final Task task = createTaskBuilder("TkGetLastPurchasedEquipmentsByBaseId")
@@ -93,7 +93,7 @@ public final class EquipmentDAO extends DAO<Equipment, java.lang.Long> implement
 
 	/**
 	 * Execute la tache TkInsertEquipmentsBatch.
-	 * @param equipmentsList io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.domain.Equipment> 
+	 * @param equipmentsList DtList de Equipment 
 	*/
 	public void insertEquipmentsBatch(final io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.domain.Equipment> equipmentsList) {
 		final Task task = createTaskBuilder("TkInsertEquipmentsBatch")
@@ -106,8 +106,8 @@ public final class EquipmentDAO extends DAO<Equipment, java.lang.Long> implement
 	 * Execute la tache TkLoadEquipmentsByChunk.
 	 * @param limit Long 
 	 * @param offset Long 
-	 * @param dateExist java.time.Instant 
-	 * @return io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.domain.Equipment> equipmentList
+	 * @param dateExist Instant 
+	 * @return DtList de Equipment equipmentList
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.domain.Equipment> loadEquipmentsByChunk(final Long limit, final Long offset, final java.time.Instant dateExist) {
 		final Task task = createTaskBuilder("TkLoadEquipmentsByChunk")

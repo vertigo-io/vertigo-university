@@ -43,7 +43,7 @@ public final class HrPAO implements StoreServices {
 	/**
 	 * Execute la tache TkGetMissionsDisplayByPersonId.
 	 * @param personId Long 
-	 * @return io.vertigo.dynamo.domain.model.DtList<io.mars.hr.domain.MissionDisplay> missions
+	 * @return DtList de MissionDisplay missions
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.mars.hr.domain.MissionDisplay> getMissionsDisplayByPersonId(final Long personId) {
 		final Task task = createTaskBuilder("TkGetMissionsDisplayByPersonId")

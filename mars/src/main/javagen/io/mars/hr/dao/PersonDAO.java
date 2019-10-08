@@ -45,7 +45,7 @@ public final class PersonDAO extends DAO<Person, java.lang.Long> implements Stor
 	/**
 	 * Execute la tache TkGetBaseManager.
 	 * @param baseId Long 
-	 * @return Option de io.mars.hr.domain.Person manager
+	 * @return Option de Person manager
 	*/
 	public Optional<io.mars.hr.domain.Person> getBaseManager(final Long baseId) {
 		final Task task = createTaskBuilder("TkGetBaseManager")

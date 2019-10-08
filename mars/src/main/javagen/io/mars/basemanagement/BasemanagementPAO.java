@@ -43,7 +43,7 @@ public final class BasemanagementPAO implements StoreServices {
 	/**
 	 * Execute la tache TkGetBaseOverview.
 	 * @param baseId Long 
-	 * @return io.mars.basemanagement.domain.BaseOverview baseOverview
+	 * @return BaseOverview baseOverview
 	*/
 	public io.mars.basemanagement.domain.BaseOverview getBaseOverview(final Long baseId) {
 		final Task task = createTaskBuilder("TkGetBaseOverview")
@@ -56,7 +56,7 @@ public final class BasemanagementPAO implements StoreServices {
 
 	/**
 	 * Execute la tache TkGetBasesSummary.
-	 * @return io.mars.basemanagement.domain.BasesSummary basesSummary
+	 * @return BasesSummary basesSummary
 	*/
 	public io.mars.basemanagement.domain.BasesSummary getBasesSummary() {
 		final Task task = createTaskBuilder("TkGetBasesSummary")
@@ -69,7 +69,7 @@ public final class BasemanagementPAO implements StoreServices {
 	/**
 	 * Execute la tache TkGetEquipmentMaintenanceOverview.
 	 * @param equipmentId Long 
-	 * @return io.mars.basemanagement.domain.EquipmentMaintenanceOverview equipmentMaintenanceOverview
+	 * @return EquipmentMaintenanceOverview equipmentMaintenanceOverview
 	*/
 	public io.mars.basemanagement.domain.EquipmentMaintenanceOverview getEquipmentMaintenanceOverview(final Long equipmentId) {
 		final Task task = createTaskBuilder("TkGetEquipmentMaintenanceOverview")
@@ -83,7 +83,7 @@ public final class BasemanagementPAO implements StoreServices {
 	/**
 	 * Execute la tache TkGetEquipmentsOverview.
 	 * @param baseId Long 
-	 * @return io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.domain.EquipmentOverview> overview
+	 * @return DtList de EquipmentOverview overview
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.domain.EquipmentOverview> getEquipmentsOverview(final Long baseId) {
 		final Task task = createTaskBuilder("TkGetEquipmentsOverview")
@@ -96,8 +96,8 @@ public final class BasemanagementPAO implements StoreServices {
 
 	/**
 	 * Execute la tache TkLoadBaseIndex.
-	 * @param baseIds java.util.List<Long> 
-	 * @return io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.search.BaseIndex> dtcIndex
+	 * @param baseIds List de Long 
+	 * @return DtList de BaseIndex dtcIndex
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.search.BaseIndex> loadBaseIndex(final java.util.List<Long> baseIds) {
 		final Task task = createTaskBuilder("TkLoadBaseIndex")
@@ -110,8 +110,8 @@ public final class BasemanagementPAO implements StoreServices {
 
 	/**
 	 * Execute la tache TkLoadEquipmentIndex.
-	 * @param equipmentIds java.util.List<Long> 
-	 * @return io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.search.EquipmentIndex> dtcIndex
+	 * @param equipmentIds List de Long 
+	 * @return DtList de EquipmentIndex dtcIndex
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.search.EquipmentIndex> loadEquipmentIndex(final java.util.List<Long> equipmentIds) {
 		final Task task = createTaskBuilder("TkLoadEquipmentIndex")
@@ -124,7 +124,7 @@ public final class BasemanagementPAO implements StoreServices {
 
 	/**
 	 * Execute la tache TkSelectBaseId.
-	 * @return java.util.List<Long> baseIdList
+	 * @return List de Long baseIdList
 	*/
 	public java.util.List<Long> selectBaseId() {
 		final Task task = createTaskBuilder("TkSelectBaseId")
@@ -136,7 +136,7 @@ public final class BasemanagementPAO implements StoreServices {
 
 	/**
 	 * Execute la tache TkSelectBusinessId.
-	 * @return java.util.List<Long> businessIdList
+	 * @return List de Long businessIdList
 	*/
 	public java.util.List<Long> selectBusinessId() {
 		final Task task = createTaskBuilder("TkSelectBusinessId")
@@ -148,7 +148,7 @@ public final class BasemanagementPAO implements StoreServices {
 
 	/**
 	 * Execute la tache TkSelectGeosectorId.
-	 * @return java.util.List<Long> geosectorIdList
+	 * @return List de Long geosectorIdList
 	*/
 	public java.util.List<Long> selectGeosectorId() {
 		final Task task = createTaskBuilder("TkSelectGeosectorId")

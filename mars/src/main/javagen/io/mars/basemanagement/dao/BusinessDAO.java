@@ -43,7 +43,7 @@ public final class BusinessDAO extends DAO<Business, java.lang.Long> implements 
 
 	/**
 	 * Execute la tache TkSelectBusiness.
-	 * @return io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.domain.Business> dtcBusiness
+	 * @return DtList de Business dtcBusiness
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.mars.basemanagement.domain.Business> selectBusiness() {
 		final Task task = createTaskBuilder("TkSelectBusiness")
