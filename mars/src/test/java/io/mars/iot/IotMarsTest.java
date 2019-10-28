@@ -78,6 +78,7 @@ public final class IotMarsTest extends AbstractTestCaseJU5 {
 	}
 
 	@Test
+	@Disabled
 	public void testMqttClient() throws InterruptedException {
 
 		final MemoryPersistence persistence = new MemoryPersistence();

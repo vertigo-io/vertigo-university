@@ -112,11 +112,13 @@ function _chatbotWrapper() {
 		}
 
 		for (var prop in mapping) {
-			var urlList = mapping[prop];
-			for (var i = 0; i < urlList.length; i++) {
-				var curUrl = urlList[i];
-				if (url.indexOf(curUrl) !== -1) {
-					return prop;
+			if (mapping.hasOwnProperty(prop)) {
+				var urlList = mapping[prop];
+				for (var i = 0; i < urlList.length; i++) {
+					var curUrl = urlList[i];
+					if (url.indexOf(curUrl) !== -1) {
+						return prop;
+					}
 				}
 			}
 		}

@@ -18,7 +18,7 @@ import io.vertigo.database.timeseries.TimedDatas;
 import io.vertigo.lang.Assertion;
 
 public class EquipmentEnvironmentServices implements Component {
-	private final String appName = "mars-test"; // TODO: add a param
+	private static final String APP_NAME = "mars-test"; // TODO: add a param
 
 	@Inject
 	private EventBusManager eventBusManager;
@@ -27,28 +27,28 @@ public class EquipmentEnvironmentServices implements Component {
 	private TimeSeriesDataBaseManager timeSeriesDataBaseManager;
 
 	public TimedDatas getTimeSeries(final List<String> measures, final DataFilter dataFilter, final TimeFilter timeFilter) {
-		return timeSeriesDataBaseManager.getTimeSeries(appName, measures, dataFilter, timeFilter);
+		return timeSeriesDataBaseManager.getTimeSeries(APP_NAME, measures, dataFilter, timeFilter);
 
 	}
 
 	public TimedDatas getClusteredTimeSeries(final ClusteredMeasure clusteredMeasure, final DataFilter dataFilter, final TimeFilter timeFilter) {
-		return timeSeriesDataBaseManager.getClusteredTimeSeries(appName, clusteredMeasure, dataFilter, timeFilter);
+		return timeSeriesDataBaseManager.getClusteredTimeSeries(APP_NAME, clusteredMeasure, dataFilter, timeFilter);
 	}
 
 	public TimedDatas getTabularTimedData(final List<String> measures, final DataFilter dataFilter, final TimeFilter timeFilter, final String... groupBy) {
-		return timeSeriesDataBaseManager.getTabularTimedData(appName, measures, dataFilter, timeFilter, groupBy);
+		return timeSeriesDataBaseManager.getTabularTimedData(APP_NAME, measures, dataFilter, timeFilter, groupBy);
 	}
 
 	public TabularDatas getTabularData(final List<String> measures, final DataFilter dataFilter, final TimeFilter timeFilter, final String... groupBy) {
-		return timeSeriesDataBaseManager.getTabularData(appName, measures, dataFilter, timeFilter, groupBy);
+		return timeSeriesDataBaseManager.getTabularData(APP_NAME, measures, dataFilter, timeFilter, groupBy);
 	}
 
 	public TabularDatas getTops(final String measure, final DataFilter dataFilter, final TimeFilter timeFilter, final String groupBy, final int maxRows) {
-		return timeSeriesDataBaseManager.getTops(appName, measure, dataFilter, timeFilter, groupBy, maxRows);
+		return timeSeriesDataBaseManager.getTops(APP_NAME, measure, dataFilter, timeFilter, groupBy, maxRows);
 	}
 
 	public List<String> getTagValues(final String measurement, final String tag) {
-		return timeSeriesDataBaseManager.getTagValues(appName, measurement, tag);
+		return timeSeriesDataBaseManager.getTagValues(APP_NAME, measurement, tag);
 	}
 
 	public Double getLastTemperature() {

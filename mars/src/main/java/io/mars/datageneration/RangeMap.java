@@ -19,7 +19,7 @@ final class RangeMap<T extends Comparable<T>, V> {
 		if (!isOverlappingExistingSegments(myRange)) {
 			myMap.put(myRange, value);
 		} else {
-			throw new IllegalArgumentException("Range " + minValue.toString() + "-" + maxValue.toString() + " is overlapping previously added segments");
+			throw new IllegalArgumentException("Range " + minValue + "-" + maxValue + " is overlapping previously added segments");
 		}
 
 	}

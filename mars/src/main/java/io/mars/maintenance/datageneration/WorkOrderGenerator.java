@@ -25,10 +25,10 @@ public class WorkOrderGenerator implements Component {
 	/*
 		@Inject
 		private VTransactionManager transactionManager;
-
+	
 		@Inject
 		private EquipmentDAO equipmentDAO;
-
+	
 		@Inject
 		private TicketDAO ticketDAO;
 	*/
@@ -37,28 +37,28 @@ public class WorkOrderGenerator implements Component {
 
 	/*
 	public void generatePastWorkOrders(final Instant instant, final ChronoUnit chronoUnit, final int step) {
-
+	
 		try (VTransactionWritable tx = transactionManager.createCurrentTransaction()) {
-
+	
 			int nbRecordsFound = CHUNK_SIZE;
 			Long previousLastId = 0L;
-
+	
 			while (nbRecordsFound == CHUNK_SIZE) {
 				final DtList<Ticket> tickets = ticketDAO.loadTicketssByChunk(new Long(CHUNK_SIZE), previousLastId, instant);
 				nbRecordsFound = tickets.size();
 				if (nbRecordsFound > 0) {
 					previousLastId = tickets.get(nbRecordsFound - 1).getEquipmentId();
-
+	
 					for (final Ticket ticket : tickets) {
 						createWorkOrdersForTicket(ticket, instant, chronoUnit, step);
 					}
 				}
 			}
-
+	
 			tx.commit();
 		}
 	}
-
+	
 	*/
 
 	public void createWorkOrdersForTicket(final Ticket ticket, final LocalDate nowLocalDate) {
@@ -85,7 +85,7 @@ public class WorkOrderGenerator implements Component {
 			workOrder.setTicketId(ticket.getTicketId());
 			workOrder.setTicketCode(ticket.getCode());
 			workOrder.setDescription("Cette opération de maintenance concerne le ticket " + ticket.getCode() + ". Elle a été créée le " + dateCreated + ".");
-			workOrder.setDueDate(dateCreated.plus(DataGenerator.RND.nextInt(2 * MAX_DUE_DATE_DELAY + 1) - MAX_DUE_DATE_DELAY, ChronoUnit.DAYS));
+			workOrder.setDueDate(dateCreated.plus(DataGenerator.RND.nextInt(2 * MAX_DUE_DATE_DELAY + 1) - (long) MAX_DUE_DATE_DELAY, ChronoUnit.DAYS));
 			workOrderDAO.create(workOrder);
 		}
 

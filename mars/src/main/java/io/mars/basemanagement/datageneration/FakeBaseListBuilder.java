@@ -110,7 +110,7 @@ public final class FakeBaseListBuilder implements Builder {
 	private static LocalDate getCreationDate() {
 
 		final LocalDate today = LocalDate.now();
-		return today.minus(31 + DataGenerator.RND.nextInt(3650), ChronoUnit.DAYS);
+		return today.minus(31L + DataGenerator.RND.nextInt(3650), ChronoUnit.DAYS);
 	}
 
 	private static int getHealthLevel() {

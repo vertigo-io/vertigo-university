@@ -92,7 +92,7 @@ public class DataGenerator implements Component {
 		while (timeCursor.isBefore(to)) {
 			ticketGenerator.generatePastTickets(timeCursor, ChronoUnit.DAYS, 1);
 			// tous les 10 à 20 jours
-			timeCursor = timeCursor.plus(RND.nextInt(10) + 10, ChronoUnit.DAYS);
+			timeCursor = timeCursor.plus(RND.nextInt(10) + 10L, ChronoUnit.DAYS);
 		}
 	}
 

@@ -82,7 +82,7 @@ public class TicketGenerator implements Component {
 
 		if (purchaseDate.isBefore(instant)) {
 			final long yearOfEvent = ChronoUnit.YEARS.between(purchaseDate.atZone(ZoneOffset.UTC), instant.atZone(ZoneOffset.UTC));
-			final Double density = qualityEquipmentDensityDistribution.getDensity(Double.valueOf(yearOfEvent));
+			final Double density = qualityEquipmentDensityDistribution.getDensity(yearOfEvent);
 
 			final Double realDensity = density / (chronoUnit.getDuration().getSeconds() / ChronoUnit.YEARS.getDuration().getSeconds()) * step;
 			final Double tirage = DataGenerator.RND.nextDouble();

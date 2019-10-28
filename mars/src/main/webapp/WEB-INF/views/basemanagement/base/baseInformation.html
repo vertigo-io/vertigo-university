@@ -13,7 +13,7 @@
 	</section>
 	<section>
 		<div layout:fragment="content-header-left" id="baseImg">
-			<img th:src="@{|/basemanagement/base/${model.base.baseId}/mainPicture|}" class="detailImg gt-md" />
+			<img th:src="@{|/basemanagement/base/${model.base.baseId}/mainPicture|}" class="detailImg gt-md" alt="Main picture"/>
 		</div>
 		<div layout:fragment="content-header-title" id="baseTitle">
 			<span class="text-bigger" th:text="${model.base.name}"></span> <br />

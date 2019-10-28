@@ -102,7 +102,7 @@ public class FakeEquipmentListBuilder implements Builder {
 
 	private static LocalDate getPurchaseDate() {
 		final LocalDate today = LocalDate.now();
-		return today.minus(31 + DataGenerator.RND.nextInt(3650), ChronoUnit.DAYS);
+		return today.minus(31L + DataGenerator.RND.nextInt(3650), ChronoUnit.DAYS);
 	}
 
 	private static BigDecimal getRentingFee() {

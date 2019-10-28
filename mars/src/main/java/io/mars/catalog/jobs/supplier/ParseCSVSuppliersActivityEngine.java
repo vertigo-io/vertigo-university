@@ -121,7 +121,7 @@ public class ParseCSVSuppliersActivityEngine extends AbstractActivityEngine {
 			supplier.setNomenclatureActivite(fields[29]);
 		}
 		if (!StringUtil.isEmpty(fields[30])) {
-			supplier.setNicSiege(Long.parseLong(fields[30]));
+			supplier.setNicSiege(Long.valueOf(fields[30]));
 		}
 		if (!StringUtil.isEmpty(fields[32])) {
 			supplier.setCaractereEmployeur("O".equals(fields[32]) ? true : false);

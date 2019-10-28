@@ -23,7 +23,7 @@ public class IotEquipmentServices implements Component {
 	public void onInput(final InputEvent inputEvent) {
 		Assertion.checkNotNull(inputEvent);
 		//---
-		LOGGER.info("Actuator is triggered " + inputEvent.getType());
+		LOGGER.info("Actuator is triggered {}", inputEvent.getType());
 
 		final OutputEvent outputEvent;
 		if (inputEvent.getPayloadOpt().isPresent()) {

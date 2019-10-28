@@ -29,9 +29,9 @@ public class WebHandlesController extends AbstractVSpringMvcController {
 		final UID uid = handleServices.getHandleByCode(handle).getUid();
 		switch (uid.getDefinition().getName()) {
 			case "DtBase":
-				return "redirect:/basemanagement/base/information/" + uid.getId().toString();
+				return "redirect:/basemanagement/base/information/" + uid.getId();
 			case "DtEquipment":
-				return "redirect:/basemanagement/equipment/" + uid.getId().toString();
+				return "redirect:/basemanagement/equipment/" + uid.getId();
 			default:
 				throw new VSystemException("handle {0} is not linkable to a web resource", handle);
 		}

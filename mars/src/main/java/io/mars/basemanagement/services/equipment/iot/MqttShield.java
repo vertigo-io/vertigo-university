@@ -2,7 +2,10 @@ package io.mars.basemanagement.services.equipment.iot;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.nio.charset.StandardCharsets;
 import java.time.Instant;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import javax.inject.Inject;
 
@@ -78,16 +81,14 @@ public class MqttShield implements Component, Activeable {
 	private final MqttCallback callback = new MqttCallback() {
 		@Override
 		public void connectionLost(final Throwable cause) {
-			LOGGER.info("Connection lost");
-			LOGGER.info("Caused by: " + cause);
+			LOGGER.info("Connection lost", cause);
 			try {
 				if (!mqttClient.isConnected()) {
 					LOGGER.info("Trying to reconnect mqttClient");
 					mqttClient.reconnect();
-					Thread.sleep(5 * 1000);
+					Thread.sleep(5 * 1000L);
 					subscribe();
-					LOGGER.info("mqttClient Reconnected");
-					LOGGER.info(mqttClient.isConnected());
+					LOGGER.info("mqttClient Reconnected, status : {}", mqttClient.isConnected());
 				}
 				if (!mqttClientPub.isConnected()) {
 					mqttClientPub.reconnect();
@@ -95,7 +96,6 @@ public class MqttShield implements Component, Activeable {
 				}
 
 			} catch (final MqttException me) {
-				// TODO Auto-generated catch block
 				throw WrappedException.wrap(me);
 			} catch (final InterruptedException e) {
 				Thread.currentThread().interrupt();
@@ -104,7 +104,7 @@ public class MqttShield implements Component, Activeable {
 		}
 
 		@Override
-		public void messageArrived(final String topic, final MqttMessage message) throws Exception {
+		public void messageArrived(final String topic, final MqttMessage message) {
 			Assertion.checkNotNull(topic);
 			Assertion.checkNotNull(message);
 			//
@@ -124,30 +124,11 @@ public class MqttShield implements Component, Activeable {
 		connOpts.setCleanSession(true);
 
 		// Connect to broker
-		LOGGER.info("Connecting to broker: " + brokerHost);
+		LOGGER.info("Connecting to broker, host : {}", brokerHost);
 		sampleClient.connect(connOpts);
 		connOpts.setCleanSession(true);
 		samplePublisher.connect();
 		sampleClient.setCallback(callback);
-		//		sampleClient.setCallback(new MqttCallback() {
-		//			@Override
-		//			public void connectionLost(final Throwable cause) {
-		//				LOGGER.info("Connection lost");
-		//			}
-		//
-		//			@Override
-		//			public void messageArrived(final String topic, final MqttMessage message) throws Exception {
-		//				Assertion.checkNotNull(topic);
-		//				Assertion.checkNotNull(message);
-		//				//
-		//				handleMessage(message, topic);
-		//			}
-		//
-		//			@Override
-		//			public void deliveryComplete(final IMqttDeliveryToken token) {
-		//				// nothing for now
-		//			}
-		//		});
 		LOGGER.info("Connected");
 
 		mqttClient = sampleClient;
@@ -246,14 +227,9 @@ public class MqttShield implements Component, Activeable {
 		final Integer actuatorValue = Integer.parseInt(parsedMessage[1]);
 		final Integer parsedMessageLength = parsedMessage.length;
 
-		LOGGER.info("inputEvent " + message);
+		LOGGER.info("inputEvent : {}", message);
 		if (parsedMessageLength >= 3) {
-			String tempMessage = "";
-			for (int i = 2; i < parsedMessageLength; i++) {
-				tempMessage += parsedMessage[i];
-				tempMessage += " ";
-			}
-			final String payload = tempMessage.substring(0, tempMessage.length() - 1);
+			final String payload = Arrays.stream(parsedMessage).collect(Collectors.joining(" "));
 			return new InputEvent(InputEvent.Type.of(actuatorValue), topic, payload);
 		}
 		LOGGER.info("inputEvent Case else");
@@ -263,7 +239,7 @@ public class MqttShield implements Component, Activeable {
 	@EventBusSubscribed
 	public void onOutput(final OutputEvent outputEvent) throws MqttException {
 		Assertion.checkNotNull(outputEvent);
-		LOGGER.info("outputEvent " + outputEvent);
+		LOGGER.info("outputEvent : {}", outputEvent);
 		//---
 		if (outputEvent.getPayloadOpt().isPresent()) {
 			mqttClientPub.publish(outputEvent.getTopic(), createMessage(outputEvent.getValue() + " " + outputEvent.getPayloadOpt().get()));
@@ -274,7 +250,7 @@ public class MqttShield implements Component, Activeable {
 	}
 
 	private static MqttMessage createMessage(final String message) {
-		return new MqttMessage((Instant.now().getEpochSecond() + " " + message).getBytes());
+		return new MqttMessage((Instant.now().getEpochSecond() + " " + message).getBytes(StandardCharsets.UTF_8));
 	}
 
 	private void addMeasure(final String[] parsedTopic, final String[] data) {
