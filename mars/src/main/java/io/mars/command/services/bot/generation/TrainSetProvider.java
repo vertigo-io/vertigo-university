@@ -69,23 +69,23 @@ public class TrainSetProvider implements Component {
 	}
 
 	private final List<String> retrievePossibleValues(final CommandParamTrainingConfiguration commandParamTrainingConfiguration) {
-		Assertion.checkArgNotEmpty(commandParamTrainingConfiguration.type);
+		Assertion.checkArgNotEmpty(commandParamTrainingConfiguration.getType());
 
-		switch (commandParamTrainingConfiguration.type) {
+		switch (commandParamTrainingConfiguration.getType()) {
 			case "fromDb":
 				try (final VTransactionWritable transaction = transactionManager.createCurrentTransaction()) {
-					final DtDefinition dtDefinition = Home.getApp().getDefinitionSpace().resolve(commandParamTrainingConfiguration.dtDefinition, DtDefinition.class);
-					final DataAccessor dtFieldDataAccessor = dtDefinition.getField(commandParamTrainingConfiguration.dtField).getDataAccessor();
-					return storeManager.getDataStore().find(dtDefinition, Criterions.alwaysTrue(), DtListState.of(commandParamTrainingConfiguration.limit))
+					final DtDefinition dtDefinition = Home.getApp().getDefinitionSpace().resolve(commandParamTrainingConfiguration.getDtDefinition(), DtDefinition.class);
+					final DataAccessor dtFieldDataAccessor = dtDefinition.getField(commandParamTrainingConfiguration.getDtField()).getDataAccessor();
+					return storeManager.getDataStore().find(dtDefinition, Criterions.alwaysTrue(), DtListState.of(commandParamTrainingConfiguration.getLimit()))
 							.stream()
 							.map(entity -> String.valueOf(dtFieldDataAccessor.getValue(entity)))
 							.collect(Collectors.toList());
 				}
 			case "static":
-				Assertion.checkNotNull(commandParamTrainingConfiguration.values);
-				return commandParamTrainingConfiguration.values;
+				Assertion.checkNotNull(commandParamTrainingConfiguration.getValues());
+				return commandParamTrainingConfiguration.getValues();
 			default:
-				throw new VSystemException("Unsupported training type : ", commandParamTrainingConfiguration.type);
+				throw new VSystemException("Unsupported training type : ", commandParamTrainingConfiguration.getType());
 		}
 	}
 }

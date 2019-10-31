@@ -92,17 +92,41 @@ public class CommandWebServices implements WebServices {
 
 	private static CommandUi toCommandUi(final CommandDefinition commandDefinition) {
 		final CommandUi commandUi = new CommandUi();
-		commandUi.commandName = commandDefinition.getCommand();
-		commandUi.descpription = commandDefinition.getDescription();
-		commandUi.commandParams = commandDefinition.getParams();
+		commandUi.setCommandName(commandDefinition.getCommand());
+		commandUi.setDescpription(commandDefinition.getDescription());
+		commandUi.setCommandParams(commandDefinition.getParams());
 		return commandUi;
 	}
 
 	public static class CommandUi {
 
-		public String commandName;
-		public String descpription;
-		public List<CommandParam> commandParams;
+		private String commandName;
+		private String descpription;
+		private List<CommandParam> commandParams;
+
+		public String getCommandName() {
+			return commandName;
+		}
+
+		public void setCommandName(final String commandName) {
+			this.commandName = commandName;
+		}
+
+		public String getDescpription() {
+			return descpription;
+		}
+
+		public void setDescpription(final String descpription) {
+			this.descpription = descpription;
+		}
+
+		public List<CommandParam> getCommandParams() {
+			return commandParams;
+		}
+
+		public void setCommandParams(final List<CommandParam> commandParams) {
+			this.commandParams = commandParams;
+		}
 
 	}
 

@@ -16,10 +16,52 @@ public class TrainingConfiguration extends HashMap<String, CommandTrainingConfig
 	}
 
 	public static class CommandParamTrainingConfiguration {
-		public String type;
-		public String dtDefinition;
-		public String dtField;
-		public Integer limit;
-		public List<String> values;
+
+		private String type;
+		private String dtDefinition;
+		private String dtField;
+		private Integer limit;
+		private List<String> values;
+
+		public String getType() {
+			return type;
+		}
+
+		public void setType(final String type) {
+			this.type = type;
+		}
+
+		public String getDtDefinition() {
+			return dtDefinition;
+		}
+
+		public void setDtDefinition(final String dtDefinition) {
+			this.dtDefinition = dtDefinition;
+		}
+
+		public String getDtField() {
+			return dtField;
+		}
+
+		public void setDtField(final String dtField) {
+			this.dtField = dtField;
+		}
+
+		public Integer getLimit() {
+			return limit;
+		}
+
+		public void setLimit(final Integer limit) {
+			this.limit = limit;
+		}
+
+		public List<String> getValues() {
+			return values;
+		}
+
+		public void setValues(final List<String> values) {
+			this.values = values;
+		}
+
 	}
 }
