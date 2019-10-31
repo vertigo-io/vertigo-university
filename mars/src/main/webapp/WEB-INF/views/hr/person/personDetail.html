@@ -19,7 +19,7 @@
 		<section>
 				<div layout:fragment="content-header-left">
 					<vu:include-data-protected object="person" field="picturefileId"/>
-					<img th::src="|'@{/hr/person/picture/}'+vueData.person.picturefileId|" class="detailImg gt-md"/>
+					<img th::src="|'@{/hr/person/picture/}'+vueData.person.picturefileId|" class="detailImg gt-md" alt="Avatar"/>
 				</div>
 				<div layout:fragment="content-header-title">
 					<span class="text-bigger" th:text="${model.modeCreate?'New Person':model.person.fullName}"></span> 

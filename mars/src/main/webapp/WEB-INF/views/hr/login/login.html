@@ -12,14 +12,14 @@
     
   	<link rel="stylesheet" th:href="@{/static/css/mars.css}"/>
 	<link rel="icon" th:href="@{/static/img/favicon.ico}"/>
-    
+    <title>Vertigo - Mars</title>
    	<script th:src="@{/static/js/mars.js}"></script>
 </head>
 
 <body class="mat desktop no-touch platform-mat login" >
 	<vu:page>
 	<div id="page" class="column justify-center items-center" v-cloak>
-      	<div class="title"><h2><img th:src="@{/static/img/titleMarsBaseNetwork.png}"></h2></div>
+      	<div class="title"><h2><img th:src="@{/static/img/titleMarsBaseNetwork.png}" alt="Home mars network"></h2></div>
       	<vu:form>
       	<div class="q-gutter-y-md">
 	    		<vu:include-data-primitive key="login" />

@@ -91,7 +91,7 @@
 					v-for="(item, index) in vueData.basePictures" th:class="|${cardClass?:''}  showButtonOnHover|" :name="index" > 
 					<img 
 						th::src="|'@{/basemanagement/base/picture/}'+item.picturefileId|"
-						@click="componentStates.basePictureZoomDialog.opened = true;componentStates.basePictureZoomDialog.imgSrc = item.picturefileId" style="max-width: 100%;" />
+						@click="componentStates.basePictureZoomDialog.opened = true;componentStates.basePictureZoomDialog.imgSrc = item.picturefileId" style="max-width: 100%;" :alt="'base picture ' + index "/>
 					<q-btn th:if="${!model.modeEdit}" color="primary" round icon="fullscreen" class="absolute-center bg-grey" aria-label="Zoom picture" title="Zoom picture"></q-btn>
 					<q-btn th:if="${model.modeEdit}" th:@click="|httpPostAjax('@{_remove}', {'baseId':${model.base.baseId}, 'basePictureId':item.picturefileId})|"
 					color="primary" round icon="delete" class="absolute-center bg-grey" aria-label="Remove picture" title="Remove picture"></q-btn> 

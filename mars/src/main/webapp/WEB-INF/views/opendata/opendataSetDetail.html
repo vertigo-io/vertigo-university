@@ -20,7 +20,7 @@
 		<section>
 				<div layout:fragment="content-header-left">
 					<vu:include-data-protected object="opendataSet" field="picturefileId"/>
-					<img th::src="|'@{/opendata/opendataset/picture/}'+vueData.opendataSet.picturefileId|" class="detailImg gt-md"/>
+					<img th::src="|'@{/opendata/opendataset/picture/}'+vueData.opendataSet.picturefileId|" class="detailImg gt-md" alt="dataset logo"/>
 				</div>
 				<div layout:fragment="content-header-title">
 					<vu:include-data object="opendataSet" field="code"/>

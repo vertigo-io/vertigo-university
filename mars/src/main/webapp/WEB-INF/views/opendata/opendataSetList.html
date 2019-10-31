@@ -17,7 +17,7 @@
 				<vu:include-data object="opendataSets" field="code" />
 				<vu:include-data object="opendataSets" field="endPointUrl" />
 				<q-item-section avatar>
-					<img th::src="|'@{/opendata/opendataset/picture/}'+item.picturefileId|" class="avatar"  />
+					<img th::src="|'@{/opendata/opendataset/picture/}'+item.picturefileId|" class="avatar" alt="Dataset Logo"  />
 				</q-item-section>
 				<q-item-section class="col-3">
 					<span class="text-primary small-caps text-bigger">{{item.title}}</span>
