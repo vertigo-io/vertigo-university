@@ -46,7 +46,7 @@ import io.vertigo.vega.engines.webservice.json.GoogleJsonEngine;
 
 @Transactional
 public class CommonServicesImpl implements CommonServices {
-	private final GoogleJsonEngine gson = new GoogleJsonEngine(Optional.<String> empty());
+	private final GoogleJsonEngine gson = new GoogleJsonEngine(Optional.<Boolean> empty(), Optional.<String> empty());
 	@Inject
 	private SearchManager searchManager;
 
