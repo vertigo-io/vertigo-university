@@ -23,7 +23,7 @@
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
-			<version>3.1.0</version>
+			<version>4.0.1</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -80,7 +80,7 @@
 		<dependency>
 			<groupId>org.influxdb</groupId>
 			<artifactId>influxdb-java</artifactId>
-			<version>2.15</version>  <!-- InfluxDbTimeSeriesPlugin -->
+			<version>2.16</version>  <!-- InfluxDbTimeSeriesPlugin -->
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.paho</groupId>
