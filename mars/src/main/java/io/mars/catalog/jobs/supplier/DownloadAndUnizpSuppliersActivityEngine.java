@@ -41,7 +41,7 @@ public class DownloadAndUnizpSuppliersActivityEngine extends AbstractActivityEng
 		final String rootDirectory = "file:///" + paramManager.getParam("orchestra.root.directory").getValueAsString() + "/IMPORT/SIRENE/";
 		try {
 			final VFile vFile = fileManager.createFile("StockUniteLegale_utf8.zip", "application/zip", new URL(url));
-			try (InputStream inputStream = vFile.createInputStream()) {
+			try (final InputStream inputStream = vFile.createInputStream()) {
 				final Path destPath = Paths.get(new URL(rootDirectory + "StockUniteLegale_utf8.zip").toURI());
 				destPath.toFile().mkdirs();
 				Files.copy(inputStream, destPath, StandardCopyOption.REPLACE_EXISTING);
