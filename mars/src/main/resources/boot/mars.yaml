@@ -159,7 +159,7 @@ modules:
   io.vertigo.ledger.LedgerFeatures:
     featuresConfig:
       - ledger.ethereum:
-          __flags__: ["klee"]
+          __flags__: ["ethereum"]
           urlRpcEthNode: ${ledgerHost}
           myAccountName: ${myAccountName}
           myPublicAddr: ${myPublicAddr}
@@ -168,7 +168,7 @@ modules:
           walletPassword: ${walletPassword}
           walletPath: ${walletPath}
       - ledger.fake:
-          __flags__: ["home"]
+          __flags__: ["!ethereum"]
   io.mars.support.SupportFeatures:
   io.mars.catalog.CatalogFeatures:
   io.mars.hr.HrFeatures:
