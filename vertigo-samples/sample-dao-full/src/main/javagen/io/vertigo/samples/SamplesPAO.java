@@ -42,7 +42,7 @@ public final class SamplesPAO implements StoreServices {
 
 	/**
 	 * Execute la tache TkGetMovieByYear.
-	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.MovieByYear> movies
+	 * @return DtList de MovieByYear movies
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.MovieByYear> getMovieByYear() {
 		final Task task = createTaskBuilder("TkGetMovieByYear")
@@ -54,7 +54,7 @@ public final class SamplesPAO implements StoreServices {
 
 	/**
 	 * Execute la tache TkGetMovieDisplay.
-	 * @return io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.MovieDisplay> movies
+	 * @return DtList de MovieDisplay movies
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.MovieDisplay> getMovieDisplay() {
 		final Task task = createTaskBuilder("TkGetMovieDisplay")

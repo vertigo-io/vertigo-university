@@ -6,7 +6,7 @@
 
 	<groupId>io.vertigo</groupId>
 	<artifactId>mars</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>2.1.0</version>
 	<packaging>war</packaging>
 	<name>mars</name>
 
@@ -16,7 +16,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.test.failure.ignore>true</maven.test.failure.ignore>
 		<maven.test.error.ignore>true</maven.test.error.ignore>
-		<vertigo.version>2.1.0-SNAPSHOT</vertigo.version>
+		<vertigo.version>2.1.0</vertigo.version>
 	</properties>
 
 	<dependencies>
