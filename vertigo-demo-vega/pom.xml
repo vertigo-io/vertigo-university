@@ -118,7 +118,7 @@
 		<dependency>
 			<groupId>com.mchange</groupId>
 			<artifactId>c3p0</artifactId>
-			<version>0.9.5.2</version><!-- C3p0DataSourceProviderPlugin -->
+			<version>0.9.5.4</version><!-- C3p0DataSourceProviderPlugin -->
 		</dependency>
 		<dependency>
 			<groupId>com.h2database</groupId>
