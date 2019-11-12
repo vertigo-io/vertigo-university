@@ -103,7 +103,7 @@
         "focus-core": "^0.14.0",
         "focus-components": "^0.14.1",
         "immutable": "^3.7.2",
-        "jquery": "3.0.0-alpha1",
+        "jquery": "3.4.1",
         "lodash": "^3.10.1",
         "moment": "^2.10.3",
         "native-promise-only": "^0.8.0-a",
