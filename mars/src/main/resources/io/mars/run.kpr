@@ -1,8 +1,0 @@
-support/domains.ksp
-support/mdm.ksp
-
-basemanagement/basemanagement_run.kpr
-catalog/catalog_run.kpr
-hr/hr_run.kpr
-maintenance/maintenance_run.kpr
-opendata/opendata_run.kpr

@@ -2,18 +2,10 @@
 =================
 
 Vertigo university is an up to date source of knowledge about vertigo.
-It's composed of demo apps and code samples.
+It's composed of code samples.
 
-## vertigo-demo-vega
-A demo application that uses vertigo-vega and an SPA as UI
 
-## vertigo-demo-struts2
-A demo application that uses vertigo-struts2 to build the UI
-
-## vertigo-demo-orchestra
-A simple application to use the vertigo-orchestra extensions as a standalone app
-
-## vertigo-samples
+# vertigo-samples
 Samples are a bunch of code snippets (and more) to help you understand and use vertigo to build your app.
 Each sample targets a specific topic and is composed of several exercices with solutions.
 
@@ -26,7 +18,7 @@ Use the PowerPoint and walkthrough documentation provided in each sample for mor
 * __sameple-vega__ : learn how to create and publish REST webservices in your app
 * __sample-notifications__ : learn how to send notifications to users
 
-## Additional note for [Eclipse](https://www.eclipse.org/) users
+# Additional note for [Eclipse](https://www.eclipse.org/) users
 A plugin named [KSP Plugin](https://github.com/sebez/vertigo-chroma-kspplugin) developped by [sebez](https://github.com/sebez/) enhances Developer Experience.
 
 -----

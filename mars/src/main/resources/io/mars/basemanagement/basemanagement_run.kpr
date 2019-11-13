@@ -1,6 +1,0 @@
-dao/basemanagement_tasks.ksp
-dao/basemanagement_ui.ksp
-dao/searchTasks.ksp
-dao/tasks.ksp
-search/searchBaseQueries.ksp
-search/searchEquipmentQueries.ksp

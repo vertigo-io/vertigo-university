@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<config>
-	<!-- A ne pas supprimer voir AbstractActionSupport -->
-	<path name="app">
-		<param name="version" value="v 0.0.1"/>
-	</path>
-</config>

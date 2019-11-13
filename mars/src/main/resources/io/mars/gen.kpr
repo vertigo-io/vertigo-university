@@ -1,8 +1,0 @@
-run.kpr
-
-support/mda/file.ksp
-basemanagement/basemanagement_mda.kpr
-catalog/catalog_mda.kpr
-hr/hr_mda.kpr
-maintenance/maintenance_mda.kpr
-opendata/opendata_mda.kpr
