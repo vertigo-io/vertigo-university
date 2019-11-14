@@ -5,7 +5,7 @@ import java.util.stream.IntStream;
 
 import javax.inject.Inject;
 
-import io.vertigo.core.component.Component;
+import io.vertigo.core.node.component.Component;
 import io.vertigo.core.param.ParamValue;
 
 public final class Calculator3 implements Component {

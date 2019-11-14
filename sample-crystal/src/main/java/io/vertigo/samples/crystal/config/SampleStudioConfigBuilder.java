@@ -1,8 +1,8 @@
 package io.vertigo.samples.crystal.config;
 
-import io.vertigo.app.config.DefinitionProviderConfig;
-import io.vertigo.app.config.ModuleConfig;
-import io.vertigo.app.config.NodeConfig;
+import io.vertigo.core.node.config.DefinitionProviderConfig;
+import io.vertigo.core.node.config.ModuleConfig;
+import io.vertigo.core.node.config.NodeConfig;
 import io.vertigo.core.param.Param;
 import io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin;
 import io.vertigo.dynamo.plugins.environment.DynamoDefinitionProvider;

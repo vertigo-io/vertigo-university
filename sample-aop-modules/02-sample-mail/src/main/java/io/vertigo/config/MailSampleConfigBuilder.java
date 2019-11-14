@@ -1,7 +1,7 @@
 package io.vertigo.config;
 
-import io.vertigo.app.config.NodeConfig;
 import io.vertigo.commons.CommonsFeatures;
+import io.vertigo.core.node.config.NodeConfig;
 import io.vertigo.core.param.Param;
 import io.vertigo.dynamo.DynamoFeatures;
 import io.vertigo.social.SocialFeatures;

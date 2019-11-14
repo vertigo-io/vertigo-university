@@ -4,11 +4,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import io.vertigo.core.component.Activeable;
-import io.vertigo.core.component.Component;
-import io.vertigo.core.definition.Definition;
-import io.vertigo.core.definition.DefinitionSpace;
-import io.vertigo.core.definition.SimpleDefinitionProvider;
+import io.vertigo.core.node.component.Activeable;
+import io.vertigo.core.node.component.Component;
+import io.vertigo.core.node.definition.Definition;
+import io.vertigo.core.node.definition.DefinitionSpace;
+import io.vertigo.core.node.definition.SimpleDefinitionProvider;
 
 public class Calculator4 implements Component, Activeable, SimpleDefinitionProvider {
 

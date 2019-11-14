@@ -2,9 +2,9 @@ package io.vertigo.samples.aspects;
 
 import javax.inject.Inject;
 
-import io.vertigo.core.component.aop.Aspect;
-import io.vertigo.core.component.aop.AspectMethodInvocation;
-import io.vertigo.lang.Assertion;
+import io.vertigo.core.lang.Assertion;
+import io.vertigo.core.node.component.aop.Aspect;
+import io.vertigo.core.node.component.aop.AspectMethodInvocation;
 
 /**
  * @author pchretien

@@ -9,10 +9,11 @@ import io.vertigo.account.authorization.AuthorizationManager;
 import io.vertigo.account.plugins.authorization.loaders.JsonSecurityDefinitionProvider;
 import io.vertigo.account.security.UserSession;
 import io.vertigo.account.security.VSecurityManager;
-import io.vertigo.app.AutoCloseableApp;
-import io.vertigo.app.config.DefinitionProviderConfig;
-import io.vertigo.app.config.ModuleConfig;
-import io.vertigo.app.config.NodeConfigBuilder;
+import io.vertigo.core.node.AutoCloseableApp;
+import io.vertigo.core.node.config.DefinitionProviderConfig;
+import io.vertigo.core.node.config.ModuleConfig;
+import io.vertigo.core.node.config.NodeConfigBuilder;
+import io.vertigo.core.util.InjectorUtil;
 import io.vertigo.samples.account.authorization.SecuredEntities.MovieOperations;
 import io.vertigo.samples.account.config.SampleConfigBuilder;
 import io.vertigo.samples.account.dao.ActorDAO;
@@ -22,7 +23,6 @@ import io.vertigo.samples.account.domain.Movie;
 import io.vertigo.samples.account.services.UserServices;
 import io.vertigo.samples.account.services.UserServicesImpl;
 import io.vertigo.samples.account.webservices.TestUserSession;
-import io.vertigo.util.InjectorUtil;
 
 public class AccountSample {
 

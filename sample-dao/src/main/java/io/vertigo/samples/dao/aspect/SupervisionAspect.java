@@ -5,8 +5,8 @@ import java.lang.annotation.Annotation;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import io.vertigo.core.component.aop.Aspect;
-import io.vertigo.core.component.aop.AspectMethodInvocation;
+import io.vertigo.core.node.component.aop.Aspect;
+import io.vertigo.core.node.component.aop.AspectMethodInvocation;
 
 /**
  *

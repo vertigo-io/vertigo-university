@@ -4,7 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import io.vertigo.app.AutoCloseableApp;
+import io.vertigo.core.node.AutoCloseableApp;
 import io.vertigo.notifications.config.NotificationSampleConfigBuilder;
 
 /**

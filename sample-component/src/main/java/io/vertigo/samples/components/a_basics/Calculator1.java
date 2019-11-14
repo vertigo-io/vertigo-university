@@ -2,7 +2,7 @@ package io.vertigo.samples.components.a_basics;
 
 import java.util.stream.IntStream;
 
-import io.vertigo.core.component.Component;
+import io.vertigo.core.node.component.Component;
 
 public class Calculator1 implements Component {
 

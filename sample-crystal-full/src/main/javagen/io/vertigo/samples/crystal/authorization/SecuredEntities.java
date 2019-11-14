@@ -3,7 +3,7 @@ package io.vertigo.samples.crystal.authorization;
 import io.vertigo.account.authorization.metamodel.Authorization;
 import io.vertigo.account.authorization.metamodel.AuthorizationName;
 import io.vertigo.account.authorization.metamodel.OperationName;
-import io.vertigo.app.Home;
+import io.vertigo.core.node.Home;
 import io.vertigo.samples.crystal.domain.Movie;
 
 /**

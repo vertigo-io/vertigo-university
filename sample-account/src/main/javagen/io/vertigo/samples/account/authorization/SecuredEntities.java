@@ -3,7 +3,7 @@ package io.vertigo.samples.account.authorization;
 import io.vertigo.account.authorization.metamodel.Authorization;
 import io.vertigo.account.authorization.metamodel.AuthorizationName;
 import io.vertigo.account.authorization.metamodel.OperationName;
-import io.vertigo.app.Home;
+import io.vertigo.core.node.Home;
 import io.vertigo.samples.account.domain.Movie;
 
 /**

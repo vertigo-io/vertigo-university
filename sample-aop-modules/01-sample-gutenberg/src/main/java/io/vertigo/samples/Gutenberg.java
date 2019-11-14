@@ -4,7 +4,7 @@ import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import io.vertigo.app.AutoCloseableApp;
+import io.vertigo.core.node.AutoCloseableApp;
 import io.vertigo.samples.components.text.TextProcessorManager;
 import io.vertigo.samples.config.SampleConfigBuilder;
 

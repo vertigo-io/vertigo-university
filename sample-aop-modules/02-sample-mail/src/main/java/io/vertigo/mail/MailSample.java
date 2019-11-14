@@ -1,7 +1,7 @@
 package io.vertigo.mail;
 
-import io.vertigo.app.AutoCloseableApp;
 import io.vertigo.config.MailSampleConfigBuilder;
+import io.vertigo.core.node.AutoCloseableApp;
 import io.vertigo.social.services.mail.Mail;
 import io.vertigo.social.services.mail.MailManager;
 

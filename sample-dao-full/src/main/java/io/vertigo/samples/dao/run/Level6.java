@@ -5,11 +5,12 @@ import javax.inject.Inject;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import io.vertigo.app.AutoCloseableApp;
-import io.vertigo.app.config.ModuleConfig;
-import io.vertigo.app.config.NodeConfigBuilder;
 import io.vertigo.commons.transaction.VTransactionManager;
 import io.vertigo.commons.transaction.VTransactionWritable;
+import io.vertigo.core.node.AutoCloseableApp;
+import io.vertigo.core.node.config.ModuleConfig;
+import io.vertigo.core.node.config.NodeConfigBuilder;
+import io.vertigo.core.util.InjectorUtil;
 import io.vertigo.samples.SamplesPAO;
 import io.vertigo.samples.dao.config.SampleConfigBuilder;
 import io.vertigo.samples.dao.dao.ActorDAO;
@@ -30,7 +31,6 @@ import io.vertigo.samples.dao.services.MovieServicesImpl;
 import io.vertigo.samples.dao.services.RepriseServices;
 import io.vertigo.samples.dao.services.RepriseServicesImpl;
 import io.vertigo.samples.reprise.ReprisePAO;
-import io.vertigo.util.InjectorUtil;
 
 public class Level6 {
 

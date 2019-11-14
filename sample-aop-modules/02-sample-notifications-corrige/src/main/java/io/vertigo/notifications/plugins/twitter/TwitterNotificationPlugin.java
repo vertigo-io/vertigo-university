@@ -3,7 +3,7 @@ package io.vertigo.notifications.plugins.twitter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import io.vertigo.lang.WrappedException;
+import io.vertigo.core.lang.WrappedException;
 import io.vertigo.notifications.impl.NotificationPlugin;
 import twitter4j.Status;
 import twitter4j.Twitter;

@@ -1,6 +1,6 @@
 package io.vertigo.notifications.aspects.trace;
 
-import io.vertigo.core.component.Manager;
+import io.vertigo.core.node.component.Manager;
 
 /**
  *

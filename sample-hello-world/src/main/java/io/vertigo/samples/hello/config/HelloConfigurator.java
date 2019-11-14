@@ -1,8 +1,8 @@
 package io.vertigo.samples.hello.config;
 
-import io.vertigo.app.config.NodeConfig;
-import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.commons.CommonsFeatures;
+import io.vertigo.core.node.config.ModuleConfig;
+import io.vertigo.core.node.config.NodeConfig;
 import io.vertigo.core.param.Param;
 import io.vertigo.samples.hello.webservices.HelloWebServices;
 import io.vertigo.vega.VegaFeatures;

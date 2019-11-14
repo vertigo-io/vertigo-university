@@ -3,7 +3,9 @@ package io.vertigo.samples.dao.dao;
 import javax.inject.Inject;
 
 import java.util.Optional;
-import io.vertigo.app.Home;
+
+import io.vertigo.core.lang.Generated;
+import io.vertigo.core.node.Home;
 import io.vertigo.dynamo.task.metamodel.TaskDefinition;
 import io.vertigo.dynamo.task.model.Task;
 import io.vertigo.dynamo.task.model.TaskBuilder;
@@ -12,7 +14,6 @@ import io.vertigo.dynamo.store.StoreManager;
 import io.vertigo.dynamo.store.StoreServices;
 import io.vertigo.dynamo.task.TaskManager;
 import io.vertigo.samples.dao.domain.Movie;
-import io.vertigo.lang.Generated;
 
 /**
  * This class is automatically generated.

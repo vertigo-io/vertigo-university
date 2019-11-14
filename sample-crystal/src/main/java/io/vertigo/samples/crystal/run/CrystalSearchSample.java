@@ -1,8 +1,9 @@
 package io.vertigo.samples.crystal.run;
 
-import io.vertigo.app.AutoCloseableApp;
-import io.vertigo.app.config.ModuleConfig;
-import io.vertigo.app.config.NodeConfigBuilder;
+import io.vertigo.core.node.AutoCloseableApp;
+import io.vertigo.core.node.config.ModuleConfig;
+import io.vertigo.core.node.config.NodeConfigBuilder;
+import io.vertigo.core.util.InjectorUtil;
 import io.vertigo.samples.crystal.CrystalPAO;
 import io.vertigo.samples.crystal.config.SampleConfigBuilder;
 import io.vertigo.samples.crystal.dao.MovieDAO;
@@ -10,7 +11,6 @@ import io.vertigo.samples.crystal.services.MovieSearchLoader;
 import io.vertigo.samples.crystal.services.MovieServices;
 import io.vertigo.samples.crystal.services.MovieServicesImpl;
 import io.vertigo.samples.crystal.webservices.MovieWebServices;
-import io.vertigo.util.InjectorUtil;
 
 public class CrystalSearchSample {
 

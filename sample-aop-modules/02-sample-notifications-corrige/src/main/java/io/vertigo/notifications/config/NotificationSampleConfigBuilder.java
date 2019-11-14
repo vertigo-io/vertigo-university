@@ -1,8 +1,8 @@
 package io.vertigo.notifications.config;
 
-import io.vertigo.app.config.NodeConfig;
-import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.commons.CommonsFeatures;
+import io.vertigo.core.node.config.ModuleConfig;
+import io.vertigo.core.node.config.NodeConfig;
 import io.vertigo.core.param.Param;
 import io.vertigo.dynamo.DynamoFeatures;
 import io.vertigo.notifications.NotificationManager;

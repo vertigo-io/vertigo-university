@@ -1,10 +1,10 @@
 package io.vertigo.samples.vega.config;
 
 import io.vertigo.account.AccountFeatures;
-import io.vertigo.app.config.NodeConfig;
-import io.vertigo.app.config.DefinitionProviderConfig;
-import io.vertigo.app.config.ModuleConfig;
 import io.vertigo.commons.CommonsFeatures;
+import io.vertigo.core.node.config.DefinitionProviderConfig;
+import io.vertigo.core.node.config.ModuleConfig;
+import io.vertigo.core.node.config.NodeConfig;
 import io.vertigo.core.param.Param;
 import io.vertigo.dynamo.DynamoFeatures;
 import io.vertigo.dynamo.kvstore.KVStoreManager;

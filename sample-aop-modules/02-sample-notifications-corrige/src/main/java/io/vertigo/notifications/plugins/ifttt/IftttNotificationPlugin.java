@@ -21,11 +21,11 @@ import javax.ws.rs.core.Response.Status.Family;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import io.vertigo.core.component.Activeable;
+import io.vertigo.core.lang.Assertion;
+import io.vertigo.core.lang.VSystemException;
+import io.vertigo.core.lang.WrappedException;
+import io.vertigo.core.node.component.Activeable;
 import io.vertigo.core.param.ParamValue;
-import io.vertigo.lang.Assertion;
-import io.vertigo.lang.VSystemException;
-import io.vertigo.lang.WrappedException;
 import io.vertigo.notifications.impl.NotificationPlugin;
 
 /**

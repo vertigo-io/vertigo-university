@@ -19,7 +19,7 @@ import javax.ws.rs.core.Response.Status.Family;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import io.vertigo.lang.WrappedException;
+import io.vertigo.core.lang.WrappedException;
 
 /**
  *

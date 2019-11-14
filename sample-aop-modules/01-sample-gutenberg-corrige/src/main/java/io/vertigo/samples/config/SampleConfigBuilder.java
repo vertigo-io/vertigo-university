@@ -1,7 +1,7 @@
 package io.vertigo.samples.config;
 
-import io.vertigo.app.config.NodeConfig;
-import io.vertigo.app.config.ModuleConfig;
+import io.vertigo.core.node.config.ModuleConfig;
+import io.vertigo.core.node.config.NodeConfig;
 import io.vertigo.samples.components.scrabble.ScrabbleManager;
 import io.vertigo.samples.components.scrabble.ScrabbleManagerImpl;
 import io.vertigo.samples.components.text.TextProcessorManager;

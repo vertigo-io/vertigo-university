@@ -6,7 +6,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import io.vertigo.core.component.Component;
+import io.vertigo.core.node.component.Component;
 
 public class Calculator6 implements Component {
 	private final Map<String, OperationPlugin> operationDispatcher;

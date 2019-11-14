@@ -19,20 +19,14 @@
 			<artifactId>vertigo-core</artifactId>
 			<version>${vertigo.version}</version>
 		</dependency>
-		
-<!-- 		<dependency>
+		<dependency>
 			<groupId>io.vertigo</groupId>
-			<artifactId>vertigo-vega-api</artifactId>
-			<version>${vertigo.version}</version>
-		</dependency>
- -->		<dependency>
-			<groupId>io.vertigo</groupId>
-			<artifactId>vertigo-vega-impl</artifactId>
+			<artifactId>vertigo-vega</artifactId>
 			<version>${vertigo.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.vertigo</groupId>
-			<artifactId>vertigo-dynamo-impl</artifactId>
+			<artifactId>vertigo-dynamo</artifactId>
 			<version>${vertigo.version}</version>
 		</dependency>
 		<dependency>

@@ -2,7 +2,7 @@ package io.vertigo.samples.hello;
 
 import java.io.IOException;
 
-import io.vertigo.app.AutoCloseableApp;
+import io.vertigo.core.node.AutoCloseableApp;
 import io.vertigo.samples.hello.config.HelloConfigurator;
 
 /***

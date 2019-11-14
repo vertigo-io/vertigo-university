@@ -3,7 +3,7 @@ package io.vertigo.samples.dao.services;
 import javax.inject.Inject;
 
 import io.vertigo.commons.transaction.Transactional;
-import io.vertigo.lang.Assertion;
+import io.vertigo.core.lang.Assertion;
 import io.vertigo.samples.dao.aspect.Supervision;
 import io.vertigo.samples.dao.dao.MovieDAO;
 import io.vertigo.samples.dao.domain.Movie;

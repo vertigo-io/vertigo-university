@@ -2,7 +2,7 @@ package io.vertigo.samples.components.b_plugins;
 
 import javax.inject.Inject;
 
-import io.vertigo.core.component.Component;
+import io.vertigo.core.node.component.Component;
 
 public final class Calculator5 implements Component {
 	@Inject
