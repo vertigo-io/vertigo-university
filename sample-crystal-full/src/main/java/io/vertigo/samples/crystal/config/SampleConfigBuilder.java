@@ -4,6 +4,7 @@ import io.vertigo.account.AccountFeatures;
 import io.vertigo.account.authorization.AuthorizationManager;
 import io.vertigo.account.impl.authorization.AuthorizationManagerImpl;
 import io.vertigo.commons.CommonsFeatures;
+import io.vertigo.connectors.elasticsearch.ElasticSearchFeatures;
 import io.vertigo.core.node.config.ComponentConfig;
 import io.vertigo.core.node.config.DefinitionProviderConfig;
 import io.vertigo.core.node.config.ModuleConfig;
@@ -17,7 +18,6 @@ import io.vertigo.database.impl.sql.vendor.h2.H2DataBase;
 import io.vertigo.dynamo.DynamoFeatures;
 import io.vertigo.dynamo.impl.task.proxy.TaskProxyMethod;
 import io.vertigo.dynamo.plugins.environment.DynamoDefinitionProvider;
-import io.vertigo.dynamo.plugins.search.elasticsearch.embedded.ESEmbeddedSearchServicesPlugin;
 import io.vertigo.samples.crystal.webservices.TestUserSession;
 import io.vertigo.vega.VegaFeatures;
 
@@ -27,22 +27,26 @@ public class SampleConfigBuilder {
 		final DynamoFeatures dynamoFeatures = new DynamoFeatures()
 				.withStore()
 				.withSqlStore();
-		if (withSearch) {
-			dynamoFeatures
-					.withSearch()
-					.addPlugin(ESEmbeddedSearchServicesPlugin.class,
-							Param.of("home", "D:/atelier/search"), //usage d'url impropre
-							Param.of("envIndex", "crystal-test_"),
-							Param.of("rowsPerQuery", "50"),
-							Param.of("config.file", "elasticsearch.yml"));
-		}
 
 		final NodeConfigBuilder nodeConfigBuilder = NodeConfig.builder()
 				.beginBoot()
 				.withLocales("fr_FR")
 				.addPlugin(ClassPathResourceResolverPlugin.class)
 				.addPlugin(LocalResourceResolverPlugin.class)
-				.endBoot()
+				.endBoot();
+
+		if (withSearch) {
+			nodeConfigBuilder.addModule(new ElasticSearchFeatures()
+					.withEmbedded(Param.of("home", "D:/atelier/search"))//usage d'url impropre
+					.build());
+			dynamoFeatures
+					.withSearch()
+					.withES(Param.of("envIndex", "crystal-test_"),
+							Param.of("rowsPerQuery", "50"),
+							Param.of("config.file", "elasticsearch.yml"));
+		}
+
+		nodeConfigBuilder
 				.addModule(new CommonsFeatures()
 						.withCache()
 						.withMemoryCache()

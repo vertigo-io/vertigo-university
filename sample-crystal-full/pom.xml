@@ -52,33 +52,32 @@
 			<version>${vertigo.version}</version>
 		</dependency>
 		
-				<dependency>
-			<groupId>org.elasticsearch</groupId>
-			<artifactId>elasticsearch</artifactId>
-			<version>6.6.0</version>
-		</dependency>
 		<dependency>
-		    <groupId>org.elasticsearch.client</groupId>
-		    <artifactId>transport</artifactId>
-		    <version>6.6.0</version><!-- EsTransportSearchServicesPlugin -->
-		</dependency>
-		<dependency>
-			<groupId>org.elasticsearch.plugin</groupId>
-			<artifactId>transport-netty4-client</artifactId>
-			<version>6.6.0</version>
+			<groupId>io.vertigo</groupId>
+			<artifactId>vertigo-elasticsearch-connector</artifactId>
+			<version>${vertigo.version}</version>
 		</dependency>
 		
 		<dependency>
+		    <groupId>org.elasticsearch.client</groupId>
+		    <artifactId>transport</artifactId>
+		    <version>7.4.1</version> <!-- TransportSearchServicesPlugin -->
+		</dependency>
+		<dependency>
+		    <groupId>org.elasticsearch.client</groupId>
+		    <artifactId>elasticsearch-rest-high-level-client</artifactId>
+		    <version>7.4.1</version> <!-- REstHighLevelElasticSearchConnector -->
+		</dependency>
+		<dependency>
 	        <groupId>org.codelibs.elasticsearch.module</groupId>
 	        <artifactId>analysis-common</artifactId> 
-	        <version>6.6.0</version> <!-- required by ESEmbeddedSearchServicesPlugin -->
+	        <version>7.4.1</version> <!-- required by EmbeddedSearchServicesPlugin -->
 	    </dependency>
 	   	<dependency>
 		    <groupId>org.codelibs.elasticsearch.module</groupId>
 		    <artifactId>mapper-extras</artifactId>
-		    <version>6.6.0</version> <!-- required by ESEmbeddedSearchServicesPlugin -->
+		    <version>7.4.1</version> <!-- required by ESEmbeddedSearchServicesPlugin -->
 		</dependency>
-		
 	</dependencies>
 
 	<build>

@@ -1,6 +1,7 @@
 package io.vertigo.samples.crystal.config;
 
 import io.vertigo.commons.CommonsFeatures;
+import io.vertigo.connectors.elasticsearch.ElasticSearchFeatures;
 import io.vertigo.core.node.config.DefinitionProviderConfig;
 import io.vertigo.core.node.config.ModuleConfig;
 import io.vertigo.core.node.config.NodeConfig;
@@ -20,27 +21,32 @@ public class SampleConfigBuilder {
 		final DynamoFeatures dynamoFeatures = new DynamoFeatures()
 				.withStore()
 				.withSqlStore();
-		if (withSearch) {
-			dynamoFeatures.withSearch()
-					.withESEmbedded(
-							Param.of("home", "D:/atelier/search"), //usage d'url impropre
-							Param.of("envIndex", "CrystalTest"),
-							Param.of("rowsPerQuery", "50"),
-							Param.of("config.file", "elasticsearch.yml"));
-		}
 
 		final NodeConfigBuilder nodeConfigBuilder = NodeConfig.builder()
 				.beginBoot()
 				.withLocales("fr_FR")
 				.addPlugin(ClassPathResourceResolverPlugin.class)
 				.addPlugin(LocalResourceResolverPlugin.class)
-				.endBoot()
-				.addModule(new CommonsFeatures()
-						.withCache()
-						.withMemoryCache()
-						.withScript()
-						.withJaninoScript()
-						.build())
+				.endBoot();
+
+		if (withSearch) {
+			nodeConfigBuilder.addModule(new ElasticSearchFeatures()
+					.withEmbedded(Param.of("home", "D:/atelier/search"))//usage d'url impropre
+					.build());
+			dynamoFeatures
+					.withSearch()
+					.withES(
+							Param.of("envIndex", "CrystalTest"),
+							Param.of("rowsPerQuery", "50"),
+							Param.of("config.file", "elasticsearch.yml"));
+		}
+
+		nodeConfigBuilder.addModule(new CommonsFeatures()
+				.withCache()
+				.withMemoryCache()
+				.withScript()
+				.withJaninoScript()
+				.build())
 				.addModule(new DatabaseFeatures()
 						.withSqlDataBase()
 						.withC3p0(
