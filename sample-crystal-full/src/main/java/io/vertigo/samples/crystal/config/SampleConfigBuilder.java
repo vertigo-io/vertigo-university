@@ -37,11 +37,12 @@ public class SampleConfigBuilder {
 
 		if (withSearch) {
 			nodeConfigBuilder.addModule(new ElasticSearchFeatures()
-					.withEmbedded(Param.of("home", "D:/atelier/search"))//usage d'url impropre
+					.withEmbeddedServer(Param.of("home", "D:/atelier/search"))//usage d'url impropre
+					.withRestHL(Param.of("servers.names", "localhost:9200"))
 					.build());
 			dynamoFeatures
 					.withSearch()
-					.withES(Param.of("envIndex", "crystal-test_"),
+					.withESHL(Param.of("envIndex", "crystal-test_"),
 							Param.of("rowsPerQuery", "50"),
 							Param.of("config.file", "elasticsearch.yml"));
 		}
