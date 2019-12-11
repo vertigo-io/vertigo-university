@@ -3,7 +3,6 @@ package io.vertigo.samples.dao.dao;
 import javax.inject.Inject;
 
 import java.util.Optional;
-
 import io.vertigo.core.lang.Generated;
 import io.vertigo.core.node.Home;
 import io.vertigo.dynamo.task.metamodel.TaskDefinition;
