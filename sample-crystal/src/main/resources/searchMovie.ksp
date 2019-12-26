@@ -6,12 +6,12 @@ package io.vertigo.samples.crystal.domain
 /************************/
 
 create DtDefinition DtMovieIndex {
-  field movId {domain: DoId label: "id" required:"true" }
-  field name {domain: DoLabelLong label: "Titre" required:"false"}
-  field year {domain: DoYear label: "Année" required:"false"}
-  field country {domain: DoLabel label: "Pays" required:"false"}
+  field movId {domain: DoId label: "id" cardinality:"1" }
+  field name {domain: DoLabelLong label: "Titre" cardinality:"?"}
+  field year {domain: DoYear label: "Année" cardinality:"?"}
+  field country {domain: DoLabel label: "Pays" cardinality:"?"}
   
-  computed nameSortOnly {domain : DoLabelLongSort, label:"Titre"
+  computed nameSortOnly {domain : DoLabelLongSort, label:"Titre" cardinality:"1"
         expression:"return getName();"
   }  
 }

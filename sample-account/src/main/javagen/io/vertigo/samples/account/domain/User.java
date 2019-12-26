@@ -61,7 +61,7 @@ public final class User implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long usrId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DoId", type = "ID", required = true, label = "Id")
+	@Field(domain = "DoId", type = "ID", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Id")
 	public Long getUsrId() {
 		return usrId;
 	}
@@ -80,7 +80,7 @@ public final class User implements Entity {
 	 * Récupère la valeur de la propriété 'Login'.
 	 * @return String login
 	 */
-	@Field(domain = "DoLabel", label = "Login")
+	@Field(domain = "DoLabel", cardinality = io.vertigo.core.lang.Cardinality.OPTIONAL_OR_NULLABLE, label = "Login")
 	public String getLogin() {
 		return login;
 	}
@@ -99,7 +99,7 @@ public final class User implements Entity {
 	 * Récupère la valeur de la propriété 'Nom'.
 	 * @return String name
 	 */
-	@Field(domain = "DoLabel", label = "Nom")
+	@Field(domain = "DoLabel", cardinality = io.vertigo.core.lang.Cardinality.OPTIONAL_OR_NULLABLE, label = "Nom")
 	public String getName() {
 		return name;
 	}
@@ -118,7 +118,7 @@ public final class User implements Entity {
 	 * Récupère la valeur de la propriété 'email'.
 	 * @return String email
 	 */
-	@Field(domain = "DoLabel", label = "email")
+	@Field(domain = "DoLabel", cardinality = io.vertigo.core.lang.Cardinality.OPTIONAL_OR_NULLABLE, label = "email")
 	public String getEmail() {
 		return email;
 	}
@@ -137,7 +137,7 @@ public final class User implements Entity {
 	 * Récupère la valeur de la propriété 'Country'.
 	 * @return Long couId
 	 */
-	@Field(domain = "DoId", type = "FOREIGN_KEY", label = "Country")
+	@Field(domain = "DoId", type = "FOREIGN_KEY", cardinality = io.vertigo.core.lang.Cardinality.OPTIONAL_OR_NULLABLE, label = "Country")
 	public Long getCouId() {
 		return (Long) couIdAccessor.getId();
 	}
@@ -156,7 +156,7 @@ public final class User implements Entity {
 	 * Récupère la valeur de la propriété 'Group'.
 	 * @return Long grpId
 	 */
-	@Field(domain = "DoId", type = "FOREIGN_KEY", label = "Group")
+	@Field(domain = "DoId", type = "FOREIGN_KEY", cardinality = io.vertigo.core.lang.Cardinality.OPTIONAL_OR_NULLABLE, label = "Group")
 	public Long getGrpId() {
 		return (Long) grpIdAccessor.getId();
 	}

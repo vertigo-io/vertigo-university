@@ -30,7 +30,7 @@ public final class MyActor implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long actId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DoId", type = "ID", required = true, label = "Id")
+	@Field(domain = "DoId", type = "ID", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Id")
 	public Long getActId() {
 		return actId;
 	}
@@ -49,7 +49,7 @@ public final class MyActor implements Entity {
 	 * Récupère la valeur de la propriété 'Nom'.
 	 * @return String name <b>Obligatoire</b>
 	 */
-	@Field(domain = "DoLabelLong", required = true, label = "Nom")
+	@Field(domain = "DoLabelLong", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Nom")
 	public String getName() {
 		return name;
 	}
@@ -68,7 +68,7 @@ public final class MyActor implements Entity {
 	 * Récupère la valeur de la propriété 'Sexe'.
 	 * @return String sexe
 	 */
-	@Field(domain = "DoCode", label = "Sexe")
+	@Field(domain = "DoCode", cardinality = io.vertigo.core.lang.Cardinality.OPTIONAL_OR_NULLABLE, label = "Sexe")
 	public String getSexe() {
 		return sexe;
 	}

@@ -2,9 +2,9 @@ package io.vertigo.samples;
 
 import javax.inject.Inject;
 
+import io.vertigo.core.node.Home;
 import io.vertigo.core.lang.Assertion;
 import io.vertigo.core.lang.Generated;
-import io.vertigo.core.node.Home;
 import io.vertigo.dynamo.task.TaskManager;
 import io.vertigo.dynamo.task.metamodel.TaskDefinition;
 import io.vertigo.dynamo.task.model.Task;
@@ -42,7 +42,7 @@ public final class SamplesPAO implements StoreServices {
 
 	/**
 	 * Execute la tache TkGetActorsIdsByMovie.
-	 * @param movId Long 
+	 * @param movId Long
 	 * @return List de Long actors
 	*/
 	public java.util.List<Long> getActorsIdsByMovie(final Long movId) {

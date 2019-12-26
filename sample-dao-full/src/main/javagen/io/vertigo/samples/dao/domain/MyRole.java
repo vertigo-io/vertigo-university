@@ -60,7 +60,7 @@ public final class MyRole implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long rolId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DoId", type = "ID", required = true, label = "Id")
+	@Field(domain = "DoId", type = "ID", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Id")
 	public Long getRolId() {
 		return rolId;
 	}
@@ -79,7 +79,7 @@ public final class MyRole implements Entity {
 	 * Récupère la valeur de la propriété 'Dans le role de'.
 	 * @return String asCharacter <b>Obligatoire</b>
 	 */
-	@Field(domain = "DoLabelVeryLong", required = true, label = "Dans le role de")
+	@Field(domain = "DoLabelVeryLong", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Dans le role de")
 	public String getAsCharacter() {
 		return asCharacter;
 	}
@@ -98,7 +98,7 @@ public final class MyRole implements Entity {
 	 * Récupère la valeur de la propriété 'Movie'.
 	 * @return Long movId
 	 */
-	@Field(domain = "DoId", type = "FOREIGN_KEY", label = "Movie")
+	@Field(domain = "DoId", type = "FOREIGN_KEY", cardinality = io.vertigo.core.lang.Cardinality.OPTIONAL_OR_NULLABLE, label = "Movie")
 	public Long getMovId() {
 		return (Long) movIdAccessor.getId();
 	}
@@ -117,7 +117,7 @@ public final class MyRole implements Entity {
 	 * Récupère la valeur de la propriété 'Actor'.
 	 * @return Long actId
 	 */
-	@Field(domain = "DoId", type = "FOREIGN_KEY", label = "Actor")
+	@Field(domain = "DoId", type = "FOREIGN_KEY", cardinality = io.vertigo.core.lang.Cardinality.OPTIONAL_OR_NULLABLE, label = "Actor")
 	public Long getActId() {
 		return (Long) actIdAccessor.getId();
 	}

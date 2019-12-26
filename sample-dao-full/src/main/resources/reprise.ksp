@@ -6,7 +6,7 @@ create Task TkInsertCountriesBatch {
         request : "
         	INSERT INTO MY_COUNTRY (COU_ID, NAME) values (#COUNTRY_LIST.COU_ID#, #COUNTRY_LIST.NAME#) 
 			"
-	attribute countryList	 	{domain : DoDtCountryDtc		required:"true" 	inOut :"in"}
+	attribute countryList	 	{domain : DoDtCountry		cardinality:"*" 	inOut :"in"}
 }
 
 
@@ -15,7 +15,7 @@ create Task TkLoadCountries {
         request : "
         	select * from COUNTRY
 			"
-	attribute countryList	 	{domain : DoDtCountryDtc		required:"true" 	inOut :"out"}
+	attribute countryList	 	{domain : DoDtCountry		cardinality:"*" 	inOut :"out"}
 }
 
 create Task TkCountActors {
@@ -23,7 +23,7 @@ create Task TkCountActors {
         request : "
         	select count(*) from ACTOR
 			"
-	attribute count	 	{domain : DoId		required:"true" 	inOut :"out"}
+	attribute count	 	{domain : DoId		cardinality:"1" 	inOut :"out"}
 }
 
 create Task TkInsertActorsBatch {
@@ -32,7 +32,7 @@ create Task TkInsertActorsBatch {
         request : "
         	INSERT INTO MY_ACTOR (ACT_ID, NAME, SEXE) values (#ACTORS_LIST.ACT_ID#, #ACTORS_LIST.NAME#, #ACTORS_LIST.SEXE#) 
 			"
-	attribute actorsList	 	{domain : DoDtActorDtc		required:"true" 	inOut :"in"}
+	attribute actorsList	 	{domain : DoDtActor		cardinality:"*" 	inOut :"in"}
 }
 
 
@@ -44,9 +44,9 @@ create Task TkLoadActorsByChunk {
         	order by ACT_ID asc
 			limit 1000
 			"
-	attribute limit	 	{domain : DoId		required:"true" 	inOut :"in"}
-	attribute offset	 	{domain : DoId		required:"true" 	inOut :"in"}
-	attribute actorsList	 	{domain : DoDtActorDtc		required:"true" 	inOut :"out"}
+	attribute limit	 	{domain : DoId		cardinality:"1" 	inOut :"in"}
+	attribute offset	 	{domain : DoId		cardinality:"1" 	inOut :"in"}
+	attribute actorsList	 	{domain : DoDtActor		cardinality:"*" 	inOut :"out"}
 }
 
 
@@ -56,7 +56,7 @@ create Task TkCountMovies {
         	select count(*) from MOVIE
         	where NAME like 'S%%'
 			"
-	attribute count	 	{domain : DoId		required:"true" 	inOut :"out"}
+	attribute count	 	{domain : DoId		cardinality:"1" 	inOut :"out"}
 }
 
 create Task TkInsertMoviesBatch {
@@ -65,7 +65,7 @@ create Task TkInsertMoviesBatch {
         request : "
         	INSERT INTO MY_MOVIE (MOV_ID, NAME, YEAR, IMDBID, COU_ID) values (#MOVIES_LIST.MOV_ID#, #MOVIES_LIST.NAME#, #MOVIES_LIST.YEAR#, #MOVIES_LIST.IMDBID#, #MOVIES_LIST.COU_ID#) 
 			"
-	attribute moviesList	 	{domain : DoDtMovieDtc		required:"true" 	inOut :"in"}
+	attribute moviesList	 	{domain : DoDtMovie		cardinality:"*" 	inOut :"in"}
 }
 
 
@@ -77,9 +77,9 @@ create Task TkLoadMoviesByChunk {
         	order by MOV_ID asc
         	limit #limit#
 			"
-	attribute limit	 	{domain : DoId		required:"true" 	inOut :"in"}
-	attribute offset	 	{domain : DoId		required:"true" 	inOut :"in"}
-	attribute moviesList	 	{domain : DoDtMovieDtc		required:"true" 	inOut :"out"}
+	attribute limit	 	{domain : DoId		cardinality:"1" 	inOut :"in"}
+	attribute offset	 	{domain : DoId		cardinality:"1" 	inOut :"in"}
+	attribute moviesList	 	{domain : DoDtMovie		cardinality:"*" 	inOut :"out"}
 }
 
 
@@ -90,7 +90,7 @@ create Task TkCountRoles {
         	join movie mov on mov.MOV_ID = rol.MOV_ID
         	where mov.name like 'S%%'
 			"
-	attribute count	 	{domain : DoId		required:"true" 	inOut :"out"}
+	attribute count	 	{domain : DoId		cardinality:"1" 	inOut :"out"}
 }
 
 create Task TkInsertRolesBatch {
@@ -99,7 +99,7 @@ create Task TkInsertRolesBatch {
         request : "
         	INSERT INTO MY_ROLE (ROL_ID, MOV_ID, ACT_ID, AS_CHARACTER) values (#rolesList.rolId#, #rolesList.movId#, #rolesList.actId#, #rolesList.asCharacter#) 
 			"
-	attribute rolesList	 	{domain : DoDtRoleDtc		required:"true" 	inOut :"in"}
+	attribute rolesList	 	{domain : DoDtRole		cardinality:"*" 	inOut :"in"}
 }
 
 
@@ -111,8 +111,8 @@ create Task TkLoadRolesByChunk {
         	order by rol.ROL_ID asc
         	limit #limit#
 			"
-	attribute limit	 	{domain : DoId		required:"true" 	inOut :"in"}
-	attribute offset	 	{domain : DoId		required:"true" 	inOut :"in"}
-	attribute moviesList	 	{domain : DoDtRoleDtc		required:"true" 	inOut :"out"}
+	attribute limit	 	{domain : DoId		cardinality:"1" 	inOut :"in"}
+	attribute offset	 	{domain : DoId		cardinality:"1" 	inOut :"in"}
+	attribute moviesList	 	{domain : DoDtRole		cardinality:"*" 	inOut :"out"}
 }
 

@@ -65,7 +65,7 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 
 	/**
 	 * Execute la tache TkGetMoviesInCountries.
-	 * @param countriesIds List de Long 
+	 * @param countriesIds List de Long
 	 * @return DtList de Movie movies
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.crystal.domain.Movie> getMoviesInCountries(final java.util.List<Long> countriesIds) {

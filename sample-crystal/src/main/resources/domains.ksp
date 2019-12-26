@@ -72,11 +72,6 @@ create Domain DoId {
 	storeType : "NUMERIC"
 }
 
-create Domain DoIds {
-	dataType : Long
-	formatter : FmtDefault
-	multiple : "true"
-}
 create Domain DoDate {
 	dataType : LocalDate
 	formatter : FmtDate

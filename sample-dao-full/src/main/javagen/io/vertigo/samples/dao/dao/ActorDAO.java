@@ -43,7 +43,7 @@ public final class ActorDAO extends DAO<Actor, java.lang.Long> implements StoreS
 
 	/**
 	 * Execute la tache TkGetActorsInMovie.
-	 * @param movId Long 
+	 * @param movId Long
 	 * @return DtList de Actor actors
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Actor> getActorsInMovie(final Long movId) {
@@ -57,7 +57,7 @@ public final class ActorDAO extends DAO<Actor, java.lang.Long> implements StoreS
 
 	/**
 	 * Execute la tache TkInsertActorsBatch.
-	 * @param actorsList DtList de Actor 
+	 * @param actorsList DtList de Actor
 	*/
 	public void insertActorsBatch(final io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Actor> actorsList) {
 		final Task task = createTaskBuilder("TkInsertActorsBatch")
@@ -68,8 +68,8 @@ public final class ActorDAO extends DAO<Actor, java.lang.Long> implements StoreS
 
 	/**
 	 * Execute la tache TkLoadActorsByChunk.
-	 * @param limit Long 
-	 * @param offset Long 
+	 * @param limit Long
+	 * @param offset Long
 	 * @return DtList de Actor actorsList
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Actor> loadActorsByChunk(final Long limit, final Long offset) {

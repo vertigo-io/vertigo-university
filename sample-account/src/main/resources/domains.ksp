@@ -72,11 +72,6 @@ create Domain DoId {
 	storeType : "NUMERIC"
 }
 
-create Domain DoIds {
-	dataType : Long
-	formatter : FmtDefault
-	multiple : "true"
-}
 create Domain DoDate {
 	dataType : LocalDate
 	formatter : FmtDate
@@ -222,12 +217,6 @@ create Domain DoFilePath {
 	formatter : FmtDefault
 	constraint : [CkMaxLength250]
 	storeType : "VARCHAR(250)"
-}
-
-create Domain DoLongs {  
-    dataType : Long
-    multiple : "true"
-    formatter : FmtDefault
 }
 
 create Domain DoInteger {  

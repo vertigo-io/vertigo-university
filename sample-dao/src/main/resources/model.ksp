@@ -2,25 +2,25 @@ package io.vertigo.samples.dao.domain
 
 create DtDefinition DtCountry {
   id couId {domain: DoId label: "Id" }
-  field name {domain: DoLabel label: "Code du pays" required:"false"}
+  field name {domain: DoLabel label: "Code du pays" cardinality:"?"}
 }
 
 create DtDefinition DtMovie {
   id movId {domain: DoId label: "Id" }
-  field name {domain: DoLabelLong label: "Code du pays" required:"true"}
-  field year {domain: DoYear label: "Année" required:"false"}
-  field imdbid {domain: DoLabel label: "Id Imdb" required:"false"}
+  field name {domain: DoLabelLong label: "Code du pays" cardinality:"1"}
+  field year {domain: DoYear label: "Année" cardinality:"?"}
+  field imdbid {domain: DoLabel label: "Id Imdb" cardinality:"?"}
 }
 
 create DtDefinition DtActor {
   id actId {domain: DoId label: "Id" }
-  field name {domain: DoLabelLong label: "Nom" required:"true"}
-  field sexe {domain: DoCode label: "Sexe" required:"false"}
+  field name {domain: DoLabelLong label: "Nom" cardinality:"1"}
+  field sexe {domain: DoCode label: "Sexe" cardinality:"?"}
 }
 
 create DtDefinition DtRole {
   id rolId {domain: DoId label: "Id" }
-  field asCharacter {domain: DoLabelVeryLong label: "Dans le role de" required:"true"}
+  field asCharacter {domain: DoLabelVeryLong label: "Dans le role de" cardinality:"1"}
 }
 
 create Association AMovCou {

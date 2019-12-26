@@ -44,8 +44,8 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 
 	/**
 	 * Execute la tache TkGetMoviesByCriteria.
-	 * @param title String 
-	 * @param year Integer 
+	 * @param title String
+	 * @param year Integer
 	 * @return DtList de Movie movies
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Movie> getMoviesByCriteria(final String title, final Integer year) {
@@ -60,9 +60,9 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 
 	/**
 	 * Execute la tache TkGetMoviesByCriteriaWithCountry.
-	 * @param title String 
-	 * @param year Integer (peut être null)
-	 * @param countries DtList de Country 
+	 * @param title String
+	 * @param year Integer
+	 * @param countries DtList de Country
 	 * @return DtList de Movie movies
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Movie> getMoviesByCriteriaWithCountry(final String title, final Optional<Integer> year, final io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Country> countries) {
@@ -90,7 +90,7 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 
 	/**
 	 * Execute la tache TkInsertMoviesBatch.
-	 * @param moviesList DtList de Movie 
+	 * @param moviesList DtList de Movie
 	*/
 	public void insertMoviesBatch(final io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Movie> moviesList) {
 		final Task task = createTaskBuilder("TkInsertMoviesBatch")
@@ -101,8 +101,8 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 
 	/**
 	 * Execute la tache TkLoadMoviesByChunk.
-	 * @param limit Long 
-	 * @param offset Long 
+	 * @param limit Long
+	 * @param offset Long
 	 * @return DtList de Movie moviesList
 	*/
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Movie> loadMoviesByChunk(final Long limit, final Long offset) {

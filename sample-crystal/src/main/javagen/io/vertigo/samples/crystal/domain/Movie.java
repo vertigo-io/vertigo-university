@@ -62,7 +62,7 @@ public final class Movie implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long movId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DoId", type = "ID", required = true, label = "Id")
+	@Field(domain = "DoId", type = "ID", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Id")
 	public Long getMovId() {
 		return movId;
 	}
@@ -81,7 +81,7 @@ public final class Movie implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Titre du film'.
 	 * @return String name <b>Obligatoire</b>
 	 */
-	@Field(domain = "DoLabelLong", required = true, label = "Titre du film")
+	@Field(domain = "DoLabelLong", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Titre du film")
 	public String getName() {
 		return name;
 	}
@@ -100,7 +100,7 @@ public final class Movie implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Année'.
 	 * @return Integer year
 	 */
-	@Field(domain = "DoYear", label = "Année")
+	@Field(domain = "DoYear", cardinality = io.vertigo.core.lang.Cardinality.OPTIONAL_OR_NULLABLE, label = "Année")
 	public Integer getYear() {
 		return year;
 	}
@@ -119,7 +119,7 @@ public final class Movie implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Id Imdb'.
 	 * @return String imdbid
 	 */
-	@Field(domain = "DoLabel", label = "Id Imdb")
+	@Field(domain = "DoLabel", cardinality = io.vertigo.core.lang.Cardinality.OPTIONAL_OR_NULLABLE, label = "Id Imdb")
 	public String getImdbid() {
 		return imdbid;
 	}
@@ -138,7 +138,7 @@ public final class Movie implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Country'.
 	 * @return Long couId
 	 */
-	@Field(domain = "DoId", type = "FOREIGN_KEY", label = "Country")
+	@Field(domain = "DoId", type = "FOREIGN_KEY", cardinality = io.vertigo.core.lang.Cardinality.OPTIONAL_OR_NULLABLE, label = "Country")
 	public Long getCouId() {
 		return (Long) couIdAccessor.getId();
 	}

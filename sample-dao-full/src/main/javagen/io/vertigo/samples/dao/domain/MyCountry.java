@@ -29,7 +29,7 @@ public final class MyCountry implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long couId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DoId", type = "ID", required = true, label = "Id")
+	@Field(domain = "DoId", type = "ID", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Id")
 	public Long getCouId() {
 		return couId;
 	}
@@ -48,7 +48,7 @@ public final class MyCountry implements Entity {
 	 * Récupère la valeur de la propriété 'Code du pays'.
 	 * @return String name
 	 */
-	@Field(domain = "DoLabel", label = "Code du pays")
+	@Field(domain = "DoLabel", cardinality = io.vertigo.core.lang.Cardinality.OPTIONAL_OR_NULLABLE, label = "Code du pays")
 	public String getName() {
 		return name;
 	}

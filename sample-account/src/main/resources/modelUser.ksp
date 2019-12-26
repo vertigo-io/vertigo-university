@@ -2,14 +2,14 @@ package io.vertigo.samples.account.domain
 
 create DtDefinition DtUser {
   id usrId {domain: DoId label: "Id" }
-  field login {domain: DoLabel label: "Login" required:"false"}
-  field name {domain: DoLabel label: "Nom" required:"false"}
-  field email {domain: DoLabel label: "email" required:"false"}
+  field login {domain: DoLabel label: "Login" cardinality:"?"}
+  field name {domain: DoLabel label: "Nom" cardinality:"?"}
+  field email {domain: DoLabel label: "email" cardinality:"?"}
 }
 
 create DtDefinition DtUserGroup {
   id grpId {domain: DoId label: "Id" }
-  field name {domain: DoLabel label: "Nom" required:"false"}
+  field name {domain: DoLabel label: "Nom" cardinality:"?"}
 }
 
 create Association AUsrCou {

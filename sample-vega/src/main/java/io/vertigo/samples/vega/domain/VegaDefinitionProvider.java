@@ -2,6 +2,7 @@ package io.vertigo.samples.vega.domain;
 
 import java.util.List;
 
+import io.vertigo.core.lang.Cardinality;
 import io.vertigo.core.node.definition.Definition;
 import io.vertigo.core.node.definition.DefinitionSpace;
 import io.vertigo.core.node.definition.SimpleDefinitionProvider;
@@ -19,7 +20,7 @@ public final class VegaDefinitionProvider implements SimpleDefinitionProvider {
 
 		final DtDefinition movieDtDefinition = DtDefinition.builder("DtMovie")
 				.addIdField("id", "id", domainId)
-				.addDataField("title", "title", domainText, true, false/*persistent*/)
+				.addDataField("title", "title", domainText, Cardinality.ONE, false/*persistent*/)
 				.withSortField("title")
 				.withDisplayField("title")
 				.build();

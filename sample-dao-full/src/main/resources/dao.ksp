@@ -14,9 +14,9 @@ create Task TkGetMoviesByCriteria {
         	 and mov.YEAR = #year#
         	<%}%>
 			"
-	attribute title	 	{domain : DoLabelLong 		required:"true" 	inOut :"in"}
-	attribute year	 	{domain : DoYear 				required:"true" 	inOut :"in"}
-	attribute movies	{domain : DoDtMovieDtc 	required:"true" 	inOut :"out"}
+	attribute title	 	{domain : DoLabelLong 		cardinality:"1" 	inOut :"in"}
+	attribute year	 	{domain : DoYear 				cardinality:"1" 	inOut :"in"}
+	attribute movies	{domain : DoDtMovie 	cardinality:"*" 	inOut :"out"}
 }
 
 create Task TkGetMoviesByCriteriaWithCountry {
@@ -36,10 +36,10 @@ create Task TkGetMoviesByCriteriaWithCountry {
         	 and mov.COU_ID in (#countries.rownum.couId#)
         	<%}%>
 			"
-	attribute title	 	{domain : DoLabelLong 		required:"true" 	inOut :"in"}
-	attribute year	 	{domain : DoYear 				required:"false"	inOut :"in"}
-	attribute countries	{domain : DoDtCountryDtc 	required:"true" 	inOut :"in"}
-	attribute movies	{domain : DoDtMovieDtc 	required:"true" 	inOut :"out"}
+	attribute title	 	{domain : DoLabelLong 		cardinality:"1" 	inOut :"in"}
+	attribute year	 	{domain : DoYear 				cardinality:"?"	inOut :"in"}
+	attribute countries	{domain : DoDtCountry 	cardinality:"*" 	inOut :"in"}
+	attribute movies	{domain : DoDtMovie 	cardinality:"*" 	inOut :"out"}
 }
 
 
@@ -51,8 +51,8 @@ create Task TkGetActorsInMovie {
         	join actor act on act.ACT_ID = rol.ACT_ID
         	where rol.MOV_ID = #movId#
 			"
-	attribute movId		{domain : DoId 	required:"true" 	inOut :"in"}
-	attribute actors	{domain : DoDtActorDtc 	required:"true" 	inOut :"out"}
+	attribute movId		{domain : DoId 	cardinality:"1" 	inOut :"in"}
+	attribute actors	{domain : DoDtActor 	cardinality:"*" 	inOut :"out"}
 }
 
 
@@ -64,7 +64,7 @@ create Task TkGetMoviesWith100Actors {
 			join (select MOV_ID, count(*) cnt from role group by mov_id ) hv on hv.MOV_ID = mov.MOV_ID
 			where hv.cnt> 100
 			"
-	attribute movies	{domain : DoDtMovieDtc 	required:"true" 	inOut :"out"}
+	attribute movies	{domain : DoDtMovie 	cardinality:"*" 	inOut :"out"}
 }
 
 
@@ -78,7 +78,7 @@ create Task TkGetMovieDisplay {
 		where mov.YEAR > 2010
 		limit 500
 			"
-	attribute movies	{domain : DoDtMovieDisplayDtc 	required:"true" 	inOut :"out"}
+	attribute movies	{domain : DoDtMovieDisplay 	cardinality:"*" 	inOut :"out"}
 }
 
 create Task TkGetMovieByYear {
@@ -86,7 +86,7 @@ create Task TkGetMovieByYear {
         request : "
 		select YEAR, count(*) as MOVIES_COUNT from movie where YEAR is not null group by year order by YEAR asc
 			"
-	attribute movies	{domain : DoDtMovieByYearDtc 	required:"true" 	inOut :"out"}
+	attribute movies	{domain : DoDtMovieByYear 	cardinality:"*" 	inOut :"out"}
 }
 
 
