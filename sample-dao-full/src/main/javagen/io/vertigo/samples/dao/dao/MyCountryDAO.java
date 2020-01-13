@@ -3,9 +3,9 @@ package io.vertigo.samples.dao.dao;
 import javax.inject.Inject;
 
 import io.vertigo.core.lang.Generated;
-import io.vertigo.dynamo.impl.store.util.DAO;
-import io.vertigo.dynamo.store.StoreManager;
-import io.vertigo.dynamo.store.StoreServices;
+import io.vertigo.datastore.entitystore.EntityStoreManager;
+import io.vertigo.datastore.impl.dao.DAO;
+import io.vertigo.datastore.impl.dao.StoreServices;
 import io.vertigo.dynamo.task.TaskManager;
 import io.vertigo.samples.dao.domain.MyCountry;
 
@@ -18,12 +18,12 @@ public final class MyCountryDAO extends DAO<MyCountry, java.lang.Long> implement
 
 	/**
 	 * Contructeur.
-	 * @param storeManager Manager de persistance
+	 * @param entityStoreManager Manager de persistance
 	 * @param taskManager Manager de Task
 	 */
 	@Inject
-	public MyCountryDAO(final StoreManager storeManager, final TaskManager taskManager) {
-		super(MyCountry.class, storeManager, taskManager);
+	public MyCountryDAO(final EntityStoreManager entityStoreManager, final TaskManager taskManager) {
+		super(MyCountry.class, entityStoreManager, taskManager);
 	}
 
 }

@@ -9,8 +9,9 @@ import io.vertigo.core.param.Param;
 import io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin;
 import io.vertigo.database.DatabaseFeatures;
 import io.vertigo.database.impl.sql.vendor.h2.H2DataBase;
-import io.vertigo.dynamo.DynamoFeatures;
-import io.vertigo.dynamo.plugins.environment.DynamoDefinitionProvider;
+import io.vertigo.datastore.DataStoreFeatures;
+import io.vertigo.dynamo.DataModelFeatures;
+import io.vertigo.dynamo.plugins.environment.ModelDefinitionProvider;
 import io.vertigo.samples.dao.aspect.SupervisionAspect;
 import io.vertigo.samples.dao.boot.DataBaseInitializer;
 
@@ -47,17 +48,18 @@ public class SampleConfigBuilder {
 										Param.of("jdbcDriver", org.h2.Driver.class.getName()),
 										Param.of("jdbcUrl", "jdbc:h2:D:/atelier/database/formation_mine"))
 								.build())
-						.addModule(new DynamoFeatures()
-								.withStore()
-								.withSqlStore()
-								.withSqlStore(
+						.addModule(new DataModelFeatures().build())
+						.addModule(new DataStoreFeatures()
+								.withEntityStore()
+								.withSqlEntityStore()
+								.withSqlEntityStore(
 										Param.of("dataSpace","mine"),
 										Param.of("connectionName","mine"),
 										Param.of("sequencePrefix","SEQ_"))
 								.build())
 						//----Definitions
 						.addModule( ModuleConfig.builder("ressources")
-								.addDefinitionProvider( DefinitionProviderConfig.builder(DynamoDefinitionProvider.class)
+								.addDefinitionProvider( DefinitionProviderConfig.builder(ModelDefinitionProvider.class)
 										.addDefinitionResource("kpr", "application.kpr")
 										.build())
 								.build())
@@ -91,17 +93,17 @@ public class SampleConfigBuilder {
 									Param.of("jdbcDriver", org.h2.Driver.class.getName()),
 									Param.of("jdbcUrl", "jdbc:h2:D:/atelier/database/formation_mine"))
 							.build())
-					.addModule(new DynamoFeatures()
-							.withStore()
-							.withSqlStore()
-							.withSqlStore(
+					.addModule(new DataStoreFeatures()
+							.withEntityStore()
+							.withSqlEntityStore()
+							.withSqlEntityStore(
 									Param.of("name", "mine"),
 									Param.of("connectionName", "mine"),
 									Param.of("sequencePrefix", "SEQ_"))
 							.build())
 					//----Definitions
 					.addModule( ModuleConfig.builder("ressources")
-							.addDefinitionProvider( DefinitionProviderConfig.builder(DynamoDefinitionProvider.class)
+							.addDefinitionProvider( DefinitionProviderConfig.builder(ModelDefinitionProvider.class)
 									.addDefinitionResource("kpr", "application.kpr")
 									.build())
 							.build());

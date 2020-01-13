@@ -68,7 +68,7 @@ public final class MyActor implements Entity {
 	 * Récupère la valeur de la propriété 'Sexe'.
 	 * @return String sexe
 	 */
-	@Field(domain = "DoCode", cardinality = io.vertigo.core.lang.Cardinality.OPTIONAL_OR_NULLABLE, label = "Sexe")
+	@Field(domain = "DoCode", label = "Sexe")
 	public String getSexe() {
 		return sexe;
 	}

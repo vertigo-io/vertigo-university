@@ -38,7 +38,12 @@
 		</dependency>
 		<dependency>
 			<groupId>io.vertigo</groupId>
-			<artifactId>vertigo-dynamo</artifactId>
+			<artifactId>vertigo-datastore</artifactId>
+			<version>${vertigo.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.vertigo</groupId>
+			<artifactId>vertigo-datafactory</artifactId>
 			<version>${vertigo.version}</version>
 		</dependency>
 		<dependency>

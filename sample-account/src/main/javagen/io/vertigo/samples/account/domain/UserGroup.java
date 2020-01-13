@@ -47,7 +47,7 @@ public final class UserGroup implements Entity {
 	 * Récupère la valeur de la propriété 'Nom'.
 	 * @return String name
 	 */
-	@Field(domain = "DoLabel", cardinality = io.vertigo.core.lang.Cardinality.OPTIONAL_OR_NULLABLE, label = "Nom")
+	@Field(domain = "DoLabel", label = "Nom")
 	public String getName() {
 		return name;
 	}

@@ -1,6 +1,6 @@
 package io.vertigo.samples.dao.services;
 
-import io.vertigo.dynamo.store.StoreServices;
+import io.vertigo.datastore.impl.dao.StoreServices;
 import io.vertigo.samples.dao.domain.Movie;
 
 public interface MovieServices extends StoreServices {

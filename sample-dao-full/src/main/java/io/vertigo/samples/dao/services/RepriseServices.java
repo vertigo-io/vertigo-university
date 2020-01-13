@@ -2,7 +2,7 @@ package io.vertigo.samples.dao.services;
 
 import java.util.Optional;
 
-import io.vertigo.dynamo.store.StoreServices;
+import io.vertigo.datastore.impl.dao.StoreServices;
 
 public interface RepriseServices extends StoreServices {
 

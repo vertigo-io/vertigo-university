@@ -3,7 +3,7 @@ package io.vertigo.config;
 import io.vertigo.commons.CommonsFeatures;
 import io.vertigo.core.node.config.NodeConfig;
 import io.vertigo.core.param.Param;
-import io.vertigo.dynamo.DynamoFeatures;
+import io.vertigo.datastore.DataStoreFeatures;
 import io.vertigo.social.SocialFeatures;
 
 /**
@@ -19,7 +19,7 @@ public class MailSampleConfigBuilder {
 				.withLocales("fr")
 				.endBoot()
 				.addModule(new CommonsFeatures().build())
-				.addModule(new DynamoFeatures().build())
+				.addModule(new DataStoreFeatures().build())
 				.addModule(new SocialFeatures()
 						.withMails()
 						.withJavaxMail(

@@ -3,7 +3,7 @@ package io.vertigo.samples.account.domain;
 import io.vertigo.core.lang.Generated;
 import io.vertigo.dynamo.domain.model.Entity;
 import io.vertigo.dynamo.domain.model.UID;
-import io.vertigo.dynamo.domain.model.VAccessor;
+import io.vertigo.datastore.impl.entitystore.StoreVAccessor;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 
@@ -31,7 +31,7 @@ public final class Actor implements Entity {
 			foreignRole = "Actor",
 			foreignLabel = "Actor",
 			foreignMultiplicity = "0..*")
-	private final VAccessor<io.vertigo.samples.account.domain.Sexe> sexCdAccessor = new VAccessor<>(io.vertigo.samples.account.domain.Sexe.class, "Sexe");
+	private final StoreVAccessor<io.vertigo.samples.account.domain.Sexe> sexCdAccessor = new StoreVAccessor<>(io.vertigo.samples.account.domain.Sexe.class, "Sexe");
 
 	/** {@inheritDoc} */
 	@Override
@@ -82,7 +82,7 @@ public final class Actor implements Entity {
 	 * Récupère la valeur de la propriété 'Sexe'.
 	 * @return String sexCd
 	 */
-	@Field(domain = "DoCode", type = "FOREIGN_KEY", cardinality = io.vertigo.core.lang.Cardinality.OPTIONAL_OR_NULLABLE, label = "Sexe")
+	@Field(domain = "DoCode", type = "FOREIGN_KEY", label = "Sexe")
 	public String getSexCd() {
 		return (String) sexCdAccessor.getId();
 	}
@@ -100,7 +100,7 @@ public final class Actor implements Entity {
 	 * Association : Sexe.
 	 * @return l'accesseur vers la propriété 'Sexe'
 	 */
-	public VAccessor<io.vertigo.samples.account.domain.Sexe> sexe() {
+	public StoreVAccessor<io.vertigo.samples.account.domain.Sexe> sexe() {
 		return sexCdAccessor;
 	}
 	

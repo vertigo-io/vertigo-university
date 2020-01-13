@@ -4,7 +4,7 @@ import io.vertigo.commons.CommonsFeatures;
 import io.vertigo.core.node.config.ModuleConfig;
 import io.vertigo.core.node.config.NodeConfig;
 import io.vertigo.core.param.Param;
-import io.vertigo.dynamo.DynamoFeatures;
+import io.vertigo.datastore.DataStoreFeatures;
 import io.vertigo.notifications.NotificationManager;
 import io.vertigo.notifications.aspects.supervision.SupervisionAspect;
 import io.vertigo.notifications.aspects.supervision.SupervisionManager;
@@ -31,7 +31,7 @@ public class NotificationSampleConfigBuilder {
 				.withLocales("fr")
 				.endBoot()
 				.addModule(new CommonsFeatures().build())
-				.addModule(new DynamoFeatures().build())
+				.addModule(new DataStoreFeatures().build())
 				.addModule(ModuleConfig.builder("notificationAspects")
 						.addComponent(SupervisionManager.class, SupervisionManagerImpl.class)
 						.addComponent(TraceManager.class, TraceManagerImpl.class)

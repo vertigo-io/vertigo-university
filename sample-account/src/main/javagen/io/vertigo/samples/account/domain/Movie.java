@@ -2,9 +2,9 @@ package io.vertigo.samples.account.domain;
 
 import io.vertigo.core.lang.Generated;
 import io.vertigo.dynamo.domain.model.KeyConcept;
-import io.vertigo.dynamo.domain.model.ListVAccessor;
+import io.vertigo.datastore.impl.entitystore.StoreListVAccessor;
 import io.vertigo.dynamo.domain.model.UID;
-import io.vertigo.dynamo.domain.model.VAccessor;
+import io.vertigo.datastore.impl.entitystore.StoreVAccessor;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 
@@ -34,7 +34,7 @@ public final class Movie implements KeyConcept {
 			foreignRole = "Movie",
 			foreignLabel = "Movie",
 			foreignMultiplicity = "0..*")
-	private final VAccessor<io.vertigo.samples.account.domain.Country> couIdAccessor = new VAccessor<>(io.vertigo.samples.account.domain.Country.class, "Country");
+	private final StoreVAccessor<io.vertigo.samples.account.domain.Country> couIdAccessor = new StoreVAccessor<>(io.vertigo.samples.account.domain.Country.class, "Country");
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
 			name = "ARolMov",
@@ -49,7 +49,7 @@ public final class Movie implements KeyConcept {
 			foreignRole = "Role",
 			foreignLabel = "Role",
 			foreignMultiplicity = "0..*")
-	private final ListVAccessor<io.vertigo.samples.account.domain.Role> roleAccessor = new ListVAccessor<>(this, "ARolMov", "Role");
+	private final StoreListVAccessor<io.vertigo.samples.account.domain.Role> roleAccessor = new StoreListVAccessor<>(this, "ARolMov", "Role");
 
 	/** {@inheritDoc} */
 	@Override
@@ -100,7 +100,7 @@ public final class Movie implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Année'.
 	 * @return Integer year
 	 */
-	@Field(domain = "DoYear", cardinality = io.vertigo.core.lang.Cardinality.OPTIONAL_OR_NULLABLE, label = "Année")
+	@Field(domain = "DoYear", label = "Année")
 	public Integer getYear() {
 		return year;
 	}
@@ -119,7 +119,7 @@ public final class Movie implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Id Imdb'.
 	 * @return String imdbid
 	 */
-	@Field(domain = "DoLabel", cardinality = io.vertigo.core.lang.Cardinality.OPTIONAL_OR_NULLABLE, label = "Id Imdb")
+	@Field(domain = "DoLabel", label = "Id Imdb")
 	public String getImdbid() {
 		return imdbid;
 	}
@@ -138,7 +138,7 @@ public final class Movie implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Country'.
 	 * @return Long couId
 	 */
-	@Field(domain = "DoId", type = "FOREIGN_KEY", cardinality = io.vertigo.core.lang.Cardinality.OPTIONAL_OR_NULLABLE, label = "Country")
+	@Field(domain = "DoId", type = "FOREIGN_KEY", label = "Country")
 	public Long getCouId() {
 		return (Long) couIdAccessor.getId();
 	}
@@ -156,7 +156,7 @@ public final class Movie implements KeyConcept {
 	 * Association : Country.
 	 * @return l'accesseur vers la propriété 'Country'
 	 */
-	public VAccessor<io.vertigo.samples.account.domain.Country> country() {
+	public StoreVAccessor<io.vertigo.samples.account.domain.Country> country() {
 		return couIdAccessor;
 	}
 
@@ -164,7 +164,7 @@ public final class Movie implements KeyConcept {
 	 * Association : Role.
 	 * @return l'accesseur vers la propriété 'Role'
 	 */
-	public ListVAccessor<io.vertigo.samples.account.domain.Role> role() {
+	public StoreListVAccessor<io.vertigo.samples.account.domain.Role> role() {
 		return roleAccessor;
 	}
 	

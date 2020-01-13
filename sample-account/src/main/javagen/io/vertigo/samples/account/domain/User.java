@@ -3,7 +3,7 @@ package io.vertigo.samples.account.domain;
 import io.vertigo.core.lang.Generated;
 import io.vertigo.dynamo.domain.model.Entity;
 import io.vertigo.dynamo.domain.model.UID;
-import io.vertigo.dynamo.domain.model.VAccessor;
+import io.vertigo.datastore.impl.entitystore.StoreVAccessor;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 
@@ -33,7 +33,7 @@ public final class User implements Entity {
 			foreignRole = "User",
 			foreignLabel = "User",
 			foreignMultiplicity = "0..*")
-	private final VAccessor<io.vertigo.samples.account.domain.Country> couIdAccessor = new VAccessor<>(io.vertigo.samples.account.domain.Country.class, "Country");
+	private final StoreVAccessor<io.vertigo.samples.account.domain.Country> couIdAccessor = new StoreVAccessor<>(io.vertigo.samples.account.domain.Country.class, "Country");
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
 			name = "AUsrGrp",
@@ -48,7 +48,7 @@ public final class User implements Entity {
 			foreignRole = "User",
 			foreignLabel = "User",
 			foreignMultiplicity = "0..*")
-	private final VAccessor<io.vertigo.samples.account.domain.UserGroup> grpIdAccessor = new VAccessor<>(io.vertigo.samples.account.domain.UserGroup.class, "Group");
+	private final StoreVAccessor<io.vertigo.samples.account.domain.UserGroup> grpIdAccessor = new StoreVAccessor<>(io.vertigo.samples.account.domain.UserGroup.class, "Group");
 
 	/** {@inheritDoc} */
 	@Override
@@ -80,7 +80,7 @@ public final class User implements Entity {
 	 * Récupère la valeur de la propriété 'Login'.
 	 * @return String login
 	 */
-	@Field(domain = "DoLabel", cardinality = io.vertigo.core.lang.Cardinality.OPTIONAL_OR_NULLABLE, label = "Login")
+	@Field(domain = "DoLabel", label = "Login")
 	public String getLogin() {
 		return login;
 	}
@@ -99,7 +99,7 @@ public final class User implements Entity {
 	 * Récupère la valeur de la propriété 'Nom'.
 	 * @return String name
 	 */
-	@Field(domain = "DoLabel", cardinality = io.vertigo.core.lang.Cardinality.OPTIONAL_OR_NULLABLE, label = "Nom")
+	@Field(domain = "DoLabel", label = "Nom")
 	public String getName() {
 		return name;
 	}
@@ -118,7 +118,7 @@ public final class User implements Entity {
 	 * Récupère la valeur de la propriété 'email'.
 	 * @return String email
 	 */
-	@Field(domain = "DoLabel", cardinality = io.vertigo.core.lang.Cardinality.OPTIONAL_OR_NULLABLE, label = "email")
+	@Field(domain = "DoLabel", label = "email")
 	public String getEmail() {
 		return email;
 	}
@@ -137,7 +137,7 @@ public final class User implements Entity {
 	 * Récupère la valeur de la propriété 'Country'.
 	 * @return Long couId
 	 */
-	@Field(domain = "DoId", type = "FOREIGN_KEY", cardinality = io.vertigo.core.lang.Cardinality.OPTIONAL_OR_NULLABLE, label = "Country")
+	@Field(domain = "DoId", type = "FOREIGN_KEY", label = "Country")
 	public Long getCouId() {
 		return (Long) couIdAccessor.getId();
 	}
@@ -156,7 +156,7 @@ public final class User implements Entity {
 	 * Récupère la valeur de la propriété 'Group'.
 	 * @return Long grpId
 	 */
-	@Field(domain = "DoId", type = "FOREIGN_KEY", cardinality = io.vertigo.core.lang.Cardinality.OPTIONAL_OR_NULLABLE, label = "Group")
+	@Field(domain = "DoId", type = "FOREIGN_KEY", label = "Group")
 	public Long getGrpId() {
 		return (Long) grpIdAccessor.getId();
 	}
@@ -174,7 +174,7 @@ public final class User implements Entity {
 	 * Association : Country.
 	 * @return l'accesseur vers la propriété 'Country'
 	 */
-	public VAccessor<io.vertigo.samples.account.domain.Country> country() {
+	public StoreVAccessor<io.vertigo.samples.account.domain.Country> country() {
 		return couIdAccessor;
 	}
 
@@ -182,7 +182,7 @@ public final class User implements Entity {
 	 * Association : Group.
 	 * @return l'accesseur vers la propriété 'Group'
 	 */
-	public VAccessor<io.vertigo.samples.account.domain.UserGroup> group() {
+	public StoreVAccessor<io.vertigo.samples.account.domain.UserGroup> group() {
 		return grpIdAccessor;
 	}
 	

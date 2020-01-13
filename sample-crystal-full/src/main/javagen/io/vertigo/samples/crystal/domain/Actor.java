@@ -2,7 +2,7 @@ package io.vertigo.samples.crystal.domain;
 
 import io.vertigo.core.lang.Generated;
 import io.vertigo.dynamo.domain.model.Entity;
-import io.vertigo.dynamo.domain.model.EnumVAccessor;
+import io.vertigo.datastore.impl.entitystore.EnumStoreVAccessor;
 import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
@@ -31,7 +31,7 @@ public final class Actor implements Entity {
 			foreignRole = "Actor",
 			foreignLabel = "Actor",
 			foreignMultiplicity = "0..*")
-	private final EnumVAccessor<io.vertigo.samples.crystal.domain.Sexe, io.vertigo.samples.crystal.domain.SexeEnum> sexCdAccessor = new EnumVAccessor<>(io.vertigo.samples.crystal.domain.Sexe.class, "Sexe", io.vertigo.samples.crystal.domain.SexeEnum.class);
+	private final EnumStoreVAccessor<io.vertigo.samples.crystal.domain.Sexe, io.vertigo.samples.crystal.domain.SexeEnum> sexCdAccessor = new EnumStoreVAccessor<>(io.vertigo.samples.crystal.domain.Sexe.class, "Sexe", io.vertigo.samples.crystal.domain.SexeEnum.class);
 
 	/** {@inheritDoc} */
 	@Override
@@ -82,7 +82,7 @@ public final class Actor implements Entity {
 	 * Récupère la valeur de la propriété 'Sexe'.
 	 * @return String sexCd
 	 */
-	@Field(domain = "DoCode", type = "FOREIGN_KEY", cardinality = io.vertigo.core.lang.Cardinality.OPTIONAL_OR_NULLABLE, label = "Sexe")
+	@Field(domain = "DoCode", type = "FOREIGN_KEY", label = "Sexe")
 	public String getSexCd() {
 		return (String) sexCdAccessor.getId();
 	}
@@ -100,7 +100,7 @@ public final class Actor implements Entity {
 	 * Association : Sexe.
 	 * @return l'accesseur vers la propriété 'Sexe'
 	 */
-	public EnumVAccessor<io.vertigo.samples.crystal.domain.Sexe, io.vertigo.samples.crystal.domain.SexeEnum> sexe() {
+	public EnumStoreVAccessor<io.vertigo.samples.crystal.domain.Sexe, io.vertigo.samples.crystal.domain.SexeEnum> sexe() {
 		return sexCdAccessor;
 	}
 	

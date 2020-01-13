@@ -5,7 +5,7 @@ import io.vertigo.core.node.config.ModuleConfig;
 import io.vertigo.core.node.config.NodeConfig;
 import io.vertigo.core.param.Param;
 import io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin;
-import io.vertigo.dynamo.plugins.environment.DynamoDefinitionProvider;
+import io.vertigo.dynamo.plugins.environment.ModelDefinitionProvider;
 import io.vertigo.studio.StudioFeatures;
 
 public class SampleStudioConfigBuilder {
@@ -32,7 +32,7 @@ public class SampleStudioConfigBuilder {
 						.build())
 				//----Definitions
 				.addModule(ModuleConfig.builder("ressources")
-						.addDefinitionProvider(DefinitionProviderConfig.builder(DynamoDefinitionProvider.class)
+						.addDefinitionProvider(DefinitionProviderConfig.builder(ModelDefinitionProvider.class)
 								.addDefinitionResource("kpr", "application.kpr")
 								.build())
 						.build())

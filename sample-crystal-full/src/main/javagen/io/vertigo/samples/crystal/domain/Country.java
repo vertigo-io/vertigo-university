@@ -47,7 +47,7 @@ public final class Country implements Entity {
 	 * Récupère la valeur de la propriété 'Nom du pays'.
 	 * @return String name
 	 */
-	@Field(domain = "DoLabel", cardinality = io.vertigo.core.lang.Cardinality.OPTIONAL_OR_NULLABLE, label = "Nom du pays")
+	@Field(domain = "DoLabel", label = "Nom du pays")
 	public String getName() {
 		return name;
 	}

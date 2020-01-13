@@ -42,7 +42,7 @@ public final class MovieDisplay implements DtObject {
 	 * Récupère la valeur de la propriété 'Année'.
 	 * @return Integer year
 	 */
-	@Field(domain = "DoYear", cardinality = io.vertigo.core.lang.Cardinality.OPTIONAL_OR_NULLABLE, label = "Année")
+	@Field(domain = "DoYear", label = "Année")
 	public Integer getYear() {
 		return year;
 	}
@@ -61,7 +61,7 @@ public final class MovieDisplay implements DtObject {
 	 * Récupère la valeur de la propriété 'Pays'.
 	 * @return String country
 	 */
-	@Field(domain = "DoLabel", cardinality = io.vertigo.core.lang.Cardinality.OPTIONAL_OR_NULLABLE, label = "Pays")
+	@Field(domain = "DoLabel", label = "Pays")
 	public String getCountry() {
 		return country;
 	}
@@ -80,7 +80,7 @@ public final class MovieDisplay implements DtObject {
 	 * Récupère la valeur de la propriété 'Nombre d'acteur'.
 	 * @return Long actorsCount
 	 */
-	@Field(domain = "DoId", cardinality = io.vertigo.core.lang.Cardinality.OPTIONAL_OR_NULLABLE, label = "Nombre d'acteur")
+	@Field(domain = "DoId", label = "Nombre d'acteur")
 	public Long getActorsCount() {
 		return actorsCount;
 	}

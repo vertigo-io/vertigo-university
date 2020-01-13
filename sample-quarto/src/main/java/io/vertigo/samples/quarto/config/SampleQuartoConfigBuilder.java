@@ -5,8 +5,8 @@ import io.vertigo.core.node.config.DefinitionProviderConfig;
 import io.vertigo.core.node.config.ModuleConfig;
 import io.vertigo.core.node.config.NodeConfig;
 import io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin;
-import io.vertigo.dynamo.DynamoFeatures;
-import io.vertigo.dynamo.plugins.environment.DynamoDefinitionProvider;
+import io.vertigo.datastore.DataStoreFeatures;
+import io.vertigo.dynamo.plugins.environment.ModelDefinitionProvider;
 import io.vertigo.quarto.QuartoFeatures;
 import io.vertigo.samples.quarto.services.ThemeProvider;
 
@@ -24,7 +24,7 @@ public final class SampleQuartoConfigBuilder {
 						.withScript()
 						.withJaninoScript()
 						.build())
-				.addModule(new DynamoFeatures().build())
+				.addModule(new DataStoreFeatures().build())
 				.addModule(new QuartoFeatures()
 						.withPublisher()
 						.withDOCXPublisher()
@@ -32,7 +32,7 @@ public final class SampleQuartoConfigBuilder {
 				//-----Declaration of a module named 'Vega' which contains a webservice component.
 				.addModule( ModuleConfig.builder("Samples")
 					.addDefinitionProvider( DefinitionProviderConfig.builder(QuartoDefinitionProvider.class).build())
-					.addDefinitionProvider(DefinitionProviderConfig.builder(DynamoDefinitionProvider.class)
+					.addDefinitionProvider(DefinitionProviderConfig.builder(ModelDefinitionProvider.class)
 							.addDefinitionResource("classes", "io.vertigo.samples.quarto.domain*")
 							.build())
 					.addDefinitionProvider(PublisherDefinitionProvider.class)

@@ -42,7 +42,7 @@ public final class MovieIndex implements DtObject {
 	 * Récupère la valeur de la propriété 'Titre'.
 	 * @return String name
 	 */
-	@Field(domain = "DoLabelLong", cardinality = io.vertigo.core.lang.Cardinality.OPTIONAL_OR_NULLABLE, label = "Titre")
+	@Field(domain = "DoLabelLong", label = "Titre")
 	public String getName() {
 		return name;
 	}
@@ -61,7 +61,7 @@ public final class MovieIndex implements DtObject {
 	 * Récupère la valeur de la propriété 'Année'.
 	 * @return Integer year
 	 */
-	@Field(domain = "DoYear", cardinality = io.vertigo.core.lang.Cardinality.OPTIONAL_OR_NULLABLE, label = "Année")
+	@Field(domain = "DoYear", label = "Année")
 	public Integer getYear() {
 		return year;
 	}
@@ -80,7 +80,7 @@ public final class MovieIndex implements DtObject {
 	 * Récupère la valeur de la propriété 'Pays'.
 	 * @return String country
 	 */
-	@Field(domain = "DoLabel", cardinality = io.vertigo.core.lang.Cardinality.OPTIONAL_OR_NULLABLE, label = "Pays")
+	@Field(domain = "DoLabel", label = "Pays")
 	public String getCountry() {
 		return country;
 	}

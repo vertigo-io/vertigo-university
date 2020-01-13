@@ -2,9 +2,9 @@ package io.vertigo.samples.dao.domain;
 
 import io.vertigo.core.lang.Generated;
 import io.vertigo.dynamo.domain.model.Entity;
-import io.vertigo.dynamo.domain.model.ListVAccessor;
+import io.vertigo.datastore.impl.entitystore.StoreListVAccessor;
 import io.vertigo.dynamo.domain.model.UID;
-import io.vertigo.dynamo.domain.model.VAccessor;
+import io.vertigo.datastore.impl.entitystore.StoreVAccessor;
 import io.vertigo.dynamo.domain.stereotype.Field;
 import io.vertigo.dynamo.domain.util.DtObjectUtil;
 
@@ -35,7 +35,7 @@ public final class MyMovie implements Entity {
 			foreignRole = "Movie",
 			foreignLabel = "Movie",
 			foreignMultiplicity = "0..*")
-	private final VAccessor<io.vertigo.samples.dao.domain.MyCountry> couIdAccessor = new VAccessor<>(io.vertigo.samples.dao.domain.MyCountry.class, "Country");
+	private final StoreVAccessor<io.vertigo.samples.dao.domain.MyCountry> couIdAccessor = new StoreVAccessor<>(io.vertigo.samples.dao.domain.MyCountry.class, "Country");
 
 	@io.vertigo.dynamo.domain.stereotype.Association(
 			name = "AMrolMmov",
@@ -50,7 +50,7 @@ public final class MyMovie implements Entity {
 			foreignRole = "Role",
 			foreignLabel = "Role",
 			foreignMultiplicity = "0..*")
-	private final ListVAccessor<io.vertigo.samples.dao.domain.MyRole> roleAccessor = new ListVAccessor<>(this, "AMrolMmov", "Role");
+	private final StoreListVAccessor<io.vertigo.samples.dao.domain.MyRole> roleAccessor = new StoreListVAccessor<>(this, "AMrolMmov", "Role");
 
 	/** {@inheritDoc} */
 	@Override
@@ -101,7 +101,7 @@ public final class MyMovie implements Entity {
 	 * Récupère la valeur de la propriété 'Année'.
 	 * @return Integer year
 	 */
-	@Field(domain = "DoYear", cardinality = io.vertigo.core.lang.Cardinality.OPTIONAL_OR_NULLABLE, label = "Année")
+	@Field(domain = "DoYear", label = "Année")
 	public Integer getYear() {
 		return year;
 	}
@@ -120,7 +120,7 @@ public final class MyMovie implements Entity {
 	 * Récupère la valeur de la propriété 'Id Imdb'.
 	 * @return String imdbid
 	 */
-	@Field(domain = "DoLabel", cardinality = io.vertigo.core.lang.Cardinality.OPTIONAL_OR_NULLABLE, label = "Id Imdb")
+	@Field(domain = "DoLabel", label = "Id Imdb")
 	public String getImdbid() {
 		return imdbid;
 	}
@@ -139,7 +139,7 @@ public final class MyMovie implements Entity {
 	 * Récupère la valeur de la propriété 'Country'.
 	 * @return Long couId
 	 */
-	@Field(domain = "DoId", type = "FOREIGN_KEY", cardinality = io.vertigo.core.lang.Cardinality.OPTIONAL_OR_NULLABLE, label = "Country")
+	@Field(domain = "DoId", type = "FOREIGN_KEY", label = "Country")
 	public Long getCouId() {
 		return (Long) couIdAccessor.getId();
 	}
@@ -157,7 +157,7 @@ public final class MyMovie implements Entity {
 	 * Association : Country.
 	 * @return l'accesseur vers la propriété 'Country'
 	 */
-	public VAccessor<io.vertigo.samples.dao.domain.MyCountry> country() {
+	public StoreVAccessor<io.vertigo.samples.dao.domain.MyCountry> country() {
 		return couIdAccessor;
 	}
 
@@ -165,7 +165,7 @@ public final class MyMovie implements Entity {
 	 * Association : Role.
 	 * @return l'accesseur vers la propriété 'Role'
 	 */
-	public ListVAccessor<io.vertigo.samples.dao.domain.MyRole> role() {
+	public StoreListVAccessor<io.vertigo.samples.dao.domain.MyRole> role() {
 		return roleAccessor;
 	}
 	
