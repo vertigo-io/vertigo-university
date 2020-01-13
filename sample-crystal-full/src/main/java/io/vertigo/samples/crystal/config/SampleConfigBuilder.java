@@ -16,6 +16,7 @@ import io.vertigo.core.plugins.resource.local.LocalResourceResolverPlugin;
 import io.vertigo.database.DatabaseFeatures;
 import io.vertigo.database.impl.sql.vendor.h2.H2DataBase;
 import io.vertigo.datafactory.DataFactoryFeatures;
+import io.vertigo.datafactory.impl.search.grammar.SearchDefinitionProvider;
 import io.vertigo.datastore.DataStoreFeatures;
 import io.vertigo.dynamo.DataModelFeatures;
 import io.vertigo.dynamo.impl.task.proxy.TaskProxyMethod;
@@ -70,7 +71,11 @@ public class SampleConfigBuilder {
 		//----Definitions
 		nodeConfigBuilder.addModule(ModuleConfig.builder("ressources")
 				.addDefinitionProvider(DefinitionProviderConfig.builder(ModelDefinitionProvider.class)
-						.addDefinitionResource("kpr", "application.kpr")
+						.addDefinitionResource("kpr", "model.kpr")
+						.addDefinitionResource("kpr", "task.kpr")
+						.build())
+				.addDefinitionProvider(DefinitionProviderConfig.builder(SearchDefinitionProvider.class)
+						.addDefinitionResource("kpr", "search.kpr")
 						.build())
 				.build());
 		if (withVega) {

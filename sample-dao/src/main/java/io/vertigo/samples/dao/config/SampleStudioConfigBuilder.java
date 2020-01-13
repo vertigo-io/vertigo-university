@@ -33,7 +33,8 @@ public class SampleStudioConfigBuilder {
 				//----Definitions
 				.addModule(ModuleConfig.builder("ressources")
 						.addDefinitionProvider(DefinitionProviderConfig.builder(ModelDefinitionProvider.class)
-								.addDefinitionResource("kpr", "application.kpr")
+								.addDefinitionResource("kpr", "model.kpr")
+								.addDefinitionResource("kpr", "task.kpr")
 								.build())
 						.build())
 				.build();
