@@ -41,9 +41,14 @@ public final class ReprisePAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TkCountActors.
+	 * Execute la tache StTkCountActors.
 	 * @return Long count
 	*/
+	@io.vertigo.dynamo.task.proxy.TaskAnnotation(
+			name = "TkCountActors",
+			request = "select count(*) from ACTOR",
+			taskEngineClass = io.vertigo.dynamox.task.TaskEngineSelect.class)
+	@io.vertigo.dynamo.task.proxy.TaskOutput(domain = "STyId")
 	public Long countActors() {
 		final Task task = createTaskBuilder("TkCountActors")
 				.build();
@@ -53,9 +58,15 @@ public final class ReprisePAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TkCountMovies.
+	 * Execute la tache StTkCountMovies.
 	 * @return Long count
 	*/
+	@io.vertigo.dynamo.task.proxy.TaskAnnotation(
+			name = "TkCountMovies",
+			request = "select count(*) from MOVIE" + 
+ "        	where NAME like 'S%%'",
+			taskEngineClass = io.vertigo.dynamox.task.TaskEngineSelect.class)
+	@io.vertigo.dynamo.task.proxy.TaskOutput(domain = "STyId")
 	public Long countMovies() {
 		final Task task = createTaskBuilder("TkCountMovies")
 				.build();
@@ -65,9 +76,16 @@ public final class ReprisePAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TkCountRoles.
+	 * Execute la tache StTkCountRoles.
 	 * @return Long count
 	*/
+	@io.vertigo.dynamo.task.proxy.TaskAnnotation(
+			name = "TkCountRoles",
+			request = "select count(*) from ROLE rol" + 
+ "        	join movie mov on mov.MOV_ID = rol.MOV_ID" + 
+ "        	where mov.name like 'S%%'",
+			taskEngineClass = io.vertigo.dynamox.task.TaskEngineSelect.class)
+	@io.vertigo.dynamo.task.proxy.TaskOutput(domain = "STyId")
 	public Long countRoles() {
 		final Task task = createTaskBuilder("TkCountRoles")
 				.build();

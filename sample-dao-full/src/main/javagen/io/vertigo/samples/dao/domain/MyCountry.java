@@ -12,6 +12,7 @@ import io.vertigo.dynamo.domain.util.DtObjectUtil;
  */
 @Generated
 @io.vertigo.dynamo.domain.stereotype.DataSpace("mine")
+@io.vertigo.dynamo.ngdomain.annotations.Mapper(clazz = io.vertigo.dynamo.domain.util.JsonMapper.class, dataType = io.vertigo.dynamo.domain.metamodel.DataType.String)
 public final class MyCountry implements Entity {
 	private static final long serialVersionUID = 1L;
 
@@ -29,7 +30,7 @@ public final class MyCountry implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long couId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DoId", type = "ID", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Id")
+	@Field(domain = "STyId", type = "ID", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Id")
 	public Long getCouId() {
 		return couId;
 	}
@@ -48,7 +49,7 @@ public final class MyCountry implements Entity {
 	 * Récupère la valeur de la propriété 'Code du pays'.
 	 * @return String name
 	 */
-	@Field(domain = "DoLabel", label = "Code du pays")
+	@Field(domain = "STyLabel", label = "Code du pays")
 	public String getName() {
 		return name;
 	}

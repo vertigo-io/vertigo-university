@@ -11,6 +11,7 @@ import io.vertigo.dynamo.task.model.TaskBuilder;
 import io.vertigo.datastore.entitystore.EntityStoreManager;
 import io.vertigo.datastore.impl.dao.DAO;
 import io.vertigo.datastore.impl.dao.StoreServices;
+import io.vertigo.dynamo.ngdomain.ModelManager;
 import io.vertigo.dynamo.task.TaskManager;
 import io.vertigo.samples.dao.domain.Movie;
 
@@ -27,8 +28,8 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	 * @param taskManager Manager de Task
 	 */
 	@Inject
-	public MovieDAO(final EntityStoreManager entityStoreManager, final TaskManager taskManager) {
-		super(Movie.class, entityStoreManager, taskManager);
+	public MovieDAO(final EntityStoreManager entityStoreManager, final TaskManager taskManager, final ModelManager modelManager) {
+		super(Movie.class, entityStoreManager, taskManager, modelManager);
 	}
 
 
@@ -43,12 +44,26 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	}
 
 	/**
-	 * Execute la tache TkGetMoviesByCriteria.
+	 * Execute la tache StTkGetMoviesByCriteria.
 	 * @param title String
 	 * @param year Integer
 	 * @return DtList de Movie movies
 	*/
-	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Movie> getMoviesByCriteria(final String title, final Integer year) {
+	@io.vertigo.dynamo.task.proxy.TaskAnnotation(
+			name = "TkGetMoviesByCriteria",
+			request = "select mov.*" + 
+ "        	from movie mov" + 
+ "        	where " + 
+ "        	1=1" + 
+ "        	<%if(title != null) {%>" + 
+ "        	 and mov.NAME like concat(#title#, '%%')" + 
+ "        	<%}%>" + 
+ "        	<%if(year != null) {%>" + 
+ "        	 and mov.YEAR = #year#" + 
+ "        	<%}%>",
+			taskEngineClass = io.vertigo.dynamox.task.TaskEngineSelect.class)
+	@io.vertigo.dynamo.task.proxy.TaskOutput(domain = "STyDtMovie")
+	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Movie> getMoviesByCriteria(@io.vertigo.dynamo.task.proxy.TaskInput(name = "title", domain = "STyLabelLong") final String title, @io.vertigo.dynamo.task.proxy.TaskInput(name = "year", domain = "STyYear") final Integer year) {
 		final Task task = createTaskBuilder("TkGetMoviesByCriteria")
 				.addValue("title", title)
 				.addValue("year", year)
@@ -59,13 +74,30 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	}
 
 	/**
-	 * Execute la tache TkGetMoviesByCriteriaWithCountry.
+	 * Execute la tache StTkGetMoviesByCriteriaWithCountry.
 	 * @param title String
 	 * @param year Integer
 	 * @param countries DtList de Country
 	 * @return DtList de Movie movies
 	*/
-	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Movie> getMoviesByCriteriaWithCountry(final String title, final Optional<Integer> year, final io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Country> countries) {
+	@io.vertigo.dynamo.task.proxy.TaskAnnotation(
+			name = "TkGetMoviesByCriteriaWithCountry",
+			request = "select mov.*" + 
+ "        	from movie mov" + 
+ "        	where " + 
+ "        	1=1" + 
+ "        	<%if(title != null) {%>" + 
+ "        	 and mov.NAME like concat(#title#, '%%')" + 
+ "        	<%}%>" + 
+ "        	<%if(year != null) {%>" + 
+ "        	 and mov.YEAR = #year#" + 
+ "        	<%}%>" + 
+ "        	<%if(!countries.isEmpty()) {%>" + 
+ "        	 and mov.COU_ID in (#countries.rownum.couId#)" + 
+ "        	<%}%>",
+			taskEngineClass = io.vertigo.dynamox.task.TaskEngineSelect.class)
+	@io.vertigo.dynamo.task.proxy.TaskOutput(domain = "STyDtMovie")
+	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Movie> getMoviesByCriteriaWithCountry(@io.vertigo.dynamo.task.proxy.TaskInput(name = "title", domain = "STyLabelLong") final String title, @io.vertigo.dynamo.task.proxy.TaskInput(name = "year", domain = "STyYear") final Optional<Integer> year, @io.vertigo.dynamo.task.proxy.TaskInput(name = "countries", domain = "STyDtCountry") final io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Country> countries) {
 		final Task task = createTaskBuilder("TkGetMoviesByCriteriaWithCountry")
 				.addValue("title", title)
 				.addValue("year", year.orElse(null))
@@ -77,9 +109,17 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	}
 
 	/**
-	 * Execute la tache TkGetMoviesWith100Actors.
+	 * Execute la tache StTkGetMoviesWith100Actors.
 	 * @return DtList de Movie movies
 	*/
+	@io.vertigo.dynamo.task.proxy.TaskAnnotation(
+			name = "TkGetMoviesWith100Actors",
+			request = "select mov.*" + 
+ "			from movie mov" + 
+ "			join (select MOV_ID, count(*) cnt from role group by mov_id ) hv on hv.MOV_ID = mov.MOV_ID" + 
+ "			where hv.cnt> 100",
+			taskEngineClass = io.vertigo.dynamox.task.TaskEngineSelect.class)
+	@io.vertigo.dynamo.task.proxy.TaskOutput(domain = "STyDtMovie")
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Movie> getMoviesWith100Actors() {
 		final Task task = createTaskBuilder("TkGetMoviesWith100Actors")
 				.build();
@@ -89,10 +129,15 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	}
 
 	/**
-	 * Execute la tache TkInsertMoviesBatch.
+	 * Execute la tache StTkInsertMoviesBatch.
 	 * @param moviesList DtList de Movie
 	*/
-	public void insertMoviesBatch(final io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Movie> moviesList) {
+	@io.vertigo.dynamo.task.proxy.TaskAnnotation(
+			dataSpace = "mine",
+			name = "TkInsertMoviesBatch",
+			request = "INSERT INTO MY_MOVIE (MOV_ID, NAME, YEAR, IMDBID, COU_ID) values (#MOVIES_LIST.MOV_ID#, #MOVIES_LIST.NAME#, #MOVIES_LIST.YEAR#, #MOVIES_LIST.IMDBID#, #MOVIES_LIST.COU_ID#)",
+			taskEngineClass = io.vertigo.dynamox.task.TaskEngineProcBatch.class)
+	public void insertMoviesBatch(@io.vertigo.dynamo.task.proxy.TaskInput(name = "moviesList", domain = "STyDtMovie") final io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Movie> moviesList) {
 		final Task task = createTaskBuilder("TkInsertMoviesBatch")
 				.addValue("moviesList", moviesList)
 				.build();
@@ -100,12 +145,20 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	}
 
 	/**
-	 * Execute la tache TkLoadMoviesByChunk.
+	 * Execute la tache StTkLoadMoviesByChunk.
 	 * @param limit Long
 	 * @param offset Long
 	 * @return DtList de Movie moviesList
 	*/
-	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Movie> loadMoviesByChunk(final Long limit, final Long offset) {
+	@io.vertigo.dynamo.task.proxy.TaskAnnotation(
+			name = "TkLoadMoviesByChunk",
+			request = "select * from movie" + 
+ "        	where MOV_ID > #offset#" + 
+ "        	order by MOV_ID asc" + 
+ "        	limit #limit#",
+			taskEngineClass = io.vertigo.dynamox.task.TaskEngineSelect.class)
+	@io.vertigo.dynamo.task.proxy.TaskOutput(domain = "STyDtMovie")
+	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Movie> loadMoviesByChunk(@io.vertigo.dynamo.task.proxy.TaskInput(name = "limit", domain = "STyId") final Long limit, @io.vertigo.dynamo.task.proxy.TaskInput(name = "offset", domain = "STyId") final Long offset) {
 		final Task task = createTaskBuilder("TkLoadMoviesByChunk")
 				.addValue("limit", limit)
 				.addValue("offset", offset)

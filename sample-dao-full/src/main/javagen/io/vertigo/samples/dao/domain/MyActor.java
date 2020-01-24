@@ -12,6 +12,7 @@ import io.vertigo.dynamo.domain.util.DtObjectUtil;
  */
 @Generated
 @io.vertigo.dynamo.domain.stereotype.DataSpace("mine")
+@io.vertigo.dynamo.ngdomain.annotations.Mapper(clazz = io.vertigo.dynamo.domain.util.JsonMapper.class, dataType = io.vertigo.dynamo.domain.metamodel.DataType.String)
 public final class MyActor implements Entity {
 	private static final long serialVersionUID = 1L;
 
@@ -30,7 +31,7 @@ public final class MyActor implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long actId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DoId", type = "ID", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Id")
+	@Field(domain = "STyId", type = "ID", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Id")
 	public Long getActId() {
 		return actId;
 	}
@@ -49,7 +50,7 @@ public final class MyActor implements Entity {
 	 * Récupère la valeur de la propriété 'Nom'.
 	 * @return String name <b>Obligatoire</b>
 	 */
-	@Field(domain = "DoLabelLong", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Nom")
+	@Field(domain = "STyLabelLong", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Nom")
 	public String getName() {
 		return name;
 	}
@@ -68,7 +69,7 @@ public final class MyActor implements Entity {
 	 * Récupère la valeur de la propriété 'Sexe'.
 	 * @return String sexe
 	 */
-	@Field(domain = "DoCode", label = "Sexe")
+	@Field(domain = "STyCode", label = "Sexe")
 	public String getSexe() {
 		return sexe;
 	}

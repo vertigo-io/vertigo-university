@@ -111,21 +111,21 @@ comment on column MY_ROLE.ACT_ID is
 
 
 alter table MY_MOVIE
-	add constraint FK_MMOV_MCOU_MY_COUNTRY foreign key (COU_ID)
+	add constraint FK__A_MMOV_MCOU_MY_COUNTRY foreign key (COU_ID)
 	references MY_COUNTRY (COU_ID);
 
-create index MMOV_MCOU_MY_COUNTRY_FK on MY_MOVIE (COU_ID asc);
+create index _A_MMOV_MCOU_MY_COUNTRY_FK on MY_MOVIE (COU_ID asc);
 
 alter table MY_ROLE
-	add constraint FK_MROL_MACT_MY_ACTOR foreign key (ACT_ID)
+	add constraint FK__A_MROL_MACT_MY_ACTOR foreign key (ACT_ID)
 	references MY_ACTOR (ACT_ID);
 
-create index MROL_MACT_MY_ACTOR_FK on MY_ROLE (ACT_ID asc);
+create index _A_MROL_MACT_MY_ACTOR_FK on MY_ROLE (ACT_ID asc);
 
 alter table MY_ROLE
-	add constraint FK_MROL_MMOV_MY_MOVIE foreign key (MOV_ID)
+	add constraint FK__A_MROL_MMOV_MY_MOVIE foreign key (MOV_ID)
 	references MY_MOVIE (MOV_ID);
 
-create index MROL_MMOV_MY_MOVIE_FK on MY_ROLE (MOV_ID asc);
+create index _A_MROL_MMOV_MY_MOVIE_FK on MY_ROLE (MOV_ID asc);
 
 

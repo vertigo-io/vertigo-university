@@ -13,6 +13,7 @@ import io.vertigo.dynamo.domain.util.DtObjectUtil;
  */
 @Generated
 @io.vertigo.dynamo.domain.stereotype.DataSpace("mine")
+@io.vertigo.dynamo.ngdomain.annotations.Mapper(clazz = io.vertigo.dynamo.domain.util.JsonMapper.class, dataType = io.vertigo.dynamo.domain.metamodel.DataType.String)
 public final class MyRole implements Entity {
 	private static final long serialVersionUID = 1L;
 
@@ -60,7 +61,7 @@ public final class MyRole implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long rolId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DoId", type = "ID", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Id")
+	@Field(domain = "STyId", type = "ID", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Id")
 	public Long getRolId() {
 		return rolId;
 	}
@@ -79,7 +80,7 @@ public final class MyRole implements Entity {
 	 * Récupère la valeur de la propriété 'Dans le role de'.
 	 * @return String asCharacter <b>Obligatoire</b>
 	 */
-	@Field(domain = "DoLabelVeryLong", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Dans le role de")
+	@Field(domain = "STyLabelVeryLong", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Dans le role de")
 	public String getAsCharacter() {
 		return asCharacter;
 	}
@@ -98,7 +99,7 @@ public final class MyRole implements Entity {
 	 * Récupère la valeur de la propriété 'Movie'.
 	 * @return Long movId
 	 */
-	@Field(domain = "DoId", type = "FOREIGN_KEY", label = "Movie")
+	@io.vertigo.dynamo.domain.stereotype.ForeignKey(domain = "STyId", label = "Movie", fkDefinition = "DtMyMovie" )
 	public Long getMovId() {
 		return (Long) movIdAccessor.getId();
 	}
@@ -117,7 +118,7 @@ public final class MyRole implements Entity {
 	 * Récupère la valeur de la propriété 'Actor'.
 	 * @return Long actId
 	 */
-	@Field(domain = "DoId", type = "FOREIGN_KEY", label = "Actor")
+	@io.vertigo.dynamo.domain.stereotype.ForeignKey(domain = "STyId", label = "Actor", fkDefinition = "DtMyActor" )
 	public Long getActId() {
 		return (Long) actIdAccessor.getId();
 	}

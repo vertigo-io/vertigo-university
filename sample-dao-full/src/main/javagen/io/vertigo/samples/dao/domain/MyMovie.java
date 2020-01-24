@@ -14,6 +14,7 @@ import io.vertigo.dynamo.domain.util.DtObjectUtil;
  */
 @Generated
 @io.vertigo.dynamo.domain.stereotype.DataSpace("mine")
+@io.vertigo.dynamo.ngdomain.annotations.Mapper(clazz = io.vertigo.dynamo.domain.util.JsonMapper.class, dataType = io.vertigo.dynamo.domain.metamodel.DataType.String)
 public final class MyMovie implements Entity {
 	private static final long serialVersionUID = 1L;
 
@@ -50,7 +51,7 @@ public final class MyMovie implements Entity {
 			foreignRole = "Role",
 			foreignLabel = "Role",
 			foreignMultiplicity = "0..*")
-	private final StoreListVAccessor<io.vertigo.samples.dao.domain.MyRole> roleAccessor = new StoreListVAccessor<>(this, "AMrolMmov", "Role");
+	private final StoreListVAccessor<io.vertigo.samples.dao.domain.MyRole> roleAccessor = new StoreListVAccessor<>(this, "StAMrolMmov", "Role");
 
 	/** {@inheritDoc} */
 	@Override
@@ -63,7 +64,7 @@ public final class MyMovie implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long movId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DoId", type = "ID", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Id")
+	@Field(domain = "STyId", type = "ID", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Id")
 	public Long getMovId() {
 		return movId;
 	}
@@ -82,7 +83,7 @@ public final class MyMovie implements Entity {
 	 * Récupère la valeur de la propriété 'Code du pays'.
 	 * @return String name <b>Obligatoire</b>
 	 */
-	@Field(domain = "DoLabelLong", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Code du pays")
+	@Field(domain = "STyLabelLong", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Code du pays")
 	public String getName() {
 		return name;
 	}
@@ -101,7 +102,7 @@ public final class MyMovie implements Entity {
 	 * Récupère la valeur de la propriété 'Année'.
 	 * @return Integer year
 	 */
-	@Field(domain = "DoYear", label = "Année")
+	@Field(domain = "STyYear", label = "Année")
 	public Integer getYear() {
 		return year;
 	}
@@ -120,7 +121,7 @@ public final class MyMovie implements Entity {
 	 * Récupère la valeur de la propriété 'Id Imdb'.
 	 * @return String imdbid
 	 */
-	@Field(domain = "DoLabel", label = "Id Imdb")
+	@Field(domain = "STyLabel", label = "Id Imdb")
 	public String getImdbid() {
 		return imdbid;
 	}
@@ -139,7 +140,7 @@ public final class MyMovie implements Entity {
 	 * Récupère la valeur de la propriété 'Country'.
 	 * @return Long couId
 	 */
-	@Field(domain = "DoId", type = "FOREIGN_KEY", label = "Country")
+	@io.vertigo.dynamo.domain.stereotype.ForeignKey(domain = "STyId", label = "Country", fkDefinition = "DtMyCountry" )
 	public Long getCouId() {
 		return (Long) couIdAccessor.getId();
 	}

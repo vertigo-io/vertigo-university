@@ -10,6 +10,7 @@ import io.vertigo.dynamo.task.model.TaskBuilder;
 import io.vertigo.datastore.entitystore.EntityStoreManager;
 import io.vertigo.datastore.impl.dao.DAO;
 import io.vertigo.datastore.impl.dao.StoreServices;
+import io.vertigo.dynamo.ngdomain.ModelManager;
 import io.vertigo.dynamo.task.TaskManager;
 import io.vertigo.samples.dao.domain.Role;
 
@@ -26,8 +27,8 @@ public final class RoleDAO extends DAO<Role, java.lang.Long> implements StoreSer
 	 * @param taskManager Manager de Task
 	 */
 	@Inject
-	public RoleDAO(final EntityStoreManager entityStoreManager, final TaskManager taskManager) {
-		super(Role.class, entityStoreManager, taskManager);
+	public RoleDAO(final EntityStoreManager entityStoreManager, final TaskManager taskManager, final ModelManager modelManager) {
+		super(Role.class, entityStoreManager, taskManager, modelManager);
 	}
 
 
@@ -42,10 +43,15 @@ public final class RoleDAO extends DAO<Role, java.lang.Long> implements StoreSer
 	}
 
 	/**
-	 * Execute la tache TkInsertRolesBatch.
+	 * Execute la tache StTkInsertRolesBatch.
 	 * @param rolesList DtList de Role
 	*/
-	public void insertRolesBatch(final io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Role> rolesList) {
+	@io.vertigo.dynamo.task.proxy.TaskAnnotation(
+			dataSpace = "mine",
+			name = "TkInsertRolesBatch",
+			request = "INSERT INTO MY_ROLE (ROL_ID, MOV_ID, ACT_ID, AS_CHARACTER) values (#rolesList.rolId#, #rolesList.movId#, #rolesList.actId#, #rolesList.asCharacter#)",
+			taskEngineClass = io.vertigo.dynamox.task.TaskEngineProcBatch.class)
+	public void insertRolesBatch(@io.vertigo.dynamo.task.proxy.TaskInput(name = "rolesList", domain = "STyDtRole") final io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Role> rolesList) {
 		final Task task = createTaskBuilder("TkInsertRolesBatch")
 				.addValue("rolesList", rolesList)
 				.build();
@@ -53,12 +59,20 @@ public final class RoleDAO extends DAO<Role, java.lang.Long> implements StoreSer
 	}
 
 	/**
-	 * Execute la tache TkLoadRolesByChunk.
+	 * Execute la tache StTkLoadRolesByChunk.
 	 * @param limit Long
 	 * @param offset Long
 	 * @return DtList de Role moviesList
 	*/
-	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Role> loadRolesByChunk(final Long limit, final Long offset) {
+	@io.vertigo.dynamo.task.proxy.TaskAnnotation(
+			name = "TkLoadRolesByChunk",
+			request = "select rol.* from role rol" + 
+ "        	where ROL_ID > #offset#" + 
+ "        	order by rol.ROL_ID asc" + 
+ "        	limit #limit#",
+			taskEngineClass = io.vertigo.dynamox.task.TaskEngineSelect.class)
+	@io.vertigo.dynamo.task.proxy.TaskOutput(domain = "STyDtRole")
+	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.Role> loadRolesByChunk(@io.vertigo.dynamo.task.proxy.TaskInput(name = "limit", domain = "STyId") final Long limit, @io.vertigo.dynamo.task.proxy.TaskInput(name = "offset", domain = "STyId") final Long offset) {
 		final Task task = createTaskBuilder("TkLoadRolesByChunk")
 				.addValue("limit", limit)
 				.addValue("offset", offset)

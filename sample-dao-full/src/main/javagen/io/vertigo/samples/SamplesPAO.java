@@ -41,9 +41,14 @@ public final class SamplesPAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TkGetMovieByYear.
+	 * Execute la tache StTkGetMovieByYear.
 	 * @return DtList de MovieByYear movies
 	*/
+	@io.vertigo.dynamo.task.proxy.TaskAnnotation(
+			name = "TkGetMovieByYear",
+			request = "select YEAR, count(*) as MOVIES_COUNT from movie where YEAR is not null group by year order by YEAR asc",
+			taskEngineClass = io.vertigo.dynamox.task.TaskEngineSelect.class)
+	@io.vertigo.dynamo.task.proxy.TaskOutput(domain = "STyDtMovieByYear")
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.MovieByYear> getMovieByYear() {
 		final Task task = createTaskBuilder("TkGetMovieByYear")
 				.build();
@@ -53,9 +58,19 @@ public final class SamplesPAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache TkGetMovieDisplay.
+	 * Execute la tache StTkGetMovieDisplay.
 	 * @return DtList de MovieDisplay movies
 	*/
+	@io.vertigo.dynamo.task.proxy.TaskAnnotation(
+			name = "TkGetMovieDisplay",
+			request = "select mov.NAME,mov.YEAR, cou.NAME as COUNTRY, hv.CNT as ACTORS_COUNT" + 
+ "		from movie mov" + 
+ "		join country cou on cou.COU_ID = mov.COU_ID" + 
+ "		join (select MOV_ID, count(*) cnt from role group by mov_id ) hv on hv.MOV_ID = mov.MOV_ID" + 
+ "		where mov.YEAR > 2010" + 
+ "		limit 500",
+			taskEngineClass = io.vertigo.dynamox.task.TaskEngineSelect.class)
+	@io.vertigo.dynamo.task.proxy.TaskOutput(domain = "STyDtMovieDisplay")
 	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.MovieDisplay> getMovieDisplay() {
 		final Task task = createTaskBuilder("TkGetMovieDisplay")
 				.build();
