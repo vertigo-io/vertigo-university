@@ -7,10 +7,10 @@ import javax.inject.Inject;
 
 import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.core.lang.Assertion;
-import io.vertigo.dynamo.criteria.Criteria;
-import io.vertigo.dynamo.criteria.Criterions;
-import io.vertigo.dynamo.domain.model.DtList;
-import io.vertigo.dynamo.domain.model.DtListState;
+import io.vertigo.datamodel.criteria.Criteria;
+import io.vertigo.datamodel.criteria.Criterions;
+import io.vertigo.datamodel.structure.model.DtList;
+import io.vertigo.datamodel.structure.model.DtListState;
 import io.vertigo.samples.SamplesPAO;
 import io.vertigo.samples.dao.dao.ActorDAO;
 import io.vertigo.samples.dao.dao.MovieDAO;

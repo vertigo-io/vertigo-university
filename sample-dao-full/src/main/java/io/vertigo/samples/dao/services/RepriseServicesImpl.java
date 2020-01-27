@@ -5,7 +5,7 @@ import java.util.Optional;
 import javax.inject.Inject;
 
 import io.vertigo.commons.transaction.Transactional;
-import io.vertigo.dynamo.domain.model.DtList;
+import io.vertigo.datamodel.structure.model.DtList;
 import io.vertigo.samples.dao.dao.ActorDAO;
 import io.vertigo.samples.dao.dao.CountryDAO;
 import io.vertigo.samples.dao.dao.MovieDAO;

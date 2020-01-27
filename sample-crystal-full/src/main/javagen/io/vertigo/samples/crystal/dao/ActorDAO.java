@@ -4,13 +4,13 @@ import javax.inject.Inject;
 
 import io.vertigo.core.lang.Generated;
 import io.vertigo.core.node.Home;
-import io.vertigo.dynamo.task.metamodel.TaskDefinition;
-import io.vertigo.dynamo.task.model.Task;
-import io.vertigo.dynamo.task.model.TaskBuilder;
+import io.vertigo.datamodel.task.TaskManager;
+import io.vertigo.datamodel.task.metamodel.TaskDefinition;
+import io.vertigo.datamodel.task.model.Task;
+import io.vertigo.datamodel.task.model.TaskBuilder;
 import io.vertigo.datastore.entitystore.EntityStoreManager;
 import io.vertigo.datastore.impl.dao.DAO;
 import io.vertigo.datastore.impl.dao.StoreServices;
-import io.vertigo.dynamo.task.TaskManager;
 import io.vertigo.samples.crystal.domain.Actor;
 
 /**
@@ -46,7 +46,7 @@ public final class ActorDAO extends DAO<Actor, java.lang.Long> implements StoreS
 	 * @param movId Long
 	 * @return DtList de Actor actors
 	*/
-	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.crystal.domain.Actor> getActorsByMovie(final Long movId) {
+	public io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.crystal.domain.Actor> getActorsByMovie(final Long movId) {
 		final Task task = createTaskBuilder("TkGetActorsByMovie")
 				.addValue("movId", movId)
 				.build();

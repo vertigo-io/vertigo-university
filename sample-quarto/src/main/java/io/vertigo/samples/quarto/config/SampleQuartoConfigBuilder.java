@@ -5,8 +5,8 @@ import io.vertigo.core.node.config.DefinitionProviderConfig;
 import io.vertigo.core.node.config.ModuleConfig;
 import io.vertigo.core.node.config.NodeConfig;
 import io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin;
+import io.vertigo.datamodel.plugins.environment.ModelDefinitionProvider;
 import io.vertigo.datastore.DataStoreFeatures;
-import io.vertigo.dynamo.plugins.environment.ModelDefinitionProvider;
 import io.vertigo.quarto.QuartoFeatures;
 import io.vertigo.samples.quarto.services.ThemeProvider;
 

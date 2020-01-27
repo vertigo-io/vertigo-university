@@ -9,9 +9,9 @@ import io.vertigo.core.param.Param;
 import io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin;
 import io.vertigo.database.DatabaseFeatures;
 import io.vertigo.database.impl.sql.vendor.h2.H2DataBase;
+import io.vertigo.datamodel.DataModelFeatures;
 import io.vertigo.datastore.DataStoreFeatures;
-import io.vertigo.dynamo.DataModelFeatures;
-import io.vertigo.dynamo.plugins.environment.ModelDefinitionProvider;
+import io.vertigo.dynamo.plugins.environment.StudioDefinitionProvider;
 import io.vertigo.samples.dao.aspect.SupervisionAspect;
 
 public class SampleConfigBuilder {
@@ -47,7 +47,7 @@ public class SampleConfigBuilder {
 					.withSqlEntityStore()
 					.build())
 				.addModule(ModuleConfig.builder("ressources")
-						.addDefinitionProvider(DefinitionProviderConfig.builder(ModelDefinitionProvider.class)
+						.addDefinitionProvider(DefinitionProviderConfig.builder(StudioDefinitionProvider.class)
 								.addDefinitionResource("kpr", "model.kpr")
 								.addDefinitionResource("kpr", "task.kpr")
 								.build())

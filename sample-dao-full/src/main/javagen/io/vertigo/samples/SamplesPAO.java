@@ -5,10 +5,10 @@ import javax.inject.Inject;
 import io.vertigo.core.node.Home;
 import io.vertigo.core.lang.Assertion;
 import io.vertigo.core.lang.Generated;
-import io.vertigo.dynamo.task.TaskManager;
-import io.vertigo.dynamo.task.metamodel.TaskDefinition;
-import io.vertigo.dynamo.task.model.Task;
-import io.vertigo.dynamo.task.model.TaskBuilder;
+import io.vertigo.datamodel.task.TaskManager;
+import io.vertigo.datamodel.task.metamodel.TaskDefinition;
+import io.vertigo.datamodel.task.model.Task;
+import io.vertigo.datamodel.task.model.TaskBuilder;
 import io.vertigo.datastore.impl.dao.StoreServices;
 
 /**
@@ -44,12 +44,12 @@ public final class SamplesPAO implements StoreServices {
 	 * Execute la tache StTkGetMovieByYear.
 	 * @return DtList de MovieByYear movies
 	*/
-	@io.vertigo.dynamo.task.proxy.TaskAnnotation(
+	@io.vertigo.datamodel.task.proxy.TaskAnnotation(
 			name = "TkGetMovieByYear",
 			request = "select YEAR, count(*) as MOVIES_COUNT from movie where YEAR is not null group by year order by YEAR asc",
 			taskEngineClass = io.vertigo.dynamox.task.TaskEngineSelect.class)
-	@io.vertigo.dynamo.task.proxy.TaskOutput(domain = "STyDtMovieByYear")
-	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.MovieByYear> getMovieByYear() {
+	@io.vertigo.datamodel.task.proxy.TaskOutput(domain = "STyDtMovieByYear")
+	public io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.dao.domain.MovieByYear> getMovieByYear() {
 		final Task task = createTaskBuilder("TkGetMovieByYear")
 				.build();
 		return getTaskManager()
@@ -61,7 +61,7 @@ public final class SamplesPAO implements StoreServices {
 	 * Execute la tache StTkGetMovieDisplay.
 	 * @return DtList de MovieDisplay movies
 	*/
-	@io.vertigo.dynamo.task.proxy.TaskAnnotation(
+	@io.vertigo.datamodel.task.proxy.TaskAnnotation(
 			name = "TkGetMovieDisplay",
 			request = "select mov.NAME,mov.YEAR, cou.NAME as COUNTRY, hv.CNT as ACTORS_COUNT" + 
  "		from movie mov" + 
@@ -70,8 +70,8 @@ public final class SamplesPAO implements StoreServices {
  "		where mov.YEAR > 2010" + 
  "		limit 500",
 			taskEngineClass = io.vertigo.dynamox.task.TaskEngineSelect.class)
-	@io.vertigo.dynamo.task.proxy.TaskOutput(domain = "STyDtMovieDisplay")
-	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.dao.domain.MovieDisplay> getMovieDisplay() {
+	@io.vertigo.datamodel.task.proxy.TaskOutput(domain = "STyDtMovieDisplay")
+	public io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.dao.domain.MovieDisplay> getMovieDisplay() {
 		final Task task = createTaskBuilder("TkGetMovieDisplay")
 				.build();
 		return getTaskManager()

@@ -3,8 +3,8 @@ package io.vertigo.samples.quarto.services;
 import java.util.Arrays;
 
 import io.vertigo.core.node.component.Component;
-import io.vertigo.dynamo.domain.model.DtList;
-import io.vertigo.dynamo.domain.util.VCollectors;
+import io.vertigo.datamodel.structure.model.DtList;
+import io.vertigo.datamodel.structure.util.VCollectors;
 import io.vertigo.samples.quarto.domain.Card;
 import io.vertigo.samples.quarto.domain.Category;
 import io.vertigo.samples.quarto.domain.Status;

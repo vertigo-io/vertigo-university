@@ -4,16 +4,16 @@ package lollipop
 /********************************* Formatters *****************************************************/
 /**************************************************************************************************/
 create Formatter FmtDefault{
-	className : "io.vertigo.dynamox.domain.formatter.FormatterDefault"
+	className : "io.vertigo.datamodel.impl.smarttype.formatter.FormatterDefault"
 }
 
 create Formatter FmtDate {
-     className :"io.vertigo.dynamox.domain.formatter.FormatterDate"
+     className :"io.vertigo.datamodel.impl.smarttype.formatter.FormatterDate"
      args : "dd/MM/yy;dd/MM/yyyy"
 }
 
 create Formatter FmtDateHeure {
-     className :"io.vertigo.dynamox.domain.formatter.FormatterDate"
+     className :"io.vertigo.datamodel.impl.smarttype.formatter.FormatterDate"
      args : "dd/MM/yyyy '�' HH'h'mm"
 }
 
@@ -22,43 +22,43 @@ create Formatter FmtDateHeure {
 /**************************************************************************************************/
 
 create Constraint CkEmail {
-	className: "io.vertigo.dynamox.domain.constraint.ConstraintRegex"
+	className: "io.vertigo.datamodel.impl.smarttype.constraint.ConstraintRegex"
 	args : "^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*(\.[a-zA-Z0-9-]{2,3})+$"
 	msg : "L'email n'est pas valide"
 }
 
 create Constraint CkMaxLength20 {
-	className: "io.vertigo.dynamox.domain.constraint.ConstraintStringLength"
+	className: "io.vertigo.datamodel.impl.smarttype.constraint.ConstraintStringLength"
 	args :"20"
 }
 
 create Constraint CkMaxLength32 {
-	className: "io.vertigo.dynamox.domain.constraint.ConstraintStringLength"
+	className: "io.vertigo.datamodel.impl.smarttype.constraint.ConstraintStringLength"
 	args :"32"
 }
 
 create Constraint CkMaxLength50 {
-	className: "io.vertigo.dynamox.domain.constraint.ConstraintStringLength"
+	className: "io.vertigo.datamodel.impl.smarttype.constraint.ConstraintStringLength"
 	args :"50"
 }
 
 create Constraint CkMaxLength100 {
-	className: "io.vertigo.dynamox.domain.constraint.ConstraintStringLength"
+	className: "io.vertigo.datamodel.impl.smarttype.constraint.ConstraintStringLength"
 	args :"100"
 }
 
 create Constraint CkMaxLength150 {
-	className: "io.vertigo.dynamox.domain.constraint.ConstraintStringLength"
+	className: "io.vertigo.datamodel.impl.smarttype.constraint.ConstraintStringLength"
 	args :"150"
 }
 
 create Constraint CkMaxLength250 {
-	className: "io.vertigo.dynamox.domain.constraint.ConstraintStringLength"
+	className: "io.vertigo.datamodel.impl.smarttype.constraint.ConstraintStringLength"
 	args :"250"
 }
 
 create Constraint CkMaxLength3000 {
-	className: "io.vertigo.dynamox.domain.constraint.ConstraintStringLength"
+	className: "io.vertigo.datamodel.impl.smarttype.constraint.ConstraintStringLength"
 	args :"3000"
 }
 

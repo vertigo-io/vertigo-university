@@ -4,14 +4,14 @@ import javax.inject.Inject;
 
 import io.vertigo.core.lang.Generated;
 import io.vertigo.core.node.Home;
-import io.vertigo.dynamo.task.metamodel.TaskDefinition;
-import io.vertigo.dynamo.task.model.Task;
-import io.vertigo.dynamo.task.model.TaskBuilder;
-import io.vertigo.dynamo.domain.model.UID;
+import io.vertigo.datamodel.structure.model.UID;
+import io.vertigo.datamodel.task.TaskManager;
+import io.vertigo.datamodel.task.metamodel.TaskDefinition;
+import io.vertigo.datamodel.task.model.Task;
+import io.vertigo.datamodel.task.model.TaskBuilder;
 import io.vertigo.datastore.entitystore.EntityStoreManager;
 import io.vertigo.datastore.impl.dao.DAO;
 import io.vertigo.datastore.impl.dao.StoreServices;
-import io.vertigo.dynamo.task.TaskManager;
 import io.vertigo.samples.crystal.domain.Movie;
 
 /**
@@ -68,7 +68,7 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	 * @param countriesIds List de Long
 	 * @return DtList de Movie movies
 	*/
-	public io.vertigo.dynamo.domain.model.DtList<io.vertigo.samples.crystal.domain.Movie> getMoviesInCountries(final java.util.List<Long> countriesIds) {
+	public io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.crystal.domain.Movie> getMoviesInCountries(final java.util.List<Long> countriesIds) {
 		final Task task = createTaskBuilder("TkGetMoviesInCountries")
 				.addValue("countriesIds", countriesIds)
 				.build();

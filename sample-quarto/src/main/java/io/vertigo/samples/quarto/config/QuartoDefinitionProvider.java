@@ -6,10 +6,10 @@ import io.vertigo.core.node.definition.Definition;
 import io.vertigo.core.node.definition.DefinitionSpace;
 import io.vertigo.core.node.definition.SimpleDefinitionProvider;
 import io.vertigo.core.util.ListBuilder;
-import io.vertigo.dynamo.domain.metamodel.DataType;
-import io.vertigo.dynamo.domain.metamodel.Domain;
-import io.vertigo.dynamo.domain.metamodel.FormatterDefinition;
-import io.vertigo.dynamox.domain.formatter.FormatterDefault;
+import io.vertigo.datamodel.impl.smarttype.formatter.FormatterDefault;
+import io.vertigo.datamodel.structure.metamodel.DataType;
+import io.vertigo.datamodel.structure.metamodel.Domain;
+import io.vertigo.datamodel.structure.metamodel.FormatterDefinition;
 
 public final class QuartoDefinitionProvider implements SimpleDefinitionProvider {
 

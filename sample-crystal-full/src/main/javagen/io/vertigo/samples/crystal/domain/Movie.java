@@ -1,12 +1,12 @@
 package io.vertigo.samples.crystal.domain;
 
 import io.vertigo.core.lang.Generated;
-import io.vertigo.dynamo.domain.model.KeyConcept;
+import io.vertigo.datamodel.structure.model.KeyConcept;
+import io.vertigo.datamodel.structure.model.UID;
+import io.vertigo.datamodel.structure.stereotype.Field;
+import io.vertigo.datamodel.structure.util.DtObjectUtil;
 import io.vertigo.datastore.impl.entitystore.StoreListVAccessor;
-import io.vertigo.dynamo.domain.model.UID;
 import io.vertigo.datastore.impl.entitystore.StoreVAccessor;
-import io.vertigo.dynamo.domain.stereotype.Field;
-import io.vertigo.dynamo.domain.util.DtObjectUtil;
 
 /**
  * This class is automatically generated.
@@ -21,7 +21,7 @@ public final class Movie implements KeyConcept {
 	private Integer year;
 	private String imdbid;
 
-	@io.vertigo.dynamo.domain.stereotype.Association(
+	@io.vertigo.datamodel.structure.stereotype.Association(
 			name = "AMovCou",
 			fkFieldName = "couId",
 			primaryDtDefinitionName = "DtCountry",
@@ -36,7 +36,7 @@ public final class Movie implements KeyConcept {
 			foreignMultiplicity = "0..*")
 	private final StoreVAccessor<io.vertigo.samples.crystal.domain.Country> couIdAccessor = new StoreVAccessor<>(io.vertigo.samples.crystal.domain.Country.class, "Country");
 
-	@io.vertigo.dynamo.domain.stereotype.Association(
+	@io.vertigo.datamodel.structure.stereotype.Association(
 			name = "ARolMov",
 			fkFieldName = "movId",
 			primaryDtDefinitionName = "DtMovie",

@@ -9,7 +9,7 @@ import io.vertigo.core.node.AutoCloseableApp;
 import io.vertigo.core.node.config.ModuleConfig;
 import io.vertigo.core.node.config.NodeConfigBuilder;
 import io.vertigo.core.util.InjectorUtil;
-import io.vertigo.dynamo.domain.model.DtList;
+import io.vertigo.datamodel.structure.model.DtList;
 import io.vertigo.samples.SamplesPAO;
 import io.vertigo.samples.dao.config.SampleConfigBuilder;
 import io.vertigo.samples.dao.dao.ActorDAO;

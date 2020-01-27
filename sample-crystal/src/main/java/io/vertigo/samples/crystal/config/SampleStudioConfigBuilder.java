@@ -6,7 +6,7 @@ import io.vertigo.core.node.config.NodeConfig;
 import io.vertigo.core.param.Param;
 import io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin;
 import io.vertigo.datafactory.impl.search.grammar.SearchDefinitionProvider;
-import io.vertigo.dynamo.plugins.environment.ModelDefinitionProvider;
+import io.vertigo.datamodel.plugins.environment.ModelDefinitionProvider;
 import io.vertigo.studio.StudioFeatures;
 
 public class SampleStudioConfigBuilder {

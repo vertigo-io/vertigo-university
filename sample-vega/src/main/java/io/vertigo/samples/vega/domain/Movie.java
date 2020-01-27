@@ -1,9 +1,9 @@
 package io.vertigo.samples.vega.domain;
 
 import io.vertigo.core.lang.Cardinality;
-import io.vertigo.dynamo.domain.model.KeyConcept;
-import io.vertigo.dynamo.domain.model.UID;
-import io.vertigo.dynamo.domain.stereotype.Field;
+import io.vertigo.datamodel.structure.model.KeyConcept;
+import io.vertigo.datamodel.structure.model.UID;
+import io.vertigo.datamodel.structure.stereotype.Field;
 
 public final class Movie implements KeyConcept {
 	private static final long serialVersionUID = -5975848806293357234L;

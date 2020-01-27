@@ -1,7 +1,7 @@
 package io.vertigo.samples.quarto.domain;
 
-import io.vertigo.dynamo.domain.model.DtObject;
-import io.vertigo.dynamo.domain.stereotype.Field;
+import io.vertigo.datamodel.structure.model.DtObject;
+import io.vertigo.datamodel.structure.stereotype.Field;
 
 public final class Status implements DtObject {
 

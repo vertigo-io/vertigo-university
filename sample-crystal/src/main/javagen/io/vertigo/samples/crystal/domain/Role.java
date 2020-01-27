@@ -1,11 +1,11 @@
 package io.vertigo.samples.crystal.domain;
 
 import io.vertigo.core.lang.Generated;
-import io.vertigo.dynamo.domain.model.Entity;
-import io.vertigo.dynamo.domain.model.UID;
+import io.vertigo.datamodel.structure.model.Entity;
+import io.vertigo.datamodel.structure.model.UID;
+import io.vertigo.datamodel.structure.stereotype.Field;
+import io.vertigo.datamodel.structure.util.DtObjectUtil;
 import io.vertigo.datastore.impl.entitystore.StoreVAccessor;
-import io.vertigo.dynamo.domain.stereotype.Field;
-import io.vertigo.dynamo.domain.util.DtObjectUtil;
 
 /**
  * This class is automatically generated.
@@ -18,7 +18,7 @@ public final class Role implements Entity {
 	private Long rolId;
 	private String asCharacter;
 
-	@io.vertigo.dynamo.domain.stereotype.Association(
+	@io.vertigo.datamodel.structure.stereotype.Association(
 			name = "ARolMov",
 			fkFieldName = "movId",
 			primaryDtDefinitionName = "DtMovie",
@@ -33,7 +33,7 @@ public final class Role implements Entity {
 			foreignMultiplicity = "0..*")
 	private final StoreVAccessor<io.vertigo.samples.crystal.domain.Movie> movIdAccessor = new StoreVAccessor<>(io.vertigo.samples.crystal.domain.Movie.class, "Movie");
 
-	@io.vertigo.dynamo.domain.stereotype.Association(
+	@io.vertigo.datamodel.structure.stereotype.Association(
 			name = "ARolAct",
 			fkFieldName = "actId",
 			primaryDtDefinitionName = "DtActor",

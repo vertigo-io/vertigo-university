@@ -2,8 +2,8 @@ package io.vertigo.samples.crystal.domain;
 
 import java.io.Serializable;
 
-import io.vertigo.dynamo.domain.model.MasterDataEnum;
-import io.vertigo.dynamo.domain.model.UID;
+import io.vertigo.datamodel.structure.model.MasterDataEnum;
+import io.vertigo.datamodel.structure.model.UID;
 
 public enum SexeEnum implements MasterDataEnum<io.vertigo.samples.crystal.domain.Sexe> {
 

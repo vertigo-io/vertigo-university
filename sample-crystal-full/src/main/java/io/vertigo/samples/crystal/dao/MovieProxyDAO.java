@@ -2,9 +2,9 @@ package io.vertigo.samples.crystal.dao;
 
 import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.core.node.component.Component;
-import io.vertigo.dynamo.task.proxy.TaskProxyAnnotation;
-import io.vertigo.dynamo.task.proxy.TaskInput;
-import io.vertigo.dynamo.task.proxy.TaskOutput;
+import io.vertigo.datamodel.task.proxy.TaskInput;
+import io.vertigo.datamodel.task.proxy.TaskOutput;
+import io.vertigo.datamodel.task.proxy.TaskProxyAnnotation;
 import io.vertigo.dynamox.task.TaskEngineSelect;
 
 @Transactional
