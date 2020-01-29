@@ -12,7 +12,7 @@ import io.vertigo.datamodel.structure.util.DtObjectUtil;
  */
 @Generated
 @io.vertigo.datamodel.structure.stereotype.DataSpace("mine")
-@io.vertigo.datamodel.smarttype.annotations.Mapper(clazz = io.vertigo.datamodel.structure.util.JsonMapper.class, dataType = io.vertigo.datamodel.structure.metamodel.DataType.String)
+@io.vertigo.datamodel.smarttype.annotations.Mapper(clazz = io.vertigo.datamodel.structure.util.JsonMapper.class, dataType = io.vertigo.core.lang.DataType.String)
 public final class MyActor implements Entity {
 	private static final long serialVersionUID = 1L;
 
@@ -31,7 +31,7 @@ public final class MyActor implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long actId <b>Obligatoire</b>
 	 */
-	@Field(domain = "STyId", type = "ID", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Id")
+	@Field(smartType = "STyId", type = "ID", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Id")
 	public Long getActId() {
 		return actId;
 	}
@@ -50,7 +50,7 @@ public final class MyActor implements Entity {
 	 * Récupère la valeur de la propriété 'Nom'.
 	 * @return String name <b>Obligatoire</b>
 	 */
-	@Field(domain = "STyLabelLong", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Nom")
+	@Field(smartType = "STyLabelLong", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Nom")
 	public String getName() {
 		return name;
 	}
@@ -69,7 +69,7 @@ public final class MyActor implements Entity {
 	 * Récupère la valeur de la propriété 'Sexe'.
 	 * @return String sexe
 	 */
-	@Field(domain = "STyCode", label = "Sexe")
+	@Field(smartType = "STyCode", label = "Sexe")
 	public String getSexe() {
 		return sexe;
 	}

@@ -7,9 +7,9 @@ import io.vertigo.datamodel.structure.stereotype.Field;
 
 public final class Movie implements KeyConcept {
 	private static final long serialVersionUID = -5975848806293357234L;
-	@Field(domain = "STyIdentity", type = "ID", cardinality = Cardinality.ONE, label = "id")
+	@Field(smartType = "STyIdentity", type = "ID", cardinality = Cardinality.ONE, label = "id")
 	private int id;
-	@Field(domain = "STyText", label = "name")
+	@Field(smartType = "STyText", label = "name")
 	private String title;
 
 	public Movie setId(final int id) {

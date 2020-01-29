@@ -14,8 +14,8 @@ public interface MovieProxyDAO extends Component {
 			name = "TK_MOVIE_COUNT_BY_COUNTRY",
 			request = "select count(*) from movie where cou_id = #COU_ID#",
 			taskEngineClass = TaskEngineSelect.class)
-	@TaskOutput(domain = "DO_INTEGER")
+	@TaskOutput(smartType = "DO_INTEGER")
 	int count(
-			@TaskInput(name = "COU_ID", domain = "DO_ID") Long couId);
+			@TaskInput(name = "COU_ID", smartType = "DO_ID") Long couId);
 
 }

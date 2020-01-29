@@ -28,7 +28,7 @@ public final class UserGroup implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long grpId <b>Obligatoire</b>
 	 */
-	@Field(domain = "DoId", type = "ID", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Id")
+	@Field(smartType = "DoId", type = "ID", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Id")
 	public Long getGrpId() {
 		return grpId;
 	}
@@ -47,7 +47,7 @@ public final class UserGroup implements Entity {
 	 * Récupère la valeur de la propriété 'Nom'.
 	 * @return String name
 	 */
-	@Field(domain = "DoLabel", label = "Nom")
+	@Field(smartType = "DoLabel", label = "Nom")
 	public String getName() {
 		return name;
 	}

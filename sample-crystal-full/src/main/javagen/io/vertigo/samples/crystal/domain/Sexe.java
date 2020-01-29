@@ -28,7 +28,7 @@ public final class Sexe implements DtStaticMasterData {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return String sexCd <b>Obligatoire</b>
 	 */
-	@Field(domain = "DoCode", type = "ID", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Id")
+	@Field(smartType = "DoCode", type = "ID", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Id")
 	public String getSexCd() {
 		return sexCd;
 	}
@@ -47,7 +47,7 @@ public final class Sexe implements DtStaticMasterData {
 	 * Récupère la valeur de la propriété 'Label'.
 	 * @return String label <b>Obligatoire</b>
 	 */
-	@Field(domain = "DoLabelLong", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Label")
+	@Field(smartType = "DoLabelLong", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Label")
 	public String getLabel() {
 		return label;
 	}

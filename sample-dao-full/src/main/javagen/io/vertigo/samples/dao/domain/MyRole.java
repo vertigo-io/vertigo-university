@@ -13,7 +13,7 @@ import io.vertigo.datamodel.structure.util.DtObjectUtil;
  */
 @Generated
 @io.vertigo.datamodel.structure.stereotype.DataSpace("mine")
-@io.vertigo.datamodel.smarttype.annotations.Mapper(clazz = io.vertigo.datamodel.structure.util.JsonMapper.class, dataType = io.vertigo.datamodel.structure.metamodel.DataType.String)
+@io.vertigo.datamodel.smarttype.annotations.Mapper(clazz = io.vertigo.datamodel.structure.util.JsonMapper.class, dataType = io.vertigo.core.lang.DataType.String)
 public final class MyRole implements Entity {
 	private static final long serialVersionUID = 1L;
 
@@ -61,7 +61,7 @@ public final class MyRole implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long rolId <b>Obligatoire</b>
 	 */
-	@Field(domain = "STyId", type = "ID", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Id")
+	@Field(smartType = "STyId", type = "ID", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Id")
 	public Long getRolId() {
 		return rolId;
 	}
@@ -80,7 +80,7 @@ public final class MyRole implements Entity {
 	 * Récupère la valeur de la propriété 'Dans le role de'.
 	 * @return String asCharacter <b>Obligatoire</b>
 	 */
-	@Field(domain = "STyLabelVeryLong", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Dans le role de")
+	@Field(smartType = "STyLabelVeryLong", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Dans le role de")
 	public String getAsCharacter() {
 		return asCharacter;
 	}
@@ -99,7 +99,7 @@ public final class MyRole implements Entity {
 	 * Récupère la valeur de la propriété 'Movie'.
 	 * @return Long movId
 	 */
-	@io.vertigo.datamodel.structure.stereotype.ForeignKey(domain = "STyId", label = "Movie", fkDefinition = "DtMyMovie" )
+	@io.vertigo.datamodel.structure.stereotype.ForeignKey(smartType = "STyId", label = "Movie", fkDefinition = "DtMyMovie" )
 	public Long getMovId() {
 		return (Long) movIdAccessor.getId();
 	}
@@ -118,7 +118,7 @@ public final class MyRole implements Entity {
 	 * Récupère la valeur de la propriété 'Actor'.
 	 * @return Long actId
 	 */
-	@io.vertigo.datamodel.structure.stereotype.ForeignKey(domain = "STyId", label = "Actor", fkDefinition = "DtMyActor" )
+	@io.vertigo.datamodel.structure.stereotype.ForeignKey(smartType = "STyId", label = "Actor", fkDefinition = "DtMyActor" )
 	public Long getActId() {
 		return (Long) actIdAccessor.getId();
 	}

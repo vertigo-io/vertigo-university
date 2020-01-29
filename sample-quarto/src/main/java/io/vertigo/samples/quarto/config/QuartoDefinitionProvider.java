@@ -2,12 +2,12 @@ package io.vertigo.samples.quarto.config;
 
 import java.util.List;
 
+import io.vertigo.core.lang.DataType;
 import io.vertigo.core.node.definition.Definition;
 import io.vertigo.core.node.definition.DefinitionSpace;
 import io.vertigo.core.node.definition.SimpleDefinitionProvider;
 import io.vertigo.core.util.ListBuilder;
 import io.vertigo.datamodel.impl.smarttype.formatter.FormatterDefault;
-import io.vertigo.datamodel.structure.metamodel.DataType;
 import io.vertigo.datamodel.structure.metamodel.Domain;
 import io.vertigo.datamodel.structure.metamodel.FormatterDefinition;
 

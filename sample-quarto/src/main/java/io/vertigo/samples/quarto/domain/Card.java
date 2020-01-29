@@ -8,11 +8,11 @@ public final class Card implements DtObject {
 
 	private static final long serialVersionUID = 1L;
 
-	@Field(domain = "DoText", label = "name")
+	@Field(smartType = "DoText", label = "name")
 	private String name;
-	@Field(domain = "DoText", label = "description")
+	@Field(smartType = "DoText", label = "description")
 	private String description;
-	@Field(domain = "DoDtStatusDtc", label = "status")
+	@Field(smartType = "DoDtStatusDtc", label = "status")
 	private DtList<Status> status;
 
 	public String getName() {

@@ -8,11 +8,11 @@ public final class Category implements DtObject {
 
 	private static final long serialVersionUID = 1L;
 
-	@Field(domain = "DoText", label = "name")
+	@Field(smartType = "DoText", label = "name")
 	private String name;
-	@Field(domain = "DoText", label = "description")
+	@Field(smartType = "DoText", label = "description")
 	private String description;
-	@Field(domain = "DoDtCardDtc", label = "cards")
+	@Field(smartType = "DoDtCardDtc", label = "cards")
 	private DtList<Card> cards;
 
 	public String getName() {

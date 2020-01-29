@@ -48,7 +48,7 @@ public final class ReprisePAO implements StoreServices {
 			name = "TkCountActors",
 			request = "select count(*) from ACTOR",
 			taskEngineClass = io.vertigo.dynamox.task.TaskEngineSelect.class)
-	@io.vertigo.datamodel.task.proxy.TaskOutput(domain = "STyId")
+	@io.vertigo.datamodel.task.proxy.TaskOutput(smartType = "STyId")
 	public Long countActors() {
 		final Task task = createTaskBuilder("TkCountActors")
 				.build();
@@ -66,7 +66,7 @@ public final class ReprisePAO implements StoreServices {
 			request = "select count(*) from MOVIE" + 
  "        	where NAME like 'S%%'",
 			taskEngineClass = io.vertigo.dynamox.task.TaskEngineSelect.class)
-	@io.vertigo.datamodel.task.proxy.TaskOutput(domain = "STyId")
+	@io.vertigo.datamodel.task.proxy.TaskOutput(smartType = "STyId")
 	public Long countMovies() {
 		final Task task = createTaskBuilder("TkCountMovies")
 				.build();
@@ -85,7 +85,7 @@ public final class ReprisePAO implements StoreServices {
  "        	join movie mov on mov.MOV_ID = rol.MOV_ID" + 
  "        	where mov.name like 'S%%'",
 			taskEngineClass = io.vertigo.dynamox.task.TaskEngineSelect.class)
-	@io.vertigo.datamodel.task.proxy.TaskOutput(domain = "STyId")
+	@io.vertigo.datamodel.task.proxy.TaskOutput(smartType = "STyId")
 	public Long countRoles() {
 		final Task task = createTaskBuilder("TkCountRoles")
 				.build();

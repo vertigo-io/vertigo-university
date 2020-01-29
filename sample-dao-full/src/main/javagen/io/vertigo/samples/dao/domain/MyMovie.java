@@ -14,7 +14,7 @@ import io.vertigo.datamodel.structure.util.DtObjectUtil;
  */
 @Generated
 @io.vertigo.datamodel.structure.stereotype.DataSpace("mine")
-@io.vertigo.datamodel.smarttype.annotations.Mapper(clazz = io.vertigo.datamodel.structure.util.JsonMapper.class, dataType = io.vertigo.datamodel.structure.metamodel.DataType.String)
+@io.vertigo.datamodel.smarttype.annotations.Mapper(clazz = io.vertigo.datamodel.structure.util.JsonMapper.class, dataType = io.vertigo.core.lang.DataType.String)
 public final class MyMovie implements Entity {
 	private static final long serialVersionUID = 1L;
 
@@ -64,7 +64,7 @@ public final class MyMovie implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long movId <b>Obligatoire</b>
 	 */
-	@Field(domain = "STyId", type = "ID", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Id")
+	@Field(smartType = "STyId", type = "ID", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Id")
 	public Long getMovId() {
 		return movId;
 	}
@@ -83,7 +83,7 @@ public final class MyMovie implements Entity {
 	 * Récupère la valeur de la propriété 'Code du pays'.
 	 * @return String name <b>Obligatoire</b>
 	 */
-	@Field(domain = "STyLabelLong", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Code du pays")
+	@Field(smartType = "STyLabelLong", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Code du pays")
 	public String getName() {
 		return name;
 	}
@@ -102,7 +102,7 @@ public final class MyMovie implements Entity {
 	 * Récupère la valeur de la propriété 'Année'.
 	 * @return Integer year
 	 */
-	@Field(domain = "STyYear", label = "Année")
+	@Field(smartType = "STyYear", label = "Année")
 	public Integer getYear() {
 		return year;
 	}
@@ -121,7 +121,7 @@ public final class MyMovie implements Entity {
 	 * Récupère la valeur de la propriété 'Id Imdb'.
 	 * @return String imdbid
 	 */
-	@Field(domain = "STyLabel", label = "Id Imdb")
+	@Field(smartType = "STyLabel", label = "Id Imdb")
 	public String getImdbid() {
 		return imdbid;
 	}
@@ -140,7 +140,7 @@ public final class MyMovie implements Entity {
 	 * Récupère la valeur de la propriété 'Country'.
 	 * @return Long couId
 	 */
-	@io.vertigo.datamodel.structure.stereotype.ForeignKey(domain = "STyId", label = "Country", fkDefinition = "DtMyCountry" )
+	@io.vertigo.datamodel.structure.stereotype.ForeignKey(smartType = "STyId", label = "Country", fkDefinition = "DtMyCountry" )
 	public Long getCouId() {
 		return (Long) couIdAccessor.getId();
 	}

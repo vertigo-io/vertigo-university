@@ -8,9 +8,9 @@ public final class Theme implements DtObject {
 
 	private static final long serialVersionUID = 1L;
 
-	@Field(domain = "DoText", label = "name")
+	@Field(smartType = "DoText", label = "name")
 	private String name;
-	@Field(domain = "DoDtCategoryDtc", label = "categories")
+	@Field(smartType = "DoDtCategoryDtc", label = "categories")
 	private DtList<Category> categories;
 
 	public String getName() {

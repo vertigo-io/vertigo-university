@@ -51,7 +51,7 @@ public final class CountryDAO extends DAO<Country, java.lang.Long> implements St
 			name = "TkInsertCountriesBatch",
 			request = "INSERT INTO MY_COUNTRY (COU_ID, NAME) values (#COUNTRY_LIST.COU_ID#, #COUNTRY_LIST.NAME#)",
 			taskEngineClass = io.vertigo.dynamox.task.TaskEngineProcBatch.class)
-	public void insertCountriesBatch(@io.vertigo.datamodel.task.proxy.TaskInput(name = "countryList", domain = "STyDtCountry") final io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.dao.domain.Country> countryList) {
+	public void insertCountriesBatch(@io.vertigo.datamodel.task.proxy.TaskInput(name = "countryList", smartType = "STyDtCountry") final io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.dao.domain.Country> countryList) {
 		final Task task = createTaskBuilder("TkInsertCountriesBatch")
 				.addValue("countryList", countryList)
 				.build();
@@ -66,7 +66,7 @@ public final class CountryDAO extends DAO<Country, java.lang.Long> implements St
 			name = "TkLoadCountries",
 			request = "select * from COUNTRY",
 			taskEngineClass = io.vertigo.dynamox.task.TaskEngineSelect.class)
-	@io.vertigo.datamodel.task.proxy.TaskOutput(domain = "STyDtCountry")
+	@io.vertigo.datamodel.task.proxy.TaskOutput(smartType = "STyDtCountry")
 	public io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.dao.domain.Country> loadCountries() {
 		final Task task = createTaskBuilder("TkLoadCountries")
 				.build();

@@ -12,7 +12,7 @@ import io.vertigo.datamodel.structure.util.DtObjectUtil;
  */
 @Generated
 @io.vertigo.datamodel.structure.stereotype.DataSpace("mine")
-@io.vertigo.datamodel.smarttype.annotations.Mapper(clazz = io.vertigo.datamodel.structure.util.JsonMapper.class, dataType = io.vertigo.datamodel.structure.metamodel.DataType.String)
+@io.vertigo.datamodel.smarttype.annotations.Mapper(clazz = io.vertigo.datamodel.structure.util.JsonMapper.class, dataType = io.vertigo.core.lang.DataType.String)
 public final class MyCountry implements Entity {
 	private static final long serialVersionUID = 1L;
 
@@ -30,7 +30,7 @@ public final class MyCountry implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long couId <b>Obligatoire</b>
 	 */
-	@Field(domain = "STyId", type = "ID", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Id")
+	@Field(smartType = "STyId", type = "ID", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Id")
 	public Long getCouId() {
 		return couId;
 	}
@@ -49,7 +49,7 @@ public final class MyCountry implements Entity {
 	 * Récupère la valeur de la propriété 'Code du pays'.
 	 * @return String name
 	 */
-	@Field(domain = "STyLabel", label = "Code du pays")
+	@Field(smartType = "STyLabel", label = "Code du pays")
 	public String getName() {
 		return name;
 	}
