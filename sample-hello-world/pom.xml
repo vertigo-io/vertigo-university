@@ -18,7 +18,14 @@
 			<groupId>io.vertigo</groupId>
 			<artifactId>vertigo-core</artifactId>
 			<version>${vertigo.version}</version>
-		</dependency>		
+		</dependency>	
+
+		<dependency>
+			<groupId>io.vertigo</groupId>
+			<artifactId>vertigo-datamodel</artifactId>
+			<version>${vertigo.version}</version>
+		</dependency>
+			
 		<dependency>
 			<groupId>io.vertigo</groupId>
 			<artifactId>vertigo-vega</artifactId>
