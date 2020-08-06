@@ -2,8 +2,8 @@ package io.vertigo.samples;
 
 import javax.inject.Inject;
 
-import io.vertigo.core.node.AutoCloseableApp;
-import io.vertigo.core.node.Home;
+import io.vertigo.core.node.AutoCloseableNode;
+import io.vertigo.core.node.Node;
 import io.vertigo.core.util.InjectorUtil;
 import io.vertigo.samples.components.a_basics.Calculator1;
 import io.vertigo.samples.components.a_basics.Calculator2;
@@ -43,7 +43,7 @@ public class Samples {
 	private Calculator8 calculator8;
 
 	public static void main(final String[] args) {
-		try (AutoCloseableApp app = new AutoCloseableApp(new SampleConfigBuilder().build())) {
+		try (AutoCloseableNode node = new AutoCloseableNode(new SampleConfigBuilder().build())) {
 			final Samples sample = new Samples();
 			InjectorUtil.injectMembers(sample);
 			final Samples sample2 = InjectorUtil.newInstance(Samples.class);
@@ -72,7 +72,7 @@ public class Samples {
 	}
 
 	void step2() {
-		final Calculator2 calculator2 = Home.getApp().getComponentSpace().resolve(Calculator2.class);
+		final Calculator2 calculator2 = Node.getNode().getComponentSpace().resolve(Calculator2.class);
 		System.out.println("|");
 		System.out.println("|--- a component with a defined api");
 		final int result2 = calculator2.sum(1, 2, 3, 4);

@@ -4,7 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import io.vertigo.core.node.AutoCloseableApp;
+import io.vertigo.core.node.AutoCloseableNode;
 import io.vertigo.notifications.config.NotificationSampleConfigBuilder;
 
 /**
@@ -15,9 +15,9 @@ import io.vertigo.notifications.config.NotificationSampleConfigBuilder;
 public class NotificationSample {
 
 	public static void main(final String[] args) {
-		try (AutoCloseableApp app = new AutoCloseableApp(new NotificationSampleConfigBuilder().build())) {
+		try (AutoCloseableNode node = new AutoCloseableNode(new NotificationSampleConfigBuilder().build())) {
 
-			final NotificationManager notificationManager = app.getComponentSpace().resolve(NotificationManager.class);
+			final NotificationManager notificationManager = node.getComponentSpace().resolve(NotificationManager.class);
 
 			final Date now = new Date();
 			final DateFormat format = new SimpleDateFormat("dd/MM HH:mm:ss");

@@ -3,10 +3,11 @@ package io.vertigo.samples.crystal.dao;
 import javax.inject.Inject;
 
 import io.vertigo.core.lang.Generated;
-import io.vertigo.datamodel.task.TaskManager;
 import io.vertigo.datastore.entitystore.EntityStoreManager;
 import io.vertigo.datastore.impl.dao.DAO;
 import io.vertigo.datastore.impl.dao.StoreServices;
+import io.vertigo.datamodel.smarttype.SmartTypeManager;
+import io.vertigo.datamodel.task.TaskManager;
 import io.vertigo.samples.crystal.domain.Sexe;
 
 /**
@@ -20,10 +21,11 @@ public final class SexeDAO extends DAO<Sexe, java.lang.String> implements StoreS
 	 * Contructeur.
 	 * @param entityStoreManager Manager de persistance
 	 * @param taskManager Manager de Task
+	 * @param smartTypeManager SmartTypeManager
 	 */
 	@Inject
-	public SexeDAO(final EntityStoreManager entityStoreManager, final TaskManager taskManager) {
-		super(Sexe.class, entityStoreManager, taskManager);
+	public SexeDAO(final EntityStoreManager entityStoreManager, final TaskManager taskManager, final SmartTypeManager smartTypeManager) {
+		super(Sexe.class, entityStoreManager, taskManager, smartTypeManager);
 	}
 
 }

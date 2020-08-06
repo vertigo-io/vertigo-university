@@ -5,15 +5,15 @@ import java.io.IOException;
 import java.net.URL;
 
 import io.vertigo.core.lang.WrappedException;
-import io.vertigo.core.node.AutoCloseableApp;
+import io.vertigo.core.node.AutoCloseableNode;
 import io.vertigo.core.resource.ResourceManager;
 import io.vertigo.datastore.filestore.model.VFile;
 import io.vertigo.datastore.filestore.util.FileUtil;
-import io.vertigo.quarto.impl.services.publisher.PublisherDataUtil;
-import io.vertigo.quarto.services.publisher.PublisherManager;
-import io.vertigo.quarto.services.publisher.metamodel.PublisherDataDefinition;
-import io.vertigo.quarto.services.publisher.model.PublisherData;
-import io.vertigo.quarto.services.publisher.model.PublisherNode;
+import io.vertigo.quarto.impl.publisher.PublisherDataUtil;
+import io.vertigo.quarto.publisher.PublisherManager;
+import io.vertigo.quarto.publisher.metamodel.PublisherDataDefinition;
+import io.vertigo.quarto.publisher.model.PublisherData;
+import io.vertigo.quarto.publisher.model.PublisherNode;
 import io.vertigo.samples.quarto.config.SampleQuartoConfigBuilder;
 import io.vertigo.samples.quarto.domain.Theme;
 import io.vertigo.samples.quarto.services.ThemeProvider;
@@ -29,15 +29,15 @@ import io.vertigo.samples.quarto.services.ThemeProvider;
 public class SampleQuarto {
 
 	public static void main(final String[] args) {
-		try (final AutoCloseableApp app = new AutoCloseableApp(SampleQuartoConfigBuilder.config())) {
+		try (final AutoCloseableNode node = new AutoCloseableNode(SampleQuartoConfigBuilder.config())) {
 			// nothing
-			final ThemeProvider themeProvider = app.getComponentSpace().resolve(ThemeProvider.class);
-			final PublisherManager publisherManager = app.getComponentSpace().resolve(PublisherManager.class);
-			final ResourceManager resourceManager = app.getComponentSpace().resolve(ResourceManager.class);
+			final ThemeProvider themeProvider = node.getComponentSpace().resolve(ThemeProvider.class);
+			final PublisherManager publisherManager = node.getComponentSpace().resolve(PublisherManager.class);
+			final ResourceManager resourceManager = node.getComponentSpace().resolve(ResourceManager.class);
 
 			final Theme theme = themeProvider.getSampleTheme();
 
-			final PublisherDataDefinition publisherDataDefinition = app.getDefinitionSpace().resolve("PuTheme", PublisherDataDefinition.class);
+			final PublisherDataDefinition publisherDataDefinition = node.getDefinitionSpace().resolve("PuTheme", PublisherDataDefinition.class);
 			final PublisherData publisherData = new PublisherData(publisherDataDefinition);
 
 			final PublisherNode rootNode = publisherData.getRootNode();

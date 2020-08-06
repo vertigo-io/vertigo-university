@@ -3,9 +3,9 @@ package io.vertigo.samples.crystal.domain;
 import io.vertigo.core.lang.Generated;
 import io.vertigo.datamodel.structure.model.Entity;
 import io.vertigo.datamodel.structure.model.UID;
+import io.vertigo.datastore.impl.entitystore.StoreVAccessor;
 import io.vertigo.datamodel.structure.stereotype.Field;
 import io.vertigo.datamodel.structure.util.DtObjectUtil;
-import io.vertigo.datastore.impl.entitystore.StoreVAccessor;
 
 /**
  * This class is automatically generated.
@@ -59,7 +59,7 @@ public final class Role implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long rolId <b>Obligatoire</b>
 	 */
-	@Field(smartType = "DoId", type = "ID", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Id")
+	@Field(smartType = "STyId", type = "ID", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Id")
 	public Long getRolId() {
 		return rolId;
 	}
@@ -78,7 +78,7 @@ public final class Role implements Entity {
 	 * Récupère la valeur de la propriété 'Dans le role de'.
 	 * @return String asCharacter <b>Obligatoire</b>
 	 */
-	@Field(smartType = "DoLabelVeryLong", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Dans le role de")
+	@Field(smartType = "STyLabelVeryLong", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Dans le role de")
 	public String getAsCharacter() {
 		return asCharacter;
 	}
@@ -97,7 +97,7 @@ public final class Role implements Entity {
 	 * Récupère la valeur de la propriété 'Movie'.
 	 * @return Long movId
 	 */
-	@Field(smartType = "DoId", type = "FOREIGN_KEY", label = "Movie")
+	@io.vertigo.datamodel.structure.stereotype.ForeignKey(smartType = "STyId", label = "Movie", fkDefinition = "DtMovie" )
 	public Long getMovId() {
 		return (Long) movIdAccessor.getId();
 	}
@@ -116,7 +116,7 @@ public final class Role implements Entity {
 	 * Récupère la valeur de la propriété 'Actor'.
 	 * @return Long actId
 	 */
-	@Field(smartType = "DoId", type = "FOREIGN_KEY", label = "Actor")
+	@io.vertigo.datamodel.structure.stereotype.ForeignKey(smartType = "STyId", label = "Actor", fkDefinition = "DtActor" )
 	public Long getActId() {
 		return (Long) actIdAccessor.getId();
 	}

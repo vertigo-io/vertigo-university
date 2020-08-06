@@ -14,7 +14,7 @@ public final class SpyAspect implements Aspect {
 
 	@Inject
 	public SpyAspect(final SpyManager spyManager) {
-		Assertion.checkNotNull(spyManager);
+		Assertion.check().isNotNull(spyManager);
 		//-----
 		this.spyManager = spyManager;
 	}

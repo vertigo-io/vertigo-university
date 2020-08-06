@@ -23,7 +23,7 @@ public final class MovieIndex implements DtObject {
 	 * Récupère la valeur de la propriété 'id'.
 	 * @return Long movId <b>Obligatoire</b>
 	 */
-	@Field(smartType = "DoId", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "id")
+	@Field(smartType = "STyId", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "id")
 	public Long getMovId() {
 		return movId;
 	}
@@ -42,7 +42,7 @@ public final class MovieIndex implements DtObject {
 	 * Récupère la valeur de la propriété 'Titre'.
 	 * @return String name
 	 */
-	@Field(smartType = "DoLabelLong", label = "Titre")
+	@Field(smartType = "STyLabelLong", label = "Titre")
 	public String getName() {
 		return name;
 	}
@@ -61,7 +61,7 @@ public final class MovieIndex implements DtObject {
 	 * Récupère la valeur de la propriété 'Année'.
 	 * @return Integer year
 	 */
-	@Field(smartType = "DoYear", label = "Année")
+	@Field(smartType = "STyYear", label = "Année")
 	public Integer getYear() {
 		return year;
 	}
@@ -80,7 +80,7 @@ public final class MovieIndex implements DtObject {
 	 * Récupère la valeur de la propriété 'Pays'.
 	 * @return String country
 	 */
-	@Field(smartType = "DoLabel", label = "Pays")
+	@Field(smartType = "STyLabel", label = "Pays")
 	public String getCountry() {
 		return country;
 	}
@@ -99,7 +99,7 @@ public final class MovieIndex implements DtObject {
 	 * Récupère la valeur de la propriété calculée 'Titre'.
 	 * @return String nameSortOnly <b>Obligatoire</b>
 	 */
-	@Field(smartType = "DoLabelLongSort", type = "COMPUTED", cardinality = io.vertigo.core.lang.Cardinality.ONE, persistent = false, label = "Titre")
+	@Field(smartType = "STyLabelLongSort", type = "COMPUTED", cardinality = io.vertigo.core.lang.Cardinality.ONE, persistent = false, label = "Titre")
 	public String getNameSortOnly() {
 		return getName();
 	}

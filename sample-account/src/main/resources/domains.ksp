@@ -1,66 +1,5 @@
 package lollipop
 
-/**************************************************************************************************/
-/********************************* Formatters *****************************************************/
-/**************************************************************************************************/
-create Formatter FmtDefault{
-	className : "io.vertigo.datamodel.impl.smarttype.formatter.FormatterDefault"
-}
-
-create Formatter FmtDate {
-     className :"io.vertigo.datamodel.impl.smarttype.formatter.FormatterDate"
-     args : "dd/MM/yy;dd/MM/yyyy"
-}
-
-create Formatter FmtDateHeure {
-     className :"io.vertigo.datamodel.impl.smarttype.formatter.FormatterDate"
-     args : "dd/MM/yyyy '�' HH'h'mm"
-}
-
-/**************************************************************************************************/
-/********************************* Constraints ****************************************************/
-/**************************************************************************************************/
-
-create Constraint CkEmail {
-	className: "io.vertigo.datamodel.impl.smarttype.constraint.ConstraintRegex"
-	args : "^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*(\.[a-zA-Z0-9-]{2,3})+$"
-	msg : "L'email n'est pas valide"
-}
-
-create Constraint CkMaxLength20 {
-	className: "io.vertigo.datamodel.impl.smarttype.constraint.ConstraintStringLength"
-	args :"20"
-}
-
-create Constraint CkMaxLength32 {
-	className: "io.vertigo.datamodel.impl.smarttype.constraint.ConstraintStringLength"
-	args :"32"
-}
-
-create Constraint CkMaxLength50 {
-	className: "io.vertigo.datamodel.impl.smarttype.constraint.ConstraintStringLength"
-	args :"50"
-}
-
-create Constraint CkMaxLength100 {
-	className: "io.vertigo.datamodel.impl.smarttype.constraint.ConstraintStringLength"
-	args :"100"
-}
-
-create Constraint CkMaxLength150 {
-	className: "io.vertigo.datamodel.impl.smarttype.constraint.ConstraintStringLength"
-	args :"150"
-}
-
-create Constraint CkMaxLength250 {
-	className: "io.vertigo.datamodel.impl.smarttype.constraint.ConstraintStringLength"
-	args :"250"
-}
-
-create Constraint CkMaxLength3000 {
-	className: "io.vertigo.datamodel.impl.smarttype.constraint.ConstraintStringLength"
-	args :"3000"
-}
 
 /**************************************************************************************************/
 /********************************* Domains ********************************************************/
@@ -68,159 +7,31 @@ create Constraint CkMaxLength3000 {
 
 create Domain DoId {
 	dataType : Long
-	formatter : FmtDefault
 	storeType : "NUMERIC"
-}
-
-create Domain DoDate {
-	dataType : LocalDate
-	formatter : FmtDate
-	storeType : "DATE"
 }
 
 create Domain DoYear {
 	dataType : Integer
-	formatter : FmtDefault
 	storeType : "NUMERIC"
-}
-
-create Domain DoDuration {
-	dataType : Integer
-	formatter : FmtDefault
-	storeType : "NUMERIC"
-}
-
-create Domain DoComment {
-	dataType : String
-	formatter : FmtDefault
-	constraint : [CkMaxLength3000]
-	storeType : "VARCHAR(3000)"
-}
-
-create Domain DoLabelShort {
-	dataType : String
-	formatter : FmtDefault
-	constraint : [CkMaxLength50]
-	storeType : "VARCHAR(50)"
 }
 
 create Domain DoLabel {
 	dataType : String
-	formatter : FmtDefault
-	constraint : [CkMaxLength100]
 	storeType : "VARCHAR(100)"
-	indexType : "text_fr:sortable:facetable"
 }
 
 create Domain DoLabelLong {
 	dataType : String
-	formatter : FmtDefault
 	storeType : "VARCHAR(500)"
-	indexType : "text_fr:sortable:facetable"
 }
-
-create Domain DoLabelLongSort {
-	dataType : String
-	formatter : FmtDefault
-	storeType : "VARCHAR(500)"
-	indexType:"text_fr_not_tokenized:facetable"
-}
-
 
 create Domain DoLabelVeryLong {
 	dataType : String
-	formatter : FmtDefault
 	storeType : "VARCHAR(1000)"
-}
-
-create Domain DoEmail {
-	dataType : String
-	formatter : FmtDefault
-	constraint : [CkEmail, CkMaxLength150]
-	storeType : "VARCHAR(150)"
 }
 
 create Domain DoCode {
 	dataType : String
-	formatter : FmtDefault
-	constraint : [CkMaxLength100]
 	storeType : "VARCHAR(100)"
-}
-
-create Domain DoMultiValuesField {
-	dataType : String
-	formatter : FmtDefault
-	constraint : [CkMaxLength3000]
-	storeType : "VARCHAR(3000)"
-}
-
-create Domain DoName {
-	dataType : String
-	formatter : FmtDefault
-	constraint : [CkMaxLength50]
-	storeType : "VARCHAR(50)"
-}
-
-create Domain DoFirstname {
-	dataType : String
-	formatter : FmtDefault
-	constraint : [CkMaxLength50]
-	storeType : "VARCHAR(50)"
-}
-
-create Domain DoPassword {
-	dataType : String
-	formatter : FmtDefault
-	constraint : [CkMaxLength32]
-	storeType : "VARCHAR(32)"
-}
-
-create Domain DoText {
-	dataType : String
-	formatter : FmtDefault
-	storeType : "TEXT"
-}
-
-create Domain DoTextNotAnalyzed {
-	dataType : String
-	formatter : FmtDefault
-}
-
-create Domain DoYesNo {
-	dataType : Boolean
-	formatter : FmtDefault
-	storeType : "bool"
-}
-
-
-create Domain DoFileName {
-	dataType : String
-	formatter : FmtDefault
-	constraint : [CkMaxLength100]
-	storeType : "VARCHAR(100)"
-}
-
-create Domain DoTimestamp {
-	dataType : Instant
-	formatter : FmtDateHeure
-	storeType : "TIMESTAMP"
-}
-
-create Domain DoFileLength {
-	dataType : Long
-	formatter : FmtDefault
-	storeType : "NUMERIC"
-}
-
-create Domain DoFilePath {
-	dataType : String
-	formatter : FmtDefault
-	constraint : [CkMaxLength250]
-	storeType : "VARCHAR(250)"
-}
-
-create Domain DoInteger {  
-    dataType : Integer
-    formatter : FmtDefault
 }
 

@@ -2,15 +2,15 @@ package io.vertigo.samples.account.domain
 
 create DtDefinition DtCountry {
   id couId {domain: DoId label: "Id" }
-  field name {domain: DoLabel label: "Nom du pays" cardinality:"?"}
+  field name {domain: DoLabel label: "Nom du pays" }
 }
 
 create DtDefinition DtMovie {
   stereotype : "KeyConcept"
   id movId {domain: DoId label: "Id" }
   field name {domain: DoLabelLong label: "Titre du film" cardinality:"1"}
-  field year {domain: DoYear label: "Année" cardinality:"?"}
-  field imdbid {domain: DoLabel label: "Id Imdb" cardinality:"?"}
+  field year {domain: DoYear label: "Année" }
+  field imdbid {domain: DoLabel label: "Id Imdb" }
 }
 
 create DtDefinition DtActor {
@@ -69,39 +69,30 @@ create Association ARolMov {
 
 
 create Association ARolAct {
-  fkFieldName : "actId"
+    fkFieldName : "actId"
     
  	dtDefinitionA : DtRole
-	dtDefinitionB : DtActor
-			
-	navigabilityA : "false"
-	navigabilityB : "true"
-	
-	multiplicityA:"0..*"
-	multiplicityB:"0..1"
-	
 	labelA : "Role"
-	labelB : "Actor"
 	roleA : "Role"
+
+ 	type : "*>1"
+
+	dtDefinitionB : DtActor
+	labelB : "Actor"
 	roleB : "Actor"
-			
 }
 
 create Association AActSex {
-  fkFieldName : "sexCd"
+    fkFieldName : "sexCd"
     
- 	dtDefinitionA : DtActor
-	dtDefinitionB : DtSexe
-			
-	navigabilityA : "false"
-	navigabilityB : "true"
-	
-	multiplicityA:"0..*"
-	multiplicityB:"0..1"
-	
 	labelA : "Actor"
-	labelB : "Sexe"
+ 	dtDefinitionA : DtActor
 	roleA : "Actor"
+
+ 	type : "*>1"
+
+	dtDefinitionB : DtSexe
+	labelB : "Sexe"
 	roleB : "Sexe"
 			
 }

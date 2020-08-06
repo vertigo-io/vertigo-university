@@ -11,7 +11,7 @@ import io.vertigo.datamodel.task.model.TaskBuilder;
 import io.vertigo.datastore.entitystore.EntityStoreManager;
 import io.vertigo.datastore.impl.dao.DAO;
 import io.vertigo.datastore.impl.dao.StoreServices;
-import io.vertigo.datamodel.smarttype.ModelManager;
+import io.vertigo.datamodel.smarttype.SmartTypeManager;
 import io.vertigo.datamodel.task.TaskManager;
 import io.vertigo.samples.dao.domain.Movie;
 
@@ -28,8 +28,8 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	 * @param taskManager Manager de Task
 	 */
 	@Inject
-	public MovieDAO(final EntityStoreManager entityStoreManager, final TaskManager taskManager, final ModelManager modelManager) {
-		super(Movie.class, entityStoreManager, taskManager, modelManager);
+	public MovieDAO(final EntityStoreManager entityStoreManager, final TaskManager taskManager, final SmartTypeManager smartTypeManager) {
+		super(Movie.class, entityStoreManager, taskManager, smartTypeManager);
 	}
 
 

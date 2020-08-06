@@ -7,9 +7,9 @@ public final class Status implements DtObject {
 
 	private static final long serialVersionUID = 1L;
 
-	@Field(smartType = "DoText", label = "name")
+	@Field(smartType = "STyText", label = "name")
 	private String name;
-	@Field(smartType = "DoText", label = "color")
+	@Field(smartType = "STyText", label = "color")
 	private String color;
 
 	public String getName() {

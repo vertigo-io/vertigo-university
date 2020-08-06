@@ -10,7 +10,7 @@ import io.vertigo.datamodel.task.model.TaskBuilder;
 import io.vertigo.datastore.entitystore.EntityStoreManager;
 import io.vertigo.datastore.impl.dao.DAO;
 import io.vertigo.datastore.impl.dao.StoreServices;
-import io.vertigo.datamodel.smarttype.ModelManager;
+import io.vertigo.datamodel.smarttype.SmartTypeManager;
 import io.vertigo.datamodel.task.TaskManager;
 import io.vertigo.samples.dao.domain.Country;
 
@@ -27,8 +27,8 @@ public final class CountryDAO extends DAO<Country, java.lang.Long> implements St
 	 * @param taskManager Manager de Task
 	 */
 	@Inject
-	public CountryDAO(final EntityStoreManager entityStoreManager, final TaskManager taskManager, final ModelManager modelManager) {
-		super(Country.class, entityStoreManager, taskManager, modelManager);
+	public CountryDAO(final EntityStoreManager entityStoreManager, final TaskManager taskManager, final SmartTypeManager smartTypeManager) {
+		super(Country.class, entityStoreManager, taskManager, smartTypeManager);
 	}
 
 

@@ -3,9 +3,9 @@ package io.vertigo.samples.crystal.domain;
 import io.vertigo.core.lang.Generated;
 import io.vertigo.datamodel.structure.model.Entity;
 import io.vertigo.datamodel.structure.model.UID;
+import io.vertigo.datastore.impl.entitystore.StoreVAccessor;
 import io.vertigo.datamodel.structure.stereotype.Field;
 import io.vertigo.datamodel.structure.util.DtObjectUtil;
-import io.vertigo.datastore.impl.entitystore.StoreVAccessor;
 
 /**
  * This class is automatically generated.
@@ -44,7 +44,7 @@ public final class Actor implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long actId <b>Obligatoire</b>
 	 */
-	@Field(smartType = "DoId", type = "ID", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Id")
+	@Field(smartType = "STyId", type = "ID", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Id")
 	public Long getActId() {
 		return actId;
 	}
@@ -63,7 +63,7 @@ public final class Actor implements Entity {
 	 * Récupère la valeur de la propriété 'Nom'.
 	 * @return String name <b>Obligatoire</b>
 	 */
-	@Field(smartType = "DoLabelLong", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Nom")
+	@Field(smartType = "STyLabelLong", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Nom")
 	public String getName() {
 		return name;
 	}
@@ -82,7 +82,7 @@ public final class Actor implements Entity {
 	 * Récupère la valeur de la propriété 'Sexe'.
 	 * @return String sexCd
 	 */
-	@Field(smartType = "DoCode", type = "FOREIGN_KEY", label = "Sexe")
+	@io.vertigo.datamodel.structure.stereotype.ForeignKey(smartType = "STyCode", label = "Sexe", fkDefinition = "DtSexe" )
 	public String getSexCd() {
 		return (String) sexCdAccessor.getId();
 	}

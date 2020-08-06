@@ -43,14 +43,14 @@ public class MovieServicesImpl implements MovieServices {
 
 	@Override
 	public Movie getMovieById(final Long movId) {
-		Assertion.checkNotNull(movId);
+		Assertion.check().isNotNull(movId);
 		// ---
 		return movieDAO.get(movId);
 	}
 
 	@Override
 	public DtList<Role> getRolesByMovie(final Long movId) {
-		Assertion.checkNotNull(movId);
+		Assertion.check().isNotNull(movId);
 		// ---
 		final Movie movie = movieDAO.get(movId);
 		movie.role().load();

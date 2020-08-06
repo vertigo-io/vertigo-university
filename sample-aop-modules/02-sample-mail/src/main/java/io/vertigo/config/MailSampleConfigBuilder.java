@@ -1,6 +1,7 @@
 package io.vertigo.config;
 
 import io.vertigo.commons.CommonsFeatures;
+import io.vertigo.core.node.config.BootConfig;
 import io.vertigo.core.node.config.NodeConfig;
 import io.vertigo.core.param.Param;
 import io.vertigo.datastore.DataStoreFeatures;
@@ -15,9 +16,9 @@ public class MailSampleConfigBuilder {
 
 	public NodeConfig build() {
 		return NodeConfig.builder()
-				.beginBoot()
-				.withLocales("fr")
-				.endBoot()
+				.withBoot(BootConfig.builder()
+						.withLocales("fr")
+						.build())
 				.addModule(new CommonsFeatures().build())
 				.addModule(new DataStoreFeatures().build())
 				.addModule(new SocialFeatures()

@@ -1,0 +1,20 @@
+{
+	"metamodelResources": [
+		{"type": "kpr", "path": "src/main/resources/application.kpr"},
+		{"type": "security", "path": "src/main/resources/auth-config.json"} 
+	],
+	"mdaConfig": {
+		"projectPackageName": "io.vertigo.samples.account",
+		"targetGenDir" : "src/main/",
+		"properties" : {
+			"vertigo.domain.java": "true",
+			"vertigo.domain.java.generateDtResources": "false",
+			"vertigo.domain.sql": "true",
+			"vertigo.domain.sql.targetSubDir": "javagen/sqlgen",
+			"vertigo.domain.sql.baseCible": "H2",
+			"vertigo.domain.sql.generateDrop": "false",
+			"vertigo.task": "true",
+			"vertigo.authorization": "true"
+		}
+	}
+}

@@ -182,39 +182,39 @@ comment on column USER_GROUP.NAME is
 
 
 alter table ACTOR
-	add constraint FK_ACT_SEX_SEXE foreign key (SEX_CD)
+	add constraint FK_A_ACT_SEX_SEXE foreign key (SEX_CD)
 	references SEXE (SEX_CD);
 
-create index ACT_SEX_SEXE_FK on ACTOR (SEX_CD asc);
+create index A_ACT_SEX_SEXE_FK on ACTOR (SEX_CD asc);
 
 alter table MOVIE
-	add constraint FK_MOV_COU_COUNTRY foreign key (COU_ID)
+	add constraint FK_A_MOV_COU_COUNTRY foreign key (COU_ID)
 	references COUNTRY (COU_ID);
 
-create index MOV_COU_COUNTRY_FK on MOVIE (COU_ID asc);
+create index A_MOV_COU_COUNTRY_FK on MOVIE (COU_ID asc);
 
 alter table ROLE
-	add constraint FK_ROL_ACT_ACTOR foreign key (ACT_ID)
+	add constraint FK_A_ROL_ACT_ACTOR foreign key (ACT_ID)
 	references ACTOR (ACT_ID);
 
-create index ROL_ACT_ACTOR_FK on ROLE (ACT_ID asc);
+create index A_ROL_ACT_ACTOR_FK on ROLE (ACT_ID asc);
 
 alter table ROLE
-	add constraint FK_ROL_MOV_MOVIE foreign key (MOV_ID)
+	add constraint FK_A_ROL_MOV_MOVIE foreign key (MOV_ID)
 	references MOVIE (MOV_ID);
 
-create index ROL_MOV_MOVIE_FK on ROLE (MOV_ID asc);
+create index A_ROL_MOV_MOVIE_FK on ROLE (MOV_ID asc);
 
 alter table USER
-	add constraint FK_USR_COU_COUNTRY foreign key (COU_ID)
+	add constraint FK_A_USR_COU_COUNTRY foreign key (COU_ID)
 	references COUNTRY (COU_ID);
 
-create index USR_COU_COUNTRY_FK on USER (COU_ID asc);
+create index A_USR_COU_COUNTRY_FK on USER (COU_ID asc);
 
 alter table USER
-	add constraint FK_USR_GRP_USER_GROUP foreign key (GRP_ID)
+	add constraint FK_A_USR_GRP_USER_GROUP foreign key (GRP_ID)
 	references USER_GROUP (GRP_ID);
 
-create index USR_GRP_USER_GROUP_FK on USER (GRP_ID asc);
+create index A_USR_GRP_USER_GROUP_FK on USER (GRP_ID asc);
 
 

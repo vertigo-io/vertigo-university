@@ -7,11 +7,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
+import java.util.Collections;
 
 import javax.inject.Inject;
 
 import io.vertigo.core.lang.WrappedException;
-import io.vertigo.core.node.AutoCloseableApp;
+import io.vertigo.core.node.AutoCloseableNode;
 import io.vertigo.core.resource.ResourceManager;
 import io.vertigo.core.util.InjectorUtil;
 import io.vertigo.database.sql.SqlDataBaseManager;
@@ -27,7 +28,7 @@ public class CreateDatabase {
 	private SqlDataBaseManager sqlDataBaseManager;
 
 	public static void main(final String[] args) {
-		try (final AutoCloseableApp app = new AutoCloseableApp(SampleConfigBuilder.createNodeConfigBuilder().build())) {
+		try (final AutoCloseableNode node = new AutoCloseableNode(SampleConfigBuilder.createNodeConfigBuilder().build())) {
 			final CreateDatabase createDatabase = new CreateDatabase();
 			InjectorUtil.injectMembers(createDatabase);
 			//-----
@@ -73,7 +74,7 @@ public class CreateDatabase {
 	private static void execPreparedStatement(final SqlConnection connection, final SqlDataBaseManager sqlDataBaseManager, final String sql) {
 		try {
 			sqlDataBaseManager
-					.executeUpdate(SqlStatement.builder(sql).build(), connection);
+					.executeUpdate(SqlStatement.builder(sql).build(), Collections.emptyMap(), connection);
 		} catch (final SQLException e) {
 			throw WrappedException.wrap(e, "Can't exec command {0}", sql);
 		}

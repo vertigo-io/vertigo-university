@@ -2,15 +2,15 @@ package io.vertigo.samples.crystal.domain
 
 create DtDefinition DtCountry {
   id couId {domain: DoId label: "Id" }
-  field name {domain: DoLabel label: "Nom du pays" cardinality:"?"}
+  field name {domain: DoLabel label: "Nom du pays" }
 }
 
 create DtDefinition DtMovie {
   stereotype : "KeyConcept"
   id movId {domain: DoId label: "Id" }
   field name {domain: DoLabelLong label: "Titre du film" cardinality:"1"}
-  field year {domain: DoYear label: "Année" cardinality:"?"}
-  field imdbid {domain: DoLabel label: "Id Imdb" cardinality:"?"}
+  field year {domain: DoYear label: "Année" }
+  field imdbid {domain: DoLabel label: "Id Imdb" }
 }
 
 create DtDefinition DtActor {

@@ -10,7 +10,7 @@ import io.vertigo.datamodel.task.model.TaskBuilder;
 import io.vertigo.datastore.entitystore.EntityStoreManager;
 import io.vertigo.datastore.impl.dao.DAO;
 import io.vertigo.datastore.impl.dao.StoreServices;
-import io.vertigo.datamodel.smarttype.ModelManager;
+import io.vertigo.datamodel.smarttype.SmartTypeManager;
 import io.vertigo.datamodel.task.TaskManager;
 import io.vertigo.samples.dao.domain.Role;
 
@@ -27,8 +27,8 @@ public final class RoleDAO extends DAO<Role, java.lang.Long> implements StoreSer
 	 * @param taskManager Manager de Task
 	 */
 	@Inject
-	public RoleDAO(final EntityStoreManager entityStoreManager, final TaskManager taskManager, final ModelManager modelManager) {
-		super(Role.class, entityStoreManager, taskManager, modelManager);
+	public RoleDAO(final EntityStoreManager entityStoreManager, final TaskManager taskManager, final SmartTypeManager smartTypeManager) {
+		super(Role.class, entityStoreManager, taskManager, smartTypeManager);
 	}
 
 

@@ -14,7 +14,7 @@ import io.vertigo.datamodel.structure.util.DtObjectUtil;
  */
 @Generated
 @io.vertigo.datamodel.structure.stereotype.DataSpace("mine")
-@io.vertigo.datamodel.smarttype.annotations.Mapper(clazz = io.vertigo.datamodel.structure.util.JsonMapper.class, dataType = io.vertigo.core.lang.DataType.String)
+@io.vertigo.datamodel.smarttype.annotations.Adapter(clazz = io.vertigo.datamodel.structure.util.JsonBasicAdapter.class, targetBasicType = io.vertigo.core.lang.BasicType.String)
 public final class MyMovie implements Entity {
 	private static final long serialVersionUID = 1L;
 

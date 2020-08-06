@@ -28,7 +28,7 @@ public final class Country implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long couId <b>Obligatoire</b>
 	 */
-	@Field(smartType = "DoId", type = "ID", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Id")
+	@Field(smartType = "STyId", type = "ID", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Id")
 	public Long getCouId() {
 		return couId;
 	}
@@ -47,7 +47,7 @@ public final class Country implements Entity {
 	 * Récupère la valeur de la propriété 'Nom du pays'.
 	 * @return String name
 	 */
-	@Field(smartType = "DoLabel", label = "Nom du pays")
+	@Field(smartType = "STyLabel", label = "Nom du pays")
 	public String getName() {
 		return name;
 	}

@@ -3,7 +3,7 @@ package io.vertigo.samples.vega.domain;
 import java.util.List;
 
 import io.vertigo.core.lang.Cardinality;
-import io.vertigo.core.lang.DataType;
+import io.vertigo.core.lang.BasicType;
 import io.vertigo.core.node.definition.Definition;
 import io.vertigo.core.node.definition.DefinitionSpace;
 import io.vertigo.core.node.definition.SimpleDefinitionProvider;
@@ -15,8 +15,8 @@ public final class VegaDefinitionProvider implements SimpleDefinitionProvider {
 
 	@Override
 	public List<Definition> provideDefinitions(final DefinitionSpace definitionSpace) {
-		final SmartTypeDefinition smartTypeId = SmartTypeDefinition.builder("STyIdentity", DataType.String).build();
-		final SmartTypeDefinition smartTypeText = SmartTypeDefinition.builder("STyText", DataType.String).build();
+		final SmartTypeDefinition smartTypeId = SmartTypeDefinition.builder("STyIdentity", BasicType.String).build();
+		final SmartTypeDefinition smartTypeText = SmartTypeDefinition.builder("STyText", BasicType.String).build();
 
 		final DtDefinition movieDtDefinition = DtDefinition.builder("DtMovie")
 				.addIdField("id", "id", smartTypeId)

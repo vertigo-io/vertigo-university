@@ -2,6 +2,7 @@ package io.vertigo.samples.crystal.config;
 
 import io.vertigo.commons.CommonsFeatures;
 import io.vertigo.connectors.elasticsearch.ElasticSearchFeatures;
+import io.vertigo.core.node.config.BootConfig;
 import io.vertigo.core.node.config.DefinitionProviderConfig;
 import io.vertigo.core.node.config.ModuleConfig;
 import io.vertigo.core.node.config.NodeConfig;
@@ -12,32 +13,26 @@ import io.vertigo.core.plugins.resource.local.LocalResourceResolverPlugin;
 import io.vertigo.database.DatabaseFeatures;
 import io.vertigo.database.impl.sql.vendor.h2.H2DataBase;
 import io.vertigo.datafactory.DataFactoryFeatures;
-import io.vertigo.datafactory.impl.search.grammar.SearchDefinitionProvider;
 import io.vertigo.datamodel.DataModelFeatures;
-import io.vertigo.datamodel.plugins.environment.ModelDefinitionProvider;
+import io.vertigo.datamodel.impl.smarttype.ModelDefinitionProvider;
 import io.vertigo.datastore.DataStoreFeatures;
+import io.vertigo.samples.crystal.domain.DtDefinitions;
 import io.vertigo.vega.VegaFeatures;
 
 public class SampleConfigBuilder {
 
 	public static NodeConfigBuilder createNodeConfigBuilder(final boolean withSearch, final boolean withVega) {
-		final DataStoreFeatures dynamoFeatures = new DataStoreFeatures()
-				.withEntityStore()
-				.withSqlEntityStore();
 
 		final NodeConfigBuilder nodeConfigBuilder = NodeConfig.builder()
-				.beginBoot()
-				.withLocales("fr_FR")
-				.addPlugin(ClassPathResourceResolverPlugin.class)
-				.addPlugin(LocalResourceResolverPlugin.class)
-				.endBoot();
-
-		nodeConfigBuilder.addModule(new CommonsFeatures()
-				.withCache()
-				.withMemoryCache()
-				.withScript()
-				.withJaninoScript()
-				.build())
+				.withBoot(BootConfig.builder()
+						.withLocales("fr_FR")
+						.addPlugin(ClassPathResourceResolverPlugin.class)
+						.addPlugin(LocalResourceResolverPlugin.class)
+						.build())
+				.addModule(new CommonsFeatures()
+						.withScript()
+						.withJaninoScript()
+						.build())
 				.addModule(new DatabaseFeatures()
 						.withSqlDataBase()
 						.withC3p0(
@@ -45,7 +40,13 @@ public class SampleConfigBuilder {
 								Param.of("jdbcDriver", org.h2.Driver.class.getName()),
 								Param.of("jdbcUrl", "jdbc:h2:D:/atelier/database/formation_loaded"))
 						.build())
-				.addModule(new DataModelFeatures().build());
+				.addModule(new DataModelFeatures().build())
+				.addModule(new DataStoreFeatures()
+						.withCache()
+						.withMemoryCache()
+						.withEntityStore()
+						.withSqlEntityStore()
+						.build());
 		if (withSearch) {
 			nodeConfigBuilder
 					.addModule(new ElasticSearchFeatures()
@@ -55,19 +56,16 @@ public class SampleConfigBuilder {
 					.addModule(new DataFactoryFeatures()
 							.withSearch()
 							.withESHL(
-									Param.of("envIndex", "CrystalTest"),
+									Param.of("envIndexPrefix", "CrystalTest"),
 									Param.of("rowsPerQuery", "50"),
 									Param.of("config.file", "elasticsearch.yml"))
 							.build());
 		}
-		nodeConfigBuilder.addModule(dynamoFeatures.build())
+		nodeConfigBuilder
 				.addModule(ModuleConfig.builder("ressources")
 						.addDefinitionProvider(DefinitionProviderConfig.builder(ModelDefinitionProvider.class)
-								.addDefinitionResource("kpr", "model.kpr")
-								.addDefinitionResource("kpr", "task.kpr")
-								.build())
-						.addDefinitionProvider(DefinitionProviderConfig.builder(SearchDefinitionProvider.class)
-								.addDefinitionResource("kpr", "search.kpr")
+								.addDefinitionResource("smarttypes", SampleCrystalSmartTypes.class.getCanonicalName())
+								.addDefinitionResource("dtobjects", DtDefinitions.class.getCanonicalName())
 								.build())
 						.build());
 

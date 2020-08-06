@@ -1,5 +1,6 @@
 package io.vertigo.samples.quarto.domain;
 
+import io.vertigo.core.lang.Cardinality;
 import io.vertigo.datamodel.structure.model.DtList;
 import io.vertigo.datamodel.structure.model.DtObject;
 import io.vertigo.datamodel.structure.stereotype.Field;
@@ -8,9 +9,9 @@ public final class Theme implements DtObject {
 
 	private static final long serialVersionUID = 1L;
 
-	@Field(smartType = "DoText", label = "name")
+	@Field(smartType = "STyText", label = "name")
 	private String name;
-	@Field(smartType = "DoDtCategoryDtc", label = "categories")
+	@Field(smartType = "STyDtCategory", label = "categories", cardinality = Cardinality.MANY)
 	private DtList<Category> categories;
 
 	public String getName() {

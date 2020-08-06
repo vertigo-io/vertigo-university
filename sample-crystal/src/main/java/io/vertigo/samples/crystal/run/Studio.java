@@ -1,27 +1,18 @@
 package io.vertigo.samples.crystal.run;
 
-import javax.inject.Inject;
+import java.net.MalformedURLException;
+import java.nio.file.Paths;
 
-import io.vertigo.core.node.AutoCloseableApp;
-import io.vertigo.core.util.InjectorUtil;
-import io.vertigo.samples.crystal.config.SampleStudioConfigBuilder;
-import io.vertigo.studio.mda.MdaManager;
+import io.vertigo.core.lang.WrappedException;
+import io.vertigo.studio.tools.VertigoStudioMda;
 
 public class Studio {
-	@Inject
-	private MdaManager mdaManager;
 
 	public static void main(final String[] args) {
-		try (final AutoCloseableApp app = new AutoCloseableApp(new SampleStudioConfigBuilder().build())) {
-			final Studio sample = new Studio();
-			InjectorUtil.injectMembers(sample);
-			//-----
-			sample.cleanGenerate();
+		try {
+			VertigoStudioMda.main(new String[] { "generate", Paths.get("studio-config.json").toUri().toURL().toExternalForm() });
+		} catch (final MalformedURLException e) {
+			throw WrappedException.wrap(e);
 		}
-	}
-
-	void cleanGenerate() {
-		mdaManager.clean();
-		mdaManager.generate().displayResultMessage(System.out);
 	}
 }
