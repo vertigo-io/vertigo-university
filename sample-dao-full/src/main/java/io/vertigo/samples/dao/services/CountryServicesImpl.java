@@ -19,7 +19,7 @@ public class CountryServicesImpl implements CountryServices {
 
 	@Override
 	public DtList<Country> getCountriesByName(final String prefix) {
-		Assertion.checkArgNotEmpty(prefix);
+		Assertion.check().isNotBlank(prefix);
 		// ---
 
 		return countryDAO.findAll(Criterions.startsWith(CountryFields.name, prefix), DtListState.of(50));

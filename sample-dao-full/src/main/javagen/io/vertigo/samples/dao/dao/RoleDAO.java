@@ -3,7 +3,7 @@ package io.vertigo.samples.dao.dao;
 import javax.inject.Inject;
 
 import io.vertigo.core.lang.Generated;
-import io.vertigo.core.node.Home;
+import io.vertigo.core.node.Node;
 import io.vertigo.datamodel.task.metamodel.TaskDefinition;
 import io.vertigo.datamodel.task.model.Task;
 import io.vertigo.datamodel.task.model.TaskBuilder;
@@ -25,6 +25,7 @@ public final class RoleDAO extends DAO<Role, java.lang.Long> implements StoreSer
 	 * Contructeur.
 	 * @param entityStoreManager Manager de persistance
 	 * @param taskManager Manager de Task
+	 * @param smartTypeManager SmartTypeManager
 	 */
 	@Inject
 	public RoleDAO(final EntityStoreManager entityStoreManager, final TaskManager taskManager, final SmartTypeManager smartTypeManager) {
@@ -38,12 +39,12 @@ public final class RoleDAO extends DAO<Role, java.lang.Long> implements StoreSer
 	 * @return the builder 
 	 */
 	private static TaskBuilder createTaskBuilder(final String name) {
-		final TaskDefinition taskDefinition = Home.getApp().getDefinitionSpace().resolve(name, TaskDefinition.class);
+		final TaskDefinition taskDefinition = Node.getNode().getDefinitionSpace().resolve(name, TaskDefinition.class);
 		return Task.builder(taskDefinition);
 	}
 
 	/**
-	 * Execute la tache StTkInsertRolesBatch.
+	 * Execute la tache TkInsertRolesBatch.
 	 * @param rolesList DtList de Role
 	*/
 	@io.vertigo.datamodel.task.proxy.TaskAnnotation(
@@ -59,7 +60,7 @@ public final class RoleDAO extends DAO<Role, java.lang.Long> implements StoreSer
 	}
 
 	/**
-	 * Execute la tache StTkLoadRolesByChunk.
+	 * Execute la tache TkLoadRolesByChunk.
 	 * @param limit Long
 	 * @param offset Long
 	 * @return DtList de Role moviesList

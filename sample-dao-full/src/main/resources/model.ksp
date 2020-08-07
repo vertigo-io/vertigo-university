@@ -2,20 +2,20 @@ package io.vertigo.samples.dao.domain
 
 create DtDefinition DtCountry {
   id couId {domain: DoId label: "Id" }
-  field name {domain: DoLabel label: "Code du pays" cardinality:"?"}
+  field name {domain: DoLabel label: "Code du pays" }
 }
 
 create DtDefinition DtMovie {
   id movId {domain: DoId label: "Id" }
   field name {domain: DoLabelLong label: "Code du pays" cardinality:"1"}
-  field year {domain: DoYear label: "Année" cardinality:"?"}
-  field imdbid {domain: DoLabel label: "Id Imdb" cardinality:"?"}
+  field year {domain: DoYear label: "Année" }
+  field imdbid {domain: DoLabel label: "Id Imdb" }
 }
 
 create DtDefinition DtActor {
   id actId {domain: DoId label: "Id" }
   field name {domain: DoLabelLong label: "Nom" cardinality:"1"}
-  field sexe {domain: DoCode label: "Sexe" cardinality:"?"}
+  field sexe {domain: DoCode label: "Sexe" }
 }
 
 create DtDefinition DtRole {
@@ -27,37 +27,31 @@ create Association AMovCou {
   fkFieldName : "couId"
     
  	dtDefinitionA : DtMovie
+ 	labelA : "Movie"
+ 	roleA : "Movie"
+ 	
+ 	type : "*>?"
+ 	
 	dtDefinitionB : DtCountry
-			
-	navigabilityA : "false"
-	navigabilityB : "true"
-	
-	multiplicityA:"0..*"
-	multiplicityB:"0..1"
-	
-	labelA : "Movie"
 	labelB : "Country"
-	roleA : "Movie"
 	roleB : "Country"
-			
+		
 }
 
 create Association ARolMov {
   fkFieldName : "movId"
     
  	dtDefinitionA : DtRole
-	dtDefinitionB : DtMovie
-			
-	navigabilityA : "true"
-	navigabilityB : "false"
-	
-	multiplicityA:"0..*"
-	multiplicityB:"0..1"
-	
-	labelA : "Role"
-	labelB : "Movie"
+ 	labelA : "Role"
 	roleA : "Role"
-	roleB : "Movie"
+	multiplicityA:"0..*"
+	navigabilityA : "true"
+
+	dtDefinitionB : DtMovie
+	labelB : "Movie"
+	roleB : "Movie"		
+	multiplicityB:"0..1"
+	navigabilityB : "false"
 			
 }
 
@@ -66,30 +60,25 @@ create Association ARolAct {
   fkFieldName : "actId"
     
  	dtDefinitionA : DtRole
-	dtDefinitionB : DtActor
-			
-	navigabilityA : "false"
-	navigabilityB : "true"
-	
-	multiplicityA:"0..*"
-	multiplicityB:"0..1"
-	
-	labelA : "Role"
-	labelB : "Actor"
+ 	labelA : "Role"
 	roleA : "Role"
+ 	
+ 	type : "*>?"
+ 	
+	dtDefinitionB : DtActor
+	labelB : "Actor"
 	roleB : "Actor"
 			
 }
-
 /*************Level4*****************************/
 create DtDefinition DtMovieDisplay {
   field name {domain: DoLabelLong label: "Titre" cardinality:"1"}
-  field year {domain: DoYear label: "Année" cardinality:"?"}
-  field country {domain: DoLabel label: "Pays" cardinality:"?"}
-  field actorsCount {domain: DoId label: "Nombre d'acteur" cardinality:"?"}
+  field year {domain: DoYear label: "Année" }
+  field country {domain: DoLabel label: "Pays" }
+  field actorsCount {domain: DoId label: "Nombre d'acteur" }
 }
 
 create DtDefinition DtMovieByYear {
-  field year {domain: DoYear label: "Année" cardinality:"?"}
-  field moviesCount {domain: DoId label: "Nombre de film" cardinality:"?"}
+  field year {domain: DoYear label: "Année" }
+  field moviesCount {domain: DoId label: "Nombre de film" }
 }

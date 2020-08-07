@@ -3,7 +3,7 @@ package io.vertigo.samples.dao.dao;
 import javax.inject.Inject;
 
 import io.vertigo.core.lang.Generated;
-import io.vertigo.core.node.Home;
+import io.vertigo.core.node.Node;
 import io.vertigo.datamodel.task.metamodel.TaskDefinition;
 import io.vertigo.datamodel.task.model.Task;
 import io.vertigo.datamodel.task.model.TaskBuilder;
@@ -25,6 +25,7 @@ public final class CountryDAO extends DAO<Country, java.lang.Long> implements St
 	 * Contructeur.
 	 * @param entityStoreManager Manager de persistance
 	 * @param taskManager Manager de Task
+	 * @param smartTypeManager SmartTypeManager
 	 */
 	@Inject
 	public CountryDAO(final EntityStoreManager entityStoreManager, final TaskManager taskManager, final SmartTypeManager smartTypeManager) {
@@ -38,18 +39,18 @@ public final class CountryDAO extends DAO<Country, java.lang.Long> implements St
 	 * @return the builder 
 	 */
 	private static TaskBuilder createTaskBuilder(final String name) {
-		final TaskDefinition taskDefinition = Home.getApp().getDefinitionSpace().resolve(name, TaskDefinition.class);
+		final TaskDefinition taskDefinition = Node.getNode().getDefinitionSpace().resolve(name, TaskDefinition.class);
 		return Task.builder(taskDefinition);
 	}
 
 	/**
-	 * Execute la tache StTkInsertCountriesBatch.
+	 * Execute la tache TkInsertCountriesBatch.
 	 * @param countryList DtList de Country
 	*/
 	@io.vertigo.datamodel.task.proxy.TaskAnnotation(
 			dataSpace = "mine",
 			name = "TkInsertCountriesBatch",
-			request = "INSERT INTO MY_COUNTRY (COU_ID, NAME) values (#COUNTRY_LIST.COU_ID#, #COUNTRY_LIST.NAME#)",
+			request = "INSERT INTO MY_COUNTRY (COU_ID, NAME) values (#countryList.couId#, #countryList.name#)",
 			taskEngineClass = io.vertigo.dynamox.task.TaskEngineProcBatch.class)
 	public void insertCountriesBatch(@io.vertigo.datamodel.task.proxy.TaskInput(name = "countryList", smartType = "STyDtCountry") final io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.dao.domain.Country> countryList) {
 		final Task task = createTaskBuilder("TkInsertCountriesBatch")
@@ -59,7 +60,7 @@ public final class CountryDAO extends DAO<Country, java.lang.Long> implements St
 	}
 
 	/**
-	 * Execute la tache StTkLoadCountries.
+	 * Execute la tache TkLoadCountries.
 	 * @return DtList de Country countryList
 	*/
 	@io.vertigo.datamodel.task.proxy.TaskAnnotation(

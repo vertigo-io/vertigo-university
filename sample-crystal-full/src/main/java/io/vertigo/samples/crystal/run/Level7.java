@@ -9,7 +9,7 @@ import io.vertigo.account.authorization.AuthorizationManager;
 import io.vertigo.account.plugins.authorization.loaders.JsonSecurityDefinitionProvider;
 import io.vertigo.account.security.UserSession;
 import io.vertigo.account.security.VSecurityManager;
-import io.vertigo.core.node.AutoCloseableApp;
+import io.vertigo.core.node.AutoCloseableNode;
 import io.vertigo.core.node.config.DefinitionProviderConfig;
 import io.vertigo.core.node.config.ModuleConfig;
 import io.vertigo.core.node.config.NodeConfigBuilder;
@@ -52,7 +52,7 @@ public class Level7 {
 								.build())
 						.build())
 				.addModule(defaultSampleModule());
-		try (final AutoCloseableApp app = new AutoCloseableApp(nodeConfigBuilder.build())) {
+		try (final AutoCloseableNode node = new AutoCloseableNode(nodeConfigBuilder.build())) {
 			final Level7 sample = new Level7();
 			InjectorUtil.injectMembers(sample);
 			//-----

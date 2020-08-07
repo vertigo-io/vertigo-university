@@ -17,7 +17,7 @@ public class ActorServicesImpl implements ActorServices {
 
 	@Override
 	public void saveActor(final Actor actor) {
-		Assertion.checkNotNull(actor);
+		Assertion.check().isNotNull(actor);
 		// ---
 		actorDAO.save(actor);
 
@@ -25,14 +25,14 @@ public class ActorServicesImpl implements ActorServices {
 
 	@Override
 	public Actor getActorById(final Long actId) {
-		Assertion.checkNotNull(actId);
+		Assertion.check().isNotNull(actId);
 		//---
 		return actorDAO.get(actId);
 	}
 
 	@Override
 	public void deleteMyActor(final Long actId) {
-		Assertion.checkNotNull(actId);
+		Assertion.check().isNotNull(actId);
 		//---
 		actorDAO.delete(actId);
 	}

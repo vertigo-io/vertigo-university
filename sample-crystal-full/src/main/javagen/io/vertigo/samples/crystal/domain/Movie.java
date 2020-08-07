@@ -2,11 +2,11 @@ package io.vertigo.samples.crystal.domain;
 
 import io.vertigo.core.lang.Generated;
 import io.vertigo.datamodel.structure.model.KeyConcept;
+import io.vertigo.datastore.impl.entitystore.StoreListVAccessor;
 import io.vertigo.datamodel.structure.model.UID;
+import io.vertigo.datastore.impl.entitystore.StoreVAccessor;
 import io.vertigo.datamodel.structure.stereotype.Field;
 import io.vertigo.datamodel.structure.util.DtObjectUtil;
-import io.vertigo.datastore.impl.entitystore.StoreListVAccessor;
-import io.vertigo.datastore.impl.entitystore.StoreVAccessor;
 
 /**
  * This class is automatically generated.
@@ -62,7 +62,7 @@ public final class Movie implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long movId <b>Obligatoire</b>
 	 */
-	@Field(smartType = "DoId", type = "ID", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Id")
+	@Field(smartType = "STyId", type = "ID", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Id")
 	public Long getMovId() {
 		return movId;
 	}
@@ -81,7 +81,7 @@ public final class Movie implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Titre du film'.
 	 * @return String name <b>Obligatoire</b>
 	 */
-	@Field(smartType = "DoLabelLong", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Titre du film")
+	@Field(smartType = "STyLabelLong", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Titre du film")
 	public String getName() {
 		return name;
 	}
@@ -100,7 +100,7 @@ public final class Movie implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Année'.
 	 * @return Integer year
 	 */
-	@Field(smartType = "DoYear", label = "Année")
+	@Field(smartType = "STyYear", label = "Année")
 	public Integer getYear() {
 		return year;
 	}
@@ -119,7 +119,7 @@ public final class Movie implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Id Imdb'.
 	 * @return String imdbid
 	 */
-	@Field(smartType = "DoLabel", label = "Id Imdb")
+	@Field(smartType = "STyLabel", label = "Id Imdb")
 	public String getImdbid() {
 		return imdbid;
 	}
@@ -138,7 +138,7 @@ public final class Movie implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Country'.
 	 * @return Long couId
 	 */
-	@Field(smartType = "DoId", type = "FOREIGN_KEY", label = "Country")
+	@io.vertigo.datamodel.structure.stereotype.ForeignKey(smartType = "STyId", label = "Country", fkDefinition = "DtCountry" )
 	public Long getCouId() {
 		return (Long) couIdAccessor.getId();
 	}

@@ -4,7 +4,7 @@ import javax.inject.Inject;
 
 import java.util.Optional;
 import io.vertigo.core.lang.Generated;
-import io.vertigo.core.node.Home;
+import io.vertigo.core.node.Node;
 import io.vertigo.datamodel.task.metamodel.TaskDefinition;
 import io.vertigo.datamodel.task.model.Task;
 import io.vertigo.datamodel.task.model.TaskBuilder;
@@ -26,6 +26,7 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	 * Contructeur.
 	 * @param entityStoreManager Manager de persistance
 	 * @param taskManager Manager de Task
+	 * @param smartTypeManager SmartTypeManager
 	 */
 	@Inject
 	public MovieDAO(final EntityStoreManager entityStoreManager, final TaskManager taskManager, final SmartTypeManager smartTypeManager) {
@@ -39,12 +40,12 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	 * @return the builder 
 	 */
 	private static TaskBuilder createTaskBuilder(final String name) {
-		final TaskDefinition taskDefinition = Home.getApp().getDefinitionSpace().resolve(name, TaskDefinition.class);
+		final TaskDefinition taskDefinition = Node.getNode().getDefinitionSpace().resolve(name, TaskDefinition.class);
 		return Task.builder(taskDefinition);
 	}
 
 	/**
-	 * Execute la tache StTkGetMoviesByCriteria.
+	 * Execute la tache TkGetMoviesByCriteria.
 	 * @param title String
 	 * @param year Integer
 	 * @return DtList de Movie movies
@@ -74,7 +75,7 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	}
 
 	/**
-	 * Execute la tache StTkGetMoviesByCriteriaWithCountry.
+	 * Execute la tache TkGetMoviesByCriteriaWithCountry.
 	 * @param title String
 	 * @param year Integer
 	 * @param countries DtList de Country
@@ -109,7 +110,7 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	}
 
 	/**
-	 * Execute la tache StTkGetMoviesWith100Actors.
+	 * Execute la tache TkGetMoviesWith100Actors.
 	 * @return DtList de Movie movies
 	*/
 	@io.vertigo.datamodel.task.proxy.TaskAnnotation(
@@ -129,13 +130,13 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	}
 
 	/**
-	 * Execute la tache StTkInsertMoviesBatch.
+	 * Execute la tache TkInsertMoviesBatch.
 	 * @param moviesList DtList de Movie
 	*/
 	@io.vertigo.datamodel.task.proxy.TaskAnnotation(
 			dataSpace = "mine",
 			name = "TkInsertMoviesBatch",
-			request = "INSERT INTO MY_MOVIE (MOV_ID, NAME, YEAR, IMDBID, COU_ID) values (#MOVIES_LIST.MOV_ID#, #MOVIES_LIST.NAME#, #MOVIES_LIST.YEAR#, #MOVIES_LIST.IMDBID#, #MOVIES_LIST.COU_ID#)",
+			request = "INSERT INTO MY_MOVIE (MOV_ID, NAME, YEAR, IMDBID, COU_ID) values (#moviesList.movId#, #moviesList.name#, #moviesList.year#, #moviesList.imdbid#, #moviesList.couId#)",
 			taskEngineClass = io.vertigo.dynamox.task.TaskEngineProcBatch.class)
 	public void insertMoviesBatch(@io.vertigo.datamodel.task.proxy.TaskInput(name = "moviesList", smartType = "STyDtMovie") final io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.dao.domain.Movie> moviesList) {
 		final Task task = createTaskBuilder("TkInsertMoviesBatch")
@@ -145,7 +146,7 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	}
 
 	/**
-	 * Execute la tache StTkLoadMoviesByChunk.
+	 * Execute la tache TkLoadMoviesByChunk.
 	 * @param limit Long
 	 * @param offset Long
 	 * @return DtList de Movie moviesList

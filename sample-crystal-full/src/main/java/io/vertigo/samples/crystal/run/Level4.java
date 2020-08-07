@@ -4,7 +4,7 @@ import javax.inject.Inject;
 
 import org.apache.logging.log4j.LogManager;
 
-import io.vertigo.core.node.AutoCloseableApp;
+import io.vertigo.core.node.AutoCloseableNode;
 import io.vertigo.core.node.config.ModuleConfig;
 import io.vertigo.core.node.config.NodeConfigBuilder;
 import io.vertigo.core.util.InjectorUtil;
@@ -33,10 +33,10 @@ public class Level4 {
 						.addComponent(ActorDAO.class)
 						.addComponent(RoleDAO.class)
 						.addComponent(SamplesPAO.class)
-						.addProxy(MovieProxyDAO.class)
+						.addAmplifier(MovieProxyDAO.class)
 						.build())
 				.addModule(defaultSampleModule());
-		try (final AutoCloseableApp app = new AutoCloseableApp(nodeConfigBuilder.build())) {
+		try (final AutoCloseableNode node = new AutoCloseableNode(nodeConfigBuilder.build())) {
 			final Level4 sample = new Level4();
 			InjectorUtil.injectMembers(sample);
 			//-----

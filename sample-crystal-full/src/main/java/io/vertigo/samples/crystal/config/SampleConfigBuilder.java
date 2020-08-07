@@ -1,11 +1,9 @@
 package io.vertigo.samples.crystal.config;
 
 import io.vertigo.account.AccountFeatures;
-import io.vertigo.account.authorization.AuthorizationManager;
-import io.vertigo.account.impl.authorization.AuthorizationManagerImpl;
 import io.vertigo.commons.CommonsFeatures;
 import io.vertigo.connectors.elasticsearch.ElasticSearchFeatures;
-import io.vertigo.core.node.config.ComponentConfig;
+import io.vertigo.core.node.config.BootConfig;
 import io.vertigo.core.node.config.DefinitionProviderConfig;
 import io.vertigo.core.node.config.ModuleConfig;
 import io.vertigo.core.node.config.NodeConfig;
@@ -16,32 +14,24 @@ import io.vertigo.core.plugins.resource.local.LocalResourceResolverPlugin;
 import io.vertigo.database.DatabaseFeatures;
 import io.vertigo.database.impl.sql.vendor.h2.H2DataBase;
 import io.vertigo.datafactory.DataFactoryFeatures;
-import io.vertigo.datafactory.impl.search.grammar.SearchDefinitionProvider;
 import io.vertigo.datamodel.DataModelFeatures;
+import io.vertigo.datamodel.impl.smarttype.ModelDefinitionProvider;
 import io.vertigo.datamodel.impl.task.proxy.TaskProxyMethod;
-import io.vertigo.datamodel.plugins.environment.ModelDefinitionProvider;
 import io.vertigo.datastore.DataStoreFeatures;
+import io.vertigo.samples.crystal.domain.DtDefinitions;
 import io.vertigo.samples.crystal.webservices.TestUserSession;
 import io.vertigo.vega.VegaFeatures;
 
 public class SampleConfigBuilder {
 
 	public static NodeConfigBuilder createNodeConfigBuilder(final boolean withSearch, final boolean withVega, final boolean withAccount) {
-		final DataStoreFeatures dynamoFeatures = new DataStoreFeatures()
-				.withEntityStore()
-				.withSqlEntityStore();
-
 		final NodeConfigBuilder nodeConfigBuilder = NodeConfig.builder()
-				.beginBoot()
-				.withLocales("fr_FR")
-				.addPlugin(ClassPathResourceResolverPlugin.class)
-				.addPlugin(LocalResourceResolverPlugin.class)
-				.endBoot();
-
-		nodeConfigBuilder
+				.withBoot(BootConfig.builder()
+						.withLocales("fr_FR")
+						.addPlugin(ClassPathResourceResolverPlugin.class)
+						.addPlugin(LocalResourceResolverPlugin.class)
+						.build())
 				.addModule(new CommonsFeatures()
-						.withCache()
-						.withMemoryCache()
 						.withScript()
 						.withJaninoScript()
 						.build())
@@ -52,8 +42,13 @@ public class SampleConfigBuilder {
 								Param.of("jdbcDriver", org.h2.Driver.class.getName()),
 								Param.of("jdbcUrl", "jdbc:h2:D:/atelier/database/formation_loaded"))
 						.build())
-				.addModule(dynamoFeatures.build())
-				.addModule(new DataModelFeatures().build());
+				.addModule(new DataModelFeatures().build())
+				.addModule(new DataStoreFeatures()
+						.withCache()
+						.withMemoryCache()
+						.withEntityStore()
+						.withSqlEntityStore()
+						.build());
 
 		if (withSearch) {
 			nodeConfigBuilder
@@ -63,7 +58,7 @@ public class SampleConfigBuilder {
 							.build())
 					.addModule(new DataFactoryFeatures()
 							.withSearch()
-							.withESHL(Param.of("envIndex", "crystal-test_"),
+							.withESHL(Param.of("envIndexPrefix", "crystal-test_"),
 									Param.of("rowsPerQuery", "50"),
 									Param.of("config.file", "elasticsearch.yml"))
 							.build());
@@ -71,11 +66,8 @@ public class SampleConfigBuilder {
 		//----Definitions
 		nodeConfigBuilder.addModule(ModuleConfig.builder("ressources")
 				.addDefinitionProvider(DefinitionProviderConfig.builder(ModelDefinitionProvider.class)
-						.addDefinitionResource("kpr", "model.kpr")
-						.addDefinitionResource("kpr", "task.kpr")
-						.build())
-				.addDefinitionProvider(DefinitionProviderConfig.builder(SearchDefinitionProvider.class)
-						.addDefinitionResource("kpr", "search.kpr")
+						.addDefinitionResource("smarttypes", SampleCrystalSmartTypes.class.getCanonicalName())
+						.addDefinitionResource("dtobjects", DtDefinitions.class.getCanonicalName())
 						.build())
 				.build());
 		if (withVega) {
@@ -106,12 +98,7 @@ public class SampleConfigBuilder {
 							Param.of("userLoginTemplate", "cn={0},dc=vertigo,dc=io"),
 							Param.of("ldapServerHost", "docker-vertigo.part.klee.lan.net"),
 							Param.of("ldapServerPort", "389"))
-					.build());
-			nodeConfigBuilder.addModule(ModuleConfig.builder("authorization")
-					.addComponent(ComponentConfig.builder()
-							.withApi(AuthorizationManager.class)
-							.withImpl(AuthorizationManagerImpl.class)
-							.build())
+					.withAuthorization()
 					.build());
 		}
 

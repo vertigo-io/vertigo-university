@@ -33,18 +33,14 @@ create Association AMovCou {
   fkFieldName : "couId"
     
  	dtDefinitionA : DtMovie
-	dtDefinitionB : DtCountry
-			
-	navigabilityA : "false"
-	navigabilityB : "true"
-	
-	multiplicityA:"0..*"
-	multiplicityB:"0..1"
-	
-	labelA : "Movie"
-	labelB : "Country"
+ 	labelA : "Movie"
 	roleA : "Movie"
-	roleB : "Country"
+ 	
+ 	type : "*>?"
+ 	
+	dtDefinitionB : DtCountry
+	labelB : "Country"
+	roleB : "Country"	
 			
 }
 
@@ -72,17 +68,13 @@ create Association ARolAct {
   fkFieldName : "actId"
     
  	dtDefinitionA : DtRole
-	dtDefinitionB : DtActor
-			
-	navigabilityA : "false"
-	navigabilityB : "true"
-	
-	multiplicityA:"0..*"
-	multiplicityB:"0..1"
-	
-	labelA : "Role"
-	labelB : "Actor"
+ 	labelA : "Role"
 	roleA : "Role"
+ 	
+ 	type : "*>?"
+ 	
+	dtDefinitionB : DtActor
+	labelB : "Actor"
 	roleB : "Actor"
 			
 }
@@ -91,17 +83,13 @@ create Association AActSex {
   fkFieldName : "sexCd"
     
  	dtDefinitionA : DtActor
-	dtDefinitionB : DtSexe
-			
-	navigabilityA : "false"
-	navigabilityB : "true"
-	
-	multiplicityA:"0..*"
-	multiplicityB:"0..1"
-	
-	labelA : "Actor"
-	labelB : "Sexe"
+ 	labelA : "Actor"
 	roleA : "Actor"
+ 	
+ 	type : "*>?"
+ 	
+	dtDefinitionB : DtSexe
+	labelB : "Sexe"
 	roleB : "Sexe"
 			
 }

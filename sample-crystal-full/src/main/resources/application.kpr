@@ -5,3 +5,9 @@ modelUser.ksp
 modelSearch.ksp
 
 alter.ksp
+
+searchMovie.ksp
+
+dao.ksp
+daoSearch.ksp
+

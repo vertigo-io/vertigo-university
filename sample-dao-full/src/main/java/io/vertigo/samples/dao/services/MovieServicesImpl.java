@@ -37,7 +37,7 @@ public class MovieServicesImpl implements MovieServices {
 
 	@Override
 	public Movie getMovieById(final Long movId) {
-		Assertion.checkNotNull(movId);
+		Assertion.check().isNotNull(movId);
 		// ---
 		return movieDAO.get(movId);
 	}
@@ -77,9 +77,10 @@ public class MovieServicesImpl implements MovieServices {
 
 	@Override
 	public void addActorToMovie(final Long actId, final Long movId, final String role) {
-		Assertion.checkNotNull(actId);
-		Assertion.checkNotNull(movId);
-		Assertion.checkArgNotEmpty(role);
+		Assertion.check()
+				.isNotNull(actId)
+				.isNotNull(movId)
+				.isNotNull(role);
 		// ---
 		final Role newRole = new Role();
 		newRole.setMovId(movId);
@@ -91,7 +92,7 @@ public class MovieServicesImpl implements MovieServices {
 
 	@Override
 	public DtList<Movie> findMoviesByKspWhereIn(final String title, final Integer year, final DtList<Country> countries) {
-		Assertion.checkNotNull(countries);
+		Assertion.check().isNotNull(countries);
 		// ---
 		return movieDAO.getMoviesByCriteriaWithCountry(title, Optional.ofNullable(year), countries);
 	}

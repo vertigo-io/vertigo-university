@@ -2,7 +2,7 @@ package io.vertigo.samples.crystal.authorization;
 
 import io.vertigo.account.authorization.metamodel.Authorization;
 import io.vertigo.account.authorization.metamodel.AuthorizationName;
-import io.vertigo.core.node.Home;
+import io.vertigo.core.node.Node;
 
 /**
  * Warning. This class is generated automatically !
@@ -12,7 +12,7 @@ import io.vertigo.core.node.Home;
 public enum GlobalAuthorizations implements AuthorizationName {
 
 	/**
-	 * AtzSpecial.
+	 * Special.
 	 */
 	AtzSpecial;
 
@@ -23,7 +23,7 @@ public enum GlobalAuthorizations implements AuthorizationName {
 	 * @return authorization
 	 */
 	public static Authorization of(final String code) {
-		return Home.getApp().getDefinitionSpace().resolve(code, Authorization.class);
+		return Node.getNode().getDefinitionSpace().resolve(code, Authorization.class);
 	}
 
 	/**

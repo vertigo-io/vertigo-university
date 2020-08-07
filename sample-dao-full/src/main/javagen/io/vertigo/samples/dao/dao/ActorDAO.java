@@ -3,7 +3,7 @@ package io.vertigo.samples.dao.dao;
 import javax.inject.Inject;
 
 import io.vertigo.core.lang.Generated;
-import io.vertigo.core.node.Home;
+import io.vertigo.core.node.Node;
 import io.vertigo.datamodel.task.metamodel.TaskDefinition;
 import io.vertigo.datamodel.task.model.Task;
 import io.vertigo.datamodel.task.model.TaskBuilder;
@@ -25,6 +25,7 @@ public final class ActorDAO extends DAO<Actor, java.lang.Long> implements StoreS
 	 * Contructeur.
 	 * @param entityStoreManager Manager de persistance
 	 * @param taskManager Manager de Task
+	 * @param smartTypeManager SmartTypeManager
 	 */
 	@Inject
 	public ActorDAO(final EntityStoreManager entityStoreManager, final TaskManager taskManager, final SmartTypeManager smartTypeManager) {
@@ -38,12 +39,12 @@ public final class ActorDAO extends DAO<Actor, java.lang.Long> implements StoreS
 	 * @return the builder 
 	 */
 	private static TaskBuilder createTaskBuilder(final String name) {
-		final TaskDefinition taskDefinition = Home.getApp().getDefinitionSpace().resolve(name, TaskDefinition.class);
+		final TaskDefinition taskDefinition = Node.getNode().getDefinitionSpace().resolve(name, TaskDefinition.class);
 		return Task.builder(taskDefinition);
 	}
 
 	/**
-	 * Execute la tache StTkGetActorsInMovie.
+	 * Execute la tache TkGetActorsInMovie.
 	 * @param movId Long
 	 * @return DtList de Actor actors
 	*/
@@ -65,13 +66,13 @@ public final class ActorDAO extends DAO<Actor, java.lang.Long> implements StoreS
 	}
 
 	/**
-	 * Execute la tache StTkInsertActorsBatch.
+	 * Execute la tache TkInsertActorsBatch.
 	 * @param actorsList DtList de Actor
 	*/
 	@io.vertigo.datamodel.task.proxy.TaskAnnotation(
 			dataSpace = "mine",
 			name = "TkInsertActorsBatch",
-			request = "INSERT INTO MY_ACTOR (ACT_ID, NAME, SEXE) values (#ACTORS_LIST.ACT_ID#, #ACTORS_LIST.NAME#, #ACTORS_LIST.SEXE#)",
+			request = "INSERT INTO MY_ACTOR (ACT_ID, NAME, SEXE) values (#actorsList.actId#, #actorsList.name#, #actorsList.sexe#)",
 			taskEngineClass = io.vertigo.dynamox.task.TaskEngineProcBatch.class)
 	public void insertActorsBatch(@io.vertigo.datamodel.task.proxy.TaskInput(name = "actorsList", smartType = "STyDtActor") final io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.dao.domain.Actor> actorsList) {
 		final Task task = createTaskBuilder("TkInsertActorsBatch")
@@ -81,7 +82,7 @@ public final class ActorDAO extends DAO<Actor, java.lang.Long> implements StoreS
 	}
 
 	/**
-	 * Execute la tache StTkLoadActorsByChunk.
+	 * Execute la tache TkLoadActorsByChunk.
 	 * @param limit Long
 	 * @param offset Long
 	 * @return DtList de Actor actorsList

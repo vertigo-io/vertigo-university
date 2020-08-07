@@ -1,22 +1,19 @@
 index :
     analysis :
         normalizer :
-             sortable :
+            code :
                 type : custom
-                filter : ["lowercase", "asciifolding"]  
+            sortable :
+                type : custom
+                filter : [lowercase, asciifolding]  
         analyzer :
             multiple_code :
                 tokenizer : piped_keywords
-                filter : [standard]
-            text_fr_not_tokenized :
-                tokenizer : keyword
-                filter : [standard, lowercase, snowball]
+                filter : []
             text_fr :
                 tokenizer : standard
-                filter : [standard, lowercase, snowball, elision]
+                filter : [lowercase, asciifolding, snowball, elision]
         tokenizer :
-            keyword :
-                type : keyword
             piped_keywords :
                 type : pattern
                 pattern : '([|,] *)'

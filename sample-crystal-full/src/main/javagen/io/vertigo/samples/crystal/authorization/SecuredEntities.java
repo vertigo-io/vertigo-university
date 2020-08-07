@@ -3,7 +3,7 @@ package io.vertigo.samples.crystal.authorization;
 import io.vertigo.account.authorization.metamodel.Authorization;
 import io.vertigo.account.authorization.metamodel.AuthorizationName;
 import io.vertigo.account.authorization.metamodel.OperationName;
-import io.vertigo.core.node.Home;
+import io.vertigo.core.node.Node;
 import io.vertigo.samples.crystal.domain.Movie;
 
 /**
@@ -21,7 +21,7 @@ public final class SecuredEntities {
 	 * Authorizations of Movie.
 	 */
 	public enum MovieAuthorizations implements AuthorizationName {
-		/** AtzMovie$read. */
+		/** read. */
 		AtzMovie$read;
 
 		/**
@@ -31,7 +31,7 @@ public final class SecuredEntities {
 		 * @return authorization
 		 */
 		public static Authorization of(final String code) {
-			return Home.getApp().getDefinitionSpace().resolve(code, Authorization.class);
+			return Node.getNode().getDefinitionSpace().resolve(code, Authorization.class);
 		}
 
 		/**

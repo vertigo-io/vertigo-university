@@ -1,6 +1,8 @@
 package io.vertigo.notifications.config;
 
 import io.vertigo.commons.CommonsFeatures;
+import io.vertigo.connectors.mail.MailFeatures;
+import io.vertigo.core.node.config.BootConfig;
 import io.vertigo.core.node.config.ModuleConfig;
 import io.vertigo.core.node.config.NodeConfig;
 import io.vertigo.core.param.Param;
@@ -27,9 +29,14 @@ public class NotificationSampleConfigBuilder {
 
 	public NodeConfig build() {
 		return NodeConfig.builder()
-				.beginBoot()
-				.withLocales("fr")
-				.endBoot()
+				.withBoot(BootConfig.builder()
+						.withLocales("fr")
+						.build())
+				.addModule(new MailFeatures()
+						.withNativeMailConnector(
+								Param.of("storeProtocol", "smtp"),
+								Param.of("host", "localdelivery.klee.lan.net"))
+						.build())
 				.addModule(new CommonsFeatures().build())
 				.addModule(new DataStoreFeatures().build())
 				.addModule(ModuleConfig.builder("notificationAspects")
@@ -41,8 +48,6 @@ public class NotificationSampleConfigBuilder {
 				.addModule(new SocialFeatures()
 						.withMails()
 						.withJavaxMail(
-								Param.of("storeProtocol", "smtp"),
-								Param.of("host", "localdelivery.klee.lan.net"),
 								Param.of("developmentMode", "true"),
 								Param.of("developmentMailTo", "prenom.nom@kleegroup.com"))
 						.build())

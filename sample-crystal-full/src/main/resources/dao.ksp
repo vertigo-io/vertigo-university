@@ -9,8 +9,8 @@ create Task TkGetActorsIdsByMovie {
 			join movie mov on rol.mov_id = mov.mov_id 
 			where mov.mov_id = #movId#
 			"
-	attribute movId	{domain : DoId 				cardinality:"1" 	inOut :"in"}
-	attribute actors	{domain : DoId			 	cardinality:"*" 	inOut :"out"}
+	in movId	{domain : DoId 				cardinality:"1" 	}
+	out actors	{domain : DoId			 	cardinality:"*" 	}
 }
 
 create Task TkGetActorsByMovie {
@@ -22,8 +22,8 @@ create Task TkGetActorsByMovie {
 			join movie mov on rol.mov_id = mov.mov_id 
 			where mov.mov_id = #movId#
 			"
-	attribute movId	{domain : DoId 				cardinality:"1" 	inOut :"in"}
-	attribute actors	{domain : DoDtActor	 	cardinality:"*" 	inOut :"out"}
+	in movId	{domain : DoId 				cardinality:"1" 	}
+	out actors	{domain : DoDtActor	 		cardinality:"*" 	}
 }
 
 
@@ -34,8 +34,8 @@ create Task TkGetMoviesInCountries {
         	from movie 
         	where cou_id in ( #countriesIds.rownum#)
 			"
-	attribute countriesIds	{domain : DoId 				cardinality:"*" 	inOut :"in"}
-	attribute movies		{domain : DoDtMovie		cardinality:"*" 	inOut :"out"}
+	in countriesIds	{domain : DoId 				cardinality:"*" 	}
+	out movies		{domain : DoDtMovie			cardinality:"*" 	}
 }
 
 

@@ -7,7 +7,7 @@ import org.apache.logging.log4j.Logger;
 
 import io.vertigo.commons.transaction.VTransactionManager;
 import io.vertigo.commons.transaction.VTransactionWritable;
-import io.vertigo.core.node.AutoCloseableApp;
+import io.vertigo.core.node.AutoCloseableNode;
 import io.vertigo.core.node.config.ModuleConfig;
 import io.vertigo.core.node.config.NodeConfigBuilder;
 import io.vertigo.core.util.InjectorUtil;
@@ -62,7 +62,7 @@ public class Level6 {
 						.addComponent(ActorServices.class, ActorServicesImpl.class)
 						.addComponent(RepriseServices.class, RepriseServicesImpl.class)
 						.build());
-		try (final AutoCloseableApp app = new AutoCloseableApp(nodeConfigBuilder.build())) {
+		try (final AutoCloseableNode node = new AutoCloseableNode(nodeConfigBuilder.build())) {
 			final Level6 level6 = new Level6();
 			InjectorUtil.injectMembers(level6);
 			//-----

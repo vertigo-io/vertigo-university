@@ -17,7 +17,7 @@ public class MovieServicesImpl implements MovieServices {
 
 	@Override
 	public Movie getMovieById(final Long movId) {
-		Assertion.checkNotNull(movId);
+		Assertion.check().isNotNull(movId);
 		// ---
 		return movieDAO.get(movId);
 	}

@@ -3,22 +3,22 @@ package io.vertigo.samples.dao.domain
 create DtDefinition DtMyCountry {
   storeName : "mine"
   id couId {domain: DoId label: "Id" }
-  field name {domain: DoLabel label: "Code du pays" cardinality:"?"}
+  field name {domain: DoLabel label: "Code du pays" }
 }
 
 create DtDefinition DtMyMovie {
   storeName : "mine"
   id movId {domain: DoId label: "Id" }
   field name {domain: DoLabelLong label: "Code du pays" cardinality:"1"}
-  field year {domain: DoYear label: "Année" cardinality:"?"}
-  field imdbid {domain: DoLabel label: "Id Imdb" cardinality:"?"}
+  field year {domain: DoYear label: "Année" }
+  field imdbid {domain: DoLabel label: "Id Imdb" }
 }
 
 create DtDefinition DtMyActor {
   storeName : "mine"
   id actId {domain: DoId label: "Id" }
   field name {domain: DoLabelLong label: "Nom" cardinality:"1"}
-  field sexe {domain: DoCode label: "Sexe" cardinality:"?"}
+  field sexe {domain: DoCode label: "Sexe" }
 }
 
 create DtDefinition DtMyRole {
@@ -31,17 +31,13 @@ create Association AMmovMcou {
   fkFieldName : "couId"
     
  	dtDefinitionA : DtMyMovie
-	dtDefinitionB : DtMyCountry
-			
-	navigabilityA : "false"
-	navigabilityB : "true"
-	
-	multiplicityA:"0..*"
-	multiplicityB:"0..1"
-	
-	labelA : "Movie"
-	labelB : "Country"
+ 	labelA : "Movie"
 	roleA : "Movie"
+ 	
+ 	type : "*>?"
+ 	
+	dtDefinitionB : DtMyCountry
+	labelB : "Country"
 	roleB : "Country"
 			
 }
@@ -70,17 +66,14 @@ create Association AMrolMact {
   fkFieldName : "actId"
     
  	dtDefinitionA : DtMyRole
-	dtDefinitionB : DtMyActor
-			
-	navigabilityA : "false"
-	navigabilityB : "true"
-	
-	multiplicityA:"0..*"
-	multiplicityB:"0..1"
-	
-	labelA : "Role"
-	labelB : "Actor"
+ 	labelA : "Role"
 	roleA : "Role"
+ 	
+ 	type : "*>?"
+ 	
+	dtDefinitionB : DtMyActor
+	labelB : "Actor"
 	roleB : "Actor"
+			
 			
 }

@@ -3,14 +3,15 @@ package io.vertigo.samples.crystal.dao;
 import javax.inject.Inject;
 
 import io.vertigo.core.lang.Generated;
-import io.vertigo.core.node.Home;
-import io.vertigo.datamodel.task.TaskManager;
+import io.vertigo.core.node.Node;
 import io.vertigo.datamodel.task.metamodel.TaskDefinition;
 import io.vertigo.datamodel.task.model.Task;
 import io.vertigo.datamodel.task.model.TaskBuilder;
 import io.vertigo.datastore.entitystore.EntityStoreManager;
 import io.vertigo.datastore.impl.dao.DAO;
 import io.vertigo.datastore.impl.dao.StoreServices;
+import io.vertigo.datamodel.smarttype.SmartTypeManager;
+import io.vertigo.datamodel.task.TaskManager;
 import io.vertigo.samples.crystal.domain.Actor;
 
 /**
@@ -24,10 +25,11 @@ public final class ActorDAO extends DAO<Actor, java.lang.Long> implements StoreS
 	 * Contructeur.
 	 * @param entityStoreManager Manager de persistance
 	 * @param taskManager Manager de Task
+	 * @param smartTypeManager SmartTypeManager
 	 */
 	@Inject
-	public ActorDAO(final EntityStoreManager entityStoreManager, final TaskManager taskManager) {
-		super(Actor.class, entityStoreManager, taskManager);
+	public ActorDAO(final EntityStoreManager entityStoreManager, final TaskManager taskManager, final SmartTypeManager smartTypeManager) {
+		super(Actor.class, entityStoreManager, taskManager, smartTypeManager);
 	}
 
 
@@ -37,7 +39,7 @@ public final class ActorDAO extends DAO<Actor, java.lang.Long> implements StoreS
 	 * @return the builder 
 	 */
 	private static TaskBuilder createTaskBuilder(final String name) {
-		final TaskDefinition taskDefinition = Home.getApp().getDefinitionSpace().resolve(name, TaskDefinition.class);
+		final TaskDefinition taskDefinition = Node.getNode().getDefinitionSpace().resolve(name, TaskDefinition.class);
 		return Task.builder(taskDefinition);
 	}
 
@@ -46,7 +48,16 @@ public final class ActorDAO extends DAO<Actor, java.lang.Long> implements StoreS
 	 * @param movId Long
 	 * @return DtList de Actor actors
 	*/
-	public io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.crystal.domain.Actor> getActorsByMovie(final Long movId) {
+	@io.vertigo.datamodel.task.proxy.TaskAnnotation(
+			name = "TkGetActorsByMovie",
+			request = "select act.*" + 
+ "			from role rol" + 
+ "			join actor act on rol.act_id= act.act_id " + 
+ "			join movie mov on rol.mov_id = mov.mov_id " + 
+ "			where mov.mov_id = #movId#",
+			taskEngineClass = io.vertigo.dynamox.task.TaskEngineSelect.class)
+	@io.vertigo.datamodel.task.proxy.TaskOutput(smartType = "STyDtActor")
+	public io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.crystal.domain.Actor> getActorsByMovie(@io.vertigo.datamodel.task.proxy.TaskInput(name = "movId", smartType = "STyId") final Long movId) {
 		final Task task = createTaskBuilder("TkGetActorsByMovie")
 				.addValue("movId", movId)
 				.build();

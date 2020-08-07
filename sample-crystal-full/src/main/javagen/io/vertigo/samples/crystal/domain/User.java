@@ -3,9 +3,9 @@ package io.vertigo.samples.crystal.domain;
 import io.vertigo.core.lang.Generated;
 import io.vertigo.datamodel.structure.model.Entity;
 import io.vertigo.datamodel.structure.model.UID;
+import io.vertigo.datastore.impl.entitystore.StoreVAccessor;
 import io.vertigo.datamodel.structure.stereotype.Field;
 import io.vertigo.datamodel.structure.util.DtObjectUtil;
-import io.vertigo.datastore.impl.entitystore.StoreVAccessor;
 
 /**
  * This class is automatically generated.
@@ -61,7 +61,7 @@ public final class User implements Entity {
 	 * Récupère la valeur de la propriété 'Id'.
 	 * @return Long usrId <b>Obligatoire</b>
 	 */
-	@Field(smartType = "DoId", type = "ID", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Id")
+	@Field(smartType = "STyId", type = "ID", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Id")
 	public Long getUsrId() {
 		return usrId;
 	}
@@ -80,7 +80,7 @@ public final class User implements Entity {
 	 * Récupère la valeur de la propriété 'Login'.
 	 * @return String login
 	 */
-	@Field(smartType = "DoLabel", label = "Login")
+	@Field(smartType = "STyLabel", label = "Login")
 	public String getLogin() {
 		return login;
 	}
@@ -99,7 +99,7 @@ public final class User implements Entity {
 	 * Récupère la valeur de la propriété 'Nom'.
 	 * @return String name
 	 */
-	@Field(smartType = "DoLabel", label = "Nom")
+	@Field(smartType = "STyLabel", label = "Nom")
 	public String getName() {
 		return name;
 	}
@@ -118,7 +118,7 @@ public final class User implements Entity {
 	 * Récupère la valeur de la propriété 'email'.
 	 * @return String email
 	 */
-	@Field(smartType = "DoLabel", label = "email")
+	@Field(smartType = "STyLabel", label = "email")
 	public String getEmail() {
 		return email;
 	}
@@ -137,7 +137,7 @@ public final class User implements Entity {
 	 * Récupère la valeur de la propriété 'Country'.
 	 * @return Long couId
 	 */
-	@Field(smartType = "DoId", type = "FOREIGN_KEY", label = "Country")
+	@io.vertigo.datamodel.structure.stereotype.ForeignKey(smartType = "STyId", label = "Country", fkDefinition = "DtCountry" )
 	public Long getCouId() {
 		return (Long) couIdAccessor.getId();
 	}
@@ -156,7 +156,7 @@ public final class User implements Entity {
 	 * Récupère la valeur de la propriété 'Group'.
 	 * @return Long grpId
 	 */
-	@Field(smartType = "DoId", type = "FOREIGN_KEY", label = "Group")
+	@io.vertigo.datamodel.structure.stereotype.ForeignKey(smartType = "STyId", label = "Group", fkDefinition = "DtUserGroup" )
 	public Long getGrpId() {
 		return (Long) grpIdAccessor.getId();
 	}

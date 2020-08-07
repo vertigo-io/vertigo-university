@@ -2,7 +2,7 @@ package io.vertigo.samples.reprise;
 
 import javax.inject.Inject;
 
-import io.vertigo.core.node.Home;
+import io.vertigo.core.node.Node;
 import io.vertigo.core.lang.Assertion;
 import io.vertigo.core.lang.Generated;
 import io.vertigo.datamodel.task.TaskManager;
@@ -25,7 +25,7 @@ public final class ReprisePAO implements StoreServices {
 	 */
 	@Inject
 	public ReprisePAO(final TaskManager taskManager) {
-		Assertion.checkNotNull(taskManager);
+		Assertion.check().isNotNull(taskManager);
 		//-----
 		this.taskManager = taskManager;
 	}
@@ -36,12 +36,12 @@ public final class ReprisePAO implements StoreServices {
 	 * @return the builder 
 	 */
 	private static TaskBuilder createTaskBuilder(final String name) {
-		final TaskDefinition taskDefinition = Home.getApp().getDefinitionSpace().resolve(name, TaskDefinition.class);
+		final TaskDefinition taskDefinition = Node.getNode().getDefinitionSpace().resolve(name, TaskDefinition.class);
 		return Task.builder(taskDefinition);
 	}
 
 	/**
-	 * Execute la tache StTkCountActors.
+	 * Execute la tache TkCountActors.
 	 * @return Long count
 	*/
 	@io.vertigo.datamodel.task.proxy.TaskAnnotation(
@@ -58,7 +58,7 @@ public final class ReprisePAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache StTkCountMovies.
+	 * Execute la tache TkCountMovies.
 	 * @return Long count
 	*/
 	@io.vertigo.datamodel.task.proxy.TaskAnnotation(
@@ -76,7 +76,7 @@ public final class ReprisePAO implements StoreServices {
 	}
 
 	/**
-	 * Execute la tache StTkCountRoles.
+	 * Execute la tache TkCountRoles.
 	 * @return Long count
 	*/
 	@io.vertigo.datamodel.task.proxy.TaskAnnotation(

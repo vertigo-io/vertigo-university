@@ -16,17 +16,13 @@ create Association AUsrCou {
   fkFieldName : "couId"
     
  	dtDefinitionA : DtUser
-	dtDefinitionB : DtCountry
-			
-	navigabilityA : "false"
-	navigabilityB : "true"
-	
-	multiplicityA:"0..*"
-	multiplicityB:"0..1"
-	
-	labelA : "User"
-	labelB : "Country"
+ 	labelA : "User"
 	roleA : "User"
+ 	
+ 	type : "*>?"
+ 	
+	dtDefinitionB : DtCountry
+	labelB : "Country"
 	roleB : "Country"
 			
 }
@@ -35,17 +31,13 @@ create Association AUsrGrp {
   fkFieldName : "grpId"
     
  	dtDefinitionA : DtUser
-	dtDefinitionB : DtUserGroup
-			
-	navigabilityA : "false"
-	navigabilityB : "true"
-	
-	multiplicityA:"0..*"
-	multiplicityB:"0..1"
-	
-	labelA : "User"
-	labelB : "Group"
+ 	labelA : "User"
 	roleA : "User"
+ 	
+ 	type : "*>?"
+ 	
+	dtDefinitionB : DtUserGroup
+	labelB : "Group"
 	roleB : "Group"
 			
 }

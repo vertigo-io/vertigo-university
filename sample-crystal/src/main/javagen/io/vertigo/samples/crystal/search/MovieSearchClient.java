@@ -60,7 +60,6 @@ public final class MovieSearchClient implements Component, DefinitionProvider {
 				.withCriteria(criteria)
 				.withFacet(selectedFacetValues);
 	}
-
 	/**
 	 * Création d'une SearchQuery de type : MovieWithFacets.
 	 * @param criteria Critères de recherche

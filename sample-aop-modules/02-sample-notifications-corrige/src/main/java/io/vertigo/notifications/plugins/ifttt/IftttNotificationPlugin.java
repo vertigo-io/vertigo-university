@@ -44,11 +44,12 @@ public class IftttNotificationPlugin implements NotificationPlugin, Activeable {
 	@Inject
 	public IftttNotificationPlugin(@ParamValue("proxyHost") final Optional<String> proxyHost,
 			@ParamValue("proxyPort") final Optional<String> proxyPort) {
-		Assertion.checkNotNull(proxyHost);
-		Assertion.checkNotNull(proxyPort);
-		Assertion.checkArgument(
-				(proxyHost.isPresent() && proxyPort.isPresent()) || (!proxyHost.isPresent() && proxyPort.isPresent()),
-				"les deux paramètres host et port doivent être tous les deux remplis ou vides");
+		Assertion.check()
+				.isNotNull(proxyHost)
+				.isNotNull(proxyPort)
+				.isTrue(
+						(proxyHost.isPresent() && proxyPort.isPresent()) || (!proxyHost.isPresent() && proxyPort.isPresent()),
+						"les deux paramètres host et port doivent être tous les deux remplis ou vides");
 		// ----
 		if (proxyHost.isPresent()) {
 			System.setProperty("https.proxyHost", proxyHost.get()); // "172.20.0.9"

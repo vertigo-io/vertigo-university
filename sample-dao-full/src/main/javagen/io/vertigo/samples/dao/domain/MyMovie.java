@@ -14,7 +14,6 @@ import io.vertigo.datamodel.structure.util.DtObjectUtil;
  */
 @Generated
 @io.vertigo.datamodel.structure.stereotype.DataSpace("mine")
-@io.vertigo.datamodel.smarttype.annotations.Adapter(clazz = io.vertigo.datamodel.structure.util.JsonBasicAdapter.class, targetBasicType = io.vertigo.core.lang.BasicType.String)
 public final class MyMovie implements Entity {
 	private static final long serialVersionUID = 1L;
 
@@ -51,7 +50,7 @@ public final class MyMovie implements Entity {
 			foreignRole = "Role",
 			foreignLabel = "Role",
 			foreignMultiplicity = "0..*")
-	private final StoreListVAccessor<io.vertigo.samples.dao.domain.MyRole> roleAccessor = new StoreListVAccessor<>(this, "StAMrolMmov", "Role");
+	private final StoreListVAccessor<io.vertigo.samples.dao.domain.MyRole> roleAccessor = new StoreListVAccessor<>(this, "AMrolMmov", "Role");
 
 	/** {@inheritDoc} */
 	@Override

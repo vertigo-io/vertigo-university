@@ -2,15 +2,15 @@ package io.vertigo.samples.crystal.domain
 
 create DtDefinition DtCountry {
   id couId {domain: DoId label: "Id" }
-  field name {domain: DoLabel label: "Nom du pays" cardinality:"?"}
+  field name {domain: DoLabel label: "Nom du pays" }
 }
 
 create DtDefinition DtMovie {
   stereotype : "KeyConcept"
   id movId {domain: DoId label: "Id" }
   field name {domain: DoLabelLong label: "Titre du film" cardinality:"1"}
-  field year {domain: DoYear label: "Année" cardinality:"?"}
-  field imdbid {domain: DoLabel label: "Id Imdb" cardinality:"?"}
+  field year {domain: DoYear label: "Année" }
+  field imdbid {domain: DoLabel label: "Id Imdb" }
 }
 
 create DtDefinition DtActor {
@@ -33,37 +33,31 @@ create Association AMovCou {
   fkFieldName : "couId"
     
  	dtDefinitionA : DtMovie
+ 	labelA : "Movie"
+ 	roleA : "Movie"
+ 	
+ 	type : "*>?"
+ 	
 	dtDefinitionB : DtCountry
-			
-	navigabilityA : "false"
-	navigabilityB : "true"
-	
-	multiplicityA:"0..*"
-	multiplicityB:"0..1"
-	
-	labelA : "Movie"
 	labelB : "Country"
-	roleA : "Movie"
 	roleB : "Country"
-			
+		
 }
 
 create Association ARolMov {
   fkFieldName : "movId"
     
  	dtDefinitionA : DtRole
-	dtDefinitionB : DtMovie
-			
-	navigabilityA : "true"
-	navigabilityB : "false"
-	
-	multiplicityA:"0..*"
-	multiplicityB:"0..1"
-	
-	labelA : "Role"
-	labelB : "Movie"
+ 	labelA : "Role"
 	roleA : "Role"
-	roleB : "Movie"
+	multiplicityA:"0..*"
+	navigabilityA : "true"
+
+	dtDefinitionB : DtMovie
+	labelB : "Movie"
+	roleB : "Movie"		
+	multiplicityB:"0..1"
+	navigabilityB : "false"
 			
 }
 
@@ -72,17 +66,13 @@ create Association ARolAct {
   fkFieldName : "actId"
     
  	dtDefinitionA : DtRole
-	dtDefinitionB : DtActor
-			
-	navigabilityA : "false"
-	navigabilityB : "true"
-	
-	multiplicityA:"0..*"
-	multiplicityB:"0..1"
-	
-	labelA : "Role"
-	labelB : "Actor"
+ 	labelA : "Role"
 	roleA : "Role"
+ 	
+ 	type : "*>?"
+ 	
+	dtDefinitionB : DtActor
+	labelB : "Actor"
 	roleB : "Actor"
 			
 }
@@ -91,17 +81,13 @@ create Association AActSex {
   fkFieldName : "sexCd"
     
  	dtDefinitionA : DtActor
-	dtDefinitionB : DtSexe
-			
-	navigabilityA : "false"
-	navigabilityB : "true"
-	
-	multiplicityA:"0..*"
-	multiplicityB:"0..1"
-	
 	labelA : "Actor"
-	labelB : "Sexe"
 	roleA : "Actor"
+ 	
+ 	type : "*>?"
+ 	
+	dtDefinitionB : DtSexe
+	labelB : "Sexe"
 	roleB : "Sexe"
 			
 }

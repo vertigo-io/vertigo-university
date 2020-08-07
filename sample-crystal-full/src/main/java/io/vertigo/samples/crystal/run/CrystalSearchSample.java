@@ -1,6 +1,6 @@
 package io.vertigo.samples.crystal.run;
 
-import io.vertigo.core.node.AutoCloseableApp;
+import io.vertigo.core.node.AutoCloseableNode;
 import io.vertigo.core.node.config.ModuleConfig;
 import io.vertigo.core.node.config.NodeConfigBuilder;
 import io.vertigo.core.util.InjectorUtil;
@@ -28,7 +28,7 @@ public class CrystalSearchSample {
 						.build())
 				.addModule(defaultSampleModule());
 
-		try (final AutoCloseableApp app = new AutoCloseableApp(nodeConfigBuilder.build())) {
+		try (final AutoCloseableNode node = new AutoCloseableNode(nodeConfigBuilder.build())) {
 			final CrystalSearchSample sample = new CrystalSearchSample();
 			InjectorUtil.injectMembers(sample);
 			//-----
