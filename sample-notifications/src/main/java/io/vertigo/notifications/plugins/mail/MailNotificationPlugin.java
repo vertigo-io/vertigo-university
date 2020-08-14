@@ -2,9 +2,9 @@ package io.vertigo.notifications.plugins.mail;
 
 import javax.inject.Inject;
 
-import io.vertigo.mail.Mail;
-import io.vertigo.mail.MailManager;
 import io.vertigo.notifications.impl.NotificationPlugin;
+import io.vertigo.social.mail.Mail;
+import io.vertigo.social.mail.MailManager;
 
 /**
  *

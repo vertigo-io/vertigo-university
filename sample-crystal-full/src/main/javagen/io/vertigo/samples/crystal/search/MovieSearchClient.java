@@ -159,14 +159,14 @@ public final class MovieSearchClient implements Component, DefinitionProvider {
 				// FacetedQueryDefinition
 				//-----
 				.add(new FacetedQueryDefinitionSupplier("QryMovie")
-						.withListFilterBuilderClass(io.vertigo.dynamox.search.DslListFilterBuilder.class)
+						.withListFilterBuilderClass(io.vertigo.datafactory.impl.search.dsl.DslListFilterBuilder.class)
 						.withListFilterBuilderQuery("_all:#+query*#")
 						.withCriteriaSmartType("STyLabel"))
 				.add(new FacetedQueryDefinitionSupplier("QryMovieWithFacets")
 						.withFacet("FctMovieName")
 						.withFacet("FctMovieYear")
 						.withFacet("FctMovieCountry")
-						.withListFilterBuilderClass(io.vertigo.dynamox.search.DslListFilterBuilder.class)
+						.withListFilterBuilderClass(io.vertigo.datafactory.impl.search.dsl.DslListFilterBuilder.class)
 						.withListFilterBuilderQuery("_all:#+query*#")
 						.withCriteriaSmartType("STyLabel"))
 				.build();

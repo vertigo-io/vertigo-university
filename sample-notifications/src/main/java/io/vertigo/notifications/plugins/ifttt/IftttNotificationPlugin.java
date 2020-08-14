@@ -22,10 +22,10 @@ import javax.ws.rs.core.Response.Status.Family;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import io.vertigo.core.component.Activeable;
-import io.vertigo.lang.Assertion;
-import io.vertigo.lang.VSystemException;
-import io.vertigo.lang.WrappedException;
+import io.vertigo.core.lang.Assertion;
+import io.vertigo.core.lang.VSystemException;
+import io.vertigo.core.lang.WrappedException;
+import io.vertigo.core.node.component.Activeable;
 import io.vertigo.notifications.impl.NotificationPlugin;
 
 /**
@@ -44,11 +44,10 @@ public class IftttNotificationPlugin implements NotificationPlugin, Activeable {
 	@Inject
 	public IftttNotificationPlugin(@Named("proxyHost") final Optional<String> proxyHost,
 			@Named("proxyPort") final Optional<String> proxyPort) {
-		Assertion.checkNotNull(proxyHost);
-		Assertion.checkNotNull(proxyPort);
-		Assertion.checkArgument(
-				(proxyHost.isPresent() && proxyPort.isPresent()) || (!proxyHost.isPresent() && proxyPort.isPresent()),
-				"les deux paramètres host et port doivent être tous les deux remplis ou vides");
+		Assertion.check().isNotNull(proxyHost)
+				.isNotNull(proxyPort)
+				.isTrue((proxyHost.isPresent() && proxyPort.isPresent()) || (!proxyHost.isPresent() && !proxyPort.isPresent()),
+						"les deux paramètres host et port doivent être tous les deux remplis ou vides");
 		// ----
 		if (proxyHost.isPresent()) {
 			System.setProperty("https.proxyHost", proxyHost.get()); // "172.20.0.9"

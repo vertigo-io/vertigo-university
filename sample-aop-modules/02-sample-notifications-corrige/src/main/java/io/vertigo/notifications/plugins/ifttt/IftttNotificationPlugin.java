@@ -48,7 +48,7 @@ public class IftttNotificationPlugin implements NotificationPlugin, Activeable {
 				.isNotNull(proxyHost)
 				.isNotNull(proxyPort)
 				.isTrue(
-						(proxyHost.isPresent() && proxyPort.isPresent()) || (!proxyHost.isPresent() && proxyPort.isPresent()),
+						(proxyHost.isPresent() && proxyPort.isPresent()) || (!proxyHost.isPresent() && !proxyPort.isPresent()),
 						"les deux paramètres host et port doivent être tous les deux remplis ou vides");
 		// ----
 		if (proxyHost.isPresent()) {

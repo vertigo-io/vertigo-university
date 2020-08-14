@@ -80,7 +80,7 @@
 	   	<dependency>
 		    <groupId>org.codelibs.elasticsearch.module</groupId>
 		    <artifactId>mapper-extras</artifactId>
-		    <version>7.4.1</version> <!-- required by ESEmbeddedSearchServicesPlugin -->
+		    <version>7.8.1</version> <!-- required by ESEmbeddedSearchServicesPlugin -->
 		</dependency>
 		
 	</dependencies>
