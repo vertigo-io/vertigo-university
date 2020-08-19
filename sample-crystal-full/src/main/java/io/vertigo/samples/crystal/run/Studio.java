@@ -10,7 +10,7 @@ public class Studio {
 
 	public static void main(final String[] args) {
 		try {
-			VertigoStudioMda.main(new String[] { "generate", Paths.get("studio-config.json").toUri().toURL().toExternalForm() });
+			VertigoStudioMda.main(new String[] { "generate", Paths.get("studio-config.yaml").toUri().toURL().toExternalForm() });
 		} catch (final MalformedURLException e) {
 			throw WrappedException.wrap(e);
 		}

@@ -25,8 +25,8 @@ import io.vertigo.datafactory.search.model.SearchQuery;
 import io.vertigo.datafactory.search.model.SearchQueryBuilder;
 import io.vertigo.datamodel.structure.model.DtListState;
 import io.vertigo.datamodel.structure.model.UID;
-import io.vertigo.samples.crystal.domain.Movie;
 import io.vertigo.samples.crystal.domain.MovieIndex;
+import io.vertigo.samples.crystal.domain.Movie;
 
 /**
  * This class is automatically generated.
@@ -60,7 +60,6 @@ public final class MovieSearchClient implements Component, DefinitionProvider {
 				.withCriteria(criteria)
 				.withFacet(selectedFacetValues);
 	}
-
 	/**
 	 * Création d'une SearchQuery de type : MovieWithFacets.
 	 * @param criteria Critères de recherche
