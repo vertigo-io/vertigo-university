@@ -15,7 +15,7 @@ import io.vertigo.core.lang.WrappedException;
 import io.vertigo.core.node.AutoCloseableNode;
 import io.vertigo.core.resource.ResourceManager;
 import io.vertigo.core.util.InjectorUtil;
-import io.vertigo.database.sql.SqlDataBaseManager;
+import io.vertigo.database.sql.SqlManager;
 import io.vertigo.database.sql.connection.SqlConnection;
 import io.vertigo.database.sql.statement.SqlStatement;
 import io.vertigo.samples.account.config.SampleConfigBuilder;
@@ -25,7 +25,7 @@ public class CreateDatabase {
 	@Inject
 	private ResourceManager resourceManager;
 	@Inject
-	private SqlDataBaseManager sqlDataBaseManager;
+	private SqlManager sqlManager;
 
 	public static void main(final String[] args) {
 		try (final AutoCloseableNode node = new AutoCloseableNode(SampleConfigBuilder.createNodeConfigBuilder().build())) {
@@ -40,13 +40,13 @@ public class CreateDatabase {
 
 	private void createDataBase() {
 		SqlConnection connection;
-		connection = sqlDataBaseManager.getConnectionProvider(SqlDataBaseManager.MAIN_CONNECTION_PROVIDER_NAME).obtainConnection();
+		connection = sqlManager.getConnectionProvider(SqlManager.MAIN_CONNECTION_PROVIDER_NAME).obtainConnection();
 		execSqlScript(connection, "sqlgen/crebas.sql");
 	}
 
 	private void initData() {
 		SqlConnection connection;
-		connection = sqlDataBaseManager.getConnectionProvider(SqlDataBaseManager.MAIN_CONNECTION_PROVIDER_NAME).obtainConnection();
+		connection = sqlManager.getConnectionProvider(SqlManager.MAIN_CONNECTION_PROVIDER_NAME).obtainConnection();
 		execSqlScript(connection, "sql/initdata.sql");
 	}
 
@@ -61,7 +61,7 @@ public class CreateDatabase {
 					crebaseSql.append(adaptedInputLine).append('\n');
 				}
 				if (inputLine.trim().endsWith(";")) {
-					execPreparedStatement(connection, sqlDataBaseManager, crebaseSql.toString());
+					execPreparedStatement(connection, sqlManager, crebaseSql.toString());
 					crebaseSql.setLength(0);
 				}
 			}
@@ -71,9 +71,9 @@ public class CreateDatabase {
 		}
 	}
 
-	private static void execPreparedStatement(final SqlConnection connection, final SqlDataBaseManager sqlDataBaseManager, final String sql) {
+	private static void execPreparedStatement(final SqlConnection connection, final SqlManager sqlManager, final String sql) {
 		try {
-			sqlDataBaseManager
+			sqlManager
 					.executeUpdate(SqlStatement.builder(sql).build(), Collections.emptyMap(), connection);
 		} catch (final SQLException e) {
 			throw WrappedException.wrap(e, "Can't exec command {0}", sql);
