@@ -3,6 +3,7 @@ package io.vertigo.samples.crystal.config;
 import io.vertigo.account.AccountFeatures;
 import io.vertigo.commons.CommonsFeatures;
 import io.vertigo.connectors.elasticsearch.ElasticSearchFeatures;
+import io.vertigo.connectors.javalin.JavalinFeatures;
 import io.vertigo.core.node.config.BootConfig;
 import io.vertigo.core.node.config.DefinitionProviderConfig;
 import io.vertigo.core.node.config.ModuleConfig;
@@ -31,6 +32,7 @@ public class SampleConfigBuilder {
 						.addPlugin(ClassPathResourceResolverPlugin.class)
 						.addPlugin(LocalResourceResolverPlugin.class)
 						.build())
+				.addModule(new JavalinFeatures().withEmbeddedServer(Param.of("port", "8081")).build())
 				.addModule(new CommonsFeatures()
 						.withScript()
 						.withJaninoScript()
@@ -73,7 +75,7 @@ public class SampleConfigBuilder {
 		if (withVega) {
 			nodeConfigBuilder.addModule(new VegaFeatures()
 					.withWebServices()
-					.withWebServicesEmbeddedServer(Param.of("port", "8081"))
+					.withJavalinWebServerPlugin()
 					.build());
 		}
 

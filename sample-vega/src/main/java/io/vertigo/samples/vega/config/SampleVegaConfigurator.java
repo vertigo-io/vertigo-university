@@ -2,6 +2,7 @@ package io.vertigo.samples.vega.config;
 
 import io.vertigo.account.AccountFeatures;
 import io.vertigo.commons.CommonsFeatures;
+import io.vertigo.connectors.javalin.JavalinFeatures;
 import io.vertigo.core.node.config.BootConfig;
 import io.vertigo.core.node.config.DefinitionProviderConfig;
 import io.vertigo.core.node.config.ModuleConfig;
@@ -24,6 +25,7 @@ public final class SampleVegaConfigurator {
 				.withBoot(BootConfig.builder()
 						.withLocales(locales)
 						.build())
+				.addModule(new JavalinFeatures().withEmbeddedServer(Param.of("port", port)).build())
 				.addModule(new CommonsFeatures().build())
 				.addModule(new DataStoreFeatures().build())
 				.addModule(new AccountFeatures()
@@ -35,7 +37,7 @@ public final class SampleVegaConfigurator {
 						.build())
 				.addModule(new VegaFeatures()
 						.withWebServices()
-						.withWebServicesEmbeddedServer(Param.of("port", Integer.toString(port)))
+						.withJavalinWebServerPlugin()
 						.withWebServicesTokens(Param.of("tokens", "security-token"))
 						.build())
 				//-----Declaration of a module named 'Vega' which contains a webservice component.
