@@ -1,7 +1,7 @@
 package io.vertigo.samples.account.authorization;
 
-import io.vertigo.account.authorization.metamodel.Authorization;
-import io.vertigo.account.authorization.metamodel.AuthorizationName;
+import io.vertigo.account.authorization.definitions.Authorization;
+import io.vertigo.account.authorization.definitions.AuthorizationName;
 import io.vertigo.core.node.Node;
 
 /**

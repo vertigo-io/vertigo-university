@@ -1,8 +1,8 @@
 package io.vertigo.samples.crystal.authorization;
 
-import io.vertigo.account.authorization.metamodel.Authorization;
-import io.vertigo.account.authorization.metamodel.AuthorizationName;
-import io.vertigo.account.authorization.metamodel.OperationName;
+import io.vertigo.account.authorization.definitions.Authorization;
+import io.vertigo.account.authorization.definitions.AuthorizationName;
+import io.vertigo.account.authorization.definitions.OperationName;
 import io.vertigo.core.node.Node;
 import io.vertigo.samples.crystal.domain.Movie;
 

@@ -4,7 +4,7 @@ import javax.inject.Inject;
 
 import io.vertigo.core.lang.Generated;
 import io.vertigo.core.node.Node;
-import io.vertigo.datamodel.task.metamodel.TaskDefinition;
+import io.vertigo.datamodel.task.definitions.TaskDefinition;
 import io.vertigo.datamodel.task.model.Task;
 import io.vertigo.datamodel.task.model.TaskBuilder;
 import io.vertigo.datamodel.structure.model.UID;

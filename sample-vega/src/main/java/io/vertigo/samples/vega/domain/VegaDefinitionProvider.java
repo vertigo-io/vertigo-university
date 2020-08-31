@@ -2,14 +2,14 @@ package io.vertigo.samples.vega.domain;
 
 import java.util.List;
 
-import io.vertigo.core.lang.Cardinality;
 import io.vertigo.core.lang.BasicType;
+import io.vertigo.core.lang.Cardinality;
 import io.vertigo.core.node.definition.Definition;
 import io.vertigo.core.node.definition.DefinitionSpace;
 import io.vertigo.core.node.definition.SimpleDefinitionProvider;
 import io.vertigo.core.util.ListBuilder;
-import io.vertigo.datamodel.smarttype.SmartTypeDefinition;
-import io.vertigo.datamodel.structure.metamodel.DtDefinition;
+import io.vertigo.datamodel.smarttype.definitions.SmartTypeDefinition;
+import io.vertigo.datamodel.structure.definitions.DtDefinition;
 
 public final class VegaDefinitionProvider implements SimpleDefinitionProvider {
 

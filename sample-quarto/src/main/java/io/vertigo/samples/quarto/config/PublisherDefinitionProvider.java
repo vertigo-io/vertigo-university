@@ -24,9 +24,9 @@ import io.vertigo.core.node.definition.Definition;
 import io.vertigo.core.node.definition.DefinitionSpace;
 import io.vertigo.core.node.definition.SimpleDefinitionProvider;
 import io.vertigo.core.util.ListBuilder;
-import io.vertigo.quarto.publisher.metamodel.PublisherDataDefinition;
-import io.vertigo.quarto.publisher.metamodel.PublisherNodeDefinition;
-import io.vertigo.quarto.publisher.metamodel.PublisherNodeDefinitionBuilder;
+import io.vertigo.quarto.publisher.definitions.PublisherDataDefinition;
+import io.vertigo.quarto.publisher.definitions.PublisherNodeDefinition;
+import io.vertigo.quarto.publisher.definitions.PublisherNodeDefinitionBuilder;
 
 public final class PublisherDefinitionProvider implements SimpleDefinitionProvider {
 

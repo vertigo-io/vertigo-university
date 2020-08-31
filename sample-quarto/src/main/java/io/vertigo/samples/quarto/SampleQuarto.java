@@ -11,7 +11,7 @@ import io.vertigo.datastore.filestore.model.VFile;
 import io.vertigo.datastore.filestore.util.FileUtil;
 import io.vertigo.quarto.impl.publisher.PublisherDataUtil;
 import io.vertigo.quarto.publisher.PublisherManager;
-import io.vertigo.quarto.publisher.metamodel.PublisherDataDefinition;
+import io.vertigo.quarto.publisher.definitions.PublisherDataDefinition;
 import io.vertigo.quarto.publisher.model.PublisherData;
 import io.vertigo.quarto.publisher.model.PublisherNode;
 import io.vertigo.samples.quarto.config.SampleQuartoConfigBuilder;
