@@ -7,6 +7,7 @@ import javax.inject.Inject;
 
 import io.vertigo.commons.transaction.VTransactionManager;
 import io.vertigo.core.node.component.Activeable;
+import io.vertigo.datafactory.impl.search.loader.AbstractSqlSearchLoader;
 import io.vertigo.datafactory.search.SearchManager;
 import io.vertigo.datafactory.search.definitions.SearchChunk;
 import io.vertigo.datafactory.search.definitions.SearchIndexDefinition;
@@ -14,7 +15,6 @@ import io.vertigo.datafactory.search.model.SearchIndex;
 import io.vertigo.datamodel.structure.model.DtList;
 import io.vertigo.datamodel.structure.model.UID;
 import io.vertigo.datamodel.task.TaskManager;
-import io.vertigo.dynamox.search.AbstractSqlSearchLoader;
 import io.vertigo.samples.crystal.domain.Movie;
 import io.vertigo.samples.crystal.domain.MovieIndex;
 
