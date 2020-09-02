@@ -1,12 +1,13 @@
 package io.vertigo.samples.quarto.config;
 
-import io.vertigo.datamodel.smarttype.annotations.FormatterDefault;
+import io.vertigo.basics.formatter.FormatterDefault;
+import io.vertigo.datamodel.smarttype.annotations.Formatter;
 import io.vertigo.datamodel.smarttype.annotations.SmartTypeDefinition;
 
 public enum SampleQuartoSmartTypes {
 
 	@SmartTypeDefinition(String.class)
-	@FormatterDefault
+	@Formatter(clazz = FormatterDefault.class)
 	Text,
 
 }

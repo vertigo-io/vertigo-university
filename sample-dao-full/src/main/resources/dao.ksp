@@ -1,7 +1,7 @@
 package io.vertigo.samples
 
 create Task TkGetMoviesByCriteria {
-    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+    className : "io.vertigo.basics.task.TaskEngineSelect"
         request : "
         	select mov.*
         	from movie mov
@@ -20,7 +20,7 @@ create Task TkGetMoviesByCriteria {
 }
 
 create Task TkGetMoviesByCriteriaWithCountry {
-    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+    className : "io.vertigo.basics.task.TaskEngineSelect"
         request : "
         	select mov.*
         	from movie mov
@@ -44,7 +44,7 @@ create Task TkGetMoviesByCriteriaWithCountry {
 
 
 create Task TkGetActorsInMovie {
-    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+    className : "io.vertigo.basics.task.TaskEngineSelect"
         request : "
         	select act.*
         	from role rol
@@ -57,7 +57,7 @@ create Task TkGetActorsInMovie {
 
 
 create Task TkGetMoviesWith100Actors {
-    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+    className : "io.vertigo.basics.task.TaskEngineSelect"
         request : "
         	select mov.*
 			from movie mov
@@ -69,7 +69,7 @@ create Task TkGetMoviesWith100Actors {
 
 
 create Task TkGetMovieDisplay {
-    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+    className : "io.vertigo.basics.task.TaskEngineSelect"
         request : "
 		select mov.NAME,mov.YEAR, cou.NAME as COUNTRY, hv.CNT as ACTORS_COUNT
 		from movie mov
@@ -82,7 +82,7 @@ create Task TkGetMovieDisplay {
 }
 
 create Task TkGetMovieByYear {
-    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+    className : "io.vertigo.basics.task.TaskEngineSelect"
         request : "
 		select YEAR, count(*) as MOVIES_COUNT from movie where YEAR is not null group by year order by YEAR asc
 			"

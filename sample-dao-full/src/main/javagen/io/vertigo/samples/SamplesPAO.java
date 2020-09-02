@@ -47,7 +47,7 @@ public final class SamplesPAO implements StoreServices {
 	@io.vertigo.datamodel.task.proxy.TaskAnnotation(
 			name = "TkGetMovieByYear",
 			request = "select YEAR, count(*) as MOVIES_COUNT from movie where YEAR is not null group by year order by YEAR asc",
-			taskEngineClass = io.vertigo.dynamox.task.TaskEngineSelect.class)
+			taskEngineClass = io.vertigo.basics.task.TaskEngineSelect.class)
 	@io.vertigo.datamodel.task.proxy.TaskOutput(smartType = "STyDtMovieByYear")
 	public io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.dao.domain.MovieByYear> getMovieByYear() {
 		final Task task = createTaskBuilder("TkGetMovieByYear")
@@ -69,7 +69,7 @@ public final class SamplesPAO implements StoreServices {
  "		join (select MOV_ID, count(*) cnt from role group by mov_id ) hv on hv.MOV_ID = mov.MOV_ID" + 
  "		where mov.YEAR > 2010" + 
  "		limit 500",
-			taskEngineClass = io.vertigo.dynamox.task.TaskEngineSelect.class)
+			taskEngineClass = io.vertigo.basics.task.TaskEngineSelect.class)
 	@io.vertigo.datamodel.task.proxy.TaskOutput(smartType = "STyDtMovieDisplay")
 	public io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.dao.domain.MovieDisplay> getMovieDisplay() {
 		final Task task = createTaskBuilder("TkGetMovieDisplay")

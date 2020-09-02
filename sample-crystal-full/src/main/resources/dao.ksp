@@ -1,7 +1,7 @@
 package io.vertigo.samples
 
 create Task TkGetActorsIdsByMovie {
-    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+    className : "io.vertigo.basics.task.TaskEngineSelect"
         request : "
         	select act.act_id 
 			from role rol
@@ -14,7 +14,7 @@ create Task TkGetActorsIdsByMovie {
 }
 
 create Task TkGetActorsByMovie {
-    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+    className : "io.vertigo.basics.task.TaskEngineSelect"
         request : "
         	select act.*
 			from role rol
@@ -28,7 +28,7 @@ create Task TkGetActorsByMovie {
 
 
 create Task TkGetMoviesInCountries {
-    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+    className : "io.vertigo.basics.task.TaskEngineSelect"
         request : "
         	select * 
         	from movie 

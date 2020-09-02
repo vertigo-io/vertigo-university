@@ -2,7 +2,7 @@ package io.vertigo.samples.reprise
 
 create Task TkInsertCountriesBatch {
 	storeName : "mine"
-    className : "io.vertigo.dynamox.task.TaskEngineProcBatch"
+    className : "io.vertigo.basics.task.TaskEngineProcBatch"
         request : "
         	INSERT INTO MY_COUNTRY (COU_ID, NAME) values (#countryList.couId#, #countryList.name#) 
 			"
@@ -11,7 +11,7 @@ create Task TkInsertCountriesBatch {
 
 
 create Task TkLoadCountries {
-    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+    className : "io.vertigo.basics.task.TaskEngineSelect"
         request : "
         	select * from COUNTRY
 			"
@@ -19,7 +19,7 @@ create Task TkLoadCountries {
 }
 
 create Task TkCountActors {
-    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+    className : "io.vertigo.basics.task.TaskEngineSelect"
         request : "
         	select count(*) from ACTOR
 			"
@@ -28,7 +28,7 @@ create Task TkCountActors {
 
 create Task TkInsertActorsBatch {
 	storeName : "mine"
-    className : "io.vertigo.dynamox.task.TaskEngineProcBatch"
+    className : "io.vertigo.basics.task.TaskEngineProcBatch"
         request : "
         	INSERT INTO MY_ACTOR (ACT_ID, NAME, SEXE) values (#actorsList.actId#, #actorsList.name#, #actorsList.sexe#) 
 			"
@@ -37,7 +37,7 @@ create Task TkInsertActorsBatch {
 
 
 create Task TkLoadActorsByChunk {
-    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+    className : "io.vertigo.basics.task.TaskEngineSelect"
         request : "
         	select * from ACTOR
 			where ACT_ID > #offset#
@@ -51,7 +51,7 @@ create Task TkLoadActorsByChunk {
 
 
 create Task TkCountMovies {
-    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+    className : "io.vertigo.basics.task.TaskEngineSelect"
         request : "
         	select count(*) from MOVIE
         	where NAME like 'S%%'
@@ -61,7 +61,7 @@ create Task TkCountMovies {
 
 create Task TkInsertMoviesBatch {
 	storeName : "mine"
-    className : "io.vertigo.dynamox.task.TaskEngineProcBatch"
+    className : "io.vertigo.basics.task.TaskEngineProcBatch"
         request : "
         	INSERT INTO MY_MOVIE (MOV_ID, NAME, YEAR, IMDBID, COU_ID) values (#moviesList.movId#, #moviesList.name#, #moviesList.year#, #moviesList.imdbid#, #moviesList.couId#) 
 			"
@@ -70,7 +70,7 @@ create Task TkInsertMoviesBatch {
 
 
 create Task TkLoadMoviesByChunk {
-    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+    className : "io.vertigo.basics.task.TaskEngineSelect"
         request : "
         	select * from movie
         	where MOV_ID > #offset#
@@ -84,7 +84,7 @@ create Task TkLoadMoviesByChunk {
 
 
 create Task TkCountRoles {
-    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+    className : "io.vertigo.basics.task.TaskEngineSelect"
         request : "
         	select count(*) from ROLE rol
         	join movie mov on mov.MOV_ID = rol.MOV_ID
@@ -95,7 +95,7 @@ create Task TkCountRoles {
 
 create Task TkInsertRolesBatch {
 	storeName : "mine"
-    className : "io.vertigo.dynamox.task.TaskEngineProcBatch"
+    className : "io.vertigo.basics.task.TaskEngineProcBatch"
         request : "
         	INSERT INTO MY_ROLE (ROL_ID, MOV_ID, ACT_ID, AS_CHARACTER) values (#rolesList.rolId#, #rolesList.movId#, #rolesList.actId#, #rolesList.asCharacter#) 
 			"
@@ -104,7 +104,7 @@ create Task TkInsertRolesBatch {
 
 
 create Task TkLoadRolesByChunk {
-    className : "io.vertigo.dynamox.task.TaskEngineSelect"
+    className : "io.vertigo.basics.task.TaskEngineSelect"
         request : "
         	select rol.* from role rol
         	where ROL_ID > #offset#

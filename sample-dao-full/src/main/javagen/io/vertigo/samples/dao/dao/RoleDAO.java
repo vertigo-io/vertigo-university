@@ -51,7 +51,7 @@ public final class RoleDAO extends DAO<Role, java.lang.Long> implements StoreSer
 			dataSpace = "mine",
 			name = "TkInsertRolesBatch",
 			request = "INSERT INTO MY_ROLE (ROL_ID, MOV_ID, ACT_ID, AS_CHARACTER) values (#rolesList.rolId#, #rolesList.movId#, #rolesList.actId#, #rolesList.asCharacter#)",
-			taskEngineClass = io.vertigo.dynamox.task.TaskEngineProcBatch.class)
+			taskEngineClass = io.vertigo.basics.task.TaskEngineProcBatch.class)
 	public void insertRolesBatch(@io.vertigo.datamodel.task.proxy.TaskInput(name = "rolesList", smartType = "STyDtRole") final io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.dao.domain.Role> rolesList) {
 		final Task task = createTaskBuilder("TkInsertRolesBatch")
 				.addValue("rolesList", rolesList)
@@ -71,7 +71,7 @@ public final class RoleDAO extends DAO<Role, java.lang.Long> implements StoreSer
  "        	where ROL_ID > #offset#" + 
  "        	order by rol.ROL_ID asc" + 
  "        	limit #limit#",
-			taskEngineClass = io.vertigo.dynamox.task.TaskEngineSelect.class)
+			taskEngineClass = io.vertigo.basics.task.TaskEngineSelect.class)
 	@io.vertigo.datamodel.task.proxy.TaskOutput(smartType = "STyDtRole")
 	public io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.dao.domain.Role> loadRolesByChunk(@io.vertigo.datamodel.task.proxy.TaskInput(name = "limit", smartType = "STyId") final Long limit, @io.vertigo.datamodel.task.proxy.TaskInput(name = "offset", smartType = "STyId") final Long offset) {
 		final Task task = createTaskBuilder("TkLoadRolesByChunk")
