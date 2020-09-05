@@ -77,6 +77,7 @@ public final class ActorDAO extends DAO<Actor, java.lang.Long> implements StoreS
 	public void insertActorsBatch(@io.vertigo.datamodel.task.proxy.TaskInput(name = "actorsList", smartType = "STyDtActor") final io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.dao.domain.Actor> actorsList) {
 		final Task task = createTaskBuilder("TkInsertActorsBatch")
 				.addValue("actorsList", actorsList)
+				.addContextProperty("connectionName", io.vertigo.datastore.impl.dao.StoreUtil.getConnectionName("mine"))
 				.build();
 		getTaskManager().execute(task);
 	}

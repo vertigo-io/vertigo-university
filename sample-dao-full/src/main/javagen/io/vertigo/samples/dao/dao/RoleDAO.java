@@ -55,6 +55,7 @@ public final class RoleDAO extends DAO<Role, java.lang.Long> implements StoreSer
 	public void insertRolesBatch(@io.vertigo.datamodel.task.proxy.TaskInput(name = "rolesList", smartType = "STyDtRole") final io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.dao.domain.Role> rolesList) {
 		final Task task = createTaskBuilder("TkInsertRolesBatch")
 				.addValue("rolesList", rolesList)
+				.addContextProperty("connectionName", io.vertigo.datastore.impl.dao.StoreUtil.getConnectionName("mine"))
 				.build();
 		getTaskManager().execute(task);
 	}

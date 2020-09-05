@@ -77,6 +77,7 @@ public class SampleConfigBuilder {
 				.addModule(new VegaFeatures()
 						.withWebServices()
 						.withWebServicesSecurity()
+						.withJavalinWebServerPlugin()
 						.build());
 
 		return nodeConfigBuilder;

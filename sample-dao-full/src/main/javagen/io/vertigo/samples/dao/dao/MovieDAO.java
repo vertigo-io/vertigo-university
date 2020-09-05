@@ -141,6 +141,7 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	public void insertMoviesBatch(@io.vertigo.datamodel.task.proxy.TaskInput(name = "moviesList", smartType = "STyDtMovie") final io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.dao.domain.Movie> moviesList) {
 		final Task task = createTaskBuilder("TkInsertMoviesBatch")
 				.addValue("moviesList", moviesList)
+				.addContextProperty("connectionName", io.vertigo.datastore.impl.dao.StoreUtil.getConnectionName("mine"))
 				.build();
 		getTaskManager().execute(task);
 	}

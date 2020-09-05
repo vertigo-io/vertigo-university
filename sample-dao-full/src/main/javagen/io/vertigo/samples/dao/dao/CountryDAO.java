@@ -55,6 +55,7 @@ public final class CountryDAO extends DAO<Country, java.lang.Long> implements St
 	public void insertCountriesBatch(@io.vertigo.datamodel.task.proxy.TaskInput(name = "countryList", smartType = "STyDtCountry") final io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.dao.domain.Country> countryList) {
 		final Task task = createTaskBuilder("TkInsertCountriesBatch")
 				.addValue("countryList", countryList)
+				.addContextProperty("connectionName", io.vertigo.datastore.impl.dao.StoreUtil.getConnectionName("mine"))
 				.build();
 		getTaskManager().execute(task);
 	}
