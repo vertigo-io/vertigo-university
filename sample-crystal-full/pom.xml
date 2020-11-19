@@ -18,12 +18,12 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<version>1.4.199</version>
+			<version>1.4.200</version>
 		</dependency>
 		<dependency>
 			<groupId>com.mchange</groupId>
 			<artifactId>c3p0</artifactId>
-			<version>0.9.5.4</version>
+			<version>0.9.5.5</version>
 		</dependency>
 
 		<dependency>
@@ -66,22 +66,22 @@
 		<dependency>
 		    <groupId>org.elasticsearch.client</groupId>
 		    <artifactId>transport</artifactId>
-		    <version>7.9.0</version> <!-- TransportSearchServicesPlugin -->
+		    <version>7.9.3</version> <!-- TransportSearchServicesPlugin -->
 		</dependency>
 		<dependency>
 		    <groupId>org.elasticsearch.client</groupId>
 		    <artifactId>elasticsearch-rest-high-level-client</artifactId>
-		    <version>7.9.0</version> <!-- REstHighLevelElasticSearchConnector -->
+		    <version>7.9.3</version> <!-- REstHighLevelElasticSearchConnector -->
 		</dependency>
 		<dependency>
 	        <groupId>org.codelibs.elasticsearch.module</groupId>
 	        <artifactId>analysis-common</artifactId> 
-	        <version>7.9.0</version> <!-- required by EmbeddedSearchServicesPlugin -->
+	        <version>7.9.3</version> <!-- required by EmbeddedSearchServicesPlugin -->
 	    </dependency>
 	   	<dependency>
 		    <groupId>org.codelibs.elasticsearch.module</groupId>
 		    <artifactId>mapper-extras</artifactId>
-		    <version>7.9.0</version> <!-- required by ESEmbeddedSearchServicesPlugin -->
+		    <version>7.9.3</version> <!-- required by ESEmbeddedSearchServicesPlugin -->
 		</dependency>
 		
 		<dependency>
