@@ -38,7 +38,7 @@ public class SampleConfigBuilder {
 						.withC3p0(
 								Param.of("dataBaseClass", H2DataBase.class.getName()),
 								Param.of("jdbcDriver", org.h2.Driver.class.getName()),
-								Param.of("jdbcUrl", "jdbc:h2:D:/atelier/database/formation_loaded"))
+								Param.of("jdbcUrl", "jdbc:h2:C:/atelier/database/formation_loaded"))
 						.build())
 				.addModule(new DataModelFeatures().build())
 				.addModule(new DataStoreFeatures()

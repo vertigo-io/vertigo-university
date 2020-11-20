@@ -40,7 +40,7 @@ public class SampleConfigBuilder {
 						.withC3p0(
 								Param.of("dataBaseClass", H2DataBase.class.getName()),
 								Param.of("jdbcDriver", org.h2.Driver.class.getName()),
-								Param.of("jdbcUrl", "jdbc:h2:D:/atelier/database/formation_loaded"))
+								Param.of("jdbcUrl", "jdbc:h2:C:/atelier/database/formation_loaded"))
 						.build())
 				.addModule(new DataModelFeatures().build())
 				.addModule(new DataStoreFeatures()
@@ -52,7 +52,7 @@ public class SampleConfigBuilder {
 		if (withSearch) {
 			nodeConfigBuilder
 					.addModule(new ElasticSearchFeatures()
-							.withEmbeddedServer(Param.of("home", "D:/atelier/search"))//usage d'url impropre
+							.withEmbeddedServer(Param.of("home", "C:/atelier/search"))//usage d'url impropre
 							.withRestHL(Param.of("servers.names", "localhost:9200"))
 							.build())
 					.addModule(new DataFactoryFeatures()

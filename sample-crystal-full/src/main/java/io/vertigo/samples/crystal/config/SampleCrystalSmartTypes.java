@@ -38,7 +38,7 @@ public enum SampleCrystalSmartTypes {
 	@Formatter(clazz = FormatterDefault.class)
 	@Constraint(clazz = ConstraintStringLength.class, arg = "500", msg = "")
 	@SmartTypeProperty(property = "storeType", value = "VARCHAR(500)")
-	@SmartTypeProperty(property = "indexType", value = "text_fr_not_tokenized")
+	@SmartTypeProperty(property = "indexType", value = "text_fr:sortable")
 	LabelLongSort,
 
 	@SmartTypeDefinition(String.class)
