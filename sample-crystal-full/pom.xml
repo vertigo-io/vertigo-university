@@ -66,33 +66,33 @@
 		<dependency>
 		    <groupId>org.elasticsearch.client</groupId>
 		    <artifactId>transport</artifactId>
-		    <version>7.9.3</version> <!-- TransportSearchServicesPlugin -->
+		    <version>7.10.2</version> <!-- TransportSearchServicesPlugin -->
 		</dependency>
 		<dependency>
 		    <groupId>org.elasticsearch.client</groupId>
 		    <artifactId>elasticsearch-rest-high-level-client</artifactId>
-		    <version>7.9.3</version> <!-- REstHighLevelElasticSearchConnector -->
+		    <version>7.10.2</version> <!-- REstHighLevelElasticSearchConnector -->
 		</dependency>
 		<dependency>
 	        <groupId>org.codelibs.elasticsearch.module</groupId>
 	        <artifactId>analysis-common</artifactId> 
-	        <version>7.9.3</version> <!-- required by EmbeddedSearchServicesPlugin -->
+	        <version>7.10.2</version> <!-- required by EmbeddedSearchServicesPlugin -->
 	    </dependency>
 	   	<dependency>
 		    <groupId>org.codelibs.elasticsearch.module</groupId>
 		    <artifactId>mapper-extras</artifactId>
-		    <version>7.9.3</version> <!-- required by ESEmbeddedSearchServicesPlugin -->
+		    <version>7.10.2</version> <!-- required by ESEmbeddedSearchServicesPlugin -->
 		</dependency>
 		
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-server</artifactId>
-			<version>9.4.31.v20200723</version>
+			<version>9.4.35.v20201120</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.jetty.websocket</groupId>
 			<artifactId>websocket-server</artifactId>
-			<version>9.4.31.v20200723</version>
+			<version>9.4.35.v20201120</version>
 		</dependency>
 	</dependencies>
 
