@@ -72,9 +72,9 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	*/
 	@io.vertigo.datamodel.task.proxy.TaskAnnotation(
 			name = "TkGetMoviesInCountries",
-			request = "select * " + 
- "        	from movie " + 
- "        	where cou_id in ( #countriesIds.rownum#)",
+			request = "select * \n" + 
+ "         	from movie \n" + 
+ "         	where cou_id in ( #countriesIds.rownum#)",
 			taskEngineClass = io.vertigo.basics.task.TaskEngineSelect.class)
 	@io.vertigo.datamodel.task.proxy.TaskOutput(smartType = "STyDtMovie")
 	public io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.crystal.domain.Movie> getMoviesInCountries(@io.vertigo.datamodel.task.proxy.TaskInput(name = "countriesIds", smartType = "STyId") final java.util.List<Long> countriesIds) {

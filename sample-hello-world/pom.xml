@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>io.vertigo</groupId>
 		<artifactId>vertigo-samples</artifactId>
-		<version>4.0.0-SNAPSHOT</version>
+		<version>3.3.0</version>
 	</parent>
 
 	<artifactId>vertigo-sample-hello-world</artifactId>

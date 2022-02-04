@@ -22,7 +22,7 @@ import io.vertigo.samples.crystal.dao.ActorDAO;
 import io.vertigo.samples.crystal.dao.MovieDAO;
 import io.vertigo.samples.crystal.dao.RoleDAO;
 import io.vertigo.samples.crystal.domain.Movie;
-import io.vertigo.samples.crystal.search.MovieSearchClient;
+import io.vertigo.samples.crystal.search.MovieIndexSearchClient;
 import io.vertigo.samples.crystal.services.LoginServices;
 import io.vertigo.samples.crystal.services.LoginServicesImpl;
 import io.vertigo.samples.crystal.services.MovieSearchLoader;
@@ -64,7 +64,7 @@ public class Level7 {
 		return ModuleConfig.builder("Sample")
 				.addComponent(MovieDAO.class)
 				.addComponent(CrystalPAO.class)
-				.addComponent(MovieSearchClient.class)
+				.addComponent(MovieIndexSearchClient.class)
 				.addComponent(MovieServices.class, MovieServicesImpl.class)
 				.addComponent(LoginServices.class, LoginServicesImpl.class)
 				.addComponent(MovieSearchLoader.class)

@@ -52,16 +52,16 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	*/
 	@io.vertigo.datamodel.task.proxy.TaskAnnotation(
 			name = "TkGetMoviesByCriteria",
-			request = "select mov.*" + 
- "        	from movie mov" + 
- "        	where " + 
- "        	1=1" + 
- "        	<%if(title != null) {%>" + 
- "        	 and mov.NAME like concat(#title#, '%%')" + 
- "        	<%}%>" + 
- "        	<%if(year != null) {%>" + 
- "        	 and mov.YEAR = #year#" + 
- "        	<%}%>",
+			request = "select mov.*\n" + 
+ "         	from movie mov\n" + 
+ "         	where \n" + 
+ "         	1=1\n" + 
+ "         	<%if(title != null) {%>\n" + 
+ "         	 and mov.NAME like concat(#title#, '%%')\n" + 
+ "         	<%}%>\n" + 
+ "         	<%if(year != null) {%>\n" + 
+ "         	 and mov.YEAR = #year#\n" + 
+ "         	<%}%>",
 			taskEngineClass = io.vertigo.basics.task.TaskEngineSelect.class)
 	@io.vertigo.datamodel.task.proxy.TaskOutput(smartType = "STyDtMovie")
 	public io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.dao.domain.Movie> getMoviesByCriteria(@io.vertigo.datamodel.task.proxy.TaskInput(name = "title", smartType = "STyLabelLong") final String title, @io.vertigo.datamodel.task.proxy.TaskInput(name = "year", smartType = "STyYear") final Integer year) {
@@ -83,19 +83,19 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	*/
 	@io.vertigo.datamodel.task.proxy.TaskAnnotation(
 			name = "TkGetMoviesByCriteriaWithCountry",
-			request = "select mov.*" + 
- "        	from movie mov" + 
- "        	where " + 
- "        	1=1" + 
- "        	<%if(title != null) {%>" + 
- "        	 and mov.NAME like concat(#title#, '%%')" + 
- "        	<%}%>" + 
- "        	<%if(year != null) {%>" + 
- "        	 and mov.YEAR = #year#" + 
- "        	<%}%>" + 
- "        	<%if(!countries.isEmpty()) {%>" + 
- "        	 and mov.COU_ID in (#countries.rownum.couId#)" + 
- "        	<%}%>",
+			request = "select mov.*\n" + 
+ "         	from movie mov\n" + 
+ "         	where \n" + 
+ "         	1=1\n" + 
+ "         	<%if(title != null) {%>\n" + 
+ "         	 and mov.NAME like concat(#title#, '%%')\n" + 
+ "         	<%}%>\n" + 
+ "         	<%if(year != null) {%>\n" + 
+ "         	 and mov.YEAR = #year#\n" + 
+ "         	<%}%>\n" + 
+ "         	<%if(!countries.isEmpty()) {%>\n" + 
+ "         	 and mov.COU_ID in (#countries.rownum.couId#)\n" + 
+ "         	<%}%>",
 			taskEngineClass = io.vertigo.basics.task.TaskEngineSelect.class)
 	@io.vertigo.datamodel.task.proxy.TaskOutput(smartType = "STyDtMovie")
 	public io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.dao.domain.Movie> getMoviesByCriteriaWithCountry(@io.vertigo.datamodel.task.proxy.TaskInput(name = "title", smartType = "STyLabelLong") final String title, @io.vertigo.datamodel.task.proxy.TaskInput(name = "year", smartType = "STyYear") final Optional<Integer> year, @io.vertigo.datamodel.task.proxy.TaskInput(name = "countries", smartType = "STyDtCountry") final io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.dao.domain.Country> countries) {
@@ -115,10 +115,10 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	*/
 	@io.vertigo.datamodel.task.proxy.TaskAnnotation(
 			name = "TkGetMoviesWith100Actors",
-			request = "select mov.*" + 
- "			from movie mov" + 
- "			join (select MOV_ID, count(*) cnt from role group by mov_id ) hv on hv.MOV_ID = mov.MOV_ID" + 
- "			where hv.cnt> 100",
+			request = "select mov.*\n" + 
+ " 			from movie mov\n" + 
+ " 			join (select MOV_ID, count(*) cnt from role group by mov_id ) hv on hv.MOV_ID = mov.MOV_ID\n" + 
+ " 			where hv.cnt> 100",
 			taskEngineClass = io.vertigo.basics.task.TaskEngineSelect.class)
 	@io.vertigo.datamodel.task.proxy.TaskOutput(smartType = "STyDtMovie")
 	public io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.dao.domain.Movie> getMoviesWith100Actors() {
@@ -154,10 +154,10 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	*/
 	@io.vertigo.datamodel.task.proxy.TaskAnnotation(
 			name = "TkLoadMoviesByChunk",
-			request = "select * from movie" + 
- "        	where MOV_ID > #offset#" + 
- "        	order by MOV_ID asc" + 
- "        	limit #limit#",
+			request = "select * from movie\n" + 
+ "         	where MOV_ID > #offset#\n" + 
+ "         	order by MOV_ID asc\n" + 
+ "         	limit #limit#",
 			taskEngineClass = io.vertigo.basics.task.TaskEngineSelect.class)
 	@io.vertigo.datamodel.task.proxy.TaskOutput(smartType = "STyDtMovie")
 	public io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.dao.domain.Movie> loadMoviesByChunk(@io.vertigo.datamodel.task.proxy.TaskInput(name = "limit", smartType = "STyId") final Long limit, @io.vertigo.datamodel.task.proxy.TaskInput(name = "offset", smartType = "STyId") final Long offset) {

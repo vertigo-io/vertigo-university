@@ -68,10 +68,10 @@ public final class RoleDAO extends DAO<Role, java.lang.Long> implements StoreSer
 	*/
 	@io.vertigo.datamodel.task.proxy.TaskAnnotation(
 			name = "TkLoadRolesByChunk",
-			request = "select rol.* from role rol" + 
- "        	where ROL_ID > #offset#" + 
- "        	order by rol.ROL_ID asc" + 
- "        	limit #limit#",
+			request = "select rol.* from role rol\n" + 
+ "         	where ROL_ID > #offset#\n" + 
+ "         	order by rol.ROL_ID asc\n" + 
+ "         	limit #limit#",
 			taskEngineClass = io.vertigo.basics.task.TaskEngineSelect.class)
 	@io.vertigo.datamodel.task.proxy.TaskOutput(smartType = "STyDtRole")
 	public io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.dao.domain.Role> loadRolesByChunk(@io.vertigo.datamodel.task.proxy.TaskInput(name = "limit", smartType = "STyId") final Long limit, @io.vertigo.datamodel.task.proxy.TaskInput(name = "offset", smartType = "STyId") final Long offset) {

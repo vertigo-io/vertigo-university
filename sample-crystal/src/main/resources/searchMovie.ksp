@@ -40,7 +40,7 @@ create FacetDefinition FctMovieYear {
 }
 
 create FacetedQueryDefinition QryMovie {  
-  keyConcept : DtMovie
+  dtIndex : DtMovieIndex
   facets : []
   domainCriteria : DoLabel
   listFilterBuilderClass : "io.vertigo.datafactory.impl.search.dsl.DslListFilterBuilder"  
@@ -48,7 +48,7 @@ create FacetedQueryDefinition QryMovie {
 }
 
 create FacetedQueryDefinition QryMovieWithFacets {  
-  keyConcept : DtMovie
+  dtIndex : DtMovieIndex
   facets : [FctMovieName, FctMovieYear, FctMovieCountry]
   domainCriteria : DoLabel
   listFilterBuilderClass : "io.vertigo.datafactory.impl.search.dsl.DslListFilterBuilder"  

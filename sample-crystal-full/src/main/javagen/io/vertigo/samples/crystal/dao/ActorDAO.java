@@ -50,11 +50,11 @@ public final class ActorDAO extends DAO<Actor, java.lang.Long> implements StoreS
 	*/
 	@io.vertigo.datamodel.task.proxy.TaskAnnotation(
 			name = "TkGetActorsByMovie",
-			request = "select act.*" + 
- "			from role rol" + 
- "			join actor act on rol.act_id= act.act_id " + 
- "			join movie mov on rol.mov_id = mov.mov_id " + 
- "			where mov.mov_id = #movId#",
+			request = "select act.*\n" + 
+ " 			from role rol\n" + 
+ " 			join actor act on rol.act_id= act.act_id \n" + 
+ " 			join movie mov on rol.mov_id = mov.mov_id \n" + 
+ " 			where mov.mov_id = #movId#",
 			taskEngineClass = io.vertigo.basics.task.TaskEngineSelect.class)
 	@io.vertigo.datamodel.task.proxy.TaskOutput(smartType = "STyDtActor")
 	public io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.crystal.domain.Actor> getActorsByMovie(@io.vertigo.datamodel.task.proxy.TaskInput(name = "movId", smartType = "STyId") final Long movId) {

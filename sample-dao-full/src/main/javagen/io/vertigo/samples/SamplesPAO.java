@@ -63,12 +63,12 @@ public final class SamplesPAO implements StoreServices {
 	*/
 	@io.vertigo.datamodel.task.proxy.TaskAnnotation(
 			name = "TkGetMovieDisplay",
-			request = "select mov.NAME,mov.YEAR, cou.NAME as COUNTRY, hv.CNT as ACTORS_COUNT" + 
- "		from movie mov" + 
- "		join country cou on cou.COU_ID = mov.COU_ID" + 
- "		join (select MOV_ID, count(*) cnt from role group by mov_id ) hv on hv.MOV_ID = mov.MOV_ID" + 
- "		where mov.YEAR > 2010" + 
- "		limit 500",
+			request = "select mov.NAME,mov.YEAR, cou.NAME as COUNTRY, hv.CNT as ACTORS_COUNT\n" + 
+ " 		from movie mov\n" + 
+ " 		join country cou on cou.COU_ID = mov.COU_ID\n" + 
+ " 		join (select MOV_ID, count(*) cnt from role group by mov_id ) hv on hv.MOV_ID = mov.MOV_ID\n" + 
+ " 		where mov.YEAR > 2010\n" + 
+ " 		limit 500",
 			taskEngineClass = io.vertigo.basics.task.TaskEngineSelect.class)
 	@io.vertigo.datamodel.task.proxy.TaskOutput(smartType = "STyDtMovieDisplay")
 	public io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.dao.domain.MovieDisplay> getMovieDisplay() {

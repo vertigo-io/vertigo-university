@@ -50,10 +50,10 @@ public final class ActorDAO extends DAO<Actor, java.lang.Long> implements StoreS
 	*/
 	@io.vertigo.datamodel.task.proxy.TaskAnnotation(
 			name = "TkGetActorsInMovie",
-			request = "select act.*" + 
- "        	from role rol" + 
- "        	join actor act on act.ACT_ID = rol.ACT_ID" + 
- "        	where rol.MOV_ID = #movId#",
+			request = "select act.*\n" + 
+ "         	from role rol\n" + 
+ "         	join actor act on act.ACT_ID = rol.ACT_ID\n" + 
+ "         	where rol.MOV_ID = #movId#",
 			taskEngineClass = io.vertigo.basics.task.TaskEngineSelect.class)
 	@io.vertigo.datamodel.task.proxy.TaskOutput(smartType = "STyDtActor")
 	public io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.dao.domain.Actor> getActorsInMovie(@io.vertigo.datamodel.task.proxy.TaskInput(name = "movId", smartType = "STyId") final Long movId) {
@@ -90,10 +90,10 @@ public final class ActorDAO extends DAO<Actor, java.lang.Long> implements StoreS
 	*/
 	@io.vertigo.datamodel.task.proxy.TaskAnnotation(
 			name = "TkLoadActorsByChunk",
-			request = "select * from ACTOR" + 
- "			where ACT_ID > #offset#" + 
- "        	order by ACT_ID asc" + 
- "			limit 1000",
+			request = "select * from ACTOR\n" + 
+ " 			where ACT_ID > #offset#\n" + 
+ "         	order by ACT_ID asc\n" + 
+ " 			limit 1000",
 			taskEngineClass = io.vertigo.basics.task.TaskEngineSelect.class)
 	@io.vertigo.datamodel.task.proxy.TaskOutput(smartType = "STyDtActor")
 	public io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.dao.domain.Actor> loadActorsByChunk(@io.vertigo.datamodel.task.proxy.TaskInput(name = "limit", smartType = "STyId") final Long limit, @io.vertigo.datamodel.task.proxy.TaskInput(name = "offset", smartType = "STyId") final Long offset) {

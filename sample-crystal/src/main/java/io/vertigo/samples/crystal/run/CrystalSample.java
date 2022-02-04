@@ -11,7 +11,7 @@ import io.vertigo.core.util.InjectorUtil;
 import io.vertigo.samples.crystal.CrystalPAO;
 import io.vertigo.samples.crystal.config.SampleConfigBuilder;
 import io.vertigo.samples.crystal.dao.MovieDAO;
-import io.vertigo.samples.crystal.search.MovieSearchClient;
+import io.vertigo.samples.crystal.search.MovieIndexSearchClient;
 import io.vertigo.samples.crystal.services.MovieSearchLoader;
 import io.vertigo.samples.crystal.services.MovieServices;
 import io.vertigo.samples.crystal.services.MovieServicesImpl;
@@ -41,7 +41,7 @@ public class CrystalSample {
 		return ModuleConfig.builder("Sample")
 				.addComponent(MovieDAO.class)
 				.addComponent(CrystalPAO.class)
-				.addComponent(MovieSearchClient.class)
+				.addComponent(MovieIndexSearchClient.class)
 				.addComponent(MovieServices.class, MovieServicesImpl.class)
 				.addComponent(MovieSearchLoader.class)
 				.addComponent(MovieWebServices.class)

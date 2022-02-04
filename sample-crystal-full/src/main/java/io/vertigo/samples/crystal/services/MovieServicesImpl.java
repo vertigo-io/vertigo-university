@@ -28,14 +28,14 @@ import io.vertigo.samples.crystal.domain.Movie;
 import io.vertigo.samples.crystal.domain.MovieIndex;
 import io.vertigo.samples.crystal.domain.Role;
 import io.vertigo.samples.crystal.domain.SexeEnum;
-import io.vertigo.samples.crystal.search.MovieSearchClient;
+import io.vertigo.samples.crystal.search.MovieIndexSearchClient;
 
 @Transactional
 public class MovieServicesImpl implements MovieServices {
 	private static Logger logger = LogManager.getLogger(MovieServices.class);
 
 	@Inject
-	private MovieSearchClient movieSearchClient;
+	private MovieIndexSearchClient movieIndexSearchClient;
 	@Inject
 	private MovieDAO movieDAO;
 	@Inject
@@ -79,8 +79,8 @@ public class MovieServicesImpl implements MovieServices {
 	@Override
 	public FacetedQueryResult searchMovies(final String criteria, final SelectedFacetValues selectedFacetValues, final DtListState listState) {
 		try {
-			final SearchQueryBuilder searchQueryBuilder = movieSearchClient.createSearchQueryBuilderMovieWithFacets(criteria, selectedFacetValues);
-			return movieSearchClient.loadList(searchQueryBuilder.build(), listState);
+			final SearchQueryBuilder searchQueryBuilder = movieIndexSearchClient.createSearchQueryBuilderMovieWithFacets(criteria, selectedFacetValues);
+			return movieIndexSearchClient.loadList(searchQueryBuilder.build(), listState);
 		} catch (final VUserException e) {
 			if (e.getCause() != null) {
 				logger.warn(e.getCause());
