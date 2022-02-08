@@ -11,8 +11,8 @@ import java.util.OptionalInt;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
+import io.vertigo.core.lang.MapBuilder;
 import io.vertigo.core.lang.WrappedException;
-import io.vertigo.core.util.MapBuilder;
 
 /**
  *

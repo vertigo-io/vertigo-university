@@ -3,8 +3,8 @@ package io.vertigo.samples.aspects;
 import javax.inject.Inject;
 
 import io.vertigo.core.lang.Assertion;
-import io.vertigo.core.node.component.aop.Aspect;
-import io.vertigo.core.node.component.aop.AspectMethodInvocation;
+import io.vertigo.core.node.component.aspect.Aspect;
+import io.vertigo.core.node.component.aspect.AspectMethodInvocation;
 
 /**
  * @author pchretien

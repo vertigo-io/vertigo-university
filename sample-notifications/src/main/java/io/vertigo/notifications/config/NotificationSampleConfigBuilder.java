@@ -21,7 +21,7 @@ import io.vertigo.notifications.plugins.mail.MailNotificationPlugin;
 import io.vertigo.notifications.plugins.twitter.TwitterNotificationPlugin;
 import io.vertigo.social.impl.mail.MailManagerImpl;
 import io.vertigo.social.mail.MailManager;
-import io.vertigo.social.plugins.mail.javax.JavaxSendMailPlugin;
+import io.vertigo.social.plugins.mail.javax.JavaxMailPlugin;
 
 /**
  * Notification Config Builder
@@ -56,7 +56,7 @@ public class NotificationSampleConfigBuilder {
 						.addPlugin(TwitterNotificationPlugin.class)
 						.addPlugin(MailNotificationPlugin.class)
 						.addComponent(MailManager.class, MailManagerImpl.class)
-						.addPlugin(JavaxSendMailPlugin.class,
+						.addPlugin(JavaxMailPlugin.class,
 								Param.of("developmentMode", "true"),
 								Param.of("developmentMailTo", "prenom.nom@kleegroup.com"))
 						.build())

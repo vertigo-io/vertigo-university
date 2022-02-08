@@ -7,11 +7,11 @@ import javax.inject.Inject;
 
 import io.vertigo.commons.transaction.VTransactionManager;
 import io.vertigo.core.lang.Generated;
+import io.vertigo.core.lang.ListBuilder;
 import io.vertigo.core.node.component.Component;
 import io.vertigo.core.node.definition.DefinitionProvider;
 import io.vertigo.core.node.definition.DefinitionSpace;
 import io.vertigo.core.node.definition.DefinitionSupplier;
-import io.vertigo.core.util.ListBuilder;
 import io.vertigo.datafactory.collections.definitions.FacetDefinition.FacetOrder;
 import io.vertigo.datafactory.collections.definitions.FacetRangeDefinitionSupplier;
 import io.vertigo.datafactory.collections.definitions.FacetTermDefinitionSupplier;

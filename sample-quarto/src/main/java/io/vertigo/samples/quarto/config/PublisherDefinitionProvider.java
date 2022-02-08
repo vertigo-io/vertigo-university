@@ -20,10 +20,10 @@ package io.vertigo.samples.quarto.config;
 
 import java.util.List;
 
+import io.vertigo.core.lang.ListBuilder;
 import io.vertigo.core.node.definition.Definition;
 import io.vertigo.core.node.definition.DefinitionSpace;
 import io.vertigo.core.node.definition.SimpleDefinitionProvider;
-import io.vertigo.core.util.ListBuilder;
 import io.vertigo.quarto.publisher.definitions.PublisherDataDefinition;
 import io.vertigo.quarto.publisher.definitions.PublisherNodeDefinition;
 import io.vertigo.quarto.publisher.definitions.PublisherNodeDefinitionBuilder;
