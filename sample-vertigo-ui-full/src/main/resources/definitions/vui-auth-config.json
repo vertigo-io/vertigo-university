@@ -1,0 +1,17 @@
+{
+	"globalAuthorizations": [{
+		"name": "Special",
+		"label": "Droit spécial"
+	}],
+	"securedEntities": [{
+		"entity": "Movie",
+		"securityFields" : ["couId" ],
+		"securityDimensions" : [] ,
+		"operations": [{
+			"name": "read",	"label" : "Lecture",
+			"rules": [
+				"couId=${couId}"
+			]
+		}]
+	}]
+}

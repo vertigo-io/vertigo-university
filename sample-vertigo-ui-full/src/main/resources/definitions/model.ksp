@@ -1,0 +1,93 @@
+package io.vertigo.samples.vui.domain
+
+create DtDefinition DtCountry {
+  id couId {domain: DoId label: "Id" }
+  field name {domain: DoLabel label: "Nom du pays" }
+}
+
+create DtDefinition DtMovie {
+  stereotype : "KeyConcept"
+  id movId {domain: DoId label: "Id" }
+  field name {domain: DoLabelLong label: "Titre du film" cardinality:"1"}
+  field year {domain: DoYear label: "Année" }
+  field imdbid {domain: DoLabel label: "Id Imdb" }
+}
+
+create DtDefinition DtActor {
+  id actId {domain: DoId label: "Id" }
+  field name {domain: DoLabelLong label: "Nom" cardinality:"1"}
+}
+
+create DtDefinition DtSexe {
+  id sexCd {domain: DoCode label: "Id" }
+  field label {domain: DoLabelLong label: "Label" cardinality:"1"}
+}
+
+create DtDefinition DtRole {
+  id rolId {domain: DoId label: "Id" }
+  field asCharacter {domain: DoLabelVeryLong label: "Dans le role de" cardinality:"1"}
+}
+
+create Association AMovCou {
+  fkFieldName : "couId"
+    
+ 	dtDefinitionA : DtMovie
+ 	labelA : "Movie"
+ 	roleA : "Movie"
+ 	
+ 	type : "*>?"
+ 	
+	dtDefinitionB : DtCountry
+	labelB : "Country"
+	roleB : "Country"
+		
+}
+
+create Association ARolMov {
+  fkFieldName : "movId"
+    
+ 	dtDefinitionA : DtRole
+ 	labelA : "Role"
+	roleA : "Role"
+	multiplicityA:"0..*"
+	navigabilityA : "true"
+
+	dtDefinitionB : DtMovie
+	labelB : "Movie"
+	roleB : "Movie"		
+	multiplicityB:"0..1"
+	navigabilityB : "false"
+			
+}
+
+
+create Association ARolAct {
+  fkFieldName : "actId"
+    
+ 	dtDefinitionA : DtRole
+ 	labelA : "Role"
+	roleA : "Role"
+ 	
+ 	type : "*>?"
+ 	
+	dtDefinitionB : DtActor
+	labelB : "Actor"
+	roleB : "Actor"
+			
+}
+
+create Association AActSex {
+  fkFieldName : "sexCd"
+    
+ 	dtDefinitionA : DtActor
+	labelA : "Actor"
+	roleA : "Actor"
+ 	
+ 	type : "*>?"
+ 	
+	dtDefinitionB : DtSexe
+	labelB : "Sexe"
+	roleB : "Sexe"
+			
+}
+

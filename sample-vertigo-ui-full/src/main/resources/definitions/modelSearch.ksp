@@ -1,0 +1,17 @@
+package io.vertigo.samples.vui.domain
+
+
+/************************/
+/***** Index Movie  *****/
+/************************/
+
+create DtDefinition DtMovieIndex {
+  field movId {domain: DoId label: "id" cardinality:"1" }
+  field name {domain: DoLabelLong label: "Titre" }
+  field year {domain: DoYear label: "Année" }
+  field country {domain: DoLabel label: "Pays" }
+  
+  computed nameSortOnly {domain : DoLabelLongSort, label:"Titre" cardinality:"1"
+        expression:"return getName();"
+  }  
+}

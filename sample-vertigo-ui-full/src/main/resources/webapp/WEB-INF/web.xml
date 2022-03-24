@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="4.0" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_4_0.xsd">
+
+	<display-name>Test Vertigo SpringMvc</display-name>
+	<listener>
+		<listener-class>io.vertigo.vega.impl.webservice.servlet.AppServletContextListener
+		</listener-class>
+	</listener>
+
+	<!-- Paramètrage des composants : assemblage de : - Dt de DtDefinitions; 
+		- Managers de managers.xml - Services de demo-services.xml - Autres éléments 
+		Task/MDM de execution.kpr -->
+	<context-param>
+		<param-name>boot.applicationConfiguration</param-name>
+		<param-value>/webapp/META-INF/sample-vui.yaml</param-value>
+	</context-param>
+
+
+	<filter>
+		<filter-name>Character Encoding Filter</filter-name>
+		<filter-class>io.vertigo.vega.impl.servlet.filter.SetCharsetEncodingFilter
+		</filter-class>
+		<init-param>
+			<param-name>charset</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>Character Encoding Filter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+   <filter> 
+        <description>
+            Filtre de sécurisation des URLs et de conservation des sessions.
+            Limite l'accés aux URLs (sauf celles de url-exclude-pattern) aux utilisateurs authentifiés.
+            Authentifié = isAuthentified true dans la UserSession.
+        </description>
+        <filter-name>Security Filter</filter-name>
+        <filter-class>io.vertigo.vega.impl.servlet.filter.SecurityFilter</filter-class>
+        <init-param>
+            <param-name>url-no-authentification</param-name>
+            <param-value>/*</param-value>
+        </init-param>
+        <init-param>
+            <param-name>url-exclude-pattern</param-name>
+            <param-value>/;/index.html;/api/*;/vertigo-ui/static/*;/static/*</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>Security Filter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+	<!-- prevent Locking of static files on windows -->
+	<context-param>
+		<param-name>org.eclipse.jetty.servlet.Default.useFileMappedBuffer</param-name>
+		<param-value>false</param-value>
+	</context-param>
+	<!-- serve static files by jetty -->
+
+	
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/</url-pattern>
+        <url-pattern>/index.html</url-pattern>
+        <url-pattern>/static/*</url-pattern>
+    </servlet-mapping>
+
+    <session-config>
+        <session-timeout>60</session-timeout>
+    </session-config>
+
+    <mime-mapping>
+        <extension>html</extension>
+        <mime-type>text/html</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>txt</extension>
+        <mime-type>text/plain</mime-type>
+    </mime-mapping>
+    <mime-mapping>
+        <extension>css</extension>
+        <mime-type>text/css</mime-type>
+    </mime-mapping>
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+    
+    <error-page>    
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/jsp/application-error.jsp</location>
+    </error-page>
+    
+    <error-page>
+        <error-code>500</error-code>
+        <location>/jsp/application-error.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>400</error-code>
+        <location>/jsp/application-error.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/jsp/application-error.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>401</error-code>
+        <location>/jsp/application-error.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/jsp/404-error.jsp</location>
+    </error-page>
+
+
+</web-app>

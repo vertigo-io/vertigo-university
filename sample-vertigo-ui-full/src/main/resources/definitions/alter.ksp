@@ -1,0 +1,8 @@
+package io.vertigo.samples.vui.domain
+
+
+alter DtDefinition DtSexe {
+  stereotype : "StaticMasterData"
+}
+
+

@@ -1,0 +1,12 @@
+package io.vertigo.samples.vui
+
+    
+create Task TkLoadMovieIndex {
+	className : "io.vertigo.basics.task.TaskEngineSelect",
+	request : "	select MOV_ID, mov.NAME, YEAR, cou.NAME as COUNTRY
+				from MOVIE mov
+				join COUNTRY cou on cou.cou_id = mov.cou_id
+				where MOV_ID in (#movieIds.rownum#);"
+	in movieIds {domain : DoId cardinality:"*" } 
+	out dtcIndex {domain : DoDtMovieIndex cardinality:"*"} 
+}

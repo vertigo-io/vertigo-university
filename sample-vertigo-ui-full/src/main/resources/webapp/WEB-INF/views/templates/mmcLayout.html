@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="https://vertigo.io/thymeleaf/vertigo-ui"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <vu:head-meta vuejsDevMode/>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="Demo Application of Vertigo UI powered by SpringMvc, Thymeleaf and Quasar Framework"/>
+    <meta name="author" content="Klee Group"/>
+    
+  	<link rel="stylesheet" th:href="@{/static/css/mars.css}"/>
+	<link rel="icon" th:href="@{/static/img/favicon.ico}"/>
+	
+    <script type="text/javascript" th:src="@{/vertigo-ui/static/js/vertigo-ui-extensions.js}"></script>
+   	<script type="text/javascript" th:src="@{/static/js/demo.js}"></script>
+</head>
+
+<body class="mat desktop no-touch platform-mat">
+
+	<vu:page  > <!-- vuiDevMode --> <!-- vuiSsr -->
+	
+      <q-layout view="hHh LpR fff" id="page" v-cloak>
+			<!-- BEGIN HEADER-->
+			<q-header class="items-center">
+				<q-toolbar class="justify-between">
+					<div class="row">
+						<q-btn flat round dense class="lt-lg"
+						th:with="showLeft=${model.vContext['componentStates'].addComponentState('navDrawer').addPrimitive('showLeft', true)}, mini=${model.vContext['componentStates']['navDrawer'].addPrimitive('mini', false)}"
+						@click="componentStates.navDrawer.showLeft = !componentStates.navDrawer.showLeft" icon="menu" aria-label="Toggle menu on left side"></q-btn>
+						<div class="gt-md">Demo</div>
+						<q-toolbar-title class="gt-md">
+								Command Center 
+								<span slot="subtitle">Observe, Orient, Decide and Act</span>
+						</q-toolbar-title>
+					</div>
+					<!-- Brand and toggle get grouped for better mobile display -->
+				</q-toolbar>
+			</q-header>
+        	<!-- END HEADER-->
+        			
+  			
+  			<q-drawer
+  			  content-class="bg-white text-primary"
+		      side="left"
+		      :mini="function() {var miniMenu = localStorage.miniMenu === 'true';componentStates.navDrawer.mini = miniMenu;return miniMenu;}()"
+		      v-model="componentStates.navDrawer.showLeft">
+		      
+		      <q-list :class="{'v-navList':true, 'dense-list-header':!componentStates.navDrawer.mini}" >
+		      <nav class="text-no-wrap">
+		      	<q-item-label header>Home</q-item-label>
+		        <q-item tag="a" th:href="@{/movies/}">
+		          <q-item-section avatar>
+		          	<q-icon name="fas fa-globe-europe"></q-icon>
+		          </q-item-section>
+		          <q-item-section>Home</q-item-section>
+		        </q-item>
+		        <q-separator></q-separator>
+		       	<q-item-label header>Base managment</q-item-label>
+		        <q-item tag="a" th:href="@{/movies/}">
+		          <q-item-section avatar>
+		          	<q-icon name="fas fa-dice-d20"></q-icon>
+		          </q-item-section>
+		          <q-item-section>Movies</q-item-section>
+		          <q-item-section side><q-chip color="primary" dense square class="q-mr-xs">VR</q-chip></q-item-section>
+		        </q-item>
+		        <q-item tag="a" th:href="@{#}">
+		          <q-item-section avatar>
+		          	<q-icon name="fas fa-rocket"></q-icon>
+		          </q-item-section>
+		          <q-item-section>Equipments</q-item-section>
+		        </q-item>
+		       	<q-separator></q-separator>
+		        <q-item v-if="componentStates.navDrawer.mini"
+						@click.native="componentStates.navDrawer.mini = false; localStorage.miniMenu = 'false'" title="Expand menu">
+						<q-item-section avatar>
+		          			<q-icon name="arrow_right"></q-icon>
+		          		</q-item-section>
+				</q-item>
+				 <q-item v-if="!componentStates.navDrawer.mini"
+						@click.native="componentStates.navDrawer.mini = true; localStorage.miniMenu = 'true'" title="Minify menu">
+					<q-item-section side>
+		          		<q-icon name="arrow_left"></q-icon>
+		          	</q-item-section>
+				</q-item>
+		        </nav>
+		        </q-list>
+		        
+		    </q-drawer>
+		    
+			<q-page-container class="row justify-center q-pb-lg" >
+				<q-page padding class="row col-12">			
+			 		<section class="col content-body"  layout:fragment="content"></section>
+				</q-page>
+			</q-page-container>
+		</q-layout>
+		
+	</vu:page>
+	<div layout:fragment="javascript-footer">
+	</div>
+			
+</body>
+</html>
