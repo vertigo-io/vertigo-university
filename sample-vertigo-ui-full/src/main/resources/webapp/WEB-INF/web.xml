@@ -87,31 +87,6 @@
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
     
-    <error-page>    
-        <exception-type>java.lang.Exception</exception-type>
-        <location>/jsp/application-error.jsp</location>
-    </error-page>
-    
-    <error-page>
-        <error-code>500</error-code>
-        <location>/jsp/application-error.jsp</location>
-    </error-page>
-    <error-page>
-        <error-code>400</error-code>
-        <location>/jsp/application-error.jsp</location>
-    </error-page>
-    <error-page>
-        <error-code>403</error-code>
-        <location>/jsp/application-error.jsp</location>
-    </error-page>
-    <error-page>
-        <error-code>401</error-code>
-        <location>/jsp/application-error.jsp</location>
-    </error-page>
-    <error-page>
-        <error-code>404</error-code>
-        <location>/jsp/404-error.jsp</location>
-    </error-page>
 
 
 </web-app>

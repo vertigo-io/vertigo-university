@@ -21,46 +21,27 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import io.vertigo.datamodel.structure.model.DtListState;
 import io.vertigo.samples.vui.domain.Movie;
 import io.vertigo.samples.vui.services.MovieServices;
 import io.vertigo.ui.core.ViewContext;
 import io.vertigo.ui.core.ViewContextKey;
-import io.vertigo.ui.impl.springmvc.argumentresolvers.ViewAttribute;
 import io.vertigo.ui.impl.springmvc.controller.AbstractVSpringMvcController;
 
 @Controller
-@RequestMapping("/movie")
-public class MovieController extends AbstractVSpringMvcController {
+@RequestMapping("/movies")
+public class MoviesController extends AbstractVSpringMvcController {
 
-	private final ViewContextKey<Movie> movieKey = ViewContextKey.of("movie");
+	private final ViewContextKey<Movie> moviesKey = ViewContextKey.of("movies");
 
 	@Inject
 	private MovieServices movieServices;
 
 	@GetMapping("/")
 	public void initContext(final ViewContext viewContext) {
-		viewContext.publishDto(movieKey, new Movie());
-	}
-
-	@GetMapping("/{movId}")
-	public void initContext(final ViewContext viewContext, @PathVariable("movId") final Long movId) {
-		final Movie movie = movieServices.getById(movId);
-		viewContext.publishDto(movieKey, movie);
-	}
-
-	@PostMapping("/_edit")
-	public void doEdit() {
-		toModeEdit();
-	}
-
-	@PostMapping("/_save")
-	public String doSave(@ViewAttribute("movie") final Movie movie) {
-		movieServices.save(movie);
-		return "redirect:/movie/" + movie.getMovId();
+		viewContext.publishDtList(moviesKey, movieServices.getMovies(DtListState.defaultOf(Movie.class)));
 	}
 
 }
