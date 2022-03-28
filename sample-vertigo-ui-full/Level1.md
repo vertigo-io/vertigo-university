@@ -41,9 +41,10 @@ Le rendu de la table sera réalisé coté client en vueJs. En vueJs, dans une ta
 ## Etapes
 
 1. Créez le controller.
-1. Déclarez une clé de context "movie" de type Movie.
+1. Déclarez une clé de context "movies" de type Movie.
 1. Dans le initContext chargez la liste des movies avec le service `MovieServices.getMovies`.
 *(Pour créer un *DtListState* par défaut : `DtListState.defaultOf(Xxx.class)`)*
+1. Publiez la liste dans le context.
 1. Créez le fichier de la vue en copiant et modifiant le **home.html**
 1. Ajoutez une table dans le fragment="content".
 ```Html
@@ -58,15 +59,15 @@ Le rendu de la table sera réalisé coté client en vueJs. En vueJs, dans une ta
             </div>
         </section>
 ```
-6. Testez la page affichant la liste de *Movies*.
+7. Testez la page affichant la liste de *Movies*.
 7. Consulter la source de la page. Recherchez la balise `script id="vui-init-data"` et regardez son contenu.
 8. Retirez une colonne du tableau et comparez.
 9. Familiarisez vous avec la lecture des composants `vu:table` et `vu:column` ([GitHub VertigoUi Components](https://github.com/vertigo-io/vertigo-extensions/tree/vertigo-3.3.0/vertigo-ui/src/main/resources/io/vertigo/ui/components)). Notez l'usage de `vu:include-data`.
 
-10. Modifiez la colonne movId, pour ajouter un lien vers la page de détail `/movie/{movId}`
+11. Modifiez la colonne movId, pour ajouter un lien vers la page de détail `/movie/{movId}`
 
 `<a th::href="|'@{/movie/}'+props.row.movId|" >{{props.row.movId}}</a>`
 
-11. Testez la page affichant la liste de *Movies*.
+12. Testez la page affichant la liste de *Movies*.
 
 [Suite : Level 2 - Ecran de détail ]
