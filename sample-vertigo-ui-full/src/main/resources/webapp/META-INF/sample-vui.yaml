@@ -14,6 +14,7 @@ modules:
     featuresConfig:
       - script.janino:
   io.vertigo.connectors.elasticsearch.ElasticSearchFeatures:
+    __flags__: ["search"]
     features:
       - embeddedServer:
           home: D:/atelier/search
@@ -26,7 +27,7 @@ modules:
       - sql.c3p0:
           dataBaseClass: io.vertigo.database.impl.sql.vendor.h2.H2DataBase
           jdbcDriver: org.h2.Driver
-          jdbcUrl: jdbc:h2:D:/atelier/database/formation_loaded
+          jdbcUrl: jdbc:h2:D:/atelier/database/formation_loaded;NON_KEYWORDS=YEAR,KEY
   io.vertigo.datamodel.DataModelFeatures:
   io.vertigo.datastore.DataStoreFeatures:
     features:
@@ -50,10 +51,12 @@ modules:
           timeToLiveSeconds: 3600
   io.vertigo.datafactory.DataFactoryFeatures:
     features:
-      - search:
+      - search:      
+          __flags__: ["search"]
     featuresConfig:
       - collections.luceneIndex:
-      - search.elasticsearch.restHL:          
+      - search.elasticsearch.restHL:
+          __flags__: ["search"]          
           envIndexPrefix: sampleVui_
           rowsPerQuery: 50
           config.file: webapp/META-INF/elasticsearch.yml
@@ -65,6 +68,9 @@ modules:
   io.vertigo.vega.VegaFeatures:        
   io.vertigo.samples.support.SupportFeatures:
   io.vertigo.samples.vui.VuiFeatures:
+    features:
+      - search:
+          __flags__: ["search"]
 initializers:
   - io.vertigo.samples.support.boot.LocaleManagerInitializer:
   - io.vertigo.samples.support.boot.I18nResourcesInitializer:

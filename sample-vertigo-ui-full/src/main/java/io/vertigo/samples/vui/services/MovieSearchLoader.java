@@ -2,6 +2,7 @@ package io.vertigo.samples.vui.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.inject.Inject;
 
@@ -21,11 +22,11 @@ import io.vertigo.samples.vui.domain.MovieIndex;
 public final class MovieSearchLoader extends AbstractSqlSearchLoader<Long, Movie, MovieIndex> implements Activeable {
 
 	private final MovieServices movieServices;
-	private final SearchManager searchManager;
+	private final Optional<SearchManager> searchManager;
 	private SearchIndexDefinition indexDefinition;
 
 	@Inject
-	public MovieSearchLoader(final TaskManager taskManager, final SearchManager searchManager, final VTransactionManager transactionManager, final MovieServices movieServices) {
+	public MovieSearchLoader(final TaskManager taskManager, final Optional<SearchManager> searchManager, final VTransactionManager transactionManager, final MovieServices movieServices) {
 		super(taskManager, transactionManager);
 		this.searchManager = searchManager;
 		this.movieServices = movieServices;
@@ -33,7 +34,9 @@ public final class MovieSearchLoader extends AbstractSqlSearchLoader<Long, Movie
 
 	@Override
 	public void start() {
-		indexDefinition = searchManager.findFirstIndexDefinitionByKeyConcept(Movie.class);
+		if (searchManager.isPresent()) {
+			indexDefinition = searchManager.get().findFirstIndexDefinitionByKeyConcept(Movie.class);
+		}
 	}
 
 	@Override

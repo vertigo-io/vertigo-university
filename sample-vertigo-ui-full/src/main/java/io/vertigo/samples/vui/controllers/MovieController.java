@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import io.vertigo.samples.vui.domain.Country;
 import io.vertigo.samples.vui.domain.Movie;
 import io.vertigo.samples.vui.services.MovieServices;
 import io.vertigo.ui.core.ViewContext;
@@ -37,6 +38,7 @@ import io.vertigo.ui.impl.springmvc.controller.AbstractVSpringMvcController;
 public class MovieController extends AbstractVSpringMvcController {
 
 	private final ViewContextKey<Movie> movieKey = ViewContextKey.of("movie");
+	private final ViewContextKey<Country> countriesKey = ViewContextKey.of("countries");
 
 	@Inject
 	private MovieServices movieServices;
@@ -44,12 +46,14 @@ public class MovieController extends AbstractVSpringMvcController {
 	@GetMapping("/")
 	public void initContext(final ViewContext viewContext) {
 		viewContext.publishDto(movieKey, new Movie());
+		viewContext.publishMdl(countriesKey, Country.class, null);
 	}
 
 	@GetMapping("/{movId}")
 	public void initContext(final ViewContext viewContext, @PathVariable("movId") final Long movId) {
 		final Movie movie = movieServices.getById(movId);
 		viewContext.publishDto(movieKey, movie);
+		viewContext.publishMdl(countriesKey, Country.class, null);
 	}
 
 	@PostMapping("/_edit")

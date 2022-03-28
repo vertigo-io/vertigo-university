@@ -15,3 +15,4 @@ mdaConfig:
     vertigo.task: true
     vertigo.file: true
     vertigo.search: true
+    mermaid: true

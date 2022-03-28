@@ -21,6 +21,7 @@ package io.vertigo.samples.support;
 import io.vertigo.core.node.config.DefinitionProviderConfig;
 import io.vertigo.core.node.config.Features;
 import io.vertigo.datamodel.impl.smarttype.ModelDefinitionProvider;
+import io.vertigo.samples.support.config.SampleVuiMasterDataDefinitionProvider;
 import io.vertigo.samples.support.config.SampleVuiSmartTypes;
 import io.vertigo.samples.vui.domain.DtDefinitions;
 
@@ -36,8 +37,7 @@ public class SupportFeatures extends Features<SupportFeatures> {
 				.addDefinitionProvider(DefinitionProviderConfig.builder(ModelDefinitionProvider.class)
 						.addDefinitionResource("smarttypes", SampleVuiSmartTypes.class.getName())
 						.addDefinitionResource("dtobjects", DtDefinitions.class.getName())
-						.build());
-
+						.build())
+				.addDefinitionProvider(SampleVuiMasterDataDefinitionProvider.class);
 	}
-
 }

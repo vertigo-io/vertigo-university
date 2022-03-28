@@ -48,6 +48,8 @@ public final class Sexe implements DtStaticMasterData {
 	 * @return String label <b>Obligatoire</b>
 	 */
 	@Field(smartType = "STyLabelLong", cardinality = io.vertigo.core.lang.Cardinality.ONE, label = "Label")
+	@io.vertigo.datamodel.structure.stereotype.SortField
+	@io.vertigo.datamodel.structure.stereotype.DisplayField
 	public String getLabel() {
 		return label;
 	}

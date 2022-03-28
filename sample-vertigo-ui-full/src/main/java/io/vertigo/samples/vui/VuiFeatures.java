@@ -18,17 +18,35 @@
  */
 package io.vertigo.samples.vui;
 
-import io.vertigo.core.node.config.discovery.ModuleDiscoveryFeatures;
+import io.vertigo.core.node.config.Feature;
+import io.vertigo.core.node.config.Features;
+import io.vertigo.samples.vui.dao.ActorDAO;
+import io.vertigo.samples.vui.dao.MovieDAO;
+import io.vertigo.samples.vui.search.MovieIndexSearchClient;
+import io.vertigo.samples.vui.services.MovieSearchLoader;
+import io.vertigo.samples.vui.services.MovieServices;
 
-public class VuiFeatures extends ModuleDiscoveryFeatures<VuiFeatures> {
+public class VuiFeatures extends Features<VuiFeatures> {
 
 	public VuiFeatures() {
 		super("sample-vui");
 	}
 
+	@Feature("search")
+	public VuiFeatures withSearch() {
+		getModuleConfigBuilder().addComponent(MovieSearchLoader.class)
+				.addComponent(MovieIndexSearchClient.class);
+		return this;
+	}
+
 	@Override
-	protected String getPackageRoot() {
-		return this.getClass().getPackage().getName();
+	protected void buildFeatures() {
+		getModuleConfigBuilder()
+				.addComponent(MovieServices.class)
+				.addComponent(MovieDAO.class)
+				.addComponent(ActorDAO.class)
+				.addComponent(VuiPAO.class);
+
 	}
 
 }

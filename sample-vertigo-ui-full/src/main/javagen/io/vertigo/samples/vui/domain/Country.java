@@ -48,6 +48,8 @@ public final class Country implements Entity {
 	 * @return String name
 	 */
 	@Field(smartType = "STyLabel", label = "Nom du pays")
+	@io.vertigo.datamodel.structure.stereotype.SortField
+	@io.vertigo.datamodel.structure.stereotype.DisplayField
 	public String getName() {
 		return name;
 	}
