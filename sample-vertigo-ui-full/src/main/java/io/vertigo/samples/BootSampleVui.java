@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.vertigo.samples.support.boot;
+package io.vertigo.samples;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,6 +31,7 @@ import org.eclipse.jetty.webapp.WebAppClassLoader;
 import org.eclipse.jetty.webapp.WebAppContext;
 import org.springframework.web.SpringServletContainerInitializer;
 
+import io.vertigo.samples.support.boot.MultipartConfigInjectionHandler;
 import io.vertigo.samples.support.config.VuiVSpringWebApplicationInitializer;
 
 public final class BootSampleVui {
