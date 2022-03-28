@@ -72,4 +72,4 @@ Le rendu de la table sera réalisé coté client en vueJs. En vueJs, dans une ta
 
 12. Testez la page affichant la liste de *Movies*.
 
-[Suite : Level 2 - Ecran de détail ]
+[Suite : Level 2 - Ecran de détail ](./Level2.md)
