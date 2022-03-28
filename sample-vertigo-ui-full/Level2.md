@@ -21,7 +21,7 @@ En `Post`, nous utilisons majoritairement la mise à jour d'un élément du cont
 
 Par défaut les paramètres attendus sont considérés obligatoires, mais il est possible de les déclarer `Optional<>` si besoin.
 
-### A connaitre : Rendu en grille
+### A connaitre : Composants
 
 Le composant `vu:form` : Déclare un formulaire. Le body est utilisé.
 
