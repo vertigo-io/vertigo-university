@@ -1,4 +1,4 @@
-# Vertigo Ui university
+# Vertigo Ui University
 
 Vertigo-UI is built over Vue.js, Quasar and SpringMVC with Thymeleaf.
 
@@ -14,19 +14,23 @@ Les exercices ci-dessous portent sur VertigoUi, pour cela la structure de projet
 
 *Note: Il est préférable de suivre les exercices dans l'ordre.*
 
-#Level 0 - Préparation de l'environnement
+# Level 0 - Préparation de l'environnement
 
 1. Récupérer les sources du github [vertigo-io/vertigo-university/sample-vertigo-ui](https://github.com/vertigo-io/vertigo-university/tree/master/sample-vertigo-ui)
 2. Créer le projet Eclipse (Import Maven Project)
 3. Démarrer l'application `Run Application BootSampleVui` *(dans /vertigo-sample-vertigo-ui-full/src/main/java/io/vertigo/samples/BootSampleVui.java)*
 4. Vérifier le fonctionnement [http://localhost:18080/sample/home/](http://localhost:18080/sample/home/)
 
+Dans le web.xml, remarquez le Listener utilisé, et le paramètre `boot.applicationConfiguration`.
 
-#Level 1 - Liste simple
+Retrouvez la classe `VuiVSpringWebApplicationInitializer` : c'est le point de départ de l'initialisation de SpringMVC.
+Il référence la classe `VuiVSpringWebConfig`. Elle porte les annotations de scan de SpringMVC `@ComponentScan` : une ligne par package, il n'y a pas de scan des sous packages. Elle contient les points de hook pour le paramétrage avancé de SpringMVC et VertigoUi.
+
+# Level 1 - Liste simple
 
 Pour commencer, nous allons construire une liste simple.
 
-**Eléments**
+## Eléments
 
 Route : [http://localhost:18080/sample/movies/](http://localhost:18080/sample/movies/)
 Controller : /src/main/java/io/vertigo/samples/vui/controllers/MoviesController
