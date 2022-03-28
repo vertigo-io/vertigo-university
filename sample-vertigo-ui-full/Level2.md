@@ -37,10 +37,11 @@ Ce composant a un rendu différent en fonction du mode.
 1. Déclarez une clé de context "movie" de type Movie.
 2. Créez un initContext récupérant l'identifiant dans le Path de la route.
 3. Dans le initContext chargez le movie à partir de l'id avec le service `MovieServices.getById`.
-1. Créez le fichier de la vue en copiant et modifiant le **home.html**
-1. Ajoutez un formulaire `<vu:form>`.
-2. Ajouter des champs text sur movId, name, year et couId
-3. Consulter la page de détail d'un film.
-4. Consulter la source de la page. Recherchez la balise script id="vui-init-data" et regardez son contenu.
+4. Publiez la liste dans le context.
+5. Créez le fichier de la vue en copiant et modifiant le **home.html**
+6. Ajoutez un formulaire `<vu:form>`.
+7. Ajouter des champs text sur movId, name, year et couId
+8. Consulter la page de détail d'un film.
+9. Consulter la source de la page. Recherchez la balise script id="vui-init-data" et regardez son contenu.
 
 [Suite : Level 2.1 - Ecran de détail - Liste de référence des pays](./Level2.1.md)
