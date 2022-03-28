@@ -68,3 +68,10 @@ La méthode de sauvegarde doit récupérer les données postées : utiliser le `
 12. Consulter la source de la page. Recherchez la balise script id="vui-init-data" et regardez son contenu.
 
 [Suite : Level 2.3 - Ecran de détail - Compléments](./Level2.3.md)
+
+### Optionnel : Ajouter l'écran de creation
+
+1. Ajouter le bouton dans la liste de Movies
+2. Dans le controller de détail, ajouter un initContext dédié, et utiliser le mode Create
+3. Modifier la vue pour afficher les bons composants dans le modeCreate
+4. Permettre la creation d'un Movie (l'identifiant est issu d'une séquence en base de donnée)
