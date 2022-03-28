@@ -15,7 +15,7 @@ Use the PowerPoint and walkthrough documentation provided in each sample for mor
 * __sample-component__ : learn how to build components and use the dependency injection mechanism
 * __sample-dao__ : learn how to master access to your app data (SQL oriented)
 * __sample-stream__ : learn how to efficiently use java 8 streams in your source code
-* __sameple-vega__ : learn how to create and publish REST webservices in your app
+* __sample-vega__ : learn how to create and publish REST webservices in your app
 * __sample-notifications__ : learn how to send notifications to users
 
 # Additional note for [Eclipse](https://www.eclipse.org/) users
