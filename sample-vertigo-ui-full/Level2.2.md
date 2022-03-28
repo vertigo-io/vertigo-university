@@ -50,10 +50,10 @@ La méthode de sauvegarde doit récupérer les données postées : utiliser le `
 
 ```Java
   @PostMapping("/_edit")
-	public void doEdit() {
+  public void doEdit() {
 
-	@PostMapping("/_save")
-	public String doSave(@ViewAttribute("movie") final Movie movie) {
+  @PostMapping("/_save")
+  public String doSave(@ViewAttribute("movie") final Movie movie) {
 ```
 
 2. Dans la méthode de passage en mode édit, utiliser le `toModeEdit`. Il n'y a rien à retourner, à la fin d'une méthode d'action la page est rafraichie.
@@ -63,9 +63,9 @@ La méthode de sauvegarde doit récupérer les données postées : utiliser le `
 6. Ajoutez un second bouton pour sauvegarder. Celui-ci ne doit s'afficher qu'en mode edit (`th:if="${model.modeEdit}"`)
 7. Ajoutez un troisième bouton pour annuler losrque l'on est en édition. Celui-ci recharge la page, on utilisera un `bouton-link` avec une url adaptée : `@{/movie/} + ${model.movie.getLong('movId')}`
 9. Consultez la page de détail d'un film et faites quelques essais.
-10. Pour éviter de modifier l'identifiant, forcez le champ movId en mode readOnly.
+10. Pour éviter de modifier l'identifiant, forcez le champ `movId` en mode readOnly.
 11. Retourner sur la page, notez le comportement en cas d'erreur de saisie sur les champs.
-12. Consulter la source de la page. Recherchez la balise script id="vui-init-data" et regardez son contenu.
+12. Consulter la source de la page. Recherchez la balise script `id="vui-init-data"` et regardez son contenu.
 
 [Suite : Level 2.3 - Ecran de détail - Compléments](./Level2.3.md)
 
