@@ -33,7 +33,9 @@ La vue est produite coté server avec l'outil de templating Thymeleaf.
 Nous préconisons l'usage des [layouts Thymeleaf](https://vertigo-io.github.io/vertigo-docs/#/extensions/ui?id=moteur-de-layout-thymeleaf-layout).
 Les composants vertigo permettent une mutualisation et une simplification des composants graphiques riches de Quasar. Ils sont préfixés par `vu:` *(plus tard `vui:` pour lever l'ambiguité avec vueJs)*
 
-Le composant *vu:table* nécessite le paramètre *list* et contient des *vu:column* précisant le *field*.
+Le composant *vu:table* nécessite le paramètre *list* et contient des *vu:column*.
+
+Le composant *vu:column* nécessite le paramètre *field*.
 
 Le body de la *column* permet d'avoir un rendu spécifique. Cela agit coté serveur comme un scope.
 Le rendu de la table sera réalisé coté client en vueJs. En vueJs, dans une table, `props.row` permet d'accéder à l'objet de la vue *(il faut s'assurer que les champs sont chargés)*
