@@ -13,11 +13,11 @@
 			<div>
 			<h2>Movies</h2>
 			<vu:table list="movies" componentId="movieTable" >
-				<vu:column field="movId" >
+				<vu:column field="movId">
 					<a th::href="|'@{/movie/}'+props.row.movId|" >{{props.row.movId}}</a>
 				</vu:column>
-				<vu:column field="name" sortable="true" />
-                <vu:column field="year" sortable="true" />
+				<vu:column field="name" />
+				<vu:column field="year" />
 			</vu:table>
 			</div>
 		</section>

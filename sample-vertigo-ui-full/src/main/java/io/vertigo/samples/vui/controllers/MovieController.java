@@ -47,6 +47,7 @@ public class MovieController extends AbstractVSpringMvcController {
 	public void initContext(final ViewContext viewContext) {
 		viewContext.publishDto(movieKey, new Movie());
 		viewContext.publishMdl(countriesKey, Country.class, null);
+		toModeCreate();
 	}
 
 	@GetMapping("/{movId}")
