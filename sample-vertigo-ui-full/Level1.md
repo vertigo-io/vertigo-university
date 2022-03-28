@@ -11,7 +11,7 @@ Pour commencer, nous allons construire une liste simple.
 
 ### A connaitre : Création du controller
 
-Vous remarquez que nous appliquons une règle de nommage pour garder une cohérence entre le nom du controller, la route web et le fichier de la vue (thymeleaf)
+Vous remarquez que nous appliquons une règle de nommage pour garder une cohérence entre le nom et le package du controller, la route web et le fichier de la vue (en thymeleaf)
 
 Pour construire le controller :
 - le controller hérite de io.vertigo.ui.impl.springmvc.controller.AbstractVSpringMvcController.
@@ -21,6 +21,9 @@ Pour construire le controller :
   - `@GetMapping` : Précise le suffix de la route associée à une méthode, commence toujours par **/**
 - le context du controller à un scope sur la page. Il est décrit par des attributs `private final ViewContextKey<...> = ViewContextKey.of("...")`. 
 Le context est injecté automatiquement par Spring dans les méthodes du controller avec un attribut : `final ViewContext viewContext`
+- l'annotation standard `@Inject` *(javax.inject.Inject)*, permet l'injection des services Vertigo. Par convention et par respect des bonnes pratiques, seuls les Services doivent être injectés dans les Controllers (en favorisant l'injection d'un minimum de services et seulement les services du même module).
+
+**Rappel** : La transaction est portée par la méthode du service (avec l'annotation `@Transactional` par AOP)
 
 Par convention, les controlleurs VertigoUi ont :
 - une ou plusieurs méthodes `initContext` accessibles en `Get`. Les routes `Get` sont dans l'esprit des services REST (orientés ressources). Elles peuvent prendre des paramètres si nécessaire.
