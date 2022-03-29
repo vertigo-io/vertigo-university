@@ -47,4 +47,4 @@ Ce composant a un rendu différent en fonction du mode.
 8. Consulter la page de détail d'un film.
 9. Consulter la source de la page. Recherchez la balise script id="vui-init-data" et regardez son contenu. Dans la console, consulter le vueData avec la commande `VUiPage.vueData`
 
-[Suite : Level 2.1 - Ecran de détail - Liste de référence des pays](./Level2.1.md)
+# [Suite : Level 2.1 - Ecran de détail - Liste de référence des pays](./Level2.1.md)

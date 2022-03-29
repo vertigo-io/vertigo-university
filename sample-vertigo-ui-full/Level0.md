@@ -18,4 +18,4 @@ Retrouver et regardez le fichier mermaid-io-vertigo-samples-vui.html, il est gé
 
 La class `io.vertigo.samples.support.mda.StudioGenerate` permet de lancer la génération de Studio. Toutefois dans la suite de ces exercices vous n'en n'aurez pas besoin, nous resterons concentré sur VertigoUi.
 
-[Suite : Level 1 - Liste simple](./Level1.md)
+# [Suite : Level 1 - Liste simple](./Level1.md)

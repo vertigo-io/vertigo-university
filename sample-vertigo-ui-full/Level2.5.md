@@ -39,7 +39,7 @@ tr_@click.native="|goTo('@{/movie/}'+props.row.movId)|"
 ```
 3. Consulter la page et observer le comportement
 
-[Suite : Level 2.6 - Gestion des slots](./Level2.6.md)
+# [Suite : Level 2.6 - Gestion des slots](./Level2.6.md)
 
 ### Optionnel : Creation de l'écran de détail d'acteur
 

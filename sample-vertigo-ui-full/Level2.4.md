@@ -46,4 +46,4 @@ Pour ajouter le tri des roles dans film, nous allons ajouter un tri spécial sur
 4. Dans la vue de l'écran de détail, sur la liste des roles ajouter le `sortUrl` sur la table
 5. Consulter la page et observer le comportement
 
-[Suite : Level 2.5 - Attributs complémentaires et évènements](./Level2.5.md)
+# [Suite : Level 2.5 - Attributs complémentaires et évènements](./Level2.5.md)

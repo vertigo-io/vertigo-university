@@ -67,7 +67,7 @@ La méthode de sauvegarde doit récupérer les données postées : utiliser le `
 11. Retourner sur la page, notez le comportement en cas d'erreur de saisie sur les champs.
 12. Consulter le contenu du `vueData` (balise script `id="vui-init-data"` ou VUiPage.vueData).
 
-[Suite : Level 2.3 - Ecran de détail - Compléments](./Level2.3.md)
+# [Suite : Level 2.3 - Ecran de détail - Compléments](./Level2.3.md)
 
 ### Optionnel : Ajouter l'écran de creation
 

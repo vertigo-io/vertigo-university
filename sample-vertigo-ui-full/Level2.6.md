@@ -44,4 +44,4 @@ Pour illustrer le principe nous allons ajouter une confirmation sur l'enregistre
 4. Etudier dans le composant `button-submit.html`, les différentes options pour ajouter une confirmation. Vous remarquerez qu'il y a beaucoup plus simple.
 5. Consulter la page et observer le comportement.
 
-[Suite : Level 3 - Recherche](./Level3.md)
+# [Suite : Level 3 - Recherche](./Level3.md)

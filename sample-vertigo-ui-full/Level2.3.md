@@ -35,4 +35,4 @@ Le composant `vu:select`, comme les autres composants de formulaire ne peuvent p
 4. Dans la vue, utiliser le composant `vu:field-read` pour résoudre le actId en nom de l'acteur.
 6. Consulter la page de détail. Consulter le contenu du `vueData`.
  
-[Suite : Level 2.4 - Ecran de détail - Tri spécifique coté serveur](./Level2.4.md)
+# [Suite : Level 2.4 - Ecran de détail - Tri spécifique coté serveur](./Level2.4.md)
