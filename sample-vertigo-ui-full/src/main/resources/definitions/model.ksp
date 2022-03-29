@@ -3,8 +3,6 @@ package io.vertigo.samples.vui.domain
 create DtDefinition DtCountry {
   id couId {domain: DoId label: "Id" }
   field name {domain: DoLabel label: "Nom du pays" }
-  sortField : "name"
-  displayField : "name"
 }
 
 create DtDefinition DtMovie {
@@ -81,7 +79,7 @@ create Association ARolAct {
 }
 
 create Association AActSex {
-  fkFieldName : "sexCd"
+  fkFieldName : "sexe"
     
  	dtDefinitionA : DtActor
 	labelA : "Actor"

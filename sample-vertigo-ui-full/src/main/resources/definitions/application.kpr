@@ -2,12 +2,12 @@ domains.ksp
 
 model.ksp
 modelUser.ksp
-modelSearch.ksp
+search/modelSearch.ksp
 
 alter.ksp
 
-searchMovie.ksp
+search/searchMovie.ksp
 
 dao.ksp
-daoSearch.ksp
+search/daoSearch.ksp
 

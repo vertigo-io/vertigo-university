@@ -1,138 +1,386 @@
 /******** CSS SPECIFIQUE A CERTAINES PAGES *******/
-
-nav a {
-	text-decoration: none;
-	
+:root {
+    --v-color-body-background: #f5f5f5;
+    --v-color-body-color: #0c0c0c;
+    /*--q-color-primary: #027be3;
+    --q-color-secondary:#fad9c2;*/
+    --q-primary: #027be3;
+    --q-primary-invert: rgba(255, 255, 255, 0.9);
+    --q-secondary:#00BCD4;
+    --q-secondary-invert: rgba(255, 255, 255, 0.9);
+    --q-accent: #B2EBF2;
+    --q-accent-invert:  rgba(60, 60, 60, 0.8);
+    
+    
+    /*--q-color-primary:#2196F3;
+    --q-color-secondary:#64B5F6;
+    --q-color-tertiary: #BBDEFB;*/
+    
+    --q-positive:   #21BA45;
+    --q-negative:   #DB2828;
+    --q-info:       #31CCEC;    
+    --q-warning:    #F2C037;  
 }
 
+body {
+  background: white !important;
+  background: var(--v-color-body-background) !important;
+  color: var(--v-color-body-color) !important;
+}
+
+img {
+  /* needed, else there is a bottom-margin like for text */ 
+  display: block;
+}
+
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #ddd; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #ccc; 
+}
+
+.container-bottom-padding {
+    padding-bottom: 64px;
+}
+
+body.login {
+    background: fixed url(../img/bcf60b99d4_121619_mars-bfrs.jpg) center / cover no-repeat !important;
+}
+
+.login #page > div {
+    height:100vh;
+}
+
+.login .title {
+    position: absolute;
+    top: 0;
+}
+
+.login .title img {
+    width:90vw;
+    max-width:700px;
+}
+.login form {
+    background: rgba(255, 255, 255, 0.8);
+    -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.2), 0 1px 1px rgba(0,0,0,0.14), 0 2px 1px -1px rgba(0,0,0,0.12);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2), 0 1px 1px rgba(0,0,0,0.14), 0 2px 1px -1px rgba(0,0,0,0.12);
+    padding : 20px;
+    display:inline-block;
+    margin: auto;
+    min-width: 400px;
+}
+
+/*
+.q-list {
+    border: none;
+}
+ 
 .q-item-side {
-	text-align: center;	
+    text-align: center;
+}
+*/
+
+.mini br {
+  display: none;
 }
 
-a.q-item {
-	color: #737373;	
+.mini br + span:before { /* means : all span juste after a br, are prefixed with ' - ' */
+    content : '\00a0-\00a0';
+    /*font-size:1.5em;*/
 }
 
-/* --------------------------- PAGE LOGIN ------------------------------ */
-
-/*  Cadre � taille fixe et centr� contenant les �l�ments du login */
-.pageLogin .cadre-login{
-          background-image: url('../img/gestim/login/bg_login_gestim.jpg');
-          background-repeat: no-repeat;
-      background-position: center; 
-      height : 640px;
-      width: 960px;
-      margin-left: auto;
-      margin-right: auto;
-      position : relative;
-}
-/* Placement du titre principal */
-.pageLogin h1 {
-        font-size : 80px;
-        position: absolute;
-        right: 246px;
-        top: 30px;
-    color: #FAFAFA;
-}
-/* Placement du titre secondaire */
-.pageLogin h2 {
-        position: absolute;
-        right: 120px;
-        top: 134px;
-    color: #FAFAFA;
-}
-/* Formulaire avec le cadre plac� en bas � droite */
-.pageLogin form {
-        width: 100%;
-        max-width: 500px;
-        position: absolute;
-        right: 10px;
-        bottom: 156px;
-    background-color: #FAFAFA;
-    padding : 8px;
-    background : linear-gradient(to bottom, #fdfdfd,#dff0fa);
-}
-/* R�duction du padding de base des colonnes pour que tout rentre dans le cadre*/
-.pageLogin form .form-group {
-        padding-right: 10px;
-        padding-left : 10px;
-}
-/* Ajout de l'image � droite de "identifiant" et "mot de passe" */
-.pageLogin form .login-field label {
-        background-image: url('../img/gestim/login/login_col_entete.png');
-        background-repeat: no-repeat;
-        background-position: bottom right; 
-        width: 100%;
-}
-/* Image devant la ligne login/pass */
-.pageLogin form .login-lig-entete {
-        background-image: url('../img/gestim/login/login_lig_entete.png');
-        background-repeat: no-repeat;
-        background-size: 32px 42px;
-        background-position: bottom right; 
-        height : 60px;
-}
-/* Ressere le bouton de confirmation de login pour qu'il reste dans le cadre */
-.pageLogin form .login-btn {
-        padding-left : 0px;
-}
-/* Message de blocage, positionn� en bas a droite du cadre de login */
-.pageLogin .message-blocage {
-        position: absolute;
-        bottom: 84px;
-        right: 0;
-        width: 480px;
-        color: #003584;
-}
-/* Message de d�connexion ou d'erreur de saisie, positionn� au dessus de la mire de la login */
-.pageLogin .messages {
-        position: absolute;
-        right: 10px;
-        bottom: 235px;
-        width: 500px;
+.dense-list-header .q-list-header+.q-item
+{ /*q-item after a q-list-header is nearer*/
+   margin-top: -12px;
 }
 
-/* --------------------- PAGE VERROUILLAGE / DEVERROUILLAGE PREVISIONS  ---------------------- */
-th#th-cocher-decocher{
-        white-space: initial;
+.detailType, .detailType img {
+    height: 140px;
+    border-radius: 50%;
 }
-div#div-cocher-decocher {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: baseline;
+.detailImg, .detailImg img {
+    height: 100%;
 }
 
-/*-------------------------------------------  MESSAGES PAGE D'ACCUEIL */
-
-.accueil .message {
-        width: 100%;
-        align-items: center; /* centrage v*/
-        justify-content: center; /* Centrage horizontal */
-        margin-bottom: 10px;
-        border-radius: 4px;
-        overflow: hidden;
-        padding : 5px;
+.detailTypeIcon {
+    height: 120px;
+    width: 120px;
+    font-size: 70px;
+    border-radius: 50%;
+    background-color: white;
+    color: black;
+    border: 4px solid black;
+}
+.detailType {
+    line-height: 150px;
+}
+.mini .detailTypeIcon {
+    height: 40px;
+    width: 40px;
+    font-size: 23px;
+    border-width: 2px;
+}
+.mini .detailType {
+    line-height: 50px;
+}
+.image-gallery .q-carousel-quick-nav,
+.image-gallery .q-carousel-left-arrow,
+.image-gallery .q-carousel-right-arrow  {
+    background: rgba(255,255,255,.3);
 }
 
-.accueil .message-dsnj {
-        border: 1px solid #094791;
-        background-color: rgba(207, 160, 233, 0.4);
+.image-gallery .q-carousel-slide {
+    text-align:center;
+    padding: 0px;
 }
-.accueil .message-dsnj-esn {
-        border: 1px solid #094791;
-        background-color: rgba(254, 248, 108, 0.4);
+
+.image-gallery img {
+    height:296px;
+    width:100%;
+    object-fit:contain;
 }
-.accueil .message-dsnj-csn {
-        border: 1px solid #094791;
-        background-color: rgba(196, 196, 196, 0.4);
+
+.nav {
+    cursor: pointer;
 }
-.accueil .message-esn-csn {
-        border: 1px solid #094791;
-        background-color: rgba(144, 238, 144, 0.4);
+
+nav .q-list, .nav .q-list {
+    padding: 0;
+}
+
+.q-card .nav>div:first-child {
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+}
+
+nav a, .nav a {
+    text-decoration: none;  
+}
+
+nav.scroll-spy-nav a {
+    border-left-width:3px;
+    border-left-style:solid;
+    border-left-color:lightgrey;        
 }
 
 
-.v-nalList {
-    height:100%
+nav.scroll-spy-nav a.q-item.active {
+    border-left-color:var(--q-color-primary);   
+    color: var(--q-color-primary) !important;
+    background: hsla(0,0%,74.1%,.4);
 }
+
+nav a.q-item, .nav a.q_item {
+    color: grey;
+    align-items: center; /** replaced using q-item-section every times */
+}
+
+/*
+.q-list-link .q-item:hover {
+    background: lightgrey;
+}
+
+
+
+.q-list-link> .q-item.no-hoverable {
+    cursor:default; 
+}
+
+.q-list-link> .q-item.no-hoverable:hover {
+    background: none;
+}
+*/
+
+.q-page-sticky.fixed-bottom-right {
+    margin: 50px 3vw;
+}
+
+
+.marsCard .q-card {
+    width:100%; 
+    /*transition: translate .2s, box-shadow .2s, -webkit-box-shadow .2s;*/
+}
+
+.marsCard .q-card .q-img {
+    height: 250px;
+    object-fit: cover;    
+}
+
+
+.marsCard:hover .q-card  {
+    transform: translate(0,-5px);
+    -webkit-box-shadow: 3px 7px 5px rgba(0,0,0,.2), 1px 3px 2px rgba(0,0,0,.14), 0px 1px 1px -2px rgba(0,0,0,.12);
+            box-shadow: 3px 7px 5px rgba(0,0,0,.2), 1px 3px 2px rgba(0,0,0,.14), 0px 1px 1px -2px rgba(0,0,0,.12);
+}
+
+.q-table tr:hover td {
+    overflow: visible; 
+    white-space: normal;
+    /*height:auto;  /* just added this line */
+}
+
+
+.q-table td, .q-table th {
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.q-table th {
+    padding: 16px; /** same as block */
+}
+
+.q-table th.sortable:hover, .q-table th.sorted {
+    opacity: 0.96;
+}
+
+.q-table th.sortable {
+    opacity: 0.66;
+}
+
+@media (min-width: 1500px) {
+.row  .marsCard {
+    width: 25%;
+}}
+
+.fullHeight {
+    height:100%;
+}
+
+.m-title {
+    color: var(--q-color-primary);
+    text-transform:uppercase;
+}
+
+.small-caps {
+    font-variant: small-caps;
+}
+
+.header-content {
+    height: 160px;
+    position: relative;
+    z-index: 10;
+}
+
+@media (min-width: 1500px) {
+.header-content {
+    height: 150px;
+}}
+
+.mini .header-content {
+    height: 50px;
+}
+
+.header-content > div {
+    height: 100%;
+}
+
+.header-tabs a.active {
+    color: black;
+}
+
+.header-tabs a.active .q-btn__content {
+    padding-top: 3px;
+    border-bottom: 3px solid black;
+}
+
+.header-tabs {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.text-bigger{
+    font-size: 170%;
+}
+
+.text-smaller{
+    font-size: 80%;
+}
+
+
+.image-gallery-modal .modal-body {
+    max-height: 80%
+}
+
+/** Home **/
+.indicator {
+    font-size: 3em;
+}
+
+.indicator-title {
+    font-size: 1.5em;
+    font-variant: small-caps;
+}
+
+
+/**Orchestra***/
+
+.execution-summary > div {
+        width: 32px;
+        margin: 5px 10px;
+        text-align: center;
+}
+
+.execution-summary span {
+    vertical-align: middle;
+    line-height: 32px;
+    font-size:1rem;
+}
+
+.version-watermark {
+    color: lightgrey;
+    margin: 10px 20px;
+}
+.version-watermark img {
+    opacity: 0.3;
+    filter: alpha(opacity=30); /* For IE8 and earlier */
+}
+.poweredBy {
+    font-style: italic;
+}
+
+.poweredBy img {
+    width:40%;
+}
+/*
+.q-stepper.noContent > .q-stepper-step > .q-stepper-step-content {
+    display: none;
+} 
+*/
+.vertical-separator {
+    border-right: 1px solid #e5e5e5;
+    width: 1px;
+    margin: -0.2em 10px;
+    height: 100%;
+}
+
+/**
+tr th.dom_id:nth-child(1){
+ display:none;
+}*/
+
+
+#view-flexbox{margin-top:30px;max-width:95vw}#view-flexbox .column>div>div,#view-flexbox .flex>div>div,#view-flexbox .row>div>div{padding:10px;border-radius:3px;background:hsla(31,15%,50%,.1);text-align:center}#view-flexbox.with-border .column,#view-flexbox.with-border .flex,#view-flexbox.with-border .row{border:2px solid teal}#view-flexbox.with-border .column>div,#view-flexbox.with-border .flex>div,#view-flexbox.with-border .row>div{border:1px dashed orange}
+
+.q-avatar__content, .q-avatar img:not(.q-icon) {
+    width: initial !important;
+}
+

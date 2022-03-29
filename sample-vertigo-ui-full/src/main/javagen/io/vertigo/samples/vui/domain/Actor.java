@@ -20,7 +20,7 @@ public final class Actor implements Entity {
 
 	@io.vertigo.datamodel.structure.stereotype.Association(
 			name = "AActSex",
-			fkFieldName = "sexCd",
+			fkFieldName = "sexe",
 			primaryDtDefinitionName = "DtSexe",
 			primaryIsNavigable = true,
 			primaryRole = "Sexe",
@@ -31,7 +31,7 @@ public final class Actor implements Entity {
 			foreignRole = "Actor",
 			foreignLabel = "Actor",
 			foreignMultiplicity = "0..*")
-	private final EnumStoreVAccessor<io.vertigo.samples.vui.domain.Sexe, io.vertigo.samples.vui.domain.SexeEnum> sexCdAccessor = new EnumStoreVAccessor<>(io.vertigo.samples.vui.domain.Sexe.class, "Sexe", io.vertigo.samples.vui.domain.SexeEnum.class);
+	private final EnumStoreVAccessor<io.vertigo.samples.vui.domain.Sexe, io.vertigo.samples.vui.domain.SexeEnum> sexeAccessor = new EnumStoreVAccessor<>(io.vertigo.samples.vui.domain.Sexe.class, "Sexe", io.vertigo.samples.vui.domain.SexeEnum.class);
 
 	/** {@inheritDoc} */
 	@Override
@@ -80,20 +80,20 @@ public final class Actor implements Entity {
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Récupère la valeur de la propriété 'Sexe'.
-	 * @return String sexCd
+	 * @return String sexe
 	 */
 	@io.vertigo.datamodel.structure.stereotype.ForeignKey(smartType = "STyCode", label = "Sexe", fkDefinition = "DtSexe" )
-	public String getSexCd() {
-		return (String) sexCdAccessor.getId();
+	public String getSexe() {
+		return (String) sexeAccessor.getId();
 	}
 
 	/**
 	 * Champ : FOREIGN_KEY.
 	 * Définit la valeur de la propriété 'Sexe'.
-	 * @param sexCd String
+	 * @param sexe String
 	 */
-	public void setSexCd(final String sexCd) {
-		sexCdAccessor.setId(sexCd);
+	public void setSexe(final String sexe) {
+		sexeAccessor.setId(sexe);
 	}
 
  	/**
@@ -101,7 +101,7 @@ public final class Actor implements Entity {
 	 * @return l'accesseur vers la propriété 'Sexe'
 	 */
 	public EnumStoreVAccessor<io.vertigo.samples.vui.domain.Sexe, io.vertigo.samples.vui.domain.SexeEnum> sexe() {
-		return sexCdAccessor;
+		return sexeAccessor;
 	}
 	
 	/** {@inheritDoc} */

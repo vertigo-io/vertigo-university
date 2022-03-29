@@ -5,4 +5,9 @@ alter DtDefinition DtSexe {
   stereotype : "StaticMasterData"
 }
 
+alter DtDefinition DtCountry {
+  sortField : "name"
+  displayField : "name"
+}
+
 

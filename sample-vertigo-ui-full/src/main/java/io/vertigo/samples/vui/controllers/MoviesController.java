@@ -21,6 +21,7 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import io.vertigo.datamodel.structure.model.DtListState;
@@ -44,4 +45,9 @@ public class MoviesController extends AbstractVSpringMvcController {
 		viewContext.publishDtList(moviesKey, movieServices.getMovies(DtListState.defaultOf(Movie.class)));
 	}
 
+	@PostMapping("/_sort")
+	public ViewContext sort(final ViewContext viewContext, final DtListState dtListState) {
+		viewContext.publishDtList(moviesKey, movieServices.getMovies(dtListState));
+		return viewContext;
+	}
 }

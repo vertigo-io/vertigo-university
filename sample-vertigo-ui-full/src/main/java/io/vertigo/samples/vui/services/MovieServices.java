@@ -1,5 +1,6 @@
 package io.vertigo.samples.vui.services;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
@@ -21,15 +22,16 @@ import io.vertigo.datafactory.search.model.SearchQueryBuilder;
 import io.vertigo.datamodel.criteria.Criterions;
 import io.vertigo.datamodel.structure.model.DtList;
 import io.vertigo.datamodel.structure.model.DtListState;
+import io.vertigo.datamodel.structure.model.DtObject;
+import io.vertigo.datamodel.structure.util.VCollectors;
+import io.vertigo.datastore.entitystore.EntityStoreManager;
 import io.vertigo.samples.vui.VuiPAO;
 import io.vertigo.samples.vui.dao.ActorDAO;
 import io.vertigo.samples.vui.dao.MovieDAO;
 import io.vertigo.samples.vui.domain.Actor;
-import io.vertigo.samples.vui.domain.Country;
 import io.vertigo.samples.vui.domain.Movie;
 import io.vertigo.samples.vui.domain.MovieIndex;
 import io.vertigo.samples.vui.domain.Role;
-import io.vertigo.samples.vui.domain.SexeEnum;
 import io.vertigo.samples.vui.search.MovieIndexSearchClient;
 
 @Transactional
@@ -48,6 +50,9 @@ public class MovieServices implements Component {
 	@Inject
 	private Optional<SearchManager> searchManager;
 
+	@Inject
+	private EntityStoreManager entityStoreManager;
+
 	public Movie getById(final Long movId) {
 		Assertion.check().isNotNull(movId);
 		//---
@@ -55,7 +60,7 @@ public class MovieServices implements Component {
 	}
 
 	public DtList<Movie> getMovies(final DtListState dtListState) {
-		return movieDAO.findAll(Criterions.alwaysTrue(), dtListState);
+		return movieDAO.findAll(Criterions.alwaysTrue(), dtListState.withDefault(250, null, null));
 	}
 
 	public void save(final Movie movie) {
@@ -98,35 +103,9 @@ public class MovieServices implements Component {
 		return movieDAO.getMoviesInCountries(countryIds);
 	}
 
-	public void manipulateAccessors(final Long movId) {
-		final Movie movie = getById(movId);
-		//--- entity
-		//----- read-------
-		LogManager.getLogger(this.getClass()).info("country accessor isLoaded : " + movie.country().isLoaded());
-		movie.country().load();
-		LogManager.getLogger(this.getClass()).info("country accessor isLoaded : " + movie.country().isLoaded());
-		final Country country = movie.country().get();
-		//----- write-------
-		movie.country().setId(null);
-		LogManager.getLogger(this.getClass()).info("country accessor isLoaded : " + movie.country().isLoaded());
-		movie.country().set(country);
-		LogManager.getLogger(this.getClass()).info("country accessor isLoaded : " + movie.country().isLoaded());
-		//--- list
-		//--- read only
-		movie.role().load();
-		movie.role().get();
-
-	}
-
 	public Movie loadMovieWithRoles(final Long movId) {
 		final Movie movie = getById(movId);
 		movie.role().load();
-		return movie;
-	}
-
-	public Movie loadMovieWithRolesAndReset(final Long movId) {
-		final Movie movie = loadMovieWithRoles(movId);
-		movie.role().reset();
 		return movie;
 	}
 
@@ -139,14 +118,76 @@ public class MovieServices implements Component {
 		return movie.role().get();
 	}
 
-	public long countMaleActorsInMovie(final Long movId) {
+	public DtList<Actor> getActorsByMovie(final Long movId) {
 		Assertion.check().isNotNull(movId);
 		//---
-		final DtList<Actor> actors = actorDAO.getActorsByMovie(movId);
+		return actorDAO.getActorsByMovie(movId);
+	}
 
-		return actors.stream()
-				.filter(actor -> actor.sexe().getEnumValue() == SexeEnum.male)
-				.count();
+	public DtList<Role> sortRoles(final DtList<Role> roles, final DtListState dtListState) {
+		DtList<Role> sortedList;
+		if (dtListState.getSortFieldName().isPresent() && dtListState.getSortFieldName().get().equals("asCharacter")) {
+			sortedList = roles;
+			final Comparator<Role> comparator = new Comparator<>() {
+				@Override
+				public int compare(final Role o1, final Role o2) {
+					final int sortDesc = dtListState.isSortDesc().orElse(false) ? 1 : -1;
+					final int order1 = extractOrder(o1.getAsCharacter());
+					final int order2 = extractOrder(o2.getAsCharacter());
+					if (order1 == order2) {
+						return o1.getAsCharacter().compareToIgnoreCase(o2.getAsCharacter()) * sortDesc;
+					} else if (order1 == -1) {
+						return sortDesc;
+					} else if (order2 == -1) {
+						return -sortDesc;
+					}
+					return (order1 - order2) * sortDesc;
+				}
+
+				private int extractOrder(final String asCharacter) {
+					final int begin = asCharacter.indexOf('<');
+					final int end = asCharacter.indexOf('>', begin);
+					if (begin > 0 && end > 0) {
+						return Integer.parseInt(asCharacter.substring(begin + 1, end));
+					}
+					return -1;
+				}
+			};
+			sortedList = roles.stream()
+					.sorted(comparator)
+					.collect(VCollectors.toDtList(roles.getDefinition()));
+		} else {
+			sortedList = applySort(roles, dtListState);
+		}
+		return applyPagination(sortedList, dtListState.withDefault(250, null, null));
+	}
+
+	/*private <D extends DtObject> DtList<D> applySortAndPagination(final DtList<D> unFilteredList, final DtListState dtListState) {
+		final DtList<D> sortedList = applySort(unFilteredList, dtListState);
+		return applyPagination(sortedList, dtListState);
+	}*/
+
+	private <D extends DtObject> DtList<D> applySort(final DtList<D> unFilteredList, final DtListState dtListState) {
+		final DtList<D> sortedList;
+		if (dtListState.getSortFieldName().isPresent()) {
+			sortedList = entityStoreManager.sort(unFilteredList, dtListState.getSortFieldName().get(), dtListState.isSortDesc().get());
+		} else {
+			sortedList = unFilteredList;
+		}
+		return sortedList;
+	}
+
+	private <D extends DtObject> DtList<D> applyPagination(final DtList<D> unFilteredList, final DtListState dtListState) {
+		if (dtListState.getSkipRows() >= unFilteredList.size()) {
+			return new DtList<>(unFilteredList.getDefinition());
+		} else if (dtListState.getMaxRows().isPresent()) {
+			return unFilteredList
+					.stream()
+					.skip(dtListState.getSkipRows())
+					.limit(dtListState.getMaxRows().get())
+					.collect(VCollectors.toDtList(unFilteredList.getDefinition()));
+		}
+		return unFilteredList;
 	}
 
 }

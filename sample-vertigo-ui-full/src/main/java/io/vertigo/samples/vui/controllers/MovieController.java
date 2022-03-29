@@ -25,8 +25,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import io.vertigo.datamodel.structure.model.DtList;
+import io.vertigo.datamodel.structure.model.DtListState;
+import io.vertigo.samples.vui.domain.Actor;
 import io.vertigo.samples.vui.domain.Country;
 import io.vertigo.samples.vui.domain.Movie;
+import io.vertigo.samples.vui.domain.Role;
 import io.vertigo.samples.vui.services.MovieServices;
 import io.vertigo.ui.core.ViewContext;
 import io.vertigo.ui.core.ViewContextKey;
@@ -38,6 +42,8 @@ import io.vertigo.ui.impl.springmvc.controller.AbstractVSpringMvcController;
 public class MovieController extends AbstractVSpringMvcController {
 
 	private final ViewContextKey<Movie> movieKey = ViewContextKey.of("movie");
+	private final ViewContextKey<Role> rolesKey = ViewContextKey.of("roles");
+	private final ViewContextKey<Actor> actorsKey = ViewContextKey.of("actors");
 	private final ViewContextKey<Country> countriesKey = ViewContextKey.of("countries");
 
 	@Inject
@@ -52,9 +58,20 @@ public class MovieController extends AbstractVSpringMvcController {
 
 	@GetMapping("/{movId}")
 	public void initContext(final ViewContext viewContext, @PathVariable("movId") final Long movId) {
-		final Movie movie = movieServices.getById(movId);
+		final Movie movie = movieServices.loadMovieWithRoles(movId);
 		viewContext.publishDto(movieKey, movie);
+		viewContext.publishDtList(rolesKey, movie.role().get());
+		viewContext.publishDtList(actorsKey, movieServices.getActorsByMovie(movId));
 		viewContext.publishMdl(countriesKey, Country.class, null);
+	}
+
+	@PostMapping("/_sort")
+	public ViewContext sort(final ViewContext viewContext, @ViewAttribute("roles") final DtList<Role> roles, final DtListState dtListState) {
+		//Long movId = viewContext.getUiList(actorsKey).;
+
+		viewContext.publishDtList(rolesKey, movieServices.sortRoles(roles, dtListState));
+		return viewContext;
+		//.publishDtList(bases, baseServices.getBases(dtListState));
 	}
 
 	@PostMapping("/_edit")

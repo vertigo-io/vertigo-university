@@ -11,7 +11,8 @@
 
 <body>
 	<div layout:fragment="content">			
-			<vu:form>
+			<vu:form id="myFormId">
+				<vu:block title="Movie">
 				<vu:grid cols="2">
 					<vu:text-field-read object="movie" field="movId"/>
 					<vu:text-field object="movie" field="name" />
@@ -19,10 +20,27 @@
 					<vu:select object="movie" field="couId" list="countries"/>
 					<vu:grid-cell>
 						<vu:button-submit th:if="${model.modeReadOnly}" label="Edit" action="@{_edit}" color="primary"/>
-						<vu:button-submit th:if="${model.modeEdit}"  label="Save" action="@{_save}" color="primary" />
+						<vu:button-submit-confirm th:if="${model.modeEdit}" action="notUsed" formId="notUsed" label="Save" color="primary">
+						       <vu:slot name="actions_slot">
+                                 <q-btn flat label="Non pas vraiment" color="primary" v-close-popup />
+                                 <q-btn type="submit" th:formaction="@{_save}" form="myFormId" label="Oui tout à fait" color="primary" v-close-popup />
+                               </vu:slot>
+                               <span>Etes-vous certain de vouloir sauvegarder ?</span>
+						</vu:button-submit-confirm>
 						<vu:button-link th:if="${model.modeEdit}" label="Cancel" url="@{/movie/} + ${model.movie.getLong('movId')}" />
 					</vu:grid-cell>
 				</vu:grid>
+				</vu:block>
+				<br/>
+				<vu:table list="roles" componentId="roleTable" rowsPerPage="10" 
+				sortUrl="@{/movie/_sort}"
+				tr_@click.native="|goTo('@{/actor/}'+props.row.actId)|" tr_class="nav" >
+	                <vu:include-data object="roles" field="rolId" />
+	                <vu:column field="asCharacter" />
+	                <vu:column field="actId" >
+	                   <vu:field-read object="roles" field="actId" rowIndex="'props.rowIndex'" list="actors" listKey="actId" listDisplay="name"/>
+	                </vu:column>
+                </vu:table>
 			</vu:form>
 	</div>
 </body>

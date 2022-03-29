@@ -35,7 +35,7 @@ create table ACTOR
 (
     ACT_ID      	 NUMERIC     	not null,
     NAME        	 VARCHAR(500)	not null,
-    SEX_CD      	 VARCHAR(100)	,
+    SEXE        	 VARCHAR(100)	,
     constraint PK_ACTOR primary key (ACT_ID)
 );
 
@@ -45,7 +45,7 @@ comment on column ACTOR.ACT_ID is
 comment on column ACTOR.NAME is
 'Nom';
 
-comment on column ACTOR.SEX_CD is
+comment on column ACTOR.SEXE is
 'Sexe';
 
 -- ============================================================
@@ -182,10 +182,10 @@ comment on column USER_GROUP.NAME is
 
 
 alter table ACTOR
-	add constraint FK_A_ACT_SEX_SEXE foreign key (SEX_CD)
+	add constraint FK_A_ACT_SEX_SEXE foreign key (SEXE)
 	references SEXE (SEX_CD);
 
-create index A_ACT_SEX_SEXE_FK on ACTOR (SEX_CD asc);
+create index A_ACT_SEX_SEXE_FK on ACTOR (SEXE asc);
 
 alter table MOVIE
 	add constraint FK_A_MOV_COU_COUNTRY foreign key (COU_ID)

@@ -58,7 +58,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		/** Propriété 'Nom'. */
 		name,
 		/** Propriété 'Sexe'. */
-		sexCd	}
+		sexe	}
 
 	/**
 	 * Enumération des champs de Country.
