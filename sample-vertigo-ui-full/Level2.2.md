@@ -65,7 +65,7 @@ La méthode de sauvegarde doit récupérer les données postées : utiliser le `
 9. Consultez la page de détail d'un film et faites quelques essais.
 10. Pour éviter de modifier l'identifiant, forcez le champ `movId` en mode readOnly.
 11. Retourner sur la page, notez le comportement en cas d'erreur de saisie sur les champs.
-12. Consulter la source de la page. Recherchez la balise script `id="vui-init-data"` et regardez son contenu.
+12. Consulter le contenu du `vueData` (balise script `id="vui-init-data"` ou VUiPage.vueData).
 
 [Suite : Level 2.3 - Ecran de détail - Compléments](./Level2.3.md)
 
