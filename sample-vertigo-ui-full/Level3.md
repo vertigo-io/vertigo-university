@@ -114,7 +114,7 @@ Nous avons préparer le Controller, passont à la vue.
 ```
 3. Consulter la page et observer le comportement.
 
-[Suite : Level 4 - Tableaux éditables](./Level4.md)
+# [Suite : Level 4 - Tableaux éditables](./Level4.md)
 
 ## Optionnel : Ajout un mode de rendu sélectionnable
 
