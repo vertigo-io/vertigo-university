@@ -23,7 +23,7 @@ Au niveau des composants Vertigo en Thymeleaf, nous avons aussi la notion de `sl
 Le body du composant est un premier niveau de paramétrage, certain composant ont un contenu par défaut mais qui peut être modifier par le contenu spécifique. 
 Il peut aussi y avoir des slots nommés particuliers, dans ce cas il faut placer un `<vu:slot name="named_slot">` dans le corps du composant *(au début)*.
 
-Au niveau des composants vueJs, il y a également une notion de `slot`. 
+Au niveau des composants vueJs, il y a également une notion de `slot` avec `v-slot:named_slot`. 
 La [documentation de Quasar](https://v1.quasar.dev/vue-components/input#qinput-api) est très bien faite et liste les slots proposés pour chaque composant.
 C'est par exemple utilisé dans les tableaux pour spécialiser le rendu d'une ligne.
 
