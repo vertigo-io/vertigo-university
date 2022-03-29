@@ -16,6 +16,9 @@ Cela permet de simplifier leur usage dans le projet, car il y a une résolution 
 Les données peuvent être mise en cache (et le sont généralement). 
 Nous préconisons un cache court pour absorber les pics de charge sans poser de pb important de cohérence.
 
+Les listes de référence, sont des listes nommées que le système sait charger seul. L'objet doit être une Entity et doit être enregistré comme MasterData.
+Cela est fait dans un `DefinitionProvider` du module.
+
 
 ### A connaitre : Composants
 
@@ -24,8 +27,10 @@ Elle peut être directement dans le context si elle est assez courte ou référe
 
 ## Etapes
 
-1. Dans le controller déclarez une clé de context "countries" de type Country.
-2. Dans le initContext publiez la liste des pays comme une MasterDataList. (Utilisez `null` en dernier paramètre)
+1. Vérifiez que `Country` est bien enregistré comme Entity de référence dans `SampleVuiMasterDataDefinitionProvider`. Ce `DefinitionProvider` est référencé dans les `Features` du module **Support**.
+2. Remarquez que l'objet Java `Country` à son champ `name` déclaré comme `@DisplayField`. Retrouvez où cela a été déclaré dans la définition de l'objet (`model.ksp` ou `alter.ksp`)
+3. Dans le controller déclarez une clé de context "countries" de type Country.
+4. Dans le initContext publiez la liste des pays comme une MasterDataList. (Utilisez `null` en dernier paramètre)
 *Ce dernier paramètre permet de passer un code, dans la cas ou la liste de ref propose des filtres (actif par exemple)*
 4. Dans la vue, remplacer le champ text de `couId` par un `vu:select`
 7. Consulter la page de détail d'un film.
