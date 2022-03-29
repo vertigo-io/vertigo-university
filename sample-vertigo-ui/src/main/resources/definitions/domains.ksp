@@ -1,0 +1,36 @@
+package io.vertigo.samples.vui
+
+create Domain DoId {
+	dataType : Long
+	storeType : "NUMERIC"
+}
+
+create Domain DoYear {
+	dataType : Integer
+	storeType : "NUMERIC"
+}
+
+create Domain DoLabel {
+	dataType : String
+	storeType : "VARCHAR(100)"
+}
+
+create Domain DoLabelLong {
+	dataType : String
+	storeType : "VARCHAR(500)"
+}
+
+create Domain DoLabelLongSort {
+	dataType : String
+	storeType : "VARCHAR(500)"
+}
+
+create Domain DoLabelVeryLong {
+	dataType : String
+	storeType : "VARCHAR(1000)"
+}
+
+create Domain DoCode {
+	dataType : String
+	storeType : "VARCHAR(100)"
+}

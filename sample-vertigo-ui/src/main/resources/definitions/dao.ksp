@@ -1,0 +1,43 @@
+package io.vertigo.samples.vui
+
+create Task TkGetActorsIdsByMovie {
+    className : "io.vertigo.basics.task.TaskEngineSelect"
+        request : "
+        	select act.act_id 
+			from role rol
+			join actor act on rol.act_id= act.act_id 
+			join movie mov on rol.mov_id = mov.mov_id 
+			where mov.mov_id = #movId#
+			"
+	in movId	{domain : DoId 				cardinality:"1" 	}
+	out actors	{domain : DoId			 	cardinality:"*" 	}
+}
+
+create Task TkGetActorsByMovie {
+    className : "io.vertigo.basics.task.TaskEngineSelect"
+        request : "
+        	select act.*
+			from role rol
+			join actor act on rol.act_id= act.act_id 
+			join movie mov on rol.mov_id = mov.mov_id 
+			where mov.mov_id = #movId#
+			"
+	in movId	{domain : DoId 				cardinality:"1" 	}
+	out actors	{domain : DoDtActor	 		cardinality:"*" 	}
+}
+
+
+create Task TkGetMoviesInCountries {
+    className : "io.vertigo.basics.task.TaskEngineSelect"
+        request : "
+        	select * 
+        	from movie 
+        	where cou_id in ( #countriesIds.rownum#)
+			"
+	in countriesIds	{domain : DoId 				cardinality:"*" 	}
+	out movies		{domain : DoDtMovie			cardinality:"*" 	}
+}
+
+
+
+

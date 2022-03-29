@@ -1,0 +1,18 @@
+---
+resources:
+  - { type: kpr, path: src/main/resources/definitions/application.kpr }
+  - { type: staticMasterData, path: src/main/resources/definitions/masterDataValues.json }
+mdaConfig: 
+  projectPackageName: io.vertigo.samples.vui
+  targetGenDir : src/main/
+  properties : 
+    vertigo.domain.java: true
+    vertigo.domain.java.generateDtResources: false
+    vertigo.domain.sql: true
+    vertigo.domain.sql.targetSubDir: javagen/sqlgen
+    vertigo.domain.sql.baseCible: H2
+    vertigo.domain.sql.generateDrop: false
+    vertigo.task: true
+    vertigo.file: true
+    vertigo.search: true
+    mermaid: true

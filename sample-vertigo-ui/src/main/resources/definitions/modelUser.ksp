@@ -1,0 +1,51 @@
+package io.vertigo.samples.vui.domain
+
+create DtDefinition DtUser {
+  id usrId {domain: DoId label: "Id" }
+  field login {domain: DoLabel label: "Login" }
+  field name {domain: DoLabel label: "Nom" }
+  field email {domain: DoLabel label: "email" }
+}
+
+create DtDefinition DtUserGroup {
+  id grpId {domain: DoId label: "Id" }
+  field name {domain: DoLabel label: "Nom" }
+}
+
+create Association AUsrCou {
+  fkFieldName : "couId"
+    
+ 	dtDefinitionA : DtUser
+	dtDefinitionB : DtCountry
+			
+	navigabilityA : "false"
+	navigabilityB : "true"
+	
+	multiplicityA:"0..*"
+	multiplicityB:"0..1"
+	
+	labelA : "User"
+	labelB : "Country"
+	roleA : "User"
+	roleB : "Country"
+			
+}
+
+create Association AUsrGrp {
+  fkFieldName : "grpId"
+    
+ 	dtDefinitionA : DtUser
+	dtDefinitionB : DtUserGroup
+			
+	navigabilityA : "false"
+	navigabilityB : "true"
+	
+	multiplicityA:"0..*"
+	multiplicityB:"0..1"
+	
+	labelA : "User"
+	labelB : "Group"
+	roleA : "User"
+	roleB : "Group"
+			
+}

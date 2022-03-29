@@ -1,0 +1,17 @@
+package io.vertigo.samples.vui.domain
+
+
+/************************/
+/***** Index Movie  *****/
+/************************/
+
+create DtDefinition DtMovieIndex {
+  field movId {domain: DoId label: "id" cardinality:"1" }
+  field name {domain: DoLabelLong label: "Titre" }
+  field year {domain: DoYear label: "Année" }
+  field country {domain: DoLabel label: "Pays" }
+}
+
+alter DtDefinition DtMovieIndex {
+    computed allText {  domain : DoLabelLong, label:"ALL_TEXT", expression:"throw new io.vertigo.core.lang.VSystemException(\"Can't use index copyTo field\");"     }
+}

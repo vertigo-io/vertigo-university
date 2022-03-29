@@ -1,0 +1,76 @@
+---
+boot:
+  params:
+    locales: fr_FR, en_US
+  plugins:
+    - io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin: {}
+    - io.vertigo.vega.plugins.webservice.servlet.ServletResourceResolverPlugin: {}
+    - io.vertigo.core.plugins.resource.local.LocalResourceResolverPlugin: {}
+    - io.vertigo.vega.plugins.webservice.servlet.WebAppContextParamPlugin: {}
+modules:
+  io.vertigo.commons.CommonsFeatures:
+    features:
+      - script:
+    featuresConfig:
+      - script.janino:
+  io.vertigo.connectors.elasticsearch.ElasticSearchFeatures:
+    __flags__: ["search"]
+    features:
+      - embeddedServer:
+          home: D:/atelier/search
+      - restHL:
+          servers.names: localhost:9200
+  io.vertigo.database.DatabaseFeatures:
+    features:
+      - sql:
+    featuresConfig:
+      - sql.c3p0:
+          dataBaseClass: io.vertigo.database.impl.sql.vendor.h2.H2DataBase
+          jdbcDriver: org.h2.Driver
+          jdbcUrl: jdbc:h2:D:/atelier/database/formation_loaded;NON_KEYWORDS=YEAR,KEY
+  io.vertigo.datamodel.DataModelFeatures:
+  io.vertigo.datastore.DataStoreFeatures:
+    features:
+      - cache:
+      - entitystore:
+      - filestore:
+      - kvStore:
+    featuresConfig:
+      - cache.memory:
+      - entitystore.sql:
+      - filestore.fullFilesystem:
+          name: temp
+          path: ${java.io.tmpdir}/uiTempFiles/
+          purgeDelayMinutes: 30
+          fileInfoClass: io.vertigo.samples.support.fileinfo.FileInfoTmp
+      - kvStore.berkeley:
+          collections: VViewContext;TTL=43200
+          dbFilePath: ${java.io.tmpdir}/vertigo/VViewContext
+      - kvStore.delayedMemory:
+          collections: protected-value
+          timeToLiveSeconds: 3600
+  io.vertigo.datafactory.DataFactoryFeatures:
+    features:
+      - search:      
+          __flags__: ["search"]
+    featuresConfig:
+      - collections.luceneIndex:
+      - search.elasticsearch.restHL:
+          __flags__: ["search"]          
+          envIndexPrefix: sampleVui_
+          rowsPerQuery: 50
+          config.file: webapp/META-INF/elasticsearch.yml
+  io.vertigo.account.AccountFeatures:
+    features:
+      - authorization:
+      - security:
+          userSessionClassName: io.vertigo.samples.support.SampleUserSession
+  io.vertigo.vega.VegaFeatures:        
+  io.vertigo.samples.support.SupportFeatures:
+  io.vertigo.samples.vui.VuiFeatures:
+    features:
+      - search:
+          __flags__: ["search"]
+initializers:
+  - io.vertigo.samples.support.boot.LocaleManagerInitializer:
+  - io.vertigo.samples.support.boot.I18nResourcesInitializer:

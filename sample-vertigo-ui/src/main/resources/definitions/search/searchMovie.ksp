@@ -1,0 +1,54 @@
+package io.vertigo.samples.vui.domain
+
+
+/************************/
+/***** Index Movie  *****/
+/************************/
+
+create IndexDefinition IdxMovie {  
+  keyConcept : DtMovie
+  dtIndex : DtMovieIndex
+  indexCopyTo allText { from: "country,year,name,movId" }
+  loaderId : "MovieSearchLoader"
+}
+
+
+
+create FacetDefinition FctMovieCountry {  
+  dtDefinition:DtMovieIndex, fieldName:"country", label:"Par pays"
+  multiselectable : "true"
+}
+
+create FacetDefinition FctMovieName {  
+  dtDefinition:DtMovieIndex, fieldName:"name", label:"Par titre"
+  range r1 { filter:"name.keyword:[* TO a]", label:"#"},
+  range r2 { filter:"name.keyword:[a TO g]", label:"a-f"},
+  range r3 { filter:"name.keyword:[g TO n]", label:"g-m"},
+  range r4 { filter:"name.keyword:[n TO t]", label:"n-s"},
+  range r5 { filter:"name.keyword:[t TO *]", label:"t-z"},
+}
+
+create FacetDefinition FctMovieYear {  
+  dtDefinition:DtMovieIndex, fieldName:"year", label:"Par année"
+  range r1 { filter:"year:[* TO 1930]", label:"< années 30"},
+  range r2 { filter:"year:[1930 TO 1940]", label:"années 30"},
+  range r3 { filter:"year:[1940 TO 1950]", label:"années 40"},
+  range r4 { filter:"year:[1950 TO 1960]", label:"années 50"},
+  range r5 { filter:"year:[1960 TO 1970]", label:"années 60"},
+  range r6 { filter:"year:[1970 TO 1980]", label:"années 70"},
+  range r7 { filter:"year:[1980 TO 1990]", label:"années 80"},
+  range r8 { filter:"year:[1990 TO 2000]", label:"années 90"},
+  range r9 { filter:"year:[2000 TO 2010]", label:"années 2000"},
+  range r10 { filter:"year:[2010 TO *]", label:"> années 2010"},  
+}
+
+
+create FacetedQueryDefinition QryMovieWithFacets {  
+  dtIndex : DtMovieIndex
+  facets : [FctMovieName, FctMovieYear, FctMovieCountry]
+  domainCriteria : DoLabel
+  listFilterBuilderClass : "io.vertigo.datafactory.impl.search.dsl.DslListFilterBuilder"  
+  listFilterBuilderQuery : "allText:#+query*#"
+}
+
+
