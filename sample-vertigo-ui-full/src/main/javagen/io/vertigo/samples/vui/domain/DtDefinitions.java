@@ -96,8 +96,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		year,
 		/** Propriété 'Pays'. */
 		country,
-		/** Propriété 'Titre'. */
-		nameSortOnly	}
+		/** Propriété 'ALL_TEXT'. */
+		allText	}
 
 	/**
 	 * Enumération des champs de Role.

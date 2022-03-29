@@ -8,8 +8,10 @@ package io.vertigo.samples.vui.domain
 create IndexDefinition IdxMovie {  
   keyConcept : DtMovie
   dtIndex : DtMovieIndex
+  indexCopyTo allText { from: "country,year,name,movId" }
   loaderId : "MovieSearchLoader"
 }
+
 
 
 create FacetDefinition FctMovieCountry {  
@@ -23,7 +25,7 @@ create FacetDefinition FctMovieName {
   range r2 { filter:"name.keyword:[a TO g]", label:"a-f"},
   range r3 { filter:"name.keyword:[g TO n]", label:"g-m"},
   range r4 { filter:"name.keyword:[n TO t]", label:"n-s"},
-  range r4 { filter:"name.keyword:[t TO *]", label:"t-z"},
+  range r5 { filter:"name.keyword:[t TO *]", label:"t-z"},
 }
 
 create FacetDefinition FctMovieYear {  
@@ -40,20 +42,13 @@ create FacetDefinition FctMovieYear {
   range r10 { filter:"year:[2010 TO *]", label:"> années 2010"},  
 }
 
-create FacetedQueryDefinition QryMovie {  
-  dtIndex : DtMovieIndex
-  facets : []
-  domainCriteria : DoLabel
-  listFilterBuilderClass : "io.vertigo.datafactory.impl.search.dsl.DslListFilterBuilder"  
-  listFilterBuilderQuery : "_all:#+query*#"
-}
 
 create FacetedQueryDefinition QryMovieWithFacets {  
   dtIndex : DtMovieIndex
   facets : [FctMovieName, FctMovieYear, FctMovieCountry]
   domainCriteria : DoLabel
   listFilterBuilderClass : "io.vertigo.datafactory.impl.search.dsl.DslListFilterBuilder"  
-  listFilterBuilderQuery : "_all:#+query*#"
+  listFilterBuilderQuery : "allText:#+query*#"
 }
 
 

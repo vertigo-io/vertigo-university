@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="https://vertigo.io/thymeleaf/vertigo-ui"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{templates/mmcLayout}"
+>
+	<head>
+		<title>Movie List</title>
+	</head>
+	
+	<body>
+		<section layout:fragment="content" >
+			<div>
+			<vu:search resultKey="movies" searchUrl="@{/moviesSearch/_search}" collectionComponentId="moviesTable">
+                <div class="row q-col-gutter-md">
+                    <vu:include-data-primitive key="movies_totalcount"/>
+                    <div class="m-title text-h6 self-center" style="flex-basis: 300px;">{{vueData.movies_totalcount}} Movies</div>
+                    <div class="col-md col-sm-12">
+                        <vu:include-data-primitive key="criteria" modifiable/>
+                        <q-input placeholder="Name, Country, Year, ..." v-model="vueData.criteria" @input="search('movies')" :debounce="300"  outlined bg-color="white" dense >
+                            <template v-slot:prepend><q-icon name="search" /></template>
+                        </q-input>
+                    </div>
+                    <div class="row justify-end items-center text-primary">
+                        <q-btn round icon="fas fa-table" type="a" th:href="@{?renderer=table}" th::flat="${model.listRenderer != 'table'}"> </q-btn>
+                        <q-btn round icon="fas fa-list" type="a" th:href="@{?renderer=list}" th::flat="${model.listRenderer != 'list'}"> </q-btn>
+                    </div>
+                    <div class="col-break"></div>
+                    <div class="gt-md" style="flex-basis: 300px;">
+                        <vu:facets resultKey="movies" />
+                    </div>
+                    <div class="col">
+        <th:block th:if="${model.listRenderer == 'table'}">
+            <vu:table list="movies_list" componentId="moviesTable" sortUrl="${searchUrl}"
+                      tr_@click.native="|goTo('@{/movie/}'+props.row.movId)|" tr_class="nav">
+                <vu:column field="movId">
+                    <a th::href="|'@{/movie/}'+props.row.movId|" >{{props.row.movId}}</a>
+                </vu:column>
+                <vu:column field="name" />
+                <vu:column field="year" />
+            </vu:table>       
+        </th:block>
+        <th:block th:if="${model.listRenderer == 'list'}">
+            <vu:include-data object="movies_list" field="movId" />
+            <vu:list list="movies_list" componentId="moviesTable" sortUrl="${searchUrl}" rowsPerPage="8" pagination_:direction-links="true"
+                pagination_:boundary-links="true">
+                <q-item-section>
+                    <vu:include-data object="movies_list" field="movId" />
+                    <vu:include-data object="movies_list" field="name" />
+                    <vu:include-data object="movies_list" field="year" />
+                    <a class="text-primary small-caps text-bigger" th::href="|'@{/movie/}'+item.movId|">{{item.name}}</a> ({{item.year}})
+                </q-item-section>
+                <q-item-section side> <q-btn round color="primary" icon="arrow_forward" type="a" th::href="|'@{/movie/}'+item.movId|"></q-btn> </q-item-section>
+            </vu:list>
+        </th:block>
+                    </div>
+                </div>
+            </vu:search>
+			</div>
+		</section>
+	</body>
+</html>

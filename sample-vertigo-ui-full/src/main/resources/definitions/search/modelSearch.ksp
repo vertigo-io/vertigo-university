@@ -10,8 +10,8 @@ create DtDefinition DtMovieIndex {
   field name {domain: DoLabelLong label: "Titre" }
   field year {domain: DoYear label: "Année" }
   field country {domain: DoLabel label: "Pays" }
-  
-  computed nameSortOnly {domain : DoLabelLongSort, label:"Titre" cardinality:"1"
-        expression:"return getName();"
-  }  
+}
+
+alter DtDefinition DtMovieIndex {
+    computed allText {  domain : DoLabelLong, label:"ALL_TEXT", expression:"throw new io.vertigo.core.lang.VSystemException(\"Can't use index copyTo field\");"     }
 }

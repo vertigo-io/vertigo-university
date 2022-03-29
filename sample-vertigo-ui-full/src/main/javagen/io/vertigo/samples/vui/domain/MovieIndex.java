@@ -96,12 +96,12 @@ public final class MovieIndex implements DtObject {
 	
 	/**
 	 * Champ : COMPUTED.
-	 * Récupère la valeur de la propriété calculée 'Titre'.
-	 * @return String nameSortOnly <b>Obligatoire</b>
+	 * Récupère la valeur de la propriété calculée 'ALL_TEXT'.
+	 * @return String allText
 	 */
-	@Field(smartType = "STyLabelLongSort", type = "COMPUTED", cardinality = io.vertigo.core.lang.Cardinality.ONE, persistent = false, label = "Titre")
-	public String getNameSortOnly() {
-		return getName();
+	@Field(smartType = "STyLabelLong", type = "COMPUTED", persistent = false, label = "ALL_TEXT")
+	public String getAllText() {
+		throw new io.vertigo.core.lang.VSystemException("Can't use index copyTo field");
 	}
 	
 	/** {@inheritDoc} */

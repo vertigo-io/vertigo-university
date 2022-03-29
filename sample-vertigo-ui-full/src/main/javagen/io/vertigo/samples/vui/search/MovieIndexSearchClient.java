@@ -49,17 +49,6 @@ public final class MovieIndexSearchClient implements Component, DefinitionProvid
 	}
 
 	/**
-	 * Création d'une SearchQuery de type : Movie.
-	 * @param criteria Critères de recherche
-	 * @param selectedFacetValues Liste des facettes sélectionnées à appliquer
-	 * @return SearchQueryBuilder pour ce type de recherche
-	 */
-	public SearchQueryBuilder createSearchQueryBuilderMovie(final String criteria, final SelectedFacetValues selectedFacetValues) {
-		return SearchQuery.builder("QryMovie")
-				.withCriteria(criteria)
-				.withFacet(selectedFacetValues);
-	}
-	/**
 	 * Création d'une SearchQuery de type : MovieWithFacets.
 	 * @param criteria Critères de recherche
 	 * @param selectedFacetValues Liste des facettes sélectionnées à appliquer
@@ -129,6 +118,7 @@ public final class MovieIndexSearchClient implements Component, DefinitionProvid
 				.add(new SearchIndexDefinitionSupplier("IdxMovie")
 						.withIndexDtDefinition("DtMovieIndex")
 						.withKeyConcept("DtMovie")
+						.withCopyToFields("allText", "country", "year", "name", "movId")
 						.withLoaderId("MovieSearchLoader"))
 				
 				//---
@@ -148,7 +138,7 @@ public final class MovieIndexSearchClient implements Component, DefinitionProvid
 						.withRange("r2", "name.keyword:[a TO g]", "a-f")
 						.withRange("r3", "name.keyword:[g TO n]", "g-m")
 						.withRange("r4", "name.keyword:[n TO t]", "n-s")
-						.withRange("r4", "name.keyword:[t TO *]", "t-z")
+						.withRange("r5", "name.keyword:[t TO *]", "t-z")
 						.withOrder(FacetOrder.definition))
 				.add(new FacetRangeDefinitionSupplier("FctMovieYear")
 						.withDtDefinition("DtMovieIndex")
@@ -169,16 +159,12 @@ public final class MovieIndexSearchClient implements Component, DefinitionProvid
 				//---
 				// FacetedQueryDefinition
 				//-----
-				.add(new FacetedQueryDefinitionSupplier("QryMovie")
-						.withListFilterBuilderClass(io.vertigo.datafactory.impl.search.dsl.DslListFilterBuilder.class)
-						.withListFilterBuilderQuery("_all:#+query*#")
-						.withCriteriaSmartType("STyLabel"))
 				.add(new FacetedQueryDefinitionSupplier("QryMovieWithFacets")
 						.withFacet("FctMovieName")
 						.withFacet("FctMovieYear")
 						.withFacet("FctMovieCountry")
 						.withListFilterBuilderClass(io.vertigo.datafactory.impl.search.dsl.DslListFilterBuilder.class)
-						.withListFilterBuilderQuery("_all:#+query*#")
+						.withListFilterBuilderQuery("allText:#+query*#")
 						.withCriteriaSmartType("STyLabel"))
 				.build();
 	}

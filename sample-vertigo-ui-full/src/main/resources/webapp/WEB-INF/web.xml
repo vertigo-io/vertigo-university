@@ -16,6 +16,10 @@
 		<param-name>boot.applicationConfiguration</param-name>
 		<param-value>/webapp/META-INF/sample-vui.yaml</param-value>
 	</context-param>
+    <context-param>
+        <param-name>boot.activeFlags</param-name>
+        <param-value>search</param-value>
+    </context-param>
 
 
 	<filter>
