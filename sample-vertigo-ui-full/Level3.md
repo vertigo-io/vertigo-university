@@ -58,6 +58,22 @@ Par exemple :
 
 ## Etapes
 
+Le ElasticSearch qui sera nécessaire pour cette exercice était désactivé pour éviter des temps de démarrage trop long.
+Pour le réactiver, il faut placer un `flag` dans le context de la webApp.
+1. Editer le fichier `web.xml`
+2. Retrouver/ajouter le paramètre `boot.activeFlags` et ajouter le `flag search`
+```Xml
+<context-param>
+  <param-name>boot.activeFlags</param-name>
+  <param-value>search</param-value>
+</context-param>
+```
+3. Redémarrer l'application.
+4. Vérifier que ElasticSearch est bien démarré : [localhost:9200/sample_vui___idx_movie/](http://localhost:9200/sample_vui___idx_movie/_search?q=*:*)
+
+
+Une fois l'ElasticSearch démarré, nous pouvons commncer par le controller :
+
 1. Créez le controller `MoviesSearchController`.
 2. Déclarez une clé de context **movies** de type `FacetedQueryResult<MovieIndex, SearchQuery>`.
 3. Déclarez une clé de context **criteria** de type `String`.
