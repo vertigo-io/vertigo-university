@@ -71,6 +71,17 @@ Pour le réactiver, il faut placer un `flag` dans le context de la webApp.
 3. Redémarrer l'application.
 4. Vérifier que ElasticSearch est bien démarré : [localhost:9200/sample_vui___idx_movie/](http://localhost:9200/sample_vui___idx_movie/_search?q=*:*)
 
+Si besoin, il est possible de lancer une reindexation : 
+1. Dans le controller 
+```Java
+@GetMapping("/_reindex")
+public ViewContext indexMovies(final ViewContext viewContext) {
+  movieServices.indexMovies();
+  return viewContext;
+}
+```
+2. Puis appeler le serviceWeb : http://localhost:18080/sample/moviesSearch/_reindex
+
 
 Une fois l'ElasticSearch démarré, nous pouvons commncer par le controller :
 
