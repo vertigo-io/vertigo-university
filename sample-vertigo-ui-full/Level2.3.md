@@ -69,9 +69,13 @@ Pour ajouter le tri des roles dans film, nous allons ajouter un tri spécial sur
 5. Consulter la page et observer le comportement
 
 ## Etapes - Ajout d'un lien de navigation sur la ligne
+
+Sur la liste des films nous allons rajouter un lien de navigation sur l'évenement onClick de l'ensemble de la ligne
+
+
  
 [Suite : Level 3 - Recherche](./Level3.md)
 
 ### Optionnel : Creation de l'écran de détail d'acteur
 
-1. Utiliser vos connaissances pour ajouter l'écran de consultation/modification des acteurs.
+1. Utiliser vos connaissances pour ajouter un lien sur la liste des rôles vers l'écran de consultation/modification des acteurs.
