@@ -45,13 +45,6 @@ public class MoviesModifiableController extends AbstractVSpringMvcController {
 	@GetMapping("/")
 	public void initContext(final ViewContext viewContext) {
 		viewContext.publishDtListModifiable(moviesKey, movieServices.getMovies(DtListState.of(200)));
-
-	}
-
-	@PostMapping("/_sort")
-	public ViewContext sort(final ViewContext viewContext, final DtListState dtListState) {
-		viewContext.publishDtListModifiable(moviesKey, movieServices.getMovies(dtListState));
-		return viewContext;
 	}
 
 	@PostMapping("/_edit")
