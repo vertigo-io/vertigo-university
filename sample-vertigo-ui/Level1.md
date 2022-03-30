@@ -53,7 +53,6 @@ Le rendu de la table sera réalisé coté client en vueJs. En vueJs, dans une ta
 1. Créez le fichier de la vue en copiant et modifiant le **home.html**
 1. Ajoutez une table dans le fragment="content".
 ```Html
-       <section layout:fragment="content" >
             <div>
             <h2>Movies</h2>
             <vu:table list="movies" componentId="movieTable" >
@@ -62,7 +61,6 @@ Le rendu de la table sera réalisé coté client en vueJs. En vueJs, dans une ta
                 <vu:column field="year" />
             </vu:table>
             </div>
-        </section>
 ```
 7. Testez la page affichant la liste de *Movies*.
 7. Consulter la source de la page. Recherchez la balise `script id="vui-init-data"` et regardez son contenu.
