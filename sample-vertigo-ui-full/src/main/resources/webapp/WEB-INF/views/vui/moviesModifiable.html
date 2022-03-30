@@ -13,15 +13,15 @@
 			<div>
 			<h2>Movies</h2>
 			<vu:form>
-			<vu:table-modifiable list="movies" componentId="movieTable">
+			<vu:table-modifiable list="movies" componentId="movieTable" :pagination.sync="|componentStates.${componentId}.pagination|">
 				<vu:column field="movId">
 					<a th::href="|'@{/movie/}'+props.row.movId|" >{{props.row.movId}}</a>
 				</vu:column>
 				<vu:column field="name">
-				    <vu:text-field object="movies" field="name" />
+				    <vu:text-field object="movies" field="name" dense hide-bottom-space />
 				</vu:column>
 				<vu:column field="year">
-				    <vu:text-field object="movies" field="year" />
+				    <vu:text-field object="movies" field="year" dense hide-bottom-space />
 				</vu:column>
 			</vu:table-modifiable>
 			
