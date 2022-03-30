@@ -80,7 +80,7 @@ Une fois l'ElasticSearch démarré, nous pouvons commncer par le controller :
 3. Déclarez une clé de context **criteria** de type `String`.
 4. Créez un initContext avec un `@GetMapping("/")`.
 5. Dans le initContext initialisez le criteria à "" 
-6. Faite une première recherche et publier le `FacetedQueryResult`
+6. Appeler le service de recherche et publier le `FacetedQueryResult`
 7. Ajouter une méthode pour les recherches en Ajax
 ```Java
 @PostMapping("/_search")
