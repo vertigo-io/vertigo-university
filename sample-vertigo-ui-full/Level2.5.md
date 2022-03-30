@@ -10,6 +10,25 @@ Nous verrons comment passer des attributs spécifiques du composant Thymeleaf au
 - Vue : `/src/main/resources/webapp/WEB-INF/views/vui/movies.html`
 - Service : 
 
+
+
+### A connaitre : Peuplement du `vueData` (vueJs) à partir du `ViewContext` (SpringMVC)
+
+Le principe de VertigoUi, est que les données nécessaires pour la construction de la page sont publiés par le controller dans le context.
+L'ensemble de ces données sont accessibles lors de l'évaluation par le template Thymeleaf.
+
+En revanche, seules les données nécessaires à vueJS coté client sont ajoutées à l'objet javascript vueData qui sera écrit dans le code source de la page. 
+Il est également nécessaire de déclarer si ces données sont autorisées en modification depuis le client ou non. Cela protège les données/champs du context de recevoir des modifications interdites depuis une requete.
+Cela reste relativement transparent, car les composants VertigoUi qui nécessitent des données dans le vueData le déclare déjà.
+
+Toutefois, si le développeur souhaite utilisé des composants vueJs directement, ou utiliser une donnée coté client, il faudra le déclarer *manuellement*.
+Cela se fait via le composant `include-data`. Il y a 4 modes de déclaration : (cf. [doc Vertigo](https://vertigo-io.github.io/vertigo-docs/#/extensions/ui?id=composants-vertigo-ui-utils))
+- `include-data(object, field, modifiable, modifiableAllLines)` : Inclus le champ d'un objet 
+- `include-data-primitive(key, modifiable)` : Inclus une donnée primitive du context
+- `include-data-map(object, field, list, listKey, listDisplay)` : Inclus le champ d'un objet et applique une dénormalisation sur sa valeur (traduit un id en libellé par exemple)
+- `include-data-protected(object, field)` : Inclus le champ d'un objet. La valeur posée coté client est protégée (non en clair et non modifiable), la valeur réelle reste coté serveur. Ce système est utilisé pour les identifiants de fichier par exemple.
+
+
 ### A connaitre : Paramètres des composants
 
 Les composants Vertigo sont en fait des fragments Thymeleaf. Par convention, ils déclarent les paramètres qu'ils vont utiliser.
