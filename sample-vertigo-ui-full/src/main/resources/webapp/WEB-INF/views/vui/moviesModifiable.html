@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="https://vertigo.io/thymeleaf/vertigo-ui"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{templates/mmcLayout}"
+>
+	<head>
+		<title>Movie List</title>
+	</head>
+	
+	<body>
+		<section layout:fragment="content" >
+			<div>
+			<h2>Movies</h2>
+			<vu:form>
+			<vu:table-modifiable list="movies" componentId="movieTable">
+				<vu:column field="movId">
+					<a th::href="|'@{/movie/}'+props.row.movId|" >{{props.row.movId}}</a>
+				</vu:column>
+				<vu:column field="name">
+				    <vu:text-field object="movies" field="name" />
+				</vu:column>
+				<vu:column field="year">
+				    <vu:text-field object="movies" field="year" />
+				</vu:column>
+			</vu:table-modifiable>
+			
+			<vu:button-submit th:if="${model.modeReadOnly}" label="Edit" action="@{_edit}" color="primary"/>
+            <vu:button-submit th:if="${model.modeEdit}" label="Save" action="@{_save}" color="primary"/>
+            <vu:button-link th:if="${model.modeEdit}" label="Cancel" url="@{/moviesModifiable/}" />           
+			</vu:form>
+			</div>
+		</section>
+	</body>
+</html>

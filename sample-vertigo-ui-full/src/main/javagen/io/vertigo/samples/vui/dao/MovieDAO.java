@@ -86,4 +86,20 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 				.getResult();
 	}
 
+	/**
+	 * Execute la tache TkUpdateMoviesBatch.
+	 * @param moviesList DtList de Movie
+	*/
+	@io.vertigo.datamodel.task.proxy.TaskAnnotation(
+			name = "TkUpdateMoviesBatch",
+			request = "UPDATE MOVIE SET NAME=#moviesList.name#, YEAR=#moviesList.year#, IMDBID=#moviesList.imdbid#, COU_ID=#moviesList.couId# \n" + 
+ "             WHERE MOV_ID=#moviesList.movId#",
+			taskEngineClass = io.vertigo.basics.task.TaskEngineProcBatch.class)
+	public void updateMoviesBatch(@io.vertigo.datamodel.task.proxy.TaskInput(name = "moviesList", smartType = "STyDtMovie") final io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.vui.domain.Movie> moviesList) {
+		final Task task = createTaskBuilder("TkUpdateMoviesBatch")
+				.addValue("moviesList", moviesList)
+				.build();
+		getTaskManager().execute(task);
+	}
+
 }
