@@ -23,9 +23,11 @@ Coté service, ce `VAccessor` permet un chargement simplifié des données mais 
 ### A connaitre : Composants
 
 Le composant `vu:field-read` : Déclare un champ en mode lecture, il sera résolu coté client. 
-Il nécessite de préciser l'`object`, le `field` et le `rowIndex` si besoin. Il peut associer une liste de mapping : avec `list`, `listKey` et `listDisplay`.
+Il nécessite de préciser l'`object`, le `field` et le `rowIndex` si besoin. Il peut associer une liste de mapping : avec `list`, `listKey` *(champ de la liste utilisé comme Id)* et `listDisplay` *(champ de la liste utilisé comme label)*.
 
-*Note* : pour les tables résolues coté client, le rowIndex devra pointer vers la ligne courante VueJs, et sera : `rowIndex="'props.rowIndex'"`
+*Note 1*: Il est possible de déclarer le `displayField` et le `displayKey` sur un objet pour ne pas avoir à le configurer. C'était le cas sur `Country`.
+
+*Note 2* : pour les tables résolues coté client, le rowIndex devra pointer vers la ligne courante VueJs, et sera : `rowIndex="'props.rowIndex'"`
 
 Le composant `vu:select`, comme les autres composants de formulaire ne peuvent pas fonctionner dans une table simple (sera vu par la suite).
 
