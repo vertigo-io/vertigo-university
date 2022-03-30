@@ -17,7 +17,7 @@ modules:
     __flags__: ["search"]
     features:
       - embeddedServer:
-          home: D:/atelier/search
+          home: C:/atelier/search
       - restHL:
           servers.names: localhost:9200
   io.vertigo.database.DatabaseFeatures:
@@ -27,7 +27,7 @@ modules:
       - sql.c3p0:
           dataBaseClass: io.vertigo.database.impl.sql.vendor.h2.H2DataBase
           jdbcDriver: org.h2.Driver
-          jdbcUrl: jdbc:h2:D:/atelier/database/formation_loaded;NON_KEYWORDS=YEAR,KEY
+          jdbcUrl: jdbc:h2:C:/atelier/database/formation_loaded;NON_KEYWORDS=YEAR,KEY
   io.vertigo.datamodel.DataModelFeatures:
   io.vertigo.datastore.DataStoreFeatures:
     features:
