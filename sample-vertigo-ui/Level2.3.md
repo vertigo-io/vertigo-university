@@ -10,6 +10,16 @@ Nous verrons le rendu particulier des tableaux.
 - Vue : `/src/main/resources/webapp/WEB-INF/views/vui/movie.html`
 - Service : `movieServices.loadMovieWithRoles`, `movieServices.getActorsByMovie`
 
+
+### A connaitre : DtObject Accessors
+
+Nous profitons de cet exercice pour découvrir une nouveauté de Vertigo 3.
+Le service `loadMovieWithRoles`, retourne bien un `Movie`, il vient donc en remplacement du `getById` utilisé dans les exercices précédent.
+Le `Movie` retourné contient la liste des `Roles`, qui sont chargés et conservés dans l'association.
+On les récupère à travers un objet `VAccessor` avec la méthode `get()`.
+
+Coté service, ce `VAccessor` permet un chargement simplifié des données mais ce chargement n'est pas automatique : on garde la main sur les accès base qui sont fait.
+
 ### A connaitre : Composants
 
 Le composant `vu:field-read` : Déclare un champ en mode lecture, il sera résolu coté client. 
@@ -22,7 +32,7 @@ Le composant `vu:select`, comme les autres composants de formulaire ne peuvent p
 ## Etapes
 
 1. Dans le Controller, déclarez une clé de context "roles" de type Role.
-2. Dans le initContext charger la liste de film avec leur liste de rôle avec le service `loadMovieWithRoles`.
+2. Dans le initContext charger le de film avec sa liste de rôle avec le service `loadMovieWithRoles`.
 3. Publiez la liste dans le context.
 4. Dans la vue, ajouter une table avec les colonnes `asCharacter` et `actId`
 5. Consulter la page de détail d'un film avec des Roles : [Star Wars](http://localhost:18080/sample/movie/3678598). Consulter le contenu du `vueData`.
