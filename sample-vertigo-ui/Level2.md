@@ -23,11 +23,11 @@ Par défaut les paramètres attendus sont considérés obligatoires, mais il est
 
 ### A connaitre : Composants
 
-Le composant `vu:form` : Déclare un formulaire. Le body est utilisé.
+Le composant `vu:form` : Déclare un formulaire. Le contenu est utilisé.
 
-Le composant `vu:block` : Déclare un block, c'est un élément graphique. Le body est utilisé.
+Le composant `vu:block` : Déclare un block, c'est un élément graphique. Le contenu est utilisé.
 
-Le composant `vu:grid` : Déclare une mise en page de grille, il possible de modifier le nombre de colonne (2 par défaut). Le body est utilisé.
+Le composant `vu:grid` : Déclare une mise en page de grille, il possible de modifier le nombre de colonne (2 par défaut). Le contenu est utilisé.
 
 Le composant `vu:text-field` : Pose un champ text, nécessite `object` pour le nom de l'objet dans le context et `field` pour le nom du champ. 
 Ce composant a un rendu différent en fonction du mode.
