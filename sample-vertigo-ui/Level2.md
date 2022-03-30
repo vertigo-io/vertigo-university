@@ -23,7 +23,7 @@ Par exemple :
 ```
 Cela permet de récupérer le `movId` depuis l'url et le passer au `initContext` via le paramètre `Long movId`.
 
-En `Post`, nous utilisons majoritairement la mise à jour d'un élément du context. Il est récupérer avec `@ViewAttribute`.
+En `Post`, nous utilisons majoritairement la mise à jour d'un élément du context. Il est récupéré avec `@ViewAttribute`.
 
 Par défaut les paramètres attendus sont considérés obligatoires, mais il est possible de les déclarer `Optional<>` si besoin.
 
