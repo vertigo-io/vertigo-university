@@ -11,6 +11,12 @@ et proposer une recherche plus pratique et plus performante.
 - Vue : `/src/main/resources/webapp/WEB-INF/views/vui/moviesSearch.html`
 - Service : `movieServices.searchMovies`
 
+### A connaitre : Publier un objet primitif dans le context
+
+Il est possible de publier un objet simple *(String, Long, Integer, ...)* dans le context.
+
+Il faut utiliser `publishRef`.
+
 ### A connaitre : FacetedQueryResult
 
 Les services de haut niveau de recherche dans Vertigo retourne le résultat dans un objet complet : `FacetedQueryResult`.
