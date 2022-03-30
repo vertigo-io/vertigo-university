@@ -39,10 +39,10 @@ Ce composant a un rendu différent en fonction du mode.
 1. Déclarez une clé de context "movie" de type Movie.
 2. Créez un initContext récupérant l'identifiant dans le Path de la route.
 3. Dans le initContext chargez le movie à partir de l'id avec le service `MovieServices.getById`.
-4. Publiez la liste dans le context.
+4. Publiez l'objet `movie` dans le context.
 5. Créez le fichier de la vue en copiant et modifiant le **home.html**
 6. Ajoutez un formulaire `<vu:form>`.
-6. Ajoutez un formulaire `<vu:block>` avec un **title="Movie"**
+6. Ajoutez un `<vu:block>` avec un **title="Movie"**
 7. Ajouter des champs text sur movId, name, year et couId
 8. Consulter la page de détail d'un film.
 9. Consulter la source de la page. Recherchez la balise script id="vui-init-data" et regardez son contenu. Dans la console, consulter le vueData avec la commande `VUiPage.vueData`
