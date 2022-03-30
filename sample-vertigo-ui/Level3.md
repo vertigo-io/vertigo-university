@@ -22,6 +22,8 @@ Il faut utiliser `publishRef`.
 Les services de haut niveau de recherche dans Vertigo retourne le résultat dans un objet complet : `FacetedQueryResult`.
 Celui-ci contient éléments du resultat, nombre total d'élément, résultat des facettes et autre.
 
+`SelectedFacetValues` : Est un builder qui permet d'initialiser les facettes sélectionnées. *(`.empty().build()` pour l'initialiser vide)*
+
 Il peut être publié dans le context via `publishFacetedQueryResult`. Cette méthode va *"mettre à plat"* l'objet en inserant plusieurs clés dans le contexte. 
 Toutes ces clés sont préfixées par le nom de la référence passée en premier paramètre de `publishFacetedQueryResult`.
 - `"_list"` : Premiers élements du résultat en mode liste
@@ -50,6 +52,9 @@ Le projet peut composer sa page comme il le souhaite, il lui reste l'effort de m
 - `resultKey` : Nom de la référence du `FacetedQueryResult` dans le context
 - `searchUrl` : Url de recherche *(en mode Ajax)*
 - `collectionComponentId` : Nom du composant portant la liste. Ceci permet le rafraichissement et la conservation du tri et de la pagination.
+
+`vu:facets` : Ce composant pose les facettes associées à cette recherche.
+- `resultKey` : Nom de la référence du `FacetedQueryResult` dans le context
 
 `search('contextKeyName')` : méthode javascript qui permet de lancer un rafraichissement d'une recherche. 
 On l'utilise par exemple sur l'event `@input` du champ de critère.
