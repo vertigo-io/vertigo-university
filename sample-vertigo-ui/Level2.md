@@ -43,8 +43,9 @@ Ce composant a un rendu différent en fonction du mode.
 5. Créez le fichier de la vue en copiant et modifiant le **home.html**
 6. Ajoutez un formulaire `<vu:form>`.
 6. Ajoutez un `<vu:block>` avec un **title="Movie"**
-7. Ajouter des champs text sur movId, name, year et couId
-8. Consulter la page de détail d'un film.
-9. Consulter la source de la page. Recherchez la balise script id="vui-init-data" et regardez son contenu. Dans la console, consulter le vueData avec la commande `VUiPage.vueData`
+7. Ajouter un `vu:grid` *(2 colonnes par défaut)*
+8. Ajouter des champs text sur movId, name, year et couId
+9. Consulter la page de détail d'un film.
+10. Consulter la source de la page. Recherchez la balise script id="vui-init-data" et regardez son contenu. Dans la console, consulter le vueData avec la commande `VUiPage.vueData`
 
 # [Suite : Level 2.1 - Ecran de détail - Liste de référence des pays](./Level2.1.md)
