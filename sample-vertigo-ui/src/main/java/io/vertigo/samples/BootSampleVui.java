@@ -17,7 +17,6 @@
  */
 package io.vertigo.samples;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -54,7 +53,7 @@ public final class BootSampleVui {
 		System.setProperty("org.apache.jasper.compiler.disablejsr199", "false");
 		context.setAttribute("jacoco.exclClassLoaders", "*");
 
-		context.setAttribute("javax.servlet.context.tempdir", getScratchDir());
+		//context.setAttribute("javax.servlet.context.tempdir", getScratchDir());
 
 		final ContainerInitializer springInitializer = new ContainerInitializer(new SpringServletContainerInitializer(), null);
 		springInitializer.addApplicableTypeName(VuiVSpringWebApplicationInitializer.class.getCanonicalName());
@@ -69,16 +68,16 @@ public final class BootSampleVui {
 		server.start();
 	}
 
-	private static File getScratchDir() throws IOException {
-		final File tempDir = new File(System.getProperty("java.io.tmpdir"));
-		final File scratchDir = new File(tempDir.toString(), "embedded-jetty-html");
-
-		if (!scratchDir.exists()) {
-			if (!scratchDir.mkdirs()) {
-				throw new IOException("Unable to create scratch directory: " + scratchDir);
-			}
-		}
-		return scratchDir;
-	}
+	//	private static File getScratchDir() throws IOException {
+	//		final File tempDir = new File(System.getProperty("java.io.tmpdir"));
+	//		final File scratchDir = new File(tempDir.toString(), "embedded-jetty-html");
+	//
+	//		if (!scratchDir.exists()) {
+	//			if (!scratchDir.mkdirs()) {
+	//				throw new IOException("Unable to create scratch directory: " + scratchDir);
+	//			}
+	//		}
+	//		return scratchDir;
+	//	}
 
 }

@@ -67,6 +67,10 @@ public class MovieServices implements Component {
 		movieDAO.save(movie);
 	}
 
+	public void saveList(final DtList<Movie> movies) {
+		movieDAO.updateMoviesBatch(movies);
+	}
+
 	public List<Long> getActorsIdsByMovie(final Long movId) {
 		Assertion.check().isNotNull(movId);
 		//---

@@ -38,6 +38,16 @@ create Task TkGetMoviesInCountries {
 	out movies		{domain : DoDtMovie			cardinality:"*" 	}
 }
 
+create Task TkUpdateMoviesBatch {
+    className : "io.vertigo.basics.task.TaskEngineProcBatch"
+        request : "
+            UPDATE MOVIE SET NAME=#moviesList.name#, YEAR=#moviesList.year#, IMDBID=#moviesList.imdbid#, COU_ID=#moviesList.couId# 
+            WHERE MOV_ID=#moviesList.movId#
+            "
+    in moviesList       {domain : DoDtMovie     cardinality:"*"     }
+}
+
+
 
 
 
