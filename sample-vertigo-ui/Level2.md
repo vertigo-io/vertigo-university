@@ -16,6 +16,12 @@ avec une annotation qui précise comment est passé le paramètre avec le protoc
 Il existe plusieurs moyens pour passer des paramètres : Path, paramètre d'url, Body d'un post, ...
 
 En `Get`, nous utilisons majoritairement l'extraction d'une partie de la route avec `@PathVariable` et le paramètre de requete avec *url?param1=..&param2=..* avec `@RequestParam`.
+Par exemple :
+```Java
+@GetMapping("/{movId}")
+	public void initContext(@PathVariable("movId") final Long movId, final ViewContext viewContext) {
+```
+Cela permet de récupérer le `movId` depuis l'url et le passer au `initContext` via le paramètre `Long movId`.
 
 En `Post`, nous utilisons majoritairement la mise à jour d'un élément du context. Il est récupérer avec `@ViewAttribute`.
 
