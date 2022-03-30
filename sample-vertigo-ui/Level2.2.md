@@ -30,7 +30,7 @@ Nous préconisons de le faire lors des sauvegardes, en forçant le rechargement 
 
 ### A connaitre : Composants
 
-Dans les fichiers html des composants VertigoUi, on retrouve les différentes version du composant (readOnly, edit, ...).
+Dans les fichiers html des composants VertigoUi, on retrouve les différentes versions du composant (readOnly, edit, ...).
 La résolution des composants utilise le `vu:alias`et le `vu:selector`
 Il est possible de *forcer* l'usage d'une version en donnant son nom principal (ex: text-field-read)
 
