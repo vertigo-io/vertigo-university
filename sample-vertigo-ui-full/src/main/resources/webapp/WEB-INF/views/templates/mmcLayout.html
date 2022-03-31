@@ -30,8 +30,14 @@
 						@click="componentStates.navDrawer.showLeft = !componentStates.navDrawer.showLeft" icon="menu" aria-label="Toggle menu on left side"></q-btn>
 						<div class="gt-md">University Vertigo Ui</div>						
 					</div>
-					<!-- Brand and toggle get grouped for better mobile display -->
+					<div class="col q-mx-xl">&nbsp;</div>
+                    <div>
+                        <vu:autocomplete-edit stack-label="false" dense object="user" field="couId" list="countriesMdl"
+                        th:@input="|httpPostAjax('@{/country/_changeCountry}', vueDataParams(['user']))|" 
+                        />                        
+                    </div>
 				</q-toolbar>
+				
 			</q-header>
         	<!-- END HEADER-->
         			
