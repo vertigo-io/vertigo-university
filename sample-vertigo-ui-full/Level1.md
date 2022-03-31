@@ -53,7 +53,6 @@ Le rendu de la table sera réalisé coté client en vueJs. En vueJs, dans une ta
 1. Créez le fichier de la vue en copiant et modifiant le **home.html**
 1. Ajoutez une table dans le fragment="content".
 ```Html
-       <section layout:fragment="content" >
             <div>
             <h2>Movies</h2>
             <vu:table list="movies" componentId="movieTable" >
@@ -62,14 +61,13 @@ Le rendu de la table sera réalisé coté client en vueJs. En vueJs, dans une ta
                 <vu:column field="year" />
             </vu:table>
             </div>
-        </section>
 ```
 7. Testez la page affichant la liste de *Movies*.
 7. Consulter la source de la page. Recherchez la balise `script id="vui-init-data"` et regardez son contenu.
 8. Retirez une colonne du tableau et comparez.
 9. Familiarisez vous avec la lecture des composants `vu:table` et `vu:column` ([GitHub VertigoUi Components](https://github.com/vertigo-io/vertigo-extensions/tree/vertigo-3.3.0/vertigo-ui/src/main/resources/io/vertigo/ui/components)). Notez l'usage de `vu:include-data`.
 
-11. Modifiez la colonne movId, pour ajouter un lien vers la page de détail `/movie/{movId}`
+11. Modifiez le contenu de la colonne `movId`, pour ajouter un lien vers la page de détail `/movie/{movId}`
 
 `<a th::href="|'@{/movie/}'+props.row.movId|" >{{props.row.movId}}</a>`
 

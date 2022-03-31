@@ -22,7 +22,7 @@ Cela est fait dans un `DefinitionProvider` du module.
 
 ### A connaitre : Composants
 
-Le composant `vu:select` : Pose un champ référencant un liste. A minima, nécessite un attribut `liste`. Ce composant supporte plusieurs manières pour déclarer la liste associée. 
+Le composant `vu:select` : Pose un champ référencant une liste. A minima, nécessite un attribut `list`. Ce composant supporte plusieurs manières pour déclarer la liste associée. 
 Elle peut être directement dans le context si elle est assez courte ou référencer une liste de référence.
 
 ## Etapes

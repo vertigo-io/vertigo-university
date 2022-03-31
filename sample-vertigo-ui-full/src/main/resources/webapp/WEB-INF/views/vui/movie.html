@@ -37,7 +37,7 @@
 				</vu:grid>
 				</vu:block>
 				<br/>
-				<vu:table list="roles" componentId="roleTable" rowsPerPage="10" 
+				<vu:table list="roles" componentId="roleTable" rowsPerPage="10" binary-state-sort
 				  sortUrl="@{/movie/_sort}"
 				  tr_@click.native="|goTo('@{/actor/}'+props.row.actId)|" tr_class="nav" >
 	                <vu:include-data object="roles" field="rolId" />

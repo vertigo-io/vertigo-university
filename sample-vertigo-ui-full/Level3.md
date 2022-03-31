@@ -11,10 +11,18 @@ et proposer une recherche plus pratique et plus performante.
 - Vue : `/src/main/resources/webapp/WEB-INF/views/vui/moviesSearch.html`
 - Service : `movieServices.searchMovies`
 
+### A connaitre : Publier un objet primitif dans le context
+
+Il est possible de publier un objet simple *(String, Long, Integer, ...)* dans le context.
+
+Il faut utiliser `publishRef`.
+
 ### A connaitre : FacetedQueryResult
 
 Les services de haut niveau de recherche dans Vertigo retourne le résultat dans un objet complet : `FacetedQueryResult`.
 Celui-ci contient éléments du resultat, nombre total d'élément, résultat des facettes et autre.
+
+`SelectedFacetValues` : Est un builder qui permet d'initialiser les facettes sélectionnées. *(`.empty().build()` pour l'initialiser vide)*
 
 Il peut être publié dans le context via `publishFacetedQueryResult`. Cette méthode va *"mettre à plat"* l'objet en inserant plusieurs clés dans le contexte. 
 Toutes ces clés sont préfixées par le nom de la référence passée en premier paramètre de `publishFacetedQueryResult`.
@@ -45,6 +53,9 @@ Le projet peut composer sa page comme il le souhaite, il lui reste l'effort de m
 - `searchUrl` : Url de recherche *(en mode Ajax)*
 - `collectionComponentId` : Nom du composant portant la liste. Ceci permet le rafraichissement et la conservation du tri et de la pagination.
 
+`vu:facets` : Ce composant pose les facettes associées à cette recherche.
+- `resultKey` : Nom de la référence du `FacetedQueryResult` dans le context
+
 `search('contextKeyName')` : méthode javascript qui permet de lancer un rafraichissement d'une recherche. 
 On l'utilise par exemple sur l'event `@input` du champ de critère.
 
@@ -71,17 +82,7 @@ Pour le réactiver, il faut placer un `flag` dans le context de la webApp.
 3. Redémarrer l'application.
 4. Vérifier que ElasticSearch est bien démarré : [localhost:9200/sample_vui___idx_movie/](http://localhost:9200/sample_vui___idx_movie/_search?q=*:*)
 
-Si besoin, il est possible de lancer une reindexation : 
-1. Dans le controller 
-```Java
-@GetMapping("/_reindex")
-public ViewContext indexMovies(final ViewContext viewContext) {
-  movieServices.indexMovies();
-  return viewContext;
-}
-```
-2. Puis appeler le serviceWeb : http://localhost:18080/sample/moviesSearch/_reindex
-
+**Si besoin** : retrouver tout en bas de cette page les éléments pour faire une réindexation *(normalement vous n'en n'avez pas besoin)*
 
 Une fois l'ElasticSearch démarré, nous pouvons commncer par le controller :
 
@@ -90,7 +91,7 @@ Une fois l'ElasticSearch démarré, nous pouvons commncer par le controller :
 3. Déclarez une clé de context **criteria** de type `String`.
 4. Créez un initContext avec un `@GetMapping("/")`.
 5. Dans le initContext initialisez le criteria à "" 
-6. Faite une première recherche et publier le `FacetedQueryResult`
+6. Appeler le service de recherche et publier le `FacetedQueryResult`
 7. Ajouter une méthode pour les recherches en Ajax
 ```Java
 @PostMapping("/_search")
@@ -152,3 +153,15 @@ Nous avons préparer le Controller, passont à la vue.
   </vu:list>
  </th:block>
 ```
+
+## Pour lancer une reindexation : 
+1. Dans le controller 
+```Java
+@GetMapping("/_reindex")
+public ViewContext indexMovies(final ViewContext viewContext) {
+  movieServices.indexMovies();
+  return viewContext;
+}
+```
+2. Puis appeler le serviceWeb : http://localhost:18080/sample/moviesSearch/_reindex
+

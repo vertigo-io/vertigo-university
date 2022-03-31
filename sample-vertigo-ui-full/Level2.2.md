@@ -30,7 +30,7 @@ Nous préconisons de le faire lors des sauvegardes, en forçant le rechargement 
 
 ### A connaitre : Composants
 
-Dans les fichiers html des composants VertigoUi, on retrouve les différentes version du composant (readOnly, edit, ...).
+Dans les fichiers html des composants VertigoUi, on retrouve les différentes versions du composant (readOnly, edit, ...).
 La résolution des composants utilise le `vu:alias`et le `vu:selector`
 Il est possible de *forcer* l'usage d'une version en donnant son nom principal (ex: text-field-read)
 
@@ -61,7 +61,7 @@ La méthode de sauvegarde doit récupérer les données postées : utiliser le `
 4. Dans la vue, ajouter une cellule qui portera les boutons d'actions
 5. Ajoutez un premier bouton pour passer en mode édit. Celui-ci ne doit s'afficher qu'en mode readOnly (`th:if="${model.modeReadOnly}"`)
 6. Ajoutez un second bouton pour sauvegarder. Celui-ci ne doit s'afficher qu'en mode edit (`th:if="${model.modeEdit}"`)
-7. Ajoutez un troisième bouton pour annuler losrque l'on est en édition. Celui-ci recharge la page, on utilisera un `bouton-link` avec une url adaptée : `@{/movie/} + ${model.movie.getLong('movId')}`
+7. Ajoutez un troisième bouton pour annuler losrque l'on est en édition. Celui-ci recharge la page, on utilisera un `button-link` avec une url adaptée : `@{/movie/} + ${model.movie.getLong('movId')}`
 9. Consultez la page de détail d'un film et faites quelques essais.
 10. Pour éviter de modifier l'identifiant, forcez le champ `movId` en mode readOnly.
 11. Retourner sur la page, notez le comportement en cas d'erreur de saisie sur les champs.

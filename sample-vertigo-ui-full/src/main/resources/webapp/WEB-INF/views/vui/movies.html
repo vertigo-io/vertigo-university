@@ -12,7 +12,7 @@
 		<section layout:fragment="content" >
 			<div>
 			<h2>Movies</h2>
-			<vu:table list="movies" componentId="movieTable" 
+			<vu:table list="movies" componentId="movieTable" binary-state-sort
 			sortUrl="@{/movies/_sort}"
 			tr_@click.native="|goTo('@{/movie/}'+props.row.movId)|" tr_class="nav">
 				<vu:column field="movId">
