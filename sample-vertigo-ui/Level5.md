@@ -21,14 +21,19 @@ Cela permettra de l'activer sur toutes les pages.
 `@ModelAttribute` : Execute la méthode lors du chargement du composant. Pour VertigoUI, nous l'utilisons pour le initContext des controllers transverses.
 ```Java
 @ModelAttribute
-	public void initContext(final ViewContext viewContext) {
-		//must support all cases : check conditions (newContext, logged user, etc..)
+public void initContext(final ViewContext viewContext) {
+  if (isNewContext()) { //Needded to initContext only once
+    //must support all cases : check conditions (newContext, logged user, etc..)
     ...
+  }
 }
 ```
 
+**Important:** `@ModelAttribut` est exécuté deux fois si le controller est aussi dans le scope du `@ControllerAdvice` (ce qui est souvent le cas, car il `extends AbstractVSpringMvcController`). Dans ce cas, le `if (isNewContext()) {` permet d'avoir une seule execution.
+
 **Attention:** Lorsque votre composant transverse interagit avec le serveur, les données en cours d'édition peuvent être perdues (car non postées).
 Prévoyez une interaction en ajax ou une ergonomie générale adaptée.
+
 
 ### A connaitre : Composants
 
@@ -41,36 +46,34 @@ Pour cet exercice nous allons utiliser le composant autocomplete.
 
 1. Créez le controller `CountryChoiceController`, avec la route `"/country"`.
 2. Ajouter l'annotation `@ControllerAdvice(assignableTypes = { AbstractVSpringMvcController.class })`
-3. Ajouter une clé du context pour un objet `"user"` de type `User`
+3. Ajouter une clé du context pour un objet `"user"` de type `User`. Cet objet est un peu détourné de son usage pour récupérer le pays selectionné et actif dans la session de l'utilisateur connecté.
 3. Ajouter une clé du context pour un objet `"countriesMdl"` de type `Country`
-4. Ajouter le `initContext` qui prend le ViewContext et la Session en paramètre. Celui ci n'est pas mappé sur une route **/**, mais a l'annotation `@ModelAttribute`
+4. Ajouter le `initContext` qui prend le ViewContext en paramètre. Celui ci **n'est pas** mappé sur une route **/**, mais a l'annotation `@ModelAttribute`
+Ce initContext devra vérifier qu'on est bien sur un nouveau context pour ne pas exécuter deux fois l'init.
 ```Java
 @ModelAttribute
-public void initContext(final ViewContext viewContext, final SampleUserSession session)
+public void initContext(final ViewContext viewContext)
 ```
-6. Dans le initContext, initialiser le user et publier la MasterDataList de Country. Pour initialiser le context utiliser la méthode ci-dessous :
+5. Dans le initContext il faut initialiser le user et publier la MasterDataList de Country. Pour initialiser le context utiliser la méthode ci-dessous :
 ```Java
-	private User obtainUser(final SampleUserSession session) {
-		User user = session.getAttribute("sessionUser");
-		if (user != null) {
-			return user;
-		}
-		user = new User();
-		user.setCouId(1128L); //France
-		return user;
-	}
+private User obtainUser() {
+  final SampleUserSession session = Node.getNode().getComponentSpace().resolve(VSecurityManager.class)
+	.<SampleUserSession> getCurrentUserSession().orElseThrow(() -> new VSecurityException(MessageText.of("No active session found")));
+  User user = session.getAttribute("sessionUser");
+  if (user != null) {
+    return user;
+  }
+  user = new User();
+  user.setCouId(1128L); //France
+  session.putAttribute("sessionUser", user);
+  return user;
+}
+```
+6. Ajouter une méthode mappée sur une requete `POST` en `/_changeCountry`, elle prend l'objet user qui a été envoyé, récupère l'id du pays, met à jour la session et retourne le `viewContext` mis à jour
+7. Pour appliquer l'élément graphique sur toute les pages, il faut agir sur le template de page : `mmcLayout.html`
+8. Ajouter le composant `vu:autocomplete` dans le dernier `div` de la `q-toolbar`. Ce composant est associé au champ `couId` de `user` et utilise la liste `countriesMdl`
+9. Lors de la saisie d'une valeur sur ce composant, il faut *Poster* l'objet `user` du `vueData` vers la méthode de `CountryChoiceController`
+```Javascript
+th:@input="|httpPostAjax('@{/country/_changeCountry}', vueDataParams(['user']))|"
 ```
 
-7. Retirer la méthode du tri et ajouter une méthode pour passer en mode edit
-8. Ajouter une méthode de sauvegarde à l'image de celle du `MovieController` : récupère une `DtList<Movie>` et utilise le service `movieServices.saveList`
-9. Créez la vue `moviesModifiable.html` à partir de `movies.html`.
-10. Remplacer le composant `vu:table` par `vu:table-modifiable` *(pensez au pagination.sync)*
-11. Ajouter le corps des colonnes pour les champs `name` et `year`
-12. Ajouter les boutons d'action Edit, Save et Cancel à partir de `movie.html`
-13. Ajouter un vu:form autour de la table et des boutons d'actions
-14. Consulter la page et observer le comportement.
-
-Pour améliorer le rendu, vous pouvez consulter la [documentation Quasar du QInput](https://v1.quasar.dev/vue-components/input#qinput-api)
-Par exemple ajouter `dense hide-bottom-space` sur les `vu:text-field` 
-
-# [Suite : Level 5 - Controllers et Context transverses](./Level5.md)
