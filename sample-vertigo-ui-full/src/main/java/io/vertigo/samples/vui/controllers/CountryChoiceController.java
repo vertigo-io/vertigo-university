@@ -59,13 +59,6 @@ public final class CountryChoiceController extends AbstractVSpringMvcController 
 		return viewContext;
 	}
 
-	//	private User obtainUser() {
-	//		final SampleUserSession session = Node.getNode().getComponentSpace().resolve(VSecurityManager.class)
-	//				.<SampleUserSession> getCurrentUserSession().orElseThrow(() -> new VSecurityException(MessageText.of("No active session found")));
-	//		final User user = session.getAttribute("sessionUser");
-	//		Assertion.check().isNotNull(user);
-	//		return user;
-	//	}
 	private User obtainUser() {
 		final SampleUserSession session = Node.getNode().getComponentSpace().resolve(VSecurityManager.class)
 				.<SampleUserSession> getCurrentUserSession().orElseThrow(() -> new VSecurityException(MessageText.of("No active session found")));
