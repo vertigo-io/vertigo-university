@@ -17,6 +17,8 @@
  */
 package io.vertigo.samples.vui.controllers;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
@@ -36,6 +38,9 @@ import io.vertigo.ui.core.ViewContext;
 import io.vertigo.ui.core.ViewContextKey;
 import io.vertigo.ui.impl.springmvc.argumentresolvers.ViewAttribute;
 import io.vertigo.ui.impl.springmvc.controller.AbstractVSpringMvcController;
+import io.vertigo.vega.webservice.model.UiObject;
+import io.vertigo.vega.webservice.validation.DefaultDtObjectValidator;
+import io.vertigo.vega.webservice.validation.UiMessageStack;
 
 @Controller
 @RequestMapping("/movie")
@@ -77,6 +82,14 @@ public class MovieController extends AbstractVSpringMvcController {
 	@PostMapping("/_edit")
 	public void doEdit() {
 		toModeEdit();
+	}
+
+	@PostMapping("/_validate")
+	public ViewContext doValidate(final ViewContext viewContext, @ViewAttribute("movie") final UiObject<Movie> movieUi, final UiMessageStack uiMessageStack) {
+		//could use more specialized validator
+		final Movie movie = movieUi.mergeAndCheckInput(List.of(new DefaultDtObjectValidator<>()), uiMessageStack);
+		movieServices.validate(movie, uiMessageStack);
+		return viewContext;
 	}
 
 	@PostMapping("/_save")

@@ -29,10 +29,12 @@ import io.vertigo.samples.vui.VuiPAO;
 import io.vertigo.samples.vui.dao.ActorDAO;
 import io.vertigo.samples.vui.dao.MovieDAO;
 import io.vertigo.samples.vui.domain.Actor;
+import io.vertigo.samples.vui.domain.DtDefinitions.MovieFields;
 import io.vertigo.samples.vui.domain.Movie;
 import io.vertigo.samples.vui.domain.MovieIndex;
 import io.vertigo.samples.vui.domain.Role;
 import io.vertigo.samples.vui.search.MovieIndexSearchClient;
+import io.vertigo.vega.webservice.validation.UiMessageStack;
 
 @Transactional
 public class MovieServices implements Component {
@@ -69,6 +71,13 @@ public class MovieServices implements Component {
 
 	public void saveList(final DtList<Movie> movies) {
 		movieDAO.updateMoviesBatch(movies);
+	}
+
+	public void validate(final Movie movie, final UiMessageStack uiMessageStack) {
+		if (movie.getYear() < 1920) {
+			uiMessageStack.error("Too old, only movies after 1920 are accepted", movie, MovieFields.year.name());
+			uiMessageStack.error("There are some errors");
+		}
 	}
 
 	public List<Long> getActorsIdsByMovie(final Long movId) {

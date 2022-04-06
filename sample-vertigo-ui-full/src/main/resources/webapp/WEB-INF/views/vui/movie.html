@@ -15,8 +15,8 @@
 				<vu:block title="Movie">
 				<vu:grid cols="2">
 					<vu:text-field-read object="movie" field="movId"/>
-					<vu:text-field object="movie" field="name" />
-					<vu:text-field object="movie" field="year" />
+					<vu:text-field object="movie" field="name"/>
+					<vu:text-field object="movie" field="year" debounce="250" th:@input="|httpPostAjax('@{_validate}', vueDataParams(['movie']))|"  />
 					<vu:select object="movie" field="couId" list="countries"/>
 					<vu:grid-cell>
 						<vu:button-submit th:if="${model.modeReadOnly}" label="Edit" action="@{_edit}" color="primary"/>
