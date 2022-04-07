@@ -1,65 +1,97 @@
-# Level 2.5 - Attributs complémentaires et évènements
+# Level 2.5 - Ecran de détail - Validation coté serveur en Ajax
 
-Nous allons rajouter un lien de navigation sur la liste des films en récupérant l'évenement onClick de l'ensemble de la ligne.
-Nous verrons comment passer des attributs spécifiques du composant Thymeleaf au composant Quasar, et comment traiter les évenements.
+Nous allons ajouter une validation de la date du film l'écran de détail.
+Nous verrons la réactivité aux modifications d'un objet du vueModel et la validation de données coté serveur.
 
 ## Eléments
 
-- Route : [http://localhost:18080/sample/movies/](http://localhost:18080/sample/movies/)
-- Controller : `/src/main/java/io/vertigo/samples/vui/controllers/MoviesController`
-- Vue : `/src/main/resources/webapp/WEB-INF/views/vui/movies.html`
-- Service : 
+- Route : [http://localhost:18080/sample/movie/{movId}](http://localhost:18080/sample/movie/3678598)
+- Controller : `/src/main/java/io/vertigo/samples/vui/controllers/MovieController`
+- Vue : `/src/main/resources/webapp/WEB-INF/views/vui/movie.html`
+- Service : `movieServices.validate`
+
+### A connaitre : UiMessageStack
+
+VertigoUi propose une représentation des messages qui doivent être affichés coté client.
+Cela passe par l'`UiMessageStack: un objet qui contient la pile des messages de l'action : erreurs de format et de surface (validation des contraintes et du caractère non null), il peut être passé au service et complété avec des messages d'erreur, de warning, d'info ou de succès globaux, par objet ou par champs
+
+Il peut être passé en paramètre d'une action de controller, pour être complété manuellement lors des traitements. 
 
 
+### A connaitre : Validations spécifiques
 
-### A connaitre : Peuplement du `vueData` (vueJs) à partir du `ViewContext` (SpringMVC)
+VertigoUi applique automatiquement une validation des DtObjects à partir des contraintes associées aux SmartTypes lors de la réception coté serveur, 
+mais il est possible d'appliquer des validations spécifiques.
 
-Le principe de VertigoUi, est que les données nécessaires pour la construction de la page sont publiés par le controller dans le context.
-L'ensemble de ces données sont accessibles lors de l'évaluation par le template Thymeleaf.
+**Important** : La validation coté serveur est absolument nécessaire, c'est pourquoi nous nous focalisons dessus. N'oubliez pas que les controles coté client est toujours contournable.
 
-En revanche, seules les données nécessaires à vueJS coté client sont ajoutées à l'objet javascript vueData qui sera écrit dans le code source de la page. 
-Il est également nécessaire de déclarer si ces données sont autorisées en modification depuis le client ou non. Cela protège les données/champs du context de recevoir des modifications interdites depuis une requete.
-Cela reste relativement transparent, car les composants VertigoUi qui nécessitent des données dans le vueData le déclare déjà.
+Ces validations peuvent s'appliquer à deux niveaux : 
+- Sur la saisie utilisateur 
+- Sur les entités ayant déjà passés les premiers niveaux de validation de surface
 
-Toutefois, si le développeur souhaite utilisé des composants vueJs directement, ou utiliser une donnée coté client, il faudra le déclarer *manuellement*.
-Cela se fait via le composant `include-data`. Il y a 4 modes de déclaration : (cf. [doc Vertigo](https://vertigo-io.github.io/vertigo-docs/#/extensions/ui?id=composants-vertigo-ui-utils))
-- `include-data(object, field, modifiable, modifiableAllLines)` : Inclus le champ d'un objet 
-- `include-data-primitive(key, modifiable)` : Inclus une donnée primitive du context
-- `include-data-map(object, field, list, listKey, listDisplay)` : Inclus le champ d'un objet et applique une dénormalisation sur sa valeur (traduit un id en libellé par exemple)
-- `include-data-protected(object, field)` : Inclus le champ d'un objet. La valeur posée coté client est protégée (non en clair et non modifiable), la valeur réelle reste coté serveur. Ce système est utilisé pour les identifiants de fichier par exemple.
+Pour être efficace, il est préférable de travailler coté serveur sur les entités déjà validées. 
+Sur la saisie utilisateur, il est plus complexe de gérer les cas où les champs obligatoires sont absents et où les saisies ont des erreurs de format. 
+Cette complexitée impacte fortement les autres controles, puisqu'il entrainne une forte complexité dans la combinatoire des cas rencontrés.
 
+> Les contrôles sur la saisie utilisateur ne sont vraiment utiles que lorsqu'on valide une sous partie d'un objet.
 
-### A connaitre : Paramètres des composants
+Pour la saisie utilisateur, il suffit de récupérer un `UiObject<?>` dans la méthode du Controller, dans ce mode les valeurs de champ sont accéssibles même s'il y a des erreurs utilisateur dans l'objet.
 
-Les composants Vertigo sont en fait des fragments Thymeleaf. Par convention, ils déclarent les paramètres qu'ils vont utiliser.
-Par exemple : 
-```Html
-<th:block th:fragment="text-field-edit(object, field, rowIndex, label, suffix, input_attrs, label_attrs)" 
-	vu:alias="text-field" vu:selector="${viewMode=='edit'}"
+Pour lancer une validation sur un `UiObject`, soit on utilise les méthodes de l'`UiObject`, soit on fait appliquer un `DtObjectValidator` (il existe le `DefaultDtObjectValidator` pour appliquer les contraintes des *SmartTypes*.
+
+La méthode `mergeAndCheckInput` permet d'appliquer une Validator et de récupérer le `DtObject` typé avec les données mise à jour par la requete `Http`.
+
+Exemple:
+```Java
+final Movie movie = movieUi.mergeAndCheckInput(List.of(new DefaultDtObjectValidator<>()), uiMessageStack);
 ```
-Les paramètres qui se terminent par `_attrs` permettent de passer des paramètres qui n'étaient pas prévues à la base. 
-Il faut préfixer le paramètre avec le même préfix *(s'il n'y a pas de prefix, c'est le dernier attrs qui le récupère)*.
-Il est aussi possible de passer des events vueJs. Et enfin, il est possible d'en passer plusieurs les `xxx_attrs` sont des listes de paramètres.
 
-Quelques exemples : 
-- `input_color="blue"` passera `color="blue"` dans le paramètre `input_attrs`
-- `input_color="blue" input_readonly` passera `color="blue", readonly=true` dans le paramètre `input_attrs`
-- `color="blue"` passera `color="blue"` dans le paramètre `label_attrs`
-- `input_@click="todo"` passera `@click="todo"` dans le paramètre `input_attrs`
+### A connaitre : Reaction aux modifications sur un champ 
 
-Vous pouvez voir dans les composants, comment ces paramètres sont ensuite affichés sur les composants Quasar avec des `th:attr="__${input_attrs}__"`
+En vueJS, le plus simple pour réagir à quelques choses est de poser un handler d'evenement sur le composant d'édition.
+Dans le cas d'une saisie sur un text-field et en consultant l'api du composante vueJs sous jacent ([QField](https://v1.quasar.dev/vue-components/field))
 
-## Etapes 
+L'event `@input` : *Emitted when the model changes, only when used with 'clearable' or the 'control' scoped slot.*
+permet de réagir à la saisie dans un text. Pour ne lancer le traitement que lorsque l'utilisateur fait a terminé sa saisie, on utilise l'attribut `debounce` (en ms).
 
-1. Sur la page des films, ajouter une class `nav` sur le `tr` de la table, avec `tr_class="nav"` sur le composant `vu:table`
-2. Ajouter l'évenement natif `onClick` sur le `tr`. Celui-ci utilisera la méthode javascript `goTo(url)`.
-```Html
-tr_@click.native="|goTo('@{/movie/}'+props.row.movId)|"
+Un appel ajax sur évenement ressemblera globalement à :
+```Javascript
+th:@input="|httpPostAjax('@{url}', vueDataParams(['obj']))|"
 ```
-3. Consulter la page et observer le comportement
 
-# [Suite : Level 2.6 - Gestion des slots](./Level2.6.md)
+**Note:** Quasar propose un utilitaire pour réaliser un *debounce* : `Quasar.utils.debounce(fct, timeMs)`.
+Cette méthode retourne une nouvelle fonction, il faut donc s'assurer qu'elle sera évaluée.
 
-### Optionnel : Creation de l'écran de détail d'acteur
+### A connaitre : Reaction aux modifications sur un objet 
 
-1. Utiliser vos connaissances pour ajouter un lien sur la liste des rôles vers l'écran de consultation/modification des acteurs.
+Il est souvant préférable d'agir sur les modifications d'un objet quelques soit le champ. 
+Dans ce cas, on ne va pas réagir aux évenements de chaques `input`, mais plutot réagir à la modification de l'objet bindé dans le *vueData*.
+Pour cela, vueJs propose la mise en place de `watcher` qui permet de réagir au modification. En générale on appliquera un `debounce`.
+
+Exemple : 
+```Javascript
+VUiPage.$watch('vueData.object', 
+Quasar.utils.debounce(
+  (newValue, oldValue) => { ... myFunction ... },
+debounceDelay), { deep: true });
+```
+
+## Etapes
+
+Nous allons ajouter une validation en Ajax sur le formulaire de saisie de film pour vérifier que l'année est supérieur à 1920. [movie](http://localhost:18080/sample/movie/3678598)
+
+
+1. Dans le Controller `MovieController`, ajouter une méthode qui répondra à la validation Ajax 
+```Java
+ @PostMapping("/_validate")
+public ViewContext doValidate(final ViewContext viewContext, @ViewAttribute("movie") final Movie movie, final UiMessageStack uiMessageStack) {
+```
+2. Appeller la méthode du service `validate`. Vérifier le traitement réalisé par le service.
+3. Dans la vue `movie.html`, ajouter sur l'evenement `input` l'appel au service de validation
+*Rappel* : utiliser la méthode `httpPostAjax: function (url, paramsIn, options)`
+4. Vérifier le fonctionnement
+5. Ajouter un `debounce` pour éviter de multiple appels
+6. Vérifier le fonctionnement
+7. Remplacer le `@input` par un *watcher* sur l'objet `movie` du `vueData` (avec `debounce` également)
+
+# [Suite : Level 2.6 - Attributs complémentaires et évènements](./Level2.6.md)

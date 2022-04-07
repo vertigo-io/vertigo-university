@@ -1,47 +1,65 @@
-# Level 2.6 - Gestion des slots
+# Level 2.6 - Attributs complémentaires et évènements
 
-Nous allons completer le bouton de sauvegarde de film pour ajouter une message de confirmation.
-Nous verrons le mécanisme de slot.
+Nous allons rajouter un lien de navigation sur la liste des films en récupérant l'évenement onClick de l'ensemble de la ligne.
+Nous verrons comment passer des attributs spécifiques du composant Thymeleaf au composant Quasar, et comment traiter les évenements.
 
 ## Eléments
 
-- Route : [http://localhost:18080/sample/movie/{movId}](http://localhost:18080/sample/movie/3678598)
-- Controller : `/src/main/java/io/vertigo/samples/vui/controllers/MovieController`
-- Vue : `/src/main/resources/webapp/WEB-INF/views/vui/movie.html`
-- Service :
+- Route : [http://localhost:18080/sample/movies/](http://localhost:18080/sample/movies/)
+- Controller : `/src/main/java/io/vertigo/samples/vui/controllers/MoviesController`
+- Vue : `/src/main/resources/webapp/WEB-INF/views/vui/movies.html`
+- Service : 
 
-### A connaitre : Gestion de slots
 
-Les pages de rendu proposent plusieurs mécanisme pour généraliser des éléments tout en laissant une marge de manoeuvre pour spécialiser des sous-parties.
 
-Au niveau des templates, nous utilisons la notion de layout dans Thymeleaf, 
-vous en avez un apperçu dans toutes les pages avec le corps de page qui est à l'intérieur d'un `layout:fragment="content"`.
-Le template utilisé est référencé par le `layout:decorate="~{templates/mmcLayout}"` sur la balise `html` tout en haut.
-Dans la [demo Mars](https://github.com/vertigo-io/vertigo-mars/tree/master/src/main/webapp/WEB-INF/views/templates) nous avons créer des templates assez riche pour simplifier le code local à une page (header, boutons d'actions, ...).
+### A connaitre : Peuplement du `vueData` (vueJs) à partir du `ViewContext` (SpringMVC)
 
-Au niveau des composants Vertigo en Thymeleaf, nous avons aussi la notion de `slot`. 
-Le body du composant est un premier niveau de paramétrage, certain composant ont un contenu par défaut mais qui peut être modifier par le contenu spécifique. 
-Il peut aussi y avoir des slots nommés particuliers, dans ce cas il faut placer un `<vu:slot name="named_slot">` dans le corps du composant *(au début)*.
+Le principe de VertigoUi, est que les données nécessaires pour la construction de la page sont publiés par le controller dans le context.
+L'ensemble de ces données sont accessibles lors de l'évaluation par le template Thymeleaf.
 
-Au niveau des composants vueJs, il y a également une notion de `slot` avec `v-slot:named_slot`. 
-La [documentation de Quasar](https://v1.quasar.dev/vue-components/input#qinput-api) est très bien faite et liste les slots proposés pour chaque composant.
-C'est par exemple utilisé dans les tableaux pour spécialiser le rendu d'une ligne.
+En revanche, seules les données nécessaires à vueJS coté client sont ajoutées à l'objet javascript vueData qui sera écrit dans le code source de la page. 
+Il est également nécessaire de déclarer si ces données sont autorisées en modification depuis le client ou non. Cela protège les données/champs du context de recevoir des modifications interdites depuis une requete.
+Cela reste relativement transparent, car les composants VertigoUi qui nécessitent des données dans le vueData le déclare déjà.
 
-## Etapes
+Toutefois, si le développeur souhaite utilisé des composants vueJs directement, ou utiliser une donnée coté client, il faudra le déclarer *manuellement*.
+Cela se fait via le composant `include-data`. Il y a 4 modes de déclaration : (cf. [doc Vertigo](https://vertigo-io.github.io/vertigo-docs/#/extensions/ui?id=composants-vertigo-ui-utils))
+- `include-data(object, field, modifiable, modifiableAllLines)` : Inclus le champ d'un objet 
+- `include-data-primitive(key, modifiable)` : Inclus une donnée primitive du context
+- `include-data-map(object, field, list, listKey, listDisplay)` : Inclus le champ d'un objet et applique une dénormalisation sur sa valeur (traduit un id en libellé par exemple)
+- `include-data-protected(object, field)` : Inclus le champ d'un objet. La valeur posée coté client est protégée (non en clair et non modifiable), la valeur réelle reste coté serveur. Ce système est utilisé pour les identifiants de fichier par exemple.
 
-Pour illustrer le principe nous allons ajouter une confirmation sur l'enregistrement des modifications d'un film.
 
-1. Dans la vue du détail d'un film. Ajouter un identifiant sur le `vu:form` avec `id="myFormId"`. Ceci est nécessaire car la fenetre de confirmation est hors du formulaire et devra poster les données.
-2. Remplacer le `<vu:button-submit` par un `<vu:button-submit-confirm`, et préciser le `formId`
-3. Ajouter un message et des actions spécifique 
+### A connaitre : Paramètres des composants
+
+Les composants Vertigo sont en fait des fragments Thymeleaf. Par convention, ils déclarent les paramètres qu'ils vont utiliser.
+Par exemple : 
 ```Html
-<vu:slot name="actions_slot">
-<q-btn flat label="Non pas vraiment" color="primary" v-close-popup />
-<q-btn type="submit" th:formaction="@{_save}" form="myFormId" label="Oui tout à fait" color="primary" v-close-popup />
-</vu:slot>
-<span>Etes-vous certain de vouloir sauvegarder ?</span>
+<th:block th:fragment="text-field-edit(object, field, rowIndex, label, suffix, input_attrs, label_attrs)" 
+	vu:alias="text-field" vu:selector="${viewMode=='edit'}"
 ```
-4. Etudier dans le composant `button-submit.html`, les différentes options pour ajouter une confirmation. Vous remarquerez qu'il y a beaucoup plus simple.
-5. Consulter la page et observer le comportement.
+Les paramètres qui se terminent par `_attrs` permettent de passer des paramètres qui n'étaient pas prévues à la base. 
+Il faut préfixer le paramètre avec le même préfix *(s'il n'y a pas de prefix, c'est le dernier attrs qui le récupère)*.
+Il est aussi possible de passer des events vueJs. Et enfin, il est possible d'en passer plusieurs les `xxx_attrs` sont des listes de paramètres.
 
-# [Suite : Level 3 - Recherche](./Level3.md)
+Quelques exemples : 
+- `input_color="blue"` passera `color="blue"` dans le paramètre `input_attrs`
+- `input_color="blue" input_readonly` passera `color="blue", readonly=true` dans le paramètre `input_attrs`
+- `color="blue"` passera `color="blue"` dans le paramètre `label_attrs`
+- `input_@click="todo"` passera `@click="todo"` dans le paramètre `input_attrs`
+
+Vous pouvez voir dans les composants, comment ces paramètres sont ensuite affichés sur les composants Quasar avec des `th:attr="__${input_attrs}__"`
+
+## Etapes 
+
+1. Sur la page des films, ajouter une class `nav` sur le `tr` de la table, avec `tr_class="nav"` sur le composant `vu:table`
+2. Ajouter l'évenement natif `onClick` sur le `tr`. Celui-ci utilisera la méthode javascript `goTo(url)`.
+```Html
+tr_@click.native="|goTo('@{/movie/}'+props.row.movId)|"
+```
+3. Consulter la page et observer le comportement
+
+# [Suite : Level 2.7 - Gestion des slots](./Level2.7.md)
+
+### Optionnel : Creation de l'écran de détail d'acteur
+
+1. Utiliser vos connaissances pour ajouter un lien sur la liste des rôles vers l'écran de consultation/modification des acteurs.
