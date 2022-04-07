@@ -39,7 +39,7 @@ Nous allons commencer par le tri de la liste des films. [movies](http://localhos
 4. Dans la vue de la liste des films, ajouter une `sortUrl="@{/movies/_sort}"` sur la table
 5. Consulter la page et observer le comportement (la base de contient que les films commençant par 'S').
 
-# [Suite : Level 2.5 - Attributs complémentaires et évènements](./Level2.5.md)
+# [Suite : Level 2.5 - Ecran de détail - Validation coté serveur en Ajax](./Level2.5.md)
 
 ## Optionnel - Tri spécifique en Java
 
