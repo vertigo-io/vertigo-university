@@ -21,10 +21,10 @@ Les exercices ci-dessous portent sur VertigoUi, pour cela la structure de projet
   - [Level 2.2 - Ecran de détail - Edition](./Level2.2.md)
   - [Level 2.3 - Ecran de détail - Affichage des tableaux](./Level2.3.md)
   - [Level 2.4 - Ecran de détail - Tri coté serveur](./Level2.4.md)
-  - [Level 2.5 - Attributs complémentaires et évènements](./Level2.5.md)
-  - [Level 2.6 - Gestion des slots](./Level2.6.md)
+  - [Level 2.5 - Ecran de détail - Validation coté serveur en Ajax](./Level2.5.md)
+  - [Level 2.6 - Attributs complémentaires et évènements](./Level2.6.md)
+  - [Level 2.7 - Gestion des slots](./Level2.7.md)
 - [Level 3 - Recherche](./Level3.md)
 - [Level 4 - Tableaux éditables](./Level4.md)
 - [Level 5 - Controllers et Context transverses](./Level5.md)
-
 
