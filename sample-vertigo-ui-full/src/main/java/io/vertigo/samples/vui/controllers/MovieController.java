@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import io.vertigo.datamodel.structure.model.DtList;
 import io.vertigo.datamodel.structure.model.DtListState;
@@ -51,6 +52,9 @@ public class MovieController extends AbstractVSpringMvcController {
 	private final ViewContextKey<Actor> actorsKey = ViewContextKey.of("actors");
 	private final ViewContextKey<Country> countriesKey = ViewContextKey.of("countries");
 
+	private static final ViewContextKey<Role> roleKey = ViewContextKey.of("selected_role");
+	private static final ViewContextKey<Actor> actorKey = ViewContextKey.of("selected_actor");
+
 	@Inject
 	private MovieServices movieServices;
 
@@ -68,6 +72,23 @@ public class MovieController extends AbstractVSpringMvcController {
 		viewContext.publishDtList(rolesKey, movie.role().get());
 		viewContext.publishDtList(actorsKey, movieServices.getActorsByMovie(movId));
 		viewContext.publishMdl(countriesKey, Country.class, null);
+
+		viewContext.publishDto(roleKey, new Role());
+		viewContext.publishDto(actorKey, new Actor());
+	}
+
+	@PostMapping("/_loadActorRole")
+	public ViewContext loadActorRole(final ViewContext viewContext, @RequestParam("roleId") final Long roleId) {
+		final Role role = movieServices.getRoleWithActorById(roleId);
+		viewContext.publishDto(roleKey, role);
+		viewContext.publishDto(actorKey, role.actor().get());
+		//---
+		return viewContext;
+	}
+
+	@PostMapping("/_saveActorRole")
+	public void doSaveActorRole(@ViewAttribute("selected_role") final Role role, @ViewAttribute("selected_actor") final Actor actor) {
+		movieServices.save(role, actor);
 	}
 
 	@PostMapping("/_sort")

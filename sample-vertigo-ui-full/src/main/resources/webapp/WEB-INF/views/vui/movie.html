@@ -39,16 +39,30 @@
 				<br/>
 				<vu:table list="roles" componentId="roleTable" rowsPerPage="10" binary-state-sort
 				  sortUrl="@{/movie/_sort}"
-				  tr_@click.native="|${model.modeEdit}?openModal('roleActorModal', '@{/roleActor/}' + props.row.rolId , {'successCallback' : 'onRoleActorSuccess' }):false|"
-				  tr_class="nav" >
+				  tr_@click.native="|componentStates.roleActorDialog.opened=${model.modeEdit};componentStates.roleActorDialog.rolId=props.row.rolId|"
+				  th:tr_class="${model.modeEdit}?'nav':''" >
 	                <vu:include-data object="roles" field="rolId" />
 	                <vu:column field="asCharacter" />
 	                <vu:column field="actId">
 	                   <vu:field-read  list="actors" listKey="actId" listDisplay="name"/>
 	                </vu:column>
                 </vu:table>
-                <vu:modal componentId="roleActorModal" title="Role Actor" iframe_width="550" iframe_height="auto" iframe_onload="setIframeHeight(this)" />
+                <vu:modal componentId="roleActorModal" title="Role Actor" iframe_width="550" iframe_height="auto" iframe_onload="setIframeHeight(this)" />          
 			</vu:form>
+			
+                <q-dialog v-model="componentStates.roleActorDialog.opened"
+                    @before-show="VUiPage.httpPostAjax('_loadActorRole', {'roleId':componentStates.roleActorDialog.rolId})"
+                    th:with="objectKey=${model.vContext['componentStates'].addComponentState('roleActorDialog').addPrimitive('opened', false)}, objectKey=${model.vContext['componentStates']['roleActorDialog'].addPrimitive('selectedRolId', 0)}">                    
+                    <vu:form id="roleActorFormId">
+                    <vu:block id="general" title="Role Actor Dialog">
+                    <vu:grid cols="1">
+                        <vu:text-field object="selected_role" field="asCharacter" />
+                        <vu:text-field object="selected_actor" field="name" />
+                        <vu:button-submit label="Save" action="@{_saveActorRole}" form="roleActorFormId" color="primary" class="float-right q-mt-md"/>               
+                    </vu:grid>
+                    </vu:block>
+                    </vu:form>
+                </q-dialog>
 	</div>
 		<section layout:fragment="javascript-footer" >
             <script type="text/javascript">
