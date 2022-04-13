@@ -28,18 +28,15 @@ import io.vertigo.datastore.entitystore.EntityStoreManager;
 import io.vertigo.samples.vui.VuiPAO;
 import io.vertigo.samples.vui.dao.ActorDAO;
 import io.vertigo.samples.vui.dao.MovieDAO;
-import io.vertigo.samples.vui.dao.RoleDAO;
 import io.vertigo.samples.vui.domain.Actor;
-import io.vertigo.samples.vui.domain.DtDefinitions.MovieFields;
 import io.vertigo.samples.vui.domain.Movie;
 import io.vertigo.samples.vui.domain.MovieIndex;
 import io.vertigo.samples.vui.domain.Role;
 import io.vertigo.samples.vui.search.MovieIndexSearchClient;
-import io.vertigo.vega.webservice.validation.UiMessageStack;
 
 @Transactional
-public class MovieServices implements Component {
-	private static Logger logger = LogManager.getLogger(MovieServices.class);
+public class CountryServices implements Component {
+	private static Logger logger = LogManager.getLogger(CountryServices.class);
 
 	@Inject
 	private Optional<MovieIndexSearchClient> movieIndexSearchClient;
@@ -47,8 +44,6 @@ public class MovieServices implements Component {
 	private MovieDAO movieDAO;
 	@Inject
 	private ActorDAO actorDAO;
-	@Inject
-	private RoleDAO roleDAO;
 	@Inject
 	private VuiPAO vuiPAO;
 
@@ -74,13 +69,6 @@ public class MovieServices implements Component {
 
 	public void saveList(final DtList<Movie> movies) {
 		movieDAO.updateMoviesBatch(movies);
-	}
-
-	public void validate(final Movie movie, final UiMessageStack uiMessageStack) {
-		if (movie.getYear() < 1920) {
-			uiMessageStack.error("Too old, only movies after 1920 are accepted", movie, MovieFields.year.name());
-			uiMessageStack.error("There are some errors");
-		}
 	}
 
 	public List<Long> getActorsIdsByMovie(final Long movId) {
@@ -206,18 +194,4 @@ public class MovieServices implements Component {
 		return unFilteredList;
 	}
 
-	public Actor getActorById(final Long actorId) {
-		return actorDAO.get(actorId);
-	}
-
-	public void save(final Role role, final Actor actor) {
-		actorDAO.save(actor);
-		roleDAO.save(role);
-	}
-
-	public Role getRoleWithActorById(final Long roleId) {
-		final Role role = roleDAO.get(roleId);
-		role.actor().load();
-		return role;
-	}
 }

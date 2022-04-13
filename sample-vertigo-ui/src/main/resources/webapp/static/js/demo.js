@@ -1,32 +1,20 @@
 
-quasarConfig = {
-    loadingBar: { 'skip-hijack' : true } // disable quasar's ajaxbar
+
+function getDocHeight(doc) {
+    doc = doc || document;
+    // stackoverflow.com/questions/...
+    var body = doc.body, html = doc.documentElement;
+    var height = Math.max( body.scrollHeight, body.offsetHeight, 
+    html.clientHeight, html.scrollHeight, html.offsetHeight );
+    return height;
 }
 
-/******
- * 
- * @returns
- */
-function configDatePickers(){
-        $(".dateSelector").datepicker({
-                                                todayBtn: "linked",
-                                                clearBtn: true,
-                                                language: "fr"
-        });
+function setIframeHeight(ifrm) {
+    var doc = ifrm.contentDocument? ifrm.contentDocument: 
+    ifrm.contentWindow.document;
+    ifrm.style.visibility = 'hidden';
+    ifrm.style.height = "100px"; // reset to minimal height ...
+    // IE opt. for bing/msn needs a bit added or scrollbar appears
+    ifrm.style.height = getDocHeight( doc ) + 4 + "px";
+    ifrm.style.visibility = 'visible';
 }
-
-/**
- *  CORRECTIF permettant de mofidier les datepickers avec l'autocompletion du navigateur
- *  Prend en compte tous les inputs avec un id commençant par "datepicker"
- */
-function patchDatePicker(){
-        let listeDatepicker = $('input[id^="datepicker"]');
-        listeDatepicker.each(function(idx){
-                let datepicker = $(this);               
-                datepicker.select(function(e){                  
-                        datepicker.datepicker("update", datepicker.val());      
-                });
-        });
-}
-
-VUiExtensions.dataX.selectedTimeZoneListArray = '[[${model[selectedTimeZoneList]}]]'.split(';');

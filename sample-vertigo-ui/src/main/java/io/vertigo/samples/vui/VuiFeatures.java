@@ -22,6 +22,7 @@ import io.vertigo.core.node.config.Feature;
 import io.vertigo.core.node.config.Features;
 import io.vertigo.samples.vui.dao.ActorDAO;
 import io.vertigo.samples.vui.dao.MovieDAO;
+import io.vertigo.samples.vui.dao.RoleDAO;
 import io.vertigo.samples.vui.search.MovieIndexSearchClient;
 import io.vertigo.samples.vui.services.MovieSearchLoader;
 import io.vertigo.samples.vui.services.MovieServices;
@@ -45,6 +46,7 @@ public class VuiFeatures extends Features<VuiFeatures> {
 				.addComponent(MovieServices.class)
 				.addComponent(MovieDAO.class)
 				.addComponent(ActorDAO.class)
+				.addComponent(RoleDAO.class)
 				.addComponent(VuiPAO.class);
 
 	}

@@ -14,6 +14,7 @@
 	<link rel="icon" th:href="@{/static/img/favicon.ico}"/>
 	
     <script type="text/javascript" th:src="@{/vertigo-ui/static/js/vertigo-ui-extensions.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/demo.js}"></script>
 </head>
 
 <body class="mat desktop no-touch platform-mat">
@@ -89,7 +90,10 @@
 		    
 			<q-page-container class="row justify-center q-pb-lg" >
 				<q-page padding class="row col-12">			
-			 		<section class="col content-body"  layout:fragment="content"></section>
+				<div class="col content-body q-gutter-sm">
+				    <vu:messages/>		
+				    <section class="col content-body"  layout:fragment="content"></section>
+				</div>
 				</q-page>
 			</q-page-container>
 		</q-layout>
