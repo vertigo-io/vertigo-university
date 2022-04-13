@@ -39,13 +39,15 @@
 				<br/>
 				<vu:table list="roles" componentId="roleTable" rowsPerPage="10" binary-state-sort
 				  sortUrl="@{/movie/_sort}"
-				  tr_@click.native="|goTo('@{/actor/}'+props.row.actId)|" tr_class="nav" >
+				  tr_@click.native="|${model.modeEdit}?openModal('roleActorModal', '@{/roleActor/}' + props.row.rolId , {'successCallback' : 'onRoleActorSuccess' }):false|"
+				  tr_class="nav" >
 	                <vu:include-data object="roles" field="rolId" />
 	                <vu:column field="asCharacter" />
-	                <vu:column field="actId" >
-	                   <vu:field-read object="roles" field="actId" rowIndex="'props.rowIndex'" list="actors" listKey="actId" listDisplay="name"/>
+	                <vu:column field="actId">
+	                   <vu:field-read  list="actors" listKey="actId" listDisplay="name"/>
 	                </vu:column>
                 </vu:table>
+                <vu:modal componentId="roleActorModal" title="Role Actor" iframe_width="550" iframe_height="auto" iframe_onload="setIframeHeight(this)" />
 			</vu:form>
 	</div>
 		<section layout:fragment="javascript-footer" >
@@ -53,7 +55,14 @@
                 VUiPage.$watch('vueData.movie', Quasar.utils.debounce(
                 		(newValue, oldValue) => { VUiPage.httpPostAjax('_validate', VUiPage.vueDataParams(['movie']))}, 500
                 		), { deep: true });
+                
+                function onRoleActorSuccess() {
+                    VUiPage.$data.componentStates.roleActorModal.opened = false;
+                    VUiPage.httpPostAjax("[[@{_reloadRoles}]]", {});
+                }
+                
             </script>
+        </section>
         </section>
 </body>
 </html>

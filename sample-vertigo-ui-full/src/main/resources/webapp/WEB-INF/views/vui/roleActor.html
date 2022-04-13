@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+  xmlns:vu="https://vertigo.io/thymeleaf/vertigo-ui"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{templates/mmcModalLayout}"
+>
+	<head>
+		<title>Role Actor</title>			
+	</head>
+	
+	<body>		
+		<section layout:fragment="page-container" >
+			<vu:form th:if="${!model.closeSuccess}">
+			<vu:grid cols="1">
+				<vu:text-field object="role" field="asCharacter" />
+				<vu:text-field object="actor" field="name" />
+				<vu:button-submit th:if="${model.modeEdit}"  label="Save" action="@{_save}" color="primary" class="float-right q-mt-md"/>
+			</vu:grid>
+			</vu:form>
+		</section>
+	</body>
+</html>

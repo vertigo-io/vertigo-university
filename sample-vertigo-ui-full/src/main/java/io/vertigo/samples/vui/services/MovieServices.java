@@ -28,6 +28,7 @@ import io.vertigo.datastore.entitystore.EntityStoreManager;
 import io.vertigo.samples.vui.VuiPAO;
 import io.vertigo.samples.vui.dao.ActorDAO;
 import io.vertigo.samples.vui.dao.MovieDAO;
+import io.vertigo.samples.vui.dao.RoleDAO;
 import io.vertigo.samples.vui.domain.Actor;
 import io.vertigo.samples.vui.domain.DtDefinitions.MovieFields;
 import io.vertigo.samples.vui.domain.Movie;
@@ -46,6 +47,8 @@ public class MovieServices implements Component {
 	private MovieDAO movieDAO;
 	@Inject
 	private ActorDAO actorDAO;
+	@Inject
+	private RoleDAO roleDAO;
 	@Inject
 	private VuiPAO vuiPAO;
 
@@ -203,4 +206,18 @@ public class MovieServices implements Component {
 		return unFilteredList;
 	}
 
+	public Actor getActorById(final Long actorId) {
+		return actorDAO.get(actorId);
+	}
+
+	public void save(final Role role, final Actor actor) {
+		actorDAO.save(actor);
+		roleDAO.save(role);
+	}
+
+	public Role getRoleWithActorById(final Long roleId) {
+		final Role role = roleDAO.get(roleId);
+		role.actor().load();
+		return role;
+	}
 }

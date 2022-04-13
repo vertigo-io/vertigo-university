@@ -98,4 +98,11 @@ public class MovieController extends AbstractVSpringMvcController {
 		return "redirect:/movie/" + movie.getMovId();
 	}
 
+	@PostMapping("/_reloadRoles")
+	public ViewContext doReloadRoles(final ViewContext viewContext, @ViewAttribute("movie") final UiObject<Movie> movieUi) {
+		//may accept errors in movie object
+		viewContext.publishDtList(rolesKey, movieServices.getRolesByMovie(movieUi.getLong("movId")));
+		return viewContext;
+	}
+
 }
