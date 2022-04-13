@@ -22,7 +22,6 @@ package io.vertigo.samples.support.config;
 
 import io.vertigo.datastore.impl.entitystore.AbstractMasterDataDefinitionProvider;
 import io.vertigo.samples.vui.domain.Country;
-import io.vertigo.samples.vui.domain.Role;
 import io.vertigo.samples.vui.domain.Sexe;
 
 /**
@@ -33,7 +32,6 @@ public class SampleVuiMasterDataDefinitionProvider extends AbstractMasterDataDef
 
 	@Override
 	public void declareMasterDataLists() {
-		registerDtMasterDatas(Role.class);
 		registerDtMasterDatas(Sexe.class);
 		registerDtMasterDatas(Country.class);
 	}
