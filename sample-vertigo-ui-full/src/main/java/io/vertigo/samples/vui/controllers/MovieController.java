@@ -91,6 +91,13 @@ public class MovieController extends AbstractVSpringMvcController {
 		movieServices.save(role, actor);
 	}
 
+	@PostMapping("/_saveActorRoleAjax")
+	public ViewContext doSaveActorRole(final ViewContext viewContext, @ViewAttribute("selected_role") final Role role, @ViewAttribute("selected_actor") final Actor actor) {
+		movieServices.save(role, actor);
+		viewContext.publishDtList(rolesKey, movieServices.getRolesByMovie(viewContext.readDto(movieKey, getUiMessageStack()).getMovId()));
+		return viewContext;
+	}
+
 	@PostMapping("/_sort")
 	public ViewContext sort(final ViewContext viewContext, @ViewAttribute("roles") final DtList<Role> roles, final DtListState dtListState) {
 		//Long movId = viewContext.getUiList(actorsKey).;
