@@ -27,9 +27,10 @@
 						
                         <!-- button for Level 2.6 -->
                         <vu:button-submit-confirm th:if="${model.modeEdit}" action="notUsed" formId="notUsed" label="Save" color="primary">
+						       <!--  il est aussi possible de simplement paramétrer les labels utilisés, sans utiliser le slot -->
 						       <vu:slot name="actions_slot">
-                                 <q-btn flat label="Non pas vraiment" color="primary" v-close-popup />
-                                 <q-btn type="submit" th:formaction="@{_save}" form="myFormId" label="Oui tout à fait" color="primary" v-close-popup />
+                                 <q-btn flat label="Non pas vraiment" color="primary" v-close-popup ></q-btn>
+                                 <q-btn type="submit" th:formaction="@{_save}" form="myFormId" label="Oui tout à fait" color="primary" v-close-popup ></q-btn>
                                </vu:slot>
                                <span>Etes-vous certain de vouloir sauvegarder ?</span>
 						</vu:button-submit-confirm>
@@ -60,14 +61,14 @@
                     </vu:block>
                 </q-dialog>           
 			</vu:form>
-			
-                
-	</div>
-		<section layout:fragment="javascript-footer" >
+        	</div>		
+        </section>
+        
+        <section layout:fragment="javascript-footer" >
             <script type="text/javascript">
                 VUiPage.$watch('vueData.movie', Quasar.utils.debounce(
-                		(newValue, oldValue) => { VUiPage.httpPostAjax('_validate', VUiPage.vueDataParams(['movie']))}, 500
-                		), { deep: true });
+                        (newValue, oldValue) => { VUiPage.httpPostAjax('_validate', VUiPage.vueDataParams(['movie']))}, 500
+                        ), { deep: true });
                 
                 function onRoleActorSuccess() {
                     VUiPage.$data.componentStates.roleActorModal.opened = false;
@@ -75,7 +76,6 @@
                 }
                 
             </script>
-        </section>
         </section>
 </body>
 </html>
