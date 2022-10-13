@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>io.vertigo</groupId>
 		<artifactId>sample-aop-modules</artifactId>
-		<version>3.3.0</version>
+		<version>3.4.0</version>
 	</parent>
 
   	<artifactId>vertigo-sample-ifttt-exo</artifactId>
@@ -14,7 +14,7 @@
 	<packaging>jar</packaging>
 
 	<properties>
-		<jersey2.version>2.19</jersey2.version>
+		<jersey2.version>3.0.8</jersey2.version>
 	</properties>
 	
 	<dependencies>

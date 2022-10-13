@@ -6,44 +6,60 @@
 	<parent>
 		<groupId>io.vertigo</groupId>
 		<artifactId>vertigo-samples</artifactId>
-		<version>3.3.0</version>
+		<version>3.4.0</version>
 	</parent>
 
-	<artifactId>vertigo-sample-vertigo-ui</artifactId>
+	<artifactId>vertigo-sample-vertigo-ui-full</artifactId>
 	<name>vertigo-sample-vertigo-ui</name>
 	<packaging>jar</packaging>
 	
 	
 	<repositories>
-     	<!-- add the elasticsearch repo for x-pack -->
-      <repository>
-         <id>elasticsearch-releases</id>
-         <url>https://artifacts.elastic.co/maven</url>
-         <releases>
-          	<enabled>true</enabled>
-         </releases>
-         <snapshots>
-            <enabled>false</enabled>
-         </snapshots>
-      </repository>
-      <repository>
-         <id>codelibs.elasticsearch-releases</id>
-         <url>https://maven.codelibs.org/</url>
-         <releases>
-            <enabled>true</enabled>
-         </releases>
-         <snapshots>
-            <enabled>false</enabled>
-         </snapshots>
-      </repository>
-   	</repositories>
+		<!-- add the elasticsearch repo for x-pack -->
+		<repository>
+			<id>elasticsearch-releases</id>
+			<url>https://artifacts.elastic.co/maven</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>codelibs.elasticsearch-releases</id>
+			<url>https://maven.codelibs.org/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
 
 	<dependencies>
+		<dependency>
+			<groupId>io.vertigo</groupId>
+			<artifactId>vertigo-elasticsearch-connector</artifactId>
+			<version>${vertigo.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.vertigo</groupId>
+			<artifactId>vertigo-ui</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.vertigo</groupId>
+			<artifactId>vertigo-studio</artifactId>
+			<version>${vertigo.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<version>2.1.210</version>
+			<version>2.1.214</version>
 		</dependency>
 		<dependency>
 			<groupId>com.mchange</groupId>
@@ -52,116 +68,58 @@
 		</dependency>
 
 		<dependency>
-			<groupId>io.vertigo</groupId>
-			<artifactId>vertigo-core</artifactId>
-			<version>${vertigo.version}</version>
+			<groupId>org.elasticsearch.client</groupId>
+			<artifactId>transport</artifactId>
+			<version>7.17.6</version> <!-- TransportSearchServicesPlugin -->
 		</dependency>
 		<dependency>
-			<groupId>io.vertigo</groupId>
-			<artifactId>vertigo-commons</artifactId>
-			<version>${vertigo.version}</version>
+			<groupId>org.elasticsearch.client</groupId>
+			<artifactId>elasticsearch-rest-high-level-client</artifactId>
+			<version>7.17.6</version> <!-- REstHighLevelElasticSearchConnector -->
 		</dependency>
 		<dependency>
-			<groupId>io.vertigo</groupId>
-			<artifactId>vertigo-datastore</artifactId>
-			<version>${vertigo.version}</version>
+			<groupId>org.codelibs.elasticsearch.module</groupId>
+			<artifactId>analysis-common</artifactId>
+			<version>7.17.6</version> <!-- required by EmbeddedSearchServicesPlugin -->
 		</dependency>
 		<dependency>
-			<groupId>io.vertigo</groupId>
-			<artifactId>vertigo-datafactory</artifactId>
-			<version>${vertigo.version}</version>
+			<groupId>org.codelibs.elasticsearch.module</groupId>
+			<artifactId>mapper-extras</artifactId>
+			<version>7.17.6</version> <!-- required by ESEmbeddedSearchServicesPlugin -->
 		</dependency>
-		<dependency>
-            <groupId>io.vertigo</groupId>
-            <artifactId>vertigo-ui</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-		<dependency>
-			<groupId>io.vertigo</groupId>
-			<artifactId>vertigo-vega</artifactId>
-			<version>${vertigo.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>io.vertigo</groupId>
-			<artifactId>vertigo-studio</artifactId>
-			<version>${vertigo.version}</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>io.vertigo</groupId>
-			<artifactId>vertigo-elasticsearch-connector</artifactId>
-			<version>${vertigo.version}</version>
-		</dependency>
-		
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <version>2.10.4</version>
-        </dependency>
-		
-		<dependency>
-		    <groupId>org.elasticsearch.client</groupId>
-		    <artifactId>transport</artifactId>
-		    <version>7.16.3</version> <!-- TransportSearchServicesPlugin -->
-		</dependency>
-		<dependency>
-		    <groupId>org.elasticsearch.client</groupId>
-		    <artifactId>elasticsearch-rest-high-level-client</artifactId>
-		    <version>7.16.3</version> <!-- REstHighLevelElasticSearchConnector -->
-		</dependency>
-		<dependency>
-	        <groupId>org.codelibs.elasticsearch.module</groupId>
-	        <artifactId>analysis-common</artifactId> 
-	        <version>7.16.3</version> <!-- required by EmbeddedSearchServicesPlugin -->
-	    </dependency>
-	   	<dependency>
-		    <groupId>org.codelibs.elasticsearch.module</groupId>
-		    <artifactId>mapper-extras</artifactId>
-		    <version>7.16.3</version> <!-- required by ESEmbeddedSearchServicesPlugin -->
-		</dependency>
-		
-		<!-- SpringMVC -->
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>5.3.15</version>
-        </dependency>
-        <dependency>
-            <groupId>org.thymeleaf</groupId>
-            <artifactId>thymeleaf-spring5</artifactId>
-            <version>3.0.14.RELEASE</version>
-        </dependency>
-        <dependency>
-          <groupId>nz.net.ultraq.thymeleaf</groupId>
-          <artifactId>thymeleaf-layout-dialect</artifactId>
-          <version>3.0.0</version>
-        </dependency>
-		
+
+
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-server</artifactId>
-			<version>9.4.44.v20210927</version>
+			<version>9.4.49.v20220914</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.jetty.websocket</groupId>
 			<artifactId>websocket-server</artifactId>
-			<version>9.4.44.v20210927</version>
+			<version>9.4.49.v20220914</version>
 		</dependency>
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>apache-jstl</artifactId>
-            <version>9.4.44.v20210927</version>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-plus</artifactId>
-            <version>9.4.44.v20210927</version>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-annotations</artifactId>
-            <version>9.4.44.v20210927</version>
-        </dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>apache-jstl</artifactId>
+			<version>9.4.49.v20220914</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-plus</artifactId>
+			<version>9.4.49.v20220914</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-annotations</artifactId>
+			<version>9.4.49.v20220914</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.13.4.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>

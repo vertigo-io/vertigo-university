@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>io.vertigo</groupId>
 		<artifactId>sample-aop-modules</artifactId>
-		<version>3.3.0</version>
+		<version>3.4.0</version>
 	</parent>
 
   	<artifactId>vertigo-sample-mail-exo</artifactId>

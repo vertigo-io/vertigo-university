@@ -26,8 +26,8 @@
 						<vu:button-submit th:if="${model.modeEdit && false}" label="Save" action="@{_save}" color="primary"/>
 						
                         <!-- button for Level 2.6 -->
-                        <vu:button-submit-confirm th:if="${model.modeEdit}" action="notUsed" formId="notUsed" label="Save" color="primary">
 						       <!--  il est aussi possible de simplement paramétrer les labels utilisés, sans utiliser le slot -->
+                        <vu:button-submit-confirm th:if="${model.modeEdit}" action="notUsed" formId="notUsed" label="Save" color="primary">
 						       <vu:slot name="actions_slot">
                                  <q-btn flat label="Non pas vraiment" color="primary" v-close-popup ></q-btn>
                                  <q-btn type="submit" th:formaction="@{_save}" form="myFormId" label="Oui tout à fait" color="primary" v-close-popup ></q-btn>

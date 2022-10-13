@@ -9,7 +9,6 @@ import io.vertigo.core.node.AutoCloseableNode;
 import io.vertigo.core.resource.ResourceManager;
 import io.vertigo.core.util.FileUtil;
 import io.vertigo.datastore.filestore.model.VFile;
-import io.vertigo.datastore.filestore.util.VFileUtil;
 import io.vertigo.quarto.impl.publisher.PublisherDataUtil;
 import io.vertigo.quarto.publisher.PublisherManager;
 import io.vertigo.quarto.publisher.definitions.PublisherDataDefinition;
@@ -52,7 +51,7 @@ public class SampleQuarto {
 
 	private static void save(final VFile result) {
 		try {
-			FileUtil.copy(result.createInputStream(), new File("D:/" + result.getFileName() + ".docx"));
+			FileUtil.copy(result.createInputStream(), new File("./" + result.getFileName() + ".docx"));
 		} catch (final IOException e) {
 			throw WrappedException.wrap(e);
 		}
