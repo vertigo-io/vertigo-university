@@ -19,7 +19,7 @@ Pour construire le controller :
   - `@Controller` : pour préciser que la class est un controller et permettre le scan au démarrage
   - `@RequestMapping` : Précise le préfix de la route du controller. Par convention commence toujours par **/** et n'a pas de **/** à la fin.
   - `@GetMapping` : Précise le suffix de la route associée à une méthode, commence toujours par **/**
-- le context du controller à un scope sur la page. Il est décrit par des attributs `private final ViewContextKey<...> = ViewContextKey.of("...")`. 
+- le context du controller à un scope sur la page. Il est décrit par des attributs `private final ViewContextKey<..type de l'objet..> ..nomVariableKey.. = ViewContextKey.of("..nomVariable..")`. 
 Le context est injecté automatiquement par Spring dans les méthodes du controller avec un attribut : `final ViewContext viewContext`
 - l'annotation standard `@Inject` *(javax.inject.Inject)*, permet l'injection des services Vertigo. Par convention et par respect des bonnes pratiques, seuls les Services doivent être injectés dans les Controllers (en favorisant l'injection d'un minimum de services et seulement les services du même module).
 
@@ -46,7 +46,7 @@ Le rendu de la table sera réalisé coté client en vueJs. En vueJs, dans une ta
 ## Etapes
 
 1. Créez le controller.
-1. Déclarez une clé de context "movies" de type Movie.
+1. Déclarez une clé de context "movies" de type Movie `private static ViewContextKey...`.
 1. Dans le initContext chargez la liste des movies avec le service `MovieServices.getMovies`.
 *(Pour créer un *DtListState* par défaut : `DtListState.defaultOf(Xxx.class)`)*
 1. Publiez la liste dans le context.
@@ -65,9 +65,11 @@ Le rendu de la table sera réalisé coté client en vueJs. En vueJs, dans une ta
 7. Testez la page affichant la liste de *Movies*.
 7. Consulter la source de la page. Recherchez la balise `script id="vui-init-data"` et regardez son contenu.
 8. Retirez une colonne du tableau et comparez.
-9. Familiarisez vous avec la lecture des composants `vu:table` et `vu:column` ([GitHub VertigoUi Components](https://github.com/vertigo-io/vertigo-extensions/tree/vertigo-3.3.0/vertigo-ui/src/main/resources/io/vertigo/ui/components)). Notez l'usage de `vu:include-data`.
+9. Familiarisez vous avec la lecture des composants `vu:table` et `vu:column` ([GitHub VertigoUi Components](https://github.com/vertigo-io/vertigo-extensions/tree/vertigo-3.3.0/vertigo-ui/src/main/resources/io/vertigo/ui/components), column est plus simple à lire que table). 
+Notez l'usage de `vu:include-data`.
 
 11. Modifiez le contenu de la colonne `movId`, pour ajouter un lien vers la page de détail `/movie/{movId}`
+*Le {movId} sera l'identifiant du movie. Pour le moment ce lien enverra sur une 404, mais c'est l'objet du level suivant :)*
 
 `<a th::href="|'@{/movie/}'+props.row.movId|" >{{props.row.movId}}</a>`
 
