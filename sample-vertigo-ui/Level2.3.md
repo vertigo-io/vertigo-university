@@ -34,7 +34,7 @@ Le composant `vu:select`, comme les autres composants de formulaire ne peuvent p
 ## Etapes
 
 1. Dans le Controller, déclarez une clé de context "roles" de type Role.
-2. Dans le initContext charger le de film avec sa liste de rôle avec le service `loadMovieWithRoles`.
+2. Dans le initContext charger le film avec sa liste de rôle avec le service `loadMovieWithRoles`.
 3. Publiez la liste dans le context.
 4. Dans la vue, ajouter une table avec les colonnes `asCharacter` et `actId`
 5. Consulter la page de détail d'un film avec des Roles : [Star Wars](http://localhost:18080/sample/movie/3678598). Consulter le contenu du `vueData`.
