@@ -32,7 +32,7 @@ Elle peut être directement dans le context si elle est assez courte ou référe
 3. Dans le controller déclarez une clé de context "countries" de type Country.
 4. Dans le initContext publiez la liste des pays comme une MasterDataList. (Utilisez `null` en dernier paramètre)
 *Ce dernier paramètre permet de passer un code, dans la cas ou la liste de ref propose des filtres (actif par exemple)*
-4. Dans la vue, remplacer le champ text de `couId` par un `vu:select`
+4. Dans la vue, remplacer le champ text de `couId` par un `vu:select` *(conserver `object` et `field`, puis ajoutez `list`)*
 7. Consulter la page de détail d'un film. Consulter le contenu du `vueData`
 
 # [Suite : Level 2.2 - Ecran de détail - Edition](./Level2.2.md)
