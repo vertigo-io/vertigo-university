@@ -58,7 +58,7 @@ La méthode de sauvegarde doit récupérer les données postées : utiliser le `
 
 2. Dans la méthode de passage en mode édit, utiliser le `toModeEdit`. Il n'y a rien à retourner, à la fin d'une méthode d'action la page est rafraichie.
 3. Dans la méthode de sauvegarde, utiliser le service pour sauvegarder l'objet mis à jour, puis recharger la page (`"redirect:/movie/" + movie.getMovId();`)
-4. Dans la vue, ajouter une cellule qui portera les boutons d'actions
+4. Dans la vue, ajouter une cellule qui portera les boutons d'actions (`vu:button-submit`)
 5. Ajoutez un premier bouton pour passer en mode édit. Celui-ci ne doit s'afficher qu'en mode readOnly (`th:if="${model.modeReadOnly}"`)
 6. Ajoutez un second bouton pour sauvegarder. Celui-ci ne doit s'afficher qu'en mode edit (`th:if="${model.modeEdit}"`)
 7. Ajoutez un troisième bouton pour annuler losrque l'on est en édition. Celui-ci recharge la page, on utilisera un `button-link` avec une url adaptée : `@{/movie/} + ${model.movie.getLong('movId')}`
