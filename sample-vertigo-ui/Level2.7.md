@@ -33,7 +33,7 @@ Pour illustrer le principe nous allons ajouter une confirmation sur l'enregistre
 
 1. Dans la vue du détail d'un film. Ajouter un identifiant sur le `vu:form` avec `id="myFormId"`. Ceci est nécessaire car la fenetre de confirmation est hors du formulaire et devra poster les données.
 2. Remplacer le `<vu:button-submit` par un `<vu:button-submit-confirm`, et préciser le `formId`
-3. Ajouter un message et des actions spécifique 
+3. Ajouter un message et des actions spécifique, dans le corps du composant `<vu:button-submit-confirm`
 ```Html
 <vu:slot name="actions_slot">
 <q-btn flat label="Non pas vraiment" color="primary" v-close-popup />
