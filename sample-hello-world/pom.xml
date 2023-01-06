@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>io.vertigo</groupId>
 		<artifactId>vertigo-samples</artifactId>
-		<version>3.4.0</version>
+		<version>3.5.0</version>
 	</parent>
 
 	<artifactId>vertigo-sample-hello-world</artifactId>
@@ -35,12 +35,12 @@
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-server</artifactId>
-			<version>9.4.40.v20210413</version>
+			<version>9.4.50.v20221201</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.jetty.websocket</groupId>
 			<artifactId>websocket-server</artifactId>
-			<version>9.4.40.v20210413</version>
+			<version>9.4.50.v20221201</version>
 		</dependency>
 	</dependencies>
 </project>

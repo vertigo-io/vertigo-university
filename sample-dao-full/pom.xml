@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>io.vertigo</groupId>
 		<artifactId>vertigo-samples</artifactId>
-		<version>3.4.0</version>
+		<version>3.5.0</version>
 	</parent>
 
 	<artifactId>vertigo-sample-dao-full</artifactId>
@@ -29,7 +29,7 @@
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<version>42.5.0</version>
+			<version>42.5.1</version>
 		</dependency>
 
 		<dependency>

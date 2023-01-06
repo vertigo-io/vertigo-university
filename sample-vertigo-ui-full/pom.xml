@@ -6,7 +6,7 @@
 	<parent>
 		<groupId>io.vertigo</groupId>
 		<artifactId>vertigo-samples</artifactId>
-		<version>3.4.0</version>
+		<version>3.5.0</version>
 	</parent>
 
 	<artifactId>vertigo-sample-vertigo-ui-full</artifactId>
@@ -70,49 +70,49 @@
 		<dependency>
 			<groupId>org.elasticsearch.client</groupId>
 			<artifactId>transport</artifactId>
-			<version>7.17.6</version> <!-- TransportSearchServicesPlugin -->
+			<version>7.17.8</version> <!-- TransportSearchServicesPlugin -->
 		</dependency>
 		<dependency>
 			<groupId>org.elasticsearch.client</groupId>
 			<artifactId>elasticsearch-rest-high-level-client</artifactId>
-			<version>7.17.6</version> <!-- REstHighLevelElasticSearchConnector -->
+			<version>7.17.8</version> <!-- REstHighLevelElasticSearchConnector -->
 		</dependency>
 		<dependency>
 			<groupId>org.codelibs.elasticsearch.module</groupId>
 			<artifactId>analysis-common</artifactId>
-			<version>7.17.6</version> <!-- required by EmbeddedSearchServicesPlugin -->
+			<version>7.17.7</version> <!-- required by EmbeddedSearchServicesPlugin -->
 		</dependency>
 		<dependency>
 			<groupId>org.codelibs.elasticsearch.module</groupId>
 			<artifactId>mapper-extras</artifactId>
-			<version>7.17.6</version> <!-- required by ESEmbeddedSearchServicesPlugin -->
+			<version>7.17.7</version> <!-- required by ESEmbeddedSearchServicesPlugin -->
 		</dependency>
 
 
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-server</artifactId>
-			<version>9.4.49.v20220914</version>
+			<version>9.4.50.v20221201</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.jetty.websocket</groupId>
 			<artifactId>websocket-server</artifactId>
-			<version>9.4.49.v20220914</version>
+			<version>9.4.50.v20221201</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>apache-jstl</artifactId>
-			<version>9.4.49.v20220914</version>
+			<version>9.4.50.v20221201</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-plus</artifactId>
-			<version>9.4.49.v20220914</version>
+			<version>9.4.50.v20221201</version>
 		</dependency>
 		<dependency>
 			<groupId>org.eclipse.jetty</groupId>
 			<artifactId>jetty-annotations</artifactId>
-			<version>9.4.49.v20220914</version>
+			<version>9.4.50.v20221201</version>
 		</dependency>
 		
 		<dependency>
