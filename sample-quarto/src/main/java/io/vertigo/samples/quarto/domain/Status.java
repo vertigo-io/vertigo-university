@@ -1,9 +1,9 @@
 package io.vertigo.samples.quarto.domain;
 
-import io.vertigo.datamodel.structure.model.DtObject;
-import io.vertigo.datamodel.structure.stereotype.Field;
+import io.vertigo.datamodel.data.model.DataObject;
+import io.vertigo.datamodel.data.stereotype.Field;
 
-public final class Status implements DtObject {
+public final class Status implements DataObject {
 
 	private static final long serialVersionUID = 1L;
 
