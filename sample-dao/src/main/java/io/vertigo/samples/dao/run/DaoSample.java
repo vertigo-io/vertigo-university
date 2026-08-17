@@ -1,6 +1,6 @@
 package io.vertigo.samples.dao.run;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.apache.logging.log4j.LogManager;
 

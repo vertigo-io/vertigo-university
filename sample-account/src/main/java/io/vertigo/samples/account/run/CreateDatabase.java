@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.util.Collections;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import io.vertigo.core.lang.WrappedException;
 import io.vertigo.core.node.AutoCloseableNode;

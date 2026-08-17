@@ -2,7 +2,7 @@ package io.vertigo.samples.account.services;
 
 import java.util.Optional;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import io.vertigo.account.account.Account;
 import io.vertigo.account.authentication.AuthenticationManager;
