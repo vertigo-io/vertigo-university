@@ -9,18 +9,15 @@
 		<version>4.4.0</version>
 	</parent>
 
-	<artifactId>sample-aop-modules</artifactId>
-	<name>sample-aop-modules</name>
+	<artifactId>sample-stream</artifactId>
+	<name>sample-stream</name>
 	<packaging>pom</packaging>
-	<version>4.4.0</version>
 
 	<modules>
-		<module>01-sample-gutenberg</module>
-		<module>01-sample-gutenberg-corrige</module>
-		<module>02-sample-ifttt</module>
-		<module>02-sample-mail</module>
-		<module>02-sample-notifications-corrige</module>
-		<module>02-sample-twitter</module>
- 	</modules>
+		<module>01-sample-starbucks-corrige</module>
+		<module>01-sample-starbucks-exo</module>
+		<module>02-sample-scrabble-corrige</module>
+		<module>02-sample-scrabble-exo</module>
+	</modules>
 
 </project>
