@@ -1,6 +1,6 @@
 package io.vertigo.samples.dao.run;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -9,7 +9,7 @@ import io.vertigo.core.node.AutoCloseableNode;
 import io.vertigo.core.node.config.ModuleConfig;
 import io.vertigo.core.node.config.NodeConfigBuilder;
 import io.vertigo.core.util.InjectorUtil;
-import io.vertigo.datamodel.structure.model.DtList;
+import io.vertx...datamodel.data.util.DataList;
 import io.vertigo.samples.SamplesPAO;
 import io.vertigo.samples.dao.config.SampleConfigBuilder;
 import io.vertigo.samples.dao.dao.ActorDAO;
@@ -74,7 +74,7 @@ public class Level5 {
 	}
 
 	void step2() {
-		final DtList<Country> countries = countryServices.getCountriesByName("U");
+		final DataList<Country> countries = countryServices.getCountriesByName("U");
 		LOGGER.info(movieServices.findMoviesByKspWhereIn("Star Wars", null, countries));
 	}
 

@@ -2,10 +2,10 @@ package io.vertigo.samples.dao.services;
 
 import java.util.Optional;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import io.vertigo.commons.transaction.Transactional;
-import io.vertigo.datamodel.structure.model.DtList;
+import io.vertx...datamodel.data.model.DataList;
 import io.vertigo.samples.dao.dao.ActorDAO;
 import io.vertigo.samples.dao.dao.CountryDAO;
 import io.vertigo.samples.dao.dao.MovieDAO;
@@ -32,7 +32,7 @@ public class RepriseServicesImpl implements RepriseServices {
 
 	@Override
 	public void fillCountries() {
-		final DtList<Country> existingCountries = countryDAO.loadCountries();
+		final DataList<Country> existingCountries = countryDAO.loadCountries();
 		countryDAO.insertCountriesBatch(existingCountries);
 
 	}
@@ -44,7 +44,7 @@ public class RepriseServicesImpl implements RepriseServices {
 
 	@Override
 	public Optional<Long> fillActors(final long limit, final long offset) {
-		final DtList<Actor> existingActors = actorDAO.loadActorsByChunk(limit, offset);
+		final DataList<Actor> existingActors = actorDAO.loadActorsByChunk(limit, offset);
 		if (!existingActors.isEmpty()) {
 			actorDAO.insertActorsBatch(existingActors);
 			return Optional.of(existingActors.get(existingActors.size() - 1).getActId());
@@ -60,7 +60,7 @@ public class RepriseServicesImpl implements RepriseServices {
 
 	@Override
 	public Optional<Long> fillMovies(final long limit, final long offset) {
-		final DtList<Movie> existingMovies = movieDAO.loadMoviesByChunk(limit, offset);
+		final DataList<Movie> existingMovies = movieDAO.loadMoviesByChunk(limit, offset);
 		if (!existingMovies.isEmpty()) {
 			movieDAO.insertMoviesBatch(existingMovies);
 			return Optional.of(existingMovies.get(existingMovies.size() - 1).getMovId());
@@ -76,7 +76,7 @@ public class RepriseServicesImpl implements RepriseServices {
 
 	@Override
 	public Optional<Long> fillRoles(final long limit, final long offset) {
-		final DtList<Role> existingRoles = roleDAO.loadRolesByChunk(limit, offset);
+		final DataList<Role> existingRoles = roleDAO.loadRolesByChunk(limit, offset);
 		if (!existingRoles.isEmpty()) {
 			roleDAO.insertRolesBatch(existingRoles);
 			return Optional.of(existingRoles.get(existingRoles.size() - 1).getRolId());

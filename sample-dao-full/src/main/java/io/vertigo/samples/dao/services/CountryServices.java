@@ -1,11 +1,11 @@
 package io.vertigo.samples.dao.services;
 
-import io.vertigo.datamodel.structure.model.DtList;
-import io.vertigo.datastore.impl.dao.StoreServices;
-import io.vertigo.samples.dao.domain.Country;
+import io.vertx...datamodel.data.model.DataList;
+import io.vertx...datastore.impl.dao.StoreServices;
+import io.vertx...samples.dao.domain.Country;
 
 public interface CountryServices extends StoreServices {
 
-	DtList<Country> getCountriesByName(String prefix);
+	DataList<Country> getCountriesByName(String prefix);
 
 }

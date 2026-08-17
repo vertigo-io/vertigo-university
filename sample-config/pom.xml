@@ -24,21 +24,6 @@
 			<artifactId>vertigo-vega</artifactId>
 			<version>${vertigo.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>io.vertigo</groupId>
-			<artifactId>vertigo-vega</artifactId>
-			<version>${vertigo.version}</version>
-		</dependency>
 		
-		<dependency>
-			<groupId>org.eclipse.jetty</groupId>
-			<artifactId>jetty-server</artifactId>
-			<version>9.4.50.v20221201</version>
-		</dependency>
-		<dependency>
-			<groupId>org.eclipse.jetty.websocket</groupId>
-			<artifactId>websocket-server</artifactId>
-			<version>9.4.50.v20221201</version>
-		</dependency>
-	</dependencies>
+		</dependencies>
 </project>
