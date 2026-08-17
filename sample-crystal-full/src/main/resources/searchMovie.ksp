@@ -23,7 +23,7 @@ create FacetDefinition FctMovieName {
   range r2 { filter:"name.keyword:[a TO g]", label:"a-f"},
   range r3 { filter:"name.keyword:[g TO n]", label:"g-m"},
   range r4 { filter:"name.keyword:[n TO t]", label:"n-s"},
-  range r4 { filter:"name.keyword:[t TO *]", label:"t-z"},
+  range r5 { filter:"name.keyword:[t TO *]", label:"t-z"},
 }
 
 create FacetDefinition FctMovieYear {  
