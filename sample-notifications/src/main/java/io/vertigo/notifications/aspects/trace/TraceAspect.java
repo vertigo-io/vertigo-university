@@ -2,7 +2,7 @@ package io.vertigo.notifications.aspects.trace;
 
 import java.lang.annotation.Annotation;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import io.vertigo.core.node.component.aop.Aspect;
 import io.vertigo.core.node.component.aop.AspectMethodInvocation;
