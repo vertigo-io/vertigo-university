@@ -16,6 +16,7 @@ public interface NotificationManager extends Manager {
 
 	/**
 	 * Send a message to a specified list of channels
+	 *
 	 * @param channels one or more channels.
 	 * @param message
 	 */

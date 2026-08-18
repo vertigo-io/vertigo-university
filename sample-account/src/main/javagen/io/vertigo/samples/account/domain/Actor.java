@@ -1,11 +1,11 @@
 package io.vertigo.samples.account.domain;
 
 import io.vertigo.core.lang.Generated;
-import io.vertigo.datamodel.structure.model.Entity;
-import io.vertigo.datamodel.structure.model.UID;
+import io.vertigo.datamodel.data.model.Entity;
+import io.vertigo.datamodel.data.model.UID;
 import io.vertigo.datastore.impl.entitystore.StoreVAccessor;
-import io.vertigo.datamodel.structure.stereotype.Field;
-import io.vertigo.datamodel.structure.util.DtObjectUtil;
+import io.vertigo.datamodel.data.stereotype.Field;
+import io.vertigo.datamodel.data.util.DataModelUtil;
 
 /**
  * This class is automatically generated.
@@ -18,7 +18,7 @@ public final class Actor implements Entity {
 	private Long actId;
 	private String name;
 
-	@io.vertigo.datamodel.structure.stereotype.Association(
+	@io.vertigo.datamodel.data.stereotype.Association(
 			name = "AActSex",
 			fkFieldName = "sexCd",
 			primaryDtDefinitionName = "DtSexe",
@@ -82,7 +82,7 @@ public final class Actor implements Entity {
 	 * Récupère la valeur de la propriété 'Sexe'.
 	 * @return String sexCd <b>Obligatoire</b>
 	 */
-	@io.vertigo.datamodel.structure.stereotype.ForeignKey(smartType = "STyCode", label = "Sexe", fkDefinition = "DtSexe" )
+	@io.vertigo.datamodel.data.stereotype.ForeignKey(smartType = "STyCode", label = "Sexe", fkDefinition = "DtSexe", cardinality = io.vertigo.core.lang.Cardinality.ONE )
 	public String getSexCd() {
 		return (String) sexCdAccessor.getId();
 	}
@@ -107,6 +107,6 @@ public final class Actor implements Entity {
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {
-		return DtObjectUtil.toString(this);
+		return DataModelUtil.toString(this);
 	}
 }

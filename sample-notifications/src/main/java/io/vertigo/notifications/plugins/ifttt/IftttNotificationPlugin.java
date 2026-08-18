@@ -9,16 +9,6 @@ import java.util.Optional;
 import java.util.Properties;
 
 import javax.inject.Inject;
-import jakarta.inject.Inject;
-import jakarta.annotation.Named;
-import jakarta.ws.rs.client.Client;
-import jakarta.ws.rs.client.ClientBuilder;
-import jakarta.ws.rs.client.Entity;
-import jakarta.ws.rs.client.Invocation.Builder;
-import jakarta.ws.rs.client.WebTarget;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.core.Response.Status.Family;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,6 +18,15 @@ import io.vertigo.core.lang.VSystemException;
 import io.vertigo.core.lang.WrappedException;
 import io.vertigo.core.node.component.Activeable;
 import io.vertigo.notifications.impl.NotificationPlugin;
+import jakarta.inject.Named;
+import jakarta.ws.rs.client.Client;
+import jakarta.ws.rs.client.ClientBuilder;
+import jakarta.ws.rs.client.Entity;
+import jakarta.ws.rs.client.Invocation.Builder;
+import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response.Status.Family;
 
 /**
  *
@@ -47,7 +46,7 @@ public class IftttNotificationPlugin implements NotificationPlugin, Activeable {
 			@Named("proxyPort") final Optional<String> proxyPort) {
 		Assertion.check().isNotNull(proxyHost)
 				.isNotNull(proxyPort)
-				.isTrue((proxyHost.isPresent() && proxyPort.isPresent()) || (!proxyHost.isPresent() && !proxyPort.isPresent()),
+				.isTrue(proxyHost.isPresent() && proxyPort.isPresent() || !proxyHost.isPresent() && !proxyPort.isPresent(),
 						"les deux paramètres host et port doivent être tous les deux remplis ou vides");
 		// ----
 		if (proxyHost.isPresent()) {
@@ -87,7 +86,7 @@ public class IftttNotificationPlugin implements NotificationPlugin, Activeable {
 
 		final Builder request = resource.request().accept(MediaType.APPLICATION_JSON);
 
-		final Response response = request.post(Entity.<MakerEvent> entity(postMessage, MediaType.APPLICATION_JSON));
+		final Response response = request.post(Entity.<MakerEvent>entity(postMessage, MediaType.APPLICATION_JSON));
 
 		if (response.getStatusInfo().getFamily() == Family.SUCCESSFUL) {
 			LOGGER.info("Success! " + response.getStatus());
@@ -99,7 +98,7 @@ public class IftttNotificationPlugin implements NotificationPlugin, Activeable {
 
 		final List<String> list = new ArrayList<>();
 		Collections.sort(list, String::compareToIgnoreCase);
-		Collections.sort(list, (s1, s2) -> s1.compareToIgnoreCase(s2));
+		Collections.sort(list, String::compareToIgnoreCase);
 
 	}
 

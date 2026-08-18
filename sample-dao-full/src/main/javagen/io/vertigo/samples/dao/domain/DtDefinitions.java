@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 import io.vertigo.core.lang.Generated;
-import io.vertigo.datamodel.structure.definitions.DtFieldName;
+import io.vertigo.datamodel.data.definitions.DataFieldName;
 
 /**
  * This class is automatically generated.
@@ -56,7 +56,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de Actor.
 	 */
-	public enum ActorFields implements DtFieldName<io.vertigo.samples.dao.domain.Actor> {
+	public enum ActorFields implements DataFieldName<io.vertigo.samples.dao.domain.Actor> {
 		/** Propriété 'Id'. */
 		actId,
 		/** Propriété 'Nom'. */
@@ -67,7 +67,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de Country.
 	 */
-	public enum CountryFields implements DtFieldName<io.vertigo.samples.dao.domain.Country> {
+	public enum CountryFields implements DataFieldName<io.vertigo.samples.dao.domain.Country> {
 		/** Propriété 'Id'. */
 		couId,
 		/** Propriété 'Code du pays'. */
@@ -76,7 +76,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de Movie.
 	 */
-	public enum MovieFields implements DtFieldName<io.vertigo.samples.dao.domain.Movie> {
+	public enum MovieFields implements DataFieldName<io.vertigo.samples.dao.domain.Movie> {
 		/** Propriété 'Id'. */
 		movId,
 		/** Propriété 'Code du pays'. */
@@ -91,7 +91,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de MovieByYear.
 	 */
-	public enum MovieByYearFields implements DtFieldName<io.vertigo.samples.dao.domain.MovieByYear> {
+	public enum MovieByYearFields implements DataFieldName<io.vertigo.samples.dao.domain.MovieByYear> {
 		/** Propriété 'Année'. */
 		year,
 		/** Propriété 'Nombre de film'. */
@@ -100,7 +100,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de MovieDisplay.
 	 */
-	public enum MovieDisplayFields implements DtFieldName<io.vertigo.samples.dao.domain.MovieDisplay> {
+	public enum MovieDisplayFields implements DataFieldName<io.vertigo.samples.dao.domain.MovieDisplay> {
 		/** Propriété 'Titre'. */
 		name,
 		/** Propriété 'Année'. */
@@ -113,7 +113,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de MyActor.
 	 */
-	public enum MyActorFields implements DtFieldName<io.vertigo.samples.dao.domain.MyActor> {
+	public enum MyActorFields implements DataFieldName<io.vertigo.samples.dao.domain.MyActor> {
 		/** Propriété 'Id'. */
 		actId,
 		/** Propriété 'Nom'. */
@@ -124,7 +124,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de MyCountry.
 	 */
-	public enum MyCountryFields implements DtFieldName<io.vertigo.samples.dao.domain.MyCountry> {
+	public enum MyCountryFields implements DataFieldName<io.vertigo.samples.dao.domain.MyCountry> {
 		/** Propriété 'Id'. */
 		couId,
 		/** Propriété 'Code du pays'. */
@@ -133,7 +133,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de MyMovie.
 	 */
-	public enum MyMovieFields implements DtFieldName<io.vertigo.samples.dao.domain.MyMovie> {
+	public enum MyMovieFields implements DataFieldName<io.vertigo.samples.dao.domain.MyMovie> {
 		/** Propriété 'Id'. */
 		movId,
 		/** Propriété 'Code du pays'. */
@@ -148,7 +148,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de MyRole.
 	 */
-	public enum MyRoleFields implements DtFieldName<io.vertigo.samples.dao.domain.MyRole> {
+	public enum MyRoleFields implements DataFieldName<io.vertigo.samples.dao.domain.MyRole> {
 		/** Propriété 'Id'. */
 		rolId,
 		/** Propriété 'Dans le role de'. */
@@ -161,7 +161,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de Role.
 	 */
-	public enum RoleFields implements DtFieldName<io.vertigo.samples.dao.domain.Role> {
+	public enum RoleFields implements DataFieldName<io.vertigo.samples.dao.domain.Role> {
 		/** Propriété 'Id'. */
 		rolId,
 		/** Propriété 'Dans le role de'. */

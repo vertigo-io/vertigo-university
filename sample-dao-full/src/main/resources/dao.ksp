@@ -1,4 +1,4 @@
-package io.vertigo.samples
+package io.vertigo.samples.dao
 
 create Task TkGetMoviesByCriteria {
     className : "io.vertigo.basics.task.TaskEngineSelect"
@@ -66,7 +66,6 @@ create Task TkGetMoviesWith100Actors {
 			"
 	out movies	{domain : DoDtMovie 	cardinality:"*" }
 }
-
 
 create Task TkGetMovieDisplay {
     className : "io.vertigo.basics.task.TaskEngineSelect"

@@ -1,6 +1,6 @@
 package io.vertigo.samples.dao.run;
 
-import jakarta.inject.Inject;
+import javax.inject.Inject;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -11,7 +11,7 @@ import io.vertigo.core.node.AutoCloseableNode;
 import io.vertigo.core.node.config.ModuleConfig;
 import io.vertigo.core.node.config.NodeConfigBuilder;
 import io.vertigo.core.util.InjectorUtil;
-import io.vertigo.samples.SamplesPAO;
+import io.vertigo.samples.dao.DaoPAO;
 import io.vertigo.samples.dao.config.SampleConfigBuilder;
 import io.vertigo.samples.dao.dao.ActorDAO;
 import io.vertigo.samples.dao.dao.CountryDAO;
@@ -22,6 +22,7 @@ import io.vertigo.samples.dao.dao.MyMovieDAO;
 import io.vertigo.samples.dao.dao.MyRoleDAO;
 import io.vertigo.samples.dao.dao.RoleDAO;
 import io.vertigo.samples.dao.domain.Actor;
+import io.vertigo.samples.dao.reprise.ReprisePAO;
 import io.vertigo.samples.dao.services.ActorServices;
 import io.vertigo.samples.dao.services.ActorServicesImpl;
 import io.vertigo.samples.dao.services.CountryServices;
@@ -30,7 +31,6 @@ import io.vertigo.samples.dao.services.MovieServices;
 import io.vertigo.samples.dao.services.MovieServicesImpl;
 import io.vertigo.samples.dao.services.RepriseServices;
 import io.vertigo.samples.dao.services.RepriseServicesImpl;
-import io.vertigo.samples.reprise.ReprisePAO;
 
 public class Level6 {
 
@@ -54,7 +54,7 @@ public class Level6 {
 				.addComponent(RoleDAO.class)
 				.addComponent(CountryDAO.class)
 				.addComponent(ReprisePAO.class)
-				.addComponent(SamplesPAO.class)
+				.addComponent(DaoPAO.class)
 				.build())
 				.addModule(ModuleConfig.builder("mineServices")
 						.addComponent(CountryServices.class, CountryServicesImpl.class)

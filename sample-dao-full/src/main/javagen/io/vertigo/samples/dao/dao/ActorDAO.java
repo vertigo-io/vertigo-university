@@ -50,13 +50,14 @@ public final class ActorDAO extends DAO<Actor, java.lang.Long> implements StoreS
 	*/
 	@io.vertigo.datamodel.task.proxy.TaskAnnotation(
 			name = "TkGetActorsInMovie",
-			request = "select act.*\n" + 
- "         	from role rol\n" + 
- "         	join actor act on act.ACT_ID = rol.ACT_ID\n" + 
- "         	where rol.MOV_ID = #movId#",
+			request = """
+			select act.*
+        	from role rol
+        	join actor act on act.ACT_ID = rol.ACT_ID
+        	where rol.MOV_ID = #movId#""",
 			taskEngineClass = io.vertigo.basics.task.TaskEngineSelect.class)
-	@io.vertigo.datamodel.task.proxy.TaskOutput(smartType = "STyDtActor")
-	public io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.dao.domain.Actor> getActorsInMovie(@io.vertigo.datamodel.task.proxy.TaskInput(name = "movId", smartType = "STyId") final Long movId) {
+	@io.vertigo.datamodel.task.proxy.TaskOutput(smartType = "STyDtActor", name = "actors")
+	public io.vertigo.datamodel.data.model.DtList<io.vertigo.samples.dao.domain.Actor> getActorsInMovie(@io.vertigo.datamodel.task.proxy.TaskInput(name = "movId", smartType = "STyId") final Long movId) {
 		final Task task = createTaskBuilder("TkGetActorsInMovie")
 				.addValue("movId", movId)
 				.build();
@@ -72,9 +73,10 @@ public final class ActorDAO extends DAO<Actor, java.lang.Long> implements StoreS
 	@io.vertigo.datamodel.task.proxy.TaskAnnotation(
 			dataSpace = "mine",
 			name = "TkInsertActorsBatch",
-			request = "INSERT INTO MY_ACTOR (ACT_ID, NAME, SEXE) values (#actorsList.actId#, #actorsList.name#, #actorsList.sexe#)",
+			request = """
+			INSERT INTO MY_ACTOR (ACT_ID, NAME, SEXE) values (#actorsList.actId#, #actorsList.name#, #actorsList.sexe#)""",
 			taskEngineClass = io.vertigo.basics.task.TaskEngineProcBatch.class)
-	public void insertActorsBatch(@io.vertigo.datamodel.task.proxy.TaskInput(name = "actorsList", smartType = "STyDtActor") final io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.dao.domain.Actor> actorsList) {
+	public void insertActorsBatch(@io.vertigo.datamodel.task.proxy.TaskInput(name = "actorsList", smartType = "STyDtActor") final io.vertigo.datamodel.data.model.DtList<io.vertigo.samples.dao.domain.Actor> actorsList) {
 		final Task task = createTaskBuilder("TkInsertActorsBatch")
 				.addValue("actorsList", actorsList)
 				.addContextProperty("connectionName", io.vertigo.datastore.impl.dao.StoreUtil.getConnectionName("mine"))
@@ -90,13 +92,14 @@ public final class ActorDAO extends DAO<Actor, java.lang.Long> implements StoreS
 	*/
 	@io.vertigo.datamodel.task.proxy.TaskAnnotation(
 			name = "TkLoadActorsByChunk",
-			request = "select * from ACTOR\n" + 
- " 			where ACT_ID > #offset#\n" + 
- "         	order by ACT_ID asc\n" + 
- " 			limit 1000",
+			request = """
+			select * from ACTOR
+			where ACT_ID > #offset#
+        	order by ACT_ID asc
+			limit 1000""",
 			taskEngineClass = io.vertigo.basics.task.TaskEngineSelect.class)
-	@io.vertigo.datamodel.task.proxy.TaskOutput(smartType = "STyDtActor")
-	public io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.dao.domain.Actor> loadActorsByChunk(@io.vertigo.datamodel.task.proxy.TaskInput(name = "limit", smartType = "STyId") final Long limit, @io.vertigo.datamodel.task.proxy.TaskInput(name = "offset", smartType = "STyId") final Long offset) {
+	@io.vertigo.datamodel.task.proxy.TaskOutput(smartType = "STyDtActor", name = "actorsList")
+	public io.vertigo.datamodel.data.model.DtList<io.vertigo.samples.dao.domain.Actor> loadActorsByChunk(@io.vertigo.datamodel.task.proxy.TaskInput(name = "limit", smartType = "STyId") final Long limit, @io.vertigo.datamodel.task.proxy.TaskInput(name = "offset", smartType = "STyId") final Long offset) {
 		final Task task = createTaskBuilder("TkLoadActorsByChunk")
 				.addValue("limit", limit)
 				.addValue("offset", offset)

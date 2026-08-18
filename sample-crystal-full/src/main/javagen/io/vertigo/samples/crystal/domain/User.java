@@ -1,11 +1,11 @@
 package io.vertigo.samples.crystal.domain;
 
 import io.vertigo.core.lang.Generated;
-import io.vertigo.datamodel.structure.model.Entity;
-import io.vertigo.datamodel.structure.model.UID;
+import io.vertigo.datamodel.data.model.Entity;
+import io.vertigo.datamodel.data.model.UID;
 import io.vertigo.datastore.impl.entitystore.StoreVAccessor;
-import io.vertigo.datamodel.structure.stereotype.Field;
-import io.vertigo.datamodel.structure.util.DtObjectUtil;
+import io.vertigo.datamodel.data.stereotype.Field;
+import io.vertigo.datamodel.data.util.DataModelUtil;
 
 /**
  * This class is automatically generated.
@@ -20,7 +20,7 @@ public final class User implements Entity {
 	private String name;
 	private String email;
 
-	@io.vertigo.datamodel.structure.stereotype.Association(
+	@io.vertigo.datamodel.data.stereotype.Association(
 			name = "AUsrCou",
 			fkFieldName = "couId",
 			primaryDtDefinitionName = "DtCountry",
@@ -35,7 +35,7 @@ public final class User implements Entity {
 			foreignMultiplicity = "0..*")
 	private final StoreVAccessor<io.vertigo.samples.crystal.domain.Country> couIdAccessor = new StoreVAccessor<>(io.vertigo.samples.crystal.domain.Country.class, "Country");
 
-	@io.vertigo.datamodel.structure.stereotype.Association(
+	@io.vertigo.datamodel.data.stereotype.Association(
 			name = "AUsrGrp",
 			fkFieldName = "grpId",
 			primaryDtDefinitionName = "DtUserGroup",
@@ -137,7 +137,7 @@ public final class User implements Entity {
 	 * Récupère la valeur de la propriété 'Country'.
 	 * @return Long couId
 	 */
-	@io.vertigo.datamodel.structure.stereotype.ForeignKey(smartType = "STyId", label = "Country", fkDefinition = "DtCountry" )
+	@io.vertigo.datamodel.data.stereotype.ForeignKey(smartType = "STyId", label = "Country", fkDefinition = "DtCountry" )
 	public Long getCouId() {
 		return (Long) couIdAccessor.getId();
 	}
@@ -156,7 +156,7 @@ public final class User implements Entity {
 	 * Récupère la valeur de la propriété 'Group'.
 	 * @return Long grpId
 	 */
-	@io.vertigo.datamodel.structure.stereotype.ForeignKey(smartType = "STyId", label = "Group", fkDefinition = "DtUserGroup" )
+	@io.vertigo.datamodel.data.stereotype.ForeignKey(smartType = "STyId", label = "Group", fkDefinition = "DtUserGroup" )
 	public Long getGrpId() {
 		return (Long) grpIdAccessor.getId();
 	}
@@ -189,6 +189,6 @@ public final class User implements Entity {
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {
-		return DtObjectUtil.toString(this);
+		return DataModelUtil.toString(this);
 	}
 }

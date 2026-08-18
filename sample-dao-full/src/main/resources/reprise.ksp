@@ -1,4 +1,4 @@
-package io.vertigo.samples.reprise
+package io.vertigo.samples.dao.reprise
 
 create Task TkInsertCountriesBatch {
 	storeName : "mine"

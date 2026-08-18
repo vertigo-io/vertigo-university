@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Properties;
 
-import jakarta.inject.Inject;
+import javax.inject.Inject;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.ClientBuilder;
 import jakarta.ws.rs.client.Entity;

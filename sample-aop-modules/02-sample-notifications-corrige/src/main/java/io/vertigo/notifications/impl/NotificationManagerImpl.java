@@ -3,7 +3,7 @@ package io.vertigo.notifications.impl;
 import java.util.Arrays;
 import java.util.List;
 
-import jakarta.inject.Inject;
+import javax.inject.Inject;
 
 import io.vertigo.notifications.NotificationManager;
 import io.vertigo.notifications.aspects.supervision.Supervision;

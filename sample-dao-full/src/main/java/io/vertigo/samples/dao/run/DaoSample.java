@@ -8,7 +8,7 @@ import io.vertigo.core.node.AutoCloseableNode;
 import io.vertigo.core.node.config.ModuleConfig;
 import io.vertigo.core.node.config.NodeConfigBuilder;
 import io.vertigo.core.util.InjectorUtil;
-import io.vertigo.samples.SamplesPAO;
+import io.vertigo.samples.dao.DaoPAO;
 import io.vertigo.samples.dao.config.SampleConfigBuilder;
 import io.vertigo.samples.dao.dao.ActorDAO;
 import io.vertigo.samples.dao.dao.MovieDAO;
@@ -32,7 +32,7 @@ public class DaoSample {
 						.addComponent(MovieDAO.class)
 						.addComponent(ActorDAO.class)
 						.addComponent(RoleDAO.class)
-						.addComponent(SamplesPAO.class)
+						.addComponent(DaoPAO.class)
 						.build());
 		try (final AutoCloseableNode node = new AutoCloseableNode(nodeConfigBuilder.build())) {
 			final DaoSample sample = new DaoSample();

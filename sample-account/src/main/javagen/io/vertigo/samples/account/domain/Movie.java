@@ -1,12 +1,12 @@
 package io.vertigo.samples.account.domain;
 
 import io.vertigo.core.lang.Generated;
-import io.vertigo.datamodel.structure.model.KeyConcept;
+import io.vertigo.datamodel.data.model.KeyConcept;
 import io.vertigo.datastore.impl.entitystore.StoreListVAccessor;
-import io.vertigo.datamodel.structure.model.UID;
+import io.vertigo.datamodel.data.model.UID;
 import io.vertigo.datastore.impl.entitystore.StoreVAccessor;
-import io.vertigo.datamodel.structure.stereotype.Field;
-import io.vertigo.datamodel.structure.util.DtObjectUtil;
+import io.vertigo.datamodel.data.stereotype.Field;
+import io.vertigo.datamodel.data.util.DataModelUtil;
 
 /**
  * This class is automatically generated.
@@ -21,7 +21,7 @@ public final class Movie implements KeyConcept {
 	private Integer year;
 	private String imdbid;
 
-	@io.vertigo.datamodel.structure.stereotype.Association(
+	@io.vertigo.datamodel.data.stereotype.Association(
 			name = "AMovCou",
 			fkFieldName = "couId",
 			primaryDtDefinitionName = "DtCountry",
@@ -36,7 +36,7 @@ public final class Movie implements KeyConcept {
 			foreignMultiplicity = "0..*")
 	private final StoreVAccessor<io.vertigo.samples.account.domain.Country> couIdAccessor = new StoreVAccessor<>(io.vertigo.samples.account.domain.Country.class, "Country");
 
-	@io.vertigo.datamodel.structure.stereotype.Association(
+	@io.vertigo.datamodel.data.stereotype.Association(
 			name = "ARolMov",
 			fkFieldName = "movId",
 			primaryDtDefinitionName = "DtMovie",
@@ -138,7 +138,7 @@ public final class Movie implements KeyConcept {
 	 * Récupère la valeur de la propriété 'Country'.
 	 * @return Long couId
 	 */
-	@io.vertigo.datamodel.structure.stereotype.ForeignKey(smartType = "STyId", label = "Country", fkDefinition = "DtCountry" )
+	@io.vertigo.datamodel.data.stereotype.ForeignKey(smartType = "STyId", label = "Country", fkDefinition = "DtCountry" )
 	public Long getCouId() {
 		return (Long) couIdAccessor.getId();
 	}
@@ -171,6 +171,6 @@ public final class Movie implements KeyConcept {
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {
-		return DtObjectUtil.toString(this);
+		return DataModelUtil.toString(this);
 	}
 }

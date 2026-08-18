@@ -1,6 +1,6 @@
 package io.vertigo.samples.account.run;
 
-import jakarta.inject.Inject;
+import javax.inject.Inject;
 
 import org.apache.logging.log4j.LogManager;
 

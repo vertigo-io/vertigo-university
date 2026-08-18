@@ -3,15 +3,15 @@ package io.vertigo.samples.dao.services;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import jakarta.inject.Inject;
+import javax.inject.Inject;
 
 import io.vertigo.commons.transaction.Transactional;
 import io.vertigo.core.lang.Assertion;
 import io.vertigo.datamodel.criteria.Criteria;
 import io.vertigo.datamodel.criteria.Criterions;
-import io.vertx...datamodel.data.model.DataList;
-import io.vertx...datamodel.data.model.DataListState;
-import io.vertigo.samples.SamplesPAO;
+import io.vertigo.datamodel.data.model.DtList;
+import io.vertigo.datamodel.data.model.DtListState;
+import io.vertigo.samples.dao.DaoPAO;
 import io.vertigo.samples.dao.dao.ActorDAO;
 import io.vertigo.samples.dao.dao.MovieDAO;
 import io.vertigo.samples.dao.dao.RoleDAO;
@@ -33,7 +33,7 @@ public class MovieServicesImpl implements MovieServices {
 	@Inject
 	private RoleDAO roleDAO;
 	@Inject
-	private SamplesPAO samplesPAO;
+	private DaoPAO samplesPAO;
 
 	@Override
 	public Movie getMovieById(final Long movId) {
@@ -43,26 +43,26 @@ public class MovieServicesImpl implements MovieServices {
 	}
 
 	@Override
-	public DataList<Movie> findMoviesByCriteria(final String title, final Integer year) {
+	public DtList<Movie> findMoviesByCriteria(final String title, final Integer year) {
 		final Criteria<Movie> criteria = Criterions.startsWith(MovieFields.name, title)
 				.and(Criterions.isEqualTo(MovieFields.year, year));
-		return movieDAO.findAll(criteria, DataListState.of(500));
+		return movieDAO.findAll(criteria, DtListState.of(500));
 	}
 
 	@Override
-	public DataList<Movie> findMoviesByKsp(final String title, final Integer year) {
+	public DtList<Movie> findMoviesByKsp(final String title, final Integer year) {
 		return movieDAO.getMoviesByCriteria(title, year);
 	}
 
 	@Override
-	public DataList<Actor> getActorsByMovie1(final Long movId) {
-		final DataList<Actor> result = new DataList<>(Actor.class);
+	public DtList<Actor> getActorsByMovie1(final Long movId) {
+		final DtList<Actor> result = new DtList<>(Actor.class);
 		final Movie movie = movieDAO.get(movId);
 		movie.role().load();
 		result.addAll(
 				movie.role().get()
 						.stream()
-						.map((role) -> {
+						.map(role -> {
 							role.actor().load();
 							return role.actor().get();
 						})
@@ -71,7 +71,7 @@ public class MovieServicesImpl implements MovieServices {
 	}
 
 	@Override
-	public DataList<Actor> getActorsByMovie2(final Long movId) {
+	public DtList<Actor> getActorsByMovie2(final Long movId) {
 		return actorDAO.getActorsInMovie(movId);
 	}
 
@@ -91,24 +91,24 @@ public class MovieServicesImpl implements MovieServices {
 	}
 
 	@Override
-	public DataList<Movie> findMoviesByKspWhereIn(final String title, final Integer year, final DataList<Country> countries) {
+	public DtList<Movie> findMoviesByKspWhereIn(final String title, final Integer year, final DtList<Country> countries) {
 		Assertion.check().isNotNull(countries);
 		// ---
 		return movieDAO.getMoviesByCriteriaWithCountry(title, Optional.ofNullable(year), countries);
 	}
 
 	@Override
-	public DataList<Movie> getMoviesWith100Actors() {
+	public DtList<Movie> getMoviesWith100Actors() {
 		return movieDAO.getMoviesWith100Actors();
 	}
 
 	@Override
-	public DataList<MovieDisplay> getMovieDisplay() {
+	public DtList<MovieDisplay> getMovieDisplay() {
 		return samplesPAO.getMovieDisplay();
 	}
 
 	@Override
-	public DataList<MovieByYear> getMoviesByDate() {
+	public DtList<MovieByYear> getMoviesByDate() {
 		return samplesPAO.getMovieByYear();
 	}
 

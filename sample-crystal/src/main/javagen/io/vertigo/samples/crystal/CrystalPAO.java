@@ -47,13 +47,14 @@ public final class CrystalPAO implements StoreServices {
 	*/
 	@io.vertigo.datamodel.task.proxy.TaskAnnotation(
 			name = "TkLoadMovieIndex",
-			request = "select MOV_ID, mov.NAME, YEAR, cou.NAME as COUNTRY\n" + 
- " 				from MOVIE mov\n" + 
- " 				join COUNTRY cou on cou.cou_id = mov.cou_id\n" + 
- " 				where MOV_ID in (#movieIds.rownum#);",
+			request = """
+			select MOV_ID, mov.NAME, YEAR, cou.NAME as COUNTRY
+				from MOVIE mov
+				join COUNTRY cou on cou.cou_id = mov.cou_id
+				where MOV_ID in (#movieIds.rownum#);""",
 			taskEngineClass = io.vertigo.basics.task.TaskEngineSelect.class)
 	@io.vertigo.datamodel.task.proxy.TaskOutput(smartType = "STyDtMovieIndex", name = "dtcIndex")
-	public io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.crystal.domain.MovieIndex> loadMovieIndex(@io.vertigo.datamodel.task.proxy.TaskInput(name = "movieIds", smartType = "STyId") final java.util.List<Long> movieIds) {
+	public io.vertigo.datamodel.data.model.DtList<io.vertigo.samples.crystal.domain.MovieIndex> loadMovieIndex(@io.vertigo.datamodel.task.proxy.TaskInput(name = "movieIds", smartType = "STyId") final java.util.List<Long> movieIds) {
 		final Task task = createTaskBuilder("TkLoadMovieIndex")
 				.addValue("movieIds", movieIds)
 				.build();

@@ -50,9 +50,10 @@ public final class CountryDAO extends DAO<Country, java.lang.Long> implements St
 	@io.vertigo.datamodel.task.proxy.TaskAnnotation(
 			dataSpace = "mine",
 			name = "TkInsertCountriesBatch",
-			request = "INSERT INTO MY_COUNTRY (COU_ID, NAME) values (#countryList.couId#, #countryList.name#)",
+			request = """
+			INSERT INTO MY_COUNTRY (COU_ID, NAME) values (#countryList.couId#, #countryList.name#)""",
 			taskEngineClass = io.vertigo.basics.task.TaskEngineProcBatch.class)
-	public void insertCountriesBatch(@io.vertigo.datamodel.task.proxy.TaskInput(name = "countryList", smartType = "STyDtCountry") final io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.dao.domain.Country> countryList) {
+	public void insertCountriesBatch(@io.vertigo.datamodel.task.proxy.TaskInput(name = "countryList", smartType = "STyDtCountry") final io.vertigo.datamodel.data.model.DtList<io.vertigo.samples.dao.domain.Country> countryList) {
 		final Task task = createTaskBuilder("TkInsertCountriesBatch")
 				.addValue("countryList", countryList)
 				.addContextProperty("connectionName", io.vertigo.datastore.impl.dao.StoreUtil.getConnectionName("mine"))
@@ -66,10 +67,11 @@ public final class CountryDAO extends DAO<Country, java.lang.Long> implements St
 	*/
 	@io.vertigo.datamodel.task.proxy.TaskAnnotation(
 			name = "TkLoadCountries",
-			request = "select * from COUNTRY",
+			request = """
+			select * from COUNTRY""",
 			taskEngineClass = io.vertigo.basics.task.TaskEngineSelect.class)
-	@io.vertigo.datamodel.task.proxy.TaskOutput(smartType = "STyDtCountry")
-	public io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.dao.domain.Country> loadCountries() {
+	@io.vertigo.datamodel.task.proxy.TaskOutput(smartType = "STyDtCountry", name = "countryList")
+	public io.vertigo.datamodel.data.model.DtList<io.vertigo.samples.dao.domain.Country> loadCountries() {
 		final Task task = createTaskBuilder("TkLoadCountries")
 				.build();
 		return getTaskManager()

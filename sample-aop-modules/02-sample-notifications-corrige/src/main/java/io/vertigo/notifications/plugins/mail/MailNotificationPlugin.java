@@ -1,6 +1,6 @@
 package io.vertigo.notifications.plugins.mail;
 
-import jakarta.inject.Inject;
+import javax.inject.Inject;
 
 import io.vertigo.notifications.impl.NotificationPlugin;
 import io.vertigo.social.mail.Mail;

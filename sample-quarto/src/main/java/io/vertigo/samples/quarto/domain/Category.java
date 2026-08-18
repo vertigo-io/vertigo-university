@@ -1,8 +1,8 @@
 package io.vertigo.samples.quarto.domain;
 
 import io.vertigo.core.lang.Cardinality;
-import io.vertigo.datamodel.data.model.DataList;
 import io.vertigo.datamodel.data.model.DataObject;
+import io.vertigo.datamodel.data.model.DtList;
 import io.vertigo.datamodel.data.stereotype.Field;
 
 public final class Category implements DataObject {
@@ -14,7 +14,7 @@ public final class Category implements DataObject {
 	@Field(smartType = "STyText", label = "description")
 	private String description;
 	@Field(smartType = "STyDtCard", label = "cards", cardinality = Cardinality.MANY)
-	private DataList<Card> cards;
+	private DtList<Card> cards;
 
 	public String getName() {
 		return name;
@@ -32,11 +32,11 @@ public final class Category implements DataObject {
 		this.description = description;
 	}
 
-	public DataList<Card> getCards() {
+	public DtList<Card> getCards() {
 		return cards;
 	}
 
-	public void setCards(final DataList<Card> cards) {
+	public void setCards(final DtList<Card> cards) {
 		this.cards = cards;
 	}
 

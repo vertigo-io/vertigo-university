@@ -9,16 +9,16 @@
 --   Sequences                                      
 -- ============================================================
 create sequence SEQ_MY_ACTOR
-	start with 1000 cache 20; 
+	start with 1000 cache 1; 
 
 create sequence SEQ_MY_COUNTRY
-	start with 1000 cache 20; 
+	start with 1000 cache 1; 
 
 create sequence SEQ_MY_MOVIE
-	start with 1000 cache 20; 
+	start with 1000 cache 1; 
 
 create sequence SEQ_MY_ROLE
-	start with 1000 cache 20; 
+	start with 1000 cache 1; 
 
 
 -- ============================================================

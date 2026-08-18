@@ -7,11 +7,11 @@ import javax.inject.Inject;
 
 import io.vertigo.commons.transaction.VTransactionManager;
 import io.vertigo.core.lang.Generated;
+import io.vertigo.core.lang.ListBuilder;
 import io.vertigo.core.node.component.Component;
 import io.vertigo.core.node.definition.DefinitionProvider;
 import io.vertigo.core.node.definition.DefinitionSpace;
 import io.vertigo.core.node.definition.DefinitionSupplier;
-import io.vertigo.core.util.ListBuilder;
 import io.vertigo.datafactory.collections.definitions.FacetDefinition.FacetOrder;
 import io.vertigo.datafactory.collections.definitions.FacetRangeDefinitionSupplier;
 import io.vertigo.datafactory.collections.definitions.FacetTermDefinitionSupplier;
@@ -23,8 +23,8 @@ import io.vertigo.datafactory.search.definitions.SearchIndexDefinition;
 import io.vertigo.datafactory.search.definitions.SearchIndexDefinitionSupplier;
 import io.vertigo.datafactory.search.model.SearchQuery;
 import io.vertigo.datafactory.search.model.SearchQueryBuilder;
-import io.vertigo.datamodel.structure.model.DtListState;
-import io.vertigo.datamodel.structure.model.UID;
+import io.vertigo.datamodel.data.model.DtListState;
+import io.vertigo.datamodel.data.model.UID;
 import io.vertigo.samples.crystal.domain.MovieIndex;
 
 /**
@@ -39,7 +39,6 @@ public final class MovieIndexSearchClient implements Component, DefinitionProvid
 
 	/**
 	 * Contructeur.
-	 *
 	 * @param searchManager Search Manager
 	 * @param transactionManager Transaction Manager
 	 */
@@ -51,7 +50,6 @@ public final class MovieIndexSearchClient implements Component, DefinitionProvid
 
 	/**
 	 * Création d'une SearchQuery de type : Movie.
-	 *
 	 * @param criteria Critères de recherche
 	 * @param selectedFacetValues Liste des facettes sélectionnées à appliquer
 	 * @return SearchQueryBuilder pour ce type de recherche
@@ -61,10 +59,8 @@ public final class MovieIndexSearchClient implements Component, DefinitionProvid
 				.withCriteria(criteria)
 				.withFacet(selectedFacetValues);
 	}
-
 	/**
 	 * Création d'une SearchQuery de type : MovieWithFacets.
-	 *
 	 * @param criteria Critères de recherche
 	 * @param selectedFacetValues Liste des facettes sélectionnées à appliquer
 	 * @return SearchQueryBuilder pour ce type de recherche
@@ -77,26 +73,24 @@ public final class MovieIndexSearchClient implements Component, DefinitionProvid
 
 	/**
 	 * Récupération du résultat issu d'une requête.
-	 *
 	 * @param searchQuery critères initiaux
 	 * @param listState Etat de la liste (tri et pagination)
 	 * @return Résultat correspondant à la requête (de type MovieIndex)
 	 */
 	public FacetedQueryResult<MovieIndex, SearchQuery> loadListIdxMovie(final SearchQuery searchQuery, final DtListState listState) {
-		final SearchIndexDefinition indexDefinition = io.vertigo.core.node.Node.getNode().getDefinitionSpace().resolve("IdxMovie", SearchIndexDefinition.class);
+		final SearchIndexDefinition indexDefinition = io.vertigo.core.node.Node.getNode().getDefinitionSpace().resolve("IdxMovie",SearchIndexDefinition.class);
 		return searchManager.loadList(indexDefinition, searchQuery, listState);
 	}
-
+		
 	/**
 	 * Récupération du résultat issu d'une requête.
-	 *
 	 * @param searchQuery critères initiaux
 	 * @param listState Etat de la liste (tri et pagination)
 	 * @return Résultat correspondant à la requête (de type MovieIndex)
 	 */
 	public FacetedQueryResult<MovieIndex, SearchQuery> loadList(final SearchQuery searchQuery, final DtListState listState) {
-		final List<SearchIndexDefinition> indexDefinitions = List.of(
-				io.vertigo.core.node.Node.getNode().getDefinitionSpace().resolve("IdxMovie", SearchIndexDefinition.class));
+		final List<SearchIndexDefinition> indexDefinitions = List.of( 
+				io.vertigo.core.node.Node.getNode().getDefinitionSpace().resolve("IdxMovie",SearchIndexDefinition.class));
 		return searchManager.loadList(indexDefinitions, searchQuery, listState);
 	}
 
@@ -123,6 +117,14 @@ public final class MovieIndexSearchClient implements Component, DefinitionProvid
 	public void markAsDirty(final io.vertigo.samples.crystal.domain.Movie entity) {
 		markAsDirty(UID.of(entity));
 	}
+	
+	/**
+	 * Simple access to definition, need to call some SearchManager function.
+	 * @return SearchDefinition 
+	 */
+	public SearchIndexDefinition getSearchIndexDefinitionIdxMovie() {
+		return io.vertigo.core.node.Node.getNode().getDefinitionSpace().resolve("IdxMovie",SearchIndexDefinition.class);
+	}
 
 	/** {@inheritDoc} */
 	@Override
@@ -135,7 +137,7 @@ public final class MovieIndexSearchClient implements Component, DefinitionProvid
 						.withIndexDtDefinition("DtMovieIndex")
 						.withKeyConcept("DtMovie")
 						.withLoaderId("MovieSearchLoader"))
-
+				
 				//---
 				// FacetTermDefinition
 				//-----
