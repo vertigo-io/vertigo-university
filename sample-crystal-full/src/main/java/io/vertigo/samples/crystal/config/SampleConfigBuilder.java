@@ -2,7 +2,7 @@ package io.vertigo.samples.crystal.config;
 
 import io.vertigo.account.AccountFeatures;
 import io.vertigo.commons.CommonsFeatures;
-import io.vertigo.connectors.elasticsearch.ElasticSearchFeatures;
+import io.vertigo.connectors.elasticsearch_7_17.ElasticSearchFeatures;
 import io.vertigo.connectors.javalin.JavalinFeatures;
 import io.vertigo.core.node.config.BootConfig;
 import io.vertigo.core.node.config.DefinitionProviderConfig;
@@ -17,8 +17,8 @@ import io.vertigo.database.impl.sql.vendor.h2.H2DataBase;
 import io.vertigo.datafactory.DataFactoryFeatures;
 import io.vertigo.datamodel.DataModelFeatures;
 import io.vertigo.datamodel.impl.smarttype.ModelDefinitionProvider;
-import io.vertigo.datamodel.impl.task.proxy.TaskProxyMethod;
 import io.vertigo.datastore.DataStoreFeatures;
+import io.vertigo.samples.crystal.dao.MovieProxyDAO;
 import io.vertigo.samples.crystal.domain.DtDefinitions;
 import io.vertigo.samples.crystal.webservices.TestUserSession;
 import io.vertigo.vega.VegaFeatures;
@@ -81,7 +81,7 @@ public class SampleConfigBuilder {
 
 		//---- proxies (Level4)
 		nodeConfigBuilder.addModule(ModuleConfig.builder("proxies")
-				.addProxyMethod(TaskProxyMethod.class)
+				.addAmplifier(MovieProxyDAO.class)
 				.build());
 
 		//---- Account (Level6)

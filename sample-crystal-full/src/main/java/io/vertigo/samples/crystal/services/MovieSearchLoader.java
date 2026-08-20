@@ -12,13 +12,13 @@ import io.vertigo.datafactory.search.SearchManager;
 import io.vertigo.datafactory.search.definitions.SearchChunk;
 import io.vertigo.datafactory.search.definitions.SearchIndexDefinition;
 import io.vertigo.datafactory.search.model.SearchIndex;
-import io.vertigo.datamodel.structure.model.DtList;
-import io.vertigo.datamodel.structure.model.UID;
+import io.vertigo.datamodel.data.model.DtList;
+import io.vertigo.datamodel.data.model.UID;
 import io.vertigo.datamodel.task.TaskManager;
 import io.vertigo.samples.crystal.domain.Movie;
 import io.vertigo.samples.crystal.domain.MovieIndex;
 
-public final class MovieSearchLoader extends AbstractSqlSearchLoader<Long, Movie, MovieIndex> implements Activeable {
+public final class MovieSearchLoader extends AbstractSqlSearchLoader<Movie, MovieIndex> implements Activeable {
 
 	private final MovieServices movieServices;
 	private final SearchManager searchManager;

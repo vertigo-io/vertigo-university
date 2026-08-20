@@ -81,11 +81,10 @@
 			<artifactId>vertigo-studio</artifactId>
 			<version>${vertigo.version}</version>
 		</dependency>
-		
 		<dependency>
-			<groupId>io.vertigo</groupId>
-			<artifactId>vertigo-elasticsearch-connector</artifactId>
-			<version>${vertigo.version}</version>
+		    <groupId>io.vertigo</groupId>
+		    <artifactId>vertigo-datafactory-plugin-elasticsearch_7_17</artifactId>
+		    <version>${vertigo.version}</version>
 		</dependency>
 		
 		<dependency>
@@ -119,8 +118,9 @@
 			<artifactId>websocket-server</artifactId>
 			<version>9.4.50.v20221201</version>
 		</dependency>
+		
 	</dependencies>
-
+	
 	<build>
 		<resources>
 			<resource>

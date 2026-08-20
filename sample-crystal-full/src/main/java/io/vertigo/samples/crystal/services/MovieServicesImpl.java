@@ -16,9 +16,8 @@ import io.vertigo.datafactory.collections.model.FacetedQueryResult;
 import io.vertigo.datafactory.collections.model.SelectedFacetValues;
 import io.vertigo.datafactory.search.SearchManager;
 import io.vertigo.datafactory.search.model.SearchQueryBuilder;
-import io.vertigo.datamodel.structure.model.DtList;
-import io.vertigo.datamodel.structure.model.DtListState;
-import io.vertigo.samples.SamplesPAO;
+import io.vertigo.datamodel.data.model.DtList;
+import io.vertigo.datamodel.data.model.DtListState;
 import io.vertigo.samples.crystal.CrystalPAO;
 import io.vertigo.samples.crystal.dao.ActorDAO;
 import io.vertigo.samples.crystal.dao.MovieDAO;
@@ -41,8 +40,6 @@ public class MovieServicesImpl implements MovieServices {
 	@Inject
 	private ActorDAO actorDAO;
 	@Inject
-	private SamplesPAO samplesPAO;
-	@Inject
 	private CrystalPAO crystalPAO;
 
 	@Inject
@@ -59,7 +56,7 @@ public class MovieServicesImpl implements MovieServices {
 	public List<Long> getActorsIdsByMovie(final Long movId) {
 		Assertion.check().isNotNull(movId);
 		//---
-		return samplesPAO.getActorsIdsByMovie(movId);
+		return crystalPAO.getActorsIdsByMovie(movId);
 	}
 
 	@Override

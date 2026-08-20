@@ -41,6 +41,30 @@ public final class CrystalPAO implements StoreServices {
 	}
 
 	/**
+	 * Execute la tache TkGetActorsIdsByMovie.
+	 * @param movId Long
+	 * @return List de Long actors
+	*/
+	@io.vertigo.datamodel.task.proxy.TaskAnnotation(
+			name = "TkGetActorsIdsByMovie",
+			request = """
+			select act.act_id 
+			from role rol
+			join actor act on rol.act_id= act.act_id 
+			join movie mov on rol.mov_id = mov.mov_id 
+			where mov.mov_id = #movId#""",
+			taskEngineClass = io.vertigo.basics.task.TaskEngineSelect.class)
+	@io.vertigo.datamodel.task.proxy.TaskOutput(smartType = "STyId", name = "actors")
+	public java.util.List<Long> getActorsIdsByMovie(@io.vertigo.datamodel.task.proxy.TaskInput(name = "movId", smartType = "STyId") final Long movId) {
+		final Task task = createTaskBuilder("TkGetActorsIdsByMovie")
+				.addValue("movId", movId)
+				.build();
+		return getTaskManager()
+				.execute(task)
+				.getResult();
+	}
+
+	/**
 	 * Execute la tache TkLoadMovieIndex.
 	 * @param movieIds List de Long
 	 * @return DtList de MovieIndex dtcIndex

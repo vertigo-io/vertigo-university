@@ -82,9 +82,9 @@
 			<version>${vertigo.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>io.vertigo</groupId>
-			<artifactId>vertigo-elasticsearch-connector</artifactId>
-			<version>${vertigo.version}</version>
+		    <groupId>io.vertigo</groupId>
+		    <artifactId>vertigo-datafactory-plugin-elasticsearch_7_17</artifactId>
+		    <version>${vertigo.version}</version>
 		</dependency>
 		
 		<dependency>

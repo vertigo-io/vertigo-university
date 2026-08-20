@@ -4,8 +4,8 @@ import java.util.List;
 
 import io.vertigo.datafactory.collections.model.FacetedQueryResult;
 import io.vertigo.datafactory.collections.model.SelectedFacetValues;
-import io.vertigo.datamodel.structure.model.DtList;
-import io.vertigo.datamodel.structure.model.DtListState;
+import io.vertigo.datamodel.data.model.DtList;
+import io.vertigo.datamodel.data.model.DtListState;
 import io.vertigo.datastore.impl.dao.StoreServices;
 import io.vertigo.samples.crystal.domain.Movie;
 import io.vertigo.samples.crystal.domain.MovieIndex;

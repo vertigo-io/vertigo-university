@@ -1,7 +1,7 @@
 package io.vertigo.samples.crystal.config;
 
 import io.vertigo.commons.CommonsFeatures;
-import io.vertigo.connectors.elasticsearch.ElasticSearchFeatures;
+import io.vertigo.connectors.elasticsearch_7_17.ElasticSearchFeatures;
 import io.vertigo.connectors.javalin.JavalinFeatures;
 import io.vertigo.core.node.config.BootConfig;
 import io.vertigo.core.node.config.DefinitionProviderConfig;

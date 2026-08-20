@@ -3,6 +3,10 @@ package io.vertigo.samples.crystal.dao;
 import javax.inject.Inject;
 
 import io.vertigo.core.lang.Generated;
+import io.vertigo.core.node.Node;
+import io.vertigo.datamodel.task.definitions.TaskDefinition;
+import io.vertigo.datamodel.task.model.Task;
+import io.vertigo.datamodel.task.model.TaskBuilder;
 import io.vertigo.datamodel.data.model.UID;
 import io.vertigo.datastore.entitystore.EntityStoreManager;
 import io.vertigo.datastore.impl.dao.DAO;
@@ -50,4 +54,37 @@ public final class MovieDAO extends DAO<Movie, java.lang.Long> implements StoreS
 	public Movie readOneForUpdate(final java.lang.Long id) {
 		return readOneForUpdate(createUID(id));
 	}
+
+	/**
+	 * Creates a taskBuilder.
+	 * @param name  the name of the task
+	 * @return the builder 
+	 */
+	private static TaskBuilder createTaskBuilder(final String name) {
+		final TaskDefinition taskDefinition = Node.getNode().getDefinitionSpace().resolve(name, TaskDefinition.class);
+		return Task.builder(taskDefinition);
+	}
+
+	/**
+	 * Execute la tache TkGetMoviesInCountries.
+	 * @param countriesIds List de Long
+	 * @return DtList de Movie movies
+	*/
+	@io.vertigo.datamodel.task.proxy.TaskAnnotation(
+			name = "TkGetMoviesInCountries",
+			request = """
+			select * 
+        	from movie 
+        	where cou_id in ( #countriesIds.rownum#)""",
+			taskEngineClass = io.vertigo.basics.task.TaskEngineSelect.class)
+	@io.vertigo.datamodel.task.proxy.TaskOutput(smartType = "STyDtMovie", name = "movies")
+	public io.vertigo.datamodel.data.model.DtList<io.vertigo.samples.crystal.domain.Movie> getMoviesInCountries(@io.vertigo.datamodel.task.proxy.TaskInput(name = "countriesIds", smartType = "STyId") final java.util.List<Long> countriesIds) {
+		final Task task = createTaskBuilder("TkGetMoviesInCountries")
+				.addValue("countriesIds", countriesIds)
+				.build();
+		return getTaskManager()
+				.execute(task)
+				.getResult();
+	}
+
 }

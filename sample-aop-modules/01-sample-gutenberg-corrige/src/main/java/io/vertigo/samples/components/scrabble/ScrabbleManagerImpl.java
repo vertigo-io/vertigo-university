@@ -12,7 +12,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import io.vertigo.core.lang.WrappedException;
-import io.vertigo.core.util.MapBuilder;
 
 /**
  *
@@ -35,7 +34,7 @@ public class ScrabbleManagerImpl implements ScrabbleManager {
 
 		try {
 			return Files.lines(text)
-					.map(line -> new Integer(line.split("[\\s|,|\\.]|--").length))
+					.map(line -> line.split("[\\s|,|\\.]|--").length)
 					.reduce(0, (x, y) -> x + y + 1);
 		} catch (final IOException e) {
 			throw WrappedException.wrap(e);
@@ -50,7 +49,7 @@ public class ScrabbleManagerImpl implements ScrabbleManager {
 		try {
 			return Files.lines(text)
 					.flatMap(line -> Arrays.stream(line.split("[\\s|,|\\.]|--")))
-					.map(word -> word.length())
+					.map(String::length)
 					.reduce(0, (x, y) -> x + y);
 		} catch (final IOException e) {
 			throw WrappedException.wrap(e);
@@ -99,7 +98,7 @@ public class ScrabbleManagerImpl implements ScrabbleManager {
 		try {
 			histo = Files.lines(text)
 					.flatMap(line -> Arrays.stream(line.split("[\\s|,|\\.]|--")))
-					.collect(() -> new HashMap<>(), (map, key) -> map.compute(key, (k, v) -> (v == null) ? 1 : v + 1L), (x, y) -> x.putAll(y));
+					.collect(HashMap::new, (map, key) -> map.compute(key, (k, v) -> v == null ? 1 : v + 1L), HashMap::putAll);
 		} catch (final IOException e) {
 			throw WrappedException.wrap(e);
 		}
@@ -108,65 +107,41 @@ public class ScrabbleManagerImpl implements ScrabbleManager {
 	}
 
 	private static Map<Character, Integer> buildMapScore() {
-		final MapBuilder<Character, Integer> mb = new MapBuilder<>();
-		mb.put('A', 9)
-				.put('B', 3)
-				.put('C', 3)
-				.put('D', 2)
-				.put('E', 1)
-				.put('F', 4)
-				.put('G', 2)
-				.put('H', 4)
-				.put('I', 1)
-				.put('J', 8)
-				.put('K', 10)
-				.put('L', 1)
-				.put('M', 2)
-				.put('N', 1)
-				.put('O', 1)
-				.put('P', 3)
-				.put('Q', 8)
-				.put('R', 1)
-				.put('S', 1)
-				.put('T', 1)
-				.put('U', 1)
-				.put('V', 4)
-				.put('W', 10)
-				.put('X', 10)
-				.put('Y', 10)
-				.put('Z', 10);
-		return mb.unmodifiable().build();
+		final Map<Character, Integer> mb = Map.ofEntries(
+				Map.entry('A', 9),
+				Map.entry('B', 3),
+				Map.entry('C', 3),
+				Map.entry('D', 2),
+				Map.entry('E', 1),
+				Map.entry('F', 4),
+				Map.entry('G', 2),
+				Map.entry('H', 4),
+				Map.entry('I', 1),
+				Map.entry('J', 8),
+				Map.entry('K', 10),
+				Map.entry('L', 1),
+				Map.entry('M', 2),
+				Map.entry('N', 1),
+				Map.entry('O', 1),
+				Map.entry('P', 3),
+				Map.entry('Q', 8),
+				Map.entry('R', 1),
+				Map.entry('S', 1),
+				Map.entry('T', 1),
+				Map.entry('U', 1),
+				Map.entry('V', 4),
+				Map.entry('W', 10),
+				Map.entry('X', 10),
+				Map.entry('Y', 10),
+				Map.entry('Z', 10));
+		return mb;
 	}
 
 	private static Map<Character, Integer> buildMapOccurence() {
-		final MapBuilder<Character, Integer> mb = new MapBuilder<>();
-		mb.put('A', 9)
-				.put('B', 2)
-				.put('C', 2)
-				.put('D', 3)
-				.put('E', 15)
-				.put('F', 2)
-				.put('G', 2)
-				.put('H', 2)
-				.put('I', 8)
-				.put('J', 1)
-				.put('K', 1)
-				.put('L', 5)
-				.put('M', 3)
-				.put('N', 6)
-				.put('O', 6)
-				.put('P', 2)
-				.put('Q', 1)
-				.put('R', 6)
-				.put('S', 6)
-				.put('T', 6)
-				.put('U', 6)
-				.put('V', 2)
-				.put('W', 1)
-				.put('X', 1)
-				.put('Y', 1)
-				.put('Z', 1);
-		return mb.unmodifiable().build();
+		final Map<Character, Integer> mb = Map.ofEntries(
+				Map.entry('A', 9), Map.entry('B', 2), Map.entry('C', 2), Map.entry('D', 3), Map.entry('E', 15), Map.entry('F', 2), Map.entry('G', 2), Map.entry('H', 2), Map.entry('I', 8), Map.entry('J', 1), Map.entry('K', 1), Map.entry('L', 5), Map.entry('M', 3), Map.entry('N', 6), Map.entry('O', 6), Map.entry('P', 2), Map.entry('Q', 1), Map.entry('R', 6), Map.entry('S', 6), Map.entry('T', 6),
+				Map.entry('U', 6), Map.entry('V', 2), Map.entry('W', 1), Map.entry('X', 1), Map.entry('Y', 1), Map.entry('Z', 1));
+		return mb;
 	}
 
 	/**
@@ -188,8 +163,8 @@ public class ScrabbleManagerImpl implements ScrabbleManager {
 		OptionalInt score;
 		try {
 			score = Files.lines(text)
-					.flatMap(line -> Arrays.<String> stream(line.split("[\\s|,|\\.]|--")))
-					.mapToInt(word -> scoreScrabble(word))
+					.flatMap(line -> Arrays.<String>stream(line.split("[\\s|,|\\.]|--")))
+					.mapToInt(this::scoreScrabble)
 					.max();
 
 		} catch (final IOException e) {
@@ -206,9 +181,9 @@ public class ScrabbleManagerImpl implements ScrabbleManager {
 		final Map<Integer, List<String>> score;
 		try {
 			score = Files.lines(text)
-					.flatMap(line -> Arrays.<String> stream(line.split("[\\s|,|\\.]|--")))
+					.flatMap(line -> Arrays.<String>stream(line.split("[\\s|,|\\.]|--")))
 					.distinct()
-					.collect(Collectors.groupingBy(x -> scoreScrabble(x)));
+					.collect(Collectors.groupingBy(this::scoreScrabble));
 		} catch (final IOException e) {
 			throw WrappedException.wrap(e);
 		}

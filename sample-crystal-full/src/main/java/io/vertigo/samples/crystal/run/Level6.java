@@ -13,7 +13,6 @@ import io.vertigo.core.node.config.DefinitionProviderConfig;
 import io.vertigo.core.node.config.ModuleConfig;
 import io.vertigo.core.node.config.NodeConfigBuilder;
 import io.vertigo.core.util.InjectorUtil;
-import io.vertigo.samples.SamplesPAO;
 import io.vertigo.samples.crystal.CrystalPAO;
 import io.vertigo.samples.crystal.config.SampleConfigBuilder;
 import io.vertigo.samples.crystal.dao.ActorDAO;
@@ -41,7 +40,7 @@ public class Level6 {
 				.addModule(ModuleConfig.builder("stepDao")
 						.addComponent(ActorDAO.class)
 						.addComponent(RoleDAO.class)
-						.addComponent(SamplesPAO.class)
+						.addComponent(CrystalPAO.class)
 						.addDefinitionProvider(DefinitionProviderConfig.builder(JsonSecurityDefinitionProvider.class)
 								.addDefinitionResource("security", "auth-config.json")
 								.build())
@@ -68,7 +67,7 @@ public class Level6 {
 	}
 
 	void step1() {
-		final UserSession userSession = securityManager.<TestUserSession> createUserSession();
+		final UserSession userSession = securityManager.<TestUserSession>createUserSession();
 		try {
 			securityManager.startCurrentUserSession(userSession);
 			final Account account = loginServices.login("admin", "v3rt1g0");

@@ -14,7 +14,6 @@ import io.vertigo.core.node.config.DefinitionProviderConfig;
 import io.vertigo.core.node.config.ModuleConfig;
 import io.vertigo.core.node.config.NodeConfigBuilder;
 import io.vertigo.core.util.InjectorUtil;
-import io.vertigo.samples.SamplesPAO;
 import io.vertigo.samples.crystal.CrystalPAO;
 import io.vertigo.samples.crystal.authorization.SecuredEntities.MovieOperations;
 import io.vertigo.samples.crystal.config.SampleConfigBuilder;
@@ -46,7 +45,7 @@ public class Level7 {
 				.addModule(ModuleConfig.builder("stepDao")
 						.addComponent(ActorDAO.class)
 						.addComponent(RoleDAO.class)
-						.addComponent(SamplesPAO.class)
+						.addComponent(CrystalPAO.class)
 						.addDefinitionProvider(DefinitionProviderConfig.builder(JsonSecurityDefinitionProvider.class)
 								.addDefinitionResource("security", "auth-config.json")
 								.build())
@@ -73,7 +72,7 @@ public class Level7 {
 	}
 
 	void step1() {
-		final UserSession userSession = securityManager.<TestUserSession> createUserSession();
+		final UserSession userSession = securityManager.<TestUserSession>createUserSession();
 		try {
 			securityManager.startCurrentUserSession(userSession);
 

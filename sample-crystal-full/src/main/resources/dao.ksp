@@ -1,4 +1,4 @@
-package io.vertigo.samples
+package io.vertigo.samples.crystal
 
 create Task TkGetActorsIdsByMovie {
     className : "io.vertigo.basics.task.TaskEngineSelect"

@@ -15,7 +15,6 @@ public interface MovieProxyDAO extends Amplifier {
 			request = "select count(*) from movie where cou_id = #COU_ID#",
 			taskEngineClass = TaskEngineSelect.class)
 	@TaskOutput(smartType = "DO_INTEGER")
-	int count(
-			@TaskInput(name = "COU_ID", smartType = "DO_ID") Long couId);
+	int count(@TaskInput(name = "COU_ID", smartType = "DO_ID") Long couId);
 
 }

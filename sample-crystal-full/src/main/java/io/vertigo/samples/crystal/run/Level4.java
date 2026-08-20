@@ -8,7 +8,6 @@ import io.vertigo.core.node.AutoCloseableNode;
 import io.vertigo.core.node.config.ModuleConfig;
 import io.vertigo.core.node.config.NodeConfigBuilder;
 import io.vertigo.core.util.InjectorUtil;
-import io.vertigo.samples.SamplesPAO;
 import io.vertigo.samples.crystal.CrystalPAO;
 import io.vertigo.samples.crystal.config.SampleConfigBuilder;
 import io.vertigo.samples.crystal.dao.ActorDAO;
@@ -32,7 +31,7 @@ public class Level4 {
 				.addModule(ModuleConfig.builder("stepDao")
 						.addComponent(ActorDAO.class)
 						.addComponent(RoleDAO.class)
-						.addComponent(SamplesPAO.class)
+						.addComponent(CrystalPAO.class)
 						.addAmplifier(MovieProxyDAO.class)
 						.build())
 				.addModule(defaultSampleModule());
