@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import io.vertigo.datafactory.collections.model.FacetedQueryResult;
 import io.vertigo.datafactory.collections.model.SelectedFacetValues;
 import io.vertigo.datafactory.search.model.SearchQuery;
-import io.vertigo.datamodel.structure.model.DtListState;
+import io.vertigo.datamodel.data.model.DtListState;
 import io.vertigo.samples.vui.domain.DtDefinitions.MovieIndexFields;
 import io.vertigo.samples.vui.domain.Movie;
 import io.vertigo.samples.vui.domain.MovieIndex;

@@ -47,13 +47,14 @@ public final class VuiPAO implements StoreServices {
 	*/
 	@io.vertigo.datamodel.task.proxy.TaskAnnotation(
 			name = "TkGetActorsIdsByMovie",
-			request = "select act.act_id \n" + 
- " 			from role rol\n" + 
- " 			join actor act on rol.act_id= act.act_id \n" + 
- " 			join movie mov on rol.mov_id = mov.mov_id \n" + 
- " 			where mov.mov_id = #movId#",
+			request = """
+			select act.act_id 
+			from role rol
+			join actor act on rol.act_id= act.act_id 
+			join movie mov on rol.mov_id = mov.mov_id 
+			where mov.mov_id = #movId#""",
 			taskEngineClass = io.vertigo.basics.task.TaskEngineSelect.class)
-	@io.vertigo.datamodel.task.proxy.TaskOutput(smartType = "STyId")
+	@io.vertigo.datamodel.task.proxy.TaskOutput(smartType = "STyId", name = "actors")
 	public java.util.List<Long> getActorsIdsByMovie(@io.vertigo.datamodel.task.proxy.TaskInput(name = "movId", smartType = "STyId") final Long movId) {
 		final Task task = createTaskBuilder("TkGetActorsIdsByMovie")
 				.addValue("movId", movId)
@@ -70,13 +71,14 @@ public final class VuiPAO implements StoreServices {
 	*/
 	@io.vertigo.datamodel.task.proxy.TaskAnnotation(
 			name = "TkLoadMovieIndex",
-			request = "select MOV_ID, mov.NAME, YEAR, cou.NAME as COUNTRY\n" + 
- " 				from MOVIE mov\n" + 
- " 				join COUNTRY cou on cou.cou_id = mov.cou_id\n" + 
- " 				where MOV_ID in (#movieIds.rownum#);",
+			request = """
+			select MOV_ID, mov.NAME, YEAR, cou.NAME as COUNTRY
+				from MOVIE mov
+				join COUNTRY cou on cou.cou_id = mov.cou_id
+				where MOV_ID in (#movieIds.rownum#);""",
 			taskEngineClass = io.vertigo.basics.task.TaskEngineSelect.class)
-	@io.vertigo.datamodel.task.proxy.TaskOutput(smartType = "STyDtMovieIndex")
-	public io.vertigo.datamodel.structure.model.DtList<io.vertigo.samples.vui.domain.MovieIndex> loadMovieIndex(@io.vertigo.datamodel.task.proxy.TaskInput(name = "movieIds", smartType = "STyId") final java.util.List<Long> movieIds) {
+	@io.vertigo.datamodel.task.proxy.TaskOutput(smartType = "STyDtMovieIndex", name = "dtcIndex")
+	public io.vertigo.datamodel.data.model.DtList<io.vertigo.samples.vui.domain.MovieIndex> loadMovieIndex(@io.vertigo.datamodel.task.proxy.TaskInput(name = "movieIds", smartType = "STyId") final java.util.List<Long> movieIds) {
 		final Task task = createTaskBuilder("TkLoadMovieIndex")
 				.addValue("movieIds", movieIds)
 				.build();

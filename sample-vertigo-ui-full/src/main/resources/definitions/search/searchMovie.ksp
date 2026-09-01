@@ -16,7 +16,7 @@ create IndexDefinition IdxMovie {
 
 create FacetDefinition FctMovieCountry {  
   dtDefinition:DtMovieIndex, fieldName:"country", label:"Par pays"
-  multiselectable : "true"
+  multiSelectable : "true"
 }
 
 create FacetDefinition FctMovieName {  

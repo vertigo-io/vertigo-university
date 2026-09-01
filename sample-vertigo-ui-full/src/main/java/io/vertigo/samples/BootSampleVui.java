@@ -1,83 +1,50 @@
-/**
- * vertigo - application development platform
+/*
  *
- * Copyright (C) 2013-2022, Vertigo.io, team@vertigo.io
+ *  Copyright (c) 2012. inTux.info.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ *  This is free software; you can redistribute it and/or modify it
+ *  under the terms of the GNU Lesser General Public License as
+ *  published by the Free Software Foundation; either version 2.1 of
+ *  the License, or (at your option) any later version.
  *
- * http://www.apache.org/licenses/LICENSE-2.0
+ *  This software is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ *  Lesser General Public License for more details.
  *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ *  You should have received a copy of the GNU Lesser General Public
+ *  License along with this software; if not, write to the Free
+ *  Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+ *  02111-1307 USA
+ *  or on the web at: http://www.gnu.org/copyleft/lesser.html
+ *
+ *
  */
+
 package io.vertigo.samples;
 
-import java.io.IOException;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.nio.file.Paths;
-import java.util.Collections;
-
-import org.eclipse.jetty.annotations.ServletContainerInitializersStarter;
-import org.eclipse.jetty.plus.annotation.ContainerInitializer;
-import org.eclipse.jetty.server.Server;
-import org.eclipse.jetty.webapp.WebAppClassLoader;
-import org.eclipse.jetty.webapp.WebAppContext;
-import org.springframework.web.SpringServletContainerInitializer;
+import java.util.List;
 
 import io.vertigo.samples.support.boot.MultipartConfigInjectionHandler;
 import io.vertigo.samples.support.config.VuiVSpringWebApplicationInitializer;
+import io.vertigo.ui.boot.JettyBoot;
+import io.vertigo.ui.boot.JettyBootParams;
 
 public final class BootSampleVui {
 
 	public static void main(final String[] args) throws Exception {
 		startServer();
-		server.join();
 	}
 
-	private static ClassLoader getUrlClassLoader() {
-		return new URLClassLoader(new URL[0], BootSampleVui.class.getClassLoader());
+	public static void startServer() throws Exception {
+		final JettyBootParams jettyBootParams = JettyBootParams.builder("webapp/", VuiVSpringWebApplicationInitializer.class)
+				.withContextPath("/sample")
+				.noSsl()
+				.build();
+		JettyBoot.startServer(jettyBootParams, (context) -> {
+			final MultipartConfigInjectionHandler multipartConfigInjectionHandler = new MultipartConfigInjectionHandler();
+			multipartConfigInjectionHandler.setHandler(context);
+			return List.of(multipartConfigInjectionHandler);
+		});
 	}
-
-	private static final int port = 18080;
-	private static Server server;
-
-	private static void startServer() throws IOException, Exception {
-		server = new Server(port);
-		final WebAppContext context = new WebAppContext(Paths.get(BootSampleVui.class.getClassLoader().getResource("webapp/").toURI()).toString(), "/sample");
-		System.setProperty("org.apache.jasper.compiler.disablejsr199", "false");
-		context.setAttribute("jacoco.exclClassLoaders", "*");
-
-		//context.setAttribute("javax.servlet.context.tempdir", getScratchDir());
-
-		final ContainerInitializer springInitializer = new ContainerInitializer(new SpringServletContainerInitializer(), null);
-		springInitializer.addApplicableTypeName(VuiVSpringWebApplicationInitializer.class.getCanonicalName());
-		context.setAttribute("org.eclipse.jetty.containerInitializers", Collections.singletonList(springInitializer));
-		context.addBean(new ServletContainerInitializersStarter(context), true);
-		context.setClassLoader(getUrlClassLoader());
-		context.setClassLoader(new WebAppClassLoader(BootSampleVui.class.getClassLoader(), context));
-
-		final MultipartConfigInjectionHandler multipartConfigInjectionHandler = new MultipartConfigInjectionHandler();
-		multipartConfigInjectionHandler.setHandler(context);
-		server.setHandler(multipartConfigInjectionHandler);
-		server.start();
-	}
-
-	//	private static File getScratchDir() throws IOException {
-	//		final File tempDir = new File(System.getProperty("java.io.tmpdir"));
-	//		final File scratchDir = new File(tempDir.toString(), "embedded-jetty-html");
-	//
-	//		if (!scratchDir.exists()) {
-	//			if (!scratchDir.mkdirs()) {
-	//				throw new IOException("Unable to create scratch directory: " + scratchDir);
-	//			}
-	//		}
-	//		return scratchDir;
-	//	}
-
 }

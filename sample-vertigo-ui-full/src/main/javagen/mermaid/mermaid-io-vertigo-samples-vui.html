@@ -220,9 +220,12 @@
 		</style>
 	</head>
 	<body>
-		<script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+		<script type="module">
+		  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+		  mermaid.initialize({startOnLoad:false, flowchart:{useMaxWidth:false}});
+		  window.mermaid = mermaid;
+		</script>
 		<script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
-		<script>mermaid.initialize({startOnLoad:true, flowchart:{useMaxWidth:false}});</script>
 		<div id="app">
 			<div class="main-content row">
 				<section class="columns fullheigth">
@@ -237,10 +240,15 @@
 					  </ul>
 					</aside>
 					<div class="column is-10 is-marginless fullheigth">
-							<div v-if="activePanel === 'io.vertigo.samples.vui.domain' " >
-								<h1 v-cloak >Module io.vertigo.samples.vui.domain</h1>
-								<div class="mermaid">
-								classDiagram
+						<div ref="graphDiv" class="graph"></div>
+					</div>
+				</section>
+			</div>
+		</div>
+		<script>
+			var graphData = {};
+			graphData.io.vertigo.samples.vui.domain = `classDiagram
+					direction BT
 class Actor:::entity {
 		+Long actId
 		+String name
@@ -285,16 +293,12 @@ class UserGroup:::entity {
 		+Long grpId
 		+String name
 }
-						 		</div>
-						 	</div>
-					</div>
-				</section>
-			</div>
-		</div>
+			 	`
+		</script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/6.2.0/d3.min.js"></script>
 		<script>
 			function zoomAndPan() {
-				var div = d3.selectAll("div.mermaid");
+				var div = d3.selectAll("div.graph");
 				var svg = div.select("svg");
 				svg.attr('width', "100%");
 				svg.attr('height',  "100%");
@@ -326,8 +330,6 @@ class UserGroup:::entity {
 			}
 		</script> 
 		<script>
-			mermaid.init({noteMargin: 10}, ".mermaid");
-			zoomAndPan();
 			var app = new Vue({
 			  el: '#app',
 			  data: {
@@ -336,9 +338,12 @@ class UserGroup:::entity {
 			  methods : {
 			  	changeActivePanel : function(panelName) {
 			  		this.$data.activePanel = panelName
-			  		this.$nextTick(function() {
-			  			window.zoomAndPan();
-			  		})
+			  		element = this.$refs.graphDiv;
+			  		window.mermaid.render('graphDiv', graphData[panelName]).then(({ svg, bindFunctions }) => {
+					  element.innerHTML = svg;
+					  bindFunctions?.(element);
+					  window.zoomAndPan();
+					});
 			  	}
 			  }
 			})

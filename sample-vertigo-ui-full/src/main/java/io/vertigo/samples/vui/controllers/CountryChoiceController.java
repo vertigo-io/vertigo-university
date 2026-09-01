@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import io.vertigo.account.authorization.VSecurityException;
 import io.vertigo.account.security.VSecurityManager;
-import io.vertigo.core.locale.MessageText;
+import io.vertigo.core.locale.LocaleMessageText;
 import io.vertigo.core.node.Node;
 import io.vertigo.samples.support.SampleUserSession;
 import io.vertigo.samples.vui.domain.Country;
@@ -61,7 +61,7 @@ public final class CountryChoiceController extends AbstractVSpringMvcController 
 
 	private User obtainUser() {
 		final SampleUserSession session = Node.getNode().getComponentSpace().resolve(VSecurityManager.class)
-				.<SampleUserSession> getCurrentUserSession().orElseThrow(() -> new VSecurityException(MessageText.of("No active session found")));
+				.<SampleUserSession> getCurrentUserSession().orElseThrow(() -> new VSecurityException(LocaleMessageText.of("No active session found")));
 		User user = session.getAttribute("sessionUser");
 		if (user != null) {
 			return user;

@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 import io.vertigo.core.lang.Generated;
-import io.vertigo.datamodel.structure.definitions.DtFieldName;
+import io.vertigo.datamodel.data.definitions.DataFieldName;
 
 /**
  * This class is automatically generated.
@@ -52,7 +52,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de Actor.
 	 */
-	public enum ActorFields implements DtFieldName<io.vertigo.samples.vui.domain.Actor> {
+	public enum ActorFields implements DataFieldName<io.vertigo.samples.vui.domain.Actor> {
 		/** Propriété 'Id'. */
 		actId,
 		/** Propriété 'Nom'. */
@@ -63,7 +63,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de Country.
 	 */
-	public enum CountryFields implements DtFieldName<io.vertigo.samples.vui.domain.Country> {
+	public enum CountryFields implements DataFieldName<io.vertigo.samples.vui.domain.Country> {
 		/** Propriété 'Id'. */
 		couId,
 		/** Propriété 'Nom du pays'. */
@@ -72,7 +72,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de Movie.
 	 */
-	public enum MovieFields implements DtFieldName<io.vertigo.samples.vui.domain.Movie> {
+	public enum MovieFields implements DataFieldName<io.vertigo.samples.vui.domain.Movie> {
 		/** Propriété 'Id'. */
 		movId,
 		/** Propriété 'Titre du film'. */
@@ -87,7 +87,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de MovieIndex.
 	 */
-	public enum MovieIndexFields implements DtFieldName<io.vertigo.samples.vui.domain.MovieIndex> {
+	public enum MovieIndexFields implements DataFieldName<io.vertigo.samples.vui.domain.MovieIndex> {
 		/** Propriété 'id'. */
 		movId,
 		/** Propriété 'Titre'. */
@@ -102,7 +102,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de Role.
 	 */
-	public enum RoleFields implements DtFieldName<io.vertigo.samples.vui.domain.Role> {
+	public enum RoleFields implements DataFieldName<io.vertigo.samples.vui.domain.Role> {
 		/** Propriété 'Id'. */
 		rolId,
 		/** Propriété 'Dans le role de'. */
@@ -115,7 +115,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de Sexe.
 	 */
-	public enum SexeFields implements DtFieldName<io.vertigo.samples.vui.domain.Sexe> {
+	public enum SexeFields implements DataFieldName<io.vertigo.samples.vui.domain.Sexe> {
 		/** Propriété 'Id'. */
 		sexCd,
 		/** Propriété 'Label'. */
@@ -124,7 +124,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de User.
 	 */
-	public enum UserFields implements DtFieldName<io.vertigo.samples.vui.domain.User> {
+	public enum UserFields implements DataFieldName<io.vertigo.samples.vui.domain.User> {
 		/** Propriété 'Id'. */
 		usrId,
 		/** Propriété 'Login'. */
@@ -141,7 +141,7 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 	/**
 	 * Enumération des champs de UserGroup.
 	 */
-	public enum UserGroupFields implements DtFieldName<io.vertigo.samples.vui.domain.UserGroup> {
+	public enum UserGroupFields implements DataFieldName<io.vertigo.samples.vui.domain.UserGroup> {
 		/** Propriété 'Id'. */
 		grpId,
 		/** Propriété 'Nom'. */

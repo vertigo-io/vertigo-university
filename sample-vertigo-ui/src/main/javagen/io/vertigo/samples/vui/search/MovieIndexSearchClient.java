@@ -7,11 +7,11 @@ import javax.inject.Inject;
 
 import io.vertigo.commons.transaction.VTransactionManager;
 import io.vertigo.core.lang.Generated;
+import io.vertigo.core.lang.ListBuilder;
 import io.vertigo.core.node.component.Component;
 import io.vertigo.core.node.definition.DefinitionProvider;
 import io.vertigo.core.node.definition.DefinitionSpace;
 import io.vertigo.core.node.definition.DefinitionSupplier;
-import io.vertigo.core.util.ListBuilder;
 import io.vertigo.datafactory.collections.definitions.FacetDefinition.FacetOrder;
 import io.vertigo.datafactory.collections.definitions.FacetRangeDefinitionSupplier;
 import io.vertigo.datafactory.collections.definitions.FacetTermDefinitionSupplier;
@@ -23,8 +23,8 @@ import io.vertigo.datafactory.search.definitions.SearchIndexDefinition;
 import io.vertigo.datafactory.search.definitions.SearchIndexDefinitionSupplier;
 import io.vertigo.datafactory.search.model.SearchQuery;
 import io.vertigo.datafactory.search.model.SearchQueryBuilder;
-import io.vertigo.datamodel.structure.model.DtListState;
-import io.vertigo.datamodel.structure.model.UID;
+import io.vertigo.datamodel.data.model.DtListState;
+import io.vertigo.datamodel.data.model.UID;
 import io.vertigo.samples.vui.domain.MovieIndex;
 
 /**
@@ -107,6 +107,13 @@ public final class MovieIndexSearchClient implements Component, DefinitionProvid
 		markAsDirty(UID.of(entity));
 	}
 	
+	/**
+	 * Simple access to definition, need to call some SearchManager function.
+	 * @return SearchDefinition 
+	 */
+	public SearchIndexDefinition getSearchIndexDefinitionIdxMovie() {
+		return io.vertigo.core.node.Node.getNode().getDefinitionSpace().resolve("IdxMovie",SearchIndexDefinition.class);
+	}
 
 	/** {@inheritDoc} */
 	@Override

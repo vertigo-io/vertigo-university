@@ -1,10 +1,10 @@
 package io.vertigo.samples.vui.domain;
 
 import io.vertigo.core.lang.Generated;
-import io.vertigo.datamodel.structure.model.Entity;
-import io.vertigo.datamodel.structure.model.UID;
-import io.vertigo.datamodel.structure.stereotype.Field;
-import io.vertigo.datamodel.structure.util.DtObjectUtil;
+import io.vertigo.datamodel.data.model.Entity;
+import io.vertigo.datamodel.data.model.UID;
+import io.vertigo.datamodel.data.stereotype.Field;
+import io.vertigo.datamodel.data.util.DataModelUtil;
 
 /**
  * This class is automatically generated.
@@ -48,8 +48,8 @@ public final class Country implements Entity {
 	 * @return String name
 	 */
 	@Field(smartType = "STyLabel", label = "Nom du pays")
-	@io.vertigo.datamodel.structure.stereotype.SortField
-	@io.vertigo.datamodel.structure.stereotype.DisplayField
+	@io.vertigo.datamodel.data.stereotype.SortField
+	@io.vertigo.datamodel.data.stereotype.DisplayField
 	public String getName() {
 		return name;
 	}
@@ -66,6 +66,6 @@ public final class Country implements Entity {
 	/** {@inheritDoc} */
 	@Override
 	public String toString() {
-		return DtObjectUtil.toString(this);
+		return DataModelUtil.toString(this);
 	}
 }

@@ -3,7 +3,7 @@ package io.vertigo.samples.support.controllers;
 import java.util.Optional;
 
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -22,6 +22,7 @@ import io.vertigo.core.lang.VUserException;
 import io.vertigo.datastore.filestore.model.FileInfo;
 import io.vertigo.datastore.filestore.model.FileInfoURI;
 import io.vertigo.datastore.filestore.model.VFile;
+import io.vertigo.datastore.kvstore.KVCollection;
 import io.vertigo.datastore.kvstore.KVStoreManager;
 import io.vertigo.samples.support.services.SampleFileServices;
 import io.vertigo.ui.core.UiFileInfo;
@@ -34,7 +35,7 @@ import io.vertigo.vega.webservice.validation.UiMessageStack.Level;
 @RequestMapping("/commons/")
 public class FileUploadController {
 
-	private static final String FILE_INFOS_COLLECTION_KEY = "uiFileInfos";
+	private static final KVCollection FILE_INFOS_COLLECTION_KEY = new KVCollection("uiFileInfos");
 
 	@Inject
 	private SampleFileServices commonsServices;

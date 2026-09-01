@@ -20,10 +20,10 @@ import io.vertigo.datafactory.collections.model.SelectedFacetValues;
 import io.vertigo.datafactory.search.SearchManager;
 import io.vertigo.datafactory.search.model.SearchQueryBuilder;
 import io.vertigo.datamodel.criteria.Criterions;
-import io.vertigo.datamodel.structure.model.DtList;
-import io.vertigo.datamodel.structure.model.DtListState;
-import io.vertigo.datamodel.structure.model.DtObject;
-import io.vertigo.datamodel.structure.util.VCollectors;
+import io.vertigo.datamodel.data.model.DataObject;
+import io.vertigo.datamodel.data.model.DtList;
+import io.vertigo.datamodel.data.model.DtListState;
+import io.vertigo.datamodel.data.util.VCollectors;
 import io.vertigo.datastore.entitystore.EntityStoreManager;
 import io.vertigo.samples.vui.VuiPAO;
 import io.vertigo.samples.vui.dao.ActorDAO;
@@ -178,12 +178,12 @@ public class MovieServices implements Component {
 		return applyPagination(sortedList, dtListState.withDefault(250, null, null));
 	}
 
-	/*private <D extends DtObject> DtList<D> applySortAndPagination(final DtList<D> unFilteredList, final DtListState dtListState) {
+	/*private <D extends DataObject> DtList<D> applySortAndPagination(final DtList<D> unFilteredList, final DtListState dtListState) {
 		final DtList<D> sortedList = applySort(unFilteredList, dtListState);
 		return applyPagination(sortedList, dtListState);
 	}*/
 
-	private <D extends DtObject> DtList<D> applySort(final DtList<D> unFilteredList, final DtListState dtListState) {
+	private <D extends DataObject> DtList<D> applySort(final DtList<D> unFilteredList, final DtListState dtListState) {
 		final DtList<D> sortedList;
 		if (dtListState.getSortFieldName().isPresent()) {
 			sortedList = entityStoreManager.sort(unFilteredList, dtListState.getSortFieldName().get(), dtListState.isSortDesc().get());
@@ -193,7 +193,7 @@ public class MovieServices implements Component {
 		return sortedList;
 	}
 
-	private <D extends DtObject> DtList<D> applyPagination(final DtList<D> unFilteredList, final DtListState dtListState) {
+	private <D extends DataObject> DtList<D> applyPagination(final DtList<D> unFilteredList, final DtListState dtListState) {
 		if (dtListState.getSkipRows() >= unFilteredList.size()) {
 			return new DtList<>(unFilteredList.getDefinition());
 		} else if (dtListState.getMaxRows().isPresent()) {
