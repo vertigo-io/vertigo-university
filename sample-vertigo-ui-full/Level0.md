@@ -1,6 +1,7 @@
 # Level 0 - Préparation de l'environnement
 
-1. Récupérer les fichiers de la base de données H2 et de l'index ElasticSearch. Et posez les en `C:/atelier/`
+1. Initialiser la base de données H2 dans `C:/atelier/database/` à partir des scripts du dépôt `../sample-vertigo-ui/` : `src/main/javagen/sqlgen/crebas.sql` (schéma) puis `src/main/resources/sql/initdata.sql` (données de démo), via `java -cp h2-*.jar org.h2.tools.RunScript -url "jdbc:h2:C:/atelier/database/formation_loaded;NON_KEYWORDS=YEAR,KEY,USER" -user sa -script <script>`
+   *(L'index ElasticSearch est embarqué : créé au démarrage, la recherche se remplit via [http://localhost:18080/sample/moviesSearch/\_reindex](http://localhost:18080/sample/moviesSearch/_reindex))*
 2. Récupérer les sources du github [vertigo-io/vertigo-university/sample-vertigo-ui](https://github.com/vertigo-io/vertigo-university/tree/master/sample-vertigo-ui)
 3. Créer le projet Eclipse (Import Maven Project)
 4. Démarrer l'application `Run Application BootSampleVui` *(dans /vertigo-sample-vertigo-ui-full/src/main/java/io/vertigo/samples/BootSampleVui.java)*
