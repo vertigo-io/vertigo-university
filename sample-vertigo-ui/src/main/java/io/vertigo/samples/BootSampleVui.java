@@ -39,6 +39,7 @@ public final class BootSampleVui {
 	public static void startServer() throws Exception {
 		final JettyBootParams jettyBootParams = JettyBootParams.builder("webapp/", VuiVSpringWebApplicationInitializer.class)
 				.withContextPath("/sample")
+				.withPort(18080)
 				.noSsl()
 				.build();
 		JettyBoot.startServer(jettyBootParams, (context) -> {

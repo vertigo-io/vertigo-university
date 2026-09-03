@@ -1,4 +1,6 @@
 ---
+node:
+  appName: sampleVuiFull
 boot:
   params:
     locales: fr_FR, en_US
@@ -13,13 +15,14 @@ modules:
       - script:
     featuresConfig:
       - script.janino:
-  io.vertigo.connectors.elasticsearch.ElasticSearchFeatures:
+  io.vertigo.connectors.elasticsearch_7_17.ElasticSearchFeatures:
     __flags__: ["search"]
     features:
       - embeddedServer:
           home: c:/atelier/search
       - restHL:
           servers.names: localhost:9200
+          ssl: false
   io.vertigo.database.DatabaseFeatures:
     features:
       - sql:
@@ -27,7 +30,7 @@ modules:
       - sql.c3p0:
           dataBaseClass: io.vertigo.database.impl.sql.vendor.h2.H2DataBase
           jdbcDriver: org.h2.Driver
-          jdbcUrl: jdbc:h2:c:/atelier/database/formation_loaded;NON_KEYWORDS=YEAR,KEY
+          jdbcUrl: jdbc:h2:c:/atelier/database/formation_loaded;USER=sa;PASSWORD=;NON_KEYWORDS=YEAR,KEY,USER
   io.vertigo.datamodel.DataModelFeatures:
   io.vertigo.datastore.DataStoreFeatures:
     features:
@@ -44,19 +47,18 @@ modules:
           purgeDelayMinutes: 30
           fileInfoClass: io.vertigo.samples.support.fileinfo.FileInfoTmp
       - kvStore.berkeley:
-          collections: VViewContext;TTL=43200
+          collections: VViewContext;TTL=43200, VViewInitContext;TTL=43200
           dbFilePath: ${java.io.tmpdir}/vertigo/VViewContext
       - kvStore.delayedMemory:
-          collections: protected-value
+          collections: protected-value, uiFileInfos
           timeToLiveSeconds: 3600
   io.vertigo.datafactory.DataFactoryFeatures:
     features:
       - search:      
           __flags__: ["search"]
-    featuresConfig:
-      - collections.luceneIndex:
-      - search.elasticsearch.restHL:
-          __flags__: ["search"]          
+    plugins:
+      - io.vertigo.datafactory.plugins.search.elasticsearch_7_17.rest.RestHLClientESSearchServicesPlugin:
+          __flags__: ["search"]
           envIndexPrefix: sampleVui_
           rowsPerQuery: 50
           config.file: webapp/META-INF/elasticsearch.yml

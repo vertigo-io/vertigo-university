@@ -41,7 +41,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>io.vertigo</groupId>
-			<artifactId>vertigo-elasticsearch-connector</artifactId>
+			<artifactId>vertigo-datafactory-plugin-elasticsearch_7_17</artifactId>
 			<version>${vertigo.version}</version>
 		</dependency>
 
@@ -66,26 +66,47 @@
 			<artifactId>c3p0</artifactId>
 			<version>0.9.5.5</version>
 		</dependency>
+		<dependency>
+			<groupId>com.sleepycat</groupId>
+			<artifactId>je</artifactId>
+			<version>18.3.12</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.22.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.22.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>2.22</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.elasticsearch.client</groupId>
 			<artifactId>transport</artifactId>
-			<version>7.17.8</version> <!-- TransportSearchServicesPlugin -->
+			<version>7.17.28</version> <!-- TransportSearchServicesPlugin -->
 		</dependency>
 		<dependency>
 			<groupId>org.elasticsearch.client</groupId>
 			<artifactId>elasticsearch-rest-high-level-client</artifactId>
-			<version>7.17.8</version> <!-- REstHighLevelElasticSearchConnector -->
+			<version>7.17.28</version> <!-- REstHighLevelElasticSearchConnector -->
 		</dependency>
 		<dependency>
 			<groupId>org.codelibs.elasticsearch.module</groupId>
 			<artifactId>analysis-common</artifactId>
-			<version>7.17.7</version> <!-- required by EmbeddedSearchServicesPlugin -->
+			<version>7.17.22</version> <!-- required by EmbeddedSearchServicesPlugin -->
 		</dependency>
 		<dependency>
 			<groupId>org.codelibs.elasticsearch.module</groupId>
 			<artifactId>mapper-extras</artifactId>
-			<version>7.17.7</version> <!-- required by ESEmbeddedSearchServicesPlugin -->
+			<version>7.17.22</version> <!-- required by ESEmbeddedSearchServicesPlugin -->
 		</dependency>
 
 		<dependency>
@@ -107,12 +128,6 @@
 			<groupId>org.eclipse.jetty.websocket</groupId>
 			<artifactId>websocket-jetty-server</artifactId>
 			<version>11.0.26</version>
-		</dependency>
-
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-			<version>2.13.4.1</version>
 		</dependency>
 	</dependencies>
 
