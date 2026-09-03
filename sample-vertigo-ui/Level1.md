@@ -65,7 +65,7 @@ Le rendu de la table sera réalisé coté client en vueJs. En vueJs, dans une ta
 7. Testez la page affichant la liste de *Movies*.
 7. Consulter la source de la page. Recherchez la balise `script id="vui-init-data"` et regardez son contenu.
 8. Retirez une colonne du tableau et comparez.
-9. Familiarisez vous avec la lecture des composants `vu:table` et `vu:column` ([GitHub VertigoUi Components](https://github.com/vertigo-io/vertigo-extensions/tree/vertigo-3.3.0/vertigo-ui/src/main/resources/io/vertigo/ui/components), column est plus simple à lire que table). 
+9. Familiarisez vous avec la lecture des composants `vu:table` et `vu:column` ([GitHub VertigoUi Components](https://github.com/vertigo-io/vertigo-libs/tree/master/vertigo-ui/src/main/resources/io/vertigo/ui/components), column est plus simple à lire que table). 
 Notez l'usage de `vu:include-data`.
 
 11. Modifiez le contenu de la colonne `movId`, pour ajouter un lien vers la page de détail `/movie/{movId}`
