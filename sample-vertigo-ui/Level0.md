@@ -1,6 +1,6 @@
 # Level 0 - Préparation de l'environnement
 
-1. Récupérer les fichiers de la base de données H2 et de l'index ElasticSearch. Et posez les en `D:/atelier/`
+1. Récupérer les fichiers de la base de données H2 et de l'index ElasticSearch. Et posez les en `C:/atelier/`
 2. Récupérer les sources du github [vertigo-io/vertigo-university/sample-vertigo-ui](https://github.com/vertigo-io/vertigo-university/tree/master/sample-vertigo-ui)
 3. Créer le projet Eclipse (Import Maven Project)
 4. Démarrer l'application `Run Application BootSampleVui` *(dans /vertigo-sample-vertigo-ui-full/src/main/java/io/vertigo/samples/BootSampleVui.java)*
