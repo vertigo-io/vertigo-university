@@ -18,7 +18,10 @@
 					<vu:text-field-read object="movie" field="movId"/>
 					<vu:text-field object="movie" field="name"/>
 					<vu:text-field object="movie" field="year"   />
-					<vu:select object="movie" field="couId" list="countries"/>
+					<vu:grid-cell>
+						<vu:select object="movie" field="couId" list="countries"/>
+						<vu:button flat icon="search" title="Rechercher un pays" th:@click="|openModal('countrySearchModal')|" />
+					</vu:grid-cell>
 					<vu:grid-cell>
 						<vu:button-submit th:if="${model.modeReadOnly}" label="Edit" action="@{_edit}" color="primary"/>
 						
@@ -41,25 +44,35 @@
 				<br/>
 				<vu:table list="roles" componentId="roleTable" rowsPerPage="10" binary-state-sort
 				  sortUrl="@{/movie/_sort}"
-				  tr_@click.native="|componentStates.roleActorDialog.opened=${model.modeEdit};componentStates.roleActorDialog.rolId=props.row.rolId|"
-				  th:tr_class="${model.modeEdit}?'nav':''" >
+				  tr_@click.native="|goTo('@{/roleActor/}' + props.row.rolId)|"
+				  tr_class="nav" >
+	                <vu:slot name="actions_slot">
+	                    <vu:button flat icon="ri-eye-fill" title="Voir le rôle" th:@click.stop="|openModal('roleActorModal', '@{/roleActor/}' + props.row.rolId, {edit: false})|" />
+	                    <vu:button flat icon="ri-edit-fill" title="Modifier le rôle" th:@click.stop="|openModal('roleActorModal', '@{/roleActor/}' + props.row.rolId, {edit: true, successCallback: 'onRoleActorSuccess'})|" />
+	                </vu:slot>
 	                <vu:include-data object="roles" field="rolId" />
 	                <vu:column field="asCharacter" />
 	                <vu:column field="actId">
 	                   <vu:field-read  list="actors" listKey="actId" listDisplay="name"/>
 	                </vu:column>
                 </vu:table>
-                <q-dialog v-model="componentStates.roleActorDialog.opened"
-                    @before-show="VUiPage.httpPostAjax('_loadActorRole', {'roleId':componentStates.roleActorDialog.rolId})"
-                    th:with="objectKey=${model.vContext['componentStates'].addComponentState('roleActorDialog').addPrimitive('opened', false)}, objectKey=${model.vContext['componentStates']['roleActorDialog'].addPrimitive('selectedRolId', 0)}">                    
-                    <vu:block id="general" title="Role Actor Dialog">
-                    <vu:grid cols="1">
-                        <vu:text-field object="selected_role" field="asCharacter" />
-                        <vu:text-field object="selected_actor" field="name" />
-                        <q-btn th:@click="|httpPostAjax('@{_saveActorRoleAjax}', vueDataParams(['selected_role','selected_actor']),{ onSuccess: function(response) {componentStates.roleActorDialog.opened=false;}})|" color="primary" class="float-right q-mt-md" label="Save" ></q-btn>
-                    </vu:grid>
-                    </vu:block>
-                </q-dialog>           
+                <vu:modal componentId="roleActorModal" title="Role Actor" width="550px" autoHeight="true" />
+                <vu:modal componentId="countrySearchModal" title="Rechercher un pays">
+                    <q-card class="bg-white v-modal column" style="width: 400px;">
+                        <q-toolbar class="bg-primary">
+                            <vu:button flat dense v-close-popup icon="keyboard_arrow_left" color="primary" textColor="white" title="Fermer" />
+                            <q-toolbar-title class="text-white">Rechercher un pays</q-toolbar-title>
+                        </q-toolbar>
+                        <q-card-section>
+                            <vu:form>
+                                <vu:grid cols="1">
+                                    <vu:autocomplete object="countrySearch" field="couId" list="countries" minQueryLength="0" />
+                                    <q-btn color="primary" label="Valider" class="float-right q-mt-md" th:@click="|httpPostAjax('@{/movie/_selectCountry}', vueDataParams(['countrySearch']), { onSuccess: function() { componentStates.countrySearchModal.opened = false; } })|" />
+                                </vu:grid>
+                            </vu:form>
+                        </q-card-section>
+                    </q-card>
+                </vu:modal>
 			</vu:form>
         	</div>		
         </section>

@@ -11,7 +11,7 @@
 	<link rel="icon" th:href="@{/static/img/favicon.ico}" />
     <script type="text/javascript" th:src="@{/static/js/demo.js}"></script>
     
-	<th:block th:if="${model.containsKey('closeSuccess') && model.closeSuccess}">
+	<th:block th:if="${model.containsKey('closeSuccess') && model.closeSuccess && !#strings.isEmpty(model.successCallback)}">
 		<script>
 		       	window.parent.[[${model.successCallback}]]();
 			</script>

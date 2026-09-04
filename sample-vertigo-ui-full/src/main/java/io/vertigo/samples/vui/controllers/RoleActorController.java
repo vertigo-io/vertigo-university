@@ -1,5 +1,7 @@
 package io.vertigo.samples.vui.controllers;
 
+import java.util.Optional;
+
 import javax.inject.Inject;
 
 import org.springframework.stereotype.Controller;
@@ -30,14 +32,16 @@ public class RoleActorController extends AbstractVSpringMvcController {
 	private static final ViewContextKey<Boolean> closeSuccessKey = ViewContextKey.of("closeSuccess");
 
 	@GetMapping("/{roleId}")
-	public void initContext(final ViewContext viewContext, @PathVariable("roleId") final Long roleId, @RequestParam("successCallback") final String successCallback) {
+	public void initContext(final ViewContext viewContext, @PathVariable("roleId") final Long roleId, @RequestParam("edit") final Optional<Boolean> isEditOpt, @RequestParam(value="successCallback", required=false) final Optional<String> successCallbackOpt) {
 		final Role role = movieServices.getRoleWithActorById(roleId);
 		viewContext.publishDto(roleKey, role);
 		viewContext.publishDto(actorKey, role.actor().get());
-		viewContext.publishRef(successCallbackKey, successCallback);
+		viewContext.publishRef(successCallbackKey, successCallbackOpt.orElse(""));
 		viewContext.publishRef(closeSuccessKey, Boolean.FALSE);
 		//---
-		toModeEdit();
+		if (isEditOpt.orElse(false)) {
+			toModeEdit();
+		}
 	}
 
 	@PostMapping("/_save")

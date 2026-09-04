@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import io.vertigo.datamodel.data.model.DtList;
 import io.vertigo.datamodel.data.model.DtListState;
@@ -51,9 +50,7 @@ public class MovieController extends AbstractVSpringMvcController {
 	private final ViewContextKey<Role> rolesKey = ViewContextKey.of("roles");
 	private final ViewContextKey<Actor> actorsKey = ViewContextKey.of("actors");
 	private final ViewContextKey<Country> countriesKey = ViewContextKey.of("countries");
-
-	private static final ViewContextKey<Role> roleKey = ViewContextKey.of("selected_role");
-	private static final ViewContextKey<Actor> actorKey = ViewContextKey.of("selected_actor");
+	private final ViewContextKey<Country> countrySearchKey = ViewContextKey.of("countrySearch");
 
 	@Inject
 	private MovieServices movieServices;
@@ -62,6 +59,7 @@ public class MovieController extends AbstractVSpringMvcController {
 	public void initContext(final ViewContext viewContext) {
 		viewContext.publishDto(movieKey, new Movie());
 		viewContext.publishMdl(countriesKey, Country.class, null);
+		viewContext.publishDto(countrySearchKey, new Country());
 		toModeCreate();
 	}
 
@@ -72,29 +70,15 @@ public class MovieController extends AbstractVSpringMvcController {
 		viewContext.publishDtList(rolesKey, movie.role().get());
 		viewContext.publishDtList(actorsKey, movieServices.getActorsByMovie(movId));
 		viewContext.publishMdl(countriesKey, Country.class, null);
-
-		viewContext.publishDto(roleKey, new Role());
-		viewContext.publishDto(actorKey, new Actor());
+		viewContext.publishDto(countrySearchKey, new Country());
 	}
 
-	@PostMapping("/_loadActorRole")
-	public ViewContext loadActorRole(final ViewContext viewContext, @RequestParam("roleId") final Long roleId) {
-		final Role role = movieServices.getRoleWithActorById(roleId);
-		viewContext.publishDto(roleKey, role);
-		viewContext.publishDto(actorKey, role.actor().get());
+	@PostMapping("/_selectCountry")
+	public ViewContext doSelectCountry(final ViewContext viewContext, @ViewAttribute("countrySearch") final Country countrySearch) {
+		final Movie movie = viewContext.readDto(movieKey, getUiMessageStack());
+		movie.setCouId(countrySearch.getCouId());
+		viewContext.publishDto(movieKey, movie);
 		//---
-		return viewContext;
-	}
-
-	@PostMapping("/_saveActorRole")
-	public void doSaveActorRole(@ViewAttribute("selected_role") final Role role, @ViewAttribute("selected_actor") final Actor actor) {
-		movieServices.save(role, actor);
-	}
-
-	@PostMapping("/_saveActorRoleAjax")
-	public ViewContext doSaveActorRole(final ViewContext viewContext, @ViewAttribute("selected_role") final Role role, @ViewAttribute("selected_actor") final Actor actor) {
-		movieServices.save(role, actor);
-		viewContext.publishDtList(rolesKey, movieServices.getRolesByMovie(viewContext.readDto(movieKey, getUiMessageStack()).getMovId()));
 		return viewContext;
 	}
 
