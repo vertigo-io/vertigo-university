@@ -43,7 +43,7 @@ mvn clean install -DskipTests
 | [sample-aop-modules](sample-aop-modules) | Aspects AOP pas à pas (exo / corrigé) | classes main des sous-modules | [README](sample-aop-modules/README.md) |
 | [sample-stream](sample-stream) | Java 8 Streams (starbucks, scrabble) | `MainStarbucks`, `MainScrabble` | [README](sample-stream/README.md) |
 | [sample-vertigo-ui](sample-vertigo-ui) | Application web Vertigo-UI (SpringMVC/Thymeleaf/Vue) | `BootSampleVui` (Jetty :18080) | [README](sample-vertigo-ui/README.md) |
-| [sample-vertigo-ui-full](sample-vertigo-ui-full) | Idem + recherche Elasticsearch + tableaux | `BootSampleVui` (Jetty :18080) | [README](sample-vertigo-ui-full/README.md) |
+| [sample-vertigo-ui-full](sample-vertigo-ui-full) | Idem + recherche Elasticsearch + tableaux + modales (solutions des Levels 0→6) | `BootSampleVui` (Jetty :18080) | [README](sample-vertigo-ui-full/README.md) |
 
 ## Plans de formation
 
@@ -62,8 +62,8 @@ Progression sur le framework, du premier node aux web services :
 
 ### 2. Application web Vertigo-UI
 
-1. [sample-vertigo-ui](sample-vertigo-ui) : niveaux Level0→5 (préparation, listes, écran de détail, recherche, tableaux éditables, controllers)
-2. [sample-vertigo-ui-full](sample-vertigo-ui-full) : mêmes niveaux complétés (recherche Elasticsearch, tableaux modifiables)
+1. [sample-vertigo-ui](sample-vertigo-ui) : niveaux Level0→6 (préparation, listes, écran de détail, recherche, tableaux éditables, controllers, modales)
+2. [sample-vertigo-ui-full](sample-vertigo-ui-full) : mêmes niveaux complétés (recherche Elasticsearch, tableaux modifiables, modales)
 
 ### 3. Sujets avancés
 

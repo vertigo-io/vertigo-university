@@ -27,4 +27,5 @@ Les exercices ci-dessous portent sur VertigoUi, pour cela la structure de projet
 - [Level 3 - Recherche](./Level3.md)
 - [Level 4 - Tableaux éditables](./Level4.md)
 - [Level 5 - Controllers et Context transverses](./Level5.md)
+- [Level 6 - Modales](./Level6.md)
 
