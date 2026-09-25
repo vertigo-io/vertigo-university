@@ -8,8 +8,10 @@ import io.vertigo.core.node.AutoCloseableNode;
 import io.vertigo.core.node.config.ModuleConfig;
 import io.vertigo.core.node.config.NodeConfigBuilder;
 import io.vertigo.core.util.InjectorUtil;
+import io.vertigo.samples.dao.boot.DataBaseInitializer;
 import io.vertigo.samples.dao.config.SampleConfigBuilder;
 import io.vertigo.samples.dao.dao.MovieDAO;
+import io.vertigo.samples.dao.domain.Movie;
 import io.vertigo.samples.dao.services.MovieServices;
 import io.vertigo.samples.dao.services.MovieServicesImpl;
 
@@ -21,6 +23,7 @@ public class DaoSample {
 	public static void main(final String[] args) {
 		final NodeConfigBuilder nodeConfigBuilder = SampleConfigBuilder.createNodeConfigBuilder();
 		nodeConfigBuilder
+				.addInitializer(DataBaseInitializer.class)
 				.addModule(ModuleConfig.builder("DAO")
 						.addComponent(MovieDAO.class)
 						.build())
@@ -37,7 +40,8 @@ public class DaoSample {
 	}
 
 	void step1() {
-		LogManager.getLogger(this.getClass()).info(movieServices.getMovieById(3678598L));
+		final Movie movie = movieServices.createMovie("Le sample se suffit à lui-même", 2026);
+		LogManager.getLogger(this.getClass()).info(movieServices.getMovieById(movie.getMovId()));
 	}
 
 }

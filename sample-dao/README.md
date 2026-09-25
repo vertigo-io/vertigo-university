@@ -4,8 +4,8 @@ Accès aux données (SQL) : Vertigo Datastore, DAO générés par Vertigo Studio
 
 ## Démarrage
 
-- Lancer la classe main `io.vertigo.samples.dao.run.DaoSample` (base H2 en mémoire créée au démarrage)
-- La sortie console montre la requête d'un film via `MovieServices`
+- Lancer la classe main `io.vertigo.samples.dao.run.DaoSample` : base H2 en mémoire, schéma créé au démarrage par `DataBaseInitializer`
+- Le sample crée son film de démonstration (aucune donnée préchargée), puis le requiert via `MovieServices` ; la sortie console montre l'aspect de supervision
 
 ## Contenu
 

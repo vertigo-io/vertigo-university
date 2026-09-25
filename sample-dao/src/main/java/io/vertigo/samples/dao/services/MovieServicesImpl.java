@@ -16,6 +16,16 @@ public class MovieServicesImpl implements MovieServices {
 	private MovieDAO movieDAO;
 
 	@Override
+	public Movie createMovie(final String name, final Integer year) {
+		Assertion.check().isNotNull(name);
+		final Movie movie = new Movie();
+		movie.setName(name);
+		movie.setYear(year);
+		movieDAO.save(movie);
+		return movie;
+	}
+
+	@Override
 	public Movie getMovieById(final Long movId) {
 		Assertion.check().isNotNull(movId);
 		// ---
