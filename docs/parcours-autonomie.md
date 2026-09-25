@@ -4,19 +4,21 @@ Ce parcours est un **menu d'approfondissements** pour un développeur déjà aut
 
 L'horizon : 6 à 12 mois de pratique, au rythme des tickets.
 
-## Progression des 9 étapes
+## Progression des 9 etapes
 
-| # | Etape | Dosage cours/exo |
-|---|---|---|
-| S0 | Le « way of Vertigo » (le vocabulaire commun) | 60/40 |
-| S1 | Modèle de données & Studio (le geste quotidien, en profondeur) | 70/30 |
-| S2 | Environnement local réel (Docker, PostgreSQL/Liquibase, cache) | 30/70 |
-| S3 | Accès aux données & recherche (services, Elasticsearch, DAO avancés) | 50/50 |
-| S4 | Sécurité (login, authorizations, row-level, SSO) | 50/50 |
-| S5 | Application web Vertigo-UI (mécanique + couche « production ») | 30/70 |
-| S6 | Planification & batch (agenda, orchestration de jobs) | 40/60 |
-| S7 | Communication & intégration (mail/SMS, documents, HTTP, REST, audit) | 40/60 |
-| S8 | Production & fiabilité (tests, environnement, CI, monitoring) | 60/40 |
+Chaque étape est une **formation d'approfondissement** (un sujet) : le tableau indique la formation de référence du dépôt et son statut.
+
+| # | Etape | Dosage cours/exo | Formation de référence | Statut |
+|---|---|---|---|---|
+| S0 | Le « way of Vertigo » (le vocabulaire commun) | 60/40 | [sample-hello-world](../sample-hello-world), [sample-config](../sample-config), [sample-component](../sample-component) | existante |
+| S1 | Modèle de données & Studio (le geste quotidien, en profondeur) | 70/30 | [sample-vertigo-ui](../sample-vertigo-ui) (`definitions/`), [sample-dao-full](../sample-dao-full) | existante |
+| S2 | Environnement local réel (Docker, PostgreSQL/Liquibase, cache) | 30/70 | — | **formation manquante** |
+| S3 | Accès aux données & recherche (services, Elasticsearch, DAO avancés) | 50/50 | [sample-crystal](../sample-crystal), [sample-crystal-full](../sample-crystal-full), [sample-dao-full](../sample-dao-full) | existante |
+| S4 | Sécurité (login, authorizations, row-level, SSO) | 50/50 | [sample-account](../sample-account) | existante (SSO : doc seule) |
+| S5 | Application web Vertigo-UI (mécanique + couche « production ») | 30/70 | [sample-vertigo-ui](../sample-vertigo-ui) Levels 0→6, [sample-vertigo-ui-hello](../sample-vertigo-ui-hello) (boot minimal) | existante |
+| S6 | Planification & batch (agenda, orchestration de jobs) | 40/60 | — | **formation manquante** |
+| S7 | Communication & intégration (mail/SMS, documents, HTTP, REST, audit) | 40/60 | [sample-quarto](../sample-quarto), [sample-aop-modules](../sample-aop-modules) (mail), [sample-vega](../sample-vega) | partielle (audit : formation manquante) |
+| S8 | Production & fiabilité (tests, environnement, CI, monitoring) | 60/40 | — | **formation manquante** |
 
 ### S0 - Le « way of Vertigo »
 

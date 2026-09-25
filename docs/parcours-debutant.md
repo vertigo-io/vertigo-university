@@ -16,6 +16,18 @@ Ce parcours prépare un développeur qui rejoint une équipe expérimentée trav
 - Le [Parcours Démarrage](parcours-demarrage.md) suivi (ou un équivalent : node, javagen, services, Vertigo-UI)
 - Un accès à l'application de l'équipe et à son environnement local
 
+## Formations de référence
+
+Chaque étape s'appuie sur des formations de ce dépôt (un sujet par formation) :
+
+| Etape | Formations de référence |
+|---|---|
+| A - L'environnement tourne | — (l'application de l'équipe et son README) |
+| B - Comment l'appli est faite | [sample-hello-world](../sample-hello-world), [sample-config](../sample-config), [sample-component](../sample-component) |
+| C - Le geste quotidien Studio → javagen | [sample-vertigo-ui](../sample-vertigo-ui) (`definitions/`, `StudioGenerate`) |
+| D - Le premier ticket | [sample-dao](../sample-dao), [sample-vertigo-ui](../sample-vertigo-ui) Levels 0→6 (boot minimal : [sample-vertigo-ui-hello](../sample-vertigo-ui-hello)), [sample-account](../sample-account) |
+| E - Les règles de l'équipe | — (tests, CI et conventions de l'équipe) |
+
 ## Etapes
 
 ### Etape A - L'environnement tourne
@@ -75,7 +87,7 @@ Puis la **visite guidée de l'application de l'équipe** (à faire avec un membr
 *Objectif : traiter un ticket standard bout en bout.*
 
 1. **Service sur DAO** : critères, tri, pagination — étudier [sample-dao](../sample-dao) puis écrire le service du ticket
-2. **Écran Vertigo-UI** : suivre les [Levels 0→6 de sample-vertigo-ui](../sample-vertigo-ui) si ce n'est pas encore fait (listes, écran de détail, recherche, tableaux, controllers, modales)
+2. **Écran Vertigo-UI** : suivre les [Levels 0→6 de sample-vertigo-ui](../sample-vertigo-ui) si ce n'est pas encore fait (listes, écran de détail, recherche, tableaux, controllers, modales) — le boot web minimal seul est dans [sample-vertigo-ui-hello](../sample-vertigo-ui-hello)
 3. **Sécurité** : comprendre ce que fait l'annotation `@Secured` (côté service, valeurs = noms d'autorizations) et comment l'authorization de l'équipe (fichier `*-auth-config.json`) **restreint à l'exécution les requêtes émises par les DAO** (row-level security) — étudier [sample-account](../sample-account) (login, authorizations, `auth-config.json`) et la doc du module account dans [vertigo-docs](https://vertigo-io.github.io/vertigo-docs/#/)
 4. Soumettre le ticket en code review
 

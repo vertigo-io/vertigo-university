@@ -23,7 +23,7 @@ Les samples ne contiennent pas de tests automatisés : chaque sample se lance pa
 mvn clean install -DskipTests
 ```
 
-26 modules.
+27 modules.
 
 ## Inventaire des samples
 
@@ -44,6 +44,7 @@ mvn clean install -DskipTests
 | [sample-stream](sample-stream) | Java 8 Streams (starbucks, scrabble) | `MainStarbucks`, `MainScrabble` | [README](sample-stream/README.md) |
 | [sample-vertigo-ui](sample-vertigo-ui) | Application web Vertigo-UI (SpringMVC/Thymeleaf/Vue) | `BootSampleVui` (Jetty :18080) | [README](sample-vertigo-ui/README.md) |
 | [sample-vertigo-ui-full](sample-vertigo-ui-full) | Idem + recherche Elasticsearch + tableaux + modales (solutions des Levels 0→6) | `BootSampleVui` (Jetty :18080) | [README](sample-vertigo-ui-full/README.md) |
+| [sample-vertigo-ui-hello](sample-vertigo-ui-hello) | Premier écran Vertigo-UI : boot web minimal (Jetty), un layout, une page — sans base, sans donnée préchargée | `BootSampleUiHello` (Jetty :18081) | [README](sample-vertigo-ui-hello/README.md) |
 
 ## Parcours débutant
 
@@ -70,8 +71,9 @@ Progression sur le framework, du premier node aux web services :
 
 ### 2. Application web Vertigo-UI
 
-1. [sample-vertigo-ui](sample-vertigo-ui) : niveaux Level0→6 (préparation, listes, écran de détail, recherche, tableaux éditables, controllers, modales)
-2. [sample-vertigo-ui-full](sample-vertigo-ui-full) : mêmes niveaux complétés (recherche Elasticsearch, tableaux modifiables, modales)
+1. [sample-vertigo-ui-hello](sample-vertigo-ui-hello) : le premier écran (boot web minimal Jetty, un layout, une page)
+2. [sample-vertigo-ui](sample-vertigo-ui) : niveaux Level0→6 (préparation, listes, écran de détail, recherche, tableaux éditables, controllers, modales)
+3. [sample-vertigo-ui-full](sample-vertigo-ui-full) : mêmes niveaux complétés (recherche Elasticsearch, tableaux modifiables, modales)
 
 ### 3. Sujets avancés
 
