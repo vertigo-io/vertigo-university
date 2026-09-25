@@ -45,6 +45,14 @@ mvn clean install -DskipTests
 | [sample-vertigo-ui](sample-vertigo-ui) | Application web Vertigo-UI (SpringMVC/Thymeleaf/Vue) | `BootSampleVui` (Jetty :18080) | [README](sample-vertigo-ui/README.md) |
 | [sample-vertigo-ui-full](sample-vertigo-ui-full) | Idem + recherche Elasticsearch + tableaux + modales (solutions des Levels 0→6) | `BootSampleVui` (Jetty :18080) | [README](sample-vertigo-ui-full/README.md) |
 
+## Parcours débutant
+
+Trois parcours progressifs, du premier node à l'autonomie en équipe :
+
+1. [Parcours Démarrage](docs/parcours-demarrage.md) — créer une application Vertigo de zéro (hello world → premier écran)
+2. [Parcours Débutant](docs/parcours-debutant.md) — rejoindre une équipe expérimentée : viser l'autonomie sur le courant
+3. [Parcours Autonomie](docs/parcours-autonomie.md) — les approfondissements (9 étapes S0→S8), à consulter au fil de l'eau
+
 ## Plans de formation
 
 ### 1. Fondamentaux Vertigo
