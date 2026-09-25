@@ -1,0 +1,33 @@
+---
+node:
+  appName: sampleUiHello
+boot:
+  params:
+    locales: fr_FR
+  plugins:
+    - io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin: {}
+modules:
+  io.vertigo.commons.CommonsFeatures:
+    features:
+      - script:
+    featuresConfig:
+      - script.janino:
+  io.vertigo.datamodel.DataModelFeatures:
+  io.vertigo.datastore.DataStoreFeatures:
+    features:
+      - cache:
+      - kvStore:
+    featuresConfig:
+      - cache.memory:
+      - kvStore.delayedMemory:
+          collections: VViewContext, VViewInitContext
+          timeToLiveSeconds: 43200
+  io.vertigo.vega.VegaFeatures:
+  io.vertigo.account.AccountFeatures:
+    features:
+      - authorization:
+      - security:
+          userSessionClassName: io.vertigo.samples.uihello.support.SampleUiHelloUserSession
+  io.vertigo.datafactory.DataFactoryFeatures:
+    features:
+      - collections.luceneIndex:

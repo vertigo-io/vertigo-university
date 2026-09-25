@@ -39,6 +39,7 @@
 		<module>sample-vega</module>
 		<module>sample-vertigo-ui</module>
 		<module>sample-vertigo-ui-full</module>
+		<module>sample-vertigo-ui-hello</module>
  	</modules>
 
 </project>

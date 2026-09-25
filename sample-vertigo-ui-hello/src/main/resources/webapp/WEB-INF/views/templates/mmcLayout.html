@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+  xmlns:vu="https://vertigo.io/thymeleaf/vertigo-ui"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <vu:head-meta/>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link rel="stylesheet" th:href="@{/static/css/mars.css}"/>
+    <link rel="icon" th:href="@{/static/img/favicon.ico}"/>
+
+    <script type="text/javascript" th:src="@{/vertigo-ui/static/js/vertigo-ui-extensions.js}"></script>
+    <script type="text/javascript" th:src="@{/static/js/demo.js}"></script>
+</head>
+
+<body class="mat desktop no-touch platform-mat">
+
+	<vu:page>
+
+      <q-layout view="hHh LpR fff" id="page" v-cloak>
+			<q-header class="items-center">
+				<q-toolbar class="justify-between">
+					<div class="row">
+						<div class="gt-md">Vertigo UI Hello</div>
+					</div>
+				</q-toolbar>
+			</q-header>
+
+			<q-page-container class="row justify-center q-pb-lg" >
+				<q-page padding class="row col-12">
+				<div class="col content-body q-gutter-sm">
+				    <vu:messages/>
+				    <section class="col content-body" layout:fragment="content"></section>
+				</div>
+				</q-page>
+			</q-page-container>
+		</q-layout>
+
+	</vu:page>
+	<div layout:fragment="javascript-footer">
+	</div>
+
+</body>
+</html>
