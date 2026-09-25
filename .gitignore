@@ -9,3 +9,4 @@ mvn-release.txt
 **/WEB-INF/classes/**
 *.class
 pom.xml.versionsBackup
+*.args

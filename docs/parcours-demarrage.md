@@ -83,7 +83,7 @@ Studio est l'environnement de modélisation propre à Vertigo : vous déclarez v
 1. Dans [sample-vertigo-ui](../sample-vertigo-ui), étudier :
    - `studio-config.yaml` : la configuration de la génération
    - `src/main/resources/definitions/` : les fichiers de définitions — **les objets sont dans les `.ksp`** (domaines, modèle, DAO), le `.kpr` n'agrège que la liste des `.ksp`
-    - `src/main/javagen/` : le code généré — classes du domaine (`Movie`, `Actor`…), DAO (`MovieDAO`), requêtes SQL nommées (les classes `*PAO`, produites pour les tâches orphelines — sur un modèle minimal où les tâches sont rattachées à un objet, aucun PAO n'est produit), définitions (`DtDefinitions`), SQL (`sqlgen/`)
+   - `src/main/javagen/` : le code généré — classes du domaine (`Movie`, `Actor`…), DAO (`MovieDAO`), requêtes SQL nommées (les classes `*PAO`, produites pour les tâches orphelines — cf. `VuiPAO` de `sample-vertigo-ui` ; sur un modèle minimal où les tâches sont rattachées à un objet, aucun PAO n'est produit), définitions (`DtDefinitions`), SQL (`sqlgen/`)
 2. Lancer le runner `io.vertigo.samples.support.mda.StudioGenerate` (classe main, **à lancer depuis la racine du projet** : il lit `studio-config.yaml` en chemin relatif) : `mvn compile` du module, puis `java` avec le classpath du module (cf. étape 1), et observer la régénération — **sur une copie du sample** : lancer le runner dans le dépôt réécrit les fichiers générés suivis par git
 3. Dans votre projet, **mettre en place la génération** (poms de `sample-dao` / `sample-vertigo-ui` en référence) :
     - copier le runner `StudioGenerate` dans votre projet (c'est une classe des samples, pas une librairie)
@@ -104,9 +104,9 @@ Studio est l'environnement de modélisation propre à Vertigo : vous déclarez v
 
 1. Lire [sample-dao](../sample-dao) (README, puis `DaoSample`) : des services écrits sur les DAO générés — la base H2 est en mémoire et **le sample crée lui-même sa donnée de démonstration** au démarrage (initializer de schéma + insert via le service)
 2. Dans votre projet :
-   - enregistrer les features du node — `CommonsFeatures` (script), `DataModelFeatures`, `DatabaseFeatures` (driver H2 + C3p0), `DataStoreFeatures` (entityStore sql) et le module « ressources » avec le `ModelDefinitionProvider` (`DtDefinitions` générées + SmartTypes) : `SampleConfigBuilder` de `sample-dao` en référence — sans elles, le boot échoue avec des erreurs DI (`component info with id '…' not found`)
+   - enregistrer les features du node — `CommonsFeatures` (script **janino**), `DataModelFeatures`, `DatabaseFeatures` (driver H2 + C3p0), `DataStoreFeatures` (entityStore sql) et le module « ressources » avec le `ModelDefinitionProvider` (`DtDefinitions` générées + SmartTypes) : `SampleConfigBuilder` de `sample-dao` en référence — sans elles, le boot échoue avec des erreurs DI (`component info with id '…' not found`)
    - enregistrer votre initializer de création de base — un `ComponentInitializer` s'enregistre avec `addInitializer`, **pas** `addComponent`
-   - écrire un service qui liste, cherche et enregistre votre objet (critères, tri, pagination)
+   - écrire un service qui liste, cherche et enregistre votre objet — `MovieServicesImpl` de `sample-dao` en référence : `save`/`get` sur le DAO généré, et **liste/recherche/pagination** avec `Criterions.startsWith(DtDefinitions.MovieFields.name, …)` / `Criterions.alwaysTrue()`, un `DtListState` (`DtListState.defaultOf(Movie.class)`, `withDefault`) et les méthodes `findAll(critères, listState)` (tri + pagination) / `count(critères)` — héritées de la classe de base `DAO` (le `MovieDAO` généré est une sous-classe vide, elles n'y sont pas écrites)
 3. Observer les **tasks auto-générées** au runtime (`TkInsert…`, `TkSelect…ByUri`, `TkSelectList…ByCriteria`…) : le DataStore produit tout seul les requêtes CRUD — c'est ce que vous n'avez PAS à écrire. Elles sont visibles **dans les logs SQL** (loggers `sql`/`tasks` en INFO : `Finish /execute/TkInsertBook successfully …`) ; elles n'apparaissent pas dans `DefinitionSpace.getAll(TaskDefinition.class)` (seules vos tâches déclarées s'y trouvent)
 4. *(Optionnel)* Étudier [sample-dao-full](../sample-dao-full) (Level2→Level7, `Reprise`) : DAO personnalisés, projections, reprise par lots
 
@@ -125,7 +125,10 @@ Vertigo-UI est construit sur Vue.js, Quasar et SpringMVC avec Thymeleaf.
    - `sample-ui-hello.yaml` : les briques du node VUI — `CommonsFeatures`, `DataModelFeatures`, `VegaFeatures`, `DataStoreFeatures` (kvStore des vues, **sans cache**), `DataFactoryFeatures` (**sans lucene**), `AccountFeatures` (security + authorization + userSession) — à ajouter
    - `SampleUiHelloUserSession`, `HomeController`, `home.html` (la page dans le layout fourni) — à créer
 2. Comparer avec la solution [sample-vertigo-ui-hello-full](../sample-vertigo-ui-hello-full) : la démarrer et vérifier [http://localhost:18081/uihello/home/](http://localhost:18081/uihello/home/) (200, « Hello Vertigo-UI !! »)
-3. Dans votre projet : intégrer le boot web (webapp, `web.xml`, configuration SpringMVC), **copier `sampleLayout.html` et `static/` de l'exercice** dans votre webapp, et afficher votre première page. **Convention de nom de vue** : la vue est trouvée depuis le package du controller — `.../uihello/controllers/HomeController` → `WEB-INF/views/uihello/home.html` (le segment de package juste avant `.controllers`)
+3. Dans votre projet : intégrer le boot web et afficher votre première page. Fichiers à copier/adapter **depuis l'exercice** :
+   - le boot : votre classe main (`JettyBoot`/`JettyBootParams`, cf. `BootSampleUiHello`), `MultipartConfigInjectionHandler`, `*VSpringWebConfig` (**`@ComponentScan` sur votre package `.controllers`**), `*VSpringWebApplicationInitializer`
+    - la webapp : `web.xml` (complété comme à l'étape 1 de l'exercice), `META-INF/*.yaml` (les features de l'exercice), `sampleLayout.html` et `static/` (+ `index.html` si vous gardez le `welcome-file-list`)
+   - votre `UserSession`, votre controller, votre page. **Convention de nom de vue** : la vue est trouvée depuis le package du controller — `.../uihello/controllers/HomeController` → `WEB-INF/views/uihello/home.html` (le segment de package juste avant `.controllers`)
 
 **Vérification** : votre écran s'affiche dans le navigateur.
 

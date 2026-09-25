@@ -5,7 +5,8 @@ Accès aux données (SQL) : Vertigo Datastore, DAO générés par Vertigo Studio
 ## Démarrage
 
 - Lancer la classe main `io.vertigo.samples.dao.run.DaoSample` : base H2 en mémoire, schéma créé au démarrage par `DataBaseInitializer`
-- Le sample crée son film de démonstration (aucune donnée préchargée), puis le requiert via `MovieServices` ; la sortie console montre l'aspect de supervision
+- Le sample crée son film de démonstration (aucune donnée préchargée), puis le requiert et le liste via `MovieServices` (recherche par préfixe `Criterions.startsWith`, tri/pagination via `DtListState`, `count`) ; la sortie console montre l'aspect de supervision
+- La JVM ne s'arrête pas toute seule après la démo (pool de connexions) : arrêter avec Ctrl+C
 
 ## Contenu
 
