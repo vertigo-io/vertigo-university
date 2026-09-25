@@ -14,7 +14,7 @@ Les samples ne contiennent pas de tests automatisés : chaque sample se lance pa
 
 - JDK 17
 - Maven 3.9+
-- Eclipse (recommandé ; plugin [KSP Plugin](https://github.com/sebez/vertigo-chroma-kspplugin) en option pour l'expérience de développement)
+- Eclipse (recommandé ; plugin [Vertigo Dsl Plugin 3.5.0](https://marketplace.eclipse.org/content/vertigo-3-dsl-plugin) — Eclipse et VSCode — en option pour l'expérience de développement)
 - Les samples sont autonomes : Elasticsearch embarqué quand c'est nécessaire, bases H2 créées au démarrage ou initialisées par les scripts SQL du dépôt, aucun service externe requis (sauf les identifiants mail/Twitter/IFTTT du sample notifications).
 
 ## Build

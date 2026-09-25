@@ -7,7 +7,7 @@ C'est un parcours « bac à sable » : chaque étape existe déjà en sample fon
 ## Prérequis
 
 - JDK 17, Maven 3.9+
-- Eclipse (recommandé ; plugin [KSP Plugin](https://github.com/sebez/vertigo-chroma-kspplugin) en option)
+- Eclipse (recommandé ; plugin [Vertigo Dsl Plugin 3.5.0](https://marketplace.eclipse.org/content/vertigo-3-dsl-plugin) — Eclipse et VSCode — en option)
 - La documentation officielle Vertigo en appui : [vertigo-io.github.io/vertigo-docs](https://vertigo-io.github.io/vertigo-docs/#/)
 
 ## Ce que vous saurez faire à la fin
