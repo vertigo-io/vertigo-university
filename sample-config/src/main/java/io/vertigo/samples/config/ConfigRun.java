@@ -1,8 +1,11 @@
 package io.vertigo.samples.config;
 
+import java.io.IOException;
+
 import io.vertigo.commons.CommonsFeatures;
 import io.vertigo.connectors.javalin.JavalinFeatures;
 import io.vertigo.core.node.AutoCloseableNode;
+import io.vertigo.core.node.config.BootConfig;
 import io.vertigo.core.node.config.ModuleConfig;
 import io.vertigo.core.node.config.NodeConfig;
 import io.vertigo.core.param.Param;
@@ -12,7 +15,7 @@ import io.vertigo.vega.VegaFeatures;
 /***
  * Start the main method.
  *
- * Call "http://localhost:8080/hello" with your web browser.
+ * Call "http://localhost:8080/hello/" with your web browser.
  * You may receive an "hello world" back.
  *
  *
@@ -21,8 +24,11 @@ import io.vertigo.vega.VegaFeatures;
  */
 public class ConfigRun {
 
-	public static void main(final String[] args) {
+	public static void main(final String[] args) throws IOException {
 		final NodeConfig nodeConfig = NodeConfig.builder()
+				.withBoot(BootConfig.builder()
+						.withLocales("fr_FR")
+						.build())
 				.addModule(new JavalinFeatures().withEmbeddedServer(Param.of("port", "8080")).build())
 				.addModule(new CommonsFeatures().build())
 				.addModule(new DataModelFeatures().build())
@@ -34,7 +40,7 @@ public class ConfigRun {
 				.build();
 
 		try (AutoCloseableNode node = new AutoCloseableNode(nodeConfig)) {
-			//do whatever you want
+			System.in.read();
 		}
 	}
 }

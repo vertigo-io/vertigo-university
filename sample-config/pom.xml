@@ -24,6 +24,16 @@
 			<artifactId>vertigo-vega</artifactId>
 			<version>${vertigo.version}</version>
 		</dependency>
-		
-		</dependencies>
+
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-server</artifactId>
+			<version>11.0.26</version>
+		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty.websocket</groupId>
+			<artifactId>websocket-jetty-server</artifactId>
+			<version>11.0.26</version>
+		</dependency>
+	</dependencies>
 </project>
