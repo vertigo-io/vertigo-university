@@ -1,22 +1,19 @@
-# sample-vertigo-ui-hello
+# sample-vertigo-ui-hello (exo)
 
-Premier écran Vertigo-UI : le boot web minimal (Jetty), un layout, une page. Sans base de données, sans Elasticsearch, sans BerkeleyDB et sans donnée préchargée.
+Premier écran Vertigo-UI : le boot web minimal (Jetty), une page rendue dans un layout. Sans base de données, sans Elasticsearch, sans BerkeleyDB et sans donnée préchargée.
 
-## Démarrage
+Ce module est un **exercice** : le squelette (boot Jetty, SpringMVC, layout, squelettes yaml/web.xml) est fourni — vous construisez les briques du node et la première page.
+
+## Exercice
+
+- [Exercice.md](Exercice.md) : l'énoncé complet (éléments, cours à connaitre, étapes avec vérifications, optionnel)
+- Correction : [sample-vertigo-ui-hello-corrige](../sample-vertigo-ui-hello-corrige)
+
+## Démarrage du squelette
 
 - Lancer la classe main `io.vertigo.samples.uihello.BootSampleUiHello` (Jetty :18081, context `/uihello`)
-- Tester `http://localhost:18081/uihello/home/` dans un navigateur
-- Arrêter avec Ctrl+C (le node web ne lit pas le stdin, contrairement à un node Javalin)
-
-## Contenu
-
-- `BootSampleUiHello` : le boot web (`JettyBoot` + `MultipartConfigInjectionHandler`)
-- `support.config` : l'initialisation SpringMVC (`VSpringWebConfig`)
-- `support.SampleUiHelloUserSession` : la session utilisateur (sécurité Vertigo-UI)
-- `controllers.HomeController` : le controller qui rend la vue `uihello/home`
-- `webapp/META-INF/sample-ui-hello.yaml` : la configuration du node (boot, features)
-- `webapp/WEB-INF/web.xml` : le Listener et le paramètre `boot.applicationConfiguration`
-- `webapp/WEB-INF/views/` : le layout `mmcLayout` et la page `uihello/home`
+- Le squelette (sans les briques de l'exercice) échoue au démarrage : c'est normal, c'est la brique de l'étape 1
+- Arrêter avec Ctrl+C (le node web ne lit pas le stdin)
 
 ## Suite
 

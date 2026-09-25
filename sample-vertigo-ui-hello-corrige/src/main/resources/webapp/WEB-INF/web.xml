@@ -4,6 +4,15 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_4_0.xsd">
 
 	<display-name>Vertigo UI Hello</display-name>
+	<listener>
+		<listener-class>io.vertigo.vega.impl.webservice.servlet.AppServletContextListener
+		</listener-class>
+	</listener>
+
+	<context-param>
+		<param-name>boot.applicationConfiguration</param-name>
+		<param-value>/webapp/META-INF/sample-ui-hello.yaml</param-value>
+	</context-param>
 
 	<filter>
 		<filter-name>Character Encoding Filter</filter-name>

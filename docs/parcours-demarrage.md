@@ -115,13 +115,11 @@ Vertigo-UI est construit sur Vue.js, Quasar et SpringMVC avec Thymeleaf.
 
 À faire :
 
-1. Lire [sample-vertigo-ui-hello](../sample-vertigo-ui-hello) — le boot web **minimal** (sans base de données, sans Elasticsearch, sans donnée préchargée) :
-   - le boot `BootSampleUiHello` (`JettyBoot`/`JettyBootParams` : context path, port)
-   - le `web.xml` : le Listener et le paramètre `boot.applicationConfiguration`
-   - `SampleUiHelloVSpringWebApplicationInitializer` → `SampleUiHelloVSpringWebConfig` : l'initialisation SpringMVC et son `@ComponentScan`
-   - `HomeController` + `home.html` + le layout `mmcLayout` : le premier écran
-   - `sample-ui-hello.yaml` : les briques minimales d'un node web VUI — notamment `AccountFeatures` (security + authorization + userSession), `DataFactoryFeatures` (collections lucene), `DataStoreFeatures` (cache mémoire + kvStore des vues)
-2. Démarrer le sample et vérifier [http://localhost:18081/uihello/home/](http://localhost:18081/uihello/home/)
+1. Réaliser l'exercice [sample-vertigo-ui-hello](../sample-vertigo-ui-hello/Exercice.md) — le boot web **minimal** (sans base de données, sans Elasticsearch, sans donnée préchargée). Le squelette est fourni (boot `BootSampleUiHello` via `JettyBoot`, initialisation SpringMVC, le layout `sampleLayout`) : vous construisez les briques du node et la première page,
+   - `web.xml` : le listener et le paramètre `boot.applicationConfiguration` — à ajouter
+   - `sample-ui-hello.yaml` : les briques du node VUI — `CommonsFeatures`, `DataModelFeatures`, `VegaFeatures`, `DataStoreFeatures` (kvStore des vues, **sans cache**), `DataFactoryFeatures` (**sans lucene**), `AccountFeatures` (security + authorization + userSession) — à ajouter
+   - `SampleUiHelloUserSession`, `HomeController`, `home.html` (la page dans le layout fourni) — à créer
+2. Comparer avec la correction [sample-vertigo-ui-hello-corrige](../sample-vertigo-ui-hello-corrige) : la démarrer et vérifier [http://localhost:18081/uihello/home/](http://localhost:18081/uihello/home/) (200, « Hello Vertigo-UI !! »)
 3. Dans votre projet : intégrer le boot web (webapp, `web.xml`, configuration SpringMVC) et afficher votre première page
 
 **Vérification** : votre écran s'affiche dans le navigateur.
