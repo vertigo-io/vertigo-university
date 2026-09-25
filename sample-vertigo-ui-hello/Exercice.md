@@ -2,6 +2,8 @@
 
 Vous allez construire, brique par brique, le boot web minimal d'un node Vertigo-UI : le node démarre, la sécurité est en place, puis une première page rendue par un controller dans un layout. Sans base de données, sans Elasticsearch, sans BerkeleyDB, sans donnée préchargée.
 
+**Prérequis** : le dépôt university est installé dans le repo local Maven (`mvn install` à la racine) — le parent des modules (`io.vertigo:vertigo-samples`) n'est pas publié sur Maven Central.
+
 ## Eléments
 
 - Route : [http://localhost:18081/uihello/home/](http://localhost:18081/uihello/home/)
@@ -48,6 +50,7 @@ La section `modules` du yaml déclare les features Vertigo utilisées par le nod
 
 Points clés :
 
+- `script.janino` (`CommonsFeatures`) : requis par Vertigo-UI (scripts/expressions).
 - `kvStore.delayedMemory` stocke les **ViewContext** de Vertigo-UI (`VViewContext`, `VViewInitContext`) : c'est la mémoire par page de l'UI.
 - `DataFactoryFeatures` se déclare **sans sous-feature** : le `CollectionsManager` est enregistré par le module lui-même. L'indexation Lucene est un plugin **optionnel** de ce composant : pas de dépendance lucene, pas de cache.
 
@@ -97,8 +100,9 @@ et complétez la section `modules` du yaml avec les 3 features de base :
 
 (l'ordre des modules dans le yaml est sans importance)
 
-1. **Testez** : lancez `BootSampleUiHello`. Jetty démarre puis l'initialisation échoue avec (attendu, c'est la brique suivante) :
+**Testez** : lancez `BootSampleUiHello`. Jetty démarre puis l'initialisation échoue avec (attendu, c'est la brique suivante) :
 `No qualifying bean of type 'io.vertigo.datastore.kvstore.KVStoreManager'`.
+(le log peut contenir **aussi** `vSecurityManager not found` : les erreurs sont agrégées au démarrage — c'est normal, c'est la brique de l'étape 3.)
 
 2. **Ajoutez la brique données** dans le yaml :
 
@@ -113,7 +117,7 @@ et complétez la section `modules` du yaml avec les 3 features de base :
   io.vertigo.datafactory.DataFactoryFeatures:
 ```
 
-1. **Testez** : relancez. L'initialisation échoue avec (attendu, c'est la brique suivante) :
+**Testez** : relancez. L'initialisation échoue avec (attendu, c'est la brique suivante) :
 `component info with id 'vSecurityManager' not found`.
 
 3. **Ajoutez la brique sécurité** — créez la session utilisateur :
@@ -147,10 +151,10 @@ et complétez le yaml :
           userSessionClassName: io.vertigo.samples.uihello.support.SampleUiHelloUserSession
 ```
 
-1. **Testez** : relancez. Le node démarre maintenant sans erreur.
-   Vérification : `http://localhost:18081/uihello/home/` retourne **404** (l'écran n'existe pas encore).
+**Testez** : relancez. Le node démarre maintenant sans erreur.
+Vérification : `http://localhost:18081/uihello/home/` retourne **404** (l'écran n'existe pas encore).
 
-4. **Créez l'écran** — la page (le layout `sampleLayout` est fourni) :
+4. **Créez l'écran** — la page (le layout `sampleLayout` est fourni) et le controller qui la rend :
 
 ```Html
 <!DOCTYPE html>
@@ -176,7 +180,7 @@ et complétez le yaml :
 </html>
 ```
 
-1. et le controller qui la rend :
+Et le controller qui la rend :
 
 ```Java
 package io.vertigo.samples.uihello.controllers;
@@ -199,9 +203,9 @@ public class HomeController extends AbstractVSpringMvcController {
 }
 ```
 
-1. **Testez** : `http://localhost:18081/uihello/home/` dans le navigateur (ou `curl`).
-   Attendu : **200** et le contenu `Hello Vertigo-UI !!` dans la page rendue (dans le layout fourni).
-1. Arrêtez le node avec Ctrl+C (le node web ne lit pas le stdin).
+**Testez** : `http://localhost:18081/uihello/home/` dans le navigateur (ou `curl`).
+Attendu : **200** et le contenu `Hello Vertigo-UI !!` dans la page rendue (dans le layout fourni).
+Arrêtez le node avec Ctrl+C (le node web ne lit pas le stdin).
 
 ## Optionnel : pour aller plus loin
 
