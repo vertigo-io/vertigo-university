@@ -1,6 +1,7 @@
 package io.vertigo.samples.hello.config;
 
 import io.vertigo.connectors.javalin.JavalinFeatures;
+import io.vertigo.core.node.config.BootConfig;
 import io.vertigo.core.node.config.ModuleConfig;
 import io.vertigo.core.node.config.NodeConfig;
 import io.vertigo.core.param.Param;
@@ -11,6 +12,9 @@ import io.vertigo.vega.VegaFeatures;
 public final class HelloConfigurator {
 	public static NodeConfig config(final int port) {
 		return NodeConfig.builder()
+				.withBoot(BootConfig.builder()
+						.withLocales("fr_FR")
+						.build())
 				.addModule(new JavalinFeatures().withEmbeddedServer(Param.of("port", port)).build())
 				.addModule(new DataModelFeatures().build())
 				.addModule(new VegaFeatures()
