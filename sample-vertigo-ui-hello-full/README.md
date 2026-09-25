@@ -1,6 +1,6 @@
-# sample-vertigo-ui-hello-corrige (corrigé)
+# sample-vertigo-ui-hello-full
 
-Correction de l'exercice [sample-vertigo-ui-hello](../sample-vertigo-ui-hello) : le boot web minimal d'un node Vertigo-UI, complet. Sans base de données, sans Elasticsearch, sans BerkeleyDB et sans donnée préchargée.
+Solution de l'exercice [sample-vertigo-ui-hello](../sample-vertigo-ui-hello) : le boot web minimal d'un node Vertigo-UI, complet. Sans base de données, sans Elasticsearch, sans BerkeleyDB et sans donnée préchargée.
 
 ## Démarrage
 

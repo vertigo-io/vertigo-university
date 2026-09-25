@@ -9,8 +9,8 @@
 		<version>4.4.1</version>
 	</parent>
 
-	<artifactId>vertigo-sample-vertigo-ui-hello-corrige</artifactId>
-	<name>vertigo-sample-vertigo-ui-hello-corrige</name>
+	<artifactId>vertigo-sample-vertigo-ui-hello-full</artifactId>
+	<name>vertigo-sample-vertigo-ui-hello-full</name>
 	<packaging>jar</packaging>
 
 	<dependencies>

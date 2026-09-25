@@ -45,7 +45,7 @@ mvn clean install -DskipTests
 | [sample-vertigo-ui](sample-vertigo-ui) | Application web Vertigo-UI (SpringMVC/Thymeleaf/Vue) | `BootSampleVui` (Jetty :18080) | [README](sample-vertigo-ui/README.md) |
 | [sample-vertigo-ui-full](sample-vertigo-ui-full) | Idem + recherche Elasticsearch + tableaux + modales (solutions des Levels 0→6) | `BootSampleVui` (Jetty :18080) | [README](sample-vertigo-ui-full/README.md) |
 | [sample-vertigo-ui-hello](sample-vertigo-ui-hello) | Premier écran Vertigo-UI : boot web minimal (Jetty), une page dans un layout — **exercice** (squelette + `Exercice.md`) — sans base, sans donnée préchargée | `BootSampleUiHello` (Jetty :18081) | [Exercice](sample-vertigo-ui-hello/Exercice.md) |
-| [sample-vertigo-ui-hello-corrige](sample-vertigo-ui-hello-corrige) | Correction de l'exercice : boot web minimal complet — sans cache, sans lucene | `BootSampleUiHello` (Jetty :18081) | [README](sample-vertigo-ui-hello-corrige/README.md) |
+| [sample-vertigo-ui-hello-full](sample-vertigo-ui-hello-full) | Solution de l'exercice : boot web minimal complet — sans cache, sans lucene | `BootSampleUiHello` (Jetty :18081) | [README](sample-vertigo-ui-hello-full/README.md) |
 
 ## Parcours débutant
 
@@ -72,7 +72,7 @@ Progression sur le framework, du premier node aux web services :
 
 ### 2. Application web Vertigo-UI
 
-1. [sample-vertigo-ui-hello](sample-vertigo-ui-hello) : le premier écran — boot web minimal (Jetty), une page dans un layout (**exercice** / [corrigé](sample-vertigo-ui-hello-corrige))
+1. [sample-vertigo-ui-hello](sample-vertigo-ui-hello) : le premier écran — boot web minimal (Jetty), une page dans un layout (**exercice** / [solution](sample-vertigo-ui-hello-full))
 2. [sample-vertigo-ui](sample-vertigo-ui) : niveaux Level0→6 (préparation, listes, écran de détail, recherche, tableaux éditables, controllers, modales)
 3. [sample-vertigo-ui-full](sample-vertigo-ui-full) : mêmes niveaux complétés (recherche Elasticsearch, tableaux modifiables, modales)
 

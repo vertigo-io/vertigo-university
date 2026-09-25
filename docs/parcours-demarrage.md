@@ -119,7 +119,7 @@ Vertigo-UI est construit sur Vue.js, Quasar et SpringMVC avec Thymeleaf.
    - `web.xml` : le listener et le paramètre `boot.applicationConfiguration` — à ajouter
    - `sample-ui-hello.yaml` : les briques du node VUI — `CommonsFeatures`, `DataModelFeatures`, `VegaFeatures`, `DataStoreFeatures` (kvStore des vues, **sans cache**), `DataFactoryFeatures` (**sans lucene**), `AccountFeatures` (security + authorization + userSession) — à ajouter
    - `SampleUiHelloUserSession`, `HomeController`, `home.html` (la page dans le layout fourni) — à créer
-2. Comparer avec la correction [sample-vertigo-ui-hello-corrige](../sample-vertigo-ui-hello-corrige) : la démarrer et vérifier [http://localhost:18081/uihello/home/](http://localhost:18081/uihello/home/) (200, « Hello Vertigo-UI !! »)
+2. Comparer avec la solution [sample-vertigo-ui-hello-full](../sample-vertigo-ui-hello-full) : la démarrer et vérifier [http://localhost:18081/uihello/home/](http://localhost:18081/uihello/home/) (200, « Hello Vertigo-UI !! »)
 3. Dans votre projet : intégrer le boot web (webapp, `web.xml`, configuration SpringMVC) et afficher votre première page
 
 **Vérification** : votre écran s'affiche dans le navigateur.
