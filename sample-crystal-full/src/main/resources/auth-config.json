@@ -1,7 +1,7 @@
 {
 	"globalAuthorizations": [{
 		"name": "Special",
-		"label": "Droit sp�cial"
+		"label": "Droit spécial"
 	}],
 	"securedEntities": [{
 		"entity": "Movie",
