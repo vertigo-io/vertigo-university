@@ -40,7 +40,7 @@ public class SampleConfigBuilder {
 						.withC3p0(
 								Param.of("dataBaseClass", H2DataBase.class.getName()),
 								Param.of("jdbcDriver", org.h2.Driver.class.getName()),
-								Param.of("jdbcUrl", "jdbc:h2:~/atelier/database/sample_account"))
+								Param.of("jdbcUrl", "jdbc:h2:~/atelier/database/sample_account;NON_KEYWORDS=YEAR,KEY,USER"))
 						.build())
 				.addModule(new DataModelFeatures().build())
 				.addModule(new DataStoreFeatures()
