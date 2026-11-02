@@ -1,7 +1,8 @@
 package io.vertigo.samples.vega.domain;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class MovieDAO {
@@ -24,8 +25,8 @@ public class MovieDAO {
 		return cinematheque.get(id);
 	}
 
-	public Collection<Movie> listMovie() {
-		return cinematheque.values();
+	public List<Movie> listMovie() {
+		return new ArrayList<>(cinematheque.values());
 	}
 
 	public int putMovie(final String title) {

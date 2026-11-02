@@ -35,7 +35,7 @@ mvn clean install -DskipTests
 | [sample-dao-full](sample-dao-full) | Idem + DAO personnalisés, projections, reprise par lots | `Level2`→`Level7`, `Reprise` | [README](sample-dao-full/README.md) |
 | [sample-crystal](sample-crystal) | DataFactory Crystal (CRUD + recherche Elasticsearch) | `CrystalSample`, `CrystalSearchSample` | [README](sample-crystal/README.md) |
 | [sample-crystal-full](sample-crystal-full) | Idem + niveaux, authorization, login | `Level1`→`Level7` | [README](sample-crystal-full/README.md) |
-| [sample-vega](sample-vega) | Web services REST (Vega, Jetty) | `SampleVega` (:8080) | [README](sample-vega/README.md) |
+| [sample-vega](sample-vega) | Web services REST (Vega) | `SampleVega` (Javalin :8080) | [README](sample-vega/README.md) |
 | [sample-notifications](sample-notifications) | Moteur de notifications multi-canaux + AOP | `NotificationSample` | [README](sample-notifications/README.md) |
 | [sample-account](sample-account) | Authentification / autorisation (security) | `AccountSample` | [README](sample-account/README.md) |
 | [sample-config](sample-config) | NodeConfig programmatique (Features) | `ConfigRun` (Javalin :8080) | [README](sample-config/README.md) |
@@ -67,7 +67,7 @@ Progression sur le framework, du premier node aux web services :
    - *Complément : `sample-dao-full` (niveaux Level2→7, DAO personnalisés, reprise par lots)*
 4. `sample-crystal` : DataFactory (CRUD typé + recherche Elasticsearch)
    - *Complément : `sample-crystal-full` (Level1→7, authorization, login)*
-5. `sample-vega` : web services REST (Jetty)
+5. `sample-vega` : web services REST (Vega, Javalin)
 6. `sample-notifications` : moteur de notifications multi-canaux (mail, Twitter, IFTTT) + AOP
 
 ### 2. Application web Vertigo-UI

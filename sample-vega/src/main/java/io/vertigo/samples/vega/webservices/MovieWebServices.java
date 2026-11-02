@@ -1,6 +1,6 @@
 package io.vertigo.samples.vega.webservices;
 
-import java.util.Collection;
+import java.util.List;
 
 import io.vertigo.samples.vega.domain.Movie;
 import io.vertigo.samples.vega.domain.MovieDAO;
@@ -38,7 +38,7 @@ public class MovieWebServices implements WebServices {
 
 	@AnonymousAccessAllowed
 	@GET("/")
-	public Collection<Movie> getAllMovies() {
+	public List<Movie> getAllMovies() {
 		return cinematheque.listMovie();
 	}
 }

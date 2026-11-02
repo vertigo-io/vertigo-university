@@ -68,7 +68,7 @@ Le **node** est l'unité de base d'une application Vertigo : c'est le processus 
 1. Lire `hello.webservices.HelloWebServices` dans `sample-hello-world`
 2. Démarrer `sample-hello-world` (cf. étape 1) et tester `http://localhost:8080/hello/` dans un navigateur
 3. Créer votre propre webservice dans votre projet et le tester
-4. *(Optionnel)* Étudier [sample-vega](../sample-vega) (`SampleVega`, Jetty :8080) pour des webservice REST plus complets
+4. *(Optionnel)* Étudier [sample-vega](../sample-vega) (`SampleVega`, Javalin :8080) pour des webservice REST plus complets
 
 **Vérification** : votre réponse s'affiche dans le navigateur.
 
