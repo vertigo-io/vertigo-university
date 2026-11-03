@@ -1,0 +1,71 @@
+# Level 4 - DAO proxy
+
+Nous allons déclarer une requête directement sur une interface Java annotée : la plateforme en fournit l'implémentation au démarrage, sans passer par la génération de code.
+
+## Eléments
+
+- Interface à créer : `src/main/java/io/vertigo/samples/crystal/dao/MovieProxyDAO.java`
+- Configuration : `src/main/java/io/vertigo/samples/crystal/config/SampleConfigBuilder.java`
+- Smart types : `src/main/java/io/vertigo/samples/crystal/config/SampleCrystalSmartTypes.java` (nouveau smart type `Count`)
+- Classe main à créer : `src/main/java/io/vertigo/samples/crystal/run/Level4.java`
+
+### A connaitre : Les proxies (amplifiers)
+
+Un *amplifier* est un composant déclaré sous la forme d'une **interface** (qui étend `Amplifier`) : la plateforme crée son implémentation au démarrage, d'après les annotations portées par les méthodes. Pour les tâches :
+
+- `@TaskProxyAnnotation(name, request, taskEngineClass)` : le nom de la tâche, la requête et le moteur d'exécution ;
+- `@TaskOutput(smartType)` : le type du résultat ;
+- `@TaskInput(name, smartType)` sur chaque paramètre : son nom dans la requête (`#couId#`) et son type.
+
+```java
+@Transactional
+public interface MovieProxyDAO extends Amplifier {
+
+	@TaskProxyAnnotation(
+			name = "TkMovieCountByCountry",
+			request = "select count(*) from movie where cou_id = #couId#",
+			taskEngineClass = TaskEngineSelect.class)
+	@TaskOutput(smartType = "STyCount")
+	int count(@TaskInput(name = "couId", smartType = "STyId") Long couId);
+
+}
+```
+
+Les conventions de nommage :
+
+- le nom de la tâche commence par `Tk`, comme les tâches générées (`TkMovieCountByCountry`) ;
+- les noms des paramètres sont en *lowerCamelCase* (`couId`) : c'est vérifié au démarrage ;
+- les smart types se nomment `STy` suivi du nom de la constante de `SampleCrystalSmartTypes` (`Id` → `STyId`).
+
+### A connaitre : L'activation
+
+Deux déclarations dans la configuration du node :
+
+- dans `DataStoreFeatures`, `withTaskProxyMethod()` : active la création des méthodes de tâche des proxies ;
+- un module qui déclare l'amplifier : `ModuleConfig.builder("proxies").addAmplifier(MovieProxyDAO.class).build()`.
+
+## Etapes
+
+1. Dans `SampleCrystalSmartTypes`, ajoutez le smart type `Count` : un `Integer` (`@SmartTypeDefinition(Integer.class)`), avec le formatter par défaut et `storeType` `NUMERIC`, sur le modèle de `Year`.
+2. Créez l'interface `MovieProxyDAO` (code ci-dessus) dans le package `io.vertigo.samples.crystal.dao`.
+3. Dans `SampleConfigBuilder` :
+   - ajoutez `.withTaskProxyMethod()` à `DataStoreFeatures` ;
+   - ajoutez un module `proxies` qui déclare l'amplifier `MovieProxyDAO`.
+4. Créez `Level4` en copiant `CrystalSample` (avec `ActorDAO` dans `stepDao`) :
+   - injectez `MovieProxyDAO` (`@Inject private MovieProxyDAO movieProxyDAO;`) ;
+   - `step1()` : lisez le pays de Forrest Gump (`movieServices.getMovieById(FORREST_GUMP_ID).getCouId()`), puis affichez `"films in the same country as Forrest Gump : " + movieProxyDAO.count(countryId)`.
+5. Lancez `Level4`.
+   **Vérification** : la console affiche `Level4 - films in the same country as Forrest Gump : 4`.
+
+**Les erreurs que vous pouvez rencontrer** (toutes au démarrage) :
+
+- `withTaskProxyMethod()` oublié : `No way to find a proxyMethod for this method : public abstract int io.vertigo.samples.crystal.dao.MovieProxyDAO.count(java.lang.Long)` ;
+- un paramètre en majuscules (`COU_ID`) : `the name of the descriptor COU_ID must be in lowerCamelCase` ;
+- un smart type inconnu (par exemple `DO_INTEGER`) : `Definition 'DO_INTEGER' of type 'SmartTypeDefinition' not found` ;
+- l'amplifier déclaré deux fois (dans `SampleConfigBuilder` et dans `Level4`) : `component 'movieProxyDAO' already registered`.
+
+## Optionnel : pour aller plus loin
+
+- Comparez avec le Level 1 : la même requête aurait pu être déclarée dans `dao.ksp` et générée par `Studio`. Le proxy évite la génération, mais la requête n'apparaît plus dans les définitions du modèle.
+
+# [Suite : Level 5 - Web services REST et recherche à facettes](./Level5.md)

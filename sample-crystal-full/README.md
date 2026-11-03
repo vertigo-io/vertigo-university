@@ -4,7 +4,7 @@ Version complète de Crystal : niveaux progressifs, authorization (entités séc
 
 ## Démarrage
 
-- `crystal.run.Level1` → `crystal.run.Level7` : la progression
+- `crystal.run.Level1` → `crystal.run.Level7` : la progression (solution des exercices ; les énoncés `LevelN.md` sont dans [sample-crystal](../sample-crystal/README.md#exercices))
   - Level 1 : tâches avec listes en paramètres (`getActorsIdsByMovie`, `getMoviesInCountries`)
   - Level 2 : accesseurs (`load`, `get`, `set`, `reset`)
   - Level 3 : liste de référence statique (`Sexe` → `SexeEnum`)
