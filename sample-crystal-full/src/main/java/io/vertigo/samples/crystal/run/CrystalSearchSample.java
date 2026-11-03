@@ -23,7 +23,6 @@ public class CrystalSearchSample {
 				.addModule(ModuleConfig.builder("stepDao")
 						.addComponent(ActorDAO.class)
 						.addComponent(RoleDAO.class)
-						.addComponent(CrystalPAO.class)
 						.build())
 				.addModule(defaultSampleModule());
 

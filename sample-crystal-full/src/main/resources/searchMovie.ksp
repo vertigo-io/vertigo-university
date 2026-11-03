@@ -8,6 +8,7 @@ package io.vertigo.samples.crystal.domain
 create IndexDefinition IdxMovie {  
   keyConcept : DtMovie
   dtIndex : DtMovieIndex
+  indexCopyTo allText { from: "country,year,name,movId" }
   loaderId : "MovieSearchLoader"
 }
 
@@ -45,7 +46,7 @@ create FacetedQueryDefinition QryMovie {
   facets : []
   domainCriteria : DoLabel
   listFilterBuilderClass : "io.vertigo.datafactory.impl.search.dsl.DslListFilterBuilder"  
-  listFilterBuilderQuery : "_all:#+query*#"
+  listFilterBuilderQuery : "allText:#+query*#"
 }
 
 create FacetedQueryDefinition QryMovieWithFacets {  
@@ -53,7 +54,7 @@ create FacetedQueryDefinition QryMovieWithFacets {
   facets : [FctMovieName, FctMovieYear, FctMovieCountry]
   domainCriteria : DoLabel
   listFilterBuilderClass : "io.vertigo.datafactory.impl.search.dsl.DslListFilterBuilder"  
-  listFilterBuilderQuery : "_all:#+query*#"
+  listFilterBuilderQuery : "allText:#+query*#"
 }
 
 

@@ -47,7 +47,7 @@ public class MovieWebServices implements WebServices {
 	@POST("/_search")
 	public FacetedQueryResult<MovieIndex, SearchQuery> search(@InnerBodyParam("criteria") final String criteria,
 			@InnerBodyParam("facets") final SelectedFacetValues selectedFacetValues,
-			@InnerBodyParam("state") final DtListState dtListState) {
+			final DtListState dtListState) {
 		return movieServices.searchMovies(criteria, selectedFacetValues, dtListState);
 	}
 }

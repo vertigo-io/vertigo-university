@@ -136,6 +136,7 @@ public final class MovieIndexSearchClient implements Component, DefinitionProvid
 				.add(new SearchIndexDefinitionSupplier("IdxMovie")
 						.withIndexDtDefinition("DtMovieIndex")
 						.withKeyConcept("DtMovie")
+						.withCopyToFields("allText", "country", "year", "name", "movId")
 						.withLoaderId("MovieSearchLoader"))
 				
 				//---
@@ -178,14 +179,14 @@ public final class MovieIndexSearchClient implements Component, DefinitionProvid
 				//-----
 				.add(new FacetedQueryDefinitionSupplier("QryMovie")
 						.withListFilterBuilderClass(io.vertigo.datafactory.impl.search.dsl.DslListFilterBuilder.class)
-						.withListFilterBuilderQuery("_all:#+query*#")
+						.withListFilterBuilderQuery("allText:#+query*#")
 						.withCriteriaSmartType("STyLabel"))
 				.add(new FacetedQueryDefinitionSupplier("QryMovieWithFacets")
 						.withFacet("FctMovieName")
 						.withFacet("FctMovieYear")
 						.withFacet("FctMovieCountry")
 						.withListFilterBuilderClass(io.vertigo.datafactory.impl.search.dsl.DslListFilterBuilder.class)
-						.withListFilterBuilderQuery("_all:#+query*#")
+						.withListFilterBuilderQuery("allText:#+query*#")
 						.withCriteriaSmartType("STyLabel"))
 				.build();
 	}

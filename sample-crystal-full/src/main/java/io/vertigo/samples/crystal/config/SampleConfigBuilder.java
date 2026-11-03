@@ -15,10 +15,12 @@ import io.vertigo.core.plugins.resource.local.LocalResourceResolverPlugin;
 import io.vertigo.database.DatabaseFeatures;
 import io.vertigo.database.impl.sql.vendor.h2.H2DataBase;
 import io.vertigo.datafactory.DataFactoryFeatures;
+import io.vertigo.datafactory.plugins.search.elasticsearch_7_17.rest.RestHLClientESSearchServicesPlugin;
 import io.vertigo.datamodel.DataModelFeatures;
 import io.vertigo.datamodel.impl.smarttype.ModelDefinitionProvider;
 import io.vertigo.datastore.DataStoreFeatures;
 import io.vertigo.samples.crystal.dao.MovieProxyDAO;
+import io.vertigo.samples.crystal.boot.DataBaseInitializer;
 import io.vertigo.samples.crystal.domain.DtDefinitions;
 import io.vertigo.samples.crystal.webservices.TestUserSession;
 import io.vertigo.vega.VegaFeatures;
@@ -42,7 +44,7 @@ public class SampleConfigBuilder {
 						.withC3p0(
 								Param.of("dataBaseClass", H2DataBase.class.getName()),
 								Param.of("jdbcDriver", org.h2.Driver.class.getName()),
-								Param.of("jdbcUrl", "jdbc:h2:C:/atelier/database/formation_loaded"))
+								Param.of("jdbcUrl", "jdbc:h2:mem:sample_crystal;DB_CLOSE_DELAY=-1;NON_KEYWORDS=YEAR,KEY,USER"))
 						.build())
 				.addModule(new DataModelFeatures().build())
 				.addModule(new DataStoreFeatures()
@@ -50,17 +52,20 @@ public class SampleConfigBuilder {
 						.withMemoryCache()
 						.withEntityStore()
 						.withSqlEntityStore()
+						.withTaskProxyMethod()
 						.build());
 
 		if (withSearch) {
 			nodeConfigBuilder
 					.addModule(new ElasticSearchFeatures()
-							.withEmbeddedServer(Param.of("home", "C:/atelier/search"))//usage d'url impropre
-							.withRestHL(Param.of("servers.names", "localhost:9200"))
+							.withEmbeddedServer(Param.of("home", "search"))//classpath directory (target/classes/search)
+							.withRestHL(Param.of("servers.names", "localhost:9200"), Param.of("ssl", "false"))
 							.build())
 					.addModule(new DataFactoryFeatures()
 							.withSearch()
-							.withESHL(Param.of("envIndexPrefix", "crystal-test_"),
+							//ES 7.17 search plugin (with embedded server) : declared explicitly, withESHL() targets the newer ES java client
+							.addPlugin(RestHLClientESSearchServicesPlugin.class,
+									Param.of("envIndexPrefix", "crystal-test_"),
 									Param.of("rowsPerQuery", "50"),
 									Param.of("config.file", "elasticsearch.yml"))
 							.build());
@@ -103,6 +108,9 @@ public class SampleConfigBuilder {
 					.withAuthorization()
 					.build());
 		}
+
+		//----In-memory database : schema + demo data created at startup
+		nodeConfigBuilder.addInitializer(DataBaseInitializer.class);
 
 		return nodeConfigBuilder;
 	}

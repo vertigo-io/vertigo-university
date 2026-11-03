@@ -21,6 +21,9 @@ import io.vertigo.samples.crystal.webservices.MovieWebServices;
 
 public class CrystalSample {
 
+	//demo data, created by sql/initdata.sql
+	private static final Long FORREST_GUMP_ID = 1000L;
+
 	@Inject
 	private MovieServices movieServices;
 
@@ -30,7 +33,6 @@ public class CrystalSample {
 				.addModule(ModuleConfig.builder("stepDao")
 						.addComponent(ActorDAO.class)
 						.addComponent(RoleDAO.class)
-						.addComponent(CrystalPAO.class)
 						.build())
 				.addModule(defaultSampleModule());
 		try (final AutoCloseableNode node = new AutoCloseableNode(nodeConfigBuilder.build())) {
@@ -53,7 +55,7 @@ public class CrystalSample {
 	}
 
 	void step1() {
-		LogManager.getLogger(this.getClass()).info(movieServices.getMovieById(3678598L));
+		LogManager.getLogger(this.getClass()).info(movieServices.getMovieById(FORREST_GUMP_ID));
 	}
 
 }
