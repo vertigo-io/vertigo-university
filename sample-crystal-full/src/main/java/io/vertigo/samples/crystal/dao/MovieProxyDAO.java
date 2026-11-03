@@ -11,10 +11,10 @@ import io.vertigo.datamodel.task.proxy.TaskProxyAnnotation;
 public interface MovieProxyDAO extends Amplifier {
 
 	@TaskProxyAnnotation(
-			name = "TK_MOVIE_COUNT_BY_COUNTRY",
-			request = "select count(*) from movie where cou_id = #COU_ID#",
+			name = "TkMovieCountByCountry",
+			request = "select count(*) from movie where cou_id = #couId#",
 			taskEngineClass = TaskEngineSelect.class)
-	@TaskOutput(smartType = "DO_INTEGER")
-	int count(@TaskInput(name = "COU_ID", smartType = "DO_ID") Long couId);
+	@TaskOutput(smartType = "STyCount")
+	int count(@TaskInput(name = "couId", smartType = "STyId") Long couId);
 
 }

@@ -40,7 +40,6 @@ public class Level6 {
 				.addModule(ModuleConfig.builder("stepDao")
 						.addComponent(ActorDAO.class)
 						.addComponent(RoleDAO.class)
-						.addComponent(CrystalPAO.class)
 						.addDefinitionProvider(DefinitionProviderConfig.builder(JsonSecurityDefinitionProvider.class)
 								.addDefinitionResource("security", "auth-config.json")
 								.build())

@@ -24,6 +24,11 @@ import io.vertigo.samples.crystal.webservices.MovieWebServices;
 
 public class Level1 {
 
+	//demo data, created by sql/initdata.sql
+	private static final Long FORREST_GUMP_ID = 1000L;
+	private static final Long USA_ID = 840L;
+	private static final Long GERMANY_ID = 250L;
+
 	@Inject
 	private MovieServices movieServices;
 
@@ -33,7 +38,6 @@ public class Level1 {
 				.addModule(ModuleConfig.builder("stepDao")
 						.addComponent(ActorDAO.class)
 						.addComponent(RoleDAO.class)
-						.addComponent(CrystalPAO.class)
 						.build())
 				.addModule(defaultSampleModule());
 		try (final AutoCloseableNode node = new AutoCloseableNode(nodeConfigBuilder.build())) {
@@ -57,11 +61,11 @@ public class Level1 {
 	}
 
 	void step1() {
-		LogManager.getLogger(this.getClass()).info(movieServices.getActorsIdsByMovie(3678598L));
+		LogManager.getLogger(this.getClass()).info(movieServices.getActorsIdsByMovie(FORREST_GUMP_ID));
 	}
 
 	void step2() {
-		final List<Long> countryIds = Arrays.asList(1223L, 1119L, 1075L, 1207L);
+		final List<Long> countryIds = Arrays.asList(USA_ID, GERMANY_ID);
 		LogManager.getLogger(this.getClass()).info(movieServices.getMoviesInCountries(countryIds));
 	}
 

@@ -24,14 +24,14 @@ public enum SampleCrystalSmartTypes {
 	@Formatter(clazz = FormatterDefault.class)
 	@Constraint(clazz = ConstraintStringLength.class, arg = "100", msg = "")
 	@SmartTypeProperty(property = "storeType", value = "VARCHAR(100)")
-	@SmartTypeProperty(property = "indexType", value = "text_fr")
+	@SmartTypeProperty(property = "indexType", value = "text_fr:sortable")
 	Label,
 
 	@SmartTypeDefinition(String.class)
 	@Formatter(clazz = FormatterDefault.class)
 	@Constraint(clazz = ConstraintStringLength.class, arg = "500", msg = "")
 	@SmartTypeProperty(property = "storeType", value = "VARCHAR(500)")
-	@SmartTypeProperty(property = "indexType", value = "text_fr")
+	@SmartTypeProperty(property = "indexType", value = "text_fr:sortable")
 	LabelLong,
 
 	@SmartTypeDefinition(String.class)
@@ -50,6 +50,11 @@ public enum SampleCrystalSmartTypes {
 	@SmartTypeDefinition(Integer.class)
 	@Formatter(clazz = FormatterDefault.class)
 	@SmartTypeProperty(property = "storeType", value = "NUMERIC")
-	Year;
+	Year,
+
+	@SmartTypeDefinition(Integer.class)
+	@Formatter(clazz = FormatterDefault.class)
+	@SmartTypeProperty(property = "storeType", value = "NUMERIC")
+	Count;
 
 }

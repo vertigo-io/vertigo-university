@@ -22,6 +22,9 @@ import io.vertigo.samples.crystal.webservices.MovieWebServices;
 
 public class Level2 {
 
+	//demo data, created by sql/initdata.sql
+	private static final Long FORREST_GUMP_ID = 1000L;
+
 	@Inject
 	private MovieServices movieServices;
 
@@ -31,7 +34,6 @@ public class Level2 {
 				.addModule(ModuleConfig.builder("stepDao")
 						.addComponent(ActorDAO.class)
 						.addComponent(RoleDAO.class)
-						.addComponent(CrystalPAO.class)
 						.build())
 				.addModule(defaultSampleModule());
 		try (final AutoCloseableNode node = new AutoCloseableNode(nodeConfigBuilder.build())) {
@@ -56,19 +58,19 @@ public class Level2 {
 	}
 
 	void step1() {
-		movieServices.manipulateAccessors(3678598L);
+		movieServices.manipulateAccessors(FORREST_GUMP_ID);
 	}
 
 	void step2() {
-		final Movie movie = movieServices.loadMovieWithRoles(3678598L);
-		LogManager.getLogger(this.getClass()).info("movie roles : ", movie.role().get());
+		final Movie movie = movieServices.loadMovieWithRoles(FORREST_GUMP_ID);
+		LogManager.getLogger(this.getClass()).info("movie roles : {}", movie.role().get());
 
-		final Movie movieReset = movieServices.loadMovieWithRolesAndReset(3678598L);
-		LogManager.getLogger(this.getClass()).info("movie roles reset: ", movieReset.role());
+		final Movie movieReset = movieServices.loadMovieWithRolesAndReset(FORREST_GUMP_ID);
+		LogManager.getLogger(this.getClass()).info("movie roles reset (isLoaded) : {}", movieReset.role().isLoaded());
 	}
 
 	void step3() {
-		LogManager.getLogger(this.getClass()).info(movieServices.getRolesByMovie(3678598L));
+		LogManager.getLogger(this.getClass()).info(movieServices.getRolesByMovie(FORREST_GUMP_ID));
 	}
 
 }

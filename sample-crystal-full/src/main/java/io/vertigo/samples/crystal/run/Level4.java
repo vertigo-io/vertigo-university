@@ -22,8 +22,13 @@ import io.vertigo.samples.crystal.webservices.MovieWebServices;
 
 public class Level4 {
 
+	//demo data, created by sql/initdata.sql
+	private static final Long FORREST_GUMP_ID = 1000L;
+
 	@Inject
 	private MovieProxyDAO movieProxyDAO;
+	@Inject
+	private MovieServices movieServices;
 
 	public static void main(final String[] args) {
 		final NodeConfigBuilder nodeConfigBuilder = SampleConfigBuilder.createNodeConfigBuilder(true, false, false);
@@ -31,8 +36,6 @@ public class Level4 {
 				.addModule(ModuleConfig.builder("stepDao")
 						.addComponent(ActorDAO.class)
 						.addComponent(RoleDAO.class)
-						.addComponent(CrystalPAO.class)
-						.addAmplifier(MovieProxyDAO.class)
 						.build())
 				.addModule(defaultSampleModule());
 		try (final AutoCloseableNode node = new AutoCloseableNode(nodeConfigBuilder.build())) {
@@ -55,7 +58,8 @@ public class Level4 {
 	}
 
 	void step1() {
-		LogManager.getLogger(this.getClass()).info("film in france : " + movieProxyDAO.count(1128L));
+		final Long countryId = movieServices.getMovieById(FORREST_GUMP_ID).getCouId();
+		LogManager.getLogger(this.getClass()).info("films in the same country as Forrest Gump : " + movieProxyDAO.count(countryId));
 	}
 
 }
