@@ -50,7 +50,8 @@ create Task TkGetActorsIdsByMovie {
 
 Pour un objet, le domain se nomme `Do` suivi du nom de sa définition : `DoDtMovie` pour `DtMovie` (la classe `Movie`), `DoDtActor` pour `DtActor`.
 
-Une fois la tâche déclarée, Studio génère la méthode Java qui l'exécute. Elle est placée dans le **DAO de l'objet concerné** par les paramètres (en entrée ou en sortie) lorsqu'il n'y a pas d'ambiguïté, sinon dans le **PAO** (*Package Access Object*) du package : ici `CrystalPAO`.
+Une fois la tâche déclarée, Studio génère la méthode Java qui l'exécute. Elle est placée dans le **DAO de l'objet concerné** par les paramètres (en entrée ou en sortie) lorsqu'il n'y a pas d'ambiguïté, sinon dans le **PAO** (*Package Access Object*) du package : ici `CrystalPAO`. Une tâche dont aucun paramètre n'est un objet (que des valeurs simples, comme `TkGetActorsIdsByMovie`) va donc dans le PAO.
+Ce sont les **paramètres** qui décident, pas la requête : peu importe les tables jointes dans le SQL.
 
 **Rappel** : le code généré ne se modifie jamais à la main. Si la méthode ne convient pas, on corrige la définition et on régénère.
 
@@ -71,7 +72,8 @@ Un paramètre de cardinalité `"*"` est une liste. Pour une liste de valeurs sim
 1. Créez la classe `Level1` en copiant `CrystalSample`.
 1. Déclarez en constantes les identifiants utiles des données de démonstration *(voir `sql/initdata.sql`)* : `FORREST_GUMP_ID = 1000L`, `USA_ID = 840L`, `GERMANY_ID = 250L`.
 1. Dans un `step1`, affichez les identifiants des acteurs de Forrest Gump ; dans un `step2`, les films des États-Unis et d'Allemagne *(`Arrays.asList(USA_ID, GERMANY_ID)`)*.
-1. Lancez `Level1` : vous devez voir les acteurs `[1000, 1002]` (Tom Hanks et Meryl Streep), puis une liste de 5 films.
+1. Lancez `Level1` : vous devez voir les acteurs `[1000, 1002]` (Tom Hanks et Meryl Streep), puis une liste de taille 5 (`size=5` : 4 films américains et 1 allemand).
+*(une `DtList` s'affiche par sa définition et sa taille ; parcourez-la si vous voulez voir les films)*
 1. Observez dans la console les traces des tâches *(`Finish /execute/TkGetActorsIdsByMovie ...`)* : vous y trouvez la requête exécutée, sa durée et le nombre de lignes lues. C'est votre premier outil pour comprendre ce que fait l'application en base.
 
 **Attention** : un composant ne se déclare qu'une fois. `CrystalPAO` est déjà déclaré dans le module `Sample` : le déclarer aussi dans `stepDao` fait échouer le démarrage (`Two components with the same id :'crystalPAO'`).

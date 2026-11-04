@@ -51,7 +51,11 @@ public interface MovieProxyDAO extends Amplifier {
 On retrouve les conventions des tâches générées : le nom commence par `Tk`, les paramètres sont en *lowerCamelCase*.
 Les types sont ici des **SmartTypes**, désignés par leur nom : `STy` suivi du nom de la constante de `SampleCrystalSmartTypes` (`Id` → `STyId`). C'est le même nom que vous avez vu dans le code généré au Level 1 : le domain `DoId` des définitions y apparaît en `STyId`.
 
-**Attention** : l'annotation d'un proxy est `@TaskProxyAnnotation`. Le code généré utilise une autre annotation, `@TaskAnnotation` : ne la recopiez pas depuis `CrystalPAO`.
+**Attention** : ne confondez pas les deux annotations de tâche.
+- `@TaskAnnotation` se pose sur une **méthode concrète d'un composant** : c'est ce que génère Studio dans `CrystalPAO` et dans les DAO. Au démarrage, la plateforme en tire la définition de la tâche, et le corps de la méthode l'exécute.
+- `@TaskProxyAnnotation` se pose sur une méthode d'une **interface `Amplifier`**, sans corps : la plateforme en fournit l'implémentation.
+
+Recopier `@TaskAnnotation` depuis `CrystalPAO` sur `MovieProxyDAO` fait échouer le démarrage avec `No way to find a proxy annotation on method : ... MovieProxyDAO.count(java.lang.Long)`.
 
 ### A connaitre : L'activation
 

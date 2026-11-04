@@ -36,7 +36,8 @@ Une **facette** regroupe les résultats par valeur, avec le nombre de résultats
 
 Deux requêtes de recherche sont déclarées : `QryMovie`, sans facette, et `QryMovieWithFacets`, avec les trois facettes. Studio génère dans `MovieIndexSearchClient` une méthode par requête : `createSearchQueryBuilderMovie` et `createSearchQueryBuilderMovieWithFacets`.
 
-Une facette déclarée `multiSelectable : "true"` accepte plusieurs valeurs sélectionnées à la fois. **Attention**, les facettes multi-sélectionnables ont un coût en performances : ne les activez que si le besoin est réel.
+Une facette déclarée `multiSelectable : "true"` accepte plusieurs valeurs sélectionnées à la fois. Quand une valeur est sélectionnée, elle continue d'afficher ses **autres valeurs avec leurs compteurs**, pour que l'utilisateur puisse en ajouter ; une facette simple, elle, ne garde que la valeur choisie.
+**Attention**, la documentation le précise : les facettes multi-sélectionnables ont un coût en performances. Ne les activez que si le besoin est réel.
 
 ### A connaitre : Trier et facetter un champ
 
@@ -59,6 +60,7 @@ Le service `MovieServices.indexMovies()` existe déjà : il appelle `reindexAll`
 
 Une fois réindexé, l'index est conservé d'un lancement à l'autre *(dans `target/classes/search/data`, à supprimer, programme arrêté, pour repartir d'un index vide)*.
 Au démarrage, la plateforme vérifie la structure de l'index : ajouter un champ `keyword` (passage en `sortable`) est accepté ; un changement incompatible impose de supprimer l'index puis de réindexer.
+Dans les deux cas, **réindexez** : les documents déjà indexés n'ont pas le nouveau champ. Sans réindexation, une facette qui s'appuie dessus reste vide.
 
 ## Etapes
 
@@ -82,6 +84,7 @@ create FacetDefinition FctMovieCountry {
     - [`/movies/_search?q=the`](http://localhost:8081/movies/_search?q=the) retourne 4 films, avec la facette `FctMovieCountry` (`"isMultiSelectable": true`) et ses valeurs `etats-unis` (2), `allemagne` (1), `royaume-uni` (1) ;
     - [`/movies/_search?q=the&top=2`](http://localhost:8081/movies/_search?q=the&top=2) retourne les 2 premiers films, et [`&top=2&skip=2`](http://localhost:8081/movies/_search?q=the&top=2&skip=2) les 2 suivants ; `totalCount` reste à 4.
 11. Testez la sélection de facettes en `Post` *(par exemple avec curl depuis Git Bash)* : en sélectionnant `etats-unis` et `allemagne`, vous devez obtenir 3 films.
+*(**observez** aussi : en sélectionnant seulement `etats-unis`, vous obtenez 2 films et la facette pays garde `allemagne` (1) et `royaume-uni` (1) ; en sélectionnant la décennie `r9` de `FctMovieYear`, facette simple, il ne reste qu'elle)*
 ```
 curl -X POST -H "Content-Type: application/json" -d '{"criteria":"the","facets":{"FctMovieCountry":["etats-unis","allemagne"]}}' http://localhost:8081/movies/_search
 ```

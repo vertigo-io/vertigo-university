@@ -71,13 +71,14 @@ Studio génère alors l'enum `SexeEnum` (`male`, `female`), et l'accesseur `acto
 1. `MovieServicesImpl` a maintenant besoin de `ActorDAO` : déclarez-le dans le module `stepDao` de **toutes** vos classes main *(`.addComponent(ActorDAO.class)`, dans `CrystalSample`, `CrystalSearchSample`, `Level1` et `Level2`)*.
 1. Créez la classe `Level3` en copiant `CrystalSample`, et affichez dans un `step1` le nombre d'acteurs masculins de Forrest Gump.
 1. Lancez `Level3` : vous devez obtenir `male actors : 1` (Tom Hanks ; Meryl Streep est `F`). Relancez `Level1` pour vérifier qu'il démarre toujours.
+1. **Observez** la console : après `TkGetActorsByMovie`, aucune autre requête n'est exécutée avant le résultat. `actor.sexe().getEnumValue()` lit la valeur de l'enum sans accès à la base, contrairement au `load()` d'un accesseur vers une entité (Level 2).
 
 **Attention** : si une classe main ne déclare pas `ActorDAO`, son démarrage échoue avec `Components or params not found :actorDAO (referenced by movieServices<MovieServicesImpl>)`. Un composant ne peut être injecté que s'il est déclaré dans la configuration du node.
 
 ### Ce qu'il faut retenir
 
 - Une liste de référence est soit administrable (`MasterData`), soit figée (`StaticMasterData`) ; seule la liste figée devient une enum.
-- Les règles de gestion s'écrivent sur l'enum (`SexeEnum.male`), jamais sur la valeur brute.
+- Les règles de gestion s'écrivent sur l'enum (`SexeEnum.male`), jamais sur la valeur brute ; lire cette valeur ne coûte aucun accès à la base.
 - Un `alter` complète une définition existante sans la réécrire.
 - Tout composant injecté doit être déclaré dans la configuration du node.
 

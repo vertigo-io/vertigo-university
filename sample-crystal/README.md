@@ -18,11 +18,11 @@ Toujours avec la **racine du module** `sample-crystal` comme répertoire de trav
 - **En ligne de commande** (Git Bash, depuis la racine du module) :
   ```
   mvn -q compile dependency:build-classpath -Dmdep.outputFile=cp.txt
-  printf -- '-cp\n"%s"\n' "target/classes;$(tr '\\' '/' < cp.txt)" > java.args
+  printf -- '-cp\n"%s"\n' "target/classes;$(tr '\134' '/' < cp.txt)" > java.args
   java @java.args io.vertigo.samples.crystal.run.CrystalSample
   ```
   - le classpath est trop long pour une ligne de commande Windows : il passe par un fichier d'arguments (`java.args`) ;
-  - dans ce fichier, les `\` sont remplacés par des `/` : le backslash y est un caractère d'échappement, et un chemin Windows non converti fait échouer le lancement (`Could not find or load main class`) ;
+  - dans ce fichier, les `\` sont remplacés par des `/` (`\134` est le code octal du backslash) : le backslash y est un caractère d'échappement, et un chemin Windows non converti fait échouer le lancement (`Could not find or load main class`) ;
   - sous Linux ou macOS, le séparateur du classpath est `:` au lieu de `;` ;
   - après chaque modification de code ou régénération : `mvn -q compile` ;
   - les classes console s'arrêtent seules ; les serveurs web (`CrystalSearchSample`, `Level5`) s'arrêtent avec Ctrl+C.
