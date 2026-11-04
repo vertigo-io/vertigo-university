@@ -53,8 +53,6 @@ Les valeurs sont listées dans un fichier JSON, déclaré dans `studio-config.ya
 }
 ```
 
-*(la documentation présente aussi la déclaration des valeurs directement dans la définition KSP, avec une propriété `values`)*
-
 Studio génère alors l'enum `SexeEnum` (`male`, `female`), et l'accesseur `actor.sexe()` devient un `EnumStoreVAccessor` qui donne directement la valeur de l'enum : `actor.sexe().getEnumValue() == SexeEnum.male`.
 
 **Rappel** : les valeurs du JSON correspondent aux lignes de la table `SEXE`, insérées ici par `sql/initdata.sql`. Les identifiants doivent correspondre : c'est par eux que l'enum retrouve l'entité.

@@ -49,13 +49,9 @@ public interface MovieProxyDAO extends Amplifier {
 ```
 
 On retrouve les conventions des tâches générées : le nom commence par `Tk`, les paramètres sont en *lowerCamelCase*.
-Les types sont ici des **SmartTypes**, désignés par leur nom : `STy` suivi du nom de la constante de `SampleCrystalSmartTypes` (`Id` → `STyId`). C'est le même nom que vous avez vu dans le code généré au Level 1 : le domain `DoId` des définitions y apparaît en `STyId`.
+Les types sont ici des **SmartTypes**, désignés par leur nom : `STy` suivi du nom de la constante de `SampleCrystalSmartTypes` (`Id` → `STyId`). Ouvrez `CrystalPAO` : le domain `DoId` des définitions y apparaît sous ce même nom, `STyId`.
 
-**Attention** : ne confondez pas les deux annotations de tâche.
-- `@TaskAnnotation` se pose sur une **méthode concrète d'un composant** : c'est ce que génère Studio dans `CrystalPAO` et dans les DAO. Au démarrage, la plateforme en tire la définition de la tâche, et le corps de la méthode l'exécute.
-- `@TaskProxyAnnotation` se pose sur une méthode d'une **interface `Amplifier`**, sans corps : la plateforme en fournit l'implémentation.
-
-Recopier `@TaskAnnotation` depuis `CrystalPAO` sur `MovieProxyDAO` fait échouer le démarrage avec `No way to find a proxy annotation on method : ... MovieProxyDAO.count(java.lang.Long)`.
+**Attention** : le code généré (`CrystalPAO`, les DAO) utilise `@TaskAnnotation`, qui se pose sur une méthode concrète d'un composant. Sur une interface `Amplifier`, c'est `@TaskProxyAnnotation` : recopier `@TaskAnnotation` fait échouer le démarrage (`No way to find a proxy annotation on method`).
 
 ### A connaitre : L'activation
 
@@ -75,8 +71,7 @@ Il faut deux déclarations dans la configuration du node :
 1. Lancez `Level4` : vous devez obtenir `films in the same country as Forrest Gump : 4`.
 1. **Question** : la même requête aurait pu être une tâche dans `dao.ksp`, comme au Level 1. Qu'est-ce qui change pour le reste de l'équipe ? *(où la requête est-elle visible ? qui la génère ? à quel moment une erreur dans son écriture est-elle détectée ?)*
 
-**Attention** : si `withTaskProxyMethod()` est oublié, le démarrage échoue avec `No way to find a proxyMethod for this method : ... MovieProxyDAO.count(java.lang.Long)`.
-Les erreurs d'écriture du proxy, elles, n'apparaissent qu'au premier appel de `count()`, tout en bas de la console : par exemple `the name of the descriptor COU_ID must be in lowerCamelCase` pour un paramètre `@TaskInput(name = "COU_ID")`, ou `Definition 'DO_INTEGER' of type 'SmartTypeDefinition' not found` pour un SmartType inconnu.
+**Attention** : si `withTaskProxyMethod()` est oublié, le démarrage échoue (`No way to find a proxyMethod for this method`). Les erreurs d'écriture du proxy, elles, n'apparaissent qu'au premier appel de `count()` : par exemple `the name of the descriptor COU_ID must be in lowerCamelCase` pour un paramètre `@TaskInput(name = "COU_ID")`.
 
 ### Ce qu'il faut retenir
 

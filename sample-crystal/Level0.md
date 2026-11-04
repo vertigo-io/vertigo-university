@@ -32,28 +32,17 @@ Chaque classe main ajoute ensuite deux modules : `stepDao`, vide au départ, où
 
 Le modèle est décrit dans des fichiers de définitions, écrits en KSP (`src/main/resources/*.ksp`, listés dans `application.kpr`). À partir d'eux, Studio génère le code de `src/main/javagen` : les classes des DtObject, les DAO, les tâches d'accès aux données (`CrystalPAO`), le client de recherche et le script de création de la base.
 
-Ce que Studio génère est piloté par `studio-config.yaml` : chaque propriété active un générateur (`vertigo.domain.java` pour les classes, `vertigo.domain.sql` pour le SQL, `vertigo.task` pour les tâches…).
-
 **Rappel** : le code généré ne se modifie jamais à la main. On modifie les définitions, puis on régénère : c'est le geste central du développement Vertigo.
-
-### A connaitre : La console
-
-Le démarrage est bavard : le serveur web démarre d'abord, puis Elasticsearch, puis la base est créée et remplie (les `create table`, puis les `INSERT`). Le démarrage est terminé quand les traces s'arrêtent sur la dernière insertion (`INSERT INTO ROLE ...`).
-Un appel lancé trop tôt peut répondre 404 (routes pas encore publiées) ou 500 (table pas encore créée) : il suffit d'attendre et de relancer l'appel.
-
-Le nom du logger est aligné avec des espaces (`INFO  Level1      - [1000, 1002]`) : pour retrouver une ligne, cherchez plutôt sa fin.
-
-Attention, après une erreur au démarrage (un composant déclaré deux fois, une dépendance manquante…), le programme peut ne pas s'arrêter de lui-même : arrêtez-le à la main *(bouton Stop de l'IDE ou Ctrl+C)*.
 
 ## Etapes
 
 1. Installez le dépôt dans votre repo Maven local : `mvn install` à la racine du dépôt.
 *(le parent des samples n'est pas publié sur Maven Central)*
-1. Lisez `SampleConfigBuilder` et repérez les Features activées par le node : `JavalinFeatures`, `CommonsFeatures`, `DatabaseFeatures`, `DataModelFeatures` et `DataStoreFeatures` toujours ; `ElasticSearchFeatures` et `DataFactoryFeatures` avec `withSearch` ; `VegaFeatures` avec `withVega`.
+1. Lisez `SampleConfigBuilder` et repérez les Features activées par le node *(`DatabaseFeatures`, `DataStoreFeatures`… ; `ElasticSearchFeatures` et `DataFactoryFeatures` seulement avec `withSearch`, `VegaFeatures` avec `withVega`)*.
 1. Lancez `CrystalSample` *(voir le [README](./README.md#lancer-une-classe-main) pour lancer une classe main)*. Vers la fin de la console, juste avant les traces d'arrêt, vous devez voir le film Forrest Gump : `DtMovie(couId=840, imdbid=tt0109830, movId=1000, name=Forrest Gump, year=1994)`.
-1. Lancez `Studio` depuis la racine du module. Il annonce la création de 19 fichiers *(il réécrit tout le code généré)*, mais leur contenu ne change pas : `git status` reste vide *(hors d'un dépôt git, comparez avec une copie de `src/main/javagen` faite avant)*.
-*(les lignes `INFO ... Resource fldActor$actId not found` sont normales : ce sont les libellés traduits des champs, dont la génération est désactivée dans `studio-config.yaml`)*
-1. Lancez `CrystalSearchSample` et attendez la fin du démarrage.
+1. Lancez `Studio` depuis la racine du module. Il annonce la création de 19 fichiers *(il réécrit tout le code généré)*, mais leur contenu ne change pas : `git status` reste vide.
+*(les lignes `Resource fld... not found` sont normales : la génération des libellés traduits est désactivée)*
+1. Lancez `CrystalSearchSample` et attendez la fin du démarrage *(voir le README)*.
 1. Consultez le film [http://localhost:8081/movies/1000](http://localhost:8081/movies/1000) et ses 2 rôles [http://localhost:8081/movies/1000/roles](http://localhost:8081/movies/1000/roles).
 1. Testez la recherche [http://localhost:8081/movies/_search?q=gump](http://localhost:8081/movies/_search?q=gump) : elle ne trouve rien (`"totalCount": 0`), car l'index de recherche est encore vide. La réindexation n'est pas automatique : vous ajouterez la route qui la déclenche au Level 5 :)
 1. Arrêtez `CrystalSearchSample` *(Ctrl+C)*.

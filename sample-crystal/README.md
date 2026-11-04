@@ -26,6 +26,7 @@ Toujours avec la **racine du module** `sample-crystal` comme répertoire de trav
   - sous Linux ou macOS, le séparateur du classpath est `:` au lieu de `;` ;
   - après chaque modification de code ou régénération : `mvn -q compile` ;
   - les classes console s'arrêtent seules ; les serveurs web (`CrystalSearchSample`, `Level5`) s'arrêtent avec Ctrl+C. Après une erreur au démarrage, une classe console peut aussi rester bloquée : arrêtez-la de la même façon.
+- **Le démarrage d'un serveur** est terminé quand les traces s'arrêtent sur la dernière insertion de données (`INSERT INTO ROLE ...`) : un appel lancé avant peut répondre 404 ou 500, il suffit de le relancer.
 
 ## Exercices
 

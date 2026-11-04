@@ -34,7 +34,7 @@ Une **facette** regroupe les résultats par valeur, avec le nombre de résultats
 - les facettes **term**, dont les valeurs sont tirées des données de l'index (`FctMovieCountry`, par pays) ;
 - les facettes **range**, dont les tranches sont prédéfinies (`FctMovieName` par tranche de titre, `FctMovieYear` par décennie). Le filtre de chaque tranche est une requête écrite dans la syntaxe du moteur de recherche : il nomme donc lui-même le champ à interroger (`name.keyword:[a TO g]`).
 
-Deux requêtes de recherche sont déclarées : `QryMovie`, sans facette, et `QryMovieWithFacets`, avec les trois facettes. Studio génère dans `MovieIndexSearchClient` une méthode par requête : `createSearchQueryBuilderMovie` et `createSearchQueryBuilderMovieWithFacets`.
+Deux requêtes de recherche sont déclarées, `QryMovie` (sans facette) et `QryMovieWithFacets` ; Studio génère pour chacune une méthode dans `MovieIndexSearchClient` (`createSearchQueryBuilderMovie…`).
 
 Une facette déclarée `multiSelectable : "true"` accepte plusieurs valeurs sélectionnées à la fois. Quand une valeur est sélectionnée, elle continue d'afficher ses **autres valeurs avec leurs compteurs**, pour que l'utilisateur puisse en ajouter ; une facette simple, elle, ne garde que la valeur choisie.
 **Attention**, la documentation le précise : les facettes multi-sélectionnables ont un coût en performances. Ne les activez que si le besoin est réel.
@@ -42,8 +42,8 @@ Une facette déclarée `multiSelectable : "true"` accepte plusieurs valeurs sél
 ### A connaitre : Trier et facetter un champ
 
 Le SmartType d'un champ d'index précise comment il est indexé, avec sa propriété `indexType` :
-- `text_fr` : un texte analysé en français, pour la recherche plein texte. L'analyseur `text_fr` (déclaré dans `elasticsearch.yml`) découpe le texte en mots, les met en minuscules, retire les accents et réduit chaque mot à sa racine ;
-- `text_fr:sortable` : en plus, Vertigo ajoute automatiquement une version `keyword` du champ (`name.keyword`). Elle conserve la valeur **entière**, sans la découper en mots, simplement normalisée pour le tri (le normalizer `sortable` de `elasticsearch.yml` la met en minuscules et retire les accents). Vertigo l'utilise de manière transparente pour les **tris** et pour les **facettes** ;
+- `text_fr` : un texte analysé en français pour la recherche plein texte, découpé en mots réduits à leur racine (analyseur `text_fr` de `elasticsearch.yml`) ;
+- `text_fr:sortable` : en plus, Vertigo ajoute automatiquement une version `keyword` du champ (`name.keyword`), qui conserve la valeur **entière**, simplement mise en minuscules et sans accents (normalizer `sortable`). Vertigo l'utilise de manière transparente pour les **tris** et pour les **facettes** ;
 - `facetable` existe aussi : il permet de facetter le champ analysé lui-même. Il n'est pas nécessaire sur un champ déjà `sortable`.
 
 Pourquoi préférer `sortable` pour une facette de pays ? Parce qu'une facette sur un texte analysé regroupe les **mots** analysés, pas les valeurs. Avec `text_fr:facetable`, la facette pays renvoie `etat`, `unis`, `allemagn`, `royaum`… Avec `text_fr:sortable`, elle renvoie `etats-unis`, `allemagne` et `royaume-uni`.
@@ -58,9 +58,7 @@ Par exemple : `/movies/_search?q=the&top=2&skip=2`. En `Post`, la pagination pas
 L'index est vide au premier lancement et la réindexation n'est pas automatique. Vertigo ne fournit pas d'écran d'administration de la réindexation : le web service ou l'écran qui la déclenche est à créer dans l'application.
 Le service `MovieServices.indexMovies()` existe déjà : il appelle `reindexAll` du `SearchManager` et retourne le nombre de films indexés. Il ne reste qu'à le publier sur une route.
 
-Une fois réindexé, l'index est conservé d'un lancement à l'autre *(dans `target/classes/search/data`, à supprimer, programme arrêté, pour repartir d'un index vide)*.
-Au démarrage, la plateforme vérifie la structure de l'index : ajouter un champ `keyword` (passage en `sortable`) est accepté ; un changement incompatible impose de supprimer l'index puis de réindexer.
-Dans les deux cas, **réindexez** : les documents déjà indexés n'ont pas le nouveau champ. Sans réindexation, une facette qui s'appuie dessus reste vide.
+L'index est conservé d'un lancement à l'autre. Après toute modification de sa structure (un champ devenu `sortable`, par exemple), **réindexez** : les documents déjà indexés n'ont pas le nouveau champ, et une facette qui s'appuie dessus resterait vide.
 
 ## Etapes
 
@@ -93,8 +91,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"criteria":"the","facets":
 
 **Attention** :
 - une facette sur un champ ni `sortable` ni `facetable` (par exemple en laissant `Label` en `text_fr`) fait répondre la recherche en **422** : `Search index structure error. Sorted or aggregated fields must be declared as keyword, sortable or facetable in your SmartType.` ;
-- en `Post`, le critère ne doit pas être vide et la clé `facets` est obligatoire *(`"facets":{}` si aucune facette n'est sélectionnée)*, sinon la réponse est un **500** `RestParam not found` ;
-- en `Get`, le paramètre `q` est obligatoire mais peut être vide : `?q=` retourne les 6 films, alors que sans `q` la réponse est un **500** `RestParam not found : class java.lang.String :Query:q`.
+- en `Post`, le critère ne doit pas être vide et la clé `facets` est obligatoire *(`"facets":{}` si aucune facette n'est sélectionnée)*, sinon la réponse est un **500** `RestParam not found`.
 
 ### Ce qu'il faut retenir
 

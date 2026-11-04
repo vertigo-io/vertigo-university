@@ -53,8 +53,6 @@ Pour un objet, le domain se nomme `Do` suivi du nom de sa définition : `DoDtMov
 Une fois la tâche déclarée, Studio génère la méthode Java qui l'exécute. Elle est placée dans le **DAO de l'objet concerné** par les paramètres (en entrée ou en sortie) lorsqu'il n'y a pas d'ambiguïté, sinon dans le **PAO** (*Package Access Object*) du package : ici `CrystalPAO`. Une tâche dont aucun paramètre n'est un objet (que des valeurs simples, comme `TkGetActorsIdsByMovie`) va donc dans le PAO.
 Ce sont les **paramètres** qui décident, pas la requête : peu importe les tables jointes dans le SQL.
 
-**Rappel** : le code généré ne se modifie jamais à la main. Si la méthode ne convient pas, on corrige la définition et on régénère.
-
 ### A connaitre : Une liste en paramètre
 
 Un paramètre de cardinalité `"*"` est une liste. Pour une liste de valeurs simples, on écrit `#nomParametre.rownum#` dans la requête : dans une clause `in (...)`, chaque valeur de la liste devient un paramètre bindé.
@@ -65,15 +63,13 @@ Un paramètre de cardinalité `"*"` est une liste. Pour une liste de valeurs sim
 1. Déclarez une seconde tâche `TkGetMoviesInCountries`, qui retourne les films d'une liste de pays.
 *(requête : `select * from movie where cou_id in ( #countriesIds.rownum#)` ; en entrée `countriesIds` de domain `DoId`, en sortie `movies` de domain `DoDtMovie`, tous deux de cardinalité `"*"`)*
 1. Lancez `Studio` et retrouvez les méthodes générées : `CrystalPAO.getActorsIdsByMovie` et `MovieDAO.getMoviesInCountries`.
-*(dans le code généré, le domain `DoId` apparaît sous le nom de son SmartType : `STyId`)*
 1. **Question** : pourquoi Studio a-t-il placé la première méthode dans `CrystalPAO` et la seconde dans `MovieDAO` ? Relisez la règle de placement ci-dessus.
 1. Ajoutez les deux méthodes à `MovieServices` et implémentez-les dans `MovieServicesImpl`, en appelant le PAO et le DAO.
 *(vérifiez d'abord les paramètres avec `Assertion.check().isNotNull(...)`)*
 1. Créez la classe `Level1` en copiant `CrystalSample`.
 1. Déclarez en constantes les identifiants utiles des données de démonstration *(voir `sql/initdata.sql`)* : `FORREST_GUMP_ID = 1000L`, `USA_ID = 840L`, `GERMANY_ID = 250L`.
 1. Dans un `step1`, affichez les identifiants des acteurs de Forrest Gump ; dans un `step2`, les films des États-Unis et d'Allemagne *(`Arrays.asList(USA_ID, GERMANY_ID)`)*.
-1. Lancez `Level1` : vous devez voir les acteurs `[1000, 1002]` (Tom Hanks et Meryl Streep), puis une liste de taille 5 (`size=5` : 4 films américains et 1 allemand).
-*(une `DtList` s'affiche avec sa taille, puis une ligne par élément : `Row #0 : DtMovie(...)`)*
+1. Lancez `Level1` : vous devez voir les acteurs `[1000, 1002]` (Tom Hanks et Meryl Streep), puis une liste de 5 films (4 américains et 1 allemand).
 1. Observez dans la console les traces des tâches *(`Finish /execute/TkGetActorsIdsByMovie ...`)* : vous y trouvez la requête exécutée, sa durée et le nombre de lignes lues. C'est votre premier outil pour comprendre ce que fait l'application en base.
 
 **Attention** : un composant ne se déclare qu'une fois. `CrystalPAO` est déjà déclaré dans le module `Sample` : le déclarer aussi dans `stepDao` fait échouer le démarrage (`Two components with the same id :'crystalPAO'`).
@@ -83,7 +79,6 @@ Un paramètre de cardinalité `"*"` est une liste. Pour une liste de valeurs sim
 - Les méthodes du DAO suffisent pour une seule entité ; dès que plusieurs entités sont concernées, on écrit une tâche.
 - Une requête se déclare comme une tâche dans les définitions, jamais dans le code Java : Studio génère la méthode.
 - La méthode générée va dans le DAO de l'objet concerné, ou dans le PAO du package quand il n'y en a pas.
-- Les manipulations ensemblistes (une requête pour une liste) sont toujours préférables aux appels unitaires répétés.
 
 # [Suite : Level 2 - Accesseurs](./Level2.md)
 
