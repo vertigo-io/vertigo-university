@@ -51,7 +51,6 @@ Par convention, le `load()` est fait **dans un service** : c'est un accès SQL, 
 *(rappel : marqueur `{}` dans le message Log4j, voir le Level 1)*
 1. Lancez `Level2`. Vous devez voir l'état de l'accesseur passer de `false` à `true`, puis `false`, puis `true` ; puis les 2 rôles de Forrest Gump (`<1>Forrest Gump` et `<2>Jenny Curran`, le préfixe vient des données) ; puis `false` après le `reset` ; enfin une liste de 2 rôles.
 1. **Observez** la console autour des traces `country accessor isLoaded` : entre `false` et `true`, une requête `TkSelectCountryByUri` est exécutée. C'est le `load()` qui lit le pays en base. En revanche, le `set(country)` ne déclenche aucune requête. De même, `role().load()` exécute `TkSelectListRoleByCriteria`.
-1. **Question** : ces tâches `TkSelectCountryByUri` et `TkSelectListRoleByCriteria`, vous ne les avez pas écrites. D'où viennent-elles ? *(indice : relisez au Level 1 les méthodes que les DAO offrent sans que vous ayez à déclarer de tâche : sélection par la clé primaire, sélection par critères)*
 
 ### Ce qu'il faut retenir
 

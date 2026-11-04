@@ -65,6 +65,7 @@ L'index est créé dès le premier démarrage d'une classe main avec la recherch
 ## Etapes
 
 1. Dans `SampleCrystalSmartTypes`, passez l'`indexType` du SmartType `LabelLong` (le titre) de `text_fr` à `text_fr:sortable`, et celui de `Label` (le pays) de `text_fr` à `code:keyword`.
+*(dans `modelSearch.ksp`, le champ `name` a le domain `DoLabelLong` et le champ `country` le domain `DoLabel` : chaque domain `DoXxx` correspond au SmartType `Xxx`)*
 1. Dans `searchMovie.ksp`, faites porter `FctMovieName` sur le champ `name`, avec des tranches sur `name.keyword` à la place de `nameSortOnly` *(`range r1 { filter:"name.keyword:[* TO a]", label:"#"}`, etc. ; le champ calculé `nameSortOnly` n'est alors plus utilisé, vous pouvez le laisser)*.
 1. Rendez `FctMovieCountry` multi-sélectionnable :
 ```
@@ -89,11 +90,11 @@ create FacetDefinition FctMovieCountry {
 ```
 curl -X POST -H "Content-Type: application/json" -d '{"criteria":"the","facets":{"FctMovieCountry":["Etats-Unis","Allemagne"]}}' http://localhost:8081/movies/_search
 ```
-12. **Question** : dans la réponse de `q=the`, la facette `FctMovieName` affiche `t-z` *(seules les tranches non vides sont renvoyées)* et la facette `FctMovieCountry` affiche `Etats-Unis`, `Allemagne`… D'où vient le libellé de chaque facette ?
+12. **Question** : dans la réponse de `q=the`, la facette `FctMovieName` n'affiche que `t-z` *(seules les tranches non vides sont renvoyées)*. Si l'on ajoutait sur l'année une facette term, puis une facette range par décennie comme `FctMovieYear`, quels libellés afficherait chacune, et d'où viendraient-ils ?
 13. Arrêtez `Level4` *(Ctrl+C)*.
 
 **Attention** :
-- une facette sur un champ qui n'est ni `keyword`, ni `sortable`, ni `facetable` (par exemple en laissant `Label` en `text_fr`) fait répondre la recherche en **422** : `Search index structure error. Sorted or aggregated fields must be declared as keyword, sortable or facetable in your SmartType.` ;
+- une facette sur un champ qui n'est ni `keyword`, ni `sortable`, ni `facetable` (par exemple, sur un index neuf, avec `Label` laissé en `text_fr`) fait répondre la recherche en **422** : `Search index structure error. Sorted or aggregated fields must be declared as keyword, sortable or facetable in your SmartType.` ;
 - en `Post`, le critère ne doit pas être vide et la clé `facets` est obligatoire *(`"facets":{}` si aucune facette n'est sélectionnée)*, sinon la réponse est un **500** `RestParam not found`.
 
 ### Ce qu'il faut retenir
