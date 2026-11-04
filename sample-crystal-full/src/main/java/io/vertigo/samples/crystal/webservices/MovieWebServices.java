@@ -40,7 +40,7 @@ public class MovieWebServices implements WebServices {
 	@AnonymousAccessAllowed
 	@GET("/_search")
 	public FacetedQueryResult<MovieIndex, SearchQuery> searchMovies(@QueryParam("q") final String criteria,
-			final DtListState dtListState) {
+			@QueryParam("") final DtListState dtListState) {
 		return movieServices.searchMovies(criteria, SelectedFacetValues.empty().build(), dtListState);
 	}
 
@@ -48,7 +48,7 @@ public class MovieWebServices implements WebServices {
 	@POST("/_search")
 	public FacetedQueryResult<MovieIndex, SearchQuery> search(@InnerBodyParam("criteria") final String criteria,
 			@InnerBodyParam("facets") final SelectedFacetValues selectedFacets,
-			final DtListState dtListState) {
+			@QueryParam("") final DtListState dtListState) {
 		return movieServices.searchMovies(criteria, selectedFacets, dtListState);
 	}
 

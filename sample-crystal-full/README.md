@@ -9,7 +9,7 @@ Version complète de Crystal : niveaux progressifs, authorization (entités séc
   - Level 2 : accesseurs (`load`, `get`, `set`, `reset`)
   - Level 3 : liste de référence statique (`Sexe` → `SexeEnum`)
   - Level 4 : DAO proxy (`MovieProxyDAO`)
-  - Level 5 : web services REST et recherche à facettes (Javalin :8081). **L'index démarre vide** : appeler `GET /movies/search/_reindex` avant de chercher (`GET /movies/_search?q=the&listState.top=2`)
+  - Level 5 : web services REST et recherche à facettes (Javalin :8081). **L'index est vide au premier lancement** : appeler `GET /movies/search/_reindex` avant de chercher (`GET /movies/_search?q=the&top=2`)
 - `crystal.run.CrystalSample` / `crystal.run.CrystalSearchSample` : CRUD et recherche
 - Aucune donnée préchargée : la base H2 est créée en mémoire au démarrage (`crystal.boot.DataBaseInitializer` : `sqlgen/crebas.sql` puis `sql/initdata.sql`)
 - Le login s'appuie sur les utilisateurs de la base H2 (`crystal.services.LoginServices`)

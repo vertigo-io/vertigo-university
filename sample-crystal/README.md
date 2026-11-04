@@ -5,7 +5,7 @@ Vertigo DataFactory « Crystal » : accès typé aux données (H2) et moteur de 
 ## Démarrage
 
 - `crystal.run.CrystalSample` : CRUD (lecture d'un film)
-- `crystal.run.CrystalSearchSample` : web services REST (Javalin :8081) : `GET /movies/{id}`, `GET /movies/{id}/roles`, recherche `GET|POST /movies/_search` (au départ, le `GET` renvoie au plus 5 résultats et le `POST` lit sa pagination dans les paramètres d'URL `listState.top`, `listState.skip` ; le Level 5 étend cette pagination au `GET`)
+- `crystal.run.CrystalSearchSample` : web services REST (Javalin :8081) : `GET /movies/{id}`, `GET /movies/{id}/roles`, recherche `GET|POST /movies/_search` (au départ, le `GET` renvoie au plus 5 résultats et le `POST` lit sa pagination dans les paramètres d'URL `top`, `skip` ; le Level 5 étend cette pagination au `GET`)
 - Aucune donnée préchargée : la base H2 est créée en mémoire au démarrage (`crystal.boot.DataBaseInitializer` : `sqlgen/crebas.sql` puis les données de démo `sql/initdata.sql`) ; Elasticsearch est embarqué (données d'index sous `target/classes/search`)
 - L'index de recherche est **vide** au premier lancement : la réindexation n'est pas automatique, la route `GET /movies/search/_reindex` est ajoutée au Level 5. Une fois réindexé, l'index est conservé d'un lancement à l'autre (`target/classes/search/data`, à supprimer programme arrêté pour repartir d'un index vide)
 - Javalin démarre toujours sur le port 8081 : deux classes main ne peuvent pas tourner en même temps
