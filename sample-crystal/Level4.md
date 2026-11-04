@@ -18,6 +18,15 @@ Un *amplifier* est un composant déclaré sous la forme d'une **interface** (qui
 - `@TaskInput(name, smartType)` sur chaque paramètre : son nom dans la requête (`#couId#`) et son type.
 
 ```java
+package io.vertigo.samples.crystal.dao;
+
+import io.vertigo.basics.task.TaskEngineSelect;
+import io.vertigo.commons.transaction.Transactional;
+import io.vertigo.core.node.component.Amplifier;
+import io.vertigo.datamodel.task.proxy.TaskInput;
+import io.vertigo.datamodel.task.proxy.TaskOutput;
+import io.vertigo.datamodel.task.proxy.TaskProxyAnnotation;
+
 @Transactional
 public interface MovieProxyDAO extends Amplifier {
 
@@ -30,6 +39,8 @@ public interface MovieProxyDAO extends Amplifier {
 
 }
 ```
+
+**Attention** : l'annotation d'un proxy est `@TaskProxyAnnotation`. Le code généré (`CrystalPAO`, les DAO) utilise une autre annotation, `@TaskAnnotation` : ne la recopiez pas depuis le code généré.
 
 Les conventions de nommage :
 
@@ -47,17 +58,18 @@ Deux déclarations dans la configuration du node :
 ## Etapes
 
 1. Dans `SampleCrystalSmartTypes`, ajoutez le smart type `Count` : un `Integer` (`@SmartTypeDefinition(Integer.class)`), avec le formatter par défaut et `storeType` `NUMERIC`, sur le modèle de `Year`.
-2. Créez l'interface `MovieProxyDAO` (code ci-dessus) dans le package `io.vertigo.samples.crystal.dao`.
+2. Créez l'interface `MovieProxyDAO` (code complet ci-dessus) : `src/main/java/io/vertigo/samples/crystal/dao/MovieProxyDAO.java`. Le dossier `dao` est à créer sous `src/main/java` : le package existe déjà, mais seulement dans `src/main/javagen` (les DAO générés), où l'on n'écrit jamais à la main.
 3. Dans `SampleConfigBuilder` :
    - ajoutez `.withTaskProxyMethod()` à `DataStoreFeatures` ;
-   - ajoutez un module `proxies` qui déclare l'amplifier `MovieProxyDAO`.
+   - après le module `ressources` (et en dehors des blocs `if`), ajoutez le module `proxies` :
+     `nodeConfigBuilder.addModule(ModuleConfig.builder("proxies").addAmplifier(MovieProxyDAO.class).build());`
 4. Créez `Level4` en copiant `CrystalSample` (avec `ActorDAO` dans `stepDao`) :
    - injectez `MovieProxyDAO` (`@Inject private MovieProxyDAO movieProxyDAO;`) ;
    - `step1()` : lisez le pays de Forrest Gump (`movieServices.getMovieById(FORREST_GUMP_ID).getCouId()`), puis affichez `"films in the same country as Forrest Gump : " + movieProxyDAO.count(countryId)`.
 5. Lancez `Level4`.
    **Vérification** : la console affiche `Level4 - films in the same country as Forrest Gump : 4`.
 
-**Les erreurs que vous pouvez rencontrer** (toutes au démarrage) :
+**Les erreurs que vous pouvez rencontrer** (toutes au démarrage ; après certaines, le programme ne s'arrête pas de lui-même : arrêtez-le à la main) :
 
 - `withTaskProxyMethod()` oublié : `No way to find a proxyMethod for this method : public abstract int io.vertigo.samples.crystal.dao.MovieProxyDAO.count(java.lang.Long)` ;
 - un paramètre en majuscules (`COU_ID`) : `the name of the descriptor COU_ID must be in lowerCamelCase` ;

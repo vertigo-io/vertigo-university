@@ -2,11 +2,11 @@
 	{
 		"male" : {
 			"sexCd" : "M",
-			"label" : "Male"
+			"label" : "Masculin"
 		},
 		"female" : {
 			"sexCd" : "F",
-			"label" : "Female"
+			"label" : "Feminin"
 		}		
 				
 	}

@@ -5,7 +5,8 @@ Vertigo DataFactory « Crystal » : accès typé aux données (H2) et moteur de 
 ## Démarrage
 
 - `crystal.run.CrystalSample` : CRUD (lecture d'un film)
-- `crystal.run.CrystalSearchSample` : web services REST (Javalin :8081) : `GET /movies/{id}`, `GET /movies/{id}/roles`, recherche `GET|POST /movies/_search` (pagination par les paramètres `listState.top`, `listState.skip`)
+- `crystal.run.CrystalSearchSample` : web services REST (Javalin :8081) : `GET /movies/{id}`, `GET /movies/{id}/roles`, recherche `GET|POST /movies/_search` (au départ, le `GET` renvoie au plus 5 résultats et le `POST` lit sa pagination dans les paramètres d'URL `listState.top`, `listState.skip` ; le Level 5 étend cette pagination au `GET`)
+- Lancement : depuis l'IDE (*Run As > Java Application* sur la classe main), avec la **racine du module** `sample-crystal` comme répertoire de travail (nécessaire pour `Studio`). En ligne de commande : `mvn compile`, puis `java` avec le classpath produit par `mvn dependency:build-classpath` (voir le « Bon à savoir » de l'étape 1 du [parcours Démarrage](../docs/parcours-demarrage.md))
 - Aucune donnée préchargée : la base H2 est créée en mémoire au démarrage (`crystal.boot.DataBaseInitializer` : `sqlgen/crebas.sql` puis les données de démo `sql/initdata.sql`) ; Elasticsearch est embarqué (données d'index sous `target/classes/search`)
 - L'index de recherche démarre **vide** : la réindexation n'est pas automatique, la route `GET /movies/search/_reindex` est ajoutée au Level 5 (voir `sample-crystal-full`)
 

@@ -32,11 +32,11 @@ Pour en faire une enum Java :
    	{
    		"male" : {
    			"sexCd" : "M",
-   			"label" : "Male"
+   			"label" : "Masculin"
    		},
    		"female" : {
    			"sexCd" : "F",
-   			"label" : "Female"
+   			"label" : "Feminin"
    		}		
    	}
    }
@@ -44,7 +44,7 @@ Pour en faire une enum Java :
 
 Le générateur produit alors l'enum `SexeEnum` (`male`, `female`), et l'accesseur `actor.sexe()` devient un `EnumStoreVAccessor` qui donne directement la valeur de l'enum : `actor.sexe().getEnumValue() == SexeEnum.male`.
 
-Les identifiants du JSON (`M`, `F`) doivent correspondre aux lignes de la table `SEXE` : elles sont insérées par `sql/initdata.sql`.
+Les valeurs du JSON (`M` / `Masculin`, `F` / `Feminin`) correspondent aux lignes de la table `SEXE`, insérées par `sql/initdata.sql`. Les identifiants doivent correspondre : c'est par eux que l'enum retrouve l'entité.
 
 ## Etapes
 
@@ -54,7 +54,7 @@ Les identifiants du JSON (`M`, `F`) doivent correspondre aux lignes de la table 
 4. Lancez `Studio` depuis la racine du module.
    **Vérification** : `src/main/javagen/io/vertigo/samples/crystal/domain/SexeEnum.java` existe, `Actor.sexe()` retourne un `EnumStoreVAccessor`, et `ActorDAO` contient `getActorsByMovie`.
 5. Implémentez `countMaleActorsInMovie(movId)` dans `MovieServicesImpl` : injectez `ActorDAO`, chargez les acteurs du film avec `actorDAO.getActorsByMovie(movId)`, puis comptez ceux dont `actor.sexe().getEnumValue() == SexeEnum.male`.
-6. `MovieServicesImpl` dépend désormais de `ActorDAO` : déclarez-le (`.addComponent(ActorDAO.class)`) dans le module `stepDao` de **toutes** vos classes main qui utilisent `MovieServices` (`CrystalSample`, `CrystalSearchSample`, `Level1`, `Level2`), sinon leur démarrage échoue sur la dépendance manquante.
+6. `MovieServicesImpl` dépend désormais de `ActorDAO` : déclarez-le (`.addComponent(ActorDAO.class)`) dans le module `stepDao` de **toutes** vos classes main qui utilisent `MovieServices` (`CrystalSample`, `CrystalSearchSample`, `Level1`, `Level2`). Sinon leur démarrage échoue avec `Components or params not found :actorDAO (referenced by movieServices<MovieServicesImpl>)` (le programme ne s'arrête alors pas de lui-même : arrêtez-le à la main).
 7. Créez `Level3` en copiant `CrystalSample` (avec `ActorDAO` dans `stepDao`) :
    - `step1()` : affichez `"male actors : " + movieServices.countMaleActorsInMovie(FORREST_GUMP_ID)`.
 8. Lancez `Level3`.

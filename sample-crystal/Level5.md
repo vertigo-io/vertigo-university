@@ -40,7 +40,13 @@ L'index démarre vide et n'est pas réindexé automatiquement. `MovieServices.in
 1. Dans `SampleCrystalSmartTypes`, passez l'`indexType` des smart types `Label` (le pays) et `LabelLong` (le titre) de `text_fr` à `text_fr:sortable`.
 2. Dans `searchMovie.ksp` :
    - `FctMovieName` : utilisez le champ `name` et ses tranches sur `name.keyword` (`range r1 { filter:"name.keyword:[* TO a]", label:"#"}`, etc.) à la place de `nameSortOnly` ;
-   - `FctMovieCountry` : ajoutez `multiSelectable : "true"`.
+   - `FctMovieCountry` : ajoutez `multiSelectable : "true"`, sur une ligne à part :
+     ```
+     create FacetDefinition FctMovieCountry {  
+       dtDefinition:DtMovieIndex, fieldName:"country", label:"Par pays"
+       multiSelectable : "true"
+     }
+     ```
 3. Lancez `Studio` depuis la racine du module.
    **Vérification** : dans `MovieIndexSearchClient`, les tranches de `FctMovieName` portent sur `name.keyword` et `FctMovieCountry` déclare `.withMultiSelectable()`.
 4. Dans `MovieServicesImpl.searchMovies`, utilisez `movieIndexSearchClient.createSearchQueryBuilderMovieWithFacets(criteria, selectedFacetValues)` au lieu de `createSearchQueryBuilderMovie`.
@@ -48,12 +54,17 @@ L'index démarre vide et n'est pas réindexé automatiquement. `MovieServices.in
    - ajoutez la route `@AnonymousAccessAllowed @GET("/search/_reindex")` qui retourne `movieServices.indexMovies()` ;
    - dans `GET /_search`, remplacez la pagination fixe `DtListState.of(5)` par un paramètre `final DtListState dtListState`.
 6. Créez `Level5` en copiant `CrystalSearchSample` (avec `ActorDAO` dans `stepDao`) : web services activés (`createNodeConfigBuilder(true, true)`), et un `step1()` qui attend (`Thread.currentThread().join()`).
-7. Après avoir modifié les smart types de l'index, repartez d'un index neuf : `mvn clean`, ou supprimez `target/classes/search/data`. Lancez `Level5`, puis appelez :
-   - `GET /movies/search/_reindex` : **200**, `6`
-   - `GET /movies/_search?q=gump` : **200**, Forrest Gump
-   - `GET /movies/_search?q=the&listState.top=2` : **200**, 2 films
-   - `GET /movies/_search?q=the` : **200**, 4 films, et la facette `FctMovieCountry` (`"isMultiSelectable": true`) avec les valeurs `etats-unis` (2), `allemagne` (1), `royaume-uni` (1)
-   - `POST /movies/_search` avec le corps `{"criteria":"the","facets":{"FctMovieCountry":["etats-unis","allemagne"]}}` : **200**, 3 films
+7. Lancez `Level5` et attendez la fin des traces de démarrage (voir le Level 0), puis appelez (navigateur pour les `GET`, ou `curl`) :
+   - `curl http://localhost:8081/movies/search/_reindex` : **200**, `6`
+   - `curl "http://localhost:8081/movies/_search?q=gump"` : **200**, Forrest Gump
+   - `curl "http://localhost:8081/movies/_search?q=the&listState.top=2"` : **200**, 2 films
+   - `curl "http://localhost:8081/movies/_search?q=the"` : **200**, 4 films, et la facette `FctMovieCountry` (`"isMultiSelectable": true`) avec les valeurs `etats-unis` (2), `allemagne` (1), `royaume-uni` (1)
+   - le `POST`, avec un corps JSON (en-tête `Content-Type: application/json` obligatoire) : **200**, 3 films
+     ```
+     curl -X POST -H "Content-Type: application/json" -d '{"criteria":"the","facets":{"FctMovieCountry":["etats-unis","allemagne"]}}' http://localhost:8081/movies/_search
+     ```
+
+   **Bon à savoir** : l'index est créé au démarrage à partir des smart types ; après les avoir modifiés, la plateforme met à jour sa structure au démarrage suivant, il suffit de réindexer. Pour repartir d'un index complètement vide, supprimez `target/classes/search/data` (programme arrêté).
 8. Arrêtez `Level5` (Ctrl+C).
 
 **Les erreurs et pièges que vous pouvez rencontrer** :
