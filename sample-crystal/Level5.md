@@ -32,7 +32,7 @@ L'index `IdxMovie` (`searchMovie.ksp`) contient des `MovieIndex` (`movId`, `name
 
 Une **facette** regroupe les résultats par valeur, avec le nombre de résultats de chacune. Il en existe deux types courants :
 - les facettes **term**, dont les valeurs sont tirées des données de l'index (`FctMovieCountry`, par pays) ;
-- les facettes **range**, dont les tranches sont prédéfinies (`FctMovieName` par tranche de titre, `FctMovieYear` par décennie).
+- les facettes **range**, dont les tranches sont prédéfinies (`FctMovieName` par tranche de titre, `FctMovieYear` par décennie). Le filtre de chaque tranche est une requête écrite dans la syntaxe du moteur de recherche : il nomme donc lui-même le champ à interroger (`name.keyword:[a TO g]`).
 
 Deux requêtes de recherche sont déclarées : `QryMovie`, sans facette, et `QryMovieWithFacets`, avec les trois facettes. Studio génère dans `MovieIndexSearchClient` une méthode par requête : `createSearchQueryBuilderMovie` et `createSearchQueryBuilderMovieWithFacets`.
 
@@ -93,7 +93,8 @@ curl -X POST -H "Content-Type: application/json" -d '{"criteria":"the","facets":
 
 **Attention** :
 - une facette sur un champ ni `sortable` ni `facetable` (par exemple en laissant `Label` en `text_fr`) fait répondre la recherche en **422** : `Search index structure error. Sorted or aggregated fields must be declared as keyword, sortable or facetable in your SmartType.` ;
-- en `Post`, le critère ne doit pas être vide et la clé `facets` est obligatoire *(`"facets":{}` si aucune facette n'est sélectionnée)*, sinon la réponse est un **500** `RestParam not found`.
+- en `Post`, le critère ne doit pas être vide et la clé `facets` est obligatoire *(`"facets":{}` si aucune facette n'est sélectionnée)*, sinon la réponse est un **500** `RestParam not found` ;
+- en `Get`, le paramètre `q` est obligatoire mais peut être vide : `?q=` retourne les 6 films, alors que sans `q` la réponse est un **500** `RestParam not found : class java.lang.String :Query:q`.
 
 ### Ce qu'il faut retenir
 

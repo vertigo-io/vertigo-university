@@ -51,7 +51,7 @@ Attention, après une erreur au démarrage (un composant déclaré deux fois, un
 *(le parent des samples n'est pas publié sur Maven Central)*
 1. Lisez `SampleConfigBuilder` et repérez les Features activées par le node : `JavalinFeatures`, `CommonsFeatures`, `DatabaseFeatures`, `DataModelFeatures` et `DataStoreFeatures` toujours ; `ElasticSearchFeatures` et `DataFactoryFeatures` avec `withSearch` ; `VegaFeatures` avec `withVega`.
 1. Lancez `CrystalSample` *(voir le [README](./README.md#lancer-une-classe-main) pour lancer une classe main)*. Vers la fin de la console, juste avant les traces d'arrêt, vous devez voir le film Forrest Gump : `DtMovie(couId=840, imdbid=tt0109830, movId=1000, name=Forrest Gump, year=1994)`.
-1. Lancez `Studio` depuis la racine du module. Il annonce la création de 19 fichiers *(il réécrit tout le code généré)*, mais leur contenu ne change pas : `git status` reste vide.
+1. Lancez `Studio` depuis la racine du module. Il annonce la création de 19 fichiers *(il réécrit tout le code généré)*, mais leur contenu ne change pas : `git status` reste vide *(hors d'un dépôt git, comparez avec une copie de `src/main/javagen` faite avant)*.
 *(les lignes `INFO ... Resource fldActor$actId not found` sont normales : ce sont les libellés traduits des champs, dont la génération est désactivée dans `studio-config.yaml`)*
 1. Lancez `CrystalSearchSample` et attendez la fin du démarrage.
 1. Consultez le film [http://localhost:8081/movies/1000](http://localhost:8081/movies/1000) et ses 2 rôles [http://localhost:8081/movies/1000/roles](http://localhost:8081/movies/1000/roles).

@@ -25,7 +25,7 @@ Toujours avec la **racine du module** `sample-crystal` comme répertoire de trav
   - dans ce fichier, les `\` sont remplacés par des `/` (`\134` est le code octal du backslash) : le backslash y est un caractère d'échappement, et un chemin Windows non converti fait échouer le lancement (`Could not find or load main class`) ;
   - sous Linux ou macOS, le séparateur du classpath est `:` au lieu de `;` ;
   - après chaque modification de code ou régénération : `mvn -q compile` ;
-  - les classes console s'arrêtent seules ; les serveurs web (`CrystalSearchSample`, `Level5`) s'arrêtent avec Ctrl+C.
+  - les classes console s'arrêtent seules ; les serveurs web (`CrystalSearchSample`, `Level5`) s'arrêtent avec Ctrl+C. Après une erreur au démarrage, une classe console peut aussi rester bloquée : arrêtez-la de la même façon.
 
 ## Exercices
 

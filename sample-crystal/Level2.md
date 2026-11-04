@@ -13,7 +13,7 @@ Pour cela, Vertigo génère sur chaque entité des **accesseurs**, qui rendent l
 - Classe main : `/src/main/java/io/vertigo/samples/crystal/run/Level2`
 - Code généré : `Movie.country()` et `Movie.role()`
 - Services : `MovieServices.manipulateAccessors`, `MovieServices.loadMovieWithRoles`, `MovieServices.loadMovieWithRolesAndReset`
-- Documentation : [vertigo-docs : FAQ](https://vertigo-io.github.io/vertigo-docs/#/extensions/faq) *(questions sur les accessors)*
+- Documentation : [vertigo-docs : FAQ](https://vertigo-io.github.io/vertigo-docs/#/extensions/faq) *(cherchez « accessor » dans la page : les questions [DataStore] sur le chargement des accesseurs)*
 
 ### A connaitre : Les accesseurs
 
@@ -31,6 +31,7 @@ Un accesseur ne charge rien automatiquement :
 Pourquoi ce chargement explicite ? Parce qu'un `load()` est **un accès à la base** : ce n'est pas une opération à prendre à la légère. Un chargement transparent, caché derrière un simple `get()`, multiplierait les requêtes sans qu'on le voie, par exemple au milieu d'une boucle. On charge donc les données dont le traitement a besoin, au moment où il en a besoin.
 
 Par convention, le `load()` est fait **dans un service** : c'est un accès SQL, il doit être exécuté dans une transaction (`@Transactional`, porté par les services). On écrit `load()` puis `get()` en deux instructions.
+Il existe aussi `loadIfAbsent()`, qui ne charge que si l'accesseur ne l'est pas déjà : utile dans un service appelé par plusieurs chemins.
 
 **Attention** : appeler `get()` sur un accesseur non chargé lève l'erreur `Accessor is not loaded, you must load it before calling get method`.
 

@@ -73,7 +73,7 @@ Un paramètre de cardinalité `"*"` est une liste. Pour une liste de valeurs sim
 1. Déclarez en constantes les identifiants utiles des données de démonstration *(voir `sql/initdata.sql`)* : `FORREST_GUMP_ID = 1000L`, `USA_ID = 840L`, `GERMANY_ID = 250L`.
 1. Dans un `step1`, affichez les identifiants des acteurs de Forrest Gump ; dans un `step2`, les films des États-Unis et d'Allemagne *(`Arrays.asList(USA_ID, GERMANY_ID)`)*.
 1. Lancez `Level1` : vous devez voir les acteurs `[1000, 1002]` (Tom Hanks et Meryl Streep), puis une liste de taille 5 (`size=5` : 4 films américains et 1 allemand).
-*(une `DtList` s'affiche par sa définition et sa taille ; parcourez-la si vous voulez voir les films)*
+*(une `DtList` s'affiche avec sa taille, puis une ligne par élément : `Row #0 : DtMovie(...)`)*
 1. Observez dans la console les traces des tâches *(`Finish /execute/TkGetActorsIdsByMovie ...`)* : vous y trouvez la requête exécutée, sa durée et le nombre de lignes lues. C'est votre premier outil pour comprendre ce que fait l'application en base.
 
 **Attention** : un composant ne se déclare qu'une fois. `CrystalPAO` est déjà déclaré dans le module `Sample` : le déclarer aussi dans `stepDao` fait échouer le démarrage (`Two components with the same id :'crystalPAO'`).
