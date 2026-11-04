@@ -33,7 +33,7 @@ Un paramètre `final DtListState dtListState` **sans annotation** dans un web se
 
 ### A connaitre : La réindexation
 
-L'index démarre vide et n'est pas réindexé automatiquement. `MovieServices.indexMovies()` existe déjà : il lance la réindexation complète et retourne le nombre de films indexés. Il suffit de le publier dans une route.
+L'index est vide au premier lancement et n'est pas réindexé automatiquement. Une fois réindexé, il est conservé d'un lancement à l'autre (`target/classes/search/data`). `MovieServices.indexMovies()` existe déjà : il lance la réindexation complète et retourne le nombre de films indexés. Il suffit de le publier dans une route.
 
 ## Etapes
 
@@ -53,13 +53,13 @@ L'index démarre vide et n'est pas réindexé automatiquement. `MovieServices.in
 5. Dans `MovieWebServices` :
    - ajoutez la route `@AnonymousAccessAllowed @GET("/search/_reindex")` qui retourne `movieServices.indexMovies()` ;
    - dans `GET /_search`, remplacez la pagination fixe `DtListState.of(5)` par un paramètre `final DtListState dtListState`.
-6. Créez `Level5` en copiant `CrystalSearchSample` (avec `ActorDAO` dans `stepDao`) : web services activés (`createNodeConfigBuilder(true, true)`), et un `step1()` qui attend (`Thread.currentThread().join()`).
-7. Lancez `Level5` et attendez la fin des traces de démarrage (voir le Level 0), puis appelez (navigateur pour les `GET`, ou `curl`) :
+6. Créez `Level5` en copiant `CrystalSearchSample` sous ce nouveau nom : il contient déjà tout le nécessaire (web services activés par `createNodeConfigBuilder(true, true)`, `ActorDAO` dans `stepDao` depuis le Level 3, un `step1()` qui attend avec `Thread.currentThread().join()`).
+7. Lancez `Level5` et attendez la fin des traces de démarrage (voir le Level 0), puis appelez (navigateur pour les `GET`, ou `curl` ; les commandes ci-dessous sont écrites pour Git Bash) :
    - `curl http://localhost:8081/movies/search/_reindex` : **200**, `6`
    - `curl "http://localhost:8081/movies/_search?q=gump"` : **200**, Forrest Gump
    - `curl "http://localhost:8081/movies/_search?q=the&listState.top=2"` : **200**, 2 films
    - `curl "http://localhost:8081/movies/_search?q=the"` : **200**, 4 films, et la facette `FctMovieCountry` (`"isMultiSelectable": true`) avec les valeurs `etats-unis` (2), `allemagne` (1), `royaume-uni` (1)
-   - le `POST`, avec un corps JSON (en-tête `Content-Type: application/json` obligatoire) : **200**, 3 films
+   - le `POST`, avec un corps JSON (en-tête `Content-Type: application/json` recommandé) : **200**, 3 films
      ```
      curl -X POST -H "Content-Type: application/json" -d '{"criteria":"the","facets":{"FctMovieCountry":["etats-unis","allemagne"]}}' http://localhost:8081/movies/_search
      ```
@@ -69,10 +69,11 @@ L'index démarre vide et n'est pas réindexé automatiquement. `MovieServices.in
 
 **Les erreurs et pièges que vous pouvez rencontrer** :
 
-- une recherche avant la réindexation : `"totalCount": 0` ;
-- une facette sur un champ qui n'est ni `sortable` ni facetable : **422** `Search index structure error. Sorted or aggregated fields must be declared as keyword, sortable or facetable in your SmartType.` ;
+- une recherche avant toute réindexation (index vide, au premier lancement ou après suppression de `target/classes/search/data`) : `"totalCount": 0` ;
+- une facette sur un champ qui n'est pas `sortable` (par exemple en laissant `Label` en `text_fr`, pour la facette `FctMovieCountry`) : **422**, avec dans le JSON `"Search index structure error.\nSorted or aggregated fields must be declared as keyword, sortable or facetable in your SmartType."` ;
 - `top=2` au lieu de `listState.top=2` : le paramètre est ignoré, toute la liste revient ;
-- un `POST` avec un critère vide (`"criteria":""`) : **500** `RestParam not found : class java.lang.String :InnerBody:criteria`.
+- un `POST` avec un critère vide (`"criteria":""`) : **500** `RestParam not found : class java.lang.String :InnerBody:criteria` ;
+- un `POST` sans la clé `facets` : **500** `RestParam not found : class io.vertigo.datafactory.collections.model.SelectedFacetValues :InnerBody:facets` (envoyez `"facets":{}` si aucune facette n'est sélectionnée).
 
 ## Optionnel : pour aller plus loin
 

@@ -6,9 +6,26 @@ Vertigo DataFactory « Crystal » : accès typé aux données (H2) et moteur de 
 
 - `crystal.run.CrystalSample` : CRUD (lecture d'un film)
 - `crystal.run.CrystalSearchSample` : web services REST (Javalin :8081) : `GET /movies/{id}`, `GET /movies/{id}/roles`, recherche `GET|POST /movies/_search` (au départ, le `GET` renvoie au plus 5 résultats et le `POST` lit sa pagination dans les paramètres d'URL `listState.top`, `listState.skip` ; le Level 5 étend cette pagination au `GET`)
-- Lancement : depuis l'IDE (*Run As > Java Application* sur la classe main), avec la **racine du module** `sample-crystal` comme répertoire de travail (nécessaire pour `Studio`). En ligne de commande : `mvn compile`, puis `java` avec le classpath produit par `mvn dependency:build-classpath` (voir le « Bon à savoir » de l'étape 1 du [parcours Démarrage](../docs/parcours-demarrage.md))
 - Aucune donnée préchargée : la base H2 est créée en mémoire au démarrage (`crystal.boot.DataBaseInitializer` : `sqlgen/crebas.sql` puis les données de démo `sql/initdata.sql`) ; Elasticsearch est embarqué (données d'index sous `target/classes/search`)
-- L'index de recherche démarre **vide** : la réindexation n'est pas automatique, la route `GET /movies/search/_reindex` est ajoutée au Level 5 (voir `sample-crystal-full`)
+- L'index de recherche est **vide** au premier lancement : la réindexation n'est pas automatique, la route `GET /movies/search/_reindex` est ajoutée au Level 5. Une fois réindexé, l'index est conservé d'un lancement à l'autre (`target/classes/search/data`, à supprimer programme arrêté pour repartir d'un index vide)
+- Javalin démarre toujours sur le port 8081 : deux classes main ne peuvent pas tourner en même temps
+
+## Lancer une classe main
+
+Toujours avec la **racine du module** `sample-crystal` comme répertoire de travail (`Studio` lit `studio-config.yaml` en chemin relatif).
+
+- **Depuis l'IDE** : *Run As > Java Application* sur la classe main.
+- **En ligne de commande** (Git Bash, depuis la racine du module) :
+  ```
+  mvn -q compile dependency:build-classpath -Dmdep.outputFile=cp.txt
+  printf -- '-cp\n"%s"\n' "target/classes;$(tr '\\' '/' < cp.txt)" > java.args
+  java @java.args io.vertigo.samples.crystal.run.CrystalSample
+  ```
+  - le classpath est trop long pour une ligne de commande Windows : il passe par un fichier d'arguments (`java.args`) ;
+  - dans ce fichier, les `\` sont remplacés par des `/` : le backslash y est un caractère d'échappement, et un chemin Windows non converti fait échouer le lancement (`Could not find or load main class`) ;
+  - sous Linux ou macOS, le séparateur du classpath est `:` au lieu de `;` ;
+  - après chaque modification de code ou régénération : `mvn -q compile` ;
+  - les classes console s'arrêtent seules ; les serveurs web (`CrystalSearchSample`, `Level5`) s'arrêtent avec Ctrl+C.
 
 ## Exercices
 

@@ -45,7 +45,7 @@ public interface MovieProxyDAO extends Amplifier {
 Les conventions de nommage :
 
 - le nom de la tâche commence par `Tk`, comme les tâches générées (`TkMovieCountByCountry`) ;
-- les noms des paramètres sont en *lowerCamelCase* (`couId`) : c'est vérifié au démarrage ;
+- les noms des paramètres (`@TaskInput(name = "couId")`, repris dans la requête par `#couId#`) sont en *lowerCamelCase* : c'est vérifié au premier appel de la méthode ;
 - les smart types se nomment `STy` suivi du nom de la constante de `SampleCrystalSmartTypes` (`Id` → `STyId`).
 
 ### A connaitre : L'activation
@@ -67,14 +67,17 @@ Deux déclarations dans la configuration du node :
    - injectez `MovieProxyDAO` (`@Inject private MovieProxyDAO movieProxyDAO;`) ;
    - `step1()` : lisez le pays de Forrest Gump (`movieServices.getMovieById(FORREST_GUMP_ID).getCouId()`), puis affichez `"films in the same country as Forrest Gump : " + movieProxyDAO.count(countryId)`.
 5. Lancez `Level4`.
-   **Vérification** : la console affiche `Level4 - films in the same country as Forrest Gump : 4`.
+   **Vérification** : sur la ligne du logger `Level4`, la console affiche `films in the same country as Forrest Gump : 4`.
 
-**Les erreurs que vous pouvez rencontrer** (toutes au démarrage ; après certaines, le programme ne s'arrête pas de lui-même : arrêtez-le à la main) :
+**Les erreurs que vous pouvez rencontrer** :
 
-- `withTaskProxyMethod()` oublié : `No way to find a proxyMethod for this method : public abstract int io.vertigo.samples.crystal.dao.MovieProxyDAO.count(java.lang.Long)` ;
-- un paramètre en majuscules (`COU_ID`) : `the name of the descriptor COU_ID must be in lowerCamelCase` ;
-- un smart type inconnu (par exemple `DO_INTEGER`) : `Definition 'DO_INTEGER' of type 'SmartTypeDefinition' not found` ;
-- l'amplifier déclaré deux fois (dans `SampleConfigBuilder` et dans `Level4`) : `component 'movieProxyDAO' already registered`.
+- **au démarrage** (le programme ne s'arrête pas de lui-même : arrêtez-le à la main) :
+  - `withTaskProxyMethod()` oublié : `No way to find a proxyMethod for this method : public abstract int io.vertigo.samples.crystal.dao.MovieProxyDAO.count(java.lang.Long)` ;
+  - l'amplifier déclaré deux fois (dans `SampleConfigBuilder` et dans `Level4`) : `component 'movieProxyDAO' already registered` ;
+- **au premier appel de `count()`** (l'exception s'affiche tout en bas de la console, après les traces d'arrêt, et le programme s'arrête) :
+  - un nom de paramètre en majuscules dans `@TaskInput(name = "COU_ID")` : `the name of the descriptor COU_ID must be in lowerCamelCase` ;
+  - un smart type inconnu (par exemple `DO_INTEGER`) : `Definition 'DO_INTEGER' of type 'SmartTypeDefinition' not found` ;
+  - un paramètre de la requête (`#COU_ID#`) qui ne correspond à aucun `@TaskInput` : `no data found for param COU_ID in sql ...`.
 
 ## Optionnel : pour aller plus loin
 

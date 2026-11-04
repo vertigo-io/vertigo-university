@@ -48,6 +48,6 @@ Avec Log4j, un paramètre de message n'est affiché que si le message contient u
    - `step2()` : affichez `info("movie roles : {}", movie.role().get())` pour le film retourné par `loadMovieWithRoles`, puis `info("movie roles reset (isLoaded) : {}", movieReset.role().isLoaded())` pour celui retourné par `loadMovieWithRolesAndReset` ;
    - `step3()` : affichez `movieServices.getRolesByMovie(FORREST_GUMP_ID)`.
 5. Lancez `Level2`.
-   **Vérification** : la console affiche, dans l'ordre, `MovieServicesImpl - country accessor isLoaded : false`, `true`, `false`, `true` ; puis les 2 rôles de Forrest Gump (`Forrest Gump` et `Jenny Curran`) ; puis `false` après le `reset` ; puis une liste de taille 2.
+   **Vérification** : la console affiche, dans l'ordre, `MovieServicesImpl - country accessor isLoaded : false`, `true`, `false`, `true` ; puis les 2 rôles de Forrest Gump (`asCharacter=<1>Forrest Gump` et `asCharacter=<2>Jenny Curran` : le préfixe `<n>` vient des données de `initdata.sql`) ; puis `false` après le `reset` ; puis une liste de taille 2.
 
 # [Suite : Level 3 - Liste de référence statique](./Level3.md)

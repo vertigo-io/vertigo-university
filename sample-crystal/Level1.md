@@ -59,7 +59,7 @@ Avec `cardinality:"*"`, un paramètre d'entrée est une liste. Dans un `in (...)
    - `step2()` : affichez `movieServices.getMoviesInCountries(Arrays.asList(USA_ID, GERMANY_ID))` ;
    - appelez `step1()` puis `step2()` dans le `main`.
 6. Lancez `Level1`.
-   **Vérification** : la console affiche `Level1 - [1000, 1002]` (Tom Hanks et Meryl Streep), puis une liste de taille 5 (`size=5` : 4 films américains et 1 allemand).
+   **Vérification** : sur les lignes du logger `Level1`, la console affiche `[1000, 1002]` (Tom Hanks et Meryl Streep), puis une liste de taille 5 (`size=5` : 4 films américains et 1 allemand).
 
 **Bon à savoir** : un composant ne se déclare qu'une fois. `CrystalPAO` est déjà déclaré dans le module `Sample` : le déclarer aussi dans `stepDao` fait échouer le démarrage avec `Two components with the same id :'crystalPAO'` (le programme ne s'arrête alors pas de lui-même : arrêtez-le à la main).
 

@@ -48,17 +48,17 @@ Les valeurs du JSON (`M` / `Masculin`, `F` / `Feminin`) correspondent aux lignes
 
 ## Etapes
 
-1. Créez `src/main/resources/alter.ksp` (contenu ci-dessus) et ajoutez-le à `application.kpr`.
+1. Créez `src/main/resources/alter.ksp` (contenu ci-dessus) et ajoutez-le à la liste de `application.kpr` (une ligne `alter.ksp`, en fin de fichier).
 2. Créez `src/main/resources/masterDataValues.json` (contenu ci-dessus) et déclarez-le dans les `resources` de `studio-config.yaml` : `- { type: staticMasterData, path: src/main/resources/masterDataValues.json }`.
 3. Dans `dao.ksp`, déclarez la tâche `TkGetActorsByMovie` : même requête que `TkGetActorsIdsByMovie` mais en `select act.*`, avec la sortie `actors` de domaine `DoDtActor` et de cardinalité `"*"`.
 4. Lancez `Studio` depuis la racine du module.
-   **Vérification** : `src/main/javagen/io/vertigo/samples/crystal/domain/SexeEnum.java` existe, `Actor.sexe()` retourne un `EnumStoreVAccessor`, et `ActorDAO` contient `getActorsByMovie`.
-5. Implémentez `countMaleActorsInMovie(movId)` dans `MovieServicesImpl` : injectez `ActorDAO`, chargez les acteurs du film avec `actorDAO.getActorsByMovie(movId)`, puis comptez ceux dont `actor.sexe().getEnumValue() == SexeEnum.male`.
+   **Vérification** : `src/main/javagen/io/vertigo/samples/crystal/domain/SexeEnum.java` existe et contient les constantes `male("M")` et `female("F")`, `Actor.sexe()` retourne un `EnumStoreVAccessor`, et `ActorDAO` contient `getActorsByMovie`. Si `SexeEnum` est vide (aucune constante, Studio ne signale rien), le JSON n'est pas déclaré dans `studio-config.yaml` : l'erreur n'apparaîtrait qu'à la compilation de l'étape 5 (`cannot find symbol ... variable male`).
+5. Ajoutez `long countMaleActorsInMovie(Long movId)` à l'interface `MovieServices` et implémentez-le dans `MovieServicesImpl` : injectez `ActorDAO`, chargez les acteurs du film avec `actorDAO.getActorsByMovie(movId)`, puis comptez ceux dont `actor.sexe().getEnumValue() == SexeEnum.male`.
 6. `MovieServicesImpl` dépend désormais de `ActorDAO` : déclarez-le (`.addComponent(ActorDAO.class)`) dans le module `stepDao` de **toutes** vos classes main qui utilisent `MovieServices` (`CrystalSample`, `CrystalSearchSample`, `Level1`, `Level2`). Sinon leur démarrage échoue avec `Components or params not found :actorDAO (referenced by movieServices<MovieServicesImpl>)` (le programme ne s'arrête alors pas de lui-même : arrêtez-le à la main).
 7. Créez `Level3` en copiant `CrystalSample` (avec `ActorDAO` dans `stepDao`) :
    - `step1()` : affichez `"male actors : " + movieServices.countMaleActorsInMovie(FORREST_GUMP_ID)`.
 8. Lancez `Level3`.
-   **Vérification** : la console affiche `Level3 - male actors : 1` (Tom Hanks ; Meryl Streep est `F`). Relancez `Level1` : il démarre toujours.
+   **Vérification** : sur la ligne du logger `Level3`, la console affiche `male actors : 1` (Tom Hanks ; Meryl Streep est `F`). Relancez `Level1` : il démarre toujours.
 
 ## Optionnel : pour aller plus loin
 
