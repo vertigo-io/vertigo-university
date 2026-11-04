@@ -50,7 +50,7 @@ Pourquoi préférer `sortable` pour une facette de pays ? Parce qu'une facette s
 
 ### A connaitre : La pagination et le tri
 
-Pour ajouter la pagination et le tri à un web service, on ajoute un paramètre `@QueryParam("") final DtListState dtListState` et on le transmet au service. Le client passe alors dans l'url : `top` (nombre maximum d'éléments), `skip` (position du premier), `sortFieldName` (champ de tri) et `sortDesc` (`true` pour un tri décroissant).
+Pour ajouter la pagination et le tri à un web service, on ajoute un paramètre `@QueryParam("") final DtListState dtListState` et on le transmet au service. Le client passe alors dans l'url : `top` (nombre maximum d'éléments), `skip` (position du premier), `sortFieldName` (champ de tri) et `sortDesc` (`true` pour un tri décroissant, obligatoire dès qu'on passe `sortFieldName`, sinon la réponse est un 400).
 Par exemple : `/movies/_search?q=the&top=2&skip=2`. En `Post`, la pagination passe aussi par l'url ; le corps porte les autres paramètres (`@InnerBodyParam`).
 
 ### A connaitre : La réindexation

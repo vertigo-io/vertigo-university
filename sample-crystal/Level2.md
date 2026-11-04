@@ -43,12 +43,12 @@ Par convention, le `load()` est fait **dans un service** : c'est un accès SQL, 
    - après avoir conservé le pays (`movie.country().get()`) puis appelé `movie.country().setId(null)`,
    - après `movie.country().set(country)`.
 
-   Terminez par `movie.role().load()` puis `movie.role().get()`.
+   Terminez par `movie.role().load()`, puis affichez `movie.role().get()`.
 1. Ajoutez `loadMovieWithRoles(movId)`, qui retourne le film avec sa liste de rôles chargée.
 1. Ajoutez `loadMovieWithRolesAndReset(movId)`, qui appelle `loadMovieWithRoles` puis `movie.role().reset()`.
 1. Créez la classe `Level2` en copiant `CrystalSample`, avec la constante `FORREST_GUMP_ID = 1000L`.
 1. Dans un `step1`, appelez `manipulateAccessors` ; dans un `step2`, affichez les rôles du film retourné par `loadMovieWithRoles`, puis `isLoaded()` sur celui retourné par `loadMovieWithRolesAndReset` ; dans un `step3`, affichez `getRolesByMovie` *(ce service existe déjà et utilise l'accesseur `role()`)*.
-*(avec Log4j, un paramètre n'est affiché que si le message contient un marqueur `{}` : `info("movie roles : {}", movie.role().get())`)*
+*(rappel : marqueur `{}` dans le message Log4j, voir le Level 1)*
 1. Lancez `Level2`. Vous devez voir l'état de l'accesseur passer de `false` à `true`, puis `false`, puis `true` ; puis les 2 rôles de Forrest Gump (`<1>Forrest Gump` et `<2>Jenny Curran`, le préfixe vient des données) ; puis `false` après le `reset` ; enfin une liste de 2 rôles.
 1. **Observez** la console autour des traces `country accessor isLoaded` : entre `false` et `true`, une requête `TkSelectCountryByUri` est exécutée. C'est le `load()` qui lit le pays en base. En revanche, le `set(country)` ne déclenche aucune requête. De même, `role().load()` exécute `TkSelectListRoleByCriteria`.
 1. **Question** : ces tâches `TkSelectCountryByUri` et `TkSelectListRoleByCriteria`, vous ne les avez pas écrites. D'où viennent-elles ? *(indice : relisez au Level 1 ce que les DAO offrent déjà sans tâche)*

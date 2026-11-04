@@ -77,6 +77,6 @@ Il faut deux déclarations dans la configuration du node :
 
 - Un proxy est une interface annotée dont la plateforme fournit l'implémentation : la requête vit dans le code Java, pas dans les définitions.
 - Il faut l'activer (`withTaskProxyMethod()`) et le déclarer comme amplifier dans un module.
-- Une tâche déclarée dans les définitions est lue par Studio dès la génération et reste visible dans le modèle ; les erreurs d'écriture d'un proxy n'apparaissent qu'à l'exécution, au premier appel.
+- Une tâche déclarée dans les définitions reste visible dans le modèle, et Studio en vérifie la structure (noms, domains) dès la génération ; celle d'un proxy n'est vérifiée qu'au premier appel. Dans les deux cas, le SQL lui-même n'est vérifié qu'à l'exécution.
 
 # [Suite : Level 5 - Web services REST et recherche à facettes](./Level5.md)
