@@ -44,7 +44,7 @@ Le modèle est décrit dans des fichiers de définitions, écrits en KSP (`src/m
 *(les lignes `Resource fld... not found` sont normales : la génération des libellés traduits est désactivée)*
 1. Lancez `CrystalSearchSample` et attendez la fin du démarrage *(voir le README)*.
 1. Consultez le film [http://localhost:8081/movies/1000](http://localhost:8081/movies/1000) et ses 2 rôles [http://localhost:8081/movies/1000/roles](http://localhost:8081/movies/1000/roles).
-1. Testez la recherche [http://localhost:8081/movies/_search?q=gump](http://localhost:8081/movies/_search?q=gump) : elle ne trouve rien (`"totalCount": 0`), car l'index de recherche est encore vide. La réindexation n'est pas automatique : vous ajouterez la route qui la déclenche au Level 5 :)
+1. Testez la recherche [http://localhost:8081/movies/_search?q=gump](http://localhost:8081/movies/_search?q=gump) : elle ne trouve rien (`"totalCount": 0`), car l'index de recherche est encore vide. La réindexation n'est pas automatique : vous ajouterez la route qui la déclenche au Level 4 :)
 1. Arrêtez `CrystalSearchSample` *(Ctrl+C)*.
 
 ### Ce qu'il faut retenir

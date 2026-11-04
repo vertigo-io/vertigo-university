@@ -84,7 +84,7 @@ public class SampleConfigBuilder {
 					.build());
 		}
 
-		//---- proxies (Level4)
+		//---- proxies (Level5, pour aller plus loin)
 		nodeConfigBuilder.addModule(ModuleConfig.builder("proxies")
 				.addAmplifier(MovieProxyDAO.class)
 				.build());

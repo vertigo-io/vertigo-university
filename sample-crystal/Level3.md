@@ -80,7 +80,7 @@ Studio génère alors l'enum `SexeEnum` (`male`, `female`), et l'accesseur `acto
 - Un `alter` complète une définition existante sans la réécrire.
 - Tout composant injecté doit être déclaré dans la configuration du node.
 
-# [Suite : Level 4 - DAO proxy](./Level4.md)
+# [Suite : Level 4 - Web services REST et recherche à facettes](./Level4.md)
 
 ### Optionnel : Une nouvelle valeur
 

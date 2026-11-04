@@ -1,9 +1,5 @@
 package io.vertigo.samples.crystal.run;
 
-import javax.inject.Inject;
-
-import org.apache.logging.log4j.LogManager;
-
 import io.vertigo.core.node.AutoCloseableNode;
 import io.vertigo.core.node.config.ModuleConfig;
 import io.vertigo.core.node.config.NodeConfigBuilder;
@@ -12,7 +8,6 @@ import io.vertigo.samples.crystal.CrystalPAO;
 import io.vertigo.samples.crystal.config.SampleConfigBuilder;
 import io.vertigo.samples.crystal.dao.ActorDAO;
 import io.vertigo.samples.crystal.dao.MovieDAO;
-import io.vertigo.samples.crystal.dao.MovieProxyDAO;
 import io.vertigo.samples.crystal.dao.RoleDAO;
 import io.vertigo.samples.crystal.search.MovieIndexSearchClient;
 import io.vertigo.samples.crystal.services.MovieSearchLoader;
@@ -22,16 +17,8 @@ import io.vertigo.samples.crystal.webservices.MovieWebServices;
 
 public class Level4 {
 
-	//demo data, created by sql/initdata.sql
-	private static final Long FORREST_GUMP_ID = 1000L;
-
-	@Inject
-	private MovieProxyDAO movieProxyDAO;
-	@Inject
-	private MovieServices movieServices;
-
 	public static void main(final String[] args) {
-		final NodeConfigBuilder nodeConfigBuilder = SampleConfigBuilder.createNodeConfigBuilder(true, false, false);
+		final NodeConfigBuilder nodeConfigBuilder = SampleConfigBuilder.createNodeConfigBuilder(true, true, false);
 		nodeConfigBuilder
 				.addModule(ModuleConfig.builder("stepDao")
 						.addComponent(ActorDAO.class)
@@ -58,8 +45,11 @@ public class Level4 {
 	}
 
 	void step1() {
-		final Long countryId = movieServices.getMovieById(FORREST_GUMP_ID).getCouId();
-		LogManager.getLogger(this.getClass()).info("films in the same country as Forrest Gump : " + movieProxyDAO.count(countryId));
+		try {
+			Thread.currentThread().join();
+		} catch (final InterruptedException e) {
+			//nothing
+		}
 	}
 
 }

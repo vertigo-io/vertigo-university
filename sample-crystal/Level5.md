@@ -1,109 +1,85 @@
-# Level 5 - Web services REST et recherche à facettes
+# Level 5 - Pour aller plus loin : DAO proxy
 
-Nous allons publier la recherche de films en REST.
-Le client pourra déclencher la réindexation, piloter la pagination et le tri, et sélectionner des facettes, dont une à sélection multiple.
+Nous allons déclarer une requête directement sur une interface Java annotée.
+La plateforme en fournit l'implémentation au démarrage : la requête n'est plus déclarée dans les définitions, et Studio n'intervient pas.
+
+**Hors du parcours normal** : dans une application Vertigo, les tâches se déclarent **toujours** dans les définitions (KSP) et sont générées par Studio, comme aux Levels 1 et 3. Le proxy de tâche est un cas particulier, réservé à la maintenance d'une application dont l'équipe a renoncé à Studio. Ce Level le présente pour que vous sachiez le reconnaître, pas pour que vous l'adoptiez.
 
 À la fin de ce Level, vous saurez :
-- expliquer ce qu'apporte un moteur de recherche par rapport à SQL ;
-- rendre un champ d'index triable et utilisable en facette ;
-- exposer une recherche paginée et facettée dans un web service, et déclencher la réindexation.
+- reconnaître un proxy de tâche et comprendre comment la plateforme l'implémente ;
+- l'activer dans la configuration du node ;
+- expliquer pourquoi on lui préfère les tâches déclarées dans les définitions.
 
 ## Eléments
 
-- Routes : [http://localhost:8081/movies/search/_reindex](http://localhost:8081/movies/search/_reindex) *(à créer)* et [http://localhost:8081/movies/_search?q=the](http://localhost:8081/movies/_search?q=the)
 - Classe main : `/src/main/java/io/vertigo/samples/crystal/run/Level5`
-- Web services : `/src/main/java/io/vertigo/samples/crystal/webservices/MovieWebServices`
-- Service : `MovieServices.searchMovies`
-- Définitions de recherche : `/src/main/resources/searchMovie.ksp`
+- Interface : `/src/main/java/io/vertigo/samples/crystal/dao/MovieProxyDAO` *(à créer)*
+- Configuration : `/src/main/java/io/vertigo/samples/crystal/config/SampleConfigBuilder`
 - SmartTypes : `/src/main/java/io/vertigo/samples/crystal/config/SampleCrystalSmartTypes`
-- Documentation : [vertigo-docs : Recherche](https://vertigo-io.github.io/vertigo-docs/#/basic/recherche) et [vertigo-docs : Vega](https://vertigo-io.github.io/vertigo-docs/#/extensions/vega) *(tri et pagination des listes)*
+- Documentation : [vertigo-docs : DataModel](https://vertigo-io.github.io/vertigo-docs/#/extensions/datamodel) *(TaskManager, proxy annotations)*
 
-### A connaitre : Pourquoi un moteur de recherche ?
+### A connaitre : Les proxies de tâche
 
-Une recherche dans la base, même bien écrite, reste limitée. Le moteur de recherche (Elasticsearch) apporte une recherche riche et performante : plein texte, facettes avec leurs compteurs, tri par pertinence, avec des temps de réponse de quelques millisecondes, incomparables avec des requêtes SQL.
+Au Level 1, une tâche était déclarée dans les définitions, puis Studio générait sa méthode Java. Un **proxy** prend le chemin inverse : on écrit l'interface Java, et la plateforme crée son implémentation au démarrage, d'après les annotations portées par ses méthodes.
 
-Deux principes à garder en tête :
-- **la recherche est un filtre** : plus l'utilisateur donne d'informations, plus le champ des résultats se réduit, et il affine avec les facettes ;
-- la recherche *plain text* cherche les documents qui contiennent un mot **qui commence par** le critère, pas un mot qui le *contient* : l'index est un index des mots, comme celui d'un livre. `q=gum` trouve Forrest Gump, pas `q=ump`.
+Une telle interface étend `Amplifier` : c'est un composant dont l'implémentation est fournie par la plateforme. Ce mécanisme sert surtout ailleurs que pour les tâches : par exemple pour les clients de web services, déclarés comme des interfaces annotées `@WebServiceProxyAnnotation` dont la plateforme réalise les appels HTTP. Pour une tâche, on utilise :
+- `@TaskProxyAnnotation(name, request, taskEngineClass)` : le nom de la tâche, la requête et le moteur d'exécution ;
+- `@TaskOutput(smartType)` : le type du résultat ;
+- `@TaskInput(name, smartType)` sur chaque paramètre : son nom dans la requête et son type.
 
-### A connaitre : L'index et les facettes
+```java
+package io.vertigo.samples.crystal.dao;
 
-L'index `IdxMovie` (`searchMovie.ksp`) contient des `MovieIndex` (`movId`, `name`, `year`, `country`), chargés depuis la base par `MovieSearchLoader`. La recherche plein texte porte sur le champ `allText`, qui regroupe les autres champs.
+import io.vertigo.basics.task.TaskEngineSelect;
+import io.vertigo.commons.transaction.Transactional;
+import io.vertigo.core.node.component.Amplifier;
+import io.vertigo.datamodel.task.proxy.TaskInput;
+import io.vertigo.datamodel.task.proxy.TaskOutput;
+import io.vertigo.datamodel.task.proxy.TaskProxyAnnotation;
 
-Une **facette** regroupe les résultats par valeur, avec le nombre de résultats de chacune. Il en existe deux types courants :
-- les facettes **term**, dont les valeurs sont tirées des données de l'index (`FctMovieCountry`, par pays) ;
-- les facettes **range**, dont les tranches sont prédéfinies (`FctMovieName` par tranche de titre, `FctMovieYear` par décennie). Le filtre de chaque tranche est une requête écrite dans la syntaxe du moteur de recherche : il nomme donc lui-même le champ à interroger (`name.keyword:[a TO g]`).
+@Transactional
+public interface MovieProxyDAO extends Amplifier {
 
-Deux requêtes de recherche sont déclarées, `QryMovie` (sans facette) et `QryMovieWithFacets` ; Studio génère pour chacune une méthode dans `MovieIndexSearchClient` (`createSearchQueryBuilderMovie…`).
+	@TaskProxyAnnotation(
+			name = "TkMovieCountByCountry",
+			request = "select count(*) from movie where cou_id = #couId#",
+			taskEngineClass = TaskEngineSelect.class)
+	@TaskOutput(smartType = "STyCount")
+	int count(@TaskInput(name = "couId", smartType = "STyId") Long couId);
 
-Une facette déclarée `multiSelectable : "true"` accepte plusieurs valeurs sélectionnées à la fois. Quand une valeur est sélectionnée, elle continue d'afficher ses **autres valeurs avec leurs compteurs**, pour que l'utilisateur puisse en ajouter ; une facette simple, elle, ne garde que la valeur choisie.
-**Attention**, la documentation le précise : les facettes multi-sélectionnables ont un coût en performances. Ne les activez que si le besoin est réel.
+}
+```
 
-### A connaitre : Trier et facetter un champ
+On retrouve les conventions des tâches générées : le nom commence par `Tk`, les paramètres sont en *lowerCamelCase*.
+Les types sont ici des **SmartTypes**, désignés par leur nom : `STy` suivi du nom de la constante de `SampleCrystalSmartTypes` (`Id` → `STyId`). Ouvrez `CrystalPAO` : le domain `DoId` des définitions y apparaît sous ce même nom, `STyId`.
 
-Le SmartType d'un champ d'index précise comment il est indexé, avec sa propriété `indexType` :
-- `text_fr` : un texte analysé en français pour la recherche plein texte, découpé en mots réduits à leur racine (analyseur `text_fr` de `elasticsearch.yml`) ;
-- `text_fr:sortable` : en plus, Vertigo ajoute automatiquement une version `keyword` du champ (`name.keyword`), qui conserve la valeur **entière**, simplement mise en minuscules et sans accents (normalizer `sortable`). Vertigo l'utilise de manière transparente pour les **tris** et pour les **facettes** ;
-- `facetable` existe aussi : il permet de facetter le champ analysé lui-même. Il n'est pas nécessaire sur un champ déjà `sortable`.
+**Attention** : le code généré (`CrystalPAO`, les DAO) utilise `@TaskAnnotation`, qui se pose sur une méthode concrète d'un composant. Sur une interface `Amplifier`, c'est `@TaskProxyAnnotation` : recopier `@TaskAnnotation` fait échouer le démarrage (`No way to find a proxy annotation on method`).
 
-Pourquoi préférer `sortable` pour une facette de pays ? Parce qu'une facette sur un texte analysé regroupe les **mots** analysés, pas les valeurs. Avec `text_fr:facetable`, la facette pays renvoie `etat`, `unis`, `allemagn`, `royaum`… Avec `text_fr:sortable`, elle renvoie `etats-unis`, `allemagne` et `royaume-uni`.
+### A connaitre : L'activation
 
-### A connaitre : La pagination et le tri
-
-Pour ajouter la pagination et le tri à un web service, on ajoute un paramètre `@QueryParam("") final DtListState dtListState` et on le transmet au service. Le client passe alors dans l'url : `top` (nombre maximum d'éléments), `skip` (position du premier), `sortFieldName` (champ de tri) et `sortDesc` (`true` pour un tri décroissant, obligatoire dès qu'on passe `sortFieldName`, sinon la réponse est un 400).
-Par exemple : `/movies/_search?q=the&top=2&skip=2`. En `Post`, la pagination passe aussi par l'url ; le corps porte les autres paramètres (`@InnerBodyParam`).
-
-### A connaitre : La réindexation
-
-L'index est vide au premier lancement et la réindexation n'est pas automatique. Vertigo ne fournit pas d'écran d'administration de la réindexation : le web service ou l'écran qui la déclenche est à créer dans l'application.
-Le service `MovieServices.indexMovies()` existe déjà : il appelle `reindexAll` du `SearchManager` et retourne le nombre de films indexés. Il ne reste qu'à le publier sur une route.
-
-L'index est conservé d'un lancement à l'autre. Après toute modification de sa structure (un champ devenu `sortable`, par exemple), **réindexez** : les documents déjà indexés n'ont pas le nouveau champ, et une facette qui s'appuie dessus resterait vide.
+Il faut deux déclarations dans la configuration du node :
+- `withTaskProxyMethod()` sur les `DataStoreFeatures` : c'est cette Feature qui relie les annotations des proxies aux définitions de tâche réelles ;
+- un module qui déclare l'amplifier : `ModuleConfig.builder("proxies").addAmplifier(MovieProxyDAO.class).build()`.
 
 ## Etapes
 
-1. Dans `SampleCrystalSmartTypes`, passez les SmartTypes `Label` (le pays) et `LabelLong` (le titre) de `text_fr` à `text_fr:sortable`.
-1. Dans `searchMovie.ksp`, faites porter `FctMovieName` sur le champ `name`, avec des tranches sur `name.keyword` à la place de `nameSortOnly` *(`range r1 { filter:"name.keyword:[* TO a]", label:"#"}`, etc.)*.
-1. Rendez `FctMovieCountry` multi-sélectionnable :
-```
-create FacetDefinition FctMovieCountry {  
-  dtDefinition:DtMovieIndex, fieldName:"country", label:"Par pays"
-  multiSelectable : "true"
-}
-```
-4. Lancez `Studio` : dans `MovieIndexSearchClient`, les tranches de `FctMovieName` portent maintenant sur `name.keyword` et `FctMovieCountry` déclare `.withMultiSelectable()`.
-5. Dans `MovieServicesImpl.searchMovies`, utilisez `createSearchQueryBuilderMovieWithFacets` à la place de `createSearchQueryBuilderMovie`.
-6. Dans `MovieWebServices`, ajoutez la route `@GET("/search/_reindex")` *(en `@AnonymousAccessAllowed`)*, qui retourne `movieServices.indexMovies()`.
-7. Dans le `@GET("/_search")`, remplacez la pagination fixe `DtListState.of(5)` par un paramètre `@QueryParam("") final DtListState dtListState`.
-8. Créez la classe `Level5` en copiant `CrystalSearchSample` : elle contient déjà tout le nécessaire.
-9. Lancez `Level5`, attendez la fin du démarrage, puis appelez [http://localhost:8081/movies/search/_reindex](http://localhost:8081/movies/search/_reindex) : vous devez obtenir `6`.
-10. Testez la recherche :
-    - [`/movies/_search?q=gump`](http://localhost:8081/movies/_search?q=gump) retourne Forrest Gump ;
-    - [`/movies/_search?q=the`](http://localhost:8081/movies/_search?q=the) retourne 4 films, avec la facette `FctMovieCountry` (`"isMultiSelectable": true`) et ses valeurs `etats-unis` (2), `allemagne` (1), `royaume-uni` (1) ;
-    - [`/movies/_search?q=the&top=2`](http://localhost:8081/movies/_search?q=the&top=2) retourne les 2 premiers films, et [`&top=2&skip=2`](http://localhost:8081/movies/_search?q=the&top=2&skip=2) les 2 suivants ; `totalCount` reste à 4.
-11. Testez la sélection de facettes en `Post` *(par exemple avec curl depuis Git Bash)* : en sélectionnant `etats-unis` et `allemagne`, vous devez obtenir 3 films.
-*(**observez** aussi : en sélectionnant seulement `etats-unis`, vous obtenez 2 films et la facette pays garde `allemagne` (1) et `royaume-uni` (1) ; en sélectionnant la décennie `r9` de `FctMovieYear`, facette simple, il ne reste qu'elle)*
-```
-curl -X POST -H "Content-Type: application/json" -d '{"criteria":"the","facets":{"FctMovieCountry":["etats-unis","allemagne"]}}' http://localhost:8081/movies/_search
-```
-12. **Question** : pourquoi la facette pays donne-t-elle `etats-unis` et non `Etats-Unis`, la valeur en base ? *(indice : relisez ce que fait la version `keyword` d'un champ `sortable`, puis regardez le normalizer `sortable` dans `elasticsearch.yml`)*
-13. Arrêtez `Level5` *(Ctrl+C)*.
+1. Dans `SampleCrystalSmartTypes`, ajoutez un SmartType `Count` : un `Integer`, avec le formatter par défaut et le `storeType` `NUMERIC` *(sur le modèle de `Year`)*.
+1. Créez l'interface `MovieProxyDAO` *(code ci-dessus)*. Le dossier `dao` est à créer sous `src/main/java` : le package existe déjà, mais seulement dans `src/main/javagen`, où l'on n'écrit jamais à la main.
+1. Dans `SampleConfigBuilder`, ajoutez `.withTaskProxyMethod()` sur les `DataStoreFeatures`.
+1. Toujours dans `SampleConfigBuilder`, après le module `ressources` et en dehors des `if`, déclarez le module `proxies` :
+`nodeConfigBuilder.addModule(ModuleConfig.builder("proxies").addAmplifier(MovieProxyDAO.class).build());`
+1. Créez la classe `Level5` en copiant `CrystalSample`, et injectez-y le `MovieProxyDAO`.
+1. Dans un `step1`, lisez le pays de Forrest Gump *(`getMovieById(FORREST_GUMP_ID).getCouId()`)* et affichez le nombre de films de ce pays avec `movieProxyDAO.count`.
+1. Lancez `Level5` : vous devez obtenir `films in the same country as Forrest Gump : 4`.
+1. **Question** : la même requête aurait pu être une tâche dans `dao.ksp`, comme au Level 1. Qu'est-ce qui change pour le reste de l'équipe ? *(où la requête est-elle visible ? qui la génère ? à quel moment une erreur dans son écriture est-elle détectée ?)*
 
-**Attention** :
-- une facette sur un champ ni `sortable` ni `facetable` (par exemple en laissant `Label` en `text_fr`) fait répondre la recherche en **422** : `Search index structure error. Sorted or aggregated fields must be declared as keyword, sortable or facetable in your SmartType.` ;
-- en `Post`, le critère ne doit pas être vide et la clé `facets` est obligatoire *(`"facets":{}` si aucune facette n'est sélectionnée)*, sinon la réponse est un **500** `RestParam not found`.
+**Attention** : si `withTaskProxyMethod()` est oublié, le démarrage échoue (`No way to find a proxyMethod for this method`). Les erreurs d'écriture du proxy, elles, n'apparaissent qu'au premier appel de `count()` : par exemple `the name of the descriptor COU_ID must be in lowerCamelCase` pour un paramètre `@TaskInput(name = "COU_ID")`.
 
 ### Ce qu'il faut retenir
 
-- La recherche est un filtre, et la recherche plain text cherche des mots qui *commencent par* le critère.
-- Pour trier ou facetter une valeur entière, on rend le champ `sortable` : Vertigo utilise sa version `keyword`.
-- La pagination et le tri se passent par un `@QueryParam("") DtListState` : `top`, `skip`, `sortFieldName`, `sortDesc`.
-- La réindexation est un service à exposer par l'application : Vertigo ne la déclenche pas seule.
+- Dans un projet, les tâches se déclarent toujours dans les définitions ; le proxy de tâche est réservé à la maintenance d'une application sans Studio.
+- Un proxy est une interface annotée dont la plateforme fournit l'implémentation : la requête vit dans le code Java, pas dans les définitions.
+- Il faut l'activer (`withTaskProxyMethod()`) et le déclarer comme amplifier dans un module.
+- Une tâche déclarée dans les définitions reste visible dans le modèle, et Studio en vérifie la structure (noms, domains) dès la génération ; celle d'un proxy n'est vérifiée qu'au premier appel. Dans les deux cas, le SQL lui-même n'est vérifié qu'à l'exécution.
 
 # [Suite : la sécurité (connexion, autorisations) se travaille dans sample-account](../sample-account)
-
-### Optionnel : Le tri
-
-Triez les résultats : [`/movies/_search?q=the&sortFieldName=name&sortDesc=true`](http://localhost:8081/movies/_search?q=the&sortFieldName=name&sortDesc=true) retourne les 4 films par titre décroissant (`The Iron Giant` en premier). Le tri sur `name` est possible parce que son SmartType est `sortable`.
-
-Comparez aussi avec la recherche du [Level 3 de sample-vertigo-ui](../sample-vertigo-ui/Level3.md), qui construit un index et des facettes équivalents, utilisés depuis un écran.

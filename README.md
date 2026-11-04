@@ -33,7 +33,7 @@ mvn clean install -DskipTests
 | [sample-component](sample-component) | Composants et injection de dépendances | `Samples` (console) | [README](sample-component/README.md) |
 | [sample-dao](sample-dao) | Accès aux données SQL (DAO générés, services) | `DaoSample` | [README](sample-dao/README.md) |
 | [sample-dao-full](sample-dao-full) | Idem + DAO personnalisés, projections, reprise par lots | `Level2`→`Level7`, `Reprise` | [README](sample-dao-full/README.md) |
-| [sample-crystal](sample-crystal) | DataFactory Crystal (CRUD + recherche Elasticsearch) | `CrystalSample`, `CrystalSearchSample` | **exercice** : [Level 0→5](sample-crystal/README.md#exercices) |
+| [sample-crystal](sample-crystal) | DataFactory Crystal (CRUD + recherche Elasticsearch) | `CrystalSample`, `CrystalSearchSample` | **exercice** : [Level 0→4](sample-crystal/README.md#exercices) (+ Level 5 pour aller plus loin) |
 | [sample-crystal-full](sample-crystal-full) | Solution des exercices (Level 1→5) + authorization, login (Level 6-7) | `Level1`→`Level7` | [README](sample-crystal-full/README.md) |
 | [sample-vega](sample-vega) | Web services REST (Vega) | `SampleVega` (Javalin :8080) | [README](sample-vega/README.md) |
 | [sample-notifications](sample-notifications) | Moteur de notifications multi-canaux + AOP | `NotificationSample` | [README](sample-notifications/README.md) |

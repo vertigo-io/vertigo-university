@@ -24,7 +24,7 @@ public enum SampleCrystalSmartTypes {
 	@Formatter(clazz = FormatterDefault.class)
 	@Constraint(clazz = ConstraintStringLength.class, arg = "100", msg = "")
 	@SmartTypeProperty(property = "storeType", value = "VARCHAR(100)")
-	@SmartTypeProperty(property = "indexType", value = "text_fr:sortable")
+	@SmartTypeProperty(property = "indexType", value = "code:keyword")
 	Label,
 
 	@SmartTypeDefinition(String.class)
