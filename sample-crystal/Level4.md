@@ -58,12 +58,14 @@ Par exemple : `/movies/_search?q=the&top=2&skip=2`. En `Post`, la pagination pas
 L'index est vide au premier lancement et la réindexation n'est pas automatique. Vertigo ne fournit pas d'écran d'administration de la réindexation : le web service ou l'écran qui la déclenche est à créer dans l'application.
 Le service `MovieServices.indexMovies()` existe déjà : il appelle `reindexAll` du `SearchManager` et retourne le nombre de films indexés. Il ne reste qu'à le publier sur une route.
 
-L'index est conservé d'un lancement à l'autre. Après toute modification de sa structure (un `indexType` modifié, par exemple), **réindexez** : les documents déjà indexés ne sont pas transformés, et une facette qui s'appuie sur le nouveau champ resterait vide.
+L'index est créé dès le premier démarrage d'une classe main avec la recherche, puis conservé d'un lancement à l'autre (`target/classes/search/data`). Quand vous modifiez sa structure (un `indexType`), deux cas se présentent :
+- un changement **compatible**, comme ajouter `sortable` (un sous-champ en plus), est accepté au démarrage : **réindexez** pour que les documents aient le nouveau champ ;
+- un changement **incompatible**, comme passer un champ de texte (`text_fr`) à une valeur exacte (`code:keyword`), fait échouer le démarrage (`mapper [country] cannot be changed from type [text] to [keyword]`) : programme arrêté, **supprimez l'index** (`target/classes/search/data`), relancez, puis réindexez.
 
 ## Etapes
 
 1. Dans `SampleCrystalSmartTypes`, passez l'`indexType` du SmartType `LabelLong` (le titre) de `text_fr` à `text_fr:sortable`, et celui de `Label` (le pays) de `text_fr` à `code:keyword`.
-1. Dans `searchMovie.ksp`, faites porter `FctMovieName` sur le champ `name`, avec des tranches sur `name.keyword` à la place de `nameSortOnly` *(`range r1 { filter:"name.keyword:[* TO a]", label:"#"}`, etc.)*.
+1. Dans `searchMovie.ksp`, faites porter `FctMovieName` sur le champ `name`, avec des tranches sur `name.keyword` à la place de `nameSortOnly` *(`range r1 { filter:"name.keyword:[* TO a]", label:"#"}`, etc. ; le champ calculé `nameSortOnly` n'est alors plus utilisé, vous pouvez le laisser)*.
 1. Rendez `FctMovieCountry` multi-sélectionnable :
 ```
 create FacetDefinition FctMovieCountry {  
@@ -76,17 +78,18 @@ create FacetDefinition FctMovieCountry {
 6. Dans `MovieWebServices`, ajoutez la route `@GET("/search/_reindex")` *(en `@AnonymousAccessAllowed`)*, qui retourne `movieServices.indexMovies()`.
 7. Dans le `@GET("/_search")`, remplacez la pagination fixe `DtListState.of(5)` par un paramètre `@QueryParam("") final DtListState dtListState`.
 8. Créez la classe `Level4` en copiant `CrystalSearchSample` : elle contient déjà tout le nécessaire.
-9. Lancez `Level4`, attendez la fin du démarrage, puis appelez [http://localhost:8081/movies/search/_reindex](http://localhost:8081/movies/search/_reindex) : vous devez obtenir `6`.
+9. Le pays change de type d'indexation, un changement incompatible avec l'index créé aux Levels précédents : supprimez d'abord le dossier `target/classes/search/data` *(sinon le démarrage échoue, voir « La réindexation »)*. Lancez ensuite `Level4`, attendez la fin du démarrage, puis appelez [http://localhost:8081/movies/search/_reindex](http://localhost:8081/movies/search/_reindex) : vous devez obtenir `6`.
 10. Testez la recherche :
     - [`/movies/_search?q=gump`](http://localhost:8081/movies/_search?q=gump) retourne Forrest Gump ;
     - [`/movies/_search?q=the`](http://localhost:8081/movies/_search?q=the) retourne 4 films, avec la facette `FctMovieCountry` (`"isMultiSelectable": true`) et ses valeurs `Etats-Unis` (2), `Allemagne` (1), `Royaume-Uni` (1) ;
     - [`/movies/_search?q=the&top=2`](http://localhost:8081/movies/_search?q=the&top=2) retourne les 2 premiers films, et [`&top=2&skip=2`](http://localhost:8081/movies/_search?q=the&top=2&skip=2) les 2 suivants ; `totalCount` reste à 4.
 11. Testez la sélection de facettes en `Post` *(par exemple avec curl depuis Git Bash)* : en sélectionnant `Etats-Unis` et `Allemagne`, vous devez obtenir 3 films.
+*(une facette term se sélectionne par sa valeur, `Etats-Unis` ; une facette range par le code de sa tranche, `r9`)*
 *(**observez** aussi : en sélectionnant seulement `Etats-Unis`, vous obtenez 2 films et la facette pays garde `Allemagne` (1) et `Royaume-Uni` (1) ; en sélectionnant la décennie `r9` de `FctMovieYear`, facette simple, il ne reste qu'elle)*
 ```
 curl -X POST -H "Content-Type: application/json" -d '{"criteria":"the","facets":{"FctMovieCountry":["Etats-Unis","Allemagne"]}}' http://localhost:8081/movies/_search
 ```
-12. **Question** : dans la réponse, les valeurs de `FctMovieName` s'affichent `#`, `a-f`… et celles de `FctMovieCountry` `Etats-Unis`… D'où vient le libellé de chaque facette ?
+12. **Question** : dans la réponse de `q=the`, la facette `FctMovieName` affiche `t-z` *(seules les tranches non vides sont renvoyées)* et la facette `FctMovieCountry` affiche `Etats-Unis`, `Allemagne`… D'où vient le libellé de chaque facette ?
 13. Arrêtez `Level4` *(Ctrl+C)*.
 
 **Attention** :
