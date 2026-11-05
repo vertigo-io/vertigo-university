@@ -13,7 +13,7 @@ Chaque étape est une **formation d'approfondissement** (un sujet) : le tableau 
 | S0 | Le « way of Vertigo » (le vocabulaire commun) | 60/40 | [sample-hello-world](../sample-hello-world), [sample-config](../sample-config), [sample-component](../sample-component) | existante |
 | S1 | Modèle de données & Studio (le geste quotidien, en profondeur) | 70/30 | [sample-vertigo-ui](../sample-vertigo-ui) (`definitions/`), [sample-dao-full](../sample-dao-full) | existante |
 | S2 | Environnement local réel (Docker, PostgreSQL/Liquibase, cache) | 30/70 | — | **formation manquante** |
-| S3 | Accès aux données & recherche (services, Elasticsearch, DAO avancés) | 50/50 | [sample-crystal](../sample-crystal), [sample-crystal-full](../sample-crystal-full), [sample-dao-full](../sample-dao-full) | existante |
+| S3 | Accès aux données & recherche (tâches, accesseurs, master data, Elasticsearch, DAO avancés) | 50/50 | [sample-crystal](../sample-crystal) Levels 0→4 (corrigé : [sample-crystal-full](../sample-crystal-full)), [sample-dao-full](../sample-dao-full) | existante |
 | S4 | Sécurité (login, authorizations, row-level, SSO) | 50/50 | [sample-account](../sample-account) | existante (SSO : doc seule) |
 | S5 | Application web Vertigo-UI (mécanique + couche « production ») | 30/70 | [sample-vertigo-ui](../sample-vertigo-ui) Levels 0→6, [sample-vertigo-ui-hello](../sample-vertigo-ui-hello) (boot minimal) | existante |
 | S6 | Planification & batch (agenda, orchestration de jobs) | 40/60 | — | **formation manquante** |
@@ -75,15 +75,20 @@ Chaque étape est une **formation d'approfondissement** (un sujet) : le tableau 
 
 **Thèmes**
 
+Le fil conducteur est l'exercice [sample-crystal](../sample-crystal) (Levels 0→4, à suivre dans l'ordre ; corrigé : [sample-crystal-full](../sample-crystal-full)).
+
 1. **Services sur DAO** : `DtList`, critères, tri, pagination — la base est dans [sample-dao](../sample-dao).
-2. **Elasticsearch** : indexation (pattern `SearchLoader`, voir [sample-crystal](../sample-crystal) et le [Level 3 de sample-vertigo-ui](../sample-vertigo-ui)) et recherche facettée ; plugin datafactory Elasticsearch dans la plateforme ; Mars (`basemanagement/search/`). Référence : [vertigo-docs : recherche](https://vertigo-io.github.io/vertigo-docs/#/).
-3. **DAO avancés** : DAO personnalisés, projections, reprise par lots, performances — [sample-dao-full](../sample-dao-full).
-4. **Master data** : les données de référence (valeurs fixes) — Mars (`MarsMasterDataDefinitionProvider`).
-5. **Crystal, en option** : un autre mode d'accès typé aux données — [sample-crystal](../sample-crystal).
+2. **Tâches** : les requêtes SQL nommées déclarées dans les `.ksp`, avec une liste de valeurs en paramètre (`IN (...)`) ; une tâche se place dans le DAO de l'objet concerné par ses paramètres, sinon dans le PAO — [Level 1 de sample-crystal](../sample-crystal/Level1.md).
+3. **Accesseurs** : naviguer d'une entité vers une autre (`load()` puis `get()`) ; chaque chargement est un accès à la base, visible dans la console — [Level 2](../sample-crystal/Level2.md).
+4. **Master data** : les données de référence (valeurs fixes) ; une liste statique devient un enum généré, lu sans requête — [Level 3](../sample-crystal/Level3.md), Mars (`MarsMasterDataDefinitionProvider`).
+5. **Elasticsearch** : indexation (pattern `SearchLoader`), réindexation à la demande, recherche à facettes (term et range), tri et pagination (`DtListState`) exposés en REST — [Level 4](../sample-crystal/Level4.md), le [Level 3 de sample-vertigo-ui](../sample-vertigo-ui) ; plugin datafactory Elasticsearch dans la plateforme ; Mars (`basemanagement/search/`). Référence : [vertigo-docs : recherche](https://vertigo-io.github.io/vertigo-docs/#/).
+6. **DAO avancés** : DAO personnalisés, projections, reprise par lots, performances — [sample-dao-full](../sample-dao-full).
 
-**Exo** : écrire dans `sample-dao-full` un service avec critères + tri + pagination ; reproduire le pattern `SearchLoader` d'un sample sur un objet du sample.
+**Exo** : suivre les Levels 0→4 de `sample-crystal` ; puis écrire dans `sample-dao-full` un service avec critères + tri + pagination.
 
-**Vigilance** : l'index de recherche est un mécanisme asynchrone : la donnée indexée peut être en retard sur la base — à connaître avant de « déboguer un résultat manquant ».
+**Vigilance** :
+- l'index de recherche est un mécanisme asynchrone : la donnée indexée peut être en retard sur la base — à connaître avant de « déboguer un résultat manquant » ;
+- un changement de mapping incompatible (par exemple un champ `text` passé en `keyword`) empêche le démarrage : l'index se supprime, puis se reconstruit par réindexation (voir le Level 4).
 
 ### S4 - Sécurité
 

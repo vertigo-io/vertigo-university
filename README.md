@@ -34,7 +34,7 @@ mvn clean install -DskipTests
 | [sample-dao](sample-dao) | Accès aux données SQL (DAO générés, services) | `DaoSample` | [README](sample-dao/README.md) |
 | [sample-dao-full](sample-dao-full) | Idem + DAO personnalisés, projections, reprise par lots | `Level2`→`Level7`, `Reprise` | [README](sample-dao-full/README.md) |
 | [sample-crystal](sample-crystal) | DataFactory Crystal (CRUD + recherche Elasticsearch) | `CrystalSample`, `CrystalSearchSample` | **exercice** : [Level 0→4](sample-crystal/README.md#exercices) (+ Level 5 pour aller plus loin) |
-| [sample-crystal-full](sample-crystal-full) | Solution des exercices (Level 1→5) + authorization, login (Level 6-7) | `Level1`→`Level7` | [README](sample-crystal-full/README.md) |
+| [sample-crystal-full](sample-crystal-full) | Solution des exercices (Level 1→5) + login, authorization (Level 6-7, LDAP du réseau interne, non vérifiés) | `Level1`→`Level7` | [README](sample-crystal-full/README.md) |
 | [sample-vega](sample-vega) | Web services REST (Vega) | `SampleVega` (Javalin :8080) | [README](sample-vega/README.md) |
 | [sample-notifications](sample-notifications) | Moteur de notifications multi-canaux + AOP | `NotificationSample` | [README](sample-notifications/README.md) |
 | [sample-account](sample-account) | Authentification / autorisation (security) | `AccountSample` | [README](sample-account/README.md) |
@@ -65,8 +65,8 @@ Progression sur le framework, du premier node aux web services :
 2. `sample-component` : composants, injection de dépendances, plugins, aspects AOP
 3. `sample-dao` : accès aux données SQL (DAO générés par Studio, services, supervision)
    - *Complément : `sample-dao-full` (niveaux Level2→7, DAO personnalisés, reprise par lots)*
-4. `sample-crystal` : DataFactory (CRUD typé + recherche Elasticsearch)
-   - *Complément : `sample-crystal-full` (Level1→7, authorization, login)*
+4. `sample-crystal` : DataFactory (tâches, accesseurs, master data, recherche Elasticsearch) — **exercice** Level 0→4 (+ Level 5 pour aller plus loin)
+   - *Solution : `sample-crystal-full`*
 5. `sample-vega` : web services REST (Vega, Javalin)
 6. `sample-notifications` : moteur de notifications multi-canaux (mail, Twitter, IFTTT) + AOP
 
