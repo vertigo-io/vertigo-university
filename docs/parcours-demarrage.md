@@ -33,7 +33,7 @@ Ce parcours est une **liste de formations à suivre dans l'ordre** : chaque form
 | Écrire un service sur les DAO générés et l'exposer en REST | 4 | [sample-dao](../sample-dao) |
 | Afficher un premier écran web (Vertigo-UI) | 5 | [sample-vertigo-ui-hello](../sample-vertigo-ui-hello) |
 
-**Livrable** : une mini application construite étape par étape (un seul projet qui grandit) qui démarre, a un modèle de données, un service exposé en REST et un premier écran web. C'est un prototype : sa configuration est écrite en Java (voir l'étape 1).
+**Livrable** : une mini application construite étape par étape (un seul projet qui grandit) qui démarre, a un modèle de données, un service exposé en REST et un premier écran web. C'est un prototype : sa configuration est écrite en Java, sauf celle de l'écran web, en YAML (voir l'étape 1).
 
 **Le fil conducteur** : à l'étape 2, vous publiez un webservice sur du code **écrit à la main et provisoire** (un objet, sa définition et un faux DAO en mémoire), pour obtenir tout de suite un premier rendu. Les étapes 3 et 4 le remplacent par **la méthode normale** : l'objet et le DAO sont générés par Studio depuis le modèle, et le webservice passe par un service. La même URL renvoie alors les données de votre base.
 
@@ -59,7 +59,7 @@ Le **node** est l'unité de base d'une application Vertigo : c'est le processus 
 
 **Important:** dans Vertigo, on configure d'abord, on code ensuite : le modèle de données, les composants activés et la sécurité sont déclarés avant d'écrire la moindre logique métier.
 
-**Important:** dans ce parcours, la configuration du node est écrite **en Java** (`NodeConfig`, `ModuleConfig`, Features) et votre classe main démarre elle-même le serveur REST : c'est simple et adapté aux prototypes et aux tests. Ce n'est pas la méthode préconisée pour un vrai projet, où la configuration est déclarée dans un fichier **YAML** (voir le [Parcours Débutant](parcours-debutant.md)).
+**Important:** aux étapes 1 à 4, la configuration du node est écrite **en Java** (`NodeConfig`, `ModuleConfig`, Features) et votre classe main démarre elle-même le serveur REST : c'est simple et adapté aux prototypes et aux tests. Ce n'est pas la méthode préconisée pour un vrai projet, où la configuration est déclarée dans un fichier **YAML**. Vous la découvrirez à l'étape 5 : l'écran web impose une configuration YAML, guidée par l'exercice ; le [Parcours Débutant](parcours-debutant.md) la généralise.
 
 **Pour comprendre** : [vertigo-docs : Configuration](https://vertigo-io.github.io/vertigo-docs/#/basic/configuration) et [Composants](https://vertigo-io.github.io/vertigo-docs/#/basic/composants).
 
