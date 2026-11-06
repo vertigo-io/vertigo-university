@@ -2,7 +2,7 @@
 
 Vous allez construire, brique par brique, le boot web minimal d'un node Vertigo-UI : le node démarre, la sécurité est en place, puis une première page rendue par un controller dans un layout. Sans base de données, sans Elasticsearch, sans BerkeleyDB, sans donnée préchargée.
 
-**Prérequis** : le dépôt university est installé dans le repo local Maven (`mvn install` à la racine) — le parent des modules (`io.vertigo:vertigo-samples`) n'est pas publié sur Maven Central.
+**Prérequis** : le module se compile sur place (`mvn compile` dans son dossier) — son parent `io.vertigo:vertigo-samples`, non publié sur Maven Central, est résolu par le `pom.xml` à la racine du dépôt. Pour compiler une copie placée hors du dépôt, installez d'abord ce parent (`mvn -N install` à la racine).
 
 ## Eléments
 
