@@ -1,7 +1,7 @@
 ---
 # Configuration du node web (Vertigo-UI) de l'application Cinema.
 # Fournie dès l'étape 1, elle n'est chargée qu'à l'étape 5, par le boot web (web.xml : boot.applicationConfiguration).
-# Aux étapes 1 à 4, le node est configuré en Java (votre classe de configuration) : ce fichier n'est pas lu.
+# Aux étapes 1 à 4, le node est configuré en Java (config.CinemaNodeConfig) : ce fichier n'est pas lu.
 # A copier dans votre projet : src/main/resources/webapp/META-INF/cinema.yaml
 # Il cite des classes de votre projet : respectez leurs noms (package com.example.cinema) :
 #   CinemaFeatures, support.CinemaUserSession, boot.DataBaseInitializer, boot.DemoDataInitializer
