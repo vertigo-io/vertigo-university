@@ -1,4 +1,4 @@
-# Level 2 - Ecran de détail
+# Level Ui 2 - Ecran de détail
 
 Nous allons construire l'écran de détail d'un film.
 
@@ -54,4 +54,4 @@ Ce composant a un rendu différent en fonction du mode.
 9. Consulter la page de détail d'un film.
 10. Consulter la source de la page. Recherchez la balise script id="vui-init-data" et regardez son contenu. Dans la console, consulter le vueData avec la commande `VUiPage.vueData`
 
-# [Suite : Level 2.1 - Ecran de détail - Liste de référence des pays](./Level2.1.md)
+# [Suite : Level Ui 2.1 - Ecran de détail - Liste de référence des pays](./LevelUi2.1.md)

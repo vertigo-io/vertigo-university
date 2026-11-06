@@ -1,4 +1,4 @@
-# Level 3 - Recherche
+# Level Ui 3 - Recherche
 
 Nous allons ajouter une page de recherche sur les Films.
 Cela permettra de dépasser les limites de recherche dans la base de données
@@ -126,7 +126,7 @@ Nous avons préparer le Controller, passont à la vue.
 ```
 3. Consulter la page et observer le comportement.
 
-# [Suite : Level 4 - Tableaux éditables](./Level4.md)
+# [Suite : Level Ui 4 - Tableaux éditables](./LevelUi4.md)
 
 ## Optionnel : Ajout un mode de rendu sélectionnable
 

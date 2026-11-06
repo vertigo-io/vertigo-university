@@ -42,8 +42,8 @@ mvn clean install -DskipTests
 | [sample-quarto](sample-quarto) | Génération de documents Word (.docx) | `SampleQuarto` | [README](sample-quarto/README.md) |
 | [sample-aop-modules](sample-aop-modules) | Aspects AOP pas à pas (exo / corrigé) | classes main des sous-modules | [README](sample-aop-modules/README.md) |
 | [sample-stream](sample-stream) | Java 8 Streams (starbucks, scrabble) | `MainStarbucks`, `MainScrabble` | [README](sample-stream/README.md) |
-| [sample-vertigo-ui](sample-vertigo-ui) | Application web Vertigo-UI (SpringMVC/Thymeleaf/Vue) | `BootSampleVui` (Jetty :18080) | [README](sample-vertigo-ui/README.md) |
-| [sample-vertigo-ui-full](sample-vertigo-ui-full) | Idem + recherche Elasticsearch + tableaux + modales (solutions des Levels 0→6) | `BootSampleVui` (Jetty :18080) | [README](sample-vertigo-ui-full/README.md) |
+| [sample-vertigo-ui](sample-vertigo-ui) | Application web Vertigo-UI (SpringMVC/Thymeleaf/Vue) : **exercice** en deux séries sur la même application, Socle et UI | `BootSampleVui` (Jetty :18080) | [README](sample-vertigo-ui/README.md) |
+| [sample-vertigo-ui-full](sample-vertigo-ui-full) | Idem + recherche Elasticsearch + tableaux + modales (solutions des Levels Ui 0→6) | `BootSampleVui` (Jetty :18080) | [README](sample-vertigo-ui-full/README.md) |
 | [sample-vertigo-ui-hello](sample-vertigo-ui-hello) | Premier écran Vertigo-UI : boot web minimal (Jetty), une page dans un layout — **exercice** (squelette + `Exercice.md`) — sans base, sans donnée préchargée | `BootSampleUiHello` (Jetty :18081) | [Exercice](sample-vertigo-ui-hello/Exercice.md) |
 | [sample-vertigo-ui-hello-full](sample-vertigo-ui-hello-full) | Solution de l'exercice : boot web minimal complet — sans cache, sans lucene | `BootSampleUiHello` (Jetty :18081) | [README](sample-vertigo-ui-hello-full/README.md) |
 
@@ -73,7 +73,7 @@ Progression sur le framework, du premier node aux web services :
 ### 2. Application web Vertigo-UI
 
 1. [sample-vertigo-ui-hello](sample-vertigo-ui-hello) : le premier écran — boot web minimal (Jetty), une page dans un layout (**exercice** / [solution](sample-vertigo-ui-hello-full))
-2. [sample-vertigo-ui](sample-vertigo-ui) : niveaux Level0→6 (préparation, listes, écran de détail, recherche, tableaux éditables, controllers, modales)
+2. [sample-vertigo-ui](sample-vertigo-ui) : Level Socle 0 (point de départ), puis la série UI, Levels Ui 1→6 (listes, écran de détail, recherche, tableaux éditables, controllers, modales)
 3. [sample-vertigo-ui-full](sample-vertigo-ui-full) : mêmes niveaux complétés (recherche Elasticsearch, tableaux modifiables, modales)
 
 ### 3. Sujets avancés

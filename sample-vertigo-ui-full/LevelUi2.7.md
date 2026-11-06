@@ -1,4 +1,4 @@
-# Level 2.7 - Gestion des slots
+# Level Ui 2.7 - Gestion des slots
 
 Nous allons completer le bouton de sauvegarde de film pour ajouter une message de confirmation.
 Nous verrons le mécanisme de slot.
@@ -44,4 +44,4 @@ Pour illustrer le principe nous allons ajouter une confirmation sur l'enregistre
 4. Etudier dans le composant `button-submit.html`, les différentes options pour ajouter une confirmation. Vous remarquerez qu'il y a beaucoup plus simple.
 5. Consulter la page et observer le comportement.
 
-# [Suite : Level 3 - Recherche](./Level3.md)
+# [Suite : Level Ui 3 - Recherche](./LevelUi3.md)

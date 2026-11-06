@@ -187,6 +187,6 @@ Vertigo-UI est construit sur Vue.js, Quasar et SpringMVC avec Thymeleaf.
 
 ## Suite
 
-- [sample-vertigo-ui](../sample-vertigo-ui) Levels 0→6 — la formation Vertigo-UI complète : base de données, listes, écran de détail, recherche, tableaux éditables, controllers, modales (solutions dans [sample-vertigo-ui-full](../sample-vertigo-ui-full))
+- [sample-vertigo-ui](../sample-vertigo-ui) Levels Ui 0→6 — la formation Vertigo-UI complète : base de données, listes, écran de détail, recherche, tableaux éditables, controllers, modales (solutions dans [sample-vertigo-ui-full](../sample-vertigo-ui-full))
 - [Parcours Débutant](parcours-debutant.md) — rejoindre une équipe expérimentée et viser l'autonomie sur le courant (le travail standard de l'équipe)
 - [Parcours Autonomie](parcours-autonomie.md) — les approfondissements, à consulter au fil de l'eau

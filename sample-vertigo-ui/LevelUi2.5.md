@@ -1,4 +1,4 @@
-# Level 2.5 - Ecran de détail - Validation coté serveur en Ajax
+# Level Ui 2.5 - Ecran de détail - Validation coté serveur en Ajax
 
 Nous allons ajouter une validation de la date du film l'écran de détail.
 Nous verrons la réactivité aux modifications d'un objet du vueModel et la validation de données coté serveur.
@@ -97,4 +97,4 @@ public ViewContext doValidate(final ViewContext viewContext, @ViewAttribute("mov
 6. Vérifier le fonctionnement
 7. Remplacer le `@input` par un *watcher* sur l'objet `movie` du `vueData` (avec `debounce` également)
 
-# [Suite : Level 2.6 - Attributs complémentaires et évènements](./Level2.6.md)
+# [Suite : Level Ui 2.6 - Attributs complémentaires et évènements](./LevelUi2.6.md)

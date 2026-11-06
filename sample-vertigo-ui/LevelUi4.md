@@ -1,4 +1,4 @@
-# Level 4 - Tableaux éditables
+# Level Ui 4 - Tableaux éditables
 
 Nous allons ajouter une page pour modifier les films directement depuis la liste.
 Cela permettra de voir le cas des listes modifiables.
@@ -51,4 +51,4 @@ Pour que les composants d'éditions de champs fonctionnent (`textfield`, `select
 Pour améliorer le rendu, vous pouvez consulter la [documentation Quasar du QInput](https://v1.quasar.dev/vue-components/input#qinput-api)
 Par exemple ajouter `dense hide-bottom-space` sur les `vu:text-field` 
 
-# [Suite : Level 5 - Controllers et Context transverses](./Level5.md)
+# [Suite : Level Ui 5 - Controllers et Context transverses](./LevelUi5.md)

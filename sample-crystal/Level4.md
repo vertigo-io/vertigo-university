@@ -111,7 +111,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"criteria":"the","facets":
 
 Triez les résultats : [`/movies/_search?q=the&sortFieldName=name&sortDesc=true`](http://localhost:8081/movies/_search?q=the&sortFieldName=name&sortDesc=true) retourne les 4 films par titre décroissant (`The Iron Giant` en premier). Le tri sur `name` est possible parce que son SmartType est `sortable`.
 
-Comparez aussi avec la recherche du [Level 3 de sample-vertigo-ui](../sample-vertigo-ui/Level3.md), qui construit un index et des facettes équivalents, utilisés depuis un écran.
+Comparez aussi avec la recherche du [Level Ui 3 de sample-vertigo-ui](../sample-vertigo-ui/LevelUi3.md), qui construit un index et des facettes équivalents, utilisés depuis un écran.
 
 ### Pour aller plus loin
 

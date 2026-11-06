@@ -1,4 +1,4 @@
-# Level 2.1 - Ecran de détail - Liste de référence des pays
+# Level Ui 2.1 - Ecran de détail - Liste de référence des pays
 
 Nous allons completer l'écran de détail de film pour référencer la liste des pays.
 
@@ -35,4 +35,4 @@ Elle peut être directement dans le context si elle est assez courte ou référe
 4. Dans la vue, remplacer le champ text de `couId` par un `vu:select`
 7. Consulter la page de détail d'un film. Consulter le contenu du `vueData`
 
-# [Suite : Level 2.2 - Ecran de détail - Edition](./Level2.2.md)
+# [Suite : Level Ui 2.2 - Ecran de détail - Edition](./LevelUi2.2.md)

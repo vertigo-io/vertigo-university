@@ -1,4 +1,4 @@
-# Level 2.4 - Ecran de détail - Tri coté serveur 
+# Level Ui 2.4 - Ecran de détail - Tri coté serveur 
 
 Nous allons completer la liste des rôles dans l'écran de détail de film.
 Nous verrons le tri coté serveur et le cas où nous souhaitons un comportement spécifique.
@@ -39,7 +39,7 @@ Nous allons commencer par le tri de la liste des films. [movies](http://localhos
 4. Dans la vue de la liste des films, ajouter une `sortUrl="@{/movies/_sort}"` sur la table
 5. Consulter la page et observer le comportement (la base de contient que les films commençant par 'S').
 
-# [Suite : Level 2.5 - Ecran de détail - Validation coté serveur en Ajax](./Level2.5.md)
+# [Suite : Level Ui 2.5 - Ecran de détail - Validation coté serveur en Ajax](./LevelUi2.5.md)
 
 ## Optionnel - Tri spécifique en Java
 

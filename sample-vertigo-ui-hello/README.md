@@ -17,4 +17,4 @@ Ce module est un **exercice** : le squelette (boot Jetty, SpringMVC, layout, squ
 
 ## Suite
 
-- [sample-vertigo-ui](../sample-vertigo-ui) : la formation Vertigo-UI complète (Levels 0→6 : base de données, recherche, listes, écran de détail, modales)
+- [sample-vertigo-ui](../sample-vertigo-ui) : la formation Vertigo-UI complète (Levels Ui 0→6 : base de données, recherche, listes, écran de détail, modales)

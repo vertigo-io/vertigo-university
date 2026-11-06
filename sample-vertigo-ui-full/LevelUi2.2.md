@@ -1,4 +1,4 @@
-# Level 2.2 - Ecran de détail - Edition
+# Level Ui 2.2 - Ecran de détail - Edition
 
 Nous allons completer l'écran de détail de film pour ajouter l'édition.
 Nous allons voir la gestion des boutons, des actions et des controles de surface.
@@ -67,7 +67,7 @@ La méthode de sauvegarde doit récupérer les données postées : utiliser le `
 11. Retourner sur la page, notez le comportement en cas d'erreur de saisie sur les champs.
 12. Consulter le contenu du `vueData` (balise script `id="vui-init-data"` ou VUiPage.vueData).
 
-# [Suite : Level 2.3 - Ecran de détail - Affichage des tableaux](./Level2.3.md)
+# [Suite : Level Ui 2.3 - Ecran de détail - Affichage des tableaux](./LevelUi2.3.md)
 
 ### Optionnel : Ajouter l'écran de creation
 

@@ -1,4 +1,4 @@
-# Level 2.6 - Attributs complémentaires et évènements
+# Level Ui 2.6 - Attributs complémentaires et évènements
 
 Nous allons rajouter un lien de navigation sur la liste des films en récupérant l'évenement onClick de l'ensemble de la ligne.
 Nous verrons comment passer des attributs spécifiques du composant Thymeleaf au composant Quasar, et comment traiter les évenements.
@@ -37,8 +37,7 @@ Par exemple :
 <th:block th:fragment="text-field-edit(object, field, rowIndex, label, suffix, input_attrs, label_attrs)" 
 	vu:alias="text-field" vu:selector="${viewMode=='edit'}"
 ```
-Les paramètres qui se terminant par `_attrs` permettent de passer des paramètres qui n'étaient pas prévus à la base. 
-Pour passer le parametre `yyy` au *sous composant* `xxx`, il faut préfixer le paramètre avec `xxx_` (voir exemples ci-dessous), ces paramètres seront "récoltés" par le `xxx_attrs`.
+Les paramètres qui se terminent par `_attrs` permettent de passer des paramètres qui n'étaient pas prévues à la base. 
 Il faut préfixer le paramètre avec le même préfix *(s'il n'y a pas de prefix, c'est le dernier attrs qui le récupère)*.
 Il est aussi possible de passer des events vueJs. Et enfin, il est possible d'en passer plusieurs les `xxx_attrs` sont des listes de paramètres.
 
@@ -59,7 +58,7 @@ tr_@click.native="|goTo('@{/movie/}'+props.row.movId)|"
 ```
 3. Consulter la page et observer le comportement
 
-# [Suite : Level 2.7 - Gestion des slots](./Level2.7.md)
+# [Suite : Level Ui 2.7 - Gestion des slots](./LevelUi2.7.md)
 
 ### Optionnel : Creation de l'écran de détail d'acteur
 

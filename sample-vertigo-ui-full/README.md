@@ -10,22 +10,27 @@ Lectures en prérequis :
 - Doc Vuejs (en vitesse) pour avoir les concepts : [Introduction — Vue.js (vuejs.org)](https://v2.vuejs.org/v2/guide/?redirect=true)
 
 
-Les exercices ci-dessous portent sur VertigoUi, pour cela la structure de projet, les objets du mod&egrave;le et les services sont déjà présent.
+Les exercices portent sur une application déjà construite : la structure de projet, les objets du modèle et les services sont présents.
 
 *Note: Il est préférable de suivre les exercices dans l'ordre.*
 
-- [Level 0 - Préparation de l'environnement](./Level0.md)
-- [Level 1 - Liste simple](./Level1.md)
-- [Level 2 - Ecran de détail](./Level2.md)
-  - [Level 2.1 - Ecran de détail - Liste de référence des pays](./Level2.1.md)
-  - [Level 2.2 - Ecran de détail - Edition](./Level2.2.md)
-  - [Level 2.3 - Ecran de détail - Affichage des tableaux](./Level2.3.md)
-  - [Level 2.4 - Ecran de détail - Tri coté serveur](./Level2.4.md)
-  - [Level 2.5 - Ecran de détail - Validation coté serveur en Ajax](./Level2.5.md)
-  - [Level 2.6 - Attributs complémentaires et évènements](./Level2.6.md)
-  - [Level 2.7 - Gestion des slots](./Level2.7.md)
-- [Level 3 - Recherche](./Level3.md)
-- [Level 4 - Tableaux éditables](./Level4.md)
-- [Level 5 - Controllers et Context transverses](./Level5.md)
-- [Level 6 - Modales](./Level6.md)
+Point de départ, commun aux deux séries :
 
+- [Level Socle 0 - Point de départ : préparation de l'environnement](./LevelSocle0.md)
+
+Série UI (les écrans Vertigo-UI) :
+
+- [Level Ui 0 - Point de départ](./LevelUi0.md)
+- [Level Ui 1 - Liste simple](./LevelUi1.md)
+- [Level Ui 2 - Ecran de détail](./LevelUi2.md)
+  - [Level Ui 2.1 - Ecran de détail - Liste de référence des pays](./LevelUi2.1.md)
+  - [Level Ui 2.2 - Ecran de détail - Edition](./LevelUi2.2.md)
+  - [Level Ui 2.3 - Ecran de détail - Affichage des tableaux](./LevelUi2.3.md)
+  - [Level Ui 2.4 - Ecran de détail - Tri coté serveur](./LevelUi2.4.md)
+  - [Level Ui 2.5 - Ecran de détail - Validation coté serveur en Ajax](./LevelUi2.5.md)
+  - [Level Ui 2.6 - Attributs complémentaires et évènements](./LevelUi2.6.md)
+  - [Level Ui 2.7 - Gestion des slots](./LevelUi2.7.md)
+- [Level Ui 3 - Recherche](./LevelUi3.md)
+- [Level Ui 4 - Tableaux éditables](./LevelUi4.md)
+- [Level Ui 5 - Controllers et Context transverses](./LevelUi5.md)
+- [Level Ui 6 - Modales](./LevelUi6.md)

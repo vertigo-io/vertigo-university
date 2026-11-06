@@ -1,4 +1,4 @@
-# Level 2.3 - Ecran de détail - Affichage des tableaux 
+# Level Ui 2.3 - Ecran de détail - Affichage des tableaux 
 
 Nous allons completer l'écran de détail de film pour la liste des rôles.
 Nous verrons le rendu particulier des tableaux.
@@ -47,4 +47,4 @@ Le composant `vu:select`, comme les autres composants de formulaire ne peuvent p
 4. Dans la vue, utiliser le composant `vu:field-read` pour résoudre le actId en nom de l'acteur.
 6. Consulter la page de détail. Consulter le contenu du `vueData`.
  
-# [Suite : Level 2.4 - Ecran de détail - Tri spécifique coté serveur](./Level2.4.md)
+# [Suite : Level Ui 2.4 - Ecran de détail - Tri spécifique coté serveur](./LevelUi2.4.md)

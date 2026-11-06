@@ -214,4 +214,4 @@ Arrêtez le node avec Ctrl+C (le node web ne lit pas le stdin).
 - **Deuxième page** : créez `about.html` (même pattern : decorate + fragment) et un `AboutController` (`@RequestMapping("/about")`), ajoutez un lien `<a th:href="@{/about/}">` dans le fragment `content` de `home.html`.
 - **Pourquoi pas de cache, pas de lucene ?** : `CollectionsManagerImpl` déclare un `Optional<IndexPlugin>` : l'indexation Lucene est un plugin optionnel. Le cache mémoire n'est requis que si un plugin l'injecte. Un node VUI minimal n'en a pas besoin.
 
-# [Suite : sample-vertigo-ui — Level 0](../sample-vertigo-ui/Level0.md)
+# [Suite : sample-vertigo-ui — Level Ui 0](../sample-vertigo-ui/LevelUi0.md)

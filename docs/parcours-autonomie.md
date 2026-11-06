@@ -15,7 +15,7 @@ Chaque étape est une **formation d'approfondissement** (un sujet) : le tableau 
 | S2 | Environnement local réel (Docker, PostgreSQL/Liquibase, cache) | 30/70 | — | **formation manquante** |
 | S3 | Accès aux données & recherche (tâches, accesseurs, master data, Elasticsearch, DAO avancés) | 50/50 | [sample-crystal](../sample-crystal) Levels 0→4 (corrigé : [sample-crystal-full](../sample-crystal-full)), [sample-dao-full](../sample-dao-full) | existante |
 | S4 | Sécurité (login, authorizations, row-level, SSO) | 50/50 | [sample-account](../sample-account) | existante (SSO : doc seule) |
-| S5 | Application web Vertigo-UI (mécanique + couche « production ») | 30/70 | [sample-vertigo-ui](../sample-vertigo-ui) Levels 0→6, [sample-vertigo-ui-hello](../sample-vertigo-ui-hello) (boot minimal) | existante |
+| S5 | Application web Vertigo-UI (mécanique + couche « production ») | 30/70 | [sample-vertigo-ui](../sample-vertigo-ui) Levels Ui 0→6, [sample-vertigo-ui-hello](../sample-vertigo-ui-hello) (boot minimal) | existante |
 | S6 | Planification & batch (agenda, orchestration de jobs) | 40/60 | — | **formation manquante** |
 | S7 | Communication & intégration (mail/SMS, documents, HTTP, REST, audit) | 40/60 | [sample-quarto](../sample-quarto), [sample-aop-modules](../sample-aop-modules) (mail), [sample-vega](../sample-vega) | partielle (audit : formation manquante) |
 | S8 | Production & fiabilité (tests, environnement, CI, monitoring) | 60/40 | — | **formation manquante** |
@@ -81,7 +81,7 @@ Le fil conducteur est l'exercice [sample-crystal](../sample-crystal) (Levels 0�
 2. **Tâches** : les requêtes SQL nommées déclarées dans les `.ksp`, avec une liste de valeurs en paramètre (`IN (...)`) ; une tâche se place dans le DAO de l'objet concerné par ses paramètres, sinon dans le PAO — [Level 1 de sample-crystal](../sample-crystal/Level1.md).
 3. **Accesseurs** : naviguer d'une entité vers une autre (`load()` puis `get()`) ; chaque chargement est un accès à la base, visible dans la console — [Level 2](../sample-crystal/Level2.md).
 4. **Master data** : les données de référence (valeurs fixes) ; une liste statique devient un enum généré, lu sans requête — [Level 3](../sample-crystal/Level3.md), Mars (`MarsMasterDataDefinitionProvider`).
-5. **Elasticsearch** : indexation (pattern `SearchLoader`), réindexation à la demande, recherche à facettes (term et range), tri et pagination (`DtListState`) exposés en REST — [Level 4](../sample-crystal/Level4.md), le [Level 3 de sample-vertigo-ui](../sample-vertigo-ui) ; plugin datafactory Elasticsearch dans la plateforme ; Mars (`basemanagement/search/`). Référence : [vertigo-docs : recherche](https://vertigo-io.github.io/vertigo-docs/#/).
+5. **Elasticsearch** : indexation (pattern `SearchLoader`), réindexation à la demande, recherche à facettes (term et range), tri et pagination (`DtListState`) exposés en REST — [Level 4](../sample-crystal/Level4.md), le [Level Ui 3 de sample-vertigo-ui](../sample-vertigo-ui/LevelUi3.md) ; plugin datafactory Elasticsearch dans la plateforme ; Mars (`basemanagement/search/`). Référence : [vertigo-docs : recherche](https://vertigo-io.github.io/vertigo-docs/#/).
 6. **DAO avancés** : DAO personnalisés, projections, reprise par lots, performances — [sample-dao-full](../sample-dao-full).
 
 **Exo** : suivre les Levels 0→4 de `sample-crystal` ; puis écrire dans `sample-dao-full` un service avec critères + tri + pagination.
@@ -111,11 +111,11 @@ Le fil conducteur est l'exercice [sample-crystal](../sample-crystal) (Levels 0�
 
 **Thèmes**
 
-1. **La mécanique Vertigo-UI** : [Levels 0→6 de sample-vertigo-ui](../sample-vertigo-ui) (listes, écran de détail, recherche, tableaux, controllers, modales) — solutions dans [sample-vertigo-ui-full](../sample-vertigo-ui-full) — et les vues de Mars. Référence : [vertigo-docs : UI](https://vertigo-io.github.io/vertigo-docs/#/).
-2. **Le boot web réel** : deux modes — `web.xml` + Listener (Level 0 de sample-vertigo-ui) ou boot programmatique `JettyBoot`/`JettyBootParams` (Mars `BootMars` : context path, SSL/keystore pilotés par variables d'environnement).
+1. **La mécanique Vertigo-UI** : [Levels Ui 0→6 de sample-vertigo-ui](../sample-vertigo-ui) (listes, écran de détail, recherche, tableaux, controllers, modales) — solutions dans [sample-vertigo-ui-full](../sample-vertigo-ui-full) — et les vues de Mars. Référence : [vertigo-docs : UI](https://vertigo-io.github.io/vertigo-docs/#/).
+2. **Le boot web réel** : deux modes — `web.xml` + Listener ([Level Socle 0 de sample-vertigo-ui](../sample-vertigo-ui/LevelSocle0.md)) ou boot programmatique `JettyBoot`/`JettyBootParams` (Mars `BootMars` : context path, SSL/keystore pilotés par variables d'environnement).
 3. **L'initialisation SpringMVC** : `*VSpringWebApplicationInitializer` → `*VSpringWebConfig` (Mars, sample-vertigo-ui) — le `@ComponentScan` liste les packages explicitement, pas de scan des sous-packages.
 4. **Les intercepteurs web** : le cross-cutting côté web (ex. limitation de débit sur des endpoints publics) — [vertigo-docs : UI](https://vertigo-io.github.io/vertigo-docs/#/).
-5. **Gestion des erreurs et feedback** : le message stack de l'UI (voir le Level 2.5 de sample-vertigo-ui) et les pages d'erreur.
+5. **Gestion des erreurs et feedback** : le message stack de l'UI (voir le [Level Ui 2.5 de sample-vertigo-ui](../sample-vertigo-ui/LevelUi2.5.md)) et les pages d'erreur.
 6. **Upload multipart** : Mars (`FileUploadController`, `MultipartConfigInjectionHandler`).
 7. **i18n** : les bundles de messages initialisés au boot (Mars `I18nResourcesInitializer`).
 8. **DSFR** : le design system de l'administration française (standard public) — une bibliothèque de composants Vertigo-UI dédiée existe (vertigo-ui-dsfr) ; s'appliquer à la checklist **RGAA** (accessibilité) quand l'application est destinée au public administratif.
@@ -180,4 +180,4 @@ Modules qui ne font pas partie du travail courant d'un développeur (cas d'usage
 
 - [vertigo-docs](https://vertigo-io.github.io/vertigo-docs/#/) : la documentation officielle (basic, extensions, modules, design-system)
 - [Mars](https://github.com/vertigo-io/vertigo-mars) : l'application de démonstration publique de Vertigo
-- Les samples de ce dépôt : `sample-*` (dont [sample-vertigo-ui](../sample-vertigo-ui) Levels 0→6 et sa [solution](../sample-vertigo-ui-full))
+- Les samples de ce dépôt : `sample-*` (dont [sample-vertigo-ui](../sample-vertigo-ui) Levels Ui 0→6 et sa [solution](../sample-vertigo-ui-full))

@@ -1,4 +1,4 @@
-# Level 6 - Modales
+# Level Ui 6 - Modales
 
 Nous allons ajouter des panneaux (modales) à l'écran de détail d'un film.
 Cela permettra de voir les deux façons de faire une modale en Vertigo-UI : pointer vers une page autonome, ou ouvrir un sous-élément du contexte courant.
@@ -38,7 +38,7 @@ Nous allons ajouter au tableau des rôles une colonne d'actions *(œil et stylo)
     <vu:button flat icon="ri-edit-fill" title="Modifier le rôle" th:@click.stop="|openModal('roleActorModal', '@{/roleActor/}' + props.row.rolId, {edit: true, successCallback: 'onRoleActorSuccess'})|" />
 </vu:slot>
 ```
-2. Sur le même tableau, faire naviguer la ligne vers la page autonome du rôle *(le mécanisme `tr_@click.native` vu au Level 2.6)* :
+2. Sur le même tableau, faire naviguer la ligne vers la page autonome du rôle *(le mécanisme `tr_@click.native` vu au Level Ui 2.6)* :
 ```Html
 tr_@click.native="|goTo('@{/roleActor/}' + props.row.rolId)|" tr_class="nav"
 ```
@@ -67,12 +67,12 @@ function onRoleActorSuccess() {
    - le stylo ouvre le panneau en édition : modifier puis Save, le panneau se ferme tout seul et la liste des rôles est rechargée
    - le clic sur la ligne ouvre la page du rôle en plein écran *(la page est autonome : on peut aussi la charger directement dans le navigateur)*
 
-*Note : en projet, il faudrait protéger les données en cours d'édition avant une navigation (cf. Level 5).*
+*Note : en projet, il faudrait protéger les données en cours d'édition avant une navigation (cf. Level Ui 5).*
 *La solution complète est dans le sample-vertigo-ui-full.*
 
 ## Optionnel : Rechercher un pays en modale (sous-élément du contexte courant)
 
-Le pays du film est une liste de référence *(Level 2.1)*. Nous allons proposer une modale qui ouvre un sous-élément du contexte courant : un objet `countrySearch` qui, une fois validé, met à jour le film dans le contexte de la page.
+Le pays du film est une liste de référence *(Level Ui 2.1)*. Nous allons proposer une modale qui ouvre un sous-élément du contexte courant : un objet `countrySearch` qui, une fois validé, met à jour le film dans le contexte de la page.
 
 1. Dans le `MovieController`, publier une clé de context `countrySearch` de type `Country` *(initialisée avec `new Country()`)* dans les initContext.
 2. Ajouter la méthode `POST /_selectCountry` : elle prend l'objet `countrySearch`, lit le film depuis le context, pose l'identifiant du pays choisi sur le film, re-publie le film et renvoie le `viewContext`.
