@@ -23,6 +23,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		Country(io.vertigo.samples.vui.domain.Country.class),
 		/** Objet de données Movie. */
 		Movie(io.vertigo.samples.vui.domain.Movie.class),
+		/** Objet de données MovieDisplay. */
+		MovieDisplay(io.vertigo.samples.vui.domain.MovieDisplay.class),
 		/** Objet de données MovieIndex. */
 		MovieIndex(io.vertigo.samples.vui.domain.MovieIndex.class),
 		/** Objet de données Role. */
@@ -83,6 +85,19 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		imdbid,
 		/** Propriété 'Country'. */
 		couId	}
+
+	/**
+	 * Enumération des champs de MovieDisplay.
+	 */
+	public enum MovieDisplayFields implements DataFieldName<io.vertigo.samples.vui.domain.MovieDisplay> {
+		/** Propriété 'Id'. */
+		movId,
+		/** Propriété 'Titre du film'. */
+		name,
+		/** Propriété 'Année'. */
+		year,
+		/** Propriété 'Pays'. */
+		countryName	}
 
 	/**
 	 * Enumération des champs de MovieIndex.

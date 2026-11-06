@@ -35,6 +35,15 @@
 		<filter-name>Character Encoding Filter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	<!-- Vega webservices (REST), served by Javalin under /api (VegaFeatures webservices.javalin, apiPrefix /api) -->
+	<filter>
+		<filter-name>VegaJavalinFilter</filter-name>
+		<filter-class>io.vertigo.vega.plugins.webservice.webserver.javalin.VegaJavalinFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>VegaJavalinFilter</filter-name>
+		<url-pattern>/api/*</url-pattern>
+	</filter-mapping>
    <filter> 
         <description>
             Filtre de sécurisation des URLs et de conservation des sessions.

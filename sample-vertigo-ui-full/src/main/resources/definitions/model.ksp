@@ -30,6 +30,14 @@ create DtDefinition DtRole {
   field asCharacter {domain: DoLabelVeryLong label: "Dans le role de" cardinality:"1"}
 }
 
+/* A DTO (no id, not persisted): one line of a list, the movie with the name of its country (TkGetMoviesDisplay) */
+create DtDefinition DtMovieDisplay {
+  field movId {domain: DoId label: "Id" }
+  field name {domain: DoLabelLong label: "Titre du film" }
+  field year {domain: DoYear label: "Année" }
+  field countryName {domain: DoLabel label: "Pays" }
+}
+
 create Association AMovCou {
   fkFieldName : "couId"
     

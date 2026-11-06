@@ -10,6 +10,9 @@ boot:
     - io.vertigo.core.plugins.resource.local.LocalResourceResolverPlugin: {}
     - io.vertigo.vega.plugins.webservice.servlet.WebAppContextParamPlugin: {}
 modules:
+  io.vertigo.connectors.javalin.JavalinFeatures:
+    features:
+      - standalone:
   io.vertigo.commons.CommonsFeatures:
     features:
       - script:
@@ -19,7 +22,7 @@ modules:
     __flags__: ["search"]
     features:
       - embeddedServer:
-          home: C:/atelier/search
+          home: search # classpath directory (target/classes/search)
       - restHL:
           servers.names: localhost:9200
           ssl: false
@@ -30,7 +33,7 @@ modules:
       - sql.c3p0:
           dataBaseClass: io.vertigo.database.impl.sql.vendor.h2.H2DataBase
           jdbcDriver: org.h2.Driver
-          jdbcUrl: jdbc:h2:C:/atelier/database/formation_loaded;USER=sa;PASSWORD=;NON_KEYWORDS=YEAR,KEY,USER
+          jdbcUrl: jdbc:h2:mem:sample_vui;DB_CLOSE_DELAY=-1;NON_KEYWORDS=YEAR,KEY,USER
   io.vertigo.datamodel.DataModelFeatures:
   io.vertigo.datastore.DataStoreFeatures:
     features:
@@ -67,12 +70,19 @@ modules:
       - authorization:
       - security:
           userSessionClassName: io.vertigo.samples.support.SampleUserSession
-  io.vertigo.vega.VegaFeatures:        
+  io.vertigo.vega.VegaFeatures:
+    features:
+      - webservices:
+    featuresConfig:
+      - webservices.javalin:
+          apiPrefix: /api
+      - webservices.healthcheck:
   io.vertigo.samples.support.SupportFeatures:
   io.vertigo.samples.vui.VuiFeatures:
     features:
       - search:
           __flags__: ["search"]
 initializers:
+  - io.vertigo.samples.support.boot.DataBaseInitializer:
   - io.vertigo.samples.support.boot.LocaleManagerInitializer:
   - io.vertigo.samples.support.boot.I18nResourcesInitializer:

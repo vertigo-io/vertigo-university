@@ -65,6 +65,27 @@ public final class VuiPAO implements StoreServices {
 	}
 
 	/**
+	 * Execute la tache TkGetMoviesDisplay.
+	 * @return DtList de MovieDisplay moviesDisplay
+	*/
+	@io.vertigo.datamodel.task.proxy.TaskAnnotation(
+			name = "TkGetMoviesDisplay",
+			request = """
+			select mov.mov_id, mov.name, mov.year, cou.name as country_name
+        	from movie mov
+        	left join country cou on mov.cou_id = cou.cou_id
+        	order by mov.name""",
+			taskEngineClass = io.vertigo.basics.task.TaskEngineSelect.class)
+	@io.vertigo.datamodel.task.proxy.TaskOutput(smartType = "STyDtMovieDisplay", name = "moviesDisplay")
+	public io.vertigo.datamodel.data.model.DtList<io.vertigo.samples.vui.domain.MovieDisplay> getMoviesDisplay() {
+		final Task task = createTaskBuilder("TkGetMoviesDisplay")
+				.build();
+		return getTaskManager()
+				.execute(task)
+				.getResult();
+	}
+
+	/**
 	 * Execute la tache TkLoadMovieIndex.
 	 * @param movieIds List de Long
 	 * @return DtList de MovieIndex dtcIndex
