@@ -8,7 +8,7 @@ Ce parcours est une **liste de formations à suivre dans l'ordre** : chaque form
 |---|---|---|
 | 1 | Le projet Maven et le node Vertigo | [sample-hello-world](../sample-hello-world), [sample-config](../sample-config) |
 | 2 | Le premier webservice REST (Vega) | [sample-hello-world](../sample-hello-world), [sample-vega](../sample-vega) |
-| 3 | Le modèle de données et Studio (code génération) | [sample-vertigo-ui](../sample-vertigo-ui) (`definitions/`, `StudioGenerate`) |
+| 3 | Le modèle de données et Studio (code génération) | [sample-dao](../sample-dao) (`.ksp`, runner `Studio`) |
 | 4 | Le premier service et les DAO | [sample-dao](../sample-dao), [sample-dao-full](../sample-dao-full) |
 | 5 | Le premier écran web (Vertigo-UI) | [sample-vertigo-ui-hello](../sample-vertigo-ui-hello) |
 
@@ -17,6 +17,10 @@ Ce parcours est une **liste de formations à suivre dans l'ordre** : chaque form
 - JDK 17, Maven 3.9+
 - Eclipse (recommandé ; plugin [Vertigo Dsl Plugin 3.5.0](https://marketplace.eclipse.org/content/vertigo-3-dsl-plugin) — Eclipse et VSCode — en option)
 - La documentation officielle Vertigo en appui : [vertigo-io.github.io/vertigo-docs](https://vertigo-io.github.io/vertigo-docs/#/)
+- **À lire avant de commencer** (environ une heure ; vous y reviendrez au fil des étapes) — les principes et le vocabulaire de Vertigo :
+  - [Pourquoi Vertigo ?](https://vertigo-io.github.io/vertigo-docs/#/intro/why) et [Philosophie](https://vertigo-io.github.io/vertigo-docs/#/intro/philosophie) : les objectifs et les principes de conception
+  - [Concepts](https://vertigo-io.github.io/vertigo-docs/#/basic/concepts) : le glossaire (Module, Component, Manager et Plugin, SmartType, DtObject, Task, `@Transactional`, KSP et KPR)
+  - [Règles de codage](https://vertigo-io.github.io/vertigo-docs/#/intro/regles-codage)
 - Le dépôt university est installé dans le repo local Maven (`mvn install` à la racine) : le parent des samples (`io.vertigo:vertigo-samples`) n'est pas publié sur Maven Central (le parent d'un projet standalone est `io.vertigo:vertigo-parent`)
 
 ## Ce que vous saurez faire à la fin
@@ -25,11 +29,13 @@ Ce parcours est une **liste de formations à suivre dans l'ordre** : chaque form
 |---|---|---|
 | Créer un projet Maven et démarrer un node Vertigo | 1 | [sample-hello-world](../sample-hello-world), [sample-config](../sample-config) |
 | Publier un premier webservice REST (Vega) | 2 | [sample-hello-world](../sample-hello-world), [sample-vega](../sample-vega) |
-| Déclarer un modèle de données et générer le code (Studio) | 3 | [sample-vertigo-ui](../sample-vertigo-ui) (`definitions/`, `StudioGenerate`) |
-| Écrire un service sur les DAO générés | 4 | [sample-dao](../sample-dao) |
+| Déclarer un modèle de données et générer le code (Studio) | 3 | [sample-dao](../sample-dao) (`.ksp`, runner `Studio`) |
+| Écrire un service sur les DAO générés et l'exposer en REST | 4 | [sample-dao](../sample-dao) |
 | Afficher un premier écran web (Vertigo-UI) | 5 | [sample-vertigo-ui-hello](../sample-vertigo-ui-hello) |
 
-**Livrable** : une mini application construite étape par étape (un seul projet qui grandit) qui démarre, a un modèle de données, un service et un premier écran web.
+**Livrable** : une mini application construite étape par étape (un seul projet qui grandit) qui démarre, a un modèle de données, un service exposé en REST et un premier écran web.
+
+**Le fil conducteur** : à l'étape 2, vous publiez un webservice sur du code **écrit à la main et provisoire** (un objet, sa définition et un faux DAO en mémoire), pour obtenir tout de suite un premier rendu. Les étapes 3 et 4 le remplacent par **la méthode normale** : l'objet et le DAO sont générés par Studio depuis le modèle, et le webservice passe par un service. La même URL renvoie alors les données de votre base.
 
 **Important:** les données manipulées dans le parcours sont **créées par votre projet** (base H2 en mémoire, inserts de démonstration) : aucune base préchargée, aucune donnée externe.
 
@@ -53,6 +59,8 @@ Le **node** est l'unité de base d'une application Vertigo : c'est le processus 
 
 **Important:** dans Vertigo, on configure d'abord, on code ensuite : le modèle de données, les composants activés et la sécurité sont déclarés avant d'écrire la moindre logique métier.
 
+**Pour comprendre** : [vertigo-docs : Configuration](https://vertigo-io.github.io/vertigo-docs/#/basic/configuration) et [Composants](https://vertigo-io.github.io/vertigo-docs/#/basic/composants).
+
 **Bon à savoir** :
 
 - le port du serveur est un paramètre de `JavalinFeatures` (`Param.of("port", …)`) : à changer pour faire démarrer plusieurs samples en parallèle
@@ -61,44 +69,55 @@ Le **node** est l'unité de base d'une application Vertigo : c'est le processus 
 
 ### Etape 2 - Le premier webservice REST (Vega)
 
-*Objectif : répondre à une requête HTTP.*
+*Objectif : répondre à une requête HTTP par une liste de films en JSON.*
+
+Un webservice Vega est un composant (`implements WebServices`) dont les méthodes annotées (`@GET`, `@POST`…) deviennent des routes REST ; Vega convertit en JSON les objets retournés.
 
 À faire :
 
-1. Lire `hello.webservices.HelloWebServices` dans `sample-hello-world`
-2. Démarrer `sample-hello-world` (cf. étape 1) et tester `http://localhost:8080/hello/` dans un navigateur
-3. Créer votre propre webservice dans votre projet et le tester
-4. *(Optionnel)* Étudier [sample-vega](../sample-vega) (`SampleVega`, Javalin :8080) pour des webservice REST plus complets
+1. Lire `hello.webservices.HelloWebServices` dans `sample-hello-world`, démarrer le sample (cf. étape 1) et tester `http://localhost:8080/hello/` dans un navigateur
+2. Lire [sample-vega](../sample-vega) (`SampleVega`, Javalin :8080) : `MovieWebServices` publie `/movies` sur l'objet `Movie` et le `MovieDAO` du package `vega.domain`
+3. Dans votre projet, publier `GET /movies/` et `GET /movies/{id}` de la même façon, en reprenant de `sample-vega`, **dans un package à part** (par exemple `….mock`) :
+   - `Movie` : l'objet, **avec les champs `movId` et `name`** — les noms qu'il aura dans le modèle de l'étape 3 (l'identifiant est préfixé par le trigramme de l'objet)
+   - `VegaDefinitionProvider` : la définition de `Movie` (`DtMovie`) et de ses SmartTypes, avec les mêmes noms de champs ; il s'enregistre par `addDefinitionProvider`
+   - `MovieDAO` : quelques films gardés en mémoire
+   - `MovieWebServices`, qui s'enregistre par `addComponent`
 
-**Vérification** : votre réponse s'affiche dans le navigateur.
+**Vérification** : `http://localhost:8080/movies/` affiche vos films en JSON (`movId`, `name`).
+
+**Important:** ce `Movie`, sa définition et ce `MovieDAO` écrits à la main sont **provisoires** : ils donnent un premier rendu. Dans une application Vertigo, on ne les écrit pas : l'objet et sa définition sont générés par Studio depuis le modèle (étape 3), et le DAO généré accède à la base (étape 4). Le package à part évite qu'ils entrent en conflit avec le code généré à l'étape 3, qui utilise le package `….domain`.
+
+**Pour comprendre** : [vertigo-docs : WebServices](https://vertigo-io.github.io/vertigo-docs/#/basic/webservices).
 
 ### Etape 3 - Le modèle de données et Studio (code génération)
 
-*Objectif : comprendre comment Vertigo génère le domaine, les DAO et le SQL depuis le modèle.*
+*Objectif : générer l'objet `Movie`, son DAO et le SQL de la base depuis le modèle.*
 
 Studio est l'environnement de modélisation propre à Vertigo : vous déclarez votre modèle dans des fichiers de définitions, et la génération produit le code Java (domaine, DAO, requêtes SQL nommées, définitions) dans `src/main/javagen`.
 
 À faire :
 
-1. Dans [sample-vertigo-ui](../sample-vertigo-ui), étudier :
-   - `studio-config.yaml` : la configuration de la génération
-   - `src/main/resources/definitions/` : les fichiers de définitions — **les objets sont dans les `.ksp`** (domaines, modèle, DAO), le `.kpr` n'agrège que la liste des `.ksp`
-   - `src/main/javagen/` : le code généré — classes du domaine (`Movie`, `Actor`…), DAO (`MovieDAO`), requêtes SQL nommées (les classes `*PAO`, produites pour les tâches orphelines — cf. `VuiPAO` de `sample-vertigo-ui` ; sur un modèle minimal où les tâches sont rattachées à un objet, aucun PAO n'est produit), définitions (`DtDefinitions`), SQL (`sqlgen/`)
-2. Lancer le runner `io.vertigo.samples.support.mda.StudioGenerate` (classe main, **à lancer depuis la racine du projet** : il lit `studio-config.yaml` en chemin relatif) : `mvn compile` du module, puis `java` avec le classpath du module (cf. étape 1), et observer la régénération — **sur une copie du sample** : lancer le runner dans le dépôt réécrit les fichiers générés suivis par git
-3. Dans votre projet, **mettre en place la génération** (poms de `sample-dao` / `sample-vertigo-ui` en référence) :
-    - copier le runner `StudioGenerate` dans votre projet (c'est une classe des samples, pas une librairie)
+1. Dans [sample-dao](../sample-dao), étudier :
+   - `studio-config.yaml` : la configuration de la génération (package du projet, répertoire cible, SGBD cible `H2`)
+   - `src/main/resources/application.kpr` : la liste des fichiers de définitions — **les objets sont dans les `.ksp`** : `domains.ksp` (les domaines, c'est-à-dire les types des champs), `model.ksp` (les objets et leurs associations), `dao.ksp`
+   - `src/main/javagen/` : le code généré — classes du domaine (`Movie`, `Actor`…), DAO (`MovieDAO`…), définitions (`DtDefinitions`), SQL de création de base (`sqlgen/crebas.sql`)
+2. Lancer le runner `io.vertigo.samples.dao.run.Studio` (classe main, **à lancer depuis la racine du projet** : il lit `studio-config.yaml` en chemin relatif) : `mvn compile` du module, puis `java` avec le classpath du module (cf. étape 1), et observer la régénération — **sur une copie du sample** : lancer le runner dans le dépôt réécrit les fichiers générés suivis par git
+3. Dans votre projet, **mettre en place la génération** (pom de `sample-dao` en référence) :
+    - copier le runner `Studio` dans votre projet (une classe main de quelques lignes qui appelle `VertigoStudioMda`)
     - ajouter la dépendance `io.vertigo:vertigo-studio`
-    - ajouter la section de build Maven qui compile `src/main/javagen` en source (build-helper) et les resources — sans elle le code généré ne compile pas à l'étape suivante
-4. Dans votre projet : déclarer un `studio-config.yaml`, un `.kpr` et un premier objet (une table, quelques champs) dans un `.ksp`, puis générer
-5. Lire le code généré produit : la classe du domaine, son DAO, le SQL de création de base
+    - ajouter la section de build Maven qui compile `src/main/javagen` en source (build-helper) et les resources — sans elle le code généré ne compile pas
+4. Dans votre projet : déclarer un `studio-config.yaml`, un `.kpr`, vos domaines et l'objet `DtMovie` dans des `.ksp` — **avec l'identifiant `movId` et le champ `name`**, comme le `Movie` écrit à la main à l'étape 2 — puis générer
+5. Lire le code généré et **le comparer à ce que vous avez écrit à la main à l'étape 2** : le `Movie` généré porte ses champs et leurs annotations, `DtDefinitions` remplace la déclaration écrite dans `VegaDefinitionProvider`, et le `MovieDAO` généré accède à la base, dont `sqlgen/crebas.sql` crée la table
 
-**Vérification** : le code généré est présent dans `src/main/javagen` et cohérent avec votre modèle ; le SQL de création de base est rejouable **une fois** `NON_KEYWORDS=YEAR,KEY,USER` ajouté à l'URL JDBC le cas échéant — **attention** : en H2 2.x, une colonne `YEAR` est un mot réservé (cf. `SampleConfigBuilder` de `sample-dao`).
+**Vérification** : le code généré est présent dans `src/main/javagen`, compile et est cohérent avec votre modèle ; le node démarre toujours et `/movies/` répond encore avec le code provisoire (le code généré n'est pas encore branché). Le SQL de création de base est rejouable **une fois** `NON_KEYWORDS=YEAR,KEY,USER` ajouté à l'URL JDBC le cas échéant — **attention** : en H2 2.x, une colonne `YEAR` est un mot réservé (cf. `SampleConfigBuilder` de `sample-dao`).
 
 **Important:** le code généré ne se modifie jamais à la main : si le code est faux, c'est le modèle qui est faux. Modifier le modèle puis régénérer est le geste central du développement Vertigo.
 
+**Pour comprendre** : [vertigo-docs : MDA](https://vertigo-io.github.io/vertigo-docs/#/basic/mda).
+
 ### Etape 4 - Le premier service et les DAO
 
-*Objectif : écrire de la logique métier sur les DAO générés.*
+*Objectif : remplacer le code provisoire de l'étape 2 par la méthode normale : un service sur le DAO généré, avec des données en base.*
 
 À faire :
 
@@ -107,10 +126,16 @@ Studio est l'environnement de modélisation propre à Vertigo : vous déclarez v
    - enregistrer les features du node — `CommonsFeatures` (script **janino**), `DataModelFeatures`, `DatabaseFeatures` (driver H2 + C3p0), `DataStoreFeatures` (entityStore sql) et le module « ressources » avec le `ModelDefinitionProvider` (`DtDefinitions` générées + SmartTypes) : `SampleConfigBuilder` de `sample-dao` en référence — sans elles, le boot échoue avec des erreurs DI (`component info with id '…' not found`)
    - enregistrer votre initializer de création de base — un `ComponentInitializer` s'enregistre avec `addInitializer`, **pas** `addComponent`
    - écrire un service qui liste, cherche et enregistre votre objet — `MovieServicesImpl` de `sample-dao` en référence : `save`/`get` sur le DAO généré, et **liste/recherche/pagination** avec `Criterions.startsWith(DtDefinitions.MovieFields.name, …)` / `Criterions.alwaysTrue()`, un `DtListState` (`DtListState.defaultOf(Movie.class)`, `withDefault`) et les méthodes `findAll(critères, listState)` (tri + pagination) / `count(critères)` — héritées de la classe de base `DAO` (le `MovieDAO` généré est une sous-classe vide, elles n'y sont pas écrites)
-3. Observer les **tasks auto-générées** au runtime (`TkInsert…`, `TkSelect…ByUri`, `TkSelectList…ByCriteria`…) : le DataStore produit tout seul les requêtes CRUD — c'est ce que vous n'avez PAS à écrire. Elles sont visibles **dans les logs SQL** (loggers `sql`/`tasks` en INFO : `Finish /execute/TkInsertBook successfully …`) ; elles n'apparaissent pas dans `DefinitionSpace.getAll(TaskDefinition.class)` (seules vos tâches déclarées s'y trouvent)
+3. **Remplacer le code provisoire de l'étape 2** :
+   - supprimer le package `….mock` (`Movie`, `MovieDAO`, `VegaDefinitionProvider`) et l'enregistrement du provider : la définition `DtMovie` vient maintenant des `DtDefinitions` générées — gardé, le provider la déclarerait une deuxième fois
+   - `MovieWebServices` reçoit votre service par injection (`@Inject`) et l'appelle
 4. *(Optionnel)* Étudier [sample-dao-full](../sample-dao-full) (Level2→Level7, `Reprise`) : DAO personnalisés, projections, reprise par lots
 
-**Vérification** : votre service fonctionne (appel depuis la console ou un webservice), sur des données créées par votre projet.
+**Vérification** : la même URL `http://localhost:8080/movies/` renvoie maintenant les films **créés par votre projet en base** ; la forme du JSON (`movId`, `name`) n'a pas changé.
+
+**Important:** un webservice ne crée pas ses dépendances avec `new` et n'accède jamais directement à un DAO : il passe par un service, qui porte la transaction (`@Transactional`). C'est la méthode normale : modèle → génération → service → webservice.
+
+**Pour comprendre** : [vertigo-docs : Accès aux données](https://vertigo-io.github.io/vertigo-docs/#/basic/dao).
 
 ### Etape 5 - Le premier écran web (Vertigo-UI)
 
@@ -131,6 +156,8 @@ Vertigo-UI est construit sur Vue.js, Quasar et SpringMVC avec Thymeleaf.
    - votre `UserSession`, votre controller, votre page. **Convention de nom de vue** : la vue est trouvée depuis le package du controller — `.../uihello/controllers/HomeController` → `WEB-INF/views/uihello/home.html` (le segment de package juste avant `.controllers`)
 
 **Vérification** : votre écran s'affiche dans le navigateur.
+
+**Pour comprendre** : [vertigo-docs : UI](https://vertigo-io.github.io/vertigo-docs/#/basic/ui).
 
 **Bon à savoir** : le node web ne lit pas le stdin (contrairement au node Javalin) : l'arrêt est Ctrl+C. La racine du context (`/uihello/`) renvoie 404 sous Jetty 11 (welcome file) : c'est cosmétique, viser `/uihello/home/`.
 
