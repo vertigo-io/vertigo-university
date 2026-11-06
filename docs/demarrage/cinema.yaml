@@ -1,0 +1,57 @@
+---
+# Configuration du node web (Vertigo-UI) de l'application Cinema.
+# Fournie dès l'étape 1, elle n'est chargée qu'à l'étape 5, par le boot web (web.xml : boot.applicationConfiguration).
+# Aux étapes 1 à 4, le node est configuré en Java (votre classe de configuration) : ce fichier n'est pas lu.
+# A copier dans votre projet : src/main/resources/webapp/META-INF/cinema.yaml
+# Il cite des classes de votre projet : respectez leurs noms (package com.example.cinema) :
+#   CinemaFeatures, support.CinemaUserSession, boot.DataBaseInitializer, boot.DemoDataInitializer
+node:
+  appName: cinema
+boot:
+  params:
+    locales: fr_FR
+  plugins:
+    - io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin: {}
+modules:
+  # Etape 1 : le socle
+  io.vertigo.commons.CommonsFeatures:
+    features:
+      - script:
+    featuresConfig:
+      - script.janino:
+  io.vertigo.datamodel.DataModelFeatures:
+  io.vertigo.vega.VegaFeatures:
+  # Etape 4 : la base de données et l'accès aux données
+  io.vertigo.database.DatabaseFeatures:
+    features:
+      - sql:
+    featuresConfig:
+      - sql.c3p0:
+          dataBaseClass: io.vertigo.database.impl.sql.vendor.h2.H2DataBase
+          jdbcDriver: org.h2.Driver
+          jdbcUrl: jdbc:h2:mem:cinema;DB_CLOSE_DELAY=-1;NON_KEYWORDS=YEAR,KEY,USER
+  io.vertigo.datastore.DataStoreFeatures:
+    features:
+      - cache:
+      - entitystore:
+      - kvStore:
+    featuresConfig:
+      - cache.memory:
+      - entitystore.sql:
+      # Etape 5 : le contexte des écrans Vertigo-UI
+      - kvStore.delayedMemory:
+          collections: VViewContext, VViewInitContext
+          timeToLiveSeconds: 43200
+  # Etape 5 : les briques Vertigo-UI (voir l'exercice sample-vertigo-ui-hello)
+  io.vertigo.datafactory.DataFactoryFeatures:
+  io.vertigo.account.AccountFeatures:
+    features:
+      - authorization:
+      - security:
+          userSessionClassName: com.example.cinema.support.CinemaUserSession
+  # Etapes 2 à 4 : les composants de l'application (la même classe qu'en Java)
+  com.example.cinema.CinemaFeatures:
+# Etape 4 : la création de la base et les films de démonstration
+initializers:
+  - com.example.cinema.boot.DataBaseInitializer:
+  - com.example.cinema.boot.DemoDataInitializer:
