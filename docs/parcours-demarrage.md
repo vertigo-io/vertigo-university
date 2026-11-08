@@ -49,10 +49,10 @@ Le **node** est l'unité de base d'une application Vertigo : c'est le processus 
 
 À faire :
 
-1. Créer un projet Maven (un module, parent `io.vertigo:vertigo-parent` en version `4.4.1`, celle du `pom.xml` à la racine du dépôt) avec la même structure que `sample-hello-world`, et le package **`com.example.cinema`** (imposé : voir le point 6)
+1. Créer un projet Maven (un module, parent `io.vertigo:vertigo-parent` dans la version du `pom.xml` à la racine du dépôt, propriété `vertigo.version`) avec la même structure que `sample-hello-world`, et le package **`com.example.cinema`** (imposé : voir le point 6)
 2. Lire `hello.HelloWorld` : la classe main (démarrage du node, qui attend ensuite sur la console)
 3. Lire `hello.config.HelloConfigurator` : la configuration du node (boot locales, Javalin, DataModel, Vega)
-4. Dans votre projet, écrire la configuration du node dans une classe **`com.example.cinema.config.CinemaNodeConfig`**, dont la méthode `config()` renvoie le `NodeConfig` (le contenu de `HelloConfigurator` ; le nom suit la convention du framework, `<…>NodeConfig`), et une classe main qui démarre le node avec, comme `HelloWorld`. Lancer le node et vérifier qu'il démarre sans erreur
+4. Dans votre projet, écrire la configuration du node dans une classe **`com.example.cinema.config.CinemaNodeConfig`**, dont la méthode `config()` renvoie le `NodeConfig` (le contenu de `HelloConfigurator` ; le nom suit la convention de la plateforme, `<…>NodeConfig`), et une classe main qui démarre le node avec, comme `HelloWorld`. Lancer le node et vérifier qu'il démarre sans erreur
 5. *(Optionnel)* Lire [sample-config](../sample-config) (`ConfigRun`) : la construction programmatique d'un `NodeConfig`/`ModuleConfig` avec les Features (Javalin, DataModel, Vega)
 6. Copier dans votre projet le fichier fourni [`cinema.yaml`](demarrage/cinema.yaml), en `src/main/resources/webapp/META-INF/cinema.yaml`. C'est la configuration complète du node web de l'étape 5 : **il n'est pas lu avant l'étape 5**. Il cite quelques classes que vous créerez au fil des étapes : gardez leurs noms (`CinemaFeatures` à l'étape 2, `boot.DataBaseInitializer` et `boot.DemoDataInitializer` à l'étape 4, `support.CinemaUserSession` à l'étape 5)
 
@@ -187,6 +187,6 @@ Vertigo-UI est construit sur Vue.js, Quasar et SpringMVC avec Thymeleaf.
 
 ## Suite
 
-- [sample-vertigo-ui](../sample-vertigo-ui) Levels Ui 0→6 — la formation Vertigo-UI complète : base de données, listes, écran de détail, recherche, tableaux éditables, controllers, modales (solutions dans [sample-vertigo-ui-full](../sample-vertigo-ui-full))
 - [Parcours Débutant](parcours-debutant.md) — rejoindre une équipe expérimentée et viser l'autonomie sur le courant (le travail standard de l'équipe)
+- [sample-vertigo-ui](../sample-vertigo-ui) — l'application support du parcours Débutant : la série Socle (Levels Socle 0→7 : configuration, génération, modèle, tâches, modules, services, transaction et erreurs), puis la série UI (Levels Ui 0→6 : listes, écran de détail, recherche, tableaux éditables, controllers, modales) ; solutions dans [sample-vertigo-ui-full](../sample-vertigo-ui-full)
 - [Parcours Autonomie](parcours-autonomie.md) — les approfondissements, à consulter au fil de l'eau
