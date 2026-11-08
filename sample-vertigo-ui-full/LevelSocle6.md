@@ -64,9 +64,9 @@ Comme tout composant, il s'enregistre dans un module. Il est servi sous le préf
    ```
    *(l'annotation `PathParam` est, comme `GET` et `PathPrefix`, dans le package `io.vertigo.vega.webservice.stereotype`)*
 1. Relancez l'application et appelez :
-   - [http://localhost:18080/sample/api/movies/display](http://localhost:18080/sample/api/movies/display) : les 6 films, triés par titre, chacun avec son pays (`{"countryName": "Etats-Unis", "movId": 1000, "name": "Forrest Gump", "year": 1994}`…) ;
+   - [http://localhost:18080/sample/api/movies/display](http://localhost:18080/sample/api/movies/display) : les 20 films, triés par titre, chacun avec son pays (le premier : `{"countryName": "Etats-Unis", "movId": 1015, "name": "Back to the Future", "year": 1985}`) ;
    - [http://localhost:18080/sample/api/movies/display/250](http://localhost:18080/sample/api/movies/display/250) : le seul film allemand, `The Grand Budapest Hotel` ;
-   - [http://localhost:18080/sample/api/movies/display/1128](http://localhost:18080/sample/api/movies/display/1128) : `[]`, aucun film pour la France *(voir les pays dans `/src/main/resources/sql/initdata.sql`)*.
+   - [http://localhost:18080/sample/api/movies/display/392](http://localhost:18080/sample/api/movies/display/392) : `[]`, aucun film pour le Japon *(voir les pays dans `/src/main/resources/sql/initdata.sql`)*.
 
    *(si les adresses `/api/movies/...` répondent **404** : le webservice n'est pas enregistré dans `VuiFeatures`)*
 1. **Observez** la console : pour chaque appel, une trace du webservice (`Finish /Get//movies/display/{couId} ...`) et une trace de la tâche (`Finish /execute/TkGetMoviesDisplayByCountry ...`), avec leur durée.

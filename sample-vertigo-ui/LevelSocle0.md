@@ -17,7 +17,7 @@ Ce Level est le point de départ commun des deux séries de cet exercice : la s�
 
 L'application de cet exercice gère des films, leurs acteurs et leurs pays. Elle est déjà construite : la structure du projet, le modèle de données et les services sont en place. La série Socle vous apprend à vous y repérer et à la faire évoluer ; la série UI, à en construire les écrans.
 
-Sa base de données H2 est en mémoire : elle est recréée à chaque démarrage, avec les données de démonstration (6 films, dont les identifiants commencent à 1000). Il n'y a rien à installer.
+Sa base de données H2 est en mémoire : elle est recréée à chaque démarrage, avec les données de démonstration : 20 films réels, connus en France, avec leurs acteurs et leurs rôles (les identifiants commencent à 1000). Il n'y a rien à installer.
 
 ## Etapes
 

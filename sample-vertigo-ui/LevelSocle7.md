@@ -38,7 +38,7 @@ Une assertion vérifie le contrat du code : si elle échoue, c'est une erreur de
 1. Complétez `getMoviesDisplayByCountry` :
    - ajoutez à la vérification du paramètre une assertion : l'identifiant doit être positif *(`Assertion.check().isNotNull(couId).isTrue(couId > 0, "the country id must be positive ({0})", couId);`)* ;
    - si la liste de films est vide, levez une erreur utilisateur *(`throw new VUserException("Aucun film pour ce pays");`)*.
-1. Relancez l'application et appelez [http://localhost:18080/sample/api/movies/display/1128](http://localhost:18080/sample/api/movies/display/1128) : la réponse est **422**, avec `"globalErrors": ["Aucun film pour ce pays"]`.
+1. Relancez l'application et appelez [http://localhost:18080/sample/api/movies/display/392](http://localhost:18080/sample/api/movies/display/392) (le Japon, sans film) : la réponse est **422**, avec `"globalErrors": ["Aucun film pour ce pays"]`.
 1. Appelez [http://localhost:18080/sample/api/movies/display/250](http://localhost:18080/sample/api/movies/display/250) : la réponse est toujours le film allemand. L'assertion ne change rien pour un appel valide : elle protège le service contre un appel incorrect.
 *(si un appel répond **500** avec `"globalErrors": ["the country id must be positive (-1)"]` : l'identifiant passé est négatif, et l'assertion a refusé l'appel ; c'est une erreur système, tracée dans la console par `ERROR ExceptionWebServiceHandlerPlugin - Internal Server Error`, suivi de `java.lang.IllegalStateException` et de la pile d'appels)*
 1. **Question** : un appel pour un pays sans film, un appel avec un identifiant négatif. Lequel relève d'une erreur utilisateur, lequel d'une erreur système ? Lequel l'utilisateur peut-il corriger lui-même ?
