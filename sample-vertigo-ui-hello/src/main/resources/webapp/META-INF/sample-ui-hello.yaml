@@ -7,7 +7,7 @@ boot:
   plugins:
     - io.vertigo.core.plugins.resource.classpath.ClassPathResourceResolverPlugin: {}
 modules:
-  # TODO Etape 1 : ajoutez les 3 features de base du node Vertigo-UI
+  # TODO Brique 1 : ajoutez les 3 features de base du node Vertigo-UI
   #       (CommonsFeatures, DataModelFeatures, VegaFeatures)
-  # TODO Etape 2 : ajoutez DataStoreFeatures (kvStore) et DataFactoryFeatures
-  # TODO Etape 3 : ajoutez AccountFeatures (sécurité)
+  # TODO Brique 2 : ajoutez DataStoreFeatures (kvStore) et DataFactoryFeatures
+  # TODO Brique 3 : ajoutez AccountFeatures (sécurité)

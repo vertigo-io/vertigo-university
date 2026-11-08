@@ -19,14 +19,16 @@ Les deux voies construisent les mêmes fichiers et arrivent au même résultat.
 ## Eléments
 
 - Route : [http://localhost:18081/uihello/home/](http://localhost:18081/uihello/home/)
-- Classe main : `io.vertigo.samples.uihello.BootSampleUiHello` (Jetty :18081, context `/uihello`)
+- Classe main : `io.vertigo.samples.uihello.BootSampleUiHello` (Jetty :18081, context `/uihello`) *(pour la lancer en ligne de commande, depuis la racine de ce module : voir [Lancer une classe main](../sample-vertigo-ui/README.md#lancer-une-classe-main), la même procédure)*
+- Concepts illustrés : Module, Component *(voir le glossaire [vertigo-docs : Concepts](https://vertigo-io.github.io/vertigo-docs/#/basic/concepts))*
+- Documentation : [vertigo-docs : UI](https://vertigo-io.github.io/vertigo-docs/#/basic/ui) et [vertigo-docs : Configuration](https://vertigo-io.github.io/vertigo-docs/#/basic/configuration)
 
 **Fourni (ne pas modifier)** :
 
 - `BootSampleUiHello` : le boot web Jetty (port, context, handler multipart)
 - `support/boot/MultipartConfigInjectionHandler` et `support/config/` : l'initialisation SpringMVC
 - `webapp/index.html` et `webapp/static/` : la page d'accueil statique
-- `webapp/WEB-INF/views/templates/sampleLayout.html` : **le layout** (le chrome Quasar de l'application). Dans une application réelle, le layout existe et évolue avec le projet : votre travail est de créer des **pages** dedans, pas de réécrire le layout.
+- `webapp/WEB-INF/views/templates/sampleLayout.html` : **le layout** (l'habillage commun des pages : en-tête, menu, zone de contenu). Dans une application réelle, le layout existe et évolue avec le projet : votre travail est de créer des **pages** dedans, pas de réécrire le layout.
 - `webapp/META-INF/sample-ui-hello.yaml` et `webapp/WEB-INF/web.xml` : les squelettes à compléter
 
 **À construire (cet exercice)** :
@@ -42,17 +44,17 @@ Les deux voies construisent les mêmes fichiers et arrivent au même résultat.
 Un node web Vertigo-UI repose sur 3 mécanismes déjà présents dans le squelette :
 
 - **Jetty** est démarré par `BootSampleUiHello` (classe `JettyBoot` de vertigo-ui) : port 18081, context `/uihello`.
-- **Le node Vertigo** est démarré par le listener `AppServletContextListener` (à ajouter dans `web.xml`) : il lit le paramètre `boot.applicationConfiguration` pour trouver la configuration du node (le fichier yaml).
+- **Le node Vertigo** est démarré par le listener `AppServletContextListener` (à ajouter dans `web.xml`) : il lit le paramètre `boot.applicationConfiguration` pour trouver la configuration du node (le fichier YAML).
 - **Le contexte SpringMVC** est créé par `SampleUiHelloVSpringWebApplicationInitializer` (déjà passé à `JettyBoot`) : c'est lui qui instancie les controllers Vertigo-UI.
 
-### A connaitre : Les features du node (yaml)
+### A connaitre : Les features du node (YAML)
 
-La section `modules` du yaml déclare les features Vertigo utilisées par le node. Chaque feature enregistre des composants disponibles par injection (DI). Les controllers livrés dans vertigo-ui (par exemple `ListAutocompleteController`) injectent plusieurs de ces composants :
+La section `modules` du YAML déclare les features Vertigo utilisées par le node. Chaque feature enregistre des composants disponibles par injection (DI). Vertigo-UI a besoin de plusieurs de ces composants :
 
 | Composant injecté | Fourni par la feature |
 |---|---|
 | `CodecManager` | `CommonsFeatures` |
-| `SmartTypeManager` | `DataModelFeatures` (utilisé par `CollectionsManagerImpl`) |
+| `SmartTypeManager` | `DataModelFeatures` |
 | `JsonEngine` | `VegaFeatures` |
 | `KVStoreManager` | `DataStoreFeatures` (kvStore) |
 | `CollectionsManager` | `DataFactoryFeatures` |
@@ -80,7 +82,7 @@ Les pages sont des templates Thymeleaf. Le moteur de layout Thymeleaf permet à 
 
 ## Les briques
 
-Les deux voies utilisent les mêmes quatre briques. L'ordre des modules dans le yaml est sans importance.
+Les deux voies utilisent les mêmes quatre briques. L'ordre des modules dans le YAML est sans importance.
 
 ### Brique 1 - Le node et ses features de base
 
@@ -98,7 +100,7 @@ Complétez `web.xml` avec le listener et le paramètre de configuration (après 
 	</context-param>
 ```
 
-et complétez la section `modules` du yaml avec les 3 features de base :
+et complétez la section `modules` du YAML avec les 3 features de base :
 
 ```Yaml
   io.vertigo.commons.CommonsFeatures:
@@ -112,7 +114,7 @@ et complétez la section `modules` du yaml avec les 3 features de base :
 
 ### Brique 2 - Les données
 
-Ajoutez dans le yaml :
+Ajoutez dans le YAML :
 
 ```Yaml
   io.vertigo.datastore.DataStoreFeatures:
@@ -148,7 +150,7 @@ public class SampleUiHelloUserSession extends UserSession {
 }
 ```
 
-et complétez le yaml :
+et complétez le YAML :
 
 ```Yaml
   io.vertigo.account.AccountFeatures:
@@ -218,7 +220,8 @@ public class HomeController extends AbstractVSpringMvcController {
 *avec `No qualifying bean of type 'io.vertigo.datastore.kvstore.KVStoreManager'` : la brique 2 manque ;*
 *avec `component info with id 'vSecurityManager' not found` : la brique 3 manque ;*
 *si la page répond **404** : le controller de la brique 4 manque)*
-1. Arrêtez le node avec Ctrl+C (le node web ne lit pas le stdin).
+1. **Observez** la source de la page : la balise `<script id="vui-init-data">` contient le context de la page, que Vertigo-UI transmet au navigateur ; dans la console du navigateur, `VUiPage.vueData` l'expose en vueJs.
+1. Arrêtez le node : Ctrl+C en ligne de commande, ou le bouton d'arrêt de la console sous Eclipse.
 
 ## Etapes : voie brique par brique
 
@@ -233,7 +236,8 @@ Il manque la sécurité : c'est la brique 3.
 1. Ajoutez la **brique 3**, puis relancez. Le node démarre maintenant sans erreur.
 [http://localhost:18081/uihello/home/](http://localhost:18081/uihello/home/) répond **404** : l'écran n'existe pas encore.
 1. Ajoutez la **brique 4**, puis relancez. [http://localhost:18081/uihello/home/](http://localhost:18081/uihello/home/) répond **200**, avec le contenu `Hello Vertigo-UI !!` dans la page rendue, dans le layout fourni.
-1. Arrêtez le node avec Ctrl+C (le node web ne lit pas le stdin).
+1. **Observez** la source de la page : la balise `<script id="vui-init-data">` contient le context de la page, que Vertigo-UI transmet au navigateur ; dans la console du navigateur, `VUiPage.vueData` l'expose en vueJs.
+1. Arrêtez le node : Ctrl+C en ligne de commande, ou le bouton d'arrêt de la console sous Eclipse.
 
 ### Ce qu'il faut retenir
 
@@ -241,10 +245,9 @@ Il manque la sécurité : c'est la brique 3.
 - Chaque feature du YAML apporte des composants : le node ne démarre que si tous ceux dont il a besoin sont présents.
 - Une page est un template Thymeleaf greffé sur le layout ; un controller SpringMVC la rend.
 
-## Optionnel : pour aller plus loin
-
-- **Regardez ce que Vertigo-UI injecte** : ouvrez la source de la page rendue et repérez la balise `<script id="vui-init-data">`. Dans la console du navigateur, `VUiPage.vueData` expose le context de la page en vueJs.
-- **Deuxième page** : créez `about.html` (même pattern : decorate + fragment) et un `AboutController` (`@RequestMapping("/about")`), ajoutez un lien `<a th:href="@{/about/}">` dans le fragment `content` de `home.html`.
-- **Pourquoi pas de cache, pas de lucene ?** : `CollectionsManagerImpl` déclare un `Optional<IndexPlugin>` : l'indexation Lucene est un plugin optionnel. Le cache mémoire n'est requis que si un plugin l'injecte. Un node VUI minimal n'en a pas besoin.
-
 # [Suite : sample-vertigo-ui — Level Ui 0](../sample-vertigo-ui/LevelUi0.md)
+
+### Optionnel : pour aller plus loin
+
+- **Deuxième page** : créez `about.html` (même pattern : decorate + fragment) et un `AboutController` (`@RequestMapping("/about")`), ajoutez un lien `<a th:href="@{/about/}">` dans le fragment `content` de `home.html`.
+- **Pourquoi pas de cache, pas de Lucene ?** : l'index Lucene est un plugin optionnel de `DataFactoryFeatures`, qui sert à rechercher dans des listes (l'autocomplete, par exemple) ; le cache mémoire n'est requis que si un plugin l'utilise. Un node Vertigo-UI minimal n'a besoin ni de l'un ni de l'autre.
