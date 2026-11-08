@@ -92,16 +92,16 @@ Le fil conducteur est l'exercice [sample-crystal](../sample-crystal) (Levels 0�
 
 ### S4 - Sécurité
 
-*Dosage 50/50 — ce que le débutant consomme (Etape D du parcours débutant), vu de l'architecture.*
+*Dosage 50/50 — ce que le débutant consomme (Etape H du parcours Débutant), vu de l'architecture.*
 
 **Thèmes**
 
 1. **Identités, login, UserSession** — [sample-account](../sample-account), Mars (`LoginController`, `LoginServices`). Référence : [vertigo-docs : sécurité](https://vertigo-io.github.io/vertigo-docs/#/).
-2. **Authorizations** : `@Secured` côté service (valeurs = noms d'autorizations) + un fichier `*-auth-config.json` par domaine métier — Mars en a un par domaine (`base-auth-config.json`, `hr-auth-config.json`). Référence : [vertigo-docs : account](https://vertigo-io.github.io/vertigo-docs/#/).
-3. **Row-level security, en profondeur** : les règles d'authorization **restreignent à l'exécution les requêtes émises par les DAO** (conditions injectées) — le code généré n'est pas modifié. C'est le piège à comprendre une fois pour toutes.
+2. **Authorizations** : des fichiers `*-auth-config.json`, chacun chargé par la classe `Features` de son module (Mars en a deux : `base-…`, `hr-…`), et les contrôles côté serveur (`@Secured` sur les controllers, `AuthorizationUtil` dans les services). Référence : [vertigo-docs : account](https://vertigo-io.github.io/vertigo-docs/#/extensions/account).
+3. **Row-level security, en profondeur** : les règles d'authorization produisent un **filtre de sécurité** que le service applique explicitement (`getCriteriaSecurity` pour un `findAll`, `AuthorizationCriteria` dans une tâche, `getSearchSecurity` pour une recherche) — une requête sans ce filtre renvoie toutes les lignes. C'est le piège à comprendre une fois pour toutes.
 4. **SSO** : la plateforme fournit des connecteurs (OIDC — utilisé par Mars ; SAML2, Keycloak, LDAP). En équipe, vous les *observez* (flux de login, déconnexion, sessions) avant de les paramétrer.
 
-**Exo** : dans `sample-account`, se connecter, créer une règle, et observer la requête exécutée avec et sans session ; puis lire les `*-auth-config.json` de Mars.
+**Exo** : dans `sample-account`, se connecter, modifier la règle de `auth-config.json`, et observer le filtre de sécurité calculé ; puis lire les `*-auth-config.json` de Mars.
 
 **Vigilance** : une règle d'authorization change le résultat de *toutes* les requêtes concernées : tester systématiquement avec au moins deux rôles différents.
 
@@ -113,7 +113,7 @@ Le fil conducteur est l'exercice [sample-crystal](../sample-crystal) (Levels 0�
 
 1. **La mécanique Vertigo-UI** : [Levels Ui 0→6 de sample-vertigo-ui](../sample-vertigo-ui) (listes, écran de détail, recherche, tableaux, controllers, modales) — solutions dans [sample-vertigo-ui-full](../sample-vertigo-ui-full) — et les vues de Mars. Référence : [vertigo-docs : UI](https://vertigo-io.github.io/vertigo-docs/#/).
 2. **Le boot web réel** : deux modes — `web.xml` + Listener ([Level Socle 0 de sample-vertigo-ui](../sample-vertigo-ui/LevelSocle0.md)) ou boot programmatique `JettyBoot`/`JettyBootParams` (Mars `BootMars` : context path, SSL/keystore pilotés par variables d'environnement).
-3. **L'initialisation SpringMVC** : `*VSpringWebApplicationInitializer` → `*VSpringWebConfig` (Mars, sample-vertigo-ui) — le `@ComponentScan` liste les packages explicitement, pas de scan des sous-packages.
+3. **L'initialisation SpringMVC** : `*VSpringWebApplicationInitializer` → `*VSpringWebConfig` (Mars, sample-vertigo-ui) — le `@ComponentScan` désigne le package des controllers, sous-packages compris (voir le [Level Socle 5 de sample-vertigo-ui](../sample-vertigo-ui/LevelSocle5.md)).
 4. **Les intercepteurs web** : le cross-cutting côté web (ex. limitation de débit sur des endpoints publics) — [vertigo-docs : UI](https://vertigo-io.github.io/vertigo-docs/#/).
 5. **Gestion des erreurs et feedback** : le message stack de l'UI (voir le [Level Ui 2.5 de sample-vertigo-ui](../sample-vertigo-ui/LevelUi2.5.md)) et les pages d'erreur.
 6. **Upload multipart** : Mars (`FileUploadController`, `MultipartConfigInjectionHandler`).
@@ -122,7 +122,7 @@ Le fil conducteur est l'exercice [sample-crystal](../sample-crystal) (Levels 0�
 
 **Exo** : suivre les Level 0→6, refondre un écran du sample en DSFR + passer la checklist RGAA, ajouter un test UI type (un par écran).
 
-**Vigilance** : le `@ComponentScan` sans sous-packages : un nouveau package de controllers qui ne « se voit pas » vient d'oublier sa ligne dans `*VSpringWebConfig`.
+**Vigilance** : un controller placé hors du package désigné par le `@ComponentScan` de `*VSpringWebConfig` n'est pas trouvé : un nouveau package de controllers doit y être ajouté.
 
 ### S6 - Planification & batch
 
