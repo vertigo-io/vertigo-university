@@ -20,6 +20,7 @@ public final class Movie implements KeyConcept {
 	private String name;
 	private Integer year;
 	private String imdbid;
+	private String originalTitle;
 
 	@io.vertigo.datamodel.data.stereotype.Association(
 			name = "AMovCou",
@@ -131,6 +132,25 @@ public final class Movie implements KeyConcept {
 	 */
 	public void setImdbid(final String imdbid) {
 		this.imdbid = imdbid;
+	}
+	
+	/**
+	 * Champ : DATA.
+	 * Récupère la valeur de la propriété 'Titre original'.
+	 * @return String originalTitle
+	 */
+	@Field(smartType = "STyLabelLong", label = "Titre original")
+	public String getOriginalTitle() {
+		return originalTitle;
+	}
+
+	/**
+	 * Champ : DATA.
+	 * Définit la valeur de la propriété 'Titre original'.
+	 * @param originalTitle String
+	 */
+	public void setOriginalTitle(final String originalTitle) {
+		this.originalTitle = originalTitle;
 	}
 	
 	/**

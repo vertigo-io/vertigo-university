@@ -13,7 +13,7 @@ Nous verrons la réactivité aux modifications d'un objet du vueModel et la vali
 ### A connaitre : UiMessageStack
 
 VertigoUi propose une représentation des messages qui doivent être affichés coté client.
-Cela passe par l'`UiMessageStack: un objet qui contient la pile des messages de l'action : erreurs de format et de surface (validation des contraintes et du caractère non null), il peut être passé au service et complété avec des messages d'erreur, de warning, d'info ou de succès globaux, par objet ou par champs
+Cela passe par l'`UiMessageStack` : un objet qui contient la pile des messages de l'action : erreurs de format et de surface (validation des contraintes et du caractère non null), il peut être passé au service et complété avec des messages d'erreur, de warning, d'info ou de succès globaux, par objet ou par champs
 
 Il peut être passé en paramètre d'une action de controller, pour être complété manuellement lors des traitements. 
 

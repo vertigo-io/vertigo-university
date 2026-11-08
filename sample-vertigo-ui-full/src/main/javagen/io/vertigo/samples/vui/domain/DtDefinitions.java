@@ -83,6 +83,8 @@ public final class DtDefinitions implements Iterable<Class<?>> {
 		year,
 		/** Propriété 'Id Imdb'. */
 		imdbid,
+		/** Propriété 'Titre original'. */
+		originalTitle,
 		/** Propriété 'Country'. */
 		couId	}
 

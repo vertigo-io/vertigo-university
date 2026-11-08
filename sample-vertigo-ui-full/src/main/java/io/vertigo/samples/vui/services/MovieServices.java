@@ -32,6 +32,7 @@ import io.vertigo.samples.vui.dao.RoleDAO;
 import io.vertigo.samples.vui.domain.Actor;
 import io.vertigo.samples.vui.domain.DtDefinitions.MovieFields;
 import io.vertigo.samples.vui.domain.Movie;
+import io.vertigo.samples.vui.domain.MovieDisplay;
 import io.vertigo.samples.vui.domain.MovieIndex;
 import io.vertigo.samples.vui.domain.Role;
 import io.vertigo.samples.vui.search.MovieIndexSearchClient;
@@ -87,6 +88,22 @@ public class MovieServices implements Component {
 		Assertion.check().isNotNull(movId);
 		//---
 		return vuiPAO.getActorsIdsByMovie(movId);
+	}
+
+	public DtList<MovieDisplay> getMoviesDisplay() {
+		return vuiPAO.getMoviesDisplay();
+	}
+
+	public DtList<MovieDisplay> getMoviesDisplayByCountry(final Long couId) {
+		Assertion.check()
+				.isNotNull(couId)
+				.isTrue(couId > 0, "the country id must be positive ({0})", couId);
+		//---
+		final DtList<MovieDisplay> moviesDisplay = vuiPAO.getMoviesDisplayByCountry(couId);
+		if (moviesDisplay.isEmpty()) {
+			throw new VUserException("Aucun film pour ce pays");
+		}
+		return moviesDisplay;
 	}
 
 	public DtList<MovieIndex> getMovieIndex(final List<Long> movieIds) {

@@ -20,4 +20,7 @@ Retrouver et regardez le fichier mermaid-io-vertigo-samples-vui.html, il est gé
 
 La class `io.vertigo.samples.support.mda.StudioGenerate` permet de lancer la génération de Studio. Dans la série UI, vous n'en aurez pas besoin : elle reste concentrée sur Vertigo-UI.
 
-# [Suite : Level Ui 1 - Liste simple](./LevelUi1.md)
+# Suite
+
+- Série Socle : [Level Socle 1 - Le démarrage et la configuration](./LevelSocle1.md)
+- Série UI : [Level Ui 1 - Liste simple](./LevelUi1.md)

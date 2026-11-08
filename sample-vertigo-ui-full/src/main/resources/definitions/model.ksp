@@ -11,6 +11,7 @@ create DtDefinition DtMovie {
   field name {domain: DoLabelLong label: "Titre du film" cardinality:"1"}
   field year {domain: DoYear label: "Année" }
   field imdbid {domain: DoLabel label: "Id Imdb" }
+  field originalTitle {domain: DoLabelLong label: "Titre original" }
 }
 
 create DtDefinition DtActor {

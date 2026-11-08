@@ -73,6 +73,7 @@ create table MOVIE
     NAME        	 VARCHAR(500)	not null,
     YEAR        	 NUMERIC     	,
     IMDBID      	 VARCHAR(100)	,
+    ORIGINAL_TITLE	 VARCHAR(500)	,
     COU_ID      	 NUMERIC     	,
     constraint PK_MOVIE primary key (MOV_ID)
 );
@@ -88,6 +89,9 @@ comment on column MOVIE.YEAR is
 
 comment on column MOVIE.IMDBID is
 'Id Imdb';
+
+comment on column MOVIE.ORIGINAL_TITLE is
+'Titre original';
 
 comment on column MOVIE.COU_ID is
 'Country';

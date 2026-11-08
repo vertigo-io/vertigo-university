@@ -49,6 +49,19 @@ create Task TkGetMoviesDisplay {
 	out moviesDisplay	{domain : DoDtMovieDisplay	cardinality:"*" 	}
 }
 
+create Task TkGetMoviesDisplayByCountry {
+    className : "io.vertigo.basics.task.TaskEngineSelect"
+        request : "
+        	select mov.mov_id, mov.name, mov.year, cou.name as country_name
+        	from movie mov
+        	join country cou on mov.cou_id = cou.cou_id
+        	where mov.cou_id = #couId#
+        	order by mov.name
+			"
+	in couId	{domain : DoId	cardinality:"1" 	}
+	out moviesDisplay	{domain : DoDtMovieDisplay	cardinality:"*" 	}
+}
+
 create Task TkUpdateMoviesBatch {
     className : "io.vertigo.basics.task.TaskEngineProcBatch"
         request : "
