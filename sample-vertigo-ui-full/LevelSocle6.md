@@ -46,6 +46,11 @@ Comme tout composant, il s'enregistre dans un module. Il est servi sous le préf
    	@Inject
    	private MovieServices movieServices;
 
+   	@GET("/ping")
+   	public String ping() {
+   		return "ok";
+   	}
+
    	@GET("/display")
    	public DtList<MovieDisplay> getMoviesDisplay() {
    		return movieServices.getMoviesDisplay();
@@ -57,7 +62,7 @@ Comme tout composant, il s'enregistre dans un module. Il est servi sous le préf
    	}
    }
    ```
-   *(les annotations `GET` et `PathParam` sont, comme `PathPrefix`, dans le package `io.vertigo.vega.webservice.stereotype`)*
+   *(l'annotation `PathParam` est, comme `GET` et `PathPrefix`, dans le package `io.vertigo.vega.webservice.stereotype`)*
 1. Relancez l'application et appelez :
    - [http://localhost:18080/sample/api/movies/display](http://localhost:18080/sample/api/movies/display) : les 6 films, triés par titre, chacun avec son pays (`{"countryName": "Etats-Unis", "movId": 1000, "name": "Forrest Gump", "year": 1994}`…) ;
    - [http://localhost:18080/sample/api/movies/display/250](http://localhost:18080/sample/api/movies/display/250) : le seul film allemand, `The Grand Budapest Hotel` ;

@@ -47,14 +47,20 @@ Le module `support` a les siens : `boot` (les initializers), `config` (les Smart
    - l'enum des SmartTypes ;
    - l'initializer qui crée la base.
 1. **Question** : `MovieServices` reçoit `VuiPAO` par injection. Où `VuiPAO` est-il enregistré ?
-1. Préparez le webservice des films, que vous compléterez au Level Socle 6 : créez la classe `io.vertigo.samples.vui.webservices.MovieWebServices`, encore vide, et enregistrez-la dans `VuiFeatures` (`.addComponent(MovieWebServices.class)`).
+1. Créez le webservice des films, que vous compléterez au Level Socle 6 : la classe `io.vertigo.samples.vui.webservices.MovieWebServices`, avec une première route qui répond simplement `ok`. Enregistrez-la dans `VuiFeatures` (`.addComponent(MovieWebServices.class)`).
    ```Java
    @PathPrefix("/movies")
    public class MovieWebServices implements WebServices {
+
+   	@GET("/ping")
+   	public String ping() {
+   		return "ok";
+   	}
    }
    ```
-   *(l'interface est `io.vertigo.vega.webservice.WebServices`, l'annotation est dans le package `io.vertigo.vega.webservice.stereotype`)*
-1. Relancez l'application : elle démarre, et [http://localhost:18080/sample/api/healthcheck/ping](http://localhost:18080/sample/api/healthcheck/ping) répond toujours `OK`. Le nouveau composant est enregistré ; il n'a pas encore de route.
+   *(l'interface est `io.vertigo.vega.webservice.WebServices`, les annotations `PathPrefix` et `GET` sont dans le package `io.vertigo.vega.webservice.stereotype`)*
+1. Relancez l'application et appelez [http://localhost:18080/sample/api/movies/ping](http://localhost:18080/sample/api/movies/ping) : vous devez obtenir `ok`. Le nouveau composant est enregistré, et sa route est servie sous le préfixe `/api`.
+*(si l'adresse répond **404** : le webservice n'est pas enregistré dans `VuiFeatures`)*
 *(si le démarrage échoue avec, dans la console, `DIException: Components or params not found :…` : un composant n'est enregistré dans aucun module ; le message nomme le composant manquant, puis celui qui en a besoin, par exemple `vuiPAO (referenced by movieServices<MovieServices>)` ; ajoutez-le dans la classe `Features` de son module)*
 
 ### Ce qu'il faut retenir

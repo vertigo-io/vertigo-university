@@ -16,6 +16,11 @@ public class MovieWebServices implements WebServices {
 	@Inject
 	private MovieServices movieServices;
 
+	@GET("/ping")
+	public String ping() {
+		return "ok";
+	}
+
 	@GET("/display")
 	public DtList<MovieDisplay> getMoviesDisplay() {
 		return movieServices.getMoviesDisplay();
