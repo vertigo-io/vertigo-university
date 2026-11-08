@@ -6,7 +6,7 @@ Ce découpage est le même d'une application Vertigo à l'autre : une fois compr
 À la fin de ce Level, vous saurez :
 - dire ce que déclare un module de l'application ;
 - situer une classe d'après son package ;
-- savoir où enregistrer un nouveau composant, et reconnaître l'erreur quand il manque.
+- savoir où placer et où enregistrer un nouveau composant.
 
 ## Eléments
 
@@ -46,15 +46,13 @@ Le module `support` a les siens : `boot` (les initializers), `config` (les Smart
    - le controller de la page d'accueil ;
    - l'enum des SmartTypes ;
    - l'initializer qui crée la base.
-1. Retirez de `VuiFeatures` l'enregistrement `.addComponent(VuiPAO.class)`, puis relancez : le démarrage échoue, avec dans la console
-`DIException: Components or params not found :vuiPAO (referenced by movieServices<MovieServices>)`.
-Lisez ce message : le composant `vuiPAO` manque, et c'est `MovieServices` qui en a besoin.
-1. Remettez l'enregistrement : l'application démarre de nouveau.
+1. **Question** : `MovieServices` reçoit `VuiPAO` par injection. Où `VuiPAO` est-il enregistré ? Au Level Socle 6, vous créerez un webservice pour les films : dans quel package le placerez-vous, et dans quelle classe l'enregistrerez-vous ?
+*(si un jour le démarrage échoue avec, dans la console, `DIException: Components or params not found :vuiPAO (referenced by movieServices<MovieServices>)` : le composant `vuiPAO` n'est enregistré dans aucun module, et c'est `MovieServices` qui en a besoin ; ajoutez-le dans la classe `Features` de son module)*
 
 ### Ce qu'il faut retenir
 
 - Un module de l'application est une classe `Features`, citée dans le YAML : elle enregistre ses définitions et ses composants.
 - Les packages suivent un pattern : `controllers`, `services`, `webservices`, et les packages générés `domain`, `dao`, `search`.
-- Un composant non enregistré fait échouer le démarrage : le message nomme le composant manquant et celui qui l'attend.
+- Tout nouveau composant s'enregistre dans la classe `Features` de son module : sinon le démarrage échoue, avec un message qui nomme le composant manquant et celui qui l'attend.
 
 # [Suite : Level Socle 6 - Services, DAO et webservices](./LevelSocle6.md)

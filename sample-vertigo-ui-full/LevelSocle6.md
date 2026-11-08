@@ -59,6 +59,7 @@ public class MovieWebServices implements WebServices {
 ```
 *(les annotations sont dans le package `io.vertigo.vega.webservice.stereotype`, l'interface est `io.vertigo.vega.webservice.WebServices`)*
 1. Enregistrez le webservice dans `VuiFeatures` : `.addComponent(MovieWebServices.class)`.
+*(si, à l'étape suivante, les adresses `/api/movies/...` répondent **404** : le webservice n'est pas enregistré dans `VuiFeatures`)*
 1. Relancez l'application et appelez :
    - [http://localhost:18080/sample/api/movies/display](http://localhost:18080/sample/api/movies/display) : les 6 films, triés par titre, chacun avec son pays (`{"countryName": "Etats-Unis", "movId": 1000, "name": "Forrest Gump", "year": 1994}`…) ;
    - [http://localhost:18080/sample/api/movies/display/250](http://localhost:18080/sample/api/movies/display/250) : le seul film allemand, `The Grand Budapest Hotel` ;

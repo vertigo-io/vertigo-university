@@ -42,9 +42,9 @@ Chaque feature enregistre des **composants** dans le node : ce sont eux que les 
 1. Retrouvez ce qui sert les webservices : le module `JavalinFeatures` (`standalone`), et dans `VegaFeatures` les configurations `webservices.javalin` (préfixe `/api`) et `webservices.healthcheck`. Dans `web.xml`, le filtre `VegaJavalinFilter` fait passer les adresses `/api/*` aux webservices. Ce montage est déjà prêt : vous y ajouterez votre propre webservice au Level Socle 6.
 1. Démarrez l'application *(voir le [Level Socle 0](./LevelSocle0.md))* et appelez [http://localhost:18080/sample/api/healthcheck/ping](http://localhost:18080/sample/api/healthcheck/ping) : vous devez obtenir `OK`. C'est un webservice standard de la plateforme, apporté par la feature `webservices.healthcheck`.
 1. Appelez [http://localhost:18080/sample/api/healthcheck/complete](http://localhost:18080/sample/api/healthcheck/complete) : la liste des contrôles de santé de l'application.
-**Question** : quel contrôle vérifie la base de données, quel composant le réalise, et dans quel état est-il ? *(le contrôle `poolUtilization` des daemons peut apparaître en rouge juste après le démarrage : il n'est pas lié à l'exercice)*
-1. Arrêtez l'application, retirez la ligne `- webservices.healthcheck:` du fichier YAML, puis relancez : l'adresse du ping répond maintenant **404**. Sans la feature, le composant du healthcheck n'est plus enregistré : le webservice n'existe plus.
-1. Remettez la ligne.
+**Question** : quel contrôle vérifie la base de données, quel composant le réalise, et dans quel état est-il ?
+1. **Question** : quelle ligne du fichier YAML apporte ce webservice ? Que deviendrait l'adresse du ping sans elle ?
+*(si le ping répond **404** : la configuration `webservices.healthcheck` manque dans `VegaFeatures`, ou l'adresse ne commence pas par `/sample/api` ; sans cette configuration, le composant du healthcheck n'est pas enregistré, et le webservice n'existe pas)*
 
 ### Ce qu'il faut retenir
 
@@ -53,3 +53,6 @@ Chaque feature enregistre des **composants** dans le node : ce sont eux que les 
 - Les flags activent ou non des parties de la configuration ; les initializers s'exécutent une fois le node démarré.
 
 # [Suite : Level Socle 2 - Régénérer le code](./LevelSocle2.md)
+
+---
+*Note : juste après le démarrage, `/healthcheck/complete` peut afficher en rouge le contrôle `poolUtilization` des daemons. C'est temporaire et sans lien avec l'exercice.*
