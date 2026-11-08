@@ -33,7 +33,7 @@ Chaque étape se termine par un volet **Dans votre équipe** : la même chose, r
 
 | # | Etape | Formation de référence | Durée indicative | Statut |
 |---|---|---|---|---|
-| A | Démarrer et configurer l'application | [Levels Socle 0 et 1](../sample-vertigo-ui/LevelSocle0.md), Level Socle 1.1 | une demi-journée | existante (Level Socle 1.1 : à créer) |
+| A | Démarrer et configurer l'application | [Levels Socle 0, 1 et 1.1](../sample-vertigo-ui/LevelSocle0.md) | une demi-journée | existante |
 | B | Le geste quotidien : modèle → génération | [Levels Socle 2 et 3](../sample-vertigo-ui/LevelSocle2.md) | une demi-journée | existante |
 | C | Les requêtes : les tâches | [Level Socle 4](../sample-vertigo-ui/LevelSocle4.md) | 2 heures | existante |
 | D | L'organisation du code : modules et packages | [Level Socle 5](../sample-vertigo-ui/LevelSocle5.md) | 2 heures | existante |
@@ -72,7 +72,7 @@ Formation :
 
 1. [Level Socle 0 - Point de départ : démarrer l'application](../sample-vertigo-ui/LevelSocle0.md) : importer le module, lancer l'application, lire l'adresse d'une page
 2. [Level Socle 1 - Le démarrage et la configuration](../sample-vertigo-ui/LevelSocle1.md) : de la classe main jusqu'au fichier YAML ; les modules, leurs features, les flags et les initializers ; un premier webservice standard de la plateforme, le healthcheck
-3. Level Socle 1.1 - Paramètres, variables d'environnement et flags (**à créer**) : changer un paramètre et voir son effet, le faire venir d'une variable d'environnement, activer un flag ; puis tout remettre en état. Ce Level ne change pas l'application pour la suite
+3. [Level Socle 1.1 - Paramètres, variables d'environnement et flags](../sample-vertigo-ui/LevelSocle1.1.md) : activer un flag (la recherche), changer un paramètre et voir son effet, le faire venir d'une variable d'environnement avec une valeur par défaut ; puis revenir à l'état de départ. Ce Level ne change pas l'application pour la suite
 
 Concepts : Module, Component, Manager, Plugin *(glossaire [Concepts](https://vertigo-io.github.io/vertigo-docs/#/basic/concepts))* ; [vertigo-docs : Configuration](https://vertigo-io.github.io/vertigo-docs/#/basic/configuration).
 
