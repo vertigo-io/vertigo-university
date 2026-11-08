@@ -16,7 +16,7 @@ Les exercices portent sur une application déjà construite : la structure de pr
 
 Point de départ, commun aux deux séries :
 
-- [Level Socle 0 - Point de départ : préparation de l'environnement](./LevelSocle0.md)
+- [Level Socle 0 - Point de départ : démarrer l'application](./LevelSocle0.md)
 
 Série Socle (le fonctionnement de l'application : configuration, génération, modèle, tâches, modules, services, webservices, transaction et erreurs) :
 
