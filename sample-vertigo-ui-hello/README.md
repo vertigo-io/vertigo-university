@@ -6,7 +6,7 @@ Ce module est un **exercice** : le squelette (boot Jetty, SpringMVC, layout, squ
 
 ## Exercice
 
-- [Exercice.md](Exercice.md) : l'énoncé complet (éléments, cours à connaitre, étapes avec vérifications, optionnel)
+- [Level 1 - Le boot web minimal](Level1.md) : l'énoncé complet (éléments, cours à connaitre, étapes avec vérifications, optionnel)
 - Solution : [sample-vertigo-ui-hello-full](../sample-vertigo-ui-hello-full)
 
 ## Démarrage du squelette

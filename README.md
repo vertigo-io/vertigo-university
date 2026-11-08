@@ -44,7 +44,7 @@ mvn clean install -DskipTests
 | [sample-stream](sample-stream) | Java 8 Streams (starbucks, scrabble) | `MainStarbucks`, `MainScrabble` | [README](sample-stream/README.md) |
 | [sample-vertigo-ui](sample-vertigo-ui) | Application web Vertigo-UI (SpringMVC/Thymeleaf/Vue) : **exercice** en deux séries sur la même application, Socle et UI | `BootSampleVui` (Jetty :18080) | [README](sample-vertigo-ui/README.md) |
 | [sample-vertigo-ui-full](sample-vertigo-ui-full) | Idem + recherche Elasticsearch + tableaux + modales (solutions des Levels Ui 0→6) | `BootSampleVui` (Jetty :18080) | [README](sample-vertigo-ui-full/README.md) |
-| [sample-vertigo-ui-hello](sample-vertigo-ui-hello) | Premier écran Vertigo-UI : boot web minimal (Jetty), une page dans un layout — **exercice** (squelette + `Exercice.md`) — sans base, sans donnée préchargée | `BootSampleUiHello` (Jetty :18081) | [Exercice](sample-vertigo-ui-hello/Exercice.md) |
+| [sample-vertigo-ui-hello](sample-vertigo-ui-hello) | Premier écran Vertigo-UI : boot web minimal (Jetty), une page dans un layout — **exercice** (squelette + `Level1.md`) — sans base, sans donnée préchargée | `BootSampleUiHello` (Jetty :18081) | [Level 1](sample-vertigo-ui-hello/Level1.md) |
 | [sample-vertigo-ui-hello-full](sample-vertigo-ui-hello-full) | Solution de l'exercice : boot web minimal complet — sans cache, sans lucene | `BootSampleUiHello` (Jetty :18081) | [README](sample-vertigo-ui-hello-full/README.md) |
 
 ## Parcours débutant

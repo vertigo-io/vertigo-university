@@ -1,6 +1,11 @@
-# Vertigo-UI Hello — Boot web minimal
+# Level 1 - Le boot web minimal
 
-Vous allez construire le boot web minimal d'un node Vertigo-UI : le node démarre, la sécurité est en place, puis une première page est rendue par un controller dans un layout. Sans base de données, sans Elasticsearch, sans BerkeleyDB, sans donnée préchargée.
+Nous allons construire le boot web minimal d'un node Vertigo-UI : le node démarre, la sécurité est en place, puis une première page est rendue par un controller dans un layout. Sans base de données, sans Elasticsearch, sans BerkeleyDB, sans donnée préchargée.
+
+À la fin de ce Level, vous saurez :
+- démarrer un node Vertigo-UI dans une webapp : le listener et le fichier YAML qu'il lit ;
+- déclarer les features dont ce node a besoin ;
+- créer une page dans le layout, et le controller qui la rend.
 
 **Prérequis** : le module se compile sur place (`mvn compile` dans son dossier) — son parent `io.vertigo:vertigo-samples`, non publié sur Maven Central, est résolu par le `pom.xml` à la racine du dépôt. Pour compiler une copie placée hors du dépôt, installez d'abord ce parent (`mvn -N install` à la racine).
 
@@ -229,6 +234,12 @@ Il manque la sécurité : c'est la brique 3.
 [http://localhost:18081/uihello/home/](http://localhost:18081/uihello/home/) répond **404** : l'écran n'existe pas encore.
 1. Ajoutez la **brique 4**, puis relancez. [http://localhost:18081/uihello/home/](http://localhost:18081/uihello/home/) répond **200**, avec le contenu `Hello Vertigo-UI !!` dans la page rendue, dans le layout fourni.
 1. Arrêtez le node avec Ctrl+C (le node web ne lit pas le stdin).
+
+### Ce qu'il faut retenir
+
+- Le node web est démarré par le listener de `web.xml`, à partir du fichier YAML que désigne `boot.applicationConfiguration`.
+- Chaque feature du YAML apporte des composants : le node ne démarre que si tous ceux dont il a besoin sont présents.
+- Une page est un template Thymeleaf greffé sur le layout ; un controller SpringMVC la rend.
 
 ## Optionnel : pour aller plus loin
 
