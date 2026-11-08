@@ -2,6 +2,8 @@
 
 Solution de l'exercice [sample-vertigo-ui-hello](../sample-vertigo-ui-hello) : le boot web minimal d'un node Vertigo-UI, complet. Sans base de données, sans Elasticsearch, sans BerkeleyDB et sans donnée préchargée.
 
+C'est le même projet, une fois l'exercice complété : l'énoncé [Exercice.md](./Exercice.md) est identique à celui de l'exercice.
+
 ## Démarrage
 
 - Lancer la classe main `io.vertigo.samples.uihello.BootSampleUiHello` (Jetty :18081, context `/uihello`)
