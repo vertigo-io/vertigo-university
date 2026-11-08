@@ -28,10 +28,10 @@ Chaque étape est une **formation d'approfondissement** (un sujet) : le tableau 
 
 1. **Le node et sa configuration** : le node est le processus qui porte l'application ; tout y est piloté par `NodeConfig`/`ModuleConfig` et les Features activées. Références : [sample-hello-world](../sample-hello-world), [sample-config](../sample-config) (Features Javalin, DataModel, Vega), l'appli de démo [Mars](https://github.com/vertigo-io/vertigo-mars) (`BootMars`).
 2. **Composants, injection et plugins** : `ComponentSpace`, `@Inject`, le pattern Manager/Plugin. Référence : [sample-component](../sample-component) (steps 1→8).
-3. **SmartType** : le typage fort qui relie le domaine à l'UI et aux webservices (format, conversion contrôlées dès l'entrée dans le système). Référence : [vertigo-docs : concepts](https://vertigo-io.github.io/vertigo-docs/#/), et les SmartTypes custom de Mars (`MarsSmartTypes`).
+3. **SmartType** : le typage fort qui relie le domaine à l'UI et aux webservices (format, conversion contrôlées dès l'entrée dans le système). Référence : [vertigo-docs : concepts](https://vertigo-io.github.io/vertigo-docs/#/basic/concepts), et les SmartTypes custom de Mars (`MarsSmartTypes`).
 4. **Transactions** : `@Transactional` porté par les services — l'échec d'une opération en échoue tout le bloc.
-5. **EventBus** : les événements de domaine (un composant en publie, d'autres les consomment) — indispensable pour comprendre le planning (S6). Référence : [vertigo-docs : commons](https://vertigo-io.github.io/vertigo-docs/#/).
-6. **ParamManager** : les paramètres d'application (lecture et modification à chaud) — la configuration fine sans recompiler. Référence : [vertigo-docs : configuration](https://vertigo-io.github.io/vertigo-docs/#/).
+5. **EventBus** : les événements de domaine (un composant en publie, d'autres les consomment) — indispensable pour comprendre le planning (S6). Référence : [vertigo-docs : commons](https://vertigo-io.github.io/vertigo-docs/#/extensions/commons).
+6. **ParamManager** : les paramètres d'application (lecture et modification à chaud) — la configuration fine sans recompiler. Référence : [vertigo-docs : configuration](https://vertigo-io.github.io/vertigo-docs/#/basic/configuration).
 7. **AOP, en connaissance** : les aspects traversent le node (supervision, trace). Vous les *consommez* avant de les écrire — l'écriture est couverte par [sample-aop-modules](../sample-aop-modules).
 
 **Exo** : lancer `sample-hello-world`, ajouter un composant et un plugin dans `sample-component`, écrire un service `@Transactional` dont l'échec échoue en cascade.
@@ -60,7 +60,7 @@ Chaque étape est une **formation d'approfondissement** (un sujet) : le tableau 
 **Thèmes**
 
 1. **Les dépendances locales en docker-compose** : base de données, serveur de recherche, cache — l'environnement local reproduit la stack de production, en miniature.
-2. **PostgreSQL** : Studio génère le SQL pour un SGBDR cible déclaré dans `studio-config.yaml` (paramètre `baseCible` — `H2` dans les samples, PostgreSQL dans une application de production). Référence : [vertigo-docs : database](https://vertigo-io.github.io/vertigo-docs/#/).
+2. **PostgreSQL** : Studio génère le SQL pour un SGBDR cible déclaré dans `studio-config.yaml` (paramètre `baseCible` — `H2` dans les samples, PostgreSQL dans une application de production). Référence : [vertigo-docs : database](https://vertigo-io.github.io/vertigo-docs/#/extensions/database).
 3. **Liquibase** : les migrations versionnées qui font évoluer la base entre deux versions de l'application, à côté du SQL généré par Studio.
 4. **Le cache (Redis)** : les données calculées ou coûteuses sont cachées (typiquement un planning, S6). Connecteur Redis dans la plateforme.
 5. **Le login local du back-office** : chaque équipe a un moyen de se connecter en local (comptes de test, annuaire local) — savoir le trouver et l'activer.
@@ -81,7 +81,7 @@ Le fil conducteur est l'exercice [sample-crystal](../sample-crystal) (Levels 0�
 2. **Tâches** : les requêtes SQL nommées déclarées dans les `.ksp`, avec une liste de valeurs en paramètre (`IN (...)`) ; une tâche se place dans le DAO de l'objet concerné par ses paramètres, sinon dans le PAO — [Level 1 de sample-crystal](../sample-crystal/Level1.md).
 3. **Accesseurs** : naviguer d'une entité vers une autre (`load()` puis `get()`) ; chaque chargement est un accès à la base, visible dans la console — [Level 2](../sample-crystal/Level2.md).
 4. **Master data** : les données de référence (valeurs fixes) ; une liste statique devient un enum généré, lu sans requête — [Level 3](../sample-crystal/Level3.md), Mars (`MarsMasterDataDefinitionProvider`).
-5. **Elasticsearch** : indexation (pattern `SearchLoader`), réindexation à la demande, recherche à facettes (term et range), tri et pagination (`DtListState`) exposés en REST — [Level 4](../sample-crystal/Level4.md), le [Level Ui 3 de sample-vertigo-ui](../sample-vertigo-ui/LevelUi3.md) ; plugin datafactory Elasticsearch dans la plateforme ; Mars (`basemanagement/search/`). Référence : [vertigo-docs : recherche](https://vertigo-io.github.io/vertigo-docs/#/).
+5. **Elasticsearch** : indexation (pattern `SearchLoader`), réindexation à la demande, recherche à facettes (term et range), tri et pagination (`DtListState`) exposés en REST — [Level 4](../sample-crystal/Level4.md), le [Level Ui 3 de sample-vertigo-ui](../sample-vertigo-ui/LevelUi3.md) ; plugin datafactory Elasticsearch dans la plateforme ; Mars (`basemanagement/search/`). Référence : [vertigo-docs : recherche](https://vertigo-io.github.io/vertigo-docs/#/basic/recherche).
 6. **DAO avancés** : DAO personnalisés, projections, reprise par lots, performances — [sample-dao-full](../sample-dao-full).
 
 **Exo** : suivre les Levels 0→4 de `sample-crystal` ; puis écrire dans `sample-dao-full` un service avec critères + tri + pagination.
@@ -96,7 +96,7 @@ Le fil conducteur est l'exercice [sample-crystal](../sample-crystal) (Levels 0�
 
 **Thèmes**
 
-1. **Identités, login, UserSession** — [sample-account](../sample-account), Mars (`LoginController`, `LoginServices`). Référence : [vertigo-docs : sécurité](https://vertigo-io.github.io/vertigo-docs/#/).
+1. **Identités, login, UserSession** — [sample-account](../sample-account), Mars (`LoginController`, `LoginServices`). Référence : [vertigo-docs : sécurité](https://vertigo-io.github.io/vertigo-docs/#/basic/securite).
 2. **Authorizations** : des fichiers `*-auth-config.json`, chacun chargé par la classe `Features` de son module (Mars en a deux : `base-…`, `hr-…`), et les contrôles côté serveur (`@Secured` sur les controllers, `AuthorizationUtil` dans les services). Référence : [vertigo-docs : account](https://vertigo-io.github.io/vertigo-docs/#/extensions/account).
 3. **Row-level security, en profondeur** : les règles d'authorization produisent un **filtre de sécurité** que le service applique explicitement (`getCriteriaSecurity` pour un `findAll`, `AuthorizationCriteria` dans une tâche, `getSearchSecurity` pour une recherche) — une requête sans ce filtre renvoie toutes les lignes. C'est le piège à comprendre une fois pour toutes.
 4. **SSO** : la plateforme fournit des connecteurs (OIDC — utilisé par Mars ; SAML2, Keycloak, LDAP). En équipe, vous les *observez* (flux de login, déconnexion, sessions) avant de les paramétrer.
@@ -111,10 +111,10 @@ Le fil conducteur est l'exercice [sample-crystal](../sample-crystal) (Levels 0�
 
 **Thèmes**
 
-1. **La mécanique Vertigo-UI** : [Levels Ui 0→6 de sample-vertigo-ui](../sample-vertigo-ui) (listes, écran de détail, recherche, tableaux, controllers, modales) — solutions dans [sample-vertigo-ui-full](../sample-vertigo-ui-full) — et les vues de Mars. Référence : [vertigo-docs : UI](https://vertigo-io.github.io/vertigo-docs/#/).
+1. **La mécanique Vertigo-UI** : [Levels Ui 0→6 de sample-vertigo-ui](../sample-vertigo-ui) (listes, écran de détail, recherche, tableaux, controllers, modales) — solutions dans [sample-vertigo-ui-full](../sample-vertigo-ui-full) — et les vues de Mars. Référence : [vertigo-docs : UI](https://vertigo-io.github.io/vertigo-docs/#/basic/ui).
 2. **Le boot web réel** : deux modes — `web.xml` + Listener ([Level Socle 0 de sample-vertigo-ui](../sample-vertigo-ui/LevelSocle0.md)) ou boot programmatique `JettyBoot`/`JettyBootParams` (Mars `BootMars` : context path, SSL/keystore pilotés par variables d'environnement).
 3. **L'initialisation SpringMVC** : `*VSpringWebApplicationInitializer` → `*VSpringWebConfig` (Mars, sample-vertigo-ui) — le `@ComponentScan` désigne le package des controllers, sous-packages compris (voir le [Level Socle 5 de sample-vertigo-ui](../sample-vertigo-ui/LevelSocle5.md)).
-4. **Les intercepteurs web** : le cross-cutting côté web (ex. limitation de débit sur des endpoints publics) — [vertigo-docs : UI](https://vertigo-io.github.io/vertigo-docs/#/).
+4. **Les intercepteurs web** : le cross-cutting côté web (ex. limitation de débit sur des endpoints publics) — [vertigo-docs : UI](https://vertigo-io.github.io/vertigo-docs/#/extensions/ui).
 5. **Gestion des erreurs et feedback** : le message stack de l'UI (voir le [Level Ui 2.5 de sample-vertigo-ui](../sample-vertigo-ui/LevelUi2.5.md)) et les pages d'erreur.
 6. **Upload multipart** : Mars (`FileUploadController`, `MultipartConfigInjectionHandler`).
 7. **i18n** : les bundles de messages initialisés au boot (Mars `I18nResourcesInitializer`).
@@ -130,9 +130,9 @@ Le fil conducteur est l'exercice [sample-crystal](../sample-crystal) (Levels 0�
 
 **Thèmes**
 
-1. **vertigo-planning** : la bibliothèque d'agenda — plages horaires, tranches, créneaux, publication, réservation côté usager, et les événements de domaine qui propagent les changements (créneau libéré, consommé, supprimé). Référence : [vertigo-docs : planning](https://vertigo-io.github.io/vertigo-docs/#/).
+1. **vertigo-planning** : la bibliothèque d'agenda — plages horaires, tranches, créneaux, publication, réservation côté usager, et les événements de domaine qui propagent les changements (créneau libéré, consommé, supprimé). Référence : [vertigo-docs : planning](https://vertigo-io.github.io/vertigo-docs/#/modules/planning).
 2. **Le cache du planning** : un planning est lu en continu et écrit par lots — il est typiquement caché (Redis, S2), avec synchronisation base ↔ cache.
-3. **vertigo-orchestra** : l'orchestration de jobs — définition de processus, activités, exécutions planifiées, rapports, déclenchement ; les jobs de Mars (`basemanagement/jobs/`, `catalog/jobs/supplier/`) en sont des exemples. Référence : [vertigo-docs : orchestra](https://vertigo-io.github.io/vertigo-docs/#/).
+3. **vertigo-orchestra** : l'orchestration de jobs — définition de processus, activités, exécutions planifiées, rapports, déclenchement ; les jobs de Mars (`basemanagement/jobs/`, `catalog/jobs/supplier/`) en sont des exemples. Référence : [vertigo-docs : orchestra](https://vertigo-io.github.io/vertigo-docs/#/modules/orchestra).
 4. **Le pipeline de fichiers** : un batch typique = télécharger un fichier (connecteur SFTP/JSch) → import par lots → purge — avec idempotence et rollback.
 5. **Le front-office sans session** : les parcours publics (usager) s'authentifient par tokens (parfois QR code) plutôt que par session — comprendre le pattern avant de toucher à un écran FO.
 
@@ -146,11 +146,11 @@ Le fil conducteur est l'exercice [sample-crystal](../sample-crystal) (Levels 0�
 
 **Thèmes**
 
-1. **vertigo-social** : la messagerie — mail, et SMS dans les applications de production ; Mars l'utilise, [02-sample-mail](../sample-aop-modules/02-sample-mail) l'exerce en local (yopmail). Référence : [vertigo-docs : social](https://vertigo-io.github.io/vertigo-docs/#/).
-2. **vertigo-quarto** : les documents Word/PDF depuis un modèle — [sample-quarto](../sample-quarto). Référence : [vertigo-docs : quarto](https://vertigo-io.github.io/vertigo-docs/#/).
+1. **vertigo-social** : la messagerie — mail, et SMS dans les applications de production ; Mars l'utilise, [02-sample-mail](../sample-aop-modules/02-sample-mail) l'exerce en local (yopmail). Référence : [vertigo-docs : social](https://vertigo-io.github.io/vertigo-docs/#/modules/social).
+2. **vertigo-quarto** : les documents Word/PDF depuis un modèle — [sample-quarto](../sample-quarto). Référence : [vertigo-docs : quarto](https://vertigo-io.github.io/vertigo-docs/#/modules/quarto).
 3. **Appels sortants HTTP** : le connecteur httpclient pour les webservice externes (TLS selon le contournant) ; les appels sortants se mockent en local pour tester.
-4. **Vega** : la REST API de l'application (SPA, mobile, intégrations) — [sample-vega](../sample-vega), les webservices de Mars (`basemanagement/webservices/`, `command/webservices/bot/`). Référence : [vertigo-docs : vega](https://vertigo-io.github.io/vertigo-docs/#/). Les endpoints publics sont souvent dotés d'une limitation de débit.
-5. **vertigo-audit** : la traçabilité métier (qui a fait quoi, sur quoi) ; Mars l'utilise. Référence : [vertigo-docs : audit](https://vertigo-io.github.io/vertigo-docs/#/).
+4. **Vega** : la REST API de l'application (SPA, mobile, intégrations) — [sample-vega](../sample-vega), les webservices de Mars (`basemanagement/webservices/`, `command/webservices/bot/`). Référence : [vertigo-docs : vega](https://vertigo-io.github.io/vertigo-docs/#/extensions/vega). Les endpoints publics sont souvent dotés d'une limitation de débit.
+5. **vertigo-audit** : la traçabilité métier (qui a fait quoi, sur quoi) ; Mars l'utilise. Référence : [vertigo-docs : audit](https://vertigo-io.github.io/vertigo-docs/#/modules/audit).
 
 **Exo** : `02-sample-mail` (MailManager vers yopmail), `sample-quarto` (générer un document), publier un webservice vega avec limitation de débit.
 
