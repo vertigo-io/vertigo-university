@@ -26,7 +26,7 @@ Il peut être passé en paramètre d'une action de controller, pour être compl�
 VertigoUi applique automatiquement une validation des DtObjects à partir des contraintes associées aux SmartTypes lors de la réception coté serveur, 
 mais il est possible d'appliquer des validations spécifiques.
 
- La validation coté serveur est absolument nécessaire, c'est pourquoi nous nous focalisons dessus. N'oubliez pas que les controles coté client est toujours contournable.
+**Important** : La validation coté serveur est absolument nécessaire, c'est pourquoi nous nous focalisons dessus. N'oubliez pas que les controles coté client est toujours contournable.
 
 Ces validations peuvent s'appliquer à deux niveaux : 
 - Sur la saisie utilisateur 

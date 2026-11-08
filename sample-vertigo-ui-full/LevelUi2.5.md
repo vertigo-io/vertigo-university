@@ -17,6 +17,9 @@ Cela passe par l'`UiMessageStack: un objet qui contient la pile des messages de 
 
 Il peut être passé en paramètre d'une action de controller, pour être complété manuellement lors des traitements. 
 
+**Important** : La `UiMessageStack` est affichée coté client : 
+- soit via les champs eux même pour les erreurs sur un champ, 
+- soit par le composant `<vu:messages/>` pour les autres messages. **Assurez vous qu'il est bien présent dans le template de page.**
 
 ### A connaitre : Validations spécifiques
 

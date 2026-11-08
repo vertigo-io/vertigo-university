@@ -3,7 +3,6 @@
 Ce Level est le point de départ commun des deux séries de cet exercice : la série Socle et la série UI.
 
 1. Rien à préparer pour la base de données : la base H2 est créée en mémoire au démarrage, par l'initializer `io.vertigo.samples.support.boot.DataBaseInitializer` (`src/main/javagen/sqlgen/crebas.sql` pour le schéma, puis `src/main/resources/sql/initdata.sql` pour les données de démo)
-   *(L'index ElasticSearch est embarqué, ses données sont sous `target/classes/search` : créé au démarrage, la recherche se remplit via [http://localhost:18080/sample/moviesSearch/\_reindex](http://localhost:18080/sample/moviesSearch/_reindex))*
 2. Récupérer les sources du github [vertigo-io/vertigo-university/sample-vertigo-ui](https://github.com/vertigo-io/vertigo-university/tree/master/sample-vertigo-ui)
 3. Créer le projet Eclipse (Import Maven Project)
 4. Démarrer l'application `Run Application BootSampleVui` *(dans /src/main/java/io/vertigo/samples/BootSampleVui.java)*
