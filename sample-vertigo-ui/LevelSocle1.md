@@ -1,7 +1,7 @@
 # Level Socle 1 - Le démarrage et la configuration
 
 Nous allons suivre le démarrage de l'application, jusqu'au fichier qui la configure.
-Dans un vrai projet, le node Vertigo n'est pas construit en Java, comme dans le parcours Démarrage : sa configuration est déclarée dans un fichier YAML, lu au démarrage.
+Dans le parcours Démarrage, vous avez d'abord construit le node en Java, puis rencontré le fichier YAML avec l'écran web. Dans un vrai projet, la configuration du node est toujours ce fichier YAML, lu au démarrage.
 
 À la fin de ce Level, vous saurez :
 - suivre le démarrage, de la classe main jusqu'au fichier de configuration ;
@@ -26,7 +26,7 @@ Pourquoi un fichier plutôt que du code ? La configuration se lit d'un coup d'œ
 - `boot` : les paramètres de démarrage (les langues) et les plugins de démarrage, par exemple ceux qui trouvent les ressources dans le classpath ou dans la webapp.
 - `modules` : chaque entrée est une classe `Features`, qui déclare un **module**. Celles de la plateforme (`CommonsFeatures`, `DatabaseFeatures`, `DataStoreFeatures`, `VegaFeatures`…) et celles de l'application (`SupportFeatures`, `VuiFeatures` : nous les verrons au Level Socle 5). Sous un module :
   - `features` : les fonctionnalités activées, par exemple `sql` pour `DatabaseFeatures` ;
-  - `featuresConfig` : la façon de les réaliser, avec ses paramètres, par exemple `sql.c3p0` et l'URL de la base. Une fonctionnalité est exposée par un **manager** ; le **plugin** choisi ici fait le travail derrière lui.
+  - `featuresConfig` : la façon de les réaliser, avec ses paramètres, par exemple `sql.c3p0` (c3p0 : le pool de connexions à la base) et l'URL de la base. Une fonctionnalité est exposée par un **manager** ; le **plugin** choisi ici fait le travail derrière lui.
 - `__flags__` : un élément marqué d'un flag n'est pris en compte que si ce flag est actif. Les flags actifs se donnent par le paramètre `boot.activeFlags`, dans `web.xml`.
 - `initializers` : du code exécuté une fois le node démarré, dans l'ordre de la liste. Le premier, `DataBaseInitializer`, crée la base de données (le schéma, puis les données de démonstration).
 
@@ -38,13 +38,13 @@ Chaque feature enregistre des **composants** dans le node : ce sont eux que les 
 1. Dans `sample-vui.yaml`, retrouvez la configuration de la base de données.
 **Question** : quelle base est utilisée, et pourquoi n'y a-t-il rien à installer ? *(lisez le paramètre `jdbcUrl`)*
 1. Retrouvez le module `ElasticSearchFeatures`.
-**Question** : est-il actif au démarrage de cet exercice ? *(cherchez `boot.activeFlags` dans `web.xml`)*
-1. Retrouvez ce qui sert les webservices : le module `JavalinFeatures` (`standalone`), et dans `VegaFeatures` les configurations `webservices.javalin` (préfixe `/api`) et `webservices.healthcheck`. Dans `web.xml`, le filtre `VegaJavalinFilter` fait passer les adresses `/api/*` aux webservices. Ce montage est déjà prêt : vous y ajouterez votre propre webservice au Level Socle 6.
-1. Démarrez l'application *(voir le [Level Socle 0](./LevelSocle0.md))* et appelez [http://localhost:18080/sample/api/healthcheck/ping](http://localhost:18080/sample/api/healthcheck/ping) : vous devez obtenir `OK`. C'est un webservice standard de la plateforme, apporté par la feature `webservices.healthcheck`.
-1. Appelez [http://localhost:18080/sample/api/healthcheck/complete](http://localhost:18080/sample/api/healthcheck/complete) : la liste des contrôles de santé de l'application.
-**Question** : quel contrôle vérifie la base de données, quel composant le réalise, et dans quel état est-il ?
-1. **Question** : quelle ligne du fichier YAML apporte ce webservice ? Que deviendrait l'adresse du ping sans elle ?
+**Question** : est-il actif au démarrage de cet exercice ? *(cherchez `boot.activeFlags` dans `web.xml` : s'il est absent, aucun flag n'est actif)*
+1. Dans `VegaFeatures`, retrouvez la configuration `webservices.javalin` et son paramètre `apiPrefix`.
+**Question** : par quel préfixe commencent les adresses des webservices REST de l'application ? *(le montage qui les sert est déjà prêt : vous y ajouterez votre propre webservice au Level Socle 6)*
+1. Démarrez l'application *(voir le [Level Socle 0](./LevelSocle0.md))* et appelez [http://localhost:18080/sample/api/healthcheck/ping](http://localhost:18080/sample/api/healthcheck/ping) : vous devez obtenir `OK`. C'est un webservice standard de la plateforme, apporté par la configuration `webservices.healthcheck` de `VegaFeatures`.
 *(si le ping répond **404** : la configuration `webservices.healthcheck` manque dans `VegaFeatures`, ou l'adresse ne commence pas par `/sample/api` ; sans cette configuration, le composant du healthcheck n'est pas enregistré, et le webservice n'existe pas)*
+1. Appelez [http://localhost:18080/sample/api/healthcheck/complete](http://localhost:18080/sample/api/healthcheck/complete) : la liste des contrôles de santé de l'application. Vous devez y trouver le contrôle `testQuery`, réalisé par `sqlConnectionProviderPlugin`, dans l'état `GREEN`.
+**Question** : quel module et quelle feature de la plateforme apportent ce contrôle ? *(lisez ses champs `module` et `feature`, puis retrouvez-les dans le YAML)*
 
 ### Ce qu'il faut retenir
 
@@ -53,6 +53,10 @@ Chaque feature enregistre des **composants** dans le node : ce sont eux que les 
 - Les flags activent ou non des parties de la configuration ; les initializers s'exécutent une fois le node démarré.
 
 # [Suite : Level Socle 2 - Régénérer le code](./LevelSocle2.md)
+
+### Optionnel : Le montage des webservices
+
+Les webservices REST passent par la webapp : dans le YAML, le module `JavalinFeatures` (`standalone`) et la configuration `webservices.javalin` de `VegaFeatures` ; dans `web.xml`, le filtre `VegaJavalinFilter`, qui transmet aux webservices les adresses `/api/*`. Ce montage se prépare une fois pour toutes dans un projet : il est détaillé dans le [Parcours Autonomie](../docs/parcours-autonomie.md).
 
 ---
 *Note : juste après le démarrage, `/healthcheck/complete` peut afficher en rouge le contrôle `poolUtilization` des daemons. C'est temporaire et sans lien avec l'exercice.*

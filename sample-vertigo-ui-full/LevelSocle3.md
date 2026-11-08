@@ -14,6 +14,7 @@ Puis nous ajouterons un champ à un objet, et nous suivrons ce que la générati
 - SmartTypes : `/src/main/java/io/vertigo/samples/support/config/SampleVuiSmartTypes.java`
 - Code généré : `/src/main/javagen/io/vertigo/samples/vui/domain`
 - Concepts illustrés : DtObject, Entity, KeyConcept, Domain, SmartType, Constraint, Formatter *(voir le glossaire [vertigo-docs : Concepts](https://vertigo-io.github.io/vertigo-docs/#/basic/concepts))*
+- Documentation : [vertigo-docs : DataModel](https://vertigo-io.github.io/vertigo-docs/#/extensions/datamodel)
 
 ### A connaitre : Les objets du modèle
 
@@ -21,7 +22,7 @@ Un objet se déclare par `create DtDefinition`. Chaque champ a un nom, un *domai
 - Un objet qui a un identifiant (`id`) est une **entité** : il est stocké en base (une table) et Studio lui génère un DAO. Par exemple `DtMovie`, `DtCountry`.
 - Un objet sans identifiant est un objet de transfert (**DTO**) : il n'est pas stocké, il transporte des données. Par exemple `DtMovieDisplay` : une ligne de liste, le film avec le nom de son pays, construite par une requête qui joint deux tables (Level Socle 4).
 - Un **stéréotype** précise le rôle d'une entité :
-  - `KeyConcept` marque un objet métier principal de l'application : ici `DtMovie` ;
+  - `KeyConcept` marque un objet métier principal de l'application ;
   - `StaticMasterData` (dans `alter.ksp`) marque une liste de référence **statique** : ici `DtSexe`. Ses valeurs sont dans `masterDataValues.json`, et Studio génère l'enum `SexeEnum`.
 - Une **association** relie deux objets : `AMovCou` relie un film à son pays, par le champ `couId` du film (`"*>?"` : plusieurs films pour un pays, le pays étant facultatif).
 
@@ -45,9 +46,9 @@ Un SmartType porte tout ce qui caractérise la donnée :
 1. Partez du champ `name` de `DtMovie` : son domain, puis son SmartType dans `SampleVuiSmartTypes`.
 **Question** : quelle est la longueur maximale d'un titre de film ? Où est-elle contrôlée, et où est-elle appliquée en base ?
 1. Ajoutez à `DtMovie`, après le champ `imdbid`, le champ `originalTitle` :
-```
-  field originalTitle {domain: DoLabelLong label: "Titre original" }
-```
+   ```
+     field originalTitle {domain: DoLabelLong label: "Titre original" }
+   ```
 1. Régénérez le code *(voir le Level Socle 2)*, puis **observez** le résultat :
    - dans `Movie.java`, le getter `getOriginalTitle()`, annoté `@Field(smartType = "STyLabelLong", label = "Titre original")` ;
    - dans `DtDefinitions`, le champ `originalTitle` de `MovieFields` ;

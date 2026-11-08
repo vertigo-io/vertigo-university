@@ -13,6 +13,7 @@ Il ne s'agit pas de les programmer, mais de savoir où ils agissent, pour écrir
 - Service : `/src/main/java/io/vertigo/samples/vui/services/MovieServices.java`
 - Webservice : `/src/main/java/io/vertigo/samples/vui/webservices/MovieWebServices.java` (Level Socle 6)
 - Concepts illustrés : `@Transactional`, `VUserException`, `VSystemException`, `WrappedException` *(voir le glossaire [vertigo-docs : Concepts](https://vertigo-io.github.io/vertigo-docs/#/basic/concepts))*
+- Documentation : [vertigo-docs : Composants](https://vertigo-io.github.io/vertigo-docs/#/basic/composants) *(un exemple de service et de sa transaction)*
 
 ### A connaitre : La transaction
 
@@ -26,7 +27,7 @@ Les DAO et les tâches ont besoin d'une transaction en cours. C'est pourquoi les
 
 Dans une application Vertigo, on n'intercepte pas les exceptions : la plateforme les intercepte aux bons endroits, et produit la bonne réponse. Les erreurs se rangent en deux familles :
 - **les erreurs utilisateur** : `VUserException`. Une règle métier n'est pas respectée, et son message est destiné à l'utilisateur. Un webservice répond alors **422**, avec le message dans la pile de messages (`globalErrors`) ; un écran l'affiche à l'utilisateur.
-- **les erreurs système** : tout le reste, que l'utilisateur ne peut pas corriger. Ce sont les `VSystemException` (par exemple, une erreur au démarrage de l'application est enveloppée dans une `VSystemException` « Problème d'initialisation de l'application »), les `WrappedException`, qui enveloppent une erreur technique (comme une `SQLException` dans `DataBaseInitializer`), et les erreurs des vérifications `Assertion.check()`, qui lèvent les exceptions Java standard `IllegalArgumentException` ou `IllegalStateException`. Un webservice répond alors **500**, et le serveur trace l'erreur complète pour le développeur.
+- **les erreurs système** : tout le reste, que l'utilisateur ne peut pas corriger. Ce sont les `VSystemException`, les `WrappedException`, qui enveloppent une erreur technique (comme une `SQLException` dans `DataBaseInitializer`), et les erreurs des vérifications `Assertion.check()`, qui lèvent des exceptions Java standard : `NullPointerException` pour `isNotNull`, `IllegalStateException` pour `isTrue`, `IllegalArgumentException` pour `isNotBlank`. Un webservice répond alors **500**, et le serveur trace l'erreur complète pour le développeur.
 
 Une assertion vérifie le contrat du code : si elle échoue, c'est une erreur de programmation. Une `VUserException` signale une situation métier prévue.
 

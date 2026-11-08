@@ -1,24 +1,37 @@
-# Level Socle 0 - Point de départ : préparation de l'environnement
+# Level Socle 0 - Point de départ : démarrer l'application
 
+Nous allons récupérer l'application de l'exercice, la démarrer et vérifier qu'elle répond.
 Ce Level est le point de départ commun des deux séries de cet exercice : la série Socle et la série UI.
 
-1. Rien à préparer pour la base de données : la base H2 est créée en mémoire au démarrage, par l'initializer `io.vertigo.samples.support.boot.DataBaseInitializer` (`src/main/javagen/sqlgen/crebas.sql` pour le schéma, puis `src/main/resources/sql/initdata.sql` pour les données de démo)
-2. Récupérer les sources du github [vertigo-io/vertigo-university/sample-vertigo-ui](https://github.com/vertigo-io/vertigo-university/tree/master/sample-vertigo-ui)
-3. Créer le projet Eclipse (Import Maven Project)
-4. Démarrer l'application `Run Application BootSampleVui` *(dans /src/main/java/io/vertigo/samples/BootSampleVui.java)*
-5. Vérifier le fonctionnement [http://localhost:18080/sample/home/](http://localhost:18080/sample/home/)
+À la fin de ce Level, vous saurez :
+- importer le module et lancer l'application ;
+- lire l'adresse d'une page : le chemin de l'application, puis la route d'un controller.
 
+## Eléments
 
-Dans le web.xml, remarquez le Listener utilisé, et le paramètre `boot.applicationConfiguration`.
+- Classe main : `/src/main/java/io/vertigo/samples/BootSampleVui.java`
+- Route : [http://localhost:18080/sample/home/](http://localhost:18080/sample/home/)
+- Page d'accueil : le controller `/src/main/java/io/vertigo/samples/vui/controllers/HomeController.java` et sa vue `/src/main/resources/webapp/WEB-INF/views/vui/home.html`
 
-Retrouvez la classe `VuiVSpringWebApplicationInitializer` : c'est le point de départ de l'initialisation de SpringMVC.
-Il référence la classe `VuiVSpringWebConfig`. Elle porte les annotations de scan de SpringMVC `@ComponentScan` : une ligne par package, il n'y a pas de scan des sous packages. Elle contient les points de hook pour le paramétrage avancé de SpringMVC et VertigoUi.
+### A connaitre : Une application déjà construite
 
-Retrouver et regardez le controller `HomeController.java` et la page de la vue `home.html`.
+L'application de cet exercice gère des films, leurs acteurs et leurs pays. Elle est déjà construite : la structure du projet, le modèle de données et les services sont en place. La série Socle vous apprend à vous y repérer et à la faire évoluer ; la série UI, à en construire les écrans.
 
-Retrouver et regardez le fichier mermaid-io-vertigo-samples-vui.html, il est généré par Studio et propose une visualisation graphique du modele de données.
+Sa base de données H2 est en mémoire : elle est recréée à chaque démarrage, avec les données de démonstration (6 films, dont les identifiants commencent à 1000). Il n'y a rien à installer.
 
-La class `io.vertigo.samples.support.mda.StudioGenerate` permet de lancer la génération de Studio. Dans la série UI, vous n'en aurez pas besoin : elle reste concentrée sur Vertigo-UI.
+## Etapes
+
+1. Clonez le dépôt [vertigo-io/vertigo-university](https://github.com/vertigo-io/vertigo-university), puis importez le module `sample-vertigo-ui` comme projet Maven dans votre IDE.
+*(sous Eclipse : Import > Existing Maven Projects ; le module hérite du `pom.xml` à la racine du dépôt)*
+1. Lancez `BootSampleVui` *(voir le [README](./README.md#lancer-une-classe-main))*.
+1. Ouvrez [http://localhost:18080/sample/home/](http://localhost:18080/sample/home/) : vous devez voir `Hello world !! It works..`.
+1. **Question** : dans cette adresse, d'où vient `/sample`, et d'où vient `/home/` ? *(regardez `BootSampleVui`, puis `HomeController`)*
+
+### Ce qu'il faut retenir
+
+- L'application démarre par une classe main, et répond sous le chemin `/sample`.
+- Sa base est en mémoire, recréée à chaque démarrage avec les données de démonstration : rien à installer.
+- L'adresse d'une page se lit en deux parties : le chemin de l'application, puis la route d'un controller.
 
 # Suite
 

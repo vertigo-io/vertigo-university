@@ -36,7 +36,7 @@ Il produit dans `src/main/javagen` :
 ## Etapes
 
 1. Ouvrez `studio-config.yaml`, puis `application.kpr`.
-**Question** : combien de fichiers de définitions Studio lit-il ?
+**Question** : combien de fichiers `.ksp` Studio lit-il ?
 1. Parcourez `src/main/javagen`.
 **Question** : quels objets du modèle ont un DAO ? Repérez ceux qui n'en ont pas : vous saurez pourquoi au Level Socle 3.
 1. Lancez `StudioGenerate`, **depuis la racine du module** : il lit `studio-config.yaml` en chemin relatif *(voir le [README](./README.md#lancer-une-classe-main) pour lancer une classe main)*. La console se termine par : `Création de 22 fichiers, Mise à jour de 0 fichiers, 0 fichiers identiques et 0 problemes`.

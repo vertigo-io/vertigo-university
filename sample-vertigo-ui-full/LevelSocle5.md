@@ -17,27 +17,27 @@ Ce découpage est le même d'une application Vertigo à l'autre : une fois compr
 
 ### A connaitre : Les modules de l'application
 
-L'application déclare deux modules, à côté de ceux de la plateforme (Level Socle 1) :
-- `support` : ce qui sert à toute l'application. Sa classe `SupportFeatures` enregistre les **définitions** : les SmartTypes et les objets générés (`DtDefinitions`), et les valeurs des listes statiques ;
+L'application déclare ses propres classes `Features`, à côté de celles de la plateforme (Level Socle 1), une par package de premier niveau :
+- `support` : ce qui sert à toute l'application. Sa classe `SupportFeatures` enregistre les **définitions** : les SmartTypes et les objets générés (`DtDefinitions`), et les listes de référence (`Sexe`, `Country`) ;
 - `vui` : le métier, ici les films. Sa classe `VuiFeatures` enregistre les **composants** : le service `MovieServices`, les DAO et `VuiPAO`. Sa méthode annotée `@Feature("search")` ajoute les composants de la recherche, seulement quand la feature `search` est déclarée dans le YAML (avec son flag).
 
 Un composant n'existe dans le node que s'il est enregistré dans un module. C'est ce qui permet de l'injecter (`@Inject`) dans un autre composant : un composant manquant fait échouer le démarrage, avec un message qui dit quoi et pour qui.
 
-Les controllers sont à part : ce ne sont pas des composants Vertigo, mais des controllers SpringMVC. `VuiVSpringWebConfig` les trouve par `@ComponentScan` : une ligne par package, sans les sous-packages.
+Les controllers sont à part : ce ne sont pas des composants Vertigo, mais des controllers SpringMVC. `VuiVSpringWebConfig` les trouve par `@ComponentScan("io.vertigo.samples.vui.controllers")` : SpringMVC les cherche dans ce package (sous-packages compris). Un controller placé ailleurs n'est pas trouvé.
 
 ### A connaitre : Le pattern de packages
 
 Dans un module, chaque package a un rôle :
 - `<module>.controllers` : les controllers des écrans ;
 - `<module>.services` : les services, le code métier ;
-- `<module>.webservices` : les webservices REST (vous créerez celui de `vui` au Level Socle 6) ;
+- `<module>.webservices` : les webservices REST (vous créerez celui de `vui` dans ce Level) ;
 - générés par Studio dans `src/main/javagen` : `<module>.domain` (les objets), `<module>.dao` (les DAO), `<module>.search` (la recherche), et le PAO du module (`VuiPAO`).
 
 Le module `support` a les siens : `boot` (les initializers), `config` (les SmartTypes, la configuration SpringMVC), `mda` (les lanceurs de Studio)…
 
 ## Etapes
 
-1. Dans `sample-vui.yaml`, retrouvez les deux modules de l'application.
+1. Dans `sample-vui.yaml`, retrouvez les deux classes `Features` de l'application.
 1. Ouvrez `VuiFeatures`.
 **Question** : quels composants enregistre-t-il toujours, et lesquels seulement avec la feature `search` ?
 1. **Question** : pour chacun de ces éléments, donnez son module et son package, puis vérifiez :
@@ -46,8 +46,16 @@ Le module `support` a les siens : `boot` (les initializers), `config` (les Smart
    - le controller de la page d'accueil ;
    - l'enum des SmartTypes ;
    - l'initializer qui crée la base.
-1. **Question** : `MovieServices` reçoit `VuiPAO` par injection. Où `VuiPAO` est-il enregistré ? Au Level Socle 6, vous créerez un webservice pour les films : dans quel package le placerez-vous, et dans quelle classe l'enregistrerez-vous ?
-*(si un jour le démarrage échoue avec, dans la console, `DIException: Components or params not found :vuiPAO (referenced by movieServices<MovieServices>)` : le composant `vuiPAO` n'est enregistré dans aucun module, et c'est `MovieServices` qui en a besoin ; ajoutez-le dans la classe `Features` de son module)*
+1. **Question** : `MovieServices` reçoit `VuiPAO` par injection. Où `VuiPAO` est-il enregistré ?
+1. Préparez le webservice des films, que vous compléterez au Level Socle 6 : créez la classe `io.vertigo.samples.vui.webservices.MovieWebServices`, encore vide, et enregistrez-la dans `VuiFeatures` (`.addComponent(MovieWebServices.class)`).
+   ```Java
+   @PathPrefix("/movies")
+   public class MovieWebServices implements WebServices {
+   }
+   ```
+   *(l'interface est `io.vertigo.vega.webservice.WebServices`, l'annotation est dans le package `io.vertigo.vega.webservice.stereotype`)*
+1. Relancez l'application : elle démarre, et [http://localhost:18080/sample/api/healthcheck/ping](http://localhost:18080/sample/api/healthcheck/ping) répond toujours `OK`. Le nouveau composant est enregistré ; il n'a pas encore de route.
+*(si le démarrage échoue avec, dans la console, `DIException: Components or params not found :…` : un composant n'est enregistré dans aucun module ; le message nomme le composant manquant, puis celui qui en a besoin, par exemple `vuiPAO (referenced by movieServices<MovieServices>)` ; ajoutez-le dans la classe `Features` de son module)*
 
 ### Ce qu'il faut retenir
 
