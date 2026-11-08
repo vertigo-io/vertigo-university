@@ -79,18 +79,18 @@ create FacetDefinition FctMovieCountry {
 6. Dans `MovieWebServices`, ajoutez la route `@GET("/search/_reindex")` *(en `@AnonymousAccessAllowed`)*, qui retourne `movieServices.indexMovies()`.
 7. Dans le `@GET("/_search")`, remplacez la pagination fixe `DtListState.of(5)` par un paramètre `@QueryParam("") final DtListState dtListState`.
 8. Créez la classe `Level4` en copiant `CrystalSearchSample` : elle contient déjà tout le nécessaire.
-9. Le pays change de type d'indexation, un changement incompatible avec l'index créé aux Levels précédents : supprimez d'abord le dossier `target/classes/search/data` *(sinon le démarrage échoue, voir « La réindexation »)*. Lancez ensuite `Level4`, attendez la fin du démarrage, puis appelez [http://localhost:8081/movies/search/_reindex](http://localhost:8081/movies/search/_reindex) : vous devez obtenir `6`.
+9. Le pays change de type d'indexation, un changement incompatible avec l'index créé aux Levels précédents : supprimez d'abord le dossier `target/classes/search/data` *(sinon le démarrage échoue, voir « La réindexation »)*. Lancez ensuite `Level4`, attendez la fin du démarrage, puis appelez [http://localhost:8081/movies/search/_reindex](http://localhost:8081/movies/search/_reindex) : vous devez obtenir `20`.
 10. Testez la recherche :
     - [`/movies/_search?q=gump`](http://localhost:8081/movies/_search?q=gump) retourne Forrest Gump ;
-    - [`/movies/_search?q=the`](http://localhost:8081/movies/_search?q=the) retourne 4 films, avec la facette `FctMovieCountry` (`"isMultiSelectable": true`) et ses valeurs `Etats-Unis` (2), `Allemagne` (1), `Royaume-Uni` (1) ;
-    - [`/movies/_search?q=the&top=2`](http://localhost:8081/movies/_search?q=the&top=2) retourne les 2 premiers films, et [`&top=2&skip=2`](http://localhost:8081/movies/_search?q=the&top=2&skip=2) les 2 suivants ; `totalCount` reste à 4.
-11. Testez la sélection de facettes en `Post` *(par exemple avec curl depuis Git Bash)* : en sélectionnant `Etats-Unis` et `Allemagne`, vous devez obtenir 3 films.
+    - [`/movies/_search?q=the`](http://localhost:8081/movies/_search?q=the) retourne 7 films, avec la facette `FctMovieCountry` (`"isMultiSelectable": true`) et ses valeurs `Etats-Unis` (5), `Allemagne` (1), `Royaume-Uni` (1) ;
+    - [`/movies/_search?q=the&top=2`](http://localhost:8081/movies/_search?q=the&top=2) retourne les 2 premiers films, et [`&top=2&skip=2`](http://localhost:8081/movies/_search?q=the&top=2&skip=2) les 2 suivants ; `totalCount` reste à 7.
+11. Testez la sélection de facettes en `Post` *(par exemple avec curl depuis Git Bash)* : en sélectionnant `Etats-Unis` et `Allemagne`, vous devez obtenir 6 films.
 *(une facette term se sélectionne par sa valeur, `Etats-Unis` ; une facette range par le code de sa tranche, `r9`)*
-*(**observez** aussi : en sélectionnant seulement `Etats-Unis`, vous obtenez 2 films et la facette pays garde `Allemagne` (1) et `Royaume-Uni` (1) ; en sélectionnant la décennie `r9` de `FctMovieYear`, facette simple, il ne reste qu'elle)*
+*(**observez** aussi : en sélectionnant seulement `Etats-Unis`, vous obtenez 5 films et la facette pays garde `Allemagne` (1) et `Royaume-Uni` (1) ; en sélectionnant la décennie `r9` de `FctMovieYear`, facette simple, il ne reste qu'elle)*
 ```
 curl -X POST -H "Content-Type: application/json" -d '{"criteria":"the","facets":{"FctMovieCountry":["Etats-Unis","Allemagne"]}}' http://localhost:8081/movies/_search
 ```
-12. **Question** : dans la réponse de `q=the`, la facette `FctMovieName` n'affiche que `t-z` *(seules les tranches non vides sont renvoyées)*. Si l'on ajoutait sur l'année une facette term, puis une facette range par décennie comme `FctMovieYear`, quels libellés afficherait chacune, et d'où viendraient-ils ?
+12. **Question** : dans la réponse de `q=the`, la facette `FctMovieName` n'affiche que les tranches `a-f`, `g-m` et `t-z` *(seules les tranches non vides sont renvoyées)*. Si l'on ajoutait sur l'année une facette term, puis une facette range par décennie comme `FctMovieYear`, quels libellés afficherait chacune, et d'où viendraient-ils ?
 13. Arrêtez `Level4` *(Ctrl+C)*.
 
 **Attention** :
@@ -109,7 +109,7 @@ curl -X POST -H "Content-Type: application/json" -d '{"criteria":"the","facets":
 
 ### Optionnel : Le tri
 
-Triez les résultats : [`/movies/_search?q=the&sortFieldName=name&sortDesc=true`](http://localhost:8081/movies/_search?q=the&sortFieldName=name&sortDesc=true) retourne les 4 films par titre décroissant (`The Iron Giant` en premier). Le tri sur `name` est possible parce que son SmartType est `sortable`.
+Triez les résultats : [`/movies/_search?q=the&sortFieldName=name&sortDesc=true`](http://localhost:8081/movies/_search?q=the&sortFieldName=name&sortDesc=true) retourne les 7 films par titre décroissant (`The Iron Giant` en premier). Le tri sur `name` est possible parce que son SmartType est `sortable`.
 
 Comparez aussi avec la recherche du [Level Ui 3 de sample-vertigo-ui](../sample-vertigo-ui/LevelUi3.md), qui construit un index et des facettes équivalents, utilisés depuis un écran.
 

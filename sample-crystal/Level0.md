@@ -20,7 +20,7 @@ Il n'utilise aucune donnée préchargée : tout est créé au démarrage.
 
 Dans Vertigo, on configure d'abord, on code ensuite : le node déclare les Features qu'il active, avant toute logique métier.
 `SampleConfigBuilder.createNodeConfigBuilder(withSearch, withVega)` construit cette configuration :
-- une base H2 **en mémoire**, recréée à chaque démarrage par `DataBaseInitializer` : le schéma généré (`sqlgen/crebas.sql`) puis les données de démonstration (`sql/initdata.sql` : 6 films, 6 acteurs, leurs rôles, 5 pays) ;
+- une base H2 **en mémoire**, recréée à chaque démarrage par `DataBaseInitializer` : le schéma généré (`sqlgen/crebas.sql`) puis les données de démonstration (`sql/initdata.sql` : 20 films réels connus en France, 50 acteurs, leurs rôles, 5 pays) ;
 - avec `withSearch` : un serveur Elasticsearch embarqué et le plugin de recherche ;
 - avec `withVega` : les web services REST.
 
@@ -43,7 +43,7 @@ Le modèle est décrit dans des fichiers de définitions, écrits en KSP (`src/m
 1. Lancez `Studio` depuis la racine du module. Il annonce la création de 19 fichiers *(il réécrit tout le code généré)*, mais leur contenu ne change pas : `git status` reste vide.
 *(les lignes `Resource fld... not found` sont normales : la génération des libellés traduits est désactivée)*
 1. Lancez `CrystalSearchSample` et attendez la fin du démarrage *(voir le README)*.
-1. Consultez le film [http://localhost:8081/movies/1000](http://localhost:8081/movies/1000) et ses 2 rôles [http://localhost:8081/movies/1000/roles](http://localhost:8081/movies/1000/roles).
+1. Consultez le film [http://localhost:8081/movies/1000](http://localhost:8081/movies/1000) et ses 3 rôles [http://localhost:8081/movies/1000/roles](http://localhost:8081/movies/1000/roles).
 1. Testez la recherche [http://localhost:8081/movies/_search?q=gump](http://localhost:8081/movies/_search?q=gump) : elle ne trouve rien (`"totalCount": 0`), car l'index de recherche est encore vide. La réindexation n'est pas automatique : vous ajouterez la route qui la déclenche au Level 4 :)
 1. Arrêtez `CrystalSearchSample` *(Ctrl+C)*.
 

@@ -70,7 +70,7 @@ Il faut deux déclarations dans la configuration du node :
 `nodeConfigBuilder.addModule(ModuleConfig.builder("proxies").addAmplifier(MovieProxyDAO.class).build());`
 1. Créez la classe `Level5` en copiant `CrystalSample`, et injectez-y le `MovieProxyDAO`.
 1. Dans un `step1`, lisez le pays de Forrest Gump *(`getMovieById(FORREST_GUMP_ID).getCouId()`)* et affichez le nombre de films de ce pays avec `movieProxyDAO.count`.
-1. Lancez `Level5` : vous devez obtenir `films in the same country as Forrest Gump : 4`.
+1. Lancez `Level5` : vous devez obtenir `films in the same country as Forrest Gump : 10`.
 1. **Question** : la même requête aurait pu être une tâche dans `dao.ksp`, comme au Level 1. Qu'est-ce qui change pour le reste de l'équipe ? *(où la requête est-elle visible ? qui la génère ? à quel moment une erreur dans son écriture est-elle détectée ?)*
 
 **Attention** : si `withTaskProxyMethod()` est oublié, le démarrage échoue (`No way to find a proxyMethod for this method`). Les erreurs d'écriture du proxy, elles, n'apparaissent qu'au premier appel de `count()` : par exemple `the name of the descriptor COU_ID must be in lowerCamelCase` pour un paramètre `@TaskInput(name = "COU_ID")`.

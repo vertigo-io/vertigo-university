@@ -70,7 +70,7 @@ Un paramètre de cardinalité `"*"` est une liste. Pour une liste de valeurs sim
 1. Déclarez en constantes les identifiants utiles des données de démonstration *(voir `sql/initdata.sql`)* : `FORREST_GUMP_ID = 1000L`, `USA_ID = 840L`, `GERMANY_ID = 250L`.
 1. Dans un `step1`, affichez les identifiants des acteurs de Forrest Gump ; dans un `step2`, les films des États-Unis et d'Allemagne *(`Arrays.asList(USA_ID, GERMANY_ID)`)*.
 *(avec Log4j, une valeur passée en paramètre n'est affichée que si le message contient un marqueur `{}` : `info("actors : {}", actorsIds)`)*
-1. Lancez `Level1` : vous devez voir les acteurs `[1000, 1002]` (Tom Hanks et Meryl Streep), puis une liste de 5 films (4 américains et 1 allemand).
+1. Lancez `Level1` : vous devez voir les acteurs `[1000, 1001, 1002]` (Tom Hanks, Robin Wright et Gary Sinise), puis une liste de 11 films (10 américains et 1 allemand).
 1. Observez dans la console les traces des tâches *(`Finish /execute/TkGetActorsIdsByMovie ...`)* : vous y trouvez la requête exécutée, sa durée et le nombre de lignes lues. C'est votre premier outil pour comprendre ce que fait l'application en base.
 
 ### Ce qu'il faut retenir

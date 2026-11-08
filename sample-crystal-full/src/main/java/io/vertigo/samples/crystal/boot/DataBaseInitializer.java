@@ -3,6 +3,7 @@ package io.vertigo.samples.crystal.boot;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.Collections;
 
@@ -46,7 +47,7 @@ public class DataBaseInitializer implements ComponentInitializer {
 	}
 
 	private void execSqlScript(final SqlConnection connection, final String scriptPath) {
-		try (final BufferedReader in = new BufferedReader(new InputStreamReader(resourceManager.resolve(scriptPath).openStream()))) {
+		try (final BufferedReader in = new BufferedReader(new InputStreamReader(resourceManager.resolve(scriptPath).openStream(), StandardCharsets.UTF_8))) {
 			final StringBuilder sqlStatement = new StringBuilder();
 			String inputLine;
 			while ((inputLine = in.readLine()) != null) {

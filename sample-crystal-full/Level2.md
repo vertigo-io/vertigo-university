@@ -49,7 +49,7 @@ Par convention, le `load()` est fait **dans un service** : c'est un accès SQL, 
 1. Créez la classe `Level2` en copiant `CrystalSample`, avec la constante `FORREST_GUMP_ID = 1000L`.
 1. Dans un `step1`, appelez `manipulateAccessors` ; dans un `step2`, affichez les rôles du film retourné par `loadMovieWithRoles`, puis `isLoaded()` sur celui retourné par `loadMovieWithRolesAndReset` ; dans un `step3`, affichez `getRolesByMovie` *(ce service existe déjà et utilise l'accesseur `role()`)*.
 *(rappel : marqueur `{}` dans le message Log4j, voir le Level 1)*
-1. Lancez `Level2`. Vous devez voir l'état de l'accesseur passer de `false` à `true`, puis `false`, puis `true` ; puis les 2 rôles de Forrest Gump (`<1>Forrest Gump` et `<2>Jenny Curran`, le préfixe vient des données) ; puis `false` après le `reset` ; enfin une liste de 2 rôles.
+1. Lancez `Level2`. Vous devez voir l'état de l'accesseur passer de `false` à `true`, puis `false`, puis `true` ; puis les 3 rôles de Forrest Gump (`<1>Forrest Gump`, `<2>Jenny Curran` et `<3>Lieutenant Dan Taylor`, le préfixe vient des données) ; puis `false` après le `reset` ; enfin une liste de 3 rôles.
 1. **Observez** la console autour des traces `country accessor isLoaded` : entre `false` et `true`, une requête `TkSelectCountryByUri` est exécutée. C'est le `load()` qui lit le pays en base. En revanche, le `set(country)` ne déclenche aucune requête. De même, `role().load()` exécute `TkSelectListRoleByCriteria`.
 
 ### Ce qu'il faut retenir

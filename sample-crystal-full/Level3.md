@@ -68,7 +68,7 @@ Studio génère alors l'enum `SexeEnum` (`male`, `female`), et l'accesseur `acto
 1. Ajoutez `long countMaleActorsInMovie(Long movId)` à `MovieServices`. Dans `MovieServicesImpl`, injectez `ActorDAO`, chargez les acteurs du film avec `getActorsByMovie` et comptez ceux dont le sexe est `SexeEnum.male`.
 1. `MovieServicesImpl` a maintenant besoin de `ActorDAO` : déclarez-le dans le module `stepDao` de **toutes** vos classes main *(`.addComponent(ActorDAO.class)`, dans `CrystalSample`, `CrystalSearchSample`, `Level1` et `Level2`)*.
 1. Créez la classe `Level3` en copiant `CrystalSample`, et affichez dans un `step1` le nombre d'acteurs masculins de Forrest Gump.
-1. Lancez `Level3` : vous devez obtenir `male actors : 1` (Tom Hanks ; Meryl Streep est `F`). Relancez `Level1` pour vérifier qu'il démarre toujours.
+1. Lancez `Level3` : vous devez obtenir `male actors : 2` (Tom Hanks et Gary Sinise ; Robin Wright est `F`). Relancez `Level1` pour vérifier qu'il démarre toujours.
 1. **Observez** la console : après `TkGetActorsByMovie`, aucune autre requête n'est exécutée avant le résultat. `actor.sexe().getEnumValue()` lit la valeur de l'enum sans accès à la base, contrairement au `load()` d'un accesseur vers une entité (Level 2).
 
 **Attention** : si une classe main ne déclare pas `ActorDAO`, son démarrage échoue avec `Components or params not found :actorDAO (referenced by movieServices<MovieServicesImpl>)`. Un composant ne peut être injecté que s'il est déclaré dans la configuration du node.
