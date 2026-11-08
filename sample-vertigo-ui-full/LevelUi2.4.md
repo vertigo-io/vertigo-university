@@ -28,13 +28,14 @@ Lorsque la response server arrive coté client, le code javascript s'occupe de l
 ## Etapes - Tri en base de données
 
 Nous allons commencer par le tri de la liste des films. [movies](http://localhost:18080/sample/movies/)
-1. Ouvrez la liste et triez par titre. Avec les 6 films de démonstration, le tri côté client suffit encore ; sur une vraie liste, paginée, il ne trierait que les lignes déjà chargées dans la page : c'est pourquoi on trie côté serveur.
+1. Ouvrez la liste et triez par titre. Les 20 films de démonstration sont tous dans la page (vous l'avez vu dans `vui-init-data` au Level Ui 1) : le tri côté client les trie tous. Sur une liste plus grande, la page ne reçoit que les premières lignes (250 au plus, voir le Level Ui 1) : seul un tri côté serveur trie toute la liste.
 2. Dans le Controller `MoviesController`, ajouter une méthode qui répondra au tri Ajax du composant `vu:table`
 ```Java
  @PostMapping("/_sort")
 	public ViewContext sort(final ViewContext viewContext, final DtListState dtListState) {
 ```
 2. Dans cette action, utiliser le service de chargement avec le DtListState et mettez à jour le viewContext
+*(le DtListState vient du navigateur : bornez-le avant de l'utiliser, `dtListState.withLimit(DtListState.DEFAULT_MAX_ROWS)`, sinon le navigateur pourrait demander plus de lignes que le plafond)*
 3. Consulter le service pour voir que le DtListState est passé à la couche DAO : c'est bien la base de données qui fera le tri et le filtrage.
 4. Dans la vue de la liste des films, ajouter une `sortUrl="@{/movies/_sort}"` sur la table
 5. Consultez la page et triez par titre, puis par année : l'appel `_sort` part au serveur (onglet Réseau des outils du navigateur), et la liste revient triée.

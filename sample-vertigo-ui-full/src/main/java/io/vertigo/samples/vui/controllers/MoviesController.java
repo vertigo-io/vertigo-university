@@ -47,7 +47,8 @@ public class MoviesController extends AbstractVSpringMvcController {
 
 	@PostMapping("/_sort")
 	public ViewContext sort(final ViewContext viewContext, final DtListState dtListState) {
-		viewContext.publishDtList(moviesKey, movieServices.getMovies(dtListState));
+		//the state comes from the browser: bound it to the design ceiling of a screen (250 rows)
+		viewContext.publishDtList(moviesKey, movieServices.getMovies(dtListState.withLimit(DtListState.DEFAULT_MAX_ROWS)));
 		return viewContext;
 	}
 }

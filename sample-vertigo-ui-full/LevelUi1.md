@@ -43,6 +43,14 @@ Le composant *vu:column* nécessite le paramètre *field*.
 Le body de la *column* permet d'avoir un rendu spécifique. Cela agit coté serveur comme un scope.
 Le rendu de la table sera réalisé coté client en vueJs. En vueJs, dans une table, `props.row` permet d'accéder à l'objet de la vue *(il faut s'assurer que les champs sont chargés)*
 
+### A connaitre : Une liste dans le contexte
+
+Une liste publiée dans le contexte de la page est envoyée au navigateur, avec toutes ses lignes. Elle doit donc rester raisonnable :
+- `DtListState.defaultOf(Movie.class)` limite la lecture à **250 lignes** (`DtListState.DEFAULT_MAX_ROWS`) : c'est le plafond prévu pour un écran. Au-delà, l'utilisateur ne lit plus les lignes, et la page devient lente. Un écran propose donc de **filtrer avant d'afficher** (une recherche, des facettes : Level Ui 3), et affiche le nombre total de résultats. C'est une règle du design system : [vertigo-docs : collections](https://vertigo-io.github.io/vertigo-docs/#/design-system/organismes/collections).
+- `withLimit(n)` réduit encore ce nombre, par exemple pour n'afficher que les 10 premiers ; il ne peut pas l'augmenter.
+- Vertigo-UI ne gère pas une liste de plus de 1000 éléments dans le contexte : ce n'est jamais un cas d'écran.
+- Une liste destinée à un **export** (CSV, tableur) ne passe pas par le contexte : le service la charge, avec une limite explicite adaptée à l'export, et le fichier est produit côté serveur puis téléchargé directement (voir l'Exporter de [vertigo-docs : Quarto](https://vertigo-io.github.io/vertigo-docs/#/modules/quarto)).
+
 ## Etapes
 
 1. Créez le controller.
@@ -62,8 +70,9 @@ Le rendu de la table sera réalisé coté client en vueJs. En vueJs, dans une ta
             </vu:table>
             </div>
 ```
-7. Testez la page affichant la liste de *Movies*.
+7. Testez la page affichant la liste de *Movies* : la table affiche 10 films par page, sur 2 pages (les 20 films de démonstration).
 7. Consulter la source de la page. Recherchez la balise `script id="vui-init-data"` et regardez son contenu.
+**Observez** : la liste `movies` y contient les 20 films. Toute la liste est envoyée au navigateur, et la pagination se fait côté client : c'est pourquoi une liste publiée dans le contexte doit rester limitée.
 8. Retirez une colonne du tableau et comparez.
 9. Familiarisez vous avec la lecture des composants `vu:table` et `vu:column` ([GitHub VertigoUi Components](https://github.com/vertigo-io/vertigo-libs/tree/master/vertigo-ui/src/main/resources/io/vertigo/ui/components), column est plus simple à lire que table). 
 Notez l'usage de `vu:include-data`.
