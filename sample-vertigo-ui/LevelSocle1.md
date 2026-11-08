@@ -52,7 +52,7 @@ Chaque feature enregistre des **composants** dans le node : ce sont eux que les 
 - Un module est déclaré par une classe `Features` ; ses features et leur configuration enregistrent des composants (managers, plugins).
 - Les flags activent ou non des parties de la configuration ; les initializers s'exécutent une fois le node démarré.
 
-# [Suite : Level Socle 2 - Régénérer le code](./LevelSocle2.md)
+# [Suite : Level Socle 1.1 - Paramètres, variables d'environnement et flags](./LevelSocle1.1.md)
 
 ### Optionnel : Le montage des webservices
 

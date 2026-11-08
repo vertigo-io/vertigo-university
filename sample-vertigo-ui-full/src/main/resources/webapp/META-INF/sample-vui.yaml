@@ -9,6 +9,7 @@ boot:
     - io.vertigo.vega.plugins.webservice.servlet.ServletResourceResolverPlugin: {}
     - io.vertigo.core.plugins.resource.local.LocalResourceResolverPlugin: {}
     - io.vertigo.vega.plugins.webservice.servlet.WebAppContextParamPlugin: {}
+    - io.vertigo.core.plugins.param.env.EnvParamPlugin: {}
 modules:
   io.vertigo.connectors.javalin.JavalinFeatures:
     features:
@@ -62,7 +63,7 @@ modules:
     plugins:
       - io.vertigo.datafactory.plugins.search.elasticsearch_7_17.rest.RestHLClientESSearchServicesPlugin:
           __flags__: ["search"]
-          envIndexPrefix: sampleVui_
+          envIndexPrefix: ${INDEX_PREFIX!sampleVui_}
           rowsPerQuery: 50
           config.file: webapp/META-INF/elasticsearch.yml
       - io.vertigo.datafactory.plugins.collections.lucene_8_11.LuceneIndexPlugin: {} # in-memory list search (autocomplete), no flag

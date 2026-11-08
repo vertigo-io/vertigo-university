@@ -21,6 +21,7 @@ Point de départ, commun aux deux séries :
 Série Socle (le fonctionnement de l'application : configuration, génération, modèle, tâches, modules, services, webservices, transaction et erreurs) :
 
 - [Level Socle 1 - Le démarrage et la configuration](./LevelSocle1.md)
+  - [Level Socle 1.1 - Paramètres, variables d'environnement et flags](./LevelSocle1.1.md)
 - [Level Socle 2 - Régénérer le code](./LevelSocle2.md)
 - [Level Socle 3 - Le modèle](./LevelSocle3.md)
 - [Level Socle 4 - Les tâches](./LevelSocle4.md)
