@@ -34,7 +34,7 @@ Un SmartType porte tout ce qui caractérise la donnée :
 - son type Java (`@SmartTypeDefinition`) ;
 - son **formatter** (`@Formatter`), qui convertit la donnée vers le texte affiché ou saisi, et inversement ;
 - ses **contraintes** (`@Constraint`), par exemple `ConstraintStringLength` : elles sont vérifiées automatiquement quand des données saisies entrent dans l'application, et leur violation produit une erreur pour l'utilisateur ;
-- des propriétés, comme `storeType`, le type de la colonne en base.
+- des propriétés, comme `storeType`, le type de la colonne en base. Le SQL de création de la base est généré à partir du `storeType` du domain, que le SmartType reprend : les deux doivent rester cohérents.
 
 ## Etapes
 
@@ -53,7 +53,7 @@ Un SmartType porte tout ce qui caractérise la donnée :
    - dans `Movie.java`, le getter `getOriginalTitle()`, annoté `@Field(smartType = "STyLabelLong", label = "Titre original")` ;
    - dans `DtDefinitions`, le champ `originalTitle` de `MovieFields` ;
    - dans `sqlgen/crebas.sql`, la colonne `ORIGINAL_TITLE VARCHAR(500)` de la table `MOVIE`.
-1. Relancez l'application : elle démarre sans erreur. La base est recréée à chaque démarrage à partir de `crebas.sql` : elle a maintenant la nouvelle colonne.
+1. Recompilez le projet (`mvn -q compile`, voir le [README](./README.md#lancer-une-classe-main)), puis relancez l'application : elle démarre sans erreur. La base est recréée à chaque démarrage à partir de `crebas.sql` : elle a maintenant la nouvelle colonne.
 
 ### Ce qu'il faut retenir
 

@@ -21,7 +21,7 @@ C'est le geste quotidien du développement Vertigo : le modèle se décrit dans 
 
 Studio applique le principe du **MDA** (*Model Driven Architecture*) : le modèle est la source, le code en est déduit. Il lit sa configuration dans `studio-config.yaml` :
 - `resources` : le fichier `.kpr`, qui liste les fichiers de définitions `.ksp` à lire, et `masterDataValues.json`, les valeurs des listes de référence statiques ;
-- `mdaConfig` : le package de l'application, le répertoire cible, et dans `properties` ce qu'il faut générer : les classes du domaine (`vertigo.domain.java`), le SQL de création de la base pour H2 (`vertigo.domain.sql`), les tâches (`vertigo.task`), la recherche (`vertigo.search`) et un schéma du modèle (`mermaid`).
+- `mdaConfig` : le package de l'application, le répertoire cible, et dans `properties` ce qu'il faut générer, principalement : les classes du domaine (`vertigo.domain.java`), le SQL de création de la base pour H2 (`vertigo.domain.sql`), les tâches (`vertigo.task`), la recherche (`vertigo.search`) et un schéma du modèle (`mermaid`).
 
 Il produit dans `src/main/javagen` :
 - `domain` : une classe par objet du modèle, et `DtDefinitions` qui les référence ;
@@ -39,7 +39,7 @@ Il produit dans `src/main/javagen` :
 **Question** : combien de fichiers `.ksp` Studio lit-il ?
 1. Parcourez `src/main/javagen`.
 **Question** : quels objets du modèle ont un DAO ? Repérez ceux qui n'en ont pas : vous saurez pourquoi au Level Socle 3.
-1. Lancez `StudioGenerate`, **depuis la racine du module** : il lit `studio-config.yaml` en chemin relatif *(voir le [README](./README.md#lancer-une-classe-main) pour lancer une classe main)*. La console se termine par : `Création de 22 fichiers, Mise à jour de 0 fichiers, 0 fichiers identiques et 0 problemes`.
+1. Lancez `StudioGenerate`, **depuis la racine du module** : il lit `studio-config.yaml` en chemin relatif *(voir le [README](./README.md#lancer-une-classe-main) pour lancer une classe main)*. La console se termine par : `Création de 22 fichiers, Mise à jour de 0 fichiers, 0 fichiers identiques et 0 problemes`. *(les lignes `INFO … Resource fldXxx$yyy not found` qui précèdent sont normales : elles signalent des libellés sans traduction, et n'empêchent rien)*
 1. **Observez** `git status` : aucun fichier n'est modifié. Studio a réécrit les 22 fichiers (son compteur les annonce comme des créations), mais leur contenu est identique : le code généré est le reflet exact des définitions.
 1. Ouvrez `src/main/javagen/mermaid/mermaid-io-vertigo-samples-vui.html` dans un navigateur : c'est le schéma du modèle que nous allons lire au Level suivant.
 

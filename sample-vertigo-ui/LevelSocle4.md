@@ -37,7 +37,7 @@ Studio génère la méthode qui exécute la tâche. Il la place dans le **DAO de
 **Question** : pour chacune, prévoyez où Studio a placé la méthode générée, puis vérifiez dans `VuiPAO` et dans les DAO. Pourquoi `getMoviesInCountries` est-elle dans `MovieDAO`, et `getMoviesDisplay` dans `VuiPAO` ?
 1. Ajoutez dans `dao.ksp` la tâche `TkGetMoviesDisplayByCountry` : les films d'un pays, avec le nom de ce pays.
 *(même requête que `TkGetMoviesDisplay`, avec `join` au lieu de `left join`, et la condition `where mov.cou_id = #couId#` ; en entrée `couId` de domain `DoId` et de cardinalité `"1"` ; en sortie `moviesDisplay` de domain `DoDtMovieDisplay` et de cardinalité `"*"`)*
-1. Régénérez le code *(voir le Level Socle 2)* et retrouvez la méthode `getMoviesDisplayByCountry(final Long couId)`.
+1. Régénérez le code *(voir le Level Socle 2)* et retrouvez la méthode `getMoviesDisplayByCountry` *(son paramètre `couId` est précédé d'une annotation générée, `@TaskInput`, qui décrit le paramètre de la tâche)*.
 **Question** : dans quelle classe Studio l'a-t-il placée, et pourquoi ?
 1. Lancez `mvn compile` : le projet compile. Le service appellera cette méthode au Level Socle 6.
 

@@ -38,13 +38,13 @@ Chaque feature enregistre des **composants** dans le node : ce sont eux que les 
 1. Dans `sample-vui.yaml`, retrouvez la configuration de la base de données.
 **Question** : quelle base est utilisée, et pourquoi n'y a-t-il rien à installer ? *(lisez le paramètre `jdbcUrl`)*
 1. Retrouvez le module `ElasticSearchFeatures`.
-**Question** : est-il actif au démarrage de cet exercice ? *(cherchez `boot.activeFlags` dans `web.xml` : s'il est absent, aucun flag n'est actif)*
+**Question** : est-il actif au démarrage de cet exercice ? *(cherchez `boot.activeFlags` dans `web.xml` : s'il est absent, et sans la variable d'environnement `VERTIGO_BOOT_ACTIVE_FLAGS`, aucun flag n'est actif)*
 1. Dans `VegaFeatures`, retrouvez la configuration `webservices.javalin` et son paramètre `apiPrefix`.
 **Question** : par quel préfixe commencent les adresses des webservices REST de l'application ? *(le montage qui les sert est déjà prêt : vous y ajouterez votre propre webservice au Level Socle 6)*
 1. Démarrez l'application *(voir le [Level Socle 0](./LevelSocle0.md))* et appelez [http://localhost:18080/sample/api/healthcheck/ping](http://localhost:18080/sample/api/healthcheck/ping) : vous devez obtenir `OK`. C'est un webservice standard de la plateforme, apporté par la configuration `webservices.healthcheck` de `VegaFeatures`.
 *(si le ping répond **404** : la configuration `webservices.healthcheck` manque dans `VegaFeatures`, ou l'adresse ne commence pas par `/sample/api` ; sans cette configuration, le composant du healthcheck n'est pas enregistré, et le webservice n'existe pas)*
 1. Appelez [http://localhost:18080/sample/api/healthcheck/complete](http://localhost:18080/sample/api/healthcheck/complete) : la liste des contrôles de santé de l'application. Vous devez y trouver le contrôle `testQuery`, réalisé par `sqlConnectionProviderPlugin`, dans l'état `GREEN`.
-**Question** : quel module et quelle feature de la plateforme apportent ce contrôle ? *(lisez ses champs `module` et `feature`, puis retrouvez-les dans le YAML)*
+**Question** : quel module et quelle feature de la plateforme apportent ce contrôle ? *(lisez ses champs `module` et `feature` : `vertigo-database` est le module déclaré par `DatabaseFeatures`, et `sqlDatabase` correspond à sa feature `sql`, réalisée par la configuration `sql.c3p0` ; le contrôle lui-même est fait par le plugin `sqlConnectionProviderPlugin`)*
 
 ### Ce qu'il faut retenir
 
@@ -59,4 +59,4 @@ Chaque feature enregistre des **composants** dans le node : ce sont eux que les 
 Les webservices REST passent par la webapp : dans le YAML, le module `JavalinFeatures` (`standalone`) et la configuration `webservices.javalin` de `VegaFeatures` ; dans `web.xml`, le filtre `VegaJavalinFilter`, qui transmet aux webservices les adresses `/api/*`. Ce montage se prépare une fois pour toutes dans un projet : il est détaillé dans le [Parcours Autonomie](../docs/parcours-autonomie.md).
 
 ---
-*Note : juste après le démarrage, `/healthcheck/complete` peut afficher en rouge le contrôle `poolUtilization` des daemons. C'est temporaire et sans lien avec l'exercice.*
+*Note : `/healthcheck/complete` peut afficher en rouge le contrôle `poolUtilization` des daemons, et le garder en rouge. C'est un défaut connu de la plateforme, sans lien avec l'exercice.*

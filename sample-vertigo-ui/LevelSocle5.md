@@ -19,7 +19,7 @@ Ce découpage est le même d'une application Vertigo à l'autre : une fois compr
 
 L'application déclare ses propres classes `Features`, à côté de celles de la plateforme (Level Socle 1), une par package de premier niveau :
 - `support` : ce qui sert à toute l'application. Sa classe `SupportFeatures` enregistre les **définitions** : les SmartTypes et les objets générés (`DtDefinitions`), et les listes de référence (`Sexe`, `Country`) ;
-- `vui` : le métier, ici les films. Sa classe `VuiFeatures` enregistre les **composants** : le service `MovieServices`, les DAO et `VuiPAO`. Sa méthode annotée `@Feature("search")` ajoute les composants de la recherche, seulement quand la feature `search` est déclarée dans le YAML (avec son flag).
+- `vui` : le métier, ici les films. Sa classe `VuiFeatures` enregistre les **composants** : le service `MovieServices`, les DAO qu'il utilise et `VuiPAO`. Sa méthode annotée `@Feature("search")` ajoute les composants de la recherche, seulement quand la feature `search` est déclarée dans le YAML (avec son flag).
 
 Un composant n'existe dans le node que s'il est enregistré dans un module. C'est ce qui permet de l'injecter (`@Inject`) dans un autre composant : un composant manquant fait échouer le démarrage, avec un message qui dit quoi et pour qui.
 
@@ -34,6 +34,8 @@ Dans un module, chaque package a un rôle :
 - générés par Studio dans `src/main/javagen` : `<module>.domain` (les objets), `<module>.dao` (les DAO), `<module>.search` (la recherche), et le PAO du module (`VuiPAO`).
 
 Le module `support` a les siens : `boot` (les initializers), `config` (les SmartTypes, la configuration SpringMVC), `mda` (les lanceurs de Studio)…
+
+*`support` contient aussi `FileUploadController` et `SampleFileServices` : ils sont préparés pour un futur composant d'upload de fichiers, et ne sont pas encore branchés (le controller n'est pas dans le package scanné, le service n'est enregistré dans aucune classe `Features`).*
 
 ## Etapes
 

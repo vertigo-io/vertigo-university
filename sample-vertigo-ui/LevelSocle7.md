@@ -26,7 +26,7 @@ Les DAO et les tâches ont besoin d'une transaction en cours. C'est pourquoi les
 ### A connaitre : Les erreurs
 
 Dans une application Vertigo, on n'intercepte pas les exceptions : la plateforme les intercepte aux bons endroits, et produit la bonne réponse. Les erreurs se rangent en deux familles :
-- **les erreurs utilisateur** : `VUserException`. Une règle métier n'est pas respectée, et son message est destiné à l'utilisateur. Un webservice répond alors **422**, avec le message dans la pile de messages (`globalErrors`) ; un écran l'affiche à l'utilisateur.
+- **les erreurs utilisateur** : `VUserException`. Une règle métier n'est pas respectée, et son message est destiné à l'utilisateur. Un webservice répond alors **422**, avec le message dans la pile de messages (`globalErrors`) ; un écran l'affiche à l'utilisateur. Elle n'est pas tracée en erreur dans la console : c'est une situation prévue.
 - **les erreurs système** : tout le reste, que l'utilisateur ne peut pas corriger. Ce sont les `VSystemException`, les `WrappedException`, qui enveloppent une erreur technique (comme une `SQLException` dans `DataBaseInitializer`), et les erreurs des vérifications `Assertion.check()`, qui lèvent des exceptions Java standard : `NullPointerException` pour `isNotNull`, `IllegalStateException` pour `isTrue`, `IllegalArgumentException` pour `isNotBlank`. Un webservice répond alors **500**, et le serveur trace l'erreur complète pour le développeur.
 
 Une assertion vérifie le contrat du code : si elle échoue, c'est une erreur de programmation. Une `VUserException` signale une situation métier prévue.

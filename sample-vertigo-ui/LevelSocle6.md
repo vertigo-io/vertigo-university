@@ -62,14 +62,15 @@ Comme tout composant, il s'enregistre dans un module. Il est servi sous le préf
    	}
    }
    ```
-   *(l'annotation `PathParam` est, comme `GET` et `PathPrefix`, dans le package `io.vertigo.vega.webservice.stereotype`)*
+   *(l'annotation `PathParam` est, comme `GET` et `PathPrefix`, dans le package `io.vertigo.vega.webservice.stereotype` ; `Inject` est `javax.inject.Inject`, comme dans `MovieServices`, `DtList` est `io.vertigo.datamodel.data.model.DtList`, et `MovieDisplay` est dans `io.vertigo.samples.vui.domain`)*
 1. Relancez l'application et appelez :
    - [http://localhost:18080/sample/api/movies/display](http://localhost:18080/sample/api/movies/display) : les 20 films, triés par titre, chacun avec son pays (le premier : `{"countryName": "Etats-Unis", "movId": 1015, "name": "Back to the Future", "year": 1985}`) ;
    - [http://localhost:18080/sample/api/movies/display/250](http://localhost:18080/sample/api/movies/display/250) : le seul film allemand, `The Grand Budapest Hotel` ;
    - [http://localhost:18080/sample/api/movies/display/392](http://localhost:18080/sample/api/movies/display/392) : `[]`, aucun film pour le Japon *(voir les pays dans `/src/main/resources/sql/initdata.sql`)*.
 
    *(si les adresses `/api/movies/...` répondent **404** : le webservice n'est pas enregistré dans `VuiFeatures`)*
-1. **Observez** la console : pour chaque appel, une trace du webservice (`Finish /Get//movies/display/{couId} ...`) et une trace de la tâche (`Finish /execute/TkGetMoviesDisplayByCountry ...`), avec leur durée.
+1. **Observez** la console : pour chaque appel, une trace du webservice (`Finish /Get//movies/display/{couId} ...`) et les traces de la tâche (`Finish /execute/TkGetMoviesDisplayByCountry ...`, une pour la requête SQL, une pour la tâche), avec leur durée.
+*(dans le JSON, une apostrophe peut apparaître encodée : `Bienvenue chez les Ch\u0027tis`)*
 
 ### Ce qu'il faut retenir
 
