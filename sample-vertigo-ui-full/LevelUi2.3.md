@@ -5,7 +5,7 @@ Nous verrons le rendu particulier des tableaux.
 
 ## Eléments
 
-- Route : [http://localhost:18080/sample/movie/{movId}](http://localhost:18080/sample/movie/3678598)
+- Route : [http://localhost:18080/sample/movie/{movId}](http://localhost:18080/sample/movie/1000)
 - Controller : `/src/main/java/io/vertigo/samples/vui/controllers/MovieController`
 - Vue : `/src/main/resources/webapp/WEB-INF/views/vui/movie.html`
 - Service : `movieServices.loadMovieWithRoles`, `movieServices.getActorsByMovie`
@@ -37,7 +37,7 @@ Le composant `vu:select`, comme les autres composants de formulaire ne peuvent p
 2. Dans le initContext charger le film avec sa liste de rôle avec le service `loadMovieWithRoles`.
 3. Publiez la liste dans le context.
 4. Dans la vue, ajouter une table avec les colonnes `asCharacter` et `actId`
-5. Consulter la page de détail d'un film avec des Roles : [Star Wars](http://localhost:18080/sample/movie/3678598). Consulter le contenu du `vueData`.
+5. Consulter la page de détail d'un film avec des Roles : [Forrest Gump](http://localhost:18080/sample/movie/1000). Consulter le contenu du `vueData`.
 
 ## Etapes - Résolution du nom des acteurs
  

@@ -5,7 +5,7 @@ Nous allons voir la gestion des boutons, des actions et des controles de surface
 
 ## Eléments
 
-- Route : [http://localhost:18080/sample/movie/{movId}](http://localhost:18080/sample/movie/3678598)
+- Route : [http://localhost:18080/sample/movie/{movId}](http://localhost:18080/sample/movie/1000)
 - Controller : `/src/main/java/io/vertigo/samples/vui/controllers/MovieController`
 - Vue : `/src/main/resources/webapp/WEB-INF/views/vui/movie.html`
 - Service : `movieServices.save`

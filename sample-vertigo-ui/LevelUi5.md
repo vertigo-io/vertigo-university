@@ -7,7 +7,7 @@ Cela nous montrera comment proposer des comportements transverses via des contro
 
 - Route : [http://localhost:18080/sample/movies/](http://localhost:18080/sample/movies/)
 - Controller : `/src/main/java/io/vertigo/samples/vui/controllers/CountryChoiceController`
-- Vue : `/src/main/resources/webapp/WEB-INF/views/vui/mmcLayout.html`
+- Vue : `/src/main/resources/webapp/WEB-INF/views/templates/mmcLayout.html`
 - Service : 
 
 
@@ -58,7 +58,7 @@ public void initContext(final ViewContext viewContext)
 ```Java
 private User obtainUser() {
   final SampleUserSession session = Node.getNode().getComponentSpace().resolve(VSecurityManager.class)
-	.<SampleUserSession> getCurrentUserSession().orElseThrow(() -> new VSecurityException(MessageText.of("No active session found")));
+	.<SampleUserSession> getCurrentUserSession().orElseThrow(() -> new VSecurityException(LocaleMessageText.of("No active session found")));
   User user = session.getAttribute("sessionUser");
   if (user != null) {
     return user;
@@ -69,11 +69,15 @@ private User obtainUser() {
   return user;
 }
 ```
+*(`LocaleMessageText` est dans le package `io.vertigo.core.locale`)*
 6. Ajouter une méthode mappée sur une requete `POST` en `/_changeCountry`, elle prend l'objet user qui a été envoyé, récupère l'id du pays, met à jour la session et retourne le `viewContext` mis à jour
 7. Pour appliquer l'élément graphique sur toute les pages, il faut agir sur le template de page : `mmcLayout.html`
-8. Ajouter le composant `vu:autocomplete` dans le dernier `div` de la `q-toolbar`. Ce composant est associé au champ `couId` de `user` et utilise la liste `countriesMdl`
+8. Ajouter le composant `vu:autocomplete-edit` dans le dernier `div` de la `q-toolbar`. Ce composant est associé au champ `couId` de `user` et utilise la liste `countriesMdl`. *(le layout est en lecture par défaut : on force ici la version édition par son nom, comme au Level Ui 2.2 ; sa recherche utilise le plugin d'index Lucene déclaré dans `sample-vui.yaml`)*
 9. Lors de la saisie d'une valeur sur ce composant, il faut *Poster* l'objet `user` du `vueData` vers la méthode de `CountryChoiceController`
 ```Javascript
 th:@input="|httpPostAjax('@{/country/_changeCountry}', vueDataParams(['user']))|"
 ```
+10. Consultez [la liste des films](http://localhost:18080/sample/movies/) : le bandeau affiche le pays de l'utilisateur, la France par défaut. Choisissez « Allemagne », puis ouvrez une autre page, par exemple [l'accueil](http://localhost:18080/sample/home/) : le pays choisi est conservé, puisqu'il est gardé dans la session de l'utilisateur.
+
+# [Suite : Level Ui 6 - Modales](./LevelUi6.md)
 

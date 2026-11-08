@@ -5,7 +5,7 @@ Nous verrons la réactivité aux modifications d'un objet du vueModel et la vali
 
 ## Eléments
 
-- Route : [http://localhost:18080/sample/movie/{movId}](http://localhost:18080/sample/movie/3678598)
+- Route : [http://localhost:18080/sample/movie/{movId}](http://localhost:18080/sample/movie/1000)
 - Controller : `/src/main/java/io/vertigo/samples/vui/controllers/MovieController`
 - Vue : `/src/main/resources/webapp/WEB-INF/views/vui/movie.html`
 - Service : `movieServices.validate`
@@ -81,7 +81,7 @@ debounceDelay), { deep: true });
 
 ## Etapes
 
-Nous allons ajouter une validation en Ajax sur le formulaire de saisie de film pour vérifier que l'année est supérieur à 1920. [movie](http://localhost:18080/sample/movie/3678598)
+Nous allons ajouter une validation en Ajax sur le formulaire de saisie de film pour vérifier que l'année est supérieur à 1920. [movie](http://localhost:18080/sample/movie/1000)
 
 
 1. Dans le Controller `MovieController`, ajouter une méthode qui répondra à la validation Ajax 

@@ -69,7 +69,7 @@ Le rendu de la table sera réalisé coté client en vueJs. En vueJs, dans une ta
 Notez l'usage de `vu:include-data`.
 
 11. Modifiez le contenu de la colonne `movId`, pour ajouter un lien vers la page de détail `/movie/{movId}`
-*Le {movId} sera l'identifiant du movie. Pour le moment ce lien enverra sur une 404, mais c'est l'objet du level suivant :)*
+*Le {movId} sera l'identifiant du film. Ce lien mènera à la page de détail, que vous créerez au Level suivant : ne le suivez pas encore.*
 
 `<a th::href="|'@{/movie/}'+props.row.movId|" >{{props.row.movId}}</a>`
 

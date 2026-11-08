@@ -70,6 +70,8 @@ function onRoleActorSuccess() {
 *Note : en projet, il faudrait protéger les données en cours d'édition avant une navigation (cf. Level Ui 5).*
 *La solution complète est dans le sample-vertigo-ui-full.*
 
+# Fin de la série UI
+
 ## Optionnel : Rechercher un pays en modale (sous-élément du contexte courant)
 
 Le pays du film est une liste de référence *(Level Ui 2.1)*. Nous allons proposer une modale qui ouvre un sous-élément du contexte courant : un objet `countrySearch` qui, une fois validé, met à jour le film dans le contexte de la page.

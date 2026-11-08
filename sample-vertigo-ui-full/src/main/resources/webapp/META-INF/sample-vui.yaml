@@ -65,6 +65,7 @@ modules:
           envIndexPrefix: sampleVui_
           rowsPerQuery: 50
           config.file: webapp/META-INF/elasticsearch.yml
+      - io.vertigo.datafactory.plugins.collections.lucene_8_11.LuceneIndexPlugin: {} # in-memory list search (autocomplete), no flag
   io.vertigo.account.AccountFeatures:
     features:
       - authorization:

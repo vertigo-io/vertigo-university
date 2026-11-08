@@ -5,7 +5,7 @@ Nous verrons le tri coté serveur et le cas où nous souhaitons un comportement 
 
 ## Eléments
 
-- Route : [http://localhost:18080/sample/movie/{movId}](http://localhost:18080/sample/movie/3678598)
+- Route : [http://localhost:18080/sample/movie/{movId}](http://localhost:18080/sample/movie/1000)
 - Controller : `/src/main/java/io/vertigo/samples/vui/controllers/MovieController`
 - Vue : `/src/main/resources/webapp/WEB-INF/views/vui/movie.html`
 - Service : `movieServices.getMovies`, `movieServices.sortRoles`
@@ -28,7 +28,7 @@ Lorsque la response server arrive coté client, le code javascript s'occupe de l
 ## Etapes - Tri en base de données
 
 Nous allons commencer par le tri de la liste des films. [movies](http://localhost:18080/sample/movies/)
-1. Commencez par observer les limites du tri coté client
+1. Ouvrez la liste et triez par titre. Avec les 6 films de démonstration, le tri côté client suffit encore ; sur une vraie liste, paginée, il ne trierait que les lignes déjà chargées dans la page : c'est pourquoi on trie côté serveur.
 2. Dans le Controller `MoviesController`, ajouter une méthode qui répondra au tri Ajax du composant `vu:table`
 ```Java
  @PostMapping("/_sort")
@@ -37,7 +37,7 @@ Nous allons commencer par le tri de la liste des films. [movies](http://localhos
 2. Dans cette action, utiliser le service de chargement avec le DtListState et mettez à jour le viewContext
 3. Consulter le service pour voir que le DtListState est passé à la couche DAO : c'est bien la base de données qui fera le tri et le filtrage.
 4. Dans la vue de la liste des films, ajouter une `sortUrl="@{/movies/_sort}"` sur la table
-5. Consulter la page et observer le comportement (la base de contient que les films commençant par 'S').
+5. Consultez la page et triez par titre, puis par année : l'appel `_sort` part au serveur (onglet Réseau des outils du navigateur), et la liste revient triée.
 
 # [Suite : Level Ui 2.5 - Ecran de détail - Validation coté serveur en Ajax](./LevelUi2.5.md)
 
