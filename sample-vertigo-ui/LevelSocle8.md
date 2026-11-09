@@ -30,21 +30,13 @@ Un projet fournit à ses tests un démarrage commun et des classes parentes :
 - `AbstractSampleVuiTestCase` est la **classe parente** de tous les tests : elle porte l'extension (`@ExtendWith`), et les aides communes aux tests (ici, vider le cache). Un test en hérite, et n'a rien d'autre à déclarer ;
 - `AbstractSampleVuiRollbackTestCase` en hérite, pour les tests qui **modifient des données** (voir plus bas).
 
-Dans une équipe, la classe parente porte aussi les autres aides communes, par exemple ouvrir une session avec des droits. La base H2 en mémoire est créée avec les données de démonstration (Level Socle 0) : les résultats attendus sont connus d'avance.
+Dans une équipe, la classe parente porte aussi les autres aides communes, par exemple ouvrir une session avec des droits. JUnit 5 est déjà fourni par le projet parent : il n'y a rien à ajouter au `pom.xml`. La base H2 en mémoire est créée avec les données de démonstration (Level Socle 0) : les résultats attendus sont connus d'avance.
 
 ### A connaitre : Les tests qui modifient des données
 
 Les tests partagent la même base. Un test qui enregistre ou supprime des données ne doit rien laisser derrière lui : sinon, le résultat d'un autre test dépendrait de l'ordre dans lequel ils s'exécutent.
 
 `AbstractSampleVuiRollbackTestCase` ouvre donc une **transaction** avant chaque test, et l'**annule** (`rollback`) à la fin. Le service appelé par le test la réutilise (`@Transactional`, Level Socle 7) au lieu d'en ouvrir une : il ne valide rien lui-même. Le test voit ses propres modifications, puis l'annulation remet la base dans son état de départ.
-
-### A connaitre : JUnit 5 en bref
-
-- `@Test` marque une méthode de test ;
-- `Assertions.assertEquals(attendu, obtenu)` vérifie une valeur ;
-- `Assertions.assertThrows(VUserException.class, () -> …)` vérifie que l'appel lève cette exception, et la renvoie : on peut alors vérifier son message.
-
-JUnit 5 est déjà fourni par le projet parent : il n'y a rien à ajouter au `pom.xml`.
 
 ## Etapes
 
@@ -60,13 +52,13 @@ JUnit 5 est déjà fourni par le projet parent : il n'y a rien à ajouter au `po
    ```
    *(`Inject` est dans le package `javax.inject` ; `AbstractSampleVuiTestCase` dans `io.vertigo.samples.support`)*
 1. Ajoutez un premier test, `testMoviesOfCountry` : les films de l'Allemagne (`couId` 250). Vérifiez qu'il y en a un seul, et que c'est `The Grand Budapest Hotel`.
-*(`movieServices.getMoviesDisplayByCountry(250L)` renvoie une `DtList<MovieDisplay>` ; puis `movies.size()` et `movies.get(0).getName()` ; `Test` et `Assertions` sont dans le package `org.junit.jupiter.api`, `DtList` dans `io.vertigo.datamodel.data.model`, `MovieDisplay` dans `io.vertigo.samples.vui.domain`)*
+*(une méthode annotée `@Test` ; `movieServices.getMoviesDisplayByCountry(250L)` renvoie une `DtList<MovieDisplay>` ; puis `Assertions.assertEquals(attendu, obtenu)` sur `movies.size()` et `movies.get(0).getName()` ; `Test` et `Assertions` sont dans le package `org.junit.jupiter.api`, `DtList` dans `io.vertigo.datamodel.data.model`, `MovieDisplay` dans `io.vertigo.samples.vui.domain`)*
 1. Ajoutez un second test, `testCountryWithoutMovie` : pour le Japon (`couId` 392), vérifiez que le service lève une `VUserException` dont le message est `Aucun film pour ce pays`.
-*(`assertThrows` renvoie l'exception : son message est `exception.getMessage()` ; `VUserException` est dans le package `io.vertigo.core.lang`)*
+*(`Assertions.assertThrows(VUserException.class, () -> …)` vérifie que l'appel lève l'exception, et la renvoie : son message est `exception.getMessage()` ; `VUserException` est dans le package `io.vertigo.core.lang`)*
 1. Arrêtez l'application si elle est démarrée, puis lancez les tests : depuis l'IDE, *Run As > JUnit Test* sur la classe ; en ligne de commande, `mvn test` à la racine du module. Les deux tests passent : la vue JUnit de l'IDE est verte, et Maven affiche, sous `Results:`, la ligne de total `Tests run: 2, Failures: 0, Errors: 0, Skipped: 0` *(plus haut, une ligne semblable par classe de test se termine par `-- in` suivi du nom de la classe)*.
 *(si vous obtenez `Failed to bind to 0.0.0.0/0.0.0.0:18080`, puis `The forked VM terminated without properly saying goodbye` et `BUILD FAILURE` : les tests n'ont pas pu démarrer, car l'application est encore démarrée, et son port est occupé ; arrêtez-la, puis relancez les tests)*
 **Attention** : en ligne de commande, un test en échec ne fait pas échouer la commande. Le projet parent est configuré pour continuer (`testFailureIgnore`) : Maven affiche `There are test failures.`, puis termine quand même par `BUILD SUCCESS`. Lisez toujours la ligne `Tests run: …, Failures: …`.
-1. **Observez** ce que montre un test qui échoue : dans `testMoviesOfCountry`, attendez `2` films au lieu de `1`, et relancez les tests. Vous devez obtenir `Tests run: 2, Failures: 1`, avec le test en cause et le message `expected: <2> but was: <1>`. Remettez ensuite la valeur `1`.
+1. **Observez** la console des tests : pour chaque test, les deux traces de la tâche, comme au Level Socle 6 (`Finish /execute/TkGetMoviesDisplayByCountry ...`, une pour `sql` et une pour `tasks`), avec `nbSelectedRow=1.0` pour l'Allemagne et `nbSelectedRow=0.0` pour le Japon. Le test passe par le même chemin que l'application : le service, sa transaction, la tâche et la base. Mais aucune trace de webservice : le test appelle directement le service.
 **Question** : un collègue modifie la tâche `TkGetMoviesDisplayByCountry`, régénère le code, et le filtre par pays ne fonctionne plus : la tâche renvoie tous les films. Lesquels de vos tests le signalent, et que dit chacun ?
 1. Créez la classe `io.vertigo.samples.vui.services.MovieServicesRollbackTest`, qui hérite de `AbstractSampleVuiRollbackTestCase` et reçoit aussi `MovieServices`. Ajoutez-lui un test, `testSaveMovieOfCountry` : enregistrez un film japonais, `Le Voyage de Chihiro`, de 2001, puis vérifiez que le Japon a maintenant un film, et que c'est celui-là.
 *(créez un `Movie` (package `io.vertigo.samples.vui.domain`) avec `setName`, `setYear` et `setCouId(392L)`, enregistrez-le par `movieServices.save(movie)`, puis relisez les films du Japon comme dans le premier test)*
