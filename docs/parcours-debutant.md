@@ -72,7 +72,7 @@ Formation :
 
 1. [Level Socle 0 - Point de départ : démarrer l'application](../sample-vertigo-ui/LevelSocle0.md) : importer le module, lancer l'application, lire l'adresse d'une page
 2. [Level Socle 1 - Le démarrage et la configuration](../sample-vertigo-ui/LevelSocle1.md) : de la classe main jusqu'au fichier YAML ; les modules, leurs features, les flags et les initializers ; un premier webservice standard de la plateforme, le healthcheck
-3. [Level Socle 1.1 - Paramètres, variables d'environnement et flags](../sample-vertigo-ui/LevelSocle1.1.md) : retrouver d'où vient un paramètre de l'application (le ParamManager et ses plugins), le remplacer par une variable d'environnement, activer un flag (le catalogue des webservices) ; puis revenir à l'état de départ. Ce Level ne change pas l'application pour la suite
+3. [Level Socle 1.1 - Paramètres, variables d'environnement et flags](../sample-vertigo-ui/LevelSocle1.1.md) : retrouver d'où vient un paramètre de l'application (le ParamManager et ses plugins), le remplacer par une variable d'environnement, activer un flag (Swagger, pour décrire et appeler les webservices) ; puis revenir à l'état de départ. Ce Level ne change pas l'application pour la suite
 
 Concepts : Module, Component, Manager, Plugin *(glossaire [Concepts](https://vertigo-io.github.io/vertigo-docs/#/basic/concepts))* ; [vertigo-docs : Configuration](https://vertigo-io.github.io/vertigo-docs/#/basic/configuration).
 
@@ -211,9 +211,18 @@ Les notions :
 
 **Attention:** le filtre de sécurité n'est pas automatique : une requête à laquelle le service ne l'applique pas renvoie toutes les lignes. Et masquer un bouton à l'écran ne protège rien : le contrôle doit être fait côté serveur.
 
+**Les webservices** demandent une protection de plus : ils peuvent être appelés directement, sans passer par un écran.
+
+- La feature `webservices.security` de `VegaFeatures` fait exiger un utilisateur connecté par chaque webservice. Une route publique le déclare explicitement, par `@AnonymousAccessAllowed`, souvent avec `@SessionLess`, pour ne pas créer de session à chaque appel.
+- `@Secured("…")`, sur la classe ou sur la méthode, exige une autorisation ; les contrôles sur les données restent dans le service, comme pour un écran.
+- Les webservices d'outillage (Swagger, catalogue, pages de test) sont placés sous un flag, actif seulement en développement et en recette (voir le [Level Socle 1.1](../sample-vertigo-ui/LevelSocle1.1.md)) : ils exposent toute l'API.
+- Les routes publiques se protègent des abus par la limitation de débit (`rateLimiting` et `webservices.rateLimiting`), dont les seuils viennent en général de variables d'environnement.
+
+L'application support n'active pas `webservices.security` : ses webservices sont ouverts, ce qui convient à un exercice local, jamais à une application livrée.
+
 À lire :
 
-- [vertigo-docs : Sécurité](https://vertigo-io.github.io/vertigo-docs/#/basic/securite) (les principes) et [Account](https://vertigo-io.github.io/vertigo-docs/#/extensions/account) (la configuration et l'API)
+- [vertigo-docs : Sécurité](https://vertigo-io.github.io/vertigo-docs/#/basic/securite) (les principes) et [Account](https://vertigo-io.github.io/vertigo-docs/#/extensions/account) (la configuration et l'API) ; pour les webservices, [WebServices](https://vertigo-io.github.io/vertigo-docs/#/basic/webservices) (les sections « Sécurisation du WebService » et « Rate Limiting »)
 - [sample-account](../sample-account), sur le même modèle de films : `auth-config.json` (une autorisation globale, et l'opération `read` de `Movie` avec sa règle sur le pays) ; `UserServicesImpl.login`, qui accorde les droits et la clé de périmètre `couId` ; `AccountSample.testSecurity`, qui calcule le filtre de sécurité d'une recherche ; les classes générées `GlobalAuthorizations` et `SecuredEntities`. C'est un exemple minimal : les droits y sont écrits en dur, et accordés sans tester le résultat du login ; dans une application, on vérifie d'abord le login (voir la doc Account)
 - [Mars](https://github.com/vertigo-io/vertigo-mars), l'application de démonstration, en aperçu : deux fichiers de sécurité (`base-auth-config.json`, `hr-auth-config.json`), chacun chargé par la classe `Features` de son module ; des controllers annotés `@Secured` ; des services qui appliquent les contrôles et les filtres (`BaseServices`, et `EquipmentServices` pour les trois filtres)
 
@@ -222,6 +231,7 @@ Dans votre équipe :
 - [ ] Retrouver le fichier de sécurité de l'application (depuis les classes `Features`, qui le chargent), et comment l'équipe regroupe les autorisations (profils, périmètres)
 - [ ] Vous connecter avec deux profils différents, et comparer ce que chacun voit
 - [ ] Repérer, dans un service, où sont appliqués les contrôles et les filtres de sécurité
+- [ ] Repérer comment sont protégés les webservices de l'application : `webservices.security`, les routes publiques (`@AnonymousAccessAllowed`), les `@Secured`, les flags des outils de développement, la limitation de débit
 
 **Critère d'autonomie** : pour un nouvel écran ou un nouveau service, vous dites quels contrôles il faut, et votre ticket est validé en code review sans remarque de sécurité.
 
