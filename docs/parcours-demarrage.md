@@ -185,6 +185,36 @@ Vertigo-UI est construit sur Vue.js, Quasar et SpringMVC avec Thymeleaf.
 
 **Bon à savoir** : le node web ne lit pas le stdin (contrairement au node Javalin) : l'arrêt est Ctrl+C. La racine du context (`/uihello/`) renvoie 404 sous Jetty 11 (welcome file) : c'est cosmétique, viser `/uihello/home/`.
 
+## La structure d'un vrai projet
+
+Votre prototype tient en quelques packages. Une application Vertigo réelle suit un découpage qui se retrouve d'un projet à l'autre : une fois compris, il permet de se repérer dans n'importe quel projet. [Mars](https://github.com/vertigo-io/vertigo-mars), l'application de démonstration, en est un exemple complet ; [sample-vertigo-ui](../sample-vertigo-ui) en est une version réduite (Level Socle 5).
+
+**Le code Java** (`src/main/java`) part d'un package racine (Mars : `io.mars`), découpé en **modules** :
+
+- un module par domaine métier (Mars : `basemanagement`, `hr`…), et un module transverse, `support` ; un projet a parfois aussi un module d'outils de développement, activé seulement par un flag ;
+- chaque module a sa classe **`<Module>Features`**, citée dans le fichier YAML : elle enregistre les composants du module (services, DAO, webservices), ses définitions, et souvent son fichier de sécurité ;
+- dans un module, un package par rôle : `controllers`, `services`, `webservices`, et selon les besoins `jobs`, `search`… ;
+- `support` porte ce qui sert à toute l'application : l'enum des SmartTypes, la session utilisateur, les initializers (`boot`), la configuration SpringMVC (`config`), le lanceur de Studio (`mda`).
+
+**Le code généré** (`src/main/javagen`) suit le même découpage : les objets (`domain`), les DAO (`dao`), le PAO de chaque module, `DtDefinitions`, et les constantes des autorisations (`GlobalAuthorizations`, `SecuredEntities`, dans un package `authorization`).
+
+**Les ressources** (`src/main/resources`) :
+
+- le **fichier YAML** de configuration du node (Mars : `mars.yaml`), que le `web.xml` désigne par le paramètre `boot.applicationConfiguration` ;
+- la **webapp** (Mars : `io/mars/webapp`) : `WEB-INF/web.xml`, les vues dans `WEB-INF/views/<module>/` (une vue est trouvée depuis le package de son controller), et les fichiers statiques (`static/`) ;
+- les **définitions Studio** : un `application.kpr` qui liste les fichiers de définitions, `domains.ksp` pour les domains (Mars : dans `support`), puis, par module, un `.kpr`, le modèle (les objets) et les tâches (Mars : `io/mars/basemanagement/model/*.ksp` et `.../tasks/*_tasks.ksp`) ;
+- les **fichiers de sécurité** (`<module>-auth-config.json`), dans le module qu'ils concernent : déclarés dans `studio-config.yaml` (ressource de type `security`), pour que Studio génère les constantes des autorisations, et chargés par une classe `Features` ;
+- les ressources propres à un module : libellés (`i18n`), gabarits de mails ou de documents ;
+- souvent, les scripts de création et de migration de la base (`liquibase`).
+
+À la racine du projet : `studio-config.yaml`, la configuration de la génération.
+
+**Les surcharges de Vertigo.** Il arrive qu'un projet doive corriger ou adapter une classe de la plateforme sans attendre la version suivante : la plateforme sort environ deux versions par an, et un projet a ses propres délais. La pratique admise est de recopier la classe dans le projet, **dans le même package et sous le même nom** (`src/main/java/io/vertigo/...`) : au démarrage, la classe du projet passe avant celle de la bibliothèque. Une ressource se surcharge de la même façon (`src/main/resources/io/vertigo/...`, par exemple le gabarit d'un composant Vertigo-UI). C'est une exception, avec ses règles :
+
+- un commentaire en tête de la classe dit pourquoi elle est surchargée, et à partir de quelle version de la plateforme ;
+- la correction est remontée à l'équipe Vertigo, pour être intégrée à la plateforme ;
+- à chaque montée de version, la surcharge est revue : elle ne suit pas les évolutions de la classe d'origine, et elle est supprimée dès que la version de la plateforme la rend inutile.
+
 ## Suite
 
 - [Parcours Débutant](parcours-debutant.md) — rejoindre une équipe expérimentée et viser l'autonomie sur le courant (le travail standard de l'équipe)
