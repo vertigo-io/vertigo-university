@@ -28,7 +28,7 @@
 						<!-- button for Level Ui 2.2 -->
 						<vu:button-submit th:if="${model.modeEdit && false}" label="Save" action="@{_save}" color="primary"/>
 						
-                        <!-- button for Level Ui 2.6 -->
+                        <!-- button for Level Ui 2.7 -->
 						       <!--  il est aussi possible de simplement paramétrer les labels utilisés, sans utiliser le slot -->
                         <vu:button-submit-confirm th:if="${model.modeEdit}" action="notUsed" formId="notUsed" label="Save" color="primary">
 						       <vu:slot name="actions_slot">
@@ -75,7 +75,6 @@
                 </vu:modal>
 			</vu:form>
         	</div>		
-        </section>
         
         <section layout:fragment="javascript-footer" >
             <script type="text/javascript">
