@@ -165,13 +165,13 @@ Dans votre équipe :
 
 *Objectif : écrire le test qui garantit une fonction métier.*
 
-Formation : [Level Socle 8 - Tester une fonction métier](../sample-vertigo-ui/LevelSocle8.md). Le test démarre l'application, avec sa base et ses données de démonstration, appelle un service, et vérifie son résultat métier : les films d'un pays, et l'erreur prévue pour un pays sans film.
+Formation : [Level Socle 8 - Tester une fonction métier](../sample-vertigo-ui/LevelSocle8.md). Le test démarre l'application, avec sa base et ses données de démonstration, appelle un service, et vérifie son résultat métier : les films d'un pays, et l'erreur prévue pour un pays sans film. Puis un test qui enregistre un film, dans une transaction annulée à la fin. Les tests héritent de classes parentes fournies par le projet, comme dans une équipe.
 
 Pourquoi des tests d'intégration ? Ce qui a de la valeur, et qui reste stable quand le code évolue, c'est la fonction métier : le test l'appelle comme l'application l'appelle, avec une vraie base, plutôt que de vérifier le détail de son code.
 
 Dans votre équipe :
 
-- [ ] Lire le squelette de test de l'équipe : comment un test démarre le node, sur quelle base, avec quelles données
+- [ ] Lire le squelette de test de l'équipe : ses classes parentes, comment un test démarre l'application, sur quelle base, avec quelles données, et comment les tests qui modifient des données sont annulés
 - [ ] Lancer les tests en local, et retrouver les tests générés des tâches s'il y en a
 - [ ] Ajouter le test de la fonction de votre premier ticket
 
