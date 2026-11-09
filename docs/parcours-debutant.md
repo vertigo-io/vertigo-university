@@ -72,7 +72,7 @@ Formation :
 
 1. [Level Socle 0 - Point de départ : démarrer l'application](../sample-vertigo-ui/LevelSocle0.md) : importer le module, lancer l'application, lire l'adresse d'une page
 2. [Level Socle 1 - Le démarrage et la configuration](../sample-vertigo-ui/LevelSocle1.md) : de la classe main jusqu'au fichier YAML ; les modules, leurs features, les flags et les initializers ; un premier webservice standard de la plateforme, le healthcheck
-3. [Level Socle 1.1 - Paramètres, variables d'environnement et flags](../sample-vertigo-ui/LevelSocle1.1.md) : activer un flag (la recherche), changer un paramètre et voir son effet, le faire venir d'une variable d'environnement avec une valeur par défaut ; puis revenir à l'état de départ. Ce Level ne change pas l'application pour la suite
+3. [Level Socle 1.1 - Paramètres, variables d'environnement et flags](../sample-vertigo-ui/LevelSocle1.1.md) : retrouver d'où vient un paramètre de l'application (le ParamManager et ses plugins), le remplacer par une variable d'environnement, activer un flag (le catalogue des webservices) ; puis revenir à l'état de départ. Ce Level ne change pas l'application pour la suite
 
 Concepts : Module, Component, Manager, Plugin *(glossaire [Concepts](https://vertigo-io.github.io/vertigo-docs/#/basic/concepts))* ; [vertigo-docs : Configuration](https://vertigo-io.github.io/vertigo-docs/#/basic/configuration).
 
