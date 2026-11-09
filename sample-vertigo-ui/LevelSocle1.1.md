@@ -12,7 +12,7 @@ C'est ainsi qu'une même application s'adapte à chaque environnement (poste de 
 
 - Configuration : `/src/main/resources/webapp/WEB-INF/web.xml` et `/src/main/resources/webapp/META-INF/sample-vui.yaml`
 - Page d'accueil : `/src/main/java/io/vertigo/samples/vui/controllers/HomeController.java` et `/src/main/resources/webapp/WEB-INF/views/vui/home.html`
-- Adresses : [http://localhost:18080/sample/home/](http://localhost:18080/sample/home/) et [http://localhost:18080/sample/api/catalog](http://localhost:18080/sample/api/catalog)
+- Adresses : [http://localhost:18080/sample/home/](http://localhost:18080/sample/home/) et [http://localhost:18080/sample/api/swaggerUi](http://localhost:18080/sample/api/swaggerUi)
 - Concepts illustrés : Manager, Plugin *(voir le glossaire [vertigo-docs : Concepts](https://vertigo-io.github.io/vertigo-docs/#/basic/concepts))*
 - Documentation : [vertigo-docs : Configuration](https://vertigo-io.github.io/vertigo-docs/#/basic/configuration) *(les sections « Configuration YAML » et « Flags »)*
 
@@ -58,17 +58,17 @@ Le `web.xml` et le YAML sont lus depuis `target/classes` : après chaque modific
 *(si la page affiche toujours `Poste de développement` : la variable n'est pas lue ; vérifiez que `EnvParamPlugin` est en tête de `boot.plugins`, que vous avez recompilé, et que la variable est définie pour ce lancement, avec ce nom exact)*
 **Question** : qu'afficherait la page si `EnvParamPlugin` était déclaré après `WebAppContextParamPlugin` ? *(relisez « Les paramètres de l'application »)*
 1. Relancez **sans** la variable : la page affiche de nouveau `Environnement : Poste de développement`. Aucune variable d'environnement ne fournit le paramètre : c'est la valeur du `web.xml` qui s'applique.
-1. Dans `sample-vui.yaml`, sous `featuresConfig` de `VegaFeatures`, ajoutez après `webservices.healthcheck` le catalogue des webservices, marqué du flag `devTools` :
+1. Dans `sample-vui.yaml`, sous `featuresConfig` de `VegaFeatures`, ajoutez après `webservices.healthcheck` Swagger, l'outil qui décrit et permet d'appeler les webservices, marqué du flag `devTools` :
    ```yaml
          - webservices.healthcheck:
-         - webservices.catalog:
+         - webservices.swagger:
              __flags__: ["devTools"]
    ```
-1. Recompilez, puis relancez avec la variable d'environnement `VERTIGO_BOOT_ACTIVE_FLAGS=devTools`, et appelez [http://localhost:18080/sample/api/catalog](http://localhost:18080/sample/api/catalog) : vous devez obtenir la liste des routes REST de l'application, ici celles de la plateforme : `/catalog`, `/healthcheck/complete`, `/healthcheck/ping` et `/healthcheck/readiness`, par exemple `"Get /healthcheck/ping () -\u003e String"` (dans ce JSON, `>` et `<` sont écrits `\u003e` et `\u003c`). Au Level Socle 6, ce catalogue listera aussi vos propres webservices.
-*(si l'adresse répond `Endpoint GET /api/catalog not found` : le flag n'est pas actif ; vérifiez le nom de la variable et l'écriture exacte du flag, `devTools`, qui distingue majuscules et minuscules)*
-**Question** : pourquoi réserver ce catalogue à un flag, plutôt que de l'activer dans tous les environnements ?
-1. Remettez l'application dans son état de départ : relancez-la **sans `environmentLabel` ni `VERTIGO_BOOT_ACTIVE_FLAGS`**. La page d'accueil affiche `Environnement : Poste de développement`, et [http://localhost:18080/sample/api/catalog](http://localhost:18080/sample/api/catalog) répond `Endpoint GET /api/catalog not found` : sans le flag, le catalogue n'existe pas.
-Le YAML garde `EnvParamPlugin` et le catalogue marqué du flag : sans variable, l'application se comporte exactement comme au départ.
+1. Recompilez, puis relancez avec la variable d'environnement `VERTIGO_BOOT_ACTIVE_FLAGS=devTools`, et ouvrez dans le navigateur [http://localhost:18080/sample/api/swaggerUi](http://localhost:18080/sample/api/swaggerUi) : vous devez voir la page *MySwaggerAPI Tester*, qui liste les webservices de l'application, regroupés par classe : ici ceux de la plateforme, `HealthcheckWebServices` et `SwaggerWebServices`. Dépliez `GET /healthcheck/ping`, cliquez sur *Try it out* puis *Execute* : la réponse est `OK`. Au Level Socle 6, Swagger listera aussi vos propres webservices, et vous pourrez les appeler de la même façon.
+*(si l'adresse répond `Endpoint GET /api/swaggerUi not found` : le flag n'est pas actif ; vérifiez le nom de la variable et l'écriture exacte du flag, `devTools`, qui distingue majuscules et minuscules)*
+**Question** : pourquoi réserver Swagger à un flag, plutôt que de l'activer dans tous les environnements ? *(voir [vertigo-docs : WebServices](https://vertigo-io.github.io/vertigo-docs/#/basic/webservices), section « Sécurisation du WebService »)*
+1. Remettez l'application dans son état de départ : relancez-la **sans `environmentLabel` ni `VERTIGO_BOOT_ACTIVE_FLAGS`**. La page d'accueil affiche `Environnement : Poste de développement`, et [http://localhost:18080/sample/api/swaggerUi](http://localhost:18080/sample/api/swaggerUi) répond `Endpoint GET /api/swaggerUi not found` : sans le flag, Swagger n'existe pas.
+Le YAML garde `EnvParamPlugin` et Swagger marqué du flag : sans variable, l'application se comporte exactement comme au départ.
 
 ### Ce qu'il faut retenir
 

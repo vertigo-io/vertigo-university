@@ -79,7 +79,7 @@ modules:
       - webservices.javalin:
           apiPrefix: /api
       - webservices.healthcheck:
-      - webservices.catalog:
+      - webservices.swagger:
           __flags__: ["devTools"]
   io.vertigo.samples.support.SupportFeatures:
   io.vertigo.samples.vui.VuiFeatures:
