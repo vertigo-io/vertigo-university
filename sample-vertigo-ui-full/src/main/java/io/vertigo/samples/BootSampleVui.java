@@ -29,19 +29,26 @@ import io.vertigo.samples.support.boot.MultipartConfigInjectionHandler;
 import io.vertigo.samples.support.config.VuiVSpringWebApplicationInitializer;
 import io.vertigo.ui.boot.JettyBoot;
 import io.vertigo.ui.boot.JettyBootParams;
+import io.vertigo.ui.boot.JettyBootParamsBuilder;
 
 public final class BootSampleVui {
 
 	public static void main(final String[] args) throws Exception {
-		startServer();
+		startServer(createJettyBootParamsBuilder().build());
 	}
 
-	public static void startServer() throws Exception {
-		final JettyBootParams jettyBootParams = JettyBootParams.builder("webapp/", VuiVSpringWebApplicationInitializer.class)
+	/**
+	 * The server settings, shared by main and the tests (the tests add noJoin(), so that the server does not block them).
+	 * @return the server settings builder
+	 */
+	public static JettyBootParamsBuilder createJettyBootParamsBuilder() {
+		return JettyBootParams.builder("webapp/", VuiVSpringWebApplicationInitializer.class)
 				.withContextPath("/sample")
 				.withPort(18080)
-				.noSsl()
-				.build();
+				.noSsl();
+	}
+
+	public static void startServer(final JettyBootParams jettyBootParams) throws Exception {
 		JettyBoot.startServer(jettyBootParams, (context) -> {
 			final MultipartConfigInjectionHandler multipartConfigInjectionHandler = new MultipartConfigInjectionHandler();
 			multipartConfigInjectionHandler.setHandler(context);

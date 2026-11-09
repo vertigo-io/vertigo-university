@@ -28,6 +28,7 @@ Série Socle (le fonctionnement de l'application : configuration, génération, 
 - [Level Socle 5 - Modules et packages](./LevelSocle5.md)
 - [Level Socle 6 - Services, DAO et webservices](./LevelSocle6.md)
 - [Level Socle 7 - La transaction et les erreurs](./LevelSocle7.md)
+- [Level Socle 8 - Tester une fonction métier](./LevelSocle8.md)
 
 Série UI (les écrans Vertigo-UI) :
 

@@ -49,6 +49,4 @@ Une assertion vérifie le contrat du code : si elle échoue, c'est une erreur de
 - On n'intercepte pas les exceptions : la plateforme le fait.
 - `VUserException` est une erreur pour l'utilisateur (422 et son message) ; tout le reste est une erreur système (500, tracée pour le développeur), dont les erreurs d'assertion.
 
-# Fin de la série Socle
-
-Suite : la série UI, à partir du [Level Ui 1 - Liste simple](./LevelUi1.md).
+# [Suite : Level Socle 8 - Tester une fonction métier](./LevelSocle8.md)
