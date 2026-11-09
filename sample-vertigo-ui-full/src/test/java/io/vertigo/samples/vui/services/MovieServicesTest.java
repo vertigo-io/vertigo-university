@@ -4,19 +4,17 @@ import javax.inject.Inject;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 
 import io.vertigo.core.lang.VUserException;
 import io.vertigo.datamodel.data.model.DtList;
-import io.vertigo.samples.support.SampleVuiTestExtension;
+import io.vertigo.samples.support.AbstractSampleVuiTestCase;
 import io.vertigo.samples.vui.domain.MovieDisplay;
 
 /**
  * Integration tests of the movies business functions: the application is started with its demo data,
  * and the tests call the service as the application does.
  */
-@ExtendWith(SampleVuiTestExtension.class)
-public class MovieServicesTest {
+public class MovieServicesTest extends AbstractSampleVuiTestCase {
 
 	private static final long GERMANY_ID = 250L;
 	private static final long JAPAN_ID = 392L;
