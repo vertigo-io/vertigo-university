@@ -17,6 +17,12 @@
 		<param-value>/webapp/META-INF/sample-vui.yaml</param-value>
 	</context-param>
 
+	<!-- Application parameter, read with the ParamManager (see LevelSocle1.1) -->
+	<context-param>
+		<param-name>environmentLabel</param-name>
+		<param-value>Poste de développement</param-value>
+	</context-param>
+
 
 	<filter>
 		<filter-name>Character Encoding Filter</filter-name>

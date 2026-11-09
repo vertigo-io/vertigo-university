@@ -17,20 +17,30 @@
  */
 package io.vertigo.samples.vui.controllers;
 
+import javax.inject.Inject;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import io.vertigo.core.param.ParamManager;
 import io.vertigo.ui.core.ViewContext;
+import io.vertigo.ui.core.ViewContextKey;
 import io.vertigo.ui.impl.springmvc.controller.AbstractVSpringMvcController;
 
 @Controller
 @RequestMapping("/home")
 public class HomeController extends AbstractVSpringMvcController {
 
+	private static final ViewContextKey<String> environmentLabelKey = ViewContextKey.of("environmentLabel");
+
+	@Inject
+	private ParamManager paramManager;
+
 	@GetMapping("/")
 	public void initContext(final ViewContext viewContext) {
-		//dummy
+		// application parameter: from web.xml by default, see LevelSocle1.1
+		viewContext.publishRef(environmentLabelKey, paramManager.getParam("environmentLabel").getValueAsString());
 	}
 
 }
