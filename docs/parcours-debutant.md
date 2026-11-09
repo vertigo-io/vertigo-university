@@ -40,7 +40,7 @@ Chaque étape se termine par un volet **Dans votre équipe** : la même chose, r
 | E | Le premier ticket côté serveur | [Levels Socle 6 et 7](../sample-vertigo-ui/LevelSocle6.md) | une demi-journée | existante |
 | F | Tester une fonction métier | [Level Socle 8](../sample-vertigo-ui/LevelSocle8.md) | 2 heures | existante |
 | G | Les écrans | [Levels Ui 0 à 6](../sample-vertigo-ui/LevelUi0.md) | 3 à 4 jours | existante |
-| H | La sécurité et les droits | la documentation, Mars, [sample-account](../sample-account) à lire | une demi-journée | **à compléter** |
+| H | La sécurité et les droits | la documentation (section « Mise en œuvre » de la page Sécurité), Mars et [sample-account](../sample-account) à lire | une demi-journée | documentation |
 | I | Les règles de l'équipe | — (l'équipe : tests, CI, conventions) | au fil des premières semaines | — |
 
 Les durées sont celles de la formation seule ; le volet « Dans votre équipe » dépend de l'application.
@@ -204,7 +204,7 @@ Dans votre équipe :
 
 *Objectif : savoir où l'application contrôle les droits, et ce que votre code doit contrôler.*
 
-Formation : **à compléter**. En attendant, la documentation et deux exemples à lire.
+Formation : par la documentation, sans exercice dédié. Commencez par la section « Mise en œuvre » de [vertigo-docs : Sécurité](https://vertigo-io.github.io/vertigo-docs/#/basic/securite), qui donne les gestes dans l'ordre et renvoie au détail ; puis les deux exemples à lire (voir « À lire » plus bas).
 
 Les notions :
 
@@ -226,7 +226,7 @@ L'application support n'active pas `webservices.security` : ses webservices sont
 
 À lire :
 
-- [vertigo-docs : Sécurité](https://vertigo-io.github.io/vertigo-docs/#/basic/securite) (les principes) et [Account](https://vertigo-io.github.io/vertigo-docs/#/extensions/account) (la configuration et l'API) ; pour les webservices, [WebServices](https://vertigo-io.github.io/vertigo-docs/#/basic/webservices) (les sections « Sécurisation du WebService », « Rate Limiting » et, pour `AuthorizationWebFilter`, « Servlet Filters vs HandlerChain »)
+- [vertigo-docs : Sécurité](https://vertigo-io.github.io/vertigo-docs/#/basic/securite) (les principes et la section « Mise en œuvre ») et [Account](https://vertigo-io.github.io/vertigo-docs/#/extensions/account) (la configuration et l'API) ; pour les webservices, [WebServices](https://vertigo-io.github.io/vertigo-docs/#/basic/webservices) (les sections « Sécurisation du WebService », « Rate Limiting » et, pour `AuthorizationWebFilter`, « Servlet Filters vs HandlerChain »)
 - [sample-account](../sample-account), sur le même modèle de films : `auth-config.json` (une autorisation globale, et l'opération `read` de `Movie` avec sa règle sur le pays) ; `UserServicesImpl.login`, qui accorde les droits et la clé de périmètre `couId` ; `AccountSample.testSecurity`, qui calcule le filtre de sécurité d'une recherche ; les classes générées `GlobalAuthorizations` et `SecuredEntities`. C'est un exemple minimal : les droits y sont écrits en dur, et accordés sans tester le résultat du login ; dans une application, on vérifie d'abord le login (voir la doc Account)
 - [Mars](https://github.com/vertigo-io/vertigo-mars), l'application de démonstration, en aperçu : deux fichiers de sécurité (`base-auth-config.json`, `hr-auth-config.json`), chacun chargé par la classe `Features` de son module ; des controllers annotés `@Secured` ; des services qui appliquent les contrôles et les filtres (`BaseServices`, et `EquipmentServices` pour les trois filtres)
 
