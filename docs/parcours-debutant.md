@@ -38,7 +38,7 @@ Chaque étape se termine par un volet **Dans votre équipe** : la même chose, r
 | C | Les requêtes : les tâches | [Level Socle 4](../sample-vertigo-ui/LevelSocle4.md) | 2 heures | existante |
 | D | L'organisation du code : modules et packages | [Level Socle 5](../sample-vertigo-ui/LevelSocle5.md) | 2 heures | existante |
 | E | Le premier ticket côté serveur | [Levels Socle 6 et 7](../sample-vertigo-ui/LevelSocle6.md) | une demi-journée | existante |
-| F | Tester une fonction métier | Level Socle 8 | une demi-journée | **à créer** |
+| F | Tester une fonction métier | [Level Socle 8](../sample-vertigo-ui/LevelSocle8.md) | 2 heures | existante |
 | G | Les écrans | [Levels Ui 0 à 6](../sample-vertigo-ui/LevelUi0.md) | 3 à 4 jours | existante |
 | H | La sécurité et les droits | la documentation, Mars, [sample-account](../sample-account) à lire | une demi-journée | **à compléter** |
 | I | Les règles de l'équipe | — (l'équipe : tests, CI, conventions) | au fil des premières semaines | — |
@@ -129,11 +129,14 @@ Formation : [Level Socle 5 - Modules et packages](../sample-vertigo-ui/LevelSocl
 
 Concepts : Module, Component ; [vertigo-docs : Composants](https://vertigo-io.github.io/vertigo-docs/#/basic/composants).
 
+Pour une application réelle, la section [La structure d'un vrai projet](parcours-demarrage.md#la-structure-dun-vrai-projet) du parcours Démarrage fait le tour d'un projet : les modules et leurs classes `Features`, la webapp, le fichier YAML, les définitions Studio, les fichiers de sécurité, et les surcharges de Vertigo.
+
 Dans votre équipe :
 
 - [ ] Lister les modules de l'application (ses classes `Features`) et le domaine métier de chacun
 - [ ] Faire la visite guidée du code avec un membre de l'équipe : où vivent les définitions, le code généré, la configuration, les écrans ; la séparation back-office / front-office quand elle existe
 - [ ] Retrouver où sont scannés les controllers (`@ComponentScan` de la configuration SpringMVC)
+- [ ] Repérer les surcharges de Vertigo du projet (`src/main/java/io/vertigo/...`, `src/main/resources/io/vertigo/...`), et la raison de chacune
 
 **Critère d'autonomie** : vous situez n'importe quel type de code (objet, DAO, service, controller, webservice, définition) et vous expliquez le découpage de l'application.
 
@@ -162,7 +165,7 @@ Dans votre équipe :
 
 *Objectif : écrire le test qui garantit une fonction métier.*
 
-Formation : Level Socle 8 - Tester une fonction métier (**à créer**). Le test démarre le node de l'application, sur une base de test, appelle un service, et vérifie son résultat métier : les films d'un pays, et l'erreur prévue pour un pays sans film.
+Formation : [Level Socle 8 - Tester une fonction métier](../sample-vertigo-ui/LevelSocle8.md). Le test démarre l'application, avec sa base et ses données de démonstration, appelle un service, et vérifie son résultat métier : les films d'un pays, et l'erreur prévue pour un pays sans film.
 
 Pourquoi des tests d'intégration ? Ce qui a de la valeur, et qui reste stable quand le code évolue, c'est la fonction métier : le test l'appelle comme l'application l'appelle, avec une vraie base, plutôt que de vérifier le détail de son code.
 
@@ -215,14 +218,15 @@ Les notions :
 
 - La feature `webservices.security` de `VegaFeatures` fait exiger un utilisateur connecté par chaque webservice. Une route publique le déclare explicitement, par `@AnonymousAccessAllowed`, souvent avec `@SessionLess`, pour ne pas créer de session à chaque appel.
 - `@Secured("…")`, sur la classe ou sur la méthode, exige une autorisation ; les contrôles sur les données restent dans le service, comme pour un écran.
-- Les webservices d'outillage (Swagger, catalogue, pages de test) sont placés sous un flag, actif seulement en développement et en recette (voir le [Level Socle 1.1](../sample-vertigo-ui/LevelSocle1.1.md)) : ils exposent toute l'API.
+- Le filtre `AuthorizationWebFilter`, déclaré dans le `web.xml`, protège des adresses entières par une autorisation globale : chaque paramètre du filtre porte le nom d'une autorisation, préfixé par `Atz` (par exemple `AtzVoirSwagger`), et pour valeur les adresses qu'elle protège (par exemple `/api/swagger*;/api/catalog*`). Sans cette autorisation, l'appel est refusé (erreur 403). Il protège ainsi d'un coup tout un groupe de webservices, d'administration par exemple.
+- Les webservices d'outillage (Swagger, catalogue, pages de test) exposent toute l'API : ils sont placés sous un flag, actif seulement en développement et en recette (voir le [Level Socle 1.1](../sample-vertigo-ui/LevelSocle1.1.md)), ou protégés par une autorisation avec `AuthorizationWebFilter`.
 - Les routes publiques se protègent des abus par la limitation de débit (`rateLimiting` et `webservices.rateLimiting`), dont les seuils viennent en général de variables d'environnement.
 
 L'application support n'active pas `webservices.security` : ses webservices sont ouverts, ce qui convient à un exercice local, jamais à une application livrée.
 
 À lire :
 
-- [vertigo-docs : Sécurité](https://vertigo-io.github.io/vertigo-docs/#/basic/securite) (les principes) et [Account](https://vertigo-io.github.io/vertigo-docs/#/extensions/account) (la configuration et l'API) ; pour les webservices, [WebServices](https://vertigo-io.github.io/vertigo-docs/#/basic/webservices) (les sections « Sécurisation du WebService » et « Rate Limiting »)
+- [vertigo-docs : Sécurité](https://vertigo-io.github.io/vertigo-docs/#/basic/securite) (les principes) et [Account](https://vertigo-io.github.io/vertigo-docs/#/extensions/account) (la configuration et l'API) ; pour les webservices, [WebServices](https://vertigo-io.github.io/vertigo-docs/#/basic/webservices) (les sections « Sécurisation du WebService », « Rate Limiting » et, pour `AuthorizationWebFilter`, « Servlet Filters vs HandlerChain »)
 - [sample-account](../sample-account), sur le même modèle de films : `auth-config.json` (une autorisation globale, et l'opération `read` de `Movie` avec sa règle sur le pays) ; `UserServicesImpl.login`, qui accorde les droits et la clé de périmètre `couId` ; `AccountSample.testSecurity`, qui calcule le filtre de sécurité d'une recherche ; les classes générées `GlobalAuthorizations` et `SecuredEntities`. C'est un exemple minimal : les droits y sont écrits en dur, et accordés sans tester le résultat du login ; dans une application, on vérifie d'abord le login (voir la doc Account)
 - [Mars](https://github.com/vertigo-io/vertigo-mars), l'application de démonstration, en aperçu : deux fichiers de sécurité (`base-auth-config.json`, `hr-auth-config.json`), chacun chargé par la classe `Features` de son module ; des controllers annotés `@Secured` ; des services qui appliquent les contrôles et les filtres (`BaseServices`, et `EquipmentServices` pour les trois filtres)
 
@@ -231,7 +235,7 @@ Dans votre équipe :
 - [ ] Retrouver le fichier de sécurité de l'application (depuis les classes `Features`, qui le chargent), et comment l'équipe regroupe les autorisations (profils, périmètres)
 - [ ] Vous connecter avec deux profils différents, et comparer ce que chacun voit
 - [ ] Repérer, dans un service, où sont appliqués les contrôles et les filtres de sécurité
-- [ ] Repérer comment sont protégés les webservices de l'application : `webservices.security`, les routes publiques (`@AnonymousAccessAllowed`), les `@Secured`, les flags des outils de développement, la limitation de débit
+- [ ] Repérer comment sont protégés les webservices de l'application : `webservices.security`, les routes publiques (`@AnonymousAccessAllowed`), les `@Secured`, les adresses protégées par `AuthorizationWebFilter` dans le `web.xml`, les flags des outils de développement, la limitation de débit
 
 **Critère d'autonomie** : pour un nouvel écran ou un nouveau service, vous dites quels contrôles il faut, et votre ticket est validé en code review sans remarque de sécurité.
 
