@@ -21,7 +21,7 @@ Ce parcours est une **liste de formations à suivre dans l'ordre** : chaque form
   - [Pourquoi Vertigo ?](https://vertigo-io.github.io/vertigo-docs/#/intro/why) et [Philosophie](https://vertigo-io.github.io/vertigo-docs/#/intro/philosophie) : les objectifs et les principes de conception
   - [Concepts](https://vertigo-io.github.io/vertigo-docs/#/basic/concepts) : le glossaire (Module, Component, Manager et Plugin, SmartType, DtObject, Task, `@Transactional`, KSP et KPR)
   - [Règles de codage](https://vertigo-io.github.io/vertigo-docs/#/intro/regles-codage)
-- Les samples se compilent sur place (`mvn compile` dans leur dossier) : leur parent `io.vertigo:vertigo-samples`, non publié sur Maven Central, est résolu par le `pom.xml` à la racine du dépôt. Pour compiler une copie de sample placée **hors** du dépôt, installez d'abord ce parent dans votre repo local Maven (`mvn -N install` à la racine). Votre propre projet a pour parent `io.vertigo:vertigo-parent`, publié sur Maven Central : rien à installer
+- Les samples se compilent sur place, dans le dépôt : leur parent `io.vertigo:vertigo-samples`, non publié sur Maven Central, est résolu par le `pom.xml` à la racine du dépôt. Pour compiler une copie de sample placée **hors** du dépôt, installez d'abord ce parent dans votre repo local Maven. Votre propre projet a pour parent `io.vertigo:vertigo-parent`, publié sur Maven Central : rien à installer
 
 ## Ce que vous saurez faire à la fin
 
@@ -68,7 +68,6 @@ Le **node** est l'unité de base d'une application Vertigo : c'est le processus 
 
 - le port du serveur est un paramètre de `JavalinFeatures` (`Param.of("port", …)`) : à changer pour faire démarrer plusieurs samples en parallèle
 - le node Javalin s'arrête proprement à la fermeture du stdin — pratique pour les scripts
-- lancement en ligne de commande : `mvn compile` puis `java` avec le classpath produit par `dependency:build-classpath` ; si le classpath dépasse la longueur de ligne (Windows), le passer par un fichier d'arguments Java (`@fichier`) — **dans l'argfile, remplacez `\` par `/`** : le backslash est un caractère d'échappement dans les `@argfile` Java, un classpath Windows non converti casse le lancement silencieusement (`Could not find or load main class` alors que la classe existe)
 
 ### Etape 2 - Le premier webservice REST (Vega)
 
@@ -112,7 +111,7 @@ Studio est l'environnement de modélisation propre à Vertigo : vous déclarez v
    - `studio-config.yaml` : la configuration de la génération (package du projet, répertoire cible, SGBD cible `H2`)
    - `src/main/resources/application.kpr` : la liste des fichiers de définitions — **les objets sont dans les `.ksp`** : `domains.ksp` (les domaines, c'est-à-dire les types des champs), `model.ksp` (les objets et leurs associations), `dao.ksp` (les requêtes SQL nommées ; vide dans ce sample)
    - `src/main/javagen/` : le code généré — classes du domaine (`Movie`, `Actor`…), DAO (`MovieDAO`…), définitions (`DtDefinitions`), SQL de création de base (`sqlgen/crebas.sql`)
-2. Lancer le runner `io.vertigo.samples.dao.run.Studio` (classe main, **à lancer depuis la racine du projet** : il lit `studio-config.yaml` en chemin relatif) : `mvn compile` du module, puis `java` avec le classpath du module (cf. étape 1), et observer la régénération — **sur une copie du sample**, placée à côté dans le dépôt (par exemple `sample-dao-copie/`, pour que son parent se résolve par `../pom.xml`) : lancer le runner sur le sample lui-même réécrit les fichiers générés suivis par git
+2. Lancer le runner `io.vertigo.samples.dao.run.Studio` (classe main, **à lancer depuis la racine du projet** : il lit `studio-config.yaml` en chemin relatif), et observer la régénération — **sur une copie du sample**, placée à côté dans le dépôt (par exemple `sample-dao-copie/`, pour que son parent se résolve par `../pom.xml`) : lancer le runner sur le sample lui-même réécrit les fichiers générés suivis par git
 3. Dans votre projet, **mettre en place la génération** (pom de `sample-dao` en référence) :
    - copier le runner `Studio` dans votre projet (une classe main de quelques lignes qui appelle `VertigoStudioMda`)
    - ajouter la dépendance `io.vertigo:vertigo-studio`

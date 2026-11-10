@@ -39,7 +39,7 @@ Studio génère la méthode qui exécute la tâche. Il la place dans le **DAO de
 *(même requête que `TkGetMoviesDisplay`, avec `join` au lieu de `left join`, et la condition `where mov.cou_id = #couId#` ; en entrée `couId` de domain `DoId` et de cardinalité `"1"` ; en sortie `moviesDisplay` de domain `DoDtMovieDisplay` et de cardinalité `"*"`)*
 1. Régénérez le code *(voir le Level Socle 2)* et retrouvez la méthode `getMoviesDisplayByCountry` *(son paramètre `couId` est précédé d'une annotation générée, `@TaskInput`, qui décrit le paramètre de la tâche)*.
 **Question** : dans quelle classe Studio l'a-t-il placée, et pourquoi ?
-1. Lancez `mvn compile` : le projet compile. Le service appellera cette méthode au Level Socle 6.
+1. Recompilez : le projet compile. Le service appellera cette méthode au Level Socle 6.
 
 ### Ce qu'il faut retenir
 

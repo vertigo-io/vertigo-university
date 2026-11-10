@@ -213,6 +213,8 @@ Les notions :
 - **Les autorisations** se déclarent dans un fichier JSON : les autorisations **globales** (l'accès à une fonction : un écran, un bouton, un traitement), et les **opérations sur une entité** (lire, modifier…), avec des **règles** qui disent sur quelles lignes elles portent (par exemple `couId=${couId}` : les films du pays de l'utilisateur, `${couId}` étant la valeur de la clé de périmètre `couId` de sa session). Quand la génération des autorisations est activée, Studio génère les constantes correspondantes.
 - **Le contrôle** se fait côté serveur, dans le code : l'accès à une fonction (`@Secured` sur un controller ou un webservice, `AuthorizationUtil.assertAuthorizations` dans un service), l'opération sur une donnée (`AuthorizationUtil.assertOperations`), et le **filtre de sécurité** d'une liste, calculé à partir des règles et appliqué par le service (`getCriteriaSecurity` pour un `findAll`, `AuthorizationUtil.authorizationCriteria` passé en paramètre d'une tâche, `getSearchSecurity` pour une recherche).
 
+> **Cas courant : l'action refusée.** Un écran ou une action protégés par `@Secured("…")` répondent une erreur **403** « Forbidden action » à un utilisateur qui n'a pas l'autorisation. Les causes fréquentes : l'autorisation n'est pas accordée au profil de l'utilisateur, au login ; elle n'est pas déclarée dans le fichier de sécurité, ou n'est pas celle que demande le `@Secured` ; ou le bouton est affiché alors que l'utilisateur n'a pas le droit (`vu:authz` absent ou mal placé) : l'action n'est refusée qu'au clic. Vérifiez dans cet ordre : le fichier de sécurité, les droits accordés à la session au login, puis l'écran.
+
 **Attention:** le filtre de sécurité n'est pas automatique : une requête à laquelle le service ne l'applique pas renvoie toutes les lignes. Et masquer un bouton à l'écran ne protège rien : le contrôle doit être fait côté serveur.
 
 **Les webservices** demandent une protection de plus : ils peuvent être appelés directement, sans passer par un écran.
@@ -251,6 +253,7 @@ Dans votre équipe :
 - [ ] **CI** : ce que le CI exécute (build, tests, analyse), et comment se lit un échec
 - [ ] **Versioning** : comment l'application communique sa version
 - [ ] **Conventions** : nommage, branches, taille des pull requests, revues
+- [ ] **Base de données** : comment l'équipe fait évoluer la base (changeSets Liquibase) ; un changeSet déjà appliqué ne se modifie pas, on en ajoute un nouveau
 
 **Critère d'autonomie** : une pull request qui passe le CI et les conventions sans correction demandée.
 

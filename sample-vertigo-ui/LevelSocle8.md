@@ -55,15 +55,14 @@ Les tests partagent la même base. Un test qui enregistre ou supprime des donné
 *(une méthode annotée `@Test` ; `movieServices.getMoviesDisplayByCountry(250L)` renvoie une `DtList<MovieDisplay>` ; puis `Assertions.assertEquals(attendu, obtenu)` sur `movies.size()` et `movies.get(0).getName()` ; `Test` et `Assertions` sont dans le package `org.junit.jupiter.api`, `DtList` dans `io.vertigo.datamodel.data.model`, `MovieDisplay` dans `io.vertigo.samples.vui.domain`)*
 1. Ajoutez un second test, `testCountryWithoutMovie` : pour le Japon (`couId` 392), vérifiez que le service lève une `VUserException` dont le message est `Aucun film pour ce pays`.
 *(`Assertions.assertThrows(VUserException.class, () -> …)` vérifie que l'appel lève l'exception, et la renvoie : son message est `exception.getMessage()` ; `VUserException` est dans le package `io.vertigo.core.lang`)*
-1. Arrêtez l'application si elle est démarrée, puis lancez les tests : depuis l'IDE, *Run As > JUnit Test* sur la classe ; en ligne de commande, `mvn test` à la racine du module. Les deux tests passent : la vue JUnit de l'IDE est verte, et Maven affiche, sous `Results:`, la ligne de total `Tests run: 2, Failures: 0, Errors: 0, Skipped: 0` *(plus haut, une ligne semblable par classe de test se termine par `-- in` suivi du nom de la classe)*.
-*(si vous obtenez `Failed to bind to 0.0.0.0/0.0.0.0:18080`, puis `The forked VM terminated without properly saying goodbye` et `BUILD FAILURE` : les tests n'ont pas pu démarrer, car l'application est encore démarrée, et son port est occupé ; arrêtez-la, puis relancez les tests)*
-**Attention** : en ligne de commande, un test en échec ne fait pas échouer la commande. Le projet parent est configuré pour continuer (`testFailureIgnore`) : Maven affiche `There are test failures.`, puis termine quand même par `BUILD SUCCESS`. Lisez toujours la ligne `Tests run: …, Failures: …`.
+1. Arrêtez l'application si elle est démarrée, puis lancez les tests de la classe depuis l'IDE (*Run As > JUnit Test*). Les deux tests passent : la vue JUnit de l'IDE est verte.
+*(si vous obtenez `Failed to bind to 0.0.0.0/0.0.0.0:18080` : les tests n'ont pas pu démarrer, car l'application est encore démarrée, et son port est occupé ; arrêtez-la, puis relancez les tests)*
 1. **Observez** la console des tests : pour chaque test, les deux traces de la tâche, comme au Level Socle 6 (`Finish /execute/TkGetMoviesDisplayByCountry ...`, une pour `sql` et une pour `tasks`), avec `nbSelectedRow=1.0` pour l'Allemagne et `nbSelectedRow=0.0` pour le Japon. Le test passe par le même chemin que l'application : le service, sa transaction, la tâche et la base. Mais aucune trace de webservice : le test appelle directement le service.
 **Question** : un collègue modifie la tâche `TkGetMoviesDisplayByCountry`, régénère le code, et le filtre par pays ne fonctionne plus : la tâche renvoie tous les films. Lesquels de vos tests le signalent, et que dit chacun ?
 1. Créez la classe `io.vertigo.samples.vui.services.MovieServicesRollbackTest`, qui hérite de `AbstractSampleVuiRollbackTestCase` et reçoit aussi `MovieServices`. Ajoutez-lui un test, `testSaveMovieOfCountry` : enregistrez un film japonais, `Le Voyage de Chihiro`, de 2001, puis vérifiez que le Japon a maintenant un film, et que c'est celui-là.
 *(créez un `Movie` (package `io.vertigo.samples.vui.domain`) avec `setName`, `setYear` et `setCouId(392L)`, enregistrez-le par `movieServices.save(movie)`, puis relisez les films du Japon comme dans le premier test)*
 1. Lancez tous les tests : vous devez obtenir `Tests run: 3, Failures: 0, Errors: 0, Skipped: 0`.
-**Question** : le nouveau test ajoute un film au Japon. Pourquoi `testCountryWithoutMovie` reste-t-il vert, même s'il s'exécute après lui ? Et que se passerait-il si `MovieServicesRollbackTest` héritait de `AbstractSampleVuiTestCase` ? *(pour vérifier par l'expérience, puis remettre l'héritage d'origine : `mvn test "-Dsurefire.runOrder=alphabetical"` exécute `MovieServicesRollbackTest` avant `MovieServicesTest`)*
+**Question** : le nouveau test ajoute un film au Japon. Pourquoi `testCountryWithoutMovie` reste-t-il vert, même s'il s'exécute après lui ? Et que se passerait-il si `MovieServicesRollbackTest` héritait de `AbstractSampleVuiTestCase` ?
 
 ### Ce qu'il faut retenir
 
@@ -71,7 +70,6 @@ Les tests partagent la même base. Un test qui enregistre ou supprime des donné
 - Les tests héritent d'une classe parente fournie par le projet, qui démarre l'application une seule fois et injecte les composants (`@Inject`).
 - Un test vérifie un résultat métier précis, y compris les erreurs prévues (`assertThrows`).
 - Un test qui modifie des données s'exécute dans une transaction annulée à la fin : la base reste la même pour tous les tests.
-- En ligne de commande, `BUILD SUCCESS` ne suffit pas : lisez `Tests run: …, Failures: …`.
 
 # Fin de la série Socle
 

@@ -64,3 +64,5 @@ tr_@click.native="|goTo('@{/movie/}'+props.row.movId)|"
 ### Optionnel : Creation de l'écran de détail d'acteur
 
 1. Utiliser vos connaissances pour ajouter un lien sur la liste des rôles vers l'écran de consultation/modification des acteurs.
+
+> **Erreur courante : la donnée absente côté client.** Le lien de chaque rôle utilise son identifiant (`props.row.rolId`), qui n'est pas une colonne du tableau : il n'est donc pas envoyé au navigateur. Sans `<vu:include-data object="roles" field="rolId" />` dans le `vu:table`, le clic mène à `…/roleActor/undefined`, et le serveur répond une erreur 500, par exemple `MethodArgumentTypeMismatchException: Method parameter 'roleId': Failed to convert value of type 'java.lang.String' to required type 'java.lang.Long'; For input string: "undefined"`. Devant un `undefined`, regardez ce qui est réellement envoyé au navigateur : le `vueData` dans la source de la page, ou `VertigoUi.vueData` dans la console du navigateur. Une donnée qui n'y est pas s'ajoute par une colonne, un composant `vu:` ou un `vu:include-data`.

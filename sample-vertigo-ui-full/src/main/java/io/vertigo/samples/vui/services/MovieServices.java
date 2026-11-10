@@ -62,7 +62,9 @@ public class MovieServices implements Component {
 	public Movie getById(final Long movId) {
 		Assertion.check().isNotNull(movId);
 		//---
-		return movieDAO.get(movId);
+		final Movie movie = movieDAO.get(movId);
+		logger.debug("Titre original : {}", movie.getOriginalTitle());
+		return movie;
 	}
 
 	public DtList<Movie> getMovies(final DtListState dtListState) {

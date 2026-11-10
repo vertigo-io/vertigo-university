@@ -36,11 +36,13 @@ Pour illustrer le principe nous allons ajouter une confirmation sur l'enregistre
 3. Ajouter un message et des actions spécifique, dans le corps du composant `<vu:button-submit-confirm`
 ```Html
 <vu:slot name="actions_slot">
-<q-btn flat label="Non pas vraiment" color="primary" v-close-popup />
-<q-btn type="submit" th:formaction="@{_save}" form="myFormId" label="Oui tout à fait" color="primary" v-close-popup />
+<q-btn flat label="Non pas vraiment" color="primary" v-close-popup></q-btn>
+<q-btn type="submit" th:formaction="@{_save}" form="myFormId" label="Oui tout à fait" color="primary" v-close-popup></q-btn>
 </vu:slot>
 <span>Etes-vous certain de vouloir sauvegarder ?</span>
 ```
+
+> **Erreur courante : la balise auto-fermante.** Une balise Quasar (`q-btn`, `q-icon`…) se ferme toujours explicitement : `<q-btn …></q-btn>`, et jamais `<q-btn … />`. La page est lue par le navigateur, qui ignore le `/` final sur une balise qui n'est pas une balise HTML vide (`br`, `img`, `input`…) : la balise reste ouverte et avale ce qui la suit. Ici, le second bouton se retrouverait **à l'intérieur** du premier. Aucun message ne l'annonce : on voit seulement un rendu étrange (un élément qui disparaît, un bouton imbriqué, une action qui ne répond plus). Devant un tel rendu, cherchez d'abord une balise `q-…` fermée par `/>`. Les composants `vu:` ne sont pas concernés : ils sont transformés côté serveur avant d'arriver au navigateur.
 4. Etudier dans le composant `button-submit.html`, les différentes options pour ajouter une confirmation. Vous remarquerez qu'il y a beaucoup plus simple.
 5. Consulter la page et observer le comportement.
 

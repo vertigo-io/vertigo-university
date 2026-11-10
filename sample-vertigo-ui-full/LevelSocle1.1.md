@@ -40,7 +40,7 @@ Dans l'IDE, la variable reste enregistrée dans la configuration de lancement : 
   environmentLabel=Recette java @java.args io.vertigo.samples.BootSampleVui
   ```
 
-Le `web.xml` et le YAML sont lus depuis `target/classes` : après chaque modification, recompilez (`mvn -q compile`) avant de relancer. Avant chaque relance, arrêtez l'application (Ctrl+C, ou le bouton *Terminate* de l'IDE) : sinon le port 18080 est encore occupé.
+Le `web.xml` et le YAML sont lus depuis `target/classes` : après chaque modification, recompilez avant de relancer. Avant chaque relance, arrêtez l'application (Ctrl+C, ou le bouton *Terminate* de l'IDE) : sinon le port 18080 est encore occupé.
 
 ## Etapes
 
@@ -64,7 +64,8 @@ Le `web.xml` et le YAML sont lus depuis `target/classes` : après chaque modific
          - webservices.swagger:
              __flags__: ["devTools"]
    ```
-1. Recompilez, puis relancez avec la variable d'environnement `VERTIGO_BOOT_ACTIVE_FLAGS=devTools`, et ouvrez dans le navigateur [http://localhost:18080/sample/api/swaggerUi](http://localhost:18080/sample/api/swaggerUi) : vous devez voir la page *MySwaggerAPI Tester*, qui liste les webservices de l'application, regroupés par classe : ici ceux de la plateforme, `HealthcheckWebServices` et `SwaggerWebServices`. Dépliez `GET /healthcheck/ping`, cliquez sur *Try it out* puis *Execute* : la réponse est `OK`. Au Level Socle 6, Swagger listera aussi vos propres webservices, et vous pourrez les appeler de la même façon.
+1. Recompilez, puis relancez d'abord **sans** la variable, et ouvrez [http://localhost:18080/sample/api/swaggerUi](http://localhost:18080/sample/api/swaggerUi) : l'adresse répond `Endpoint GET /api/swaggerUi not found`, et le démarrage n'a rien signalé. La feature est déclarée, mais elle n'est chargée que si son flag est actif. C'est voulu : les flags gèrent ce qui varie d'un environnement ou d'un node à l'autre (un outil de développement, un node dédié aux traitements batch…). Quand une fonction manque dans un environnement, regardez d'abord les flags actifs : un oubli est possible, mais l'absence peut aussi être voulue.
+1. Relancez avec la variable d'environnement `VERTIGO_BOOT_ACTIVE_FLAGS=devTools`, et ouvrez dans le navigateur [http://localhost:18080/sample/api/swaggerUi](http://localhost:18080/sample/api/swaggerUi) : vous devez voir la page *MySwaggerAPI Tester*, qui liste les webservices de l'application, regroupés par classe : ici ceux de la plateforme, `HealthcheckWebServices` et `SwaggerWebServices`. Dépliez `GET /healthcheck/ping`, cliquez sur *Try it out* puis *Execute* : la réponse est `OK`. Au Level Socle 6, Swagger listera aussi vos propres webservices, et vous pourrez les appeler de la même façon.
 *(si l'adresse répond `Endpoint GET /api/swaggerUi not found` : le flag n'est pas actif ; vérifiez le nom de la variable et l'écriture exacte du flag, `devTools`, qui distingue majuscules et minuscules)*
 **Question** : pourquoi réserver Swagger à un flag, plutôt que de l'activer dans tous les environnements ? *(voir [vertigo-docs : WebServices](https://vertigo-io.github.io/vertigo-docs/#/basic/webservices), section « Sécurisation du WebService »)*
 1. Remettez l'application dans son état de départ : relancez-la **sans `environmentLabel` ni `VERTIGO_BOOT_ACTIVE_FLAGS`**. La page d'accueil affiche `Environnement : Poste de développement`, et [http://localhost:18080/sample/api/swaggerUi](http://localhost:18080/sample/api/swaggerUi) répond `Endpoint GET /api/swaggerUi not found` : sans le flag, Swagger n'existe pas.

@@ -125,6 +125,7 @@ Nous avons préparer le Controller, passont à la vue.
 </div>
 ```
 3. Consulter la page et observer le comportement.
+*(si la page répond une erreur 500, avec dans la console `java.util.NoSuchElementException: No value present` sur l'appel de `searchMovies` : le flag `search` n'est pas actif ; `MovieServices` reçoit le client de recherche en `Optional<MovieIndexSearchClient>`, vide quand la feature de recherche n'est pas chargée)*
 
 # [Suite : Level Ui 4 - Tableaux éditables](./LevelUi4.md)
 

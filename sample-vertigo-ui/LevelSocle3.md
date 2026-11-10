@@ -49,11 +49,15 @@ Un SmartType porte tout ce qui caractérise la donnée :
    ```
      field originalTitle {domain: DoLabelLong label: "Titre original" }
    ```
+1. **Erreur courante : l'oubli de régénération.** Avant de régénérer, utilisez le nouveau champ : dans `MovieServices.getById`, lisez le film dans une variable `movie`, tracez son titre original (`logger.debug("Titre original : {}", movie.getOriginalTitle());`), puis retournez-le. Recompilez : la compilation échoue, `getOriginalTitle()` n'existe pas dans `Movie` *(sous Eclipse : `The method getOriginalTitle() is undefined for the type Movie` ; avec javac ou Maven : `cannot find symbol`, `symbol: method getOriginalTitle()`, `location: variable movie of type io.vertigo.samples.vui.domain.Movie`)*.
+   Le champ existe dans le modèle (`model.ksp`), mais pas encore dans le code généré (`Movie.java`) : modifier le modèle ne suffit pas, il faut régénérer. Gardez cette ligne : elle compilera après la régénération.
 1. Régénérez le code *(voir le Level Socle 2)*, puis **observez** le résultat :
    - dans `Movie.java`, le getter `getOriginalTitle()`, annoté `@Field(smartType = "STyLabelLong", label = "Titre original")` ;
    - dans `DtDefinitions`, le champ `originalTitle` de `MovieFields` ;
    - dans `sqlgen/crebas.sql`, la colonne `ORIGINAL_TITLE VARCHAR(500)` de la table `MOVIE`.
-1. Recompilez le projet (`mvn -q compile`, voir le [README](./README.md#lancer-une-classe-main)), puis relancez l'application : elle démarre sans erreur. La base est recréée à chaque démarrage à partir de `crebas.sql` : elle a maintenant la nouvelle colonne.
+1. Recompilez le projet, puis relancez l'application : elle démarre sans erreur. La base est recréée à chaque démarrage à partir de `crebas.sql` : elle a maintenant la nouvelle colonne.
+
+> **Dans un vrai projet : la base ne se recrée pas.** Elle évolue par des changeSets Liquibase. Après une régénération, la différence du `crebas.sql` généré se recopie dans un nouveau changeSet : le changelog référence cette copie, jamais le `crebas.sql` généré, qui change à chaque génération. Sans ce changeSet, l'exécution échoue sur une colonne inexistante. Et un changeSet déjà appliqué ne se modifie pas : on en ajoute un nouveau.
 
 ### Ce qu'il faut retenir
 

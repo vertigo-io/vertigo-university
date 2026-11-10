@@ -7,7 +7,7 @@ Nous allons construire le boot web minimal d'un node Vertigo-UI : le node démar
 - déclarer les features dont ce node a besoin ;
 - créer une page dans le layout, et le controller qui la rend.
 
-**Prérequis** : le module se compile sur place (`mvn compile` dans son dossier) — son parent `io.vertigo:vertigo-samples`, non publié sur Maven Central, est résolu par le `pom.xml` à la racine du dépôt. Pour compiler une copie placée hors du dépôt, installez d'abord ce parent (`mvn -N install` à la racine).
+**Prérequis** : le module se compile sur place, dans le dépôt — son parent `io.vertigo:vertigo-samples`, non publié sur Maven Central, est résolu par le `pom.xml` à la racine du dépôt. Pour compiler une copie placée hors du dépôt, installez d'abord ce parent dans votre repo local Maven.
 
 ## Deux façons de faire l'exercice
 
@@ -214,7 +214,7 @@ public class HomeController extends AbstractVSpringMvcController {
 ## Etapes : voie rapide
 
 1. Ajoutez les briques 1 à 4, sans lancer le node entre deux briques.
-1. Recompilez le projet (automatique sous Eclipse, sinon `mvn compile`), puis lancez `BootSampleUiHello`.
+1. Recompilez le projet, puis lancez `BootSampleUiHello`.
 1. Ouvrez [http://localhost:18081/uihello/home/](http://localhost:18081/uihello/home/) dans le navigateur (ou `curl`) : vous devez obtenir **200** et le contenu `Hello Vertigo-UI !!` dans la page rendue, dans le layout fourni.
 *(si l'initialisation échoue avec `java.lang.NullPointerException: node has not been started` : le listener manque dans `web.xml` (brique 1) ;*
 *avec `No qualifying bean of type 'io.vertigo.datastore.kvstore.KVStoreManager'` : la brique 2 manque ;*
@@ -225,7 +225,7 @@ public class HomeController extends AbstractVSpringMvcController {
 
 ## Etapes : voie brique par brique
 
-Après chaque brique, recompilez le projet (automatique sous Eclipse, sinon `mvn compile`) puis relancez `BootSampleUiHello`. Le node ne démarre que lorsque toutes ses dépendances sont là : à chaque lancement, l'erreur obtenue montre ce qui manque encore.
+Après chaque brique, recompilez le projet puis relancez `BootSampleUiHello`. Le node ne démarre que lorsque toutes ses dépendances sont là : à chaque lancement, l'erreur obtenue montre ce qui manque encore.
 
 1. Ajoutez la **brique 1**, puis lancez. Jetty démarre, puis l'initialisation échoue avec :
 `No qualifying bean of type 'io.vertigo.datastore.kvstore.KVStoreManager'`.
