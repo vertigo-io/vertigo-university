@@ -23,6 +23,8 @@ L'application déclare ses propres classes `Features`, à côté de celles de la
 
 Un composant n'existe dans le node que s'il est enregistré dans un module. C'est ce qui permet de l'injecter (`@Inject`) dans un autre composant : un composant manquant fait échouer le démarrage, avec un message qui dit quoi et pour qui.
 
+> **Dans un vrai projet : la découverte automatique.** Ce sample déclare ses composants un par un, pour que vous voyiez le mécanisme. Dans une application réelle (Mars, par exemple), la classe `Features` d'un module hérite de `DefaultUiModuleFeatures` (ou de `ModuleDiscoveryFeatures` pour un module sans écran) : elle enregistre automatiquement tous les composants de son package et de ses sous-packages, c'est-à-dire les classes qui implémentent `Component`. Un nouveau service ou webservice n'y est pas déclaré : il suffit de le créer dans le bon package. La classe `Features` ne déclare en dur que les composants optionnels, comme ceux de la recherche ici : elle les exclut de la découverte (`@NotDiscoverable`) et les ajoute dans une méthode `@Feature`, que le YAML active.
+
 Les controllers sont à part : ce ne sont pas des composants Vertigo, mais des controllers SpringMVC. `VuiVSpringWebConfig` les trouve par `@ComponentScan("io.vertigo.samples.vui.controllers")` : SpringMVC les cherche dans ce package (sous-packages compris). Un controller placé ailleurs n'est pas trouvé.
 
 ### A connaitre : Le pattern de packages
@@ -67,8 +69,8 @@ Le module `support` a les siens : `boot` (les initializers), `config` (les Smart
 
 ### Ce qu'il faut retenir
 
-- Un module de l'application est une classe `Features`, citée dans le YAML : elle enregistre ses définitions et ses composants.
+- Un module de l'application est une classe `Features`, citée dans le YAML : elle enregistre ses définitions et ses composants, un par un dans ce sample, par découverte automatique de son package dans un vrai projet.
 - Les packages suivent un pattern : `controllers`, `services`, `webservices`, et les packages générés `domain`, `dao`, `search`.
-- Tout nouveau composant s'enregistre dans la classe `Features` de son module : sinon le démarrage échoue, avec un message qui nomme le composant manquant et celui qui l'attend.
+- Dans ce sample, tout nouveau composant s'enregistre dans la classe `Features` de son module : sinon le démarrage échoue, avec un message qui nomme le composant manquant et celui qui l'attend. Dans un vrai projet, il suffit de le créer dans le package du module.
 
 # [Suite : Level Socle 6 - Services, DAO et webservices](./LevelSocle6.md)

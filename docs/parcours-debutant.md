@@ -134,6 +134,7 @@ Pour une application réelle, la section [La structure d'un vrai projet](parcour
 Dans votre équipe :
 
 - [ ] Lister les modules de l'application (ses classes `Features`) et le domaine métier de chacun
+- [ ] Dans le fichier YAML, repérer les features optionnelles des modules de l'application (recherche, jobs…) et leurs flags, et les paramètres que les services lisent dans le `ParamManager`
 - [ ] Faire la visite guidée du code avec un membre de l'équipe : où vivent les définitions, le code généré, la configuration, les écrans ; la séparation back-office / front-office quand elle existe
 - [ ] Retrouver où sont scannés les controllers (`@ComponentScan` de la configuration SpringMVC)
 - [ ] Repérer les surcharges de Vertigo du projet (`src/main/java/io/vertigo/...`, `src/main/resources/io/vertigo/...`), et la raison de chacune

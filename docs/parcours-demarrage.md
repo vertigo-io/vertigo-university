@@ -83,18 +83,20 @@ Un webservice Vega est un composant (`implements WebServices`) dont les méthode
 3. Dans votre projet, publier `GET /movies/` et `GET /movies/{id}` de la même façon, en reprenant de `sample-vega`. Le code provisoire va **dans un package à part** (par exemple `….mock`) ; seul le webservice, qui sera conservé, va dans `….webservices` :
    - `Movie` : l'objet, **avec les champs `movId` (un `Long`) et `name`** — les noms et le type qu'il aura dans le modèle de l'étape 3 (l'identifiant est préfixé par le trigramme de l'objet). Dans `sample-vega`, l'identifiant est un `int` : ne le reprenez pas tel quel
    - `VegaDefinitionProvider` : la définition de `Movie` (`DtMovie`) et de ses SmartTypes, avec les mêmes noms de champs ; nommez les SmartTypes comme ceux que Studio générera (`STyId`, `STyLabel`) ; le provider s'enregistre par `addDefinitionProvider`
-   - `MovieDAO` : quelques films gardés en mémoire
+   - `MockMovieDAO` : quelques films gardés en mémoire (un composant : `implements Component`). Ne le nommez pas `MovieDAO` : c'est le nom du DAO que Studio générera à l'étape 3 dans le même module, et deux composants d'un module ne peuvent pas porter le même nom
    - `MovieWebServices`, dans `….webservices`
-4. Enregistrer ces composants dans une classe **`com.example.cinema.CinemaFeatures`** : c'est le module de votre application, qui regroupe ses composants. Contrairement aux samples, qui les déclarent directement dans la configuration (`ModuleConfig.builder(…).addComponent(…)`), un vrai projet les range dans une telle classe : le fichier YAML n'a alors qu'à la citer (voir `cinema.yaml`). Sa forme (cf. `SupportFeatures` de [sample-vertigo-ui](../sample-vertigo-ui)) :
-   - `public class CinemaFeatures extends Features<CinemaFeatures>`, avec un constructeur qui appelle `super("cinema")`
-   - la méthode `buildFeatures()`, qui enregistre les composants : `getModuleConfigBuilder().addDefinitionProvider(VegaDefinitionProvider.class).addComponent(MovieWebServices.class)`
+4. Déclarer le module de votre application : une classe **`com.example.cinema.CinemaFeatures`**, à la racine de votre package. Comme dans un vrai projet, elle **découvre** elle-même les composants de son package et de ses sous-packages (les classes qui implémentent `Component`, ici `MovieWebServices` et `MockMovieDAO`) : aucun composant n'est à déclarer un par un, et le fichier YAML n'a qu'à citer cette classe (voir `cinema.yaml`). Sa forme :
+   - `public class CinemaFeatures extends ModuleDiscoveryFeatures<CinemaFeatures>`, avec un constructeur qui appelle `super("cinema")`
+   - la méthode `buildFeatures()`, qui garde la découverte et ajoute la définition provisoire : `super.buildFeatures();` puis `getModuleConfigBuilder().addDefinitionProvider(VegaDefinitionProvider.class);`
    - dans votre configuration Java : `.addModule(new CinemaFeatures().build())`
+
+   Les samples, eux, déclarent souvent leurs composants un par un (`ModuleConfig.builder(…).addComponent(…)`) : c'est utile pour voir le mécanisme d'injection, mais un vrai projet laisse la découverte faire.
 
    La configuration de l'étape 1 suffit : inutile de reprendre l'account, le KVStore ou les tokens de `sample-vega`.
 
 **Vérification** : `http://localhost:8080/movies/` affiche vos films en JSON (`movId`, `name`).
 
-**Important:** ce `Movie`, sa définition et ce `MovieDAO` écrits à la main sont **provisoires** : ils donnent un premier rendu. Dans une application Vertigo, on ne les écrit pas : l'objet et sa définition sont générés par Studio depuis le modèle (étape 3), et le DAO généré accède à la base (étape 4). Le package à part évite qu'ils entrent en conflit avec le code généré à l'étape 3, qui utilise le package `….domain`.
+**Important:** ce `Movie`, sa définition et ce `MockMovieDAO` écrits à la main sont **provisoires** : ils donnent un premier rendu. Dans une application Vertigo, on ne les écrit pas : l'objet et sa définition sont générés par Studio depuis le modèle (étape 3), et le DAO généré accède à la base (étape 4). Le package à part évite qu'ils entrent en conflit avec le code généré à l'étape 3, qui utilise le package `….domain`.
 
 **Pour comprendre** : [vertigo-docs : WebServices](https://vertigo-io.github.io/vertigo-docs/#/basic/webservices).
 
@@ -118,7 +120,16 @@ Studio est l'environnement de modélisation propre à Vertigo : vous déclarez v
 4. Dans votre projet : déclarer un `studio-config.yaml`, un `.kpr`, vos domaines et l'objet `DtMovie` dans des `.ksp` — **avec l'identifiant `movId` (domaine `DoId`) et le champ `name` (domaine `DoLabel`)**, comme le `Movie` écrit à la main à l'étape 2 : ces domaines donneront les SmartTypes `STyId` et `STyLabel`. Dans `sample-dao`, `name` utilise `DoLabelLong` : ne le recopiez pas tel quel. Puis générer
 5. Lire le code généré et **le comparer à ce que vous avez écrit à la main à l'étape 2** : le `Movie` généré porte ses champs et leurs annotations, `DtDefinitions` remplace la déclaration écrite dans `VegaDefinitionProvider`, et le `MovieDAO` généré accède à la base, dont `sqlgen/crebas.sql` crée la table
 
-**Vérification** : le code généré est présent dans `src/main/javagen`, compile et est cohérent avec votre modèle ; le node démarre toujours et `/movies/` répond encore avec le code provisoire (le code généré n'est pas encore branché).
+**Vérification** : le code généré est présent dans `src/main/javagen`, compile et est cohérent avec votre modèle.
+
+**Erreur courante : le code généré découvert avant sa configuration.** Relancez le node : il ne démarre plus, avec
+
+```
+io.vertigo.core.node.component.di.DIException: Components or params not found :entityStoreManager (referenced by movieDAO<MovieDAO>),
+	Loaded components/params : [...]
+```
+
+`CinemaFeatures` découvre tous les composants de son package, y compris le `MovieDAO` que Studio vient de générer. Ce DAO a besoin de l'`EntityStoreManager`, fourni par le DataStore, que vous n'avez pas encore configuré. Le message nomme ce qui manque (`entityStoreManager`) et qui le réclame (`movieDAO`), puis liste les composants du module. C'est l'étape 4 qui le corrige, en ajoutant le DataStore à la configuration.
 
 **Important:** le code généré ne se modifie jamais à la main : si le code est faux, c'est le modèle qui est faux. Modifier le modèle puis régénérer est le geste central du développement Vertigo.
 
@@ -141,12 +152,12 @@ Studio est l'environnement de modélisation propre à Vertigo : vous déclarez v
 4. Créer la base et ses données, avec deux initializers enregistrés dans votre configuration Java — un `ComponentInitializer` s'enregistre avec `addInitializer`, **pas** `addComponent` :
    - `com.example.cinema.boot.DataBaseInitializer` : la création de la base (le SQL généré `crebas.sql`)
    - `com.example.cinema.boot.DemoDataInitializer`, enregistré après le premier : vos films de démonstration, créés en appelant votre service (le sample, lui, les insère depuis sa classe main)
-5. Écrire un service qui liste, cherche et enregistre votre objet, et l'enregistrer dans `CinemaFeatures` avec le `MovieDAO` généré (`addComponent(MovieDAO.class)`, `addComponent(MovieServices.class, MovieServicesImpl.class)`) — `MovieServicesImpl` de `sample-dao` en référence :
+5. Écrire un service qui liste, cherche et enregistre votre objet : l'interface `MovieServices` et son implémentation `MovieServicesImpl`, dans `com.example.cinema.services`. `CinemaFeatures` le découvre, comme le `MovieDAO` généré : rien à déclarer (une interface ne doit avoir qu'une implémentation dans le module). `MovieServicesImpl` de `sample-dao` en référence :
    - `save` / `get` sur le DAO généré
    - la liste, la recherche et la pagination : des critères (`Criterions.startsWith(DtDefinitions.MovieFields.name, …)`, `Criterions.alwaysTrue()`), un `DtListState` (`DtListState.defaultOf(Movie.class)`, `withDefault`), puis `findAll(critères, listState)` (tri + pagination) et `count(critères)`
    - ces méthodes sont héritées de la classe de base `DAO` : le `MovieDAO` généré est une sous-classe vide
 6. **Remplacer le code provisoire de l'étape 2** :
-   - supprimer le package `….mock` (`Movie`, `MovieDAO`, `VegaDefinitionProvider`) et l'enregistrement du provider dans `CinemaFeatures` : les définitions viennent maintenant des `DtDefinitions` générées et de vos SmartTypes — gardé, le provider les déclarerait une deuxième fois (`this definition 'STyId' is already registered`)
+   - supprimer le package `….mock` (`Movie`, `MockMovieDAO`, `VegaDefinitionProvider`) et l'enregistrement du provider dans `CinemaFeatures` : les définitions viennent maintenant des `DtDefinitions` générées et de vos SmartTypes — gardé, le provider les déclarerait une deuxième fois (`this definition 'STyId' is already registered`)
    - `MovieWebServices` reçoit votre service par injection (`@Inject`) et l'appelle
 7. *(Optionnel)* Étudier [sample-dao-full](../sample-dao-full) (Level2→Level7, `Reprise`) : DAO personnalisés, projections, reprise par lots
 
@@ -192,7 +203,8 @@ Votre prototype tient en quelques packages. Une application Vertigo réelle suit
 **Le code Java** (`src/main/java`) part d'un package racine (Mars : `io.mars`), découpé en **modules** :
 
 - un module par domaine métier (Mars : `basemanagement`, `hr`…), et un module transverse, `support` ; un projet a parfois aussi un module d'outils de développement, activé seulement par un flag ;
-- chaque module a sa classe **`<Module>Features`**, citée dans le fichier YAML : elle enregistre les composants du module (services, DAO, webservices), ses définitions, et souvent son fichier de sécurité ;
+- chaque module a sa classe **`<Module>Features`**, citée dans le fichier YAML. Elle hérite de `DefaultUiModuleFeatures` (ou de `ModuleDiscoveryFeatures` pour un module sans écran) : comme votre `CinemaFeatures`, elle découvre les composants de son package (services, DAO, webservices), sans les déclarer un par un. Elle déclare en plus ses définitions, souvent son fichier de sécurité, et, dans des méthodes `@Feature`, les composants optionnels qu'un environnement active depuis le fichier YAML, souvent sous un flag (une recherche, un job) ;
+- les réglages des composants (délais, seuils…) ne sont pas écrits dans le code : les services les lisent dans le `ParamManager`, qui les cherche dans les variables d'environnement ou un fichier de propriétés ;
 - dans un module, un package par rôle : `controllers`, `services`, `webservices`, et selon les besoins `jobs`, `search`… ;
 - `support` porte ce qui sert à toute l'application : l'enum des SmartTypes, la session utilisateur, les initializers (`boot`), la configuration SpringMVC (`config`), le lanceur de Studio (`mda`).
 
