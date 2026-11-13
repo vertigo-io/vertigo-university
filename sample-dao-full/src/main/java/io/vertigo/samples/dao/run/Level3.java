@@ -31,7 +31,7 @@ import io.vertigo.samples.dao.services.RepriseServicesImpl;
 public class Level3 {
 
 	private final Logger LOGGER = LogManager.getLogger(this.getClass());
-	private static final Long STARWARS_ID = 3678598L;
+	private static final Long FORREST_GUMP_ID = 1000L;
 
 	@Inject
 	private MovieServices movieServices;
@@ -39,7 +39,7 @@ public class Level3 {
 	private ActorServices actorServices;
 
 	public static void main(final String[] args) {
-		final NodeConfigBuilder nodeConfigBuilder = SampleConfigBuilder.createNodeConfigBuilderWithoutCrebase();
+		final NodeConfigBuilder nodeConfigBuilder = SampleConfigBuilder.createNodeConfigBuilder();
 		nodeConfigBuilder.addModule(ModuleConfig.builder("mineDAO")
 				.addComponent(MyMovieDAO.class)
 				.addComponent(MyActorDAO.class)
@@ -68,11 +68,11 @@ public class Level3 {
 	}
 
 	void step1() {
-		LOGGER.info(movieServices.findMoviesByCriteria("Star Wars", 1977));
+		LOGGER.info(movieServices.findMoviesByCriteria("Forrest Gump", 1994));
 	}
 
 	void step2() {
-		LOGGER.info(movieServices.getActorsByMovie1(STARWARS_ID));
+		LOGGER.info(movieServices.getActorsByMovie1(FORREST_GUMP_ID));
 	}
 
 	void step3() {
@@ -81,7 +81,7 @@ public class Level3 {
 		actor.setSexe("M");
 		// ---
 		actorServices.saveActor(actor);
-		movieServices.addActorToMovie(actor.getActId(), STARWARS_ID, "Snoopy");
+		movieServices.addActorToMovie(actor.getActId(), FORREST_GUMP_ID, "Snoopy");
 	}
 
 }

@@ -31,13 +31,13 @@ public class Level4 {
 
 	private final Logger LOGGER = LogManager.getLogger(this.getClass());
 
-	private static final Long STARWARS_ID = 3678598L;
+	private static final Long FORREST_GUMP_ID = 1000L;
 
 	@Inject
 	private MovieServices movieServices;
 
 	public static void main(final String[] args) {
-		final NodeConfigBuilder nodeConfigBuilder = SampleConfigBuilder.createNodeConfigBuilderWithoutCrebase();
+		final NodeConfigBuilder nodeConfigBuilder = SampleConfigBuilder.createNodeConfigBuilder();
 		nodeConfigBuilder.addModule(ModuleConfig.builder("mineDAO")
 				.addComponent(MyMovieDAO.class)
 				.addComponent(MyActorDAO.class)
@@ -68,7 +68,7 @@ public class Level4 {
 	}
 
 	void step1() {
-		LOGGER.info(movieServices.getActorsByMovie2(STARWARS_ID));
+		LOGGER.info(movieServices.getActorsByMovie2(FORREST_GUMP_ID));
 	}
 
 	void step2() {

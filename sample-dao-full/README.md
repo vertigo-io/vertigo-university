@@ -4,8 +4,12 @@ Version complète du sample DAO : multi-tables (Movie/Actor/Role/Country), DAO c
 
 ## Démarrage
 
-- `dao.run.Reprise` : recrée la base H2 et remplit countries/actors/movies/roles
-- Puis les runners progressifs `dao.run.Level2` → `dao.run.Level7` (et `dao.run.DaoSample` pour un tour d'horizon)
+Chaque runner crée au démarrage deux bases H2 en mémoire (`DataBaseInitializer`) : aucune base n'est à préparer.
+
+- la base principale reçoit son schéma (`sqlgen/crebas.sql`) et les données de démonstration (`sql/initdata.sql`) : 20 films réels, leurs acteurs et leurs rôles, 5 pays, les mêmes que dans les autres samples ;
+- la base `mine` reçoit le seul schéma `sqlgen/crebas_mine.sql` : c'est la cible de la reprise.
+
+Les runners progressifs : `dao.run.Level2` → `dao.run.Level7` (et `dao.run.DaoSample` pour un tour d'horizon) ; `dao.run.Reprise` recopie par lots les pays, acteurs, films et rôles de la base principale vers la base `mine`.
 
 ## Contenu
 

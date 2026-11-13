@@ -43,7 +43,7 @@ public class Level6 {
 	private VTransactionManager transactionManager;
 
 	public static void main(final String[] args) {
-		final NodeConfigBuilder nodeConfigBuilder = SampleConfigBuilder.createNodeConfigBuilderWithoutCrebase();
+		final NodeConfigBuilder nodeConfigBuilder = SampleConfigBuilder.createNodeConfigBuilder();
 		nodeConfigBuilder.addModule(ModuleConfig.builder("mineDAO")
 				.addComponent(MyMovieDAO.class)
 				.addComponent(MyActorDAO.class)

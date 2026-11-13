@@ -18,14 +18,13 @@ import io.vertigo.samples.dao.boot.DataBaseInitializer;
 import io.vertigo.samples.dao.domain.DtDefinitions;
 
 public class SampleConfigBuilder {
-	public static NodeConfigBuilder createNodeConfigBuilder() {
-		// @formatter:off
-				return createNodeConfigBuilderWithoutCrebase()
-					.addInitializer(DataBaseInitializer.class);
-		// @formatter:on
-	}
 
-	public static NodeConfigBuilder createNodeConfigBuilderWithoutCrebase() {
+	/**
+	 * Two in-memory H2 databases, created at each start by the DataBaseInitializer :
+	 * the main one holds the demo data (movies, actors, roles, countries), the "mine" one is the target of the Reprise.
+	 * @return the node config builder of the sample
+	 */
+	public static NodeConfigBuilder createNodeConfigBuilder() {
 		// @formatter:off
 				return NodeConfig.builder()
 						.withBoot(BootConfig.builder()
@@ -41,12 +40,12 @@ public class SampleConfigBuilder {
 								.withC3p0(
 										Param.of("dataBaseClass", H2DataBase.class.getName()),
 										Param.of("jdbcDriver", org.h2.Driver.class.getName()),
-										Param.of("jdbcUrl", "jdbc:h2:C:/atelier/database/formation_loaded;NON_KEYWORDS=YEAR"))
+										Param.of("jdbcUrl", "jdbc:h2:mem:formation_loaded;DB_CLOSE_DELAY=-1;NON_KEYWORDS=YEAR,KEY,USER"))
 								.withC3p0(
 										Param.of("name", "mine"),
 										Param.of("dataBaseClass", H2DataBase.class.getName()),
 										Param.of("jdbcDriver", org.h2.Driver.class.getName()),
-										Param.of("jdbcUrl", "jdbc:h2:C:/atelier/database/formation_mine;NON_KEYWORDS=YEAR"))
+										Param.of("jdbcUrl", "jdbc:h2:mem:formation_mine;DB_CLOSE_DELAY=-1;NON_KEYWORDS=YEAR,KEY,USER"))
 								.build())
 						.addModule(new DataModelFeatures().build())
 						.addModule(new DataStoreFeatures()
@@ -68,49 +67,8 @@ public class SampleConfigBuilder {
 								.build())
 						.addModule(ModuleConfig.builder("aspect")
 							.addAspect(SupervisionAspect.class)
-							.build());
+							.build())
+						.addInitializer(DataBaseInitializer.class);
 		// @formatter:on
-	}
-
-	public static NodeConfigBuilder createNodeConfigBuilderRemoteDb() {
-		// @formatter:off
-			return  NodeConfig.builder()
-					.withBoot(BootConfig.builder()
-							.withLocales("fr_FR")
-							.addPlugin(ClassPathResourceResolverPlugin.class)
-						.build())
-					.addModule(new CommonsFeatures()
-							.withScript()
-							.withJaninoScript()
-							.build())
-					.addModule(new DatabaseFeatures()
-							.withSqlDataBase()
-							.withC3p0(
-									Param.of("dataBaseClass", H2DataBase.class.getName()),
-									Param.of("jdbcDriver", org.h2.Driver.class.getName()),
-									Param.of("jdbcUrl", "jdbc:postgresql://localhost:5432/formation?user=formation&password=formation"))
-							.withC3p0(
-									Param.of("dataBaseClass", H2DataBase.class.getName()),
-									Param.of("jdbcDriver", org.h2.Driver.class.getName()),
-									Param.of("jdbcUrl", "jdbc:h2:D:/atelier/database/formation_mine;NON_KEYWORDS=YEAR"))
-							.build())
-					.addModule(new DataStoreFeatures()
-							.withCache()
-							.withMemoryCache()
-							.withEntityStore()
-							.withSqlEntityStore()
-							.withSqlEntityStore(
-									Param.of("name", "mine"),
-									Param.of("connectionName", "mine"),
-									Param.of("sequencePrefix", "SEQ_"))
-							.build())
-					//----Definitions
-					.addModule( ModuleConfig.builder("ressources")
-							.addDefinitionProvider( DefinitionProviderConfig.builder(ModelDefinitionProvider.class)
-									.addDefinitionResource("kpr", "application.kpr")
-									.build())
-							.build());
-		// @formatter:on
-
 	}
 }

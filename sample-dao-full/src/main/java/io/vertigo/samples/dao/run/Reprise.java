@@ -32,7 +32,7 @@ public class Reprise {
 	private RepriseServices repriseServices;
 
 	public static void main(final String[] args) {
-		final NodeConfigBuilder nodeConfigBuilder = SampleConfigBuilder.createNodeConfigBuilderWithoutCrebase();
+		final NodeConfigBuilder nodeConfigBuilder = SampleConfigBuilder.createNodeConfigBuilder();
 		nodeConfigBuilder.addModule(ModuleConfig.builder("mineDAO")
 				.addComponent(MyMovieDAO.class)
 				.addComponent(MyActorDAO.class)

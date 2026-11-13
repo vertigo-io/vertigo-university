@@ -41,7 +41,7 @@ public class Level5 {
 	private CountryServices countryServices;
 
 	public static void main(final String[] args) {
-		final NodeConfigBuilder nodeConfigBuilder = SampleConfigBuilder.createNodeConfigBuilderWithoutCrebase();
+		final NodeConfigBuilder nodeConfigBuilder = SampleConfigBuilder.createNodeConfigBuilder();
 		nodeConfigBuilder.addModule(ModuleConfig.builder("mineDAO")
 				.addComponent(MyMovieDAO.class)
 				.addComponent(MyActorDAO.class)
@@ -70,12 +70,12 @@ public class Level5 {
 	}
 
 	void step1() {
-		LOGGER.info(movieServices.findMoviesByKsp("Star Wars", 1977));
+		LOGGER.info(movieServices.findMoviesByKsp("Forrest Gump", 1994));
 	}
 
 	void step2() {
-		final DtList<Country> countries = countryServices.getCountriesByName("U");
-		LOGGER.info(movieServices.findMoviesByKspWhereIn("Star Wars", null, countries));
+		final DtList<Country> countries = countryServices.getCountriesByName("E");
+		LOGGER.info(movieServices.findMoviesByKspWhereIn("Forrest", null, countries));
 	}
 
 }

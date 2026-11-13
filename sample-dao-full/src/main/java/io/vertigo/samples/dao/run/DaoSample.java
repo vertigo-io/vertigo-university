@@ -43,7 +43,7 @@ public class DaoSample {
 	}
 
 	void step1() {
-		LogManager.getLogger(this.getClass()).info(movieServices.getMovieById(3678598L));
+		LogManager.getLogger(this.getClass()).info(movieServices.getMovieById(1000L));
 	}
 
 }
