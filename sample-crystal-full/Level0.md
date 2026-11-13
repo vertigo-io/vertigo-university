@@ -36,7 +36,7 @@ Le modèle est décrit dans des fichiers de définitions, écrits en KSP (`src/m
 
 ## Etapes
 
-1. Installez le dépôt dans votre repo Maven local : `mvn install` à la racine du dépôt.
+1. Installez le dépôt dans votre repo Maven local, depuis sa racine.
 *(le parent des samples n'est pas publié sur Maven Central)*
 1. Lisez `SampleConfigBuilder` et repérez les Features activées par le node *(`DatabaseFeatures`, `DataStoreFeatures`… ; `ElasticSearchFeatures` et `DataFactoryFeatures` seulement avec `withSearch`, `VegaFeatures` avec `withVega`)*.
 1. Lancez `CrystalSample` *(voir le [README](./README.md#lancer-une-classe-main) pour lancer une classe main)*. Vers la fin de la console, juste avant les traces d'arrêt, vous devez voir le film Forrest Gump : `DtMovie(couId=840, imdbid=tt0109830, movId=1000, name=Forrest Gump, year=1994)`.

@@ -14,21 +14,11 @@ C'est le **corrigé** de [sample-crystal](../sample-crystal) : le même projet, 
 
 ## Lancer une classe main
 
-Toujours avec la **racine du module** `sample-crystal-full` comme répertoire de travail (`Studio` lit `studio-config.yaml` en chemin relatif).
+Toujours avec la **racine du module** `sample-crystal-full` comme répertoire de travail (`Studio` lit `studio-config.yaml` en chemin relatif). Depuis l'IDE : *Run As > Java Application* sur la classe main.
 
-- **Depuis l'IDE** : *Run As > Java Application* sur la classe main.
-- **En ligne de commande** (Git Bash, depuis la racine du module) :
-  ```
-  mvn -q compile dependency:build-classpath -Dmdep.outputFile=target/cp.txt
-  printf -- '-cp\n"%s"\n' "target/classes;$(tr '\134' '/' < target/cp.txt)" > java.args
-  java @java.args io.vertigo.samples.crystal.run.CrystalSample
-  ```
-  - le classpath est trop long pour une ligne de commande Windows : il passe par un fichier d'arguments (`java.args`, ignoré par git comme `target/`) ;
-  - dans ce fichier, les `\` sont remplacés par des `/` (`\134` est le code octal du backslash) : le backslash y est un caractère d'échappement, et un chemin Windows non converti fait échouer le lancement (classes introuvables) ;
-  - sous Linux ou macOS, le séparateur du classpath est `:` au lieu de `;` ;
-  - après chaque modification de code ou régénération : `mvn -q compile` ;
-  - les classes console s'arrêtent seules ; les serveurs web (`CrystalSearchSample`, `Level4`) s'arrêtent avec Ctrl+C. Après une erreur au démarrage, une classe console peut aussi rester bloquée : arrêtez-la de la même façon.
-- **Le démarrage d'un serveur** est terminé quand les traces s'arrêtent sur la dernière insertion de données (`INSERT INTO ROLE ...`) : un appel lancé avant peut répondre 404 ou 500, il suffit de le relancer.
+- les classes console s'arrêtent seules ; les serveurs web (`CrystalSearchSample`, `Level4`) s'arrêtent avec Ctrl+C ou le bouton *Terminate* de l'IDE. Après une erreur au démarrage, une classe console peut aussi rester bloquée : arrêtez-la de la même façon ;
+- après une régénération, rafraîchissez le projet dans l'IDE : le code généré est écrit hors de l'IDE ;
+- **le démarrage d'un serveur** est terminé quand les traces s'arrêtent sur la dernière insertion de données (`INSERT INTO ROLE ...`) : un appel lancé avant peut répondre 404 ou 500, il suffit de le relancer.
 
 ## Exercices
 

@@ -49,17 +49,7 @@ Série UI (les écrans Vertigo-UI) :
 
 ## Lancer une classe main
 
-Toujours avec la **racine du module** comme répertoire de travail (`StudioGenerate` lit `studio-config.yaml` en chemin relatif).
+Toujours avec la **racine du module** comme répertoire de travail (`StudioGenerate` lit `studio-config.yaml` en chemin relatif). Depuis l'IDE : *Run As > Java Application* sur la classe main (`BootSampleVui` pour l'application, `io.vertigo.samples.support.mda.StudioGenerate` pour la génération).
 
-- **Depuis l'IDE** : *Run As > Java Application* sur la classe main (`BootSampleVui` pour l'application, `io.vertigo.samples.support.mda.StudioGenerate` pour la génération).
-- **En ligne de commande** (Git Bash, depuis la racine du module) :
-  ```
-  mvn -q compile dependency:build-classpath -Dmdep.outputFile=target/cp.txt
-  printf -- '-cp\n"%s"\n' "target/classes;$(tr '\134' '/' < target/cp.txt)" > java.args
-  java @java.args io.vertigo.samples.BootSampleVui
-  ```
-  - le classpath est trop long pour une ligne de commande Windows : il passe par un fichier d'arguments (`java.args`, ignoré par git comme `target/`) ;
-  - dans ce fichier, les `\` sont remplacés par des `/` (`\134` est le code octal du backslash) : le backslash y est un caractère d'échappement, et un chemin Windows non converti fait échouer le lancement (classes introuvables) ;
-  - sous Linux ou macOS, le séparateur du classpath est `:` au lieu de `;` ;
-  - après chaque modification de code ou régénération : `mvn -q compile` ;
-  - l'application démarre sur [http://localhost:18080/sample/home/](http://localhost:18080/sample/home/) et s'arrête avec Ctrl+C ; la génération (`StudioGenerate`) s'arrête seule.
+- l'application démarre sur [http://localhost:18080/sample/home/](http://localhost:18080/sample/home/) et s'arrête avec Ctrl+C ou le bouton *Terminate* de l'IDE ; la génération (`StudioGenerate`) s'arrête seule ;
+- après une régénération, rafraîchissez le projet dans l'IDE : le code généré est écrit hors de l'IDE.
